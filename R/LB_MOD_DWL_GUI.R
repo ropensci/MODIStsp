@@ -14,9 +14,6 @@ LB_MOD_DWL_GUI = function (out_proj_list, mod_prod_list){
         bbox = c('100','','300',''),
         out_folder = '')}
 
-  library(gWidgets)
-  options("guiToolkit"="RGtk2")
-
   main_win <- gbasicdialog(title = "Dialog", parent=NULL, do.buttons=FALSE)
 
   main_group = ggroup(container = main_win, horizontal = FALSE)
