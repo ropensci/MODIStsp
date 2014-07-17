@@ -1,14 +1,15 @@
-LB_MOD_DWL_ACCESSOIRES = function () {
-  
-  
+Moddwl_Accessoires = function () {
+
+
 }
 
-# ---------------------------------- ----------------------------------------------#  
+# ---------------------------------- ----------------------------------------------#
 # Accessory function to get the full list of directories on the http site (modified after Barry Rowlingson function):
-# ---------------------------------- ----------------------------------------------#	
+# ---------------------------------- ----------------------------------------------#
 
-GET_MOD_DIRS <- function(FTP, .Platform) {
-  if (strsplit(FTP,'')[[1]][length(strsplit(FTP,'')[[1]])] != "/") FTP <- paste(FTP,"/",sep="")
+getmod_dirs <- function(FTP, .Platform) {
+
+  if (strsplit(FTP,'')[[1]][length(strsplit(FTP,'')[[1]])] != "/") {FTP <- paste(FTP,"/",sep="")}
   if (.Platform$OS.type=="unix") options('download.file.method'='wget')  else options('download.file.method'='auto')
   items <- 0
   class(items) <- "try-error"
@@ -30,11 +31,11 @@ GET_MOD_DIRS <- function(FTP, .Platform) {
 }
 
 
-# ---------------------------------- ----------------------------------------------#  
+# ---------------------------------- ----------------------------------------------#
 # Accessory function to find the folders corresponding to the selected dates  (thanks to Barry Rowlingson):
-# ---------------------------------- ----------------------------------------------#	
+# ---------------------------------- ----------------------------------------------#
 
-GET_MOD_DIRS_DATES <- function(dates, dirs) {
+getmod_dates <- function(dates, dirs) {
   if (length(dates) > 1) {
     start.date <- strsplit(dates[1],'\\.')[[1]]
     end.date <- strsplit(dates[2],'\\.')[[1]]
@@ -62,11 +63,11 @@ GET_MOD_DIRS_DATES <- function(dates, dirs) {
   } else dirs <- dirs[which(dirs == dates[1])]
   return(dirs)
 }
-# ---------------------------------- ----------------------------------------------#	
+# ---------------------------------- ----------------------------------------------#
 # Accessory function to find the image names corresponding to the selected dates and tiles
-# ---------------------------------- ----------------------------------------------#	
+# ---------------------------------- ----------------------------------------------#
 
-GET_MOD_NAMES <- function(FTP, dirs, i, v, h) {
+getmod_names <- function(FTP, dirs, i, v, h) {
   getlist <- 0
   class(getlist) <- "try-error"
   ce <- 0
