@@ -1,18 +1,19 @@
-#'@title Moddwl_prodop
-#'@description Main function for the MODIS download and preprocessing functions
-#'@details
-#'  The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (Moddwl_GUI) and receive outputs,
-#'  and to launch the required routines for downloading and processing the requested datasets.
-#' @return
-#' NULL
+#' @Title moddwl_set_opts
+#' @Description
+#' Function used to define the structure of the "opts" variable used to store all processing options for the different
+#' products and generic, and save it in the "previous" file. 
+#' 
+#' @param previous_file previous_file Name of file used intrnally by moddwl project to store previously used processing
+#' options
+#' @returnType 
 #'
+#' @return 
+#' 
+#' @author Lorenzo Busetto, phD (2014)
+#' email: busetto.l@@irea.cnr.it
 #'
-#' @author Lorenzo Busetto (2014)
-#' email: lorenzo.busetto@@jrc.ec.europa.eu
-#'
-
+#' @license GPL(>2)
 #' @export
-
 
 moddwl_set_opts = function(previous_file = previous_file) {
 
@@ -31,18 +32,19 @@ moddwl_set_opts = function(previous_file = previous_file) {
   prodopts$product = "MOD09GQ/MYD09GQ"    # Product Name
   prodopts$bandnames =   c('Num_Obs','b1_Red',  'b2_NIR',	'QA',	'grid_area')					#Band names (from MRT + additional)
   prodopts$bandnames =   c('Num_Obs','b1_Red',  'b2_NIR',  'QA',	'grid_area')	               #Band nicknames (used for folder creation and band selection)
-  prodopts$bandsel = array(data = 1, dim =length(prodopts$bandnames))  					  #Selection of desired bands
+  prodopts$bandsel = rep(1, length(prodopts$bandnames))  					  #Selection of desired bands
   prodopts$datatype =  c("Byte", "Int16","Int16","UInt16","Byte")   #Datatypes for bands
   prodopts$nodata_in = c('-1','-28672','-28672','2995','-1')	# Nodata values in input MODIS Science DataSets
-  prodopts$nodata_out =  c('255','-28672','-28672','255','255')          # Nodata values in output images
+  prodopts$nodata_out =  c('255','-32767','-32767','65535','255')          # Nodata values in output images
 
   prodopts$derived_bandnames = c('NDVI')        #Names of possible derived bands
-  prodopts$derived_bandsel = array(data = 1, dim =length(prodopts$derived_bandnames)) #Selection of desired derived bands
+  prodopts$derived_bandsel = rep(1, length(prodopts$derived_bandnames))  	 #Selection of desired derived bands
   prodopts$derived_datatype =  c("Int16")   #Datatypes for derived bands
   prodopts$derived_nodata_in =  c('-28672')   #nodata for derived bands
+	prodopts$derived_nodata_out =  c('-32767')   #nodata for derived bands
 
   prodopts$FTP = hash("Terra" = "http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.005/",  # http addresses
-                      "Aqua" = "http://e4ftl01.cr.usgs.gov/MOLT/MYD11A1.005/")
+                      "Aqua" = "http://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.005/")
   prodopts$file_prefix = hash("Terra" = "MOD09GQ","Aqua" = "MYD09GQ")     # Filename Prefixes
   prodopts$main_out_folder = "Surf_Ref_250_Daily"           # output folder Prefixes
 
@@ -50,8 +52,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
   mod_prod_list = c(mod_prod_list, prodopts$product )     # Add product to products list
   prod_opt_list = c(prod_opt_list, list("MOD09GQ/MYD09GQ"= prodopts))     # Add options to options list
 
-
-# Define options for product MOD11A1 -----
+# Define options for product MOD09GA -----
 
   prodopts$product = "MOD09GA/MYD09GA"    # Product Name
   prodopts$bandnames =    c('num_observations_1km','state_1km_1','SensorZenith_1','SensorAzimuth_1',  #Band names (from MRT + additional)
@@ -60,8 +61,8 @@ moddwl_set_opts = function(previous_file = previous_file) {
                             'sur_refl_b06_1','sur_refl_b07_1','QC_500m_1','obscov_500m_1','iobs_res_1','q_scan_1')
 
   prodopts$bandnames =   c("NumObs_1Km","State_1Km","Sen_Zen","Sen_Azi","Range","Sun_Zen","Sun_Azi","GFlags","Pointer", #Band nicknames (used for folder creation and band selection)
-                           "NumObs_500","b1_Red", "b2_NIR","b3_BLUE","b4_GREEN","b5_SWIR","b6_SWIR","b7_SWIR" ,"QA", "Obs_Cov","Obs_Num","Q_scan")
-  prodopts$bandsel = array(data = 1, dim =length(prodopts$bandnames))  					  #Selection of desired bands
+                           "NumObs_500","b1_Red", "b2_NIR","b3_BLUE","b4_GREEN","b5_SWIR","b6_SWIR","b7_SWIR" ,"QA_500", "Obs_Cov","Obs_Num","Q_scan")
+  prodopts$bandsel =rep(1, length(prodopts$bandnames)) 					  #Selection of desired bands
 
   prodopts$datatype =  c("Byte", "UInt16","Int16","Int16","UInt16","Int16","Int16","Byte","Byte",             #Datatypes for bands
                          "Byte","Int16","Int16","Int16","Int16","Int16","Int16","Int16","UInt32","Byte","Byte","Byte" )
@@ -69,16 +70,20 @@ moddwl_set_opts = function(previous_file = previous_file) {
                          "-1","-1","-28672","-28762","-28762","-28762","-28762","-28762","-28762","787410671",
                          "-1","255","255")
   prodopts$nodata_out =  c('255','65535','-32767','-32767','65535',"-32767","-32767","255",    # Nodata values in output images
-                           "255","255","-28672","-28762","-28762","-28762","-28762","-28762","-28762","787410671",
+                           "255","255","-32767","-32767","-32767","-32767","-32767","-32767","-32767","787410671",
                            "255","255","255")
 
-  prodopts$derived_bandnames = c('NDVI')        #Names of possible derived bands
-  prodopts$derived_bandsel = array(data = 1, dim =length(prodopts$derived_bandnames)) #Selection of desired derived bands
-  prodopts$derived_datatype =  c("Int16")   #Datatypes for derived bands
-  prodopts$derived_nodata_in =  c('-28672')   #nodata for derived bands
+  prodopts$derived_bandnames =c('NDVI', 'Cl_St_1km','Cl_Sh_1km','lnd_wat','cirrus','MOD35_sn','snow','Quality_500')        #Names of possible derived bands
+	prodopts$derived_category = c('Index', 'BItField', 'BItField', 'BItField', 'BItField', 'BItField','BItField','BItField')
+	prodopts$derived_bitN = 	  c('NA', '0-1', '2', '3-5', '8-9', '12','15','0-1')
+	prodopts$derived_source  = c('NA', 'State_1Km','State_1Km','State_1Km','State_1Km','State_1Km','State_1Km','QA_500')        #Names of possible derived bands
+  prodopts$derived_bandsel =rep(1, length(prodopts$derived_bandnames))   #Selection of desired derived bands
+  prodopts$derived_datatype =  c("Int16", "Byte", "Byte", "Byte", "Byte", "Byte", "Byte", "Byte")   #Datatypes for derived bands
+  prodopts$derived_nodata_in =  c('-28762','255','255','255','255','255','255','255','255')   #in_nodata for derived bands
+	prodopts$derived_nodata_out =  c('-32767','255','255','255','255','255','255','255','255')   #nodata for derived bands
 
   prodopts$FTP = hash("Terra" = "http://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.005/",# http addresses
-                      "Aqua" = "http://e4ftl01.cr.usgs.gov/MOLT/MYD09GA.005/")
+                      "Aqua" = "http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.005/")
 
   prodopts$file_prefix = hash("Terra" = "MOD09GA","Aqua" = "MYD09GA")     # Filename Prefixes
   prodopts$main_out_folder = "Surf_Ref_500_Daily"           # output folder Prefixes
@@ -95,19 +100,19 @@ moddwl_set_opts = function(previous_file = previous_file) {
   prodopts$product = "MOD11A1/MYD11A1"    # Product Name
   prodopts$bandnames =   c('LST','LST_QC',  'LST_Time', 'Sen_Zen','LST_Night','LST_Night_QC','LST_Time_Night','Sen_Zen_Night','Emiss_B31','Emiss_B32','Day_Cloud_cov','Night_Cloud_cov')					#Band names (from MRT )
   prodopts$bandnames =    c('LST','LST_QC',  'LST_Time', 'Sen_Zen','LST_Night','LST_Night_QC','LST_Time_Night','Sen_Zen_Night','Emiss_B31','Emiss_B32','Day_Cloud_cov','Night_Cloud_cov')  				#Band names (from MRT ) #Band nicknames (used for folder creation and band selection)
-  prodopts$bandsel = array(data = 1, dim =length(prodopts$bandnames))      			  #Selection of desired bands
+  prodopts$bandsel = rep(1, length(prodopts$bandnames))     			  #Selection of desired bands
   prodopts$datatype =  c("UInt16", "Byte","Byte","Byte","UInt16","Byte","Byte","Byte","Byte","Byte","UInt16","UInt16")   #Datatypes for bands
   prodopts$nodata_in = c('0','-999','0','255','0','-999','0','255','0','0','0','0')  # Nodata values in input MODIS Science DataSets	# Nodata values in input MODIS Science DataSets
-  prodopts$nodata_out = c('0','-999','255','255','0','-999','255','255','0','0','0','0')          # Nodata values in output images
+  prodopts$nodata_out = c('0','255','255','255','0','255','255','255','0','0','0','0')          # Nodata values in output images
 
 
   prodopts$derived_bandnames = c('')        #Names of possible derived bands
-  prodopts$derived_bandsel = array(data = 1, dim =length(prodopts$derived_bandnames)) #Selection of desired derived bands
+  prodopts$derived_bandsel = rep(1, length(prodopts$derived_bandnames))   #Selection of desired derived bands
   prodopts$derived_datatype =  c("Int16")   #Datatypes for derived bands
   prodopts$derived_nodata_in =  c('-28672')   #nodata for derived bands
 
   prodopts$FTP = hash("Terra" = "http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.005/",  # http addresses
-                      "Aqua" = "http://e4ftl01.cr.usgs.gov/MOLT/MYD11A1.005/")
+                      "Aqua" = "http://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.005/")
   prodopts$file_prefix = hash("Terra" = "MOD11A1","Aqua" = "MYD11A1")     # Filename Prefixes
   prodopts$main_out_folder = "Land_Surf_Temp"           # output folder Prefixes
   prodopts$native_res = 926.6254
@@ -120,19 +125,19 @@ moddwl_set_opts = function(previous_file = previous_file) {
   prodopts$product = "MOD13Q1/MYD13Q1"    # Product Name
   prodopts$bandnames =  c('NDVI','EVI',  'QA',	'Red',	'NIR',	'Blue','MIR','Zen',	'Azi',	'RelAz',	'DOY','Rely')				#Band names (from MRT )
   prodopts$bandnames =  c('NDVI','EVI',  'QA',	'b1_Red',	'b2_NIR',	'b3_Blue','b7_SWIR','View_Zen',	'Sun_Zen',	'Rel_Az',	'DOY','Rely')				#Band names (from MRT ) #Band nicknames (used for folder creation and band selection)
-  prodopts$bandsel = array(data = 1, dim =length(prodopts$bandnames))      			  #Selection of desired bands
+  prodopts$bandsel = rep(1, length(prodopts$bandnames))   			  #Selection of desired bands
   prodopts$datatype =  c("Int16", "Int16","UInt16","Int16","Int16","Int16","Int16","Int16","Int16","Int16","Int16","Byte")   #Datatypes for bands
   prodopts$nodata_in =  c('-3000','-3000','65535','-1000','-1000','-1000','-1000','-10000','-10000','-4000','-1','-1')  # Nodata values in input MODIS Science DataSets	# Nodata values in input MODIS Science DataSets
   prodopts$nodata_out = c('32767','32767','65535','32767','32767','32767','32767','32767','32767','32767','32767','255')          # Nodata values in output images
 
 
   prodopts$derived_bandnames = c('')        #Names of possible derived bands
-  prodopts$derived_bandsel = array(data = 1, dim =length(prodopts$derived_bandnames)) #Selection of desired derived bands
+  prodopts$derived_bandsel = rep(1, length(prodopts$derived_bandnames))   #Selection of desired derived bands
   prodopts$derived_datatype =  c("")   #Datatypes for derived bands
   prodopts$derived_nodata_in =  c('')   #nodata for derived bands
 
   prodopts$FTP = hash("Terra" = "http://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.005/",  # http addresses
-                      "Aqua" = "http://e4ftl01.cr.usgs.gov/MOLT/MYD13Q1.005/")
+                      "Aqua" = "http://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.005/")
   prodopts$file_prefix = hash("Terra" = "MOD13Q1","Aqua" = "MYD13Q1")     # Filename Prefixes
   prodopts$main_out_folder = "Veg_Indexes_250_16days"           # output folder Prefixes
   prodopts$native_res = 231.656358
