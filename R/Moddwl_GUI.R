@@ -15,6 +15,10 @@
 #' @export
 moddwl_GUI = function (moddwl_opts){
 	
+	# Modifiche di prova 
+	
+	alopdsnfdi
+	
 	# Restore previous options file if existing, otherwise create a "dummy" one with default values
 	if (file.exists(moddwl_opts$previous_file)) {load(moddwl_opts$previous_file)
 	} else {moddwl_set_opts(previous_file = moddwl_opts$previous_file) ; load(moddwl_opts$previous_file)}
