@@ -1,5 +1,3 @@
-
-
 #' @Title moddwl_meta_create
 #' @Description	Function used to create a virtual META file from time series of single-band files corresponding to 
 #' different acquisition dates
@@ -18,10 +16,11 @@
 #'
 #' @license GPL(>2)
 #' @export
-moddwl_meta_create <- function(out_prod_folder, meta_band) {
+
+moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefix ) {
 	
-	out_meta_files = list.files(file.path(out_prod_folder,meta_band), pattern = '.dat', full.names = T)	# get list of ENVI files
-	out_meta_files_hdr = list.files(file.path(out_prod_folder,meta_band), pattern = '.hdr', full.names = T) # get list of hdr files
+	out_meta_files = list.files(file.path(out_prod_folder,meta_band), pattern = c(glob2rx(paste(file_prefix,'*.dat', sep = '')),glob2rx(paste(file_prefix,'*.tif', sep = ''))), full.names = T)	# get list of ENVI files
+	out_meta_files_hdr = list.files(file.path(out_prod_folder,meta_band), pattern = glob2rx(paste(file_prefix,'*.hdr', sep = '')), full.names = T)	# get list of ENVI files
 	
 	# retrieve nsamp and nrow from first hdr file
 	head_file = paste(out_meta_files_hdr[1], sep = '')	
@@ -31,7 +30,9 @@ moddwl_meta_create <- function(out_prod_folder, meta_band) {
 	close(fileConn_hd)
 	
 	# Write the meta file
-	meta_filename = file.path(out_prod_folder,meta_band,paste(meta_band,'_',"METAFILE.dat", sep = ''))  # define fileneame for meta
+	meta_dir = file.path(dirname(out_meta_files[1]),'METAFILES')
+	dir.create(meta_dir, showWarnings = F,recursive = T)
+	meta_filename = file.path(meta_dir,paste(file_prefix,'_',meta_band,'_',"META.dat", sep = ''))  # define fileneame for meta
 	fileConn_meta<-file(meta_filename, 'w')      		# Open connection
 	writeLines(c('ENVI META FILE'), fileConn_meta)		# Write first line
 	# Write the lines of the META file corresponding to each input file
@@ -47,9 +48,10 @@ moddwl_meta_create <- function(out_prod_folder, meta_band) {
 	doys = as.numeric(str_sub(basename(out_meta_files),-7,-5))
 	years = as.numeric(str_sub(basename(out_meta_files),-12,-9))
 	temp_dates = strptime(paste(years, doys), format="%Y %j")
-	elapsed = temp_dates-strptime(paste(2000, 001), format="%Y %j")
-	
+	elapsed = signif(difftime(temp_dates,strptime(paste(2000, 001), format="%Y %j"), units = 'days'),5)
+		
 	# Write the hdr file for the meta file
+	
 	fileConn_meta_hdr<-file(paste(file_path_sans_ext(meta_filename),'.hdr',sep = ''), 'w')
 	writeLines(c('ENVI'), fileConn_meta_hdr)		# Write first line
 	writeLines(c('Description = {ENVI META FILE}'), fileConn_meta_hdr)		# Dummy
@@ -63,7 +65,7 @@ moddwl_meta_create <- function(out_prod_folder, meta_band) {
 	writeLines(c('wavelength units = DOY'), fileConn_meta_hdr)		# Dummy
 	writeLines(c('wavelength = {', paste(as.numeric(elapsed),collapse=","),'}'), fileConn_meta_hdr)		# Wavelengths
 	close(fileConn_meta_hdr)
-	
+	browser()
 #	gdalbuildvrt(gdalfile=out_meta_files,output.vrt=file.choose(), format = 'ENVI',separate=TRUE,verbose=TRUE)
 	
 }

@@ -157,3 +157,42 @@ moddwl_refl_bsq <- function (product,out_prod_folder,bandnames,bandsel, file_pre
 	}
 	
 }
+
+# ---------------------------------- ----------------------------------------------#
+# Accessory function used to see if all expected out files for the selected date are already present.
+# If so, check_files is set to TRUE, and MODIS hdf is not downloaded
+# ---------------------------------- ----------------------------------------------#
+moddwl_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel,yy,DOY, out_format, indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel) {
+	check = T
+	for (band in 1:length(bandnames)) {
+		if (bandsel [band] == 1) {
+			
+			outfile = paste(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')    # Create name for the HDF mosaic
+			outrep_file = file.path(out_prod_folder, bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))  # Create name for the TIFF reprojected  mosaic
+			if (out_format =='GTiff') {outrep_file = paste(outrep_file, '.tif', sep = '')}
+			if (out_format =='ENVI') {outrep_file = paste(outrep_file, '.dat', sep = '')}
+			if (file.exists(outrep_file) == F) {check = F}
+		}
+	}
+	
+	for (band in seq(along = indexes_bandnames)) {
+		if (indexes_bandsel [band] == 1) {
+			outfile = paste(out_prod_folder, '/',indexes_bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')    # Create name for the HDF mosaic
+			outder_file = file.path(out_prod_folder, indexes_bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))  # Create name for the TIFF reprojected  mosaic
+			if (out_format =='GTiff') {outder_file = paste(outder_file, '.tif', sep = '')}
+			if (out_format =='ENVI') {outder_file = paste(outder_file, '.dat', sep = '')}
+			if (file.exists(outder_file) == F) {check = F}
+		}
+	}
+	
+	for (band in seq(along = quality_bandnames)) {
+		if (quality_bandsel [band] == 1) {
+			outfile = paste(out_prod_folder, '/',quality_bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')    # Create name for the HDF mosaic
+			outder_file = file.path(out_prod_folder, quality_bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))  # Create name for the TIFF reprojected  mosaic
+			if (out_format =='GTiff') {outder_file = paste(outder_file, '.tif', sep = '')}
+			if (out_format =='ENVI') {outder_file = paste(outder_file, '.dat', sep = '')}
+			if (file.exists(outder_file) == F) {check = F}
+		}
+	}
+	return(check)
+}

@@ -1,53 +1,57 @@
 #' @Title moddwl_process
-#' @Description Function used to automatically download, mosaic, reproject and resize, 
-#' preprocess MODIS images of the selected MODIS product 
+#' @Description
 #' 
 #' @details
 #'
-#' @param product selected MODIS product
-#' @param start_date 
-#' @param end_date 
-#' @param out_folder 
-#' @param MRTpath Path of MRT executable
+#' @param sel_prod selected MODIS product
+#' @param start_date start_date for images download and preproc
+#' @param end_date start_date start_date for images download and preproc
+#' @param out_folder main ouput folder 
+#' @param MRTpath path to MRT executable
 #' @param reproj Always T
 #' @param reprocess T = Redownload/reprocess existing dates
 #' @param FTP http site for MODIS download
-#' @param bbox output bounding box (xmin, xmax, ymin, ymax ) in out proj coords
-#' @param format ENVI or GTiff
+#' @param sensor Terra or Aqua
 #' @param start_x start horiz. tile
 #' @param start_y start vert. tile
 #' @param end_x end horiz. tile
 #' @param end_y end vert. tile
-#' @param nodata_in array of input nodata for MODIS bands
-#' @param nodata_out array of ouput nodata for MODIS bands
-#' @param bandsel 0-1 array. 1 = band to be processed
-#' @param bandnames Names of MODIS bands
-#' @param derived_bandsel 0-1 array. 1 = derived band to be created
-#' @param derived_bandnames Names of MODIS derived bands 
-#' @param datatype array of datatypes for MODIS bands
-#' @param MOD_prj_str Proj4 string for MODIS SIN proj.
-#' @param outproj_str Proj4 string for output proj
+#' @param bbox output bounding box (xmin, xmax, ymin, ymax ) in out proj coords
+#' @param out_format ENVI or GTiff
 #' @param out_res Output resolution (Resampling in always NN - to be changed !)
-#' @param sensor Terra or Aqua
-#' @param file_prefix output file prefix according to product
-#' @param main_out_folder folder file prefix according to product
-#' @param multiband_bsq If T, and product has reflectance bands, create virtual BSQ file for each DOY
+#' @param MOD_proj_str Proj4 string for MODIS SIN proj
+#' @param outproj_str  Proj4 string for output proj
+#' @param nodata_in  array of input nodata for MODIS bands
+#' @param nodata_out array of ouput nodata for MODIS bands
+#' @param datatype array of datatypes for MODIS bands
+#' @param bandsel array. 1 = band to be processed
+#' @param bandnames Abbreviated Names of MODIS bands
+#' @param indexes_bandsel array. 1 = index to be processed
+#' @param indexes_bandnames Abbreviated Names of MODIS Indexes
+#' @param indexes_formula Formulas for Indexes
+#' @param indexes_nodata_out Nodata values for indexes 
+#' @param quality_bandnames Abbreviated Names of MODIS Quality Indicators
+#' @param quality_bitN Position of bits corresponding to quality indicators
+#' @param quality_source source original MODIS band for quality indicators
+#' @param quality_nodata_in Always 255
+#' @param quality_nodata_out Always 255
+#' @param file_prefix output file prefix according to sel_prod (e.g., MOD13Q1)
+#' @param main_out_folder Suffix to add to the overall out_folder to create the out dir (corresponds to an abbreviation of the selected product)
+#' @param multiband_bsq If T, and sel_prod has reflectance bands, create virtual BSQ file for each DOY
+#' @returnType 
 #'
 #' @return 
-#' NULL
 #' 
-#' @author Lorenzo Busetto, phD (2014). Derived from Original functions by Babak Naimi (naimi@r-gis.net) - Modified by Lorenzo Busetto for producing separated mosaics
-#' for the different SDS,and for converting Quality data bits into meaningful QC and UI information (Thanks Tomislav Hengl as his script made the main core of this function [spatial-analyst.net])
-#' (Thanks Tomislav Hengl as his script made the main core of this function [spatial-analyst.net] Reference: http://www.r-gis.net)
+#' @author Lorenzo Busetto, phD (2014)
 #' email: busetto.l@@irea.cnr.it
 #'
 #' @license GPL(>2)
 #' @export
-
-moddwl_process <- function(product, start_date,end_date ,out_folder, MRTpath ,reproj , reprocess , FTP , sensor,
-		start_x , start_y ,	end_x , end_y , bbox , format, out_res, MOD_prj_str , outproj_str, nodata_in , nodata_out,derived_nodata_out, datatype, 
-		bandsel , bandnames , derived_bandsel,  derived_bandnames  ,
-		file_prefix , main_out_folder , multiband_bsq) {
+moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,reproj , reprocess , FTP , sensor,
+		start_x , start_y ,	end_x , end_y , bbox , out_format, out_res, MOD_proj_str , outproj_str, nodata_in , nodata_out, datatype, 
+		bandsel , bandnames , indexes_bandsel,  indexes_bandnames, indexes_formula, indexes_nodata_out, 
+		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in ,
+		quality_nodata_out,	file_prefix , main_out_folder , multiband_bsq) {
 	
 	out_prod_folder = file.path(out_folder,main_out_folder)
 	dir.create(out_prod_folder, showWarnings = F, recursive = T)
@@ -86,22 +90,11 @@ moddwl_process <- function(product, start_date,end_date ,out_folder, MRTpath ,re
 			
 			if (length(modislist) > 0) {
 				
-				# Accessory function used to see if all expected out files for the selected date are already present.
-				# If so, check_files is set to TRUE, and MODIS hdf is not downloaded
-				moddwl_check_files = function(out_prod_folder, bandnames) {check = T
-					for (band in 1:length(bandnames)) {
-						if (bandsel [band] == 1) {
-							outfile = paste(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')    # Create name for the HDF mosaic
-							outrep_file = file.path(out_prod_folder, bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))  # Create name for the TIFF reprojected  mosaic
-							if (format =='GTiff') {outrep_file = paste(outrep_file, '.tif', sep = '')}
-							if (format =='ENVI') {outrep_file = paste(outrep_file, '.dat', sep = '')}
-							if (file.exists(outrep_file) == F) {check = F}
-						}
-					}
-					return(check)
-				}
-				check_files = moddwl_check_files(out_prod_folder, bandnames)
+				# Check if all expected out files for the selected date are already present.
+				# If so, check_files is set to TRUE, MODIS hdf is not downloaded and bands are not processed
 				
+				check_files = F
+#				check_files = moddwl_check_files(out_prod_folder, file_prefix,bandnames,bandsel,yy,DOY,out_format,  indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel)
 				
 				#- ------------------------------------------------------------------------------- -#
 				#  Download images
@@ -114,10 +107,15 @@ moddwl_process <- function(product, start_date,end_date ,out_folder, MRTpath ,re
 							while(er != 0) {   # repeat until no error or > 21 tryyouts
 								print(paste('Downloading File: ', modisname ))
 								svalue(mess_lab) = paste('--- Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist),' ---')    # Update progress window
-								er <- try(download.file(url=paste(FTP,dirs[i], "/",modisname,sep=''),destfile=file.path(out_prod_folder,modisname),
-												mode='wb',quiet=T, cacheOK=FALSE),silent=FALSE)   # Start download
+#								er <- try(download.file(url=paste(FTP,dirs[i], "/",modisname,sep=''),destfile=file.path(out_prod_folder,modisname),
+#												mode='wb',quiet=F, cacheOK=FALSE),silent=FALSE)   # Start download
+								
+								er <- tryCatch(download.file(url=paste(FTP,dirs[i], "/",modisname,sep=''),destfile=file.path(out_prod_folder,modisname),mode='wb',quiet=T, cacheOK=FALSE),
+										warning=function(war) {print(war) ; return (1)}, error =function(err) {	print(err);	return (1)} )
+								
 								if (er != 0) {	# Stop after 21 failed attempts
 									print('Download Error -Retrying') ; Sys.sleep(10)   ;	ce <- ce + 1 ; 	if (ce == 21) stop("Error: FTP server is down!!")	
+									
 								}		
 							}
 						} # end IF on hdf existence
@@ -130,7 +128,7 @@ moddwl_process <- function(product, start_date,end_date ,out_folder, MRTpath ,re
 					# Added by L.Busetto --- Instead of a single mosaic,  one different mosaic for each selected band will be created.
 					# This is useful in the case of very large mosaics !
 					# ---------------------------------- ----------------------------------------------#
-	
+					
 					# Create the temporary parameter file for MRT mosaic function
 					mosaicname = file(paste(MRTpath, "/TmpMosaic.prm", sep=""), open="wt")
 					write(paste(out_prod_folder,"/",modislist[1], sep=""), mosaicname)
@@ -140,6 +138,7 @@ moddwl_process <- function(product, start_date,end_date ,out_folder, MRTpath ,re
 					# Cycle on bands to mosaic and reproject them them 
 					
 					for (band in 1:length(bandnames)) {														# Cycle on MODIS Bands
+						
 						bands = numeric(length(bandnames))													# Create vector with length = bands, filled with zeroes
 						er_mos = 1    ; er_rep = 1																	# dummies for error state
 						if (bandsel [band] == 1) {					# If band selected, process it
@@ -153,127 +152,132 @@ moddwl_process <- function(product, start_date,end_date ,out_folder, MRTpath ,re
 								er_mos <- system(paste(MRTpath, '/mrtmosaic -i ', MRTpath, '/TmpMosaic.prm' ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
 								if (er_mos != 0)  {stop()}   # exit on error
 							}
-						# ---------------------------------- ----------------------------------------------#
-						# Convert to output projection, extent and format using gdalwarp ----
-						# ---------------------------------- ----------------------------------------------#
+							# ---------------------------------- ----------------------------------------------#
+							# Convert to output projection, extent and format using gdalwarp ----
+							# ---------------------------------- ----------------------------------------------#
 							
 							print (paste('Reprojecting ', bandnames[band],'files for date: ',date_name ))
 							svalue(mess_lab) =  (paste('--- Reprojecting ', bandnames[band],'files for date: ',date_name,' ---'))
 							outrep_file = file.path(out_prod_folder, bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))	# Create name for the TIFF reprojected  mosaic
 							
-							if (format =='GTiff') {outrep_file = paste(outrep_file, '.tif', sep = '')} else {outrep_file = paste(outrep_file, '.dat', sep = '')} 
+							if (out_format =='GTiff') {outrep_file = paste(outrep_file, '.tif', sep = '')} else {outrep_file = paste(outrep_file, '.dat', sep = '')} 
 							if (file.exists(outrep_file) == F | reprocess == T) {
 								
-
-							# Create the string for gdal and launch the reprojection in a command shell ----
-
+								
+								# Create the string for gdal and launch the reprojection in a command shell ----
+								
 								if (length(which(is.finite(as.numeric(bbox)))) == 4) {	# If bounding box was passed, the output reproject file will satisfy the bbox
-									
-									er_rep = 	system(paste('gdalwarp -s_srs "',MOD_prj_str, 	# Launch GDAL to crete the reprojected File
-													'" -t_srs "', outproj_str, '" -of ',format,' -r near -co compress=lzw',
+#									browser()
+									er_rep = 	system(paste('gdalwarp -s_srs "',MOD_proj_str, 	# Launch GDAL to crete the reprojected File
+													'" -t_srs "', outproj_str, '" -of ',out_format,' -r near -co compress=lzw',
 													'-te',bbox[1],bbox[3],bbox[2],bbox[4], '-tr ',out_res, out_res,
 													'-wo "INIT_DEST=NO_DATA"', '-wt ', datatype[band],'-srcnodata ', nodata_in[band],'-dstnodata ', nodata_out[band], '-overwrite',
 													outfile,  outrep_file, #'-overwrite',outfile,  outrep_file,
 													sep = ' '), show.output.on.console = F)
 								} else {						# If bounding box was not passed, keep the original extent when creating the File
-									er_rep = 	system(paste('gdalwarp -s_srs "',MOD_prj_str,
-													'" -t_srs "', outproj_str,'" -of ',format,' -r near -co compress=lzw',
+									er_rep = 	system(paste('gdalwarp -s_srs "',MOD_proj_str,
+													'" -t_srs "', outproj_str,'" -of ',out_format,' -r near -co compress=lzw',
 													'-tr ',out_res,out_res,
 													'-wo "INIT_DEST=NO_DATA"','-wt ', datatype[band],'-srcnodata ', nodata_in[band],'-dstnodata ',nodata_out[band],
 													'-overwrite', outfile,  outrep_file, #'-overwrite',outfile,  outrep_file,
 													sep = ' '), show.output.on.console = F)
-								}
+									
+								}  
+								
 								if (er_rep != 0)  {stop()}
 							}  # End if on file existence
 							gc()
 							unlink(outfile)																			# Delete un-reprojected Mosaic HDF file
 							xml_file = paste(outrep_file,'.aux.xml',sep = '')		# Delete xml files created by gdalwarp
 							unlink(xml_file)
+							
 						}  # ENDIF band selected for processing
 					}	# END Cycle on available MODIS Bands
 					
+					# ---------------------------------- ----------------------------------------------#
+					# If Indexes selected, then start creating them 
+					# ---------------------------------- ----------------------------------------------#
+					
+#					
+					if (length(which(indexes_bandsel==1) >= 1)) {
+						for (band in seq(along = indexes_bandnames)) {
+							indexes_band =  indexes_bandnames[band]		; 	formula = indexes_formula[band]
+							svalue(mess_lab) = paste('--- Computing',  indexes_band,' for date: ',date_name,' ---')
+							print (paste('Computing ', indexes_band,' for date: ',date_name ))
+							out_filename = file.path(out_prod_folder,indexes_band,paste(file_prefix,'_',indexes_band,'_',yy,'_', DOY, sep = ''))
+							if (out_format =='GTiff') {out_filename = paste(out_filename, '.tif', sep = '')} else {out_filename = paste(out_filename, '.dat', sep = '')}
+							dir.create(file.path(out_prod_folder,indexes_band), showWarnings = F, recursive = T)
+							if (file.exists(out_filename) == F | reprocess == T) {
+								moddwl_process_indexes(out_filename = out_filename,indexes_band= indexes_band, formula = formula,bandnames=bandnames, nodata_out=nodata_out,
+										indexes_nodata_out=indexes_nodata_out[band],out_prod_folder=out_prod_folder, file_prefix=file_prefix, yy=yy,out_format=out_format, DOY=DOY )
+							}
+						}
+						
+					} #End If on length(which(indexes_bandsel ==1))
+					
+					# ---------------------------------- ----------------------------------------------#
+					# If Quality indicators, then start creating them 
+					# ---------------------------------- ----------------------------------------------#
+					
+					if (length(which(quality_bandsel==1) >= 1)) {
+						for (band in seq(along = quality_bandnames)) {
+							browser()
+							quality_band =  quality_bandnames[band]		; 	bitN =  quality_bitN[band]  ;	source = quality_source[band]
+							quality_nodata_in = quality_nodata_in [band]   ; quality_nodata_out = quality_nodata_out [band]   
+							svalue(mess_lab) = paste('--- Computing',  quality_band,' for date: ',date_name,' ---')
+							print (paste('Computing ', quality_band,' for date: ',date_name ))
+							out_filename = file.path(out_prod_folder,quality_band,paste(file_prefix,'_',quality_band,'_',yy,'_', DOY, sep = ''))
+							if (out_format =='GTiff') {out_filename = paste(out_filename, '.tif', sep = '')} else {out_filename = paste(out_filename, '.dat', sep = '')}
+							dir.create(file.path(out_prod_folder,quality_band), showWarnings = F, recursive = T)
+							if (file.exists(out_filename) == F | reprocess == T) {
+								moddwl_process_QA_bits(out_filename,in_raster_name = bandnames[grep(source,bandnames)], bitN, source, 
+										out_prod_folder, file_prefix, yy, DOY, out_format, nodata_out = nodata_out [grep(source,bandnames)], quality_nodata_in , quality_nodata_out)
+							}
+						}
+						
+					} #End If on length(which(quality_bandsel ==1))
+					
 				} else {print (paste('All Required output files for date ',date_name, ' are already existing - Doing Nothing !', sep = ''))}
 				
-				# If multiband BSQ required and product has reflectances, create an ENVI metafile ----
-				if (multiband_bsq == T) {moddwl_refl_bsq(product, out_prod_folder,bandnames, bandsel ,file_prefix, yy, DOY )} 
+				# If multiband BSQ required and sel_prod has reflectances, create an ENVI metafile ----
+				if (multiband_bsq == T) {moddwl_refl_bsq(sel_prod, out_prod_folder,bandnames, bandsel ,file_prefix, yy, DOY )} 
 				
-				# ---------------------------------- ----------------------------------------------#
-				# If derived or quality bands selected, then start creating them 
-				# ---------------------------------- ----------------------------------------------#
-				
-				if (length(which(derived_bandsel==1) >= 1)) {
-					
-					for (derived in seq(along = derived_bandnames)) {
-						
-						if(derived_bandsel[derived] == 1) {
-							browser()
-							derived_band =  derived_bandnames[derived]
-							fun_name = paste('moddwl_process_',derived_band, sep = '')
-							svalue(mess_lab) = paste('--- Computing',  derived_band,' for date: ',date_name,' ---')
-							print (paste('Computing ', derived_band,' for date: ',date_name ))
-							
-							
-							do.call(fun_name,list(derived_band, out_prod_folder,bandnames,file_prefix,yy, DOY, nodata_out, derived_nodata_out = derived_nodata_out[bandsel], format ))
-							gc()
-							
-							
-								moddwl_process_QA_bits <- function(out_prod_folder, derived_band, bandnames, file_prefix, yy, DOY, format, nodata_out) {
-									out_dir = file.path(out_prod_folder,derived_band)
-									dir.create(out_dir, recursive = T)
-									rasterOptions(setfileext = F)
-									
-									in_raster = bandnames[grep('State_1Km',bandnames)]
-									bit_file  =	file.path(out_prod_folder, in_raster,paste(file_prefix,'_',in_raster,'_',yy,'_', DOY, '.dat', sep = ''))
-									in_raster = raster(bit_file, format = format)				# Open QA file
-									NAvalue(in_raster)<- as.numeric(nodata_out [grep('State_1Km',bandnames)])
-									in_values = getValues(in_raster)								# Get the values
-									QC_vals = bitAnd(in_values,3)								# Get the QA (First 2 bits)
-									
-									# Save the QA to new file
-									in_raster = setValues(in_raster, values=QC_vals)
-									out_file = file.path(out_dir,paste(file_prefix,'_',derived_band,'_',yy,'_', DOY, sep = ''))
-									if (format =='GTiff') {out_file = paste(out_file, '.tif', sep = '')} else {out_file = paste(out_file, '.dat', sep = '')}  
-									writeRaster(in_raster,out_file, format = format ,overwrite = TRUE, datatype = 'INT1U')
-								}
-								moddwl_process_QA_bits(out_prod_folder = out_prod_folder, derived_band = derived_band, bandnames = bandnames, file_prefix = file_prefix, yy = yy, DOY = DOY, format = format, nodata_out = nodata_out)
-
-							
-							
-							
-							
-							
-							
-							
-						}
-					}
-				} #End If on length(which(derived_bandsel ==1))
 				
 				
 				if (del == T) {for (modisname in modislist) unlink(file.path(out_prod_folder,modisname))}		# Delete original downloaded HDFs
 			} else {print(paste("No available image for selected Tiles in ",dirs[i], sep=""))}
-		} # End Cycling on directories containing images to be downloaded (i.e., dates)
-		
-		
-	}	# End Cycling on years
-	browser()
+			
+		} # End Cycling on dates in selected year
+	}	# End Cycling on selected years
+	
 #- ------------------------------------------------------------------------------- -#
-#  Create META files of time series
+#  Create META files of time series - original and derived
 #- ------------------------------------------------------------------------------- -#
 	for (band in seq(along = bandnames)) {
+		
 		if (bandsel[band] == 1) {
+			
 			meta_band = bandnames[band]				
-			moddwl_meta_create(out_prod_folder = out_prod_folder, meta_band = meta_band)
+			moddwl_meta_create(out_prod_folder = out_prod_folder, meta_band = meta_band, file_prefix = file_prefix)
 			
 		} #End If on bandsel[band] == 1
 	} #End Cycle on band
-
-
+	
+	for (band in seq(along = indexes_bandnames)) {
+		
+		if (indexes_bandsel[band] == 1) {
+			
+			meta_band = indexes_bandnames[band]				
+			moddwl_meta_create(out_prod_folder = out_prod_folder, meta_band = meta_band, file_prefix = file_prefix)
+			
+		} #End If on bandsel[band] == 1
+	} #End Cycle on band
+	
+#- ------------------------------------------------------------------------------- -#	
+# Close GUI and clean
+#- ------------------------------------------------------------------------------- -#
+	gc()
 	addHandlerUnrealize(mess_lab, handler = function(h,...) {return(FALSE)})		# Allow message lab to be closed since processing ended .
 	dispose(mess_lab)
-	
 	return('DONE')
 }
-
-# ----- Accessory Functions -------------#
-
-
