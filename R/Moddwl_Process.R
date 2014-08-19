@@ -221,7 +221,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 					
 					if (length(which(quality_bandsel==1) >= 1)) {
 						for (band in seq(along = quality_bandnames)) {
-							browser()
+							
 							quality_band =  quality_bandnames[band]		; 	bitN =  quality_bitN[band]  ;	source = quality_source[band]
 							quality_nodata_in = quality_nodata_in [band]   ; quality_nodata_out = quality_nodata_out [band]   
 							svalue(mess_lab) = paste('--- Computing',  quality_band,' for date: ',date_name,' ---')

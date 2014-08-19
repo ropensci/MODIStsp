@@ -28,7 +28,7 @@ moddwl_process_indexes = function(out_filename,indexes_band, formula,bandnames,n
 	writeRaster(Index, out_filename, format = out_format,NAflag = as.numeric(indexes_nodata_out), overwrite = T)
 	xml_file = paste(out_filename,'.aux.xml',sep = '')		# Delete xml files created by writeRaster
 	unlink(xml_file)
-	rm(ls())
+#	rm(ls())
 	gc()
 	
 }

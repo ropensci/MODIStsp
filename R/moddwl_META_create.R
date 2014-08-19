@@ -19,8 +19,8 @@
 
 moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefix ) {
 	
-	out_meta_files = list.files(file.path(out_prod_folder,meta_band), pattern = c(glob2rx(paste(file_prefix,'*.dat', sep = '')),glob2rx(paste(file_prefix,'*.tif', sep = ''))), full.names = T)	# get list of ENVI files
-	out_meta_files_hdr = list.files(file.path(out_prod_folder,meta_band), pattern = glob2rx(paste(file_prefix,'*.hdr', sep = '')), full.names = T)	# get list of ENVI files
+	out_meta_files = list.files(file.path(out_prod_folder,meta_band), pattern = '.dat', full.names = T)	# get list of ENVI files
+	out_meta_files_hdr = list.files(file.path(out_prod_folder,meta_band), pattern = '.hdr', full.names = T) # get list of hdr files
 	
 	# retrieve nsamp and nrow from first hdr file
 	head_file = paste(out_meta_files_hdr[1], sep = '')	
@@ -65,7 +65,7 @@ moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefix ) {
 	writeLines(c('wavelength units = DOY'), fileConn_meta_hdr)		# Dummy
 	writeLines(c('wavelength = {', paste(as.numeric(elapsed),collapse=","),'}'), fileConn_meta_hdr)		# Wavelengths
 	close(fileConn_meta_hdr)
-	browser()
+	
 #	gdalbuildvrt(gdalfile=out_meta_files,output.vrt=file.choose(), format = 'ENVI',separate=TRUE,verbose=TRUE)
 	
 }
