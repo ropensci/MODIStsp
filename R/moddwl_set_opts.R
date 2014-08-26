@@ -25,8 +25,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
 #- ------------------------------------------------------------------------------- -#
 #  ---------------Define options for product MOD09GQ -----  
 #- ------------------------------------------------------------------------------- -#
-
-	prodopts = list()
+{{prodopts = list()
 	
 	# General options-------
 	prodopts$product = "Surf_Ref_Daily_250 (MOD09GQ)"    # Product Name
@@ -36,6 +35,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	prodopts$FTP = hash("Terra" = "http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.005/",  # http addresses for data download
 											"Aqua" = "http://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.005/")
 	prodopts$multiband_bsq = T		# To create virtual multiband BSQ files for the different dates
+	
 		
 	# Original bandnames and characteristics
   prodopts$bandnames =   c('Num_Obs','b1_Red',  'b2_NIR',	'BQ',	'obs_cov')					#Band names (from MRT + additional)
@@ -44,6 +44,8 @@ moddwl_set_opts = function(previous_file = previous_file) {
   prodopts$nodata_in = 	 c('-1',	'-28672','-28672','2995',	 '-1')						# Nodata values in input MODIS Science DataSets
   prodopts$nodata_out =  c('255',	'-32767','-32767','65535', '255')       # Nodata values to be used in produced output images
 	prodopts$bandsel = rep(0, length(prodopts$bandnames))  					  #Initial Selection of desired bands (all zeroes)
+	prodopts$reflbands = c(2,3)				# Bands corresponding to reflectances (used to build BSQ if requested
+	prodopts$reflorder = c(1,2)				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order)
 	
 	# Derived Indexes and Characteristics
 	prodopts$indexes_bandnames =	c('NDVI')        #Names of possible indexes bands
@@ -66,16 +68,64 @@ moddwl_set_opts = function(previous_file = previous_file) {
    
   mod_prod_list = c(mod_prod_list, prodopts$product )     # Add product to products list
 	prod_opt_list [[prodopts$product ]] =prodopts
+	}}
 	
 	
-#	prod_opt_list = c(prod_opt_list, do.call("list", "pippo = prodopts"))     # Add options to options list
-#
-#	prod_opt_list = c(prod_opt_list, eval(list(eval(prodopts$product) = prodopts)))   
+	#- ------------------------------------------------------------------------------- -#
+#  ---------------Define options for product MOD09A1-----  
 #- ------------------------------------------------------------------------------- -#
-#  ---------------Define options for product MOD09GQ -----  
+	{{prodopts = list()
+			
+			# General options-------
+			prodopts$product = "Surf_Ref_8_Days_500 (MOD09A1)"    # Product Name
+			prodopts$main_out_folder = "Surf_Ref_8_Days_500"          # output folder Prefixes
+			prodopts$native_res = 463.3127
+			prodopts$file_prefix = hash("Terra" = "MOD09A1","Aqua" = "MYD09A1")     # Filename Prefixes
+			prodopts$FTP = hash("Terra" = "http://e4ftl01.cr.usgs.gov/MOLT/MOD09A1.005/",  # http addresses for data download
+					"Aqua" = "http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/")
+			prodopts$multiband_bsq = T		# To create virtual multiband BSQ files for the different dates
+			
+			
+			# Original bandnames and characteristics
+			prodopts$bandnames =   c("b1_Red", "b2_NIR","b3_BLUE","b4_GREEN","b5_SWIR","b6_SWIR","b7_SWIR" ,"QC_500", "SensZen","Relaz","State_500","DOY")					#Band names (from MRT + additional)
+			prodopts$nicknames =   c("Red Reflectance (b1)", "NIR Reflectance (b2)","Blue Reflectance (b3)","Green Reflectance (b4)","SWIR Reflectance 1 (b5)",
+															 "SWIR Reflectance 2 (b6)","SWIR Reflectance 3 (b7)","500m Reflectance Band Quality","Solar Zenith Angle", "View Zenith Angle",
+															 "Relative Azimuth Angle","500m State Flags","Day of Year")	               #Band nicknames (used for folder creation and band selection)
+			prodopts$datatype =  	 c("Int16", "Int16", "Int16","Int16","Int16","Int16","Int16","UInt32","Int16","Int16","Int16","Int16","Int16")   		#Datatypes for bands
+			prodopts$nodata_in = 	 c('-28672','-28672','-28672','-28672','-28672','-28672','-28672','4294967295','0','0','0','65535','65535')						# Nodata values in input MODIS Science DataSets
+			prodopts$nodata_out =  c('-32767','-32767','-32767','-32767','-32767','-32767','-32767','4294967295','32767','32767','32767','65535','65535')       # Nodata values to be used in produced output images
+			prodopts$bandsel = rep(0, length(prodopts$bandnames))  					  #Initial Selection of desired bands (all zeroes)
+			prodopts$reflbands = c(1,2,3,4,5,6,7)				# Bands corresponding to reflectances (used to build BSQ if requested
+			prodopts$reflorder = c(3,4,1,2,5,6,7)				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order)
+			
+			# Derived Indexes and Characteristics
+			prodopts$indexes_bandnames =	c('NDVI')        #Names of possible indexes bands
+			prodopts$indexes_nicknames =	prodopts$indexes_bandnames         #Names of possible indexes bands
+			prodopts$indexes_formula = 		c('(b1-b2)/(b1+b2)')        #Formulas of different indexes
+			prodopts$indexes_nodata_out = c('-32767')   #nodata for indexes bands
+			prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
+			
+			# Derived Quality and Characteristics
+			
+			prodopts$quality_bandnames = c('')        #Names of possible quality bands
+			prodopts$quality_nicknames = c('')        #Names of possible quality bands
+			prodopts$quality_source  =	 c('')        # original band containing the information
+			prodopts$quality_bitN = 	  c('')	# Position of bits of the selected quality indicator in the total "bit word" of the original band
+			prodopts$quality_nodata_in =  rep(255, length(prodopts$indexes_bandnames))  # nodata in for quality bands (dummy - always 255)
+			prodopts$quality_nodata_out =  rep(255, length(prodopts$indexes_bandnames)) # nodata out for quality bands (always 255)
+			prodopts$quality_bandsel = rep(0, length(prodopts$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
+			
+			# Put everything  together and update list of modis products
+			
+			mod_prod_list = c(mod_prod_list, prodopts$product )     # Add product to products list
+			prod_opt_list [[prodopts$product ]] =prodopts
+		}}
+	
+#- ------------------------------------------------------------------------------- -#
+#  ---------------Define options for product MOD09GA -----  
 #- ------------------------------------------------------------------------------- -#
 
-	prodopts = list()
+{{prodopts = list()
 	
 	# General options-------
 
@@ -105,6 +155,9 @@ moddwl_set_opts = function(previous_file = previous_file) {
 			                   "-32767","-32767","-32767","-32767","-32767","-32767","-32767","787410671","255","255","255")
 											 
 	prodopts$bandsel =rep(0, length(prodopts$bandnames)) 					  #Initial Selection of desired bands (all zeroes)
+	
+	prodopts$reflbands = c(11,12,13,14,15,16,17)				# Bands corresponding to reflectances (used to build BSQ if requested
+	prodopts$reflorder = c(3,4,1,2,5,6,7)				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order)
 
 	# Derived Indexes and Characteristics
 	prodopts$indexes_bandnames =	c('NDVI')        #Names of possible indexes bands
@@ -125,11 +178,11 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	
   mod_prod_list = c(mod_prod_list, prodopts$product )     # Add product to products list
 	prod_opt_list [[prodopts$product ]] =prodopts
-	
+	}}
 #- ------------------------------------------------------------------------------- -#
 #  ---------------Define options for product MOD11A1 -----  
 #- ------------------------------------------------------------------------------- -#
-	prodopts = list()
+{{prodopts = list()
 	
 	# General options -------
   prodopts$product = "Land_Surf_Temp_Daily_1Km (MOD11A1)"    # Product Name
@@ -146,7 +199,9 @@ moddwl_set_opts = function(previous_file = previous_file) {
   prodopts$nodata_in =  c('0','-999','0','255','0','-999','0','255','0','0','0','0')  # Nodata values in input MODIS Science DataSets	# Nodata values in input MODIS Science DataSets
   prodopts$nodata_out = c('0','255','255','255','0','255','255','255','0','0','0','0')          # Nodata values in output images
 	prodopts$bandsel = rep(0, length(prodopts$bandnames))     			  #Selection of desired bands
-
+	prodopts$reflbands = NA				# Bands corresponding to reflectances (used to build BSQ if requested - set to NA if no refl present)
+	prodopts$reflorder = NA				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order - set to NA if no refl present))
+	
 	# Derived Indexes and Characteristics
 	prodopts$indexes_bandnames =	c('')        #Names of possible indexes bands
 	prodopts$indexes_nicknames =	prodopts$indexes_bandnames 
@@ -167,11 +222,11 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	# Put everything  together and update list of modis products
   mod_prod_list = c(mod_prod_list, prodopts$product )     # Add product to products list
 	prod_opt_list [[prodopts$product ]] =prodopts
-	
+}}
 #- ------------------------------------------------------------------------------- -#
 #  Define options for product MOD13Q1-----
 #- ------------------------------------------------------------------------------- -#
-	prodopts = list()
+{{prodopts = list()
 	
 	# General options-------
   prodopts$product = "Vegetation Indexes_16Days_250 (MOD13Q1)"    # Product Name
@@ -193,26 +248,22 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	prodopts$nodata_out =c('-32767','-32767','65535','-32767','-32767','-32767','-32767','-32767','-32767','-32767','-32767','255')          # Nodata values in output images
 	
 	prodopts$bandsel = rep(0, length(prodopts$bandnames))   			  #Selection of desired bands
-
-  prodopts$derived_bandnames = c('')        #Names of possible derived bands
-  prodopts$derived_bandsel = rep(0, length(prodopts$derived_bandnames))   #Selection of desired derived bands
-  prodopts$derived_datatype =  c("")   #Datatypes for derived bands
-  prodopts$derived_nodata_in =  c('')   #nodata for derived bands
-
+	prodopts$reflbands = c(4,5,6,7)				# Bands corresponding to reflectances (used to build BSQ if requested
+	prodopts$reflorder = c(3,1,2,4)				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order)
 	
 	# Derived Indexes and Characteristics
-	prodopts$indexes_bandnames =	c('')        #Names of possible indexes bands
-	prodopts$indexes_nicknames =	prodopts$indexes_bandnames 
-	prodopts$indexes_formula = 		c('')        #Formulas of different indexes
-	prodopts$indexes_nodata_out = c('')			   #nodata for indexes bands
+	prodopts$indexes_bandnames =	c('SR','FI')        #Names of possible indexes bands
+	prodopts$indexes_nicknames =	c('Simple Ratio','Flood Index') 
+	prodopts$indexes_formula = 		c('b2_NIR/b1_Red', '(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)')        #Formulas of different indexes
+	prodopts$indexes_nodata_out = c('-32767','-32767')			   #nodata for indexes bands
 	prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
 
 	# Derived Quality and Characteristics
 	
-	prodopts$quality_bandnames = c('')        #Names of possible quality bands
-	prodopts$quality_nicknames = c('')        #nickNames of possible quality bands
-	prodopts$quality_source  =	 c('')        # original band containing the information
-	prodopts$quality_bitN = 	  c('')	# Position of bits of the selected quality indicator in the total "bit word" of the original band
+	prodopts$quality_bandnames = c('MODLAND_QA', 'UI','Mix_Cld','Land_Wat_Flag','Snw_Poss','Shd_Poss' )        #Names of possible quality bands
+	prodopts$quality_nicknames = c('MODLAND_QA', 'Usefulness Index', 'Mixed Clouds Flag', ' Land Water Flag', ' Possible Snow Ice', ' Possible Shadow')        #nickNames of possible quality bands
+	prodopts$quality_source  =	 c('QA','QA','QA','QA','QA','QA')        # original band containing the information
+	prodopts$quality_bitN = 	  c('0-1','2-5','10','11-13','14','15')	# Position of bits of the selected quality indicator in the total "bit word" of the original band
 	prodopts$quality_nodata_in =  rep(255, length(prodopts$indexes_bandnames))  # nodata in for quality bands (dummy - always 255)
 	prodopts$quality_nodata_out =  rep(255, length(prodopts$indexes_bandnames)) # nodata out for quality bands (always 255)
 	prodopts$quality_bandsel = rep(0, length(prodopts$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
@@ -220,13 +271,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	# Put everything  together and update list of modis products
   mod_prod_list = c(mod_prod_list, prodopts$product )     # Add product to products list
 	prod_opt_list [[prodopts$product ]] =prodopts
-
-# Put all options in the "opts" list, add also "dummy" values for dates ,proj and other parameters and save to the "previous" file ----
-  opts = list(MRTpath = MRTpath, out_proj_list = out_proj_list, MOD_proj_str = MOD_proj_str,
-              mod_prod_list = mod_prod_list,sensor = 'Terra', prod_opt_list = prod_opt_list, modprod = 'MOD13Q1/MYD13Q1',                                                                                     start_day = 1,
-              start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
-              start_x = 1, end_x =1, start_y = 1, end_y = 1, proj = 'Sinusoidal', out_res = '',format = 'ENVI',
-              reprocess ='No', bbox = c('','','',''), out_folder = '')
+	}}
 
   save(prod_opt_list, mod_prod_list, file= previous_file)
 }
