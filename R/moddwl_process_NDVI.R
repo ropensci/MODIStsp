@@ -11,7 +11,7 @@
 #' @param DOY doy of processed image
 #' @param nodata_out nodata value in inputs
 #' @param derived_nodata_out value to be assigned to nodata in output image 
-#' @param format format to be used for output (e.g., "ENVI")
+#' @param out_format format to be used for output (e.g., "ENVI")
 #' @returnType 
 #'
 #' @return 
@@ -22,8 +22,8 @@
 #' @license GPL(>2)
 #' @export
 
-moddwl_process_NDVI = function(derived_band, out_prod_folder ,bandnames ,
-		file_prefix , yy , DOY ,nodata_out, derived_nodata_out, format) {
+moddwl_process_NDVI = function(out_filename, out_prod_folder ,bandnames ,
+		file_prefix , yy , DOY ,nodata_out, derived_nodata_out, out_format) {
 	
 		
 	# Retrieve necessary filenames (Red and NIR)
@@ -43,10 +43,8 @@ moddwl_process_NDVI = function(derived_band, out_prod_folder ,bandnames ,
 	NDVI <- overlay(nir, red, fun=f_NDVI)  # Compute Derived band
 	
 	# Save output and remove aux file
-	
-	out_filename = file.path(out_prod_folder,derived_band,paste(file_prefix,'_',derived_band,'_',yy,'_', DOY, '.dat', sep = ''))
-	dir.create(file.path(out_prod_folder,derived_band), showWarnings = F, recursive = T)
-	writeRaster(NDVI, out_filename, format = format,NAflag = as.numeric(derived_nodata_out), overwrite = T)
+
+	writeRaster(NDVI, out_filename, format = out_format,NAflag = as.numeric(derived_nodata_out), overwrite = T)
 	xml_file = paste(out_filename,'.aux.xml',sep = '')		# Delete xml files created by writeRaster
 	unlink(xml_file)
 	gc()
