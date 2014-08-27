@@ -18,7 +18,7 @@ moddwl_main = function() {
 	
 	{{# Check if needed packages are present. Install them otherwise
 			pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
-					'raster','RCurl','stringr','tools','rts')
+					'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools')
 			pkg_test <- function(x) {if (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE)}}
 			for (pkg in pkg_list) {pkg_test(pkg)}
 #	options(error = browser)
@@ -28,11 +28,11 @@ moddwl_main = function() {
 			rasterOptions(setfileext = F)
 			# Folder Initialization -----
 			
-#   rscript.stack <- function() {Filter(Negate(is.null), lapply(sys.frames(), function(x) x$ofile))}    			#	Returns the stack of RScript files
-#   rscript.current <- function() {	stack <- rscript.stack()   ;	  as.character(stack[length(stack)])}		## Returns the current RScript file path
-#   src_dir = dirname(rscript.current())
+   rscript.stack <- function() {Filter(Negate(is.null), lapply(sys.frames(), function(x) x$ofile))}    			#	Returns the stack of RScript files
+   rscript.current <- function() {	stack <- rscript.stack()   ;	  as.character(stack[length(stack)])}		## Returns the current RScript file path
+   src_dir = dirname(rscript.current())
 			
-			src_dir = "D:/Documents/Source_Code/R/LB_MOD_DWL/R"
+#			src_dir = "D:/Documents/Source_Code/R/LB_MOD_DWL/R"
 			setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ;   previous_dir = file.path(main_dir,'/Previous')   ; log_dir =  file.path(main_dir,'/Log')
 			dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 			previous_file= file.path(previous_dir, 'Moddwl_Previous.RData')
@@ -54,17 +54,18 @@ moddwl_main = function() {
 #  Set general processing options
 #- ------------------------------------------------------------------------------- -#
 	{ MRTpath='C:/MRT/bin'
+		out_proj_names = c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
 		out_proj_list = hash("Sinusoidal" = "",
 				"UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
-				"Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs ")
+				"Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs ",
+				"User Defined" = "")
 		MOD_proj_str = '+proj=sinu +R=6371007.181 +nadgrids=@null +wktext'
 		
-		
 		# Create the general_opts structure used to communicate with the GUI and 
-		general_opts = list(main_dir = main_dir, previous_file=previous_file, log_file = log_file, MRTpath = MRTpath, out_proj_list = out_proj_list, MOD_proj_str = MOD_proj_str, 
+		general_opts = list(main_dir = main_dir, previous_file=previous_file, log_file = log_file, MRTpath = MRTpath, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str, 
 				sel_prod = 'Surf_Ref_Daily_250 (MOD09GQ)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
 				start_x = 18, end_x =18, start_y = 4, end_y = 4, 
-				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'Nearest',out_format = 'ENVI',ts_format = 'ENVI Meta Files', 
+				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', 
 				reprocess ='No', bbox = c('','','',''), out_folder = '')
 	}	
 	#launch the GUI ----
@@ -83,7 +84,10 @@ moddwl_main = function() {
 						start_date = paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '.')
 						end_date = paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '.')
 						
-						outproj_str = general_opts$out_proj_list[[general_opts$proj]]   ;  if (outproj_str =='') {outproj_str = general_opts$MOD_proj_str}
+						
+						if (general_opts$proj != "User Defined") {outproj_str = general_opts$out_proj_list[[general_opts$proj]] 
+						} else { outproj_str = general_opts$user_proj4}
+						if (outproj_str =='') {outproj_str = general_opts$MOD_proj_str}
 						
 						if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {general_opts$out_res = prod_opts$native_res}   # get native resolution if out_res empty
 					
