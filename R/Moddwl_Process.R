@@ -68,6 +68,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 		#  Verify if bands needed for indexes and/or quality computation are already selected
 		#  if not, select them and set the "delete" option for them to 1 
 		#- ------------------------------------------------------------------------------- -#
+		
 		{{delbands = rep(0, length(bandnames))    # dummy array set to 0 - will contain info on wether orignal downloaded bands has to be deleted
 				bandsel_orig_choice = bandsel						# Save original choice of bands in bandsel_orig_choice (bandsel is later modified to set to 1 all bands needed for indexes and quality 
 				for (band in seq(along = indexes_bandnames)) {
@@ -156,7 +157,8 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 								# This is useful in the case of very large mosaics !
 								# ---------------------------------- ----------------------------------------------#
 								{{# Create the temporary parameter file for MRT mosaic function
-										mosaicname = file(paste(MRTpath, "/TmpMosaic.prm", sep=""), open="wt")
+										
+										mosaicname = file(file.path(out_prod_folder, 'TmpMosaic.prm'), open="wt")
 										write(paste(out_prod_folder,"/",modislist[1], sep=""), mosaicname)
 										if (length(modislist) >1) {for (j in 2:length(modislist)) write(paste(out_prod_folder,"/",modislist[j], sep=""),mosaicname,append=T)}
 										close(mosaicname)
@@ -175,8 +177,9 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 												outfile = paste(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')  	# Create name for the HDF mosaic
 												# Launch MRT to mosaic
 												if (file.exists(outfile) == F | reprocess == T) {
-													er_mos <- system(paste(MRTpath, '/mrtmosaic -i ', MRTpath, '/TmpMosaic.prm' ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
+													er_mos <- system(paste(MRTpath, '/mrtmosaic -i ',file.path(out_prod_folder, 'TmpMosaic.prm') ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
 													if (er_mos != 0)  {stop()}   # exit on error
+													
 												}
 												# ---------------------------------- ----------------------------------------------#
 												# Convert to output projection, extent and format using gdalwarp ----
@@ -218,6 +221,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 												
 											}  # ENDIF band selected for processing
 										}	# END Cycle on available MODIS Bands
+										file.remove(file.path(out_prod_folder, 'TmpMosaic.prm'))
 									}}
 								# ---------------------------------- ----------------------------------------------#
 								# If Indexes selected, then start creating them 

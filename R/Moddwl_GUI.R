@@ -5,7 +5,6 @@
 #'
 #' @param general_opts General options (paths and other stuff) passed by the moddwl_main 
 #' @returnType 
-
 #' @return 
 #'		NONE - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
 #' @author Lorenzo Busetto, phD (2014)
@@ -37,16 +36,16 @@ moddwl_GUI = function (general_opts){
 	{{satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, bands and satellites selection</span>', markup = T,horizontal = FALSE, container=main_group, spacing = 15)
 			prod_frame <- gframe(text ="Select MODIS Product and bands",horizontal = TRUE, container=satprod_frame, spacing = 15)
 			checked <- which(mod_prod_list == general_opts$sel_prod)
-			pos_prod <- which(names(general_opts$prod_opt_list) == general_opts$sel_prod)
-			
+#			browser()
 			temp_wid_bands <<- prod_opt_list[[sel_prod]]$bandsel				# set dummy variables holding the initial values of selected bands
 			temp_wid_bands_indexes <<- prod_opt_list[[sel_prod]]$indexes_bandsel
 			temp_wid_bands_quality <<- prod_opt_list[[sel_prod]]$quality_bandsel
 			
 			prod_wid <- gdroplist(items = mod_prod_list, container=prod_frame, horizontal = T, selected = checked,  handler = function(h,...) {
 						sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]		# find index of sel. product
-						temp_wid_bands <<- prod_opt_list[[sel_prod]]$bandsel					# update dummy variables
-						temp_wid_bands_indexes <<- prod_opt_list[[sel_prod]]$indexes_bandsel
+						temp_wid_bands <<- rep(0, length(temp_wid_bands))					# reset dummy variables for band selection to 0 on product change
+						temp_wid_bands_indexes <<- rep(0, length(temp_wid_bands_indexes))
+						temp_wid_bands_quality <<- rep(0, length(temp_wid_bands_quality))
 					})
 			fakelab <- glabel(text = '   ', container = prod_frame) 
 			band_wid <- gbutton(text = 'Select Processing Bands', border = T,				# Child widget for processing bands selection
@@ -135,7 +134,7 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Tiles selection	  
 #- ------------------------------------------------------------------------------- -#
-	{{tiles_group <- gframe(text = '<span foreground="blue" size="large">Processing Extent</span>', markup = T, container = main_group, horizontal = F, expand = T, spacing = 15)
+	{{tiles_group <- gframe(text = '<span foreground="blue" size="large">Required MODIS Tiles </span>', markup = T, container = main_group, horizontal = F, expand = T, spacing = 15)
 			x_group <- ggroup(container = tiles_group, horizontal = TRUE)
 			# horizontal
 			start_x_lab <- glabel(text = '<span weight = "bold" >Horizontal Tiles:</span>',markup = T, container = x_group) ; size(start_x_lab) = c(120,20)
@@ -161,13 +160,20 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Projection, resolution and bbox selection 
 #- ------------------------------------------------------------------------------- -#
-	{{output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T, container = main_group, horizontal = FALSE, expand = T, spacing = 15)
-			output_proj_group <- ggroup (container = output_proj_frame, horizontal = TRUE)
+	{{output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T, container = main_group, horizontal = FALSE, expand = T, spacing = 30)
+			output_proj_group <- ggroup (container = output_proj_frame, horizontal = TRUE, spacing = 15)
 			font (output_proj_frame) <- list(weight = 'bold', color  = 'blue')
 			# Projection ----
 			output_proj_lab <- glabel(text = '<span weight = "bold" >Output Projection:</span>', container = output_proj_group,markup = T) ; size(output_proj_lab) = c(120,20)
-			proj_wid <- gcombobox(names(general_opts$out_proj_list), container=output_proj_group, selected = match(general_opts$proj, names(general_opts$out_proj_list)))
+			proj_wid <- gcombobox(general_opts$out_proj_names, container=output_proj_group, selected = match(general_opts$proj, general_opts$out_proj_names), handler = function(h,....) {
+						current_sel <- svalue(proj_wid) 
+						if (current_sel != 'User Defined') { enabled(output_proj4_wid) <- F} else {(enabled(output_proj4_wid) <- T)}
+					})
 			size (proj_wid) <- c(100,20)
+			
+			outproj_user_lab<- glabel(text = '<span weight = "bold" >PROJ4 String:</span>', container = output_proj_group,markup = T) ; size(output_proj_lab) = c(120,20)
+			output_proj4_wid <- gedit(text = general_opts$user_proj4, container = output_proj_group, width = 40)
+			if (general_opts$proj == 'User Defined') { enabled(output_proj4_wid) <- T} else {(enabled(output_proj4_wid) <- F)}
 			
 			# Resolution ----
 			output_res_group <- ggroup (container = output_proj_frame, horizontal = TRUE)
@@ -256,8 +262,9 @@ moddwl_GUI = function (general_opts){
 	{{but_group <- ggroup(container = main_group, horizontal = TRUE)
 			
 		{{start_but <- gbutton(text = 'Start', container = but_group, handler = function (h,....) {# If "Start" pressed, retrieve selected values and save in previous file
-						general_opts$sel_prod <- svalue(prod_wid)						# Products options
+						general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
 						general_opts$sensor <- svalue(sens_wid)
+						
 						if (exists ('temp_wid_bands')) {
 							prod_opt_list[[sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
 							rm(temp_wid_bands, envir = globalenv())
@@ -286,6 +293,7 @@ moddwl_GUI = function (general_opts){
 						general_opts$end_y <- svalue(end_y_wid)
 						
 						general_opts$proj <- svalue(proj_wid)		# Proj and extent options
+						general_opts$user_proj4 <- svalue(output_proj4_wid)	
 						general_opts$out_res_sel <- (svalue(output_res_sel_wid))			
 						general_opts$out_res <- (svalue(output_res_wid))
 						general_opts$resampling <- svalue(output_resmeth_wid)
@@ -310,10 +318,11 @@ moddwl_GUI = function (general_opts){
 						general_opts$bbox <- as.numeric(general_opts$bbox)
 						n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
 						
+						if (general_opts$full_ext != 'Full Tiles Extent') {
 						if (n_bbox_compiled == 4){
 							if ((general_opts$bbox[1] > general_opts$bbox[2]) | (general_opts$bbox[3] > general_opts$bbox[4])) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}}
-						if ((n_bbox_compiled < 4) & (n_bbox_compiled > 0 )) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}
-						
+						if ((n_bbox_compiled < 4) & (n_bbox_compiled >= 0 )) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}
+						}
 						if (general_opts$out_folder == ''){gmessage('Please Select an output folder !', title = 'Warning') ; check <- F}
 						
 						if (check == T) {					# If check passed, save previous file and return
@@ -325,7 +334,7 @@ moddwl_GUI = function (general_opts){
 					})
 					}}	
 		{{save_but <- gbutton(text = 'Save Options', container = but_group, handler = function (h,....) {# If "Start" pressed, retrieve selected values and save in previous file
-						general_opts$sel_prod <- svalue(prod_wid)						# Products options
+						general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
 						general_opts$sensor <- svalue(sens_wid)
 						if (exists ('temp_wid_bands')) {
 							prod_opt_list[[sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
@@ -355,6 +364,7 @@ moddwl_GUI = function (general_opts){
 						general_opts$end_y <- svalue(end_y_wid)
 						
 						general_opts$proj <- svalue(proj_wid)		# Proj and extent options
+						general_opts$user_proj4 <- svalue(output_proj4_wid)	
 						general_opts$out_res_sel<- (svalue(output_res_sel_wid))			
 						general_opts$out_res <- (svalue(output_res_wid))
 						general_opts$resampling <- svalue(output_resmeth_wid)
