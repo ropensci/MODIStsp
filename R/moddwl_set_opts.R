@@ -48,10 +48,10 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	prodopts$reflorder = c(1,2)				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order)
 	
 	# Derived Indexes and Characteristics
-	prodopts$indexes_bandnames =	c('NDVI')        #Names of possible indexes bands
-	prodopts$indexes_nicknames =	prodopts$indexes_bandnames         #Names of possible indexes bands
-	prodopts$indexes_formula = 		c('(b2_NIR-b1_Red)/(b2_NIR+b1_Red)')        #Formulas of different indexes
-	prodopts$indexes_nodata_out = c(32767)   #nodata for indexes bands
+	prodopts$indexes_bandnames =	c('NDVI','SR')        #Names of possible indexes bands
+	prodopts$indexes_nicknames =	c('NDVI','SR')       #Names of possible indexes bands
+	prodopts$indexes_formula = 		c('(b2_NIR-b1_Red)/(b2_NIR+b1_Red)','b2_NIR/b1_Red')        #Formulas of different indexes
+	prodopts$indexes_nodata_out = rep(32767, length(prodopts$indexes_bandnames))			   #nodata for indexes bands
 	prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
 	
 	# Derived Quality and Characteristics
@@ -104,6 +104,34 @@ moddwl_set_opts = function(previous_file = previous_file) {
 			prodopts$indexes_formula = 		c('(b2_NIR-b1_Red)/(b2_NIR+b1_Red)')        #Formulas of different indexes
 			prodopts$indexes_nodata_out = c(32767)   #nodata for indexes bands
 			prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
+			
+			prodopts$indexes_bandnames =	c('NDVI','EVI','SR','FI','LSWI','NDII7','SAVI','RGRI','NDSI','GNDVI')        #Names of possible indexes bands
+			prodopts$indexes_nicknames =	c('NDVI',
+					'Simple Ratio (b2_NIR/b1_Red)',
+					'EVI (2.5*((b2-b1)/(b2+6*b1-7.5*b3+1)))',
+					'Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)',
+					'LSWI ((b2_NIR - b6_SWIR) / (b2_NIR + b6_SWIR))',
+					'NDII7 (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)',
+					'SAVI (b2-b1)/(b2+b1+0.5)*(1+0.5)',
+					'RGRI (b1_Red/b4_Green)',
+					'NDSI (b1_Red/b4_Green)',
+					'GNDVI (b1_Red/b4_Green)'
+					) 
+			prodopts$indexes_formula = 		c('(b2_NIR-b1_Red)/(b2_NIR+b1_Red)',  #Formulas of different indexes
+					'b2_NIR/b1_Red',  													#SR
+					'2.5*((b2-b1)/(b2+6*b1-7.5*b3+1))', 			 #EVI
+					'(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)',  		 #FI
+					'(b2_NIR - b6_SWIR) / (b2_NIR + b6_SWIR)',  #LSWI
+					'(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)', 			 #NDII7
+					'(b2-b1)/((b2+b1+0.5)*(1+0.5))', 					#SAVI
+					'(b1_Red/b4_Green)',       								#RGRI
+					'(b4_Blue-b6_SWIR)/(b4_Green+b6_SWIR)',   #NDSI
+					'(b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)'       #GNDVI
+					)
+			
+			prodopts$indexes_nodata_out = rep(32767, length(prodopts$indexes_bandnames))			   #nodata for indexes bands
+			prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
+			
 			
 			# Derived Quality and Characteristics
 			
@@ -163,7 +191,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	prodopts$indexes_bandnames =	c('NDVI')        #Names of possible indexes bands
 	prodopts$indexes_nicknames =	prodopts$indexes_bandnames 
 	prodopts$indexes_formula = 		c('(b2_NIR-b1_Red)/(b2_NIR+b1_Red)')        #Formulas of different indexes
-	prodopts$indexes_nodata_out = c(32767)   #nodata for indexes bands
+	prodopts$indexes_nodata_out = rep(32767, length(prodopts$indexes_bandnames))			   #nodata for indexes bands
 	prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
 	
 	# Derived Quality and Characteristics
@@ -206,7 +234,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	prodopts$indexes_bandnames =	c('')        #Names of possible indexes bands
 	prodopts$indexes_nicknames =	prodopts$indexes_bandnames 
 	prodopts$indexes_formula = 		c('')        #Formulas of different indexes
-	prodopts$indexes_nodata_out = c('')			   #nodata for indexes bands
+	prodopts$indexes_nodata_out = rep(32767, length(prodopts$indexes_bandnames))			   #nodata for indexes bands
 	prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
 	
 	# Derived Quality and Characteristics
@@ -252,15 +280,16 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	prodopts$reflorder = c(3,1,2,4)				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order)
 	
 	# Derived Indexes and Characteristics
-	prodopts$indexes_bandnames =	c('SR','FI')        #Names of possible indexes bands
-	prodopts$indexes_nicknames =	c('Simple Ratio (b2_NIR/b1_Red)','Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)','NDII7 (b2-b1)/(b2+b1+0.5)*(1+0.5)','SAVI (b2-b1)/(b2+b1+0.5)*(1+0.5)','RGRI (b2_NIR/b1_Red)') 
-	prodopts$indexes_formula = 		c('b2_NIR/b1_Red',   #Formulas of different indexes
-																	'(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)',
-																	'(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)',
-																	'(b2-b1)/(b2+b1+0.5)*(1+0.5)',
-																	'(b2_NIR/b1_Red)')       
+	prodopts$indexes_bandnames =	c('SR','FI','NDII7','SAVI','RGRI')        #Names of possible indexes bands
+	prodopts$indexes_nicknames =	c('Simple Ratio (b2_NIR/b1_Red)','Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)','NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)','SAVI (b2-b1)/(b2+b1+0.5)*(1+0.5)','RGRI (b1_Red/b4_Green)') 
+	prodopts$indexes_formula = 		c('b2_NIR/b1_Red',   #Formulas of different indexes - SR
+																	'(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)',  #FI
+																	'(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)',   #NDII7
+																	'(b2-b1)/(b2+b1+0.5)*(1+0.5)',   #SAVI
+																	'(b1_Red/b4_Green)'								#RGRI
+																	)          
 															
-	prodopts$indexes_nodata_out = c(32767,32767)			   #nodata for indexes bands
+	prodopts$indexes_nodata_out = rep(32767, length(prodopts$indexes_bandnames))			   #nodata for indexes bands
 	prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
 
 	# Derived Quality and Characteristics
