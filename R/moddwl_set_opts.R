@@ -253,8 +253,13 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	
 	# Derived Indexes and Characteristics
 	prodopts$indexes_bandnames =	c('SR','FI')        #Names of possible indexes bands
-	prodopts$indexes_nicknames =	c('Simple Ratio','Flood Index') 
-	prodopts$indexes_formula = 		c('b2_NIR/b1_Red', '(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)')        #Formulas of different indexes
+	prodopts$indexes_nicknames =	c('Simple Ratio (b2_NIR/b1_Red)','Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)','NDII7 (b2-b1)/(b2+b1+0.5)*(1+0.5)','SAVI (b2-b1)/(b2+b1+0.5)*(1+0.5)','RGRI (b2_NIR/b1_Red)') 
+	prodopts$indexes_formula = 		c('b2_NIR/b1_Red',   #Formulas of different indexes
+																	'(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)',
+																	'(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)',
+																	'(b2-b1)/(b2+b1+0.5)*(1+0.5)',
+																	'(b2_NIR/b1_Red)')       
+															
 	prodopts$indexes_nodata_out = c(32767,32767)			   #nodata for indexes bands
 	prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
 
