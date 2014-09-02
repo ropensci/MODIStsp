@@ -31,11 +31,12 @@ moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefixes,sens_se
 	out_meta_files_hdr = list.files(file.path(out_prod_folder,meta_band), pattern = '*.hdr', full.names = T) # get list of hdr files
 	if (sens_sel != "Mixed")  {out_meta_files_hdr = out_meta_files_hdr [grep(file_prefix,out_meta_files_hdr)]}	# get list of ENVI files
 	
-	doys = as.numeric(str_sub(basename(out_meta_files),-7,-5))
-	years = as.numeric(str_sub(basename(out_meta_files),-12,-9))
+	doys = (str_sub(basename(out_meta_files),-7,-5))
+	years = (str_sub(basename(out_meta_files),-12,-9))
+	
 	acq_order = order(as.numeric(paste(years,doys, sep = '')))    # find the files order (by acq.date
 	
-	doys = doys [acq_order]   ; years = years[acq_order]    # reorder doys and years
+	doys = as.numeric(doys [acq_order])   ; years = as.numeric(years[acq_order])    # reorder doys and years
 	out_meta_files = out_meta_files[acq_order]			 #  Reorder Files  
 	
 	if (ts_format == 'ENVI Meta Files' | ts_format == 'Both') {
