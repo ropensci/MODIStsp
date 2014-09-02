@@ -15,11 +15,12 @@ getmod_dirs <- function(FTP, .Platform) {
 	class(items) <- "try-error"
 	ce <- 0
 	while(class(items) == "try-error") {
-		items <- try(strsplit(getURL(FTP), "\r*\n")[[1]],silent=TRUE)
+		items <- try(strsplit(getURL(FTP, followLocation = TRUE, .opts = list(timeout = 40, maxredirs = 2, verbose = TRUE)), "\r*\n")[[1]],silent=TRUE)
 		if (class(items) == "try-error") {
-			Sys.sleep(10)
+			Sys.sleep(1)
 			ce <- ce + 1
-			if (ce == 200) stop("Error: FTP server is down!!")
+			print(ce)
+			if (ce == 50) stop("Error: FTP server is down!!")
 		}
 	}
 	items <- items[-1]
@@ -27,8 +28,9 @@ getmod_dirs <- function(FTP, .Platform) {
 	dirs <- unlist(lapply(strsplit(items, ">"), function(x){x[length(x)-1]}))
 	dirs = dirs[seq(3,length(dirs)-2)]
 	dirs <- unlist(lapply(strsplit(dirs, "/"), function(x){x[1]}))
+	
 	return(dirs)
-	ret
+	
 }
 
 
@@ -37,6 +39,7 @@ getmod_dirs <- function(FTP, .Platform) {
 # ---------------------------------- ----------------------------------------------#
 
 getmod_dates <- function(dates, dirs) {
+	
 	if (length(dates) > 1) {
 		start.date <- strsplit(dates[1],'\\.')[[1]]
 		end.date <- strsplit(dates[2],'\\.')[[1]]
@@ -73,7 +76,8 @@ getmod_names <- function(FTP, dirs, i, v, h) {
 	class(getlist) <- "try-error"
 	ce <- 0
 	while(class(getlist) == "try-error") {
-		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep="")), "\r*\n")[[1]],silent=TRUE)
+		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep=""), followLocation = TRUE, .opts = list(timeout = 40, maxredirs = 2, verbose = TRUE)), "\r*\n")[[1]],silent=TRUE)
+#		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep="")), "\r*\n")[[1]],silent=TRUE)
 		if (class(getlist) == "try-error") {
 			Sys.sleep(5)
 			ce <- ce + 1
