@@ -53,6 +53,8 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in , full_ext,
 		quality_nodata_out,	file_prefixes , main_out_folder , multiband_bsq, resampling, out_res_sel, ts_format) {
 	
+	
+	
 	if (sensor == 'Both') {senslist = c('Terra','Aqua')} else {senslist = sensor}# selected sensors
 	for (sens_sel in senslist) {		# cycle on selected sensors
 		
@@ -101,7 +103,8 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 			# Create string representing the dates to be processed 
 			if (yy == start_year & yy == end_year) {dates = c(start_date,end_date)}
 			if (yy == start_year & yy != end_year) {dates = c(start_date,paste(as.character(yy),'.12.31', sep = ''))}
-			if (yy != start_year & yy == end_year) {dates = c(paste(as.character(yy),'.12.31',end_date, sep = ''))}
+			if (yy != start_year & yy == end_year) {dates = c(paste(as.character(yy),'.1.1', sep = ''),end_date)}
+			if (yy != start_year & yy != end_year) {dates = c(paste(as.character(yy),'.1.1', sep = ''),paste(as.character(yy),'.12.31', sep = ''))}
 			
 			# Processing status message
 			mess = gwindow(title = 'Processing Status', container = TRUE, width = 400, height = 40)
@@ -140,7 +143,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 												while(er != 0) {   # repeat until no error or > 21 tryyouts
 													print(paste('Downloading File: ', modisname ))
 													svalue(mess_lab) = paste('--- Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist),' ---')    # Update progress window
-													er <- tryCatch(download.file(url=paste(FTP,dirs[i], "/",modisname,sep=''),destfile=file.path(out_prod_folder,modisname),mode='wb',quiet=T, cacheOK=FALSE),
+													er <- tryCatch(download.file(url=paste(FTP,dirs[i], "/",modisname,sep=''),destfile=file.path(out_prod_folder,modisname),mode='wb',quiet=F, cacheOK=FALSE),
 															warning=function(war) {print(war) ; return (1)}, error =function(err) {	print(err);	return (1)} )
 													if (er != 0) {	# Stop after 21 failed attempts
 														print('Download Error -Retrying') ; Sys.sleep(10)   ;	ce <- ce + 1 ; 	if (ce == 21) stop("Error: FTP server is down!!")	
