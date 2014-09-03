@@ -28,7 +28,7 @@
 #' @export
 moddwl_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, out_prod_folder, 
 		file_prefix, yy, DOY, out_format, nodata_out,quality_nodata_in , quality_nodata_out) {
-	
+#	browser() 
 	in_raster_file  =	file.path(out_prod_folder, in_raster_name,paste(file_prefix,'_',in_raster_name,'_',yy,'_', DOY, '.dat', sep = '')) #define name of input file
 	in_raster = raster(in_raster_file, format = out_format)				# Open input file
 	NAvalue(in_raster)<- as.numeric(nodata_out)									# reassign nodata
@@ -36,7 +36,7 @@ moddwl_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, out
 	
 	bits = as.numeric(unlist(strsplit(bitN,'-')))		# retrieve positions of the bits to be extracted
 	if (bits[1] > 0) {in_values = bitShiftR(in_values,bits [1])}	# if bits not at the start of the binary word, shift them 
-	bitfield_vals = bitAnd(in_values,2^(bits[2]-bits[1]+1)-1)								# retrieve the values (Don't know how it works but it's fast !)
+	if (length(bits) > 1) bitfield_vals = bitAnd(in_values,2^(bits[2]-bits[1]+1)-1)	else (bitfield_vals = bitAnd(in_values,2^(1)-1))							# retrieve the values (Don't know how it works but it's fast !)
 	in_raster = setValues(in_raster, values=bitfield_vals)	# Set the retrieved values in the raster
 	
 	writeRaster(in_raster,out_filename, format = out_format ,overwrite = TRUE, datatype = 'INT1U', NAflag = quality_nodata_out)	# save file
