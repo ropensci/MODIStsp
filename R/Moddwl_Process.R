@@ -53,7 +53,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in , full_ext,
 		quality_nodata_out,	file_prefixes , main_out_folder , multiband_bsq, resampling, out_res_sel, ts_format) {
 	
-	
+#	browser()
 	
 	if (sensor == 'Both') {senslist = c('Terra','Aqua')} else {senslist = sensor}# selected sensors
 	for (sens_sel in senslist) {		# cycle on selected sensors
@@ -160,8 +160,8 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 								# This is useful in the case of very large mosaics !
 								# ---------------------------------- ----------------------------------------------#
 								{{# Create the temporary parameter file for MRT mosaic function
-										
-										mosaicname = file(file.path(out_prod_folder, 'TmpMosaic.prm'), open="wt")
+										dir.create(file.path(out_prod_folder,'Temp'), recursive = T, showWarnings = F)
+										mosaicname = file(file.path(out_prod_folder,'Temp', 'TmpMosaic.prm'), open="wt")
 										write(paste(out_prod_folder,"/",modislist[1], sep=""), mosaicname)
 										if (length(modislist) >1) {for (j in 2:length(modislist)) write(paste(out_prod_folder,"/",modislist[j], sep=""),mosaicname,append=T)}
 										close(mosaicname)
@@ -180,7 +180,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 												outfile = paste(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')  	# Create name for the HDF mosaic
 												# Launch MRT to mosaic
 												if (file.exists(outfile) == F | reprocess == T) {
-													er_mos <- system(paste(MRTpath, '/mrtmosaic -i ',file.path(out_prod_folder, 'TmpMosaic.prm') ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
+													er_mos <- system(paste(MRTpath, '/mrtmosaic -i ',file.path(out_prod_folder,'Temp', 'TmpMosaic.prm') ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
 													if (er_mos != 0)  {stop()}   # exit on error
 													
 												}
@@ -224,7 +224,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 												
 											}  # ENDIF band selected for processing
 										}	# END Cycle on available MODIS Bands
-										file.remove(file.path(out_prod_folder, 'TmpMosaic.prm'))
+										file.remove(file.path(out_prod_folder,'Temp', 'TmpMosaic.prm'))
 									}}
 								# ---------------------------------- ----------------------------------------------#
 								# If Indexes selected, then start creating them 
