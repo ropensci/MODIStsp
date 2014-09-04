@@ -15,7 +15,7 @@ getmod_dirs <- function(FTP, .Platform) {
 	class(items) <- "try-error"
 	ce <- 0
 	while(class(items) == "try-error") {
-		items <- try(strsplit(getURL(FTP, followLocation = TRUE, .opts = list(timeout = 40, maxredirs = 2, verbose = TRUE)), "\r*\n")[[1]],silent=TRUE)
+		items <- try(strsplit(getURL(FTP, followLocation = TRUE, .opts = list(timeout = 4, maxredirs = 2, verbose = TRUE)), "\r*\n")[[1]],silent=TRUE)
 		if (class(items) == "try-error") {
 			Sys.sleep(1)
 			ce <- ce + 1
