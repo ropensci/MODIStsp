@@ -53,6 +53,8 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in , full_ext,
 		quality_nodata_out,	file_prefixes , main_out_folder , multiband_bsq, resampling, out_res_sel, ts_format) {
 	
+#	browser()
+	
 	if (sensor == 'Both') {senslist = c('Terra','Aqua')} else {senslist = sensor}# selected sensors
 	for (sens_sel in senslist) {		# cycle on selected sensors
 		
@@ -101,16 +103,18 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 			# Create string representing the dates to be processed 
 			if (yy == start_year & yy == end_year) {dates = c(start_date,end_date)}
 			if (yy == start_year & yy != end_year) {dates = c(start_date,paste(as.character(yy),'.12.31', sep = ''))}
-			if (yy != start_year & yy == end_year) {dates = c(paste(as.character(yy),'.12.31',end_date, sep = ''))}
+			if (yy != start_year & yy == end_year) {dates = c(paste(as.character(yy),'.1.1', sep = ''),end_date)}
+			if (yy != start_year & yy != end_year) {dates = c(paste(as.character(yy),'.1.1', sep = ''),paste(as.character(yy),'.12.31', sep = ''))}
 			
 			# Processing status message
 			mess = gwindow(title = 'Processing Status', container = TRUE, width = 400, height = 40)
 			size(mess) <- c(100,8)		;	addHandlerUnrealize(mess, handler = function(h,...) {return(TRUE)})
 			mess_lab = glabel(text =paste('--- Retrieving Files for Year ',as.character(yy),' ---'), editable = FALSE, container = mess)
 			
-			# Create a list of the folders containing images to be downloaded (Corresponding to the selected dates)
+			# Create a list of the images to be downloaded (Corresponding to the selected dates, year and tiles)
 			dirs = getmod_dates(dates = dates, dirs =  getmod_dirs(FTP = FTP, .Platform = .Platform))  ; if (length(dirs) < 1) stop("No available data for selected dates")
-			
+			modislist = NULL
+	
 			# Start Cycling on directories containing images to be downloaded
 			for (i in 1:length(dirs)) {
 				
@@ -140,7 +144,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 												while(er != 0) {   # repeat until no error or > 21 tryyouts
 													print(paste('Downloading File: ', modisname ))
 													svalue(mess_lab) = paste('--- Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist),' ---')    # Update progress window
-													er <- tryCatch(download.file(url=paste(FTP,dirs[i], "/",modisname,sep=''),destfile=file.path(out_prod_folder,modisname),mode='wb',quiet=T, cacheOK=FALSE),
+													er <- tryCatch(download.file(url=paste(FTP,dirs[i], "/",modisname,sep=''),destfile=file.path(out_prod_folder,modisname),mode='wb',quiet=F, cacheOK=FALSE),
 															warning=function(war) {print(war) ; return (1)}, error =function(err) {	print(err);	return (1)} )
 													if (er != 0) {	# Stop after 21 failed attempts
 														print('Download Error -Retrying') ; Sys.sleep(10)   ;	ce <- ce + 1 ; 	if (ce == 21) stop("Error: FTP server is down!!")	
@@ -157,8 +161,8 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 								# This is useful in the case of very large mosaics !
 								# ---------------------------------- ----------------------------------------------#
 								{{# Create the temporary parameter file for MRT mosaic function
-										
-										mosaicname = file(file.path(out_prod_folder, 'TmpMosaic.prm'), open="wt")
+										dir.create(file.path(out_prod_folder,'Temp'), recursive = T, showWarnings = F)
+										mosaicname = file(file.path(out_prod_folder,'Temp', 'TmpMosaic.prm'), open="wt")
 										write(paste(out_prod_folder,"/",modislist[1], sep=""), mosaicname)
 										if (length(modislist) >1) {for (j in 2:length(modislist)) write(paste(out_prod_folder,"/",modislist[j], sep=""),mosaicname,append=T)}
 										close(mosaicname)
@@ -177,7 +181,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 												outfile = paste(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')  	# Create name for the HDF mosaic
 												# Launch MRT to mosaic
 												if (file.exists(outfile) == F | reprocess == T) {
-													er_mos <- system(paste(MRTpath, '/mrtmosaic -i ',file.path(out_prod_folder, 'TmpMosaic.prm') ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
+													er_mos <- system(paste(MRTpath, '/mrtmosaic -i ',file.path(out_prod_folder,'Temp', 'TmpMosaic.prm') ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
 													if (er_mos != 0)  {stop()}   # exit on error
 													
 												}
@@ -221,7 +225,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 												
 											}  # ENDIF band selected for processing
 										}	# END Cycle on available MODIS Bands
-										file.remove(file.path(out_prod_folder, 'TmpMosaic.prm'))
+										file.remove(file.path(out_prod_folder,'Temp', 'TmpMosaic.prm'))
 									}}
 								# ---------------------------------- ----------------------------------------------#
 								# If Indexes selected, then start creating them 

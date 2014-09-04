@@ -36,7 +36,7 @@ moddwl_GUI = function (general_opts){
 	{{satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, bands and satellites selection</span>', markup = T,horizontal = FALSE, container=main_group, spacing = 15)
 			prod_frame <- gframe(text ="Select MODIS Product and bands",horizontal = TRUE, container=satprod_frame, spacing = 15)
 			checked <- which(mod_prod_list == general_opts$sel_prod)
-#			browser()
+
 			temp_wid_bands <<- prod_opt_list[[sel_prod]]$bandsel				# set dummy variables holding the initial values of selected bands
 			temp_wid_bands_indexes <<- prod_opt_list[[sel_prod]]$indexes_bandsel
 			temp_wid_bands_quality <<- prod_opt_list[[sel_prod]]$quality_bandsel
@@ -52,6 +52,7 @@ moddwl_GUI = function (general_opts){
 					handler = function(h,....) {
 						
 						sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]		# find index of sel. product
+						
 						check_names <- prod_opt_list[[sel_prod]]$nicknames						# retrieve band names
 						check_wid <- temp_wid_bands																				# retrieve selected at the time
 						selgroup <- gbasicdialog(title = "Select Processing Bands						", parent=NULL, do.buttons=F, width = 500, horizontal = T)
@@ -65,7 +66,7 @@ moddwl_GUI = function (general_opts){
 						if (length(which(check_names_indexes != '') > 0)) {
 							cbox_indexes<- gframe(text = "Spectral Indexes						", container = cbox_total, horizontal = FALSE, width = 500)
 							bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes), container = cbox_indexes, use.table = F, width = 500)
-						}
+						} 
 						
 						# widgets for band selection - quality
 						check_names_quality <- prod_opt_list[[sel_prod]]$quality_nicknames # retrieve quality band names
@@ -79,17 +80,18 @@ moddwl_GUI = function (general_opts){
 						bands_group <- ggroup(container = selgroup, horizontal = TRUE)
 						accept_but <- gbutton(text = 'Start', container = bands_group, handler = function(button,...){
 									
-									pos_wid <- which(check_names %in% svalue (bands_wid))   ;		tmp_arr <- array(data = 0 , dim = length(check_names))		
-									tmp_arr[pos_wid] <- 1   ;	temp_wid_bands <<- tmp_arr
+									pos_wid <- which(check_names %in% svalue (bands_wid))   ;		tmp_arr_bands <- array(data = 0 , dim = length(check_names))		
+									tmp_arr_bands[pos_wid] <- 1   ;	temp_wid_bands <<- tmp_arr_bands
 									if (length(which(check_names_indexes != '') > 0)) {
-										pos_wid <- which(check_names_indexes %in% svalue (bands_wid_indexes))   ;		tmp_arr <- array(data = 0 , dim = length(check_names_indexes))  
-										tmp_arr[pos_wid] <- 1	; temp_wid_bands_indexes <<- tmp_arr	
+										pos_wid <- which(check_names_indexes %in% svalue (bands_wid_indexes))   ;		tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))  
+										tmp_arr_ind[pos_wid] <- 1	; temp_wid_bands_indexes <<- tmp_arr_ind	
 									}
 									if (length(which(check_names_quality != '') > 0)) {
-										pos_wid <- which(check_names_quality %in% svalue (bands_wid_quality))   ;		tmp_arr <- array(data = 0 , dim = length(check_names_quality))  
-										tmp_arr[pos_wid] <- 1	; temp_wid_bands_quality <<- tmp_arr	
+										pos_wid <- which(check_names_quality %in% svalue (bands_wid_quality))   ;		tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))  
+										tmp_arr_qual[pos_wid] <- 1	; temp_wid_bands_quality <<- tmp_arr_qual	
 									}
 									dispose(selgroup)			
+									
 								})
 						cancel_but <- gbutton(text = 'Cancel', container = bands_group, handler = function(button,...){
 									temp_wid_bands <<- check_wid
@@ -279,7 +281,7 @@ moddwl_GUI = function (general_opts){
 							prod_opt_list[[sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
 							rm(temp_wid_bands_quality, envir = globalenv())
 						}
-#						browser()
+
 						general_opts$start_day <- svalue(start_day_wid)		# Dates options
 						general_opts$start_month <- svalue(start_month_wid)
 						general_opts$start_year <- svalue(start_year_wid)
