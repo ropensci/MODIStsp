@@ -76,7 +76,7 @@ getmod_names <- function(FTP, dirs, i, v, h) {
 	class(getlist) <- "try-error"
 	ce <- 0
 	while(class(getlist) == "try-error") {
-		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep=""), followLocation = TRUE, .opts = list(timeout = 40, maxredirs = 2, verbose = TRUE)), "\r*\n")[[1]],silent=TRUE)
+		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep=""), followLocation = TRUE, .opts = list(timeout = 4, maxredirs = 2, verbose = TRUE)), "\r*\n")[[1]],silent=TRUE)
 #		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep="")), "\r*\n")[[1]],silent=TRUE)
 		if (class(getlist) == "try-error") {
 			Sys.sleep(5)
@@ -176,5 +176,6 @@ moddwl_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel_ori
 			if (file.exists(outder_file) == F) {check = F}
 		}
 	}
+	
 	return(check)
 }
