@@ -110,7 +110,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, MRTpath ,r
 			mess = gwindow(title = 'Processing Status', container = TRUE, width = 400, height = 40)
 			size(mess) <- c(100,8)		;	addHandlerUnrealize(mess, handler = function(h,...) {return(TRUE)})
 			mess_lab = glabel(text =paste('--- Retrieving Files for Year ',as.character(yy),' ---'), editable = FALSE, container = mess)
-			browser()
+			
 			# Create a list of the images to be downloaded (Corresponding to the selected dates, year and tiles)
 			dirs = getmod_dates(dates = dates, dirs =  getmod_dirs(FTP = FTP, .Platform = .Platform))  ; if (length(dirs) < 1) stop("No available data for selected dates")
 			modislist = NULL
