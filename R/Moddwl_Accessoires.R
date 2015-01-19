@@ -15,7 +15,7 @@ getmod_dirs <- function(FTP, .Platform) {
 	class(items) <- "try-error"
 	ce <- 0
 	while(class(items) == "try-error") {
-		items <- try(strsplit(getURL(FTP, followLocation = TRUE, .opts = list(timeout = 4, maxredirs = 2, verbose = TRUE)), "\r*\n")[[1]],silent=TRUE)
+		items <- try(strsplit(getURL(FTP, followLocation = TRUE, .opts = list(timeout = 5, maxredirs = 5, verbose = T)), "\r*\n")[[1]],silent=TRUE)
 		if (class(items) == "try-error") {
 			Sys.sleep(1)
 			ce <- ce + 1
@@ -49,22 +49,27 @@ getmod_dates <- function(dates, dirs) {
 			if (length(d) == 3)
 				if (as.numeric(d[1]) >= as.numeric(start.date[1]) & as.numeric(d[1]) <= as.numeric(end.date[1]) ) wr <- c(wr,i)
 		}
-		if (length(wr) > 0) dirs <- dirs[wr]
+		
+		if (length(wr) > 0) dirs <- dirs[wr] else return (NULL)
 		wr <- c()
 		for (i in 1:length(dirs)) {
 			d <- unlist(strsplit(dirs[i],"\\."))
 			if (as.numeric(d[2]) < as.numeric(start.date[2]) & as.numeric(d[1]) == as.numeric(start.date[1])) wr <- c(wr,i)
 			if (as.numeric(d[2]) > as.numeric(end.date[2]) & as.numeric(d[1]) == as.numeric(end.date[1])) wr <- c(wr,i)
 		}
-		if (length(wr) > 0) dirs <- dirs[-wr]
+		
+		if (length(wr) > 0) dirs <- dirs[-wr] 
+    if (length(dirs) == 0) return(NULL)
 		wr <- c()
 		for (i in 1:length(dirs)) {
 			d <- unlist(strsplit(dirs[i],"\\."))
 			if (as.numeric(d[3]) < as.numeric(start.date[3]) & as.numeric(d[1]) == as.numeric(start.date[1]) & as.numeric(d[2]) == as.numeric(start.date[2])) wr <- c(wr,i)
 			if (as.numeric(d[3]) > as.numeric(end.date[3]) & as.numeric(d[1]) == as.numeric(end.date[1]) & as.numeric(d[2]) == as.numeric(end.date[2])) wr <- c(wr,i)
 		}
-		if (length(wr) > 0) dirs <- dirs[-wr]
+		if (length(wr) > 0) dirs <- dirs[-wr] 
+		if (length(dirs) == 0) return(NULL)
 	} else dirs <- dirs[which(dirs == dates[1])]
+  
 	return(dirs)
 }
 # ---------------------------------- ----------------------------------------------#
@@ -76,7 +81,7 @@ getmod_names <- function(FTP, dirs, i, v, h) {
 	class(getlist) <- "try-error"
 	ce <- 0
 	while(class(getlist) == "try-error") {
-		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep=""), followLocation = TRUE, .opts = list(timeout = 4, maxredirs = 2, verbose = TRUE)), "\r*\n")[[1]],silent=TRUE)
+		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep=""), followLocation = TRUE, .opts = list(timeout = 20, maxredirs = 2, verbose = F)), "\r*\n")[[1]],silent=TRUE)
 #		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep="")), "\r*\n")[[1]],silent=TRUE)
 		if (class(getlist) == "try-error") {
 			Sys.sleep(5)
@@ -97,10 +102,12 @@ getmod_names <- function(FTP, dirs, i, v, h) {
 			if (hh < 10) hc <- paste('0',as.character(hh),sep='')
 			else hc <- as.character(hh)
 			ModisName <- grep(".hdf$",grep(paste('h',hc,'v',vc,sep=''),getlist,value=TRUE),value=TRUE)
-			if (length(ModisName) == 1) Modislist <- c(Modislist,ModisName)
+			if (length(ModisName) >= 1) Modislist <- c(Modislist,ModisName[1])
 		}
 	}
+
 	return(Modislist)
+
 }
 
 # ---------------------------------- ----------------------------------------------#
@@ -146,6 +153,7 @@ moddwl_refl_bsq <- function (product,out_prod_folder,bandnames,bandsel_orig_choi
 # ---------------------------------- ----------------------------------------------#
 moddwl_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel_orig_choice,yy,DOY, out_format, indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel) {
 	check = T
+	
 	for (band in 1:length(bandnames)) {
 		if (bandsel_orig_choice [band] == 1) {
 			

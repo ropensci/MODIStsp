@@ -18,7 +18,7 @@ moddwl_main = function() {
 	
 	{{# Check if needed packages are present. Install them otherwise
 			pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
-					'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools')
+					'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools', 'gdalUtils')
 			pkg_test <- function(x) {if (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE)}}
 			for (pkg in pkg_list) {pkg_test(pkg)}
 #	options(error = browser)
@@ -36,7 +36,8 @@ moddwl_main = function() {
 			setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ;   previous_dir = file.path(main_dir,'/Previous')   ; log_dir =  file.path(main_dir,'/Log')
 			dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 			previous_file= file.path(previous_dir, 'Moddwl_Previous.RData')
-			log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
+#browser()		
+log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 			#   IDL_Dir = file.path(main_dir,'IDL-FRG')
 			
 			# Sourcing of needed R scripts (Remove when building package !!!!)-----
@@ -45,15 +46,15 @@ moddwl_main = function() {
 			source(file.path(src_dir,'moddwl_set_opts.R'))
 			source(file.path(src_dir,'Moddwl_QA_convert.R'))
 			source(file.path(src_dir,'Moddwl_GUI.R'))
-			source(file.path(src_dir,'moddwl_process_NDVI.R'))
-			source(file.path(src_dir,'moddwl_process_QA_bits.R'))
+# 			source(file.path(src_dir,'moddwl_process_NDVI.R'))
+# 			source(file.path(src_dir,'moddwl_process_QA_bits.R'))
 			source(file.path(src_dir,'moddwl_META_create.R'))
 			source(file.path(src_dir,'moddwl_process_indexes.R'))
 		}}
 #- ------------------------------------------------------------------------------- -#
 #  Set general processing options
 #- ------------------------------------------------------------------------------- -#
-	{ MRTpath='C:/MRT/bin'
+	{ MRTpath='D:/MRT/bin'
 		out_proj_names = c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
 		out_proj_list = hash("Sinusoidal" = "",
 				"UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -66,7 +67,7 @@ moddwl_main = function() {
 				sel_prod = 'Surf_Ref_Daily_250 (MOD09GQ)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
 				start_x = 18, end_x =18, start_y = 4, end_y = 4, 
 				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', 
-				reprocess ='No', bbox = c('','','',''), out_folder = '')
+				reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
 	}	
 	#launch the GUI ----
 	GUI = moddwl_GUI(general_opts)
@@ -90,10 +91,10 @@ moddwl_main = function() {
 						if (outproj_str =='') {outproj_str = general_opts$MOD_proj_str}
 						
 						if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {general_opts$out_res = prod_opts$native_res}   # get native resolution if out_res empty
-					
+# 					browser()
 							# launch moddwl_process to Download and preprocess the selected images
 							{{output = with(general_opts, moddwl_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
-													out_folder = out_folder, MRTpath = MRTpath,reproj = reproj,reprocess = reprocess,sensor = sensor, FTPs = prod_opts$FTP,
+													out_folder = out_folder, out_folder_mod = out_folder_mod, MRTpath = MRTpath,reproj = reproj,reprocess = reprocess,sensor = sensor, FTPs = prod_opts$FTP,
 													start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
 													full_ext = full_ext, bbox = bbox,out_format = out_format, out_res_sel = out_res_sel, out_res = as.numeric(out_res),
 													resampling = resampling, ts_format = ts_format, 

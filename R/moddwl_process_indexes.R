@@ -25,7 +25,7 @@ moddwl_process_indexes = function(out_filename,indexes_band, formula,bandnames,n
 	}
 	
 	fun_string = paste(fun_string,'...)','{comp_index <-round(10000*(',formula, '));	return((comp_index))}', sep = '')
-	
+	dir.create(file.path(out_prod_folder,'Temp'))
 	temp_raster = gsub("\\\\",'/', file.path(out_prod_folder,'Temp','tempraster'))
 	call_string = paste(call_string, 'fun=index, datatype = "INT2S", overwrite = T, filename = "',temp_raster,'\")', sep = '')
 	eval(parse(text = fun_string))
