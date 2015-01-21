@@ -13,15 +13,19 @@ require("gridExtra")
 prod_opt_list = NULL   ; mod_prod_list = NULL
 
 #xmlfile = file.choose()
-xmlfile=xmlParse(file)
+xmlfile=xmlParse(xml_file)
+
 xmltop = xmlRoot(xmlfile) #gives content of root
 class(xmltop)#"XMLInternalElementNode" "XMLInternalNode" "XMLAbstractNode"
 top_name = xmlName(xmltop) #give name of node, PubmedArticleSet
+
 n_products = xmlSize(xmltop) #how many children in node, 19
 prodnames = NULL
 for (prod in 1:n_products) {
+#	browser()
 	prodopts = list()
-	prodopts$product=xmlName(xmltop[[prod]])
+#	prodopts$product=xmlName(xmltop[[prod]])
+	prodopts$product=xmlToList(xmltop[[prod]][["name"]])
 	prodopts$main_out_folder=xmlToList(xmltop[[prod]][["main_out_folder"]])
 	prodopts$native_res=xmlToList(xmltop[[prod]][["native_res"]])
 	file_prefix_terra=xmlToList(xmltop[[prod]][['file_prefix_terra']])
@@ -61,24 +65,18 @@ if (nindexes > 0 ) {
 	indexes_formulas = NULL
 	indexes_nodata_out = NULL
 	for (index in 1:nindexes) {
-		indexes_bandnames = c(indexes_bandname,xmlToList(xmltop[[prod]][['indexes']][[index]][["indexes_bandname"]]))
-		indexes_fullnames = c(indexes_fullname,xmlToList(xmltop[[prod]][['indexes']][[index]][["indexes_fullname"]]))
+		indexes_bandnames = c(indexes_bandnames,xmlToList(xmltop[[prod]][['indexes']][[index]][["indexes_bandname"]]))
+		indexes_fullnames = c(indexes_fullnames,xmlToList(xmltop[[prod]][['indexes']][[index]][["indexes_fullname"]]))
 		indexes_formulas = c(indexes_formulas,xmlToList(xmltop[[prod]][['indexes']][[index]][["indexes_formula"]]))
 		indexes_nodata_out = c(indexes_nodata_out,xmlToList(xmltop[[prod]][['indexes']][[index]][["indexes_nodata_out"]]))
 	} #End Cycle on index
 	
 	prodopts$indexes_bandnames = indexes_bandnames
-	prodopts$indexes_fullnames = indexes_fullname
-	prodopts$indexes_formulas = indexes_formula
+	prodopts$indexes_fullnames = indexes_fullnames
+	prodopts$indexes_formulas = indexes_formulas
 	prodopts$indexes_nodata_out = indexes_nodata_out
 	prodopts$indexes_bandsel = rep(0, length(prodopts$indexes_bandnames)) 
-} else {
-	prodopts$indexes_bandnames = c('')
-	prodopts$indexes_fullname = c('')
-	prodopts$indexes_formula = c('')
-	prodopts$indexes_nodata_out = c('')
-	prodopts$indexes_bandsel = rep(0, length(prodopts$indexes_bandnames)) 
-}
+} 
 	nquality = xmlSize(xmltop[[prod]][["quality_indicators"]])
 	if (nquality > 0 ) {
 	quality_bandnames = NULL
@@ -92,26 +90,22 @@ if (nindexes > 0 ) {
 		quality_bitN = c(quality_bitN,xmlToList(xmltop[[prod]][['quality_indicators']][[quality]][["quality_bitN"]]))
 	} #End Cycle on quality
 	
-	} else {
-		prodopts$quality_bandnames = c('')
-		prodopts$quality_fullnames = c('')
-		prodopts$quality_source = c('')
-		prodopts$quality_bitN = c('')
-	}
+	prodopts$quality_bandnames = quality_bandnames
+	prodopts$quality_fullnames = quality_fullnames
+	prodopts$quality_source = quality_source
+	prodopts$quality_bitN = quality_bitN
+	prodopts$quality_nodata_in =  rep(255, length(prodopts$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
+	prodopts$quality_nodata_out =  rep(255, length(prodopts$quality_bandnames)) # nodata out for quality bands (always 255)
+	prodopts$quality_bandsel = rep(0, length(prodopts$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
+	
+	} 
  #End Cycle on prodname
-
-prodopts$quality_bandnames = quality_bandnames
-prodopts$quality_fullnames = quality_fullnames
-prodopts$quality_source = quality_source
-prodopts$quality_bitN = quality_bitN
-prodopts$quality_nodata_in =  rep(255, length(prodopts$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
-prodopts$quality_nodata_out =  rep(255, length(prodopts$quality_bandnames)) # nodata out for quality bands (always 255)
-prodopts$quality_bandsel = rep(0, length(prodopts$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
 
 mod_prod_list = c(mod_prod_list, prodopts$product ) 
 prod_opt_list [[prodopts$product ]] =prodopts
 
+#prod_opt_list
 }
-prod_opt_list
+save(prod_opt_list, mod_prod_list, file= previous_file)
 #save(prod_opt_list, mod_prod_list, file= previous_file)
 }

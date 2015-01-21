@@ -47,7 +47,7 @@
 #'
 #' @license GPL(>2)
 #' @export
-moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder_mod, MRTpath ,reproj , reprocess , sensor, FTPs ,
+moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder_mod, MRTpath ,reproj , reprocess , sensor, https ,
                            start_x , start_y ,	end_x , end_y ,   bbox , out_format, out_res, MOD_proj_str , outproj_str, nodata_in , nodata_out, datatype, 
                            bandsel , bandnames , reflbands, reflorder, indexes_bandsel,  indexes_bandnames, indexes_formula, indexes_nodata_out, 
                            quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in , full_ext,
@@ -64,7 +64,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
   for (sens_sel in senslist) {		# cycle on selected sensors
     
     # get http site addresses and file prefixes
-    if (sens_sel == "Terra") {FTP = FTPs[["Terra"]]} else {FTP =FTPs[["Aqua"]]}
+    if (sens_sel == "Terra") {FTP = https[["Terra"]]} else {FTP =https[["Aqua"]]}
     if (sens_sel == "Terra") {file_prefix = file_prefixes[["Terra"]]} else {file_prefix = file_prefixes[["Aqua"]]}
     
     out_prod_folder = file.path(out_folder,main_out_folder)
