@@ -47,7 +47,7 @@ moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefixes,sens_se
 		nrow = (strsplit(readLines(fileConn_hd)[5], '=')[[1]])[2]
 		close(fileConn_hd)
 		# Write the meta file
-		meta_dir = file.path(dirname(out_meta_files[1]),'Time_Series','ENVI_META')
+		meta_dir = file.path(out_prod_folder,'Time_Series','ENVI_META')
 		dir.create(meta_dir, showWarnings = F,recursive = T)
 		doy_min = min(doys[which(years == min(years))])		; year_min = min(years)
 		doy_max = max(doys[which(years == max(years))])		; year_max = max(years)
@@ -85,7 +85,7 @@ moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefixes,sens_se
 		
 		if (ts_format == 'R Stack Files' | ts_format == 'Both') {
 			
-			meta_dir = file.path(dirname(out_meta_files[1]),'Time_Series','R_Stack')
+			meta_dir = file.path(out_prod_folder,'Time_Series','R_Stack')
 			dir.create(meta_dir, showWarnings = F,recursive = T)
    		doy_min = min(doys[which(years == min(years))])		; year_min = min(years)
 			doy_max = max(doys[which(years == max(years))])		; year_max = max(years)

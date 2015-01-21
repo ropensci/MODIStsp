@@ -26,7 +26,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
 #  ---------------Define options for product MOD09GQ -----  
 #- ------------------------------------------------------------------------------- -#
 {{prodopts = list()
-	
+
 	# General options-------
 	prodopts$product = "Surf_Ref_Daily_250 (MOD09GQ)"    # Product Name
 	prodopts$main_out_folder = "Surf_Ref_Daily_250"          # output folder Prefixes
@@ -39,12 +39,12 @@ moddwl_set_opts = function(previous_file = previous_file) {
 		
 	# Original bandnames and characteristics
   prodopts$bandnames =   c('Num_Obs','b1_Red',  'b2_NIR',	'BQ',	'obs_cov')					#Band names (from MRT + additional)
-  prodopts$nicknames =   c('N° of Observations','Red',  'NIR',  'Band Quality',	'% grid cell covered')	               #Band nicknames (used for folder creation and band selection)
+  prodopts$nicknames =   c('N of Observations','Red',  'NIR',  'Band Quality',	'% grid cell covered')	               #Band nicknames (used for folder creation and band selection)
   prodopts$datatype =  	 c("Byte", "Int16", "Int16","UInt16","Byte")   		#Datatypes for bands
   prodopts$nodata_in = 	 c(-1,	-28672,-28672,2995,	 -1)						# Nodata values in input MODIS Science DataSets
   prodopts$nodata_out =  c(255,	32767,32767,65535, 255)       # Nodata values to be used in produced output images
 	prodopts$bandsel = rep(0, length(prodopts$bandnames))  					  #Initial Selection of desired bands (all zeroes)
-	prodopts$reflbands = c(2,3)				# Bands corresponding to reflectances (used to build BSQ if requested
+	prodopts$reflbands = c(2,3)				# Bands corresponding to reflectances (used to build BSQ if requested)
 	prodopts$reflorder = c(1,2)				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order)
 	
 	# Derived Indexes and Characteristics
@@ -56,13 +56,13 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	
 	# Derived Quality and Characteristics
 	
-	prodopts$quality_bandnames = c('')        #Names of possible quality bands
-	prodopts$quality_nicknames = c('')        #Names of possible quality bands
-	prodopts$quality_source  =	 c('')        # original band containing the information
-	prodopts$quality_bitN = 	  c('')	# Position of bits of the selected quality indicator in the total "bit word" of the original band
-	prodopts$quality_nodata_in =  rep(255, length(prodopts$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
-	prodopts$quality_nodata_out =  rep(255, length(prodopts$quality_bandnames)) # nodata out for quality bands (always 255)
-	prodopts$quality_bandsel = rep(0, length(prodopts$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
+#	prodopts$quality_bandnames = c('')        #Names of possible quality bands
+#	prodopts$quality_nicknames = c('')        #Names of possible quality bands
+#	prodopts$quality_source  =	 c('')        # original band containing the information
+#	prodopts$quality_bitN = 	  c('')	# Position of bits of the selected quality indicator in the total "bit word" of the original band
+#	prodopts$quality_nodata_in =  rep(255, length(prodopts$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
+#	prodopts$quality_nodata_out =  rep(255, length(prodopts$quality_bandnames)) # nodata out for quality bands (always 255)
+#	prodopts$quality_bandsel = rep(0, length(prodopts$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
 
 	# Put everything  together and update list of modis products
    
@@ -70,8 +70,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	prod_opt_list [[prodopts$product ]] =prodopts
 	}}
 	
-	
-	#- ------------------------------------------------------------------------------- -#
+#- ------------------------------------------------------------------------------- -#
 #  ---------------Define options for product MOD09A1-----  
 #- ------------------------------------------------------------------------------- -#
 	{{prodopts = list()
@@ -110,7 +109,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
 					'SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)',
 					'RGRI (b1_Red/b4_Green)',
 					'NDSI (b4_Green-b6_SWIR)/(b4_Green+-b6_SWIR)',
-					'GNDVI (b2_NIR-b4_Green)/(b1_NIR+b4_Green)/'
+					'GNDVI (b2_NIR-b4_Green)/(b1_NIR+b4_Green)'
 					) 
 			prodopts$indexes_formula = 		c('(b2_NIR-b1_Red)/(b2_NIR+b1_Red)',  #Formulas of different indexes - NDVI
 					'2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))', 			 #EVI
@@ -163,8 +162,8 @@ moddwl_set_opts = function(previous_file = previous_file) {
   prodopts$bandnames = c("NumObs_1Km","State_1Km","View_Zen","View_Azi","Range","Sun_Zen","Sun_Azi","GFlags","Pointer", #Band nicknames (used for folder creation and band selection)
                            "NumObs_500","b1_Red", "b2_NIR","b3_blue","b4_Green","b5_SWIR","b6_SWIR","b7_SWIR" ,"QC_500", "Obs_Cov","Obs_Num","Q_scan")
  	
-  prodopts$nicknames = c("N° of Observations - 1Km","Quality State - 1Km ","Sensor Zenith","Sensor Azimuth","Range","Sun Zenith ","Sun Azimuth","Geolocation Flags","Orbit Pointer", #Band nicknames (used for folder creation and band selection)
-		 										 "N° of Observations - 500m","Red Reflectance (b1)", "NIR Reflectance (b2)","Blue Reflectance (b3)","Green Reflectance (b4)","SWIR Reflectance 1 (b5)","SWIR Reflectance 1 (b6)","SWIR Reflectance 1 (b7)" ,
+  prodopts$nicknames = c("N of Observations - 1Km","Quality State - 1Km ","Sensor Zenith","Sensor Azimuth","Range","Sun Zenith ","Sun Azimuth","Geolocation Flags","Orbit Pointer", #Band nicknames (used for folder creation and band selection)
+		 										 "N of Observations - 500m","Red Reflectance (b1)", "NIR Reflectance (b2)","Blue Reflectance (b3)","Green Reflectance (b4)","SWIR Reflectance 1 (b5)","SWIR Reflectance 1 (b6)","SWIR Reflectance 1 (b7)" ,
 												 "Reflectance Band Quality - 500m", "Observation Coverage","Observation Numbers","Q Scan - 250m")
 	
 	prodopts$datatype =  c("Byte", "UInt16","Int16","Int16","UInt16","Int16","Int16","Byte","Byte","Byte",             #Datatypes for bands
@@ -191,7 +190,7 @@ moddwl_set_opts = function(previous_file = previous_file) {
 			'SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)',
 			'RGRI (b1_Red/b4_Green)',
 			'NDSI (b4_Green-b6_SWIR)/(b4_Green+-b6_SWIR)',
-			'GNDVI (b2_NIR-b4_Green)/(b1_NIR+b4_Green)/'
+			'GNDVI (b2_NIR-b4_Green)/(b1_NIR+b4_Green)'
 	) 
 	prodopts$indexes_formula = 		c('(b2_NIR-b1_Red)/(b2_NIR+b1_Red)',  #Formulas of different indexes - NDVI
 			'2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))', 			 #EVI
@@ -245,16 +244,16 @@ moddwl_set_opts = function(previous_file = previous_file) {
 	prodopts$reflorder = NA				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order - set to NA if no refl present))
 	
 	# Derived Indexes and Characteristics
-	prodopts$indexes_bandnames =	c('')        #Names of possible indexes bands
-	prodopts$indexes_nicknames =	prodopts$indexes_bandnames 
-	prodopts$indexes_formula = 		c('')        #Formulas of different indexes
-	prodopts$indexes_nodata_out = rep(32767, length(prodopts$indexes_bandnames))			   #nodata for indexes bands
-	prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
-	
+#	prodopts$indexes_bandnames =	c('')        #Names of possible indexes bands
+#	prodopts$indexes_nicknames =	prodopts$indexes_bandnames 
+#	prodopts$indexes_formula = 		c('')        #Formulas of different indexes
+#	prodopts$indexes_nodata_out = rep(32767, length(prodopts$indexes_bandnames))			   #nodata for indexes bands
+#	prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
+#	
 	# Derived Quality and Characteristics
 	
 	prodopts$quality_bandnames = c('QA_Flag','DQ_Flag','EEr_Flag','LSTEr_Flag')        #Names of possible quality bands
-	prodopts$quality_nicknames = c('Mandatory QA flag','Data quality flag',' 	Emissivity error flag','LST error flag')        #Names of possible quality bands
+	prodopts$quality_nicknames = c('Mandatory QA flag','Data quality flag','Emissivity error flag','LST error flag')        #Names of possible quality bands
 	prodopts$quality_source  =	 c('LST_QC','LST_QC','LST_QC','LST_QC')        # original band containing the information
 	prodopts$quality_bitN = 	  c('0-1','2-3','4-5','6-7')	# Position of bits of the selected quality indicator in the total "bit word" of the original band
 	prodopts$quality_nodata_in =  rep(255, length(prodopts$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
@@ -290,16 +289,16 @@ moddwl_set_opts = function(previous_file = previous_file) {
 		prodopts$reflorder = NA				# Oreder of reflectance bands (used to create refl. bsq with bands in WL order - set to NA if no refl present))
 		
 		# Derived Indexes and Characteristics
-		prodopts$indexes_bandnames =	c('')        #Names of possible indexes bands
-		prodopts$indexes_nicknames =	prodopts$indexes_bandnames 
-		prodopts$indexes_formula = 		c('')        #Formulas of different indexes
-		prodopts$indexes_nodata_out = rep(32767, length(prodopts$indexes_bandnames))			   #nodata for indexes bands
-		prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
-		
+#		prodopts$indexes_bandnames =	c('')        #Names of possible indexes bands
+#		prodopts$indexes_nicknames =	prodopts$indexes_bandnames 
+#		prodopts$indexes_formula = 		c('')        #Formulas of different indexes
+#		prodopts$indexes_nodata_out = rep(32767, length(prodopts$indexes_bandnames))			   #nodata for indexes bands
+#		prodopts$indexes_bandsel = 		rep(0, length(prodopts$indexes_bandnames))  	 #Selection of desired indexes bands(all zeroes)
+#		
 		# Derived Quality and Characteristics
 		
 		prodopts$quality_bandnames = c('QA_Flag','DQ_Flag','EEr_Flag','LSTEr_Flag')        #Names of possible quality bands
-		prodopts$quality_nicknames = c('Mandatory QA flag','Data quality flag',' 	Emissivity error flag','LST error flag')        #Names of possible quality bands
+		prodopts$quality_nicknames = c('Mandatory QA flag','Data quality flag','Emissivity error flag','LST error flag')        #Names of possible quality bands
 		prodopts$quality_source  =	 c('LST_QC','LST_QC','LST_QC','LST_QC')        # original band containing the information
 		prodopts$quality_bitN = 	  c('0-1','2-3','4-5','6-7')	# Position of bits of the selected quality indicator in the total "bit word" of the original band
 		prodopts$quality_nodata_in =  rep(255, length(prodopts$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
