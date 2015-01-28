@@ -9,7 +9,6 @@ require("XML")
 require("plyr")
 require("ggplot2")
 require("gridExtra")
-
 prod_opt_list = NULL   ; mod_prod_list = NULL
 
 #xmlfile = file.choose()
@@ -32,6 +31,7 @@ for (prod in 1:n_products) {
 	http_terra=xmlToList(xmltop[[prod]][['http_terra']])
 	file_prefix_aqua=xmlToList(xmltop[[prod]][['file_prefix_aqua']])
 	http_aqua=xmlToList(xmltop[[prod]][['http_aqua']])
+	www=xmlToList(xmltop[[prod]][['www']])
 	prodopts$file_prefix = hash("Terra" = file_prefix_terra,"Aqua" = file_prefix_aqua)
 	prodopts$http = hash("Terra" = http_terra,"Aqua" = http_aqua)
 	prodopts$multiband_bsq = T

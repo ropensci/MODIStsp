@@ -16,7 +16,7 @@ moddwl_GUI = function (general_opts){
 	
 	# Restore previous options file if existing, otherwise create a "dummy" one with default values
 	if (file.exists(general_opts$previous_file)) {
-	
+		
 		load(general_opts$previous_file)
 	} else {
 		
@@ -36,7 +36,7 @@ moddwl_GUI = function (general_opts){
 	
 	
 	
-	#- ------------------------------------------------------------------------------- -#
+#- ------------------------------------------------------------------------------- -#
 # Widgets for product selection and bands selection  
 #- ------------------------------------------------------------------------------- -#
 	{{satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, bands and satellites selection</span>', markup = T,horizontal = FALSE, container=main_group, spacing = 15)
@@ -68,7 +68,7 @@ moddwl_GUI = function (general_opts){
 						bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid), container = cbox, use.table = F, width = 500)
 						# widgets for band selection - indexes
 						check_names_indexes <- prod_opt_list[[checked]]$indexes_fullnames # retrieve indexes band names
-					
+						
 						if (!is.null(check_names_indexes)) {
 							check_wid_indexes<- temp_wid_bands_indexes													# retrieve indexes fullnames selected at the time
 							cbox_indexes<- gframe(text = "Spectral Indexes						", container = cbox_total, horizontal = FALSE, width = 500)
@@ -77,7 +77,7 @@ moddwl_GUI = function (general_opts){
 						
 						# widgets for band selection - quality
 						check_names_quality <- prod_opt_list[[checked]]$quality_fullnames # retrieve quality band names
-					
+						
 						if (!is.null(check_names_quality)) {
 							check_wid_quality<- temp_wid_bands_quality													# retrieve quality fullnames selected at the time
 							cbox_quality<- gframe(text = "Quality Indicators						", container = cbox_total, horizontal = FALSE, width = 500)
@@ -87,7 +87,7 @@ moddwl_GUI = function (general_opts){
 						# Start/Cancel widgets
 						bands_group <- ggroup(container = selgroup, horizontal = TRUE)
 						accept_but <- gbutton(text = 'Start', container = bands_group, handler = function(button,...){
-								
+									
 									pos_wid <- which(check_names %in% svalue (bands_wid))   ;		tmp_arr_bands <- array(data = 0 , dim = length(check_names))		
 									tmp_arr_bands[pos_wid] <- 1   ;	temp_wid_bands <<- tmp_arr_bands
 									if (length(which(check_names_indexes != '') > 0)) {
@@ -114,6 +114,8 @@ moddwl_GUI = function (general_opts){
 									if (exists('check_wid_quality')) {temp_wid_bands_quality <<- check_wid_quality}
 									dispose(selgroup)
 								})
+						addSpace(bands_group, 760, horizontal=TRUE)
+						www_but <- gbutton(text = 'Product details', container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[checked]]$www))
 						
 						visible(selgroup, set=TRUE)    # visualize band selection widgets
 						
@@ -240,7 +242,7 @@ moddwl_GUI = function (general_opts){
 				output_ULnorth_lab <- glabel('Upper Left Northing (ymax)', container = LR_group) ;    size (output_ULnorth_lab) <- c(160,20)
 				output_ULnorth_wid <- gedit(text = general_opts$bbox[4], container = LR_group, width = 10)
 				
-		
+				
 				
 				if (general_opts$full_ext == 'Full Tiles Extent') { enabled(bbox_group) <- F} else {(enabled(bbox_group) <- T)}
 			}
@@ -289,10 +291,10 @@ moddwl_GUI = function (general_opts){
 #							
 #						
 #												
-##						browser()
+	##						browser()
 #						load(svalue(outprev_wid))
 #						svalue(prod_wid) <- general_opts$sel_prod
-##						general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
+	##						general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
 #						svalue(sens_wid)<-general_opts$sensor 
 #						
 #						temp_wid_bands <<- prod_opt_list[[general_opts$sel_prod]]$bandsel				# set dummy variables holding the initial values of selected bands
@@ -366,12 +368,12 @@ moddwl_GUI = function (general_opts){
 #								browser()
 								if (exists ('temp_wid_bands')) {
 									prod_opt_list[[general_opts$sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
-								
+									
 								}
 								
 								if (exists ('temp_wid_bands_indexes')) {
 									prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
-								
+									
 								}
 								
 								if (exists ('temp_wid_bands_quality')) {
@@ -452,140 +454,140 @@ moddwl_GUI = function (general_opts){
 			addSpace(but_group, 300, horizontal=TRUE)
 			
 			{{load_but <- gbutton(text = 'Load Options from File', container = but_group, handler = function (h,....){
-						
-						choice<-gfile(type="open", text="Select file for loading processing options...")#, initialfilename = general_opts$previous_file)		# File selection widget
-						
-						#			outprev_choose <- gbutton("Browse", handler=function(h,...) {choice<-gfile(type="open", text="Select the file for saving-loading processing options...")		# File selection widget
+								
+								choice<-gfile(type="open", text="Select file for loading processing options...")#, initialfilename = general_opts$previous_file)		# File selection widget
+								
+								#			outprev_choose <- gbutton("Browse", handler=function(h,...) {choice<-gfile(type="open", text="Select the file for saving-loading processing options...")		# File selection widget
 #						
 #						if(!is.na(choice)){svalue(outprev_wid)<-choice						## On new selection, set value of the label widget
 #							general_opts$previous_file = format(choice, justify = "left")	# 	On new selection,  Set value of the selected variable
 #						
 #						}}, container=outprev_group)
-						
-						
-						if(! is.na(choice)){
+								
+								
+								if(! is.na(choice)){
 #							svalue(outprev_wid)<-choice						## On new selection, set value of the label widget
 #							general_opts$previous_file = format(choice, justify = "left")	# 	On new selection,  Set value of the selected variable
-							load(choice)
-							svalue(prod_wid) <- general_opts$sel_prod
+									load(choice)
+									svalue(prod_wid) <- general_opts$sel_prod
 #						general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
-							svalue(sens_wid)<-general_opts$sensor 
-							
-							temp_wid_bands <<- prod_opt_list[[general_opts$sel_prod]]$bandsel				# set dummy variables holding the initial values of selected bands
-							temp_wid_bands_indexes <<- prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel
-							temp_wid_bands_quality <<- prod_opt_list[[general_opts$sel_prod]]$quality_bandsel
-							
-							svalue(start_day_wid)<-general_opts$start_day  	# Dates options
-							svalue(start_month_wid)<- general_opts$start_month  
-							svalue(start_year_wid) <- general_opts$start_year 
-							svalue(end_day_wid) <- general_opts$end_day 
-							svalue(end_month_wid) <-general_opts$end_month  
-							svalue (end_year_wid) <-general_opts$end_year   
-							
-							svalue(start_x_wid)<- general_opts$start_x  		# Tiles options
-							svalue(end_x_wid) <-general_opts$end_x  
-							svalue(start_y_wid) <-general_opts$start_y   
-							svalue(end_y_wid) <-general_opts$end_y   
-							
-							svalue(proj_wid)	 <-general_opts$proj 	# Proj and extent options
-							svalue(output_proj4_wid)	 <- general_opts$user_proj4 
-							svalue(output_res_sel_wid) <-general_opts$out_res_sel 			
-							svalue(output_res_wid) <-general_opts$out_res 
-							svalue(output_resmeth_wid) <- general_opts$resampling
-							svalue(output_ext_wid) <-general_opts$full_ext 
-							svalue(output_ULeast_wid) <- general_opts$bbox [1]
-							svalue(output_LReast_wid) <- general_opts$bbox [2]
-							svalue(output_LRnorth_wid) <- general_opts$bbox [3]
-							svalue(output_ULnorth_wid) <- general_opts$bbox [4]
-							svalue(reprocess_wid) <- general_opts$reprocess
-							svalue(format_wid) <- general_opts$out_format 
-							svalue(timeseries_wid) <- general_opts$ts_format 
-							
-							svalue(outfold_wid) <- 	general_opts$out_folder # Folder options
-							svalue(outfoldmod_wid) <- general_opts$out_folder_mod
-						}
-					})
-					}}
-					{{save_but <- gbutton(text = 'Save Options', container = but_group, handler = function (h,....) {
-										
-										choice<-gfile(type="save", text="Select file for saving processing options...", initialfilename = general_opts$previous_file)		# File selection widget
+									svalue(sens_wid)<-general_opts$sensor 
+									
+									temp_wid_bands <<- prod_opt_list[[general_opts$sel_prod]]$bandsel				# set dummy variables holding the initial values of selected bands
+									temp_wid_bands_indexes <<- prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel
+									temp_wid_bands_quality <<- prod_opt_list[[general_opts$sel_prod]]$quality_bandsel
+									
+									svalue(start_day_wid)<-general_opts$start_day  	# Dates options
+									svalue(start_month_wid)<- general_opts$start_month  
+									svalue(start_year_wid) <- general_opts$start_year 
+									svalue(end_day_wid) <- general_opts$end_day 
+									svalue(end_month_wid) <-general_opts$end_month  
+									svalue (end_year_wid) <-general_opts$end_year   
+									
+									svalue(start_x_wid)<- general_opts$start_x  		# Tiles options
+									svalue(end_x_wid) <-general_opts$end_x  
+									svalue(start_y_wid) <-general_opts$start_y   
+									svalue(end_y_wid) <-general_opts$end_y   
+									
+									svalue(proj_wid)	 <-general_opts$proj 	# Proj and extent options
+									svalue(output_proj4_wid)	 <- general_opts$user_proj4 
+									svalue(output_res_sel_wid) <-general_opts$out_res_sel 			
+									svalue(output_res_wid) <-general_opts$out_res 
+									svalue(output_resmeth_wid) <- general_opts$resampling
+									svalue(output_ext_wid) <-general_opts$full_ext 
+									svalue(output_ULeast_wid) <- general_opts$bbox [1]
+									svalue(output_LReast_wid) <- general_opts$bbox [2]
+									svalue(output_LRnorth_wid) <- general_opts$bbox [3]
+									svalue(output_ULnorth_wid) <- general_opts$bbox [4]
+									svalue(reprocess_wid) <- general_opts$reprocess
+									svalue(format_wid) <- general_opts$out_format 
+									svalue(timeseries_wid) <- general_opts$ts_format 
+									
+									svalue(outfold_wid) <- 	general_opts$out_folder # Folder options
+									svalue(outfoldmod_wid) <- general_opts$out_folder_mod
+								}
+							})
+				}}
+			{{save_but <- gbutton(text = 'Save Options', container = but_group, handler = function (h,....) {
+								
+								choice<-gfile(type="save", text="Select file for saving processing options...", initialfilename = general_opts$previous_file)		# File selection widget
 #								browser()
-										if(!is.na(choice)){
-											
+								if(!is.na(choice)){
+									
 #											svalue(outprev_wid)<-choice						## On new selection, set value of the label widget
 #											general_opts$previous_file = format(choice, justify = "left")	# 	On new selection,  Set value of the selected variable
-											
-											
-											# If "Start" pressed, retrieve selected values and save in previous file
-											general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
-											general_opts$sensor <- svalue(sens_wid)
-											if (exists ('temp_wid_bands')) {
-												prod_opt_list[[sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
-												rm(temp_wid_bands, envir = globalenv())
-											}
-											
-											if (exists ('temp_wid_bands_indexes')) {
-												prod_opt_list[[sel_prod]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
-												rm(temp_wid_bands_indexes, envir = globalenv())
-											}
-											
-											if (exists ('temp_wid_bands_quality')) {
-												prod_opt_list[[sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
-												rm(temp_wid_bands_quality, envir = globalenv())
-											}
-											
-											general_opts$start_day <- svalue(start_day_wid)		# Dates options
-											general_opts$start_month <- svalue(start_month_wid)
-											general_opts$start_year <- svalue(start_year_wid)
-											general_opts$end_day <- svalue(end_day_wid)
-											general_opts$end_month <- svalue(end_month_wid)
-											general_opts$end_year <- svalue(end_year_wid)
-											
-											general_opts$start_x <- svalue(start_x_wid)		# Tiles options
-											general_opts$end_x <- svalue(end_x_wid)
-											general_opts$start_y <- svalue(start_y_wid)
-											general_opts$end_y <- svalue(end_y_wid)
-											
-											general_opts$proj <- svalue(proj_wid)		# Proj and extent options
-											general_opts$user_proj4 <- svalue(output_proj4_wid)	
-											general_opts$out_res_sel<- (svalue(output_res_sel_wid))			
-											general_opts$out_res <- (svalue(output_res_wid))
-											general_opts$resampling <- svalue(output_resmeth_wid)
-											general_opts$full_ext <- svalue(output_ext_wid)
-											general_opts$bbox <- ((c(svalue(output_ULeast_wid),svalue(output_LReast_wid),
-																	svalue(output_LRnorth_wid),svalue(output_ULnorth_wid))))
-											
-											general_opts$reprocess <- svalue(reprocess_wid)
-											general_opts$out_format <- svalue(format_wid)
-											general_opts$ts_format <- svalue(timeseries_wid)
-											
-											general_opts$out_folder <- svalue(outfold_wid)		# Folder options
-											general_opts$out_folder_mod <- svalue(outfoldmod_wid)		# Folder options
-											check <- T
-											# Check if dates, processing extent and tiles selection make sense
-											if (as.Date(paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '-')) >
-													as.Date(paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '-'))) {gmessage('Error in Selected Dates', title = 'Warning'); check <- F}
-											
-											if ((general_opts$start_x > general_opts$end_x ) | (general_opts$start_y > general_opts$end_y )) {gmessage('Error in Selected Tiles', title = 'Warning') ; check <- F}
-											
-											general_opts$bbox <- as.numeric(general_opts$bbox)
-											n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
-											
-											if (n_bbox_compiled == 4){
-												if ((general_opts$bbox[1] > general_opts$bbox[2]) | (general_opts$bbox[3] > general_opts$bbox[4])) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}}
-											if ((n_bbox_compiled < 4) & (n_bbox_compiled > 0 )) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}
-											
-											if (general_opts$out_folder == ''){gmessage('Please Select an output folder !', title = 'Warning') ; check <- F}
-											
-											if (check == T) {					# If check passed, save previous file and return
-												
-												dir.create(file.path(getwd(),'Previous'))
-												
-												save(general_opts,prod_opt_list,mod_prod_list, file = choice)
-											}
-										}
-									})		
-						}}
+									
+									
+									# If "Start" pressed, retrieve selected values and save in previous file
+									general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
+									general_opts$sensor <- svalue(sens_wid)
+									if (exists ('temp_wid_bands')) {
+										prod_opt_list[[sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
+										rm(temp_wid_bands, envir = globalenv())
+									}
+									
+									if (exists ('temp_wid_bands_indexes')) {
+										prod_opt_list[[sel_prod]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
+										rm(temp_wid_bands_indexes, envir = globalenv())
+									}
+									
+									if (exists ('temp_wid_bands_quality')) {
+										prod_opt_list[[sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
+										rm(temp_wid_bands_quality, envir = globalenv())
+									}
+									
+									general_opts$start_day <- svalue(start_day_wid)		# Dates options
+									general_opts$start_month <- svalue(start_month_wid)
+									general_opts$start_year <- svalue(start_year_wid)
+									general_opts$end_day <- svalue(end_day_wid)
+									general_opts$end_month <- svalue(end_month_wid)
+									general_opts$end_year <- svalue(end_year_wid)
+									
+									general_opts$start_x <- svalue(start_x_wid)		# Tiles options
+									general_opts$end_x <- svalue(end_x_wid)
+									general_opts$start_y <- svalue(start_y_wid)
+									general_opts$end_y <- svalue(end_y_wid)
+									
+									general_opts$proj <- svalue(proj_wid)		# Proj and extent options
+									general_opts$user_proj4 <- svalue(output_proj4_wid)	
+									general_opts$out_res_sel<- (svalue(output_res_sel_wid))			
+									general_opts$out_res <- (svalue(output_res_wid))
+									general_opts$resampling <- svalue(output_resmeth_wid)
+									general_opts$full_ext <- svalue(output_ext_wid)
+									general_opts$bbox <- ((c(svalue(output_ULeast_wid),svalue(output_LReast_wid),
+															svalue(output_LRnorth_wid),svalue(output_ULnorth_wid))))
+									
+									general_opts$reprocess <- svalue(reprocess_wid)
+									general_opts$out_format <- svalue(format_wid)
+									general_opts$ts_format <- svalue(timeseries_wid)
+									
+									general_opts$out_folder <- svalue(outfold_wid)		# Folder options
+									general_opts$out_folder_mod <- svalue(outfoldmod_wid)		# Folder options
+									check <- T
+									# Check if dates, processing extent and tiles selection make sense
+									if (as.Date(paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '-')) >
+											as.Date(paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '-'))) {gmessage('Error in Selected Dates', title = 'Warning'); check <- F}
+									
+									if ((general_opts$start_x > general_opts$end_x ) | (general_opts$start_y > general_opts$end_y )) {gmessage('Error in Selected Tiles', title = 'Warning') ; check <- F}
+									
+									general_opts$bbox <- as.numeric(general_opts$bbox)
+									n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
+									
+									if (n_bbox_compiled == 4){
+										if ((general_opts$bbox[1] > general_opts$bbox[2]) | (general_opts$bbox[3] > general_opts$bbox[4])) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}}
+									if ((n_bbox_compiled < 4) & (n_bbox_compiled > 0 )) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}
+									
+									if (general_opts$out_folder == ''){gmessage('Please Select an output folder !', title = 'Warning') ; check <- F}
+									
+									if (check == T) {					# If check passed, save previous file and return
+										
+										dir.create(file.path(getwd(),'Previous'))
+										
+										save(general_opts,prod_opt_list,mod_prod_list, file = choice)
+									}
+								}
+							})		
+				}}
 			
 		}}
 	
