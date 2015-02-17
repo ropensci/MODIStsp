@@ -16,6 +16,8 @@ moddwl_process_indexes = function(out_filename,indexes_band, formula,bandnames,n
 		if (length(grep(bandsel, formula)) > 0) {
 			temp_bandname = bandnames[grep(bandsel,bandnames)]
 			temp_file  =	file.path(out_prod_folder, temp_bandname,paste(file_prefix,'_',temp_bandname,'_',yy,'_', DOY, '.dat', sep = ''))
+			if (out_format=='GTiff')  temp_file  =  paste0(temp_file,'.dat')
+			if (out_format=='ENVI')   temp_file  =  paste0(temp_file,'.tif')
 			temp_raster =  raster(temp_file)
 			NAvalue(temp_raster)<- as.numeric(nodata_out [band])
 			assign(temp_bandname, temp_raster)
