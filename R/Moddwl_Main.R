@@ -36,7 +36,7 @@ moddwl_main = function() {
 			setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ;   previous_dir = file.path(main_dir,'/Previous')   ; log_dir =  file.path(main_dir,'/Log')
 			dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 			previous_file= file.path(previous_dir, 'Moddwl_Previous.RData') ; xml_file= file.path(main_dir,'Accessoires','Moddwl_XML.xml')
-#browser()		
+
 log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 			#   IDL_Dir = file.path(main_dir,'IDL-FRG')
 			
@@ -65,7 +65,7 @@ log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 		
 		# Create the general_opts structure used to communicate with the GUI and 
 		general_opts = list(main_dir = main_dir, previous_file=previous_file,xml_file = xml_file,  log_file = log_file, MRTpath = MRTpath, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str, 
-				sel_prod = 'Surf_Ref_Daily_250 (MOD09GQ)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
+				sel_prod = 'Surf_Ref_8Days_500m (MOD09A1)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
 				start_x = 18, end_x =18, start_y = 4, end_y = 4, 
 				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', 
 				reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')

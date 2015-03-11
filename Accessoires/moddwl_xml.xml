@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <products>
     <MOD09A1>
-        <name>Surf_Ref_8_Days_500 (MOD09A1)</name>
-        <main_out_folder>Surf_Ref_8_Days_500</main_out_folder>
+        <name>Surf_Ref_8Days_500m (MOD09A1)</name>
+        <main_out_folder>Surf_Ref_8Days_500m</main_out_folder>
         <native_res>463.3127</native_res>
         <file_prefix_terra>MOD09A1</file_prefix_terra>
         <file_prefix_aqua>MYD09A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09a1</www>
         <bands>
             <band>
                 <bandname>b1_Red</bandname>
@@ -298,13 +298,13 @@
         </quality_indicators>
     </MOD09A1>
     <MOD09CMG>
-        <name>Surf_Ref_Daily_005 (MOD09CMG)</name>
-        <main_out_folder>Surf_Ref_Daily_005</main_out_folder>
+        <name>Surf_Ref_Daily_005dg (MOD09CMG)</name>
+        <main_out_folder>Surf_Ref_Daily_005dg</main_out_folder>
         <native_res>5600</native_res>
         <file_prefix_terra>MOD09CMG</file_prefix_terra>
         <file_prefix_aqua>MYD09CMG</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09CMG.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09cmg</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09cmg</www>
         <bands>
             <band>
                 <bandname>b1_Red</bandname>
@@ -588,13 +588,13 @@
         </quality_indicators>
     </MOD09CMG>
     <MOD09GA>
-        <name>Surf_Ref_Daily_500 (MOD09GA)</name>
-        <main_out_folder>Surf_Ref_Daily_500</main_out_folder>
+        <name>Surf_Ref_Daily_500m (MOD09GA)</name>
+        <main_out_folder>Surf_Ref_Daily_500m</main_out_folder>
         <native_res>463.3127</native_res>
         <file_prefix_terra>MOD09GA</file_prefix_terra>
         <file_prefix_aqua>MYD09GA</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09ga</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09ga</www>
         <bands>
             <band>
                 <bandname>N_Obs_1k</bandname>
@@ -940,13 +940,13 @@
             </quality>
         </quality_indicators>
     </MOD09GA><MOD09GQ>
-        <name>Surf_Ref_Daily_250 (MOD09GQ)</name>
-        <main_out_folder>Surf_Ref_Daily_250</main_out_folder>
+        <name>Surf_Ref_Daily_250m (MOD09GQ)</name>
+        <main_out_folder>Surf_Ref_Daily_250m</main_out_folder>
         <native_res>231.656358</native_res>
         <file_prefix_terra>MOD09GQ</file_prefix_terra>
         <file_prefix_aqua>MYD09GQ</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09gq</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09gq</www>
         <bands>
             <band>
                 <bandname>N_Obs</bandname>
@@ -1037,13 +1037,13 @@
             </quality>
         </quality_indicators>
     </MOD09GQ><MOD09Q1>
-        <name>Surf_Ref_8_Days_250 (MOD09Q1)</name>
-        <main_out_folder>Surf_Ref_8_Days_250</main_out_folder>
+        <name>Surf_Ref_8Days_250m (MOD09Q1)</name>
+        <main_out_folder>Surf_Ref_8Days_250m</main_out_folder>
         <native_res>231.656358</native_res>
         <file_prefix_terra>MOD09Q1</file_prefix_terra>
         <file_prefix_aqua>MYD09Q1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09Q1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09q1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09q1</www>
         <bands>
             <band>
                 <bandname>b1_Red</bandname>
@@ -1167,7 +1167,7 @@
         <file_prefix_terra>MOD11A1</file_prefix_terra>
         <file_prefix_aqua>MYD11A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1288,7 +1288,7 @@
         <file_prefix_terra>MOD11A2</file_prefix_terra>
         <file_prefix_aqua>MYD11A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a2</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1426,13 +1426,13 @@
             </quality>
         </quality_indicators>
     </MOD11A2><MOD11B1>
-        <name>Surf_Temp_Daily_GlobalSin (MOD11B1)</name>
-        <main_out_folder>Surf_Temp_Daily_GlobalSin</main_out_folder>
+        <name>Surf_Temp_Daily_GridSin (MOD11B1)</name>
+        <main_out_folder>Surf_Temp_Daily_GridSin</main_out_folder>
         <native_res>5600</native_res>
         <file_prefix_terra>MOD09B1</file_prefix_terra>
         <file_prefix_aqua>MYD09B1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11B1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11b1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11B1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11b1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1547,13 +1547,13 @@
         </quality_indicators>
     </MOD11B1>
     <MOD11C1>
-        <name>Surf_Temp_Daily_005 (MOD11C1)</name>
-        <main_out_folder>Surf_Temp_Daily_005</main_out_folder>
+        <name>Surf_Temp_Daily_005dg (MOD11C1)</name>
+        <main_out_folder>Surf_Temp_Daily_005dg</main_out_folder>
         <native_res>5600</native_res>
         <file_prefix_terra>MOD09C1</file_prefix_terra>
         <file_prefix_aqua>MYD09C1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11C1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11C1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1667,13 +1667,13 @@
             </quality>
         </quality_indicators>
     </MOD11C1><MOD11C2>
-        <name>Surf_Temp_8_Days_005 (MOD11C2)</name>
-        <main_out_folder>Surf_Temp_8_Days_005</main_out_folder>
+        <name>Surf_Temp_8Days_005dg (MOD11C2)</name>
+        <main_out_folder>Surf_Temp_8Days_005dg</main_out_folder>
         <native_res>5600</native_res>
         <file_prefix_terra>MOD11C2</file_prefix_terra>
         <file_prefix_aqua>MYD11C2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11C2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11C2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c2</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1793,13 +1793,13 @@
             </quality>
         </quality_indicators>
     </MOD11C2><MOD11C3>
-        <name>Surf_Temp_Monthly_005 (MOD11C3)</name>
-        <main_out_folder>Surf_Temp_Monthly_005</main_out_folder>
+        <name>Surf_Temp_Monthly_005dg (MOD11C3)</name>
+        <main_out_folder>Surf_Temp_Monthly_005dg</main_out_folder>
         <native_res>5600</native_res>
         <file_prefix_terra>MOD11C3</file_prefix_terra>
         <file_prefix_aqua>MYD11C3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11C3.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11C3.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c3</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1931,7 +1931,7 @@
         <file_prefix_terra>MOD09_L2</file_prefix_terra>
         <file_prefix_aqua>MYD09_L2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11_L2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11_L2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11_l2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11_L2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11_l2</www>
         <bands>
             <band>
                 <bandname>LST</bandname><fullname>Land Surface Temperature</fullname><datatype>16-bit Unsigned integer</datatype><nodata_in>0</nodata_in>
@@ -2026,14 +2026,1049 @@
                 <quality_bitN>6-7</quality_bitN>
             </quality>
         </quality_indicators>
-    </MOD11_L2><MOD13A1>
-        <name>Vegetation_Indexes_16Days_500 (MOD13A1)</name>
-        <main_out_folder>VI_16Days_500</main_out_folder>
+    </MOD11_L2><MCD43A1>
+        <name>BRDF_Albedo_ModelPar_16Days_500m (MCD43A1)</name>
+        <main_out_folder>BRDF_Albedo_ModelPar_16Days_500m</main_out_folder>
+        <native_res>463.3127</native_res>
+        <file_prefix_terra>MCD43A1</file_prefix_terra>
+        <file_prefix_aqua>MCD43A1</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a1</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b1_Red</bandname><fullname>BRDF_Albedo_Parameters_Band1</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b2_NIR</bandname><fullname>BRDF_Albedo_Parameters_Band2</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b3_Blue</bandname><fullname>BRDF_Albedo_Parameters_Band3</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b4_Green</bandname><fullname>BRDF_Albedo_Parameters_Band4</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b5_SWIR</bandname><fullname>BRDF_Albedo_Parameters_Band5</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b6_SWIR</bandname><fullname>BRDF_Albedo_Parameters_Band6</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b7_SWIR</bandname><fullname>BRDF_Albedo_Parameters_Band7</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_Vis</bandname><fullname>BRDF_Albedo_Parameters_vis</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_NIR</bandname><fullname>BRDF_Albedo_Parameters_nir</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_SWIR</bandname><fullname>BRDF_Albedo_Parameters_shortwave</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Shape_Ind</bandname><fullname>BRDF_Shape_Indicators</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+            </band>
+            
+        </bands>
+        
+    </MCD43A1><MCD43A2>
+        <name>BRDF_Albedo_Quality_16Days_500m (MCD43A2)</name>
+        <main_out_folder>BRDF_Albedo_Quality_16Days_500m</main_out_folder>
+        <native_res>463.3127</native_res>
+        <file_prefix_terra>MCD43A2</file_prefix_terra>
+        <file_prefix_aqua>MCD43A2</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a2</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>AlbedoQuality</bandname><fullname>BRDF_Albedo_Quality</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Snow</bandname><fullname>Snow_BRDF_Albedo</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Ancillary</bandname><fullname>BRDF_Albedo_Ancillary</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>BQ</bandname><fullname>BRDF_Albedo_Band_Quality</fullname><datatype>32-bit unsigned integer</datatype><nodata_in>4294967295</nodata_in><nodata_out>4294967295</nodata_out>
+            </band>
+            
+            
+            
+            
+            
+            
+            
+            
+        </bands><quality_indicators>
+            <quality>
+                <quality_bandname>b1_Red_QA</quality_bandname>
+                <quality_fullname>Band_1_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>0-3</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b2_NIR_QA</quality_bandname>
+                <quality_fullname>Band_2_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>4-7</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b3_Blue_QA</quality_bandname>
+                <quality_fullname>Band_3_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>8-11</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b4_Green_QA</quality_bandname>
+                <quality_fullname>Band_4_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>12-15</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b5_SWIR_QA</quality_bandname>
+                <quality_fullname>Band_5_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>16-19</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b6_SWIR_QA</quality_bandname>
+                <quality_fullname>Band_6_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>20-23</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b7_SWIR_QA</quality_bandname>
+                <quality_fullname>Band_7_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>24-27</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>TBD</quality_bandname>
+                <quality_fullname>TBD</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>28-30</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>QAFill</quality_bandname>
+                <quality_fullname>QAFill</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>31</quality_bitN>
+            </quality>
+        </quality_indicators>
+        
+    </MCD43A2><MCD43A3>
+        <name>Albedo_16Days_500m (MCD43A3)</name>
+        <main_out_folder>Albedo_16Days_500m</main_out_folder>
+        <native_res>463.3127</native_res>
+        <file_prefix_terra>MCD43A3</file_prefix_terra>
+        <file_prefix_aqua>MCD43A3</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a3</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b1_Red</bandname><fullname>Albedo_BSA_Band_1 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b2_NIR</bandname><fullname>Albedo_BSA_Band_2 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b3_Blue</bandname><fullname>Albedo_BSA_Band_3 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b4_Green</bandname><fullname>Albedo_BSA_Band_4 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b5_SWIR</bandname><fullname>Albedo_BSA_Band_5 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b6_SWIR</bandname><fullname>Albedo_BSA_Band_6 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b7_SWIR</bandname><fullname>Albedo_BSA_Band_7 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer 6</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_Vis</bandname><fullname>Albedo_BSA_Band_vis (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_NIR</bandname><fullname>Albedo_BSA_Band_nir (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_SWIR</bandname><fullname>Albedo_BSA_Band_shortwave (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_WSA_b1_Red</bandname><fullname>Albedo_WSA_Band_1 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band><band><bandname>Alb_WSA_b2_NIR</bandname><fullname>Albedo_WSA_Band_2 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b3_Blue</bandname><fullname>Albedo_WSA_Band_3 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b4_Green</bandname><fullname>Albedo_WSA_Band_4 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b5_SWIR</bandname><fullname>Albedo_WSA_Band_5 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b6_SWIR</bandname><fullname>Albedo_WSA_Band_6 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b7_SWIR</bandname><fullname>Albedo_WSA_Band_7 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_Vis</bandname><fullname>Albedo_WSA_Band_vis (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_NIR</bandname><fullname>Albedo_WSA_Band_nir (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_SWIR</bandname><fullname>Albedo_WSA_Band_shortwave (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band>
+            
+        </bands>
+        
+    </MCD43A3><MCD43A4>
+        <name>BRDF_Adj_Refl_16Days_500m (MCD43A4)</name>
+        <main_out_folder>BRDF_Adj_Refl_16Days_500m</main_out_folder>
+        <native_res>463.3127</native_res>
+        <file_prefix_terra>MCD43A4</file_prefix_terra>
+        <file_prefix_aqua>MCD43A4</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a4</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b1_Red</bandname><fullname>Nadir_Reflectance_Band1</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b2_NIR</bandname><fullname>Nadir_Reflectance_Band2</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b3_Blue</bandname><fullname>Nadir_Reflectance_Band3</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b4_Green</bandname><fullname>Nadir_Reflectance_Band4</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b5_SWIR</bandname><fullname>Nadir_Reflectance_Band5</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b6_SWIR</bandname><fullname>Nadir_Reflectance_Band6</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b7_SWIR</bandname><fullname>Nadir_Reflectance_Band7</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            
+            
+            
+            
+            
+        </bands>
+        
+    </MCD43A4><MCD43B1>
+        <name>BRDF_Albedo_ModelPar_16Days_1Km (MCD43B1)</name>
+        <main_out_folder>BRDF_Albedo_ModelPar_16Days_1Km</main_out_folder>
+        <native_res>926.6254</native_res>
+        <file_prefix_terra>MCD43B1</file_prefix_terra>
+        <file_prefix_aqua>MCD43B1</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b1</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b1_Red</bandname><fullname>BRDF_Albedo_Parameters_Band1</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b2_NIR</bandname><fullname>BRDF_Albedo_Parameters_Band2</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b3_Blue</bandname><fullname>BRDF_Albedo_Parameters_Band3</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b4_Green</bandname><fullname>BRDF_Albedo_Parameters_Band4</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b5_SWIR</bandname><fullname>BRDF_Albedo_Parameters_Band5</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b6_SWIR</bandname><fullname>BRDF_Albedo_Parameters_Band6</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b7_SWIR</bandname><fullname>BRDF_Albedo_Parameters_Band7</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_Vis</bandname><fullname>BRDF_Albedo_Parameters_vis</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_NIR</bandname><fullname>BRDF_Albedo_Parameters_nir</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_SWIR</bandname><fullname>BRDF_Albedo_Parameters_shortwave</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Shape_Ind</bandname><fullname>BRDF_Shape_Indicators</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+            </band>
+            
+        </bands>
+        
+    </MCD43B1><MCD43B2>
+        <name>BRDF_Albedo_Quality_16Days_1Km (MCD43B2)</name>
+        <main_out_folder>BRDF_Albedo_Quality_16Days_1Km</main_out_folder>
+        <native_res>926.6254</native_res>
+        <file_prefix_terra>MCD43B2</file_prefix_terra>
+        <file_prefix_aqua>MCD43B2</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b2</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>AlbedoQuality</bandname><fullname>BRDF_Albedo_Quality</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Snow</bandname><fullname>Snow_BRDF_Albedo</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Ancillary</bandname><fullname>BRDF_Albedo_Ancillary</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>BQ</bandname><fullname>BRDF_Albedo_Band_Quality</fullname><datatype>32-bit unsigned integer</datatype><nodata_in>4294967295</nodata_in><nodata_out>4294967295</nodata_out>
+            </band>
+            
+            
+            
+            
+            
+            
+            
+            
+        </bands><quality_indicators>
+            <quality>
+                <quality_bandname>b1_Red_QA</quality_bandname>
+                <quality_fullname>Band_1_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>0-3</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b2_NIR_QA</quality_bandname>
+                <quality_fullname>Band_2_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>4-7</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b3_Blue_QA</quality_bandname>
+                <quality_fullname>Band_3_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>8-11</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b4_Green_QA</quality_bandname>
+                <quality_fullname>Band_4_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>12-15</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b5_SWIR_QA</quality_bandname>
+                <quality_fullname>Band_5_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>16-19</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b6_SWIR_QA</quality_bandname>
+                <quality_fullname>Band_6_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>20-23</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b7_SWIR_QA</quality_bandname>
+                <quality_fullname>Band_7_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>24-27</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>TBD</quality_bandname>
+                <quality_fullname>TBD</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>28-30</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>QAFill</quality_bandname>
+                <quality_fullname>QAFill</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>31</quality_bitN>
+            </quality>
+        </quality_indicators>
+        
+    </MCD43B2><MCD43B3>
+        <name>Albedo_16Days_1Km (MCD43B3)</name>
+        <main_out_folder>Albedo_16Days_1Km</main_out_folder>
+        <native_res>926.6254</native_res>
+        <file_prefix_terra>MCD43B3</file_prefix_terra>
+        <file_prefix_aqua>MCD43B3</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b3</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b1_Red</bandname><fullname>Albedo_BSA_Band_1 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b2_NIR</bandname><fullname>Albedo_BSA_Band_2 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b3_Blue</bandname><fullname>Albedo_BSA_Band_3 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b4_Green</bandname><fullname>Albedo_BSA_Band_4 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b5_SWIR</bandname><fullname>Albedo_BSA_Band_5 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b6_SWIR</bandname><fullname>Albedo_BSA_Band_6 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b7_SWIR</bandname><fullname>Albedo_BSA_Band_7 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer 6</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_Vis</bandname><fullname>Albedo_BSA_Band_vis (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_NIR</bandname><fullname>Albedo_BSA_Band_nir (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_SWIR</bandname><fullname>Albedo_BSA_Band_shortwave (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_WSA_b1_Red</bandname><fullname>Albedo_WSA_Band_1 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band><band><bandname>Alb_WSA_b2_NIR</bandname><fullname>Albedo_WSA_Band_2 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b3_Blue</bandname><fullname>Albedo_WSA_Band_3 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b4_Green</bandname><fullname>Albedo_WSA_Band_4 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b5_SWIR</bandname><fullname>Albedo_WSA_Band_5 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b6_SWIR</bandname><fullname>Albedo_WSA_Band_6 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b7_SWIR</bandname><fullname>Albedo_WSA_Band_7 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_Vis</bandname><fullname>Albedo_WSA_Band_vis (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_NIR</bandname><fullname>Albedo_WSA_Band_nir (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_SWIR</bandname><fullname>Albedo_WSA_Band_shortwave (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band>
+            
+        </bands>
+        
+    </MCD43B3><MCD43B4>
+        <name>BRDF_Adj_Refl_16Days_1Km (MCD43B4)</name>
+        <main_out_folder>BRDF_Adj_Refl_16Days_1Km</main_out_folder>
+        <native_res>926.6254</native_res>
+        <file_prefix_terra>MCD43B4</file_prefix_terra>
+        <file_prefix_aqua>MCD43B4</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b4</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b1_Red</bandname><fullname>Nadir_Reflectance_Band1</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b2_NIR</bandname><fullname>Nadir_Reflectance_Band2</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b3_Blue</bandname><fullname>Nadir_Reflectance_Band3</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b4_Green</bandname><fullname>Nadir_Reflectance_Band4</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b5_SWIR</bandname><fullname>Nadir_Reflectance_Band5</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b6_SWIR</bandname><fullname>Nadir_Reflectance_Band6</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b7_SWIR</bandname><fullname>Nadir_Reflectance_Band7</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            
+            
+            
+            
+            
+        </bands>
+        
+    </MCD43B4><MCD43C1>
+        <name>BRDF_Albedo_ModelPar_16Days_005dg (MCD43C1)</name>
+        <main_out_folder>BRDF_Albedo_ModelPar_16Days_005dg</main_out_folder>
+        <native_res>5600</native_res>
+        <file_prefix_terra>MCD43C1</file_prefix_terra>
+        <file_prefix_aqua>MCD43C1</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c1</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b1_Red</bandname><fullname>BRDF_Albedo_Parameters_Band1</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b2_NIR</bandname><fullname>BRDF_Albedo_Parameters_Band2</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b3_Blue</bandname><fullname>BRDF_Albedo_Parameters_Band3</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b4_Green</bandname><fullname>BRDF_Albedo_Parameters_Band4</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b5_SWIR</bandname><fullname>BRDF_Albedo_Parameters_Band5</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b6_SWIR</bandname><fullname>BRDF_Albedo_Parameters_Band6</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_b7_SWIR</bandname><fullname>BRDF_Albedo_Parameters_Band7</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_Vis</bandname><fullname>BRDF_Albedo_Parameters_vis</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_NIR</bandname><fullname>BRDF_Albedo_Parameters_nir</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Par_SWIR</bandname><fullname>BRDF_Albedo_Parameters_shortwave</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Shape_Ind</bandname><fullname>BRDF_Shape_Indicators</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+            </band>
+            
+        </bands>
+        
+    </MCD43C1><MCD43C2>
+        <name>BRDF_Albedo_Quality_16Days_005dg (MCD43C2)</name>
+        <main_out_folder>BRDF_Albedo_Quality_16Days_005dg</main_out_folder>
+        <native_res>5600</native_res>
+        <file_prefix_terra>MCD43C2</file_prefix_terra>
+        <file_prefix_aqua>MCD43C2</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c2</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>AlbedoQuality</bandname><fullname>BRDF_Albedo_Quality</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Snow</bandname><fullname>Snow_BRDF_Albedo</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Ancillary</bandname><fullname>BRDF_Albedo_Ancillary</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>BQ</bandname><fullname>BRDF_Albedo_Band_Quality</fullname><datatype>32-bit unsigned integer</datatype><nodata_in>4294967295</nodata_in><nodata_out>4294967295</nodata_out>
+            </band>
+            
+            
+            
+            
+            
+            
+            
+            
+        </bands><quality_indicators>
+            <quality>
+                <quality_bandname>b1_Red_QA</quality_bandname>
+                <quality_fullname>Band_1_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>0-3</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b2_NIR_QA</quality_bandname>
+                <quality_fullname>Band_2_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>4-7</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b3_Blue_QA</quality_bandname>
+                <quality_fullname>Band_3_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>8-11</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b4_Green_QA</quality_bandname>
+                <quality_fullname>Band_4_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>12-15</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b5_SWIR_QA</quality_bandname>
+                <quality_fullname>Band_5_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>16-19</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b6_SWIR_QA</quality_bandname>
+                <quality_fullname>Band_6_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>20-23</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>b7_SWIR_QA</quality_bandname>
+                <quality_fullname>Band_7_Quality</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>24-27</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>TBD</quality_bandname>
+                <quality_fullname>TBD</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>28-30</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>QAFill</quality_bandname>
+                <quality_fullname>QAFill</quality_fullname>
+                <quality_source>BQ</quality_source>
+                <quality_bitN>31</quality_bitN>
+            </quality>
+        </quality_indicators>
+        
+    </MCD43C2><MCD43C3>
+        <name>Albedo_16Days_005dg (MCD43C3)</name>
+        <main_out_folder>Albedo_16Days_005dg</main_out_folder>
+        <native_res>5600</native_res>
+        <file_prefix_terra>MCD43C3</file_prefix_terra>
+        <file_prefix_aqua>MCD43C3</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c3</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b1_Red</bandname><fullname>Albedo_BSA_Band_1 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b2_NIR</bandname><fullname>Albedo_BSA_Band_2 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b3_Blue</bandname><fullname>Albedo_BSA_Band_3 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b4_Green</bandname><fullname>Albedo_BSA_Band_4 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b5_SWIR</bandname><fullname>Albedo_BSA_Band_5 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b6_SWIR</bandname><fullname>Albedo_BSA_Band_6 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_b7_SWIR</bandname><fullname>Albedo_BSA_Band_7 (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer 6</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_Vis</bandname><fullname>Albedo_BSA_Band_vis (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_NIR</bandname><fullname>Albedo_BSA_Band_nir (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_BSA_SWIR</bandname><fullname>Albedo_BSA_Band_shortwave (Black Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Alb_WSA_b1_Red</bandname><fullname>Albedo_WSA_Band_1 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band><band><bandname>Alb_WSA_b2_NIR</bandname><fullname>Albedo_WSA_Band_2 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b3_Blue</bandname><fullname>Albedo_WSA_Band_3 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b4_Green</bandname><fullname>Albedo_WSA_Band_4 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b5_SWIR</bandname><fullname>Albedo_WSA_Band_5 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b6_SWIR</bandname><fullname>Albedo_WSA_Band_6 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_b7_SWIR</bandname><fullname>Albedo_WSA_Band_7 (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_Vis</bandname><fullname>Albedo_WSA_Band_vis (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_NIR</bandname><fullname>Albedo_WSA_Band_nir (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>Alb_WSA_SWIR</bandname><fullname>Albedo_WSA_Band_shortwave (White Sky Albedo)</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band>
+            
+        </bands>
+        
+    </MCD43C3><MCD43C4>
+        <name>BRDF_Adj_Refl_16Day_005dg (MCD43C4)</name>
+        <main_out_folder>BRDF_Adj_Refl_16Day_005dg</main_out_folder>
+        <native_res>5600</native_res>
+        <file_prefix_terra>MCD43C4</file_prefix_terra>
+        <file_prefix_aqua>MCD43C4</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c4</www>
+        <bands>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b1_Red</bandname><fullname>Nadir_Reflectance_Band1</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b2_NIR</bandname><fullname>Nadir_Reflectance_Band2</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b3_Blue</bandname><fullname>Nadir_Reflectance_Band3</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b4_Green</bandname><fullname>Nadir_Reflectance_Band4</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b5_SWIR</bandname><fullname>Nadir_Reflectance_Band5</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b6_SWIR</bandname><fullname>Nadir_Reflectance_Band6</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            <band>
+                
+                
+                
+                
+                <bandname>Nad_Refl_b7_SWIR</bandname><fullname>Nadir_Reflectance_Band7</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+            </band>
+            
+            
+            
+            
+            
+        </bands>
+        
+    </MCD43C4><MOD13A1>
+        <name>Vegetation_Indexes_16Days_500m (MOD13A1)</name>
+        <main_out_folder>VI_16Days_500m</main_out_folder>
         <native_res>463.3127</native_res>
         <file_prefix_terra>MOD13A1</file_prefix_terra>
         <file_prefix_aqua>MYD13A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a1</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -2205,7 +3240,7 @@
         <file_prefix_terra>MOD13A2</file_prefix_terra>
         <file_prefix_aqua>MYD13A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a2</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -2377,7 +3412,7 @@
         <file_prefix_terra>MOD13A3</file_prefix_terra>
         <file_prefix_aqua>MYD13A3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A3.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a3</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -2537,13 +3572,13 @@
             </quality>
         </quality_indicators>
     </MOD13A3><MOD13C1>
-        <name>Vegetation_Indexes_16Days_005 (MOD13C1)</name>
-        <main_out_folder>VI_16Days_005</main_out_folder>
+        <name>Vegetation_Indexes_16Days_005dg (MOD13C1)</name>
+        <main_out_folder>VI_16Days_005dg</main_out_folder>
         <native_res>5600</native_res>
         <file_prefix_terra>MOD13C1</file_prefix_terra>
         <file_prefix_aqua>MYD13C1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c1</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -2710,13 +3745,13 @@
             
         </quality_indicators>
     </MOD13C1><MOD13C2>
-        <name>Vegetation_Indexes_Monthly_005 (MOD13C2)</name>
-        <main_out_folder>VI_Monthly_005</main_out_folder>
+        <name>Vegetation_Indexes_Monthly_005dg (MOD13C2)</name>
+        <main_out_folder>VI_Monthly_005dg</main_out_folder>
         <native_res>5600</native_res>
         <file_prefix_terra>MOD13C2</file_prefix_terra>
         <file_prefix_aqua>MYD13C2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c2</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -2883,13 +3918,13 @@
             
         </quality_indicators>
     </MOD13C2><MOD13Q1>
-        <name>Vegetation Indexes_16Days_250 (MOD13Q1)</name>
-        <main_out_folder>VI_16Days_250</main_out_folder>
+        <name>Vegetation Indexes_16Days_250m (MOD13Q1)</name>
+        <main_out_folder>VI_16Days_250m</main_out_folder>
         <native_res>231.656358</native_res>
         <file_prefix_terra>MOD13Q1</file_prefix_terra>
         <file_prefix_aqua>MYD13Q1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13q1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13q1</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -3066,7 +4101,7 @@
         <file_prefix_terra>MCD15A2</file_prefix_terra>
         <file_prefix_aqua>MCD15A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a2</www>
         <bands>
             <band>
                 <bandname>FPAR</bandname><fullname>Fpar_1km</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>249–255</nodata_in>
@@ -3166,7 +4201,7 @@
         <file_prefix_terra>MCD15A3</file_prefix_terra>
         <file_prefix_aqua>MCD15A3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a3</www>
         <bands>
             <band>
                 <bandname>FPAR</bandname><fullname>Fpar_1km</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>249–255</nodata_in>
@@ -3266,7 +4301,7 @@
         <file_prefix_terra>MOD15A2</file_prefix_terra>
         <file_prefix_aqua>MYD15A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD15A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod15a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod15a2</www><combined>0</combined>
         <bands>
             <band>
                 <bandname>FPAR</bandname><fullname>Fpar_1km</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>249–255</nodata_in>
@@ -3366,7 +4401,7 @@
         <file_prefix_terra>MOD17A2</file_prefix_terra>
         <file_prefix_aqua>MYD17A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a2</www>
         <bands>
             <band>
                 <bandname>GPP</bandname><fullname>Gpp_1km: Gross Primary Production</fullname><datatype>16-bit signed integer</datatype><nodata_in>32761–32767</nodata_in>
@@ -3443,7 +4478,7 @@
         <file_prefix_terra>MOD17A3</file_prefix_terra>
         <file_prefix_aqua>MYD17A3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a3</www>
         <bands>
             <band>
                 <bandname>GPP</bandname><fullname>Gridded 1 Km Annual Gross Primary Productivity</fullname><datatype>16-bit signed integer</datatype><nodata_in>0 – 65500</nodata_in>
@@ -3478,125 +4513,472 @@
         </bands>
         
         
-    </MOD17A3><temp>
-        <name>Land_Surf_Temp_Daily_005 (MOD11B1)</name>
-        <main_out_folder>Land_Surf_Temp_Daily_005</main_out_folder>
-        <native_res>5600</native_res>
-        <file_prefix_terra>MOD09B1</file_prefix_terra>
-        <file_prefix_aqua>MYD09B1</file_prefix_aqua>
-        <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11B1.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11b1</www>
+    </MOD17A3><MCD45A1>
+        <name>Burned_Monthly_500m (MCD45A1)</name>
+        <main_out_folder>Burned_Monthly_500m</main_out_folder>
+        <native_res>463.3127</native_res>
+        <file_prefix_terra>MCD45A1</file_prefix_terra>
+        <file_prefix_aqua>MCD45A1</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd45a1</www>
         <bands>
             <band>
-                <bandname>LST</bandname>
-                <fullname>Daytime land surface temperature</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>0</nodata_in>
+                <bandname>Burn_Date</bandname><fullname>Burn Date</fullname><datatype>16-bit integer</datatype><nodata_in>11111</nodata_in><nodata_out>65535</nodata_out>
                 
                 
-                <nodata_out>65535</nodata_out>
+                
+                
             </band>
             <band>
-                <bandname>LST_QC</bandname>
-                <fullname>Daytime LSTE quality control</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in>
+                <bandname>Burn_Area_QA</bandname><fullname>Burned Area Pixel QA</fullname><datatype>8-bit integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
                 
                 
-                <nodata_out>-999</nodata_out>
+                
+                
             </band>
             <band>
-                <bandname>LST_Time</bandname>
-                <fullname>Daytime LST observation time</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in>
+                <bandname>N_Pass</bandname><fullname>Number of Passes</fullname><datatype>8-bit integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
                 
                 
-                <nodata_out>255</nodata_out>
+                
+                
             </band>
             <band>
-                <bandname>View_Zen</bandname>
-                <fullname>Daytime LST view zenith angle</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in>
+                <bandname>N_Used</bandname><fullname>Number Used</fullname><datatype>8-bit integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
                 
                 
-                <nodata_out>255</nodata_out>
+                
+                
             </band>
             <band>
-                <bandname>LST_Night</bandname>
-                <fullname>Nighttime land surface temperature</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>0</nodata_in>
+                <bandname>Dir</bandname><fullname>Direction</fullname><datatype>8-bit integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
                 
                 
-                <nodata_out>65535</nodata_out>
+                
+                
             </band>
             <band>
-                <bandname>LST_Night_QA</bandname>
-                <fullname>Nighttime LSTE quality control</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in>
+                <bandname>Surface</bandname><fullname>Surface Type</fullname><datatype>8-bit integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
                 
                 
-                <nodata_out>-999</nodata_out>
+                
+                
             </band>
             <band>
-                <bandname>LST_Time_Night</bandname>
-                <fullname>Nighttime LST observation time</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in>
+                <bandname>Gap_R1</bandname><fullname>Gap Range-1</fullname><datatype>16-bit integer</datatype><nodata_in>65535</nodata_in><nodata_out>65535</nodata_out>
                 
                 
-                <nodata_out>255</nodata_out>
+                
+                
             </band>
             <band>
-                <bandname>View_Zen_Night</bandname>
-                <fullname>Nighttime LST view zenith angle</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in>
+                <bandname>Gap_R2</bandname><fullname>Gap Range-2</fullname><datatype>16-bit integer</datatype><nodata_in>65535</nodata_in><nodata_out>65535</nodata_out>
                 
                 
-                <nodata_out>255</nodata_out>
+                
+                
             </band>
-            <band>
-                <bandname>Emiss_B20</bandname>
-                <fullname>Band 20 Emissivity</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in>
-                
-                
-                <nodata_out>255</nodata_out>
-            </band>
-            <band>
-                <bandname>Emiss_B22</bandname>
-                <fullname>Band 22 Emissivity</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in>
-                
-                
-                <nodata_out>255</nodata_out>
-            </band>
-            <band>
-                <bandname>Emiss_B23</bandname>
-                <fullname>Band 23 Emissivity</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in>
-                
-                
-                <nodata_out>255</nodata_out>
-            </band>
-            <band>
-                <bandname>Emiss_B29</bandname>
-                <fullname>Band 29 Emissivity</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in>
-                
-                
-                <nodata_out>255</nodata_out>
-            </band><band><bandname>Emiss_B31</bandname><fullname>Band 31 Emissivity</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in><nodata_out>255</nodata_out></band><band><bandname>Emiss_B32</bandname><fullname>Band 32 Emissivity</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in><nodata_out>255</nodata_out></band><band><bandname>Daytime_LST</bandname><fullname>Daytime 5-Km LST aggregated from 1-Km</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>0</nodata_in><nodata_out>65535</nodata_out></band><band><bandname>Nighttime_LST</bandname><fullname>Nighttime 5-Km LST aggregated from 1-Km</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>0</nodata_in><nodata_out>65535</nodata_out></band><band><bandname>Emiss_QC</bandname><fullname>Quality control for retrieved emissivities</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in><nodata_out>-999</nodata_out></band>
+            
+            
+            
+            
         </bands>
+        
+    </MCD45A1><MOD14>
+        <name>ThermalAn_Fire_5Min_1Km (MOD14)</name>
+        <main_out_folder>ThermalAn_Fire_5Min_1Km</main_out_folder>
+        <native_res>926.6254</native_res>
+        <file_prefix_terra>MOD14</file_prefix_terra>
+        <file_prefix_aqua>MYD14</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod14</www>
+        <bands>
+            <band>
+                <bandname>Fire_Mask</bandname><fullname>Fire mask</fullname><datatype>Class</datatype><nodata_in>8-bit unsigned integer</nodata_in><nodata_out>0</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>QA</bandname><fullname>Algorithm QA</fullname><datatype>Bits</datatype><nodata_in>32-bit unsigned integer</nodata_in><nodata_out>4294967295</nodata_out>
+                
+                
+                
+                
+            </band>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </bands><quality_indicators>
+            <quality>
+                <quality_bandname>QC</quality_bandname><quality_fullname>MODLAND QA bits</quality_fullname><quality_source>QA</quality_source><quality_bitN>0–1</quality_bitN>
+                
+                
+                
+            </quality>
+            <quality>
+                <quality_bandname>Flag_39</quality_bandname><quality_fullname>3.9 micron high-gain flag</quality_fullname><quality_source>QA</quality_source><quality_bitN>2</quality_bitN>
+                
+                
+                
+            </quality>
+            <quality>
+                <quality_bandname>Atm_Corr</quality_bandname><quality_fullname>Atmospheric correction</quality_fullname><quality_source>QA</quality_source><quality_bitN>3</quality_bitN>
+                
+                
+                
+            </quality>
+            <quality>
+                <quality_bandname>Day_Night</quality_bandname><quality_fullname>Day/night algorithm</quality_fullname><quality_source>QA</quality_source><quality_bitN>4</quality_bitN>
+                
+                
+                
+            </quality>
+            <quality>
+                <quality_bandname>Pot_Fire</quality_bandname><quality_fullname>Potential fire pixel</quality_fullname><quality_source>QA</quality_source><quality_bitN>5</quality_bitN>
+                
+                
+                
+            </quality><quality><quality_bandname>Spare1</quality_bandname><quality_fullname>Spare (set to zero)</quality_fullname><quality_source>QA</quality_source><quality_bitN>6</quality_bitN></quality><quality><quality_bandname>R</quality_bandname><quality_fullname>Background window size parameter, R</quality_fullname><quality_source>QA</quality_source><quality_bitN>7–10</quality_bitN></quality><quality><quality_bandname>Test_360</quality_bandname><quality_fullname>360 K T21 test</quality_fullname><quality_source>QA</quality_source><quality_bitN>11</quality_bitN></quality><quality><quality_bandname>Test_DT_Rel</quality_bandname><quality_fullname>DT relative test</quality_fullname><quality_source>QA</quality_source><quality_bitN>12</quality_bitN></quality><quality><quality_bandname>Test_DT_Abs</quality_bandname><quality_fullname>DT absolute test</quality_fullname><quality_source>QA</quality_source><quality_bitN>13</quality_bitN></quality><quality><quality_bandname>Test_T21_i</quality_bandname><quality_fullname>T21 relative test i</quality_fullname><quality_source>QA</quality_source><quality_bitN>14</quality_bitN></quality><quality><quality_bandname>Test_T21_ii</quality_bandname><quality_fullname>T31 relative test ii</quality_fullname><quality_source>QA</quality_source><quality_bitN>15</quality_bitN></quality><quality><quality_bandname>Test_BG_Fire_T21</quality_bandname><quality_fullname>Background fire T21 deviation test</quality_fullname><quality_source>QA</quality_source><quality_bitN>16</quality_bitN></quality><quality><quality_bandname>Spare2</quality_bandname><quality_fullname>Spare (set to zero)</quality_fullname><quality_source>QA</quality_source><quality_bitN>17–20</quality_bitN></quality><quality><quality_bandname>Adj_Cloud_Px</quality_bandname><quality_fullname>Adjacent cloud pixel (valid only if fire mask = 7, 8, or 9)</quality_fullname><quality_source>QA</quality_source><quality_bitN>21</quality_bitN></quality><quality><quality_bandname>Adj_Water_Px</quality_bandname><quality_fullname>Adjacent water pixel (valid only if fire mask = 7, 8, or 9)</quality_fullname><quality_source>QA</quality_source><quality_bitN>22</quality_bitN></quality><quality><quality_bandname>Sun_Glint_Lev</quality_bandname><quality_fullname>Sun glint level</quality_fullname><quality_source>QA</quality_source><quality_bitN>23</quality_bitN></quality><quality><quality_bandname>Sun_Glint_Rej</quality_bandname><quality_fullname>Sun glint rejection flag</quality_fullname><quality_source>QA</quality_source><quality_bitN>24</quality_bitN></quality><quality><quality_bandname>Hot_Surf_Rej</quality_bandname><quality_fullname>Hot surface boundary rejection flag</quality_fullname><quality_source>QA</quality_source><quality_bitN>25</quality_bitN></quality><quality><quality_bandname>Coast_FalseAlarm_Rej</quality_bandname><quality_fullname>Coastal false alarm rejection flag</quality_fullname><quality_source>QA</quality_source><quality_bitN>26</quality_bitN></quality><quality><quality_bandname>Spare3</quality_bandname><quality_fullname>Spare (set to zero)</quality_fullname><quality_source>QA</quality_source><quality_bitN>27–31</quality_bitN></quality>
+            
+            
+            
+            
+        </quality_indicators><fixme>TODO: download of fire table (see www)</fixme>
+        
+    </MOD14><MOD14A1>
+        <name>ThermalAn_Fire_Daily_1Km (MOD14A1)</name>
+        <main_out_folder>ThermalAn_Fire_Daily_1Km</main_out_folder>
+        <native_res>926.6254</native_res>
+        <file_prefix_terra>MOD14A1</file_prefix_terra>
+        <file_prefix_aqua>MYD14A1</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod14a1</www>
+        <bands>
+            <band>
+                <bandname>Fire_Mask</bandname><fullname>Fire mask</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>QA</bandname><fullname>QA</fullname><datatype>8-bit unsigned integer</datatype><nodata_in> </nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>MaxFRP</bandname><fullname>MaxFRP: Maximum Fire Radiative Power</fullname><datatype>32-bit signed integer</datatype><nodata_in>0</nodata_in><nodata_out>2147483647</nodata_out>
+                
+                
+                
+                
+            </band><band><bandname>Sample</bandname><fullname>Sample</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>na</nodata_in><nodata_out>65535</nodata_out></band>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </bands><fixme>TODO: download of fire table (see www)</fixme>
+        
+    </MOD14A1><MOD14A2>
+        <name>ThermalAn_Fire_8Days_1Km (MOD14A2)</name>
+        <main_out_folder>ThermalAn_Fire_8Days_1Km</main_out_folder>
+        <native_res>926.6254</native_res>
+        <file_prefix_terra>MOD14A2</file_prefix_terra>
+        <file_prefix_aqua>MYD14A2</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod14a2</www>
+        <bands>
+            <band>
+                <bandname>Fire_Mask</bandname><fullname>Fire mask</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>QA</bandname><fullname>QA</fullname><datatype>8-bit unsigned integer</datatype><nodata_in> </nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </bands>
+        
+    </MOD14A2><MCD12C1>
+        <name>LandCover_Type_Yearly_005dg (MCD12C1)</name>
+        <main_out_folder>LandCover_Type_Yearly_005dg</main_out_folder>
+        <native_res>5600</native_res>
+        <file_prefix_terra>MCD12C1</file_prefix_terra>
+        <file_prefix_aqua>MCD12C1</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12c1</www>
+        <bands>
+            <band>
+                <bandname>LC1</bandname><fullname>Majority_Land_Cover_Type_1</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC2_Assessment</bandname><fullname>Majority_Land_Cover_Type_1_Assessment</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC2_Percent</bandname><fullname>Majority_Land_Cover_Type_1_Percent</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC1_QC</bandname><fullname>Majority_Land_Cover_Type_1_QC</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC2</bandname><fullname>Majority_Land_Cover_Type_2</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC2_Assessment</bandname><fullname>Majority_Land_Cover_Type_2_Assessment</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band><band><bandname>LC2_Percent</bandname><fullname>Majority_Land_Cover_Type_2_Percent</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC3</bandname><fullname>Majority_Land_Cover_Type_3</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC3_Assessment</bandname><fullname>Majority_Land_Cover_Type_3_Assessment</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC3_Percent</bandname><fullname>Majority_Land_Cover_Type_3_Percent</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out></band>
+            
+            
+            
+            
+            
+            
+        </bands>
+        
         <quality_indicators>
             <quality>
-                <quality_bandname>QA</quality_bandname>
-                <quality_fullname>Mandatory QA flag</quality_fullname>
-                <quality_source>LST_QC</quality_source>
-                <quality_bitN>0-1</quality_bitN>
+                <quality_bandname>QC</quality_bandname>
+                <quality_fullname>MODLAND_QC bits</quality_fullname>
+                <quality_source>LC1_QC</quality_source>
+                <quality_bitN>1-2</quality_bitN>
             </quality>
-            <quality>
-                <quality_bandname>DQ</quality_bandname>
-                <quality_fullname>Data quality flag</quality_fullname>
-                <quality_source>LST_QC</quality_source>
-                <quality_bitN>2-3</quality_bitN>
-            </quality>
-            <quality>
-                <quality_bandname>EEr_Flag</quality_bandname>
-                <quality_fullname>Emissivity error flag</quality_fullname>
-                <quality_source>LST_QC</quality_source>
-                <quality_bitN>4-5</quality_bitN>
-            </quality>
-            <quality>
-                <quality_bandname>LSTEr</quality_bandname>
-                <quality_fullname>LST error flag</quality_fullname>
-                <quality_source>LST_QC</quality_source>
-                <quality_bitN>6-7</quality_bitN>
-            </quality>
+            
+            
+            
+            
+            
+            
+            
+            
         </quality_indicators>
-    </temp>
+    </MCD12C1><MCD12Q1>
+        <name>LandCover_Type_Yearly_500m (MCD12Q1)</name>
+        <main_out_folder>LandCover_Type_Yearly_500m</main_out_folder>
+        <native_res>463.3127</native_res>
+        <file_prefix_terra>MCD12Q1</file_prefix_terra>
+        <file_prefix_aqua>MCD12Q1</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12q1</www>
+        <bands>
+            <band>
+                <bandname>LC1</bandname><fullname>Land Cover Type 1 (IGBP)*</fullname><datatype>Class #</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC2</bandname><fullname>Land Cover Type 2 (UMD)*</fullname><datatype>Class #</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC3</bandname><fullname>Land Cover Type 3 (LAI/fPAR)*</fullname><datatype>Class #</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC4</bandname><fullname>Land Cover Type 4 (NPP/BGC)*</fullname><datatype>Class #</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC5</bandname><fullname>Land Cover Type 5 (PFT)**</fullname><datatype>Class #</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>LC1_Assessment</bandname><fullname>Land Cover Type 1 Assessment</fullname><datatype>% Integer</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out>
+                
+                
+                
+                
+            </band><band><bandname>LC2_Assessment</bandname><fullname>Land Cover Type 2 Assessment</fullname><datatype>Not populated</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC3_Assessment</bandname><fullname>Land Cover Type 3 Assessment</fullname><datatype>Not populated</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC4_Assessment</bandname><fullname>Land Cover Type 4 Assessment</fullname><datatype>Not populated</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC5_Assessment</bandname><fullname>Land Cover Type 5 Assessment</fullname><datatype>Not populated</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC_QC</bandname><fullname>Land Cover QC</fullname><datatype>Concatenated Flags</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC1_2</bandname><fullname>Land Cover Type 1 Secondary</fullname><datatype>Class #</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC1_2_Percent</bandname><fullname>Land Cover Type 1 Secondary %</fullname><datatype>Not populated</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC_Property1</bandname><fullname>Land Cover Property 1</fullname><datatype>Not populated</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC_Property2</bandname><fullname>Land Cover Property 2</fullname><datatype>Not populated</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band><band><bandname>LC_Property3</bandname><fullname>Land Cover Property 3</fullname><datatype>Not populated</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out></band>
+            
+            
+            
+            
+            
+            
+        </bands><quality_indicators>
+            <quality>
+                <quality_bandname>Mandatory_QA</quality_bandname>
+                <quality_fullname>Mandatory QA</quality_fullname>
+                <quality_source>LC_QC</quality_source>
+                <quality_bitN>0-1</quality_bitN>
+            </quality><quality>
+                <quality_bandname>Quart_Up</quality_bandname>
+                <quality_fullname>Quarters since updated</quality_fullname>
+                <quality_source>LC_QC</quality_source>
+                <quality_bitN>2-3</quality_bitN>
+            </quality><quality>
+                <quality_bandname>LW_Mask</quality_bandname>
+                <quality_fullname>Land-water mask</quality_fullname>
+                <quality_source>LC_QC</quality_source>
+                <quality_bitN>4-7</quality_bitN>
+            </quality>
+            
+            
+            
+            
+            
+            
+            
+            
+        </quality_indicators>
+        
+        
+    </MCD12Q1><MCD12Q2>
+        <name>LandCover_Dynamics_Yearly_500m (MCD12Q2)</name>
+        <main_out_folder>LandCover_Dynamics_Yearly_500m</main_out_folder>
+        <native_res>463.3127</native_res>
+        <file_prefix_terra>MCD12Q2</file_prefix_terra>
+        <file_prefix_aqua>MCD12Q2</file_prefix_aqua>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12q2</www>
+        <bands>
+            <band>
+                <bandname>Green_Incr</bandname><fullname>Onset_Greenness_Increase</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>Green_Max</bandname><fullname>Onset_Greenness_Maximum</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>Green_Decr</bandname><fullname>Onset_Greenness_Decrease</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>Green_Min</bandname><fullname>Onset_Greenness_Minimum</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>EVI_Green_Min</bandname><fullname>NBAR_EVI_Onset_Greenness_Min</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+                
+                
+                
+                
+            </band>
+            <band>
+                <bandname>EVI_Green_Max</bandname><fullname>NBAR_EVI_Onset_Greenness_Max</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>
+                
+                
+                
+                
+            </band><band><bandname>EVI_Area</bandname><fullname>NBAR_EVI_Area</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band><band><bandname>QC</bandname><fullname>Dynamics_QC</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out></band>
+            
+            
+            
+            
+            
+            
+        </bands><quality_indicators>
+            <quality>
+                <quality_bandname>Mandatory_QA</quality_bandname>
+                <quality_fullname>Mandatory QA</quality_fullname>
+                <quality_source>QC</quality_source>
+                <quality_bitN>0-1</quality_bitN>
+            </quality><quality>
+                <quality_bandname>Quart_Up</quality_bandname>
+                <quality_fullname>Quarters since updated</quality_fullname>
+                <quality_source>QC</quality_source>
+                <quality_bitN>2-3</quality_bitN>
+            </quality><quality>
+                <quality_bandname>LW_Mask</quality_bandname>
+                <quality_fullname>Land-water mask</quality_fullname>
+                <quality_source>QC</quality_source>
+                <quality_bitN>4-7</quality_bitN>
+            </quality><quality>
+                <quality_bandname>Pheno</quality_bandname>
+                <quality_fullname>Phenology Assessment</quality_fullname>
+                <quality_source>QC</quality_source>
+                <quality_bitN>8-15</quality_bitN>
+            </quality>
+            
+            
+            
+            
+            
+            
+            
+            
+        </quality_indicators>
+        
+        
+    </MCD12Q2>
 </products>

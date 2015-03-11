@@ -13,7 +13,7 @@
 #' @license GPL(>2)
 #' @export
 moddwl_GUI = function (general_opts){
-	
+		
 	# Restore previous options file if existing, otherwise create a "dummy" one with default values
 	if (file.exists(general_opts$previous_file)) {
 		
@@ -42,7 +42,7 @@ moddwl_GUI = function (general_opts){
 	{{satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, bands and satellites selection</span>', markup = T,horizontal = FALSE, container=main_group, spacing = 15)
 			prod_frame <- gframe(text ="Select MODIS Product and bands",horizontal = TRUE, container=satprod_frame, spacing = 15)
 			checked <- which(mod_prod_list == general_opts$sel_prod)
-			
+
 			temp_wid_bands <<- prod_opt_list[[checked]]$bandsel				# set dummy variables holding the initial values of selected bands
 			temp_wid_bands_indexes <<- prod_opt_list[[checked]]$indexes_bandsel
 			temp_wid_bands_quality <<- prod_opt_list[[checked]]$quality_bandsel
