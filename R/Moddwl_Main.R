@@ -33,7 +33,7 @@ moddwl_main = function() {
    src_dir = dirname(rscript.current())
 			
 #			src_dir = "D:/Documents/Source_Code/R/LB_MOD_DWL/R"
-			setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ;   previous_dir = file.path(main_dir,'/Previous')   ; log_dir =  file.path(main_dir,'/Log')
+			setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ;   previous_dir = file.path(main_dir,'Previous')   ; log_dir =  file.path(main_dir,'Log')
 			dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 			previous_file= file.path(previous_dir, 'Moddwl_Previous.RData') ; xml_file= file.path(main_dir,'Accessoires','Moddwl_XML.xml')
 

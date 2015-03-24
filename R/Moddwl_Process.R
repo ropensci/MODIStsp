@@ -55,7 +55,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
   
   #	browser()
   modis_folder = out_folder_mod
-	dir.create(modis_folder, recursive = T)
+	dir.create(modis_folder, recursive = T, showWarnings=FALSE)
   
   mess = gwindow(title = 'Processing Status', container = TRUE, width = 400, height = 40)
   size(mess) <- c(100,8)		;	addHandlerUnrealize(mess, handler = function(h,...) {return(TRUE)})
@@ -200,9 +200,16 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
 #                     er_mos <- system(paste(MRTpath, '/mrtmosaic -i ',file.path(out_prod_folder,'Temp', 'TmpMosaic.prm') ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
                     files_in = file.path(modis_folder, modislist)
                     
-                    if (full_ext == 'Resized') { 
-                      gdalbuildvrt(files_in, outfile_vrt, te = c(bbox[1],bbox[3],bbox[2],bbox[4]),  sd = band) 
-                    } else {gdalbuildvrt(files_in, outfile_vrt,  sd = band) }
+					# OLD (gg: check from here)
+#                    if (full_ext == 'Resized') { 
+#                      gdalbuildvrt(files_in, outfile_vrt, te = c(bbox[1],bbox[3],bbox[2],bbox[4]),  sd = band) 
+#                    } else {gdalbuildvrt(files_in, outfile_vrt,  sd = band) }
+					if (full_ext == 'Resized') { 
+						temp_points =SpatialPoints(coords =matrix(c(bbox[1],bbox[2],bbox[3],bbox[4]), nrow = 2), proj4string = CRS(outproj_str))
+						temp_points = spTransform(temp_points,CRS(MOD_proj_str ))
+						
+						gdalbuildvrt(files_in, outfile_vrt, te = c(bbox[1],bbox[3],bbox[2],bbox[4]),  sd = band) 
+					} else {gdalbuildvrt(files_in, outfile_vrt,  sd = band) }
                     er_mos = gdal_translate(outfile_vrt, outfile)
                     if (is.null(er_mos) == FALSE)  {stop()}   # exit on error
                     
@@ -259,7 +266,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
                     indexes_band =  indexes_bandnames[band]		; 	formula = indexes_formula[band]
                     svalue(mess_lab) = paste('--- Computing',  indexes_band,' for date: ',date_name,' ---')
                     print (paste('Computing ', indexes_band,' for date: ',date_name ))
-                    out_filename = file.path(out_prod_folder,indexes_band,paste(file_prefix,'_',indexes_band,'_',yy,'_', DOY, sep = ''))
+					out_filename = file.path(out_prod_folder,indexes_band,paste(file_prefix,'_',indexes_band,'_',yy,'_', DOY, sep = ''))
                     if (out_format =='GTiff') {out_filename = paste(out_filename, '.tif', sep = '')} else {out_filename = paste(out_filename, '.dat', sep = '')}
                     dir.create(file.path(out_prod_folder,indexes_band), showWarnings = F, recursive = T)
                     if (file.exists(out_filename) == F | reprocess == T) {
@@ -308,8 +315,8 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
                     
                   }
                   if (out_format =='GTiff') {
-                    out_filename = paste(out_filename, '.tif', sep = '')
-                    unlink(out_filename_dat)
+                    out_filename_tif = paste(out_filename, '.tif', sep = '')
+                    unlink(out_filename_tif)
                   }
                   unlink(dirname(out_filename),recursive = T)
                 } #End If on delbands[banddel] == 1
