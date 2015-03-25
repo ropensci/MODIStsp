@@ -200,10 +200,6 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
 #                     er_mos <- system(paste(MRTpath, '/mrtmosaic -i ',file.path(out_prod_folder,'Temp', 'TmpMosaic.prm') ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
                     files_in = file.path(modis_folder, modislist)
                     
-					# OLD (gg: check from here)
-#                    if (full_ext == 'Resized') { 
-#                      gdalbuildvrt(files_in, outfile_vrt, te = c(bbox[1],bbox[3],bbox[2],bbox[4]),  sd = band) 
-#                    } else {gdalbuildvrt(files_in, outfile_vrt,  sd = band) }
 					if (full_ext == 'Resized') { 
 						temp_points =SpatialPoints(coords =matrix(c(bbox[1],bbox[2],bbox[3],bbox[4]), nrow = 2), proj4string = CRS(outproj_str))
 						temp_points = spTransform(temp_points,CRS(MOD_proj_str ))
