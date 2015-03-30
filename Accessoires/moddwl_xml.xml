@@ -7,7 +7,7 @@
         <file_prefix_terra>MOD09A1</file_prefix_terra>
         <file_prefix_aqua>MYD09A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09a1</www>
         <bands>
             <band>
                 <bandname>b1_Red</bandname>
@@ -304,7 +304,7 @@
         <file_prefix_terra>MOD09CMG</file_prefix_terra>
         <file_prefix_aqua>MYD09CMG</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09CMG.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09cmg</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua><combined>0</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09cmg</www>
         <bands>
             <band>
                 <bandname>b1_Red</bandname>
@@ -594,7 +594,7 @@
         <file_prefix_terra>MOD09GA</file_prefix_terra>
         <file_prefix_aqua>MYD09GA</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09ga</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09ga</www>
         <bands>
             <band>
                 <bandname>N_Obs_1k</bandname>
@@ -946,7 +946,7 @@
         <file_prefix_terra>MOD09GQ</file_prefix_terra>
         <file_prefix_aqua>MYD09GQ</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09gq</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09gq</www>
         <bands>
             <band>
                 <bandname>N_Obs</bandname>
@@ -1043,7 +1043,7 @@
         <file_prefix_terra>MOD09Q1</file_prefix_terra>
         <file_prefix_aqua>MYD09Q1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09Q1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09q1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod09q1</www>
         <bands>
             <band>
                 <bandname>b1_Red</bandname>
@@ -1167,7 +1167,7 @@
         <file_prefix_terra>MOD11A1</file_prefix_terra>
         <file_prefix_aqua>MYD11A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A1.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1288,7 +1288,7 @@
         <file_prefix_terra>MOD11A2</file_prefix_terra>
         <file_prefix_aqua>MYD11A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A2.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a2</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1432,7 +1432,7 @@
         <file_prefix_terra>MOD09B1</file_prefix_terra>
         <file_prefix_aqua>MYD09B1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11B1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11b1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B1.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11b1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1553,7 +1553,7 @@
         <file_prefix_terra>MOD09C1</file_prefix_terra>
         <file_prefix_aqua>MYD09C1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11C1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.005/</http_aqua><combined>0</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1673,7 +1673,7 @@
         <file_prefix_terra>MOD11C2</file_prefix_terra>
         <file_prefix_aqua>MYD11C2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11C2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C2.005/</http_aqua><combined>0</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c2</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1797,9 +1797,9 @@
         <main_out_folder>Surf_Temp_Monthly_005dg</main_out_folder>
         <native_res>5600</native_res>
         <file_prefix_terra>MOD11C3</file_prefix_terra>
-        <file_prefix_aqua>MYD11C3</file_prefix_aqua>
-        <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11C3.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c3</www>
+        
+        <file_prefix_aqua>MYD11C3</file_prefix_aqua><http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.005/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.005/</http_aqua><combined>0</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c3</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1931,7 +1931,7 @@
         <file_prefix_terra>MOD09_L2</file_prefix_terra>
         <file_prefix_aqua>MYD09_L2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11_L2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11_L2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11_l2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11_L2.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11_l2</www>
         <bands>
             <band>
                 <bandname>LST</bandname><fullname>Land Surface Temperature</fullname><datatype>16-bit Unsigned integer</datatype><nodata_in>0</nodata_in>
@@ -2033,7 +2033,7 @@
         <file_prefix_terra>MCD43A1</file_prefix_terra>
         <file_prefix_aqua>MCD43A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a1</www>
         <bands>
             <band>
                 
@@ -2122,7 +2122,7 @@
         <file_prefix_terra>MCD43A2</file_prefix_terra>
         <file_prefix_aqua>MCD43A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a2</www>
         <bands>
             <band>
                 
@@ -2224,7 +2224,7 @@
         <file_prefix_terra>MCD43A3</file_prefix_terra>
         <file_prefix_aqua>MCD43A3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a3</www>
         <bands>
             <band>
                 
@@ -2313,7 +2313,7 @@
         <file_prefix_terra>MCD43A4</file_prefix_terra>
         <file_prefix_aqua>MCD43A4</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a4</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a4</www>
         <bands>
             <band>
                 
@@ -2378,7 +2378,7 @@
         <file_prefix_terra>MCD43B1</file_prefix_terra>
         <file_prefix_aqua>MCD43B1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b1</www>
         <bands>
             <band>
                 
@@ -2467,7 +2467,7 @@
         <file_prefix_terra>MCD43B2</file_prefix_terra>
         <file_prefix_aqua>MCD43B2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b2</www>
         <bands>
             <band>
                 
@@ -2569,7 +2569,7 @@
         <file_prefix_terra>MCD43B3</file_prefix_terra>
         <file_prefix_aqua>MCD43B3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b3</www>
         <bands>
             <band>
                 
@@ -2658,7 +2658,7 @@
         <file_prefix_terra>MCD43B4</file_prefix_terra>
         <file_prefix_aqua>MCD43B4</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b4</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b4</www>
         <bands>
             <band>
                 
@@ -2723,7 +2723,7 @@
         <file_prefix_terra>MCD43C1</file_prefix_terra>
         <file_prefix_aqua>MCD43C1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_aqua><combined>1</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c1</www>
         <bands>
             <band>
                 
@@ -2812,7 +2812,7 @@
         <file_prefix_terra>MCD43C2</file_prefix_terra>
         <file_prefix_aqua>MCD43C2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_aqua><combined>1</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c2</www>
         <bands>
             <band>
                 
@@ -2914,7 +2914,7 @@
         <file_prefix_terra>MCD43C3</file_prefix_terra>
         <file_prefix_aqua>MCD43C3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_aqua><combined>1</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c3</www>
         <bands>
             <band>
                 
@@ -3003,7 +3003,7 @@
         <file_prefix_terra>MCD43C4</file_prefix_terra>
         <file_prefix_aqua>MCD43C4</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c4</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.005/</http_aqua><combined>1</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c4</www>
         <bands>
             <band>
                 
@@ -3068,7 +3068,7 @@
         <file_prefix_terra>MOD13A1</file_prefix_terra>
         <file_prefix_aqua>MYD13A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a1</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -3240,7 +3240,7 @@
         <file_prefix_terra>MOD13A2</file_prefix_terra>
         <file_prefix_aqua>MYD13A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a2</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -3412,7 +3412,7 @@
         <file_prefix_terra>MOD13A3</file_prefix_terra>
         <file_prefix_aqua>MYD13A3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A3.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a3</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -3578,7 +3578,7 @@
         <file_prefix_terra>MOD13C1</file_prefix_terra>
         <file_prefix_aqua>MYD13C1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.005/</http_aqua><combined>0</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c1</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -3751,7 +3751,7 @@
         <file_prefix_terra>MOD13C2</file_prefix_terra>
         <file_prefix_aqua>MYD13C2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.005/</http_aqua><combined>0</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c2</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -3924,7 +3924,7 @@
         <file_prefix_terra>MOD13Q1</file_prefix_terra>
         <file_prefix_aqua>MYD13Q1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13q1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod13q1</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -4101,7 +4101,7 @@
         <file_prefix_terra>MCD15A2</file_prefix_terra>
         <file_prefix_aqua>MCD15A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a2</www>
         <bands>
             <band>
                 <bandname>FPAR</bandname><fullname>Fpar_1km</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>249–255</nodata_in>
@@ -4201,7 +4201,7 @@
         <file_prefix_terra>MCD15A3</file_prefix_terra>
         <file_prefix_aqua>MCD15A3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a3</www>
         <bands>
             <band>
                 <bandname>FPAR</bandname><fullname>Fpar_1km</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>249–255</nodata_in>
@@ -4301,7 +4301,7 @@
         <file_prefix_terra>MOD15A2</file_prefix_terra>
         <file_prefix_aqua>MYD15A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD15A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod15a2</www><combined>0</combined>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod15a2</www><combined>0</combined><tiled>1</tiled>
         <bands>
             <band>
                 <bandname>FPAR</bandname><fullname>Fpar_1km</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>249–255</nodata_in>
@@ -4401,7 +4401,7 @@
         <file_prefix_terra>MOD17A2</file_prefix_terra>
         <file_prefix_aqua>MYD17A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a2</www>
         <bands>
             <band>
                 <bandname>GPP</bandname><fullname>Gpp_1km: Gross Primary Production</fullname><datatype>16-bit signed integer</datatype><nodata_in>32761–32767</nodata_in>
@@ -4478,7 +4478,7 @@
         <file_prefix_terra>MOD17A3</file_prefix_terra>
         <file_prefix_aqua>MYD17A3</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a3</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a3</www>
         <bands>
             <band>
                 <bandname>GPP</bandname><fullname>Gridded 1 Km Annual Gross Primary Productivity</fullname><datatype>16-bit signed integer</datatype><nodata_in>0 – 65500</nodata_in>
@@ -4520,7 +4520,7 @@
         <file_prefix_terra>MCD45A1</file_prefix_terra>
         <file_prefix_aqua>MCD45A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd45a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd45a1</www>
         <bands>
             <band>
                 <bandname>Burn_Date</bandname><fullname>Burn Date</fullname><datatype>16-bit integer</datatype><nodata_in>11111</nodata_in><nodata_out>65535</nodata_out>
@@ -4591,7 +4591,7 @@
         <file_prefix_terra>MOD14</file_prefix_terra>
         <file_prefix_aqua>MYD14</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod14</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod14</www>
         <bands>
             <band>
                 <bandname>Fire_Mask</bandname><fullname>Fire mask</fullname><datatype>Class</datatype><nodata_in>8-bit unsigned integer</nodata_in><nodata_out>0</nodata_out>
@@ -4661,7 +4661,7 @@
         <file_prefix_terra>MOD14A1</file_prefix_terra>
         <file_prefix_aqua>MYD14A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod14a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod14a1</www>
         <bands>
             <band>
                 <bandname>Fire_Mask</bandname><fullname>Fire mask</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in><nodata_out>255</nodata_out>
@@ -4702,7 +4702,7 @@
         <file_prefix_terra>MOD14A2</file_prefix_terra>
         <file_prefix_aqua>MYD14A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.005/</http_aqua><combined>0</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mod14a2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod14a2</www>
         <bands>
             <band>
                 <bandname>Fire_Mask</bandname><fullname>Fire mask</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>0</nodata_in><nodata_out>255</nodata_out>
@@ -4736,8 +4736,8 @@
         <native_res>5600</native_res>
         <file_prefix_terra>MCD12C1</file_prefix_terra>
         <file_prefix_aqua>MCD12C1</file_prefix_aqua>
-        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12c1</www>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_aqua><combined>1</combined><tiled>0</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12c1</www>
         <bands>
             <band>
                 <bandname>LC1</bandname><fullname>Majority_Land_Cover_Type_1</fullname><datatype>8-bit unsigned integer</datatype><nodata_in>255</nodata_in><nodata_out>255</nodata_out>
@@ -4811,8 +4811,8 @@
         <native_res>463.3127</native_res>
         <file_prefix_terra>MCD12Q1</file_prefix_terra>
         <file_prefix_aqua>MCD12Q1</file_prefix_aqua>
-        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12q1</www>
+        <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_terra>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12q1</www>
         <bands>
             <band>
                 <bandname>LC1</bandname><fullname>Land Cover Type 1 (IGBP)*</fullname><datatype>Class #</datatype><nodata_in>8-bit unsigned</nodata_in><nodata_out>255</nodata_out>
@@ -4897,7 +4897,7 @@
         <file_prefix_terra>MCD12Q2</file_prefix_terra>
         <file_prefix_aqua>MCD12Q2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_aqua><combined>1</combined><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12q2</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_aqua><combined>1</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12q2</www>
         <bands>
             <band>
                 <bandname>Green_Incr</bandname><fullname>Onset_Greenness_Increase</fullname><datatype>16-bit unsigned integer</datatype><nodata_in>32767</nodata_in><nodata_out>32767</nodata_out>

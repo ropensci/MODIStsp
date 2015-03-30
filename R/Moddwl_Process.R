@@ -53,6 +53,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
                            quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in , full_ext,
                            quality_nodata_out,	file_prefixes , main_out_folder , multiband_bsq, resampling, out_res_sel, ts_format) {
   
+					   
   #	browser()
   modis_folder = out_folder_mod
 	dir.create(modis_folder, recursive = T, showWarnings=FALSE)
@@ -201,10 +202,18 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
                     files_in = file.path(modis_folder, modislist)
                     
 					if (full_ext == 'Resized') { 
-						temp_points =SpatialPoints(coords =matrix(c(bbox[1],bbox[2],bbox[3],bbox[4]), nrow = 2), proj4string = CRS(outproj_str))
-						temp_points = spTransform(temp_points,CRS(MOD_proj_str ))
 						
-						gdalbuildvrt(files_in, outfile_vrt, te = c(bbox[1],bbox[3],bbox[2],bbox[4]),  sd = band) 
+						# convert bbox coordinates from t_srs to modis_srs
+						d_bbox_out <- data.frame(lon=rep(bbox[1:2],2), lat=rep(bbox[3:4],each=2))
+						coordinates(d_bbox_out) <- c("lon", "lat")
+						proj4string(d_bbox_out) <- CRS(outproj_str)
+						d_bbox_mod <- spTransform(d_bbox_out, CRS(MOD_proj_str))
+						bbox_mod <- c(min(d_bbox_mod$lon),max(d_bbox_mod$lon),min(d_bbox_mod$lat),max(d_bbox_mod$lat))
+						# FIXME in this way some problems remain: try using a polygon with tohe output resolution)
+#						temp_points =SpatialPoints(coords =matrix(c(bbox[1],bbox[2],bbox[3],bbox[4]), nrow = 2), proj4string = CRS(outproj_str))
+#						temp_points = spTransform(temp_points,CRS(MOD_proj_str ))
+#						bbox_mod <- c(temp_points@coords)
+						gdalbuildvrt(files_in, outfile_vrt, te = c(bbox_mod[1],bbox_mod[3],bbox_mod[2],bbox_mod[4]),  sd = band) 
 					} else {gdalbuildvrt(files_in, outfile_vrt,  sd = band) }
                     er_mos = gdal_translate(outfile_vrt, outfile)
                     if (is.null(er_mos) == FALSE)  {stop()}   # exit on error
@@ -222,6 +231,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
                   if (file.exists(outrep_file) == F | reprocess != 'No') {
                     
                     # Create the string for gdal and launch the reprojection in a command shell ----
+			
                     
                     if (full_ext == 'Resized') {	# If bounding box was passed, the output reproject file will satisfy the bbox
                       
