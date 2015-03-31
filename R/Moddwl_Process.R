@@ -204,16 +204,13 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
 					if (full_ext == 'Resized') { 
 						
 						# convert bbox coordinates from t_srs to modis_srs
-						d_bbox_out <- data.frame(lon=rep(bbox[1:2],2), lat=rep(bbox[3:4],each=2))
-						coordinates(d_bbox_out) <- c("lon", "lat")
+						N_dens = 1000 # densification ratio of the bounding box
+						d_bbox_out <- data.frame(lon=c(bbox[1]+diff(bbox[1:2])*(0:N_dens)/N_dens, rep(bbox[2],N_dens-1), bbox[1]+diff(bbox[1:2])*(N_dens:0)/N_dens, rep(bbox[1],N_dens-1)),
+								lat=c(rep(bbox[3],N_dens), bbox[3]+diff(bbox[3:4])*(0:N_dens)/N_dens, rep(bbox[4],N_dens-1), bbox[3]+diff(bbox[3:4])*(N_dens:1)/N_dens))
+						d_bbox_out <- SpatialPolygons(list(Polygons(list(Polygon(d_bbox_out)),1)))
 						proj4string(d_bbox_out) <- CRS(outproj_str)
 						d_bbox_mod <- spTransform(d_bbox_out, CRS(MOD_proj_str))
-						bbox_mod <- c(min(d_bbox_mod$lon),max(d_bbox_mod$lon),min(d_bbox_mod$lat),max(d_bbox_mod$lat))
-						# FIXME in this way some problems remain: try using a polygon with tohe output resolution)
-#						temp_points =SpatialPoints(coords =matrix(c(bbox[1],bbox[2],bbox[3],bbox[4]), nrow = 2), proj4string = CRS(outproj_str))
-#						temp_points = spTransform(temp_points,CRS(MOD_proj_str ))
-#						bbox_mod <- c(temp_points@coords)
-						gdalbuildvrt(files_in, outfile_vrt, te = c(bbox_mod[1],bbox_mod[3],bbox_mod[2],bbox_mod[4]),  sd = band) 
+						gdalbuildvrt(files_in, outfile_vrt, te = c(d_bbox_mod@bbox),  sd = band) 
 					} else {gdalbuildvrt(files_in, outfile_vrt,  sd = band) }
                     er_mos = gdal_translate(outfile_vrt, outfile)
                     if (is.null(er_mos) == FALSE)  {stop()}   # exit on error

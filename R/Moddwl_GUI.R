@@ -170,9 +170,9 @@ moddwl_GUI = function (general_opts){
 			y_group <- ggroup(container = tiles_group, horizontal = TRUE)
 			start_y_lab <- glabel(text = '<span weight = "bold" >Vertical Tiles:</span>',markup = T, container = y_group) ; size(start_y_lab) = c(120,20) 
 			start_y_start <- glabel(text = 'Start: ', container = y_group) ; size(start_y_start) = c(35,25) 
-			start_y_wid <- gspinbutton(1,18, text = 'Select', container=y_group, value = general_opts$start_y)
+			start_y_wid <- gspinbutton(0,17, text = 'Select', container=y_group, value = general_opts$start_y)
 			end_y_lab <- glabel(text = 'End: ', container = y_group); size(end_y_lab) = c(35,25) 
-			end_y_wid <- gspinbutton(1,18, text = 'Select', container=y_group, value = general_opts$end_y)
+			end_y_wid <- gspinbutton(0,17, text = 'Select', container=y_group, value = general_opts$end_y)
 			size (start_y_wid) <- c(35,25)   ; size (end_y_wid) <- c(35,25) 
 		}}
 	
