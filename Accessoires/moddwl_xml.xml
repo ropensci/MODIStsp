@@ -1167,7 +1167,7 @@
         <file_prefix_terra>MOD11A1</file_prefix_terra>
         <file_prefix_aqua>MYD11A1</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A1.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a1</www>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.005/</http_aqua><combined>0</combined><tiled>1</tiled><www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
