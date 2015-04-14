@@ -130,7 +130,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
           DOY =strftime( as.Date(date_name,"%Y_%m_%d" ), format = "%j")
           check_files = F
           check_files = moddwl_check_files(out_prod_folder, file_prefix,bandnames,bandsel_orig_choice,yy,DOY,out_format,  indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel)
-         
+
 					if (check_files == F | reprocess == T) {  		# If not all output files are present, start downloading hdfs
             # Create vector of image names corresponding to the selected tiles
             
@@ -352,7 +352,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
       
       if (bandsel[band] == 1) {
         
-        meta_band = bandnames[band]				
+        meta_band = bandnames[band]		
         moddwl_meta_create(out_prod_folder = out_prod_folder, meta_band = meta_band, 
                            file_prefix = file_prefixes, sens_sel, ts_format = ts_format,  nodata_value = nodata_out[band])
         

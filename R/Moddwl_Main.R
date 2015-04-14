@@ -16,11 +16,21 @@ moddwl_main = function() {
 	#  Initialize project
 	#- ------------------------------------------------------------------------------- -#
 	
-	{{# Check if needed packages are present. Install them otherwise
-			pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
-					'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools', 'gdalUtils','XML')
-			pkg_test <- function(x) {if (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE)}}
-			for (pkg in pkg_list) {pkg_test(pkg)}
+	{{# Check sp version
+	sp_version <- packageVersion('sp')
+	sp_minversion <- package_version("1.0.17") # sp version used during the last test (for now used as minimum required version)
+	if (sp_version < sp_minversion) install.packages('sp',dep=TRUE)
+	# Check if needed packages are present. Install them otherwise
+	pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
+			'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools', 'gdalUtils','XML')
+	pkg_test <- function(x) {if (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE); require(x,character.only = TRUE)}}
+	for (pkg in pkg_list) {pkg_test(pkg)}
+	# Check GDAL version
+	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1',getGDALVersionInfo(str = "--version")))
+	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
+	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
+			
+			
 #	options(error = browser)
 			
 			options("guiToolkit"="RGtk2")
@@ -92,8 +102,8 @@ log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 						if (outproj_str =='') {outproj_str = general_opts$MOD_proj_str}
 						
 						if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {general_opts$out_res = prod_opts$native_res}   # get native resolution if out_res empty
-# 					browser()
-							# launch moddwl_process to Download and preprocess the selected images
+
+						# launch moddwl_process to Download and preprocess the selected images
 							{{output = with(general_opts, moddwl_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
 													out_folder = out_folder, out_folder_mod = out_folder_mod, MRTpath = MRTpath,reproj = reproj,reprocess = reprocess,sensor = sensor, https = prod_opts$http,
 													start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,

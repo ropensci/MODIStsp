@@ -184,6 +184,6 @@ moddwl_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel_ori
 			if (file.exists(outder_file) == F) {check = F}
 		}
 	}
-	
+
 	return(check)
 }

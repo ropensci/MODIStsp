@@ -140,8 +140,8 @@
             </index>
             <index>
                 <indexes_bandname>SAVI</indexes_bandname>
-                <indexes_fullname>SAVI (b2-b1)/(b2+b1+0.5)*(1+0.5)</indexes_fullname>
-                <indexes_formula>(b2-b1)/(b2+b1+0.5)*(1+0.5)</indexes_formula>
+                <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                 <indexes_nodata_out>32767</indexes_nodata_out>
             </index>
             <index>
@@ -152,7 +152,7 @@
             </index>
             <index>
                 <indexes_bandname>GNDVI</indexes_bandname>
-                <indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_NIR+b4_Green)</indexes_fullname>
+                <indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
                 <indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
                 <indexes_nodata_out>32767</indexes_nodata_out>
             </index>
@@ -496,7 +496,7 @@
                 <indexes_nodata_out>32767</indexes_nodata_out>
             </index>
             <index>
-                <indexes_bandname>GNDVI</indexes_bandname><indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_NIR+b4_Green)</indexes_fullname><indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
+                <indexes_bandname>GNDVI</indexes_bandname><indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_Red+b4_Green)</indexes_fullname><indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
                 
                 
                 <indexes_nodata_out>32767</indexes_nodata_out>
@@ -574,17 +574,6 @@
                 <quality_source>BQ</quality_source>
                 <quality_bitN>0–1</quality_bitN>
             </quality>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
         </quality_indicators>
     </MOD09CMG>
     <MOD09GA>
@@ -794,7 +783,7 @@
                 <indexes_nodata_out>32767</indexes_nodata_out>
             </index>
             <index>
-                <indexes_bandname>GNDVI</indexes_bandname><indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_NIR+b4_Green)</indexes_fullname><indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
+                <indexes_bandname>GNDVI</indexes_bandname><indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_Red+b4_Green)</indexes_fullname><indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
                 
                 
                 <indexes_nodata_out>32767</indexes_nodata_out>
