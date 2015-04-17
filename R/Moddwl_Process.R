@@ -188,7 +188,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
               for (band in 1:length(bandnames)) {														# Cycle on MODIS Bands
                 
                 bands = numeric(length(bandnames))													# Create vector with length = bands, filled with zeroes
-                er_mos = 1    ; er_rep = 1																	# dummies for error state
+                er_mos = 1    #; er_rep = 1																	# dummies for error state
                 if (bandsel [band] == 1) {					# If band selected, process it
                   svalue(mess_lab) =  (paste('--- Mosaicing ', bandnames[band],' files for date: ',date_name ,' ---'))
                   bands[band]=1																			# IF band selected for processing, put its value to 1
@@ -227,28 +227,14 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
                   if (out_format =='GTiff') {outrep_file = paste(outrep_file, '.tif', sep = '')} else {outrep_file = paste(outrep_file, '.dat', sep = '')} 
                   if (file.exists(outrep_file) == F | reprocess != 'No') {
                     
-                    # Create the string for gdal and launch the reprojection in a command shell ----
-			
-                    
+                    # Launch the reprojection
                     if (full_ext == 'Resized') {	# If bounding box was passed, the output reproject file will satisfy the bbox
-                      
-                      er_rep = 	system(paste('gdalwarp -s_srs "',MOD_proj_str, 	# Launch GDAL to crete the reprojected File
-                                             '" -t_srs "', outproj_str, '" -of ',out_format,' -r near -co compress=lzw',
-                                             '-te',bbox[1],bbox[3],bbox[2],bbox[4], '-tr ',out_res, out_res, '-r', resampling,
-                                             '-wo "INIT_DEST=NO_DATA"', '-wt ', datatype[band],'-srcnodata ', nodata_in[band],'-dstnodata ', nodata_out[band], '-overwrite',
-                                             outfile,  outrep_file, #'-overwrite',outfile,  outrep_file,
-                                             sep = ' '), show.output.on.console = F)
+						gdalwarp(outfile, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox[c(1,3,2,4)], tr=rep(out_res,2),
+								wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)
                     } else {						# If bounding box was not passed, keep the original extent when creating the File
-                      er_rep = 	system(paste('gdalwarp -s_srs "',MOD_proj_str,
-                                             '" -t_srs "', outproj_str,'" -of ',out_format,' -r near -co compress=lzw',
-                                             '-tr ',out_res,out_res, '-r', resampling,
-                                             '-wo "INIT_DEST=NO_DATA"','-wt ', datatype[band],'-srcnodata ', nodata_in[band],'-dstnodata ',nodata_out[band],
-                                             '-overwrite', outfile,  outrep_file, #'-overwrite',outfile,  outrep_file,
-                                             sep = ' '), show.output.on.console = F)
-                      
-                     }  
-                    
-                    if (er_rep != 0)  {stop()}
+						gdalwarp(outfile, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, tr=rep(out_res,2),
+								wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)                    
+					}  
                   }  # End if on file existence
                   gc()
                   unlink(outfile)																			# Delete un-reprojected Mosaic HDF file
