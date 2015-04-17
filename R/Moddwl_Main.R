@@ -10,7 +10,10 @@
 #'
 #' @license GPL(>2)
 #' @export
-moddwl_main = function() {
+moddwl_main = function(settings=NULL) {
+	# settings (optional): full path of the RData file with the settings;
+	# if specified, the script use it to initialize; otherwise it open the GUI to set parameters.
+	# Use the GUI to create new setting files.
 	
 	#- ------------------------------------------------------------------------------- -#
 	#  Initialize project
@@ -23,7 +26,7 @@ moddwl_main = function() {
 	# Check if needed packages are present. Install them otherwise
 	pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
 			'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools', 'gdalUtils','XML')
-	pkg_test <- function(x) {if (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE); require(x,character.only = TRUE)}}
+	pkg_test <- function(x) {while (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE)}}
 	for (pkg in pkg_list) {pkg_test(pkg)}
 	# Check GDAL version
 	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1',getGDALVersionInfo(str = "--version")))
@@ -43,9 +46,11 @@ moddwl_main = function() {
    src_dir = dirname(rscript.current())
 			
 #			src_dir = "D:/Documents/Source_Code/R/LB_MOD_DWL/R"
-			setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ;   previous_dir = file.path(main_dir,'Previous')   ; log_dir =  file.path(main_dir,'Log')
+			setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ; log_dir =  file.path(main_dir,'Log')   
+			previous_dir = if (is.null(settings)) {file.path(main_dir,'Previous')} else {dirname(previous)}  
 			dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
-			previous_file= file.path(previous_dir, 'Moddwl_Previous.RData') ; xml_file= file.path(main_dir,'Accessoires','Moddwl_XML.xml')
+			previous_file = if (is.null(settings)) {file.path(previous_dir, 'Moddwl_Previous.RData')} else {settings}  # TODO fix to accept relative paths
+			xml_file= file.path(main_dir,'Accessoires','Moddwl_XML.xml')
 
 log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 			#   IDL_Dir = file.path(main_dir,'IDL-FRG')
@@ -65,7 +70,7 @@ log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 #- ------------------------------------------------------------------------------- -#
 #  Set general processing options
 #- ------------------------------------------------------------------------------- -#
-	{ MRTpath='D:/MRT/bin'
+	{ MRTpath='D:/MRT/bin'  # TODO automatically retrieve it (or do a option script to set it and save somewhere)
 		out_proj_names = c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
 		out_proj_list = hash("Sinusoidal" = "",
 				"UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
@@ -81,7 +86,7 @@ log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 				reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
 	}	
 	#launch the GUI ----
-	GUI = moddwl_GUI(general_opts)
+	if (is.null(settings)) {GUI = moddwl_GUI(general_opts)} else {Quit=FALSE}
 	print(Quit)
 	start.time <- Sys.time()
 	# If not Quit selected, restore the user selected options and launch the processing ----
@@ -132,6 +137,6 @@ log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 		print(time.taken)
 	}
 
-output = moddwl_main()
+#output = moddwl_main()
 
 
