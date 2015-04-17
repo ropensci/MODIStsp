@@ -47,7 +47,7 @@ moddwl_main = function(settings=NULL) {
 			
 #			src_dir = "D:/Documents/Source_Code/R/LB_MOD_DWL/R"
 			setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ; log_dir =  file.path(main_dir,'Log')   
-			previous_dir = if (is.null(settings)) {file.path(main_dir,'Previous')} else {dirname(previous)}  
+			previous_dir = if (is.null(settings)) {file.path(main_dir,'Previous')} else {dirname(settings)}  
 			dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 			previous_file = if (is.null(settings)) {file.path(previous_dir, 'Moddwl_Previous.RData')} else {settings}  # TODO fix to accept relative paths
 			xml_file= file.path(main_dir,'Accessoires','Moddwl_XML.xml')
@@ -86,7 +86,7 @@ log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 				reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
 	}	
 	#launch the GUI ----
-	if (is.null(settings)) {GUI = moddwl_GUI(general_opts)} else {Quit=FALSE}
+	if (is.null(settings)) {GUI = moddwl_GUI(general_opts)} else {Quit<<-FALSE}
 	print(Quit)
 	start.time <- Sys.time()
 	# If not Quit selected, restore the user selected options and launch the processing ----
