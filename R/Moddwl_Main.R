@@ -10,10 +10,9 @@
 #'
 #' @license GPL(>2)
 #' @export
-moddwl_main = function(settings=NULL) {
-	# settings (optional): full path of the RData file with the settings;
-	# if specified, the script use it to initialize; otherwise it open the GUI to set parameters.
-	# Use the GUI to create new setting files.
+moddwl_main = function(gui=TRUE, settings=NULL) {
+	# gui: logical parameters (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed).
+	# settings (optional): full path of the RData file with the settings (default: Previous.RData in subdir Previous);
 	
 	#- ------------------------------------------------------------------------------- -#
 	#  Initialize project
@@ -32,29 +31,36 @@ moddwl_main = function(settings=NULL) {
 	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1',getGDALVersionInfo(str = "--version")))
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
+					
+	options("guiToolkit"="RGtk2")
+	memory.limit(6000)							# Increase maximum allocsable memory
+	rasterOptions(setfileext = F)
+	# Folder Initialization -----
 			
-			
-#	options(error = browser)
-			
-			options("guiToolkit"="RGtk2")
-			memory.limit(6000)							# Increase maximum allocsable memory
-			rasterOptions(setfileext = F)
-			# Folder Initialization -----
-			
-   rscript.stack <- function() {Filter(Negate(is.null), lapply(sys.frames(), function(x) x$ofile))}    			#	Returns the stack of RScript files
-   rscript.current <- function() {	stack <- rscript.stack()   ;	  as.character(stack[length(stack)])}		## Returns the current RScript file path
-   src_dir = dirname(rscript.current())
-			
-#			src_dir = "D:/Documents/Source_Code/R/LB_MOD_DWL/R"
-			setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ; log_dir =  file.path(main_dir,'Log')   
-			previous_dir = if (is.null(settings)) {file.path(main_dir,'Previous')} else {dirname(settings)}  
-			dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
-			previous_file = if (is.null(settings)) {file.path(previous_dir, 'Moddwl_Previous.RData')} else {settings}  # TODO fix to accept relative paths
-			xml_file= file.path(main_dir,'Accessoires','Moddwl_XML.xml')
+	## Retrieve parameters passed by batch launcher
+	# If the script has been launched from R, "gui" and "settings" are passed from a global var, and src_dir is computed as below;
+	# if it is launched from a bat script, they are saved as "args" list by an intermediate "RscriptEcho.R" script.
+	if (exists("Args")) {
+		src_dir = Args[1]
+		if (length(Args)==2) gui = as.logical(Args[2])
+		if (length(Args)==3) settings = Args[3]
+	} else {
+		rscript.stack <- function() {Filter(Negate(is.null), lapply(sys.frames(), function(x) x$ofile))}    			#	Returns the stack of RScript files
+		rscript.current <- function() {	stack <- rscript.stack()   ;	  as.character(stack[length(stack)])}		## Returns the current RScript file path
+		src_dir = dirname(rscript.current())
+#		src_dir <- dirname(sys.frame(1)$ofile)                    # Directory where script files are
+	}
 
-log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
+	#	src_dir = "D:/Documents/Source_Code/R/LB_MOD_DWL/R"
+	setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ; log_dir =  file.path(main_dir,'Log')   
+	previous_dir = if (is.null(settings)) {file.path(main_dir,'Previous')} else {dirname(settings)}  
+	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
+	previous_file = if (is.null(settings)) {file.path(previous_dir, 'Moddwl_Previous.RData')} else {settings}  # TODO fix to accept relative paths
+	xml_file= file.path(main_dir,'Accessoires','Moddwl_XML.xml')
+	
+ log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 			#   IDL_Dir = file.path(main_dir,'IDL-FRG')
-			
+
 			# Sourcing of needed R scripts (Remove when building package !!!!)-----
 			source(file.path(src_dir,'moddwl_accessoires.R'))
 			source(file.path(src_dir,'moddwl_process.R'))
@@ -86,11 +92,11 @@ log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 				reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
 	}	
 	#launch the GUI ----
-	if (is.null(settings)) {GUI = moddwl_GUI(general_opts)} else {Quit<<-FALSE}
+	if (gui) {GUI = moddwl_GUI(general_opts)} else {Quit<<-FALSE}
 	print(Quit)
 	start.time <- Sys.time()
 	# If not Quit selected, restore the user selected options and launch the processing ----
-	{{if (Quit == F) {
+	{{if (!Quit) {
 				{{
 						if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)} else {print('Download Options file not found ! Exiting !'); stop()}
 						
@@ -137,6 +143,6 @@ log_file = file.path(log_dir,paste(Sys.Date(),'log.txt', sep='_'))
 		print(time.taken)
 	}
 
-#output = moddwl_main()
+output = moddwl_main()
 
 
