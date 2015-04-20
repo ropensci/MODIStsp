@@ -42,8 +42,8 @@ moddwl_main = function(gui=TRUE, settings=NULL) {
 	# if it is launched from a bat script, they are saved as "args" list by an intermediate "RscriptEcho.R" script.
 	if (exists("Args")) {
 		src_dir = Args[1]
-		if (length(Args)==2) gui = as.logical(Args[2])
-		if (length(Args)==3) settings = Args[3]
+		if (length(Args)>=2) gui = as.logical(Args[2])
+		if (length(Args)>=3) settings = Args[3]
 	} else {
 		rscript.stack <- function() {Filter(Negate(is.null), lapply(sys.frames(), function(x) x$ofile))}    			#	Returns the stack of RScript files
 		rscript.current <- function() {	stack <- rscript.stack()   ;	  as.character(stack[length(stack)])}		## Returns the current RScript file path
