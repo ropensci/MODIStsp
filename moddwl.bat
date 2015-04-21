@@ -4,3 +4,6 @@ Rscript "%~dp0\Accessoires\RscriptEcho.R" "%~dp0\R\Moddwl_Main.R" "%~dp0\Log" %~
 :: 1) a logical to start /not to start the gui;
 :: 2) the path of the RData with the settings
 :: (see Moddwl_Main.R for further details)
+
+:: example of launcher:
+:: C:\Users\ermes\Documents\R\workspace\LB_MOD_DWL\moddwl.bat FALSE C:\Users\ermes\Documents\R\workspace\WARM_synced_updates\Mod_dwl_settings\reg_it_opts.RData
