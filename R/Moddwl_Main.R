@@ -10,6 +10,9 @@
 #'
 #' @license GPL(>2)
 #' @export
+
+run=FALSE # set to TRUE to run directly the function from here
+
 moddwl_main = function(gui=TRUE, settings=NULL) {
 	# gui: logical parameters (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed).
 	# settings (optional): full path of the RData file with the settings (default: Previous.RData in subdir Previous);
@@ -144,6 +147,6 @@ moddwl_main = function(gui=TRUE, settings=NULL) {
 		print(time.taken)
 	}
 
-output = moddwl_main()
+if (run | exists("Args")) {output = moddwl_main()} # run the function if run has been set to TRUE or if the function has been called from moddwl.bat
 
 
