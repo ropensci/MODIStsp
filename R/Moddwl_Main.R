@@ -28,6 +28,7 @@ moddwl_main = function(gui=TRUE, settings=NULL) {
 	pkg_test <- function(x) {while (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE)}}
 	for (pkg in pkg_list) {pkg_test(pkg)}
 	# Check GDAL version
+	if (is.null(getOption('gdalUtils_gdalPath'))) {gdal_setInstallation(ignore.full_scan=FALSE)}
 	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1',getGDALVersionInfo(str = "--version")))
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
