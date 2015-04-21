@@ -131,7 +131,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
           check_files = F
           check_files = moddwl_check_files(out_prod_folder, file_prefix,bandnames,bandsel_orig_choice,yy,DOY,out_format,  indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel)
 
-					if (check_files == F | reprocess == T) {  		# If not all output files are present, start downloading hdfs
+					if (check_files == F | reprocess == 'Yes') {  		# If not all output files are present, start downloading hdfs
             # Create vector of image names corresponding to the selected tiles
             
             # Create vector of image names corresponding to the selected tiles
@@ -194,10 +194,15 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
                   bands[band]=1																			# IF band selected for processing, put its value to 1
                   dir.create(file.path(out_prod_folder, bandnames[band]), showWarnings = F, recursive = T)
                   bands = paste(as.character(bands), collapse = '', sep = ' ')					# Convert to character
-                  outfile = paste(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'.tif', sep = '')  	# Create name for the HDF mosaic
+				  outfile = paste(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'.tif', sep = '')  	# Create name for the HDF mosaic
+				  # NOTE: Chanfe outrep_file to a list of rep files: only one for original bands, multiple for indexes and quality
+				  outrep_file = file.path(out_prod_folder, bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))	# Create name for the TIFF reprojected  mosaic
+				  if (out_format =='GTiff') {outrep_file = paste(outrep_file, '.tif', sep = '')} else {outrep_file = paste(outrep_file, '.dat', sep = '')} 
+				  
+				  
                   outfile_vrt = paste(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'vrt.tif', sep = '')    # Create name for the HDF mosaic
                   # Launch MRT to mosaic
-                  if (file.exists(outfile) == F | reprocess == T) {
+                  if (file.exists(outrep_file) == F | reprocess == 'Yes') {
 #                     er_mos <- system(paste(MRTpath, '/mrtmosaic -i ',file.path(out_prod_folder,'Temp', 'TmpMosaic.prm') ,' -o ', outfile,' -s ',bands, sep=""), show.output.on.console = F)	# Launche MRT to create the mosaic
                     files_in = file.path(modis_folder, modislist)
                     
@@ -215,17 +220,13 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
                     er_mos = gdal_translate(outfile_vrt, outfile)
                     if (is.null(er_mos) == FALSE)  {stop()}   # exit on error
                     
-                  }
+                 
                   # ---------------------------------- ----------------------------------------------#
                   # Convert to output projection, extent and format using gdalwarp ----
                   # ---------------------------------- ----------------------------------------------#
                   
                   print (paste('Reprojecting ', bandnames[band],'files for date: ',date_name ))
                   svalue(mess_lab) =  (paste('--- Reprojecting ', bandnames[band],'files for date: ',date_name,' ---'))
-                  outrep_file = file.path(out_prod_folder, bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))	# Create name for the TIFF reprojected  mosaic
-#                  browser()
-                  if (out_format =='GTiff') {outrep_file = paste(outrep_file, '.tif', sep = '')} else {outrep_file = paste(outrep_file, '.dat', sep = '')} 
-                  if (file.exists(outrep_file) == F | reprocess != 'No') {
                     
                     # Launch the reprojection
                     if (full_ext == 'Resized') {	# If bounding box was passed, the output reproject file will satisfy the bbox
@@ -235,13 +236,12 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
 						gdalwarp(outfile, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, tr=rep(out_res,2),
 								wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)                    
 					}  
-                  }  # End if on file existence
                   gc()
                   unlink(outfile)																			# Delete un-reprojected Mosaic HDF file
                   unlink(outfile_vrt)  				
                   xml_file = paste(outrep_file,'.aux.xml',sep = '')		# Delete xml files created by gdalwarp
                   unlink(xml_file)
-                  
+				  }   
                 }  # ENDIF band selected for processing
               }	# END Cycle on available MODIS Bands
 #               file.remove(file.path(out_prod_folder,'Temp', 'TmpMosaic.prm'))
