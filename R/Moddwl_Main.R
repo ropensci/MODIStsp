@@ -41,7 +41,7 @@ moddwl_main = function(gui=TRUE, settings=NULL) {
 	# If the script has been launched from R, "gui" and "settings" are passed from a global var, and src_dir is computed as below;
 	# if it is launched from a bat script, they are saved as "args" list by an intermediate "RscriptEcho.R" script.
 	if (exists("Args")) {
-		src_dir = Args[1]
+		src_dir = file.path(Args[1],'R')
 		if (length(Args)>=2) gui = as.logical(Args[2])
 		if (length(Args)>=3) settings = Args[3]
 	} else {
