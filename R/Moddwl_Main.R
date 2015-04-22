@@ -11,7 +11,7 @@
 #' @license GPL(>2)
 #' @export
 
-run=FALSE # set to TRUE to run directly the function from here
+run=TRUE # set to TRUE to run directly the function from here
 
 moddwl_main = function(gui=TRUE, settings=NULL) {
 	# gui: logical parameters (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed).

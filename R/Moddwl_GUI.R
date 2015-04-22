@@ -291,7 +291,6 @@ moddwl_GUI = function (general_opts){
 #							
 #						
 #												
-	##						browser()
 #						load(svalue(outprev_wid))
 #						svalue(prod_wid) <- general_opts$sel_prod
 	##						general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
@@ -365,7 +364,7 @@ moddwl_GUI = function (general_opts){
 			{{start_but <- gbutton(text = 'Start', container = but_group, handler = function (h,....) {# If "Start" pressed, retrieve selected values and save in previous file
 								general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
 								general_opts$sensor <- svalue(sens_wid)
-#								browser()
+
 								if (exists ('temp_wid_bands')) {
 									prod_opt_list[[general_opts$sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
 									
@@ -511,7 +510,7 @@ moddwl_GUI = function (general_opts){
 			{{save_but <- gbutton(text = 'Save Options', container = but_group, handler = function (h,....) {
 								
 								choice<-gfile(type="save", text="Select file for saving processing options...", initialfilename = general_opts$previous_file)		# File selection widget
-#								browser()
+
 								if(!is.na(choice)){
 									
 #											svalue(outprev_wid)<-choice						## On new selection, set value of the label widget
