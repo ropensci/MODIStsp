@@ -117,7 +117,6 @@ moddwl_main = function(gui=TRUE, settings=NULL) {
 						if (outproj_str =='') {outproj_str = general_opts$MOD_proj_str}
 						
 						if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {general_opts$out_res = prod_opts$native_res}   # get native resolution if out_res empty
-
 						# launch moddwl_process to Download and preprocess the selected images
 							{{output = with(general_opts, moddwl_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
 													out_folder = out_folder, out_folder_mod = out_folder_mod, MRTpath = MRTpath,reproj = reproj,reprocess = reprocess,sensor = sensor, https = prod_opts$http,

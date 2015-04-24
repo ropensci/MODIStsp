@@ -76,7 +76,6 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
     #  if not, select them and set the "delete" option for them to 1 
     #- ------------------------------------------------------------------------------- -#
     
-	delbands = rep(0, length(bandnames))    # dummy array set to 0 - will contain info on wether orignal downloaded bands has to be deleted
 	bands_indexes = matrix(0, nrow=length(bandsel), ncol=length(indexes_bandsel)+length(quality_bandsel),
 			dimnames=list(bandnames,c(indexes_bandnames,quality_bandnames)))
 		# dummy matrix which associate, to each couple of index or quality band (col) - original band (row),
@@ -199,7 +198,7 @@ moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder
 # at the end of this step, "bandsel" is recreated as the union of the bands selected by the user and the bands required by indexes and quality bands,
 # but only those ones which are not already present.
 
-req_bands_indexes <- bands_indexes; for (i in 1:length(req_bands_indexes)) {req_bands_indexes[1]<-0}
+req_bands_indexes <- bands_indexes; for (i in 1:length(req_bands_indexes)) {req_bands_indexes[i]<-0}
 # matrix similar to band_indexes, but specific for this year-doy process 
 if (length(which(indexes_bandsel==1) >= 1)) {
 	for (band in seq(along = indexes_bandsel)) {
@@ -208,7 +207,7 @@ if (length(which(indexes_bandsel==1) >= 1)) {
 			out_filename = file.path(out_prod_folder,indexes_band,paste(file_prefix,'_',indexes_band,'_',yy,'_', DOY, sep = ''))
 			if (out_format =='GTiff') {out_filename = paste(out_filename, '.tif', sep = '')} else {out_filename = paste(out_filename, '.dat', sep = '')}
 			if (file.exists(out_filename) == F | reprocess == T) {
-				req_bands_indexes[band,] <- bands_indexes[band,] # if the index does not exists then consider the original bands required for it
+				req_bands_indexes[,band] <- bands_indexes[,band] # if the index does not exists then consider the original bands required for it
 			}
 		}
 	}
@@ -221,7 +220,7 @@ if (length(which(quality_bandsel==1) >= 1)) {
 			out_filename = file.path(out_prod_folder,quality_band,paste(file_prefix,'_',quality_band,'_',yy,'_', DOY, sep = ''))
 			if (out_format =='GTiff') {out_filename = paste(out_filename, '.tif', sep = '')} else {out_filename = paste(out_filename, '.dat', sep = '')}
 			if (file.exists(out_filename) == F | reprocess == T) {
-				req_bands_indexes[band+length(indexes_bandsel),] <- bands_indexes[band+length(indexes_bandsel),] # if the index does not exists then consider the original bands required for it
+				req_bands_indexes[,band+length(indexes_bandsel)] <- bands_indexes[,band+length(indexes_bandsel)] # if the index does not exists then consider the original bands required for it
 			}
 		}
 	}
@@ -229,6 +228,7 @@ if (length(which(quality_bandsel==1) >= 1)) {
 
 # Create the vector of bands required for processing (bands chosen by the user + bands required for indexes and quality bands)
 bandsel <- as.integer(as.logical(bandsel_orig_choice + apply(req_bands_indexes,1,sum)))
+delbands = bandsel - bandsel_orig_choice    # dummy array set to 0 - will contain info on wether orignal downloaded bands has to be deleted
 
 # -----------------------------------
 # STEP 2: process the required images

@@ -22,7 +22,6 @@ n_products = xmlSize(xmltop) #how many children in node, 19
 prodnames = NULL
 for (prod in 1:n_products)
 {
-#	browser()
 	prodopts = list()
 #	prodopts$product=xmlName(xmltop[[prod]])
 	prodopts$product=xmlToList(xmltop[[prod]][["name"]])
