@@ -59,6 +59,7 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 
 	setwd(main_dir);   main_dir = getwd()   ; log_dir =  file.path(main_dir,'Log')   
 	previous_dir = if (is.null(settings)) {file.path(main_dir,'Previous')} else {dirname(settings)}  
+	
 	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 	previous_file = if (is.null(settings)) {file.path(previous_dir, 'Moddwl_Previous.RData')} else {settings}  # TODO fix to accept relative paths
 	xml_file= file.path(main_dir,'Accessoires','Moddwl_XML.xml')

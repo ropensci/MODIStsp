@@ -4,7 +4,7 @@ Args <- commandArgs(TRUE)
 moddwl_dir = Args[1] # main directory of the tool
 outFile <- file.path(moddwl_dir,'Log',paste0(make.names(date()),".Rout")) # directory to store the outputs
 if (length(Args)>=2) gui = as.logical(Args[2])
-if (length(Args)>=3) settings = Args[3]
+if (length(Args)>=3) settings = Args[3] else settings = NULL
 
 source(file.path(moddwl_dir,'R/Moddwl_Main.R'), echo = TRUE)
 sink(outFile, split = TRUE)
