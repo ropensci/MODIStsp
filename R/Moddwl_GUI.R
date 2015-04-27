@@ -433,7 +433,7 @@ moddwl_GUI = function (general_opts){
 								if (general_opts$out_folder_mod == ''){gmessage('Please Select an output folder for storing original HDFs!', title = 'Warning') ; check <- F}
 								
 								if (check == T) {					# If check passed, save previous file and return
-									dir.create(file.path(getwd(),'Previous'))
+									dir.create(file.path(getwd(),'Previous'),showWarnings=FALSE)
 									
 									save(general_opts,prod_opt_list,mod_prod_list, file = general_opts$previous_file)
 									assign("Quit", F, envir=globalenv())

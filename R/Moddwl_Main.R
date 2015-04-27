@@ -11,11 +11,15 @@
 #' @license GPL(>2)
 #' @export
 
-run=FALSE # set to TRUE to run directly the function from here
+run=FALSE # workaround usable to TRUE to run directly the function from here
+	# (It would be better to launch from ../moddwl.R, in order not to edit this)
+	# IMPORTANT: retrieve to FALSE after using it!
 
-moddwl_main = function(gui=TRUE, settings=NULL) {
+moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 	# gui: logical parameters (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed).
 	# settings (optional): full path of the RData file with the settings (default: Previous.RData in subdir Previous);
+	# moddwl_dir: main directory of the local installation of the tool
+	#   (if not gived, it is automatically retrieved, but this works only if the function is launched from here!)
 	
 	#- ------------------------------------------------------------------------------- -#
 	#  Initialize project
@@ -44,19 +48,16 @@ moddwl_main = function(gui=TRUE, settings=NULL) {
 	## Retrieve parameters passed by batch launcher
 	# If the script has been launched from R, "gui" and "settings" are passed from a global var, and src_dir is computed as below;
 	# if it is launched from a bat script, they are saved as "args" list by an intermediate "RscriptEcho.R" script.
-	if (exists("Args")) {
-		src_dir = file.path(Args[1],'R')
-		if (length(Args)>=2) gui = as.logical(Args[2])
-		if (length(Args)>=3) settings = Args[3]
-	} else {
+	if (is.na(moddwl_dir)) {
 		rscript.stack <- function() {Filter(Negate(is.null), lapply(sys.frames(), function(x) x$ofile))}    			#	Returns the stack of RScript files
 		rscript.current <- function() {	stack <- rscript.stack()   ;	  as.character(stack[length(stack)])}		## Returns the current RScript file path
 		src_dir = dirname(rscript.current())
-#		src_dir <- dirname(sys.frame(1)$ofile)                    # Directory where script files are
+		main_dir = dirname(src_dir)
+	} else {
+		main_dir = moddwl_dir; src_dir = file.path(main_dir,'R')
 	}
 
-	#	src_dir = "D:/Documents/Source_Code/R/LB_MOD_DWL/R"
-	setwd(file.path(src_dir,'..'))       ;   main_dir = getwd()   ; log_dir =  file.path(main_dir,'Log')   
+	setwd(main_dir);   main_dir = getwd()   ; log_dir =  file.path(main_dir,'Log')   
 	previous_dir = if (is.null(settings)) {file.path(main_dir,'Previous')} else {dirname(settings)}  
 	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 	previous_file = if (is.null(settings)) {file.path(previous_dir, 'Moddwl_Previous.RData')} else {settings}  # TODO fix to accept relative paths
@@ -146,6 +147,4 @@ moddwl_main = function(gui=TRUE, settings=NULL) {
 		print(time.taken)
 	}
 
-if (run | exists("Args")) {output = moddwl_main()} # run the function if run has been set to TRUE or if the function has been called from moddwl.bat
-
-
+if (run) {output = moddwl_main()} # run the function if run has been set to TRUE
