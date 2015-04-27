@@ -1,4 +1,4 @@
-PATH "C:\Progra~1\R\R-3.0.3\bin\x64\";%path%
+PATH "C:\Program Files\R\R-3.1.3\bin\x64\";%path%
 Rscript "%~dp0\Accessoires\RscriptEcho.R" %~dp0 %1 %2
 :: This batch should be run with two arguments:
 :: 1) a logical to start /not to start the gui;
