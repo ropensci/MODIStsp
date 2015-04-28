@@ -445,7 +445,7 @@ moddwl_GUI = function (general_opts){
 				}}
 			{{save_but <- gbutton(text = 'Save Options', container = but_group, handler = function (h,....) {
 								
-								choice<-gfile(type="save", text="Select file for saving processing options...", initialfilename = general_opts$previous_file)		# File selection widget
+								choice<-gfile(type="save", text="Select file for saving processing options...")		# File selection widget
 
 								if(!is.na(choice)){
 									
@@ -460,17 +460,17 @@ moddwl_GUI = function (general_opts){
 									
 									if (exists ('temp_wid_bands')) {
 										prod_opt_list[[sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
-										rm(temp_wid_bands, envir = globalenv())
+										#rm(temp_wid_bands, envir = globalenv())
 									}
 									
 									if (exists ('temp_wid_bands_indexes')) {
 										prod_opt_list[[sel_prod]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
-										rm(temp_wid_bands_indexes, envir = globalenv())
+										#rm(temp_wid_bands_indexes, envir = globalenv())
 									}
 									
 									if (exists ('temp_wid_bands_quality')) {
 										prod_opt_list[[sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
-										rm(temp_wid_bands_quality, envir = globalenv())
+										#rm(temp_wid_bands_quality, envir = globalenv())
 									}
 
 									general_opts$start_day <- svalue(start_day_wid)		# Dates options
@@ -517,7 +517,6 @@ moddwl_GUI = function (general_opts){
 									if (general_opts$out_folder == ''){gmessage('Please Select an output folder !', title = 'Warning') ; check <- F}
 									
 									if (check == T) {					# If check passed, save previous file and return
-										
 										dir.create(file.path(getwd(),'Previous'))
 										save(general_opts,prod_opt_list,mod_prod_list, file = choice)
 									}
