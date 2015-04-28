@@ -82,21 +82,23 @@ moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefixes,sens_se
 		writeLines(c('wavelength units = DOY'), fileConn_meta_hdr)		# Dummy
 		writeLines(c('wavelength = {', paste(as.numeric(elapsed),collapse=","),'}'), fileConn_meta_hdr)		# Wavelengths
 		close(fileConn_meta_hdr)
-		
-		if (ts_format == 'R Stack Files' | ts_format == 'Both') {
-			
-			meta_dir = file.path(out_prod_folder,'Time_Series','R_Stack')
+		}
+		if (ts_format == 'GDAL vrt Files' | ts_format == 'Both') {
+			browser()
+			meta_dir = file.path(out_prod_folder,'Time_Series','GDAL_vrt')
 			dir.create(meta_dir, showWarnings = F,recursive = T)
+			
    		doy_min = min(doys[which(years == min(years))])		; year_min = min(years)
 			doy_max = max(doys[which(years == max(years))])		; year_max = max(years)
 			dates = as.POSIXct(paste(format(strptime(doys, format="%j"), format="%m-%d"),years, sep = '-'),format='%m-%d-%Y')
-			meta_filename = file.path(meta_dir,paste(file_prefix,meta_band,doy_min,year_min,doy_max,year_max,"Stack.RData", sep = '_'))
-			raster = stack(out_meta_files)
-			attributes(raster)$doys	 = doys
-			attributes(raster)$years = years
-			attributes(raster)$dates = dates
-			save(raster, file = meta_filename)
+			meta_filename = file.path(meta_dir,paste(file_prefix,meta_band,doy_min,year_min,doy_max,year_max,"GDAL_vrt.vrt", sep = '_'))
+			gdalbuildvrt(out_meta_files,meta_filename, separate = T, srcnodata = nodata_value, vrtnodata = nodata_value)
+#			raster = raster(meta_filename)
+#			attributes(raster)$doys	 = doys
+#			attributes(raster)$years = years
+#			attributes(raster)$dates = dates
+#			save(raster, file = meta_filename)
 			
 		} # end If on necessity to build R Stack files
-	}
+	
 }
