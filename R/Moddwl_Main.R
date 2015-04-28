@@ -25,12 +25,8 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 	#  Initialize project
 	#- ------------------------------------------------------------------------------- -#
 	
-	{{# Check sp version
-	sp_version <- packageVersion('sp')
-	sp_minversion <- package_version("1.0.17") # sp version used during the last test (for now used as minimum required version)
-	if (sp_version < sp_minversion) install.packages('sp',dep=TRUE)
-	# Check if needed packages are present. Install them otherwise
-	pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
+	{{# Check if needed packages are present. Install them otherwise
+	pkg_list = c('sp','gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
 			'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools', 'gdalUtils','XML')
 	pkg_test <- function(x) {while (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE)}}
 	for (pkg in pkg_list) {pkg_test(pkg)}
@@ -39,7 +35,11 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1',getGDALVersionInfo(str = "--version")))
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
-					
+	# Check sp version
+	sp_version <- packageVersion('sp')
+	sp_minversion <- package_version("1.0.17") # sp version used during the last test (for now used as minimum required version)
+	if (sp_version < sp_minversion) install.packages('sp',dep=TRUE)
+	
 	options("guiToolkit"="RGtk2")
 	memory.limit(6000)							# Increase maximum allocsable memory
 	rasterOptions(setfileext = F)
@@ -95,7 +95,7 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 				sel_prod = 'Surf_Ref_8Days_500m (MOD09A1)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
 				start_x = 18, end_x =18, start_y = 4, end_y = 4, 
 				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', 
-				reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
+				delete_hdf = 'No',reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
 	}	
 	#launch the GUI ----
 	if (gui) {GUI = moddwl_GUI(general_opts)} else {Quit<<-FALSE}
@@ -121,7 +121,8 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 						if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {general_opts$out_res = prod_opts$native_res}   # get native resolution if out_res empty
 						# launch moddwl_process to Download and preprocess the selected images
 							{{output = with(general_opts, moddwl_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
-													out_folder = out_folder, out_folder_mod = out_folder_mod, MRTpath = MRTpath,reproj = reproj,reprocess = reprocess,sensor = sensor, https = prod_opts$http,
+													out_folder = out_folder, out_folder_mod = out_folder_mod, MRTpath = MRTpath,reproj = reproj,reprocess = reprocess,
+													delete_hdf = delete_hdf, sensor = sensor, https = prod_opts$http,
 													start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
 													full_ext = full_ext, bbox = bbox,out_format = out_format, out_res = as.numeric(out_res), native_res = prod_opts$native_res,
 													resampling = resampling, ts_format = ts_format, 
