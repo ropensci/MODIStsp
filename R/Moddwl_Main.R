@@ -123,7 +123,7 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 							{{output = with(general_opts, moddwl_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
 													out_folder = out_folder, out_folder_mod = out_folder_mod, MRTpath = MRTpath,reproj = reproj,reprocess = reprocess,sensor = sensor, https = prod_opts$http,
 													start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
-													full_ext = full_ext, bbox = bbox,out_format = out_format, out_res_sel = out_res_sel, out_res = as.numeric(out_res),
+													full_ext = full_ext, bbox = bbox,out_format = out_format, out_res = as.numeric(out_res), native_res = prod_opts$native_res,
 													resampling = resampling, ts_format = ts_format, 
 													MOD_proj_str = MOD_proj_str,outproj_str = outproj_str,
 													nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out,

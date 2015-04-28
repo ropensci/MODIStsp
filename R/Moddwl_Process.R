@@ -47,11 +47,11 @@
 #'
 #' @license GPL(>2)
 #' @export
-moddwl_process <- function(sel_prod, start_date,end_date ,out_folder, out_folder_mod, MRTpath ,reproj , reprocess , sensor, https ,
-                           start_x , start_y ,	end_x , end_y ,   bbox , out_format, out_res, MOD_proj_str , outproj_str, nodata_in , nodata_out, datatype, 
-                           bandsel , bandnames , reflbands, reflorder, indexes_bandsel,  indexes_bandnames, indexes_formula, indexes_nodata_out, 
-                           quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in , full_ext,
-                           quality_nodata_out,	file_prefixes , main_out_folder , multiband_bsq, resampling, out_res_sel, ts_format) {
+moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, MRTpath, reproj, reprocess, sensor, https,
+                           start_x, start_y, end_x, end_y, bbox, out_format, out_res, native_res, MOD_proj_str, outproj_str, nodata_in, nodata_out, datatype, 
+                           bandsel, bandnames, reflbands, reflorder, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out, 
+                           quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in, full_ext,
+                           quality_nodata_out, file_prefixes, main_out_folder, multiband_bsq, resampling, ts_format) {
   			   
   modis_folder = out_folder_mod
 	dir.create(modis_folder, recursive = T, showWarnings=FALSE)
@@ -268,8 +268,8 @@ for (band in 1:length(bandnames)) {														# Cycle on MODIS Bands
 				d_bbox_out <- SpatialPolygons(list(Polygons(list(Polygon(d_bbox_out)),1)))
 				proj4string(d_bbox_out) <- CRS(outproj_str)
 				d_bbox_mod <- spTransform(d_bbox_out, CRS(MOD_proj_str))
-				gdalbuildvrt(files_in, outfile_vrt, te = c(d_bbox_mod@bbox),  sd = band) 
-			} else {gdalbuildvrt(files_in, outfile_vrt,  sd = band) }
+				gdalbuildvrt(files_in, outfile_vrt, te = c(d_bbox_mod@bbox), tap = TRUE, tr = paste(rep(native_res,2),collapse=' '), sd = band) 
+			} else {gdalbuildvrt(files_in, outfile_vrt,  sd = band) }  # check if this also need to add tap (it should not)
 			er_mos = gdal_translate(outfile_vrt, outfile)
 			if (is.null(er_mos) == FALSE)  {stop()}   # exit on error
 			
@@ -282,13 +282,20 @@ for (band in 1:length(bandnames)) {														# Cycle on MODIS Bands
 			svalue(mess_lab) =  (paste('--- Reprojecting ', bandnames[band],'files for date: ',date_name,' ---'))
 			
 			# Launch the reprojection
-			if (full_ext == 'Resized') {	# If bounding box was passed, the output reproject file will satisfy the bbox
-				gdalwarp(outfile, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox[c(1,3,2,4)], tr=rep(out_res,2),
-						wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)
-			} else {						# If bounding box was not passed, keep the original extent when creating the File
+			if (all.equal(native_res,out_res)==TRUE & outproj_str==MOD_proj_str) {	
+				# If both IN/OUT resolution and projection are the same, run gdal_translate only to eventually convert the output format
+				gdal_translate(outfile, outrep_file, a_srs=MOD_proj_str, of=out_format, ot=datatype[band], a_nodata=nodata_out[band], overwrite=TRUE)
+			} else if (full_ext == 'Native' | outproj_str==MOD_proj_str) {	
+				# If bounding box was not passed keep the original extent when creating the File;
+				# also in the case the output proj is in the MODIS sinusoidal, in order to save the pixel alignment
 				gdalwarp(outfile, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, tr=rep(out_res,2),
+						wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)
+			} else {						
+				# If bounding box was passed, the output reproject file will satisfy the bbox
+				gdalwarp(outfile, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox[c(1,3,2,4)], tr=rep(out_res,2),
 						wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)                    
 			}  
+			
 			gc()
 			xml_file = paste(outrep_file,'.aux.xml',sep = '')		# Delete xml files created by gdalwarp
 			unlink(xml_file)
