@@ -115,7 +115,6 @@ getmod_names <- function(FTP, dirs, i, v, h) {
 # ---------------------------------- ----------------------------------------------#
 moddwl_refl_bsq <- function (product,out_prod_folder,bandnames,bandsel_orig_choice, reflbands, reflorder, file_prefix, yy, DOY) {
 	
-#	if (product == "Surf_Ref_Daily_250 (MOD09GQ)") {ref_file_names = file.path(out_prod_folder, bandnames[reflbands],paste(file_prefix,'_',bandnames[reflbands],'_',yy,'_', DOY, sep = ''))
 	if (max(is.finite(reflbands) > 0) ){  # check if the selected product has reflectance bands
 		
 		ref_file_names = file.path(out_prod_folder, bandnames[reflbands],paste(file_prefix,'_',bandnames[reflbands],'_',yy,'_', DOY, sep = '')) # retrieve reflectance files
