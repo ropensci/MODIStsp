@@ -39,8 +39,8 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for product selection and bands selection  
 #- ------------------------------------------------------------------------------- -#
-	{{satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, bands and satellites selection</span>', markup = T,horizontal = FALSE, container=main_group, spacing = 15)
-			prod_frame <- gframe(text ="Select MODIS Product and bands",horizontal = TRUE, container=satprod_frame, spacing = 15)
+	{{satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, bands and satellites selection</span>', markup = T,horizontal = FALSE, container=main_group, spacing = 10)
+			prod_frame <- gframe(text ="Select MODIS Product and bands",horizontal = TRUE, container=satprod_frame, spacing = 10)
 			checked <- which(mod_prod_list == general_opts$sel_prod)
 
 			temp_wid_bands <<- prod_opt_list[[checked]]$bandsel				# set dummy variables holding the initial values of selected bands
@@ -65,14 +65,14 @@ moddwl_GUI = function (general_opts){
 						selgroup <- gbasicdialog(title = "Select Processing Bands						", parent=NULL, do.buttons=F, width = 500, horizontal = T)
 						# widgets for band selection - original
 						cbox_total <- gframe(text = "Select Processing Bands", container = selgroup, horizontal = T, width = 500)
-						cbox<- gframe(text = "Original MODIS Bands					   ", container = cbox_total, horizontal = T, width = 500)
+						cbox<- gframe(text = "Original MODIS Layers					   ", container = cbox_total, horizontal = T, width = 500)
 						bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid), container = cbox, use.table = F, width = 500)
 						# widgets for band selection - indexes
 						check_names_indexes <- prod_opt_list[[checked]]$indexes_fullnames # retrieve indexes band names
 						
 						if (!is.null(check_names_indexes)) {
 							check_wid_indexes<- temp_wid_bands_indexes													# retrieve indexes fullnames selected at the time
-							cbox_indexes<- gframe(text = "Spectral Indexes						", container = cbox_total, horizontal = FALSE, width = 500)
+							cbox_indexes<- gframe(text = "Additional Spectral Indexes						", container = cbox_total, horizontal = FALSE, width = 500)
 							bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes), container = cbox_indexes, use.table = F, width = 500)
 						} 
 						
@@ -126,7 +126,7 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Sensor selection  
 #- ------------------------------------------------------------------------------- -#	
-	{{sens_frame <- gframe(text ="Select satellites to be processed",horizontal = TRUE, container=satprod_frame, spacing = 15, expand = T)
+	{{sens_frame <- gframe(text ="Select satellites to be processed",horizontal = TRUE, container=satprod_frame, spacing = 10, expand = T)
 			sens_wid <- gradio(items = c("Terra","Aqua", "Both"),selected = which(c("Terra","Aqua", "Both") == general_opts$sensor),
 					container = sens_frame, horizontal = T)
 			
@@ -135,7 +135,7 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Dates selection	  
 #- ------------------------------------------------------------------------------- -#
-	{{dates_frame <- gframe(text = '<span foreground="blue" size="large">Processing Period</span>', markup = T, container = main_group, horizontal = T, expand = T, spacing = 15)
+	{{dates_frame <- gframe(text = '<span foreground="blue" size="large">Processing Period</span>', markup = T, container = main_group, horizontal = T, expand = T, spacing = 10)
 			# start date ----
 			start_date_lab <- glabel(text = '<span weight = "bold" >Starting Date:</span>',markup = T, container = dates_frame)  ; size (start_date_lab ) = c(120,20) 
 			start_day_wid <- gspinbutton(1,31,  container=dates_frame , value = general_opts$start_day)
@@ -154,7 +154,7 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Tiles selection	  
 #- ------------------------------------------------------------------------------- -#
-	{{tiles_group <- gframe(text = '<span foreground="blue" size="large">Required MODIS Tiles </span>', markup = T, container = main_group, horizontal = F, expand = T, spacing = 15)
+	{{tiles_group <- gframe(text = '<span foreground="blue" size="large">Required MODIS Tiles </span>', markup = T, container = main_group, horizontal = F, expand = T, spacing = 10)
 			x_group <- ggroup(container = tiles_group, horizontal = TRUE)
 			# horizontal
 			start_x_lab <- glabel(text = '<span weight = "bold" >Horizontal Tiles:</span>',markup = T, container = x_group) ; size(start_x_lab) = c(120,20)
@@ -180,8 +180,8 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Projection, resolution and bbox selection 
 #- ------------------------------------------------------------------------------- -#
-	{{output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T, container = main_group, horizontal = FALSE, expand = T, spacing = 30)
-			output_proj_group <- ggroup (container = output_proj_frame, horizontal = TRUE, spacing = 15)
+	{{output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T, container = main_group, horizontal = FALSE, expand = T, spacing = 10)
+			output_proj_group <- ggroup (container = output_proj_frame, horizontal = TRUE, spacing = 10)
 			font (output_proj_frame) <- list(weight = 'bold', color  = 'blue')
 			# Projection ----
 			output_proj_lab <- glabel(text = '<span weight = "bold" >Output Projection:</span>', container = output_proj_group,markup = T) ; size(output_proj_lab) = c(120,20)
@@ -189,7 +189,7 @@ moddwl_GUI = function (general_opts){
 						current_sel <- svalue(proj_wid) 
 						if (current_sel != 'User Defined') { enabled(output_proj4_wid) <- F} else {(enabled(output_proj4_wid) <- T)}
 					})
-			size (proj_wid) <- c(100,20)
+			size (proj_wid) <- c(100,19)
 			
 			outproj_user_lab<- glabel(text = '<span weight = "bold" >PROJ4 String:</span>', container = output_proj_group,markup = T) ; size(output_proj_lab) = c(120,20)
 			output_proj4_wid <- gedit(text = general_opts$user_proj4, container = output_proj_group, width = 40)
@@ -205,7 +205,7 @@ moddwl_GUI = function (general_opts){
 					}) 
 			
 			pixsize_lab <- glabel(text = '<span weight = "bold" >Pixel Size:</span>',markup = T, container = output_res_group) ; 	size (pixsize_lab) <- c(120,20)
-			output_res_wid <- gedit(text = general_opts$out_res , container = output_res_group)   ; 	size(output_res_wid) <- c(90,20)
+			output_res_wid <- gedit(text = general_opts$out_res , container = output_res_group)   ; 	size(output_res_wid) <- c(90,19)
 			if (general_opts$out_res_sel == 'Native') { enabled(output_res_wid) <- F} else {(enabled(output_res_wid) <- T)}
 			
 			# Resampling ----
@@ -223,12 +223,13 @@ moddwl_GUI = function (general_opts){
 						current_sel = svalue(output_ext_wid) 
 						if (current_sel == 'Full Tiles Extent') { enabled(bbox_group) <- F} else {(enabled(bbox_group) <- T)}
 					}) 
+			
 			size (output_ext_wid) <- c(120,20)
 			
 			{# bounding box ----
 				bbox_group <- ggroup (horizontal = FALSE, container=output_proj_frame)
+				output_bbox_lab <- glabel(text = '<span weight = "bold" > Bounding Box for output images (IN OUTPUT COORDINATES SYSTEM !) </span>',markup = T, container = bbox_group) ; size(output_ext_lab) <- c(120,15)
 				UL_group <- ggroup (horizontal = TRUE, container=bbox_group)
-				
 				output_ULeast_lab <- glabel('Upper Left Easting (xmin)', container = UL_group)   ;    size (output_ULeast_lab) <- c(160,20)
 				output_ULeast_wid <- gedit(text = general_opts$bbox[1], container = UL_group, width = 10)
 				addSpace(UL_group, 30, horizontal=TRUE)
@@ -252,20 +253,23 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Format and reprocess options 
 #- ------------------------------------------------------------------------------- -#
-	{{options_frame <- gframe(text = '<span foreground="blue" size="large">Processing Options</span>', markup = T, container = main_group, expand = T,spacing = 15, horizontal = F)
+	{{options_frame <- gframe(text = '<span foreground="blue" size="large">Processing Options</span>', markup = T, container = main_group, expand = T,spacing = 10, horizontal = F)
 			opt_group <- ggroup(container = options_frame, horizontal = T, expand = T)
 			format_lab <- glabel(text = '<span weight = "bold" >Output Format for single images</span>',markup = T, container = opt_group)
 			format_wid <- gdroplist(items = c('ENVI','GTiff'), text = 'Select', container=opt_group, selected = match(general_opts$out_format, c('ENVI','GTiff')))
 			
-			timeseries_lab <- glabel(text = '<span weight = "bold" >Format of Time Series Images</span>',markup = T, container = opt_group)
-			timeseries_wid <- gcombobox( c('ENVI Meta Files','R Stack Files','Both'), container=opt_group, 
-					selected <- match(general_opts$ts_format, c('ENVI Meta Files','R Stack Files','Both')), handler = function(h,....) {
+			timeseries_lab <- glabel(text = '<span weight = "bold" >Create Virtual Time Series Files as: </span>',markup = T, container = opt_group)
+			timeseries_wid <- gcombobox( c('ENVI Meta Files','GDAL vrt Files','Both','None'), container=opt_group, 
+					selected <- match(general_opts$ts_format, c('ENVI Meta Files','GDAL vrt Files','Both','None')), handler = function(h,....) {
 						current_sel <- svalue(timeseries_wid)
 					})
 			repro_group <- ggroup(container = options_frame, horizontal = T)
-			reprocess_lab <- glabel(text = '<span weight = "bold" >ReDownload Existing Images</span>',markup = T, container = repro_group)
+			reprocess_lab <- glabel(text = '<span weight = "bold" >ReProcess Existing Data</span>',markup = T, container = repro_group)
 			reprocess_wid <- gradio(items = c('Yes','No'), text = 'Select', container=repro_group, selected = match(general_opts$reprocess, c('Yes','No')), horizontal = T)
-			
+			addSpace(repro_group, 30, horizontal=TRUE)
+			delete_group <- ggroup(container = options_frame, horizontal = T)
+			delete_lab <- glabel(text = '<span weight = "bold" >Delete original HDF files</span>',markup = T, container = repro_group)
+			reprocess_wid <- gradio(items = c('Yes','No'), text = 'Select', container=repro_group, selected = match(general_opts$reprocess, c('Yes','No')), horizontal = T)
 			
 		}}	
 	
@@ -273,7 +277,7 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for output folders selection  
 #- ------------------------------------------------------------------------------- -#
-	{{outfold_frame <- gframe(text = '<span foreground="blue" size="large">Main Output Folder for Time Series storage</span>', markup = T, container=main_group, expand = T,spacing = 15)    			# Frame group
+	{{outfold_frame <- gframe(text = '<span foreground="blue" size="large">Main Output Folder for Time Series storage</span>', markup = T, container=main_group, expand = T,spacing = 10)    			# Frame group
 			outfold_group <- ggroup(horizontal = TRUE, container=outfold_frame)  				# Main group
 			outfold_wid <- gedit(text = format(general_opts$out_folder, justify = "right") , container=outfold_group, width = 57)			# Selected file
 			fold_choose <- gbutton("Browse", handler=function(h,...) {choice<-gfile(type="selectdir", text="Select the Output Folder for MODIS data...")		# File selection widget
@@ -282,7 +286,7 @@ moddwl_GUI = function (general_opts){
 						}}, container=outfold_group)
 		}}
 	
-	{{outfoldmod_frame <- gframe(text = '<span foreground="blue" size="large">Output Folder for Original hdf storage</span>', markup = T, container=main_group, expand = T,spacing = 15)    			# Frame group
+	{{outfoldmod_frame <- gframe(text = '<span foreground="blue" size="large">Output Folder for Original hdf storage</span>', markup = T, container=main_group, expand = T,spacing = 10)    			# Frame group
 			outfoldmod_group <- ggroup(horizontal = TRUE, container=outfoldmod_frame)  				# Main group
 			outfoldmod_wid <- gedit(text = format(general_opts$out_folder_mod, justify = "right") , container=outfoldmod_group, width = 57)			# Selected file
 			fold_choose <- gbutton("Browse", handler=function(h,...) {choice<-gfile(type="selectdir", text="Select the Output Folder for storage of original HDFs...")		# File selection widget
