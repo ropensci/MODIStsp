@@ -17,4 +17,4 @@ source(file.path(main_dir,'R/Moddwl_Main.R'))
 # Launch it
 cat('[',date(),'] Running MOD_DWL...\n')
 moddwl_main(gui=gui,settings=settings,moddwl_dir=main_dir)
-cat('[',date(),'] Done for',country_code,'.\n\n')
+cat('[',date(),'] Done.\n\n')

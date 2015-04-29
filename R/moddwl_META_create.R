@@ -25,10 +25,10 @@ moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefixes,sens_se
 	if (sens_sel == "Aqua")  {file_prefix = file_prefixes[["Aqua"]]}
 	if (sens_sel == "Mixed") {file_prefix = paste(file_prefixes[["Terra"]], file_prefixes[["Aqua"]], sep = '_')} 
 	
-	out_meta_files = list.files(file.path(out_prod_folder,meta_band), pattern = '*.dat', full.names = T)	# get list of ENVI files
+	out_meta_files = list.files(file.path(out_prod_folder,meta_band), pattern = '\\.dat$', full.names = T)	# get list of ENVI files
 	if (sens_sel != "Mixed")  {out_meta_files = out_meta_files [grep(file_prefix,out_meta_files)]}	# get list of ENVI files
 	
-	out_meta_files_hdr = list.files(file.path(out_prod_folder,meta_band), pattern = '*.hdr', full.names = T) # get list of hdr files
+	out_meta_files_hdr = list.files(file.path(out_prod_folder,meta_band), pattern = '\\.hdr$', full.names = T) # get list of hdr files
 	if (sens_sel != "Mixed")  {out_meta_files_hdr = out_meta_files_hdr [grep(file_prefix,out_meta_files_hdr)]}	# get list of ENVI files
 	
 	doys = (str_sub(basename(out_meta_files),-7,-5))

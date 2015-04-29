@@ -25,8 +25,13 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 	#  Initialize project
 	#- ------------------------------------------------------------------------------- -#
 	
+	# Check sp version
+	sp_version <- packageVersion('sp')
+	sp_minversion <- package_version("1.0.17") # sp version used during the last test (for now used as minimum required version)
+	if (sp_version < sp_minversion) install.packages('sp',dep=TRUE)
+	require('sp')
 	{{# Check if needed packages are present. Install them otherwise
-	pkg_list = c('sp','gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
+	pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
 			'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools', 'gdalUtils','XML')
 	pkg_test <- function(x) {while (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE)}}
 	for (pkg in pkg_list) {pkg_test(pkg)}
@@ -35,10 +40,7 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1',getGDALVersionInfo(str = "--version")))
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
-	# Check sp version
-	sp_version <- packageVersion('sp')
-	sp_minversion <- package_version("1.0.17") # sp version used during the last test (for now used as minimum required version)
-	if (sp_version < sp_minversion) install.packages('sp',dep=TRUE)
+
 	
 	options("guiToolkit"="RGtk2")
 	memory.limit(6000)							# Increase maximum allocsable memory
