@@ -97,10 +97,11 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 				sel_prod = 'Surf_Ref_8Days_500m (MOD09A1)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
 				start_x = 18, end_x =18, start_y = 4, end_y = 4, 
 				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', 
-				delete_hdf = 'No',reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
+				nodata_change = 'No',delete_hdf = 'No',reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
 	}	
 	#launch the GUI ----
 	if (gui) {GUI = moddwl_GUI(general_opts)} else {Quit<<-FALSE}
+	
 	print(Quit)
 	start.time <- Sys.time()
 	# If not Quit selected, restore the user selected options and launch the processing ----
@@ -129,7 +130,7 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 													full_ext = full_ext, bbox = bbox,out_format = out_format, out_res = as.numeric(out_res), native_res = prod_opts$native_res,
 													resampling = resampling, ts_format = ts_format, 
 													MOD_proj_str = MOD_proj_str,outproj_str = outproj_str,
-													nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out,
+													nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out,nodata_change = nodata_change,
 													datatype =prod_opts$datatype,	bandsel = prod_opts$bandsel, bandnames = prod_opts$bandnames,
 													reflbands=prod_opts$reflbands, reflorder=prod_opts$reflorder,
 													indexes_bandsel = prod_opts$indexes_bandsel, indexes_bandnames = prod_opts$indexes_bandnames,
