@@ -76,12 +76,12 @@ getmod_dates <- function(dates, dirs) {
 # Accessory function to find the image names corresponding to the selected dates and tiles
 # ---------------------------------- ----------------------------------------------#
 
-getmod_names <- function(FTP, dirs, i, v, h) {
+getmod_names <- function(FTP, dirs, dir, v, h) {
 	getlist <- 0
 	class(getlist) <- "try-error"
 	ce <- 0
 	while(class(getlist) == "try-error") {
-		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep=""), followLocation = TRUE, .opts = list(timeout = 20, maxredirs = 2, verbose = F)), "\r*\n")[[1]],silent=TRUE)
+		getlist <- try(strsplit(getURL(paste(FTP,dirs[dir], "/", sep=""), followLocation = TRUE, .opts = list(timeout = 20, maxredirs = 2, verbose = F)), "\r*\n")[[1]],silent=TRUE)
 #		getlist <- try(strsplit(getURL(paste(FTP,dirs[i], "/", sep="")), "\r*\n")[[1]],silent=TRUE)
 		if (class(getlist) == "try-error") {
 			Sys.sleep(5)
@@ -110,41 +110,7 @@ getmod_names <- function(FTP, dirs, i, v, h) {
 
 }
 
-# ---------------------------------- ----------------------------------------------#
-# Accessory function to create virtual BSQ files starting from the reflectances files
-# ---------------------------------- ----------------------------------------------#
-moddwl_refl_bsq <- function (product,out_prod_folder,bandnames,bandsel_orig_choice, reflbands, reflorder, file_prefix, yy, DOY) {
-	
-	if (max(is.finite(reflbands) > 0) ){  # check if the selected product has reflectance bands
-		
-		ref_file_names = file.path(out_prod_folder, bandnames[reflbands],paste(file_prefix,'_',bandnames[reflbands],'_',yy,'_', DOY, sep = '')) # retrieve reflectance files
-		out_meta_files = ref_file_names[reflorder] 				# reorder according to WL
-		out_meta_bands = bandsel_orig_choice[reflbands]   # find which refl bands were selected for downlad and reorder them
-		out_meta_bands = out_meta_bands[reflorder]    
 
-		out_meta_files = out_meta_files[which(out_meta_bands == 1)]			# retrieve reflectance files that were downloaded
-		if (length(out_meta_files) > 1) {															# create the BSQ only if more than 1 reflectance is present and selected
-			head_file = paste(out_meta_files[1],'.hdr', sep = '')
-			fileConn_hd<-file(head_file)
-			nsamp = (strsplit(readLines(fileConn_hd)[4], '=')[[1]])[2]
-			nrow = (strsplit(readLines(fileConn_hd)[5], '=')[[1]])[2]
-			close(fileConn_hd)
-			dir.create(file.path(out_prod_folder, 'Surf_Ref_BSQ'), recursive = T, showWarnings = F)
-			meta_filename = file.path(out_prod_folder, 'Surf_Ref_BSQ',paste(file_prefix,'_',"Surf_Ref",'_',yy,'_', DOY, sep = ''))
-			fileConn_meta<-file(meta_filename, 'w')      		# Open connection
-			writeLines(c('ENVI META FILE'), fileConn_meta)		# Write first line
-			# Write the lines of the META file corresponding to each input file
-			for (ff in out_meta_files) {
-				writeLines(c(paste('File : ', ff, sep = ''),
-								paste('Bands: 1', sep = ''),
-								paste('Dims: 1-',nsamp,' , 1-',nrow, sep = ''), ''),
-						fileConn_meta)
-			}
-			close(fileConn_meta)  	# Close connection to META file
-		}
-	}	
-	
-}
 
 # ---------------------------------- ----------------------------------------------#
 # Accessory function used to see if all expected out files for the selected date are already present.
