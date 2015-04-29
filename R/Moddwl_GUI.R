@@ -204,9 +204,11 @@ moddwl_GUI = function (general_opts){
 						if (current_sel == 'Native') { enabled(output_res_wid) <- F} else {(enabled(output_res_wid) <- T)}
 					}) 
 			
-			pixsize_lab <- glabel(text = '<span weight = "bold" >Pixel Size:</span>',markup = T, container = output_res_group) ; 	size (pixsize_lab) <- c(120,20)
+			pixsize_lab <- glabel(text = '<span weight = "bold" >Pixel Size:</span>',markup = T, container = output_res_group) ; 	size (pixsize_lab) <- c(88,20)
+			
 			output_res_wid <- gedit(text = general_opts$out_res , container = output_res_group)   ; 	size(output_res_wid) <- c(90,19)
 			if (general_opts$out_res_sel == 'Native') { enabled(output_res_wid) <- F} else {(enabled(output_res_wid) <- T)}
+			pixsize2_lab <- glabel(text = '(IN OUTPUT PROJECTION !)', container = output_res_group)
 			
 			# Resampling ----
 			resopts_group <- ggroup (container = output_proj_frame, horizontal = TRUE)
@@ -228,7 +230,7 @@ moddwl_GUI = function (general_opts){
 			
 			{# bounding box ----
 				bbox_group <- ggroup (horizontal = FALSE, container=output_proj_frame)
-				output_bbox_lab <- glabel(text = '<span weight = "bold" > Bounding Box for output images (IN OUTPUT COORDINATES SYSTEM !) </span>',markup = T, container = bbox_group) ; size(output_ext_lab) <- c(120,15)
+				output_bbox_lab <- glabel(text = '<span weight = "bold" > Bounding Box for output images (IN OUTPUT PROJECTION !) </span>',markup = T, container = bbox_group) ; size(output_ext_lab) <- c(120,15)
 				UL_group <- ggroup (horizontal = TRUE, container=bbox_group)
 				output_ULeast_lab <- glabel('Upper Left Easting (xmin)', container = UL_group)   ;    size (output_ULeast_lab) <- c(160,20)
 				output_ULeast_wid <- gedit(text = general_opts$bbox[1], container = UL_group, width = 10)
@@ -257,19 +259,19 @@ moddwl_GUI = function (general_opts){
 			opt_group <- ggroup(container = options_frame, horizontal = T, expand = T)
 			format_lab <- glabel(text = '<span weight = "bold" >Output Format for single images</span>',markup = T, container = opt_group)
 			format_wid <- gdroplist(items = c('ENVI','GTiff'), text = 'Select', container=opt_group, selected = match(general_opts$out_format, c('ENVI','GTiff')))
-			
+			addSpace(opt_group, 5, horizontal=TRUE)
 			timeseries_lab <- glabel(text = '<span weight = "bold" >Create Virtual Time Series Files as: </span>',markup = T, container = opt_group)
-			timeseries_wid <- gcombobox( c('ENVI Meta Files','GDAL vrt Files','Both','None'), container=opt_group, 
-					selected <- match(general_opts$ts_format, c('ENVI Meta Files','GDAL vrt Files','Both','None')), handler = function(h,....) {
+			timeseries_wid <- gcombobox( c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL'), container=opt_group, 
+					selected <- match(general_opts$ts_format, c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL')), handler = function(h,....) {
 						current_sel <- svalue(timeseries_wid)
 					})
 			repro_group <- ggroup(container = options_frame, horizontal = T)
+			nodata_lab <- glabel(text = '<span weight = "bold" >Change Original NODATA values</span>',markup = T, container = repro_group)
+			nodata_wid <- gradio(items = c('Yes','No'), text = 'Select', container=repro_group, selected = match(general_opts$nodata_change, c('Yes','No')), horizontal = T)
+			addSpace(repro_group, 5, horizontal=TRUE)
 			reprocess_lab <- glabel(text = '<span weight = "bold" >ReProcess Existing Data</span>',markup = T, container = repro_group)
 			reprocess_wid <- gradio(items = c('Yes','No'), text = 'Select', container=repro_group, selected = match(general_opts$reprocess, c('Yes','No')), horizontal = T)
-			addSpace(repro_group, 30, horizontal=TRUE)
-			delete_group <- ggroup(container = options_frame, horizontal = T)
-			delete_lab <- glabel(text = '<span weight = "bold" >Delete original HDF files</span>',markup = T, container = repro_group)
-			reprocess_wid <- gradio(items = c('Yes','No'), text = 'Select', container=repro_group, selected = match(general_opts$reprocess, c('Yes','No')), horizontal = T)
+			addSpace(repro_group, 5, horizontal=TRUE)
 			
 		}}	
 	
@@ -286,13 +288,17 @@ moddwl_GUI = function (general_opts){
 						}}, container=outfold_group)
 		}}
 	
-	{{outfoldmod_frame <- gframe(text = '<span foreground="blue" size="large">Output Folder for Original hdf storage</span>', markup = T, container=main_group, expand = T,spacing = 10)    			# Frame group
+	{{outfoldmod_frame <- gframe(text = '<span foreground="blue" size="large">Output Folder for Original HDF files download</span>', markup = T, container=main_group, expand = T,spacing = 10)    			# Frame group
 			outfoldmod_group <- ggroup(horizontal = TRUE, container=outfoldmod_frame)  				# Main group
 			outfoldmod_wid <- gedit(text = format(general_opts$out_folder_mod, justify = "right") , container=outfoldmod_group, width = 57)			# Selected file
 			fold_choose <- gbutton("Browse", handler=function(h,...) {choice<-gfile(type="selectdir", text="Select the Output Folder for storage of original HDFs...")		# File selection widget
 						if(! is.na(choice)){svalue(outfoldmod_wid)<-choice						## On new selection, set value of the label widget
 							general_opts$out_folder_mod = format(choice, justify = "left")	# 	On new selection,  Set value of the selected variable
 						}}, container=outfoldmod_group)
+			delete_group <- ggroup(container = outfoldmod_group, horizontal = T)
+			delete_lab <- glabel(text = '<span weight = "bold" >Delete original HDF files</span>',markup = T, container = delete_group)
+			delete_wid <- gradio(items = c('Yes','No'), text = 'Select', container=delete_group, selected = 2, horizontal = T)
+			
 		}}
 	
 #- ------------------------------------------------------------------------------- -#
@@ -343,6 +349,9 @@ moddwl_GUI = function (general_opts){
 														svalue(output_LRnorth_wid),svalue(output_ULnorth_wid))))
 								
 								general_opts$reprocess <- svalue(reprocess_wid)
+								general_opts$delete_hdf <- svalue(delete_wid)
+								general_opts$nodata_change <- svalue(nodata_wid)
+								
 								general_opts$out_format <- svalue(format_wid)
 								general_opts$ts_format <- svalue(timeseries_wid)
 								
@@ -350,6 +359,9 @@ moddwl_GUI = function (general_opts){
 								general_opts$out_folder_mod <- svalue(outfoldmod_wid) 
 								
 								check <- T
+								
+								if (general_opts$delete_hdf == 'Yes') {res = gconfirm('Warning ! HDF files in Original MODIS folder will be deleted at the end of processing ! Are you sure ? ', title = 'Warning', icon = 'warning')
+								}								
 								# Check if dates, processing extent and tiles selection make sense
 								if (as.Date(paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '-')) >
 										as.Date(paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '-'))) {gmessage('Error in Selected Dates', title = 'Warning'); check <- F}
@@ -439,6 +451,10 @@ moddwl_GUI = function (general_opts){
 									svalue(output_LRnorth_wid) <- general_opts$bbox [3]
 									svalue(output_ULnorth_wid) <- general_opts$bbox [4]
 									svalue(reprocess_wid) <- general_opts$reprocess
+									svalue(delete_wid) <- general_opts$delete_hdf 
+									svalue(nodata_wid) <- general_opts$nodata_change 
+									
+									
 									svalue(format_wid) <- general_opts$out_format 
 									svalue(timeseries_wid) <- general_opts$ts_format 
 									
@@ -499,6 +515,9 @@ moddwl_GUI = function (general_opts){
 															svalue(output_LRnorth_wid),svalue(output_ULnorth_wid))))
 									
 									general_opts$reprocess <- svalue(reprocess_wid)
+									general_opts$delete_hdf <- svalue(delete_wid)
+									general_opts$nodata_change <- svalue(nodata_wid)
+									
 									general_opts$out_format <- svalue(format_wid)
 									general_opts$ts_format <- svalue(timeseries_wid)
 									
