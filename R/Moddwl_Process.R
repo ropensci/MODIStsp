@@ -40,6 +40,7 @@
 #' @param multiband_bsq If T, and sel_prod has reflectance bands, create virtual BSQ file for each DOY
 #' @returnType 
 #'
+#' 
 #' @return 
 #' 
 #' @author Lorenzo Busetto, phD (2014)
@@ -48,11 +49,12 @@
 #' @license GPL(>2)
 #' @export
 moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, MRTpath, reproj, reprocess, delete_hdf, sensor, https,
-		start_x, start_y, end_x, end_y, bbox, out_format, out_res, native_res, MOD_proj_str, outproj_str, nodata_in, nodata_out, datatype, 
+		start_x, start_y, end_x, end_y, bbox, out_format, out_res, native_res, MOD_proj_str, outproj_str, nodata_in, nodata_out,nodata_change, datatype, 
 		bandsel, bandnames, reflbands, reflorder, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out, 
 		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in, full_ext,
 		quality_nodata_out, file_prefixes, main_out_folder, multiband_bsq, resampling, ts_format) {
 	
+	if(nodata_change == 'No') {nodata_out = nodata_in}
 	modis_folder = out_folder_mod
 	dir.create(modis_folder, recursive = T, showWarnings=FALSE)
 	
@@ -131,9 +133,9 @@ moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folde
 			if (length(dirs) > 0) {
 				modislist = NULL
 				# Start Cycling on directories containing images to be downloaded
-				for (i in 1:length(dirs)) {
+				for (dir in 1:length(dirs)) {
 					
-					date_name <- sub(sub(pattern="\\.", replacement="_", dirs[i]), pattern="\\.", replacement="_", dirs[i])  #Create the date string
+					date_name <- sub(sub(pattern="\\.", replacement="_", dirs[dir]), pattern="\\.", replacement="_", dirs[dir])  #Create the date string
 					DOY =strftime( as.Date(date_name,"%Y_%m_%d" ), format = "%j")
 					check_files = F
 					check_files = moddwl_check_files(out_prod_folder, file_prefix,bandnames,bandsel_orig_choice,yy,DOY,out_format,  indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel)
@@ -141,7 +143,7 @@ moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folde
 						# Create vector of image names corresponding to the selected tiles
 						
 						# Create vector of image names corresponding to the selected tiles
-						modislist = getmod_names(FTP = FTP, dirs = dirs, i = i, v = seq(from=start_y, to =  end_y), h = seq(from = start_x, to = end_x))
+						modislist = getmod_names(FTP = FTP, dirs = dirs, dir = dir, v = seq(from=start_y, to =  end_y), h = seq(from = start_x, to = end_x))
 						# 				date_name <- sub(sub(pattern="\\.", replacement="_", dirs[i]), pattern="\\.", replacement="_", dirs[i])	#Create the date string
 						# 				DOY = substr(modislist[1],14,16)
 						
@@ -166,7 +168,7 @@ moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folde
 									while(er != 0) {   # repeat until no error or > 21 tryyouts
 										print(paste('Downloading File: ', modisname ))
 										svalue(mess_lab) = paste('--- Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist),' ---')    # Update progress window
-										er <- tryCatch(download.file(url=paste(FTP,dirs[i], "/",modisname,sep=''),destfile=file.path(modis_folder,modisname),mode='wb',quiet=F, cacheOK=FALSE),
+										er <- tryCatch(download.file(url=paste(FTP,dirs[dir], "/",modisname,sep=''),destfile=file.path(modis_folder,modisname),mode='wb',quiet=F, cacheOK=FALSE),
 												warning=function(war) {print(war) ; return (1)}, error =function(err) {	print(err);	return (1)} )
 										if (er != 0) {	# Stop after 21 failed attempts
 											print('Download Error -Retrying') ; Sys.sleep(10)   ;	ce <- ce + 1 ; 	if (ce == 21) stop("Error: FTP server is down!!")	
@@ -175,7 +177,7 @@ moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folde
 								} # end IF on hdf existence
 							} # End cycle for downloading the images in modislist vector 
 							
-							print (paste(length(modislist)," files for date of ",dirs[i]," were successfully downloaded!",sep=''))
+							print (paste(length(modislist)," files for date of ",dirs[dir]," were successfully downloaded!",sep=''))
 							
 							# ---------------------------------- ----------------------------------------------#
 							# Run the MRT tool to generate the mosaic HDFs. One separate HDF is generated for each selected band
@@ -370,16 +372,22 @@ moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folde
 								} #End If on delbands[banddel] == 1
 							} #End Cycle on banddel
 							
-							#             } else {print (paste('All Required output files for date ',date_name, ' are already existing - Doing Nothing !', sep = ''))}
 							# If multiband BSQ required, sel_prod has reflectances, and reflectances were selectd, create an ENVI metafile ----
-							if (multiband_bsq == T) {moddwl_refl_bsq(sel_prod, out_prod_folder,bandnames, bandsel_orig_choice, reflbands, reflorder ,file_prefix, yy, DOY)} 
-							if (delete_hdf == T) {for (modisname in modislist) unlink(file.path(out_prod_folder,modisname))}		# Delete original downloaded HDFs
-						} else {print(paste("No available image for selected Tiles in ",dirs[i], sep=""))}
+							# Removed for now - TBC  in next versions
+							# if (multiband_bsq == T) {moddwl_refl_bsq(sel_prod, out_prod_folder,bandnames, bandsel_orig_choice, reflbands, reflorder ,file_prefix, yy, DOY)} 
+							
+						} else {print(paste("No available image for selected Tiles in ",dirs[dir], sep=""))}
 					} else {print (paste('All Required output files for date ',date_name, ' are already existing - Doing Nothing !', sep = ''))}
 				}   # End cycling on available dates for selected year
 				
-			} else print (paste("No available data for year:  ", yy, "in selected dates dates"))
-			
+			} else print (paste("No available data for year:  ", yy, "for Sensor",sens_sel," in selected dates"))
+			if (delete_hdf == 'Yes') {  # If deletion selected, delete the HDF files in folder_mod directory 
+				
+				for (dir in 1:length(dirs)) {
+					modislist = getmod_names(FTP = FTP, dirs = dirs, dir = dir, v = seq(from=start_y, to =  end_y), h = seq(from = start_x, to = end_x))
+					for (modisname in modislist) {unlink(file.path(modis_folder,modisname))}
+				}
+			}# Delete original downloaded HDFs	
 		}	# End Cycling on selected years
 		bandsel = bandsel_orig_choice  # reset bandsel to original user's choice
 	} # End cycling on sensors
@@ -399,7 +407,7 @@ moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folde
 				
 				meta_band = bandnames[band]		
 				moddwl_meta_create(out_prod_folder = out_prod_folder, meta_band = meta_band, 
-						file_prefix = file_prefixes, sens_sel, ts_format = ts_format,  nodata_value = nodata_out[band])
+						file_prefix = file_prefixes, sens_sel, ts_format = ts_format,  nodata_value = nodata_out[band],out_format = out_format)
 				
 			} #End If on bandsel[band] == 1
 		} #End Cycle on band
