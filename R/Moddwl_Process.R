@@ -49,7 +49,7 @@
 #' @license GPL(>2)
 #' @export
 moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, MRTpath, reproj, reprocess, delete_hdf, sensor, https,
-		start_x, start_y, end_x, end_y, bbox, out_format, out_res, native_res, MOD_proj_str, outproj_str, nodata_in, nodata_out,nodata_change, datatype, 
+		start_x, start_y, end_x, end_y, bbox, out_format, compress,  out_res, native_res, MOD_proj_str, outproj_str, nodata_in, nodata_out,nodata_change, datatype, 
 		bandsel, bandnames, reflbands, reflorder, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out, 
 		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in, full_ext,
 		quality_nodata_out, file_prefixes, main_out_folder, multiband_bsq, resampling, ts_format) {
