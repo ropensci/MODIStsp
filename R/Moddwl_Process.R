@@ -419,7 +419,7 @@ moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folde
 				
 				meta_band = indexes_bandnames[band]				
 				moddwl_meta_create(out_prod_folder = out_prod_folder, meta_band = meta_band, 
-						file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = indexes_nodata_out[band])
+						file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = indexes_nodata_out[band],out_format = out_format)
 				
 			} #End If on bandsel[band] == 1
 		} #End Cycle on band
@@ -430,7 +430,7 @@ moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folde
 				
 				meta_band = quality_bandnames[band]				
 				moddwl_meta_create(out_prod_folder = out_prod_folder, meta_band = meta_band, 
-						file_prefixes = file_prefixes, sens_sel= sens_sel, ts_format = ts_format, nodata_value = quality_nodata_out[band])
+						file_prefixes = file_prefixes, sens_sel= sens_sel, ts_format = ts_format, nodata_value = quality_nodata_out[band],out_format = out_format)
 				
 			} #End If on bandsel[band] == 1
 		} #End Cycle on band
