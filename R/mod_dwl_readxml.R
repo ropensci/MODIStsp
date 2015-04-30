@@ -20,8 +20,8 @@ top_name = xmlName(xmltop) #give name of node, PubmedArticleSet
 
 n_products = xmlSize(xmltop) #how many children in node, 19
 prodnames = NULL
-for (prod in 1:n_products) {
-#	browser()
+for (prod in 1:n_products)
+{
 	prodopts = list()
 #	prodopts$product=xmlName(xmltop[[prod]])
 	prodopts$product=xmlToList(xmltop[[prod]][["name"]])
@@ -31,7 +31,7 @@ for (prod in 1:n_products) {
 	http_terra=xmlToList(xmltop[[prod]][['http_terra']])
 	file_prefix_aqua=xmlToList(xmltop[[prod]][['file_prefix_aqua']])
 	http_aqua=xmlToList(xmltop[[prod]][['http_aqua']])
-	www=xmlToList(xmltop[[prod]][['www']])
+	prodopts$www=xmlToList(xmltop[[prod]][['www']])
 	prodopts$file_prefix = hash("Terra" = file_prefix_terra,"Aqua" = file_prefix_aqua)
 	prodopts$http = hash("Terra" = http_terra,"Aqua" = http_aqua)
 	prodopts$multiband_bsq = T
@@ -97,7 +97,6 @@ if (nindexes > 0 ) {
 	prodopts$quality_nodata_in =  rep(255, length(prodopts$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
 	prodopts$quality_nodata_out =  rep(255, length(prodopts$quality_bandnames)) # nodata out for quality bands (always 255)
 	prodopts$quality_bandsel = rep(0, length(prodopts$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
-	
 	} 
  #End Cycle on prodname
 
