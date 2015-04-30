@@ -96,7 +96,7 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 		general_opts = list(main_dir = main_dir, previous_file=previous_file,xml_file = xml_file,  log_file = log_file, MRTpath = MRTpath, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str, 
 				sel_prod = 'Surf_Ref_8Days_500m (MOD09A1)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
 				start_x = 18, end_x =18, start_y = 4, end_y = 4, 
-				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', 
+				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', compress = 'NONE',
 				nodata_change = 'No',delete_hdf = 'No',reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
 	}	
 	#launch the GUI ----
@@ -128,7 +128,7 @@ moddwl_main = function(gui=TRUE, settings=NULL, moddwl_dir=NA) {
 													delete_hdf = delete_hdf, sensor = sensor, https = prod_opts$http,
 													start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
 													full_ext = full_ext, bbox = bbox,out_format = out_format, out_res = as.numeric(out_res), native_res = prod_opts$native_res,
-													resampling = resampling, ts_format = ts_format, 
+													resampling = resampling, ts_format = ts_format, compress = compress, 
 													MOD_proj_str = MOD_proj_str,outproj_str = outproj_str,
 													nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out,nodata_change = nodata_change,
 													datatype =prod_opts$datatype,	bandsel = prod_opts$bandsel, bandnames = prod_opts$bandnames,
