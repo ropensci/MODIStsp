@@ -286,16 +286,17 @@ moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folde
 										# Launch the reprojection
 										if (all.equal(native_res,out_res)==TRUE & outproj_str==MOD_proj_str) {	
 											# If both IN/OUT resolution and projection are the same, run gdal_translate only to eventually convert the output format
-											gdal_translate(outfile, outrep_file, a_srs=MOD_proj_str, of=out_format, ot=datatype[band], a_nodata=nodata_out[band], overwrite=TRUE)
+											gdal_translate(outfile, outrep_file, a_srs=MOD_proj_str, of=out_format, ot=datatype[band], a_nodata=nodata_out[band], 
+													co=paste('COMPRESS',compress,sep='='), overwrite=TRUE)
 										} else if (full_ext == 'Native' | outproj_str==MOD_proj_str) {	
 											# If bounding box was not passed keep the original extent when creating the File;
 											# also in the case the output proj is in the MODIS sinusoidal, in order to save the pixel alignment
 											gdalwarp(outfile, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, tr=rep(out_res,2),
-													wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)
+													co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)
 										} else {						
 											# If bounding box was passed, the output reproject file will satisfy the bbox
 											gdalwarp(outfile, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox[c(1,3,2,4)], tr=rep(out_res,2),
-													wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)                    
+													co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], srcnodata=nodata_in[band], dstnodata=nodata_out[band], overwrite=TRUE)                    
 										}  
 										
 										gc()
