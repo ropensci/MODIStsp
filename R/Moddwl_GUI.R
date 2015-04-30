@@ -193,7 +193,7 @@ moddwl_GUI = function (general_opts){
 # Widgets for Projection, resolution and bbox selection 
 #- ------------------------------------------------------------------------------- -#
 	{{output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T, container = main_group, horizontal = FALSE, expand = T, spacing = 10)
-			output_proj_group <- ggroup (container = output_proj_frame, horizontal = TRUE, spacing = 10)
+			output_proj_group <- ggroup (container = output_proj_frame, horizontal = TRUE, spacing = 5)
 			font (output_proj_frame) <- list(weight = 'bold', color  = 'blue')
 			# Projection ----
 			output_proj_lab <- glabel(text = '<span weight = "bold" >Output Projection:</span>', container = output_proj_group,markup = T) ; size(output_proj_lab) = c(120,20)
@@ -201,25 +201,27 @@ moddwl_GUI = function (general_opts){
 						current_sel <- svalue(proj_wid) 
 						if (current_sel != 'User Defined') { enabled(output_proj4_wid) <- F} else {(enabled(output_proj4_wid) <- T)}
 					})
+			size(proj_wid) = c(120,20)
 #			addSpace(output_proj_group, 20)
 #			size (proj_wid) <- c(100,19)
 			
-			outproj_user_lab<- glabel(text = '<span weight = "bold" >PROJ4 String:</span>', container = output_proj_group,markup = T) ; size(output_proj_lab) = c(170,20)
+			outproj_user_lab<- glabel(text = '<span weight = "bold" >PROJ4 String:</span>', container = output_proj_group,markup = T) ; size(outproj_user_lab) = c(120,20)
 			output_proj4_wid <- gedit(text = general_opts$user_proj4, container = output_proj_group, width = 30)
 			if (general_opts$proj == 'User Defined') { enabled(output_proj4_wid) <- T} else {(enabled(output_proj4_wid) <- F)}
-			
+			size(output_proj4_wid) = c(120,20)
 			# Resolution ----
-			output_res_group <- ggroup (container = output_proj_frame, horizontal = TRUE)
+			output_res_group <- ggroup (container = output_proj_frame, horizontal = TRUE, spacing = 5)
 			output_res_lab <- glabel(text = '<span weight = "bold" >Output Resolution:</span>',markup = T, container = output_res_group) ; size(output_res_lab) = c(120,20)
 			output_res_sel_wid  <-  gcombobox(c('Native','Resampled'), container=output_res_group, 
 					selected = match(general_opts$out_res_sel, c('Native','Resampled')), handler = function(h,....) {
 						current_sel <- svalue(output_res_sel_wid) 
 						if (current_sel == 'Native') { enabled(output_res_wid) <- F} else {(enabled(output_res_wid) <- T)}
 					}) 
+			size(output_res_sel_wid) = c(120,20)
 			
-			pixsize_lab <- glabel(text = '<span weight = "bold" >Pixel Size:</span>',markup = T, container = output_res_group) ; 	size (pixsize_lab) <- c(88,20)
+			pixsize_lab <- glabel(text = '<span weight = "bold" >Pixel Size:</span>',markup = T, container = output_res_group) ; 	size (pixsize_lab) <- c(120,20)
 			
-			output_res_wid <- gedit(text = general_opts$out_res , container = output_res_group)   ; 	size(output_res_wid) <- c(90,19)
+			output_res_wid <- gedit(text = general_opts$out_res , container = output_res_group)   ; 	size(output_res_wid) <- c(120,20)
 			if (general_opts$out_res_sel == 'Native') { enabled(output_res_wid) <- F} else {(enabled(output_res_wid) <- T)}
 			pixsize2_lab <- glabel(text = '(IN OUTPUT PROJECTION !)', container = output_res_group)
 			
@@ -228,7 +230,7 @@ moddwl_GUI = function (general_opts){
 			resmeth_lab <- glabel(text = '<span weight = "bold" >Resampling Method:</span>',markup = T, container = resopts_group) ; size(resmeth_lab) = c(120,20)
 			resamp_array <- c('near','bilinear','cubic', 'cubicspline','lanczos','average','mode')
 			output_resmeth_wid <-  gcombobox(resamp_array, container=resopts_group, selected = match(general_opts$resampling, resamp_array)) 
-			size (output_resmeth_wid) <- c(80,20)
+			size (output_resmeth_wid) <- c(120,20)
 			
 			# Extent ----
 #			output_ext_group <- ggroup (container = output_proj_frame, horizontal = TRUE, expand = T)
@@ -275,7 +277,7 @@ moddwl_GUI = function (general_opts){
 						current_sel <- svalue(format_wid)
 						if (current_sel != 'GTiff') { enabled(compress_wid) <- F} else {(enabled(compress_wid) <- T)}
 					})
-			addSpace(opt_group, 62, horizontal=TRUE)
+			addSpace(opt_group, 100, horizontal=TRUE)
 			
 			compress_dict <- c('NONE','PACKBITS','LZW','DEFLATE'); names(compress_dict) = c('None','Low (PACKBITS)','Medium (LZW)','High (DEFLATE)')
 			compress_lab <- glabel(text = '<span weight = "bold" >GTiff Compression: </span>',markup = T, container = opt_group)
@@ -290,6 +292,7 @@ moddwl_GUI = function (general_opts){
 					selected <- match(general_opts$ts_format, c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL')), handler = function(h,....) {
 						current_sel <- svalue(timeseries_wid)
 					})
+			addSpace(repro_group,34 )
 			nodata_lab <- glabel(text = '<span weight = "bold" >Change Original NODATA values</span>',markup = T, container = repro_group)
 			nodata_wid <- gradio(items = c('Yes','No'), text = 'Select', container=repro_group, selected = match(general_opts$nodata_change, c('Yes','No')), horizontal = T)
 			
