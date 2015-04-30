@@ -39,7 +39,7 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Widgets for product selection and bands selection  
 #- ------------------------------------------------------------------------------- -#
-	{{satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, Satellites and Layers selection</span>', markup = T,horizontal = T, container=main_group, spacing = 10)
+	{{satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, Satellites and Layers selection</span>', markup = T,horizontal = F, container=main_group, spacing = 5)
 #			prod_frame <- gframe(text ="Select MODIS Product and bands",horizontal = TRUE, container=satprod_frame, spacing = 10)
 			checked <- which(mod_prod_list == general_opts$sel_prod)
 
@@ -47,7 +47,15 @@ moddwl_GUI = function (general_opts){
 			temp_wid_bands_indexes <<- prod_opt_list[[checked]]$indexes_bandsel
 			temp_wid_bands_quality <<- prod_opt_list[[checked]]$quality_bandsel
 			
-			prod_wid <- gdroplist(items = mod_prod_list, container=satprod_frame, horizontal = T, selected = checked,  handler = function(h,...) {
+			labels_group = ggroup(horizontal = T, container=satprod_frame)
+			label = glabel (text = '<span weight = "bold">			       		 Product </span>', markup = T, container=labels_group)
+			addSpace(labels_group, 190 )
+			label2 = glabel (text = '<span weight = "bold">Satellites </span>', markup = T, container=labels_group)
+			addSpace(labels_group, 5 )
+			label3 = glabel (text = '<span weight = "bold">      Processing Layers</span>', markup = T, container=labels_group)
+			
+			prod_group = ggroup(horizontal = T, container=satprod_frame)
+			prod_wid <- gdroplist(items = mod_prod_list, container=prod_group, horizontal = T, selected = checked,  handler = function(h,...) {
 						checked <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]		# find index of sel. product
 						sel_prod <- svalue(prod_wid)
 						temp_wid_bands <<- rep(0, length(prod_opt_list[[checked]]$bandsel))					# reset dummy variables for band selection to 0 on product change
@@ -60,23 +68,23 @@ moddwl_GUI = function (general_opts){
 			# Widgets for Sensor selection  
 			#- ------------------------------------------------------------------------------- -#	
 #			{{sens_frame <- gframe(text ="Select satellites to be processed",horizontal = TRUE, container=satprod_frame, spacing = 10, expand = T)
-					sens_wid <- gdroplist(items = c("Terra","Aqua", "Both"), container = satprod_frame, text = 'Select', 
+					sens_wid <- gdroplist(items = c("Terra","Aqua", "Both"), container = prod_group, text = 'Select', 
 													selected = match(general_opts$sensor, c("Terra","Aqua", "Both")))
 					
 #				}}
 			
 			addSpace(satprod_frame, 20, horizontal=TRUE)
-			band_wid <- gbutton(text = 'Select Processing Bands', border = T,				# Child widget for processing bands selection
+			band_wid <- gbutton(text = 'Click To Select', border = T,				# Child widget for processing bands selection
 					handler = function(h,....) {
 						
 						checked <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]		# find index of sel. product
 						check_names <- prod_opt_list[[checked]]$band_fullnames						# retrieve band names
 						check_wid <- temp_wid_bands																				# retrieve selected at the time
-						selgroup <- gbasicdialog(title = "Select Processing Bands						", parent=NULL, do.buttons=F, width = 500, horizontal = T)
+						selgroup <- gbasicdialog(title = "Select Processing Layers						", parent=NULL, do.buttons=F, width = 450, horizontal = T)
 						# widgets for band selection - original
-						cbox_total <- gframe(text = '', container = selgroup, horizontal = T, width = 500)
-						cbox<- gframe(text = '<span foreground="blue" size="large">		Original MODIS Layers			</span>', markup = T, container = cbox_total, horizontal = T, width = 500)
-						bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid), container = cbox, use.table = F, width = 500)
+						cbox_total <- gframe(text = '', container = selgroup, horizontal = T, width = 450)
+						cbox<- gframe(text = '<span foreground="blue" size="large">		Original MODIS Layers			</span>', markup = T, container = cbox_total, horizontal = T, width = 450)
+						bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid), container = cbox, use.table = F, width = 450)
 						# widgets for band selection - indexes
 						check_names_indexes <- prod_opt_list[[checked]]$indexes_fullnames # retrieve indexes band names
 						
@@ -85,14 +93,14 @@ moddwl_GUI = function (general_opts){
 						
 						if (!is.null(check_names_quality)) {
 							check_wid_quality<- temp_wid_bands_quality													# retrieve quality fullnames selected at the time
-							cbox_quality<- gframe(text = '<span foreground="blue" size="large">		Quality Indicators				</span>', markup = T, container = cbox_total, horizontal = FALSE, width = 500)
-							bands_wid_quality <- gcheckboxgroup(items = check_names_quality, checked = as.logical(check_wid_quality), container = cbox_quality, use.table = F, width = 500)
+							cbox_quality<- gframe(text = '<span foreground="blue" size="large">		Quality Indicators				</span>', markup = T, container = cbox_total, horizontal = FALSE, width = 450)
+							bands_wid_quality <- gcheckboxgroup(items = check_names_quality, checked = as.logical(check_wid_quality), container = cbox_quality, use.table = F, width = 450)
 						}
 						
 						if (!is.null(check_names_indexes)) {
 							check_wid_indexes<- temp_wid_bands_indexes													# retrieve indexes fullnames selected at the time
-							cbox_indexes<- gframe(text = '<span foreground="blue" size="large">		Additional Spectral Indexes				</span>', markup = T, container = cbox_total, horizontal = FALSE, width = 500)
-							bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes), container = cbox_indexes, use.table = F, width = 500)
+							cbox_indexes<- gframe(text = '<span foreground="blue" size="large">		Additional Spectral Indexes				</span>', markup = T, container = cbox_total, horizontal = FALSE, width = 450)
+							bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes), container = cbox_indexes, use.table = F, width = 450)
 						} 
 						
 						
@@ -131,7 +139,7 @@ moddwl_GUI = function (general_opts){
 						
 						visible(selgroup, set=TRUE)    # visualize band selection widgets
 						
-					},container =satprod_frame)
+					},container =prod_group, width = 120, expand = T)
 		}}
 	
 
@@ -193,10 +201,11 @@ moddwl_GUI = function (general_opts){
 						current_sel <- svalue(proj_wid) 
 						if (current_sel != 'User Defined') { enabled(output_proj4_wid) <- F} else {(enabled(output_proj4_wid) <- T)}
 					})
-			size (proj_wid) <- c(100,19)
+#			addSpace(output_proj_group, 20)
+#			size (proj_wid) <- c(100,19)
 			
-			outproj_user_lab<- glabel(text = '<span weight = "bold" >PROJ4 String:</span>', container = output_proj_group,markup = T) ; size(output_proj_lab) = c(120,20)
-			output_proj4_wid <- gedit(text = general_opts$user_proj4, container = output_proj_group, width = 40)
+			outproj_user_lab<- glabel(text = '<span weight = "bold" >PROJ4 String:</span>', container = output_proj_group,markup = T) ; size(output_proj_lab) = c(170,20)
+			output_proj4_wid <- gedit(text = general_opts$user_proj4, container = output_proj_group, width = 30)
 			if (general_opts$proj == 'User Defined') { enabled(output_proj4_wid) <- T} else {(enabled(output_proj4_wid) <- F)}
 			
 			# Resolution ----
@@ -266,19 +275,20 @@ moddwl_GUI = function (general_opts){
 						current_sel <- svalue(format_wid)
 						if (current_sel != 'GTiff') { enabled(compress_wid) <- F} else {(enabled(compress_wid) <- T)}
 					})
-			addSpace(opt_group, 5, horizontal=TRUE)
+			addSpace(opt_group, 62, horizontal=TRUE)
 			
 			compress_lab <- glabel(text = '<span weight = "bold" >GTiff Compression: </span>',markup = T, container = opt_group)
 			compress_wid <- gcombobox( c('NONE','LZW','DEFLATE'), container=opt_group,selected <- match(general_opts$compress, c('NONE','LZW','DEFLATE')))
 			if (general_opts$out_format == 'GTiff') { enabled(compress_wid) <- T} else {(enabled(compress_wid) <- F)}
-			timeseries_lab <- glabel(text = '<span weight = "bold" >Virtual Time Series: </span>',markup = T, container = opt_group)
-			timeseries_wid <- gcombobox( c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL'), container=opt_group, 
-					selected <- match(general_opts$ts_format, c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL')), handler = function(h,....) {
-						current_sel <- svalue(timeseries_wid)
-					})
+	
 			
 			
 			repro_group <- ggroup(container = options_frame, horizontal = T)
+			timeseries_lab <- glabel(text = '<span weight = "bold" >Virtual Time Series: </span>',markup = T, container = repro_group)
+			timeseries_wid <- gcombobox( c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL'), container=repro_group, 
+					selected <- match(general_opts$ts_format, c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL')), handler = function(h,....) {
+						current_sel <- svalue(timeseries_wid)
+					})
 			nodata_lab <- glabel(text = '<span weight = "bold" >Change Original NODATA values</span>',markup = T, container = repro_group)
 			nodata_wid <- gradio(items = c('Yes','No'), text = 'Select', container=repro_group, selected = match(general_opts$nodata_change, c('Yes','No')), horizontal = T)
 			
@@ -290,7 +300,7 @@ moddwl_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 	{{outfold_frame <- gframe(text = '<span foreground="blue" size="large">Main Output Folder for Time Series storage</span>', markup = T, container=main_group, expand = T,spacing = 10)    			# Frame group
 			outfold_group <- ggroup(horizontal = TRUE, container=outfold_frame)  				# Main group
-			outfold_wid <- gedit(text = format(general_opts$out_folder, justify = "right") , container=outfold_group, width = 57)			# Selected file
+			outfold_wid <- gedit(text = format(general_opts$out_folder, justify = "right") , container=outfold_group, width = 46)			# Selected file
 			fold_choose <- gbutton("Browse", handler=function(h,...) {choice<-gfile(type="selectdir", text="Select the Output Folder for MODIS data...")		# File selection widget
 						if(! is.na(choice)){svalue(outfold_wid)<-choice						## On new selection, set value of the label widget
 							general_opts$out_folder = format(choice, justify = "left")	# 	On new selection,  Set value of the selected variable
@@ -304,7 +314,7 @@ moddwl_GUI = function (general_opts){
 	
 	{{outfoldmod_frame <- gframe(text = '<span foreground="blue" size="large">Output Folder for Original HDF files download</span>', markup = T, container=main_group, expand = T,spacing = 10)    			# Frame group
 			outfoldmod_group <- ggroup(horizontal = TRUE, container=outfoldmod_frame)  				# Main group
-			outfoldmod_wid <- gedit(text = format(general_opts$out_folder_mod, justify = "right") , container=outfoldmod_group, width = 57)			# Selected file
+			outfoldmod_wid <- gedit(text = format(general_opts$out_folder_mod, justify = "right") , container=outfoldmod_group, width = 46)			# Selected file
 			fold_choose <- gbutton("Browse", handler=function(h,...) {choice<-gfile(type="selectdir", text="Select the Output Folder for storage of original HDFs...")		# File selection widget
 						if(! is.na(choice)){svalue(outfoldmod_wid)<-choice						## On new selection, set value of the label widget
 							general_opts$out_folder_mod = format(choice, justify = "left")	# 	On new selection,  Set value of the selected variable
@@ -416,7 +426,7 @@ moddwl_GUI = function (general_opts){
 						dispose(main_win)
 					})
 			
-			addSpace(but_group, 300, horizontal=TRUE)
+			addSpace(but_group, 280, horizontal=TRUE)
 			
 			{{load_but <- gbutton(text = 'Load Options from File', container = but_group, handler = function (h,....){
 								
