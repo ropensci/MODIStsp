@@ -277,8 +277,9 @@ moddwl_GUI = function (general_opts){
 					})
 			addSpace(opt_group, 62, horizontal=TRUE)
 			
+			compress_dict <- c('NONE','PACKBITS','LZW','DEFLATE'); names(compress_dict) = c('None','Low (PACKBITS)','Medium (LZW)','High (DEFLATE)')
 			compress_lab <- glabel(text = '<span weight = "bold" >GTiff Compression: </span>',markup = T, container = opt_group)
-			compress_wid <- gcombobox( c('NONE','LZW','DEFLATE'), container=opt_group,selected <- match(general_opts$compress, c('NONE','LZW','DEFLATE')))
+			compress_wid <- gcombobox( names(compress_dict), container=opt_group,selected <- match(general_opts$compress, names(compress_dict)))
 			if (general_opts$out_format == 'GTiff') { enabled(compress_wid) <- T} else {(enabled(compress_wid) <- F)}
 	
 			
@@ -378,8 +379,8 @@ moddwl_GUI = function (general_opts){
 								
 								general_opts$out_format <- svalue(format_wid)
 								general_opts$ts_format <- svalue(timeseries_wid)
-								general_opts$compress <- svalue(compress_wid)
-								
+								general_opts$compress <- compress_dict[svalue(compress_wid)]
+
 								general_opts$out_folder <- svalue(outfold_wid)		# Folder options
 								general_opts$out_folder_mod <- svalue(outfoldmod_wid) 
 								
