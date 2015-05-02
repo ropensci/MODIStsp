@@ -28,6 +28,7 @@ moddwl_process_indexes = function(out_filename,indexes_band, formula,bandnames,n
 		}
 	}
 	
+	browser()
 	fun_string = paste(fun_string,'...)','{comp_index <-round(10000*(',formula, '));	return((comp_index))}', sep = '')
 	dir.create(file.path(out_prod_folder,'Temp'), showWarnings=FALSE)
 	temp_raster = gsub("\\\\",'/', file.path(out_prod_folder,'Temp','tempraster'))
