@@ -72,7 +72,7 @@ moddwl_main = function(gui=TRUE, options_file=NULL, moddwl_dir=NA) {
 	source(file.path(src_dir,'moddwl_process.R'))
 	source(file.path(src_dir,'moddwl_set_opts.R'))
 	source(file.path(src_dir,'moddwl_readxml.R'))
-	source(file.path(src_dir,'Moddwl_GUI.R'))
+	source(file.path(src_dir,'moddwl_GUI.R'))
 	source(file.path(src_dir,'moddwl_process_QA_bits.R'))
 	source(file.path(src_dir,'moddwl_META_create.R'))
 	source(file.path(src_dir,'moddwl_process_indexes.R'))
