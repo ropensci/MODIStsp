@@ -1,27 +1,28 @@
+
 #' @Title moddwl_meta_create
-#' @Description	Function used to create a virtual META file from time series of single-band files corresponding to 
+#' @Description	Function used to create virtual files from time series of single-band files corresponding to 
 #' different acquisition dates
 #' 
-#' @details	The function takeas as input the folder in which the single-band files are stored, and cretes a ENVI Meta file
-#' that allows access to the full time series as if it was a "real" file
-#'
-#' @param out_prod_folder 
-#' @param meta_band
-#' @param file_prefix
-#' @param ts_format 
-#' @returnType 
-#'
-#' @return 
+#' @details	The function takes as input the folder in which the single-band files are stored, and cretes a ENVI Meta file and/or
+#' a GDAL vrt file that allows access to the full time series as if it was a single physical file
+#' @param out_prod_folder string main output folder
+#' @param meta_band string "name" of the band (or index, or qi) for which the virtual file is to be created
+#' @param file_prefixes string file_prefixes for terra and aqua - used to identify the files corresponding to each sensor
+#' @param sens_sel string name of the sensor for which the time serie has to be created (Aqua, Terra, Mixed) If "Mixed" and both terra and aqua
+#' images are available, a "mixed" virtual file comprising data from both sensors ordered on DOY base is created
+#' @param ts_format string required output format for virtual file (ENVI, GDAL, Both)
+#' @param nodata_value string nodata value to be used for vrt files (equal to nodata value of inputs) 
+#' @param out_format format of images used as "input" for the vrt and contained in out_prod_folder/band folders (ENVI or GTiff)
+#' @returnType NULL
+#' @return NULL - virtual files are stored in the "Time Series" subfolder of out_prod_folder
 #' 
-#' @author Lorenzo Busetto, phD (2014)
+#' @author Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
-#'
-#' @license GPL(>2)
+#' Luigi Ranghetti, phD (2015)
+#' @license CC BY-NC 3.0
 #' @export
-
 moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefixes,sens_sel,  ts_format, nodata_value,out_format ) {
-	
-	
+		
 	if (sens_sel == "Terra") {file_prefix = file_prefixes[["Terra"]]} 
 	if (sens_sel == "Aqua")  {file_prefix = file_prefixes[["Aqua"]]}
 	if (sens_sel == "Mixed") {file_prefix = paste(file_prefixes[["Terra"]], file_prefixes[["Aqua"]], sep = '_')} 
@@ -38,13 +39,15 @@ moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefixes,sens_se
 		out_meta_files = list.files(file.path(out_prod_folder,meta_band), pattern = '\\.tif$', full.names = T)	# get list of ENVI files
 		if (sens_sel != "Mixed")  {out_meta_files = out_meta_files [grep(file_prefix,out_meta_files)]}	# get list of ENVI files
 	}
+	
 	skip_flag = 0    # initialize skip_flag to 0 
 	if ((sens_sel == "Mixed") &  #Set a flag to 1 if "mixed" was selected but either 0 AQUA or 0 TERRA files are in the time serie
 			(length(grep(file_prefixes[['Aqua']],out_meta_files)) == 0) |   # in that case, the creation of META files for the mixed case is skipped !
 			(length(grep(file_prefixes[['Terra']],out_meta_files)) == 0)
-			) {skip_flag = 1 }   # 
+			) {skip_flag = 1 
+	}    
 	
-	if (skip_flag != 1) {   # If set_flag = 1 ( mixed TS, but data from terra or aqua missing) do nothing
+	if (skip_flag != 1) {   # If skip_flag = 1 ( mixed TS, but data from terra or aqua missing) do nothing
 		if (length(out_meta_files) > 0) {   # If no files available, skip metadata creation
 			
 			doys = (str_sub(basename(out_meta_files),-7,-5))		# retrieve the doys and years from filenames
@@ -53,7 +56,7 @@ moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefixes,sens_se
 			
 			doys = as.numeric(doys [acq_order])   ; years = as.numeric(years[acq_order])    # reorder doys and years
 			out_meta_files = out_meta_files[acq_order]			 #  Reorder Files  according to acquisition date (useful to have a META file with bands
-																											 # in the correct order
+			# in the correct order
 			
 			if (ts_format == 'ENVI Meta Files' | ts_format == 'ENVI and GDAL') {
 				
