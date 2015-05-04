@@ -6,6 +6,6 @@ outFile <- file.path(moddwl_dir,'Log',paste0(make.names(date()),".Rout")) # dire
 gui = if (length(Args)>=2) as.logical(Args[2]) else TRUE
 settings = if (length(Args)>=3) Args[3] else NULL
 
-source(file.path(moddwl_dir,'R/Moddwl_Main.R'), echo = TRUE)
+source(file.path(moddwl_dir,'R/moddwl_main.R'), echo = TRUE)
 sink(outFile, split = TRUE)
 output = moddwl_main(gui=gui, settings=settings, moddwl_dir=moddwl_dir)
