@@ -1,6 +1,6 @@
 
-#' @Title moddwl_process_QA_bits
-#' @Descritpion function used to extract quality indicator from MODIS aggregated quality layers
+#'  moddwl_process_QA_bits
+#' @description function used to extract quality indicator from MODIS aggregated quality layers
 #' @details On the basis of the name of the image containing the aggregated quality information
 #' (in_raster_name) and of the position of the bit fields corresponding to the QI of interest in the bitfield representation
 #' (bitN), the function extracts the correct information exploiting bitwise operators, and save the result in a new
@@ -18,15 +18,14 @@
 #' @param nodata_source nodata values of the MODIS band containing data from which the bit field corresponding to the quality indicator must be extracted
 #' @param nodata_qa_in string in nodata for quality bands ("255")
 #' @param nodata_qa_out string out nodata for quality bands ("255")
-#' @returnType 
-#' @return 
+#' @return NULL
 #' 
 #' @author Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
 #' Based on the "modis.qc.R" script by Yann Chemin (2008) (https://r-forge.r-project.org/scm/viewvc.php/pkg/RemoteSensing/R/modis.qc.R?view=markup&root=remotesensing&pathrev=79)
 #'
-#' @license CC BY-NC 3.0
+#' license CC BY-NC 3.0
 #' @export
 moddwl_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, out_prod_folder, 
 		file_prefix, yy, DOY, out_format, nodata_source,nodata_qa_in , nodata_qa_out) {

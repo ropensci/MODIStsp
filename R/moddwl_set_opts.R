@@ -1,5 +1,5 @@
-#' @Title moddwl_set_opts OBSOLETE ! CHANGED TO READING FROM XML FILE ! TO BE REMOVED FROM PROJECCT 
-#' @Description
+#' moddwl_set_opts OBSOLETE ! CHANGED TO READING FROM XML FILE ! TO BE REMOVED FROM PROJECCT 
+#' @description
 #' Function used to define the structure of the "opts" variable used to store all processing options for the different
 #' products and generic, and save it in the "previous" file. 
 #' 

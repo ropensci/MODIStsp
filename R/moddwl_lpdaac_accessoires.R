@@ -1,18 +1,17 @@
 moddwl_lpdaac_accessoires = function () {
 }
 
-#' @Title lpdaac_getmod_dirs
-#' @Descritpion Accessory function to get the full list of directories on the lpdaac http site (modified after Barry Rowlingson function):
-#' @details 
+#' lpdaac_getmod_dirs
+#' @description Accessory function to get the full list of directories on the lpdaac http site (modified after Barry Rowlingson function):
+#' 
 #' @param http string http site on lpdaac corresponding to a given MODIS product
 #' @param .Platform string os platform (from call to .Platform)
-#' @returnType list
 #' @return list of all available folders (a.k.a. dates) for the requeted MODIS product on lpdaac archive
 #' 
 #' @author Original code by XXXXXX 
 #' Modified to adapt it to moddwl scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
-#' @license CC BY-NC 3.0
+#' license CC BY-NC 3.0
 #' @export
 lpdaac_getmod_dirs <- function(http, .Platform) {
 	
@@ -40,19 +39,18 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
 	
 }
 
-#' @Title lpdaac_getmod_dates
-#' @Descritpion Accessory function to find the folders corresponding to the requested dates period within the full list retrieved by lpdaac_getmod_dirs
-#' @details 
+#' lpdaac_getmod_dates
+#' @description Accessory function to find the folders corresponding to the requested dates period within the full list retrieved by lpdaac_getmod_dirs
+#' 
 #' @param dates 2- element string array specifying start/end dates (yyyy.mm.dd) for which the http addresses of folders in lpdaac should be retrieved
 #' (e.g., c("2015.1.1", "2015.12.31)
 #' @param date_dirs data frame full list of folders in lpdaa archive for product of interest 
-#' @returnType string array
 #' @return array of folder names containing data for the modis product acquired in the period specified by "dates" 
 #' 
 #' @author Original code by XXXXXX 
 #' Modified to adapt it to moddwl scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
-#' @license CC BY-NC 3.0
+#' license CC BY-NC 3.0
 #' @export
 lpdaac_getmod_dates <- function(dates, date_dirs) {
 	
@@ -92,21 +90,20 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 # Accessory function to find the image names corresponding to the selected dates and tiles
 # ---------------------------------- ----------------------------------------------#
 
-#' @Title lpdaac_getmod_names
-#' @Descritpion Accessory function to find the names of HDF images corresponding to a given date and interval of spatial tiles within the lpdaac archive
+#' lpdaac_getmod_names
+#' @description Accessory function to find the names of HDF images corresponding to a given date and interval of spatial tiles within the lpdaac archive
 #' @details 
 #' @param http string http site on lpdaac corresponding to a given MODIS product
 #' @param date_dirs array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)
 #' @param date string date for which the HDF filenames has to be retrieved
 #' @param v int. array containing a sequence of the vertical tiles of interest (e.g., c(18,19))
 #' @param h int. array containing a sequence of the horizontal  tiles of interest (e.g., c(3,4))
-#' @returnType string array
 #' @return Modislist names of HDF images corresponding to the requested tiles available for the product in the selected date 
 #' 
 #' @author Original code by XXXXXX 
 #' Modified to adapt it to moddwl scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
-#' @license CC BY-NC 3.0
+#' license CC BY-NC 3.0
 #' @export
 lpdaac_getmod_names <- function(http, date_dirs, date, v, h) {
 	getlist <- 0

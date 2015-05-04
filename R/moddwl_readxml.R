@@ -1,18 +1,17 @@
 
-#' @Title moddwl_read_xml_opts
-#' @Descritpion function used to parse the XML file used to store the characteristics of 
+#' moddwl_read_xml_opts
+#' @description function used to parse the XML file used to store the characteristics of 
 #' MODIS Land Products and store them in the "prod_opts" data frame
 #' @details The function parses the XML file product by product, stores data in a data frame
 #' and saves the data frame within the "moddwl_previous" RData file as a list of lists
 #' @param previous_file string filename of the RData in which to store the data parsed from the XML file
 #' @param xml_file string filename of the XML file containing the MODIS products characteristics
-#' @returnType NULL
 #' @return NULL - retrieved data are stored in the specified RData file
 #' 
 #' @author Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
-#' @license CC BY-NC 3.0
+#' license CC BY-NC 3.0
 #' @export
 moddwl_read_xml_opts = function(previous_file = previous_file, xml_file = xml_file) {
 	

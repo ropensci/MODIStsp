@@ -1,17 +1,16 @@
-#' @Title moddwl_main
-#' @Descritpion Main function for the MODIS Time Series Processing Tool (MOD_TSP)
+#'  moddwl_main
+#' @description Main function for the MODIS Time Series Processing Tool (MOD_TSP)
 #' @details The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (moddwl_GUI) and receive its outputs,
 #'  and to launch the required routines for downloading and processing the requested datasets.
 #' @param gui logical parameters (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed)
 #' @param options_file settings (optional): full path of the RData file containing the processing options (default: Previous.RData in subdir Previous);
 #' @param moddwl_dir main directory of the local installation of the tool(if not gived, it is automatically retrieved, but this works only if the function is launched from here!)
-#' @returnType 
 #' @return NULL
 #' 
 #' @author Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
-#' @license CC BY-NC 3.0
+#' license CC BY-NC 3.0
 #' @export
 
 run=T # workaround usable to TRUE to run directly the function from here

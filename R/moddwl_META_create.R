@@ -1,6 +1,6 @@
 
-#' @Title moddwl_meta_create
-#' @Description	Function used to create virtual files from time series of single-band files corresponding to 
+#' moddwl_meta_create
+#' @description	Function used to create virtual files from time series of single-band files corresponding to 
 #' different acquisition dates
 #' 
 #' @details	The function takes as input the folder in which the single-band files are stored, and cretes a ENVI Meta file and/or
@@ -13,13 +13,12 @@
 #' @param ts_format string required output format for virtual file (ENVI, GDAL, Both)
 #' @param nodata_value string nodata value to be used for vrt files (equal to nodata value of inputs) 
 #' @param out_format format of images used as "input" for the vrt and contained in out_prod_folder/band folders (ENVI or GTiff)
-#' @returnType NULL
 #' @return NULL - virtual files are stored in the "Time Series" subfolder of out_prod_folder
 #' 
 #' @author Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
-#' @license CC BY-NC 3.0
+#' license CC BY-NC 3.0
 #' @export
 moddwl_meta_create <- function(out_prod_folder, meta_band, file_prefixes,sens_sel,  ts_format, nodata_value,out_format ) {
 		

@@ -1,21 +1,16 @@
-#' @Title moddwl_GUI
-#' @Description
+#' moddwl_GUI
+#' @description
 #'	Function used to generate and handle the GUI used to allow selection of moddwl processing parameters
 #'  If the "previous options" file (moddwl_Previous.RData) already exists, it is loaded and used to reinstate
 #' 	the GUI to its last state. Otherwise, the previous options file is created by launching the moddwl_read_xml fucntion 
-#' 
-#' @details
 #'
 #' @param general_opts General options data frame passed by moddwl_main. Contains paths and other variables used to initialize the GUI
 #' 						if a previous options file is not existing. 
-#' 			 
-#' @returnType 
-#' @return 
-#'		NONE - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
+#' @return NULL - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
 #' @author Lorenzo Busetto, phD (2014)
 #' email: busetto.l@@irea.cnr.it
 #'
-#' @license GPL(>2)
+#' license GPL(>2)
 #' @export
 moddwl_GUI = function (general_opts){
 	

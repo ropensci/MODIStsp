@@ -1,6 +1,5 @@
-
-#' @Title moddwl_check_files
-#' @Descritpion Accessory function used to see if all expected out files for the selected date are already present.
+#' moddwl_check_files
+#' @description Accessory function used to see if all expected out files for the selected date are already present.
 #' @details if all expected out files for the selected date are already present, check_files is set to TRUE, and date is skipped 
 #' in moddwl_process
 #' @param out_prod_folder 
@@ -14,13 +13,12 @@
 #' @param indexes_bandsel 
 #' @param quality_bandnames 
 #' @param quality_bandsel 
-#' @returnType 
 #' @return check - logical = 1 if all expected output files are already existing
 #' 
 #' @author Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
-#' @license CC BY-NC 3.0
+#' license CC BY-NC 3.0
 #' @export
 moddwl_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel_orig_choice,yy,DOY, out_format, indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel) {
 	check = T

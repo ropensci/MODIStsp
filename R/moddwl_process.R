@@ -1,6 +1,6 @@
 #' 
-#' @Title moddwl_process
-#' @Descritpion main function of moddwl tool. Takes as input processing parameters specified by the user using moddl_GUI and saved in 
+#' moddwl_process
+#' @description main function of moddwl tool. Takes as input processing parameters specified by the user using moddl_GUI and saved in 
 #' moddwl_Previous.RData (Interactive use), or a user specified RData file (batch use) (See moddwl_main for details ) and performs all required 
 #' processing. 
 #' @details After retrieving the input processing options, the function accesses lpdaac htttp archive to determine the list of dates 
@@ -48,13 +48,12 @@
 #' @param main_out_folder Suffix to add to the overall out_folder to create the out dir for the product (corresponds to an abbreviation of the selected product)
 #' @param resampling string resampling method (near, bilinear, etc.)
 #' @param ts_format string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)
-#' @returnType NULL
 #' @return NULL
 #' 
 #' @author Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
-#' @license CC BY-NC 3.0
+#' license CC BY-NC 3.0
 #' @export
 moddwl_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = 'Yes', delete_hdf = 'No', sensor, https,
 		start_x, start_y, end_x, end_y, bbox, out_format, compress,  out_res, native_res, MOD_proj_str, outproj_str, nodata_in, nodata_out,nodata_change, datatype, 
