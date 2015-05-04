@@ -26,13 +26,13 @@ moddwl_main = function(gui=TRUE, options_file=NULL, moddwl_dir=NA) {
 	# Check sp version
 	sp_version <- packageVersion('sp')
 	sp_minversion <- package_version("1.0.17") # sp version used during the last test (for now used as minimum required version)
-	if (sp_version < sp_minversion) install.packages('sp',dep=TRUE)
+	if (sp_version < sp_minversion) install.packages('sp',dep=TRUE,repos='http://stat.ethz.ch/CRAN')
 	require('sp')
 	{{# Check if needed packages are present. Install them otherwise
 #			pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
 #					'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools', 'gdalUtils',')
-			pkg_list = c('XML','gWidgets','rgdal', 'gdalUtils','hash','raster','RCurl','stringr','tools')
-			pkg_test <- function(x) {while (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE)}}
+			pkg_list = c('XML','gWidgetsRGtk2','rgdal','gdalUtils','hash','raster','RCurl','stringr','tools','plyr')
+			pkg_test <- function(x) {while (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE,repos='http://stat.ethz.ch/CRAN')}}
 			for (pkg in pkg_list) {pkg_test(pkg)}
 			# Check GDAL version
 			if (is.null(getOption('gdalUtils_gdalPath'))) {gdal_setInstallation(ignore.full_scan=FALSE)}
@@ -63,7 +63,7 @@ moddwl_main = function(gui=TRUE, options_file=NULL, moddwl_dir=NA) {
 	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) ; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 	previous_file = if (is.null(options_file)) {file.path(previous_dir, 'Moddwl_Previous.RData')} else {options_file}  # TODO fix to accept relative paths
 	
-	xml_file= file.path(main_dir,'Accessoires','Moddwl_XML.xml')  #XML file describing MODIS products 
+	xml_file= file.path(main_dir,'Accessoires','moddwl_xml.xml')  #XML file describing MODIS products 
 	
 	# Sourcing of needed R scripts (Remove when building package !!!!)-----
 	source(file.path(src_dir,'moddwl_lpdaac_accessoires.R'))

@@ -12,7 +12,7 @@ settings=NULL # Path of the RData with the porcess parameters (default: NULL -> 
 rscript.stack <- function() {Filter(Negate(is.null), lapply(sys.frames(), function(x) x$ofile))}    			#	Returns the stack of RScript files
 rscript.current <- function() {	stack <- rscript.stack()   ;	  as.character(stack[length(stack)])}		## Returns the current RScript file path
 main_dir = dirname(rscript.current())
-source(file.path(main_dir,'R/Moddwl_Main.R'))
+source(file.path(main_dir,'R/moddwl_main.R'))
 
 # Launch it
 cat('[',date(),'] Running MOD_DWL...\n')
