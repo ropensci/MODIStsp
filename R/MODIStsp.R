@@ -45,7 +45,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
 # 		}}
 
-	options("guiToolkit"="tcltk")
+	options("guiToolkit"="RGtk2")
 	memory.limit(8000)							# Increase maximum allocsable memory
 	rasterOptions(setfileext = F)				# Make so that "raster" functions doesn't automatically add extensions on output files
 	# Folder Initialization -----
