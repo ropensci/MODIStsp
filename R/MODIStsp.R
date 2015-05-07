@@ -81,7 +81,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 		MOD_proj_str = '+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs '
 
 		# Create the general_opts structure used to communicate with the GUI and set default values
-		general_opts = list(main_dir = main_dir, previous_file=previous_file,xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
+		general_opts = list(MODIStsp_dir = MODIStsp_dir, previous_file=previous_file,xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
 				sel_prod = 'Surf_Ref_8Days_500m (MOD09A1)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
 				start_x = 18, end_x =18, start_y = 4, end_y = 4,
 				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', compress = 'None',
