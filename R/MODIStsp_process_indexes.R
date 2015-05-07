@@ -1,5 +1,5 @@
 
-#'  moddwl_process_indexes
+#'  MODIStsp_process_indexes
 #' @description function used to compute spectral indexes, given the index formula
 #' @details the function parses the index formula to identify the required bands. On the basis
 #' of identified bands, it retrieves the reflectance bands required, gets the data into R raster 
@@ -21,7 +21,7 @@
 #' Luigi Ranghetti, phD (2015)
 #' license CC BY-NC 3.0
 #' @export
-moddwl_process_indexes = function(out_filename, formula,bandnames,nodata_out,out_prod_folder,
+MODIStsp_process_indexes = function(out_filename, formula,bandnames,nodata_out,out_prod_folder,
 		indexes_nodata_out, file_prefix, yy, DOY, out_format) {
 	
 	# Retrieve necessary filenames (get names of single band files on the basis of Index formula)
