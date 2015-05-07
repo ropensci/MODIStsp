@@ -21,7 +21,7 @@
 
 MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 
-#	main_dir = system.file(package = "MODIStsp")
+	MODIStsp_dir = system.file(package = "MODIStsp")
 
 	#- ------------------------------------------------------------------------------- -#
 	#  Initialize project
@@ -65,10 +65,10 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 
 # 	setwd(main_dir);   main_dir = getwd()   ;
 #   log_dir =  file.path(main_dir,'Log')   ; log_file =  file.path(log_dir,'Log.txt')
-	previous_dir = if (is.null(options_file)) {file.path(main_dir,'Previous')} else {dirname(options_file)}   # Folder in which the previous options file is saved
+	previous_dir = if (is.null(options_file)) {file.path(MODIStsp_dir,'Previous')} else {dirname(options_file)}   # Folder in which the previous options file is saved
 	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 	previous_file = if (is.null(options_file)) {file.path(previous_dir, 'MODIStsp_Previous.RData')} else {options_file}  # TODO fix to accept relative paths
-	xml_file= file.path(main_dir,'ExtData','MODIStsp_ProdOpts.xml')  #XML file describing MODIS products
+	xml_file= file.path(MODIStsp_dir,'ExtData','MODIStsp_ProdOpts.xml')  #XML file describing MODIS products
 
 #- ------------------------------------------------------------------------------- -#
 #  Set general processing options
