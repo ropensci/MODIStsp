@@ -14,6 +14,8 @@
 #' @export
 #' @importFrom hash hash
 #' @import gdalUtils
+#' @import rgdal
+#' @import raster
 
 #run=F # workaround usable to TRUE to run directly the function from here
 # (It would be better to launch from ../MODIStsp.R, in order not to edit this)
@@ -44,7 +46,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
 # 		}}
-
+  require(gWidgetsRGtk2)
 	options("guiToolkit"="RGtk2")
 	memory.limit(8000)							# Increase maximum allocsable memory
 	rasterOptions(setfileext = F)				# Make so that "raster" functions doesn't automatically add extensions on output files
