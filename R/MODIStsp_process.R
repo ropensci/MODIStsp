@@ -59,7 +59,7 @@
 #' @import gdalUtils
 #' @import rgdal
 #' @importFrom hash hash
-#' @import gWidgetsRGtk2
+# #' @import gWidgetsRGtk2
 #' @import gWidgets
 #' @import sp
 

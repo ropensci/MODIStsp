@@ -12,7 +12,7 @@
 #'
 #' license GPL(>2)
 #' @export
-#' @import gWidgetsRGtk2
+##' @import gWidgetsRGtk2
 #' @import gWidgets
 
 MODIStsp_GUI = function (general_opts){
