@@ -178,7 +178,7 @@ MODIStsp_GUI = function (general_opts){
 	size (start_x_wid) = c(35,25)    ; size (end_x_wid) = c(35,25)
 	show_map <- gbutton(text = 'Show Tiles Map', border = T,
 			handler = function(h,....) {x11(10,6)
-				plot(raster(file.path(general_opts$main_dir, "/ExtData/MODIS_Tiles.gif")))},
+				plot(raster(file.path(general_opts$MODIStsp_dir, "/ExtData/MODIS_Tiles.gif")))},
 			container =x_group )
 	# vertical
 	y_group <- ggroup(container = tiles_group, horizontal = TRUE)
@@ -190,6 +190,47 @@ MODIStsp_GUI = function (general_opts){
 	size (start_y_wid) <- c(35,25)   ; size (end_y_wid) <- c(35,25)
 	if (prod_opt_list[[checked]]$tiled == 0) { enabled(tiles_group) <- F} else {(enabled(tiles_group) <- T)}
 
+	# button to retrieve tiles from bounding box (TODO: change as function and use also for a final check)
+	if (!exists('modis_grid')) {load(file.path(general_opts$MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))}
+	tiles_from_bbox <- gbutton(text = 'Retrieve from bounding box', border = T,
+			handler = function(h,...) {
+				bbox <- as.numeric(c(svalue(output_ULeast_wid),svalue(output_LReast_wid),svalue(output_LRnorth_wid),svalue(output_ULnorth_wid)))
+				# Check if bbox is consistent	
+				n_bbox_compiled <- length(which(is.finite(bbox)))
+				if (general_opts$full_ext != 'Full Tiles Extent' | n_bbox_compiled == 0) {
+					gmessage('Please specify an output bounding box!', title = 'Warning') ; check <- F
+				} else if (svalue(proj_wid) == 'User Defined' &  nchar(svalue(output_proj4_wid)) == 0) {
+					gmessage('Please specify an output projection', title = 'Warning') ; check <- F
+				} else if (n_bbox_compiled < 4) {
+					gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F
+				} else if (bbox[1] > bbox[2] | bbox[3] > bbox[4]) {
+					gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F
+				} else {
+					# convert polygon bbox 
+					N_dens = 1000 # densification ratio of the bounding box
+					d_bbox_out <- data.frame(lon=c(bbox[1]+diff(bbox[1:2])*(0:N_dens)/N_dens, rep(bbox[2],N_dens-1), bbox[1]+diff(bbox[1:2])*(N_dens:0)/N_dens, rep(bbox[1],N_dens-1)),
+							lat=c(rep(bbox[3],N_dens), bbox[3]+diff(bbox[3:4])*(0:N_dens)/N_dens, rep(bbox[4],N_dens-1), bbox[3]+diff(bbox[3:4])*(N_dens:1)/N_dens))
+					d_bbox_out <- SpatialPolygons(list(Polygons(list(Polygon(d_bbox_out)),1)))
+					if (svalue(proj_wid)=="Sinusoidal") {
+						proj4string(d_bbox_out) <- general_opts$MOD_proj_str
+						d_bbox_mod <- d_bbox_out
+					} else {
+						output_proj <- try(CRS(if (svalue(proj_wid) == 'User Defined') {svalue(output_proj4_wid)} else {general_opts$out_proj_list[[svalue(proj_wid)]]}),silent=TRUE)
+						if (class(output_proj)=='try-error') {
+							gmessage(output_proj, title = 'Warning') ; check <- F; stop()
+						} else {
+							proj4string(d_bbox_out) <- output_proj
+						}
+						d_bbox_mod <- spTransform(d_bbox_out, CRS(general_opts$MOD_proj_str))
+					}
+					d_bbox_mod_tiled <- intersect(modis_grid,d_bbox_mod)
+					svalue(start_x_wid)  <- min(d_bbox_mod_tiled$H)
+					svalue(end_x_wid)  <- max(d_bbox_mod_tiled$H)
+					svalue(start_y_wid) <- min(d_bbox_mod_tiled$V)
+					svalue(end_y_wid) <- max(d_bbox_mod_tiled$V)
+				}
+			}, container =y_group )
+	
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Projection, resolution and bbox selection
 #- ------------------------------------------------------------------------------- -#

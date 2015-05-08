@@ -23,7 +23,7 @@
 
 MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 
-	MODIStsp_dir = system.file(package = "MODIStsp")
+	if (is.na(MODIStsp_dir)) {MODIStsp_dir = system.file(package = "MODIStsp")}
 	print(MODIStsp_dir)
 
 	#- ------------------------------------------------------------------------------- -#
