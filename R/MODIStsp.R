@@ -47,6 +47,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
 # 		}}
+	print(gdal_version)
   require(gWidgetsRGtk2)
 	options("guiToolkit"="RGtk2")
 	memory.limit(8000)							# Increase maximum allocsable memory
