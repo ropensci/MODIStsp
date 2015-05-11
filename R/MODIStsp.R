@@ -78,7 +78,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 #  Set general processing options
 #- ------------------------------------------------------------------------------- -#
 	{out_proj_names = c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
-		out_proj_list = hash("Sinusoidal" = "",
+		out_proj_list = hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs ",
 				"UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
 				"Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
 				"User Defined" = "")
