@@ -24,18 +24,18 @@ MODIStsp_GUI = function (general_opts){
 	
 	assign("Quit", T, envir=globalenv())	# Assigng "Quit" to true
 	
-#- ------------------------------------------------------------------------------- -#
-#  Start Building the GUI
-#- ------------------------------------------------------------------------------- -#
+	#- ------------------------------------------------------------------------------- -#
+	#  Start Building the GUI
+	#- ------------------------------------------------------------------------------- -#
 	main_win <- gbasicdialog(title = "Select Main Processing Options", parent=NULL, do.buttons=F,
 			visible = F, spacing = 10)
 	main_group <- ggroup(container = main_win, horizontal = FALSE, expand = T)
 	sel_prod <- general_opts$sel_prod # get the product name selectedin the previous options file
 	
 	
-#- ------------------------------------------------------------------------------- -#
-# Widgets for product selection and bands selection
-#- ------------------------------------------------------------------------------- -#
+	#- ------------------------------------------------------------------------------- -#
+	# Widgets for product selection and bands selection
+	#- ------------------------------------------------------------------------------- -#
 	satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, Satellites and Layers selection</span>', markup = T,horizontal = F, container=main_group, spacing = 5)
 	
 	checked <- which(mod_prod_list == general_opts$sel_prod)
@@ -187,14 +187,24 @@ MODIStsp_GUI = function (general_opts){
 			})
 	size (output_ext_wid) <- c(120,20)
 	
-	#---------------------------------------
-	# button to retrieve tiles from bounding box (TODO: change as function and use also for a final check)
-	#---------------------------------------
+	#-------------------------------------------
+	# button to retrieve tiles from bounding box
+	#-------------------------------------------
+	
+	## Function to update the selected tiles with the intersection with the bounding box
+	update_tiles = function(bbox,...) {
+		bbox_mod <- reproj_bbox( bbox, svalue(output_proj4_wid), general_opts$MOD_proj_str, enlarge=TRUE)
+		d_bbox_mod_tiled <- intersect(modis_grid,extent(bbox_mod))
+		svalue(start_x_wid)  <- min(d_bbox_mod_tiled$H)
+		svalue(end_x_wid)  <- max(d_bbox_mod_tiled$H)
+		svalue(start_y_wid) <- min(d_bbox_mod_tiled$V)
+		svalue(end_y_wid) <- max(d_bbox_mod_tiled$V)
+	}
 	
 	if (!exists('modis_grid')) {load(file.path(general_opts$MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))}
 	tiles_from_bbox <- gbutton(text = 'Retrieve Tiles from bounding box', border = T,
 			handler = function(h,...) {
-				bbox <- as.numeric(c(svalue(output_ULeast_wid),svalue(output_LReast_wid),svalue(output_LRnorth_wid),svalue(output_ULnorth_wid)))
+				bbox <- as.numeric(c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
 				# Check if bbox is consistent	
 			
 				n_bbox_compiled <- length(which(is.finite(bbox)))
@@ -204,32 +214,10 @@ MODIStsp_GUI = function (general_opts){
 					gmessage('Please specify an output projection', title = 'Warning') ; check <- F
 				} else if (n_bbox_compiled < 4) {
 					gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F
-				} else if (bbox[1] > bbox[2] | bbox[3] > bbox[4]) {
+				} else if (bbox[1] > bbox[3] | bbox[2] > bbox[4]) {
 					gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F
 				} else {
-					# convert polygon bbox 
-					N_dens = 1000 # densification ratio of the bounding box
-					d_bbox_out <- data.frame(lon=c(bbox[1]+diff(bbox[1:2])*(0:N_dens)/N_dens, rep(bbox[2],N_dens-1), bbox[1]+diff(bbox[1:2])*(N_dens:0)/N_dens, rep(bbox[1],N_dens-1)),
-							lat=c(rep(bbox[3],N_dens), bbox[3]+diff(bbox[3:4])*(0:N_dens)/N_dens, rep(bbox[4],N_dens-1), bbox[3]+diff(bbox[3:4])*(N_dens:1)/N_dens))
-					d_bbox_out <- SpatialPolygons(list(Polygons(list(Polygon(d_bbox_out)),1)))
-					if (svalue(proj_wid)=="Sinusoidal") {
-						proj4string(d_bbox_out) <- general_opts$MOD_proj_str
-						d_bbox_mod <- d_bbox_out
-					} else {
-						output_proj <- try(CRS(if (svalue(proj_wid) == 'User Defined') {svalue(output_proj4_wid)} else {general_opts$out_proj_list[[svalue(proj_wid)]]}),silent=TRUE)
-						if (class(output_proj)=='try-error') {
-							gmessage(output_proj, title = 'Warning') ; check <- F; stop()
-						} else {
-							proj4string(d_bbox_out) <- output_proj
-						}
-						d_bbox_mod <- spTransform(d_bbox_out, CRS(general_opts$MOD_proj_str))
-					}
-					d_bbox_mod_tiled <- intersect(modis_grid,d_bbox_mod)
-					svalue(start_x_wid)  <- min(d_bbox_mod_tiled$H)
-					svalue(end_x_wid)  <- max(d_bbox_mod_tiled$H)
-					svalue(start_y_wid) <- min(d_bbox_mod_tiled$V)
-					svalue(end_y_wid) <- max(d_bbox_mod_tiled$V)
-					
+					update_tiles(bbox) # convert polygon bbox					
 				}
 			}, container =output_ext_group )
 	if (svalue (output_ext_wid) != "Full Tiles Extent") { enabled(tiles_from_bbox) <- T} else {(enabled(tiles_from_bbox) <- F)}
@@ -242,6 +230,11 @@ MODIStsp_GUI = function (general_opts){
 				choice<-gfile(type="open", text="Select a SHP or KML polygon file", filter=list("bboxfiles" =
 										list(patterns = c("*.shp","*.kml"))))		# File selection widget
 				if(! is.na(choice)){
+					
+					wait_window <- gwindow(title="Please wait", container = TRUE, width = 400, height = 40)
+					size(wait_window) <- c(100,8)		;	addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
+				wait_window_lab = glabel(text =paste('Charging the selected file, please wait...'), editable = FALSE, container = wait_window)
+					
 					print(choice)
 					if (file_ext(choice) == 'shp'){
 						basename = basename(file_path_sans_ext(choice))  # get shape and dir name
@@ -255,21 +248,13 @@ MODIStsp_GUI = function (general_opts){
 						bbox_shape = bbox(shape)  
 					}
 					
-					# COnvert bbox coordinates in those of output projection
+					# Convert bbox coordinates in those of output projection
 					if (svalue(proj_wid)!= "User Defined"){
 						out_proj_crs = general_opts$out_proj_list[[svalue(proj_wid)]]
 					} else {out_proj_crs = general_opts$user_proj4}
-#					N_dens = 1000 # densification ratio of the bounding box
-#					d_bbox_shape_out <- data.frame(lon=c(bbox_shape[1]+diff(bbox_shape[c(1,3)])*(0:N_dens)/N_dens, rep(bbox_shape[3],N_dens-1), bbox_shape[1]+diff(bbox_shape[c(1,3)])*(N_dens:0)/N_dens, rep(bbox_shape[1],N_dens-1)),
-#							lat=c(rep(bbox_shape[2],N_dens), bbox_shape[2]+diff(bbox_shape[c(2,4)])*(0:N_dens)/N_dens, rep(bbox_shape[4],N_dens-1), bbox_shape[2]+diff(bbox_shape[c(2,4)])*(N_dens:1)/N_dens))
-#					browser()
-					d_bbox_shape_out <- data.frame(lon=bbox_shape[c(1,3)], lat = bbox_shape[c(2,4)])
-					d_bbox_shape_out <- SpatialPolygons(list(Polygons(list(Polygon(d_bbox_shape_out)),1)))
-					
-					
-					proj4string(d_bbox_shape_out) <- CRS(proj4string(shape))
-#						# transform to output coordinates
-					d_bbox_mod <- spTransform(d_bbox_shape_out, CRS(out_proj_crs))@bbox
+
+					bbox_out <- reproj_bbox(bbox_shape, proj4string(shape), out_proj_crs, enlarge=TRUE)
+				
 #						# Get the units and kind of proj
 					
 					proj = head(strsplit(tail(strsplit(CRS(out_proj_crs)@projargs, '+proj=')[[1]],1)," +")[[1]],1)
@@ -277,10 +262,15 @@ MODIStsp_GUI = function (general_opts){
 #						units = head(strsplit(tail(strsplit("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181", '+units=')[[1]],1)," +")[[1]],1)
 					
 					# set bbox according to shape
-					svalue(output_ULeast_wid) = formatC(d_bbox_mod[1,1], digits = ifelse(units =="deg",4,1), format = 'f')
-					svalue(output_ULnorth_wid) = formatC(d_bbox_mod[2,2], digits = ifelse(units =="deg",4,1), format = 'f')
-					svalue(output_LReast_wid) = formatC(d_bbox_mod[1,2], digits = ifelse(units =="deg",4,1), format = 'f')
-					svalue(output_LRnorth_wid) = formatC(d_bbox_mod[2,1], digits = ifelse(units =="deg",4,1), format = 'f')
+					svalue(output_ULeast_wid) = formatC(bbox_out[1,1], digits = ifelse(units =="deg",4,1), format = 'f')
+					svalue(output_ULnorth_wid) = formatC(bbox_out[2,2], digits = ifelse(units =="deg",4,1), format = 'f')
+					svalue(output_LReast_wid) = formatC(bbox_out[1,2], digits = ifelse(units =="deg",4,1), format = 'f')
+					svalue(output_LRnorth_wid) = formatC(bbox_out[2,1], digits = ifelse(units =="deg",4,1), format = 'f')
+					
+					# Set tiles according with the bounding box
+					update_tiles(bbox_out)
+					
+					dispose(wait_window)
 				}
 				
 				
@@ -380,27 +370,15 @@ MODIStsp_GUI = function (general_opts){
 					svalue(pixsize2_lab) = units
 					#----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
 				if (svalue (output_ext_wid) != "Full Tiles Extent") {
-					bbox_in = as.numeric(c(svalue(output_ULeast_wid) ,svalue(output_LReast_wid) ,svalue(output_LRnorth_wid),svalue(output_ULnorth_wid)))
-#					N_dens = 1000 # densification ratio of the bounding box
-##					d_bbox_in <- data.frame(lon=c(bbox_in[1]+diff(bbox_in[1:2])*(0:N_dens)/N_dens, rep(bbox_in[2],N_dens-1), bbox_in[1]+diff(bbox_in[1:2])*(N_dens:0)/N_dens, rep(bbox_in[1],N_dens-1)),
-#							lat=c(rep(bbox_in[3],N_dens), bbox_in[3]+diff(bbox_in[3:4])*(0:N_dens)/N_dens, rep(bbox_in[4],N_dens-1), bbox_in[3]+diff(bbox_in[3:4])*(N_dens:1)/N_dens))
-					d_bbox_in <- data.frame(lon=bbox_in[1:2], lat = bbox_in[3:4])
-#					browser()
-					d_bbox_in <- SpatialPolygons(list(Polygons(list(Polygon(d_bbox_in)),1)))
-					proj4string(d_bbox_in) <- CRS(old_proj4)
+					bbox_in = as.numeric(c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
+					bbox_out <- reproj_bbox(bbox_in, old_proj4, sel_output_proj@projargs, enlarge=FALSE)
 					
-					d_bbox_mod <- spTransform(d_bbox_in, sel_output_proj)@bbox
-					svalue(output_ULeast_wid) = formatC(d_bbox_mod[1,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
-					svalue(output_ULnorth_wid) = formatC(d_bbox_mod[2,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
-					svalue(output_LReast_wid) = formatC(d_bbox_mod[1,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
-					svalue(output_LRnorth_wid) = formatC(d_bbox_mod[2,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+					svalue(output_ULeast_wid) = formatC(bbox_out[1,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+					svalue(output_ULnorth_wid) = formatC(bbox_out[2,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+					svalue(output_LReast_wid) = formatC(bbox_out[1,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+					svalue(output_LRnorth_wid) = formatC(bbox_out[2,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
 				}
-					
-					
-#				
-				
 					}
-					
 					
 				 else {
 					old_sel_projwid = keys(general_opts$out_proj_list)[which (hash::values(general_opts$out_proj_list) == old_proj4)]    # Retrieve previous selection of proj_wid
@@ -419,17 +397,9 @@ MODIStsp_GUI = function (general_opts){
 							svalue(output_proj4_wid) =  sel_output_proj
 							#----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
 				
-							bbox_in = as.numeric(c(svalue(output_ULeast_wid) ,svalue(output_LReast_wid) ,svalue(output_LRnorth_wid),svalue(output_ULnorth_wid)))
-#							N_dens = 1000 # densification ratio of the bounding box
-#							d_bbox_in <- data.frame(lon=c(bbox_in[1]+diff(bbox_in[1:2])*(0:N_dens)/N_dens, rep(bbox_in[2],N_dens-1), bbox_in[1]+diff(bbox_in[1:2])*(N_dens:0)/N_dens, rep(bbox_in[1],N_dens-1)),
-#									lat=c(rep(bbox_in[3],N_dens), bbox_in[3]+diff(bbox_in[3:4])*(0:N_dens)/N_dens, rep(bbox_in[4],N_dens-1), bbox_in[3]+diff(bbox_in[3:4])*(N_dens:1)/N_dens))
-							d_bbox_in <- data.frame(lon=bbox_in[1:2], lat = bbox_in[3:4])
-							d_bbox_in <- SpatialPolygons(list(Polygons(list(Polygon(d_bbox_in)),1)))
-							proj4string(d_bbox_in) <- CRS(old_proj)
-							
-							d_bbox_mod <- spTransform(d_bbox_in, sel_output_proj)@bbox
-							
-						
+							bbox_in = as.numeric(c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
+							bbox_out <- reproj_bbox(bbox_in, old_proj4, sel_output_proj@projargs, enlarge=FALSE)
+									
 							# Get the units and kind of proj
 							
 							proj = head(strsplit(tail(strsplit(sel_output_proj@projargs, '+proj=')[[1]],1)," +")[[1]],1)
@@ -438,11 +408,11 @@ MODIStsp_GUI = function (general_opts){
 									'Unknown')
 							units = ifelse(proj == "longlat", "dec. degrees",m_units)
 							svalue(pixsize2_lab) = units
-#				
-							svalue(output_ULeast_wid) = formatC(d_bbox_mod[1,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
-							svalue(output_ULnorth_wid) = formatC(d_bbox_mod[2,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
-							svalue(output_LReast_wid) = formatC(d_bbox_mod[1,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
-							svalue(output_LRnorth_wid) = formatC(d_bbox_mod[2,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+				
+							svalue(output_ULeast_wid) = formatC(bbox_out[1,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+							svalue(output_ULnorth_wid) = formatC(bbox_out[2,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+							svalue(output_LReast_wid) = formatC(bbox_out[1,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+							svalue(output_LRnorth_wid) = formatC(bbox_out[2,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
 						}
 					}
 				}
@@ -477,22 +447,13 @@ MODIStsp_GUI = function (general_opts){
 						svalue(pixsize2_lab) = units
 						#----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
 					if (svalue (output_ext_wid) != "Full Tiles Extent") {
-						bbox_in = as.numeric(c(svalue(output_ULeast_wid) ,svalue(output_LReast_wid) ,svalue(output_LRnorth_wid),svalue(output_ULnorth_wid)))
-						N_dens = 1000 # densification ratio of the bounding box
-						d_bbox_in <- data.frame(lon=c(bbox_in[1]+diff(bbox_in[1:2])*(0:N_dens)/N_dens, rep(bbox_in[2],N_dens-1), bbox_in[1]+diff(bbox_in[1:2])*(N_dens:0)/N_dens, rep(bbox_in[1],N_dens-1)),
-								lat=c(rep(bbox_in[3],N_dens), bbox_in[3]+diff(bbox_in[3:4])*(0:N_dens)/N_dens, rep(bbox_in[4],N_dens-1), bbox_in[3]+diff(bbox_in[3:4])*(N_dens:1)/N_dens))
-						d_bbox_in <- SpatialPolygons(list(Polygons(list(Polygon(d_bbox_in)),1)))
-						proj4string(d_bbox_in) <- CRS(old_proj)
-						
-						d_bbox_mod <- spTransform(d_bbox_in, sel_output_proj)@bbox
-						
-						
-					
-#				
-						svalue(output_ULeast_wid) = formatC(d_bbox_mod[1,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
-						svalue(output_ULnorth_wid) = formatC(d_bbox_mod[2,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
-						svalue(output_LReast_wid) = formatC(d_bbox_mod[1,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
-						svalue(output_LRnorth_wid) = formatC(d_bbox_mod[2,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+						bbox_in = as.numeric(c(svalue(output_ULeast_wid) ,svalue(output_LRnorth_wid),svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
+						bbox_out <- reproj_bbox(bbox_in, old_proj4, sel_output_proj@projargs, enlarge=FALSE)
+
+						svalue(output_ULeast_wid) = formatC(bbox_out[1,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+						svalue(output_ULnorth_wid) = formatC(bbox_out[2,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+						svalue(output_LReast_wid) = formatC(bbox_out[1,2], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
+						svalue(output_LRnorth_wid) = formatC(bbox_out[2,1], digits = ifelse(units =="dec. degrees",4,1), format = 'f')
 					}
 					}
 				}
@@ -630,92 +591,149 @@ MODIStsp_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 # Start/Quit/Save/Load buttons
 #- ------------------------------------------------------------------------------- -#
+
+	# Various checks and generation of general_opts common to both Start and Save buttons
+	prepare_to_save_options <- function(general_opts,...) {
+
+		general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
+		# sel_prod = general_opts$sel_prod    # When saving, set sel_prod to current selection (may be good to change)
+		general_opts$sensor <- svalue(sens_wid)
+		
+		if (exists ('temp_wid_bands')) {
+			prod_opt_list[[general_opts$sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
+			
+		}
+		if (exists ('temp_wid_bands_indexes')) {
+			prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
+			
+		}
+		if (exists ('temp_wid_bands_quality')) {
+			prod_opt_list[[general_opts$sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
+			
+		}
+		
+		general_opts$start_day <- svalue(start_day_wid)		# Retrieve Dates options
+		general_opts$start_month <- svalue(start_month_wid)
+		general_opts$start_year <- svalue(start_year_wid)
+		general_opts$end_day <- svalue(end_day_wid)
+		general_opts$end_month <- svalue(end_month_wid)
+		general_opts$end_year <- svalue(end_year_wid)
+		
+		general_opts$start_x <- svalue(start_x_wid)		# Retrieve Tiles options
+		general_opts$end_x <- svalue(end_x_wid)
+		general_opts$start_y <- svalue(start_y_wid)
+		general_opts$end_y <- svalue(end_y_wid)
+		
+		general_opts$proj <- svalue(proj_wid)		# Retrieve Proj and extent options
+		general_opts$user_proj4 <- svalue(output_proj4_wid)
+		general_opts$out_res_sel <- (svalue(output_res_sel_wid))
+		general_opts$out_res <- (svalue(output_res_wid))
+		general_opts$resampling <- svalue(output_resmeth_wid)
+		general_opts$full_ext <- svalue(output_ext_wid)
+		general_opts$bbox <- ((c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),
+								svalue(output_LReast_wid),svalue(output_ULnorth_wid))))
+		
+		general_opts$reprocess <- svalue(reprocess_wid)  # Retrieve reprocess, delete and nodata
+		general_opts$delete_hdf <- svalue(delete_wid)
+		general_opts$nodata_change <- svalue(nodata_wid)
+		
+		general_opts$out_format <- svalue(format_wid)   # Retrieve format, virtual and compression
+		general_opts$ts_format <- svalue(timeseries_wid)
+		general_opts$compress <- compress_dict[svalue(compress_wid)]
+		
+		general_opts$out_folder <- svalue(outfold_wid)		# # Retrieve Folder options
+		general_opts$out_folder_mod <- svalue(outfoldmod_wid)
+		
+		check <<- TRUE
+		# Send warning if HDF deletion selected
+		if (general_opts$delete_hdf == 'Yes') {check <<- gconfirm('Warning! HDF files in Original MODIS folder will be deleted at the end of processing! Are you sure? ', title = 'Warning', icon = 'warning')}
+		
+		#- Perform checks on options consistency ---------------
+		
+		# Check if at least 1 layer selected
+		if (max(prod_opt_list[[general_opts$sel_prod]]$bandsel)+
+				max(prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel)+
+				max(prod_opt_list[[general_opts$sel_prod]]$quality_bandsel) == 0) {gmessage('No Output bands or indexes selected - Please Correct !', title = 'Warning') ; check <<- FALSE}
+		
+		# Check if dates, processing extent and tiles selection make sense
+		if (as.Date(paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '-')) >
+				as.Date(paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '-'))) {gmessage('Error in Selected Dates', title = 'Warning'); check <<- FALSE}
+		
+		if ((general_opts$start_x > general_opts$end_x ) | (general_opts$start_y > general_opts$end_y )) {gmessage('Error in Selected Tiles', title = 'Warning') ; check <<- FALSE}
+		
+		# Check if bbox is consistent
+		general_opts$bbox <- as.numeric(general_opts$bbox)
+		n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
+		
+		if (general_opts$full_ext == 'Resized') {
+			if (n_bbox_compiled == 4){
+				if ((general_opts$bbox[1] > general_opts$bbox[3]) | (general_opts$bbox[2] > general_opts$bbox[4])) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}}
+			if ((n_bbox_compiled < 4) & (n_bbox_compiled >= 0 )) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}
+		}
+		
+		# Check if selected tiles are consistent with the bounding box
+		if (general_opts$full_ext == 'Resized') {
+			bbox_mod <- reproj_bbox( general_opts$bbox, svalue(output_proj4_wid), general_opts$MOD_proj_str, enlarge=TRUE)
+			d_bbox_mod_tiled <- intersect(modis_grid,extent(bbox_mod))
+			required_tiles <- paste0('H',apply(expand.grid('H'=min(d_bbox_mod_tiled$H):max(d_bbox_mod_tiled$H),
+									'V'=min(d_bbox_mod_tiled$V):max(d_bbox_mod_tiled$V)), 1, paste, collapse='_V'))
+			selected_tiles <- paste0('H',apply(expand.grid('H'=svalue(start_x_wid):svalue(end_x_wid),
+									'V'=svalue(start_y_wid):svalue(end_y_wid)), 1, paste, collapse='_V'))
+			
+			# If the bounding box does not interrsect with the tiles, return an error
+			if (!any(required_tiles %in% selected_tiles)) {
+				check <<- gconfirm(paste('There are no selected tiles useful to create your images. Do you want to automatically select the required tiles?'), 
+						handler=function(h,...) {
+							selected_tiles <<- required_tiles
+							general_opts$start_x <<- min(d_bbox_mod_tiled$H)
+							general_opts$end_x <<- max(d_bbox_mod_tiled$H)
+							general_opts$start_y <<- min(d_bbox_mod_tiled$V)
+							general_opts$end_y <<- max(d_bbox_mod_tiled$V)
+						}, title = 'Warning')
+			}
+			
+			# If not all the required tiles are selected, ask to select them
+			if (!all(required_tiles %in% selected_tiles) & check) {
+				gconfirm(paste('Some not selected tiles (',paste(required_tiles[!(required_tiles %in% selected_tiles)],collapse=', '),
+								') are required to cover your bounding box. Do you want to select them? Otherwise, nodata will be produced in the non-covered area.'), 
+						handler=function(h,...) {
+							selected_tiles <<- required_tiles
+							general_opts$start_x <<- min(d_bbox_mod_tiled$H)
+							general_opts$end_x <<- max(d_bbox_mod_tiled$H)
+							general_opts$start_y <<- min(d_bbox_mod_tiled$V)
+							general_opts$end_y <<- max(d_bbox_mod_tiled$V)
+						}, title = 'Warning')
+			}
+			
+			# If some selected tiles are not useful, ask to remove them
+			if (!all(selected_tiles %in% required_tiles) & check) {
+				gconfirm(paste('Some selected tiles (',paste(selected_tiles[!(selected_tiles %in% required_tiles)],collapse=', '),
+								') will not be used to create the output images. Do you want to unselect them?'), 
+						handler=function(h,...) {
+							selected_tiles <<- required_tiles
+							general_opts$start_x <<- min(d_bbox_mod_tiled$H)
+							general_opts$end_x <<- max(d_bbox_mod_tiled$H)
+							general_opts$start_y <<- min(d_bbox_mod_tiled$V)
+							general_opts$end_y <<- max(d_bbox_mod_tiled$V)
+						}, title = 'Warning')
+			}
+			
+		}
+		
+		# check if folders are defined
+		if (general_opts$out_folder == '' & check) {gmessage('Please Select an output folder !', title = 'Warning') ; check <<- FALSE}
+		if (general_opts$out_folder_mod == '' & check) {gmessage('Please Select an output folder for storing original HDFs!', title = 'Warning') ; check <<- FALSE}
+		
+		return(general_opts)
+		
+	}
+	
+	
 	but_group <- ggroup(container = main_group, horizontal = TRUE)
 	
 	start_but <- gbutton(text = 'Start', container = but_group, handler = function (h,....) {# If "Start" pressed, retrieve selected values and save in previous file
-				general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
-				general_opts$sensor <- svalue(sens_wid)
-				
-				if (exists ('temp_wid_bands')) {
-					prod_opt_list[[general_opts$sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
-					
-				}
-				
-				if (exists ('temp_wid_bands_indexes')) {
-					prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
-					
-				}
-				
-				if (exists ('temp_wid_bands_quality')) {
-					prod_opt_list[[general_opts$sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
-					
-				}
-				
-				general_opts$start_day <- svalue(start_day_wid)		# Retrieve Dates options
-				general_opts$start_month <- svalue(start_month_wid)
-				general_opts$start_year <- svalue(start_year_wid)
-				general_opts$end_day <- svalue(end_day_wid)
-				general_opts$end_month <- svalue(end_month_wid)
-				general_opts$end_year <- svalue(end_year_wid)
-				
-				general_opts$start_x <- svalue(start_x_wid)		# Retrieve Tiles options
-				general_opts$end_x <- svalue(end_x_wid)
-				general_opts$start_y <- svalue(start_y_wid)
-				general_opts$end_y <- svalue(end_y_wid)
-				
-				general_opts$proj <- svalue(proj_wid)		# Retrieve Proj and extent options
-				general_opts$user_proj4 <- svalue(output_proj4_wid)
-				general_opts$out_res_sel <- (svalue(output_res_sel_wid))
-				general_opts$out_res <- (svalue(output_res_wid))
-				general_opts$resampling <- svalue(output_resmeth_wid)
-				general_opts$full_ext <- svalue(output_ext_wid)
-				general_opts$bbox <- ((c(svalue(output_ULeast_wid),svalue(output_LReast_wid),
-										svalue(output_LRnorth_wid),svalue(output_ULnorth_wid))))
-				
-				general_opts$reprocess <- svalue(reprocess_wid)  # Retrieve reprocess, delete and nodata
-				general_opts$delete_hdf <- svalue(delete_wid)
-				general_opts$nodata_change <- svalue(nodata_wid)
-				
-				general_opts$out_format <- svalue(format_wid)   # Retrieve format, virtual and compression
-				general_opts$ts_format <- svalue(timeseries_wid)
-				general_opts$compress <- compress_dict[svalue(compress_wid)]
-				
-				general_opts$out_folder <- svalue(outfold_wid)		# # Retrieve Folder options
-				general_opts$out_folder_mod <- svalue(outfoldmod_wid)
-				
-				check <- T
-				# Send warning if HDF deletion selected
-				if (general_opts$delete_hdf == 'Yes') {res = gconfirm('Warning ! HDF files in Original MODIS folder will be deleted at the end of processing ! Are you sure ? ', title = 'Warning', icon = 'warning')
-				}
-				
-				#- Perform checks on options consistency ---------------
-				
-				# Check if at least 1 layer selected
-				if (max(prod_opt_list[[general_opts$sel_prod]]$bandsel)+
-						max(prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel)+
-						max(prod_opt_list[[general_opts$sel_prod]]$quality_bandsel) == 0) {gmessage('No Output bands or indexes selected - Please Correct !', title = 'Warning') ; check <- F}
-				
-				# Check if dates, processing extent and tiles selection make sense
-				if (as.Date(paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '-')) >
-						as.Date(paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '-'))) {gmessage('Error in Selected Dates', title = 'Warning'); check <- F}
-				
-				if ((general_opts$start_x > general_opts$end_x ) | (general_opts$start_y > general_opts$end_y )) {gmessage('Error in Selected Tiles', title = 'Warning') ; check <- F}
-				
-				# Check if bbox is consistent
-				general_opts$bbox <- as.numeric(general_opts$bbox)
-				n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
-				
-				if (general_opts$full_ext != 'Full Tiles Extent') {
-					if (n_bbox_compiled == 4){
-						if ((general_opts$bbox[1] > general_opts$bbox[2]) | (general_opts$bbox[3] > general_opts$bbox[4])) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}}
-					if ((n_bbox_compiled < 4) & (n_bbox_compiled >= 0 )) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}
-				}
-				
-				# check if folders are defined
-				if (general_opts$out_folder == ''){gmessage('Please Select an output folder !', title = 'Warning') ; check <- F}
-				if (general_opts$out_folder_mod == ''){gmessage('Please Select an output folder for storing original HDFs!', title = 'Warning') ; check <- F}
-				
-				if (check == T) {					# If check passed, save previous file and return
+				general_opts <- prepare_to_save_options(general_opts)
+				if (check) {					# If check passed, save previous file and return
 #					dir.create(file.path(getwd(),'Previous'),showWarnings=FALSE)
 					
 					save(general_opts,prod_opt_list,mod_prod_list, file = general_opts$previous_file) # Save options to previous file
@@ -769,8 +787,8 @@ MODIStsp_GUI = function (general_opts){
 					svalue(output_resmeth_wid) <- general_opts$resampling
 					svalue(output_ext_wid) <-general_opts$full_ext
 					svalue(output_ULeast_wid) <- general_opts$bbox [1]
-					svalue(output_LReast_wid) <- general_opts$bbox [2]
-					svalue(output_LRnorth_wid) <- general_opts$bbox [3]
+					svalue(output_LReast_wid) <- general_opts$bbox [3]
+					svalue(output_LRnorth_wid) <- general_opts$bbox [2]
 					svalue(output_ULnorth_wid) <- general_opts$bbox [4]
 					svalue(reprocess_wid) <- general_opts$reprocess
 					svalue(delete_wid) <- general_opts$delete_hdf
@@ -792,87 +810,8 @@ MODIStsp_GUI = function (general_opts){
 				choice<-gfile(type="save", text="Select file for saving processing options...")		# File selection widget
 				
 				if(!is.na(choice)){
-					
-					# If "Start" pressed, retrieve selected values and save in RData file
-					general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
-					sel_prod = general_opts$sel_prod    # When saving, set sel_prod to current selection (may be good to change)
-					general_opts$sensor <- svalue(sens_wid)
-					
-					if (exists ('temp_wid_bands')) {
-						prod_opt_list[[sel_prod]]$bandsel <- temp_wid_bands			#retrieve selected bands
-					}
-					
-					if (exists ('temp_wid_bands_indexes')) {
-						prod_opt_list[[sel_prod]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
-					}
-					
-					if (exists ('temp_wid_bands_quality')) {
-						prod_opt_list[[sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
-					}
-					
-					general_opts$start_day <- svalue(start_day_wid)		# Dates options
-					general_opts$start_month <- svalue(start_month_wid)
-					general_opts$start_year <- svalue(start_year_wid)
-					general_opts$end_day <- svalue(end_day_wid)
-					general_opts$end_month <- svalue(end_month_wid)
-					general_opts$end_year <- svalue(end_year_wid)
-					
-					general_opts$start_x <- svalue(start_x_wid)		# Tiles options
-					general_opts$end_x <- svalue(end_x_wid)
-					general_opts$start_y <- svalue(start_y_wid)
-					general_opts$end_y <- svalue(end_y_wid)
-					
-					general_opts$proj <- svalue(proj_wid)		# Proj and extent options
-					general_opts$user_proj4 <- svalue(output_proj4_wid)
-					general_opts$out_res_sel<- (svalue(output_res_sel_wid))
-					general_opts$out_res <- (svalue(output_res_wid))
-					general_opts$resampling <- svalue(output_resmeth_wid)
-					general_opts$full_ext <- svalue(output_ext_wid)
-					general_opts$bbox <- ((c(svalue(output_ULeast_wid),svalue(output_LReast_wid),
-											svalue(output_LRnorth_wid),svalue(output_ULnorth_wid))))
-					
-					general_opts$reprocess <- svalue(reprocess_wid)
-					general_opts$delete_hdf <- svalue(delete_wid)
-					general_opts$nodata_change <- svalue(nodata_wid)
-					
-					general_opts$out_format <- svalue(format_wid)
-					general_opts$ts_format <- svalue(timeseries_wid)
-					general_opts$compress <- svalue(compress_wid)
-					
-					general_opts$out_folder <- svalue(outfold_wid)		# Folder options
-					general_opts$out_folder_mod <- svalue(outfoldmod_wid)		# Folder options
-					check <- T
-					
-					# Check if at least 1 layer selected
-					if (max(prod_opt_list[[general_opts$sel_prod]]$bandsel)+
-							max(prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel)+
-							max(prod_opt_list[[general_opts$sel_prod]]$quality_bandsel) == 0) {gmessage('No Output bands or indexes selected - Please Correct !', title = 'Warning') ; check <- F}
-					
-					# Check if dates, processing extent and tiles selection make sense
-					if (as.Date(paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '-')) >
-							as.Date(paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '-'))) {gmessage('Error in Selected Dates', title = 'Warning'); check <- F}
-					
-					if ((general_opts$start_x > general_opts$end_x ) | (general_opts$start_y > general_opts$end_y )) {gmessage('Error in Selected Tiles', title = 'Warning') ; check <- F}
-					
-					general_opts$bbox <- as.numeric(general_opts$bbox)
-					n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
-					
-					# Check if bbox is consistent
-					general_opts$bbox <- as.numeric(general_opts$bbox)
-					n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
-					
-					if (general_opts$full_ext != 'Full Tiles Extent') {
-						if (n_bbox_compiled == 4){
-							if ((general_opts$bbox[1] > general_opts$bbox[2]) | (general_opts$bbox[3] > general_opts$bbox[4])) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}}
-						if ((n_bbox_compiled < 4) & (n_bbox_compiled >= 0 )) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}
-					}
-					
-					# check if folders are defined
-					if (general_opts$out_folder == ''){gmessage('Please Select an output folder !', title = 'Warning') ; check <- F}
-					if (general_opts$out_folder_mod == ''){gmessage('Please Select an output folder for storing original HDFs!', title = 'Warning') ; check <- F}
-					
-					
-					if (check == T) {					# If check passed, save previous file and return
+					general_opts <- prepare_to_save_options(general_opts)
+					if (check) {					# If check passed, save previous file and return
 						save(general_opts,prod_opt_list,mod_prod_list, file = choice)
 					}
 				}

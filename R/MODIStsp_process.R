@@ -78,9 +78,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 	tmp_prod_folder = file.path(out_prod_folder,'tmp') # directory to store temporary [virtual] rasters
 	start_year = unlist(strsplit(start_date, '[.]'))[1]    ;  end_year = unlist(strsplit(end_date, '[.]'))[1]    ;  del = F
 	
+	# Add a message window while the file is charging (TODO: foreground?)
 	mess = gwindow(title = 'Processing Status', container = TRUE, width = 400, height = 40)
-	size(mess) <- c(100,8)		;	addHandlerUnrealize(mess, handler = function(h,...) {return(TRUE)})
 	mess_lab = glabel(text =paste('--- Processing ---'), editable = FALSE, container = mess)
+	
 	if (sensor == 'Both') {senslist = c('Terra','Aqua')} else {senslist = sensor}		# If both sensor selected, do a cycle. Process first Terra then Aqua
 	for (sens_sel in senslist) {		# cycle on selected sensors
 		
@@ -255,15 +256,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 										
 										if (full_ext == 'Resized') { #If resize required,  convert bbox coordinates from t_srs to modis_srs, to get the correct extent
 											# for resizing BEFORE reprojecting
+											bbox_mod <- reproj_bbox( bbox, outproj_str, MOD_proj_str, enlarge=TRUE)
 											
-											N_dens = 1000 # densification ratio of the bounding box
-											d_bbox_out <- data.frame(lon=c(bbox[1]+diff(bbox[1:2])*(0:N_dens)/N_dens, rep(bbox[2],N_dens-1), bbox[1]+diff(bbox[1:2])*(N_dens:0)/N_dens, rep(bbox[1],N_dens-1)),
-													lat=c(rep(bbox[3],N_dens), bbox[3]+diff(bbox[3:4])*(0:N_dens)/N_dens, rep(bbox[4],N_dens-1), bbox[3]+diff(bbox[3:4])*(N_dens:1)/N_dens))
-											d_bbox_out <- SpatialPolygons(list(Polygons(list(Polygon(d_bbox_out)),1)))
-											proj4string(d_bbox_out) <- CRS(outproj_str)
-											d_bbox_mod <- spTransform(d_bbox_out, CRS(MOD_proj_str))
 											# Create a resized and eventually mosaiced GDAL vrt file
-											gdalbuildvrt(files_in, outfile_vrt, te = c(d_bbox_mod@bbox), tap = TRUE, tr = paste(rep(native_res,2),collapse=' ',srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band]), sd = band)
+											gdalbuildvrt(files_in, outfile_vrt, te = c(bbox_mod), tap = TRUE, tr = paste(rep(native_res,2),collapse=' ',srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band]), sd = band)
 										} else {gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band]) }  # Create a resized and eventually mosaiced GDAL vrt file
 										# check if this also need to add tap (it should not)
 										
@@ -279,24 +275,28 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 										print (paste('Reprojecting ', bandnames[band],'files for date: ',date_name ))
 										svalue(mess_lab) =  (paste('--- Reprojecting ', bandnames[band],'files for date: ',date_name,' ---'))
 										
-										# Launch the reprojection
+										## Launch the reprojection
 										
-										if (all.equal(as.numeric(native_res),out_res)==TRUE & outproj_str==MOD_proj_str) {
-											# If both IN/OUT resolution and projection are the same, run gdal_translate only to convert the vrt to the output format
-											gdal_translate(outfile_vrt, outrep_file, a_srs=MOD_proj_str, of=out_format, ot=datatype[band], a_nodata=nodata_out[band],
-													co=paste('COMPRESS',compress,sep='='), overwrite=TRUE)
-										} else if (full_ext == 'Full Tiles Extent' | outproj_str==MOD_proj_str) {
-											# If bounding box was not passed keep the original extent of th vrt when creating the File;
-											# also in the case the output proj is in the MODIS sinusoidal, but a bbox was passed,
-											# don't pass again the bbox in order to keep the pixel alignment (vrt is already resized !)
-											
-											gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, tr=rep(out_res,2),  #										, srcnodata=nodata_out[band], dstnodata=nodata_out[band],
-													co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE)
-										} else {
-											# If bounding box was passed, and projection is not the native one, the output reproject file will satisfy the bbox
-											gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox[c(1,3,2,4)], tr=rep(out_res,2),
-													co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE)
-										}
+										reproj_type = if (general_opts$out_res_sel=="Native" & outproj_str==MOD_proj_str) {'GdalTranslate'
+												} else if (general_opts$out_res_sel=="Resampled" & outproj_str==MOD_proj_str) {'Resample1_Resize0'
+												} else if (general_opts$out_res_sel=="Native" & outproj_str!=MOD_proj_str & full_ext == 'Full Tiles Extent') {'Resample0_Resize0'
+												} else if (general_opts$out_res_sel=="Native" & outproj_str!=MOD_proj_str & full_ext == 'Resized') {'Resample0_Resize1'
+												} else if (general_opts$out_res_sel=="Resampled" & outproj_str!=MOD_proj_str & full_ext == 'Full Tiles Extent') {'Resample1_Resize0'
+												} else if (general_opts$out_res_sel=="Resampled" & outproj_str!=MOD_proj_str & full_ext == 'Resized') {'Resample1_Resize1'
+												} else {'Error'}
+										
+										switch( reproj_type,
+												GdalTranslate = gdal_translate(outfile_vrt, outrep_file, a_srs=MOD_proj_str, of=out_format, ot=datatype[band], a_nodata=nodata_out[band],
+														co=paste('COMPRESS',compress,sep='='), overwrite=TRUE),
+												Resample0_Resize0 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling,
+														co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE),
+												Resample0_Resize1 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox[c(1,3,2,4)],
+														co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE),
+												Resample1_Resize0 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, tr=rep(out_res,2),
+														co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE),
+												Resample1_Resize1 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox[c(1,3,2,4)], tr=rep(out_res,2),
+														co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE),
+												quit('Internal error in out_res_sel, outproj_str or full_ext.') )
 										
 										gc()
 										xml_file = paste(outrep_file,'.aux.xml',sep = '')		# Delete xml files created by gdalwarp

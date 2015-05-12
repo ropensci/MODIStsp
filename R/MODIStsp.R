@@ -48,8 +48,10 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
 # 		}}
 	print(gdal_version)
-  require(gWidgetsRGtk2)
-	options("guiToolkit"="RGtk2")
+  	if (gui) {
+		require(gWidgetsRGtk2)
+		options("guiToolkit"="RGtk2")
+	}
 	memory.limit(8000)							# Increase maximum allocsable memory
 	rasterOptions(setfileext = F)				# Make so that "raster" functions doesn't automatically add extensions on output files
 	# Folder Initialization -----
@@ -93,7 +95,6 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	}
 	#launch the GUI if on an interactive session (i.e., gui = T) ----
 	if (gui) {GUI = MODIStsp_GUI(general_opts)} else {Quit<<-FALSE}
-
 	start.time <- Sys.time()
 	# If not Quit selected, restore the user selected options from previous file and launch the processing ----
 	if (!Quit) {
