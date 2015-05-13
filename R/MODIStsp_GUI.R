@@ -225,41 +225,53 @@ MODIStsp_GUI = function (general_opts){
 	#---------------------------------------------
 	# Button to loAD extent from SHP or KML file
 	#--------------------------------------------
-	bbox_from_file <- gbutton(text = 'Load Extent from shp/kml file', border = T,
-			handler = function(h,...) {
-				choice<-gfile(type="open", text="Select a SHP or KML polygon file", filter=list("bboxfiles" =
-										list(patterns = c("*.shp","*.kml"))))		# File selection widget
-				if(! is.na(choice)){
-					
-					wait_window <- gwindow(title="Please wait", container = TRUE, width = 400, height = 40)
-					size(wait_window) <- c(100,8)		;	addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
+	bbox_from_file <- gbutton(text = 'Load Extent from a spatial file', border = T,
+		handler = function(h,...) {
+			choice<-gfile(type="open", text="Select a vector or raster file", # File selection widget
+					filter=list( "All files" = list(patterns = "*"),
+							"Vector layers" = list(patterns = c("*.shp","*.kml")), # TODO add formats to the lists!
+							"Raster layers" = list(patterns = c("*.tif","*.dat"))))
+			if(! is.na(choice)){
+				
+				# Show window until the process had finished
+				wait_window <- gwindow(title="Please wait", container = TRUE, width = 400, height = 40)
+				size(wait_window) <- c(100,8)		;	addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
 				wait_window_lab = glabel(text =paste('Charging the selected file, please wait...'), editable = FALSE, container = wait_window)
+				
+				print(choice)
+				# Retrieve CRS using gdal: if fails, then the file is not a valid spatial file
+				reference_crs <- try(gdalsrsinfo(choice, as.CRS=TRUE), silent=TRUE)
+				reference_gdalinfo <- try(gdalinfo(choice), silent=TRUE)
+				reference_ogrinfo <- try(ogrinfo(choice,al=TRUE,so=TRUE), silent=TRUE)
+				
+				if (class(reference_crs)=='try-error' | (!is.null(attr(reference_gdalinfo,'status')) & !is.null(attr(reference_ogrinfo,'status')))) {
+					gmessage(paste('File format not recognized by GDAL or OGR.\n\nDetails:',reference_crs), title = 'Error')
+				} else if (is.na(reference_crs@projargs)) {
+					gmessage('The CRS of the file is not recognized!', title = 'Error') # TODO: try to retrieve from WKT, or ask to insert as proj.4 string
+				} else {
 					
-					print(choice)
-					if (file_ext(choice) == 'shp'){
-						basename = basename(file_path_sans_ext(choice))  # get shape and dir name
-						foldname = dirname (choice)
-						shape = readOGR(dsn = foldname,layer = basename,stringsAsFactors=F)   # open the shapefile
-						bbox_shape = bbox(shape)   # get extent of shapefile
-					} else {
-						basename = basename(file_path_sans_ext(choice))  # get shape and dir name
-						foldname = dirname (choice)
-						shape = readOGR(dsn = choice,layer = basename,stringsAsFactors=F)
-						bbox_shape = bbox(shape)  
-					}
+					# If it does not fail, then retrieve the bounding box
+					if (is.null(attr(reference_ogrinfo,'status'))) {
+						reference_ogrinfo <- ogrinfo(choice,al=TRUE,so=TRUE)
+						reference_bbox <- matrix(na.omit(as.numeric(unlist(strsplit(gsub("([^0-9.\\-]+|( - ))+"," ", reference_ogrinfo[grep("Extent:",reference_ogrinfo)] )," ")))), nrow=2)
+					} else if (is.null(attr(reference_gdalinfo,'status'))) {
+						reference_gdalinfo <- gdalinfo(choice)
+						reference_bbox <- cbind( na.omit(as.numeric(unlist(strsplit(gsub("[^0-9.\\-]+"," ",reference_gdalinfo[grep("^Lower Left",reference_gdalinfo)])," "))))[1:2],
+								na.omit(as.numeric(unlist(strsplit(gsub("[^0-9.\\-]+"," ",reference_gdalinfo[grep("^Upper Right",reference_gdalinfo)])," "))))[1:2])
+					}  
 					
 					# Convert bbox coordinates in those of output projection
 					if (svalue(proj_wid)!= "User Defined"){
 						out_proj_crs = general_opts$out_proj_list[[svalue(proj_wid)]]
 					} else {out_proj_crs = general_opts$user_proj4}
 
-					bbox_out <- reproj_bbox(bbox_shape, proj4string(shape), out_proj_crs, enlarge=TRUE)
+					bbox_out <- reproj_bbox(reference_bbox, reference_crs@projargs, out_proj_crs, enlarge=TRUE)
 				
-#						# Get the units and kind of proj
+					# Get the units and kind of proj
 					
 					proj = head(strsplit(tail(strsplit(CRS(out_proj_crs)@projargs, '+proj=')[[1]],1)," +")[[1]],1)
 					units = ifelse(proj == "longlat", "deg","metric")
-#						units = head(strsplit(tail(strsplit("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181", '+units=')[[1]],1)," +")[[1]],1)
+					#units = head(strsplit(tail(strsplit("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181", '+units=')[[1]],1)," +")[[1]],1)
 					
 					# set bbox according to shape
 					svalue(output_ULeast_wid) = formatC(bbox_out[1,1], digits = ifelse(units =="deg",4,1), format = 'f')
@@ -270,11 +282,13 @@ MODIStsp_GUI = function (general_opts){
 					# Set tiles according with the bounding box
 					update_tiles(bbox_out)
 					
-					dispose(wait_window)
 				}
 				
-				
-			}, container=output_ext_group)
+				dispose(wait_window)
+			}
+			
+			
+		}, container=output_ext_group)
 	
 	
 	if (svalue (output_ext_wid) != "Full Tiles Extent") { enabled(bbox_from_file) <- T} else {(enabled(bbox_from_file) <- F)}
