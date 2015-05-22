@@ -434,6 +434,3 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 	return('DONE')
 }
 
-    Status API Training Shop Blog About 
-
-    © 2015 GitHub, Inc. Terms Privacy Security Contact 
