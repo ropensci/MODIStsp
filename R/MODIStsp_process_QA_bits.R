@@ -25,7 +25,7 @@
 #' Luigi Ranghetti, phD (2015)
 #' Based on the "modis.qc.R" script by Yann Chemin (2008) (https://r-forge.r-project.org/scm/viewvc.php/pkg/RemoteSensing/R/modis.qc.R?view=markup&root=remotesensing&pathrev=79)
 #'
-#' license CC BY-NC 3.0
+#' license GPL 3.0
 #' @export
 #' @import raster
 #' @import bitops

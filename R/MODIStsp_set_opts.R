@@ -8,7 +8,7 @@
 #' @author Lorenzo Busetto, phD (2014)
 #' email: busetto.l@@irea.cnr.it
 #'
-#' license GPL(>2)
+#' license GPL 3.0
 #' @export
 
 MODIStsp_set_opts = function(previous_file = previous_file) {

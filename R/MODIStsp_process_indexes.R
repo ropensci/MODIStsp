@@ -19,7 +19,7 @@
 #' @author Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
-#' license CC BY-NC 3.0
+#' license GPL 3.0
 #' @export
 MODIStsp_process_indexes = function(out_filename, formula,bandnames,nodata_out,out_prod_folder,
 		indexes_nodata_out, file_prefix, yy, DOY, out_format) {

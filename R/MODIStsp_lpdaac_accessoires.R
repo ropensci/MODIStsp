@@ -11,7 +11,7 @@ MODIStsp_lpdaac_accessoires = function () {
 #' @author Original code by XXXXXX
 #' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
-#' license CC BY-NC 3.0
+#' license GPL 3.0
 #' @export
 #' @import RCurl
 lpdaac_getmod_dirs <- function(http, .Platform) {
