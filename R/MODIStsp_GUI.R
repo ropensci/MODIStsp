@@ -209,13 +209,13 @@ MODIStsp_GUI = function (general_opts){
 			
 				n_bbox_compiled <- length(which(is.finite(bbox)))
 				if (svalue(output_ext_wid) != 'Full Tiles Extent' & n_bbox_compiled ==0 ) {
-					gmessage('Please specify an output bounding box!', title = 'Warning') ; check <- F
+					gmessage('Please specify an output bounding box!', title = 'Warning') #; check_bbox <- FALSE
 				} else if (svalue(proj_wid) == 'User Defined' &  nchar(svalue(output_proj4_wid)) == 0) {
-					gmessage('Please specify an output projection', title = 'Warning') ; check <- F
+					gmessage('Please specify an output projection', title = 'Warning') #; check_bbox <- FALSE
 				} else if (n_bbox_compiled < 4) {
-					gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F
+					gmessage('Error in Selected Output extent', title = 'Warning') #; check_bbox <- FALSE
 				} else if (bbox[1] > bbox[3] | bbox[2] > bbox[4]) {
-					gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F
+					gmessage('Error in Selected Output extent', title = 'Warning') #; check_bbox <- FALSE
 				} else {
 					update_tiles(bbox) # convert polygon bbox					
 				}
@@ -658,22 +658,22 @@ MODIStsp_GUI = function (general_opts){
 		general_opts$out_folder <- svalue(outfold_wid)		# # Retrieve Folder options
 		general_opts$out_folder_mod <- svalue(outfoldmod_wid)
 		
-		check <<- TRUE
+		check_save_opts <<- TRUE
 		# Send warning if HDF deletion selected
-		if (general_opts$delete_hdf == 'Yes') {check <<- gconfirm('Warning! HDF files in Original MODIS folder will be deleted at the end of processing! Are you sure? ', title = 'Warning', icon = 'warning')}
+		if (general_opts$delete_hdf == 'Yes') {check_save_opts <<- gconfirm('Warning! HDF files in Original MODIS folder will be deleted at the end of processing! Are you sure? ', title = 'Warning', icon = 'warning')}
 		
 		#- Perform checks on options consistency ---------------
 		
 		# Check if at least 1 layer selected
 		if (max(prod_opt_list[[general_opts$sel_prod]]$bandsel)+
 				max(prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel)+
-				max(prod_opt_list[[general_opts$sel_prod]]$quality_bandsel) == 0) {gmessage('No Output bands or indexes selected - Please Correct !', title = 'Warning') ; check <<- FALSE}
+				max(prod_opt_list[[general_opts$sel_prod]]$quality_bandsel) == 0) {gmessage('No Output bands or indexes selected - Please Correct !', title = 'Warning') ; check_save_opts <<- FALSE}
 		
 		# Check if dates, processing extent and tiles selection make sense
 		if (as.Date(paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '-')) >
-				as.Date(paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '-'))) {gmessage('Error in Selected Dates', title = 'Warning'); check <<- FALSE}
+				as.Date(paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '-'))) {gmessage('Error in Selected Dates', title = 'Warning'); check_save_opts <<- FALSE}
 		
-		if ((general_opts$start_x > general_opts$end_x ) | (general_opts$start_y > general_opts$end_y )) {gmessage('Error in Selected Tiles', title = 'Warning') ; check <<- FALSE}
+		if ((general_opts$start_x > general_opts$end_x ) | (general_opts$start_y > general_opts$end_y )) {gmessage('Error in Selected Tiles', title = 'Warning') ; check_save_opts <<- FALSE}
 		
 		# Check if bbox is consistent
 		general_opts$bbox <- as.numeric(general_opts$bbox)
@@ -681,8 +681,8 @@ MODIStsp_GUI = function (general_opts){
 		
 		if (general_opts$full_ext == 'Resized') {
 			if (n_bbox_compiled == 4){
-				if ((general_opts$bbox[1] > general_opts$bbox[3]) | (general_opts$bbox[2] > general_opts$bbox[4])) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}}
-			if ((n_bbox_compiled < 4) & (n_bbox_compiled >= 0 )) {gmessage('Error in Selected Output extent', title = 'Warning') ; check <- F}
+				if ((general_opts$bbox[1] > general_opts$bbox[3]) | (general_opts$bbox[2] > general_opts$bbox[4])) {gmessage('Error in Selected Output extent', title = 'Warning') ; check_save_opts <- FALSE}}
+			if ((n_bbox_compiled < 4) & (n_bbox_compiled >= 0 )) {gmessage('Error in Selected Output extent', title = 'Warning') ; check_save_opts <- FALSE}
 		}
 		
 		# Check if selected tiles are consistent with the bounding box
@@ -696,7 +696,7 @@ MODIStsp_GUI = function (general_opts){
 			
 			# If the bounding box does not interrsect with the tiles, return an error
 			if (!any(required_tiles %in% selected_tiles)) {
-				check <<- gconfirm(paste('There are no selected tiles useful to create your images. Do you want to automatically select the required tiles?'), 
+				check_save_opts <<- gconfirm(paste('There are no selected tiles useful to create your images. Do you want to automatically select the required tiles?'), 
 						handler=function(h,...) {
 							selected_tiles <<- required_tiles
 							general_opts$start_x <<- min(d_bbox_mod_tiled$H)
@@ -707,7 +707,7 @@ MODIStsp_GUI = function (general_opts){
 			}
 			
 			# If not all the required tiles are selected, ask to select them
-			if (!all(required_tiles %in% selected_tiles) & check) {
+			if (!all(required_tiles %in% selected_tiles) & check_save_opts) {
 				gconfirm(paste('Some not selected tiles (',paste(required_tiles[!(required_tiles %in% selected_tiles)],collapse=', '),
 								') are required to cover your bounding box. Do you want to select them? Otherwise, nodata will be produced in the non-covered area.'), 
 						handler=function(h,...) {
@@ -720,7 +720,7 @@ MODIStsp_GUI = function (general_opts){
 			}
 			
 			# If some selected tiles are not useful, ask to remove them
-			if (!all(selected_tiles %in% required_tiles) & check) {
+			if (!all(selected_tiles %in% required_tiles) & check_save_opts) {
 				gconfirm(paste('Some selected tiles (',paste(selected_tiles[!(selected_tiles %in% required_tiles)],collapse=', '),
 								') will not be used to create the output images. Do you want to unselect them?'), 
 						handler=function(h,...) {
@@ -735,8 +735,8 @@ MODIStsp_GUI = function (general_opts){
 		}
 		
 		# check if folders are defined
-		if (general_opts$out_folder == '' & check) {gmessage('Please Select an output folder !', title = 'Warning') ; check <<- FALSE}
-		if (general_opts$out_folder_mod == '' & check) {gmessage('Please Select an output folder for storing original HDFs!', title = 'Warning') ; check <<- FALSE}
+		if (general_opts$out_folder == '' & check_save_opts) {gmessage('Please Select an output folder !', title = 'Warning') ; check_save_opts <<- FALSE}
+		if (general_opts$out_folder_mod == '' & check_save_opts) {gmessage('Please Select an output folder for storing original HDFs!', title = 'Warning') ; check_save_opts <<- FALSE}
 		
 		return(general_opts)
 		
@@ -747,7 +747,7 @@ MODIStsp_GUI = function (general_opts){
 	
 	start_but <- gbutton(text = 'Start', container = but_group, handler = function (h,....) {# If "Start" pressed, retrieve selected values and save in previous file
 				general_opts <- prepare_to_save_options(general_opts)
-				if (check) {					# If check passed, save previous file and return
+				if (check_save_opts) {					# If check passed, save previous file and return
 #					dir.create(file.path(getwd(),'Previous'),showWarnings=FALSE)
 					
 					save(general_opts,prod_opt_list,mod_prod_list, file = general_opts$previous_file) # Save options to previous file
@@ -825,7 +825,7 @@ MODIStsp_GUI = function (general_opts){
 				
 				if(!is.na(choice)){
 					general_opts <- prepare_to_save_options(general_opts)
-					if (check) {					# If check passed, save previous file and return
+					if (check_save_opts) {					# If check passed, save previous file and return
 						save(general_opts,prod_opt_list,mod_prod_list, file = choice)
 					}
 				}
