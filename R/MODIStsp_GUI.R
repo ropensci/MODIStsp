@@ -16,7 +16,7 @@
 #' @import gWidgets
 
 MODIStsp_GUI = function (general_opts){
-	
+
 	# Restore previous options file if existing, otherwise create a "new" one with default values, by retrieving data from xml file
 	if (file.exists(general_opts$previous_file)) {
 		load(general_opts$previous_file)

@@ -24,7 +24,7 @@
 MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 
 	if (is.na(MODIStsp_dir)) {MODIStsp_dir = system.file(package = "MODIStsp")}
-	print(MODIStsp_dir)
+#	print(MODIStsp_dir)
 
 	#- ------------------------------------------------------------------------------- -#
 	#  Initialize project
@@ -47,12 +47,12 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
 # 		}}
-	print(gdal_version)
+	cat('GDAL version in use:',as.character(gdal_version),'\n')
   	if (gui) {
 		require(gWidgetsRGtk2)
 		options("guiToolkit"="RGtk2")
 	}
-	memory.limit(8000)							# Increase maximum allocsable memory
+	if (Sys.info()['sysname']=='Windows') {memory.limit(8000)}							# Increase maximum allocsable memory
 	rasterOptions(setfileext = F)				# Make so that "raster" functions doesn't automatically add extensions on output files
 	# Folder Initialization -----
 
@@ -71,7 +71,8 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 
 # 	setwd(main_dir);   main_dir = getwd()   ;
 #   log_dir =  file.path(main_dir,'Log')   ; log_file =  file.path(log_dir,'Log.txt')
-	previous_dir = if (is.null(options_file)) {file.path(MODIStsp_dir,'Previous')} else {dirname(options_file)}   # Folder in which the previous options file is saved
+	if (is.null(options_file) & gui==FALSE) {stop('Please provide a valid \'option_file\' path value (or run with gui=TRUE).')}
+	if (is.null(options_file)) {previous_dir = file.path(MODIStsp_dir,'Previous')} else {previous_dir = dirname(options_file)}   # Folder in which the previous options file is saved
 	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 	previous_file = if (is.null(options_file)) {file.path(previous_dir, 'MODIStsp_Previous.RData')} else {options_file}  # TODO fix to accept relative paths
 	xml_file= file.path(MODIStsp_dir,'ExtData','MODIStsp_ProdOpts.xml')  #XML file describing MODIS products
