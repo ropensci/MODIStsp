@@ -1,5 +1,5 @@
-MODIStsp_Path="D:\Documents\Source_Code\R\LB_MOD_DWL\modistsp\modtsp_launcher.R"
-Options_File="D:\Documents\Source_Code\R\LB_MOD_DWL\Previous\Moddwl_Previous.RData"
+MODIStsp_Path="~/R/x86_64-unknown-linux-gnu-library/3.1/MODIStsp/Extdata/Batch/MODIStsp_launcher.R"
+Options_File="~/R/x86_64-unknown-linux-gnu-library/3.1/MODIStsp/Previous/MODIStsp_Previous.RData"
 GUI="FALSE"
 
 
