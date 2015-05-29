@@ -45,8 +45,10 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	if (is.null(getOption('gdalUtils_gdalPath'))) {gdal_setInstallation(ignore.full_scan=FALSE)}
 	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1',getGDALVersionInfo(str = "--version")))
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
+	gdal_HDFsupport <- length(grep('HDF4', gdalinfo(formats=TRUE))) > 0
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
 # 		}}
+	if (!gdal_HDFsupport) stop("Your local GDAL installation does not support HDF4 format. Please install HDF4 support and recompile GDAL.")
 	cat('GDAL version in use:',as.character(gdal_version),'\n')
   	if (gui) {
 		require(gWidgetsRGtk2)

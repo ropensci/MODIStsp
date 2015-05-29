@@ -340,13 +340,13 @@ MODIStsp_GUI = function (general_opts){
 	addSpace(Lon_group, 30, horizontal=TRUE)
 	output_LReast_lab <- glabel('Lower Right Easting (xmax)', container = Lon_group)
 	size (output_LReast_lab) <- c(160,20)
-	output_LReast_wid <- gedit(text = general_opts$bbox[2], container = Lon_group, width = 10)
+	output_LReast_wid <- gedit(text = general_opts$bbox[3], container = Lon_group, width = 10)
 	
 	Lat_group <- ggroup (horizontal = TRUE, container=bbox_group)
 	
 	output_LRnorth_lab <- glabel('Lower Right Northing (ymin)', container = Lat_group)
 	size (output_LRnorth_lab) = c(160,20)
-	output_LRnorth_wid <- gedit(text = general_opts$bbox[3], container = Lat_group, width = 10)
+	output_LRnorth_wid <- gedit(text = general_opts$bbox[2], container = Lat_group, width = 10)
 	addSpace(Lat_group, 30, horizontal=TRUE)
 	output_ULnorth_lab <- glabel('Upper Left Northing (ymax)', container = Lat_group)
 	size (output_ULnorth_lab) <- c(160,20)
