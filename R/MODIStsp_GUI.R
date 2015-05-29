@@ -127,7 +127,7 @@ MODIStsp_GUI = function (general_opts){
 								
 							}
 							dispose(selgroup)			 # close layers selection child widget
-							
+
 						})
 				cancel_but <- gbutton(text = 'Cancel', container = bands_group, handler = function(button,...){  # if Cancel, reset selected layers to previous choice and exit
 							
@@ -581,7 +581,7 @@ MODIStsp_GUI = function (general_opts){
 					general_opts$out_folder = format(choice, justify = "left")	# 	On new selection,  Set value of the selected variable
 				}}, container=outfold_group)
 	
-	# Reprocessing options chackbox ----
+	# Reprocessing options checkbox ----
 	reprocess_lab <- glabel(text = '<span weight = "bold" >ReProcess Existing Data</span>',markup = T, container = outfold_group)
 	reprocess_wid <- gradio(items = c('Yes','No'), text = 'Select', container=outfold_group, selected = match(general_opts$reprocess, c('Yes','No')), horizontal = T)
 	addSpace(outfold_group, 5, horizontal=TRUE)
@@ -625,6 +625,8 @@ MODIStsp_GUI = function (general_opts){
 			prod_opt_list[[general_opts$sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
 			
 		}
+		general_opts$prod_opt_list <- prod_opt_list	# workaround to export prod_opt_list from function.
+			# Remember to do "prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL" after running the function! 
 		
 		general_opts$start_day <- svalue(start_day_wid)		# Retrieve Dates options
 		general_opts$start_month <- svalue(start_month_wid)
@@ -657,6 +659,7 @@ MODIStsp_GUI = function (general_opts){
 		
 		general_opts$out_folder <- svalue(outfold_wid)		# # Retrieve Folder options
 		general_opts$out_folder_mod <- svalue(outfoldmod_wid)
+		
 		
 		check_save_opts <<- TRUE
 		# Send warning if HDF deletion selected
@@ -747,6 +750,7 @@ MODIStsp_GUI = function (general_opts){
 	
 	start_but <- gbutton(text = 'Start', container = but_group, handler = function (h,....) {# If "Start" pressed, retrieve selected values and save in previous file
 				general_opts <- prepare_to_save_options(general_opts)
+				prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL # see the function definition
 				if (check_save_opts) {					# If check passed, save previous file and return
 #					dir.create(file.path(getwd(),'Previous'),showWarnings=FALSE)
 					
@@ -825,6 +829,7 @@ MODIStsp_GUI = function (general_opts){
 				
 				if(!is.na(choice)){
 					general_opts <- prepare_to_save_options(general_opts)
+					prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL # see the function definition
 					if (check_save_opts) {					# If check passed, save previous file and return
 						save(general_opts,prod_opt_list,mod_prod_list, file = choice)
 					}
