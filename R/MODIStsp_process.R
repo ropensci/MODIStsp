@@ -252,14 +252,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 									if (file.exists(outrep_file) == F | reprocess == 'Yes') {
 										
 										files_in = file.path(out_folder_mod, modislist)
-										dir.create(tmp_prod_folder, showWarnings = FALSE)
+										dir.create(tmp_prod_folder, recursive=TRUE, showWarnings = FALSE)
 										
 										if (full_ext == 'Resized') { #If resize required,  convert bbox coordinates from t_srs to modis_srs, to get the correct extent
 											# for resizing BEFORE reprojecting
 											bbox_mod <- reproj_bbox( bbox, outproj_str, MOD_proj_str, enlarge=TRUE)
 											
 											# Create a resized and eventually mosaiced GDAL vrt file
-											gdalbuildvrt(files_in, outfile_vrt, te = c(bbox_mod), tap = TRUE, tr = paste(rep(native_res,2),collapse=' ',srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band]), sd = band)
+											gdalbuildvrt(files_in, outfile_vrt, te = c(bbox_mod), tap = TRUE, tr = paste(rep(native_res,2),collapse=' '),srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band], sd = band)
 										} else {gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band]) }  # Create a resized and eventually mosaiced GDAL vrt file
 										# check if this also need to add tap (it should not)
 										

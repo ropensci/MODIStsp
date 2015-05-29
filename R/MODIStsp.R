@@ -109,9 +109,11 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 		start_date = paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '.')
 		end_date = paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '.')
 
-		if (general_opts$proj != "User Defined") {outproj_str = general_opts$out_proj_list[[general_opts$proj]]   # get proj4 string (if needed, from user proj4)
-		} else { outproj_str = general_opts$user_proj4}
-		if (outproj_str =='') {outproj_str = general_opts$MOD_proj_str}			# If out_proj = useer but empty, set to sinusoidal
+#		if (general_opts$proj != "User Defined") {outproj_str = general_opts$out_proj_list[[general_opts$proj]]   # get proj4 string (if needed, from user proj4)
+#		} else {
+			outproj_str = general_opts$user_proj4
+#		}
+#		if (outproj_str =='') {outproj_str = general_opts$MOD_proj_str}			# If out_proj = useer but empty, set to sinusoidal
 
 		# If the product is NOT tiled, change or_proj to WGS84 and or_res to 0.05
 		if (prod_opts$tiled == 0) {
