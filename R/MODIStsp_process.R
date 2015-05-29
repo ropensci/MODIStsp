@@ -64,8 +64,8 @@
 #' @import sp
 
 MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = 'Yes', delete_hdf = 'No', sensor, https,
-		start_x, start_y, end_x, end_y, bbox, out_format, compress,  out_res, native_res, tiled, MOD_proj_str, outproj_str, nodata_in, nodata_out,nodata_change, datatype,
-		bandsel, bandnames, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
+		start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str, nodata_in,
+		nodata_out,nodata_change, datatype,	bandsel, bandnames, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
 		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in, full_ext,
 		quality_nodata_out, file_prefixes, main_out_folder, resampling, ts_format) {
 	
@@ -277,12 +277,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 										
 										## Launch the reprojection
 										
-										reproj_type = if (general_opts$out_res_sel=="Native" & outproj_str==MOD_proj_str) {'GdalTranslate'
-												} else if (general_opts$out_res_sel=="Resampled" & outproj_str==MOD_proj_str) {'Resample1_Resize0'
-												} else if (general_opts$out_res_sel=="Native" & outproj_str!=MOD_proj_str & full_ext == 'Full Tiles Extent') {'Resample0_Resize0'
-												} else if (general_opts$out_res_sel=="Native" & outproj_str!=MOD_proj_str & full_ext == 'Resized') {'Resample0_Resize1'
-												} else if (general_opts$out_res_sel=="Resampled" & outproj_str!=MOD_proj_str & full_ext == 'Full Tiles Extent') {'Resample1_Resize0'
-												} else if (general_opts$out_res_sel=="Resampled" & outproj_str!=MOD_proj_str & full_ext == 'Resized') {'Resample1_Resize1'
+										reproj_type = if (out_res_sel=="Native" & outproj_str==MOD_proj_str) {'GdalTranslate'
+												} else if (out_res_sel=="Resampled" & outproj_str==MOD_proj_str) {'Resample1_Resize0'
+												} else if (out_res_sel=="Native" & outproj_str!=MOD_proj_str & full_ext == 'Full Tiles Extent') {'Resample0_Resize0'
+												} else if (out_res_sel=="Native" & outproj_str!=MOD_proj_str & full_ext == 'Resized') {'Resample0_Resize1'
+												} else if (out_res_sel=="Resampled" & outproj_str!=MOD_proj_str & full_ext == 'Full Tiles Extent') {'Resample1_Resize0'
+												} else if (out_res_sel=="Resampled" & outproj_str!=MOD_proj_str & full_ext == 'Resized') {'Resample1_Resize1'
 												} else {'Error'}
 										
 										switch( reproj_type,
