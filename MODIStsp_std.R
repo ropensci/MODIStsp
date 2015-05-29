@@ -16,7 +16,7 @@ require('sp')
 # Check if needed packages are present. Install them otherwise
 #			pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
 #					'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools', 'gdalUtils',')
-pkg_list = c('XML','gWidgetsRGtk2','rgdal','gdalUtils','hash','raster','RCurl','stringr','tools','plyr')
+pkg_list = c('XML','gWidgetsRGtk2','rgdal','rgeos','gdalUtils','hash','raster','RCurl','stringr','tools','plyr')
 pkg_test <- function(x) {while (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE,repos='http://stat.ethz.ch/CRAN')}}
 for (pkg in pkg_list) {pkg_test(pkg)}
 # Retrieve the corrent directory
