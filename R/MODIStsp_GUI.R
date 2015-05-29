@@ -14,6 +14,7 @@
 #' @export
 ##' @import gWidgetsRGtk2
 #' @import gWidgets
+#' @import rgeos
 
 MODIStsp_GUI = function (general_opts){
 
