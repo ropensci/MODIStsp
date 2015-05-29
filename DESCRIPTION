@@ -7,4 +7,4 @@ Description: MODISTSP, a R package devoted to automatizing the creation of time 
 Depends: R (>= 3.0.3)
 License: GPL-3
 LazyData: true
-Imports: XML,gWidgets,rgdal,rgeos,gdalUtils,raster,RCurl,stringr,tools,plyr,sp (>= 1.0.17),bitops,tools,hash
+Imports: XML,gWidgets,rgdal,rgeos,gdalUtils,raster (>= 2.3-40),RCurl,stringr,tools,plyr,sp (>= 1.0.17),bitops,tools,hash
