@@ -18,6 +18,6 @@ products and generic, and save it in the "previous" file.
 Lorenzo Busetto, phD (2014)
 email: busetto.l@irea.cnr.it
 
-license GPL(>2)
+license GPL 3.0
 }
 

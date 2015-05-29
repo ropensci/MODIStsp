@@ -38,6 +38,6 @@ a GDAL vrt file that allows access to the full time series as if it was a single
 Lorenzo Busetto, phD (2014-2015)
 email: busetto.l@irea.cnr.it
 Luigi Ranghetti, phD (2015)
-license CC BY-NC 3.0
+license GPL 3.0
 }
 
