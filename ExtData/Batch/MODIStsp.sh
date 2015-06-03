@@ -15,8 +15,9 @@ OPTIONS:
     -r  Rscript dir: directory of the Rscript executable (optional; use it if your R installation is not in the PATH)
 "
 
-MODISTSP_BATCH_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+MODISTSP_BATCH_DIR=`dirname $(realpath $0)`
 MODISTSP_DIR=${MODISTSP_BATCH_DIR%/*/*}
+
 gui=TRUE
 options_file=""
 Rscript_dir
