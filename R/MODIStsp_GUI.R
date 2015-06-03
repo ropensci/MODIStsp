@@ -241,8 +241,8 @@ MODIStsp_GUI = function (general_opts){
 				print(choice)
 				# Retrieve CRS using gdal: if fails, then the file is not a valid spatial file
 				reference_crs <- try(gdalsrsinfo(choice, as.CRS=TRUE), silent=TRUE)
-				reference_gdalinfo <- try(gdalinfo(choice), silent=TRUE)
-				reference_ogrinfo <- try(ogrinfo(choice,al=TRUE,so=TRUE), silent=TRUE)
+				reference_gdalinfo <- suppressWarnings(try(gdalinfo(choice), silent=TRUE))
+				reference_ogrinfo <- suppressWarnings(try(ogrinfo(choice,al=TRUE,so=TRUE), silent=TRUE))
 
 				if (class(reference_crs)=='try-error' | (!is.null(attr(reference_gdalinfo,'status')) & !is.null(attr(reference_ogrinfo,'status')))) {
 					gmessage(paste('File format not recognized by GDAL or OGR.\n\nDetails:',reference_crs), title = 'Error')

@@ -2,7 +2,7 @@
 #' @description Main function for the MODIS Time Series Processing Tool (MOD_TSP)
 #' @details The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs,
 #'  and to launch the required routines for downloading and processing the requested datasets.
-#' @param gui logical parameters (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed)
+#' @param gui logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed)
 #' @param options_file settings (optional): full path of the RData file containing the processing options (default: Previous.RData in subdir Previous);
 #' @param MODIStsp_dir main directory of the local installation of the tool(if not gived, it is automatically retrieved, but this works only if the function is launched from here!)
 #' @return NULL
@@ -16,10 +16,6 @@
 #' @import gdalUtils
 #' @import rgdal
 #' @import raster
-
-#run=F # workaround usable to TRUE to run directly the function from here
-# (It would be better to launch from ../MODIStsp.R, in order not to edit this)
-# IMPORTANT: retrieve to FALSE after using it!
 
 MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 
@@ -151,5 +147,3 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	time.taken <- end.time - start.time
 	print(time.taken)
 }
-
-#if (run) {output = MODIStsp_main()} # run the function if run has been set to TRUE
