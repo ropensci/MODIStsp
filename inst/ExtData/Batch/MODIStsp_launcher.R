@@ -18,6 +18,6 @@ outFile <- file.path(log_dir,paste0('MODIStsp_',strftime(Sys.time(),'%y%m%d_%H%M
 require(MODIStsp)
 MODIStsp_dir = system.file(package = 'MODIStsp')
 
-sink(outFile, split = TRUE, type = c("output"))
+sink(outFile, split = FALSE, type = c("output"))
 output = MODIStsp(gui=gui, options_file=options_file)
 sink(type = c("output"))
