@@ -238,7 +238,7 @@ MODIStsp_GUI = function (general_opts){
 				size(wait_window) <- c(100,8)		;	addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
 				wait_window_lab = glabel(text =paste('Charging the selected file, please wait...'), editable = FALSE, container = wait_window)
 
-				print(choice)
+				#print(choice)
 				# Retrieve CRS using gdal: if fails, then the file is not a valid spatial file
 				reference_crs <- try(gdalsrsinfo(choice, as.CRS=TRUE), silent=TRUE)
 				reference_gdalinfo <- suppressWarnings(try(gdalinfo(choice), silent=TRUE))

@@ -168,24 +168,24 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 								if (file.exists(file.path(out_folder_mod,modisname)) == F ) {		# If HDF not existing, download.
 									er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
 									while(er != 0) {   # repeat until no error or > 21 tryyouts
-										print(paste('Downloading File: ', modisname ))
+										cat('[',date(),'] Downloading File:', modisname,'\n' )
 										svalue(mess_lab) = paste('--- Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist),' ---')    # Update progress window
 										er <- tryCatch(download.file(url=paste(http,date_dirs[date], "/",modisname,sep=''),destfile=file.path(out_folder_mod,modisname),mode='wb',quiet=F, cacheOK=FALSE),
 												warning=function(war) {print(war) ; return (1)}, error =function(err) {	print(err);	return (1)} )
 										if (er != 0) {	# Stop after 21 failed attempts
-											print('Download Error -Retrying')
+											cat('[',date(),'] Download Error -Retrying...\n')
 											Sys.sleep(10)
 											ce <- ce + 1
 											if (ce == 21) {
 												unlink(file.path(out_folder_mod,modisname))  # on error, delete last hdf file (to be sure no incomplete files are left behind)
-												stop("Error: http server is down ! Please Retry Later !")
+												cat("[',date(),'] Error: http server is down! Please Retry Later!\n"); stop()
 											}
 										}
 									}
 								} # end IF on hdf existence
 							} # End cycle for downloading the images in modislist vector
 
-							print (paste(length(modislist)," files for date of ",date_dirs[date]," were successfully downloaded!",sep=''))
+							cat('[',date(),']',length(modislist),"files for date of",date_dirs[date],"were successfully downloaded!\n")
 
 							# -------------------------------------------------------------------------
 							# After all required tiles for the date are downloaded, start geoprocessing
@@ -272,7 +272,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 										# Convert to output projection, extent and format using gdalwarp ----
 										# ---------------------------------- ----------------------------------------------#
 
-										print (paste('Reprojecting ', bandnames[band],'files for date: ',date_name ))
+										cat('[',date(),'] Reprojecting', bandnames[band],'files for date:',date_name,'\n' )
 										svalue(mess_lab) =  (paste('--- Reprojecting ', bandnames[band],'files for date: ',date_name,' ---'))
 
 										## Launch the reprojection
@@ -314,7 +314,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 								indexes_band =  indexes_bandnames[band] 	# index name
 								formula = indexes_formula[band]				#index formula
 								svalue(mess_lab) = paste('--- Computing',  indexes_band,' for date: ',date_name,' ---')
-								print (paste('Computing ', indexes_band,' for date: ',date_name ))
+								cat('[',date(),'] Computing', indexes_band,'for date: ',date_name,'\n' )
 								out_filename = file.path(out_prod_folder,indexes_band,paste(file_prefix,'_',indexes_band,'_',yy,'_', DOY, sep = ''))
 								if (out_format =='GTiff') {out_filename = paste(out_filename, '.tif', sep = '')} else {out_filename = paste(out_filename, '.dat', sep = '')}
 								dir.create(file.path(out_prod_folder,indexes_band), showWarnings = F, recursive = T) # create folder for index
@@ -335,7 +335,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 								nodata_qa_in = quality_nodata_in [band]
 								nodata_qa_out = quality_nodata_out [band]
 								svalue(mess_lab) = paste('--- Computing',  quality_band,' for date: ',date_name,' ---')
-								print (paste('Computing ', quality_band,' for date: ',date_name ))
+								cat('Computing', quality_band,'for date:',date_name,'\n')
 								out_filename = file.path(out_prod_folder,quality_band,paste(file_prefix,'_',quality_band,'_',yy,'_', DOY, sep = ''))
 								if (out_format =='GTiff') {out_filename = paste(out_filename, '.tif', sep = '')} else {out_filename = paste(out_filename, '.dat', sep = '')}
 								dir.create(file.path(out_prod_folder,quality_band), showWarnings = F, recursive = T)
@@ -373,13 +373,13 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 							# Removed for now - TBC  in next versions
 							# if (multiband_bsq == T) {MODIStsp_refl_bsq(sel_prod, out_prod_folder,bandnames, bandsel_orig_choice, reflbands, reflorder ,file_prefix, yy, DOY)}
 
-						} else {print(paste("No available image for selected Tiles in ",date_dirs[dir], sep=""))} # End check on at least one image available
+						} else {cat("[',date(),'] No available image for selected Tiles in",date_dirs[dir],'.\n')} # End check on at least one image available
 
-					} else {print (paste('All Required output files for date ',date_name, ' are already existing - Doing Nothing !', sep = ''))} # End check on all data already processed for date or reprocees = Yes
+					} else {cat('[',date(),'] All Required output files for date',date_name, 'are already existing - Doing Nothing !\n')} # End check on all data already processed for date or reprocees = Yes
 
 				}   # End cycling on available dates for selected year
 
-			} else print (paste("No available data for year:  ", yy, "for Sensor",sens_sel," in selected dates"))
+			} else cat("[',date(),'] No available data for year:", yy, "for Sensor",sens_sel,"in selected dates.\n")
 
 			#- ------------------------------------------------------------------------------- -#
 			# If deletion selected, delete the HDF files in folder_mod directory

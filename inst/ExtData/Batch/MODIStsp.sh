@@ -16,10 +16,8 @@ OPTIONS:
 "
 
 MODISTSP_BATCH_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-MODISTSP_DIR=${MODISTSP_BATCH_DIR%/*/*}
 gui=TRUE
 options_file=""
-Rscript_dir
 
 while getopts 'hgs:' option; do
   case "$option" in
@@ -39,4 +37,4 @@ while getopts 'hgs:' option; do
 done
 shift $((OPTIND - 1))
 
-Rscript "${MODISTSP_BATCH_DIR}/MODIStsp_launcher.R" "`echo $MODISTSP_DIR`" $gui $options_file
+Rscript "${MODISTSP_BATCH_DIR}/MODIStsp_launcher.R" $gui $options_file

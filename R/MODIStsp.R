@@ -98,7 +98,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	# If not Quit selected, restore the user selected options from previous file and launch the processing ----
 	if (!Quit) {
 
-		if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)} else {print('Download Options file not found ! Exiting !'); stop()}
+		if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)} else {cat('[',date(),'] Download Options file not found ! Exiting !\n'); stop()}
 
 		prod_opts = prod_opt_list[[general_opts$sel_prod]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
 
