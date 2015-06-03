@@ -8,7 +8,7 @@ Proj for MOD dwl and preprocess
 install.packages('gWidgetsRGtk2')
 ```
    when asked, request to install GTK
-2. Install the package from GitHub. (You'll need to have the "devtools" package installed and loaded=
+2. Install the package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 ```r
 install.packages('devtools')
 require('devtools')
@@ -41,7 +41,12 @@ See `?MODIStsp_install_launcher` for details and path customisations.
 
 Also these links can be launched in interactive mode calling launching them without parameters (or double-clicking them);
 to run in non-interactive mode, use the following syntax:
-```bash
+* Linux:
+```console
 MODIStsp -g -s "/yourpath/youroptions.RData"
 ```
-(see `MODIStsp -h` for details).
+* Windows:
+```bat
+C:\Users\you\Desktop\MODIStsp -g -s "X:/yourpath/youroptions.RData"
+```
+(see `C:\Users\you\Desktop\MODIStsp -h` for details).
