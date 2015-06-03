@@ -34,7 +34,7 @@ MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE,
 			file.symlink(from=file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.sh'),to=bin_path,overwrite=TRUE)
 		}
 		# Create desktop entry
-		desktopEntry = paste0("[Desktop Entry]\nName=MODIStsp\nComment=A tool for automatic download and preprocessing of time series of MODIS Land Products data\nExec=",MODIStsp_dir,"ExtData/Batch/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")
+		desktopEntry = paste0("[Desktop Entry]\nName=MODIStsp\nComment=A tool for automatic download and preprocessing of time series of MODIS Land Products data\nExec=",MODIStsp_dir,"/ExtData/Batch/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")
 		fileConn <- file(file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.desktop'))
 		writeLines(desktopEntry,fileConn)
 		close(fileConn)
