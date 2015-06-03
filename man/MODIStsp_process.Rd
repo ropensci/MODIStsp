@@ -6,11 +6,11 @@
 \usage{
 MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   reprocess = "Yes", delete_hdf = "No", sensor, https, start_x, start_y,
-  end_x, end_y, bbox, out_format, compress, out_res, native_res, tiled,
-  MOD_proj_str, outproj_str, nodata_in, nodata_out, nodata_change, datatype,
-  bandsel, bandnames, indexes_bandsel, indexes_bandnames, indexes_formula,
-  indexes_nodata_out, quality_bandnames, quality_bandsel, quality_bitN,
-  quality_source, quality_nodata_in, full_ext, quality_nodata_out,
+  end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, native_res,
+  tiled, MOD_proj_str, outproj_str, nodata_in, nodata_out, nodata_change,
+  datatype, bandsel, bandnames, indexes_bandsel, indexes_bandnames,
+  indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel,
+  quality_bitN, quality_source, quality_nodata_in, full_ext, quality_nodata_out,
   file_prefixes, main_out_folder, resampling, ts_format)
 }
 \arguments{
@@ -45,6 +45,8 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \item{out_format}{string output raster format (ENVI or GTiff)}
 
 \item{compress}{string compression for GTiff outputs (None, LZW, DEFLATE)}
+
+\item{out_res_sel}{string "Native" or "Resampled"}
 
 \item{out_res}{float Output resolution (in output projection measurement unit)}
 
@@ -113,6 +115,6 @@ images, and not reprocess already processed dates (if the user didn'specify that
 Lorenzo Busetto, phD (2014-2015)
 email: busetto.l@irea.cnr.it
 Luigi Ranghetti, phD (2015)
-license CC BY-NC 3.0
+license GPL > 3
 }
 

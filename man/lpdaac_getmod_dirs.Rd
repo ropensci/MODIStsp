@@ -21,6 +21,6 @@ Accessory function to get the full list of directories on the lpdaac http site (
 Original code by XXXXXX
 Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
 email: busetto.l@irea.cnr.it
-license CC BY-NC 3.0
+license GPL 3.0
 }
 
