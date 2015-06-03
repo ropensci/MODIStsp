@@ -3,6 +3,7 @@
 export(MODIStsp)
 export(MODIStsp_GUI)
 export(MODIStsp_check_files)
+export(MODIStsp_install_launcher)
 export(MODIStsp_process)
 export(MODIStsp_process_QA_bits)
 export(MODIStsp_process_indexes)
