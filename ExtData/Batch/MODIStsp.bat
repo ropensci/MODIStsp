@@ -27,8 +27,8 @@ OPTIONS:^
 
 :GETOPTS
  SET gui="TRUE"
- SET options_File="D:\Documents\Source_Code\R\LB_MOD_DWL\Previous\Moddwl_Previous.RData"
- if /I %1 == [] goto Run
+ SET options_File=""
+ if /I "%1" == "" goto Run
  if /I %1 == -h goto Help
  if /I %1 == -g set gui="FALSE"
  if /I %1 == -s set options_file=%2& shift
