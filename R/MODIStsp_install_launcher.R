@@ -9,7 +9,7 @@
 #'  is suggested.
 #' @param sudo (Linux only) logical value which indicates if the creation of bin_path and desktop_path requires root permissions; in this case,
 #'  the root password is requested when launching the function.
-#' @param desktop_shorcut (Windows only) logical value which indicates if also a desktop shorcut should be created.
+#' @param desktop_shortcut (Windows only) logical value which indicates if also a desktop shortcut should be created.
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015)
@@ -19,7 +19,7 @@
 #' @export
 #' @importFrom hash hash
 
-MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE, desktop_shorcut=FALSE) {
+MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE, desktop_shortcut=FALSE) {
 	
 	MODIStsp_dir = system.file(package = "MODIStsp")
 	running_os <- Sys.info()[['sysname']]
