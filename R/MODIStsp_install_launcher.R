@@ -39,7 +39,7 @@ MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE,
 		writeLines(desktopEntry,fileConn)
 		close(fileConn)
 		if (sudo) {
-			system(paste('sudo -S cp', file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.desktop'), desktop_path), input=readline("Enter your password: "))
+			system(paste('sudo -S cp -f', file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.desktop'), desktop_path), input=readline("Enter your password: "))
 		} else {
 			file.copy(from=file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.desktop'),to=desktop_path,overwrite=TRUE)
 		}
