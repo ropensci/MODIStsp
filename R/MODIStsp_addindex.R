@@ -4,7 +4,7 @@
  #' @details The function asks the user to provide the info related to the new desired Spectral Index using a GUI interface,
  #' checks for correctness of provided information (e.g., correct bandnames, computable formula, etc...). If the index is legit,
  #' it modifies the MODIStsp_Previous.RData file so to allow computation of the additional index within MODIStsp.
- #' To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Extdata subfolder of the 
+ #' To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Extdata subfolder of the
  #' folder in which the package was installed
  #'
  #' @param Previous_File string path to the MODIStsp_Previous.RData file
@@ -14,7 +14,7 @@
  #' @author Lorenzo Busetto, phD (2015)
  #' email: busetto.l@@irea.cnr.it
  #'
- #' license GPL-3
+ #' license GPL >3
 
 
  # xml_file = file.choose()
@@ -48,7 +48,7 @@
   	but_group <- ggroup(container = main_group, horizontal = TRUE)
 
   	start_but <- gbutton(text = 'Add Index', container = but_group, handler = function (h,...) {# If "Start" pressed, retrieve selected values and save in previous file
-  				
+
   				new_indexbandname = svalue(sel_indexbandname)
   				new_indexfullname = svalue(sel_indexbandfullname)
   				new_indexformula = svalue(sel_indexformula)
@@ -74,7 +74,7 @@
   				if (req_bands[5] == T) {b5_SWIR = 9}
   				if (req_bands[6] == T) {b6_SWIR = 15}
   				if (req_bands[7] == T) {b7_SWIR = 25}
-					
+
   				catch_err = 0
   				if (max(req_bands == 1)) {
   					try_parse = tryCatch (eval(parse(text = new_indexformula)))
