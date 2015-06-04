@@ -167,7 +167,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 							for (modisname in modislist) {
 								if (file.exists(file.path(out_folder_mod,modisname)) == F ) {		# If HDF not existing, download.
 									er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
-									while(er != 0) {   # repeat until no error or > 21 tryyouts
+									while(er != 0) {   # repeat until no error or > 30 tryyouts
 										cat('[',date(),'] Downloading File:', modisname,'\n' )
 										svalue(mess_lab) = paste('--- Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist),' ---')    # Update progress window
 										er <- tryCatch(download.file(url=paste(http,date_dirs[date], "/",modisname,sep=''),destfile=file.path(out_folder_mod,modisname),mode='wb',quiet=F, cacheOK=FALSE),
@@ -176,7 +176,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 											cat('[',date(),'] Download Error -Retrying...\n')
 											Sys.sleep(10)
 											ce <- ce + 1
-											if (ce == 21) {
+											if (ce == 30) {
 												unlink(file.path(out_folder_mod,modisname))  # on error, delete last hdf file (to be sure no incomplete files are left behind)
 												cat("[',date(),'] Error: http server is down! Please Retry Later!\n"); stop()
 											}
