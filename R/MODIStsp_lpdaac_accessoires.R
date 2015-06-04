@@ -22,7 +22,7 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
 	class(items) <- "try-error"
 	ce <- 0
 	while(class(items) == "try-error") {
-		items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 5, maxredirs = 5, verbose = T)), "\r*\n")[[1]],silent=TRUE)
+		items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],silent=TRUE)
 		if (class(items) == "try-error") {
 			Sys.sleep(1)
 			ce <- ce + 1
@@ -113,7 +113,7 @@ lpdaac_getmod_names <- function(http, date_dirs, date, v, h, tiled) {
 	class(getlist) <- "try-error"
 	ce <- 0
 	while(class(getlist) == "try-error") {
-		getlist <- try(strsplit(getURL(paste(http,date_dirs[date], "/", sep=""), followLocation = TRUE, .opts = list(timeout = 20, maxredirs = 2, verbose = F)), "\r*\n")[[1]],silent=TRUE)
+		getlist <- try(strsplit(getURL(paste(http,date_dirs[date], "/", sep=""), followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = F)), "\r*\n")[[1]],silent=TRUE)
 		if (class(getlist) == "try-error") {
 			Sys.sleep(5)
 			ce <- ce + 1
