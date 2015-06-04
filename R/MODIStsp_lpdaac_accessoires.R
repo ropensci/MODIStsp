@@ -15,7 +15,7 @@ MODIStsp_lpdaac_accessoires = function () {
 #' @export
 #' @import RCurl
 lpdaac_getmod_dirs <- function(http, .Platform) {
-
+	
 	if (strsplit(http,'')[[1]][length(strsplit(http,'')[[1]])] != "/") {http <- paste(http,"/",sep="")}
 	if (.Platform$OS.type=="unix") options('download.file.method'='wget')  else options('download.file.method'='auto')
 	items <- 0
@@ -27,7 +27,13 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
 			Sys.sleep(1)
 			ce <- ce + 1
 			print(ce)
-			if (ce == 50) stop("Error: http server is down!!")
+			if (ce == 50)  {
+				confirm = gconfirm("http server seems to be down! Do you want to retry ? ", icon = 'question', handler = function(h,...){})
+				if (confirm == 'FALSE') {
+					cat("[',date(),'] Error: http server seems to be down! Please Retry Later!\n")
+					stop()	
+				}
+			}
 		}
 	}
 	items <- items[-1]
@@ -35,9 +41,9 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
 	date_dirs <- unlist(lapply(strsplit(items, ">"), function(x){x[length(x)-1]}))
 	date_dirs = date_dirs[seq(3,length(date_dirs)-2)]
 	date_dirs <- unlist(lapply(strsplit(date_dirs, "/"), function(x){x[1]}))
-
+	
 	return(date_dirs)
-
+	
 }
 
 #' lpdaac_getmod_dates
@@ -55,7 +61,7 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
 #' @export
 #' @import RCurl
 lpdaac_getmod_dates <- function(dates, date_dirs) {
-
+	
 	if (length(dates) > 1) {
 		start.date <- strsplit(dates[1],'\\.')[[1]]
 		end.date <- strsplit(dates[2],'\\.')[[1]]
@@ -65,7 +71,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 			if (length(d) == 3)
 				if (as.numeric(d[1]) >= as.numeric(start.date[1]) & as.numeric(d[1]) <= as.numeric(end.date[1]) ) wr <- c(wr,i)
 		}
-
+		
 		if (length(wr) > 0) date_dirs <- date_dirs[wr] else return (NULL)
 		wr <- c()
 		for (i in 1:length(date_dirs)) {
@@ -73,7 +79,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 			if (as.numeric(d[2]) < as.numeric(start.date[2]) & as.numeric(d[1]) == as.numeric(start.date[1])) wr <- c(wr,i)
 			if (as.numeric(d[2]) > as.numeric(end.date[2]) & as.numeric(d[1]) == as.numeric(end.date[1])) wr <- c(wr,i)
 		}
-
+		
 		if (length(wr) > 0) date_dirs <- date_dirs[-wr]
 		if (length(date_dirs) == 0) return(NULL)
 		wr <- c()
@@ -85,7 +91,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 		if (length(wr) > 0) date_dirs <- date_dirs[-wr]
 		if (length(date_dirs) == 0) return(NULL)
 	} else date_dirs <- date_dirs[which(date_dirs == dates[1])]
-
+	
 	return(date_dirs)
 }
 # ---------------------------------- ----------------------------------------------#
@@ -117,7 +123,12 @@ lpdaac_getmod_names <- function(http, date_dirs, date, v, h, tiled) {
 		if (class(getlist) == "try-error") {
 			Sys.sleep(5)
 			ce <- ce + 1
-			if (ce == 21) stop("Error: http server is down!!")
+			if (ce == 21){ confirm = gconfirm("http server seems to be down! Do you want to retry ? ", icon = 'question', handler = function(h,...){})
+				if (confirm == 'FALSE') {
+					cat("[',date(),'] Error: http server seems to be down! Please Retry Later!\n")
+					stop()	
+				}
+			} 
 		}
 	}
 	getlist <- getlist[-1]
@@ -126,22 +137,22 @@ lpdaac_getmod_names <- function(http, date_dirs, date, v, h, tiled) {
 	getlist <- unlist(lapply(strsplit(getlist, "<"), function(x){x[1]}))
 	Modislist <- c()
 	if (tiled == 1 ) {
-	for (vv in v) {
-		for (hh in h) {
-			if (vv < 10) vc <- paste('0',as.character(vv),sep='')
-			else vc <- as.character(vv)
-			if (hh < 10) hc <- paste('0',as.character(hh),sep='')
-			else hc <- as.character(hh)
-			ModisName <- grep(".hdf$",grep(paste('h',hc,'v',vc,sep=''),getlist,value=TRUE),value=TRUE)
-			if (length(ModisName) >= 1) Modislist <- c(Modislist,ModisName[1])
+		for (vv in v) {
+			for (hh in h) {
+				if (vv < 10) vc <- paste('0',as.character(vv),sep='')
+				else vc <- as.character(vv)
+				if (hh < 10) hc <- paste('0',as.character(hh),sep='')
+				else hc <- as.character(hh)
+				ModisName <- grep(".hdf$",grep(paste('h',hc,'v',vc,sep=''),getlist,value=TRUE),value=TRUE)
+				if (length(ModisName) >= 1) Modislist <- c(Modislist,ModisName[1])
+			}
 		}
-	}
 	} else {
-
+		
 		Modislist <- grep(".hdf$",getlist, value = T)
 	}
 	return(Modislist)
-
+	
 }
 
 
