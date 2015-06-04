@@ -1,4 +1,4 @@
-#'  MODIStsp_main
+#'  MODIStsp_main Launch the tool
 #' @description Main function for the MODIS Time Series Processing Tool (MOD_TSP)
 #' @details The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs,
 #'  and to launch the required routines for downloading and processing the requested datasets.
@@ -7,9 +7,8 @@
 #' @param MODIStsp_dir main directory of the local installation of the tool(if not gived, it is automatically retrieved, but this works only if the function is launched from here!)
 #' @return NULL
 #'
-#' @author Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' Luigi Ranghetti, phD (2015)
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}, 
+#' Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it},
 #' license GPL 3.0
 #' @export
 #' @importFrom hash hash

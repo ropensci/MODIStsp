@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp.R
 \name{MODIStsp}
 \alias{MODIStsp}
-\title{MODIStsp_main}
+\title{MODIStsp_main Launch the tool}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, MODIStsp_dir = NA)
 }
@@ -21,9 +21,8 @@ The function is used to initialize the processing (folder names, packages, etc.)
  and to launch the required routines for downloading and processing the requested datasets.
 }
 \author{
-Lorenzo Busetto, phD (2014-2015)
-email: busetto.l@irea.cnr.it
-Luigi Ranghetti, phD (2015)
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it},
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it},
 license GPL 3.0
 }
 
