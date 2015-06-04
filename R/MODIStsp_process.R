@@ -172,13 +172,16 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 										svalue(mess_lab) = paste('--- Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist),' ---')    # Update progress window
 										er <- tryCatch(download.file(url=paste(http,date_dirs[date], "/",modisname,sep=''),destfile=file.path(out_folder_mod,modisname),mode='wb',quiet=F, cacheOK=FALSE),
 												warning=function(war) {print(war) ; return (1)}, error =function(err) {	print(err);	return (1)} )
-										if (er != 0) {	# Stop after 21 failed attempts
+										if (er != 0) {	# Stop after 30 failed attempts
 											cat('[',date(),'] Download Error -Retrying...\n')
 											Sys.sleep(10)
 											ce <- ce + 1
 											if (ce == 30) {
 												unlink(file.path(out_folder_mod,modisname))  # on error, delete last hdf file (to be sure no incomplete files are left behind)
-												cat("[',date(),'] Error: http server is down! Please Retry Later!\n"); stop()
+												confirm = gconfirm("http server seems to be down! Do you want to retry ? ", icon = 'question', handler = function(h,...){})
+												if (confirm == 'FALSE') {
+													cat("[',date(),'] Error: http server seems to be down! Please Retry Later!\n"); stop()	
+												}
 											}
 										}
 									}
