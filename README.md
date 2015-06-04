@@ -24,7 +24,9 @@ library(MODIStsp)
 MODIStsp()
 ```
 
-### Non Interactive mode (Exploiting a previously saved options file)
+### Non Interactive mode
+(Exploiting a previously saved options file)
+
 To run the tool without GUI interaction: 
 ```r
 library(MODIStsp) 
@@ -46,4 +48,4 @@ to run in non-interactive mode, use the following syntax:
 * Windows:`C:\Users\you\Desktop\MODIStsp -g -s "X:/yourpath/youroptions.RData"`
   (see `C:\Users\you\Desktop\MODIStsp -h` for details).
 
-If you do not want to install any link, launchers ca be found in the subdirectory MODIStsp/ExtData/Launcher of your library path.
+If you do not want to install any link, launchers can be found in the subdirectory MODIStsp/ExtData/Launcher of your library path.
