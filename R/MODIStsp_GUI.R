@@ -699,7 +699,7 @@ MODIStsp_GUI = function (general_opts){
 
 			# If the bounding box does not interrsect with the tiles, return an error
 			if (!any(required_tiles %in% selected_tiles)) {
-				check_save_opts <<- gconfirm(paste('There are no selected tiles useful to create your images. Do you want to automatically select the required tiles?'),
+				check_save_opts <<- gconfirm(paste('The selected tiles does not intersect the output bounding box. Do you want to automatically retrieve the required tiles?'),
 						handler=function(h,...) {
 							selected_tiles <<- required_tiles
 							general_opts$start_x <<- min(d_bbox_mod_tiled$H)
@@ -711,8 +711,8 @@ MODIStsp_GUI = function (general_opts){
 
 			# If not all the required tiles are selected, ask to select them
 			if (!all(required_tiles %in% selected_tiles) & check_save_opts) {
-				gconfirm(paste('Some not selected tiles (',paste(required_tiles[!(required_tiles %in% selected_tiles)],collapse=', '),
-								') are required to cover your bounding box. Do you want to select them? Otherwise, nodata will be produced in the non-covered area.'),
+				gconfirm(paste('The following tiles not currently selected are required to cover the output bounding box (',paste(required_tiles[!(required_tiles %in% selected_tiles)],collapse=', '),
+								'). Do you want to add them to the processing ? Otherwise, nodata will be produced in the non-covered area.'),
 						handler=function(h,...) {
 							selected_tiles <<- required_tiles
 							general_opts$start_x <<- min(d_bbox_mod_tiled$H)
@@ -724,8 +724,8 @@ MODIStsp_GUI = function (general_opts){
 
 			# If some selected tiles are not useful, ask to remove them
 			if (!all(selected_tiles %in% required_tiles) & check_save_opts) {
-				gconfirm(paste('Some selected tiles (',paste(selected_tiles[!(selected_tiles %in% required_tiles)],collapse=', '),
-								') will not be used to create the output images. Do you want to unselect them?'),
+				gconfirm(paste('The following tiles are not required to cover the output bounding box (',paste(selected_tiles[!(selected_tiles %in% required_tiles)],collapse=', '),
+								'). Do you want to remove them from processing ?'),
 						handler=function(h,...) {
 							selected_tiles <<- required_tiles
 							general_opts$start_x <<- min(d_bbox_mod_tiled$H)
