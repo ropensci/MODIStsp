@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp.R
 \name{MODIStsp}
 \alias{MODIStsp}
-\title{MODIStsp_main Launch the tool}
+\title{MODIStsp_main}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, MODIStsp_dir = NA)
 }
@@ -11,7 +11,7 @@ MODIStsp(gui = TRUE, options_file = NULL, MODIStsp_dir = NA)
 
 \item{options_file}{settings (optional): full path of the RData file containing the processing options (default: Previous.RData in subdir Previous);}
 
-\item{MODIStsp_dir}{main directory of the local installation of the tool(if not gived, it is automatically retrieved, but this works only if the function is launched from here!)}
+\item{MODIStsp_dir}{main directory of the local installation of the tool(if not given, it is automatically retrieved, but this works only if the function is launched from here!)}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MOD_TSP)
