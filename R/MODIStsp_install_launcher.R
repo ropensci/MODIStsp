@@ -1,9 +1,9 @@
 #'  MODIStsp_install_launcher
 #' @description Function which allows to use MODIStsp in batch mode by creating links
 #' @details MODIStsp tool can be used also as a standalone tool my launching a bash/batch script, which is stored in the function files.
-#'  In order to simply retrieve it, this function will create a desktop entry and a symbolic link to the bash script (in Linux) 
+#'  In order to simply retrieve it, this function will create a desktop entry and a symbolic link to the bash script (in Linux)
 #'  or a link in the Start Menu to the batch script (in Windows).
-#' @param desktop_path path to the desktop entry (Linux; default: /usr/share/applications/MODIStsp.desktop) or to the link in the Start Menu 
+#' @param desktop_path path to the desktop entry (Linux; default: /usr/share/applications/MODIStsp.desktop) or to the link in the Start Menu
 #'  (Windows; default: Start Menu -> Programs -> MODIStsp). Note that the patch must contain also the file name.
 #' @param bin_path (Linux only) path of the link to the bash script (default: /usr/bin/MODIStsp); a path included in the PATH environment variable
 #'  is suggested.
@@ -20,14 +20,14 @@
 #' @importFrom hash hash
 
 MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE, desktop_shortcut=FALSE) {
-	
+
 	MODIStsp_dir = system.file(package = "MODIStsp")
 	running_os <- Sys.info()[['sysname']]
 
 	if (running_os=='Linux') {
 		if (is.na(bin_path)) {bin_path = '/usr/bin/MODIStsp'}
 		if (is.na(desktop_path)) {desktop_path = '/usr/share/applications/MODIStsp.desktop'}
-		# Create symbolic link to a directory in the path 
+		# Create symbolic link to a directory in the path
 		if (sudo) {
 			system(paste('sudo -S ln -fs', file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.sh'), bin_path), input=readline("Enter your password: "))
 		} else {
@@ -44,7 +44,7 @@ MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE,
 			file.copy(from=file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'),to=desktop_path,overwrite=TRUE)
 		}
 	}
-	
+
 	if (running_os=='Windows') {
 		if (is.na(desktop_path)) {desktop_path = file.path(Sys.getenv('USERPROFILE'),'AppData/Roaming/Microsoft/Windows/Start Menu/Programs/MODIStsp/')}
 		# Create entry in the start menu
@@ -58,5 +58,5 @@ MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE,
 			} else warning('Desktop shortcut already exists!')
 		}
 	}
-	
+
 }

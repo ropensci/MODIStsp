@@ -9,7 +9,6 @@
 #' email: busetto.l@@irea.cnr.it
 #'
 #' license GPL 3.0
-#' @export
 
 MODIStsp_set_opts = function(previous_file = previous_file) {
 

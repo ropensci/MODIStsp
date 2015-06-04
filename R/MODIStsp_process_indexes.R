@@ -2,7 +2,7 @@
 #'  MODIStsp_process_indexes
 #' @description function used to compute spectral indexes, given the index formula
 #' @details the function parses the index formula to identify the required bands. On the basis
-#' of identified bands, it retrieves the reflectance bands required, gets the data into R raster 
+#' of identified bands, it retrieves the reflectance bands required, gets the data into R raster
 #' objects, performs the computation and stores results in a GeoTiff or ENVI raster file
 #' @param out_filename basename of the file in to which save results
 #' @param formula string Index formula, as derived from XML file and stored in prod_opts within previous_file
@@ -15,17 +15,16 @@
 #' @param DOY string used to retrieve filenames of rasters of original bands to be used in computations
 #' @param out_format string used to retrieve filenames of rasters of original bands to be used in computations
 #' @return NULL - new raster file saved in out_filename
-#' 
+#'
 #' @author Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
 #' license GPL 3.0
-#' @export
 MODIStsp_process_indexes = function(out_filename, formula,bandnames,nodata_out,out_prod_folder,
 		indexes_nodata_out, file_prefix, yy, DOY, out_format) {
-	
+
 	# Retrieve necessary filenames (get names of single band files on the basis of Index formula)
-	
+
 	call_string = 'tmp_index = index('   # initialize the "call string " for the computation
 	fun_string = 'index <- function('		 # initialize the "fun_string" --> in the end, fun_string contains a complete function definition
 											 # Parsing it allows to create on the fly a function to compute the specific index required
@@ -44,13 +43,13 @@ MODIStsp_process_indexes = function(out_filename, formula,bandnames,nodata_out,o
 			fun_string = paste(fun_string,temp_bandname,'=',temp_bandname,',', sep = '' )  # add an "entry" in fun_string (additional input parameter)
 		}
 	}
-	
+
 	call_string = paste(call_string, ')', sep = '')  #Finalize the call_string
 	fun_string = paste(fun_string,'...)','{comp_index <-round(10000*(',formula, '));	return((comp_index))}', sep = '') # Finalize the fun_string
 	eval(parse(text = fun_string)) # Parse "fun_string" to create a new function
-	
+
 	eval(parse(text = call_string))    # parse call_string to launch the new function for index computation
-	
+
 	# Save output and remove aux file
 	NAvalue(tmp_index) = as.numeric(indexes_nodata_out)
 	writeRaster(tmp_index, out_filename, format = out_format,NAflag = as.numeric(indexes_nodata_out), datatype = 'INT2S', overwrite = T)
@@ -58,7 +57,7 @@ MODIStsp_process_indexes = function(out_filename, formula,bandnames,nodata_out,o
 	unlink(xml_file)
 
 	gc()
-	
+
 }
 
 

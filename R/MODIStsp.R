@@ -126,7 +126,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 						out_folder = out_folder, out_folder_mod = out_folder_mod, reprocess = reprocess,
 						delete_hdf = delete_hdf, sensor = sensor, https = prod_opts$http,
 						start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
-						full_ext = full_ext, bbox = bbox,out_format = out_format, out_res_sel = out_res_sel, 
+						full_ext = full_ext, bbox = bbox,out_format = out_format, out_res_sel = out_res_sel,
 						out_res = as.numeric(out_res), native_res = prod_opts$native_res,  tiled = prod_opts$tiled,
 						resampling = resampling, ts_format = ts_format, compress = compress,
 						MOD_proj_str = MOD_proj_str,outproj_str = outproj_str,

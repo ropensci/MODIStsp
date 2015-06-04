@@ -26,7 +26,6 @@
 #' Based on the "modis.qc.R" script by Yann Chemin (2008) (https://r-forge.r-project.org/scm/viewvc.php/pkg/RemoteSensing/R/modis.qc.R?view=markup&root=remotesensing&pathrev=79)
 #'
 #' license GPL 3.0
-#' @export
 #' @import raster
 #' @import bitops
 MODIStsp_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, out_prod_folder,

@@ -1,8 +1,8 @@
 Package: MODIStsp
 Title: An R package for automatic download and preprocessing of time series of MODIS Land Products data
 Version: 1.0
-Authors@R: person("Lorenzo", "Busetto", , "busetto.l@irea.cnr.it", role = c("aut", "cre"))
-           person("Luigi", "Ranghetti", , "ranghetti.l@irea.cnr.it", role = c("aut", "cre"))
+Authors@R: c(person("Lorenzo", "Busetto", , "busetto.l@irea.cnr.it", role = c("aut", "cre")),
+           person("Luigi", "Ranghetti", , "ranghetti.l@irea.cnr.it", role = c("aut")))
 Description: MODISTSP, a R package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data.  MODISTSP allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to the different available acquisition dates. Virtual files allowing access to the entire time series as a single file are also created. All processing parameters can be easily selected with a user-friendly GUI. Command-line execution is also possible, allowing to use MODISTSP to automatically update time series related to a MODIS product whenever a new image is made available.
 Depends: R (>= 3.0.3)
 License: GPL-3

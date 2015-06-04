@@ -11,7 +11,6 @@
 #' email: busetto.l@@irea.cnr.it
 #'
 #' license GPL(>2)
-#' @export
 #' @import gWidgets
 #' @import rgeos
 

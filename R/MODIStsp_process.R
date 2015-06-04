@@ -56,7 +56,6 @@
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
 #' license GPL > 3
-#' @export
 #' @import gdalUtils
 #' @import rgdal
 #' @importFrom hash hash
@@ -180,7 +179,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 												unlink(file.path(out_folder_mod,modisname))  # on error, delete last hdf file (to be sure no incomplete files are left behind)
 												confirm = gconfirm("http server seems to be down! Do you want to retry ? ", icon = 'question', handler = function(h,...){})
 												if (confirm == 'FALSE') {
-													cat("[',date(),'] Error: http server seems to be down! Please Retry Later!\n"); stop()	
+													cat("[',date(),'] Error: http server seems to be down! Please Retry Later!\n"); stop()
 												}
 											}
 										}

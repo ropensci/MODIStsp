@@ -12,7 +12,6 @@
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
 #' license GPL 3.0
-#' @export
 #' @import XML
 #' @importFrom plyr revalue
 MODIStsp_read_xml = function(previous_file = previous_file, xml_file = xml_file) {

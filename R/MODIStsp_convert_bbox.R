@@ -1,8 +1,8 @@
 #' reproj_bbox
 #' @description
-#' Ancillary function used to reproject bounding boxes; setting the parameter 'enlarge' allows to choose if the new one would be the 
-#' one which completely include the old or if is simply the one obtained by reprojecting the upper-left and the lower-right corners.   
-#'  
+#' Ancillary function used to reproject bounding boxes; setting the parameter 'enlarge' allows to choose if the new one would be the
+#' one which completely include the old or if is simply the one obtained by reprojecting the upper-left and the lower-right corners.
+#'
 #' @param bbox The input bounding box (it can be a matrix in the bbox format or a vector in the format (xmin, ymin, xmax, ymax).
 #' @param in_proj The input projection (string format).
 #' @param out_proj The output projection (string format).
@@ -13,7 +13,6 @@
 #' email: ranghetti.l@@irea.cnr.it
 #'
 #' license GPL(>2)
-#' @export
 #' @import sp
 
 reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE, N_dens=1000) {
@@ -29,7 +28,7 @@ reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE, N_dens=1000) {
 	}
 	proj4string(d_bbox_in) <- in_proj # assign the projection
 	d_bbox_out <- spTransform(d_bbox_in, CRS(out_proj)) # reproject the bbox in a polygon
-	
+
 	return(bbox(d_bbox_out))
-	
+
 }

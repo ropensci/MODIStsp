@@ -19,7 +19,6 @@
 #' email: busetto.l@@irea.cnr.it
 #' Luigi Ranghetti, phD (2015)
 #' license GPL 3.0
-#' @export
 #' @import raster
 #' @importFrom tools file_path_sans_ext
 #' @import stringr
