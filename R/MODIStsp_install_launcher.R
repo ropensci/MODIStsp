@@ -46,10 +46,17 @@ MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE,
 	}
 	
 	if (running_os=='Windows') {
-		if (is.na(desktop_path)) {desktop_path = file.path(Sys.getenv('USERPROFILE'),'AppData/Roaming/Microsoft/Windows/Start Menu/Programs/MODIStsp')}
+		if (is.na(desktop_path)) {desktop_path = file.path(Sys.getenv('USERPROFILE'),'AppData/Roaming/Microsoft/Windows/Start Menu/Programs/MODIStsp/')}
 		# Create entry in the start menu
-		Sys.junction(from=file.path(MODIStsp_dir,'ExtData/Launcher/Batch/'),to=file.path(desktop_path,'MODIStsp/'))
+		if (!file.exists(file.path(desktop_path,'/MODIStsp.bat'))) {
+			Sys.junction(from=file.path(MODIStsp_dir,'ExtData/Launcher/Batch/'),to=file.path(desktop_path,'/'))
+		} else warning('Link in Start Menu already exists!')
 		# Create desktop shortcut
-		if (desktop_shortcut) {Sys.junction(from=file.path(MODIStsp_dir,'ExtData/Launcher/Batch/'),to=file.path(Sys.getenv('USERPROFILE'),'Desktop/MODIStsp/'))}	}
+		if (desktop_shortcut) {
+			if (!file.exists(file.path(Sys.getenv('USERPROFILE'),'Desktop/MODIStsp/MODIStsp.bat'))) {
+				Sys.junction(from=file.path(MODIStsp_dir,'ExtData/Launcher/Batch/'),to=file.path(Sys.getenv('USERPROFILE'),'Desktop/MODIStsp/'))
+			} else warning('Desktop shortcut already exists!')
+		}
+	}
 	
 }
