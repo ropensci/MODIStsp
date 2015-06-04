@@ -45,3 +45,5 @@ to run in non-interactive mode, use the following syntax:
   (see `MODIStsp -h` for details).
 * Windows:`C:\Users\you\Desktop\MODIStsp -g -s "X:/yourpath/youroptions.RData"`
   (see `C:\Users\you\Desktop\MODIStsp -h` for details).
+
+If you do not want to install any link, launchers ca be found in the subdirectory MODIStsp/ExtData/Launcher of your library path.

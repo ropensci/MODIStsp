@@ -29,28 +29,27 @@ MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE,
 		if (is.na(desktop_path)) {desktop_path = '/usr/share/applications/MODIStsp.desktop'}
 		# Create symbolic link to a directory in the path 
 		if (sudo) {
-			system(paste('sudo -S ln -fs', file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.sh'), bin_path), input=readline("Enter your password: "))
+			system(paste('sudo -S ln -fs', file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.sh'), bin_path), input=readline("Enter your password: "))
 		} else {
-			file.symlink(from=file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.sh'),to=bin_path,overwrite=TRUE)
+			file.symlink(from=file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.sh'),to=bin_path,overwrite=TRUE)
 		}
 		# Create desktop entry
-		desktopEntry = paste0("[Desktop Entry]\nName=MODIStsp\nComment=A tool for automatic download and preprocessing of time series of MODIS Land Products data\nExec=",MODIStsp_dir,"/ExtData/Batch/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")
-		fileConn <- file(file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.desktop'))
+		desktopEntry = paste0("[Desktop Entry]\nName=MODIStsp\nComment=A tool for automatic download and preprocessing of time series of MODIS Land Products data\nExec=",MODIStsp_dir,"/ExtData/Launcher/Bash/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")
+		fileConn <- file(file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'))
 		writeLines(desktopEntry,fileConn)
 		close(fileConn)
 		if (sudo) {
-			system(paste('sudo -S cp -f', file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.desktop'), desktop_path), input=readline("Enter your password: "))
+			system(paste('sudo -S cp -f', file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'), desktop_path), input=readline("Enter your password: "))
 		} else {
-			file.copy(from=file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.desktop'),to=desktop_path,overwrite=TRUE)
+			file.copy(from=file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'),to=desktop_path,overwrite=TRUE)
 		}
 	}
 	
 	if (running_os=='Windows') {
 		if (is.na(desktop_path)) {desktop_path = file.path(Sys.getenv('USERPROFILE'),'AppData/Roaming/Microsoft/Windows/Start Menu/Programs/MODIStsp')}
 		# Create entry in the start menu
-		file.symlink(from=file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.sh'),to=desktop_path)
+		Sys.junction(from=file.path(MODIStsp_dir,'ExtData/Launcher/Batch/'),to=file.path(desktop_path,'MODIStsp/'))
 		# Create desktop shortcut
-		if (desktop_shorcut) {file.symlink(from=file.path(MODIStsp_dir,'ExtData/Batch/MODIStsp.sh'),to=file.path(Sys.getenv('USERPROFILE'),'Desktop/MODIStsp'))}
-	}
+		if (desktop_shortcut) {Sys.junction(from=file.path(MODIStsp_dir,'ExtData/Launcher/Batch/'),to=file.path(Sys.getenv('USERPROFILE'),'Desktop/MODIStsp/'))}	}
 	
 }
