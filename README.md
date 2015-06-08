@@ -6,18 +6,18 @@ MODIStsp is devoted to automatize the creation of time series of rasters derived
 
 1. Within "R", install the "gWidgetsRGtk2" package
 
-        ```r
-        install.packages('gWidgetsRGtk2')
-        ```
+    ```r
+    install.packages('gWidgetsRGtk2')
+    ```
     when asked, request to install GTK
 
 2. Install the package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 
-        ```r
-        install.packages('devtools')
-        require('devtools')
-        install_github('lbusett/LB_MOD_DWL', ref = 'devel')
-        ```
+    ```r
+    install.packages('devtools')
+    require('devtools')
+    install_github('lbusett/LB_MOD_DWL', ref = 'devel')
+    ```
 
 ## Running the tool
 
@@ -69,15 +69,18 @@ MODIStsp allows to automatically update the time series of a selected MODIS prod
 
 1. Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options as an RData file. Then quit the program. 
 
-2. Schedule the execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path): 
+2. Schedule the execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path):
     * Linux: edit your crontab by opening a terminal and typing
-    
-            ```bash
-            crontab -e
-            ```
-        Then add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add:
+
+        ```bash
+        crontab -e
+        ```
         
-            ```bash
-            0 23 * * * /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
-            ```
+        Then add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:
+        
+        ```bash
+        0 23 * * * /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
+        ```
+        
     * Windows: create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.
+

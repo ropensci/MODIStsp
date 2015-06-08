@@ -435,4 +435,3 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 	unlink(file.path(out_prod_folder,'Temp'),recursive = TRUE)
 	return('DONE')
 }
-

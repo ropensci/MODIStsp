@@ -8,3 +8,5 @@ Depends: R (>= 3.0.3)
 License: GPL-3
 LazyData: true
 Imports: XML,gWidgets,rgdal,rgeos,gdalUtils,raster (>= 2.3-40),RCurl,stringr,tools,plyr,sp (>= 1.0.17),bitops,tools,hash
+Suggests: knitr
+VignetteBuilder: knitr
