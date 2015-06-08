@@ -1,5 +1,5 @@
 
-#' MODIStsp_read_xml_opts
+#' MODIStsp_read_xml
 #' @description function used to parse the XML file used to store the characteristics of
 #' MODIS Land Products and store them in the "prod_opts" data frame
 #' @details The function parses the XML file product by product, stores data in a data frame
@@ -109,7 +109,12 @@ MODIStsp_read_xml = function(previous_file = previous_file, xml_file = xml_file)
 
 	}  #End Cycle on products
 
-# Save the products list and the chars of the products in previous file
+	# Add attributes to these 3 lists (this is used as a check when charging them)
+	attr(mod_prod_list,"GeneratedBy") = 'MODIStsp'
+	attr(prod_opt_list,"GeneratedBy") = 'MODIStsp'
+	attr(general_opts,"GeneratedBy") = 'MODIStsp'
+	
+	# Save the products list and the chars of the products in previous file
 	save(prod_opt_list, mod_prod_list, file= previous_file)
 
 }

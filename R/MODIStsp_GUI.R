@@ -17,10 +17,17 @@
 MODIStsp_GUI = function (general_opts){
 
 	# Restore previous options file if existing, otherwise create a "new" one with default values, by retrieving data from xml file
-	if (file.exists(general_opts$previous_file)) {
+	if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)}
+	if (!exists("general_opts") | !exists("mod_prod_list") | !exists("prod_opt_list")) {
+		warning('The previously saved options file is corrupted; a new default one will be generated...')
+		MODIStsp_read_xml(previous_file = general_opts$previous_file,xml_file = general_opts$xml_file )
 		load(general_opts$previous_file)
-	} else { MODIStsp_read_xml(previous_file = general_opts$previous_file,xml_file = general_opts$xml_file ) ; load(general_opts$previous_file)}
-
+	} else if (attr(general_opts,"GeneratedBy")!='MODIStsp' | attr(mod_prod_list,"GeneratedBy")!='MODIStsp' | attr(prod_opt_list,"GeneratedBy")!='MODIStsp') {
+		warning('The previously saved options file is corrupted; a new default one will be generated...')
+		MODIStsp_read_xml(previous_file = general_opts$previous_file,xml_file = general_opts$xml_file )
+		load(general_opts$previous_file)
+	}
+	
 	assign("Quit", T, envir=globalenv())	# Assigng "Quit" to true
 
 	#- ------------------------------------------------------------------------------- -#
