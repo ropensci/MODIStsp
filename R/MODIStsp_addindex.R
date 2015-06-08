@@ -24,7 +24,7 @@
 		MODIStsp_dir = system.file(package = "MODIStsp")
 		previous_dir = file.path(MODIStsp_dir,'Previous')
 		previous_file = file.path(previous_dir, 'MODIStsp_Previous.RData')
-		if(file.exists(Previous_File)){load(Previous_File)} else {stop}
+		if(file.exists(previous_file)){load(previous_file)} else {stop}
 		xml_file = file.path(MODIStsp_dir, '/ExtData/MODIStsp_ProdOpts.xml')
 
   	# Here goes the GUI !!!!
@@ -34,15 +34,18 @@
   	main_group <- ggroup(container = main_win, horizontal = FALSE, expand = T)
 
   	indexbandname_group = ggroup(container = main_group, horizontal = T, expand = T)
-  	indexbandname_label = glabel (text = '<span weight = "bold">	Spectral Index Acronym (e.g., NDVI) </span>', markup = T, container=indexbandname_group)
+  	indexbandname_label = glabel (text = '<span weight = "bold">	Spectral Index Acronym (e.g., SR) </span>', markup = T, container=indexbandname_group)
+		size(indexbandname_label) = c(400,20)
   	sel_indexbandname <- gedit(label = "Please Insert a valid Proj4 string				", container=indexbandname_group, size = 800, horizontal = T)
 
   	indexbandfullname_group = ggroup(container = main_group, horizontal = T, expand = T)
-  	indexbandfullname_label = glabel (text = '<span weight = "bold">	Spectral Index Full Name (e.g., Simple Ratio (b1_NIR/b2_Red) )</span>', markup = T, container=indexbandfullname_group)
+  	indexbandfullname_label = glabel (text = '<span weight = "bold">	Spectral Index Full Name (e.g., Simple Ratio (b2_NIR/b1_Red) )</span>', markup = T, container=indexbandfullname_group)
+		size(indexbandfullname_label) = c(400,20)
   	sel_indexbandfullname <- gedit(container=indexbandfullname_group, size = 800, horizontal = T)
 
   	indexformula_group = ggroup(container = main_group, horizontal = T, expand = T)
-  	indexformula_label = glabel (text = '<span weight = "bold">	Spectral Index Formula (e.g., (b1_NIR/b2_Red) ) </span>', markup = T, container=indexformula_group)
+  	indexformula_label = glabel (text = '<span weight = "bold">	Spectral Index Formula (e.g., (b2_NIR/b1_Red) ) </span>', markup = T, container=indexformula_group)
+		size(indexformula_label) = c(400,20)
   	sel_indexformula <- gedit(container=indexformula_group, size = 800, horizontal = T)
 
   	but_group <- ggroup(container = main_group, horizontal = TRUE)
