@@ -13,7 +13,7 @@ install.packages('gWidgetsRGtk2')
 ```r
 install.packages('devtools')
 require('devtools')
-install_github('lbusett/LB_MOD_DWL',ref = 'devel')
+install_github('lbusett/LB_MOD_DWL', ref = 'devel')
 ```
 
 ## Running the tool
@@ -35,12 +35,22 @@ options_file = "X:/yourpath/youroptions.RData"  # --> Specify the path to a vali
 MODIStsp(gui = FALSE, options_File = options_file)
 ```
 
+If the same operations are needed on multiple extents, it is possible to launch the tool in cycle, specifying the options file (previously saved)
+and giving as parameter the name of a spatial file with the wanted extent.
+For example:
+```r
+extent_list = list.files("X:/path/containing/some/shapefiles/", "\\.shp$")
+for (single_shape in extent_list) {
+  MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData", spatial_file_path = single_shape )
+}
+```
+
 ### Standalone tool
 The tool can be also launched as a standalone application; to do it, from R launch the function `MODIStsp_install_launcher()`.
 In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography")
 and a symbolic link in a known path (default: /usr/bin/MODIStsp).
 In Windows, a link in the Start Menu and optionally a desktop shortcut are created.
-See `?MODIStsp_install_launcher` for details and path customisations.
+See `?install_MODIStsp_launcher` for details and path customisations.
 
 Also these links can be launched in interactive mode launching them without parameters (or double-clicking them);
 to run in non-interactive mode, use the following syntax:
@@ -49,17 +59,24 @@ to run in non-interactive mode, use the following syntax:
 * Windows:`C:\Users\you\Desktop\MODIStsp -g -s "X:/yourpath/youroptions.RData"`
   (see `C:\Users\you\Desktop\MODIStsp -h` for details).
 
-If you do not want to install any link, launchers can be found in the subdirectory MODIStsp/ExtData/Launcher of your library path.
+If you do not want to install any link, launchers can be found in the subdirectory "MODIStsp/ExtData/Launcher" of your library path.
 
-### Batch Processing
-MODIStsp allows to automatically update the time series of a selected MODIS product whenever a new image is available. To periodically and automatically update time series of a selected product without GUI interaction, you shuold simply:
+### Scheduled Processing
+MODIStsp allows to automatically update the time series of a selected MODIS product whenever a new image is available. To periodically and automatically update time series of a selected product without GUI interaction, you should simply:
 
-1)	Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options as an RData file. Then quit the program. 
+1) Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options as an RData file. Then quit the program. 
 
-2) Schedule the execution of the MODIStsp.bat (for Windows) or MODIStsp.sh (for Linux) batch execution scripts available in the “Inst/batch” subfolder of the package installation as a windows scheduled task or linux “cron” job, specifying the path of the previously saved Options file as additional "-s" argument, such as in: 
+2) Schedule the execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path): 
+   * Linux: edit your crontab by opening a terminal and typing
+     ```bash
+     crontab -e
+     ```
+     Then add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add:
+     ```bash
+     0 23 * * * /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
+     ```
+   * Windows: create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.
 
-  > MODIStsp.sh -g –s “c:/Temp/Test_Options.RData”.
-  
 
 
 

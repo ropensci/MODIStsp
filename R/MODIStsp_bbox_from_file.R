@@ -10,7 +10,6 @@
 #'
 #' license GPL 3.0
 #' @import sp
-#' @import gdalUtils
 
 
 bbox_from_file <- function(file_path, out_crs) {

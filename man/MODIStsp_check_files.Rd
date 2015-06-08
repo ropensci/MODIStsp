@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_check_files.R
 \name{MODIStsp_check_files}
 \alias{MODIStsp_check_files}
-\title{moddwl_check_files}
+\title{MODIStsp_check_files}
 \usage{
 MODIStsp_check_files(out_prod_folder, file_prefix, bandnames,
   bandsel_orig_choice, yy, DOY, out_format, indexes_bandnames, indexes_bandsel,

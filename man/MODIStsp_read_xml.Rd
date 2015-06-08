@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_readxml.R
 \name{MODIStsp_read_xml}
 \alias{MODIStsp_read_xml}
-\title{MODIStsp_read_xml_opts}
+\title{MODIStsp_read_xml}
 \usage{
 MODIStsp_read_xml(previous_file = previous_file, xml_file = xml_file)
 }

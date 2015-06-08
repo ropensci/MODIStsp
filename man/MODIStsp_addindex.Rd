@@ -26,6 +26,6 @@ folder in which the package was installed
 Lorenzo Busetto, phD (2015)
 email: busetto.l@irea.cnr.it
 
-license GPL-3
+license GPL >3
 }
 

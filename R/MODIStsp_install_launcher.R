@@ -18,6 +18,25 @@
 #' license GPL 3.0
 #' @export
 #' @importFrom hash hash
+#' @examples
+#' # Linux: common installation (script in /usr/bin,
+#' # desktop entry in /usr/share/applications)
+#' # (requires administrator permissions)
+#' \dontrun{
+#' install_MODIStsp_launcher(sudo = TRUE)
+#'   # the administrator password is asked interactively}
+#' 
+#' # Linux: installation in a directory which does 
+#' # not require administrator permissions
+#' \dontrun{
+#' install_MODIStsp_launcher(desktop_path = "~/Desktop/MODIStsp.desktop", 
+#'   bin_path = "~/bin/MODIStsp")}
+#' 
+#' # Windows: common installation
+#' # (script in the Start Menu and shortcut on the desktop)
+#' \dontrun{
+#' install_MODIStsp_launcher(desktop_shortcut = TRUE)
+#'   # FIXME it does not run due to symlink problems in Windows}
 
 install_MODIStsp_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE, desktop_shortcut=FALSE) {
 

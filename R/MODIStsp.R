@@ -7,8 +7,7 @@
 #' @param spatial_file_path (optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 #'  extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 #'  spatial file.
-#' @param MODIStsp_dir main directory of the local installation of the tool(if not gived, it is automatically retrieved, but this works only if the 
-#'  function is launched from here!)
+##' @param MODIStsp_dir [internal parameter] main directory of the local installation of the tool (this should not be used by the enduser)
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it},
@@ -19,7 +18,35 @@
 #' @import gdalUtils
 #' @import rgdal
 #' @import raster
-#' @import tools
+#' @importFrom tools file_path_sans_ext
+#' @examples 
+#' # Run the tool without any option will start the GUI
+#' # with the default settings (or the last used)
+#' \dontrun{
+#' MODIStsp()}
+#' 
+#' # Run the tool using the settings previously saved in a specific option file
+#' \dontrun{
+#' MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData")}
+#' 
+#' # Run the tool using a previously saved options file,
+#' # but editing it with the GUI before starting the processing
+#' \dontrun{
+#' MODIStsp(options_File = "X:/yourpath/youroptions.RData")}
+#' 
+#' # Run the tool using the settings previously saved in a specific option file
+#' # and specifying the extent from a spatial file
+#' \dontrun{
+#' MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
+#'   spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
+#' 
+#' # Run the tool in a batch mode, using the settings previously saved in a specific 
+#' # option file and specifying each time the extent from a different spatial file
+#' \dontrun{
+#' extent_list = list.files("X:/path/containing/some/shapefiles/", "\\.shp$")
+#' for (single_shape in extent_list)
+#'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData", 
+#'     spatial_file_path = single_shape )}
 
 MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA) {
 
