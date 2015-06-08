@@ -1,4 +1,4 @@
-#' moddwl_check_files
+#' MODIStsp_check_files
 #' @description Accessory function used to see if all expected out files for the selected date are already present.
 #' @details if all expected out files for the selected date are already present, check_files is set to TRUE, and date is skipped
 #' in moddwl_process

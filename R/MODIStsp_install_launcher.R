@@ -1,4 +1,4 @@
-#'  MODIStsp_install_launcher
+#'  install_MODIStsp_launcher
 #' @description Function which allows to use MODIStsp in batch mode by creating links
 #' @details MODIStsp tool can be used also as a standalone tool my launching a bash/batch script, which is stored in the function files.
 #'  In order to simply retrieve it, this function will create a desktop entry and a symbolic link to the bash script (in Linux)
@@ -12,14 +12,14 @@
 #' @param desktop_shortcut (Windows only) logical value which indicates if also a desktop shortcut should be created.
 #' @return NULL
 #'
-#' @author Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' Luigi Ranghetti, phD (2015)
+#' @author Luigi Ranghetti, phD (2015)
+#' email: ranghetti.l@@irea.cnr.it
+#'
 #' license GPL 3.0
 #' @export
 #' @importFrom hash hash
 
-MODIStsp_install_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE, desktop_shortcut=FALSE) {
+install_MODIStsp_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE, desktop_shortcut=FALSE) {
 
 	MODIStsp_dir = system.file(package = "MODIStsp")
 	running_os <- Sys.info()[['sysname']]

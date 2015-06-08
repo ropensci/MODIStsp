@@ -12,7 +12,7 @@
 #' @author Luigi Ranghetti, phD (2015)
 #' email: ranghetti.l@@irea.cnr.it
 #'
-#' license GPL(>2)
+#' license GPL 3.0
 #' @import sp
 
 reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE, N_dens=1000) {

@@ -16,7 +16,7 @@
 #' @import rgdal
 #' @import raster
 
-MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
+MODIStsp= function(gui=TRUE, options_file=NULL, shapes_dir=NULL, MODIStsp_dir=NA) {
 
 	if (is.na(MODIStsp_dir)) {MODIStsp_dir = system.file(package = "MODIStsp")}
 #	print(MODIStsp_dir)
@@ -98,19 +98,11 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 	if (!Quit) {
 
 		if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)} else {cat('[',date(),'] Download Options file not found ! Exiting !\n'); stop()}
-
 		prod_opts = prod_opt_list[[general_opts$sel_prod]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
 
 		# Create variables needed to launch the processing
-
 		start_date = paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '.')
 		end_date = paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '.')
-
-#		if (general_opts$proj != "User Defined") {outproj_str = general_opts$out_proj_list[[general_opts$proj]]   # get proj4 string (if needed, from user proj4)
-#		} else {
-			outproj_str = general_opts$user_proj4
-#		}
-#		if (outproj_str =='') {outproj_str = general_opts$MOD_proj_str}			# If out_proj = useer but empty, set to sinusoidal
 
 		# If the product is NOT tiled, change or_proj to WGS84 and or_res to 0.05
 		if (prod_opts$tiled == 0) {
@@ -118,8 +110,8 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 			prod_opts$native_res = "0.05"
 		}
 
-
 		if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {general_opts$out_res = prod_opts$native_res}   # get native resolution if out_res empty
+
 		# launch MODIStsp_process to Download and preprocess the selected images
 		output = with(general_opts, MODIStsp_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
 						out_folder = out_folder, out_folder_mod = out_folder_mod, reprocess = reprocess,
@@ -128,7 +120,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, MODIStsp_dir=NA) {
 						full_ext = full_ext, bbox = bbox,out_format = out_format, out_res_sel = out_res_sel,
 						out_res = as.numeric(out_res), native_res = prod_opts$native_res,  tiled = prod_opts$tiled,
 						resampling = resampling, ts_format = ts_format, compress = compress,
-						MOD_proj_str = MOD_proj_str,outproj_str = outproj_str,
+						MOD_proj_str = MOD_proj_str,outproj_str = user_proj4,
 						nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out,nodata_change = nodata_change,
 						datatype =prod_opts$datatype,	bandsel = prod_opts$bandsel, bandnames = prod_opts$bandnames,
 						indexes_bandsel = prod_opts$indexes_bandsel, indexes_bandnames = prod_opts$indexes_bandnames,

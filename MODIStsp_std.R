@@ -35,7 +35,8 @@ source(file.path(src_dir,'MODIStsp_GUI.R'))
 source(file.path(src_dir,'MODIStsp_process_QA_bits.R'))
 source(file.path(src_dir,'MODIStsp_vrt_create.R'))
 source(file.path(src_dir,'MODIStsp_process_indexes.R'))
-source(file.path(src_dir,'MODIStsp_convert_bbox.R'))
+source(file.path(src_dir,'MODIStsp_reproj_bbox.R'))
+source(file.path(src_dir,'MODIStsp_bbox_from_file.R'))
 
 # Launch it
 cat('[',date(),'] Running MOD_DWL...\n')
