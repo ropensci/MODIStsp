@@ -4,7 +4,11 @@
 #'  and to launch the required routines for downloading and processing the requested datasets.
 #' @param gui logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed)
 #' @param options_file settings (optional): full path of the RData file containing the processing options (default: Previous.RData in subdir Previous);
-#' @param MODIStsp_dir main directory of the local installation of the tool(if not gived, it is automatically retrieved, but this works only if the function is launched from here!)
+#' @param spatial_file_path (optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
+#'  extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
+#'  spatial file.
+#' @param MODIStsp_dir main directory of the local installation of the tool(if not gived, it is automatically retrieved, but this works only if the 
+#'  function is launched from here!)
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it},
@@ -15,8 +19,9 @@
 #' @import gdalUtils
 #' @import rgdal
 #' @import raster
+#' @import tools
 
-MODIStsp= function(gui=TRUE, options_file=NULL, shapes_dir=NULL, MODIStsp_dir=NA) {
+MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA) {
 
 	if (is.na(MODIStsp_dir)) {MODIStsp_dir = system.file(package = "MODIStsp")}
 #	print(MODIStsp_dir)
@@ -111,13 +116,50 @@ MODIStsp= function(gui=TRUE, options_file=NULL, shapes_dir=NULL, MODIStsp_dir=NA
 		}
 
 		if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {general_opts$out_res = prod_opts$native_res}   # get native resolution if out_res empty
+		
+		# Changes to perform in the case spatial_file_path is defined
+		if (!is.null(spatial_file_path)) {
+			
+			# Check if the input file is a valid spatial file and redefine the bounding box
+			external_bbox <- try(bbox_from_file(file_path=spatial_file_path, out_crs=general_opts$user_proj4),silent=TRUE)
+			if (class(external_bbox)=='try-error') {
+				stop(external_bbox)
+			}			
+			general_opts$bbox <- external_bbox
+			
+			# Redefine the out_folder including the file name as subfolder
+			# (this to avoid that, running in a cycle, files were overwritten every time)
+			general_opts$out_folder = file.path(general_opts$out_folder,file_path_sans_ext(basename(spatial_file_path)))
+			if (file.exists(general_opts$out_folder)) {
+				tmp_counter = 1
+				out_newfolder = paste(general_opts$out_folder,tmp_counter,sep='_')
+				while (file.exists(out_newfolder)) {
+					tmp_counter = tmp_counter+1
+					out_newfolder = paste(general_opts$out_folder,tmp_counter,sep='_')
+				}
+				general_opts$out_folder <- out_newfolder
+			}
+			
+			# Overwrite the full_ext option
+			general_opts$full_ext <- 'Resized'
 
+			# Choose the tiles requested to cover the extent
+			load(file.path(MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))
+			external_bbox_mod <- reproj_bbox( external_bbox, general_opts$user_proj4, general_opts$MOD_proj_str, enlarge=TRUE)
+			d_bbox_mod_tiled <- intersect(modis_grid,extent(external_bbox_mod))
+			general_opts$start_x <- min(d_bbox_mod_tiled$H)
+			general_opts$end_x <- max(d_bbox_mod_tiled$H)
+			general_opts$start_y <- min(d_bbox_mod_tiled$V)
+			general_opts$end_y <- max(d_bbox_mod_tiled$V)
+		
+		}
+		
 		# launch MODIStsp_process to Download and preprocess the selected images
 		output = with(general_opts, MODIStsp_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
 						out_folder = out_folder, out_folder_mod = out_folder_mod, reprocess = reprocess,
 						delete_hdf = delete_hdf, sensor = sensor, https = prod_opts$http,
 						start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
-						full_ext = full_ext, bbox = bbox,out_format = out_format, out_res_sel = out_res_sel,
+						full_ext = full_ext, bbox = bbox, out_format = out_format, out_res_sel = out_res_sel,
 						out_res = as.numeric(out_res), native_res = prod_opts$native_res,  tiled = prod_opts$tiled,
 						resampling = resampling, ts_format = ts_format, compress = compress,
 						MOD_proj_str = MOD_proj_str,outproj_str = user_proj4,

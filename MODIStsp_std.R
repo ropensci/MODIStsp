@@ -7,6 +7,8 @@
 # Set parameters
 gui=TRUE # Should the tool be launched with the GUI for the selection of the parameters? (default: TRUE)
 options_file=NULL # Path of the RData with the porcess parameters (default: NULL -> select the defaul one in the main script)
+spatial_file_path=NULL # path of a spatial file to use as extent: if defined, the processing options which define the extent,
+	# the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided spatial file.
 
 # Check sp version
 sp_version <- packageVersion('sp')
@@ -40,7 +42,7 @@ source(file.path(src_dir,'MODIStsp_bbox_from_file.R'))
 
 # Launch it
 cat('[',date(),'] Running MOD_DWL...\n')
-MODIStsp(gui=gui,options_file=options_file,MODIStsp_dir=main_dir)
+MODIStsp(gui=gui,options_file=options_file,spatial_file_path=spatial_file_path,MODIStsp_dir=main_dir)
 cat('[',date(),'] Done.\n\n')
 
 
