@@ -4,13 +4,15 @@ MODIStsp is devoted to automatize the creation of time series of rasters derived
 
 ## Installation
 
-1. Within "R", install the "gWidgetsRGtk2" package 
+1. Within "R", install the "gWidgetsRGtk2" package
+
         ```r
         install.packages('gWidgetsRGtk2')
         ```
     when asked, request to install GTK
 
 2. Install the package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+
         ```r
         install.packages('devtools')
         require('devtools')
@@ -69,10 +71,12 @@ MODIStsp allows to automatically update the time series of a selected MODIS prod
 
 2. Schedule the execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path): 
     * Linux: edit your crontab by opening a terminal and typing
+    
             ```bash
             crontab -e
             ```
         Then add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add:
+        
             ```bash
             0 23 * * * /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
             ```
