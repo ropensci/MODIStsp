@@ -9,6 +9,7 @@ MODIStsp is devoted to automatize the creation of time series of rasters derived
 install.packages('gWidgetsRGtk2')
 ```
    when asked, request to install GTK
+
 2. Install the package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 ```r
 install.packages('devtools')
@@ -64,17 +65,17 @@ If you do not want to install any link, launchers can be found in the subdirecto
 ### Scheduled Processing
 MODIStsp allows to automatically update the time series of a selected MODIS product whenever a new image is available. To periodically and automatically update time series of a selected product without GUI interaction, you should simply:
 
-1) Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options as an RData file. Then quit the program. 
+1. Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options as an RData file. Then quit the program. 
 
-2) Schedule the execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path): 
+2. Schedule the execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path): 
    * Linux: edit your crontab by opening a terminal and typing
-     ```bash
-     crontab -e
-     ```
+```bash
+crontab -e
+```
      Then add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add:
-     ```bash
-     0 23 * * * /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
-     ```
+```bash
+0 23 * * * /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
+```
    * Windows: create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.
 
 
