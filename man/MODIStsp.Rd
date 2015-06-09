@@ -15,8 +15,6 @@ MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
 \item{spatial_file_path}{(optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 spatial file.}
-
-\item{MODIStsp_dir}{[internal parameter] main directory of the local installation of the tool (this should not be used by the enduser)}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MOD_TSP)

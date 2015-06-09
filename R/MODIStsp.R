@@ -7,7 +7,6 @@
 #' @param spatial_file_path (optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 #'  extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 #'  spatial file.
-##' @param MODIStsp_dir [internal parameter] main directory of the local installation of the tool (this should not be used by the enduser)
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
