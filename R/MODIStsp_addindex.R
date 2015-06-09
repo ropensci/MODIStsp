@@ -55,7 +55,6 @@
   				new_indexformula = svalue(sel_indexformula)
   				new_indexnodata_out = '32767'
   				print(new_indexbandname)
-  #				browser()
   # Look for valid band names in index formula
   				refbands_names = c('b1_Red','b2_NIR','b3_Blue','b4_Green','b5_SWIR','b6_SWIR', 'b7_SWIR')
   				req_bands = c(str_detect(new_indexformula,'b1_Red'),
@@ -67,7 +66,6 @@
   						str_detect(new_indexformula,'b7_SWIR'))
 
   # verify if string is computable
-#browser()
   				if (req_bands[1] == T) {b1_Red = 5}
   				if (req_bands[2] == T) {b2_NIR = 6}
   				if (req_bands[3] == T) {b3_Blue = 7}
@@ -96,18 +94,17 @@
   					n_products = xmlSize(xmltop) #how many product available ? = elements in root
   					prodnames = NULL
   					for (prod in 1:n_products) {  # cycle on available products
-							print(prod)
+						print(prod)
   						nbands = xmlSize(xmltop[[prod]][["bands"]])  # number of original layers
   						bandnames = NULL ; 	band_fullname = NULL ;	datatype = NULL ; 	nodata_in = NULL ; 	nodata_out = NULL
   						for (band in 1:nbands) { # get bandnames of available products
   							bandnames = c(bandnames,xmlToList(xmltop[[prod]][['bands']][[band]][["bandname"]]))
   						} #End Cycle on band
-
+						
   						# check if bands required for index computation are avilable for the product
   						check = 0
-#  						browser()
   						for (reqband in refbands_names[which(req_bands == T)]){
-								bandexists = grep(reqband, bandnames)
+								bandexists = grep(paste0('^',reqband,'$'), bandnames)
   							if (length(bandexists) != 0 ) {check = check + 1}
   						} #End Cycle on reqband
 
@@ -115,22 +112,24 @@
   						# in this way, at next execution, the new index should be available. Moreover, loading and use of old RData options files
   						# won't be broken if an index is added later than their creation.
 #							if (check != 0) {
-							n_req_bands = sum(req_bands)
+						n_req_bands = sum(req_bands)
   						if (n_req_bands == check ) {
   							prod_opt_list[[prod]]$indexes_bandnames = c(prod_opt_list[[prod]]$indexes_bandnames,new_indexbandname)
   							prod_opt_list[[prod]]$indexes_fullnames = c(prod_opt_list[[prod]]$indexes_fullnames,new_indexfullname)
   							prod_opt_list[[prod]]$indexes_formulas = c(prod_opt_list[[prod]]$indexes_formulas,new_indexformula)
-  							prod_opt_list[[prod]]$indexes_nodata_out = c(prod_opt_list[[prod]]$indexes_nodata_out,32767)
+  							prod_opt_list[[prod]]$indexes_nodata_out = c(prod_opt_list[[prod]]$indexes_nodata_out,new_indexnodata_out)
 #  						}
-							}
+						}
 
   					}  #End Cycle on products
 
-  # Save the products list and the chars of the products in previous file
-  				save(prod_opt_list, mod_prod_list, file= previous_file)
-  				gmessage ('The new Spectral Index was correctly added')
-  				dispose(main_win)
-  				} else { gmessage ('The formula of the new index is not computable. Please check it (Valid band names are: b1_Red, b2_NIR, br_Blue, b4_Greeen, b5_SWIR, b6_SWIR and B7_SWIR')}
+	  				# Save the products list and the chars of the products in previous file
+	  				save(prod_opt_list, mod_prod_list, file= previous_file)
+	  				gmessage ('The new Spectral Index was correctly added')
+  					dispose(main_win)
+#  				} else if (new_indexbandname) {
+#					
+				} else {gmessage(paste0('The formula of the new index is not computable. Please check it (Valid band names are: ',paste(refbands_names,collapse=', '),'.'))}
   			})
 
   	quit_but <- gbutton(text = 'Quit', container = but_group, handler = function(h,...){ # If "Quit", set "Quit to T and exit
