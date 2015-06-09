@@ -43,12 +43,15 @@ On the basis of the name of the image containing the aggregated quality informat
 (bitN), the function extracts the correct information exploiting bitwise operators, and save the result in a new
 raster image
 }
-\author{
-Lorenzo Busetto, phD (2014-2015)
-email: busetto.l@irea.cnr.it
-Luigi Ranghetti, phD (2015)
+\note{
+License: GPL 3.0
 Based on the "modis.qc.R" script by Yann Chemin (2008) (https://r-forge.r-project.org/scm/viewvc.php/pkg/RemoteSensing/R/modis.qc.R?view=markup&root=remotesensing&pathrev=79)
 
 license GPL 3.0
+}
+\author{
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

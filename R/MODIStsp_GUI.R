@@ -7,10 +7,9 @@
 #' @param general_opts General options data frame passed by MODIStsp_main. Contains paths and other variables used to initialize the GUI
 #' 						if a previous options file is not existing.
 #' @return NULL - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
-#' @author Lorenzo Busetto, phD (2014)
-#' email: busetto.l@@irea.cnr.it
-#'
-#' license GPL(>2)
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' @import gWidgets
 #' @import rgeos
 
@@ -22,7 +21,7 @@ MODIStsp_GUI = function (general_opts){
 		warning('The previously saved options file is corrupted; a new default one will be generated...')
 		MODIStsp_read_xml(previous_file = general_opts$previous_file,xml_file = general_opts$xml_file )
 		load(general_opts$previous_file)
-	} else if (attr(general_opts,"GeneratedBy")!='MODIStsp' | attr(mod_prod_list,"GeneratedBy")!='MODIStsp' | attr(prod_opt_list,"GeneratedBy")!='MODIStsp') {
+	} else if (is.null(attr(general_opts,"GeneratedBy")) | is.null(attr(mod_prod_list,"GeneratedBy")) | is.null(attr(prod_opt_list,"GeneratedBy"))) {
 		warning('The previously saved options file is corrupted; a new default one will be generated...')
 		MODIStsp_read_xml(previous_file = general_opts$previous_file,xml_file = general_opts$xml_file )
 		load(general_opts$previous_file)
@@ -118,7 +117,7 @@ MODIStsp_GUI = function (general_opts){
 
 				# Start/Cancel widgets
 				bands_group <- ggroup(container = selgroup, horizontal = TRUE)
-				accept_but <- gbutton(text = 'Start', container = bands_group, handler = function(button,...){ # On accept, retrieve and save selected layers
+				accept_but <- gbutton(text = 'OK', container = bands_group, handler = function(button,...){ # On accept, retrieve and save selected layers
 
 							pos_wid <- which(check_names %in% svalue (bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
 							tmp_arr_bands <- array(data = 0 , dim = length(check_names))
@@ -727,7 +726,7 @@ MODIStsp_GUI = function (general_opts){
 
 	but_group <- ggroup(container = main_group, horizontal = TRUE)
 
-	start_but <- gbutton(text = 'Start', container = but_group, handler = function (h,....) {# If "Start" pressed, retrieve selected values and save in previous file
+	start_but <- gbutton(text = 'OK', container = but_group, handler = function (h,....) {# If "Start" pressed, retrieve selected values and save in previous file
 				general_opts <- prepare_to_save_options(general_opts)
 				prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL # see the function definition
 				if (check_save_opts) {					# If check passed, save previous file and return
@@ -751,7 +750,7 @@ MODIStsp_GUI = function (general_opts){
 	addSpace(but_group, 280, horizontal=TRUE)
 
 	# On "Load", ask for a old options file and load it --------
-	load_but <- gbutton(text = 'Load Options from File', container = but_group, handler = function (h,....){
+	load_but <- gbutton(text = 'Open', container = but_group, handler = function (h,....){
 
 				choice<-gfile(type="open", text="Select file for loading processing options...")	# ask for file
 
@@ -802,7 +801,7 @@ MODIStsp_GUI = function (general_opts){
 			})
 
 	# On "Save", ask for a file name and save options (must be a RData file !)  --------
-	save_but <- gbutton(text = 'Save Options', container = but_group, handler = function (h,....) {
+	save_but <- gbutton(text = 'Save', container = but_group, handler = function (h,....) {
 
 				choice<-gfile(type="save", text="Select file for saving processing options...")		# File selection widget
 

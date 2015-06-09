@@ -22,10 +22,10 @@ it modifies the MODIStsp_Previous.RData file so to allow computation of the addi
 To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Extdata subfolder of the
 folder in which the package was installed
 }
+\note{
+License: GPL 3.0
+}
 \author{
-Lorenzo Busetto, phD (2015)
-email: busetto.l@irea.cnr.it
-
-license GPL >3
+Lorenzo Busetto, phD (2015) \email{busetto.l@irea.cnr.it}
 }
 

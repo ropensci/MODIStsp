@@ -20,9 +20,9 @@
 #' @param nodata_qa_out string out nodata for quality bands ("255")
 #' @return NULL
 #'
-#' @author Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' Luigi Ranghetti, phD (2015)
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' Based on the "modis.qc.R" script by Yann Chemin (2008) (https://r-forge.r-project.org/scm/viewvc.php/pkg/RemoteSensing/R/modis.qc.R?view=markup&root=remotesensing&pathrev=79)
 #'
 #' license GPL 3.0

@@ -7,12 +7,11 @@
 #' @param spatial_file_path (optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 #'  extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 #'  spatial file.
-##' @param MODIStsp_dir [internal parameter] main directory of the local installation of the tool (this should not be used by the enduser)
 #' @return NULL
 #'
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it},
-#' Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it},
-#' license GPL 3.0
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' @export
 #' @importFrom hash hash
 #' @import gdalUtils
@@ -122,6 +121,8 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 				start_x = 18, end_x =18, start_y = 4, end_y = 4,
 				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', compress = 'None',
 				nodata_change = 'No',delete_hdf = 'No',reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
+		attr(general_opts,"GeneratedBy") = 'MODIStsp'
+		
 	}
 	#launch the GUI if on an interactive session (i.e., gui = T) ----
 	if (gui) {GUI = MODIStsp_GUI(general_opts)} else {Quit<<-FALSE}

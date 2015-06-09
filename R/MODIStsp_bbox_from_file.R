@@ -5,10 +5,9 @@
 #'
 #' @param file_path The path of the spatial file.
 #' @param out_crs The output projection (string format).
-#' @author Luigi Ranghetti, phD (2015)
-#' email: ranghetti.l@@irea.cnr.it
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #'
-#' license GPL 3.0
 #' @import sp
 
 

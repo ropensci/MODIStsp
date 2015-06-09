@@ -34,10 +34,12 @@ different acquisition dates
 The function takes as input the folder in which the single-band files are stored, and cretes a ENVI Meta file and/or
 a GDAL vrt file that allows access to the full time series as if it was a single physical file
 }
+\note{
+License: GPL 3.0
+}
 \author{
-Lorenzo Busetto, phD (2014-2015)
-email: busetto.l@irea.cnr.it
-Luigi Ranghetti, phD (2015)
-license GPL 3.0
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

@@ -22,10 +22,10 @@ if FALSE, it is simply the one obtained by reprojecting the upper-left and the l
 Ancillary function used to reproject bounding boxes; setting the parameter 'enlarge' allows to choose if the new one would be the
 one which completely include the old or if is simply the one obtained by reprojecting the upper-left and the lower-right corners.
 }
+\note{
+License: GPL 3.0
+}
 \author{
-Luigi Ranghetti, phD (2015)
-email: ranghetti.l@irea.cnr.it
-
-license GPL 3.0
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

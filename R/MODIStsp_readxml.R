@@ -8,10 +8,9 @@
 #' @param xml_file string filename of the XML file containing the MODIS products characteristics
 #' @return NULL - retrieved data are stored in the specified RData file
 #'
-#' @author Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' Luigi Ranghetti, phD (2015)
-#' license GPL 3.0
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' @import XML
 #' @importFrom plyr revalue
 MODIStsp_read_xml = function(previous_file = previous_file, xml_file = xml_file) {
@@ -108,13 +107,13 @@ MODIStsp_read_xml = function(previous_file = previous_file, xml_file = xml_file)
 
 
 	}  #End Cycle on products
-
+	
 	# Add attributes to these 3 lists (this is used as a check when charging them)
 	attr(mod_prod_list,"GeneratedBy") = 'MODIStsp'
 	attr(prod_opt_list,"GeneratedBy") = 'MODIStsp'
-	attr(general_opts,"GeneratedBy") = 'MODIStsp'
 	
 	# Save the products list and the chars of the products in previous file
+	dir.create(dirname(previous_file),recursive=TRUE,showWarnings=FALSE)
 	save(prod_opt_list, mod_prod_list, file= previous_file)
 
 }

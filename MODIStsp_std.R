@@ -1,7 +1,7 @@
 # Script used to launch the MODIStsp application from R (NO PACKAGE LOADING !) 
 # (see MODIStsp.bat or MODIStsp.sh to launch from the command line)
 #
-# Author: lranghetti
+# Author: Luigi Ranghetti <ranghetti.l@irea.cnr.it>
 ###############################################################################
 
 # Set parameters

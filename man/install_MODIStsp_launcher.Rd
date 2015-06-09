@@ -27,6 +27,9 @@ MODIStsp tool can be used also as a standalone tool my launching a bash/batch sc
  In order to simply retrieve it, this function will create a desktop entry and a symbolic link to the bash script (in Linux)
  or a link in the Start Menu to the batch script (in Windows).
 }
+\note{
+License: GPL 3.0
+}
 \examples{
 # Linux: common installation (script in /usr/bin,
 # desktop entry in /usr/share/applications)
@@ -48,9 +51,6 @@ install_MODIStsp_launcher(desktop_shortcut = TRUE)
   # FIXME it does not run due to symlink problems in Windows}
 }
 \author{
-Luigi Ranghetti, phD (2015)
-email: ranghetti.l@irea.cnr.it
-
-license GPL 3.0
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

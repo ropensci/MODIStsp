@@ -15,8 +15,6 @@ MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
 \item{spatial_file_path}{(optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 spatial file.}
-
-\item{MODIStsp_dir}{[internal parameter] main directory of the local installation of the tool (this should not be used by the enduser)}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MOD_TSP)
@@ -24,6 +22,9 @@ Main function for the MODIS Time Series Processing Tool (MOD_TSP)
 \details{
 The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs,
  and to launch the required routines for downloading and processing the requested datasets.
+}
+\note{
+License: GPL 3.0
 }
 \examples{
 # Run the tool without any option will start the GUI
@@ -55,8 +56,8 @@ for (single_shape in extent_list)
     spatial_file_path = single_shape )}
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it},
-Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it},
-license GPL 3.0
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

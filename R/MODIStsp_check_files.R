@@ -15,10 +15,9 @@
 #' @param quality_bandsel 0/1 array Indicates which Quality Indicators were selected to be processed
 #' @return check - logical = 1 if all expected output files are already existing
 #'
-#' @author Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' Luigi Ranghetti, phD (2015)
-#' license GPL 3.0
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 
 MODIStsp_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel_orig_choice,yy,DOY, out_format, indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel) {
 	check = T

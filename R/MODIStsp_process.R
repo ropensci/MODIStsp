@@ -52,10 +52,9 @@
 #' @param ts_format string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)
 #' @return NULL
 #'
-#' @author Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' Luigi Ranghetti, phD (2015)
-#' license GPL > 3
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' @import gdalUtils
 #' @import rgdal
 #' @importFrom hash hash
