@@ -113,6 +113,9 @@ MODIStsp_GUI = function (general_opts){
 					check_wid_indexes<- temp_wid_bands_indexes							# retrieve currently selected indexes layers
 					cbox_indexes<- gframe(text = '<span foreground="blue" size="large">		Additional Spectral Indexes				</span>', markup = T, container = cbox_total, horizontal = FALSE, width = 450)
 					bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes), container = cbox_indexes, use.table = F, width = 450)
+					band_wid_newindex <- gbutton(text = 'Add custom index', border = TRUE,
+							handler = function(h,...) {MODIStsp_addindex(option_file=general_opts$previous_file)}, 
+							container =cbox_indexes, width = 120, expand = T)
 				}
 
 				# Start/Cancel widgets

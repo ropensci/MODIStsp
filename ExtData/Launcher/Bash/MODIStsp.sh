@@ -12,20 +12,24 @@ OPTIONS:
     -h  show this help text
     -g  run without opening the GUI
     -s  settings: full path of the RData file containing the processing options (default: Previous.RData in subdir Previous)
+    -e  extent: full path of a spatial file to use as extent (default: NULL); if defined, the processing options which define the extent, the selected tiles and the \"Full Tile / Resized\" options are not considered; instead, new files are created on the extent of the provided spatial file.
     -r  Rscript dir: directory of the Rscript executable (optional; use it if your R installation is not in the PATH)
 "
 
 MODISTSP_BATCH_DIR=`dirname $(dirname $(realpath $0))`
 
 gui=TRUE
-options_file=""
+options_file="NULL"
+spatial_file_path="NULL"
 
-while getopts 'hgs:' option; do
+while getopts 'hge:s:r:' option; do
   case "$option" in
     h) echo "$usage"
        exit
        ;;
     g) gui=FALSE
+       ;;
+    e) spatial_file_path=$OPTARG
        ;;
     s) options_file=$OPTARG
        ;;
@@ -38,4 +42,5 @@ while getopts 'hgs:' option; do
 done
 shift $((OPTIND - 1))
 
-Rscript "${MODISTSP_BATCH_DIR}/MODIStsp_launcher.R" $gui $options_file
+echo $MODISTSP_BATCH_DIR
+Rscript "${MODISTSP_BATCH_DIR}/MODIStsp_launcher.R" $gui $options_file $spatial_file_path
