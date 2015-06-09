@@ -107,12 +107,13 @@ MODIStsp_read_xml = function(previous_file = previous_file, xml_file = xml_file)
 
 
 	}  #End Cycle on products
-
+	
 	# Add attributes to these 3 lists (this is used as a check when charging them)
 	attr(mod_prod_list,"GeneratedBy") = 'MODIStsp'
 	attr(prod_opt_list,"GeneratedBy") = 'MODIStsp'
 	
 	# Save the products list and the chars of the products in previous file
+	dir.create(dirname(previous_file),recursive=TRUE,showWarnings=FALSE)
 	save(prod_opt_list, mod_prod_list, file= previous_file)
 
 }

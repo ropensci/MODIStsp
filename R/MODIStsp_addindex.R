@@ -7,24 +7,49 @@
  #' To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Extdata subfolder of the
  #' folder in which the package was installed
  #'
- #' @param Previous_File string path to the MODIStsp_Previous.RData file
+ #' @param option_file settings (optional): full path of the RData file containing the processing options in which the new indexes 
+ #'  are saved (default: Previous.RData in subdir Previous).
  #'
  #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
  #'
- #' @author Lorenzo Busetto, phD (2015) \email{busetto.l@@irea.cnr.it}
- #' @note License: GPL 3.0
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 
 
  # xml_file = file.choose()
 
-  MODIStsp_addindex = function() {
+  MODIStsp_addindex = function(option_file) {
 
-		MODIStsp_dir = system.file(package = "MODIStsp")
-		previous_dir = file.path(MODIStsp_dir,'Previous')
-		previous_file = file.path(previous_dir, 'MODIStsp_Previous.RData')
-		if(file.exists(previous_file)){load(previous_file)} else {stop}
-		xml_file = file.path(MODIStsp_dir, '/ExtData/MODIStsp_ProdOpts.xml')
+	require(gWidgetsRGtk2)
+	options("guiToolkit"="RGtk2")
+	
+	MODIStsp_dir = system.file(package = "MODIStsp")
+	previous_dir = file.path(MODIStsp_dir,'Previous')
+	previous_file = file.path(previous_dir, 'MODIStsp_Previous.RData')
+	if(file.exists(previous_file)){load(previous_file)}
+	xml_file = file.path(MODIStsp_dir, 'ExtData/MODIStsp_ProdOpts.xml')
 
+	# Restore previous options file if existing, otherwise create a "new" one with default values, by retrieving data from xml file
+	if (!exists("mod_prod_list") | !exists("prod_opt_list")) {
+		warning('The previously saved options file is corrupted; a new default one will be generated...')
+		MODIStsp_read_xml(previous_file = previous_file,xml_file = xml_file )
+		load(previous_file)
+	} else if (is.null(attr(mod_prod_list,"GeneratedBy")) | is.null(attr(prod_opt_list,"GeneratedBy"))) {
+		warning('The previously saved options file is corrupted; a new default one will be generated...')
+		MODIStsp_read_xml(previous_file = previous_file,xml_file = xml_file )
+		load(previous_file)
+	}
+
+	# retrieve information from xml
+	xmlfile=xmlParse(xml_file)  # initialize xml parsing
+	
+	xmltop = xmlRoot(xmlfile) #gives content of root
+	class(xmltop)
+	top_name = xmlName(xmltop) #give name of node
+	
+	n_products = xmlSize(xmltop) #how many product available ? = elements in root
+		
   	# Here goes the GUI !!!!
 
   	main_win <- gbasicdialog(title = "Insert the new Spectral Index information and formula", parent=NULL, do.buttons=F,
@@ -48,7 +73,7 @@
 
   	but_group <- ggroup(container = main_group, horizontal = TRUE)
 
-  	start_but <- gbutton(text = 'Add Index', container = but_group, handler = function (h,...) {# If "Start" pressed, retrieve selected values and save in previous file
+  	start_but <- gbutton(text = 'Add', container = but_group, handler = function (h,...) {# If "Start" pressed, retrieve selected values and save in previous file
 
   				new_indexbandname = svalue(sel_indexbandname)
   				new_indexfullname = svalue(sel_indexbandfullname)
@@ -64,7 +89,7 @@
   						str_detect(new_indexformula,'b5_SWIR'),
   						str_detect(new_indexformula,'b6_SWIR'),
   						str_detect(new_indexformula,'b7_SWIR'))
-
+				
   # verify if string is computable
   				if (req_bands[1] == T) {b1_Red = 5}
   				if (req_bands[2] == T) {b2_NIR = 6}
@@ -79,20 +104,26 @@
   					try_parse = tryCatch (eval(parse(text = new_indexformula)))
   					if (class(try_parse) =='try-error') {catch_err = 1}
   				} else {catch_err = 1}#End If on max(req_bands == 1)
+				
+				## generate the list of all the index names
+				all_indexes_bandnames = all_indexes_fullnames = NA
+				for (prod in 1:n_products) {  # cycle on available products
+					all_indexes_bandnames = c(all_indexes_bandnames, prod_opt_list[[prod]]$indexes_bandnames)
+					all_indexes_fullnames = c(all_indexes_fullnames, prod_opt_list[[prod]]$indexes_fullnames)
+				}
+				all_indexes_bandnames = unique(all_indexes_bandnames)
+				all_indexes_fullnames = unique(all_indexes_fullnames)
+				
+				# verify that the index name and fullname is not already present
+				if (new_indexbandname %in% all_indexes_bandnames | new_indexfullname %in% all_indexes_fullnames) {
+					catch_err = 2
+				}
 
   # If formula is good, parse the XML file and add the new index entry to the products
   # for which the formula is computable (i.e., they have the required bands)
 
   				if (catch_err == 0) {
-
-  					xmlfile=xmlParse(xml_file)  # initialize xml parsing
-
-  					xmltop = xmlRoot(xmlfile) #gives content of root
-  					class(xmltop)
-  					top_name = xmlName(xmltop) #give name of node
-
-  					n_products = xmlSize(xmltop) #how many product available ? = elements in root
-  					prodnames = NULL
+					
   					for (prod in 1:n_products) {  # cycle on available products
 						print(prod)
   						nbands = xmlSize(xmltop[[prod]][["bands"]])  # number of original layers
@@ -104,8 +135,7 @@
   						# check if bands required for index computation are avilable for the product
   						check = 0
   						for (reqband in refbands_names[which(req_bands == T)]){
-								bandexists = grep(paste0('^',reqband,'$'), bandnames)
-  							if (length(bandexists) != 0 ) {check = check + 1}
+  							if (reqband %in% bandnames) {check = check + 1}
   						} #End Cycle on reqband
 
   						# if all required bands are available in product, add the new index to the indexes list for the product in the previous_opts file.
@@ -117,22 +147,29 @@
   							prod_opt_list[[prod]]$indexes_bandnames = c(prod_opt_list[[prod]]$indexes_bandnames,new_indexbandname)
   							prod_opt_list[[prod]]$indexes_fullnames = c(prod_opt_list[[prod]]$indexes_fullnames,new_indexfullname)
   							prod_opt_list[[prod]]$indexes_formulas = c(prod_opt_list[[prod]]$indexes_formulas,new_indexformula)
-  							prod_opt_list[[prod]]$indexes_nodata_out = c(prod_opt_list[[prod]]$indexes_nodata_out,new_indexnodata_out)
-#  						}
+							prod_opt_list[[prod]]$indexes_nodata_out = c(prod_opt_list[[prod]]$indexes_nodata_out,new_indexnodata_out)
+							prod_opt_list[[prod]]$indexes_bandsel = c(prod_opt_list[[prod]]$indexes_bandsel,0)
 						}
 
   					}  #End Cycle on products
 
 	  				# Save the products list and the chars of the products in previous file
-	  				save(prod_opt_list, mod_prod_list, file= previous_file)
+	  				if (exists("general_opts")) {
+						save(general_opts, prod_opt_list, mod_prod_list, file= previous_file)
+					} else {
+						save(prod_opt_list, mod_prod_list, file= previous_file)
+					}
 	  				gmessage ('The new Spectral Index was correctly added')
   					dispose(main_win)
-#  				} else if (new_indexbandname) {
-#					
-				} else {gmessage(paste0('The formula of the new index is not computable. Please check it (Valid band names are: ',paste(refbands_names,collapse=', '),'.'))}
+
+				} else if (catch_err == 1) {
+					gmessage(paste0('The formula of the new index is not computable. Please check it (Valid band names are: ',paste(refbands_names,collapse=', '),'.'))
+				} else {
+					gmessage('The index acronym and/or the full name are already present; please specify different ones.')
+				}
   			})
 
-  	quit_but <- gbutton(text = 'Quit', container = but_group, handler = function(h,...){ # If "Quit", set "Quit to T and exit
+  	quit_but <- gbutton(text = 'Quit', container = but_group, handler = function(h,...){ # If "Quit" exit
   				dispose(main_win)
   			})
 
