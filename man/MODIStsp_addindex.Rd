@@ -4,10 +4,11 @@
 \alias{MODIStsp_addindex}
 \title{MODIStsp_addindex}
 \usage{
-MODIStsp_addindex()
+MODIStsp_addindex(option_file)
 }
 \arguments{
-\item{Previous_File}{string path to the MODIStsp_Previous.RData file}
+\item{option_file}{settings (optional): full path of the RData file containing the processing options in which the new indexes
+ are saved (default: Previous.RData in subdir Previous).}
 }
 \value{
 NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
@@ -26,6 +27,8 @@ folder in which the package was installed
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 
