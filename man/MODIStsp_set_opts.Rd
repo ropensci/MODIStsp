@@ -14,10 +14,10 @@ options}
 Function used to define the structure of the "opts" variable used to store all processing options for the different
 products and generic, and save it in the "previous" file.
 }
+\note{
+License: GPL 3.0
+}
 \author{
-Lorenzo Busetto, phD (2014)
-email: busetto.l@irea.cnr.it
-
-license GPL 3.0
+Lorenzo Busetto, phD (2014) \email{busetto.l@irea.cnr.it}
 }
 

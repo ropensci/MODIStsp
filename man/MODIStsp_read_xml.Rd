@@ -22,10 +22,12 @@ MODIS Land Products and store them in the "prod_opts" data frame
 The function parses the XML file product by product, stores data in a data frame
 and saves the data frame within the "MODIStsp_previous" RData file as a list of lists
 }
+\note{
+License: GPL 3.0
+}
 \author{
-Lorenzo Busetto, phD (2014-2015)
-email: busetto.l@irea.cnr.it
-Luigi Ranghetti, phD (2015)
-license GPL 3.0
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

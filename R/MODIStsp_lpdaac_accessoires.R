@@ -9,9 +9,8 @@ MODIStsp_lpdaac_accessoires = function () {
 #' @return list of all available folders (a.k.a. dates) for the requeted MODIS product on lpdaac archive
 #'
 #' @author Original code by XXXXXX
-#' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' license GPL 3.0
+#' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' @import RCurl
 lpdaac_getmod_dirs <- function(http, .Platform) {
 

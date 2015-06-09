@@ -2,7 +2,6 @@
 
 export(MODIStsp)
 export(install_MODIStsp_launcher)
-export(MODIStsp_addindex)
 import(RCurl)
 import(XML)
 import(bitops)

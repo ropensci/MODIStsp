@@ -111,10 +111,12 @@ to be processed. It then perform all required processing steps on each date (dow
 quality indicators computation), and finally performs virtual files creation. Checks are done in order to not re-download already existing HDF
 images, and not reprocess already processed dates (if the user didn'specify that)
 }
+\note{
+License: GPL 3.0
+}
 \author{
-Lorenzo Busetto, phD (2014-2015)
-email: busetto.l@irea.cnr.it
-Luigi Ranghetti, phD (2015)
-license GPL > 3
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

@@ -11,10 +11,8 @@
  #'
  #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
  #'
- #' @author Lorenzo Busetto, phD (2015)
- #' email: busetto.l@@irea.cnr.it
- #'
- #' license GPL >3
+ #' @author Lorenzo Busetto, phD (2015) \email{busetto.l@@irea.cnr.it}
+ #' @note License: GPL 3.0
 
 
  # xml_file = file.choose()

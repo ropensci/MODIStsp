@@ -12,10 +12,9 @@
 #' @param desktop_shortcut (Windows only) logical value which indicates if also a desktop shortcut should be created.
 #' @return NULL
 #'
-#' @author Luigi Ranghetti, phD (2015)
-#' email: ranghetti.l@@irea.cnr.it
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #'
-#' license GPL 3.0
 #' @export
 #' @importFrom hash hash
 #' @examples

@@ -5,10 +5,8 @@
 #'
 #' @param previous_file previous_file Name of file used intrnally by MODIStsp project to store previously used processing
 #' options
-#' @author Lorenzo Busetto, phD (2014)
-#' email: busetto.l@@irea.cnr.it
-#'
-#' license GPL 3.0
+#' @author Lorenzo Busetto, phD (2014) \email{busetto.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 
 MODIStsp_set_opts = function(previous_file = previous_file) {
 

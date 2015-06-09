@@ -39,10 +39,12 @@ the function parses the index formula to identify the required bands. On the bas
 of identified bands, it retrieves the reflectance bands required, gets the data into R raster
 objects, performs the computation and stores results in a GeoTiff or ENVI raster file
 }
+\note{
+License: GPL 3.0
+}
 \author{
-Lorenzo Busetto, phD (2014-2015)
-email: busetto.l@irea.cnr.it
-Luigi Ranghetti, phD (2015)
-license GPL 3.0
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

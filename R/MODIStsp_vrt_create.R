@@ -15,10 +15,9 @@
 #' @param out_format format of images used as "input" for the vrt and contained in out_prod_folder/band folders (ENVI or GTiff)
 #' @return NULL - virtual files are stored in the "Time Series" subfolder of out_prod_folder
 #'
-#' @author Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' Luigi Ranghetti, phD (2015)
-#' license GPL 3.0
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' @import raster
 #' @importFrom tools file_path_sans_ext
 #' @import stringr

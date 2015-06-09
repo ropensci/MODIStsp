@@ -15,10 +15,10 @@ bbox_from_file(file_path, out_crs)
 Ancillary function used to retrieve the bounding box of a specified spatial file recognised by GDAL or ORG:
 the function reads the extent using gdalinfo or ogrinfo, converting it in a specified CRS.
 }
+\note{
+License: GPL 3.0
+}
 \author{
-Luigi Ranghetti, phD (2015)
-email: ranghetti.l@irea.cnr.it
-
-license GPL 3.0
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

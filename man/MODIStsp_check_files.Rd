@@ -41,10 +41,12 @@ Accessory function used to see if all expected out files for the selected date a
 if all expected out files for the selected date are already present, check_files is set to TRUE, and date is skipped
 in moddwl_process
 }
+\note{
+License: GPL 3.0
+}
 \author{
-Lorenzo Busetto, phD (2014-2015)
-email: busetto.l@irea.cnr.it
-Luigi Ranghetti, phD (2015)
-license GPL 3.0
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

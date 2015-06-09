@@ -25,6 +25,9 @@ Main function for the MODIS Time Series Processing Tool (MOD_TSP)
 The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs,
  and to launch the required routines for downloading and processing the requested datasets.
 }
+\note{
+License: GPL 3.0
+}
 \examples{
 # Run the tool without any option will start the GUI
 # with the default settings (or the last used)
@@ -55,8 +58,8 @@ for (single_shape in extent_list)
     spatial_file_path = single_shape )}
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it},
-Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it},
-license GPL 3.0
+Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+
+Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
 

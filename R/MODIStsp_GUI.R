@@ -7,10 +7,9 @@
 #' @param general_opts General options data frame passed by MODIStsp_main. Contains paths and other variables used to initialize the GUI
 #' 						if a previous options file is not existing.
 #' @return NULL - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
-#' @author Lorenzo Busetto, phD (2014)
-#' email: busetto.l@@irea.cnr.it
-#'
-#' license GPL(>2)
+#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' @import gWidgets
 #' @import rgeos
 
@@ -22,7 +21,7 @@ MODIStsp_GUI = function (general_opts){
 		warning('The previously saved options file is corrupted; a new default one will be generated...')
 		MODIStsp_read_xml(previous_file = general_opts$previous_file,xml_file = general_opts$xml_file )
 		load(general_opts$previous_file)
-	} else if (attr(general_opts,"GeneratedBy")!='MODIStsp' | attr(mod_prod_list,"GeneratedBy")!='MODIStsp' | attr(prod_opt_list,"GeneratedBy")!='MODIStsp') {
+	} else if (is.null(attr(general_opts,"GeneratedBy")) | is.null(attr(mod_prod_list,"GeneratedBy")) | is.null(attr(prod_opt_list,"GeneratedBy"))) {
 		warning('The previously saved options file is corrupted; a new default one will be generated...')
 		MODIStsp_read_xml(previous_file = general_opts$previous_file,xml_file = general_opts$xml_file )
 		load(general_opts$previous_file)
