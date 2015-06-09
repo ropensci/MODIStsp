@@ -28,6 +28,7 @@ main_dir = dirname(rscript.current())
 src_dir = file.path(main_dir,'R')
 source(file.path(main_dir,'R/MODIStsp.R'))
 # Sourcing of needed R scripts (Remove when building package !!!!)-----
+source(file.path(src_dir,'MODIStsp_addindex.R'))
 source(file.path(src_dir,'MODIStsp_lpdaac_accessoires.R'))
 source(file.path(src_dir,'MODIStsp_check_files.R'))
 source(file.path(src_dir,'MODIStsp_process.R'))

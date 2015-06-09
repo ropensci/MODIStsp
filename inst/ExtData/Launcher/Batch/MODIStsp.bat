@@ -23,21 +23,25 @@ OPTIONS:^
 
     -s  settings: full path of the RData file containing the processing options (default: Previous.RData in subdir Previous)^
 
+    -e  extent: full path of a spatial file to use as extent (default: NULL); if defined, the processing options which define the extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided spatial file.
+
     -r  Rscript dir: directory of the Rscript executable
 
 :GETOPTS
  SET gui="TRUE"
- SET options_File=""
- if /I "%1" == "" goto Run
+ SET options_File="NULL"
+ SET spatial_file_path="NULL"
+if /I "%1" == "" goto Run
  if /I %1 == -h goto Help
  if /I %1 == -g set gui="FALSE"
  if /I %1 == -s set options_file=%2& shift
+ if /I %1 == -e set spatial_file_path=%2& shift
  if /I %1 == -r set Rscript_dir=%2& shift
  shift
 if not (%1)==() goto GETOPTS
 
 :Run
-%Rscript_dir%\Rscript.exe %~dp0..\MODIStsp_launcher.R %gui% %options_File%
+%Rscript_dir%\Rscript.exe %~dp0..\MODIStsp_launcher.R %gui% %options_File% %spatial_file_path%
 goto End
 
 :Help
