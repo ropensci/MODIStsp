@@ -4,20 +4,21 @@
 \alias{install_MODIStsp_launcher}
 \title{install_MODIStsp_launcher}
 \usage{
-install_MODIStsp_launcher(desktop_path = NA, bin_path = NA, sudo = FALSE,
-  desktop_shortcut = FALSE)
+install_MODIStsp_launcher(bin_path = NA, desktop_path = NA,
+  desktop_shortcut = TRUE, sudo = FALSE)
 }
 \arguments{
-\item{desktop_path}{path to the desktop entry (Linux; default: /usr/share/applications/MODIStsp.desktop) or to the link in the Start Menu
-(Windows; default: Start Menu -> Programs -> MODIStsp). Note that the patch must contain also the file name.}
+\item{bin_path}{in Linux, directory in which the link to the bash script should be placed (default: /usr/bin; a path included in the PATH
+environment variable is suggested); in Windows, directory where to place the menu entry in the Start Menu (default: Start Menu -> Programs -> MODIStsp).}
 
-\item{bin_path}{(Linux only) path of the link to the bash script (default: /usr/bin/MODIStsp); a path included in the PATH environment variable
-is suggested.}
+\item{desktop_path}{if desktop_shortcut=TRUE: in Linux, directory in which the desktop entry should be placed (default: /usr/share/applications);
+in Windows, directory where to place the desktop entry (default: Desktop).}
 
-\item{sudo}{(Linux only) logical value which indicates if the creation of bin_path and desktop_path requires root permissions; in this case,
-the root password is requested when launching the function.}
+\item{desktop_shortcut}{logical value which indicates if the desktop entry or the desktop shortcut should be created (default: TRUE).}
 
-\item{desktop_shortcut}{(Windows only) logical value which indicates if also a desktop shortcut should be created.}
+\item{sudo}{(Linux only) logical value which indicates if administrator rights have to be used to write within bin_path and desktop_path (default: FALSE);
+in this case, the root password is requested when launching the function. Note that default values of bin_path and desktop_path requires to set this
+option to TRUE (or to lauch the script in a root session of R)!}
 }
 \description{
 Function which allows to use MODIStsp in batch mode by creating links
@@ -41,14 +42,13 @@ install_MODIStsp_launcher(sudo = TRUE)
 # Linux: installation in a directory which does
 # not require administrator permissions
 \dontrun{
-install_MODIStsp_launcher(desktop_path = "~/Desktop/MODIStsp.desktop",
-  bin_path = "~/bin/MODIStsp")}
+install_MODIStsp_launcher(bin_path = "~/bin/MODIStsp"),
+  desktop_path = "~/Desktop/MODIStsp.desktop"}
 
 # Windows: common installation
 # (script in the Start Menu and shortcut on the desktop)
 \dontrun{
-install_MODIStsp_launcher(desktop_shortcut = TRUE)
-  # FIXME it does not run due to symlink problems in Windows}
+install_MODIStsp_launcher()}
 }
 \author{
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}

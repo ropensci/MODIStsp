@@ -3,13 +3,14 @@
 #' @details MODIStsp tool can be used also as a standalone tool my launching a bash/batch script, which is stored in the function files.
 #'  In order to simply retrieve it, this function will create a desktop entry and a symbolic link to the bash script (in Linux)
 #'  or a link in the Start Menu to the batch script (in Windows).
-#' @param desktop_path path to the desktop entry (Linux; default: /usr/share/applications/MODIStsp.desktop) or to the link in the Start Menu
-#'  (Windows; default: Start Menu -> Programs -> MODIStsp). Note that the patch must contain also the file name.
-#' @param bin_path (Linux only) path of the link to the bash script (default: /usr/bin/MODIStsp); a path included in the PATH environment variable
-#'  is suggested.
-#' @param sudo (Linux only) logical value which indicates if the creation of bin_path and desktop_path requires root permissions; in this case,
-#'  the root password is requested when launching the function.
-#' @param desktop_shortcut (Windows only) logical value which indicates if also a desktop shortcut should be created.
+#' @param bin_path in Linux, directory in which the link to the bash script should be placed (default: /usr/bin; a path included in the PATH 
+#'  environment variable is suggested); in Windows, directory where to place the menu entry in the Start Menu (default: Start Menu -> Programs -> MODIStsp).
+#' @param desktop_shortcut logical value which indicates if the desktop entry or the desktop shortcut should be created (default: TRUE).
+#' @param desktop_path if desktop_shortcut=TRUE: in Linux, directory in which the desktop entry should be placed (default: /usr/share/applications);
+#'  in Windows, directory where to place the desktop entry (default: Desktop).
+#' @param sudo (Linux only) logical value which indicates if administrator rights have to be used to write within bin_path and desktop_path (default: FALSE);
+#'  in this case, the root password is requested when launching the function. Note that default values of bin_path and desktop_path requires to set this
+#'  option to TRUE (or to lauch the script in a root session of R)!
 #' @return NULL
 #'
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
@@ -28,16 +29,15 @@
 #' # Linux: installation in a directory which does 
 #' # not require administrator permissions
 #' \dontrun{
-#' install_MODIStsp_launcher(desktop_path = "~/Desktop/MODIStsp.desktop", 
-#'   bin_path = "~/bin/MODIStsp")}
+#' install_MODIStsp_launcher(bin_path = "~/bin/MODIStsp"), 
+#'   desktop_path = "~/Desktop/MODIStsp.desktop"}
 #' 
 #' # Windows: common installation
 #' # (script in the Start Menu and shortcut on the desktop)
 #' \dontrun{
-#' install_MODIStsp_launcher(desktop_shortcut = TRUE)
-#'   # FIXME it does not run due to symlink problems in Windows}
+#' install_MODIStsp_launcher()}
 
-install_MODIStsp_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE, desktop_shortcut=FALSE) {
+install_MODIStsp_launcher <- function( bin_path=NA, desktop_path=NA, desktop_shortcut=TRUE, sudo=FALSE) {
 
 	MODIStsp_dir = system.file(package = "MODIStsp")
 	running_os <- Sys.info()[['sysname']]
@@ -57,24 +57,41 @@ install_MODIStsp_launcher <- function( desktop_path=NA, bin_path=NA, sudo=FALSE,
 		writeLines(desktopEntry,fileConn)
 		close(fileConn)
 		if (sudo) {
-			system(paste('sudo -S cp -f', file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'), desktop_path), input=readline("Enter your password: "))
+			system(paste('sudo -S cp -f', file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'), file.path(desktop_path,'MODIStsp.desktop')), input=readline("Enter your password: "))
 		} else {
-			file.copy(from=file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'),to=desktop_path,overwrite=TRUE)
+			file.copy(from=file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'),to=file.path(desktop_path,'MODIStsp.desktop'),overwrite=TRUE)
 		}
 	}
 
 	if (running_os=='Windows') {
-		if (is.na(desktop_path)) {desktop_path = file.path(Sys.getenv('USERPROFILE'),'AppData/Roaming/Microsoft/Windows/Start Menu/Programs/MODIStsp/')}
+		
 		# Create entry in the start menu
-		if (!file.exists(file.path(desktop_path,'/MODIStsp.bat'))) {
-			Sys.junction(from=file.path(MODIStsp_dir,'ExtData/Launcher/Batch/'),to=file.path(desktop_path,'/'))
+		if (is.na(bin_path)) {bin_path = file.path(Sys.getenv('USERPROFILE'),'AppData/Roaming/Microsoft/Windows/Start Menu/Programs/MODIStsp')}
+		if (!file.exists(file.path(bin_path,'/MODIStsp.lnk'))) {
+			dir.create(bin_path,recursive=TRUE,showWarnings=FALSE)
+			shell("set create_script=\"%TEMP%\\create_MODIStsp_shortcut.vbs\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+			shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+			shell(paste0("echo Set oLink = oWS.CreateShortcut(\"",bin_path,"\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
+			shell(paste0("echo oLink.TargetPath = \"",MODIStsp_dir,"\\ExtData\\Launcher\\Batch\\MODIStsp.bat\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
+			shell("echo oLink.Save >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+			shell("cscript /nologo \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+			shell("del \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
 		} else warning('Link in Start Menu already exists!')
+		
 		# Create desktop shortcut
 		if (desktop_shortcut) {
-			if (!file.exists(file.path(Sys.getenv('USERPROFILE'),'Desktop/MODIStsp/MODIStsp.bat'))) {
-				Sys.junction(from=file.path(MODIStsp_dir,'ExtData/Launcher/Batch/'),to=file.path(Sys.getenv('USERPROFILE'),'Desktop/MODIStsp/'))
+			if (!file.exists(file.path(desktop_path,'/MODIStsp.bat'))) {
+				if (is.na(desktop_path)) {desktop_path = file.path(Sys.getenv('USERPROFILE'),'Desktop')}
+				shell("set create_script=\"%TEMP%\\create_MODIStsp_shortcut.vbs\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+				shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+				shell(paste0("echo Set oLink = oWS.CreateShortcut(\"",bin_path,"\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
+				shell(paste0("echo oLink.TargetPath = \"",MODIStsp_dir,"\\ExtData\\Launcher\\Batch\\MODIStsp.bat\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
+				shell("echo oLink.Save >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+				shell("cscript /nologo \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+				shell("del \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
 			} else warning('Desktop shortcut already exists!')
 		}
+		
 	}
-
+	
 }
