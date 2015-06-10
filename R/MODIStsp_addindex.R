@@ -20,7 +20,7 @@
  # xml_file = file.choose()
 
   MODIStsp_addindex = function(option_file) {
-
+	  
 	require(gWidgetsRGtk2)
 	options("guiToolkit"="RGtk2")
 	
@@ -159,7 +159,7 @@
 					} else {
 						save(prod_opt_list, mod_prod_list, file= previous_file)
 					}
-	  				gmessage ('The new Spectral Index was correctly added')
+	  				gmessage ('The new Spectral Index was correctly added! It will be available from the next running of MODIStsp().')
   					dispose(main_win)
 
 				} else if (catch_err == 1) {
@@ -169,7 +169,7 @@
 				}
   			})
 
-  	quit_but <- gbutton(text = 'Quit', container = but_group, handler = function(h,...){ # If "Quit" exit
+  	quit_but <- gbutton(text = if (exists('Quit')) {'Cancel'} else {'Quit'}, container = but_group, handler = function(h,...){ # If "Quit" exit
   				dispose(main_win)
   			})
 
