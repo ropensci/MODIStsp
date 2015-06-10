@@ -4,20 +4,20 @@
 \alias{install_MODIStsp_launcher}
 \title{install_MODIStsp_launcher}
 \usage{
-install_MODIStsp_launcher(bin_path = NA, desktop_path = NA,
+install_MODIStsp_launcher(bin_dir = NA, desktop_dir = NA,
   desktop_shortcut = TRUE, sudo = FALSE)
 }
 \arguments{
-\item{bin_path}{in Linux, directory in which the link to the bash script should be placed (default: /usr/bin; a path included in the PATH
+\item{bin_dir}{in Linux, directory in which the link to the bash script should be placed (default: /usr/bin; a path included in the PATH
 environment variable is suggested); in Windows, directory where to place the menu entry in the Start Menu (default: Start Menu -> Programs -> MODIStsp).}
 
-\item{desktop_path}{if desktop_shortcut=TRUE: in Linux, directory in which the desktop entry should be placed (default: /usr/share/applications);
+\item{desktop_dir}{if desktop_shortcut=TRUE: in Linux, directory in which the desktop entry should be placed (default: /usr/share/applications);
 in Windows, directory where to place the desktop entry (default: Desktop).}
 
 \item{desktop_shortcut}{logical value which indicates if the desktop entry or the desktop shortcut should be created (default: TRUE).}
 
-\item{sudo}{(Linux only) logical value which indicates if administrator rights have to be used to write within bin_path and desktop_path (default: FALSE);
-in this case, the root password is requested when launching the function. Note that default values of bin_path and desktop_path requires to set this
+\item{sudo}{(Linux only) logical value which indicates if administrator rights have to be used to write within bin_dir and desktop_dir (default: FALSE);
+in this case, the root password is requested when launching the function. Note that default values of bin_dir and desktop_dir requires to set this
 option to TRUE (or to lauch the script in a root session of R)!}
 }
 \description{
@@ -42,8 +42,7 @@ install_MODIStsp_launcher(sudo = TRUE)
 # Linux: installation in a directory which does
 # not require administrator permissions
 \dontrun{
-install_MODIStsp_launcher(bin_path = "~/bin/MODIStsp"),
-  desktop_path = "~/Desktop/MODIStsp.desktop"}
+install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"}
 
 # Windows: common installation
 # (script in the Start Menu and shortcut on the desktop)
