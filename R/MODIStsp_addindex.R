@@ -37,16 +37,16 @@
 
  # xml_file = file.choose()
 
-  MODIStsp_addindex = function(option_file, gui=TRUE, new_indexbandname="", new_indexfullname="", new_indexformula="", new_indexnodata_out = '32767') {
+  MODIStsp_addindex = function(option_file=NA, gui=TRUE, new_indexbandname="", new_indexfullname="", new_indexformula="", new_indexnodata_out = '32767', MODIStsp_dir=NA) {
 	
 	if (gui) {
 		require(gWidgetsRGtk2)
 		options("guiToolkit"="RGtk2")
 	}
 	
-	MODIStsp_dir = system.file(package = "MODIStsp")
+	if (is.na(MODIStsp_dir)) {MODIStsp_dir = system.file(package = "MODIStsp")}
 	previous_dir = file.path(MODIStsp_dir,'Previous')
-	previous_file = file.path(previous_dir, 'MODIStsp_Previous.RData')
+	previous_file = if (is.na(option_file)) {file.path(previous_dir, 'MODIStsp_Previous.RData')} else {option_file}
 	if(file.exists(previous_file)){load(previous_file)}
 	xml_file = file.path(MODIStsp_dir, 'ExtData/MODIStsp_ProdOpts.xml')
 
@@ -214,7 +214,9 @@
 								new_indexbandname=new_indexbandname, new_indexfullname=new_indexfullname, new_indexformula=new_indexformula, 
 								new_indexnodata_out=new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
 								mod_prod_list=mod_prod_list, previous_file=previous_file)
-						gmessage ('The new Spectral Index was correctly added! It will be available from the next running of MODIStsp().')
+						if (exists('Quit')) {
+							gmessage ('The new Spectral Index was correctly added! To use it, close and re-open the "Select Processing Layer" window.')
+						} else {gmessage ('The new Spectral Index was correctly added!')}
 	  					dispose(main_win)
 					} else if (catch_err == 1) {
 						gmessage(paste0('The formula of the new index is not computable. Please check it (Valid band names are: ',paste(refbands_names,collapse=', '),'.'))

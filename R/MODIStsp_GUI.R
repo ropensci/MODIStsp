@@ -90,6 +90,7 @@ MODIStsp_GUI = function (general_opts){
 	band_wid <- gbutton(text = 'Click To Select', border = T,				# Child widget for processing bands selection
 			handler = function(h,....) {
 
+				load(general_opts$previous_file)
 				checked <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]		# find index of sel. product
 				check_names <- prod_opt_list[[checked]]$band_fullnames					# retrieve band names of sel. product
 				check_wid <- temp_wid_bands												# retrieve currently selected original layers
@@ -114,7 +115,13 @@ MODIStsp_GUI = function (general_opts){
 					cbox_indexes<- gframe(text = '<span foreground="blue" size="large">		Additional Spectral Indexes				</span>', markup = T, container = cbox_total, horizontal = FALSE, width = 450)
 					bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes), container = cbox_indexes, use.table = F, width = 450)
 					band_wid_newindex <- gbutton(text = 'Add custom index', border = TRUE,
-							handler = function(h,...) {MODIStsp_addindex(option_file=general_opts$previous_file)}, 
+							handler = function(h,...) {
+								# Run addindex() function
+								MODIStsp_addindex(option_file=general_opts$previous_file)
+								# Update labels in the widget
+								load(general_opts$previous_file)
+								check_names_indexes <- prod_opt_list[[checked]]$indexes_fullnames # retrieve indexes band names
+							}, 
 							container =cbox_indexes, width = 120, expand = T)
 				}
 
