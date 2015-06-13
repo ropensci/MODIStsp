@@ -221,14 +221,16 @@ Some of the most commonly used Spectral Indexes are available for computation by
 
 | Index Acronym                       | Index name and reference                                             |
 |-------------------------------------|----------------------------------------------------------------------|
-| NDVI                                | Normalized Difference Vegetation Index [@Rouse1973]         |
-| EVI                                 | Enhanced Vegetation Index [@Huete2002]                            | Simple Ratio[@Tucker1979] ]                                          |
-| NDFI                                | Normalized Difference Flood Index  [@Boschetti2014]       |
-| NDII7 (NDWI)                        | Normalized Difference Infrared Index – Band 7 [@HUNTJR1989]    |                                                                      
-| SAVI                                | Soil Adjusted Vegetation Index  [@Huete1988]                       |  | NDSI*                               | Normalized Difference Snow Index ([@Hall2002]|
-| NDII6*                              | Normalized Difference Infrared Index – band 6  [@HUNTJR1989]|
-| GNDVI*                              | Green Normalized Difference Vegetation Index [@Gitelson1998] |
-| RGRI*                               | Red Green Ration index  [@Gamon1999]                         |
+| NDVI                                | Normalized Difference Vegetation Index [@Rouse1973]                 |
+| EVI                                 | Enhanced Vegetation Index [@Huete2002]                              | 
+| SR                                  | Simple Ratio[@Tucker1979] ]                                         |
+| NDFI                                | Normalized Difference Flood Index  [@Boschetti2014]                 |
+| NDII7 (NDWI)                        | Normalized Difference Infrared Index – Band 7 [@HUNTJR1989]         |                                                                      
+| SAVI                                | Soil Adjusted Vegetation Index  [@Huete1988]                        | 
+| NDSI*                               | Normalized Difference Snow Index ([@Hall2002]                       |
+| NDII6*                              | Normalized Difference Infrared Index – band 6  [@HUNTJR1989]        |
+| GNDVI*                              | Green Normalized Difference Vegetation Index [@Gitelson1998]        |
+| RGRI*                               | Red Green Ration index  [@Gamon1999]                                |
 | GRVI*                               | Green-red ratio vegetation index  [@Tucker1979]                     |
 
 
