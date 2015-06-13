@@ -54,6 +54,8 @@
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ( http://r-gis.net/?q=ModisDownload ; .
+#' http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images)
 #' @note License: GPL 3.0
 #' @import gdalUtils
 #' @import rgdal
@@ -88,7 +90,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 		if (sens_sel == "Terra") {file_prefix = file_prefixes[["Terra"]]} else {file_prefix = file_prefixes[["Aqua"]]}
 
 		#- ------------------------------------------------------------------------------- -#
-		#  Verify if bands needed for computing spectal indexes and/or quality indicators are already selected
+		#  Verify if bands needed for computing spectral indexes and/or quality indicators are already selected
 		#  if not, select them and set the "delete" option for them to 1
 		#- ------------------------------------------------------------------------------- -#
 
@@ -264,7 +266,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 										} else {gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band]) }  # Create a resized and eventually mosaiced GDAL vrt file
 										# check if this also need to add tap (it should not)
 
-										#Tranform the vrt to a physical resized TIFF file.
+										#Transform the vrt to a physical resized TIFF file.
 #										er_mos = gdal_translate(outfile_vrt, outfile)
 										er_mos = 1
 #										if (is.null(er_mos) == FALSE)  {stop()}   # exit on error
@@ -276,7 +278,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 										cat('[',date(),'] Reprojecting', bandnames[band],'files for date:',date_name,'\n' )
 										svalue(mess_lab) =  (paste('--- Reprojecting ', bandnames[band],'files for date: ',date_name,' ---'))
 
-										## Launch the reprojection
+										## Launch the reprojection - operations to be done depends on whether resize and/or reprojection and/or 
+										## resampling are required
 
 										reproj_type = if (out_res_sel=="Native" & outproj_str==MOD_proj_str) {'GdalTranslate'
 												} else if (out_res_sel=="Resampled" & outproj_str==MOD_proj_str) {'Resample1_Resize0'
@@ -330,7 +333,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 							# ---------------------------------- ----------------------------------------------#
 
 							for (band in which(quality_bandsel== 1)) {
-								quality_band =  quality_bandnames[band]		 # indicatori name
+								quality_band =  quality_bandnames[band]		 # indicator name
 								source = quality_source[band]  #  Original MODIS layer containing data of the indicator
 								bitN =  quality_bitN[band]  #  bitfields corresponding to indicator within source
 								nodata_qa_in = quality_nodata_in [band]
@@ -383,7 +386,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 			} else cat("[',date(),'] No available data for year:", yy, "for Sensor",sens_sel,"in selected dates.\n")
 
 			#- ------------------------------------------------------------------------------- -#
-			# If deletion selected, delete the HDF files in folder_mod directory
+			# If deletion selected, delete the HDF files in out_folder_mod directory
 			#- ------------------------------------------------------------------------------- -#
 			if (delete_hdf == 'Yes') {
 
@@ -408,17 +411,17 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
 	for (sens_sel in senslist) {		# cycle on selected sensors
 
-		for (band in which(bandsel== 1)) {
+		for (band in which(bandsel== 1)) { # Create virtual files for original layers
 			MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = bandnames[band],
 					file_prefixes = file_prefixes, sens_sel, ts_format = ts_format,  nodata_value = nodata_out[band],out_format = out_format)
 		} #End Cycle on bandsel
 
-		for (band in which(indexes_bandsel== 1)) {
+		for (band in which(indexes_bandsel== 1)) {  # Create virtual files for QI layers
 			MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = indexes_bandnames[band],
 					file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = indexes_nodata_out[band],out_format = out_format)
 		} #End Cycle on indexes_bandsel
 
-		for (band in which(quality_bandsel== 1)) {
+		for (band in which(quality_bandsel== 1)) {	# Create virtual files for SI layers
 
 			MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = quality_bandnames[band]		,
 					file_prefixes = file_prefixes, sens_sel= sens_sel, ts_format = ts_format, nodata_value = quality_nodata_out[band],out_format = out_format)
@@ -426,7 +429,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
 	}
 	#- ------------------------------------------------------------------------------- -#
-	# Close GUI and clean
+	# Close GUI and clean-up
 	#- ------------------------------------------------------------------------------- -#
 	gc()
 	addHandlerUnrealize(mess_lab, handler = function(h,...) {return(FALSE)})		# Allow message lab to be closed since processing ended .

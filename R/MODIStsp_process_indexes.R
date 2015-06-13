@@ -19,7 +19,7 @@
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-MODIStsp_process_indexes = function(out_filename, formula,bandnames,nodata_out,out_prod_folder,
+MODIStsp_procses_indexes = function(out_filename, formula,bandnames,nodata_out,out_prod_folder,
 		indexes_nodata_out, file_prefix, yy, DOY, out_format) {
 
 	# Retrieve necessary filenames (get names of single band files on the basis of Index formula)

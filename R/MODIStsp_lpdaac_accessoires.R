@@ -6,9 +6,9 @@ MODIStsp_lpdaac_accessoires = function () {
 #'
 #' @param http string http site on lpdaac corresponding to a given MODIS product
 #' @param .Platform string os platform (from call to .Platform)
-#' @return list of all available folders (a.k.a. dates) for the requeted MODIS product on lpdaac archive
+#' @return list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
 #'
-#' @author Original code by XXXXXX
+#' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
 #' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @import RCurl
@@ -37,7 +37,7 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
 	items <- items[-1]
 	# get the directory names (available dates)
 	date_dirs <- unlist(lapply(strsplit(items, ">"), function(x){x[length(x)-1]}))
-	date_dirs = date_dirs[seq(3,length(date_dirs)-2)]
+	date_dirs <- date_dirs[seq(3,length(date_dirs)-2)]
 	date_dirs <- unlist(lapply(strsplit(date_dirs, "/"), function(x){x[1]}))
 
 	return(date_dirs)
@@ -52,10 +52,10 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
 #' @param date_dirs data frame full list of folders in lpdaa archive for product of interest
 #' @return array of folder names containing data for the modis product acquired in the period specified by "dates"
 #'
-#' @author Original code by XXXXXX
+#' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
 #' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
-#' license CC BY-NC 3.0
+#' license GPL 3.0
 #' @import RCurl
 lpdaac_getmod_dates <- function(dates, date_dirs) {
 
@@ -105,10 +105,10 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' @param tiled 0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)
 #' @return Modislist names of HDF images corresponding to the requested tiles available for the product in the selected date
 #'
-#' @author Original code by XXXXXX
+#' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
 #' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
 #' email: busetto.l@@irea.cnr.it
-#' license CC BY-NC 3.0
+#' license  GPL 3.0
 #' @import RCurl
 lpdaac_getmod_names <- function(http, date_dirs, date, v, h, tiled) {
 	getlist <- 0
@@ -129,7 +129,7 @@ lpdaac_getmod_names <- function(http, date_dirs, date, v, h, tiled) {
 	}
 	getlist <- getlist[-1]
 	getlist <- unlist(lapply(strsplit(getlist, ">"), function(x){x[length(x)-1]}))
-	getlist = getlist[seq(3,length(getlist)-2)]
+	getlist <- getlist[seq(3,length(getlist)-2)]
 	getlist <- unlist(lapply(strsplit(getlist, "<"), function(x){x[1]}))
 	Modislist <- c()
 	if (tiled == 1 ) {
