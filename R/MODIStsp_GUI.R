@@ -16,17 +16,18 @@
 MODIStsp_GUI = function (general_opts){
 
 	# Restore previous options file if existing, otherwise create a "new" one with default values, by retrieving data from xml file
+
 	if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)}
 	if (!exists("general_opts") | !exists("mod_prod_list") | !exists("prod_opt_list")) {
 		warning('The previously saved options file is corrupted; a new default one will be generated...')
 		MODIStsp_read_xml(previous_file = general_opts$previous_file,xml_file = general_opts$xml_file )
 		load(general_opts$previous_file)
-	} else if (is.null(attr(general_opts,"GeneratedBy")) | is.null(attr(mod_prod_list,"GeneratedBy")) | is.null(attr(prod_opt_list,"GeneratedBy"))) {
+  } else if (is.null(attr(general_opts,"GeneratedBy")) | is.null(attr(mod_prod_list,"GeneratedBy")) | is.null(attr(prod_opt_list,"GeneratedBy"))) {
 		warning('The previously saved options file is corrupted; a new default one will be generated...')
 		MODIStsp_read_xml(previous_file = general_opts$previous_file,xml_file = general_opts$xml_file )
 		load(general_opts$previous_file)
 	}
-	
+
 	assign("Quit", T, envir=globalenv())	# Assigng "Quit" to true
 
 	#- ------------------------------------------------------------------------------- -#
@@ -118,10 +119,10 @@ MODIStsp_GUI = function (general_opts){
 							handler = function(h,...) {
 								# Run addindex() function
 								MODIStsp_addindex(option_file=general_opts$previous_file)
-								# Update labels in the widget
-								load(general_opts$previous_file)
-								check_names_indexes <- prod_opt_list[[checked]]$indexes_fullnames # retrieve indexes band names
-							}, 
+							  load(general_opts$previous_file)
+							  if (length(temp_wid_bands_indexes) != length(prod_opt_list[[checked]]$indexes_bandsel)) {temp_wid_bands_indexes <-- c(temp_wid_bands_indexes,0)}
+							  dispose(selgroup)
+							},
 							container =cbox_indexes, width = 120, expand = T)
 				}
 
@@ -141,6 +142,7 @@ MODIStsp_GUI = function (general_opts){
 								tmp_arr_qual[pos_wid] <- 1	; temp_wid_bands_quality <<- tmp_arr_qual
 
 							}
+
 							dispose(selgroup)			 # close layers selection child widget
 
 						})
@@ -252,12 +254,12 @@ MODIStsp_GUI = function (general_opts){
 				wait_window <- gwindow(title="Please wait", container = TRUE, width = 400, height = 40)
 				size(wait_window) <- c(100,8)		;	addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
 				wait_window_lab = glabel(text =paste('Charging the selected file, please wait...'), editable = FALSE, container = wait_window)
-	
+
 				# Convert bbox coordinates in those of output projection
 				out_proj_crs = if (svalue(proj_wid)!= "User Defined"){
 					general_opts$out_proj_list[[svalue(proj_wid)]]
 				} else {general_opts$user_proj4}
-				
+
 				# Create the bounding box in the chosen projection retrieving it from the specified file
 				bbox_out <- try(bbox_from_file(file_path=choice,out_crs=out_proj_crs),silent=TRUE)
 				if (class(bbox_out)=='try-error') {
