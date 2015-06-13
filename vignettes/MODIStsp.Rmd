@@ -10,6 +10,8 @@ output:
     fig_caption: yes
     number_section: yes
   html_document: default
+  word_document: default
+bibliography: MODIStsp.bib
 vignette: |
   %\VignetteIndexEntry{MODIStsp} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
@@ -18,7 +20,7 @@ vignette: |
 
 MODIStsp is a novel “R” package allowing to automatize the creation of time series of rasters derived from MODIS Land Products data. It allows to perform several preprocessing steps on MODIS data available within a given time period. 
 
-Development of MODIStsp started from modifications of the ModisDownload “R” script by Thomas Hengl (2010), and successive adaptations by Babak Naimi (2014). The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of: 
+Development of MODIStsp started from modifications of the ModisDownload “R” script by Thomas Hengl [-@Hengl2010], and successive adaptations by Babak Naimi [-@Naimi2014]. The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of: 
 
 * Developing a standalone application allowing to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on all available MODIS land products by exploiting  a powerful and user-friendly GUI front-end;
 * Allowing the creation of time series of both MODIS original layers and additional Quality Indicators (e.g., data acquisition quality, cloud/snow presence, algorithm used for data production, etc. ) extracted from the aggregated bit-field QA layers
@@ -45,7 +47,7 @@ To Install MODIStsp:
     ```r
     install.packages('devtools')
     require('devtools')
-    install_github('lbusett/MODIStsp', ref = 'master')
+    install_github('lbusett/MODIStsp', ref = 'devel')
     ```
 
 ## Dependencies
@@ -54,16 +56,16 @@ MODIStsp exploits functionalities of several additional “R” packages. A comp
 
 | “R” package   | Version     | Authors                      |
 |---------------|-------------|------------------------------|
-| gWidgetsRGtk2 | >= 0.0-54   | (Lawrence & Verzani 2013)    |
-| rgdal         | >= 0.8-16   | (Bivand et al. 2014)         |
-| plyr          | >= 1.8.1    | (Wickham 2011)               |
-| gdalUtils     | >= 0.3.1    | (Greenberg & Mattiuzzi 2014) |
-| XML           | >= 3.98-1.1 | (Lang 2013b)                 |
-| RCurl         | >= 1.95-4.1 | (Lang 2013a)                 |
-| Stringr       | >= 0.6.2    | (Wickham 2012)               |
-| hash          | >= 2.26     | (Brown 2013)                 |
-| raster        | >= 2.3.40   | (Hijmans 2014)               |
-| rgeos         | >= 0.3-8    | (Bivand & Rundel, 2014)      |
+| gWidgetsRGtk2 | >= 0.0-54   | [@Lawrence2013]   |
+| rgdal         | >= 0.8-16   | [@Bivand2014]         |
+| plyr          | >= 1.8.1    | [@Wickham2011]               |
+| gdalUtils     | >= 0.3.1    | [@Greenberg2014] |
+| XML           | >= 3.98-1.1 | [@Lang2013a]                 |
+| RCurl         | >= 1.95-4.1 | [@Lang2013]                 |
+| Stringr       | >= 0.6.2    | [@Wickham2012]               |
+| hash          | >= 2.26     | [@Brown2013]                 |
+| raster        | >= 2.3.40   | [@Hijmans2014]               |
+| rgeos         | >= 0.3-8    | [@Bivand2014a]      |
 
 Additionaly, MODIStsp **requires availability of the GDAL - Geospatial Data Abstraction Library  v. >1.10, with support for HDF4 raster format**. 
 
@@ -215,7 +217,7 @@ Allows to select the MODIS product of interest from a drop-down menu. The user c
 
 [^1]:The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the “MODIStsp_Products_Opts” XML file distributed with the package in /ExtData subfolder.
 
-Some of the most commonly used Spectral Indexes are Already available for computation (Table II).
+Some of the most commonly used Spectral Indexes are available for computation by default (Table II). 
 
 | Index Acronym                       | Index name and reference                                             |
 |-------------------------------------|----------------------------------------------------------------------|
@@ -231,10 +233,7 @@ Some of the most commonly used Spectral Indexes are Already available for comput
 | GRVI*                               | Green-red ratio vegetation index  (Tucker, 1979)                     |
 
 
-Users have the possibility to **specify additional custom Spectral Indexes to be calculated using the 
-``` 
-MODIStsp_addindex() 
-``` function.** Launching the function allows to provide the info related to the new desired SI using a simple GUI interface. At the next MODIStsp execution, the new index is added to the list of available ones for the MODIS products which support its computation. This allows users to add the possibility to compute indexes of their specific interest without the need of modifying MODIStsp source code.
+Users can however **specify other SIs to be computed without modifying MODIStsp source code** by clicking on the _**“Add Custom Index”**_ button, which allow to provide info related to the new desired SI using a simple GUI (Figure 3) interface. 
 
 ```{r fig.height = 1.3, fig.cap = "The GUI for insertion of additional Spectral Indexes",echo=FALSE}
   library(png)
@@ -242,6 +241,8 @@ MODIStsp_addindex()
   img <- readPNG('D:/Temp/MODIStsp_addindex.png')
   grid.raster(img)
 ```
+
+Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked,  and the new index added in the list of available ones for all products allowing its computation at the next MODIStsp execution. 
 
 ## Processing Period
 Allows to specify the starting and ending dates (dd/mm/yyyy) to be considered for the creation of the time series. 
@@ -255,17 +256,17 @@ Allows to define the area of interest for the processing. Two main options are p
 
     a. **Manually inserting** the coordinates of the Upper Left and Lower Right corners of the area of interest in the “Bounding Box” frame. _Coordinates of the corners must be provided in the coordinate system of the selected  output projection_. 
     
-    b. **pressing the “Load Extent from a Spatial File” and selecting a raster or vector spatial file**. In the latter case, the bounding box of the selecte file is retrieved, automatically converted in the selected output projection, and shown in the “Bounding Box” frame. The required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
+    b. **pressing the “Load Extent from a Spatial File” and selecting a raster or vector spatial file**. In this case, the bounding box of the selected file is retrieved, converted in the selected output projection, and shown in the “Bounding Box” frame.Required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
     
 ## Reprojection and Resize
-Allows to specify the options to be used for reprojecting and resizing the original MODIS images. In particular:
+Allows to specify the options to be used for reprojecting and resizing the MODIS images. In particular:
 
 1.	The **“Output Projection”** menu allows to either select one of the pre-defined output projections or specify a user-defined one by selecting “User Defined” and then inserting a valid “Proj4” string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails. 
 
 2.	The **“Output Resolution”**, **“Pixel Size”** and **“Reprojection Method”** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. Resampling method can be selected among those supported by the “gdalwarp” routine (http://www.gdal.org/gdalwarp.html). 
 
 ## Processing Options
-Allows first of all to specify the **format desired for the output images**. Two of the most commonly used in formats remote sensing applications are available at the moment: ENVI binary files and GeoTiff files. If GeoTiff is selected, the type of file compression can be also specified among “None”, “PACKBITS”, “LZW” and “DEFLATE”.
+Allows first of all to specify the **format desired for the output images**. Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among “None”, “PACKBITS”, “LZW” and “DEFLATE”.
 
 The user can then specify if **virtual multitemporal files** should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are ENVI metafiles and GDAL “vrt” files.
 
@@ -275,7 +276,7 @@ Finally, users can select if the **NoData values** of MODIS layers should be kep
 Allows to specify the main folder where the pre-processed time series data will be saved stored. The **“Reprocess Existing Data”** checkbox  allows to specify if images already available should be reprocessed if a new run of MODIStsp is launched with the same output folder. If set to “No”, MODIStsp skips dates for which output files following the MODIStsp naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates. 
 
 ## Output Folder for Original HDF Storage
-Allows to specify the folder where **original MODIS HDF files** downloaded from the lpdaac distribution archive are stored. The **“delete original HDF files”** checkbox allows to specify if the downloaded images should be deleted from the file system at the end of the processing. To avoid accidental file deletion, this is always set to “No” by default, and a warning is issued before execution whenever the selection is changed to “Yes”. 
+Allows to specify the folder where downloaded **original MODIS HDF files** are stored. The **“delete original HDF files”** checkbox allows to specify if the downloaded images should be deleted from the file system at the end of the processing. To avoid accidental file deletion, this is always set to “No” by default, and a warning is issued before execution whenever the selection is changed to “Yes”. 
 
 # Processing
 
@@ -289,9 +290,9 @@ Upon pressing the “Start” button,  the main processing routine is launched (
 
     a. Download all required hdf images. 
   
-    b.	For each original hdf layer i) selected by the user, or ii) required to compute a selected QI or SI layer, extract the data from the original MODIS images and resize and reproject it to the selected output projection, extent and resolution. If more than one tile is needed to cover the output extent, all required tiles are automatically mosaicked before resizing (gdalbuildvrt functionalities are used to avoid creating large temporary raster files). All the main spatial processing tasks are performed using standard GDAL routines, exploiting the wrappers for “R” provided in the “gdalUtils” package (Greenberg & Mattiuzzi 2014). Results are saved as raster GeoTiff or ENVI files using MODIStsp naming conventions (See Section 5).
+    b.	For each original hdf layer i) selected by the user, or ii) required to compute a selected QI or SI layer, extract the data from the original MODIS images and resize and reproject it to the selected output projection, extent and resolution. If more than one tile is needed to cover the output extent, all required tiles are automatically mosaicked before resizing (gdalbuildvrt functionalities are used to avoid creating large temporary raster files). All the main spatial processing tasks are performed using standard GDAL routines, exploiting the wrappers for “R” provided in the “gdalUtils” package [@Greenberg2014]. Results are saved as raster GeoTiff or ENVI files using MODIStsp naming conventions (See Section 5).
   
-    c.	Starting from files created at point b), compute required QI and/or SI layers and save the results as GeoTiff or ENVI files. Quality Indicators are computed from original QA layers using bitwise operators available in the “bitOps” package (Dutky & Maechler 2013), using a generalization of the "modis.qc.R" script by Yann Chemin (2008). Computation of SI layers exploits on-the-fly parsing of the indexes’ formulae to identify the required input raster files and perform the computation. 
+    c.	Starting from files created at point b), compute required QI and/or SI layers and save the results as GeoTiff or ENVI files. Quality Indicators are computed from original QA layers using bitwise operators available in the “bitOps” package [@Dutky2013], using a generalization of the "modis.qc.R" script by Yann Chemin [@Chemin2008]. Computation of SI layers exploits on-the-fly parsing of the indexes’ formulae to identify the required input raster files and perform the computation. 
   
     d.	Delete raster files created at point b) used  to compute the QI or SI layers but that correspond to original HDF layers not originally selected for processing.
   
@@ -328,7 +329,7 @@ Non-interactive mode is triggered by adding the “-g”  argument to the call, 
 
 (launch `yourpath_to_MODIStsp.bat\MODIStsp -h` for details).
 
-Scheduled standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, the user should simply:
+Standalone non-interactive execution easily allows to automatically update the time series of a selected product over a given study area whenever a new MODIS image is available. To do that, the user must simply:
 
 1.  Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options. Then quit the program
  
@@ -357,3 +358,5 @@ Links to the MODIStsp.bat or MODIStsp.sh standalone launchers can be created aut
 * **In Windows:**: this creates a link in the Start Menu and optionally a desktop shortcut.
 
 See `?install_MODIStsp_launcher` for details and path customisations.
+
+# References
