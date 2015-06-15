@@ -89,7 +89,7 @@ Standalone non-interactive execution can be used to periodically and automatical
         Then add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:
         
         ```bash
-        0 23 * * * /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
+        0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
         ```
         
     * Windows: create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.

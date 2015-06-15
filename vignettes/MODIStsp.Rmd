@@ -324,11 +324,11 @@ Non-interactive mode is triggered by adding the “-g”  argument to the call, 
 
 * **In Linux:** `yourpath_to_MODIStsp_sh/MODIStsp.sh -g -s "/yourpath/youroptions.RData"`
 
-(launch `yourpath_to_MODIStsp_sh/MODIStsp.bat -h` for details).
+(launch `yourpath_to_MODIStsp_sh/MODIStsp.sh -h` for details).
 
 * **In Windows:** `yourpath_to_MODIStsp_bat\MODIStsp.bat -g -s "X:/yourpath/youroptions.RData"`
 
-(launch `yourpath_to_MODIStsp_bat\MODIStsp.sh -h` for details).
+(launch `yourpath_to_MODIStsp_bat\MODIStsp.bat -h` for details).
 
 Standalone non-interactive execution easily allows to automatically update the time series of a selected product over a given study area whenever a new MODIS image is available. To do that, the user must simply:
 
@@ -345,7 +345,7 @@ Standalone non-interactive execution easily allows to automatically update the t
         Then add an entry for the MODIStsp.bsh For example, if you want to run the tool every day at 23.00, add the following row:
         
         ```bash
-        0 23 * * * /yourpath_to_MODIStsp.bsh/MODIStsp -g -s "/yourpath/youroptions.RData"
+        0 23 * * * /bin/bash /yourpath_to_MODIStsp_sh/MODIStsp.sh -g -s "/yourpath/youroptions.RData"
         ```
         
     * **In Windows:** create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.
