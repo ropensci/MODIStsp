@@ -1,6 +1,6 @@
 ---
 title: 'MODIStsp: A tool for automaic preprocessing of MODIS time series'
-author: "Lorenzo Busetto (busetto.l@irea.cnr.it) Luigi Ranghetti(ranghetti.l@irea.cnr.it)"
+author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it)), Luigi Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
   pdf_document:
@@ -322,13 +322,13 @@ MODIStsp can be executed as a standalone application using the MODIStsp.bat (for
 
 Non-interactive mode is triggered by adding the “-g”  argument to the call, and specifying the path to a valid Options File as “-s” argument 
 
-* **In Linux:** `yourpath_to_MODIStsp.bsh/MODIStsp -g -s "/yourpath/youroptions.RData"`
+* **In Linux:** `yourpath_to_MODIStsp_sh/MODIStsp.sh -g -s "/yourpath/youroptions.RData"`
 
-(launch `yourpath_to_MODIStsp.bsh/MODISts -h` for details).
+(launch `yourpath_to_MODIStsp_sh/MODIStsp.bat -h` for details).
 
-* **In Windows:** `yourpath_to_MODIStsp.bat\MODIStsp -g -s "X:/yourpath/youroptions.RData"`
+* **In Windows:** `yourpath_to_MODIStsp_bat\MODIStsp.bat -g -s "X:/yourpath/youroptions.RData"`
 
-(launch `yourpath_to_MODIStsp.bat\MODIStsp -h` for details).
+(launch `yourpath_to_MODIStsp_bat\MODIStsp.sh -h` for details).
 
 Standalone non-interactive execution easily allows to automatically update the time series of a selected product over a given study area whenever a new MODIS image is available. To do that, the user must simply:
 
@@ -354,7 +354,7 @@ Standalone non-interactive execution easily allows to automatically update the t
 
 Links to the MODIStsp.bat or MODIStsp.sh standalone launchers can be created automatically launching from R  the function `MODIStsp_install_launcher()`
 
-* **In Linux:**  this creates a desktop entry (accessible from the menu in the sections "Science" and "Geography"), and a symbolic link in a known path (default: /usr/bin/MODIStsp).
+* **In Linux:**  this creates a desktop entry (accessible from the menu in the sections "Science" and "Geography"), and a symbolic link in a known path (default: /usr/bin/MODIStsp). If the path of the symbolic link is included in the user PATH variable, the standalone execution can be done simply calling `MODIStsp -g -s "/yourpath/youroptions.RData"`.   
 
 * **In Windows:**: this creates a link in the Start Menu and optionally a desktop shortcut.
 
