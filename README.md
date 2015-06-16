@@ -1,6 +1,6 @@
 # MODIStsp
 
-In this manuscript we presented MODIStsp, a “R” package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data.  MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an “R” environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
+In this manuscript we presented MODIStsp, a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data.  MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
 
 An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the pdf file_) 
 
@@ -34,7 +34,7 @@ This will open a GUI from which processing options can be specified and eventual
 ### Non Interactive mode
 (Exploiting a previously saved options file)
 
-MODIStsp can be also launched in non-interactive mode by setting the optional “GUI” parameter to FALSE, and the “Options_File” parameter to the path of a previously saved Options file.  This allows to exploit MODIStsp functionalities within generic “R” processing scripts
+MODIStsp can be also launched in non-interactive mode by setting the optional "GUI" parameter to FALSE, and the "Options_File" parameter to the path of a previously saved Options file.  This allows to exploit MODIStsp functionalities within generic "R" processing scripts
 
 ```r
 library(MODIStsp) 
@@ -42,7 +42,7 @@ options_file = "X:/yourpath/youroptions.RData"  # --> Specify the path to a vali
 MODIStsp(gui = FALSE, options_File = options_file)
 ```
 
-Specifying also the “spatial_file_path” optional parameter overrides the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents.
+Specifying also the "spatial_file_path" optional parameter overrides the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents.
 
 For example:
 ```r
@@ -65,7 +65,7 @@ and a symbolic link in a known path (default: /usr/bin/MODIStsp).
 In Windows, a link in the Start Menu and optionally a desktop shortcut are created.
 See `?install_MODIStsp_launcher` for details and path customisations.
 
-Double-clicking the files or launching them from a shell without parameters launches MODIStsp in interactive mode. Non-interactive mode is triggered by adding the “-g”  argument to the call, and specifying the path to a valid Options File as “-s” argument:
+Double-clicking the files or launching them from a shell without parameters launches MODIStsp in interactive mode. Non-interactive mode is triggered by adding the "-g"  argument to the call, and specifying the path to a valid Options File as "-s" argument:
 
 * Linux: `MODIStsp -g -s "/yourpath/youroptions.RData"`
   (see `MODIStsp -h` for details).
@@ -76,9 +76,9 @@ If you do not want to install any link, launchers can be found in the subdirecto
 
 
 Standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, the user should simply:
-1)	Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options. Then quit the program
+1)	Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options. Then quit the program
  
-2. Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path) as windows scheduled task (or linux “cron” job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument
+2. Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path) as windows scheduled task (or linux "cron" job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument
 :
     * Linux: edit your crontab by opening a terminal and typing
 
