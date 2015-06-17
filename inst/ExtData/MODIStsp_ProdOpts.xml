@@ -1414,7 +1414,8 @@
                 <quality_bitN>6-7</quality_bitN>
             </quality>
         </quality_indicators>
-    </MOD11A2><MOD11B1>
+    </MOD11A2>
+    <MOD11B1>
         <name>Surf_Temp_Daily_GridSin (MOD11B1)</name>
         <main_out_folder>Surf_Temp_Daily_GridSin</main_out_folder>
         <native_res>5600</native_res>
@@ -1853,10 +1854,9 @@
                 <nodata_out>255</nodata_out>
             </band><band>
                 <bandname>NNights_clear</bandname>
-                <fullname>Nights with clear-sky conditions and validated LSTs</fullname><datatype>32-bit unsigned integer</datatype><nodata_in>0</nodata_in>
-                
-                
-                <nodata_out>4294967296</nodata_out>
+                <fullname>Nights with clear-sky conditions and validated LSTs</fullname><datatype>32-bit unsigned integer</datatype>
+                <nodata_in>0</nodata_in>
+                <nodata_out>4294967295</nodata_out>
             </band>
             <band>
                 <bandname>Emiss_B20</bandname>
@@ -1930,10 +1930,8 @@
                 <nodata_out>65535</nodata_out>
             </band>
             <band>
-                <bandname>LST_QC</bandname><fullname>Daytime LSTE QC</fullname><datatype>16-bit Unsigned integer</datatype><nodata_in>0</nodata_in>
-                
-                
-                
+                <bandname>LST_QC</bandname><fullname>Daytime LSTE QC</fullname><datatype>16-bit Unsigned integer</datatype
+                ><nodata_in>0</nodata_in>
                 <nodata_out>-999</nodata_out>
             </band>
             <band>
@@ -1971,18 +1969,13 @@
                 <nodata_out>255</nodata_out>
             </band>
             <band>
-                <bandname>Lat</bandname><fullname>Latitude (every 5 scan lines/pixels</fullname><datatype>32-bit Unsigned integer</datatype><nodata_in>-999</nodata_in>
-                
-                
-                
-                <nodata_out>4294967296</nodata_out>
+                <bandname>Lat</bandname><fullname>Latitude (every 5 scan lines/pixels</fullname><datatype>32-bit Unsigned integer</datatype>
+                <nodata_in>-999</nodata_in>
+                <nodata_out>4294967295</nodata_out>
             </band>
             <band>
                 <bandname>Long</bandname><fullname>Longitude (every 5 scan lines/pixels</fullname><datatype>32-bit Unsigned integer</datatype><nodata_in>-999</nodata_in>
-                
-                
-                
-                <nodata_out>4294967296</nodata_out>
+                <nodata_out>4294967295</nodata_out>
             </band>
             
             
@@ -3937,32 +3930,16 @@
                 <nodata_out>65535</nodata_out>
             </band>
             <band>
-                <bandname>b1_Red</bandname><fullname>500m 16 days red reflectance (Band 1)</fullname><datatype>16-bit signed integer</datatype><nodata_in>-1000</nodata_in><nodata_out>32767</nodata_out>
-                
-                
-                
-                
+                <bandname>b1_Red</bandname><fullname>500m 16 days red reflectance (Band 1)</fullname><datatype>16-bit signed integer</datatype><nodata_in>-1000</nodata_in><nodata_out>32767</nodata_out>     
             </band>
             <band>
                 <bandname>b2_NIR</bandname><fullname>500m 16 days NIR reflectance (Band 2)</fullname><datatype>16-bit signed integer</datatype><nodata_in>-1000</nodata_in><nodata_out>32767</nodata_out>
-                
-                
-                
-                
             </band>
             <band>
                 <bandname>b3_Blue</bandname><fullname>500m 16 days blue reflectance (Band 3)</fullname><datatype>16-bit signed integer</datatype><nodata_in>-1000</nodata_in><nodata_out>32767</nodata_out>
-                
-                
-                
-                
             </band>
             <band>
                 <bandname>b7_SWIR</bandname><fullname>500m 16 days MIR reflectance (Band 7)</fullname><datatype>16-bit signed integer</datatype><nodata_in>-1000</nodata_in><nodata_out>32767</nodata_out>
-                
-                
-                
-                
             </band>
             <band>
                 <bandname>View_Zen</bandname>
@@ -4272,16 +4249,48 @@
                 <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
                 <quality_source>QA_main</quality_source>
                 <quality_bitN>5-7</quality_bitN>
-            </quality><quality><quality_bandname>PT</quality_bandname><quality_fullname>LandSea Pass-Thru</quality_fullname>
-                
-                
-                
-                
-            <quality_source>QA_extra</quality_source><quality_bitN>0-1</quality_bitN></quality><quality><quality_bandname>Snow</quality_bandname><quality_fullname>Snow_Ice (from Aggregate_QC bits)</quality_fullname><quality_source>QA_extra</quality_source><quality_bitN>2</quality_bitN></quality><quality><quality_bandname>Aero</quality_bandname><quality_fullname>Aerosol</quality_fullname><quality_source>QA_extra</quality_source><quality_bitN>3</quality_bitN></quality><quality><quality_bandname>Cirr</quality_bandname><quality_fullname>Cirrus</quality_fullname><quality_source>QA_extra</quality_source><quality_bitN>4</quality_bitN></quality><quality><quality_bandname>MODAG_CldMsk</quality_bandname><quality_fullname>MODAGAGG_Internal_CloudMask</quality_fullname><quality_source>QA_extra</quality_source><quality_bitN>5</quality_bitN></quality><quality><quality_bandname>MODAG_CldShd</quality_bandname><quality_fullname>MODAGAGG_Cloud_Shadow</quality_fullname><quality_source>QA_extra</quality_source><quality_bitN>6</quality_bitN></quality><quality><quality_bandname>SCF_Msk</quality_bandname><quality_fullname>SCF_Biome_Mask</quality_fullname><quality_source>QA_extra</quality_source><quality_bitN>7</quality_bitN></quality>
-            
-            
-            
-            
+            </quality>
+            <quality>
+                <quality_bandname>PT</quality_bandname>
+                <quality_fullname>LandSea Pass-Thru</quality_fullname>
+                <quality_source>QA_extra</quality_source>
+                <quality_bitN>0-1</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>Snow</quality_bandname>
+                <quality_fullname>Snow_Ice (from Aggregate_QC bits)</quality_fullname>
+                <quality_source>QA_extra</quality_source>
+                <quality_bitN>2</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>Aero</quality_bandname>
+                <quality_fullname>Aerosol</quality_fullname>
+                <quality_source>QA_extra</quality_source>
+                <quality_bitN>3</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>Cirr</quality_bandname>
+                <quality_fullname>Cirrus</quality_fullname>
+                <quality_source>QA_extra</quality_source>
+                <quality_bitN>4</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>MODAG_CldMsk</quality_bandname>
+                <quality_fullname>MODAGAGG_Internal_CloudMask</quality_fullname>
+                <quality_source>QA_extra</quality_source>
+                <quality_bitN>5</quality_bitN>
+            </quality>
+            <quality>
+                <quality_bandname>MODAG_CldShd</quality_bandname>
+                <quality_fullname>MODAGAGG_Cloud_Shadow</quality_fullname>
+                <quality_source>QA_extra</quality_source>
+                <quality_bitN>6</quality_bitN></quality>
+            <quality>
+                <quality_bandname>SCF_Msk</quality_bandname>
+                <quality_fullname>SCF_Biome_Mask</quality_fullname>
+                <quality_source>QA_extra</quality_source>
+                <quality_bitN>7</quality_bitN>
+            </quality>
         </quality_indicators>
     </MCD15A3><MOD15A2>
         <name>LAI_8Days_1Km (MOD15A2)</name>
@@ -4633,9 +4642,7 @@
             </quality>
             <quality>
                 <quality_bandname>Pot_Fire</quality_bandname><quality_fullname>Potential fire pixel</quality_fullname><quality_source>QA</quality_source><quality_bitN>5</quality_bitN>
-                
-                
-                
+         
             </quality><quality><quality_bandname>Spare1</quality_bandname><quality_fullname>Spare (set to zero)</quality_fullname><quality_source>QA</quality_source><quality_bitN>6</quality_bitN></quality><quality><quality_bandname>R</quality_bandname><quality_fullname>Background window size parameter, R</quality_fullname><quality_source>QA</quality_source><quality_bitN>7-10</quality_bitN></quality><quality><quality_bandname>Test_360</quality_bandname><quality_fullname>360 K T21 test</quality_fullname><quality_source>QA</quality_source><quality_bitN>11</quality_bitN></quality><quality><quality_bandname>Test_DT_Rel</quality_bandname><quality_fullname>DT relative test</quality_fullname><quality_source>QA</quality_source><quality_bitN>12</quality_bitN></quality><quality><quality_bandname>Test_DT_Abs</quality_bandname><quality_fullname>DT absolute test</quality_fullname><quality_source>QA</quality_source><quality_bitN>13</quality_bitN></quality><quality><quality_bandname>Test_T21_i</quality_bandname><quality_fullname>T21 relative test i</quality_fullname><quality_source>QA</quality_source><quality_bitN>14</quality_bitN></quality><quality><quality_bandname>Test_T21_ii</quality_bandname><quality_fullname>T31 relative test ii</quality_fullname><quality_source>QA</quality_source><quality_bitN>15</quality_bitN></quality><quality><quality_bandname>Test_BG_Fire_T21</quality_bandname><quality_fullname>Background fire T21 deviation test</quality_fullname><quality_source>QA</quality_source><quality_bitN>16</quality_bitN></quality><quality><quality_bandname>Spare2</quality_bandname><quality_fullname>Spare (set to zero)</quality_fullname><quality_source>QA</quality_source><quality_bitN>17-20</quality_bitN></quality><quality><quality_bandname>Adj_Cloud_Px</quality_bandname><quality_fullname>Adjacent cloud pixel (valid only if fire mask = 7, 8, or 9)</quality_fullname><quality_source>QA</quality_source><quality_bitN>21</quality_bitN></quality><quality><quality_bandname>Adj_Water_Px</quality_bandname><quality_fullname>Adjacent water pixel (valid only if fire mask = 7, 8, or 9)</quality_fullname><quality_source>QA</quality_source><quality_bitN>22</quality_bitN></quality><quality><quality_bandname>Sun_Glint_Lev</quality_bandname><quality_fullname>Sun glint level</quality_fullname><quality_source>QA</quality_source><quality_bitN>23</quality_bitN></quality><quality><quality_bandname>Sun_Glint_Rej</quality_bandname><quality_fullname>Sun glint rejection flag</quality_fullname><quality_source>QA</quality_source><quality_bitN>24</quality_bitN></quality><quality><quality_bandname>Hot_Surf_Rej</quality_bandname><quality_fullname>Hot surface boundary rejection flag</quality_fullname><quality_source>QA</quality_source><quality_bitN>25</quality_bitN></quality><quality><quality_bandname>Coast_FalseAlarm_Rej</quality_bandname><quality_fullname>Coastal false alarm rejection flag</quality_fullname><quality_source>QA</quality_source><quality_bitN>26</quality_bitN></quality><quality><quality_bandname>Spare3</quality_bandname><quality_fullname>Spare (set to zero)</quality_fullname><quality_source>QA</quality_source><quality_bitN>27-31</quality_bitN></quality>
             
             
