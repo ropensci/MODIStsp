@@ -19,7 +19,7 @@
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-MODIStsp_procses_indexes = function(out_filename, formula,bandnames,nodata_out,out_prod_folder,
+MODIStsp_process_indexes = function(out_filename, formula,bandnames,nodata_out,out_prod_folder,
 		indexes_nodata_out, file_prefix, yy, DOY, out_format) {
 
 	# Retrieve necessary filenames (get names of single band files on the basis of Index formula)
@@ -42,11 +42,9 @@ MODIStsp_procses_indexes = function(out_filename, formula,bandnames,nodata_out,o
 			fun_string = paste(fun_string,temp_bandname,'=',temp_bandname,',', sep = '' )  # add an "entry" in fun_string (additional input parameter)
 		}
 	}
-
-	call_string = paste(call_string, ')', sep = '')  #Finalize the call_string
-	fun_string = paste(fun_string,'...)','{comp_index <-round(10000*(',formula, '));	return((comp_index))}', sep = '') # Finalize the fun_string
+	call_string = paste(substr(call_string,1,nchar(call_string)-1), ')', sep = '')  #Finalize the call_string
+	fun_string = paste(fun_string,'...)','{round(10000*(',formula, '))}', sep = '') # Finalize the fun_string
 	eval(parse(text = fun_string)) # Parse "fun_string" to create a new function
-
 	eval(parse(text = call_string))    # parse call_string to launch the new function for index computation
 
 	# Save output and remove aux file

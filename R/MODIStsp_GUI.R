@@ -120,7 +120,21 @@ MODIStsp_GUI = function (general_opts){
 								# Run addindex() function
 								MODIStsp_addindex(option_file=general_opts$previous_file)
 							  load(general_opts$previous_file)
-							  if (length(temp_wid_bands_indexes) != length(prod_opt_list[[checked]]$indexes_bandsel)) {temp_wid_bands_indexes <-- c(temp_wid_bands_indexes,0)}
+#							  if (length(temp_wid_bands_indexes) != length(prod_opt_list[[checked]]$indexes_bandsel)) {temp_wid_bands_indexes <-- c(temp_wid_bands_indexes,0)}
+							
+							pos_wid <- which(check_names %in% svalue (bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
+							tmp_arr_bands <- array(data = 0 , dim = length(check_names))
+							tmp_arr_bands[pos_wid] <- 1   ;	temp_wid_bands <<- tmp_arr_bands
+							if (length(which(check_names_indexes != '') > 0)) {    # ? which indexes selected ? --> store in temp_wid_bands_indexes array
+								pos_wid <- which(check_names_indexes %in% svalue (bands_wid_indexes))   ;		tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
+								tmp_arr_ind[pos_wid] <- 1	; temp_wid_bands_indexes <<- tmp_arr_ind
+							}
+							if (length(which(check_names_quality != '') > 0)) {    # ? which quality selected ? --> store in temp_wid_bands_quality array
+								pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))   ;		tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
+								tmp_arr_qual[pos_wid] <- 1	; temp_wid_bands_quality <<- tmp_arr_qual
+								
+							}
+							
 							  dispose(selgroup)
 							},
 							container =cbox_indexes, width = 120, expand = T)
@@ -598,6 +612,11 @@ MODIStsp_GUI = function (general_opts){
 
 	# Various checks and generation of general_opts common to both Start and Save buttons
 	prepare_to_save_options <- function(general_opts,...) {
+		
+		# workaround to retrieve index bandnames
+		tmp_general_opts <- general_opts
+		load(general_opts$previous_file)
+		general_opts <- tmp_general_opts; rm(tmp_general_opts)
 
 		general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
 		# sel_prod = general_opts$sel_prod    # When saving, set sel_prod to current selection (may be good to change)
@@ -609,7 +628,7 @@ MODIStsp_GUI = function (general_opts){
 		}
 		if (exists ('temp_wid_bands_indexes')) {
 			prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
-
+			
 		}
 		if (exists ('temp_wid_bands_quality')) {
 			prod_opt_list[[general_opts$sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.

@@ -174,10 +174,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 												warning=function(war) {print(war) ; return (1)}, error =function(err) {	print(err);	return (1)} )
 										if (er != 0) {	# Stop after 30 failed attempts
 											cat('[',date(),'] Download Error -Retrying...\n')
+											unlink(file.path(out_folder_mod,modisname))
 											Sys.sleep(10)
 											ce <- ce + 1
 											if (ce == 30) {
-												unlink(file.path(out_folder_mod,modisname))  # on error, delete last hdf file (to be sure no incomplete files are left behind)
+												  # on error, delete last hdf file (to be sure no incomplete files are left behind)
 												confirm = gconfirm("http server seems to be down! Do you want to retry ? ", icon = 'question', handler = function(h,...){})
 												if (confirm == 'FALSE') {
 													cat("[',date(),'] Error: http server seems to be down! Please Retry Later!\n"); stop()
@@ -203,7 +204,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
 							req_bands_indexes <- bands_indexes
 							for (i in 1:length(req_bands_indexes)) {req_bands_indexes[i]<-0}	# matrix similar to band_indexes, but specific for this year-doy process
-
+							
 #							if (length(which(indexes_bandsel==1) >= 1)) {
 #								for (band in seq(along = indexes_bandsel)) {
 #									if (indexes_bandsel[band] ==1 ) {
@@ -260,7 +261,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 										if (full_ext == 'Resized') { #If resize required,  convert bbox coordinates from t_srs to modis_srs, to get the correct extent
 											# for resizing BEFORE reprojecting
 											bbox_mod <- reproj_bbox( bbox, outproj_str, MOD_proj_str, enlarge=TRUE)
-
 											# Create a resized and eventually mosaiced GDAL vrt file
 											gdalbuildvrt(files_in, outfile_vrt, te = c(bbox_mod), tap = TRUE, tr = paste(rep(native_res,2),collapse=' '),srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band], sd = band)
 										} else {gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band]) }  # Create a resized and eventually mosaiced GDAL vrt file
@@ -294,11 +294,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 														co=paste('COMPRESS',compress,sep='='), overwrite=TRUE),
 												Resample0_Resize0 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling,
 														co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE),
-												Resample0_Resize1 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox[c(1,3,2,4)],
+												Resample0_Resize1 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox,
 														co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE),
 												Resample1_Resize0 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, tr=rep(out_res,2),
 														co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE),
-												Resample1_Resize1 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox[c(1,3,2,4)], tr=rep(out_res,2),
+												Resample1_Resize1 = gdalwarp(outfile_vrt, outrep_file, s_srs=MOD_proj_str, t_srs=outproj_str, of=out_format, r=resampling, te=bbox, tr=rep(out_res,2),
 														co=paste('COMPRESS',compress,sep='='), wo="INIT_DEST=NO_DATA", wt=datatype[band], overwrite=TRUE),
 												quit('Internal error in out_res_sel, outproj_str or full_ext.') )
 
