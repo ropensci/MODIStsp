@@ -169,11 +169,24 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 								
 								# Check file size (if the local file size is differente, re-download)
 								local_filename = file.path(out_folder_mod,modisname)
-								remote_filename = paste(http,date_dirs[date], "/",modisname,sep='')
-								remote_xml <- xmlParse(paste0(remote_filename,'.xml'))
 								local_filesize <- file.info(local_filename)$size
-								remote_filesize <- as.integer(xmlToList(xmlRoot(remote_xml)[['GranuleURMetaData']][['DataFiles']][['DataFileContainer']][['FileSize']]))
-								
+								remote_filename = paste(http,date_dirs[date], "/",modisname,sep='')
+								remote_xml_tries = 30 # numbers of tryouts for xml metafile
+								remote_xml = NA; class(remote_xml)='try-error'
+								while(remote_xml_tries>0) {
+									remote_xml <- try(xmlParse(paste0(remote_filename,'.xml')))
+									if(class(remote_xml)=='try-error') {
+										remote_xml_tries = remote_xml_tries - 1
+									} else {
+										remote_xml_tries = 0
+									}
+								}
+								# if the xml was available, check the size; otherwise, set as the local size to skip the check
+								if(class(remote_xml)=='try-error') {
+									remote_filesize = local_filesize
+								} else {
+									remote_filesize = as.integer(xmlToList(xmlRoot(remote_xml)[['GranuleURMetaData']][['DataFiles']][['DataFileContainer']][['FileSize']]))
+								}
 								
 								if (!file.exists(local_filename) | local_filesize!=remote_filesize) {		# If HDF not existing or with different size, download.
 									er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
