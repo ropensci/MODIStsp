@@ -1,12 +1,15 @@
- #' MODIStsp_addindex
- #' @description Function used to add a user-defined Spectral Index to the default list of computable spectral indexes
- #'
- #' @details The function asks the user to provide the info related to the new desired Spectral Index using a GUI interface,
- #' checks for correctness of provided information (e.g., correct bandnames, computable formula, etc...). If the index is legit,
- #' it modifies the MODIStsp_Previous.RData file so to allow computation of the additional index within MODIStsp.
- #' To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Previous subfolder of the
- #' folder in which the package was installed, or the alternative RData specified by the parameter "option_file".
- #'
+#' MODIStsp_addindex
+#' @description Function used to add a user-defined Spectral Index to the default list of computable spectral indexes
+#' Execution without the GUI (i.e., to add a new index from a script) is also possible (see examples)
+#'
+#'
+#' @details The function asks the user to provide the info related to the new desired Spectral Index using a GUI interface,
+#' checks for correctness of provided information (e.g., correct bandnames, computable formula, etc...). If the index is legit,
+#' it modifies the MODIStsp_Previous.RData file so to allow computation of the additional index within MODIStsp.
+#' To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Previous subfolder of the
+#' folder in which the package was installed, or the alternative RData specified by the parameter "option_file".
+#' The function can be run either from within the main MODIStsp GUI, or a standalone script. In the latter case, it modifies either the 
+#' MODIStsp_Previous.RData options file, or the optins_file spèecified by the user, to add the new index. 
 #' @param option_file settings (optional): full path of the RData file containing the processing options in which the new indexes
 #'  are saved (default: MODIStsp_Previous.RData in subdir Previous).
 #' @param gui logical value (default: TRUE): if TRUE, the GUI is opened to define the new index; otherwise use the "new_indexbandname",
@@ -15,38 +18,45 @@
 #' @param new_indexfullname (optional if gui=TRUE): extended name of the new spectral index.
 #' @param new_indexformula (optional if gui=TRUE): string containing the formula of the new spectral indexes. Variables accepted to
 #'  compute it are the names of the bands: b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.
+#' @param new_indexnodata_out (optional): nodata value to assign to the rasters containing the new index 
 #'
 #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
+#' @export
 #'
 #' @examples
 #' # Run the GUI to interactively define the function
-#' MODIStsp_addindex()
+#'  \dontrun{
+#'  MODIStsp_addindex()}
 #'
 #' # Run the GUI and save the new index in a custom RData file
 #' \dontrun{
 #' MODIStsp_addindex(option_file = "X:/yourpath/youroptions.RData")}
 #'
 #' # Define the new index non-interactively
+#' \dontrun{
 #' MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSD",
 #'   new_indexfullname = "Simple Stupid Difference",
-#'   new_indexformula = "b2_NIR-b1_Red")
-
- # xml_file = file.choose()
+#'   new_indexformula = "b2_NIR-b1_Red")}
+#'
+#'
 
   MODIStsp_addindex = function(option_file=NA, gui=TRUE, new_indexbandname="", new_indexfullname="", new_indexformula="", new_indexnodata_out = '32767', MODIStsp_dir=NA) {
 
+# Initialization and retrieval of parameters ----
 	if (gui) {
 		require(gWidgetsRGtk2)
 		options("guiToolkit"="RGtk2")
 	}
 
-	if (is.na(MODIStsp_dir)) {MODIStsp_dir = system.file(package = "MODIStsp")}
+	if (is.na(MODIStsp_dir)) {
+		MODIStsp_dir = system.file(package = "MODIStsp")
+	}
 	previous_dir = file.path(MODIStsp_dir,'Previous')
-	previous_file = if (is.na(option_file)) {file.path(previous_dir, 'MODIStsp_Previous.RData')} else {option_file}
+	previous_file = ifelse(is.na(option_file), file.path(previous_dir, 'MODIStsp_Previous.RData'),option_file ) 
 	if(file.exists(previous_file)){load(previous_file)}
 	xml_file = file.path(MODIStsp_dir, 'ExtData/MODIStsp_ProdOpts.xml')
 
@@ -61,19 +71,17 @@
 		load(previous_file)
 	}
 
-	# retrieve information from xml
+# retrieve information from xml ----
 	xmlfile=xmlParse(xml_file)  # initialize xml parsing
-
 	xmltop = xmlRoot(xmlfile) #gives content of root
-	class(xmltop)
 	top_name = xmlName(xmltop) #give name of node
-
 	n_products = xmlSize(xmltop) #how many product available ? = elements in root
-
+	
+	# Valid names for reflectance bands
 	refbands_names = c('b1_Red','b2_NIR','b3_Blue','b4_Green','b5_SWIR','b6_SWIR', 'b7_SWIR')
 
-	# Function to check for errors in formula
-	# (it is called from GUI when "Add" button is chosen, or when function starts in nno-interactive mode
+# Function to check for errors in formula ----
+# (it is called from GUI when "Add" button is chosen, or when function starts in non-interactive mode
 	check_formula_errors <- function(new_indexbandname, new_indexfullname, new_indexformula, n_products, prod_opt_list, refbands_names) {
 
 		catch_err = 0 # error 0: no errors
@@ -125,8 +133,8 @@
 
 	} # end of check_formula_errors()
 
-	# Function to add the formula in previous file
-	# (it is called if no errors are detected)
+# Function to add the formula in previous file ----
+# (it is called if no errors are detected)
 	save_formula <- function(n_products, xmltop, refbands_names, req_bands, new_indexbandname, new_indexfullname,
 			new_indexformula, new_indexnodata_out, general_opts, mod_prod_list, previous_file) {
 
@@ -146,7 +154,6 @@
 			# if all required bands are available in product, add the new index to the indexes list for the product in the previous_opts file.
 			# in this way, at next execution, the new index should be available. Moreover, loading and use of old RData options files
 			# won't be broken if an index is added later than their creation.
-			#							if (check != 0) {
 			n_req_bands = sum(req_bands)
 			if (n_req_bands == check ) {
 				prod_opt_list[[prod]]$indexes_bandnames = c(prod_opt_list[[prod]]$indexes_bandnames,new_indexbandname)
@@ -164,14 +171,13 @@
 		} else {
 			save(prod_opt_list, mod_prod_list, file= previous_file)
 		}
-		
+
 		return(NULL)
 
 	} # end of save_formula()
 
 
-  	# Here goes the GUI !!!!
-
+ # GUI Initialization -----
 	if (gui) {
 
 	  	main_win <- gbasicdialog(title = "Insert the new Spectral Index information and formula", parent=NULL, do.buttons=F,
@@ -200,15 +206,12 @@
 	  				new_indexbandname = svalue(sel_indexbandname)
 	  				new_indexfullname = svalue(sel_indexbandfullname)
 	  				new_indexformula = svalue(sel_indexformula)
-	  				print(new_indexbandname)
-
+	  				
+	  				# Check if formual is good. If so, add it in the options file ----
+	  				# for products for which the formula is computable (i.e., they have the required bands)
+					
 					catch_err <- check_formula_errors(new_indexbandname=new_indexbandname, new_indexfullname=new_indexfullname, new_indexformula=new_indexformula,
 							n_products=n_products, prod_opt_list=prod_opt_list, refbands_names=refbands_names)
-
-
-	  # If formula is good, parse the XML file and add the new index entry to the products
-	  # for which the formula is computable (i.e., they have the required bands)
-
 	  				if (catch_err == 0) {
 						save_formula(n_products=n_products, xmltop=xmltop, refbands_names=refbands_names, req_bands=attr(catch_err,"req_bands"),
 								new_indexbandname=new_indexbandname, new_indexfullname=new_indexfullname, new_indexformula=new_indexformula,
@@ -216,7 +219,9 @@
 								mod_prod_list=mod_prod_list, previous_file=previous_file)
 						if (exists('Quit')) {
 							gmessage ('The new Spectral Index was correctly added! To use it, Re-open the "Select Processing Layer" window.')
-						} else {gmessage ('The new Spectral Index was correctly added!')}
+						} else {
+							gmessage ('The new Spectral Index was correctly added!')
+						}
 	  					dispose(main_win)
 					} else if (catch_err == 1) {
 						gmessage(paste0('The formula of the new index is not computable. Please check it (Valid band names are: ',paste(refbands_names,collapse=', '),'.'))
@@ -227,13 +232,16 @@
 					}
 		})
 
+		# On quit, do nothing
+
 	  	quit_but <- gbutton(text = if (exists('Quit')) {'Cancel'} else {'Quit'}, container = but_group, handler = function(h,...){ # If "Quit" exit
 	  				dispose(main_win)
 	  			})
 
 	  	visible(main_win, set = T)
 
-		# end of gui actions
+		# end of gui actions ---- 
+	# Actions on non-interactive
 	} else {
 
 		catch_err <- check_formula_errors(new_indexbandname=new_indexbandname, new_indexfullname=new_indexfullname, new_indexformula=new_indexformula,
@@ -253,8 +261,6 @@
 		}
 
 	} # end of non-gui actions
-
-  # xml_file = 'D:/Documents/Source_Code/R/LB_MOD_DWL/Extdata/MODIStsp_ProdOpts_Prova.xml'
 
   }
 

@@ -12,7 +12,7 @@ lpdaac_getmod_dirs(http, .Platform)
 \item{.Platform}{string os platform (from call to .Platform)}
 }
 \value{
-list of all available folders (a.k.a. dates) for the requeted MODIS product on lpdaac archive
+list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
 }
 \description{
 Accessory function to get the full list of directories on the lpdaac http site (modified after Barry Rowlingson function):
@@ -21,7 +21,7 @@ Accessory function to get the full list of directories on the lpdaac http site (
 License: GPL 3.0
 }
 \author{
-Original code by XXXXXX
+Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
 Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
 }
 

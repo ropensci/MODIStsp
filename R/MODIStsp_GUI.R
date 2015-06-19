@@ -15,7 +15,9 @@
 
 MODIStsp_GUI = function (general_opts){
 
-	# Restore previous options file if existing, otherwise create a "new" one with default values, by retrieving data from xml file
+assign("Quit", T, envir=globalenv())	# Assigng "Quit" to true
+
+# Restore previous options file if existing, otherwise create a "new" one with default values, by retrieving data from xml file ----
 
 	if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)}
 	if (!exists("general_opts") | !exists("mod_prod_list") | !exists("prod_opt_list")) {
@@ -28,34 +30,35 @@ MODIStsp_GUI = function (general_opts){
 		load(general_opts$previous_file)
 	}
 
-	assign("Quit", T, envir=globalenv())	# Assigng "Quit" to true
+#- ------------------------------------------------------------------------------- -#
+#  Start Building the GUI
+#- ------------------------------------------------------------------------------- -#
 
-	#- ------------------------------------------------------------------------------- -#
-	#  Start Building the GUI
-	#- ------------------------------------------------------------------------------- -#
 	main_win <- gbasicdialog(title = "Select Main Processing Options", parent=NULL, do.buttons=F,
 			visible = F, spacing = 10)
 	main_group <- ggroup(container = main_win, horizontal = FALSE, expand = T)
 	sel_prod <- general_opts$sel_prod # get the product name selectedin the previous options file
 
-
 	#- ------------------------------------------------------------------------------- -#
 	# Widgets for product selection and bands selection
 	#- ------------------------------------------------------------------------------- -#
-	satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, Satellites and Layers selection</span>', markup = T,horizontal = F, container=main_group, spacing = 5)
+	satprod_frame <- gframe(text ='<span foreground="blue" size="large">MODIS Product, Satellites and Layers selection</span>', 
+		markup = T,horizontal = F, container=main_group, spacing = 5)
 
 	checked <- which(mod_prod_list == general_opts$sel_prod)
 
-	temp_wid_bands <<- prod_opt_list[[checked]]$bandsel				# set dummy global variables holding the initial values of selected bands
+# set dummy global variables holding the initial values of selected bands
+	temp_wid_bands <<- prod_opt_list[[checked]]$bandsel			
 	temp_wid_bands_indexes <<- prod_opt_list[[checked]]$indexes_bandsel
 	temp_wid_bands_quality <<- prod_opt_list[[checked]]$quality_bandsel
 
-	labels_group = ggroup(horizontal = T, container=satprod_frame)
-	label = glabel (text = '<span weight = "bold">			       		 Product </span>', markup = T, container=labels_group)
+	labels_group <- ggroup(horizontal = T, container=satprod_frame)
+	label <- glabel (text = '<span weight = "bold">			       		 Product </span>', markup = T, container=labels_group)
 	addSpace(labels_group, 190 )
-	label2 = glabel (text = '<span weight = "bold">Satellites </span>', markup = T, container=labels_group)
+	label2 <- glabel (text = '<span weight = "bold">Satellites </span>', markup = T, 
+		container=labels_group)
 	addSpace(labels_group, 5 )
-	label3 = glabel (text = '<span weight = "bold">      Processing Layers</span>', markup = T, container=labels_group)
+	label3 <- glabel (text = '<span weight = "bold">      Processing Layers</span>', markup = T, container=labels_group)
 
 	#- ------------------------------------------------------------------------------- -#
 	# Widgets for Product selection
@@ -65,29 +68,29 @@ MODIStsp_GUI = function (general_opts){
 	prod_wid <- gdroplist(items = mod_prod_list, container=prod_group, horizontal = T, selected = checked,  handler = function(h,...) {
 				checked <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]		# find index of sel. product
 				sel_prod <- svalue(prod_wid)
-				if (prod_opt_list[[checked]]$tiled == 0) {
+				# On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
+				if (prod_opt_list[[checked]]$tiled == 0) {	
 					enabled(tiles_group) <- F
 					svalue(proj_wid) = "Latlon WGS84"
 				} else {
 					(enabled(tiles_group) <- T)
 					svalue(proj_wid) = "Sinusoidal"
 				}
-
-
-				temp_wid_bands <<- rep(0, length(prod_opt_list[[checked]]$bandsel))					# reset dummy variables for band selection to 0 on product change
+				# reset dummy variables for band selection to 0 on product change
+				temp_wid_bands <<- rep(0, length(prod_opt_list[[checked]]$bandsel))					
 				temp_wid_bands_indexes <<- rep(0, length(prod_opt_list[[checked]]$indexes_bandsel))
 				temp_wid_bands_quality <<- rep(0, length(prod_opt_list[[checked]]$quality_bandsel))
-
 			})
-	#- ------------------------------------------------------------------------------- -#
-	# Widgets for Sensor selection
-	#- ------------------------------------------------------------------------------- -#
+#- ------------------------------------------------------------------------------- -#
+# Widgets for Sensor selection
+#- ------------------------------------------------------------------------------- -#
 	sens_wid <- gdroplist(items = c("Terra","Aqua", "Both"), container = prod_group, text = 'Select',
 			selected = match(general_opts$sensor, c("Terra","Aqua", "Both")))
 	addSpace(satprod_frame, 20, horizontal=TRUE)
-	#- ------------------------------------------------------------------------------- -#
-	# Widgets for Layers selection
-	#- ------------------------------------------------------------------------------- -#
+
+#- ------------------------------------------------------------------------------- -#
+# Widgets for Layers selection
+#- ------------------------------------------------------------------------------- -#
 	band_wid <- gbutton(text = 'Click To Select', border = T,				# Child widget for processing bands selection
 			handler = function(h,....) {
 
@@ -96,80 +99,93 @@ MODIStsp_GUI = function (general_opts){
 				check_names <- prod_opt_list[[checked]]$band_fullnames					# retrieve band names of sel. product
 				check_wid <- temp_wid_bands												# retrieve currently selected original layers
 				selgroup <- gbasicdialog(title = "Select Processing Layers						", parent=NULL, do.buttons=F, width = 450, horizontal = T)
-				# widgets for band selection - original
+
+				# widgets for band selection - original ----
 				cbox_total <- gframe(text = '', container = selgroup, horizontal = T, width = 450)
 				cbox<- gframe(text = '<span foreground="blue" size="large">		Original MODIS Layers			</span>', markup = T, container = cbox_total, horizontal = T, width = 450)
-				bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid), container = cbox, use.table = F, width = 450)
+				bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid), 
+					container = cbox, use.table = F, width = 450)
+				
 				# widgets for band selection - quality
-
 				check_names_quality <- prod_opt_list[[checked]]$quality_fullnames # retrieve quality band names (if existing for sel. product)
 				if (!is.null(check_names_quality)) {
 					check_wid_quality<- temp_wid_bands_quality						    # retrieve currently selected quality layers (if existing for sel. product)
 					cbox_quality<- gframe(text = '<span foreground="blue" size="large">		Quality Indicators				</span>', markup = T, container = cbox_total, horizontal = FALSE, width = 450)
-					bands_wid_quality <- gcheckboxgroup(items = check_names_quality, checked = as.logical(check_wid_quality), container = cbox_quality, use.table = F, width = 450)
+					bands_wid_quality <- gcheckboxgroup(items = check_names_quality, checked = as.logical(check_wid_quality), 
+						container = cbox_quality, use.table = F, width = 450)
 				}
 
-				# widgets for band selection - indexes
-				check_names_indexes <- prod_opt_list[[checked]]$indexes_fullnames # retrieve indexes band names
+				# widgets for band selection - indexes ----
+				check_names_indexes <- prod_opt_list[[checked]]$indexes_fullnames # retrieve indexes band names (if existing for sel. product)
 				if (!is.null(check_names_indexes)) {
 					check_wid_indexes<- temp_wid_bands_indexes							# retrieve currently selected indexes layers
 					cbox_indexes<- gframe(text = '<span foreground="blue" size="large">		Additional Spectral Indexes				</span>', markup = T, container = cbox_total, horizontal = FALSE, width = 450)
-					bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes), container = cbox_indexes, use.table = F, width = 450)
+					bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes),
+						container = cbox_indexes, use.table = F, width = 450)
 					band_wid_newindex <- gbutton(text = 'Add custom index', border = TRUE,
 							handler = function(h,...) {
-								# Run addindex() function
+								# Run addindex() function ----
 								MODIStsp_addindex(option_file=general_opts$previous_file)
-							  load(general_opts$previous_file)
-#							  if (length(temp_wid_bands_indexes) != length(prod_opt_list[[checked]]$indexes_bandsel)) {temp_wid_bands_indexes <-- c(temp_wid_bands_indexes,0)}
-							
-							pos_wid <- which(check_names %in% svalue (bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
-							tmp_arr_bands <- array(data = 0 , dim = length(check_names))
-							tmp_arr_bands[pos_wid] <- 1   ;	temp_wid_bands <<- tmp_arr_bands
-							if (length(which(check_names_indexes != '') > 0)) {    # ? which indexes selected ? --> store in temp_wid_bands_indexes array
-								pos_wid <- which(check_names_indexes %in% svalue (bands_wid_indexes))   ;		tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
-								tmp_arr_ind[pos_wid] <- 1	; temp_wid_bands_indexes <<- tmp_arr_ind
-							}
-							if (length(which(check_names_quality != '') > 0)) {    # ? which quality selected ? --> store in temp_wid_bands_quality array
-								pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))   ;		tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
-								tmp_arr_qual[pos_wid] <- 1	; temp_wid_bands_quality <<- tmp_arr_qual
-								
-							}
-							
-							  dispose(selgroup)
+							  	load(general_opts$previous_file)
+								pos_wid <- which(check_names %in% svalue (bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
+								tmp_arr_bands <- array(data = 0 , dim = length(check_names))
+								tmp_arr_bands[pos_wid] <- 1   
+								temp_wid_bands <<- tmp_arr_bands
+								if (length(which(check_names_indexes != '') > 0)) {    # ? which indexes selected ? --> store in temp_wid_bands_indexes array
+									pos_wid <- which(check_names_indexes %in% svalue (bands_wid_indexes))   
+									tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
+									tmp_arr_ind[pos_wid] <- 1	
+									temp_wid_bands_indexes <<- tmp_arr_ind
+								}
+								if (length(which(check_names_quality != '') > 0)) {    # ? which quality selected ? --> store in temp_wid_bands_quality array
+									pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))   
+									tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
+									tmp_arr_qual[pos_wid] <- 1	
+									temp_wid_bands_quality <<- tmp_arr_qual
+								}
+								dispose(selgroup)
 							},
 							container =cbox_indexes, width = 120, expand = T)
 				}
 
-				# Start/Cancel widgets
+				# Start/Cancel widgets ----
 				bands_group <- ggroup(container = selgroup, horizontal = TRUE)
 				accept_but <- gbutton(text = 'OK', container = bands_group, handler = function(button,...){ # On accept, retrieve and save selected layers
 
 							pos_wid <- which(check_names %in% svalue (bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
 							tmp_arr_bands <- array(data = 0 , dim = length(check_names))
-							tmp_arr_bands[pos_wid] <- 1   ;	temp_wid_bands <<- tmp_arr_bands
+							tmp_arr_bands[pos_wid] <- 1   
+							temp_wid_bands <<- tmp_arr_bands
 							if (length(which(check_names_indexes != '') > 0)) {    # ? which indexes selected ? --> store in temp_wid_bands_indexes array
-								pos_wid <- which(check_names_indexes %in% svalue (bands_wid_indexes))   ;		tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
-								tmp_arr_ind[pos_wid] <- 1	; temp_wid_bands_indexes <<- tmp_arr_ind
+								pos_wid <- which(check_names_indexes %in% svalue (bands_wid_indexes))   
+								tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
+								tmp_arr_ind[pos_wid] <- 1	
+								temp_wid_bands_indexes <<- tmp_arr_ind
 							}
 							if (length(which(check_names_quality != '') > 0)) {    # ? which quality selected ? --> store in temp_wid_bands_quality array
-								pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))   ;		tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
-								tmp_arr_qual[pos_wid] <- 1	; temp_wid_bands_quality <<- tmp_arr_qual
+								pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))  
+								tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
+								tmp_arr_qual[pos_wid] <- 1	
+								temp_wid_bands_quality <<- tmp_arr_qual
 
 							}
 
 							dispose(selgroup)			 # close layers selection child widget
 
 						})
-				cancel_but <- gbutton(text = 'Cancel', container = bands_group, handler = function(button,...){  # if Cancel, reset selected layers to previous choice and exit
+ 				# if Cancel, reset selected layers to previous choice and exit ----
+				cancel_but <- gbutton(text = 'Cancel', container = bands_group, handler = function(button,...){ 
 
 							if (exists('check_wid')) {temp_wid_bands <<- check_wid}
 							if (exists('check_wid_indexes')) {temp_wid_bands_indexes <<- check_wid_indexes}
 							if (exists('check_wid_quality')) {temp_wid_bands_quality <<- check_wid_quality}
 							dispose(selgroup)
 						})
-				# Widget for "www" button
+
+				# Widget for "www" button ----
 				addSpace(bands_group, 760, horizontal=TRUE)
-				www_but <- gbutton(text = 'Product details', container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[checked]]$www))
+				www_but <- gbutton(text = 'Product details', 
+					container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[checked]]$www))
 
 				visible(selgroup, set=TRUE)    # visualize band selection widgets
 
@@ -181,36 +197,42 @@ MODIStsp_GUI = function (general_opts){
 #- ------------------------------------------------------------------------------- -#
 	{{dates_frame <- gframe(text = '<span foreground="blue" size="large">Processing Period</span>', markup = T, container = main_group, horizontal = T, expand = T, spacing = 10)
 			# start date ----
-			start_date_lab <- glabel(text = '<span weight = "bold" >Starting Date:</span>',markup = T, container = dates_frame)  ; size (start_date_lab ) = c(120,20)
+			start_date_lab <- glabel(text = '<span weight = "bold" >Starting Date:</span>',markup = T, 
+				container = dates_frame)  ; size (start_date_lab ) = c(120,20)
 			start_day_wid <- gspinbutton(1,31,  container=dates_frame , value = general_opts$start_day)
 			start_month_wid <- gspinbutton(1,12,  container=dates_frame , value = general_opts$start_month)
 			start_year_wid <- gspinbutton(2000 ,2020,  container=dates_frame , value = general_opts$start_year, horizontal = T)
-			size (start_day_wid) = c(35,25)    ; size (start_month_wid) = c(35,25)   ; size (start_year_wid) = c(55,25)
+			size (start_day_wid) = size (start_month_wid) =c(35,25)    
+			size (start_year_wid) = c(55,25)
 
 			# End date ----
-			end_date_lab <- glabel(text = '<span weight = "bold" >Ending Date:</span>', markup = T,container = dates_frame)  ; size (end_date_lab ) = c(120,20)
+			end_date_lab <- glabel(text = '<span weight = "bold" >Ending Date:</span>', markup = T,
+				container = dates_frame)  ; size (end_date_lab ) = c(120,20)
 			end_day_wid <- gspinbutton(1,31,  container=dates_frame , value = general_opts$end_day)
 			end_month_wid <- gspinbutton(1,12,  container=dates_frame , value = general_opts$end_month)
 			end_year_wid <- gspinbutton(2000,2020,  container=dates_frame , value = general_opts$end_year)
-			size (end_day_wid) <- c(35,25)    ; size (end_month_wid) <- c(35,25)    ; size (end_year_wid) <- c(55,25)
+			size (end_day_wid) <- size (end_month_wid) <- c(35,25)
+			size (end_year_wid) <- c(55,25)
 		}}
 
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Tiles selection
 #- ------------------------------------------------------------------------------- -#
-	Spatial_Frame <- gframe(text = '<span foreground="blue" size="large">Spatial Extent </span>', markup = T, container = main_group, horizontal = F, expand = T, spacing = 10)
+	Spatial_Frame <- gframe(text = '<span foreground="blue" size="large">Spatial Extent </span>', markup = T,
+		container = main_group, horizontal = F, expand = T, spacing = 10)
 	output_ext_group = ggroup(container = Spatial_Frame, horizontal = TRUE)
-	output_ext_lab <- glabel(text = '<span weight = "bold" >Output Extent:</span>',markup = T, container = output_ext_group)
+	output_ext_lab <- glabel(text = '<span weight = "bold" >Output Extent:</span>',markup = T, 
+		container = output_ext_group)
 	size(output_ext_lab) <- c(120,20)
 	output_ext_wid <-  gcombobox(c('Full Tiles Extent','Resized'), container=output_ext_group,
 			selected = match(general_opts$full_ext, c('Full Tiles Extent','Resized')), handler = function(h,....) {
-
 				current_sel = svalue(output_ext_wid)
+				# On "Full Tiles Extent" selection, disable the bbox fields
 				if (current_sel == 'Full Tiles Extent') {
 					enabled(bbox_group) <- F
 					enabled(tiles_from_bbox) <- F
 					enabled(bbox_from_file) <- F
-				} else {
+				} else { # On "Resized" selection, enable the bbox fields
 					(enabled(bbox_group) <- T)
 					enabled(tiles_from_bbox) <- T
 					enabled(bbox_from_file) <- T
@@ -224,7 +246,7 @@ MODIStsp_GUI = function (general_opts){
 
 	## Function to update the selected tiles with the intersection with the bounding box
 	update_tiles = function(bbox,...) {
-		bbox_mod <- reproj_bbox( bbox, svalue(output_proj4_wid), general_opts$MOD_proj_str, enlarge=TRUE)
+		bbox_mod <- reproj_bbox(bbox, svalue(output_proj4_wid), general_opts$MOD_proj_str, enlarge=TRUE)
 		d_bbox_mod_tiled <- intersect(modis_grid,extent(bbox_mod))
 		svalue(start_x_wid)  <- min(d_bbox_mod_tiled$H)
 		svalue(end_x_wid)  <- max(d_bbox_mod_tiled$H)
@@ -232,10 +254,11 @@ MODIStsp_GUI = function (general_opts){
 		svalue(end_y_wid) <- max(d_bbox_mod_tiled$V)
 	}
 
-	if (!exists('modis_grid')) {load(file.path(general_opts$MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))}
+	if (!exists('modis_grid')) {load(file.path(general_opts$MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))}  # Laod MODIS grid ancillary file
 	tiles_from_bbox <- gbutton(text = 'Retrieve Tiles from bounding box', border = T,
 			handler = function(h,...) {
-				bbox <- as.numeric(c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
+				bbox <- as.numeric(c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),
+									 svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
 				# Check if bbox is consistent
 
 				n_bbox_compiled <- length(which(is.finite(bbox)))
@@ -248,7 +271,7 @@ MODIStsp_GUI = function (general_opts){
 				} else if (bbox[1] > bbox[3] | bbox[2] > bbox[4]) {
 					gmessage('Error in Selected Output extent', title = 'Warning') #; check_bbox <- FALSE
 				} else {
-					update_tiles(bbox) # convert polygon bbox
+					update_tiles(bbox) # If all checks pass, retrieve the tiles
 				}
 			}, container =output_ext_group )
 	if (svalue (output_ext_wid) != "Full Tiles Extent") { enabled(tiles_from_bbox) <- T} else {(enabled(tiles_from_bbox) <- F)}
@@ -266,8 +289,10 @@ MODIStsp_GUI = function (general_opts){
 
 				# Show window until the process had finished
 				wait_window <- gwindow(title="Please wait", container = TRUE, width = 400, height = 40)
-				size(wait_window) <- c(100,8)		;	addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
-				wait_window_lab = glabel(text =paste('Charging the selected file, please wait...'), editable = FALSE, container = wait_window)
+				size(wait_window) <- c(100,8)		
+				addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
+				wait_window_lab = glabel(text =paste('Retrieveing the Extent, please wait...'), editable = FALSE, 
+					container = wait_window)
 
 				# Convert bbox coordinates in those of output projection
 				out_proj_crs = if (svalue(proj_wid)!= "User Defined"){
@@ -291,76 +316,81 @@ MODIStsp_GUI = function (general_opts){
 				dispose(wait_window)
 			}
 
-
 		}, container=output_ext_group)
 
-
 	if (svalue (output_ext_wid) != "Full Tiles Extent") { enabled(bbox_from_file) <- T} else {(enabled(bbox_from_file) <- F)}
-
 
 	#-------------------------------------------------
 	# Group to select which tiles should be downloaded
 	#-------------------------------------------------
 
-
-	tiles_group <- gframe(text = '<span weight="bold">Required MODIS Tiles </span>', markup = T, container = Spatial_Frame, horizontal = F, expand = T, spacing = 10, pos = 1)
+	tiles_group <- gframe(text = '<span weight="bold">Required MODIS Tiles </span>', markup = T, 
+		container = Spatial_Frame, horizontal = F, expand = T, spacing = 10, pos = 1)
+	
+	# horizontal ----
 	x_group <- ggroup(container = tiles_group, horizontal = TRUE)
-	# horizontal
-	start_x_lab <- glabel(text = '<span weight = "bold" >Horizontal Tiles:</span>',markup = T, container = x_group) ; size(start_x_lab) = c(120,20)
-	start_x_start <- glabel(text = 'Start: ', container = x_group) ; size(start_x_start) = c(35,25)
+	start_x_lab <- glabel(text = '<span weight = "bold" >Horizontal Tiles:</span>',markup = T,
+	 container = x_group) 
+	start_x_start <- glabel(text = 'Start: ', container = x_group) 
 	start_x_wid <- gspinbutton(1, 35, text = 'Select', container=x_group, value = general_opts$start_x)
-	end_x_lab <- glabel(text = 'End: ', container = x_group) ; size(end_x_lab) = c(35,25)
+	end_x_lab <- glabel(text = 'End: ', container = x_group) 
 	end_x_wid <- gspinbutton(1, 35, text = 'Select', container=x_group, value = general_opts$end_x)
-	size (start_x_wid) = c(35,25)    ; size (end_x_wid) = c(35,25)
+	
+	size(start_x_lab) = c(120,20)
+	size (start_x_wid) = size (end_x_wid) = size(end_x_lab) = size(start_x_start) =c(35,25)    
+	
 	show_map <- gbutton(text = 'Show Tiles Map', border = T,
 			handler = function(h,....) {x11(10,6)
 				plot(raster(file.path(general_opts$MODIStsp_dir, "/ExtData/MODIS_Tiles.gif")))},
 			container =x_group )
-	# vertical
+
+	# vertical ----
 	y_group <- ggroup(container = tiles_group, horizontal = TRUE)
-	start_y_lab <- glabel(text = '<span weight = "bold" >Vertical Tiles:</span>',markup = T, container = y_group) ; size(start_y_lab) = c(120,20)
-	start_y_start <- glabel(text = 'Start: ', container = y_group) ; size(start_y_start) = c(35,25)
+	start_y_lab <- glabel(text = '<span weight = "bold" >Vertical Tiles:</span>',markup = T, 
+		container = y_group) 
+	start_y_start <- glabel(text = 'Start: ', container = y_group) 
 	start_y_wid <- gspinbutton(0,17, text = 'Select', container=y_group, value = general_opts$start_y)
-	end_y_lab <- glabel(text = 'End: ', container = y_group); size(end_y_lab) = c(35,25)
+	end_y_lab <- glabel(text = 'End: ', container = y_group)
 	end_y_wid <- gspinbutton(0,17, text = 'Select', container=y_group, value = general_opts$end_y)
 
-	size (start_y_wid) <- c(35,25)   ; size (end_y_wid) <- c(35,25)
+	size(start_y_lab) = c(120,20)
+ 	size (start_y_wid) = size (end_y_wid) = size(end_y_lab) = size(start_y_start) =c(35,25)  
+
 	if (prod_opt_list[[checked]]$tiled == 0) { enabled(tiles_group) <- F} else {(enabled(tiles_group) <- T)}
 
-	bounding_group <- gframe(text = '<span weight="bold">Bounding Box </span>', markup = T, container = Spatial_Frame, horizontal = F, expand = T, spacing = 10, pos = 1)
 	# Extent ----
-
-
-
+	bounding_group <- gframe(text = '<span weight="bold">Bounding Box </span>', markup = T, 
+		container = Spatial_Frame, horizontal = F, expand = T, spacing = 10, pos = 1)
+	
 	# bounding box ----
 	bbox_group <- ggroup (horizontal = FALSE, container=bounding_group)
 	output_bbox_lab <- glabel(text = '<span weight = "bold" > Bounding Box for output images (IN OUTPUT PROJECTION !) </span>',markup = T, container = bbox_group, expand = T)
 	size(output_ext_lab) <- c(120,15)
+
 	Lon_group <- ggroup (horizontal = TRUE, container=bbox_group)
 	output_ULeast_lab <- glabel('Upper Left Easting (xmin)', container = Lon_group)
-	size (output_ULeast_lab) <- c(160,20)
 	output_ULeast_wid <- gedit(text = general_opts$bbox[1], container = Lon_group, width = 10)
 	addSpace(Lon_group, 30, horizontal=TRUE)
 	output_LReast_lab <- glabel('Lower Right Easting (xmax)', container = Lon_group)
-	size (output_LReast_lab) <- c(160,20)
 	output_LReast_wid <- gedit(text = general_opts$bbox[3], container = Lon_group, width = 10)
-
+	size (output_ULeast_lab) = size (output_LReast_lab) <- c(160,20)
+	
 	Lat_group <- ggroup (horizontal = TRUE, container=bbox_group)
-
 	output_LRnorth_lab <- glabel('Lower Right Northing (ymin)', container = Lat_group)
-	size (output_LRnorth_lab) = c(160,20)
 	output_LRnorth_wid <- gedit(text = general_opts$bbox[2], container = Lat_group, width = 10)
 	addSpace(Lat_group, 30, horizontal=TRUE)
 	output_ULnorth_lab <- glabel('Upper Left Northing (ymax)', container = Lat_group)
-	size (output_ULnorth_lab) <- c(160,20)
 	output_ULnorth_wid <- gedit(text = general_opts$bbox[4], container = Lat_group, width = 10)
+	size (output_LRnorth_lab) = size (output_ULnorth_lab) = c(160,20)
 
 	if (general_opts$full_ext == 'Full Tiles Extent') { enabled(bbox_group) <- F} else {(enabled(bbox_group) <- T)}  # Grey out bbox if NAtive extent
 
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Projection, resolution and bbox selection
 #- ------------------------------------------------------------------------------- -#
-	output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T, container = main_group, horizontal = FALSE, expand = T, spacing = 10)
+	output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T, 
+		container = main_group, horizontal = FALSE, expand = T, spacing = 10)
+
 	output_proj_group <- ggroup (container = output_proj_frame, horizontal = TRUE, spacing = 5)
 	font (output_proj_frame) <- list(weight = 'bold', color  = 'blue')
 

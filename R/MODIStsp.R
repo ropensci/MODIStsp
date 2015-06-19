@@ -2,7 +2,7 @@
 #' @description Main function for the MODIS Time Series Processing Tool (MOD_TSP)
 #' @details The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs,
 #'  and to launch the required routines for downloading and processing the requested datasets.
-#' @param gui logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed)
+#' @param gui logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are retrieved from "options_file")
 #' @param options_file settings (optional): full path of the RData file containing the processing options (default: Previous.RData in subdir Previous);
 #' @param spatial_file_path (optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 #'  extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
@@ -50,30 +50,16 @@
 MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA) {
 
 	if (is.na(MODIStsp_dir)) {MODIStsp_dir = system.file(package = "MODIStsp")}
-#	print(MODIStsp_dir)
 
-	#- ------------------------------------------------------------------------------- -#
-	#  Initialize project
-	#- ------------------------------------------------------------------------------- -#
-
-	# Check sp version
-# 	sp_version <- packageVersion('sp')
-# 	sp_minversion <- package_version("1.0.17") # sp version used during the last test (for now used as minimum required version)
-# 	if (sp_version < sp_minversion) install.packages('sp',dep=TRUE,repos='http://stat.ethz.ch/CRAN')
-# 	require('sp')
-# 	{{# Check if needed packages are present. Install them otherwise
-# #			pkg_list = c('gWidgets','rgdal','plyr', 'reshape2','ggplot2','data.table','hash',
-# #					'raster','RCurl','stringr','tools','rts','RGtk2','gWidgetsRGtk2','spatial.tools', 'gdalUtils',')
-# 	pkg_list = c('XML','gWidgetsRGtk2','rgdal','gdalUtils','hash','raster','RCurl','stringr','tools','plyr')
-# 	pkg_test <- function(x) {while (!require(x,character.only = TRUE)) {install.packages(x,dep=TRUE,repos='http://stat.ethz.ch/CRAN')}}
-#	for (pkg in pkg_list) {pkg_test(pkg)}
-# 			# Check GDAL version
+#- ------------------------------------------------------------------------------- -#
+#  Initialize project
+#- ------------------------------------------------------------------------------- -#
+	# Check GDAL version
 	if (is.null(getOption('gdalUtils_gdalPath'))) {gdal_setInstallation(ignore.full_scan=FALSE)}
 	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1',getGDALVersionInfo(str = "--version")))
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
 	gdal_HDFsupport <- length(grep('HDF4', gdalinfo(formats=TRUE))) > 0
 	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
-# 		}}
 	if (!gdal_HDFsupport) stop("Your local GDAL installation does not support HDF4 format. Please install HDF4 support and recompile GDAL.")
 	cat('GDAL version in use:',as.character(gdal_version),'\n')
   	if (gui) {
@@ -84,29 +70,14 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 	rasterOptions(setfileext = F)				# Make so that "raster" functions doesn't automatically add extensions on output files
 	# Folder Initialization -----
 
-	## Retrieve parameters passed by batch launcher
-	# If the script has been launched from R, "gui" and "options_file" are passed from a global var, and src_dir is computed as below;
-	# if it is launched from a bat script, they are saved as "args" list by an intermediate "RscriptEcho.R" script.
-# 	if (is.na(MODIStsp_dir)) {
-# 		rscript.stack <- function() {Filter(Negate(is.null), lapply(sys.frames(), function(x) x$ofile))}    			#	Returns the stack of RScript files
-# 		rscript.current <- function() {	stack <- rscript.stack()   ;	  as.character(stack[length(stack)])}		## Returns the current RScript file path
-# 		src_dir = dirname(rscript.current())
-# 		main_dir = dirname(src_dir)
-# 	} else {
-# 		main_dir = MODIStsp_dir; src_dir = file.path(main_dir,'R')
-# 	}
-
-
-# 	setwd(main_dir);   main_dir = getwd()   ;
-#   log_dir =  file.path(main_dir,'Log')   ; log_file =  file.path(log_dir,'Log.txt')
 	if (is.null(options_file) & gui==FALSE) {stop('Please provide a valid \'option_file\' path value (or run with gui=TRUE).')}
 	if (is.null(options_file)) {previous_dir = file.path(MODIStsp_dir,'Previous')} else {previous_dir = dirname(options_file)}   # Folder in which the previous options file is saved
 	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
-	previous_file = if (is.null(options_file)) {file.path(previous_dir, 'MODIStsp_Previous.RData')} else {options_file}  # TODO fix to accept relative paths
+	previous_file = if (is.null(options_file)) {file.path(previous_dir, 'MODIStsp_Previous.RData')} else {options_file} 
 	xml_file= file.path(MODIStsp_dir,'ExtData','MODIStsp_ProdOpts.xml')  #XML file describing MODIS products
 
 #- ------------------------------------------------------------------------------- -#
-#  Set general processing options
+#  Set general processing options - used at first execution 
 #- ------------------------------------------------------------------------------- -#
 	{out_proj_names = c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
 		out_proj_list = hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs ",
@@ -124,10 +95,12 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 		attr(general_opts,"GeneratedBy") = 'MODIStsp'
 		
 	}
-	#launch the GUI if on an interactive session (i.e., gui = T) ----
+#launch the GUI if on an interactive session (i.e., gui = T) ----
 	if (gui) {GUI = MODIStsp_GUI(general_opts)} else {Quit<<-FALSE}
 	start.time <- Sys.time()
-	# If not Quit selected, restore the user selected options from previous file and launch the processing ----
+
+# Launch the processing ----
+	# When GUI is closed (or in a non-interactive run): If not Quit selected, restore the user selected options from previous file and launch the processing ----
 	if (!Quit) {
 
 		if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)} else {cat('[',date(),'] Download Options file not found ! Exiting !\n'); stop()}
@@ -137,13 +110,15 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 		start_date = paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = '.')
 		end_date = paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = '.')
 
-		# If the product is NOT tiled, change or_proj to WGS84 and or_res to 0.05
+		# If the product is NOT tiled, change or_proj to WGS84 and or_res to 0.05 deg
 		if (prod_opts$tiled == 0) {
 			general_opts$MOD_proj_str = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
 			prod_opts$native_res = "0.05"
 		}
-
-		if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {general_opts$out_res = prod_opts$native_res}   # get native resolution if out_res empty
+		# get native resolution if out_res empty
+		if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {
+			general_opts$out_res = prod_opts$native_res 
+		}  
 		
 		# Changes to perform in the case spatial_file_path is defined
 		if (!is.null(spatial_file_path)) {
@@ -156,7 +131,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 			general_opts$bbox <- external_bbox
 			
 			# Redefine the out_folder including the file name as subfolder
-			# (this to avoid that, running in a cycle, files were overwritten every time)
+			# (this to avoid that, running in a cycle, files are overwritten every time)
 			general_opts$out_folder = file.path(general_opts$out_folder,file_path_sans_ext(basename(spatial_file_path)))
 			if (file.exists(general_opts$out_folder)) {
 				tmp_counter = 1
@@ -168,10 +143,11 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 				general_opts$out_folder <- out_newfolder
 			}
 			
-			# Overwrite the full_ext option
+			# Overwrite the full_ext option (avoids that , if the options_file specifies a full processing, 
+			# the incorrect parameter is passed)
 			general_opts$full_ext <- 'Resized'
 
-			# Choose the tiles requested to cover the extent
+			# Automatically retrieve the tiles requested to cover the extent 
 			load(file.path(MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))
 			external_bbox_mod <- reproj_bbox( external_bbox, general_opts$user_proj4, general_opts$MOD_proj_str, enlarge=TRUE)
 			d_bbox_mod_tiled <- intersect(modis_grid,extent(external_bbox_mod))
@@ -182,7 +158,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 		
 		}
 		
-		# launch MODIStsp_process to Download and preprocess the selected images
+	# launch MODIStsp_process to Download and preprocess the selected images ----
 		output = with(general_opts, MODIStsp_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
 						out_folder = out_folder, out_folder_mod = out_folder_mod, reprocess = reprocess,
 						delete_hdf = delete_hdf, sensor = sensor, https = prod_opts$http,
@@ -202,6 +178,7 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 
 	} # End If on "Quit" --> If "Quit" above is skipped and program terminates
 
+# Clean up at end of processing ----
 	if (exists('Quit')) {rm(Quit, envir = globalenv())}    # Remove Quit if defined
 	# End of processing
 	end.time <- Sys.time()

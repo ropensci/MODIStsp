@@ -19,9 +19,9 @@ array of folder names containing data for the modis product acquired in the peri
 Accessory function to find the folders corresponding to the requested dates period within the full list retrieved by lpdaac_getmod_dirs
 }
 \author{
-Original code by XXXXXX
+Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
 Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
 email: busetto.l@irea.cnr.it
-license CC BY-NC 3.0
+license GPL 3.0
 }
 

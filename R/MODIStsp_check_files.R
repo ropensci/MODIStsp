@@ -1,7 +1,7 @@
 #' MODIStsp_check_files
 #' @description Accessory function used to see if all expected out files for the selected date are already present.
 #' @details if all expected out files for the selected date are already present, check_files is set to TRUE, and date is skipped
-#' in moddwl_process
+#' in MODIStsp_process
 #' @param out_prod_folder string output folder name
 #' @param file_prefix string file prefix of the product (e.g., MOD13Q1)
 #' @param bandnames string array Bandnames of the MODIS product
@@ -22,7 +22,7 @@
 MODIStsp_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel_orig_choice,yy,DOY, out_format, indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel) {
 	check = T
 
-	# check existence of all files related to Original HDF layers
+# check existence of all files related to Original HDF layers ----
 	for (band in which(bandsel_orig_choice == 1)) {  # cycle on selected indexes
 		outfile = paste(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')    # Create name for the HDF mosaic
 		outrep_file = file.path(out_prod_folder, bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))  # Create name for the TIFF reprojected  mosaic
@@ -31,7 +31,7 @@ MODIStsp_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel_o
 		if (file.exists(outrep_file) == F) {check = F}
 	}
 
-	# check existence of all files related to spectral indexes
+# check existence of all files related to spectral indexes ----
 	for (band in which(indexes_bandsel == 1)) {
 		outfile = paste(out_prod_folder, '/',indexes_bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')    # Create name for the HDF mosaic
 		outder_file = file.path(out_prod_folder, indexes_bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))  # Create name for the TIFF reprojected  mosaic
@@ -40,7 +40,7 @@ MODIStsp_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel_o
 		if (file.exists(outder_file) == F) {check = F}
 	}
 
-	# check existence of all files related to quality indicators
+# check existence of all files related to quality indicators ----
 	for (band in which(quality_bandsel == 1)) {
 		outfile = paste(out_prod_folder, '/',quality_bandnames[band],'_',yy,'_',DOY,'.hdf', sep = '')    # Create name for the HDF mosaic
 		outder_file = file.path(out_prod_folder, quality_bandnames[band], paste(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl=TRUE),sep = ''))  # Create name for the TIFF reprojected  mosaic
@@ -49,5 +49,5 @@ MODIStsp_check_files = function(out_prod_folder, file_prefix,bandnames,bandsel_o
 		if (file.exists(outder_file) == F) {check = F}
 	}
 
-	return(check)
+	return(check)  # return FALSE if at least one file missing
 }

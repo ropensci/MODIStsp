@@ -4,9 +4,9 @@
 \alias{MODIStsp_addindex}
 \title{MODIStsp_addindex}
 \usage{
-MODIStsp_addindex(option_file, gui = TRUE, new_indexbandname = "",
+MODIStsp_addindex(option_file = NA, gui = TRUE, new_indexbandname = "",
   new_indexfullname = "", new_indexformula = "",
-  new_indexnodata_out = "32767")
+  new_indexnodata_out = "32767", MODIStsp_dir = NA)
 }
 \arguments{
 \item{option_file}{settings (optional): full path of the RData file containing the processing options in which the new indexes
@@ -40,16 +40,18 @@ License: GPL 3.0
 }
 \examples{
 # Run the GUI to interactively define the function
-MODIStsp_addindex()
+ \dontrun{
+ MODIStsp_addindex()}
 
 # Run the GUI and save the new index in a custom RData file
 \dontrun{
 MODIStsp_addindex(option_file = "X:/yourpath/youroptions.RData")}
 
 # Define the new index non-interactively
+\dontrun{
 MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSD",
   new_indexfullname = "Simple Stupid Difference",
-  new_indexformula = "b2_NIR-b1_Red")
+  new_indexformula = "b2_NIR-b1_Red")}
 }
 \author{
 Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}

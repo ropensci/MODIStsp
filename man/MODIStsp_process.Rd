@@ -112,6 +112,9 @@ quality indicators computation), and finally performs virtual files creation. Ch
 images, and not reprocess already processed dates (if the user didn'specify that)
 }
 \note{
+Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ( http://r-gis.net/?q=ModisDownload ; .
+http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images)
+
 License: GPL 3.0
 }
 \author{
