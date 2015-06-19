@@ -79,11 +79,11 @@ install_MODIStsp_launcher <- function( bin_dir=NA, desktop_dir=NA, desktop_short
 		
 		# Create desktop shortcut
 		if (desktop_shortcut) {
-			if (!file.exists(file.path(desktop_dir,'/MODIStsp.bat'))) {
+			if (!file.exists(file.path(desktop_dir,'/MODIStsp'))) {
 				if (is.na(desktop_dir)) {desktop_dir = file.path(Sys.getenv('USERPROFILE'),'Desktop')}
 				shell("set create_script=\"%TEMP%\\create_MODIStsp_shortcut.vbs\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
 				shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
-				shell(paste0("echo Set oLink = oWS.CreateShortcut(\"",bin_dir,"\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
+				shell(paste0("echo Set oLink = oWS.CreateShortcut(\"",desktop_dir,"\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
 				shell(paste0("echo oLink.TargetPath = \"",MODIStsp_dir,"\\ExtData\\Launcher\\Batch\\MODIStsp.bat\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
 				shell("echo oLink.Save >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
 				shell("cscript /nologo \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")

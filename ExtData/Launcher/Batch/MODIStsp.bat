@@ -23,7 +23,7 @@ OPTIONS:^
 
     -s  settings: full path of the RData file containing the processing options (default: Previous.RData in subdir Previous)^
 
-    -e  extent: full path of a spatial file to use as extent (default: NULL); if defined, the processing options which define the extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided spatial file.
+    -e  extent: full path of a spatial file to use as extent (default: NULL); if defined, the processing options which define the extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided spatial file.^
 
     -r  Rscript dir: directory of the Rscript executable
 
