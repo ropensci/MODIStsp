@@ -69,7 +69,7 @@ Double-clicking the files or launching them from a shell without parameters laun
 
 * Linux: `MODIStsp -g -s "/yourpath/youroptions.RData"`
   (see `MODIStsp -h` for details).
-* Windows:`C:\Users\you\Desktop\MODIStsp -g -s "X:/yourpath/youroptions.RData"`
+* Windows:`C:\Users\you\your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "X:/yourpath/youroptions.RData"`
   (see `C:\Users\you\Desktop\MODIStsp -h` for details).
 
 If you do not want to install any link, launchers can be found in the subdirectory "MODIStsp/ExtData/Launcher" of your library path.
