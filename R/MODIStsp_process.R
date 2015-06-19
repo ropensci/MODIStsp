@@ -62,13 +62,14 @@
 #' @importFrom hash hash
 #' @import gWidgets
 #' @import sp
+#' @import XML
 
 MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = 'Yes', delete_hdf = 'No', sensor, https,
 		start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str, nodata_in,
 		nodata_out,nodata_change, datatype,	bandsel, bandnames, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
 		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in, full_ext,
 		quality_nodata_out, file_prefixes, main_out_folder, resampling, ts_format) {
-
+	
 	if(nodata_change == 'No') {nodata_out = nodata_in}  # if nodata chande set to no, set ou_nodata to in_nodata
 	dir.create(out_folder_mod, recursive = T, showWarnings=FALSE) # create out folder if not existing
 
@@ -165,16 +166,25 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 							#  Download images (If HDF file already in out_mod_folder, it is not redownloaded !!!!
 							#- ------------------------------------------------------------------------------- -#
 							for (modisname in modislist) {
-								if (file.exists(file.path(out_folder_mod,modisname)) == F ) {		# If HDF not existing, download.
+								
+								# Check file size (if the local file size is differente, re-download)
+								local_filename = file.path(out_folder_mod,modisname)
+								remote_filename = paste(http,date_dirs[date], "/",modisname,sep='')
+								remote_xml <- xmlParse(paste0(remote_filename,'.xml'))
+								local_filesize <- file.info(local_filename)$size
+								remote_filesize <- as.integer(xmlToList(xmlRoot(remote_xml)[['GranuleURMetaData']][['DataFiles']][['DataFileContainer']][['FileSize']]))
+								
+								
+								if (!file.exists(local_filename) | local_filesize!=remote_filesize) {		# If HDF not existing or with different size, download.
 									er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
 									while(er != 0) {   # repeat until no error or > 30 tryyouts
 										cat('[',date(),'] Downloading File:', modisname,'\n' )
 										svalue(mess_lab) = paste('--- Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist),' ---')    # Update progress window
-										er <- tryCatch(download.file(url=paste(http,date_dirs[date], "/",modisname,sep=''),destfile=file.path(out_folder_mod,modisname),mode='wb',quiet=F, cacheOK=FALSE),
+										er <- tryCatch(download.file(url=remote_filename,destfile=local_filename,mode='wb',quiet=F, cacheOK=FALSE),
 												warning=function(war) {print(war) ; return (1)}, error =function(err) {	print(err);	return (1)} )
 										if (er != 0) {	# Stop after 30 failed attempts
 											cat('[',date(),'] Download Error -Retrying...\n')
-											unlink(file.path(out_folder_mod,modisname))
+											unlink(local_filename)
 											Sys.sleep(10)
 											ce <- ce + 1
 											if (ce == 30) {
@@ -392,7 +402,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
 				for (dir in 1:length(date_dirs)) {
 					modislist = lpdaac_getmod_names(http = http, date_dirs = date_dirs,  date = date, , v = seq(from=start_y, to =  end_y), h = seq(from = start_x, to = end_x))
-					for (modisname in modislist) {unlink(file.path(out_folder_mod,modisname))}
+					for (modisname in modislist) {unlink(local_filename)}
 				}
 			} #end if on Delete original downloaded HDFs
 
