@@ -9,19 +9,18 @@
 ##' @param options_file settings (optional): full path of the RData file containing the processing options (default: Previous.RData in subdir Previous);
 #' @return NULL
 #'
-#' @author Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' Luigi Ranghetti, phD (2015)
-#' license GPL 3.0
+#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 
 
 Args <- commandArgs(TRUE)
 
 require(MODIStsp)
+
 MODIStsp_dir = system.file(package = 'MODIStsp')
 
 gui = if (length(Args)>=1) as.logical(Args[1]) else TRUE
-options_file = if (length(Args)>=2) {if (Args[2]=="") NULL else Args[2]} else NULL
+options_file = if (length(Args)>=2) {if (Args[2]==""|Args[2]=="NULL") NULL else Args[2]} else NULL
 if (!is.null(options_file)) {
 	load (options_file)
 	log_dir = file.path(general_opts$out_folder,'Log')
