@@ -39,7 +39,7 @@ Accessory function used to see if all expected out files for the selected date a
 }
 \details{
 if all expected out files for the selected date are already present, check_files is set to TRUE, and date is skipped
-in moddwl_process
+in MODIStsp_process
 }
 \note{
 License: GPL 3.0

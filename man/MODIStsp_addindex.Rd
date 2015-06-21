@@ -20,13 +20,16 @@ are saved (default: MODIStsp_Previous.RData in subdir Previous).}
 \item{new_indexfullname}{(optional if gui=TRUE): extended name of the new spectral index.}
 
 \item{new_indexformula}{(optional if gui=TRUE): string containing the formula of the new spectral indexes. Variables accepted to
- compute it are the names of the bands: b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.}
+compute it are the names of the bands: b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.}
+
+\item{new_indexnodata_out}{(optional): nodata value to assign to the rasters containing the new index}
 }
 \value{
 NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
 }
 \description{
 Function used to add a user-defined Spectral Index to the default list of computable spectral indexes
+Execution without the GUI (i.e., to add a new index from a script) is also possible (see examples)
 }
 \details{
 The function asks the user to provide the info related to the new desired Spectral Index using a GUI interface,
@@ -34,6 +37,8 @@ checks for correctness of provided information (e.g., correct bandnames, computa
 it modifies the MODIStsp_Previous.RData file so to allow computation of the additional index within MODIStsp.
 To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Previous subfolder of the
 folder in which the package was installed, or the alternative RData specified by the parameter "option_file".
+The function can be run either from within the main MODIStsp GUI, or a standalone script. In the latter case, it modifies either the
+MODIStsp_Previous.RData options file, or the optins_file spèecified by the user, to add the new index.
 }
 \note{
 License: GPL 3.0

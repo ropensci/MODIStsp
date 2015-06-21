@@ -3,6 +3,8 @@
 #' @details MODIStsp tool can be used also as a standalone tool my launching a bash/batch script, which is stored in the function files.
 #'  In order to simply retrieve it, this function will create a desktop entry and a symbolic link to the bash script (in Linux)
 #'  or a link in the Start Menu to the batch script (in Windows).
+#'  Note that, if the packages MODIStsp is installed in a directory version-dependent (as the default one is), this function should be rerunned after 
+#'  an R upgrade, otherwise the links would continue to point to the old package version!
 #' @param bin_dir in Linux, directory in which the link to the bash script should be placed (default: /usr/bin; a path included in the PATH 
 #'  environment variable is suggested); in Windows, directory where to place the menu entry in the Start Menu (default: Start Menu -> Programs -> MODIStsp).
 #' @param desktop_shortcut logical value which indicates if the desktop entry or the desktop shortcut should be created (default: TRUE).
@@ -43,12 +45,12 @@ install_MODIStsp_launcher <- function( bin_dir=NA, desktop_dir=NA, desktop_short
 
 	if (running_os=='Linux') {
 		if (is.na(bin_dir)) {bin_dir = '/usr/bin/MODIStsp'}
-		if (is.na(desktop_dir)) {desktop_dir = '/usr/share/applications/MODIStsp.desktop'}
+		if (is.na(desktop_dir)) {desktop_dir = '/usr/share/applications'}
 		# Create symbolic link to a directory in the path
 		if (sudo) {
 			system(paste('sudo -S ln -fs', file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.sh'), bin_dir), input=readline("Enter your password: "))
 		} else {
-			file.symlink(from=file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.sh'),to=bin_dir,overwrite=TRUE)
+			file.symlink(from=file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.sh'),to=bin_dir)
 		}
 		# Create desktop entry
 		desktopEntry = paste0("[Desktop Entry]\nName=MODIStsp\nComment=Download and preprocessing of MODIS data\nExec=",MODIStsp_dir,"/ExtData/Launcher/Bash/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")
