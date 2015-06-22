@@ -15,9 +15,11 @@ MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
 \item{spatial_file_path}{(optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 spatial file.}
+
+\item{MODIStsp_dir}{(optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)}
 }
 \description{
-Main function for the MODIS Time Series Processing Tool (MOD_TSP)
+Main function for the MODIS Time Series Processing Tool (MODIStsp)
 }
 \details{
 The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs,

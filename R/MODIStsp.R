@@ -7,6 +7,7 @@
 #' @param spatial_file_path (optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 #'  extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 #'  spatial file.
+#' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -18,33 +19,33 @@
 #' @import rgdal
 #' @import raster
 #' @importFrom tools file_path_sans_ext
-#' @examples 
+#' @examples
 #' # Run the tool without any option will start the GUI
 #' # with the default settings (or the last used)
 #' \dontrun{
 #' MODIStsp()}
-#' 
+#'
 #' # Run the tool using the settings previously saved in a specific option file
 #' \dontrun{
 #' MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData")}
-#' 
+#'
 #' # Run the tool using a previously saved options file,
 #' # but editing it with the GUI before starting the processing
 #' \dontrun{
 #' MODIStsp(options_File = "X:/yourpath/youroptions.RData")}
-#' 
+#'
 #' # Run the tool using the settings previously saved in a specific option file
 #' # and specifying the extent from a spatial file
 #' \dontrun{
 #' MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
 #'   spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
-#' 
-#' # Run the tool in a batch mode, using the settings previously saved in a specific 
+#'
+#' # Run the tool in a batch mode, using the settings previously saved in a specific
 #' # option file and specifying each time the extent from a different spatial file
 #' \dontrun{
 #' extent_list = list.files("X:/path/containing/some/shapefiles/", "\\.shp$")
 #' for (single_shape in extent_list)
-#'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData", 
+#'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
 #'     spatial_file_path = single_shape )}
 
 MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA) {
@@ -61,7 +62,7 @@ MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISts
 	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1', getGDALVersionInfo(str = "--version")))
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
 	gdal_HDFsupport <- length(grep('HDF4', gdalinfo(formats = TRUE))) > 0
-	
+
 	if (gdal_version < gdal_minversion) {
 		stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
 	}
@@ -88,11 +89,11 @@ MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISts
 	}
 
 	# Folder in which the previous options file is saved
-	if (is.null(options_file)) { 
+	if (is.null(options_file)) {
 		previous_dir = file.path(MODIStsp_dir,'Previous')
 	} else {
 		previous_dir = dirname(options_file)
-	}   
+	}
 	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
 
 	# Previous options file (or file passed by user in non-interactive mode)
@@ -100,7 +101,7 @@ MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISts
 		file.path(previous_dir, 'MODIStsp_Previous.RData')
 	} else {
 		options_file
-	} 
+	}
 	xml_file = file.path(MODIStsp_dir,'ExtData','MODIStsp_ProdOpts.xml')  #XML file describing MODIS products
 
 #- ------------------------------------------------------------------------------- -#
@@ -120,7 +121,7 @@ MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISts
 			proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', compress = 'None',
 			nodata_change = 'No',delete_hdf = 'No',reprocess = 'No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
 	attr(general_opts,"GeneratedBy") = 'MODIStsp'
-	
+
 #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
 	if (gui) {GUI = MODIStsp_GUI(general_opts)} else {Quit <<- FALSE}
 	start.time <- Sys.time()
@@ -147,19 +148,19 @@ MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISts
 		}
 		# get native resolution if out_res empty (Probably obsolete...)
 		if (general_opts$out_res == '' | general_opts$out_res_sel == 'Native') {
-			general_opts$out_res = prod_opts$native_res 
+			general_opts$out_res = prod_opts$native_res
 		}
-		
+
 		# Changes to perform in the case spatial_file_path is defined
 		if (!is.null(spatial_file_path)) {
-			
+
 			# Check if the input file is a valid spatial file and redefine the bounding box
 			external_bbox <- try(bbox_from_file(file_path = spatial_file_path, out_crs = general_opts$user_proj4),silent = TRUE)
 			if (class(external_bbox) == 'try-error') {
 				stop(external_bbox)
-			}			
+			}
 			general_opts$bbox <- external_bbox
-			
+
 			# Redefine the out_folder including the file name as subfolder
 			# (this to avoid that, running in a cycle, files are overwritten every time)
 			general_opts$out_folder = file.path(general_opts$out_folder,file_path_sans_ext(basename(spatial_file_path)))
@@ -172,12 +173,12 @@ MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISts
 				}
 				general_opts$out_folder <- out_newfolder
 			}
-			
-			# Overwrite the full_ext option (avoids that , if the options_file specifies a full processing, 
+
+			# Overwrite the full_ext option (avoids that , if the options_file specifies a full processing,
 			# the incorrect parameter is passed)
 			general_opts$full_ext <- 'Resized'
 
-			# Automatically retrieve the tiles requested to cover the extent 
+			# Automatically retrieve the tiles requested to cover the extent
 			load(file.path(MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))
 			external_bbox_mod <- reproj_bbox(external_bbox, general_opts$user_proj4, general_opts$MOD_proj_str, enlarge = TRUE)
 			d_bbox_mod_tiled <- intersect(modis_grid, extent(external_bbox_mod))
@@ -185,9 +186,9 @@ MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISts
 			general_opts$end_x <- max(d_bbox_mod_tiled$H)
 			general_opts$start_y <- min(d_bbox_mod_tiled$V)
 			general_opts$end_y <- max(d_bbox_mod_tiled$V)
-		
+
 		}
-		
+
 	# launch MODIStsp_process to Download and preprocess the selected images ----
 		output = with(general_opts, MODIStsp_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
 						out_folder = out_folder, out_folder_mod = out_folder_mod, reprocess = reprocess,
