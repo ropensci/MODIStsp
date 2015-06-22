@@ -42,20 +42,20 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	#- ------------------------------------------------------------------------------- -#
 	# Widgets for product selection and bands selection
 	#- ------------------------------------------------------------------------------- -#
-	satprod_frame <- gframe(text = '<span foreground="blue" size="large">MODIS Product, Satellites and Layers selection</span>', 
+	satprod_frame <- gframe(text = '<span foreground="blue" size="large">MODIS Product, Satellites and Layers selection</span>',
 		markup = T,horizontal = F, container = main_group, spacing = 5)
 
 	checked <- which(mod_prod_list == general_opts$sel_prod)
 
 # set dummy global variables holding the initial values of selected bands
-	temp_wid_bands <<- prod_opt_list[[checked]]$bandsel			
+	temp_wid_bands <<- prod_opt_list[[checked]]$bandsel
 	temp_wid_bands_indexes <<- prod_opt_list[[checked]]$indexes_bandsel
 	temp_wid_bands_quality <<- prod_opt_list[[checked]]$quality_bandsel
 
 	labels_group <- ggroup(horizontal = T, container = satprod_frame)
 	label <- glabel(text = '<span weight = "bold">			       		 Product </span>', markup = T, container = labels_group)
 	addSpace(labels_group, 190)
-	label2 <- glabel(text = '<span weight = "bold">Satellites </span>', markup = T, 
+	label2 <- glabel(text = '<span weight = "bold">Satellites </span>', markup = T,
 		container = labels_group)
 	addSpace(labels_group, 5)
 	label3 <- glabel(text = '<span weight = "bold">      Processing Layers</span>', markup = T, container = labels_group)
@@ -69,7 +69,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 				checked <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]		# find index of sel. product
 				sel_prod <- svalue(prod_wid)
 				# On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
-				if (prod_opt_list[[checked]]$tiled == 0) {	
+				if (prod_opt_list[[checked]]$tiled == 0) {
 					enabled(tiles_group) <- F
 					svalue(proj_wid) = "Latlon WGS84"
 				} else {
@@ -77,7 +77,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 					svalue(proj_wid) = "Sinusoidal"
 				}
 				# reset dummy variables for band selection to 0 on product change
-				temp_wid_bands <<- rep(0, length(prod_opt_list[[checked]]$bandsel))					
+				temp_wid_bands <<- rep(0, length(prod_opt_list[[checked]]$bandsel))
 				temp_wid_bands_indexes <<- rep(0, length(prod_opt_list[[checked]]$indexes_bandsel))
 				temp_wid_bands_quality <<- rep(0, length(prod_opt_list[[checked]]$quality_bandsel))
 			})
@@ -103,15 +103,15 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 				# widgets for band selection - original ----
 				cbox_total <- gframe(text = '', container = selgroup, horizontal = T, width = 450)
 				cbox <- gframe(text = '<span foreground="blue" size="large">		Original MODIS Layers			</span>', markup = T, container = cbox_total, horizontal = T, width = 450)
-				bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid), 
+				bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid),
 					container = cbox, use.table = F, width = 450)
-				
+
 				# widgets for band selection - quality
 				check_names_quality <- prod_opt_list[[checked]]$quality_fullnames # retrieve quality band names (if existing for sel. product)
 				if ( !is.null(check_names_quality) ) {
 					check_wid_quality <- temp_wid_bands_quality						    # retrieve currently selected quality layers (if existing for sel. product)
 					cbox_quality <- gframe(text = '<span foreground="blue" size="large">		Quality Indicators				</span>', markup = T, container = cbox_total, horizontal = FALSE, width = 450)
-					bands_wid_quality <- gcheckboxgroup(items = check_names_quality, checked = as.logical(check_wid_quality), 
+					bands_wid_quality <- gcheckboxgroup(items = check_names_quality, checked = as.logical(check_wid_quality),
 						container = cbox_quality, use.table = F, width = 450)
 				}
 
@@ -129,18 +129,18 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 							  	load(general_opts$previous_file)
 								pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
 								tmp_arr_bands <- array(data = 0 , dim = length(check_names))
-								tmp_arr_bands[pos_wid] <- 1   
+								tmp_arr_bands[pos_wid] <- 1
 								temp_wid_bands <<- tmp_arr_bands
 								if (length(which(check_names_indexes != '') > 0)) {    # ? which indexes selected ? --> store in temp_wid_bands_indexes array
-									pos_wid <- which(check_names_indexes %in% svalue(bands_wid_indexes))   
+									pos_wid <- which(check_names_indexes %in% svalue(bands_wid_indexes))
 									tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
-									tmp_arr_ind[pos_wid] <- 1	
+									tmp_arr_ind[pos_wid] <- 1
 									temp_wid_bands_indexes <<- tmp_arr_ind
 								}
 								if (length(which(check_names_quality != '') > 0)) {    # ? which quality selected ? --> store in temp_wid_bands_quality array
-									pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))   
+									pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))
 									tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
-									tmp_arr_qual[pos_wid] <- 1	
+									tmp_arr_qual[pos_wid] <- 1
 									temp_wid_bands_quality <<- tmp_arr_qual
 								}
 								dispose(selgroup)
@@ -154,18 +154,18 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 							pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
 							tmp_arr_bands <- array(data = 0 , dim = length(check_names))
-							tmp_arr_bands[pos_wid] <- 1   
+							tmp_arr_bands[pos_wid] <- 1
 							temp_wid_bands <<- tmp_arr_bands
 							if (length(which(check_names_indexes != '') > 0)) {    # ? which indexes selected ? --> store in temp_wid_bands_indexes array
-								pos_wid <- which(check_names_indexes %in% svalue(bands_wid_indexes))   
+								pos_wid <- which(check_names_indexes %in% svalue(bands_wid_indexes))
 								tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
-								tmp_arr_ind[pos_wid] <- 1	
+								tmp_arr_ind[pos_wid] <- 1
 								temp_wid_bands_indexes <<- tmp_arr_ind
 							}
 							if (length(which(check_names_quality != '') > 0)) {    # ? which quality selected ? --> store in temp_wid_bands_quality array
-								pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))  
+								pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))
 								tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
-								tmp_arr_qual[pos_wid] <- 1	
+								tmp_arr_qual[pos_wid] <- 1
 								temp_wid_bands_quality <<- tmp_arr_qual
 
 							}
@@ -174,7 +174,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 						})
  				# if Cancel, reset selected layers to previous choice and exit ----
-				cancel_but <- gbutton(text = 'Cancel', container = bands_group, handler = function(button,...){ 
+				cancel_but <- gbutton(text = 'Cancel', container = bands_group, handler = function(button,...){
 
 							if (exists('check_wid')) {temp_wid_bands <<- check_wid}
 							if (exists('check_wid_indexes')) {temp_wid_bands_indexes <<- check_wid_indexes}
@@ -184,7 +184,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 				# Widget for "www" button ----
 				addSpace(bands_group, 760, horizontal = TRUE)
-				www_but <- gbutton(text = 'Product details', 
+				www_but <- gbutton(text = 'Product details',
 					container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[checked]]$www))
 
 				visible(selgroup, set = TRUE)    # visualize band selection widgets
@@ -197,12 +197,12 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 #- ------------------------------------------------------------------------------- -#
 	dates_frame <- gframe(text = '<span foreground="blue" size="large">Processing Period</span>', markup = T, container = main_group, horizontal = T, expand = T, spacing = 10)
 			# start date ----
-			start_date_lab <- glabel(text = '<span weight = "bold" >Starting Date:</span>',markup = T, 
+			start_date_lab <- glabel(text = '<span weight = "bold" >Starting Date:</span>',markup = T,
 				container = dates_frame)  ; size(start_date_lab ) = c(120,20)
 			start_day_wid <- gspinbutton(1,31,  container = dates_frame , value = general_opts$start_day)
 			start_month_wid <- gspinbutton(1,12,  container = dates_frame , value = general_opts$start_month)
 			start_year_wid <- gspinbutton(2000 ,2020,  container = dates_frame , value = general_opts$start_year, horizontal = T)
-			size(start_day_wid) = size(start_month_wid) = c(35,25)    
+			size(start_day_wid) = size(start_month_wid) = c(35,25)
 			size(start_year_wid) = c(55,25)
 
 			# End date ----
@@ -213,7 +213,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 			end_year_wid <- gspinbutton(2000,2020,  container = dates_frame , value = general_opts$end_year)
 			size(end_day_wid) <- size(end_month_wid) <- c(35,25)
 			size(end_year_wid) <- c(55,25)
-		
+
 
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Tiles selection
@@ -221,7 +221,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	Spatial_Frame <- gframe(text = '<span foreground="blue" size="large">Spatial Extent </span>', markup = T,
 		container = main_group, horizontal = F, expand = T, spacing = 10)
 	output_ext_group = ggroup(container = Spatial_Frame, horizontal = TRUE)
-	output_ext_lab <- glabel(text = '<span weight = "bold" >Output Extent:</span>',markup = T, 
+	output_ext_lab <- glabel(text = '<span weight = "bold" >Output Extent:</span>',markup = T,
 		container = output_ext_group)
 	size(output_ext_lab) <- c(120,20)
 	output_ext_wid <-  gcombobox(c('Full Tiles Extent','Resized'), container = output_ext_group,
@@ -288,9 +288,9 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 			if (!is.na(choice)) {
 				# Show window until the process had finished
 				wait_window <- gwindow(title = "Please wait", container = TRUE, width = 400, height = 40)
-				size(wait_window) <- c(100,8)		
+				size(wait_window) <- c(100,8)
 				addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
-				wait_window_lab = glabel(text = paste('Retrieveing the Extent, please wait...'), editable = FALSE, 
+				wait_window_lab = glabel(text = paste('Retrieveing the Extent, please wait...'), editable = FALSE,
 					container = wait_window)
 
 				# Convert bbox coordinates in those of output projection
@@ -323,21 +323,21 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	# Group to select which tiles should be downloaded
 	#-------------------------------------------------
 
-	tiles_group <- gframe(text = '<span weight="bold">Required MODIS Tiles </span>', markup = T, 
+	tiles_group <- gframe(text = '<span weight="bold">Required MODIS Tiles </span>', markup = T,
 		container = Spatial_Frame, horizontal = F, expand = T, spacing = 10, pos = 1)
-	
+
 	# horizontal ----
 	x_group <- ggroup(container = tiles_group, horizontal = TRUE)
 	start_x_lab <- glabel(text = '<span weight = "bold" >Horizontal Tiles:</span>',markup = T,
-	 container = x_group) 
-	start_x_start <- glabel(text = 'Start: ', container = x_group) 
+	 container = x_group)
+	start_x_start <- glabel(text = 'Start: ', container = x_group)
 	start_x_wid <- gspinbutton(1, 35, text = 'Select', container = x_group, value = general_opts$start_x)
-	end_x_lab <- glabel(text = 'End: ', container = x_group) 
+	end_x_lab <- glabel(text = 'End: ', container = x_group)
 	end_x_wid <- gspinbutton(1, 35, text = 'Select', container = x_group, value = general_opts$end_x)
-	
+
 	size(start_x_lab) = c(120,20)
-	size(start_x_wid) = size(end_x_wid) = size(end_x_lab) = size(start_x_start) = c(35,25)    
-	
+	size(start_x_wid) = size(end_x_wid) = size(end_x_lab) = size(start_x_start) = c(35,25)
+
 	show_map <- gbutton(text = 'Show Tiles Map', border = T,
 			handler = function(h,....) {
 			  x11(10,6)
@@ -347,22 +347,22 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 	# vertical ----
 	y_group <- ggroup(container = tiles_group, horizontal = TRUE)
-	start_y_lab <- glabel(text = '<span weight = "bold" >Vertical Tiles:</span>',markup = T, 
-		container = y_group) 
-	start_y_start <- glabel(text = 'Start: ', container = y_group) 
+	start_y_lab <- glabel(text = '<span weight = "bold" >Vertical Tiles:</span>',markup = T,
+		container = y_group)
+	start_y_start <- glabel(text = 'Start: ', container = y_group)
 	start_y_wid <- gspinbutton(0,17, text = 'Select', container = y_group, value = general_opts$start_y)
 	end_y_lab <- glabel(text = 'End: ', container = y_group)
 	end_y_wid <- gspinbutton(0,17, text = 'Select', container = y_group, value = general_opts$end_y)
 
 	size(start_y_lab) = c(120,20)
- 	size(start_y_wid) = size(end_y_wid) = size(end_y_lab) = size(start_y_start) = c(35,25)  
+ 	size(start_y_wid) = size(end_y_wid) = size(end_y_lab) = size(start_y_start) = c(35,25)
 
 	if (prod_opt_list[[checked]]$tiled == 0) { enabled(tiles_group) <- F} else {(enabled(tiles_group) <- T)}
 
 	# Extent ----
-	bounding_group <- gframe(text = '<span weight="bold">Bounding Box </span>', markup = T, 
+	bounding_group <- gframe(text = '<span weight="bold">Bounding Box </span>', markup = T,
 		container = Spatial_Frame, horizontal = F, expand = T, spacing = 10, pos = 1)
-	
+
 	# bounding box ----
 	bbox_group <- ggroup(horizontal = FALSE, container = bounding_group)
 	output_bbox_lab <- glabel(text = '<span weight = "bold" > Bounding Box for output images (IN OUTPUT PROJECTION !) </span>',markup = T, container = bbox_group, expand = T)
@@ -375,7 +375,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	output_LReast_lab <- glabel('Lower Right Easting (xmax)', container = Lon_group)
 	output_LReast_wid <- gedit(text = general_opts$bbox[3], container = Lon_group, width = 10)
 	size(output_ULeast_lab) = size(output_LReast_lab) <- c(160,20)
-	
+
 	Lat_group <- ggroup(horizontal = TRUE, container = bbox_group)
 	output_LRnorth_lab <- glabel('Lower Right Northing (ymin)', container = Lat_group)
 	output_LRnorth_wid <- gedit(text = general_opts$bbox[2], container = Lat_group, width = 10)
@@ -389,7 +389,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Projection, resolution and bbox selection
 #- ------------------------------------------------------------------------------- -#
-	output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T, 
+	output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T,
 		container = main_group, horizontal = FALSE, expand = T, spacing = 10)
 
 	output_proj_group <- ggroup(container = output_proj_frame, horizontal = TRUE, spacing = 5)
@@ -637,7 +637,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 	# Various checks and generation of general_opts common to both Start and Save buttons
 	prepare_to_save_options <- function(general_opts,...) {
-		
+
 		# workaround to retrieve index bandnames
 		tmp_general_opts <- general_opts
 		load(general_opts$previous_file)
@@ -653,7 +653,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 		}
 		if (exists('temp_wid_bands_indexes')) {
 			prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
-			
+
 		}
 		if (exists('temp_wid_bands_quality')) {
 			prod_opt_list[[general_opts$sel_prod]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
