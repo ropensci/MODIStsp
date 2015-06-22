@@ -1,5 +1,5 @@
 #' MODIStsp
-#' @description Main function for the MODIS Time Series Processing Tool (MOD_TSP)
+#' @description Main function for the MODIS Time Series Processing Tool (MODIStsp)
 #' @details The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs,
 #'  and to launch the required routines for downloading and processing the requested datasets.
 #' @param gui logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are retrieved from "options_file")
@@ -47,7 +47,7 @@
 #'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData", 
 #'     spatial_file_path = single_shape )}
 
-MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA) {
+MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA) {
 
 	if (is.na(MODIStsp_dir)) {MODIStsp_dir = system.file(package = "MODIStsp")}
 
@@ -55,55 +55,85 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 #  Initialize project
 #- ------------------------------------------------------------------------------- -#
 	# Check GDAL version
-	if (is.null(getOption('gdalUtils_gdalPath'))) {gdal_setInstallation(ignore.full_scan=FALSE)}
-	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1',getGDALVersionInfo(str = "--version")))
+	if (is.null(getOption('gdalUtils_gdalPath'))) {
+		gdal_setInstallation(ignore.full_scan = FALSE)
+	}
+	gdal_version <- package_version(gsub('^GDAL ([0-9.]*)[0-9A-Za-z/., ]*','\\1', getGDALVersionInfo(str = "--version")))
 	gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
-	gdal_HDFsupport <- length(grep('HDF4', gdalinfo(formats=TRUE))) > 0
-	if (gdal_version < gdal_minversion) stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
-	if (!gdal_HDFsupport) stop("Your local GDAL installation does not support HDF4 format. Please install HDF4 support and recompile GDAL.")
+	gdal_HDFsupport <- length(grep('HDF4', gdalinfo(formats = TRUE))) > 0
+	
+	if (gdal_version < gdal_minversion) {
+		stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
+	}
+
+	if (!gdal_HDFsupport) {
+		stop("Your local GDAL installation does not support HDF4 format. Please install HDF4 support and recompile GDAL.")
+	}
+
 	cat('GDAL version in use:',as.character(gdal_version),'\n')
+
+	# On interactive execution, load Rgtk2
   	if (gui) {
 		require(gWidgetsRGtk2)
-		options("guiToolkit"="RGtk2")
+		options("guiToolkit" = "RGtk2")
 	}
-	if (Sys.info()['sysname']=='Windows') {memory.limit(8000)}							# Increase maximum allocsable memory
+
+	# Increase memory limit on winzozz
+	if (Sys.info()['sysname'] == 'Windows') {memory.limit(8000)}							# Increase maximum allocsable memory
 	rasterOptions(setfileext = F)				# Make so that "raster" functions doesn't automatically add extensions on output files
-	# Folder Initialization -----
 
-	if (is.null(options_file) & gui==FALSE) {stop('Please provide a valid \'option_file\' path value (or run with gui=TRUE).')}
-	if (is.null(options_file)) {previous_dir = file.path(MODIStsp_dir,'Previous')} else {previous_dir = dirname(options_file)}   # Folder in which the previous options file is saved
-	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
-	previous_file = if (is.null(options_file)) {file.path(previous_dir, 'MODIStsp_Previous.RData')} else {options_file} 
-	xml_file= file.path(MODIStsp_dir,'ExtData','MODIStsp_ProdOpts.xml')  #XML file describing MODIS products
-
-#- ------------------------------------------------------------------------------- -#
-#  Set general processing options - used at first execution 
-#- ------------------------------------------------------------------------------- -#
-	{out_proj_names = c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
-		out_proj_list = hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs ",
-				"UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
-				"Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-				"User Defined" = "")
-		MOD_proj_str = '+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs '
-
-		# Create the general_opts structure used to communicate with the GUI and set default values
-		general_opts = list(MODIStsp_dir = MODIStsp_dir, previous_file=previous_file,xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
-				sel_prod = 'Surf_Ref_8Days_500m (MOD09A1)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
-				start_x = 18, end_x =18, start_y = 4, end_y = 4,
-				proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', compress = 'None',
-				nodata_change = 'No',delete_hdf = 'No',reprocess ='No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
-		attr(general_opts,"GeneratedBy") = 'MODIStsp'
-		
+	# Parameter retrieval and Folder Initialization -----
+	if (is.null(options_file) & gui == FALSE) {
+		stop('Please provide a valid \'option_file\' path value (or run with gui=TRUE).')
 	}
-#launch the GUI if on an interactive session (i.e., gui = T) ----
-	if (gui) {GUI = MODIStsp_GUI(general_opts)} else {Quit<<-FALSE}
+
+	# Folder in which the previous options file is saved
+	if (is.null(options_file)) { 
+		previous_dir = file.path(MODIStsp_dir,'Previous')
+	} else {
+		previous_dir = dirname(options_file)
+	}   
+	dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
+
+	# Previous options file (or file passed by user in non-interactive mode)
+	previous_file = if (is.null(options_file)) {
+		file.path(previous_dir, 'MODIStsp_Previous.RData')
+	} else {
+		options_file
+	} 
+	xml_file = file.path(MODIStsp_dir,'ExtData','MODIStsp_ProdOpts.xml')  #XML file describing MODIS products
+
+#- ------------------------------------------------------------------------------- -#
+#  Set general processing options - used at first execution to initialize GUI
+#- ------------------------------------------------------------------------------- -#
+	out_proj_names = c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
+	out_proj_list = hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs ",
+			"UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+			"Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+			"User Defined" = "")
+	MOD_proj_str = '+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs '
+
+	# Create the general_opts structure used to communicate with the GUI and set default values
+	general_opts = list(MODIStsp_dir = MODIStsp_dir, previous_file = previous_file,xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
+			sel_prod = 'Surf_Ref_8Days_500m (MOD09A1)',sensor = 'Terra',start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
+			start_x = 18, end_x = 18, start_y = 4, end_y = 4,
+			proj = 'Sinusoidal',out_res_sel = 'Native', out_res = '',full_ext = 'Full Tiles Extent', resampling = 'near',out_format = 'ENVI',ts_format = 'ENVI Meta Files', compress = 'None',
+			nodata_change = 'No',delete_hdf = 'No',reprocess = 'No', bbox = c('','','',''), out_folder = '', out_folder_mod = '')
+	attr(general_opts,"GeneratedBy") = 'MODIStsp'
+	
+#launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
+	if (gui) {GUI = MODIStsp_GUI(general_opts)} else {Quit <<- FALSE}
 	start.time <- Sys.time()
 
 # Launch the processing ----
 	# When GUI is closed (or in a non-interactive run): If not Quit selected, restore the user selected options from previous file and launch the processing ----
 	if (!Quit) {
 
-		if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)} else {cat('[',date(),'] Download Options file not found ! Exiting !\n'); stop()}
+		if (file.exists(general_opts$previous_file)) {
+			load(general_opts$previous_file)
+		} else {
+			cat('[',date(),'] Processing Options file not found ! Exiting !\n'); stop()
+		}
 		prod_opts = prod_opt_list[[general_opts$sel_prod]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
 
 		# Create variables needed to launch the processing
@@ -115,17 +145,17 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 			general_opts$MOD_proj_str = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
 			prod_opts$native_res = "0.05"
 		}
-		# get native resolution if out_res empty
-		if(general_opts$out_res == '' | general_opts$out_res_sel == 'Native'  ) {
+		# get native resolution if out_res empty (Probably obsolete...)
+		if (general_opts$out_res == '' | general_opts$out_res_sel == 'Native') {
 			general_opts$out_res = prod_opts$native_res 
-		}  
+		}
 		
 		# Changes to perform in the case spatial_file_path is defined
 		if (!is.null(spatial_file_path)) {
 			
 			# Check if the input file is a valid spatial file and redefine the bounding box
-			external_bbox <- try(bbox_from_file(file_path=spatial_file_path, out_crs=general_opts$user_proj4),silent=TRUE)
-			if (class(external_bbox)=='try-error') {
+			external_bbox <- try(bbox_from_file(file_path = spatial_file_path, out_crs = general_opts$user_proj4),silent = TRUE)
+			if (class(external_bbox) == 'try-error') {
 				stop(external_bbox)
 			}			
 			general_opts$bbox <- external_bbox
@@ -133,12 +163,12 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 			# Redefine the out_folder including the file name as subfolder
 			# (this to avoid that, running in a cycle, files are overwritten every time)
 			general_opts$out_folder = file.path(general_opts$out_folder,file_path_sans_ext(basename(spatial_file_path)))
-			if (file.exists(general_opts$out_folder)) {
+			if (file.exists(general_opts$out_folder)) {  # If out_folder already exists, create a new one with a suffix
 				tmp_counter = 1
-				out_newfolder = paste(general_opts$out_folder,tmp_counter,sep='_')
+				out_newfolder = paste(general_opts$out_folder,tmp_counter,sep = '_')
 				while (file.exists(out_newfolder)) {
-					tmp_counter = tmp_counter+1
-					out_newfolder = paste(general_opts$out_folder,tmp_counter,sep='_')
+					tmp_counter = tmp_counter + 1
+					out_newfolder = paste(general_opts$out_folder,tmp_counter,sep = '_')
 				}
 				general_opts$out_folder <- out_newfolder
 			}
@@ -149,8 +179,8 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 
 			# Automatically retrieve the tiles requested to cover the extent 
 			load(file.path(MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))
-			external_bbox_mod <- reproj_bbox( external_bbox, general_opts$user_proj4, general_opts$MOD_proj_str, enlarge=TRUE)
-			d_bbox_mod_tiled <- intersect(modis_grid,extent(external_bbox_mod))
+			external_bbox_mod <- reproj_bbox(external_bbox, general_opts$user_proj4, general_opts$MOD_proj_str, enlarge = TRUE)
+			d_bbox_mod_tiled <- intersect(modis_grid, extent(external_bbox_mod))
 			general_opts$start_x <- min(d_bbox_mod_tiled$H)
 			general_opts$end_x <- max(d_bbox_mod_tiled$H)
 			general_opts$start_y <- min(d_bbox_mod_tiled$V)
@@ -168,13 +198,13 @@ MODIStsp= function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp
 						resampling = resampling, ts_format = ts_format, compress = compress,
 						MOD_proj_str = MOD_proj_str,outproj_str = user_proj4,
 						nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out,nodata_change = nodata_change,
-						datatype =prod_opts$datatype,	bandsel = prod_opts$bandsel, bandnames = prod_opts$bandnames,
+						datatype = prod_opts$datatype,	bandsel = prod_opts$bandsel, bandnames = prod_opts$bandnames,
 						indexes_bandsel = prod_opts$indexes_bandsel, indexes_bandnames = prod_opts$indexes_bandnames,
-						indexes_formula = prod_opts$indexes_formula, indexes_nodata_out =prod_opts$indexes_nodata_out,
+						indexes_formula = prod_opts$indexes_formula, indexes_nodata_out = prod_opts$indexes_nodata_out,
 						quality_bandnames = prod_opts$quality_bandnames,quality_bandsel = prod_opts$quality_bandsel, quality_bitN = prod_opts$quality_bitN,
-						quality_source = prod_opts$quality_source, quality_nodata_in =prod_opts$quality_nodata_in,
-						quality_nodata_out =prod_opts$quality_nodata_out,
-						file_prefixes = prod_opts$file_prefix, main_out_folder =prod_opts$main_out_folder))
+						quality_source = prod_opts$quality_source, quality_nodata_in = prod_opts$quality_nodata_in,
+						quality_nodata_out = prod_opts$quality_nodata_out,
+						file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder))
 
 	} # End If on "Quit" --> If "Quit" above is skipped and program terminates
 
