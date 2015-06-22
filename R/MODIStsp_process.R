@@ -403,7 +403,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
           } else {cat('[',date(),'] All Required output files for date',date_name, 'are already existing - Doing Nothing !\n')} # End check on all data already processed for date or reprocees = Yes
 
-
           #- ------------------------------------------------------------------------------- -#
           # If deletion selected, delete the HDF files in out_folder_mod directory
           #- ------------------------------------------------------------------------------- -#
@@ -417,12 +416,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
             }
           } #end if on Delete original downloaded HDFs
 
-
         }   # End cycling on available dates for selected year
 
       } else cat("[',date(),'] No available data for year:", yy, "for Sensor",sens_sel,"in selected dates.\n")
-
-
 
     }	# End Cycling on selected years
 

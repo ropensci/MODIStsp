@@ -49,22 +49,22 @@ install_MODIStsp_launcher <- function(bin_dir = NA, desktop_dir = NA, desktop_sh
     # Create symbolic link to a directory in the path
     if (sudo) {
       system(paste('sudo -S ln -fs', file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.sh'), bin_dir),
-       input = readline("Enter your password: "))
+             input = readline("Enter your password: "))
     } else {
       file.symlink(from = file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.sh'), to = bin_dir)
     }
     # Create desktop entry
     desktopEntry = paste0("[Desktop Entry]\nName=MODIStsp\nComment=Download and preprocessing of MODIS data\nExec=",MODIStsp_dir,
-      "/ExtData/Launcher/Bash/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")
+                          "/ExtData/Launcher/Bash/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")
     fileConn <- file(file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'))
     writeLines(desktopEntry,fileConn)
     close(fileConn)
     if (sudo) {
       system(paste('sudo -S cp -f', file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'),
-        file.path(desktop_dir,'MODIStsp.desktop')), input = readline("Enter your password: "))
+                   file.path(desktop_dir,'MODIStsp.desktop')), input = readline("Enter your password: "))
     } else {
       file.copy(from = file.path(MODIStsp_dir,'ExtData/Launcher/Bash/MODIStsp.desktop'),
-        to = file.path(desktop_dir,'MODIStsp.desktop'),overwrite = TRUE)
+                to = file.path(desktop_dir,'MODIStsp.desktop'),overwrite = TRUE)
     }
   }
 
@@ -96,7 +96,5 @@ install_MODIStsp_launcher <- function(bin_dir = NA, desktop_dir = NA, desktop_sh
         shell("del \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
       } else warning('Desktop shortcut already exists!')
     }
-
   }
-
 }

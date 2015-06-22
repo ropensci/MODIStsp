@@ -27,6 +27,8 @@ Function which allows to use MODIStsp in batch mode by creating links
 MODIStsp tool can be used also as a standalone tool my launching a bash/batch script, which is stored in the function files.
  In order to simply retrieve it, this function will create a desktop entry and a symbolic link to the bash script (in Linux)
  or a link in the Start Menu to the batch script (in Windows).
+ Note that, if the packages MODIStsp is installed in a directory version-dependent (as the default one is), this function should be rerunned after
+ an R upgrade, otherwise the links would continue to point to the old package version!
 }
 \note{
 License: GPL 3.0

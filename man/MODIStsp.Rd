@@ -8,7 +8,7 @@ MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
   MODIStsp_dir = NA)
 }
 \arguments{
-\item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are directly passed)}
+\item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are retrieved from "options_file")}
 
 \item{options_file}{settings (optional): full path of the RData file containing the processing options (default: Previous.RData in subdir Previous);}
 
