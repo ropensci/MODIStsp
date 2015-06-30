@@ -1,0 +1,362 @@
+---
+title: "MODIStsp: A tool for automatic preprocessing of MODIS time series"
+author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it)), Luigi
+  Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
+date: '`r Sys.Date()`'
+output:
+  html_document: default
+  html_vignette:
+    fig_caption: yes
+    number_section: yes
+  pdf_document:
+    fig_caption: yes
+    number_section: yes
+  word_document: default
+bibliography: MODIStsp.bib
+vignette: |
+  %\VignetteIndexEntry{MODIStsp} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+---
+
+# Introduction
+
+MODIStsp is a novel "R" package allowing to automatize the creation of time series of rasters derived from MODIS Land Products data. It allows to perform several preprocessing steps on MODIS data available within a given time period. 
+
+Development of MODIStsp started from modifications of the ModisDownload "R" script by Thomas Hengl [-@Hengl2010], and successive adaptations by Babak Naimi [-@Naimi2014]. The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of: 
+
+* Developing a standalone application allowing to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on all available MODIS land products by exploiting  a powerful and user-friendly GUI front-end;
+* Allowing the creation of time series of both MODIS original layers and additional Quality Indicators (e.g., data acquisition quality, cloud/snow presence, algorithm used for data production, etc. ) extracted from the aggregated bit-field QA layers
+* Allowing the automatic calculation and creation of time series of several additional Spectral Indexes starting form MODIS surface reflectance products
+
+All processing parameters can be easily set with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
+
+
+# Installation 
+
+MODIStsp was developed completely in the "R" Language and Environment for Statistical Computing (R Development Core Team 2014) v. 3.1.3 and is distributed as open source software under the GNU-GPL 3.0 License. Source code can be downloaded at the GITHUB repository https://github.com/lbusett/MODIStsp
+
+To Install MODIStsp:
+
+1. Within "R", install the "gWidgetsRGtk2" package
+
+    ```r
+    install.packages('gWidgetsRGtk2')
+    ```
+    when asked, request to install GTK
+
+2. Install the package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+
+    ```r
+    install.packages('devtools')
+    require('devtools')
+    install_github('lbusett/MODIStsp', ref = 'master')
+    ```
+
+## Dependencies
+
+MODIStsp exploits functionalities of several additional "R" packages. A complete list of required packages is shown in Table I. 
+
+| "R" package   | Version     | Authors                      |
+|---------------|-------------|------------------------------|
+| gWidgetsRGtk2 | >= 0.0-54   | [@Lawrence2013]   |
+| rgdal         | >= 0.8-16   | [@Bivand2014]         |
+| plyr          | >= 1.8.1    | [@Wickham2011]               |
+| gdalUtils     | >= 0.3.1    | [@Greenberg2014] |
+| XML           | >= 3.98-1.1 | [@Lang2013a]                 |
+| RCurl         | >= 1.95-4.1 | [@Lang2013]                 |
+| Stringr       | >= 0.6.2    | [@Wickham2012]               |
+| hash          | >= 2.26     | [@Brown2013]                 |
+| raster        | >= 2.3.40   | [@Hijmans2014]               |
+| rgeos         | >= 0.3-8    | [@Bivand2014a]      |
+
+Additionaly, MODIStsp **requires availability of the GDAL - Geospatial Data Abstraction Library  v. >1.10, with support for HDF4 raster format**. 
+
+# Running the tool
+
+## Interactive mode
+To run the tool in interactive mode, load the package and launch the MODIS_tsp function, with no parameters
+```r
+library(MODIStsp)
+MODIStsp()
+```
+This opens a GUI from which processing options can be specified and eventually saved (or loaded).
+A description of the different processing parameters to be selected is reported in the "Selection of Processing parameters" subsection at the end of this vignette
+
+## Non-Interactive mode (Using a previously saved options file)
+
+MODIStsp can be also launched in non-interactive mode by setting the optional "GUI" parameter to FALSE, and the "Options_File" parameter to the path of a previously saved Options file.  This allows to exploit MODIStsp functionalities within generic "R" processing scripts
+
+```r
+library(MODIStsp) 
+# --> Specify the path to a valid options file saved in advance
+options_file = "X:/yourpath/youroptions.RData"   from the GUI
+MODIStsp(gui = FALSE, options_File = options_file)
+```
+
+Specifying also the "spatial_file_path" parameter overrides the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents.
+
+For example:
+```r
+# Create a character array containing a list of shapefiles (or other spatial files)
+extent_list = list.files("X:/path/containing/some/shapefiles/", "\\.shp$")  
+
+# loop on the list of spatial files and run MODIStsp using each of them to automatically 
+# define the output extent (A separate output folder is created for each input spatial file).
+
+for (single_shape in extent_list) {
+  MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData", 
+          spatial_file_path = single_shape )
+}
+```
+
+
+# Selection of processing parameters through the GUI
+
+When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection of all processing options required for the creation of the desired MODIS time series. The main available processing options are described briefly in the following.
+
+
+```{r fig.width=7, fig.height=7, fig.cap = "The MODIStsp main GUI",echo=FALSE}
+  library(png)
+  library(grid)
+  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Latex_RSL/Figure_2.png')
+  grid.raster(img)
+  library(knitr)
+ 
+# Notify that you want to use the counter,
+# if you set the counter to 3 then it will use 
+# that as starting number. You can also use strings
+# if you for instance have a split figure with 
+# a "1a" and "1b" setup
+options(figure_counter = TRUE)
+ 
+# If you want roman letters then set: 
+# options(figure_counter_roman = TRUE)
+ 
+# Evaluate the figure caption after the chunk, 
+# sometimes you want to calculate stuff inside the
+# chunk that you want to include in the caption and
+# it is therefore useful to evaluate it afterwards.
+opts_knit$set(eval.after='fig.cap')
+ 
+# The actual hook
+knit_hooks$set(plot = function(x, options) {
+  fig_fn = paste0(opts_knit$get("base.url"), 
+                  paste(x, collapse = "."))
+ 
+  # Some stuff from the default definition
+  fig.cap <- knitr:::.img.cap(options)
+ 
+  # Style and additional options that should be included in the img tag
+  style=c("display: block",
+          sprintf("margin: %s;",
+                   switch(options$fig.align, 
+                          left = 'auto auto auto 0', 
+                          center = 'auto',
+                          right = 'auto 0 auto auto')))
+  # Certain arguments may not belong in style, 
+  # for instance the width and height are usually
+  # outside if the do not have a unit specified
+  addon_args = ""
+ 
+  # This is perhaps a little overly complicated prepared 
+  # with the loop but it allows for a more out.parameters if necessary
+  if (any(grepl("^out.(height|width)", names(options)))){
+      on <- names(options)[grep("^out.(height|width)", names(options))]
+      for(out_name in on){
+          dimName <- substr(out_name, 5, nchar(out_name))
+          if (grepl("[0-9]+(em|px|%|pt|pc|in|cm|mm)", out_name))
+              style=append(style, paste0(dimName, ": ", options[[out_name]]))
+          else if (length(options$out.width) > 0)
+              addon_args = paste0(addon_args, dimName, "='", options[[out_name]], "'")
+      }
+  }
+ 
+  # Add counter if wanted
+  fig_number_txt <- ""
+  cntr <- getOption("figure_counter", FALSE)
+  if (cntr != FALSE){
+    if (is.logical(cntr))
+      cntr <- 1
+    # The figure_counter_str allows for custom 
+    # figure text, you may for instance want it in
+    # bold: <b>Figure %s:</b>
+    # The %s is so that you have the option of setting the
+    # counter manually to 1a, 1b, etc if needed
+    fig_number_txt <- 
+      sprintf(getOption("figure_counter_str", "Figure %s: "), 
+              ifelse(getOption("figure_counter_roman", FALSE), 
+                     as.character(as.roman(cntr)), as.character(cntr)))
+ 
+    if (is.numeric(cntr))
+      options(figure_counter = cntr + 1)
+  }
+ 
+  # Put it all together
+  paste0("<figure><img src='", fig_fn, "'", 
+         " ", addon_args,
+         paste0(" style='", paste(style, collapse="; "), "'"),
+         ">",
+         "<figcaption>", fig_number_txt, fig.cap, "</figcaption></figure>")
+})
+```
+
+##	MODIS Product, Satellites and Layers
+
+Allows to select the MODIS product of interest from a drop-down menu. The user can also select which MODIS sensors should be considered for download and creation of the time series ("Terra", "Aqua" or both). After selecting the product, pushing the "Select Layers" button opens the "Select Processing Layers" GUI panel (Figure 2), from which the user **must** select which MODIS original and/or derived QI and SI layers should be processed: 
+
+```{r fig.width = 7,fig.height = 2,  fig.cap = 'The "Select Processing Layers" GUI',echo=FALSE}
+  library(png)
+  library(grid)
+  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Latex_RSL/Figure_3.png')
+  grid.raster(img)
+```
+
+1. The left-hand frame allows to select which original MODIS layers should be processed
+2. The central frame allows to select which Quality Indicators should be extracted from the original MODIS Quality Assurance layers. 
+3. For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed [^1]. 
+
+[^1]:The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
+
+Some of the most commonly used Spectral Indexes are available for computation by default (Table II). 
+
+| Index Acronym                       | Index name and reference                                             |
+|-------------------------------------|----------------------------------------------------------------------|
+| NDVI                                | Normalized Difference Vegetation Index [@Rouse1973]                 |
+| EVI                                 | Enhanced Vegetation Index [@Huete2002]                              | 
+| SR                                  | Simple Ratio[@Tucker1979] ]                                         |
+| NDFI                                | Normalized Difference Flood Index  [@Boschetti2014]                 |
+| NDII7 (NDWI)                        | Normalized Difference Infrared Index – Band 7 [@HUNTJR1989]         |                                                                      
+| SAVI                                | Soil Adjusted Vegetation Index  [@Huete1988]                        | 
+| NDSI*                               | Normalized Difference Snow Index ([@Hall2002]                       |
+| NDII6*                              | Normalized Difference Infrared Index – band 6  [@HUNTJR1989]        |
+| GNDVI*                              | Green Normalized Difference Vegetation Index [@Gitelson1998]        |
+| RGRI*                               | Red Green Ration index  [@Gamon1999]                                |
+| GRVI*                               | Green-red ratio vegetation index  [@Tucker1979]                     |
+
+
+Users can however **specify other SIs to be computed without modifying MODIStsp source code** by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related to the new desired SI using a simple GUI (Figure 3) interface. 
+
+```{r fig.height = 1.3, fig.cap = "The GUI for insertion of additional Spectral Indexes",echo=FALSE}
+  library(png)
+  library(grid)
+  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Latex_RSL/Figure_4.png')
+  grid.raster(img)
+```
+
+Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked,  and the new index added in the list of available ones for all products allowing its computation at the next MODIStsp execution. 
+
+## Processing Period
+Allows to specify the starting and ending dates (dd/mm/yyyy) to be considered for the creation of the time series. 
+
+## Spatial Extent
+Allows to define the area of interest for the processing. Two main options are possible:  .
+
+1.  _Full Tiles Extent_: the user must specify which MODIS tiles he would like to process using the "Start" and "End" horizontal and vertical sliders in the "Required MODIS Tiles" frame.  During processing, data from the different tiles is mosaiced, and a single file covering the total area is produced for each acquisition date (Note:  pressing the "show map" button, a representation of the MODIS tiles grid is shown to facilitate the selection).
+
+2.  _Resized_: the user can specify the spatial extent of the desired outputs either; 
+
+    a. **Manually inserting** the coordinates of the Upper Left and Lower Right corners of the area of interest in the "Bounding Box" frame. _Coordinates of the corners must be provided in the coordinate system of the selected  output projection_. 
+    
+    b. **pressing the "Load Extent from a Spatial File" and selecting a raster or vector spatial file**. In this case, the bounding box of the selected file is retrieved, converted in the selected output projection, and shown in the "Bounding Box" frame.Required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
+    
+## Reprojection and Resize
+Allows to specify the options to be used for reprojecting and resizing the MODIS images. In particular:
+
+1.	The **"Output Projection"** menu allows to either select one of the pre-defined output projections or specify a user-defined one by selecting "User Defined" and then inserting a valid "Proj4" string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails. 
+
+2.	The **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. Resampling method can be selected among those supported by the "gdalwarp" routine (http://www.gdal.org/gdalwarp.html). 
+
+## Processing Options
+Allows first of all to specify the **format desired for the output images**. Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among "None", "PACKBITS", "LZW" and "DEFLATE".
+
+The user can then specify if **virtual multitemporal files** should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are ENVI metafiles and GDAL "vrt" files.
+
+Finally, users can select if the **NoData values** of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp_Products_Opts" XML file. By selecting "Yes" in the "Change Original NODATA values" checkbox, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned integer layers to 65535). .
+
+## Main Output Folder for Time Series Storage
+Allows to specify the main folder where the pre-processed time series data will be saved stored. The **"Reprocess Existing Data"** checkbox  allows to specify if images already available should be reprocessed if a new run of MODIStsp is launched with the same output folder. If set to "No", MODIStsp skips dates for which output files following the MODIStsp naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates. 
+
+## Output Folder for Original HDF Storage
+Allows to specify the folder where downloaded **original MODIS HDF files** are stored. The **"delete original HDF files"** checkbox allows to specify if the downloaded images should be deleted from the file system at the end of the processing. To avoid accidental file deletion, this is always set to "No" by default, and a warning is issued before execution whenever the selection is changed to "Yes". 
+
+# Processing
+
+Upon pressing the "Start" button,  the main processing routine is launched (MODIStsp_process). This routine performs the following main tasks:
+
+1.	Retrieve the processing options from the GUI (or the saved RData file in case of non-interactive execution
+ 
+2.	Connect to the lpdaac http MODIS distribution archive, and retrieve the list of HDF images of the selected MODIS product available for the time period selected by the user, for each tile required to cover the selected study area. 
+
+3.	For each identified date of acquisition;
+
+    a. Download all required hdf images. 
+  
+    b.	For each original hdf layer i) selected by the user, or ii) required to compute a selected QI or SI layer, extract the data from the original MODIS images and resize and reproject it to the selected output projection, extent and resolution. If more than one tile is needed to cover the output extent, all required tiles are automatically mosaicked before resizing (gdalbuildvrt functionalities are used to avoid creating large temporary raster files). All the main spatial processing tasks are performed using standard GDAL routines, exploiting the wrappers for "R" provided in the "gdalUtils" package [@Greenberg2014]. Results are saved as raster GeoTiff or ENVI files using MODIStsp naming conventions (See Section 5).
+  
+    c.	Starting from files created at point b), compute required QI and/or SI layers and save the results as GeoTiff or ENVI files. Quality Indicators are computed from original QA layers using bitwise operators available in the "bitOps" package [@Dutky2013], using a generalization of the "modis.qc.R" script by Yann Chemin [@Chemin2008]. Computation of SI layers exploits on-the-fly parsing of the indexes’ formulae to identify the required input raster files and perform the computation. 
+  
+    d.	Delete raster files created at point b) used  to compute the QI or SI layers but that correspond to original HDF layers not originally selected for processing.
+  
+4.	When all dates have been processed, create the virtual time series files if required.
+
+#	Output format and naming conventions
+
+Output raster files are saved in specific subfolders of the main output folder. A separate subfolder is created for each processed original MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image for each processed date, created according to the following naming conventions: 
+
+"Product\_Code"\_"Layer"\_"YYYY"\_"DOY"."ext"             	            _(e.g.,MOD13Q1_NDVI_2000_065.dat)_
+
+**Product_Code** is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1), **Layer** is a short name describing the dataset (e.g., b1_Red, NDII, UI), **YYYY** and **DOY** corresponds to the year and DOY (Day of the Year) of acquisition of the original MODIS image, and ext is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs). 
+
+If requested, ENVI and/or GDAL virtual files are stored in the "Time_Series" subfolder. Naming convention for virtual files is: 
+
+"Product\_Code"\_"Layer"\_"StartYYYY"\_"StartDOY"\_"EndYYYY"\_"EndDOY"."ext" 
+
+_(e.g., MOD13Q1\_NDVI\_49\_2000\_17\_2015.dat)_
+             
+**StartYYYY**, **StartDOY**, **EndYYYY** and **EndDOY** indicate the starting and ending years and DOYS of the time series.
+
+
+# Standalone execution and scheduled processing 
+
+MODIStsp can be executed as a standalone application using the MODIStsp.bat (for Windows) or MODIStsp.sh (for Linux) batch execution scripts available in the "MODIStsp/ExtData/launcher" subfolder of the package installation. Double-clicking the files or launching them from a shell without parameters launches MODIStsp in interactive mode. 
+
+Non-interactive mode is triggered by adding the "-g"  argument to the call, and specifying the path to a valid Options File as "-s" argument 
+
+* **In Linux:** `yourpath_to_MODIStsp_sh/MODIStsp.sh -g -s "/yourpath/youroptions.RData"`
+
+(launch `yourpath_to_MODIStsp_sh/MODIStsp.sh -h` for details).
+
+* **In Windows:** `yourpath_to_MODIStsp_bat\MODIStsp.bat -g -s "X:/yourpath/youroptions.RData"`
+
+(launch `yourpath_to_MODIStsp_bat\MODIStsp.bat -h` for details).
+
+Standalone non-interactive execution easily allows to automatically update the time series of a selected product over a given study area whenever a new MODIS image is available. To do that, the user must simply:
+
+1.  Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options. Then quit the program
+ 
+2.  Schedule non-interactive execution of MODIStsp.bat (or MODIStsp.sh) as windows scheduled task (or linux "cron" job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument: 
+
+    * **In Linux:** edit your crontab by opening a terminal and typing
+
+        ```bash
+        crontab -e
+        ```
+        
+        Then add an entry for the MODIStsp.bsh For example, if you want to run the tool every day at 23.00, add the following row:
+        
+        ```bash
+        0 23 * * * /bin/bash /yourpath_to_MODIStsp_sh/MODIStsp.sh -g -s "/yourpath/youroptions.RData"
+        ```
+        
+    * **In Windows:** create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.
+
+## Adding links to desktop/Start menu for standalone execution
+
+Links to the MODIStsp.bat or MODIStsp.sh standalone launchers can be created automatically launching from R  the function `MODIStsp_install_launcher()`
+
+* **In Linux:**  this creates a desktop entry (accessible from the menu in the sections "Science" and "Geography"), and a symbolic link in a known path (default: /usr/bin/MODIStsp). If the path of the symbolic link is included in the user PATH variable, the standalone execution can be done simply calling `MODIStsp -g -s "/yourpath/youroptions.RData"`.   
+
+* **In Windows:**: this creates a link in the Start Menu and optionally a desktop shortcut.
+
+See `?install_MODIStsp_launcher` for details and path customisations.
+
+# References
