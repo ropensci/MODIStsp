@@ -21,11 +21,11 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 	if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)}
 	if (!exists("general_opts") | !exists("mod_prod_list") | !exists("prod_opt_list")) {
-		warning('The previously saved options file is corrupted; a new default one will be generated...')
+		warning('The previously saved options file is corrupted or missing; a new default one will be generated...')
 		MODIStsp_read_xml(previous_file = general_opts$previous_file, xml_file = general_opts$xml_file )
 		load(general_opts$previous_file)
   } else if (is.null(attr(general_opts,"GeneratedBy")) | is.null(attr(mod_prod_list,"GeneratedBy")) | is.null(attr(prod_opt_list,"GeneratedBy"))) {
-		warning('The previously saved options file is corrupted; a new default one will be generated...')
+		warning('The previously saved options file is corrupted or missing; a new default one will be generated...')
 		MODIStsp_read_xml(previous_file = general_opts$previous_file, xml_file = general_opts$xml_file )
 		load(general_opts$previous_file)
 	}
@@ -84,7 +84,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Sensor selection
 #- ------------------------------------------------------------------------------- -#
-	sens_wid <- gdroplist(items = c("Terra","Aqua", "Both"), container = prod_group, text = 'Select',
+	sens_wid <- gdroplist(items = c("Terra","Aqua", "Both"), container = prod_group, text = 'Select Layers',
 			selected = match(general_opts$sensor, c("Terra","Aqua", "Both")))
 	addSpace(satprod_frame, 20, horizontal = TRUE)
 
@@ -150,7 +150,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 				# Start/Cancel widgets ----
 				bands_group <- ggroup(container = selgroup, horizontal = TRUE)
-				accept_but <- gbutton(text = 'OK', container = bands_group, handler = function(button,...){ # On accept, retrieve and save selected layers
+				accept_but <- gbutton(text = 'Accept', container = bands_group, handler = function(button,...){ # On accept, retrieve and save selected layers
 
 							pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
 							tmp_arr_bands <- array(data = 0 , dim = length(check_names))
@@ -782,7 +782,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 	but_group <- ggroup(container = main_group, horizontal = TRUE)
 
-	start_but <- gbutton(text = 'OK', container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
+	start_but <- gbutton(text = 'Start Processing', container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
 				general_opts <- prepare_to_save_options(general_opts)
 				prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL # see the function definition
 				if (check_save_opts) {					# If check passed, save previous file and return
@@ -798,15 +798,15 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 			})
 
 	# On "Quit", exit
-	quit_but <- gbutton(text = 'Quit', container = but_group, handler = function(h,...){ # If "Quit", set "Quit to T and exit
+	quit_but <- gbutton(text = 'Quit Program', container = but_group, handler = function(h,...){ # If "Quit", set "Quit to T and exit
 				assign("Quit", T, envir = globalenv())
 				dispose(main_win)
 			})
 
-	addSpace(but_group, 280, horizontal = TRUE)
+	addSpace(but_group, 370, horizontal = TRUE)
 
 	# On "Load", ask for a old options file and load it --------
-	load_but <- gbutton(text = 'Open', container = but_group, handler = function(h,....){
+	load_but <- gbutton(text = 'Load Options', container = but_group, handler = function(h,....){
 
 				choice <- gfile(type = "open", text = "Select file for loading processing options...")	# ask for file
 
@@ -857,7 +857,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 			})
 
 	# On "Save", ask for a file name and save options (must be a RData file !)  --------
-	save_but <- gbutton(text = 'Save', container = but_group, handler = function(h,....) {
+	save_but <- gbutton(text = 'Save Options', container = but_group, handler = function(h,....) {
 
 				choice <- gfile(type = "save", text = "Select file for saving processing options...")		# File selection widget
 
