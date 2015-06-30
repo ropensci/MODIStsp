@@ -1,15 +1,16 @@
 ---
-title: 'MODIStsp: A tool for automaic preprocessing of MODIS time series'
-author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it)), Luigi Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
+title: "MODIStsp: A tool for automatic preprocessing of MODIS time series"
+author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it)), Luigi
+  Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
-  pdf_document:
-    fig_caption: yes
-    number_section: yes
+  html_document: default
   html_vignette:
     fig_caption: yes
     number_section: yes
-  html_document: default
+  pdf_document:
+    fig_caption: yes
+    number_section: yes
   word_document: default
 bibliography: MODIStsp.bib
 vignette: |
@@ -26,7 +27,7 @@ Development of MODIStsp started from modifications of the ModisDownload "R" scri
 * Allowing the creation of time series of both MODIS original layers and additional Quality Indicators (e.g., data acquisition quality, cloud/snow presence, algorithm used for data production, etc. ) extracted from the aggregated bit-field QA layers
 * Allowing the automatic calculation and creation of time series of several additional Spectral Indexes starting form MODIS surface reflectance products
 
-All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
+All processing parameters can be easily set with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
 
 
 # Installation 
@@ -47,7 +48,7 @@ To Install MODIStsp:
     ```r
     install.packages('devtools')
     require('devtools')
-    install_github('lbusett/MODIStsp', ref = 'devel')
+    install_github('lbusett/MODIStsp', ref = 'master')
     ```
 
 ## Dependencies
@@ -78,7 +79,7 @@ library(MODIStsp)
 MODIStsp()
 ```
 This opens a GUI from which processing options can be specified and eventually saved (or loaded).
-A description of the differentp rocessing parameters to be selected is reported in the "Selection of Processing parameters" subsection at the end of this vignette
+A description of the different processing parameters to be selected is reported in the "Selection of Processing parameters" subsection at the end of this vignette
 
 ## Non-Interactive mode (Using a previously saved options file)
 
@@ -110,104 +111,102 @@ for (single_shape in extent_list) {
 
 # Selection of processing parameters through the GUI
 
-When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection of all processing options required for the creation of the desired MODIS time series 
+When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection of all processing options required for the creation of the desired MODIS time series. The main available processing options are described briefly in the following.
 
 
 ```{r fig.width=7, fig.height=7, fig.cap = "The MODIStsp main GUI",echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('D:/Temp/MODIStsp_GUI.png')
+  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Latex_RSL/Figure_2.png')
   grid.raster(img)
-#   library(knitr)
-#  
-# # Notify that you want to use the counter,
-# # if you set the counter to 3 then it will use 
-# # that as starting number. You can also use strings
-# # if you for instance have a split figure with 
-# # a "1a" and "1b" setup
-# options(figure_counter = TRUE)
-#  
-# # If you want roman letters then set: 
-# # options(figure_counter_roman = TRUE)
-#  
-# # Evaluate the figure caption after the chunk, 
-# # sometimes you want to calculate stuff inside the
-# # chunk that you want to include in the caption and
-# # it is therefore useful to evaluate it afterwards.
-# opts_knit$set(eval.after='fig.cap')
-#  
-# # The actual hook
-# knit_hooks$set(plot = function(x, options) {
-#   fig_fn = paste0(opts_knit$get("base.url"), 
-#                   paste(x, collapse = "."))
-#  
-#   # Some stuff from the default definition
-#   fig.cap <- knitr:::.img.cap(options)
-#  
-#   # Style and additional options that should be included in the img tag
-#   style=c("display: block",
-#           sprintf("margin: %s;",
-#                    switch(options$fig.align, 
-#                           left = 'auto auto auto 0', 
-#                           center = 'auto',
-#                           right = 'auto 0 auto auto')))
-#   # Certain arguments may not belong in style, 
-#   # for instance the width and height are usually
-#   # outside if the do not have a unit specified
-#   addon_args = ""
-#  
-#   # This is perhaps a little overly complicated prepared 
-#   # with the loop but it allows for a more out.parameters if necessary
-#   if (any(grepl("^out.(height|width)", names(options)))){
-#       on <- names(options)[grep("^out.(height|width)", names(options))]
-#       for(out_name in on){
-#           dimName <- substr(out_name, 5, nchar(out_name))
-#           if (grepl("[0-9]+(em|px|%|pt|pc|in|cm|mm)", out_name))
-#               style=append(style, paste0(dimName, ": ", options[[out_name]]))
-#           else if (length(options$out.width) > 0)
-#               addon_args = paste0(addon_args, dimName, "='", options[[out_name]], "'")
-#       }
-#   }
-#  
-#   # Add counter if wanted
-#   fig_number_txt <- ""
-#   cntr <- getOption("figure_counter", FALSE)
-#   if (cntr != FALSE){
-#     if (is.logical(cntr))
-#       cntr <- 1
-#     # The figure_counter_str allows for custom 
-#     # figure text, you may for instance want it in
-#     # bold: <b>Figure %s:</b>
-#     # The %s is so that you have the option of setting the
-#     # counter manually to 1a, 1b, etc if needed
-#     fig_number_txt <- 
-#       sprintf(getOption("figure_counter_str", "Figure %s: "), 
-#               ifelse(getOption("figure_counter_roman", FALSE), 
-#                      as.character(as.roman(cntr)), as.character(cntr)))
-#  
-#     if (is.numeric(cntr))
-#       options(figure_counter = cntr + 1)
-#   }
-#  
-#   # Put it all together
-#   paste0("<figure><img src='", fig_fn, "'", 
-#          " ", addon_args,
-#          paste0(" style='", paste(style, collapse="; "), "'"),
-#          ">",
-#          "<figcaption>", fig_number_txt, fig.cap, "</figcaption></figure>")
-# })
+  library(knitr)
+ 
+# Notify that you want to use the counter,
+# if you set the counter to 3 then it will use 
+# that as starting number. You can also use strings
+# if you for instance have a split figure with 
+# a "1a" and "1b" setup
+options(figure_counter = TRUE)
+ 
+# If you want roman letters then set: 
+# options(figure_counter_roman = TRUE)
+ 
+# Evaluate the figure caption after the chunk, 
+# sometimes you want to calculate stuff inside the
+# chunk that you want to include in the caption and
+# it is therefore useful to evaluate it afterwards.
+opts_knit$set(eval.after='fig.cap')
+ 
+# The actual hook
+knit_hooks$set(plot = function(x, options) {
+  fig_fn = paste0(opts_knit$get("base.url"), 
+                  paste(x, collapse = "."))
+ 
+  # Some stuff from the default definition
+  fig.cap <- knitr:::.img.cap(options)
+ 
+  # Style and additional options that should be included in the img tag
+  style=c("display: block",
+          sprintf("margin: %s;",
+                   switch(options$fig.align, 
+                          left = 'auto auto auto 0', 
+                          center = 'auto',
+                          right = 'auto 0 auto auto')))
+  # Certain arguments may not belong in style, 
+  # for instance the width and height are usually
+  # outside if the do not have a unit specified
+  addon_args = ""
+ 
+  # This is perhaps a little overly complicated prepared 
+  # with the loop but it allows for a more out.parameters if necessary
+  if (any(grepl("^out.(height|width)", names(options)))){
+      on <- names(options)[grep("^out.(height|width)", names(options))]
+      for(out_name in on){
+          dimName <- substr(out_name, 5, nchar(out_name))
+          if (grepl("[0-9]+(em|px|%|pt|pc|in|cm|mm)", out_name))
+              style=append(style, paste0(dimName, ": ", options[[out_name]]))
+          else if (length(options$out.width) > 0)
+              addon_args = paste0(addon_args, dimName, "='", options[[out_name]], "'")
+      }
+  }
+ 
+  # Add counter if wanted
+  fig_number_txt <- ""
+  cntr <- getOption("figure_counter", FALSE)
+  if (cntr != FALSE){
+    if (is.logical(cntr))
+      cntr <- 1
+    # The figure_counter_str allows for custom 
+    # figure text, you may for instance want it in
+    # bold: <b>Figure %s:</b>
+    # The %s is so that you have the option of setting the
+    # counter manually to 1a, 1b, etc if needed
+    fig_number_txt <- 
+      sprintf(getOption("figure_counter_str", "Figure %s: "), 
+              ifelse(getOption("figure_counter_roman", FALSE), 
+                     as.character(as.roman(cntr)), as.character(cntr)))
+ 
+    if (is.numeric(cntr))
+      options(figure_counter = cntr + 1)
+  }
+ 
+  # Put it all together
+  paste0("<figure><img src='", fig_fn, "'", 
+         " ", addon_args,
+         paste0(" style='", paste(style, collapse="; "), "'"),
+         ">",
+         "<figcaption>", fig_number_txt, fig.cap, "</figcaption></figure>")
+})
 ```
-
-The main available processing options are described briefly in the following: 
 
 ##	MODIS Product, Satellites and Layers
 
-Allows to select the MODIS product of interest from a drop-down menu. The user can also select which MODIS sensors should be considered for download and creation of the time series ("Terra", "Aqua" or both). After selecting the product, pushing the "Select Processing Bands" button opens the "Select Processing Layers" GUI panel (Figure 2), from which the user **must** select which MODIS original and/or derived QI and SI layers should be processed: 
+Allows to select the MODIS product of interest from a drop-down menu. The user can also select which MODIS sensors should be considered for download and creation of the time series ("Terra", "Aqua" or both). After selecting the product, pushing the "Select Layers" button opens the "Select Processing Layers" GUI panel (Figure 2), from which the user **must** select which MODIS original and/or derived QI and SI layers should be processed: 
 
 ```{r fig.width = 7,fig.height = 2,  fig.cap = 'The "Select Processing Layers" GUI',echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('D:/Temp/MODIStsp_Layers.png')
+  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Latex_RSL/Figure_3.png')
   grid.raster(img)
 ```
 
@@ -239,7 +238,7 @@ Users can however **specify other SIs to be computed without modifying MODIStsp 
 ```{r fig.height = 1.3, fig.cap = "The GUI for insertion of additional Spectral Indexes",echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('D:/Temp/MODIStsp_addindex.png')
+  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Latex_RSL/Figure_4.png')
   grid.raster(img)
 ```
 

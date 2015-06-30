@@ -399,7 +399,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
               # Removed for now - TBC  in next versions
               # if (multiband_bsq == T) {MODIStsp_refl_bsq(sel_prod, out_prod_folder,bandnames, bandsel_orig_choice, reflbands, reflorder ,file_prefix, yy, DOY)}
 
-            } else {cat("[',date(),'] No available image for selected Tiles in",date_dirs[dir],'.\n')} # End check on at least one image available
+            } else {cat('[',date(),'] No available image for selected Tiles in',date_dirs[date],'.\n')} # End check on at least one image available
 
           } else {cat('[',date(),'] All Required output files for date',date_name, 'are already existing - Doing Nothing !\n')} # End check on all data already processed for date or reprocees = Yes
 

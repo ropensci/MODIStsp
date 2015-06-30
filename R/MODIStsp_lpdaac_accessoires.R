@@ -13,7 +13,7 @@ MODIStsp_lpdaac_accessoires = function() {
 #' @note License: GPL 3.0
 #' @import RCurl
 lpdaac_getmod_dirs <- function(http, .Platform) {
-  
+
   if (strsplit(http,'')[[1]][length(strsplit(http,'')[[1]])] != "/") {http <- paste(http,"/",sep = "")}
   if (.Platform$OS.type == "unix") options('download.file.method' = 'wget')  else options('download.file.method' = 'auto')
   items <- 0
@@ -25,6 +25,7 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
     if (class(items) == "try-error") {
       Sys.sleep(1)
       ce <- ce + 1
+      cat("Trying to reach http server - attempt ", ce)
       print(ce)
       if (ce == 50)  {
         confirm = gconfirm("http server seems to be down! Do you want to retry ? ", icon = 'question', handler = function(h,...){})
@@ -40,9 +41,9 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
   date_dirs <- unlist(lapply(strsplit(items, ">"), function(x){x[length(x) - 1]}))
   date_dirs <- date_dirs[seq(3,length(date_dirs) - 2)]
   date_dirs <- unlist(lapply(strsplit(date_dirs, "/"), function(x){x[1]}))
-  
+
   return(date_dirs)
-  
+
 }
 
 #' lpdaac_getmod_dates
@@ -59,7 +60,7 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
 #' license GPL 3.0
 #' @import RCurl
 lpdaac_getmod_dates <- function(dates, date_dirs) {
-  
+
   if (length(dates) > 1) {
     start.date <- strsplit(dates[1],'\\.')[[1]]
     end.date <- strsplit(dates[2],'\\.')[[1]]
@@ -69,7 +70,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
       if (length(d) == 3)
         if (as.numeric(d[1]) >= as.numeric(start.date[1]) & as.numeric(d[1]) <= as.numeric(end.date[1]) ) wr <- c(wr,i)
     }
-    
+
     if (length(wr) > 0) date_dirs <- date_dirs[wr] else return(NULL)
     wr <- c()
     for (i in 1:length(date_dirs)) {
@@ -77,7 +78,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
       if (as.numeric(d[2]) < as.numeric(start.date[2]) & as.numeric(d[1]) == as.numeric(start.date[1])) wr <- c(wr,i)
       if (as.numeric(d[2]) > as.numeric(end.date[2]) & as.numeric(d[1]) == as.numeric(end.date[1])) wr <- c(wr,i)
     }
-    
+
     if (length(wr) > 0) date_dirs <- date_dirs[-wr]
     if (length(date_dirs) == 0) return(NULL)
     wr <- c()
@@ -89,7 +90,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
     if (length(wr) > 0) date_dirs <- date_dirs[-wr]
     if (length(date_dirs) == 0) return(NULL)
   } else date_dirs <- date_dirs[which(date_dirs == dates[1])]
-  
+
   return(date_dirs)
 }
 # ---------------------------------- ----------------------------------------------#
@@ -116,12 +117,13 @@ lpdaac_getmod_names <- function(http, date_dirs, date, v, h, tiled) {
   class(getlist) <- "try-error"
   ce <- 0
   while (class(getlist) == "try-error") {
-    getlist <- try(strsplit(getURL(paste(http,date_dirs[date], "/", sep = ""), followLocation = TRUE, 
+    getlist <- try(strsplit(getURL(paste(http,date_dirs[date], "/", sep = ""), followLocation = TRUE,
       .opts = list(timeout = 10, maxredirs = 5, verbose = F)), "\r*\n")[[1]],silent = TRUE)
     if (class(getlist) == "try-error") {
-      Sys.sleep(5)
+      Sys.sleep(1)
+      cat("Trying to reach http server - attempt ", ce)
       ce <- ce + 1
-      if (ce == 21) {confirm = gconfirm("http server seems to be down! Do you want to retry ? ", icon = 'question', 
+      if (ce == 50) {confirm = gconfirm("http server seems to be down! Do you want to retry ? ", icon = 'question',
         handler = function(h,...){})
       if (confirm == 'FALSE') {
         cat("[',date(),'] Error: http server seems to be down! Please Retry Later!\n")
@@ -147,11 +149,11 @@ lpdaac_getmod_names <- function(http, date_dirs, date, v, h, tiled) {
       }
     }
   } else {
-    
+
     Modislist <- grep(".hdf$",getlist, value = T)
   }
   return(Modislist)
-  
+
 }
 
 
