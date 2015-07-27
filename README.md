@@ -18,7 +18,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
     ```r
     install.packages('devtools')
     require('devtools')
-    install_github('lbusett/LB_MOD_DWL', ref = 'master')
+    install_github('lbusett/MODIStsp', ref = 'master')
     ```
 
 ## Running the tool
