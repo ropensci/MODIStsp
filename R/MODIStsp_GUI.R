@@ -694,7 +694,6 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 		general_opts$out_folder <- svalue(outfold_wid)		# # Retrieve Folder options
 		general_opts$out_folder_mod <- svalue(outfoldmod_wid)
 
-
 		check_save_opts <<- TRUE
 		# Send warning if HDF deletion selected
 		if (general_opts$delete_hdf == 'Yes') {check_save_opts <<- gconfirm('Warning! HDF files in Original MODIS folder will be deleted at the end of processing! Are you sure? ', title = 'Warning', icon = 'warning')}
@@ -725,7 +724,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 		# Check if selected tiles are consistent with the bounding box
 		if (general_opts$full_ext == 'Resized') {
 			bbox_mod <- reproj_bbox( general_opts$bbox, svalue(output_proj4_wid), general_opts$MOD_proj_str, enlarge = TRUE)
-			d_bbox_mod_tiled <- intersect(modis_grid,extent(bbox_mod))
+			d_bbox_mod_tiled <- crop(modis_grid,extent(bbox_mod))
 			required_tiles <- paste0('H',apply(expand.grid('H' = min(d_bbox_mod_tiled$H):max(d_bbox_mod_tiled$H),
 									'V' = min(d_bbox_mod_tiled$V):max(d_bbox_mod_tiled$V)), 1, paste, collapse = '_V'))
 			selected_tiles <- paste0('H',apply(expand.grid('H' = svalue(start_x_wid):svalue(end_x_wid),
