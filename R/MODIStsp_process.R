@@ -68,7 +68,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 		start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str, nodata_in,
 		nodata_out,nodata_change, datatype,	bandsel, bandnames, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
 		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in, full_ext,
-		quality_nodata_out, file_prefixes, main_out_folder, resampling, ts_format) {
+		quality_nodata_out, file_prefixes, main_out_folder, resampling, ts_format, gui=TRUE) {
 	
 	if (nodata_change == 'No') {nodata_out = nodata_in}  # if nodata chande set to no, set ou_nodata to in_nodata
 	dir.create(out_folder_mod, recursive = T, showWarnings = FALSE) # create out folder if not existing
@@ -80,9 +80,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 	start_year = unlist(strsplit(start_date, '[.]'))[1]
 	end_year = unlist(strsplit(end_date, '[.]'))[1]
 	
-	# Add a message window while the file is charging (TODO: foreground?)
-	mess = gwindow(title = 'Processing Status', container = TRUE, width = 400, height = 40)
-	mess_lab = glabel(text = paste('--- Processing ---'), editable = FALSE, container = mess)
+	# Add a message window while the file is charging (TODO: create a function to pass the message to cat if gui=FALSE and to svalue(mess_lab) if gui=TRUE)
+	mess_text <- 'Processing'
+	if (gui) {
+		mess = gwindow(title = 'Processing Status', container = TRUE, width = 400, height = 40)
+		mess_lab = glabel(text = paste('---',mess_text,'---'), editable = FALSE, container = mess)
+	} else {
+		cat('[',date(),']',mess_text,'\n')
+	}
 	
 	if (sensor == 'Both') {senslist = c('Terra','Aqua')} else {senslist = sensor}		# If both sensor selected, do a cycle. Process first Terra then Aqua
 	for (sens_sel in senslist) {		# cycle on selected sensors
@@ -133,8 +138,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 			
 			# Processing status message
 			
-			svalue(mess_lab) = paste('--- Retrieving Files for Year ',as.character(yy),' ---')
-			
+			mes_text <- paste('Retrieving Files for Year ',as.character(yy))
+			if (gui) {svalue(mess_lab) = paste('---',mess_text,'---')} else {cat('[',date(),']',mess_text,'\n')}
+	
 			# Get a list of the folders containing hdf images required (Corresponding to the subfolders in lpdaac corresponding to
 			# selected product, dates, and current year under processing)
 			
@@ -190,8 +196,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 								if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
 									er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
 									while (er != 0) {   # repeat until no error or > 30 tryyouts
-										cat('[',date(),'] Downloading File:', modisname,'\n' )
-										svalue(mess_lab) = paste('--- Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist),' ---')    # Update progress window
+										mess_text <- paste('Downloading Files for date', date_name, ':' ,which(modislist == modisname),' of ', length(modislist))
+										if (gui) {svalue(mess_lab) = paste('---',mess_text,'---')} else {cat('[',date(),']',mess_text,'\n')}	# Update progress window
 										er <- tryCatch(download.file(url = remote_filename, destfile = local_filename, mode = 'wb', quiet = F, cacheOK = FALSE),
 												warning = function(war) {print(war) ; return(1)}, error = function(err) {print(err);	return(1)} )
 										if (er != 0) {	# Stop after 30 failed attempts
@@ -267,7 +273,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 								bands = numeric(length(bandnames))													# Create vector with length = bands, filled with zeroes
 								er_mos = 1  														# dummies for error state
 								if (bandsel[band] == 1) {					# If band selected, process it
-									svalue(mess_lab) =  (paste('--- Mosaicing ', bandnames[band],' files for date: ',date_name ,' ---'))
+									mess_text <- paste('Mosaicing ', bandnames[band],' files for date: ',date_name)
+									if (gui) {svalue(mess_lab) = paste('---',mess_text,'---')} else {cat('[',date(),']',mess_text,'\n')}
 									bands[band] = 1																			# IF band selected for processing, put its value to 1
 									dir.create(file.path(out_prod_folder, bandnames[band]), showWarnings = F, recursive = T)
 									bands = paste(as.character(bands), collapse = '', sep = ' ')					# Convert to character
@@ -303,8 +310,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 										# Convert to output projection, extent and format using gdalwarp ----
 										# ---------------------------------- ----------------------------------------------#
 										
-										cat('[',date(),'] Reprojecting', bandnames[band],'files for date:',date_name,'\n' )
-										svalue(mess_lab) =  (paste('--- Reprojecting ', bandnames[band],'files for date: ',date_name,' ---'))
+										mess_text <- paste('Reprojecting', bandnames[band],'files for date: ',date_name)
+										if (gui) {svalue(mess_lab) = paste('---',mess_text,'---')} else {cat('[',date(),']',mess_text,'\n')}
 										
 										## Launch the reprojection - operations to be done depends on whether resize and/or reprojection and/or
 										## resampling are required
@@ -345,8 +352,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 							for (band in which(indexes_bandsel == 1)) {
 								indexes_band =  indexes_bandnames[band] 	# index name
 								formula = indexes_formula[band]				#index formula
-								svalue(mess_lab) = paste('--- Computing',  indexes_band,' for date: ',date_name,' ---')
-								cat('[',date(),'] Computing', indexes_band,'for date: ',date_name,'\n' )
+								mess_text <- paste('Computing',  indexes_band,' for date: ',date_name)
+								if (gui) {svalue(mess_lab) = paste('---',mess_text,'---')} else {cat('[',date(),']',mess_text,'\n')}
 								out_filename = file.path(out_prod_folder,indexes_band,paste0(file_prefix,'_',indexes_band,'_',yy,'_', DOY))
 								if (out_format == 'GTiff') {out_filename = paste0(out_filename, '.tif')} else {out_filename = paste0(out_filename, '.dat')}
 								dir.create(file.path(out_prod_folder,indexes_band), showWarnings = F, recursive = T) # create folder for index
@@ -366,7 +373,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 								bitN =  quality_bitN[band]  #  bitfields corresponding to indicator within source
 								nodata_qa_in = quality_nodata_in[band]
 								nodata_qa_out = quality_nodata_out[band]
-								svalue(mess_lab) = paste('--- Computing',  quality_band,' for date: ',date_name,' ---')
+								mess_text <- paste('Computing',  quality_band,' for date: ',date_name)
+								if (gui) {svalue(mess_lab) = paste('---',mess_text,'---')} else {cat('[',date(),']',mess_text,'\n')}
 								cat('Computing', quality_band,'for date:',date_name,'\n')
 								out_filename = file.path(out_prod_folder,quality_band,paste0(file_prefix,'_',quality_band,'_',yy,'_', DOY))
 								if (out_format == 'GTiff') {out_filename = paste0(out_filename, '.tif')} else {out_filename = paste0(out_filename, '.dat')}
@@ -462,8 +470,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 	# Close GUI and clean-up
 	#- ------------------------------------------------------------------------------- -#
 	gc()
-	addHandlerUnrealize(mess_lab, handler = function(h,...) {return(FALSE)})		# Allow message lab to be closed since processing ended .
-	dispose(mess_lab)
+	if (gui) {
+		addHandlerUnrealize(mess_lab, handler = function(h,...) {return(FALSE)})		# Allow message lab to be closed since processing ended .
+		dispose(mess_lab)
+	}
 	unlink(file.path(out_prod_folder,'Temp'),recursive = TRUE)
 	return('DONE')
 }
