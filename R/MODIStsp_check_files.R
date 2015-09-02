@@ -30,7 +30,7 @@ MODIStsp_check_files = function(out_prod_folder, file_prefix,bandnames, bandsel_
     outrep_file = file.path(out_prod_folder, bandnames[band], paste0(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
     if (out_format == 'GTiff') {outder_file = paste0(outrep_file, '.tif')}
     if (out_format == 'ENVI') {outder_file = paste0(outrep_file, '.dat')}
-    if (file.exists(outrep_file) == F) {check = F}
+    if (file.exists(outder_file) == F) {check = F}
   }
 
   # check existence of all files related to spectral indexes ----

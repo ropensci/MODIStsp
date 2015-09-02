@@ -205,7 +205,7 @@ MODIStsp = function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISts
 						quality_bandnames = prod_opts$quality_bandnames,quality_bandsel = prod_opts$quality_bandsel, quality_bitN = prod_opts$quality_bitN,
 						quality_source = prod_opts$quality_source, quality_nodata_in = prod_opts$quality_nodata_in,
 						quality_nodata_out = prod_opts$quality_nodata_out,
-						file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder))
+						file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder, gui=gui))
 
 	} # End If on "Quit" --> If "Quit" above is skipped and program terminates
 
