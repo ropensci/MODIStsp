@@ -21,47 +21,50 @@
 #' @import raster
 #' @importFrom tools file_path_sans_ext
 #' @import stringr
-MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_sel,  ts_format, nodata_value,out_format ) {
-  
+MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_sel,  ts_format, nodata_value,out_format, rts ) {
+
   if (sens_sel == "Terra") {file_prefix = file_prefixes[["Terra"]]}
   if (sens_sel == "Aqua")  {file_prefix = file_prefixes[["Aqua"]]}
   if (sens_sel == "Mixed") {file_prefix = paste(file_prefixes[["Terra"]], file_prefixes[["Aqua"]], sep = '_')}
-  
+
   if (out_format == 'ENVI') { # retrieve files list of the time serie (ENVI format)
     out_meta_files = list.files(file.path(out_prod_folder,meta_band), pattern = '\\.dat$', full.names = T)	# get list of ENVI files
     if (sens_sel != "Mixed")  {out_meta_files = out_meta_files[grep(file_prefix,out_meta_files)]}	# get list of ENVI files
-    
+
     out_meta_files_hdr = list.files(file.path(out_prod_folder,meta_band), pattern = '\\.hdr$', full.names = T) # get list of hdr files
     if (sens_sel != "Mixed")  {out_meta_files_hdr = out_meta_files_hdr[grep(file_prefix,out_meta_files_hdr)]}	# get list of ENVI files
   }
-  
+
   if (out_format == 'GTiff') {# retrieve files list of the time serie (GTiff format)
     out_meta_files = list.files(file.path(out_prod_folder,meta_band), pattern = '\\.tif$', full.names = T)	# get list of ENVI files
     if (sens_sel != "Mixed")  {out_meta_files = out_meta_files[grep(file_prefix,out_meta_files)]}	# get list of ENVI files
   }
-  
+
   skip_flag = 0    # initialize skip_flag to 0
   if ((sens_sel == "Mixed") &  #Set a flag to 1 if "mixed" was selected but either 0 AQUA or 0 TERRA files are in the time serie
-      (length(grep(file_prefixes[['Aqua']],out_meta_files)) == 0) |   # in that case, the creation of META files for the mixed case is skipped !
-      (length(grep(file_prefixes[['Terra']],out_meta_files)) == 0)
+      ((length(grep(file_prefixes[['Aqua']],out_meta_files)) == 0) |   # in that case, the creation of META files for the mixed case is skipped !
+      (length(grep(file_prefixes[['Terra']],out_meta_files)) == 0))
   ) {skip_flag = 1
   }
-  
+
   if (skip_flag != 1) {   # If skip_flag = 1 ( mixed TS, but data from terra or aqua missing) do nothing
     if (length(out_meta_files) > 0) {   # If no files available, skip metadata creation
-      
+
       doys = (str_sub(basename(out_meta_files),-7,-5))		# retrieve the doys and years from filenames
       years = (str_sub(basename(out_meta_files),-12,-9))
       acq_order = order(as.numeric(paste0(years,doys)))    # find the files order (by acq.date
-      
+
       doys = as.numeric(doys[acq_order])   ; years = as.numeric(years[acq_order])    # reorder doys and years
-      out_meta_files = out_meta_files[acq_order]			 #  Reorder Files  according to acquisition date (useful to have a META file with bands
-      # in the correct order
-      
+      out_meta_files = out_meta_files[acq_order]			 #  Reorder Files  according to acquisition date (useful to have a META file with bands in the correct order
+			temp_dates = as.Date(strptime(paste(years, doys), format = "%Y %j"))
+			doy_min = min(doys[which(years == min(years))])		; year_min = min(years)
+			doy_max = max(doys[which(years == max(years))])		; year_max = max(years)
+
+
       if (ts_format == 'ENVI Meta Files' | ts_format == 'ENVI and GDAL') {
-        
+
         if (out_format == 'ENVI') {
-          
+
           # retrieve nsamp and nrow from first hdr file
           head_file = paste0(out_meta_files_hdr[1])
           fileConn_hd <- file(head_file)
@@ -69,7 +72,7 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
           nrow = (strsplit(readLines(fileConn_hd)[5], '=')[[1]])[2]
           close(fileConn_hd)
         }
-        
+
         if (out_format == 'GTiff') {
           # retrieve nsamp and nrow from first tif file
           nsamp = raster(out_meta_files[1])@ncols
@@ -79,8 +82,6 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
         # Write the ENVI meta file
         meta_dir = file.path(out_prod_folder,'Time_Series','ENVI_META')
         dir.create(meta_dir, showWarnings = F,recursive = T)
-        doy_min = min(doys[which(years == min(years))])		; year_min = min(years)
-        doy_max = max(doys[which(years == max(years))])		; year_max = max(years)
         meta_filename = file.path(meta_dir,paste(file_prefix,meta_band,doy_min,year_min,doy_max,year_max,"META.dat", sep = '_'))  # define fileneame for meta
         fileConn_meta <- file(meta_filename, 'w')      		# Open connection
         writeLines(c('ENVI META FILE'), fileConn_meta)		# Write first line
@@ -92,11 +93,11 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
                      fileConn_meta)
         }
         close(fileConn_meta)
-        
+
         # Compute the "wavelengths" - DOYS elapsed from 01/01/2000
-        temp_dates = strptime(paste(years, doys), format = "%Y %j")
+				temp_dates = as.Date(strptime(paste(years, doys), format = "%Y %j"))
         elapsed = signif(difftime(temp_dates,strptime(paste(2000, 001), format = "%Y %j"), units = 'days'),5)
-        
+
         # Write the hdr file for the meta file
         fileConn_meta_hdr <- file(paste0(file_path_sans_ext(meta_filename),'.hdr'), 'w')
         writeLines(c('ENVI'), fileConn_meta_hdr)		# Write first line
@@ -111,26 +112,29 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
         writeLines(c('wavelength units = DOY'), fileConn_meta_hdr)		# Dummy
         writeLines(c('wavelength = {', paste(as.numeric(elapsed),collapse = ","),'}'), fileConn_meta_hdr)		# Wavelengths
         close(fileConn_meta_hdr)
+
       }
       # Write a gdal vrt file
       if (ts_format == 'GDAL vrt Files' | ts_format == 'ENVI and GDAL') {
-        
+
         meta_dir = file.path(out_prod_folder,'Time_Series','GDAL_vrt')
         dir.create(meta_dir, showWarnings = F,recursive = T)
-        
-        doy_min = min(doys[which(years == min(years))])		; year_min = min(years)
-        doy_max = max(doys[which(years == max(years))])		; year_max = max(years)
         meta_filename = file.path(meta_dir,paste(file_prefix,meta_band,doy_min,year_min,doy_max,year_max,"GDAL_vrt.vrt", sep = '_'))
         gdalbuildvrt(out_meta_files,meta_filename, separate = T, srcnodata = nodata_value, vrtnodata = nodata_value)
-        
-        #			dates = as.POSIXct(paste(format(strptime(doys, format = "%j"), format = "%m-%d"),years, sep = '-'),format = '%m-%d-%Y')
-        #			raster = raster(meta_filename)
-        #			attributes(raster)$doys	 = doys
-        #			attributes(raster)$years = years
-        #			attributes(raster)$dates = dates
-        #			save(raster, file = meta_filename)
-        
+
       } # end If on necessity to build R Stack files
+
+			# If "rts" selected, also build Raster Time Series "R" output files
+			if (rts == 'Yes') {
+
+				meta_dir = file.path(out_prod_folder,'Time_Series/RData')
+				dir.create(meta_dir, showWarnings = FALSE, recursive = T)
+				raster_ts = rts(out_meta_files,temp_dates)
+				NAvalue(raster_ts@raster) = as.integer(nodata_value)
+				RData_filename = file.path(meta_dir,paste(file_prefix,meta_band,doy_min,year_min,doy_max,year_max,"RData.RData", sep = '_'))
+				save(raster_ts,file = RData_filename)
+
+			}
     }
   } # End if on check of existence of both aqua and terra files for "mixed" metafiles creation
 }
