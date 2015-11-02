@@ -66,7 +66,7 @@
 
 MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = 'Yes', delete_hdf = 'No', sensor, https,
 		start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str, nodata_in,
-		nodata_out,nodata_change, datatype,	bandsel, bandnames, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
+		nodata_out,nodata_change,rts, datatype,	bandsel, bandnames, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
 		quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in, full_ext,
 		quality_nodata_out, file_prefixes, main_out_folder, resampling, ts_format, gui=TRUE) {
 	
@@ -180,14 +180,16 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 								remote_xml = NA; class(remote_xml) = 'try-error'
 								while (remote_xml_tries > 0) {
 									remote_xml <- try(xmlParse(paste0(remote_filename,'.xml')))
-									if (class(remote_xml) == 'try-error') {
+									if (class(remote_xml)[1] == 'try-error') {
 										remote_xml_tries = remote_xml_tries - 1
 									} else {
 										remote_xml_tries = 0
 									}
 								}
+								
 								# if the xml was available, check the size; otherwise, set as the local size to skip the check
-								if (class(remote_xml) == 'try-error') {
+								if (class(remote_xml)[1] == 'try-error') {
+									
 									remote_filesize = local_filesize
 								} else {
 									remote_filesize = as.integer(xmlToList(xmlRoot(remote_xml)[['GranuleURMetaData']][['DataFiles']][['DataFileContainer']][['FileSize']]))
@@ -324,8 +326,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 												} else if (out_res_sel == "Resampled" & outproj_str != MOD_proj_str & full_ext == 'Resized') {'Resample1_Resize1'
 												} else {'Error'}
 										
+										if (out_format == 'GTiff') {
 										switch( reproj_type,
-												GdalTranslate  =  gdal_translate(outfile_vrt, outrep_file, a_srs = MOD_proj_str, of = out_format, ot = datatype[band], a_nodata = nodata_out[band],
+												GdalTranslate  =  gdal_translate(outfile_vrt,  outrep_file, a_srs = MOD_proj_str, of = out_format, ot = datatype[band], a_nodata = nodata_out[band],
 														co = paste('COMPRESS',compress,sep = '='), overwrite = TRUE),
 												Resample0_Resize0  =  gdalwarp(outfile_vrt, outrep_file, s_srs = MOD_proj_str, t_srs = outproj_str, of = out_format, r = resampling,
 														co = paste('COMPRESS',compress,sep = '='), wo = "INIT_DEST = NO_DATA", wt = datatype[band], overwrite = TRUE),
@@ -336,7 +339,21 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 												Resample1_Resize1  =  gdalwarp(outfile_vrt, outrep_file, s_srs = MOD_proj_str, t_srs = outproj_str, of = out_format, r = resampling, te = bbox, tr = rep(out_res,2),
 														co = paste('COMPRESS',compress,sep = '='), wo = "INIT_DEST = NO_DATA", wt = datatype[band], overwrite = TRUE),
 												quit('Internal error in out_res_sel, outproj_str or full_ext.'))
+										} else {
+											switch( reproj_type,
+													GdalTranslate  =  gdal_translate(outfile_vrt,  outrep_file, a_srs = MOD_proj_str, of = out_format, ot = datatype[band], a_nodata = nodata_out[band],
+															 overwrite = TRUE),
+													Resample0_Resize0  =  gdalwarp(outfile_vrt, outrep_file, s_srs = MOD_proj_str, t_srs = outproj_str, of = out_format, r = resampling,
+															 wo = "INIT_DEST = NO_DATA", wt = datatype[band], overwrite = TRUE),
+													Resample0_Resize1  =  gdalwarp(outfile_vrt, outrep_file, s_srs = MOD_proj_str, t_srs = outproj_str, of = out_format, r = resampling, te = bbox,
+														 wo = "INIT_DEST = NO_DATA", wt = datatype[band], overwrite = TRUE),
+													Resample1_Resize0  =  gdalwarp(outfile_vrt, outrep_file, s_srs = MOD_proj_str, t_srs = outproj_str, of = out_format, r = resampling, tr = rep(out_res,2),
+															 wo = "INIT_DEST = NO_DATA", wt = datatype[band], overwrite = TRUE),
+													Resample1_Resize1  =  gdalwarp(outfile_vrt, outrep_file, s_srs = MOD_proj_str, t_srs = outproj_str, of = out_format, r = resampling, te = bbox, tr = rep(out_res,2),
+															 wo = "INIT_DEST = NO_DATA", wt = datatype[band], overwrite = TRUE),
+													quit('Internal error in out_res_sel, outproj_str or full_ext.'))
 										
+										}
 										gc()
 										xml_file = paste0(outrep_file,'.aux.xml')		# Delete xml files created by gdalwarp
 										unlink(xml_file)
@@ -450,19 +467,21 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 	for (sens_sel in senslist) {		# cycle on selected sensors
 		
 		for (band in which(bandsel == 1)) { # Create virtual files for original layers
+			cat("[',date(),'] Creating Virtual Files and rts time series for layer", bandnames[band], "\n")
 			MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = bandnames[band],
-					file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format,  nodata_value = nodata_out[band], out_format = out_format)
+					file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format,  nodata_value = nodata_out[band], out_format = out_format, rts = rts)
 		} #End Cycle on bandsel
 		
 		for (band in which(indexes_bandsel == 1)) {  # Create virtual files for QI layers
+			cat("[',date(),'] Creating Virtual Files and rts time series for layer", indexes_bandnames[band], "\n")
 			MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = indexes_bandnames[band],
-					file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = indexes_nodata_out[band], out_format = out_format)
+					file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = indexes_nodata_out[band], out_format = out_format, rts = rts)
 		} #End Cycle on indexes_bandsel
 		
 		for (band in which(quality_bandsel == 1)) {	# Create virtual files for SI layers
-			
+			cat("[',date(),'] Creating Virtual Files and rts time series for layer", quality_bandnames[band], "\n")
 			MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = quality_bandnames[band]		,
-					file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = quality_nodata_out[band], out_format = out_format)
+					file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = quality_nodata_out[band], out_format = out_format, rts = rts)
 		} #End Cycle on quality_bandsel
 		
 	}
