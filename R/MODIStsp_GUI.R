@@ -34,8 +34,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 #  Start Building the GUI
 #- ------------------------------------------------------------------------------- -#
 
-	main_win <- gbasicdialog(title = "Select Main Processing Options", parent = NULL, do.buttons = F,
-			visible = F, spacing = 10)
+	main_win <- gbasicdialog(title = "Select Main Processing Options", parent = NULL, do.buttons = F)
 	main_group <- ggroup(container = main_win, horizontal = FALSE, expand = T)
 	sel_prod <- general_opts$sel_prod # get the product name selectedin the previous options file
 
@@ -43,7 +42,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	# Widgets for product selection and bands selection
 	#- ------------------------------------------------------------------------------- -#
 	satprod_frame <- gframe(text = '<span foreground="blue" size="large">MODIS Product, Satellites and Layers selection</span>',
-		markup = T,horizontal = F, container = main_group, spacing = 5)
+		markup = T,horizontal = F, container = main_group)
 
 	checked <- which(mod_prod_list == general_opts$sel_prod)
 
@@ -57,7 +56,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	addSpace(labels_group, 190)
 	label2 <- glabel(text = '<span weight = "bold">Satellites </span>', markup = T,
 		container = labels_group)
-	addSpace(labels_group, 5)
+	addSpace(labels_group, 85)
 	label3 <- glabel(text = '<span weight = "bold">      Processing Layers</span>', markup = T, container = labels_group)
 
 	#- ------------------------------------------------------------------------------- -#
@@ -195,15 +194,15 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Dates selection
 #- ------------------------------------------------------------------------------- -#
-	dates_frame <- gframe(text = '<span foreground="blue" size="large">Processing Period</span>', markup = T, container = main_group, horizontal = T, expand = T, spacing = 10)
+	dates_frame <- gframe(text = '<span foreground="blue" size="large">Processing Period</span>', markup = T, container = main_group, horizontal = T, expand = T)
 			# start date ----
 			start_date_lab <- glabel(text = '<span weight = "bold" >Starting Date:</span>',markup = T,
 				container = dates_frame)  ; size(start_date_lab ) = c(120,20)
 			start_day_wid <- gspinbutton(1,31,  container = dates_frame , value = general_opts$start_day)
 			start_month_wid <- gspinbutton(1,12,  container = dates_frame , value = general_opts$start_month)
 			start_year_wid <- gspinbutton(2000 ,2020,  container = dates_frame , value = general_opts$start_year, horizontal = T)
-			size(start_day_wid) = size(start_month_wid) = c(35,25)
-			size(start_year_wid) = c(55,25)
+#			size(start_day_wid) = size(start_month_wid) = c(35,25)
+#			size(start_year_wid) = c(55,25)
 
 			# End date ----
 			end_date_lab <- glabel(text = '<span weight = "bold" >Ending Date:</span>', markup = T,
@@ -211,19 +210,19 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 			end_day_wid <- gspinbutton(1,31,  container = dates_frame , value = general_opts$end_day)
 			end_month_wid <- gspinbutton(1,12,  container = dates_frame , value = general_opts$end_month)
 			end_year_wid <- gspinbutton(2000,2020,  container = dates_frame , value = general_opts$end_year)
-			size(end_day_wid) <- size(end_month_wid) <- c(35,25)
-			size(end_year_wid) <- c(55,25)
+#			size(end_day_wid) <- size(end_month_wid) <- c(35,25)
+#			size(end_year_wid) <- c(55,25)
 
 
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Tiles selection
 #- ------------------------------------------------------------------------------- -#
 	Spatial_Frame <- gframe(text = '<span foreground="blue" size="large">Spatial Extent </span>', markup = T,
-		container = main_group, horizontal = F, expand = T, spacing = 10)
+		container = main_group, horizontal = F, expand = T)
 	output_ext_group = ggroup(container = Spatial_Frame, horizontal = TRUE)
 	output_ext_lab <- glabel(text = '<span weight = "bold" >Output Extent:</span>',markup = T,
 		container = output_ext_group)
-	size(output_ext_lab) <- c(120,20)
+#	size(output_ext_lab) <- c(120,20)
 	output_ext_wid <-  gcombobox(c('Full Tiles Extent','Resized'), container = output_ext_group,
 			selected = match(general_opts$full_ext, c('Full Tiles Extent','Resized')), handler = function(h,....) {
 				current_sel = svalue(output_ext_wid)
@@ -238,7 +237,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 					enabled(bbox_from_file) <- T
 				}
 			})
-	size(output_ext_wid) <- c(120,20)
+#	size(output_ext_wid) <- c(120,20)
 
 	#-------------------------------------------
 	# button to retrieve tiles from bounding box
@@ -246,8 +245,9 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 	## Function to update the selected tiles with the intersection with the bounding box
 	update_tiles = function(bbox,...) {
+	   # browser()
 		bbox_mod <- reproj_bbox(bbox, svalue(output_proj4_wid), general_opts$MOD_proj_str, enlarge = TRUE)
-		d_bbox_mod_tiled <- intersect(modis_grid,extent(bbox_mod))
+		d_bbox_mod_tiled <- crop(modis_grid,extent(bbox_mod))
 		svalue(start_x_wid)  <- min(d_bbox_mod_tiled$H)
 		svalue(end_x_wid)  <- max(d_bbox_mod_tiled$H)
 		svalue(start_y_wid) <- min(d_bbox_mod_tiled$V)
@@ -290,10 +290,10 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 				wait_window <- gwindow(title = "Please wait", container = TRUE, width = 400, height = 40)
 				size(wait_window) <- c(100,8)
 				addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
-				wait_window_lab = glabel(text = paste('Retrieveing the Extent, please wait...'), editable = FALSE,
+				wait_window_lab = glabel(text = paste('Retrieving the Extent, please wait...'), editable = FALSE,
 					container = wait_window)
 
-				# Convert bbox coordinates in those of output projection
+								# Convert bbox coordinates in those of output projection
 				out_proj_crs = if (svalue(proj_wid) != "User Defined") {
 					general_opts$out_proj_list[[svalue(proj_wid)]]
 				} else {general_opts$user_proj4}
@@ -324,10 +324,10 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	#-------------------------------------------------
 
 	tiles_group <- gframe(text = '<span weight="bold">Required MODIS Tiles </span>', markup = T,
-		container = Spatial_Frame, horizontal = F, expand = T, spacing = 10, pos = 1)
+		container = Spatial_Frame, horizontal = F, expand = T, pos = 1)
 
 	# horizontal ----
-	x_group <- ggroup(container = tiles_group, horizontal = TRUE)
+	x_group <- ggroup(container = tiles_group, horizontal = TRUE,spacing = 10)
 	start_x_lab <- glabel(text = '<span weight = "bold" >Horizontal Tiles:</span>',markup = T,
 	 container = x_group)
 	start_x_start <- glabel(text = 'Start: ', container = x_group)
@@ -335,8 +335,8 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	end_x_lab <- glabel(text = 'End: ', container = x_group)
 	end_x_wid <- gspinbutton(1, 35, text = 'Select', container = x_group, value = general_opts$end_x)
 
-	size(start_x_lab) = c(120,20)
-	size(start_x_wid) = size(end_x_wid) = size(end_x_lab) = size(start_x_start) = c(35,25)
+#	size(start_x_lab) = c(120,20)
+#	size(start_x_wid) = size(end_x_wid) = size(end_x_lab) = size(start_x_start) = c(35,25)
 
 	show_map <- gbutton(text = 'Show Tiles Map', border = T,
 			handler = function(h,....) {
@@ -346,35 +346,35 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 			container = x_group )
 
 	# vertical ----
-	y_group <- ggroup(container = tiles_group, horizontal = TRUE)
+	y_group <- ggroup(container = tiles_group, horizontal = TRUE ,spacing = 10)
 	start_y_lab <- glabel(text = '<span weight = "bold" >Vertical Tiles:</span>',markup = T,
 		container = y_group)
-	start_y_start <- glabel(text = 'Start: ', container = y_group)
+	start_y_start <- glabel(text = 'Start:      ', container = y_group)
 	start_y_wid <- gspinbutton(0,17, text = 'Select', container = y_group, value = general_opts$start_y)
 	end_y_lab <- glabel(text = 'End: ', container = y_group)
 	end_y_wid <- gspinbutton(0,17, text = 'Select', container = y_group, value = general_opts$end_y)
 
-	size(start_y_lab) = c(120,20)
- 	size(start_y_wid) = size(end_y_wid) = size(end_y_lab) = size(start_y_start) = c(35,25)
+#	size(start_y_lab) = c(120,20)
+# 	size(start_y_wid) = size(end_y_wid) = size(end_y_lab) = size(start_y_start) = c(35,25)
 
 	if (prod_opt_list[[checked]]$tiled == 0) { enabled(tiles_group) <- F} else {(enabled(tiles_group) <- T)}
 
 	# Extent ----
 	bounding_group <- gframe(text = '<span weight="bold">Bounding Box </span>', markup = T,
-		container = Spatial_Frame, horizontal = F, expand = T, spacing = 10, pos = 1)
+		container = Spatial_Frame, horizontal = F, expand = T,  pos = 1)
 
 	# bounding box ----
 	bbox_group <- ggroup(horizontal = FALSE, container = bounding_group)
 	output_bbox_lab <- glabel(text = '<span weight = "bold" > Bounding Box for output images (IN OUTPUT PROJECTION !) </span>',markup = T, container = bbox_group, expand = T)
-	size(output_ext_lab) <- c(120,15)
+#	size(output_ext_lab) <- c(120,15)
 
 	Lon_group <- ggroup(horizontal = TRUE, container = bbox_group)
-	output_ULeast_lab <- glabel('Upper Left Easting (xmin)', container = Lon_group)
+	output_ULeast_lab <- glabel('Upper Left Easting (xmin)     ', container = Lon_group)
 	output_ULeast_wid <- gedit(text = general_opts$bbox[1], container = Lon_group, width = 10)
 	addSpace(Lon_group, 30, horizontal = TRUE)
 	output_LReast_lab <- glabel('Lower Right Easting (xmax)', container = Lon_group)
 	output_LReast_wid <- gedit(text = general_opts$bbox[3], container = Lon_group, width = 10)
-	size(output_ULeast_lab) = size(output_LReast_lab) <- c(160,20)
+#	size(output_ULeast_lab) = size(output_LReast_lab) <- c(160,20)
 
 	Lat_group <- ggroup(horizontal = TRUE, container = bbox_group)
 	output_LRnorth_lab <- glabel('Lower Right Northing (ymin)', container = Lat_group)
@@ -382,7 +382,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	addSpace(Lat_group, 30, horizontal = TRUE)
 	output_ULnorth_lab <- glabel('Upper Left Northing (ymax)', container = Lat_group)
 	output_ULnorth_wid <- gedit(text = general_opts$bbox[4], container = Lat_group, width = 10)
-	size(output_LRnorth_lab) = size(output_ULnorth_lab) = c(160,20)
+#	size(output_LRnorth_lab) = size(output_ULnorth_lab) = c(160,20)
 
 	if (general_opts$full_ext == 'Full Tiles Extent') { enabled(bbox_group) <- F} else {(enabled(bbox_group) <- T)}  # Grey out bbox if NAtive extent
 
@@ -390,14 +390,14 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 # Widgets for Projection, resolution and bbox selection
 #- ------------------------------------------------------------------------------- -#
 	output_proj_frame <- gframe(text = '<span foreground="blue" size="large">Reprojection and Resize Options</span>',markup = T,
-		container = main_group, horizontal = FALSE, expand = T, spacing = 10)
+		container = main_group, horizontal = FALSE, expand = T)
 
-	output_proj_group <- ggroup(container = output_proj_frame, horizontal = TRUE, spacing = 5)
+	output_proj_group <- ggroup(container = output_proj_frame, horizontal = TRUE)
 	font(output_proj_frame) <- list(weight = 'bold', color  = 'blue')
 
 	# Projection ----
-	output_proj_lab <- glabel(text = '<span weight = "bold" >Output Projection:</span>', container = output_proj_group,markup = T)
-	size(output_proj_lab) = c(120,20)
+	output_proj_lab <- glabel(text = '<span weight = "bold" >Output Projection:     </span>', container = output_proj_group,markup = T)
+#	size(output_proj_lab) = c(120,20)
 	proj_wid <- gcombobox(general_opts$out_proj_names, container = output_proj_group, selected = match(general_opts$proj, general_opts$out_proj_names), handler = function(h,....) {
 				current_sel <- svalue(proj_wid)
 				old_proj4 = svalue(output_proj4_wid)
@@ -465,15 +465,15 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 					}
 				}
 			})
-	size(proj_wid) = c(120,20)
+#	size(proj_wid) = c(120,20)
 
 	outproj_user_lab <- glabel(text = '<span weight = "bold" >PROJ4 String:</span>', container = output_proj_group,markup = T)
 
-	size(outproj_user_lab) = c(120,20)
+#	size(outproj_user_lab) = c(120,20)
 
 	output_proj4_wid <- gtext(text = general_opts$proj, container = output_proj_group, width = 300, height = 20,editable = FALSE)
 	svalue(output_proj4_wid ) = general_opts$out_proj_list[[svalue(proj_wid)]]
-	size(output_proj4_wid) = c(250,20)
+#	size(output_proj4_wid) = c(250,20)
 	change_proj_but <- gbutton(text = 'Change', container = output_proj_group, handler = function(h,....) {  # Button to change the user define projection
 
 				selproj <- ginput(message = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = T, size = 800, horizontal = T)
@@ -518,9 +518,9 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 
 	# Resolution ----
-	output_res_group <- ggroup(container = output_proj_frame, horizontal = TRUE, spacing = 5)
-	output_res_lab <- glabel(text = '<span weight = "bold" >Output Resolution:</span>',markup = T, container = output_res_group)
-	size(output_res_lab) = c(120,20)
+	output_res_group <- ggroup(container = output_proj_frame, horizontal = TRUE)
+	output_res_lab <- glabel(text = '<span weight = "bold" >Output Resolution:    </span>',markup = T, container = output_res_group)
+#	size(output_res_lab) = c(120,20)
 
 	output_res_sel_wid  <-  gcombobox(c('Native','Resampled'), container = output_res_group,
 			selected = match(general_opts$out_res_sel, c('Native','Resampled')), handler = function(h,....) {
@@ -534,13 +534,13 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 				}
 			})
 
-	size(output_res_sel_wid) = c(120,20)
+#	size(output_res_sel_wid) = c(120,20)
 
-	pixsize_lab <- glabel(text = '<span weight = "bold" >Pixel Size:</span>',markup = T, container = output_res_group)
-	size(pixsize_lab) <- c(120,20)
+	pixsize_lab <- glabel(text = '<span weight = "bold" >        Pixel Size:         </span>',markup = T, container = output_res_group)
+#	size(pixsize_lab) <- c(120,20)
 
 	output_res_wid <- gedit(text = general_opts$out_res , container = output_res_group)
-	size(output_res_wid) <- c(140,20)
+#	size(output_res_wid) <- c(140,20)
 #	if (general_opts$out_res_sel == 'Native') { enabled(output_res_wid) <- F} else {(enabled(output_res_wid) <- T)}
 	if (svalue(output_res_sel_wid) == 'Native') {
 		svalue(output_res_wid) = paste('Auto - from Native Res.')
@@ -561,19 +561,19 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 	# Resampling ----
 	resopts_group <- ggroup(container = output_proj_frame, horizontal = TRUE)
 	resmeth_lab <- glabel(text = '<span weight = "bold" >Resampling Method:</span>',markup = T, container = resopts_group)
-	size(resmeth_lab) = c(120,20)
+#	size(resmeth_lab) = c(120,20)
 	resamp_array <- c('near','bilinear','cubic', 'cubicspline','lanczos','average','mode')
 	output_resmeth_wid <-  gcombobox(resamp_array, container = resopts_group, selected = match(general_opts$resampling, resamp_array))
-	size(output_resmeth_wid) <- c(120,20)
+#	size(output_resmeth_wid) <- c(120,20)
 
 #- ------------------------------------------------------------------------------- -#
 # Widgets for Format and reprocess options
 #- ------------------------------------------------------------------------------- -#
-	options_frame <- gframe(text = '<span foreground="blue" size="large">Processing Options</span>', markup = T, container = main_group, expand = T,spacing = 10, horizontal = F)
+	options_frame <- gframe(text = '<span foreground="blue" size="large">Processing Options</span>', markup = T, container = main_group, expand = T, horizontal = F)
 	opt_group <- ggroup(container = options_frame, horizontal = T, expand = T)
 
 	# Out format ----
-	format_lab <- glabel(text = '<span weight = "bold" >Output Files Format </span>',markup = T, container = opt_group)
+	format_lab <- glabel(text = '<span weight = "bold" >Output Files Format: </span>',markup = T, container = opt_group)
 	format_wid <- gdroplist(items = c('ENVI','GTiff'), text = 'Select', container = opt_group, selected = match(general_opts$out_format, c('ENVI','GTiff')),handler = function(h,....) {
 				current_sel <- svalue(format_wid)
 				if (current_sel != 'GTiff') { enabled(compress_wid) <- F} else {(enabled(compress_wid) <- T)}
@@ -588,13 +588,19 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 	# virtual and NODATA ----
 	other_group <- ggroup(container = options_frame, horizontal = T)
-	timeseries_lab <- glabel(text = '<span weight = "bold" >Virtual Time Series: </span>',markup = T, container = other_group)
+
+	timeseries_lab <- glabel(text = '<span weight = "bold" >Virtual Time Series:   </span>',markup = T, container = other_group)
 	timeseries_wid <- gcombobox( c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL'), container = other_group,
 			selected <- match(general_opts$ts_format, c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL')), handler = function(h,....) {
 				current_sel <- svalue(timeseries_wid)
 			})
 	addSpace(other_group,34 )
-	nodata_lab <- glabel(text = '<span weight = "bold" >Change Original NODATA values</span>',markup = T, container = other_group)
+
+	rts_lab <- glabel(text = '<span weight = "bold" >Save rts files </span>',markup = T, container = other_group)
+	rts_wid <- gradio(items = c('Yes','No'), text = 'Select', container = other_group, selected = match(general_opts$rts, c('Yes','No')), horizontal = T)
+
+	addSpace(other_group,34 )
+	nodata_lab <- glabel(text = '<span weight = "bold" >Change NODATA values</span>',markup = T, container = other_group)
 	nodata_wid <- gradio(items = c('Yes','No'), text = 'Select', container = other_group, selected = match(general_opts$nodata_change, c('Yes','No')), horizontal = T)
 
 #- ------------------------------------------------------------------------------- -#
@@ -602,7 +608,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 #- ------------------------------------------------------------------------------- -#
 
 	# Main output folder ----
-	outfold_frame <- gframe(text = '<span foreground="blue" size="large">Main Output Folder for Time Series storage</span>', markup = T, container = main_group, expand = T,spacing = 10)    			# Frame group
+	outfold_frame <- gframe(text = '<span foreground="blue" size="large">Main Output Folder for Time Series storage</span>', markup = T, container = main_group, expand = T)    			# Frame group
 	outfold_group <- ggroup(horizontal = TRUE, container = outfold_frame)  				# Main group
 	outfold_wid <- gedit(text = format(general_opts$out_folder, justify = "right") , container = outfold_group, width = 46)			# Selected file
 	fold_choose <- gbutton("Browse", handler = function(h,...) {choice <- gfile(type = "selectdir", text = "Select the Output Folder for MODIS data...")		# File selection widget
@@ -617,7 +623,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 
 	# HDF output folder ----
-	outfoldmod_frame <- gframe(text = '<span foreground="blue" size="large">Output Folder for Original HDF files download</span>', markup = T, container = main_group, expand = T,spacing = 10)    			# Frame group
+	outfoldmod_frame <- gframe(text = '<span foreground="blue" size="large">Output Folder for Original HDF files download</span>', markup = T, container = main_group, expand = T)    			# Frame group
 	outfoldmod_group <- ggroup(horizontal = TRUE, container = outfoldmod_frame)  				# Main group
 	outfoldmod_wid <- gedit(text = format(general_opts$out_folder_mod, justify = "right") , container = outfoldmod_group, width = 46)			# Selected file
 	fold_choose <- gbutton("Browse", handler = function(h,...) {choice <- gfile(type = "selectdir", text = "Select the Output Folder for storage of original HDFs...")		# File selection widget
@@ -685,7 +691,9 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 		general_opts$reprocess <- svalue(reprocess_wid)  # Retrieve reprocess, delete and nodata
 		general_opts$delete_hdf <- svalue(delete_wid)
+
 		general_opts$nodata_change <- svalue(nodata_wid)
+		general_opts$rts <- svalue(rts_wid)
 
 		general_opts$out_format <- svalue(format_wid)   # Retrieve format, virtual and compression
 		general_opts$ts_format <- svalue(timeseries_wid)
@@ -701,8 +709,9 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 		#- Perform checks on options consistency ---------------
 
 		# Check if at least 1 layer selected
+
 		if (max(prod_opt_list[[general_opts$sel_prod]]$bandsel) +
-				max(prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel) +
+				ifelse((length(prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel) > 0), max(prod_opt_list[[general_opts$sel_prod]]$indexes_bandsel),0) +
 				max(prod_opt_list[[general_opts$sel_prod]]$quality_bandsel) == 0) {gmessage('No Output bands or indexes selected - Please Correct !', title = 'Warning') ; check_save_opts <<- FALSE}
 
 		# Check if dates, processing extent and tiles selection make sense

@@ -1,4 +1,4 @@
-# Script used to launch the MODIStsp application from R (NO PACKAGE LOADING !) 
+# Script used to launch the MODIStsp application from R (NO PACKAGE LOADING !)
 # (see MODIStsp.bat or MODIStsp.sh to launch from the command line)
 #
 # Author: Luigi Ranghetti <ranghetti.l@irea.cnr.it>
@@ -39,6 +39,7 @@ source(file.path(src_dir,'MODIStsp_vrt_create.R'))
 source(file.path(src_dir,'MODIStsp_process_indexes.R'))
 source(file.path(src_dir,'MODIStsp_reproj_bbox.R'))
 source(file.path(src_dir,'MODIStsp_bbox_from_file.R'))
+source(file.path(src_dir,'MODIStsp_extract.R'))
 
 # Launch it
 cat('[',date(),'] Running MOD_DWL...\n')
