@@ -13,12 +13,12 @@
 #' @import gWidgets
 #' @import rgeos
 
-MODIStsp_GUI_new = function(general_opts){
+MODIStsp_GUI = function(general_opts){
 
 assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 # Restore previous options file if existing, otherwise create a "new" one with default values, by retrieving data from xml file ----
-	
+
 	if (file.exists(general_opts$previous_file)) {load(general_opts$previous_file)}
 	if (!exists("general_opts") | !exists("mod_prod_list") | !exists("prod_opt_list")) {
 		warning('The previously saved options file is corrupted or missing; a new default one will be generated...')
@@ -245,8 +245,9 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 	## Function to update the selected tiles with the intersection with the bounding box
 	update_tiles = function(bbox,...) {
+	   # browser()
 		bbox_mod <- reproj_bbox(bbox, svalue(output_proj4_wid), general_opts$MOD_proj_str, enlarge = TRUE)
-		d_bbox_mod_tiled <- intersect(modis_grid,extent(bbox_mod))
+		d_bbox_mod_tiled <- crop(modis_grid,extent(bbox_mod))
 		svalue(start_x_wid)  <- min(d_bbox_mod_tiled$H)
 		svalue(end_x_wid)  <- max(d_bbox_mod_tiled$H)
 		svalue(start_y_wid) <- min(d_bbox_mod_tiled$V)
@@ -289,10 +290,10 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 				wait_window <- gwindow(title = "Please wait", container = TRUE, width = 400, height = 40)
 				size(wait_window) <- c(100,8)
 				addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
-				wait_window_lab = glabel(text = paste('Retrieveing the Extent, please wait...'), editable = FALSE,
+				wait_window_lab = glabel(text = paste('Retrieving the Extent, please wait...'), editable = FALSE,
 					container = wait_window)
 
-				# Convert bbox coordinates in those of output projection
+								# Convert bbox coordinates in those of output projection
 				out_proj_crs = if (svalue(proj_wid) != "User Defined") {
 					general_opts$out_proj_list[[svalue(proj_wid)]]
 				} else {general_opts$user_proj4}
@@ -587,17 +588,17 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 	# virtual and NODATA ----
 	other_group <- ggroup(container = options_frame, horizontal = T)
-	
+
 	timeseries_lab <- glabel(text = '<span weight = "bold" >Virtual Time Series:   </span>',markup = T, container = other_group)
 	timeseries_wid <- gcombobox( c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL'), container = other_group,
 			selected <- match(general_opts$ts_format, c('None','ENVI Meta Files','GDAL vrt Files','ENVI and GDAL')), handler = function(h,....) {
 				current_sel <- svalue(timeseries_wid)
 			})
 	addSpace(other_group,34 )
-	
+
 	rts_lab <- glabel(text = '<span weight = "bold" >Save rts files </span>',markup = T, container = other_group)
 	rts_wid <- gradio(items = c('Yes','No'), text = 'Select', container = other_group, selected = match(general_opts$rts, c('Yes','No')), horizontal = T)
-	
+
 	addSpace(other_group,34 )
 	nodata_lab <- glabel(text = '<span weight = "bold" >Change NODATA values</span>',markup = T, container = other_group)
 	nodata_wid <- gradio(items = c('Yes','No'), text = 'Select', container = other_group, selected = match(general_opts$nodata_change, c('Yes','No')), horizontal = T)
@@ -690,7 +691,7 @@ assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
 
 		general_opts$reprocess <- svalue(reprocess_wid)  # Retrieve reprocess, delete and nodata
 		general_opts$delete_hdf <- svalue(delete_wid)
-		
+
 		general_opts$nodata_change <- svalue(nodata_wid)
 		general_opts$rts <- svalue(rts_wid)
 
