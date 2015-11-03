@@ -275,7 +275,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 							for (band in 1:length(bandnames)) {														# Cycle on MODIS original layers
 
 								bands = numeric(length(bandnames))													# Create vector with length = bands, filled with zeroes
-								er_mos = 1  														# dummies for error state
+								# er_mos = 1  														# dummies for error state
 								if (bandsel[band] == 1) {					# If band selected, process it
 									mess_text <- paste('Mosaicing ', bandnames[band],' files for date: ',date_name)
 									if (gui) {svalue(mess_lab) = paste('---',mess_text,'---')} else {cat('[',date(),']',mess_text,'\n')}
@@ -296,6 +296,16 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
 										files_in = file.path(out_folder_mod, modislist)
 										dir.create(tmp_prod_folder, recursive = TRUE, showWarnings = FALSE)
+										# ---------------------------------- ----------------------------------------------#
+										# Convert to output projection, extent and format using gdalwarp ----
+										# ---------------------------------- ----------------------------------------------#
+
+										if (outproj_str != MOD_proj_str) {
+										  mess_text <- paste('Reprojecting and Resizing', bandnames[band],'files for date: ',date_name)
+										} else {
+										  mess_text <- paste('Resizing', bandnames[band],'files for date: ',date_name)
+										}
+										if (gui) {svalue(mess_lab) = paste('---',mess_text,'---')} else {cat('[',date(),']',mess_text,'\n')}
 
 										if (full_ext == 'Resized') { #If resize required,  convert bbox coordinates from t_srs to modis_srs, to get the correct extent
 											# for resizing BEFORE reprojecting
@@ -307,15 +317,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
 										#Transform the vrt to a physical resized TIFF file.
 										#										er_mos = gdal_translate(outfile_vrt, outfile)
-										er_mos = 1
+										# er_mos = 1
 										#										if (is.null(er_mos) == FALSE)  {stop()}   # exit on error
-
-										# ---------------------------------- ----------------------------------------------#
-										# Convert to output projection, extent and format using gdalwarp ----
-										# ---------------------------------- ----------------------------------------------#
-
-										mess_text <- paste('Reprojecting', bandnames[band],'files for date: ',date_name)
-										if (gui) {svalue(mess_lab) = paste('---',mess_text,'---')} else {cat('[',date(),']',mess_text,'\n')}
 
 										## Launch the reprojection - operations to be done depends on whether resize and/or reprojection and/or
 										## resampling are required
