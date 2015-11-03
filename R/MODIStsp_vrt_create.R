@@ -13,6 +13,7 @@
 #' @param ts_format string required output format for virtual file (ENVI, GDAL, Both)
 #' @param nodata_value string nodata value to be used for vrt files (equal to nodata value of inputs)
 #' @param out_format format of images used as "input" for the vrt and contained in out_prod_folder/band folders (ENVI or GTiff)
+#' @param rts string ("Yes"/"No") If Yes, create rts time series
 #' @return NULL - virtual files are stored in the "Time Series" subfolder of out_prod_folder
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
