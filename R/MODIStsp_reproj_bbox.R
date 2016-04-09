@@ -14,7 +14,6 @@
 #' @import sp
 
 reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE, N_dens=1000) {
-  
   # densificate the original bounding box
   if (enlarge) {
     d_bbox_in <- data.frame(lon = c(bbox[1] + diff(bbox[c(1,3)])*(0:N_dens)/N_dens, rep(bbox[3],N_dens - 1), bbox[1] + diff(bbox[c(1,3)])*(N_dens:0)/N_dens, rep(bbox[1],N_dens - 1)),
@@ -26,7 +25,6 @@ reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE, N_dens=1000) {
   }
   proj4string(d_bbox_in) <- in_proj # assign the projection
   d_bbox_out <- spTransform(d_bbox_in, CRS(out_proj)) # reproject the bbox in a polygon
-  
+
   return(bbox(d_bbox_out))
-  
 }

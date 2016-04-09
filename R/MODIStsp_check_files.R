@@ -19,36 +19,54 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 
-MODIStsp_check_files = function(out_prod_folder, file_prefix,bandnames, bandsel_orig_choice, yy, DOY, out_format,
+MODIStsp_check_files <- function(out_prod_folder, file_prefix,bandnames, bandsel_orig_choice, yy, DOY, out_format,
  indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel) {
 
-  check = T   # Initialize chek to T --> changed if even only one file missing
+  check <- T   # Initialize check to T --> changed if even only one file missing
 
   # check existence of all files related to Original HDF layers ----
   for (band in which(bandsel_orig_choice == 1)) {  # cycle on selected indexes
-    outfile = paste0(out_prod_folder, '/',bandnames[band],'_',yy,'_',DOY,'.hdf')    # Create name for the HDF mosaic
-    outrep_file = file.path(out_prod_folder, bandnames[band], paste0(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
-    if (out_format == 'GTiff') {outder_file = paste0(outrep_file, '.tif')}
-    if (out_format == 'ENVI') {outder_file = paste0(outrep_file, '.dat')}
-    if (file.exists(outder_file) == F) {check = F}
+    outfile <- paste0(out_prod_folder, "/",bandnames[band],"_",yy,"_",DOY,".hdf")    # Create name for the HDF mosaic
+    outrep_file <- file.path(out_prod_folder, bandnames[band], paste0(file_prefix,"_",sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
+    if (out_format == "GTiff") {
+      outder_file <- paste0(outrep_file, ".tif")
+      }
+    if (out_format == "ENVI") {
+      outder_file <- paste0(outrep_file, ".dat")
+      }
+    if (file.exists(outder_file) == F) {
+      check <- F
+      }
   }
 
   # check existence of all files related to spectral indexes ----
   for (band in which(indexes_bandsel == 1)) {
-    outfile = paste0(out_prod_folder, '/',indexes_bandnames[band],'_',yy,'_',DOY,'.hdf')  # Create name for the HDF mosaic
-    outder_file = file.path(out_prod_folder, indexes_bandnames[band], paste0(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
-    if (out_format == 'GTiff') {outder_file = paste0(outder_file, '.tif')}
-    if (out_format == 'ENVI') {outder_file = paste0(outder_file, '.dat')}
-    if (file.exists(outder_file) == F) {check = F}
+    outfile <- paste0(out_prod_folder, "/",indexes_bandnames[band],"_",yy,"_",DOY,".hdf")  # Create name for the HDF mosaic
+    outder_file <- file.path(out_prod_folder, indexes_bandnames[band], paste0(file_prefix,"_",sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
+    if (out_format == "GTiff") {
+      outder_file <- paste0(outder_file, ".tif")
+      }
+    if (out_format == "ENVI") {
+      outder_file <- paste0(outder_file, ".dat")
+      }
+    if (file.exists(outder_file) == F) {
+      check <- F
+      }
   }
 
   # check existence of all files related to quality indicators ----
   for (band in which(quality_bandsel == 1)) {
-    outfile = paste0(out_prod_folder, '/',quality_bandnames[band],'_',yy,'_',DOY,'.hdf')    # Create name for the HDF mosaic
-    outder_file = file.path(out_prod_folder, quality_bandnames[band], paste0(file_prefix,'_',sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
-    if (out_format == 'GTiff') {outder_file = paste0(outder_file, '.tif')}
-    if (out_format == 'ENVI') {outder_file = paste0(outder_file, '.dat')}
-    if (file.exists(outder_file) == F) {check = F}
+    outfile <- paste0(out_prod_folder, "/",quality_bandnames[band],"_",yy,"_",DOY,".hdf")    # Create name for the HDF mosaic
+    outder_file <- file.path(out_prod_folder, quality_bandnames[band], paste0(file_prefix,"_",sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
+    if (out_format == "GTiff") {
+      outder_file <- paste0(outder_file, ".tif")
+      }
+    if (out_format == "ENVI") {
+      outder_file <- paste0(outder_file, ".dat")
+      }
+    if (file.exists(outder_file) == F) {
+      check <- F
+      }
   }
 
   return(check)  # return FALSE if at least one file missing

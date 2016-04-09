@@ -17,19 +17,32 @@ Args <- commandArgs(TRUE)
 
 require(MODIStsp)
 
-MODIStsp_dir = system.file(package = 'MODIStsp')
+MODIStsp_dir <- system.file(package = "MODIStsp")
 
-gui = if (length(Args)>=1) as.logical(Args[1]) else TRUE
-options_file = if (length(Args)>=2) {if (Args[2]==""|Args[2]=="NULL") NULL else Args[2]} else NULL
-if (!is.null(options_file)) {
-	load (options_file)
-	log_dir = file.path(general_opts$out_folder,'Log')
-} else {
-	log_dir = file.path(MODIStsp_dir,'Log')
+gui <- if (length(Args) >= 1) {
+  as.logical(Args[1])
+} else{
+  TRUE
 }
-dir.create(log_dir,showWarnings=FALSE)
-outFile <- file.path(log_dir,paste0('MODIStsp_',strftime(Sys.time(),'%y%m%d_%H%M%S'),".Rout")) # directory to store the Log
+options_file <- if (length(Args) >= 2) {
+  if (Args[2] == "" | Args[2] == "NULL") {
+    NULL
+  } else {
+    Args[2]
+  }
+} else {
+  NULL
+}
+
+if (!is.null(options_file)) {
+  load(options_file)
+  log_dir <- file.path(general_opts$out_folder, "Log" )
+} else {
+  log_dir <- file.path(MODIStsp_dir, "Log")
+}
+dir.create(log_dir,showWarnings = FALSE)
+outFile <- file.path(log_dir,paste0("MODIStsp_",strftime(Sys.time(),"%y%m%d_%H%M%S"),".Rout")) # directory to store the Log
 
 sink(outFile, split = TRUE, type = c("output"))
-output = MODIStsp(gui=gui, options_file=options_file)
+output <- MODIStsp(gui = gui, options_file = options_file)
 sink(type = c("output"))

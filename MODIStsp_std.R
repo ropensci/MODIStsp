@@ -42,9 +42,9 @@ source(file.path(src_dir,'MODIStsp_bbox_from_file.R'))
 source(file.path(src_dir,'MODIStsp_extract.R'))
 
 # Launch it
-cat('[',date(),'] Running MOD_DWL...\n')
+cat("[",date(),"]", "Running MOD_DWL...\n")
 MODIStsp(gui=gui,options_file=options_file,spatial_file_path=spatial_file_path,MODIStsp_dir=main_dir)
-cat('[',date(),'] Done.\n\n')
+cat("[",date(),"]", "Done.\n\n")
 
 
 

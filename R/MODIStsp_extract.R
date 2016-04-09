@@ -58,65 +58,68 @@
 #' }
 
 
-MODIStsp_extract = function (in_rts, start_date, end_date, sp_object, FUN = 'mean', na.rm = T, verbose = F){
+MODIStsp_extract <- function (in_rts, start_date, end_date, sp_object, FUN = "mean", na.rm = T, verbose = F){
 
-	if (!class(in_rts) %in% c('RasterStackTS','RasterBrickTS')){
-		stop('in_rts is not a RasterStackTS or RasterBrickTS object')
-	}
+  if (!class(in_rts) %in% c("RasterStackTS","RasterBrickTS")){
+    stop("in_rts is not a RasterStackTS or RasterBrickTS object")
+  }
 
-	if (!class(start_date) %in% c('Date','POSIXct','POSIXlt')) {
+  if (!class(start_date) %in% c("Date","POSIXct","POSIXlt")) {
 
-		stop('start_date is not a Date object')
-	}
+    stop("start_date is not a Date object")
+  }
 
-	if (!class(end_date) %in% c('Date','POSIXct','POSIXlt')) {
+  if (!class(end_date) %in% c("Date","POSIXct","POSIXlt")) {
 
-		stop('end_date is not a Date object')
-	}
+    stop("end_date is not a Date object")
+  }
 
-	if (!class(sp_object) %in% c('SpatialPolygonsDataFrame','SpatialPolygons', 'SpatialPointsDataFrame',
-			'SpatialPoints','SpatialLines','SpatialLinesDataFrame')) {
-		stop('sp_object is not a valid Spatial object ')
-	}
+  if (!class(sp_object) %in% c("SpatialPolygonsDataFrame","SpatialPolygons", "SpatialPointsDataFrame",
+                               "SpatialPoints","SpatialLines","SpatialLinesDataFrame")) {
+    stop("sp_object is not a valid Spatial object ")
+  }
 
-#	if (!FUN %in% c('mean','sd', 'min',
-#			'max','length')) {
-#		stop('Invalid function - valid ones are : mean, sd, min, max')
-#	}
+  #	if (!FUN %in% c('mean','sd', 'min',
+  #			'max','length')) {
+  #		stop('Invalid function - valid ones are : mean, sd, min, max')
+  #	}
 
-	sel_indexes = which(index(in_rts) >= start_date & index(in_rts) <= end_date)
-	if (length (sel_indexes)>1){
-		shape = spTransform(sp_object, CRS(proj4string(in_rts@raster[[1]])))
+  sel_indexes <- which(index(in_rts) >= start_date & index(in_rts) <= end_date)
+  if (length (sel_indexes)>1){
+    shape <- spTransform(sp_object, CRS(proj4string(in_rts@raster[[1]])))
 
-		if (class(sp_object) %in% c('SpatialPointsDataFrame',
-				'SpatialPoints','SpatialLines','SpatialLinesDataFrame')) {
+    if (class(sp_object) %in% c("SpatialPointsDataFrame",
+                                "SpatialPoints","SpatialLines","SpatialLinesDataFrame")) {
 
-			cells = extract(in_rts@raster[[1]], shape, cellnumbers = T)[,1]
-			ts = matrix(nrow = length(sel_indexes), ncol = length(cells))
-			for (f in 1:length(sel_indexes)) {
-				if (verbose == T) {print(paste0('Extracting data from date: ', index(in_rts)[sel_indexes[f]]))}
-				ts[f,] = extract(in_rts@raster[[sel_indexes[f]]], cells)
-				}
-		}else {
-			zone_raster = rasterize(shape, in_rts@raster[[1]])
-			zones = getValues(zone_raster)
-			ok_zones = which(is.finite(zones))
-			zones = zones [ok_zones]
+      cells <- extract(in_rts@raster[[1]], shape, cellnumbers = T)[,1]
+      ts <- matrix(nrow = length(sel_indexes), ncol = length(cells))
+      for (f in 1:length(sel_indexes)) {
+        if (verbose == T) {
+          print(paste0("Extracting data from date: ", index(in_rts)[sel_indexes[f]]))
+        }
+        ts[f,] <- extract(in_rts@raster[[sel_indexes[f]]], cells)
+      }
+    }else {
+      zone_raster <- rasterize(shape, in_rts@raster[[1]])
+      zones <- getValues(zone_raster)
+      ok_zones <- which(is.finite(zones))
+      zones <- zones[ok_zones]
 
-			sel_indexes = which(index(in_rts) >= start_date & index(in_rts) <= end_date)
+      sel_indexes <- which(index(in_rts) >= start_date & index(in_rts) <= end_date)
 
-			ts = matrix(nrow = length(sel_indexes), ncol = nrow(sp_object))
-			for (f in 1:length(sel_indexes)) {
-				if (verbose == T) {print(paste0('Extracting data from date: ', index(in_rts)[sel_indexes[f]]))}
-				value = getValues(in_rts@raster[[sel_indexes[f]]]) [ok_zones]
-				rDT <- data.table(value, zones)
-				setkey(rDT, zones)
-				ts[f,] = rDT[, lapply(.SD, match.fun(FUN), na.rm = na.rm), by=zones]$value
-			}
-		}
-		xtsdata = xts(ts, index(in_rts)[sel_indexes])
-	} else {
-		warning('Selected time range does not overlap with the one of the rts input dataset !')
-	}
+      ts <- matrix(nrow = length(sel_indexes), ncol = nrow(sp_object))
+      for (f in 1:length(sel_indexes)) {
+        if (verbose == T) {
+          print(paste0("Extracting data from date: ", index(in_rts)[sel_indexes[f]]))
+        }
+        value <- getValues(in_rts@raster[[sel_indexes[f]]]) [ok_zones]
+        rDT <- data.table(value, zones)
+        setkey(rDT, zones)
+        ts[f,] <- rDT[, lapply(.SD, match.fun(FUN), na.rm = na.rm), by = zones]$value
+      }
+    }
+    xtsdata <- xts(ts, index(in_rts)[sel_indexes])
+  } else {
+    warning("Selected time range does not overlap with the one of the rts input dataset !")
+  }
 }
-
