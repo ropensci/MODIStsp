@@ -30,21 +30,37 @@
 #' @import bitops
 MODIStsp_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, out_prod_folder,
                                      file_prefix, yy, DOY, out_format, nodata_source,nodata_qa_in , nodata_qa_out) {
-  in_raster_file  =	file.path(out_prod_folder, in_raster_name,paste(file_prefix,'_',in_raster_name,'_',yy,'_', DOY, sep = '')) #define name of input "source" file
-  if (out_format == 'GTiff')  in_raster_file  =  paste0(in_raster_file,'.tif')
-  if (out_format == 'ENVI')   in_raster_file  =  paste0(in_raster_file,'.dat')
+  in_raster_file <- file.path(out_prod_folder, in_raster_name,paste(file_prefix,"_",in_raster_name,"_",yy,"_", DOY, sep = "")) #define name of input "source" file
+  if (out_format == "GTiff")  {
+    in_raster_file <- paste0(in_raster_file,".tif")
+  }
+  if (out_format == "ENVI") {
+    in_raster_file <- paste0(in_raster_file,".dat")
+  }
 
-  in_raster = raster(in_raster_file, format = out_format)				# Open input file
+  in_raster <- raster(in_raster_file, format = out_format)				# Open input file
   NAvalue(in_raster) <- as.numeric(nodata_source)					# reassign nodata
-  in_values = getValues(in_raster)								# Get the values
+  in_values <- getValues(in_raster)								# Get the values
 
-  bits = as.numeric(unlist(strsplit(bitN,'-')))		# retrieve positions of the bits to be extracted
+  bits <- as.numeric(unlist(strsplit(bitN,"-")))		# retrieve positions of the bits to be extracted
 
-  if (bits[1] > 0) {in_values = bitShiftR(in_values, bits[1])}	# if bits not at the start of the binary word, shift them using bitshifter
-  if (length(bits) > 1) bitfield_vals = bitAnd(in_values, 2^(bits[2] - bits[1] + 1) - 1)	else (bitfield_vals = bitAnd(in_values, 2^(1) - 1))		# retrieve the values using biAnd on the shifted word
-  in_raster = setValues(in_raster, values = bitfield_vals)	# Set the retrieved values in the raster
-  writeRaster(in_raster, out_filename, format = out_format, overwrite = TRUE, datatype = 'INT1U', NAflag = as.numeric(nodata_qa_out))	# save file
-  xml_file = paste(out_filename,'.aux.xml',sep = '')		# Delete xml files created by writeRaster
+  if (bits[1] > 0) {
+    in_values <- bitShiftR(in_values, bits[1])
+  }	# if bits not at the start of the binary word, shift them using bitshifter
+  if (length(bits) > 1) {
+    bitfield_vals <- bitAnd(in_values, 2^(bits[2] - bits[1] + 1) - 1)   # retrieve the values using biAnd on the shifted word
+  }	else {
+    (bitfield_vals <- bitAnd(in_values, 2^(1) - 1))
+  }
+
+  in_raster <- setValues(in_raster, values = bitfield_vals)	# Set the retrieved values in the raster
+  writeRaster(in_raster, out_filename, format = out_format, overwrite = TRUE, datatype = "INT1U", NAflag = as.numeric(nodata_qa_out))	# save file
+  if (out_format == "ENVI") { # IF "ENVI", write the nodata value in the header
+    fileConn_meta_hdr <- file(paste0(file_path_sans_ext(out_filename),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
+    writeLines(c("data ignore value = ", nodata_qa_out), fileConn_meta_hdr, sep = ' ')		# Data Ignore Value
+    close(fileConn_meta_hdr)
+  }
+  xml_file <- paste(out_filename,".aux.xml",sep = "")		# Delete xml files created by writeRaster
   unlink(xml_file)
   gc()	# clean up
 
