@@ -373,7 +373,7 @@ MODIStsp_GUI <- function(general_opts){
 
   # Extent ----
   bounding_group <- gframe(text = "Bounding Box", container = Spatial_Frame, horizontal = F, expand = T,  pos = 1)
-  font(bounding_group) = list(family = "sans",weight = "bold")
+  font(bounding_group) <- list(family = "sans",weight = "bold")
 
   # bounding box ----
   bbox_group <- ggroup(horizontal = FALSE, container = bounding_group)
@@ -776,7 +776,7 @@ MODIStsp_GUI <- function(general_opts){
       check_save_opts <<- FALSE
     }
 
-    if (class(try(as.Date(general_opts$start_date), silent = T)) == 'try-error' | class(try(as.Date(general_opts$end_date), silent = T)) == 'try-error') {
+    if (class(try(as.Date(general_opts$start_date), silent = T)) == "try-error" | class(try(as.Date(general_opts$end_date), silent = T)) == "try-error") {
       gmessage("One or both dates are not in correct format - Please correct !", title = "Warning")
       check_save_opts <<- FALSE
     }
@@ -792,7 +792,7 @@ MODIStsp_GUI <- function(general_opts){
 
     if (general_opts$full_ext == "Resized") {
       if (n_bbox_compiled == 4) {
-        if ((general_opts$bbox[1] > general_opts$bbox[3]) | (general_opts$bbox[2] > general_opts$bbox[4])) {
+        if ( (general_opts$bbox[1] > general_opts$bbox[3]) | (general_opts$bbox[2] > general_opts$bbox[4])) {
           gmessage("Error in Selected Output extent", title = "Warning")
           check_save_opts <<- FALSE
         }
@@ -919,7 +919,7 @@ MODIStsp_GUI <- function(general_opts){
       svalue(start_y_wid) <- general_opts$start_y
       svalue(end_y_wid) <- general_opts$end_y
 
-      svalue(proj_wid)	 <- general_opts$proj 	# Proj and extent options
+      svalue(proj_wid) <- general_opts$proj 	# Proj and extent options
       svalue(output_proj4_wid) <- general_opts$user_proj4
       svalue(output_res_sel_wid) <- general_opts$out_res_sel
       svalue(output_res_wid) <- general_opts$out_res

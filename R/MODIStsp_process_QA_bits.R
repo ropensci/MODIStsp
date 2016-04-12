@@ -57,7 +57,7 @@ MODIStsp_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, o
   writeRaster(in_raster, out_filename, format = out_format, overwrite = TRUE, datatype = "INT1U", NAflag = as.numeric(nodata_qa_out))	# save file
   if (out_format == "ENVI") { # IF "ENVI", write the nodata value in the header
     fileConn_meta_hdr <- file(paste0(file_path_sans_ext(out_filename),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
-    writeLines(c("data ignore value = ", nodata_qa_out), fileConn_meta_hdr, sep = ' ')		# Data Ignore Value
+    writeLines(c("data ignore value = ", nodata_qa_out), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
     close(fileConn_meta_hdr)
   }
   xml_file <- paste(out_filename,".aux.xml",sep = "")		# Delete xml files created by writeRaster

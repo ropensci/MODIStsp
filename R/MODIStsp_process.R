@@ -142,6 +142,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     # Start Cycle on selected years
     # ---------------------------------- #
 
+    # Get start and end years from start and end dates
+
+    # start_year <- as.numeric(strsplit(start_date, ".", fixed = T)[[1]][1])
+    # end_year <- as.numeric(strsplit(end_date, ".", fixed = T)[[1]][1])
+    #
     for (yy in start_year:end_year) {
 
       # Create string representing the dates to be processed
@@ -424,14 +429,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                               quit("Internal error in out_res_sel, outproj_str or full_ext."))
 
                       fileConn_meta_hdr <- file(paste0(file_path_sans_ext(outrep_file),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
-                      writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = ' ')		# Data Ignore Value
+                      writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
                       close(fileConn_meta_hdr)
 
                     }
 
                     gc()
                     xml_file <- paste0(outrep_file,".aux.xml")		# Delete xml files created by gdalwarp
-                    unlink(xml_file)
+                    # unlink(xml_file)
                     unlink(tmp_prod_folder, recursive = TRUE)					# Delete temporary files in temp folder
                   }
                 }  # ENDIF band selected for processing
