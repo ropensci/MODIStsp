@@ -20,7 +20,7 @@
 #' @import raster
 #' @importFrom tools file_path_sans_ext
 #' @examples
-#' Running the tool without any option will start the GUI with the default settings (or the last used)
+#' # Running the tool without any option will start the GUI with the default settings (or the last used)
 #' \dontrun{
 #' MODIStsp()}
 #'
@@ -58,7 +58,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
   #- ------------------------------------------------------------------------------- -#
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
-    gdal_setInstallation(ignore.full_scan = FALSE)
+    # gdal_setInstallation(ignore.full_scan = FALSE)
+    gdal_setInstallation(ignore.full_scan = TRUE)
   }
   gdal_version <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", getGDALVersionInfo(str = "--version")))
   gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
@@ -119,7 +120,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
 
   # Create the general_opts structure used to communicate with the GUI and set default values
   general_opts <- list(MODIStsp_dir = MODIStsp_dir, previous_file = previous_file,xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
-                       sel_prod = "Surf_Ref_8Days_500m (M*D09A1)",sensor = "Terra",start_day = 1, start_month = 1,start_year = 2000,end_day = 1, end_month = 1, end_year = 2000,
+                       sel_prod = "Surf_Ref_8Days_500m (M*D09A1)",sensor = "Terra",start_date = "2015-01-01",end_date = "2015-01-01",
                        start_x = 18, end_x = 18, start_y = 4, end_y = 4,
                        proj = "Sinusoidal",out_res_sel = "Native", out_res = "",full_ext = "Full Tiles Extent", resampling = "near",out_format = "ENVI",ts_format = "ENVI Meta Files", rts = "Yes",compress = "None",
                        nodata_change = "No",delete_hdf = "No",reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "")
@@ -145,8 +146,11 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
     prod_opts <- prod_opt_list[[general_opts$sel_prod]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
 
     # Create variables needed to launch the processing
-    start_date <- paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = ".")
-    end_date <- paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = ".")
+    # start_date <- paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = ".")
+    # end_date <- paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = ".")
+    #
+    general_opts$start_date <- as.character(format(as.Date(general_opts$start_date), "%Y.%m.%d"))
+    general_opts$end_date <- as.character(format(as.Date(general_opts$end_date), "%Y.%m.%d"))
 
     # If the product is NOT tiled, change or_proj to WGS84 and or_res to 0.05 deg
     if (prod_opts$tiled == 0) {
