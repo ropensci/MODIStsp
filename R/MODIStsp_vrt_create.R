@@ -19,9 +19,9 @@
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @import raster
+#' @importFrom raster stack setZ
 #' @importFrom tools file_path_sans_ext
-#' @import stringr
+#' @importFrom stringr str_sub
 MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_sel,  ts_format, nodata_value,out_format, rts ) {
 
   if (sens_sel == "Terra") {
