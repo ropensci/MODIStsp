@@ -11,7 +11,7 @@
 #' @param N_dens Densification ratio used in the case enlarge is TRUE.
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @import sp
+#' @importFrom sp bbox CRS Polygon Polygons proj4string SpatialPoints SpatialPolygons spTransform
 
 reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE, N_dens=1000) {
   # densificate the original bounding box
@@ -23,7 +23,7 @@ reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE, N_dens=1000) {
     d_bbox_in <- data.frame(lon = bbox[c(1,3)], lat = bbox[c(4,2)])
     d_bbox_in <- SpatialPoints(d_bbox_in) # convert in a SpatialPoints
   }
-  proj4string(d_bbox_in) <- in_proj # assign the projection
+  sp::proj4string(d_bbox_in) <- in_proj # assign the projection
   d_bbox_out <- spTransform(d_bbox_in, CRS(out_proj)) # reproject the bbox in a polygon
 
   return(bbox(d_bbox_out))

@@ -29,7 +29,7 @@ The function is used to initialize the processing (folder names, packages, etc.)
 License: GPL 3.0
 }
 \examples{
-# Running the tool without any option will start the GUI with the default settings (or the last used)
+# Running the tool without any option will start the GUI with the default or last used settings
 \dontrun{
 MODIStsp()}
 

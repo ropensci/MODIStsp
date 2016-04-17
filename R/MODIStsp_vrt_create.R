@@ -19,9 +19,10 @@
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom raster stack setZ
+#' @importFrom raster setZ stack
 #' @importFrom tools file_path_sans_ext
 #' @importFrom stringr str_sub
+#' @importFrom gdalUtils gdalbuildvrt
 MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_sel,  ts_format, nodata_value,out_format, rts ) {
 
   if (sens_sel == "Terra") {
@@ -35,19 +36,19 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
   }
 
   if (out_format == "ENVI") { # retrieve files list of the time serie (ENVI format)
-    out_meta_files <- list.files(file.path(out_prod_folder,meta_band), pattern = "\\.dat$", full.names = T)	# get list of ENVI files
+    out_meta_files <- list.files(file.path(out_prod_folder,meta_band), pattern = "\\.dat$", full.names = TRUE)	# get list of ENVI files
     if (sens_sel != "Mixed")  {
       out_meta_files <- out_meta_files[grep(file_prefix,out_meta_files)]
     }	# get list of ENVI files
 
-    out_meta_files_hdr <- list.files(file.path(out_prod_folder,meta_band), pattern = "\\.hdr$", full.names = T) # get list of hdr files
+    out_meta_files_hdr <- list.files(file.path(out_prod_folder,meta_band), pattern = "\\.hdr$", full.names = TRUE) # get list of hdr files
     if (sens_sel != "Mixed")  {
       out_meta_files_hdr <- out_meta_files_hdr[grep(file_prefix,out_meta_files_hdr)]
     }	# get list of ENVI files
   }
 
   if (out_format == "GTiff") {# retrieve files list of the time serie (GTiff format)
-    out_meta_files <- list.files(file.path(out_prod_folder,meta_band), pattern = "\\.tif$", full.names = T)	# get list of ENVI files
+    out_meta_files <- list.files(file.path(out_prod_folder,meta_band), pattern = "\\.tif$", full.names = TRUE)	# get list of ENVI files
     if (sens_sel != "Mixed")  {
       out_meta_files <- out_meta_files[grep(file_prefix,out_meta_files)]
     }	# get list of ENVI files
@@ -97,7 +98,7 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
 
         # Write the ENVI meta file
         meta_dir <- file.path(out_prod_folder,"Time_Series","ENVI_META")
-        dir.create(meta_dir, showWarnings = F,recursive = T)
+        dir.create(meta_dir, showWarnings = FALSE, recursive = TRUE)
         meta_filename <- file.path(meta_dir,paste(file_prefix,meta_band,doy_min,year_min,doy_max,year_max,"META.dat", sep = "_"))  # define fileneame for meta
         fileConn_meta <- file(meta_filename, "w")      		# Open connection
         writeLines(c("ENVI META FILE"), fileConn_meta)		# Write first line
@@ -128,6 +129,7 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
         writeLines(c("wavelength units = DOY"), fileConn_meta_hdr)		# Dummy
         writeLines(c("wavelength = {", paste(as.numeric(elapsed),collapse = ","),"}"), fileConn_meta_hdr)		# Wavelengths
         writeLines(c("data ignore value = ", nodata_value ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
+        writeLines("", fileConn_meta_hdr)		# Data Ignore Value
         close(fileConn_meta_hdr)
 
       }
@@ -135,9 +137,9 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
       if (ts_format == "GDAL vrt Files" | ts_format == "ENVI and GDAL") {
 
         meta_dir <- file.path(out_prod_folder,"Time_Series","GDAL_vrt")
-        dir.create(meta_dir, showWarnings = F,recursive = T)
+        dir.create(meta_dir, showWarnings = F, recursive = TRUE)
         meta_filename <- file.path(meta_dir,paste(file_prefix,meta_band,doy_min,year_min,doy_max,year_max,"GDAL_vrt.vrt", sep = "_"))
-        gdalbuildvrt(out_meta_files,meta_filename, separate = T, srcnodata = nodata_value, vrtnodata = nodata_value)
+        gdalbuildvrt(out_meta_files,meta_filename, separate = TRUE, srcnodata = nodata_value, vrtnodata = nodata_value)
 
       } # end If on necessity to build R Stack files
 
@@ -145,7 +147,7 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
       if (rts == "Yes") {
 
         meta_dir <- file.path(out_prod_folder,"Time_Series/RData")
-        dir.create(meta_dir, showWarnings = FALSE, recursive = T)
+        dir.create(meta_dir, showWarnings = FALSE, recursive = TRUE)
         # raster_ts <- rts(out_meta_files,temp_dates)
         # NAvalue(raster_ts@raster) <- as.integer(nodata_value)
 

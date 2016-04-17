@@ -59,12 +59,11 @@
 #' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ( http://r-gis.net/?q=ModisDownload ; .
 #' http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images)
 #' @note License: GPL 3.0
-#' @import gdalUtils
-#' @import rgdal
+#' @importFrom gdalUtils gdal_translate gdalbuildvrt gdalwarp
 #' @importFrom hash hash
+#' @importFrom tools file_path_sans_ext
+#' @importFrom XML xmlParse xmlRoot xmlToList
 #' @import gWidgets
-#' @import sp
-#' @import XML
 
 MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor, https,
                              start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str, nodata_in,
@@ -75,11 +74,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   if (nodata_change == "No") {
     nodata_out <- nodata_in
   }  # if nodata chande set to no, set ou_nodata to in_nodata
-  dir.create(out_folder_mod, recursive = T, showWarnings = FALSE) # create out folder if not existing
+  dir.create(out_folder_mod, recursive = TRUE, showWarnings = FALSE) # create out folder if not existing
 
   #Initialize some variables
   out_prod_folder <- file.path(out_folder,main_out_folder)  # main output folder --> define on the basis of product name and create if necessary
-  dir.create(out_prod_folder, showWarnings = F, recursive = T)
+  dir.create(out_prod_folder, showWarnings = FALSE, recursive = TRUE)
   tmp_prod_folder <- file.path(out_prod_folder,"tmp") # directory to store temporary [virtual] rasters
   start_year <- unlist(strsplit(start_date, "[.]"))[1]
   end_year <- unlist(strsplit(end_date, "[.]"))[1]
@@ -90,7 +89,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     mess <- gwindow(title = "Processing Status", container = TRUE, width = 400, height = 40)
     mess_lab <- glabel(text = paste("---",mess_text,"---"), editable = FALSE, container = mess)
   } else {
-    cat("[",date(),"]",mess_text,"\n")
+    message("[",date(),"]",mess_text)
   }
 
   if (sensor == "Both") {
@@ -172,7 +171,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
       if (gui) {
         svalue(mess_lab) <- paste("---",mess_text,"---")
       } else {
-        cat("[",date(),"]",mess_text,"\n")
+        message("[",date(),"]",mess_text)
       }
 
       # Get a list of the folders containing hdf images required (Corresponding to the subfolders in lpdaac corresponding to
@@ -189,9 +188,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
           DOY <- strftime(as.Date(date_name,"%Y_%m_%d" ), format = "%j")  # transform date to DOY
 
           # check if all foreseen output rasters already exist. If so, skip the date. Otherwise start proecssing
-          check_files <- F
+          check_files <- FALSE
           check_files <- MODIStsp_check_files(out_prod_folder, file_prefix,bandnames,bandsel_orig_choice,yy,DOY,out_format,  indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel)
-          if (check_files == F | reprocess == "Yes") {  		# If not all output files are already present or reprocess = "Yes", start downloading hdfs
+          if (check_files == FALSE | reprocess == "Yes") {  		# If not all output files are already present or reprocess = "Yes", start downloading hdfs
 
             # Create vector of image names required (corresponding to the selected tiles, within current dir)
             modislist <- lpdaac_getmod_names(http = http, date_dirs = date_dirs, date = date, v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), tiled)
@@ -237,9 +236,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     if (gui) {
                       svalue(mess_lab) <- paste("---",mess_text,"---")
                     } else {
-                      cat("[",date(),"]",mess_text,"\n")
+                      message("[",date(),"]",mess_text)
                     }	# Update progress window
-                    er <- tryCatch(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = F, cacheOK = FALSE),
+                    er <- tryCatch(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = FALSE, cacheOK = FALSE),
                                    warning = function(war) {
                                      print(war)
                                      return(1)
@@ -248,7 +247,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                                      return(1)
                                    } )
                     if (er != 0) {	# Stop after 30 failed attempts
-                      cat("[",date(),"] Download Error -Retrying...\n")
+                      message("[",date(),"] Download Error -Retrying...")
                       unlink(local_filename)
                       Sys.sleep(10)
                       ce <- ce + 1
@@ -256,7 +255,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                         # on error, delete last hdf file (to be sure no incomplete files are left behind)
                         confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...){})
                         if (confirm == "FALSE") {
-                          cat("[",date(),"] Error: http server seems to be down! Please Retry Later!\n"); stop()
+                          warning("[",date(),"] Error: http server seems to be down! Please Retry Later!"); stop()
                         }
                       }
                     }
@@ -264,7 +263,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 } # end IF on hdf existence
               } # End cycle for downloading the images in modislist vector
 
-              cat("[",date(),"]",length(modislist),"files for date of",date_dirs[date],"were successfully downloaded!\n")
+              message("[",date(),"]",length(modislist),"files for date of",date_dirs[date],"were successfully downloaded!")
 
               # -------------------------------------------------------------------------
               # After all required tiles for the date are downloaded, start geoprocessing
@@ -296,7 +295,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   } else {
                     out_filename <- paste0(out_filename, ".dat")
                   }
-                  if (file.exists(out_filename) == F | reprocess == "Yes") {
+                  if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
                     req_bands_indexes[,band] <- bands_indexes[,band] # if the index does not exists then consider the original bands required for it
                   }
                 }
@@ -309,7 +308,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   } else {
                     out_filename <- paste0(out_filename, ".dat")
                   }
-                  if (file.exists(out_filename) == F | reprocess == "Yes") {
+                  if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
                     req_bands_indexes[,band + length(indexes_bandsel)] <- bands_indexes[,band + length(indexes_bandsel)] # if the index does not exists then consider the original bands required for it
                   }
                 }
@@ -334,10 +333,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   if (gui) {
                     svalue(mess_lab) <- paste("---",mess_text,"---")
                   } else {
-                    cat("[",date(),"]",mess_text,"\n")
+                    message("[",date(),"]",mess_text)
                   }
                   bands[band] <- 1																			# IF band selected for processing, put its value to 1
-                  dir.create(file.path(out_prod_folder, bandnames[band]), showWarnings = F, recursive = T)
+                  dir.create(file.path(out_prod_folder, bandnames[band]), showWarnings = FALSE, recursive = TRUE)
                   bands <- paste(as.character(bands), collapse = "", sep = " ")					# Convert to character
                   outfile <- paste0(tmp_prod_folder, "/",bandnames[band],"_",yy,"_",DOY,".tif")  	# Create name for the temporary tif mosaic
                   outfile <- paste0(bandnames[band],"_",yy,"_",DOY,".tif")  	# Create name for the temporary tif mosaic
@@ -353,7 +352,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
                   outfile_vrt <- paste0(tmp_prod_folder, "/",bandnames[band],"_",yy,"_",DOY,"vrt.tif")    # Create name for the vrt mosaic
 
-                  if (file.exists(outrep_file) == F | reprocess == "Yes") {
+                  if (file.exists(outrep_file) == FALSE | reprocess == "Yes") {
 
                     files_in <- file.path(out_folder_mod, modislist)
                     dir.create(tmp_prod_folder, recursive = TRUE, showWarnings = FALSE)
@@ -369,7 +368,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     if (gui) {
                       svalue(mess_lab) <- paste("---",mess_text,"---")
                     } else {
-                      cat("[",date(),"]",mess_text,"\n")
+                      message("[",date(),"]",mess_text)
                     }
 
                     if (full_ext == "Resized") {
@@ -430,6 +429,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
                       fileConn_meta_hdr <- file(paste0(file_path_sans_ext(outrep_file),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
                       writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
+                      writeLines("", fileConn_meta_hdr)
                       close(fileConn_meta_hdr)
 
                     }
@@ -453,7 +453,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 if (gui) {
                   svalue(mess_lab) <- paste("---",mess_text,"---")
                 } else {
-                  cat("[",date(),"]",mess_text,"\n")
+                  message("[",date(),"]",mess_text)
                 }
                 out_filename <- file.path(out_prod_folder,indexes_band,paste0(file_prefix,"_",indexes_band,"_",yy,"_", DOY))
                 if (out_format == "GTiff") {
@@ -461,8 +461,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 } else {
                   out_filename <- paste0(out_filename, ".dat")
                 }
-                dir.create(file.path(out_prod_folder,indexes_band), showWarnings = F, recursive = T) # create folder for index
-                if (file.exists(out_filename) == F | reprocess == "Yes") { #If file not existing and reprocess = No, compute the index and save it
+                dir.create(file.path(out_prod_folder,indexes_band), showWarnings = FALSE, recursive = TRUE) # create folder for index
+                if (file.exists(out_filename) == FALSE | reprocess == "Yes") { #If file not existing and reprocess = No, compute the index and save it
                   MODIStsp_process_indexes(out_filename = out_filename, formula = formula,bandnames = bandnames, nodata_out = nodata_out,
                                            indexes_nodata_out = indexes_nodata_out[band],out_prod_folder = out_prod_folder, file_prefix = file_prefix, yy = yy,out_format = out_format, DOY = DOY )
                 }
@@ -482,17 +482,17 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 if (gui) {
                   svalue(mess_lab) <- paste("---",mess_text,"---")
                 } else {
-                  cat("[",date(),"]",mess_text,"\n")
+                  message("[",date(),"]",mess_text)
                 }
-                cat("Computing", quality_band,"for date:",date_name,"\n")
+                message("Computing", quality_band,"for date:",date_name)
                 out_filename <- file.path(out_prod_folder,quality_band,paste0(file_prefix,"_",quality_band,"_",yy,"_", DOY))
                 if (out_format == "GTiff") {
                   out_filename <- paste0(out_filename, ".tif")
                 } else {
                   out_filename <- paste0(out_filename, ".dat")
                 }
-                dir.create(file.path(out_prod_folder,quality_band), showWarnings = F, recursive = T)
-                if (file.exists(out_filename) == F | reprocess == "Yes") { #If file not existing and reprocess = No, compute the indicator and save it
+                dir.create(file.path(out_prod_folder,quality_band), showWarnings = FALSE, recursive = TRUE)
+                if (file.exists(out_filename) == FALSE | reprocess == "Yes") { #If file not existing and reprocess = No, compute the indicator and save it
                   MODIStsp_process_QA_bits(out_filename,in_raster_name = bandnames[grep(source,bandnames)], bitN, source,
                                            out_prod_folder, file_prefix, yy, DOY, out_format, nodata_source = nodata_out[grep(source,bandnames)],
                                            nodata_qa_in , nodata_qa_out  )
@@ -518,7 +518,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     out_filename_tif <- paste0(out_filename, ".tif")
                     unlink(out_filename_tif)
                   }
-                  unlink(dirname(out_filename),recursive = T)
+                  unlink(dirname(out_filename),recursive = TRUE)
                 } #End If on delbands[banddel] == 1
               } #End Cycle on banddel
 
@@ -527,11 +527,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
               # if (multiband_bsq == T) {MODIStsp_refl_bsq(sel_prod, out_prod_folder,bandnames, bandsel_orig_choice, reflbands, reflorder ,file_prefix, yy, DOY)}
 
             } else {
-              cat("[",date(),"] No available image for selected Tiles in",date_dirs[date],".\n")
+              message("[",date(),"] No available image for selected Tiles in ",date_dirs[date])
             } # End check on at least one image available
 
           } else {
-            cat("[",date(),"] All Required output files for date",date_name, "are already existing - Doing Nothing !\n")
+            message("[",date(),"] All Required output files for date",date_name, "are already existing - Doing Nothing !")
           } # End check on all data already processed for date or reprocees = Yes
 
           #- ------------------------------------------------------------------------------- -#
@@ -549,7 +549,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
         }   # End cycling on available dates for selected year
 
-      } else cat("[",date(),"]", "No available data for year:", yy, "for Sensor",sens_sel,"in selected dates.\n")
+      } else message("[",date(),"]", "No available data for year:", yy, "for Sensor",sens_sel,"in selected dates.")
 
     }	# End Cycling on selected years
 
@@ -569,19 +569,19 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   for (sens_sel in senslist) {		# cycle on selected sensors
 
     for (band in which(bandsel == 1)) { # Create virtual files for original layers
-      cat("[",date(),"]", "Creating Virtual Files and rts time series for layer", bandnames[band], "\n")
+      message("[",date(),"]", "Creating Virtual Files and rts time series for layer", bandnames[band])
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = bandnames[band],
                           file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format,  nodata_value = nodata_out[band], out_format = out_format, rts = rts)
     } #End Cycle on bandsel
 
     for (band in which(indexes_bandsel == 1)) {  # Create virtual files for QI layers
-      cat("[",date(),"]", "Creating Virtual Files and rts time series for layer", indexes_bandnames[band], "\n")
+      message("[",date(),"]", "Creating Virtual Files and rts time series for layer", indexes_bandnames[band])
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = indexes_bandnames[band],
                           file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = indexes_nodata_out[band], out_format = out_format, rts = rts)
     } #End Cycle on indexes_bandsel
 
     for (band in which(quality_bandsel == 1)) {	# Create virtual files for SI layers
-      cat("[",date(),"]","Creating Virtual Files and rts time series for layer", quality_bandnames[band], "\n")
+      message("[",date(),"]","Creating Virtual Files and rts time series for layer", quality_bandnames[band])
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = quality_bandnames[band]		,
                           file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = quality_nodata_out[band], out_format = out_format, rts = rts)
     } #End Cycle on quality_bandsel

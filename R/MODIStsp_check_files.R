@@ -34,7 +34,7 @@ MODIStsp_check_files <- function(out_prod_folder, file_prefix,bandnames, bandsel
     if (out_format == "ENVI") {
       outder_file <- paste0(outrep_file, ".dat")
       }
-    if (file.exists(outder_file) == F) {
+    if (file.exists(outder_file) == FALSE) {
       check <- F
       }
   }
@@ -49,7 +49,7 @@ MODIStsp_check_files <- function(out_prod_folder, file_prefix,bandnames, bandsel
     if (out_format == "ENVI") {
       outder_file <- paste0(outder_file, ".dat")
       }
-    if (file.exists(outder_file) == F) {
+    if (file.exists(outder_file) == FALSE) {
       check <- F
       }
   }
@@ -64,7 +64,7 @@ MODIStsp_check_files <- function(out_prod_folder, file_prefix,bandnames, bandsel
     if (out_format == "ENVI") {
       outder_file <- paste0(outder_file, ".dat")
       }
-    if (file.exists(outder_file) == F) {
+    if (file.exists(outder_file) == FALSE) {
       check <- F
       }
   }

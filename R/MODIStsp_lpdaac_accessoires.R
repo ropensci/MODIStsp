@@ -11,7 +11,8 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
 #' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @import RCurl
+#' @importFrom gWidgets gconfirm
+#' @importFrom RCurl getURL
 lpdaac_getmod_dirs <- function(http, .Platform) {
 
   if (strsplit(http,"")[[1]][length(strsplit(http,"")[[1]])] != "/") {
@@ -32,12 +33,12 @@ lpdaac_getmod_dirs <- function(http, .Platform) {
     if (class(items) == "try-error") {
       Sys.sleep(1)
       ce <- ce + 1
-      cat("Trying to reach http server - attempt ", ce)
+      message("Trying to reach http server - attempt ", ce)
       print(ce)
       if (ce == 50)  {
         confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
         if (confirm == "FALSE") {
-          cat("[",date(),"] Error: http server seems to be down! Please Retry Later!\n")
+          warning("[",date(),"] Error: http server seems to be down! Please Retry Later!")
           stop()
         }
       }
@@ -130,16 +131,16 @@ lpdaac_getmod_names <- function(http, date_dirs, date, v, h, tiled) {
   ce <- 0
   while (class(getlist) == "try-error") {
     getlist <- try(strsplit(getURL(paste(http,date_dirs[date], "/", sep = ""), followLocation = TRUE,
-                                   .opts = list(timeout = 10, maxredirs = 5, verbose = F)), "\r*\n")[[1]],silent = TRUE)
+                                   .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)), "\r*\n")[[1]],silent = TRUE)
     if (class(getlist) == "try-error") {
       Sys.sleep(1)
-      cat("Trying to reach http server - attempt ", ce)
+      message("Trying to reach http server - attempt ", ce)
       ce <- ce + 1
       if (ce == 50) {
         confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question",
                             handler = function(h,...){})
         if (confirm == "FALSE") {
-          cat("[",date(),"] Error: http server seems to be down! Please Retry Later!\n")
+          warning("[",date(),"] Error: http server seems to be down! Please Retry Later!")
           stop()
         }
       }
@@ -167,7 +168,7 @@ lpdaac_getmod_names <- function(http, date_dirs, date, v, h, tiled) {
     }
   } else {
 
-    Modislist <- grep(".hdf$",getlist, value = T)
+    Modislist <- grep(".hdf$",getlist, value = TRUE)
   }
   return(Modislist)
 

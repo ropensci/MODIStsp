@@ -15,12 +15,13 @@
 #' @note License: GPL 3.0
 #' @export
 #' @importFrom hash hash
-#' @import gdalUtils
-#' @import rgdal
-#' @import raster
+#' @importFrom gdalUtils gdal_setInstallation gdalinfo
+#' @importFrom rgdal getGDALVersionInfo
+#' @importFrom raster extent rasterOptions
 #' @importFrom tools file_path_sans_ext
+#' @importFrom utils memory.limit
 #' @examples
-#' # Running the tool without any option will start the GUI with the default settings (or the last used)
+#' # Running the tool without any option will start the GUI with the default or last used settings
 #' \dontrun{
 #' MODIStsp()}
 #'
@@ -59,9 +60,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
     # gdal_setInstallation(ignore.full_scan = FALSE)
-    mess <- gmessage(title = "Welcome", "Welcome to MODIStsp !\n We will now search for a valid GDAL installation - please Wait ! 
+    mess <- gmessage(title = "Welcome", "Welcome to MODIStsp !\n We will now search for a valid GDAL installation - please Wait !
                          \n This will happen only once !", do.buttons = FALSE)
-    gdal_setInstallation(ignore.full_scan = TRUE, verbose = T)
+    gdal_setInstallation(ignore.full_scan = TRUE, verbose = TRUE)
   }
   gdal_version <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", getGDALVersionInfo(str = "--version")))
   gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
@@ -87,7 +88,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
   if (Sys.info()["sysname"] == "Windows") {
     memory.limit(8000)
   }							# Increase maximum allocsable memory
-  rasterOptions(setfileext = F)				# Make so that "raster" functions doesn't automatically add extensions on output files
+  rasterOptions(setfileext = FALSE)				# Make so that "raster" functions doesn't automatically add extensions on output files
 
   # Parameter retrieval and Folder Initialization -----
   if (is.null(options_file) & gui == FALSE) {

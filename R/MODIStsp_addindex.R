@@ -18,6 +18,9 @@
 #'  compute it are the names of the bands: b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.
 #' @param new_indexnodata_out (optional): nodata value to assign to the rasters containing the new index
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
+#' @import gWidgets
+#' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
+#' @importFrom stringr str_detect
 #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -47,7 +50,7 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
 
   # Initialization and retrieval of parameters ----
   if (gui) {
-    require(gWidgetsRGtk2)
+    requireNamespace(gWidgetsRGtk2)
     options("guiToolkit" = "RGtk2")
   }
 
@@ -105,13 +108,13 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
     # Create dummy varaibles named as the required bands, assign random values to the
     # them, and then verify if formula is copmputable by evaluate/parse and check for errors
 
-    if (req_bands[1] == T) {b1_Red <- 5}
-    if (req_bands[2] == T) {b2_NIR <- 6}
-    if (req_bands[3] == T) {b3_Blue <- 7}
-    if (req_bands[4] == T) {b4_Green <- 8}
-    if (req_bands[5] == T) {b5_SWIR <- 9}
-    if (req_bands[6] == T) {b6_SWIR <- 15}
-    if (req_bands[7] == T) {b7_SWIR <- 25}
+    if (req_bands[1] == TRUE) {b1_Red <- 5}
+    if (req_bands[2] == TRUE) {b2_NIR <- 6}
+    if (req_bands[3] == TRUE) {b3_Blue <- 7}
+    if (req_bands[4] == TRUE) {b4_Green <- 8}
+    if (req_bands[5] == TRUE) {b5_SWIR <- 9}
+    if (req_bands[6] == TRUE) {b6_SWIR <- 15}
+    if (req_bands[7] == TRUE) {b7_SWIR <- 25}
 
     if (max(req_bands == 1)) {
       try_parse <- try(eval(parse(text = new_indexformula)), silent = TRUE)
@@ -155,7 +158,7 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
 
       # check if bands required for index computation are avilable for the product
       check <- 0
-      for (reqband in refbands_names[which(req_bands == T)]) {
+      for (reqband in refbands_names[which(req_bands == TRUE)]) {
         if (reqband %in% bandnames) {
           check <- check + 1
         }
@@ -190,27 +193,27 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
   # GUI Initialization -----
   if (gui) {
 
-    main_win <- gbasicdialog(title = "Insert the new Spectral Index information and formula", parent = NULL, do.buttons = F,
-                             visible = T, spacing = 10)
-    main_group <- ggroup(container = main_win, horizontal = FALSE, expand = T)
+    main_win <- gbasicdialog(title = "Insert the new Spectral Index information and formula", parent = NULL, do.buttons = FALSE,
+                             visible = TRUE, spacing = 10)
+    main_group <- ggroup(container = main_win, horizontal = FALSE, expand = TRUE)
 
-    indexbandname_group <- ggroup(container = main_group, horizontal = T, expand = T)
-    indexbandname_label <- glabel(text = "<span weight = 'bold'> Spectral Index Acronym (e.g., SR) </span>", markup = T, container = indexbandname_group)
+    indexbandname_group <- ggroup(container = main_group, horizontal = T, expand = TRUE)
+    indexbandname_label <- glabel(text = "<span weight = 'bold'> Spectral Index Acronym (e.g., SR) </span>", markup = TRUE, container = indexbandname_group)
     size(indexbandname_label) <- c(400,20)
     sel_indexbandname <- gedit(text = new_indexbandname, label = "Please Insert a valid Proj4 string        ",
-                               container = indexbandname_group, size = 800, horizontal = T)
+                               container = indexbandname_group, size = 800, horizontal = TRUE)
 
-    indexbandfullname_group <- ggroup(container = main_group, horizontal = T, expand = T)
-    indexbandfullname_label <- glabel(text = "<span weight = 'bold'> Spectral Index Full Name (e.g., Simple Ratio (b2_NIR/b1_Red) )</span>", markup = T,
+    indexbandfullname_group <- ggroup(container = main_group, horizontal = TRUE, expand = TRUE)
+    indexbandfullname_label <- glabel(text = "<span weight = 'bold'> Spectral Index Full Name (e.g., Simple Ratio (b2_NIR/b1_Red) )</span>", markup = TRUE,
                                       container = indexbandfullname_group)
     size(indexbandfullname_label) <- c(400,20)
-    sel_indexbandfullname <- gedit(text = new_indexfullname, container = indexbandfullname_group, size = 800, horizontal = T)
+    sel_indexbandfullname <- gedit(text = new_indexfullname, container = indexbandfullname_group, size = 800, horizontal = TRUE)
 
-    indexformula_group <- ggroup(container = main_group, horizontal = T, expand = T)
-    indexformula_label <- glabel(text = "<span weight = 'bold'>  Spectral Index Formula (e.g., (b2_NIR/b1_Red) ) </span>", markup = T,
+    indexformula_group <- ggroup(container = main_group, horizontal = TRUE, expand = TRUE)
+    indexformula_label <- glabel(text = "<span weight = 'bold'>  Spectral Index Formula (e.g., (b2_NIR/b1_Red) ) </span>", markup = TRUE,
                                  container = indexformula_group)
     size(indexformula_label) <- c(400,20)
-    sel_indexformula <- gedit(text = new_indexformula, container = indexformula_group, size = 800, horizontal = T)
+    sel_indexformula <- gedit(text = new_indexformula, container = indexformula_group, size = 800, horizontal = TRUE)
 
     but_group <- ggroup(container = main_group, horizontal = TRUE)
 
@@ -255,7 +258,7 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
       dispose(main_win)
     })
 
-    visible(main_win, set = T)
+    visible(main_win, set = TRUE)
 
     # end of gui actions ----
     # Actions on non-interactive execution
@@ -270,7 +273,7 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
                    new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                    new_indexnodata_out = new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
                    mod_prod_list = mod_prod_list, previous_file = previous_file)
-      cat("The new Spectral Index was correctly added! It will be available from the next running of MODIStsp().\n")
+      message("The new Spectral Index was correctly added! It will be available from the next running of MODIStsp().")
     } else if (catch_err == 1) {
       stop(paste0("The formula of the new index is not computable. Please check it (Valid band names are: ",paste(refbands_names,collapse = ", "),"."))
     } else if (catch_err == 2) {

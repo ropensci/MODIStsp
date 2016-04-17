@@ -6,11 +6,13 @@
 #' @param file_path The path of the spatial file.
 #' @param out_crs The output projection (string format).
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#'
+#' @importFrom gdalUtils gdalinfo gdalsrsinfo ogrinfo
+#' @importFrom sp CRS
 #' @note License: GPL 3.0
 #'
-#' @import sp
-
-
+#' @importFrom sp CRS
+#' @importFrom gdalUtils gdalsrsinfo gdalinfo ogrinfo
 bbox_from_file <- function(file_path, out_crs) {
 
   # Retrieve CRS using gdal: if fails, then the file is not a valid spatial file

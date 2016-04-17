@@ -11,8 +11,9 @@
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @import XML
+#' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom plyr revalue
+#' @importFrom hash hash
 MODIStsp_read_xml <- function(previous_file = previous_file, xml_file = xml_file) {
 
   prod_opt_list <- NULL

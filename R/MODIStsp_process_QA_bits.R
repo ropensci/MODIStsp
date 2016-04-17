@@ -26,8 +26,9 @@
 #' Based on the "modis.qc.R" script by Yann Chemin (2008) (https://r-forge.r-project.org/scm/viewvc.php/pkg/RemoteSensing/R/modis.qc.R?view=markup&root=remotesensing&pathrev=79)
 #'
 #' license GPL 3.0
-#' @import raster
-#' @import bitops
+#' @importFrom raster getValues NAvalue raster setValues writeRaster
+#' @importFrom bitops bitAnd bitShiftR
+#' @importFrom tools file_path_sans_ext
 MODIStsp_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, out_prod_folder,
                                      file_prefix, yy, DOY, out_format, nodata_source,nodata_qa_in , nodata_qa_out) {
   in_raster_file <- file.path(out_prod_folder, in_raster_name,paste(file_prefix,"_",in_raster_name,"_",yy,"_", DOY, sep = "")) #define name of input "source" file
@@ -58,6 +59,7 @@ MODIStsp_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, o
   if (out_format == "ENVI") { # IF "ENVI", write the nodata value in the header
     fileConn_meta_hdr <- file(paste0(file_path_sans_ext(out_filename),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
     writeLines(c("data ignore value = ", nodata_qa_out), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
+    writeLines("", fileConn_meta_hdr)
     close(fileConn_meta_hdr)
   }
   xml_file <- paste(out_filename,".aux.xml",sep = "")		# Delete xml files created by writeRaster
