@@ -25,9 +25,10 @@ Depends:
 License: GPL-3
 LazyData: true
 Imports:
-    XML,gWidgets,rgdal,rgeos,gdalUtils,xts,
-    data.table,RCurl,stringr,tools,plyr,sp (>= 1.0.17),bitops,hash,raster (>= 2.3-40)
+    bitops (>= 1.0-6), data.table (>= 1.9.6), gdalUtils (>= 2.0.1.7), gWidgets (>= 0.0-54),
+    hash (>= 2.2.6), plyr (>= 1.8.3), raster (>= 2.5-2), RCurl (>= 1.95-4.8), rgdal (>= 1.1-8),
+    rgeos (>= 0.3-8), xts (>= 0.9.874), XML (>= 3.98-1.1)
 Suggests:
-    knitr
+    knitr, gWidgetsRGtk2
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
