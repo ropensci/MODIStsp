@@ -5,8 +5,8 @@
 \title{MODIStsp_extract}
 \usage{
 MODIStsp_extract(in_rts, sp_object, start_date = NULL, end_date = NULL,
-  id_field = NULL, FUN = "mean", out_format = "xts", small = T,
-  small_method = "centroids", na.rm = T, verbose = F)
+  id_field = NULL, FUN = "mean", out_format = "xts", small = TRUE,
+  small_method = "centroids", na.rm = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{in_rts}{input "rasterStack" or "rasterBrick" object created by MODIStsp (it MUST contain acquisition dates in the "Z" attribute " )}

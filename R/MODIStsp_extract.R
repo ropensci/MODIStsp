@@ -47,8 +47,13 @@
 #'
 #' @note License: GPL 3.0
 #' @export
+#' @importFrom rgdal readOGR writeOGR
 #' @importFrom xts as.xts
-#' @import data.table
+#' @importFrom data.table data.table setkey
+#' @importFrom raster getValues crop extent getZ extract rasterize
+#' @importFrom sp coordinates CRS proj4string spTransform
+#' @importFrom tools file_path_sans_ext
+#' @importFrom gdalUtils gdal_rasterize
 #' @examples
 #' # Extract average and standard deviation values from a rts object created by MODIStsp
 #' # for each polygon of a shapefile, for each date in the period between 2001-01-01 and 2014-12-31
@@ -68,39 +73,39 @@
 
 
 MODIStsp_extract <- function(in_rts, sp_object, start_date = NULL, end_date = NULL,
-                             id_field = NULL, FUN = "mean", out_format = "xts", small = T, small_method = "centroids", na.rm = T, verbose = F){
+                             id_field = NULL, FUN = "mean", out_format = "xts", small = TRUE, small_method = "centroids", na.rm = TRUE, verbose = FALSE){
 
   # checks on inputs ----
-
+  # browser()
   if (!class(in_rts) %in% c("RasterStack","RasterBrick")) {
-    stop("in_rts is not a RasterStack or RasterBrick object")
+    stop("Input is not a RasterStack or RasterBrick object")
   }
 
   if (!class(getZ(in_rts)) == "Date") {
 
-    stop("in_rts doesn't contain valid dates in its 'Z' attribute !")
+    stop("Input doesn't contain valid dates in its 'Z' attribute !")
   }
   if (length(start_date) == 0) {
 
-    start_date <- min(getZ(in_ras))
-    if (verbose) cat("Starting date not provided - Using the first date in the stack\n")
+    start_date <- min(getZ(in_rts))
+    if (verbose) message("Starting date not provided - Using the first date in the stack")
   }
 
   if (length(end_date) == 0) {
 
-    end_date <- max(getZ(in_ras))
-    if (verbose) cat("Starting date not provided - Using the first date in the stack\n")
+    end_date <- max(getZ(in_rts))
+    if (verbose) message("Ending date not provided - Using the last date in the stack")
   }
 
   if (!class(start_date) %in% c("Date","POSIXct","POSIXlt")) {
-    start_date = try(as.Date(start_date), silent = T)
+    start_date = try(as.Date(start_date), silent = TRUE)
     if (class(start_date) == "try-error") {
       stop("start_date is not a Date object or string cohercible to date")
     }
   }
 
   if (!class(end_date) %in% c("Date","POSIXct","POSIXlt")) {
-    end_date = try(as.Date(end_date), silent = T)
+    end_date = try(as.Date(end_date), silent = TRUE)
     if (class(end_date) == "try-error") {
       stop("end_date is not a Date object or string cohercible to date")
     }
@@ -113,12 +118,12 @@ MODIStsp_extract <- function(in_rts, sp_object, start_date = NULL, end_date = NU
 
   if (!small_method %in% c("centroids","full")) {
 
-    if (verbose) cat("Unknown 'small_method' value - resetting to 'centroids'\n")
+    warning("Unknown 'small_method' value - resetting to 'centroids'")
   }
 
   if (!out_format %in% c("xts","dframe")) {
 
-    if (verbose) cat("Unknown 'out_format' value - resetting to 'xts'\n")
+    if (verbose) message("Unknown 'out_format' value - resetting to 'xts'")
     out_format = "xts"
   }
 
@@ -134,29 +139,51 @@ MODIStsp_extract <- function(in_rts, sp_object, start_date = NULL, end_date = NU
   }
   if (length(id_field) != 0) {
     if (!id_field %in% names(sp_object)) {
-      if (verbose) cat("Invalid 'id_field' value - names of output columns will be the record number of the shapefile feature\n")
+      warning("Invalid 'id_field' value - names of output columns will be the record number of the shapefile feature")
       id_field <- NULL
     }
   }
-
+  # browser()
   # start processing ----
   dates <- getZ(in_rts)
   sel_dates <- which(dates >= start_date & dates <= end_date)
 
-  if (length(sel_dates) > 1) {
-    shape <- spTransform(sp_object, CRS(proj4string(in_rts[[1]])))
-    in_rts <- crop(in_rts, extent(shape))
-    # If object is points or lines, find the pixels intersected by points or lines, then extract the data for each date
-    if (class(sp_object) %in% c("SpatialPointsDataFrame",
-                                "SpatialPoints","SpatialLines","SpatialLinesDataFrame")) {
+  #start cycling on dates ----
 
-      # cells <- extract(in_rts[[1]], shape, cellnumbers <- T, fun = mean)[,1]
+  if (length(sel_dates) > 0) {
+
+    # do some juggling with spatial object ----
+    # transform shape to SRS of raster, then crop the shape on the raster: to be sure that rasterization get same extent !
+    # Also add a "unique identifier" column at the end of shape@data to be used for rasterization. This is used to keep
+    # feature in the right order in the outputs and being able to assign the correct "names" to the features !
+
+    if (proj4string(sp_object) != proj4string(in_rts)) {
+      sp_object <- spTransform(sp_object, CRS(proj4string(in_rts[[1]])))
+    }
+    sp_object@data$mdxtnq = seq(1:length(sp_object@data[,1]))
+    shape = crop(sp_object, extent(in_rts[[1]]))  # create a new spObject, cropped (Not the old one to avoid losing track of columns !)
+
+    if (extent(shape) != extent (sp_object)){
+      warning("Some features of the spatial object are outside or partially outside
+            the extent of the input RasterStack ! Output for features outside rasterstack extent
+            will be set to NODATA. Outputs for features only partially inside will be retrieved
+            using only the available pixels !")
+      outside_feat = setdiff(sp_object$mdxtnq, shape$mdxtnq)
+    }
+
+    # Start processing - points or lines -----
+
+    # If object is points or lines, find the pixels intersected by points or lines, then extract the data for each date
+    # using a standard "raster::extract" call
+    if (class(shape) %in% c("SpatialPointsDataFrame",
+                            "SpatialPoints","SpatialLines","SpatialLinesDataFrame")) {
+
       ts <- matrix(nrow = length(sel_dates), ncol = length(shape[,1]))
       for (f in 1:length(sel_dates)) {
-        if (verbose == T) {
+        if (verbose == TRUE) {
           print(paste0("Extracting data from date: ", dates[sel_dates[f]]))
         }
-        ts[f,] <- extract(in_rts[[sel_dates[f]]], sp_object, fun = FUN)
+        ts[f,] <- extract(in_rts[[sel_dates[f]]], shape, fun = FUN)
       }
 
       ts <- as.data.frame(ts)
@@ -170,19 +197,49 @@ MODIStsp_extract <- function(in_rts, sp_object, start_date = NULL, end_date = NU
         ts <- cbind(date =  dates[sel_dates], ts)
       }
     } else {
+      # Start processing - poygons -----
 
       # If object is polygons, rasterize the shape, then extract the data for each date using data.table
+      # if (crop_rast) {
+      #   in_rts = crop(in_rts, extent(shape))
+      # }
 
-      zone_raster <- rasterize(shape, in_rts[[1]])
+      if(verbose) (message('Rasterizing shape'))
+      # get a filename for temporary shapefile and save it (needed for gdal_rasterize)
+      if (verbose) {message('Writing temporary shapefile')}
+      tempshape = tempfile(tmpdir = tempdir(),fileext = '.shp')
+      writeOGR(shape, dsn = dirname(tempshape), layer = basename(file_path_sans_ext(tempshape)),
+               driver = "ESRI Shapefile", overwrite_layer=TRUE, verbose = FALSE)
+
+      # get a filename for temporary raster and save it (needed for gdal_rasterize)
+      if (verbose) {message('Writing temporary rasterized shapefile')}
+      tempraster = tempfile(tmpdir = tempdir(),fileext = '.tiff')
+      ext_conv = function(x){ext = extent(x) ; c(ext[1],ext[3],ext[2],ext[4])}
+      if(max(shape@data$mdxtnq) <= 255) {
+        ot = "Byte"
+      } else {
+        if(max(shape@data$mdxtnq) <= 65536) {
+          ot = "Int16"
+        } else {
+          ot = "Int32"
+        }
+      }
+      gdal_rasterize(tempshape ,tempraster, tr = res(in_rts), te = ext_conv(in_rts[[1]]), a = "mdxtnq", ot = ot)
+
+      # get values from rasterized shape, and find which ones to process (only those
+      # inside the polygons)
+      zone_raster <- raster(tempraster)
       zones <- getValues(zone_raster)
-      ok_zones <- which(is.finite(zones))
+      ok_zones <- which(is.finite(zones) & zones != 0)
       zones <- zones[ok_zones]
-      sel_dates <- which(dates >= start_date & dates <= end_date)
-      ncols <- length(unique(zones))
-      ts <- matrix(nrow = length(sel_dates), ncol = ncols)
+
+      ncols <- length(unique(zones))  # number of features
+      ts <- matrix(nrow = length(sel_dates), ncol = ncols)  # create dummy output matrix
+
+      # cycle on dates and retrieve values from rasterstack ----
       for (f in 1:length(sel_dates)) {
-        if (verbose == T) {
-          print(paste0("Extracting data from date: ", dates[sel_dates[f]]))
+        if (verbose == TRUE) {
+          message(paste0("Extracting data from date: ", dates[sel_dates[f]]))
         }
         value <- getValues(in_rts[[sel_dates[f]]]) [ok_zones]
         rDT <- data.table(value, zones)
@@ -190,33 +247,37 @@ MODIStsp_extract <- function(in_rts, sp_object, start_date = NULL, end_date = NU
         ts[f,1:ncols] <- rDT[, lapply(.SD, match.fun(FUN), na.rm = na.rm), by = zones]$value
       }
 
+      # put correct names in colums of the output dframe, taking from id_field
+      # or from the mdxtnq dummy field
       ts <- as.data.frame(ts)
       if (length(id_field) == 1) {
-        feat_names <- as.character(shape@data[,eval(id_field)])[zones] # get the "id_field" names for the identified zones
-        names(ts) <- c(feat_names)
+        feat_names <- as.character(sp_object@data[,eval(id_field)])[sort(unique(zones))] # get the "id_field" names for the identified zones
+        names(ts) <-  feat_names
       } else {
-        names(ts) <- c(zones)
+        feat_names <- as.character(shape@data[,"mdxtnq"])[sort(unique(zones))]
+        names(ts) <-  feat_names
       }
-      if (out_format == "dframe") { # add the date column if outpit is dframe
+      if (out_format == "dframe") { # add the date column if output is dframe
         ts <- cbind(date =  dates[sel_dates], ts)
       }
 
+      # Check for small polygons ----
       # if small = T and not all the polygons had at least one point, then extract the data for the small polygons
       # using the standard "extract" function, with small == T and method defined by small_method
       if (small & ncols != length(shape@data[,1])) {
 
         if (length(id_field) == 1) {
           miss_feat <- setdiff(as.character(shape@data[,eval(id_field)]),as.character(shape@data[,eval(id_field)])[zones] )
-          pos_missing <- which(shape@data[,eval(id_field)] %in% miss_feat)
+          pos_missing <- sort(which(shape@data[,eval(id_field)] %in% miss_feat))
         } else {
-          pos_missing <- miss_feat <- setdiff(1:length(shape@data[,1]), zones)
+          pos_missing <- miss_feat <- sort(setdiff(1:length(shape@data[,1]), zones))
         }
         # browser()
         shpsub <- shape[pos_missing,]
         ts_mis <- matrix(nrow = length(sel_dates), ncol = length(pos_missing))
-        # cells <- extract(in_rts[[1]], shpsub, cellnumbers = TRUE)
+
         for (f in 1:length(sel_dates)) {
-          if (verbose == T) {
+          if (verbose == TRUE) {
             print(paste0("Extracting data from date: ", dates[sel_dates[f]]))
           }
           if (small_method == "centroids") {
@@ -229,11 +290,36 @@ MODIStsp_extract <- function(in_rts, sp_object, start_date = NULL, end_date = NU
         colnames(ts_mis) <- miss_feat
         ts <- cbind(ts, ts_mis)
       }
+
+      #remove temporary raster and shapefile
+      unlink(tempraster)
+      # unlink(list.files(tempdir(),pattern = "tempshape.*" ))
     }
+
+    # If some features were missing, then add them back in the ts, putting the data for them
+    # to NA
+    if (exists("outside_feat")) {
+      # browser()
+      if (length(id_field) == 1) {
+        feat_names_outside = as.character(sp_object@data[,eval(id_field)])[outside_feat]
+      } else {
+        feat_names_outside = as.character(sp_object@data[,"mdxtnq"])[outside_feat]
+      }
+      ts_outside = matrix(nrow = length(sel_dates), ncol = length(feat_names_outside))
+      ts_outside = data.frame(ts_outside)
+      names(ts_outside) = feat_names_outside
+      ts = cbind(ts, ts_outside)
+      sortindex = match(sp_object@data$adm_id,names(ts))
+      ts = ts[,c(1,sortindex)]
+    }
+
     if (out_format == "xts") {  # If out_format is xts, convert the df to xts object
       ts <- as.xts(ts, order.by = dates[sel_dates])
     }
-    ts
+    file.remove(tempraster)
+    file.remove(tempshape)
+
+    return(ts)
   } else {
     warning("Selected time range does not overlap with the one of the rasterstack input dataset !")
   }
