@@ -1,14 +1,8 @@
 ---
 title: 'MODIStsp: A tool for automatic preprocessing of MODIS time series'
-author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it)), Luigi  Ranghetti'
-  ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
+author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it)), Luigi Ranghetti  ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
-  pdf_document:
-    fig_caption: yes
-    highlight: tango
-    number_sections: yes
-    toc: yes
   html_vignette:
     depth: 3
     fig_caption: yes
@@ -17,11 +11,20 @@ output:
   html_document:
     depth: 3
     toc: yes
+  pdf_document:
+    fig_caption: yes
+    highlight: tango
+    number_sections: yes
+    toc: yes
   word_document: default
 bibliography: MODIStsp.bib
 vignette: |
   %\VignetteIndexEntry{MODIStsp} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
+
+
+
+
 
 # Introduction
 
@@ -59,21 +62,27 @@ To Install MODIStsp:
 
 ## Dependencies
 
-MODIStsp exploits functionalities of several additional "R" packages. A complete list of required packages is shown in Table I. 
+MODIStsp exploits functionalities of several additional "R" packages. A complete list of required packages is shown in the following table. 
 
-| "R" package   | Version     | Authors                      |
-|---------------|-------------|------------------------------|
-| gWidgetsRGtk2 | >= 0.0-54   | [@gwid]   |
-| rgdal         | >= 0.8-16   | [@rgdal]         |
-| plyr          | >= 1.8.3    | [@Wickham2011]               |
-| gdalUtils     | >= 2.0.1.7    | [@gutils] |
-| XML           | >= 3.98-1.1 | [@Lang2013a]                 |
-| RCurl         | >= 1.95-4.1 | [@Lang2013]                 |
-| Stringr       | >= 1.0    | [@stringr]               |
-| hash          | >= 2.26     | [@Brown2013]                 |
-| raster        | >= 2.3.40   | [@Hijmans2014]               |
-| rgeos         | >= 0.3-8    | [@Bivand2014a]      |
-| xts           | >= 0.9.87   | [@xts]      |
+| "R" package    | Version    | Authors          |
+|:----------------:|------------|----------------|
+|  bitops        |>= 1.9.6    | [@Dutky2013]     |
+|  data.table    |>= 1.9.6    | [@data.table]    |
+|  gdalUtils     |>= 2.0.1.7  | [@Greenberg2014] |
+|  gWidgetsRGtk2 |>= 0.0-54   | [@Lawrence2013]  |
+|  hash          |>= 2.2.6    | [@Brown2013]     |
+|  plyr          |>= 1.8.3    | [@Wickham2012]   |
+|  raster        |>= 2.5-2    | [@Hijmans2014]   |
+|  RCurl         |>= 1.95-4.8 | [@Lang2013]      |
+|  rgdal         |>= 1.1-8    | [@Bivand2014a]   |
+|  rgeos         |>= 0.3-8    | [@Bivand2014]    |
+|  xts           |>= 1.0-10   | [@xts]           |
+|  sp            |>= 1.2-2    | [@sp]            |
+|  stringr       |>= 1.0.0    | [@Wickham2012]   |
+|  XML           |>= 3.98-1.1 | [@Lang2013a]     |
+
+  
+**Table I: List of "R" package dependencies for the MODIStsp tool.**
 
 
 Additionaly, MODIStsp **requires availability of the GDAL - Geospatial Data Abstraction Library  v. >1.10, with support for HDF4 raster format**. 
@@ -125,86 +134,10 @@ When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection 
 ```{r fig.width=7, fig.height=7, fig.cap = "The MODIStsp main GUI",echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Latex_RSL/Figure_2.png')
+  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Submission_CAGEO/second_submission/Figure_2.png')
   grid.raster(img)
   library(knitr)
  
-# Notify that you want to use the counter,
-# if you set the counter to 3 then it will use 
-# that as starting number. You can also use strings
-# if you for instance have a split figure with 
-# a "1a" and "1b" setup
-options(figure_counter = TRUE)
- 
-# If you want roman letters then set: 
-# options(figure_counter_roman = TRUE)
- 
-# Evaluate the figure caption after the chunk, 
-# sometimes you want to calculate stuff inside the
-# chunk that you want to include in the caption and
-# # it is therefore useful to evaluate it afterwards.
-# opts_knit$set(eval.after='fig.cap')
-#  
-# # The actual hook
-# knit_hooks$set(plot = function(x, options) {
-#   fig_fn = paste0(opts_knit$get("base.url"), 
-#                   paste(x, collapse = "."))
-#  
-#   # Some stuff from the default definition
-#   fig.cap <- knitr:::.img.cap(options)
-#  
-#   # Style and additional options that should be included in the img tag
-#   style=c("display: block",
-#           sprintf("margin: %s;",
-#                    switch(options$fig.align, 
-#                           left = 'auto auto auto 0', 
-#                           center = 'auto',
-#                           right = 'auto 0 auto auto')))
-#   # Certain arguments may not belong in style, 
-#   # for instance the width and height are usually
-#   # outside if the do not have a unit specified
-#   addon_args = ""
-#  
-#   # This is perhaps a little overly complicated prepared 
-#   # with the loop but it allows for a more out.parameters if necessary
-#   if (any(grepl("^out.(height|width)", names(options)))){
-#       on <- names(options)[grep("^out.(height|width)", names(options))]
-#       for(out_name in on){
-#           dimName <- substr(out_name, 5, nchar(out_name))
-#           if (grepl("[0-9]+(em|px|%|pt|pc|in|cm|mm)", out_name))
-#               style=append(style, paste0(dimName, ": ", options[[out_name]]))
-#           else if (length(options$out.width) > 0)
-#               addon_args = paste0(addon_args, dimName, "='", options[[out_name]], "'")
-#       }
-#   }
-#  
-#   # Add counter if wanted
-#   fig_number_txt <- ""
-#   cntr <- getOption("figure_counter", FALSE)
-#   if (cntr != FALSE){
-#     if (is.logical(cntr))
-#       cntr <- 1
-#     # The figure_counter_str allows for custom 
-#     # figure text, you may for instance want it in
-#     # bold: <b>Figure %s:</b>
-#     # The %s is so that you have the option of setting the
-#     # counter manually to 1a, 1b, etc if needed
-#     fig_number_txt <- 
-#       sprintf(getOption("figure_counter_str", "Figure %s: "), 
-#               ifelse(getOption("figure_counter_roman", FALSE), 
-#                      as.character(as.roman(cntr)), as.character(cntr)))
-#  
-#     if (is.numeric(cntr))
-#       options(figure_counter = cntr + 1)
-#   }
-#  
-#   # Put it all together
-#   paste0("<figure><img src='", fig_fn, "'", 
-#          " ", addon_args,
-#          paste0(" style='", paste(style, collapse="; "), "'"),
-#          ">",
-#          "<figcaption>", fig_number_txt, fig.cap, "</figcaption></figure>")
-# })
 ```
 
 ##	MODIS Product, Satellites and Layers
@@ -214,7 +147,7 @@ Allows to select the MODIS product of interest from a drop-down menu. The user c
 ```{r fig.width = 7,  fig.height = 3, fig.cap = 'The "Select Processing Layers" GUI',echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Latex_RSL/Figure_3.png')
+  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Submission_CAGEO/second_submission/Figure_3.png')
   grid.raster(img)
 ```
 
@@ -230,23 +163,24 @@ Some of the most commonly used Spectral Indexes are available for computation by
 |---------------------|----------------------------------------------|
 | NDVI                | Normalized Difference Vegetation Index [@Rouse1973]         |
 | EVI                 | Enhanced Vegetation Index [@Huete2002]                      | 
-| SR                  | Simple Ratio[@Tucker1979] ]                                 |
+| SR                  | Simple Ratio[@Tucker1979]                                  |
 | NDFI                | Normalized Difference Flood Index  [@Boschetti2014]         |
-| NDII7 (NDWI)        | Normalized Difference Infrared Index – Band 7 [@HUNTJR1989] |                                                 
-| SAVI                | Soil Adjusted Vegetation Index  [@Huete1988]                | 
-| NDSI*               | Normalized Difference Snow Index ([@Hall2002]               |
-| NDII6*              | Normalized Difference Infrared Index – band 6  [@HUNTJR1989]|
-| GNDVI*              | Green Normalized Difference Vegetation Index [@Gitelson1998]|
-| RGRI*               | Red Green Ration index  [@Gamon1999]                        |
-| GRVI*               | Green-red ratio vegetation index  [@Tucker1979]             |
+| NDII7 (NDWI)        | Normalized Difference Infrared Index – Band 7 [@HUNTJR1989] |
+| SAVI                | Soil Adjusted Vegetation Index  [@Huete1988]                |
+| NDSI                | Normalized Difference Snow Index [@Hall2002]               |
+| NDII6               | Normalized Difference Infrared Index – band 6  [@HUNTJR1989]|
+| GNDVI                | Green Normalized Difference Vegetation Index [@Gitelson1998]|
+| RGRI                 | Red Green Ration index  [@Gamon1999]                        |
+| GRVI                 | Green-red ratio vegetation index  [@Tucker1979]             |
 
+**Table II: List of default Spectral Indexes available in MODIStsp**
 
 Users can however **specify other SIs to be computed without modifying MODIStsp source code** by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related to the new desired SI using a simple GUI (Figure 3) interface. 
 
 ```{r fig.height = 1.5, fig.cap = "The GUI for insertion of additional Spectral Indexes",echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('D:/Figure_4.png')
+  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Submission_CAGEO/second_submission/Figures/Figure_SI.png')
   grid.raster(img)
 ```
 
@@ -271,8 +205,7 @@ Allows to specify the options to be used for reprojecting and resizing the MODIS
 
 1.	The **"Output Projection"** menu allows to either select one of the pre-defined output projections or specify a user-defined one by selecting "User Defined" and then inserting a valid "Proj4" string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails. 
 
-2.	The **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, resampling method is forced to "nearest Neighbour", to avoid Resampling method can be selected among those supported by the "gdalwarp" routine (http://www.gdal.org/gdalwarp.html). 
-
+2.	The **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, the resampling method can instead be chosen among “Nearest Neighbour” and “Mode” (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleanind would risk to contaminate the values of high-quality observations with those of low-quality ones.
 ## Processing Options
 Allows first of all to specify the **format desired for the output images**. Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among "None", "PACKBITS", "LZW" and "DEFLATE".
 
