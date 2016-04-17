@@ -52,14 +52,16 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
   if (is.na(MODIStsp_dir)) {
     MODIStsp_dir <- system.file(package = "MODIStsp")
   }
-
+  options("guiToolkit" = "RGtk2")
   #- ------------------------------------------------------------------------------- -#
   #  Initialize project
   #- ------------------------------------------------------------------------------- -#
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
     # gdal_setInstallation(ignore.full_scan = FALSE)
-    gdal_setInstallation(ignore.full_scan = TRUE)
+    mess <- gmessage(title = "Welcome", "Welcome to MODIStsp !\n We will now search for a valid GDAL installation - please Wait ! 
+                         \n This will happen only once !", do.buttons = FALSE)
+    gdal_setInstallation(ignore.full_scan = TRUE, verbose = T)
   }
   gdal_version <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", getGDALVersionInfo(str = "--version")))
   gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
