@@ -14,5 +14,6 @@ addons:
     packages:
       - libgdal-dev
       - libproj-dev
-      - cairoDevice
-      - RGtk2
+r_binary_packages:
+  - RGtk2
+  - cairoDevice
