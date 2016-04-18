@@ -38,7 +38,7 @@ v1.1.0 was released on 20/04/2016
 
 # MODIStsp v 1.0.0 Release Notes
 
-v1.1.o was released on xx/yy/zzzz
+v1.1.0 was released on xx/yy/zzzz
 
 ## Major changes
 
