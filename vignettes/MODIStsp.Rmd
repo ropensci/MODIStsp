@@ -18,8 +18,10 @@ output:
     toc: yes
   word_document: default
 bibliography: MODIStsp.bib
-vignette: |
-  %\VignetteIndexEntry{MODIStsp} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+vignette: 
+  %\VignetteEngine{rmarkdown::render}
+  %\VignetteIndexEntry{Sending Messages With Gmailr}
+  %\usepackage[utf8]{inputenc}
 ---
 
 # Introduction
@@ -149,9 +151,9 @@ Allows to select the MODIS product of interest from a drop-down menu. The user c
 
 1. The left-hand frame allows to select which original MODIS layers should be processed
 2. The central frame allows to select which Quality Indicators should be extracted from the original MODIS Quality Assurance layers. 
-3. For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed [^1]. 
+3. For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed [^1^]. 
 
-[^1]:The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
+[^1^]:The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
 
 Some of the most commonly used Spectral Indexes are available for computation by default (Table II). 
 
@@ -161,13 +163,13 @@ Some of the most commonly used Spectral Indexes are available for computation by
 | EVI                 | Enhanced Vegetation Index [@Huete2002]                      | 
 | SR                  | Simple Ratio[@Tucker1979]                                  |
 | NDFI                | Normalized Difference Flood Index  [@Boschetti2014]         |
-| NDII7 (NDWI)        | Normalized Difference Infrared Index – Band 7 [@HUNTJR1989] |
+| NDII7 (NDWI)        | Normalized Difference Infrared Index - Band 7 [@HUNTJR1989] |
 | SAVI                | Soil Adjusted Vegetation Index  [@Huete1988]                |
 | NDSI                | Normalized Difference Snow Index [@Hall2002]               |
-| NDII6               | Normalized Difference Infrared Index – band 6  [@HUNTJR1989]|
-| GNDVI                | Green Normalized Difference Vegetation Index [@Gitelson1998]|
-| RGRI                 | Red Green Ration index  [@Gamon1999]                        |
-| GRVI                 | Green-red ratio vegetation index  [@Tucker1979]             |
+| NDII6               | Normalized Difference Infrared Index - band 6  [@HUNTJR1989]|
+| GNDVI               | Green Normalized Difference Vegetation Index [@Gitelson1998]|
+| RGRI                | Red Green Ration index  [@Gamon1999]                        |
+| GRVI                | Green-red ratio vegetation index  [@Tucker1979]             |
 
 **Table II: List of default Spectral Indexes available in MODIStsp**
 
@@ -201,7 +203,7 @@ Allows to specify the options to be used for reprojecting and resizing the MODIS
 
 1.	The **"Output Projection"** menu allows to either select one of the pre-defined output projections or specify a user-defined one by selecting "User Defined" and then inserting a valid "Proj4" string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails. 
 
-2.	The **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, the resampling method can instead be chosen among “Nearest Neighbour” and “Mode” (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleanind would risk to contaminate the values of high-quality observations with those of low-quality ones.
+2.	The **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, the resampling method can instead be chosen among "Nearest Neighbour" and "Mode" (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleanind would risk to contaminate the values of high-quality observations with those of low-quality ones.
 ## Processing Options
 Allows first of all to specify the **format desired for the output images**. Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among "None", "PACKBITS", "LZW" and "DEFLATE".
 
@@ -229,7 +231,7 @@ Upon pressing the "Start" button,  the main processing routine is launched (MODI
   
     b.	For each original hdf layer i) selected by the user, or ii) required to compute a selected QI or SI layer, extract the data from the original MODIS images and resize and reproject it to the selected output projection, extent and resolution. If more than one tile is needed to cover the output extent, all required tiles are automatically mosaicked before resizing (gdalbuildvrt functionalities are used to avoid creating large temporary raster files). All the main spatial processing tasks are performed using standard GDAL routines, exploiting the wrappers for "R" provided in the "gdalUtils" package [@Greenberg2014]. Results are saved as raster GeoTiff or ENVI files using MODIStsp naming conventions (See Section 5).
   
-    c.	Starting from files created at point b), compute required QI and/or SI layers and save the results as GeoTiff or ENVI files. Quality Indicators are computed from original QA layers using bitwise operators available in the "bitOps" package [@Dutky2013], using a generalization of the "modis.qc.R" script by Yann Chemin [@Chemin2008]. Computation of SI layers exploits on-the-fly parsing of the indexes’ formulae to identify the required input raster files and perform the computation. 
+    c.	Starting from files created at point b), compute required QI and/or SI layers and save the results as GeoTiff or ENVI files. Quality Indicators are computed from original QA layers using bitwise operators available in the "bitOps" package [@Dutky2013], using a generalization of the "modis.qc.R" script by Yann Chemin [@Chemin2008]. Computation of SI layers exploits on-the-fly parsing of the indexes' formulae to identify the required input raster files and perform the computation. 
   
     d.	Delete raster files created at point b) used  to compute the QI or SI layers but that correspond to original HDF layers not originally selected for processing.
   

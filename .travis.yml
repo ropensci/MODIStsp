@@ -17,5 +17,3 @@ addons:
 r_binary_packages:
   - RGtk2
   - cairoDevice
-  - RGtk2Extras
-  - gWidgets

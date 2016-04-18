@@ -80,7 +80,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
 
   # On interactive execution, load Rgtk2
   if (gui) {
-    require(gWidgetsRGtk2)
+    requireNa(gWidgetsRGtk2)
     options("guiToolkit" = "RGtk2")
   }
 
