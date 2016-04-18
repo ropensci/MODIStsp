@@ -31,22 +31,22 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 MODIStsp exploits functionalities of several additional "R" packages. A list of required packages is shown in the following table. 
 
-| "R" package    | Version    | Authors          |
-|:----------------:|------------|----------------|
-|  bitops        |>= 1.9.6    | [@Dutky2013]     |
-|  data.table    |>= 1.9.6    | [@data.table]    |
-|  gdalUtils     |>= 2.0.1.7  | [@Greenberg2014] |
-|  gWidgetsRGtk2 |>= 0.0-54   | [@Lawrence2013]  |
-|  hash          |>= 2.2.6    | [@Brown2013]     |
-|  plyr          |>= 1.8.3    | [@Wickham2012]   |
-|  raster        |>= 2.5-2    | [@Hijmans2014]   |
-|  RCurl         |>= 1.95-4.8 | [@Lang2013]      |
-|  rgdal         |>= 1.1-8    | [@Bivand2014a]   |
-|  rgeos         |>= 0.3-8    | [@Bivand2014]    |
-|  xts           |>= 1.0-10   | [@xts]           |
-|  sp            |>= 1.2-2    | [@sp]            |
-|  stringr       |>= 1.0.0    | [@Wickham2012]   |
-|  XML           |>= 3.98-1.1 | [@Lang2013a]     |
+| "R" package    | Version    |
+|:----------------:|------------|
+|  bitops        |>= 1.9.6    | 
+|  data.table    |>= 1.9.6    | 
+|  gdalUtils     |>= 2.0.1.7  | 
+|  gWidgetsRGtk2 |>= 0.0-54   | 
+|  hash          |>= 2.2.6    | 
+|  plyr          |>= 1.8.3    | 
+|  raster        |>= 2.5-2    | 
+|  RCurl         |>= 1.95-4.8 | 
+|  rgdal         |>= 1.1-8    | 
+|  rgeos         |>= 0.3-8    | 
+|  xts           |>= 1.0-10   | 
+|  sp            |>= 1.2-2    | 
+|  stringr       |>= 1.0.0    | 
+|  XML           |>= 3.98-1.1 | 
 
 ## Running the tool <a name="Running"></a> 
 
