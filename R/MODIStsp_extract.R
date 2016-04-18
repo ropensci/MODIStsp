@@ -292,7 +292,8 @@ MODIStsp_extract <- function(in_rts, sp_object, start_date = NULL, end_date = NU
       }
 
       #remove temporary raster and shapefile
-      unlink(tempraster)
+      file.remove(tempraster)
+      file.remove(tempshape)
       # unlink(list.files(tempdir(),pattern = "tempshape.*" ))
     }
 
@@ -316,8 +317,6 @@ MODIStsp_extract <- function(in_rts, sp_object, start_date = NULL, end_date = NU
     if (out_format == "xts") {  # If out_format is xts, convert the df to xts object
       ts <- as.xts(ts, order.by = dates[sel_dates])
     }
-    file.remove(tempraster)
-    file.remove(tempshape)
 
     return(ts)
   } else {
