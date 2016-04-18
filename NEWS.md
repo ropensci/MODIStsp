@@ -1,11 +1,11 @@
 # MODIStsp v 1.1.0 Release NOtes
 
-v1.1.o was released on 20/04/2016
+v1.1.0 was released on 20/04/2016
  
 ## Major Changes
 
 * Modified format of "R" output time series from _rts_ objects to _RasterStack_ objects with temporal information added in the 
-"z" attribute cia setZ()
+"z" attribute via setZ()
 
 * Major changes/improvements in _MODIStsp\_extract_ function:
  ** Use of plain rasterstack with "z" attribute instead than rasterstackts
