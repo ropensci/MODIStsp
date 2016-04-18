@@ -9,5 +9,8 @@ env:
      - R_BUILD_ARGS=" "
      - R_CHECK_ARGS="--as-cran"
      - BOOTSTRAP_LATEX="1"
-before_install:
-  -sudo apt-get install -y gdal-bin libgdal-dev libgdal1-dev netcdf-bin libproj-dev libgdal1h
+addons:
+  apt:
+    packages:
+      - libgdal-dev
+      - libproj-dev

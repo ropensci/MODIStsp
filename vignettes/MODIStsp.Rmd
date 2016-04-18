@@ -22,10 +22,6 @@ vignette: |
   %\VignetteIndexEntry{MODIStsp} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
-
-
-
-
 # Introduction
 
 MODIStsp is a novel "R" package allowing to automatize the creation of time series of rasters derived from MODIS Land Products data. It allows to perform several preprocessing steps on MODIS data available within a given time period. 
