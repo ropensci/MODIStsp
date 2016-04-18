@@ -17,6 +17,7 @@ v1.1.0 was released on 20/04/2016
  ** Added conformity checks on inputs
  ** Added functionaluity to run without specifying start and end dates
  ** Added id_field parameter for choosing which column of the input SP object should be used for "naming" the columns of the output
+* Removed possibility to use "complex" resampling methods when reprojecting (e.g., bilinear, cubic, etc.) to avoid incorrect resampling on categorical variables and "contamination" of good pixels data. 
 
 ## Minor Changes
 
@@ -31,6 +32,10 @@ v1.1.0 was released on 20/04/2016
 * Added Welcome message
 * Added "About" panel
 
+## Bug Fixes
+
+* Corrected a bug that threw an error in case incorrect bounding box specified
+
 # MODIStsp v 1.0.0 Release Notes
 
 v1.1.o was released on xx/yy/zzzz
@@ -39,13 +44,6 @@ v1.1.o was released on xx/yy/zzzz
 
 First stable release of MODIStsp
 
-
-
-## Bug Fixes
-
-* Corrected a bug that threw an error in case incorrect bounding box specified
-* 
-* 
 
 
 
