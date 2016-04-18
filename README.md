@@ -1,10 +1,10 @@
 # Table of contents
-1. [MODIStsp](#Installation)
-2. [Some paragraph](#paragraph1)
-    1. [Sub paragraph](#subparagraph1)
-3. [Another paragraph](#paragraph2)
+1. [MODIStsp](#MODIStsp)
+2. [Installation](#Installation)
+3. [Dependencies](#Dependencies)
+3. [Running the Tools](#Running)
 
-# MODIStsp
+# MODIStsp <a name="MODIStsp"></a>
 
 MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data.  MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
 `?/
@@ -27,9 +27,28 @@ An extended description of MODIStsp functionalities is provided in the [package 
     install_github('lbusett/MODIStsp', ref = 'master')
     ```
     
-## Dependencies
+## Dependencies <a name="Dependencies"></a> 
 
-## Running the tool
+MODIStsp exploits functionalities of several additional "R" packages. A list of required packages is shown in the following table. 
+
+| "R" package    | Version    | Authors          |
+|:----------------:|------------|----------------|
+|  bitops        |>= 1.9.6    | [@Dutky2013]     |
+|  data.table    |>= 1.9.6    | [@data.table]    |
+|  gdalUtils     |>= 2.0.1.7  | [@Greenberg2014] |
+|  gWidgetsRGtk2 |>= 0.0-54   | [@Lawrence2013]  |
+|  hash          |>= 2.2.6    | [@Brown2013]     |
+|  plyr          |>= 1.8.3    | [@Wickham2012]   |
+|  raster        |>= 2.5-2    | [@Hijmans2014]   |
+|  RCurl         |>= 1.95-4.8 | [@Lang2013]      |
+|  rgdal         |>= 1.1-8    | [@Bivand2014a]   |
+|  rgeos         |>= 0.3-8    | [@Bivand2014]    |
+|  xts           |>= 1.0-10   | [@xts]           |
+|  sp            |>= 1.2-2    | [@sp]            |
+|  stringr       |>= 1.0.0    | [@Wickham2012]   |
+|  XML           |>= 3.98-1.1 | [@Lang2013a]     |
+
+## Running the tool <a name="Running"></a> 
 
 ### Interactive mode
 To run the tool in interactive mode, load the package and launch the MODIS_tsp function, with no parameters
