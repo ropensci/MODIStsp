@@ -4,14 +4,14 @@ author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it))
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
-  pdf_document:
-    fig_caption: yes
-    number_sections: yes
-    toc: yes
   html_vignette:
     depth: 3
     fig_caption: yes
     number_section: yes
+    toc: yes
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
     toc: yes
   html_document:
     depth: 3
@@ -186,13 +186,14 @@ Some of the most commonly used Spectral Indexes are available for computation by
 
 Users can however **specify other SIs to be computed without modifying MODIStsp source code** by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related to the new desired SI using a simple GUI (Figure 3) interface. 
 
-Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked,  and the new index added in the list of available ones for all products allowing its computation at the next MODIStsp execution. 
+Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked,  and the new index added in the list of available ones for all products allowing its computation at the next MODIStsp execution (Figure 4). 
 
 \pagebreak
-```{r fig.width = 5,  fig.height = 2, fig.cap = 'The GUI for insertion of additional Spectral Indexes',echo=FALSE}
+
+```{r fig.width = 5, fig.height = 1.5, fig.cap = 'The GUI for insertion of additional Spectral Indexes',echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('Figure_SI.png')
+  img <- readPNG('Figure_4.png')
   grid.raster(img)
 ```
 
