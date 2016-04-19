@@ -4,14 +4,14 @@ author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it))
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
   html_vignette:
     depth: 3
     fig_caption: yes
     number_section: yes
-    toc: yes
-  pdf_document:
-    fig_caption: yes
-    number_sections: yes
     toc: yes
   html_document:
     depth: 3
@@ -59,7 +59,7 @@ _MODIStsp_ was developed completely in the "R" Language and Environment for Stat
 
 **2)** Finalize the installation of the _gWidgetsRGtk2_ library:
 
-```{r}
+```{r eval=FALSE}
   library(gWidgetsRGtk2)
 ```
     
@@ -67,7 +67,7 @@ _MODIStsp_ was developed completely in the "R" Language and Environment for Stat
 ```{r  echo = F}
   warning("Failed to load RGtk2 dynamic library, attempting to install it")
 ```
-and an error window will appear. **Don’t worry !** This is just signaling that   _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1]  
+and an error window will appear. **Don’t worry !** This is just signaling that   _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]  
 
 ## On Linux
 
@@ -109,7 +109,7 @@ library(MODIStsp)
 MODIStsp()
 ```
 This opens a GUI from which processing options can be specified and eventually saved (or loaded).
-A description of the different processing parameters to be selected is reported in the "Selection of Processing parameters" subsection.
+A description of the different processing parameters to be selected is reported in the "Selection of Processing parameters" subsection.[^2^]
 
 ## Non-Interactive mode (Using a previously saved options file)
 
@@ -164,9 +164,7 @@ Allows to select the MODIS product of interest from a drop-down menu. The user c
 
 1. The left-hand frame allows to select which original MODIS layers should be processed
 2. The central frame allows to select which Quality Indicators should be extracted from the original MODIS Quality Assurance layers. 
-3. For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed [^1^]. 
-
-[^1^]:The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
+3. For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed [^3^]. 
 
 Some of the most commonly used Spectral Indexes are available for computation by default (Table II). 
 
@@ -337,12 +335,14 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 
 ## On Linux 
 
-[^1]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
+[^1^]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
 
-[^2]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
+[^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
 1. Ensure that GDAL is properly installed in your system
 2. If it is installed but not found try consulting the _MODIStsp_ FAQ section for possible solutions
 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help !
+
+[^3^]:The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
 
 
 # References

@@ -12,7 +12,7 @@
 
 <meta name="author" content="Lorenzo Busetto (busetto.l@irea.cnr.it), Luigi Ranghetti (ranghetti.l@irea.cnr.it)" />
 
-<meta name="date" content="2016-04-19" />
+<meta name="date" content="2016-04-20" />
 
 <title>MODIStsp: A tool for automatic preprocessing of MODIS time series</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title">MODIStsp: A tool for automatic preprocessing of MODIS time series</h1>
 <h4 class="author"><em>Lorenzo Busetto (<a href="mailto:busetto.l@irea.cnr.it">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</em></h4>
-<h4 class="date"><em>2016-04-19</em></h4>
+<h4 class="date"><em>2016-04-20</em></h4>
 
 
 <div id="TOC">
@@ -236,7 +236,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>To run the tool in interactive mode, load the package and launch the MODIS_tsp function, with no parameters</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MODIStsp)
 <span class="kw">MODIStsp</span>()</code></pre></div>
-<p>This opens a GUI from which processing options can be specified and eventually saved (or loaded). A description of the different processing parameters to be selected is reported in the “Selection of Processing parameters” subsection.</p>
+<p>This opens a GUI from which processing options can be specified and eventually saved (or loaded). A description of the different processing parameters to be selected is reported in the “Selection of Processing parameters” subsection.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
 </div>
 <div id="non-interactive-mode-using-a-previously-saved-options-file" class="section level2">
 <h2><span class="header-section-number">3.2</span> Non-Interactive mode (Using a previously saved options file)</h2>
@@ -280,7 +280,7 @@ The “Select Processing Layers” GUI
 <ol style="list-style-type: decimal">
 <li>The left-hand frame allows to select which original MODIS layers should be processed</li>
 <li>The central frame allows to select which Quality Indicators should be extracted from the original MODIS Quality Assurance layers.</li>
-<li>For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></li>
+<li>For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></li>
 </ol>
 <p>Some of the most commonly used Spectral Indexes are available for computation by default (Table II).</p>
 <center>
@@ -569,6 +569,7 @@ The GUI for insertion of additional Spectral Indexes
 <ol>
 <li id="fn1"><p>If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the <a href="https://github.com/lbusett/MODIStsp/issues">issues</a> GitHub page of MODIStsp and we’ll try to help you !<a href="#fnref1">↩</a></p></li>
 <li id="fn2"><p>The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the “MODIStsp_Products_Opts” XML file distributed with the package in /ExtData subfolder.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the “MODIStsp_Products_Opts” XML file distributed with the package in /ExtData subfolder.<a href="#fnref3">↩</a></p></li>
 </ol>
 </div>
 

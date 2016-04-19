@@ -31,6 +31,7 @@ v1.1.0 was released on 20/04/2016
 * Updated required "R" version to 3.2, and minimum versions for dependent packages to current versions.
 * Added Welcome message
 * Added "About" panel
+* Updated links to LPDAAC product description pages
 
 ## Bug Fixes
 
