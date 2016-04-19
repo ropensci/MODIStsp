@@ -4,6 +4,10 @@ author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it))
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
   html_vignette:
     depth: 3
     fig_caption: yes
@@ -15,7 +19,6 @@ output:
     number_section: yes
     toc: yes
 
-  
 bibliography: MODIStsp.bib
 vignette: >
   %\VignetteIndexEntry{MODIStsp}
