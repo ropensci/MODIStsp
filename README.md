@@ -1,3 +1,5 @@
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
+
 # Table of contents
 1. [MODIStsp](#MODIStsp)
 2. [Installation](#Installation)
@@ -121,4 +123,3 @@ Standalone non-interactive execution can be used to periodically and automatical
         
     * Windows: create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.
 
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
