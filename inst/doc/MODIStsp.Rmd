@@ -4,6 +4,10 @@ author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it))
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
   html_vignette:
     depth: 3
     fig_caption: yes
@@ -15,7 +19,6 @@ output:
     number_section: yes
     toc: yes
 
-  
 bibliography: MODIStsp.bib
 vignette: >
   %\VignetteIndexEntry{MODIStsp}
@@ -142,7 +145,7 @@ When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection 
 ```{r fig.width=7, fig.height=7, fig.cap = "The MODIStsp main GUI", echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG("D:/Documents/GDrive/My Files/MODIS_Paper/Submission_CAGEO/second_submission/latex_source/Figure_2.png")
+  img <- readPNG("Figure_2.png")
   grid.raster(img)
 ```
 
@@ -153,7 +156,7 @@ Allows to select the MODIS product of interest from a drop-down menu. The user c
 ```{r fig.width = 7,  fig.height = 3, fig.cap = 'The "Select Processing Layers" GUI',echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Submission_CAGEO/second_submission/latex_source/Figure_3.png')
+  img <- readPNG('Figure_3.png')
   grid.raster(img)
 ```
 
@@ -190,7 +193,7 @@ Provided information (e.g., correct bandnames, computable formula, etc...) is au
 ```{r fig.width = 5,  fig.height = 2, fig.cap = 'The GUI for insertion of additional Spectral Indexes',echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('D:/Documents/GDrive/My Files/MODIS_Paper/Submission_CAGEO/second_submission/Figures/Figure_SI.png')
+  img <- readPNG('Figure_SI.png')
   grid.raster(img)
 ```
 

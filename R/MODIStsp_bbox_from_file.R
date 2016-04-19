@@ -9,6 +9,7 @@
 #'
 #' @importFrom gdalUtils gdalinfo gdalsrsinfo ogrinfo
 #' @importFrom sp CRS
+#' @importFrom rgeos show
 #' @note License: GPL 3.0
 #'
 #' @importFrom sp CRS
