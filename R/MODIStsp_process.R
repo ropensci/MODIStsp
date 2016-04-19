@@ -263,7 +263,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 } # end IF on hdf existence
               } # End cycle for downloading the images in modislist vector
 
-              message("[",date(),"]",length(modislist),"files for date of",date_dirs[date],"were successfully downloaded!")
+              message("[",date(),"]",length(modislist)," files for date of ",date_dirs[date]," were successfully downloaded!")
 
               # -------------------------------------------------------------------------
               # After all required tiles for the date are downloaded, start geoprocessing
@@ -478,13 +478,13 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 bitN <- quality_bitN[band]  #  bitfields corresponding to indicator within source
                 nodata_qa_in <- quality_nodata_in[band]
                 nodata_qa_out <- quality_nodata_out[band]
-                mess_text <- paste("Computing",  quality_band," for date: ",date_name)
+                mess_text <- paste("Computing ",  quality_band," for date: ",date_name)
                 if (gui) {
                   svalue(mess_lab) <- paste("---",mess_text,"---")
                 } else {
                   message("[",date(),"]",mess_text)
                 }
-                message("Computing", quality_band,"for date:",date_name)
+                message("Computing ", quality_band," for date: ",date_name)
                 out_filename <- file.path(out_prod_folder,quality_band,paste0(file_prefix,"_",quality_band,"_",yy,"_", DOY))
                 if (out_format == "GTiff") {
                   out_filename <- paste0(out_filename, ".tif")
@@ -531,7 +531,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
             } # End check on at least one image available
 
           } else {
-            message("[",date(),"] All Required output files for date",date_name, "are already existing - Doing Nothing !")
+            message("[",date(),"] All Required output files for date ",date_name, " are already existing - Doing Nothing !")
           } # End check on all data already processed for date or reprocees = Yes
 
           #- ------------------------------------------------------------------------------- -#
@@ -549,7 +549,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
         }   # End cycling on available dates for selected year
 
-      } else message("[",date(),"]", "No available data for year:", yy, "for Sensor",sens_sel,"in selected dates.")
+      } else message("[",date(),"]", "No available data for year: ", yy, " for Sensor ",sens_sel," in selected dates.")
 
     }	# End Cycling on selected years
 
@@ -569,19 +569,19 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   for (sens_sel in senslist) {		# cycle on selected sensors
 
     for (band in which(bandsel == 1)) { # Create virtual files for original layers
-      message("[",date(),"]", "Creating Virtual Files and rts time series for layer", bandnames[band])
+      message("[",date(),"]", "Creating Virtual Files and rts time series for layer ", bandnames[band])
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = bandnames[band],
                           file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format,  nodata_value = nodata_out[band], out_format = out_format, rts = rts)
     } #End Cycle on bandsel
 
     for (band in which(indexes_bandsel == 1)) {  # Create virtual files for QI layers
-      message("[",date(),"]", "Creating Virtual Files and rts time series for layer", indexes_bandnames[band])
+      message("[",date(),"]", "Creating Virtual Files and rts time series for layer ", indexes_bandnames[band])
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = indexes_bandnames[band],
                           file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = indexes_nodata_out[band], out_format = out_format, rts = rts)
     } #End Cycle on indexes_bandsel
 
     for (band in which(quality_bandsel == 1)) {	# Create virtual files for SI layers
-      message("[",date(),"]","Creating Virtual Files and rts time series for layer", quality_bandnames[band])
+      message("[",date(),"]","Creating Virtual Files and rts time series for layer ", quality_bandnames[band])
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = quality_bandnames[band]		,
                           file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = quality_nodata_out[band], out_format = out_format, rts = rts)
     } #End Cycle on quality_bandsel
