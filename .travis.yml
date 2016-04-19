@@ -15,5 +15,5 @@ addons:
       - libgdal-dev
       - libproj-dev
 r_binary_packages:
-  - r-cran-cairodevice
-  - r-cran-rgtk2
+  - cairodevice
+  - rgtk2
