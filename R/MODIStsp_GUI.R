@@ -916,7 +916,7 @@ MODIStsp_GUI <- function(general_opts){
       # svalue(end_month_wid) <- general_opts$end_month
       # svalue(end_year_wid) <- general_opts$end_year
       svalue(start_date_wid) <- general_opts$start_date # Dates options
-      svalue(start_end_wid) <- general_opts$end_date
+      svalue(end_date_wid) <- general_opts$end_date
 
       svalue(start_x_wid) <- general_opts$start_x  		# Tiles options
       svalue(end_x_wid) <- general_opts$end_x
