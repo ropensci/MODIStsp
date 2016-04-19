@@ -40,7 +40,7 @@ MODIStsp_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, o
   }
 
   in_raster <- raster(in_raster_file, format = out_format)				# Open input file
-  NAvalue(in_raster) <- as.numeric(nodata_source)					# reassign nodata
+  raster::NAvalue(in_raster) <- as.numeric(nodata_source)					# reassign nodata
   in_values <- getValues(in_raster)								# Get the values
 
   bits <- as.numeric(unlist(strsplit(bitN,"-")))		# retrieve positions of the bits to be extracted
