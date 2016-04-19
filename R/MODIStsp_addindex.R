@@ -50,7 +50,7 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
 
   # Initialization and retrieval of parameters ----
   if (gui) {
-    requireNamespace(gWidgetsRGtk2)
+    requireNamespace("gWidgetsRGtk2")
     options("guiToolkit" = "RGtk2")
   }
 

@@ -14,7 +14,6 @@
 #' @importFrom raster crop extent raster plot
 #' @importFrom sp CRS
 #' @import gWidgets
-#' @import gWidgetsRGtk2
 
 MODIStsp_GUI <- function(general_opts){
 
