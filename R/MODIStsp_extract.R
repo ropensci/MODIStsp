@@ -225,7 +225,7 @@ MODIStsp_extract <- function(in_rts, sp_object, start_date = NULL, end_date = NU
           ot = "Int32"
         }
       }
-      gdal_rasterize(tempshape ,tempraster, tr = res(in_rts), te = ext_conv(in_rts[[1]]), a = "mdxtnq", ot = ot)
+      gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts), te = ext_conv(in_rts[[1]]), a = "mdxtnq", ot = ot)
 
       # get values from rasterized shape, and find which ones to process (only those
       # inside the polygons)

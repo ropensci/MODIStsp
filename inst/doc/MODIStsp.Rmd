@@ -4,14 +4,14 @@ author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it))
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
-  pdf_document:
-    fig_caption: yes
-    number_sections: yes
-    toc: yes
   html_vignette:
     depth: 3
     fig_caption: yes
     number_section: yes
+    toc: yes
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
     toc: yes
   html_document:
     depth: 3
@@ -59,9 +59,10 @@ _MODIStsp_ was developed completely in the "R" Language and Environment for Stat
 
 **2)** Finalize the installation of the _gWidgetsRGtk2_ library:
 
-```{r eval=FALSE, echo = F}
+```{r}
   library(gWidgetsRGtk2)
 ```
+    
 "R" will probably throw a Warning: 
 ```{r  echo = F}
   warning("Failed to load RGtk2 dynamic library, attempting to install it")
