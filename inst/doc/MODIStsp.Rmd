@@ -193,7 +193,7 @@ Provided information (e.g., correct bandnames, computable formula, etc...) is au
 ```{r fig.width = 5, fig.height = 1.5, fig.cap = 'The GUI for insertion of additional Spectral Indexes',echo=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('Figure_4.png')
+  img <- readPNG('figure_4.png')
   grid.raster(img)
 ```
 
