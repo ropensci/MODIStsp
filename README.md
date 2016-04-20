@@ -18,17 +18,10 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ## On Windows
 
-**1)** Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
-
-```r 
-  install.packages("devtools", repos = "http://cran.us.r-project.org")
-  library(devtools)
-  install_github("lbusett/MODIStsp")
-```
-
-**2)** Finalize the installation of the _gWidgetsRGtk2_ library:
+**1)** Install and load the _gWidgetsRGtk2_ library:
 
 ```r
+  install.packages("gWidgetsRGtk2")
   library(gWidgetsRGtk2)
 ```
     
@@ -38,6 +31,14 @@ An extended description of MODIStsp functionalities is provided in the [package 
   warning("Failed to load RGtk2 dynamic library, attempting to install it")
 ```
 and an error window will appear. **Don’t worry !** This is just signaling that   _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]  
+
+**2)** Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+
+```r 
+  install.packages("devtools", repos = "http://cran.us.r-project.org")
+  library(devtools)
+  install_github("lbusett/MODIStsp")
+```
 
 ## On Linux
 

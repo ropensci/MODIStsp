@@ -121,23 +121,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="installation" class="section level1">
 <h1><span class="header-section-number">2</span> Installation</h1>
-<p><em>MODIStsp</em> was developed completely in the “R” Language and Environment for Statistical Computing (R Development Core Team 2014) v. 3.1.3 and is distributed as open source software under the GNU-GPL 3.0 License. Source code can be downloaded at the GITHUB repository <a href="https://github.com/lbusett/MODIStsp" class="uri">https://github.com/lbusett/MODIStsp</a>.</p>
 <p><strong>IMPORTANT:</strong> <em>MODIStsp</em> requires <a href="http://www.gdal.org/">GDAL</a> (Geospatial Data Abstraction Library) v &gt;1.2 To be installed in your system. Brief instructions for installing GDAL can be found <a href="#gdal_inst">HERE</a></p>
 <div id="on-windows" class="section level2">
 <h2><span class="header-section-number">2.1</span> On Windows</h2>
-<p><strong>1)</strong> Install MODIStsp package from GitHub. (You’ll need to have the “devtools” package installed and loaded)</p>
+<p><strong>1)</strong> Install and load the <em>gWidgetsRGtk2</em> library:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">install.packages</span>(<span class="st">&quot;gWidgetsRGtk2&quot;</span>)
+  <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
+<p>“R” will probably throw a Warning:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">warning</span>(<span class="st">&quot;Failed to load RGtk2 dynamic library, attempting to install it&quot;</span>)</code></pre></div>
+<p>and an error window will appear. <strong>Don’t worry !</strong> This is just signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go !<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p><strong>2)</strong> Install MODIStsp package from GitHub. (You’ll need to have the “devtools” package installed and loaded)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://cran.us.r-project.org&quot;</span>)
   <span class="kw">library</span>(devtools)
   <span class="kw">install_github</span>(<span class="st">&quot;lbusett/MODIStsp&quot;</span>)</code></pre></div>
-<p><strong>2)</strong> Finalize the installation of the <em>gWidgetsRGtk2</em> library:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
-<p>“R” will probably throw a Warning:</p>
-<pre><code>## Warning: Failed to load RGtk2 dynamic library, attempting to install it</code></pre>
-<p>and an error window will appear. <strong>Don’t worry !</strong> This is just signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go !<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 </div>
 <div id="on-linux" class="section level2">
 <h2><span class="header-section-number">2.2</span> On Linux</h2>
-<p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+<p>COMING SOON !</p>
 </div>
 <div id="dependencies" class="section level2">
 <h2><span class="header-section-number">2.3</span> Dependencies</h2>
