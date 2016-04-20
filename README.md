@@ -14,41 +14,41 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ## Installation <a name="Installation"></a> 
 
-1. Within "R", install the "gWidgetsRGtk2" package
+**IMPORTANT:** _MODIStsp_ requires [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library) v >1.2 To be installed in your system. Brief instructions for installing GDAL can be found in [_MODIStsp_ Vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf)
 
-    ```r
-    install.packages('gWidgetsRGtk2')
-    ```
-    when asked, request to install GTK
+## On Windows
 
-2. Install the package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+**1)** Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 
-    ```r
-    install.packages('devtools')
-    require('devtools')
-    install_github('lbusett/MODIStsp', ref = 'master')
-    ```
+```r 
+  install.packages("devtools", repos = "http://cran.us.r-project.org")
+  library(devtools)
+  install_github("lbusett/MODIStsp")
+```
+
+**2)** Finalize the installation of the _gWidgetsRGtk2_ library:
+
+```r
+  library(gWidgetsRGtk2)
+```
     
+"R" will probably throw a Warning: 
+
+```r
+  warning("Failed to load RGtk2 dynamic library, attempting to install it")
+```
+and an error window will appear. **Don’t worry !** This is just signaling that   _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]  
+
+## On Linux
+
+COMING SOON !!!!
+
 ## Dependencies <a name="Dependencies"></a> 
 
-MODIStsp exploits functionalities of several additional "R" packages. A list of required packages is shown in the following table. 
+MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:
 
-| "R" package    | Version    |
-|:----------------:|------------|
-|  bitops        |>= 1.9.6    | 
-|  data.table    |>= 1.9.6    | 
-|  gdalUtils     |>= 2.0.1.7  | 
-|  gWidgetsRGtk2 |>= 0.0-54   | 
-|  hash          |>= 2.2.6    | 
-|  plyr          |>= 1.8.3    | 
-|  raster        |>= 2.5-2    | 
-|  RCurl         |>= 1.95-4.8 | 
-|  rgdal         |>= 1.1-8    | 
-|  rgeos         |>= 0.3-8    | 
-|  xts           |>= 1.0-10   | 
-|  sp            |>= 1.2-2    | 
-|  stringr       |>= 1.0.0    | 
-|  XML           |>= 3.98-1.1 | 
+``` bitops (>= 1.9.6) ```, ``` data.table (>= 1.9.6) ``` , ``` gdalUtils (>= 2.0.1.7) ```, ``` gWidgetsRGtk2 (>= 0.0-54) ```, ``` hash (>= 2.2.6) ```, ``` plyr (>= 1.8.3) ```, ``` raster (>= 2.5-2) ```, ``` RCurl (>= 1.95-4.8) ```, ``` rgdal (>= 1.1-8) ```, ``` rgeos (>= 0.3-8) ```, ``` xts (>= 1.0-10) ```, ``` sp (>= 1.2-2) ```, ``` stringr (>= 1.0.0) ```, ``` XML (>= 3.98-1.1)```
+
 
 ## Running the tool <a name="Running"></a> 
 
@@ -122,4 +122,6 @@ Standalone non-interactive execution can be used to periodically and automatical
         ```
         
     * Windows: create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.
+    
+[^1^]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
 

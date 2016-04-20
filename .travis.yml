@@ -7,9 +7,9 @@ dist: trusty
 env:
    global:
      - R_BUILD_ARGS=" "
-     - R_CHECK_ARGS="--as-cran"
+     - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings"
+     - R_CHECK_TIMINGS_="0"
      - BOOTSTRAP_LATEX="1"
-     - R_BUILD_ARGS=--no-manual
 addons:
   apt:
     packages:
