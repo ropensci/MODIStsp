@@ -3,8 +3,8 @@
 ^packrat/
 ^\.Rprofile$
 .travis.yml
-/Log/
-/Previous/
-/old_and_various/
-/inst/Previous/
-/sketched_routines/
+^Log/
+^Previous/
+^old_and_various/
+^inst/Previous/
+^sketched_routines/

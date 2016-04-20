@@ -349,8 +349,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   }
 
                   # integrate bandsel (bands directly selected) with band_indexes (bands needed by indexes or quality bands)
-
-                  outfile_vrt <- paste0(tmp_prod_folder, "/",bandnames[band],"_",yy,"_",DOY,"vrt.tif")    # Create name for the vrt mosaic
+                  outfile_vrt = tempfile(fileext = ".vrt")
+                  # outfile_vrt <- paste0(tmp_prod_folder, "/",bandnames[band],"_",yy,"_",DOY,"vrt.tif")    # Create name for the vrt mosaic
 
                   if (file.exists(outrep_file) == FALSE | reprocess == "Yes") {
 
