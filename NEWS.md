@@ -1,6 +1,6 @@
-# MODIStsp v 1.1.0 Release NOtes
+# MODIStsp v 1.3.0 Release NOtes
 
-v1.1.0 was released on 20/04/2016
+v1.3.0 was released on 20/04/2016
  
 ## Major Changes
 
@@ -39,13 +39,15 @@ v1.1.0 was released on 20/04/2016
 
 * Corrected a bug that threw an error in case incorrect bounding box specified
 
-# MODIStsp v 1.0.0 Release Notes
+# MODIStsp v 1.2.0 Release Notes
 
-v1.1.0 was released on xx/yy/zzzz
+v1.2.0 was released on 29/07/2015
+
 
 ## Major changes
 
-First stable release of MODIStsp
+First stable release of advanced implementation of MODIStsp !
+We know it should be 1.0.0, but thats'it !
 
 
 
