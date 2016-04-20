@@ -4,24 +4,43 @@
 \alias{MODIStsp_extract}
 \title{MODIStsp_extract}
 \usage{
-MODIStsp_extract(in_rts, start_date, end_date, sp_object, FUN = "mean",
-  na.rm = T, verbose = F)
+MODIStsp_extract(in_rts, sp_object, start_date = NULL, end_date = NULL,
+  id_field = NULL, FUN = "mean", out_format = "xts", small = TRUE,
+  small_method = "centroids", na.rm = TRUE, verbose = FALSE)
 }
 \arguments{
-\item{in_rts}{"rasterStackTS" or "rasterBrickTS" object created by MODIStsp}
+\item{in_rts}{input "rasterStack" or "rasterBrick" object created by MODIStsp (it MUST contain acquisition dates in the "Z" attribute " )}
 
-\item{start_date}{"Date", "POSIXct" or "POSIXlt" starting date of the period to be considered for data extraction}
+\item{sp_object}{"sp" object OR name of an ESRI shapefile specifying the "positions" from which data has to be extracted
+   If sp_object represents lines, the output object contains one column for each polygon, containing values obtained applying the function
+specified as the FUN argument over all pixels touched by the line, and one line for each
+If sp_object represents points, the output object contains one column for each point, containing values of the cells corresponding to the pint,
+and one line for each date.
+If sp_object represents polygons, the output object contains one column for each polygon, containing values obtained applying the function
+specified as the FUN argument over all pixels belonging to the polygon, and one line for each date}
 
-\item{end_date}{"Date", "POSIXct" or "POSIXlt" ending date of the period to be considered for data extraction}
+\item{start_date}{"Date", "POSIXct" or "POSIXlt" starting date of the period to be considered for data extraction OR character string cohercible to
+Date class (format = "yyyy-mm-dd"). If not provided, the starting date of the rasterstack is used.}
 
-\item{sp_object}{"sp" object specifying the "positions" from which data has to be extracted
-   If sp_object represents lines, the function returns the values of the cells of a in_rts object that are touched by the line.
-If y represents polygons, the function  returns the values of the cells of a in_rts object that are covered by a polygon. A cell
-is covered if its center is inside the polygon .}
+\item{end_date}{"Date", "POSIXct" or "POSIXlt" ending date of the period to be considered for data extraction OR character string cohercible to
+Date class (format = "yyyy-mm-dd").If not provided, the ending date of the rasterstack is used.}
+
+\item{id_field}{character name of the column of the input sp object or shapefile to be used in the data extraction. Values conatined in the column MUST be unique
+The names of the columns of the output are taken from this column. If not provided, or an invalid value is provided, then the names of the columns of the output
+reflect the number of the feature in the original sp object or shapefile.}
 
 \item{FUN}{function to summarize the values (e.g. mean) on polygon data frames. The function should take a single numeric vector as argument and return a
 single value (e.g. mean, min or max), and accept a na.rm argument. Thus, standard R functions not including an na.rm argument must
-be wrapped as in this example: fun=function(x,...)length(x).}
+be wrapped as in this example: fun=function(x,...)length(x). Defaults to "mean"}
+
+\item{out_format}{character "xts" or "dframe". default to 'xts'. If dframe, the output is a data frame with dates in the first column and extracted data in the others}
+
+\item{small}{logical If set to TRUE, and input is polygons, then values are returned also for polygons not covering at least one raster cell. "Included"
+cells in this case depend on the values of the "small_method" parameter.}
+
+\item{small_method}{string 'centroids' or 'full'. if small == T and input is polygons, controls which cells are "extracted" for small polygons. If set to
+centroids (default), then only the cells corresponding to polygon centroid are considered (faster, may have problems on strangely shaped polygons). If set to
+"full", then all cells intersected by the small polygon are extracted and used in calculation.}
 
 \item{na.rm}{Logical If TRUE, and sp_object is a polygon, then na.rm = T is used when applying the function
 to the different pixels of the polygon. Default = T.}
@@ -29,7 +48,7 @@ to the different pixels of the polygon. Default = T.}
 \item{verbose}{Logical If TRUE, messages on extraction completion are sent out. Default = T.}
 }
 \value{
-xts object. Each column of data corresponds to one poin or one polygon
+data.frame or xts object. Each column of data corresponds to one point or one polygon
 }
 \description{
 function used to extract time series data from rts files created by MODIStsp
@@ -37,14 +56,16 @@ on spatial locations provided in the form of "R" spatial objects (spatialPoints,
 spatialPolygons, etc.)
 }
 \details{
-The function takes as input an rasterStackTS object created by MODIStsp, a starting and ending date
-and a standard "R" spatial object, and provides as time series for the spatial locations
-specified in the spatial object in the form of a "R" xts object .
-If the input spatial object is a "point" or "line" one, the xts output object contains one column
-for each specified point, or for each cell intersecting the line, and one line for each date.
-If the input spatial object is a "polygon" one, the xts output object contains one column
+The function takes as input a rasterStack object containing time information in the "z" attribute (set by "raster" function "SetZ"),
+a starting and ending date  and a standard "R" spatial object, and returns the time series for the spatial locations
+specified in the spatial object in the form of a "R" xts object ORr a plain data.frame with a "date" column in first position.
+If the input spatial object is a "point" or "line" one, the  output object contains one column for each specified point, or for each cell
+intersecting the line, and one line for each date. If the input spatial object is a "polygon" one, the output object contains one column
 for each polygon, containing values obtained applying the function specified as the FUN
 argument over all pixels belonging to the polygon, and one line for each date.
+}
+\note{
+License: GPL 3.0
 }
 \examples{
 # Extract average and standard deviation values from a rts object created by MODIStsp
@@ -57,10 +78,9 @@ startdate = as.Date("2010-01-01")  # Start date for extraction
 enddate = as.Date("2014-12-31")    # End date for extraction
 #Load Data
 inrts = get(load(infile))          # Load the rts file
-shape = readOGR(dirname(shpname), 'rois') # Read shapefile to SpatialPolygons
 # Compute average and St.dev
-dataavg = MODIStsp_extract(inrts, startdate, enddate, shape, FUN = 'mean', na.rm = T)
-datasd = MODIStsp_extract(inrts, startdate, enddate, shape, FUN = 'sd', na.rm = T)
+dataavg = MODIStsp_extract(inrts,shpname, startdate, enddate, FUN = 'mean', na.rm = T)
+datasd = MODIStsp_extract(inrts,shpname,  startdate,  enddate,  FUN = 'sd', na.rm = T)
 plot(dataavg)
 }
 }

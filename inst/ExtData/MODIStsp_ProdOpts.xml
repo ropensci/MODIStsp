@@ -10,7 +10,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod09a1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09a1</www>
         <bands>
             <band>
                 <bandname>b1_Red</bandname>
@@ -310,7 +310,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua>
         <combined>0</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod09cmg</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09cmg</www>
         <bands>
             <band>
                 <bandname>b1_Red</bandname>
@@ -600,7 +600,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod09ga</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09ga</www>
         <bands>
             <band>
                 <bandname>N_Obs_1k</bandname>
@@ -956,7 +956,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod09gq</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09gq</www>
         <bands>
             <band>
                 <bandname>N_Obs</bandname>
@@ -1060,7 +1060,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod09q1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09q1</www>
         <bands>
             <band>
                 <bandname>b1_Red</bandname>
@@ -1156,7 +1156,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1280,7 +1280,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11A2.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod11a2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a2</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1428,7 +1428,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B1.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod11b1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1587,7 +1587,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.005/</http_aqua>
         <combined>0</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1746,7 +1746,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C2.005/</http_aqua>
         <combined>0</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c2</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -1890,7 +1890,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.005/</http_aqua>
         <combined>0</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod11c3</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c3</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -2042,7 +2042,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MOD11_L2.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod11_l2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11_l2</www>
         <bands>
             <band>
                 <bandname>LST</bandname>
@@ -2145,7 +2145,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a1</www>
         <bands>
             <band>
                 <bandname>Par_b1_Red</bandname>
@@ -2236,7 +2236,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a2</www>
         <bands>
             <band>
                 <bandname>AlbedoQuality</bandname>
@@ -2333,7 +2333,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a3</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a3</www>
         <bands>
             <band>
                 <bandname>Alb_BSA_b1_Red</bandname>
@@ -2487,7 +2487,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43a4</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a4</www>
         <bands>
             <band>
                 <bandname>Nad_Refl_b1_Red</bandname>
@@ -2550,7 +2550,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43b1</www>
         <bands>
             <band>
                 <bandname>Par_b1_Red</bandname>
@@ -2641,7 +2641,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43b2</www>
         <bands>
             <band>
                 <bandname>AlbedoQuality</bandname>
@@ -2738,7 +2738,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b3</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43b3</www>
         <bands>
             <band>
                 <bandname>Alb_BSA_b1_Red</bandname>
@@ -2892,7 +2892,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43b4</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43b4</www>
         <bands>
             <band>
                 <bandname>Nad_Refl_b1_Red</bandname>
@@ -2955,7 +2955,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_aqua>
         <combined>1</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c1</www>
         <bands>
             <band>
                 <bandname>Par_b1_Red</bandname>
@@ -3046,7 +3046,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_aqua>
         <combined>1</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c2</www>
         <bands>
             <band>
                 <bandname>AlbedoQuality</bandname>
@@ -3143,7 +3143,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_aqua>
         <combined>1</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c3</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c3</www>
         <bands>
             <band>
                 <bandname>Alb_BSA_b1_Red</bandname>
@@ -3297,7 +3297,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.005/</http_aqua>
         <combined>1</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd43c4</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c4</www>
         <bands>
             <band>
                 <bandname>Nad_Refl_b1_Red</bandname>
@@ -3360,7 +3360,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a1</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -3537,7 +3537,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a2</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -3714,7 +3714,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod13a3</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a3</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -3884,7 +3884,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.005/</http_aqua>
         <combined>0</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c1</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -4062,7 +4062,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.005/</http_aqua>
         <combined>0</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod13c2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c2</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -4240,7 +4240,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod13q1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13q1</www>
         <bands>
             <band>
                 <bandname>NDVI</bandname>
@@ -4420,7 +4420,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a2</www>
         <bands>
             <band>
                 <bandname>FPAR</bandname>
@@ -4550,7 +4550,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd15a3</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a3</www>
         <bands>
             <band>
                 <bandname>FPAR</bandname>
@@ -4677,7 +4677,7 @@
         <file_prefix_terra>MOD15A2</file_prefix_terra>
         <file_prefix_aqua>MYD15A2</file_prefix_aqua>
         <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD15A2.005/</http_terra>
-        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2.005/</http_aqua><www>https://lpdaac.usgs.gov/products/modis_products_table/mod15a2</www><combined>0</combined>
+        <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2.005/</http_aqua><www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod15a2</www><combined>0</combined>
         <tiled>1</tiled>
         <bands>
             <band>
@@ -4808,7 +4808,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a2</www>
         <bands>
             <band>
                 <bandname>GPP</bandname>
@@ -4875,7 +4875,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod17a3</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a3</www>
         <bands>
             <band>
                 <bandname>GPP</bandname>
@@ -4910,7 +4910,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd45a1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd45a1</www>
         <bands>
             <band>
                 <bandname>Burn_Date</bandname>
@@ -4980,7 +4980,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod14</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14</www>
         <bands>
             <band>
                 <bandname>Fire_Mask</bandname>
@@ -5135,7 +5135,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod14a1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a1</www>
         <bands>
             <band>
                 <bandname>Fire_Mask</bandname>
@@ -5177,7 +5177,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.005/</http_aqua>
         <combined>0</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mod14a2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a2</www>
         <bands>
             <band>
                 <bandname>Fire_Mask</bandname>
@@ -5205,7 +5205,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_aqua>
         <combined>1</combined>
         <tiled>0</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12c1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12c1</www>
         <bands>
             <band>
                 <bandname>LC1</bandname>
@@ -5297,7 +5297,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12q1</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q1</www>
         <bands>
             <band>
                 <bandname>LC1</bandname>
@@ -5442,7 +5442,7 @@
         <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_aqua>
         <combined>1</combined>
         <tiled>1</tiled>
-        <www>https://lpdaac.usgs.gov/products/modis_products_table/mcd12q2</www>
+        <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q2</www>
         <bands>
             <band>
                 <bandname>Green_Incr</bandname>

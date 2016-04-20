@@ -1,7 +1,8 @@
 Package: MODIStsp
 Title: An R package for automatic download and preprocessing of time series of
     MODIS Land Products data
-Version: 1.0
+Type: Package
+Version: 1.1.0
 Authors@R: c(person("Lorenzo", "Busetto", , "busetto.l@irea.cnr.it", role = c("aut", "cre")),
            person("Luigi", "Ranghetti", , "ranghetti.l@irea.cnr.it", role = c("aut")))
 Description: MODISTSP, a R package devoted to automating the creation of time
@@ -20,12 +21,14 @@ Description: MODISTSP, a R package devoted to automating the creation of time
     to automatically update time series related to a MODIS product whenever a new
     image is made available.
 Depends:
-    R (>= 3.0.3)
+    R (>= 3.1.3)
 License: GPL-3
 LazyData: true
 Imports:
-    XML,gWidgets,rgdal,rgeos,gdalUtils,rts, data.table,RCurl,stringr,tools,plyr,sp (>= 1.0.17),bitops,hash,raster (>= 2.3-40)
+    bitops (>= 1.0-6), data.table (>= 1.9.6), gdalUtils (>= 2.0.1.7), gWidgets (>= 0.0-54),
+    hash (>= 2.2.6), plyr (>= 1.8.3), raster (>= 2.5-2), RCurl (>= 1.95-4.8), rgdal (>= 1.1-8),
+    rgeos (>= 0.3-8), xts (>= 0.9-7), XML (>= 3.98-1.1), sp (>= 1.2-2), stringr (>= 1.0.0)
 Suggests:
-    knitr
+    knitr, rmarkdown, png, grid
 VignetteBuilder: knitr
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1

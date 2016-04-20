@@ -1,2 +1,11 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^packrat/
+^\.Rprofile$
+.travis.yml
+^Log/
+^Previous/
+^old_and_various/
+^inst/Previous/
+^sketched_routines/
+^ExtData/

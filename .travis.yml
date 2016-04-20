@@ -1,0 +1,20 @@
+# Sample .travis.yml for R projects
+
+language: r
+warnings_are_errors: false
+sudo: required
+dist: trusty
+env:
+   global:
+     - R_BUILD_ARGS=" "
+     - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings"
+     - R_CHECK_TIMINGS_="0"
+     - BOOTSTRAP_LATEX="1"
+addons:
+  apt:
+    packages:
+      - libgdal-dev
+      - libproj-dev
+r_binary_packages:
+  - cairodevice
+  - rgtk2

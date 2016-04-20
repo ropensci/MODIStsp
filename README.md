@@ -1,27 +1,56 @@
-# MODIStsp
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp)
+
+# Table of contents
+1. [MODIStsp](#MODIStsp)
+2. [Installation](#Installation)
+3. [Dependencies](#Dependencies)
+3. [Running the Tools](#Running)
+
+# MODIStsp <a name="MODIStsp"></a>
 
 MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data.  MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
 
 An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the pdf file_) 
 
-## Installation
+## Installation <a name="Installation"></a> 
 
-1. Within "R", install the "gWidgetsRGtk2" package
+**IMPORTANT:** _MODIStsp_ requires [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library) v >1.2 To be installed in your system. Brief instructions for installing GDAL can be found in [_MODIStsp_ Vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf)
 
-    ```r
-    install.packages('gWidgetsRGtk2')
-    ```
-    when asked, request to install GTK
+## On Windows
 
-2. Install the package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+**1)** Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 
-    ```r
-    install.packages('devtools')
-    require('devtools')
-    install_github('lbusett/MODIStsp', ref = 'master')
-    ```
+```r 
+  install.packages("devtools", repos = "http://cran.us.r-project.org")
+  library(devtools)
+  install_github("lbusett/MODIStsp")
+```
 
-## Running the tool
+**2)** Finalize the installation of the _gWidgetsRGtk2_ library:
+
+```r
+  library(gWidgetsRGtk2)
+```
+    
+"R" will probably throw a Warning: 
+
+```r
+  warning("Failed to load RGtk2 dynamic library, attempting to install it")
+```
+and an error window will appear. **Don’t worry !** This is just signaling that   _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]  
+
+## On Linux
+
+COMING SOON !!!!
+
+## Dependencies <a name="Dependencies"></a> 
+
+MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:
+
+``` bitops (>= 1.9.6) ```, ``` data.table (>= 1.9.6) ``` , ``` gdalUtils (>= 2.0.1.7) ```, ``` gWidgetsRGtk2 (>= 0.0-54) ```, ``` hash (>= 2.2.6) ```, ``` plyr (>= 1.8.3) ```, ``` raster (>= 2.5-2) ```, ``` RCurl (>= 1.95-4.8) ```, ``` rgdal (>= 1.1-8) ```, ``` rgeos (>= 0.3-8) ```, ``` xts (>= 1.0-10) ```, ``` sp (>= 1.2-2) ```, ``` stringr (>= 1.0.0) ```, ``` XML (>= 3.98-1.1)```
+
+
+## Running the tool <a name="Running"></a> 
 
 ### Interactive mode
 To run the tool in interactive mode, load the package and launch the MODIS_tsp function, with no parameters
@@ -93,4 +122,6 @@ Standalone non-interactive execution can be used to periodically and automatical
         ```
         
     * Windows: create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.
+    
+[^1^]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
 

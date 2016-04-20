@@ -1,0 +1,15 @@
+citHeader("To cite MODIStsp in publications use:")
+
+citEntry(entry = "Manual",
+  author = "Lorenzo Busetto and Luigi Ranghetti",
+  title        = "MODIStsp: an R packadge for preprocessing of MODIS time series",
+  year         = "2016",
+  url          = "https://github.com/lbusett/MODIStsp/",
+  note         = "R package version 1.1.0 .",
+
+  textVersion  =
+  paste("Busetto Lorenzo, Ranghetti Luigi (2016).",
+        "MODIStsp: an R package for preprocessing of MODIS time series.",
+        "R package version 1.1.0",
+        "URL https://github.com/lbusett/MODIStsp/. ")
+)
