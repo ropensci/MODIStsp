@@ -4,25 +4,24 @@ author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it))
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
-  html_vignette:
+  rmarkdown::html_vignette:
     depth: 3
     fig_caption: yes
     number_section: yes
     toc: yes
-  pdf_document:
+  rmarkdown::pdf_document:
     fig_caption: yes
     number_sections: yes
     toc: yes
-  html_document:
+  rmarkdown::html_document:
     depth: 3
     fig_caption: yes
     number_section: yes
     toc: yes
-  
-header-includes: \usepackage{graphicx}
+
 bibliography: MODIStsp.bib
 vignette: >
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteIndexEntry{MODIStsp}
   \usepackage[utf8]{inputenc}
 ---
@@ -43,16 +42,16 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
 
 # Installation 
 
-**IMPORTANT:** _MODIStsp_ requires [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library) v >1.2 To be installed in your system. Brief instructions for installing GDAL can be found [HERE](#gdal_inst)
+**IMPORTANT:** _MODIStsp_ requires [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library) v >1.11.1 To be installed in your system. Brief instructions for installing GDAL on Windows can be found [HERE](#gdal_inst)
 
 ## On Windows
 
-1. Install and load the ```RGtk2``` package:
+1. Install and load the ```gWidgetsRGtk2``` package:
 ```r
-  install.packages("RGtk2")
-  library(RGtk2)
+  install.packages("gWidgetsRGtk2")
+  library(gWidgetsRGtk2)
 ```
-    at the end of the installation, an error window will probably appear. **Don’t worry !** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]
+    upon loading the package, an error window will probably appear. **Don’t worry !** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]
 
 2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 ```r
@@ -63,15 +62,14 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
 
 ## On Linux
 
-1. Be sure that R >= 3.2.1 and GDAL >= 1.11.1 are installed.
+1. Ensure that R >= 3.2.1 and GDAL >= 1.11.1 are installed.
     
-    With Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) it is necessary to install packages from CRAN and UbuntuGIS-unstable repositories (follow instructions [here](https://cran.r-project.org/bin/linux/ubuntu) and [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)); with Ubuntu 15.10 Wily (or newer) this step is not mandatory (altough recommended).
+    With Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) it is necessary to install packages from CRAN and UbuntuGIS-unstable repositories (follow instructions [here](https://cran.r-project.org/bin/linux/ubuntu) and [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)); with Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended).
     
     On Debian-based systems, to install packages open a terminal and type 
 ```bash
   sudo apt-get install r-base gdal-bin
 ```
-
 2. Install the dependencies requested by MODIStsp package and relative package dependencies: 
     * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (requested from library ```RGtk2```)
     * Curl (requested from library ```curl```)
@@ -79,17 +77,15 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
     
     On Debian-based systems, to install packages open a terminal and type 
 ```bash
-  sudo apt-get install r-cran-cairodevice r-cran-rgtk2 \
-      libcurl4-openssl-dev libgdal-dev libproj-dev
+  sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
 ```
 
 3. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:
 ```r
+ install.packages("gWidgetsRGtk2", repos = "http://cran.us.r-project.org")
  install.packages("devtools", repos = "http://cran.us.r-project.org")
  library(devtools)
- install_github("lbusett/MODIStsp")
 ```
-
 4. Install ```MODIStsp``` package from GitHub:
 ```r
  library(devtools)
@@ -106,18 +102,18 @@ MODIStsp exploits functionalities of several other "R" packages. In particular, 
 
 ```knitr ```, ```rmarkdown ```, ```png```, ```grid```
 
-Additionaly, MODIStsp **requires availability of the GDAL - Geospatial Data Abstraction Library  v. >1.10, with support for HDF4 raster format**. 
+Additionaly, MODIStsp **requires availability of the GDAL - Geospatial Data Abstraction Library  v. >1.11.1, with support for HDF4 raster format**. 
 
 # Running the tool
 
 ## Interactive mode
-To run the tool in interactive mode, load the package and launch the MODIS_tsp function, with no parameters
+To run the tool in interactive mode, load the package and launch the MODIS_tsp function, with no parameters:
 ```r
 library(MODIStsp)
 MODIStsp()
 ```
-This opens a GUI from which processing options can be specified and eventually saved (or loaded).
-A description of the different processing parameters to be selected is reported in the "Selection of Processing parameters" subsection.[^2^]
+This opens a GUI from which processing options can be specified and eventually saved (or loaded).[^2^]
+A description of the different processing parameters to be selected is reported in the "Selection of Processing parameters" subsection.
 
 ## Non-Interactive mode (Using a previously saved options file)
 
@@ -130,7 +126,7 @@ options_file = "X:/yourpath/youroptions.RData"   from the GUI
 MODIStsp(gui = FALSE, options_File = options_file)
 ```
 
-Specifying also the "spatial_file_path" parameter overrides the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents.
+Specifying also the "_spatial\_file\_path_" parameter overrides the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents.
 
 For example:
 ```r
@@ -145,13 +141,11 @@ for (single_shape in extent_list) {
           spatial_file_path = single_shape )
 }
 ```
-
-
 # Selection of processing parameters through the GUI
 
-When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection of all processing options required for the creation of the desired MODIS time series. The main available processing options are described briefly in the following.
+When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection of all processing options required for the creation of the desired MODIS time series. The main available processing options are d
 
-```{r fig.width=7, fig.height=7, fig.cap = "The MODIStsp main GUI", echo=FALSE}
+```{r fig.width=7, fig.height=6.8, fig.cap = "The MODIStsp main GUI", echo=FALSE}
   library(png)
   library(grid)
   library(knitr)
@@ -163,7 +157,7 @@ When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection 
 
 Allows to select the MODIS product of interest from a drop-down menu. The user can also select which MODIS sensors should be considered for download and creation of the time series ("Terra", "Aqua" or both). After selecting the product, pushing the "Select Layers" button opens the "Select Processing Layers" GUI panel (Figure 2), from which the user **must** select which MODIS original and/or derived QI and SI layers should be processed: 
 
-```{r fig.width = 7,  fig.height = 3, fig.cap = 'The "Select Processing Layers" GUI',echo=FALSE}
+```{r fig.width = 7,  fig.height = 2.8, fig.align = "center", fig.cap = 'The "Select Processing Layers" GUI',echo=FALSE}
   library(png)
   library(grid)
   img <- readPNG('Figure_3.png')
@@ -193,11 +187,8 @@ Some of the most commonly used Spectral Indexes are available for computation by
 | RGRI                | Red Green Ration index  [@Gamon1999]                        |
 | GRVI                | Green-red ratio vegetation index  [@Tucker1979]             |
 
-Users can however **specify other SIs to be computed without modifying MODIStsp source code** by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related to the new desired SI using a simple GUI (Figure 3) interface. 
-
-Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked,  and the new index added in the list of available ones for all products allowing its computation at the next MODIStsp execution (Figure 4). 
-
 \pagebreak
+Users can however **specify other SIs to be computed without modifying MODIStsp source code** by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related to the new desired SI using a simple GUI (Figure 3) interface. 
 
 ```{r fig.width = 5, fig.height = 1.5, fig.cap = 'The GUI for insertion of additional Spectral Indexes',echo=FALSE}
   library(png)
@@ -205,6 +196,8 @@ Provided information (e.g., correct bandnames, computable formula, etc...) is au
   img <- readPNG('figure_4.png')
   grid.raster(img)
 ```
+
+Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked,  and the new index added in the list of available ones for all products allowing its computation at the next MODIStsp execution (Figure 4). 
 
 ## Processing Period
 Allows to specify the starting and ending dates (dd/mm/yyyy) to be considered for the creation of the time series. 
@@ -326,9 +319,7 @@ See `?install_MODIStsp_launcher` for details and path customisations.
 
 <a name="gdal_inst"/>
 
-#Installing GDAL 
-
-## On Windows 
+#Installing GDAL on Windows 
 
 The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
 
@@ -343,7 +334,6 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
     +  Click on "Skip": the word "skip" will be replaced by the current GDAL version number
     +  Click on "Next" a few times to install GDAL
 
-## On Linux 
 
 [^1^]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
 
@@ -353,6 +343,5 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 * If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help !
 
 [^3^]:The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
-
 
 # References

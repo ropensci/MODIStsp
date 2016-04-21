@@ -14,21 +14,20 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ## Installation <a name="Installation"></a> 
 
-**IMPORTANT:** _MODIStsp_ requires [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library) v >1.2 To be installed in your system. Brief instructions for installing GDAL can be found in [_MODIStsp_ Vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf)
+**IMPORTANT:** _MODIStsp_ requires [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library) v >1.11.1 To be installed in your system. Brief instructions for installing GDAL on Windows can be found [HERE](#gdal_inst)
 
 ## On Windows
 
-1. Install and load the _RGtk2_ library:
+1. Install and load the ```gWidgetsRGtk2``` package:
+
 ```r
-  install.packages("RGtk2")
-  library(RGtk2)
+  install.packages("gWidgetsRGtk2")
+  library(gWidgetsRGtk2)
 ```
-    "R" will probably throw a Warning: 
-```r
-  warning("Failed to load RGtk2 dynamic library, attempting to install it")
-```
-    and an error window will appear. **Don’t worry !** This is just signaling that   _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]
+  upon loading the package, an error window will probably appear. **Don’t worry !** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]
+
 2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+
 ```r 
   install.packages("devtools", repos = "http://cran.us.r-project.org")
   library(devtools)
@@ -37,7 +36,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ## On Linux
 
-1. Be sure that R >= 3.2.1 and GDAL >= 1.11.1 are installed.
+1. Ensure that R >= 3.2.1 and GDAL >= 1.11.1 are installed.
     
     With Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) it is necessary to install packages from CRAN and UbuntuGIS-unstable repositories (follow instructions [here](https://cran.r-project.org/bin/linux/ubuntu) and [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)); with Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended).
     
@@ -51,16 +50,21 @@ An extended description of MODIStsp functionalities is provided in the [package 
     * GDAL >= 1.6.3, PROJ.4  >= 4.4.9 (requested from library ```rgdal```)
     
     On Debian-based systems, to install packages open a terminal and type 
+
 ```bash
   sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
 ```
+
 3. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:
+
 ```r
+ install.packages("gWidgetsRGtk2", repos = "http://cran.us.r-project.org")
  install.packages("devtools", repos = "http://cran.us.r-project.org")
  library(devtools)
- install_github("lbusett/MODIStsp")
 ```
+
 4. Install ```MODIStsp``` package from GitHub:
+
 ```r
  library(devtools)
  install_github("lbusett/MODIStsp")
@@ -146,5 +150,23 @@ Standalone non-interactive execution can be used to periodically and automatical
         
     * Windows: create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify  `-g -s "X:/yourpath/youroptions.RData"` as argument.
     
-[^1^]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
+<a name="gdal_inst"/>
+
+#Installing GDAL on Windows 
+
+The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
+
+1. Open the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
+2. In the **Quick Start for OSGeo4W Users** section, select the download of 32bit or 64bit of OSGeo4W network installer
+3. Run the installer
+  + _Easiest Option_: 
+    +Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing softwares like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
+  + _Advanded Option_: 
+    +  Select **Advanced Install**, then click on "Next" a few times until you reach the "Select Packages" screen. 
+    +  Click on "Commandline_Utilities_", and on the list look for "_gdal: The GDAL/OGR library..." entry
+    +  Click on "Skip": the word "skip" will be replaced by the current GDAL version number
+    +  Click on "Next" a few times to install GDAL
+    
+    
+[^1^]: If you encounter problems installing the ``` gWidgetsRgtk2 ``` library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
 
