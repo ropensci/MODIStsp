@@ -12,7 +12,7 @@
 
 <meta name="author" content="Lorenzo Busetto (busetto.l@irea.cnr.it), Luigi Ranghetti (ranghetti.l@irea.cnr.it)" />
 
-<meta name="date" content="2016-04-20" />
+<meta name="date" content="2016-04-21" />
 
 <title>MODIStsp: A tool for automatic preprocessing of MODIS time series</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title">MODIStsp: A tool for automatic preprocessing of MODIS time series</h1>
 <h4 class="author"><em>Lorenzo Busetto (<a href="mailto:busetto.l@irea.cnr.it">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</em></h4>
-<h4 class="date"><em>2016-04-20</em></h4>
+<h4 class="date"><em>2016-04-21</em></h4>
 
 
 <div id="TOC">
@@ -121,111 +121,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="installation" class="section level1">
 <h1><span class="header-section-number">2</span> Installation</h1>
-<p><em>MODIStsp</em> was developed completely in the “R” Language and Environment for Statistical Computing (R Development Core Team 2014) v. 3.1.3 and is distributed as open source software under the GNU-GPL 3.0 License. Source code can be downloaded at the GITHUB repository <a href="https://github.com/lbusett/MODIStsp" class="uri">https://github.com/lbusett/MODIStsp</a>.</p>
 <p><strong>IMPORTANT:</strong> <em>MODIStsp</em> requires <a href="http://www.gdal.org/">GDAL</a> (Geospatial Data Abstraction Library) v &gt;1.2 To be installed in your system. Brief instructions for installing GDAL can be found <a href="#gdal_inst">HERE</a></p>
 <div id="on-windows" class="section level2">
 <h2><span class="header-section-number">2.1</span> On Windows</h2>
-<p><strong>1)</strong> Install MODIStsp package from GitHub. (You’ll need to have the “devtools” package installed and loaded)</p>
+<p><strong>1)</strong> Install and load the <code>RGtk2</code> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">install.packages</span>(<span class="st">&quot;RGtk2&quot;</span>)
+  <span class="kw">library</span>(RGtk2)</code></pre></div>
+<p>at the end of the installation, an error window will probably appear. <strong>Don’t worry !</strong> This is just signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go !<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p><strong>2)</strong> Install MODIStsp package from GitHub. (You’ll need to have the “devtools” package installed and loaded)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://cran.us.r-project.org&quot;</span>)
   <span class="kw">library</span>(devtools)
   <span class="kw">install_github</span>(<span class="st">&quot;lbusett/MODIStsp&quot;</span>)</code></pre></div>
-<p><strong>2)</strong> Finalize the installation of the <em>gWidgetsRGtk2</em> library:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
-<p>“R” will probably throw a Warning:</p>
-<pre><code>## Warning: Failed to load RGtk2 dynamic library, attempting to install it</code></pre>
-<p>and an error window will appear. <strong>Don’t worry !</strong> This is just signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go !<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 </div>
 <div id="on-linux" class="section level2">
 <h2><span class="header-section-number">2.2</span> On Linux</h2>
-<p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+<p>COMING SOON !</p>
 </div>
 <div id="dependencies" class="section level2">
 <h2><span class="header-section-number">2.3</span> Dependencies</h2>
-<p>MODIStsp exploits functionalities of several additional “R” packages. A complete list of required packages is shown in the following table.</p>
-<center>
-<strong>Table I: List of “R” package dependencies for the MODIStsp tool.</strong>
-</center>
-<table>
-<thead>
-<tr class="header">
-<th align="center">“R” package</th>
-<th align="left">Version</th>
-<th align="left">Authors</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">bitops</td>
-<td align="left">&gt;= 1.9.6</td>
-<td align="left"><span class="citation">(Dutky and Maechler 2013)</span></td>
-</tr>
-<tr class="even">
-<td align="center">data.table</td>
-<td align="left">&gt;= 1.9.6</td>
-<td align="left"><span class="citation">(Dowle et al. 2015)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">gdalUtils</td>
-<td align="left">&gt;= 2.0.1.7</td>
-<td align="left"><span class="citation">(Greenberg and Mattiuzzi 2014)</span></td>
-</tr>
-<tr class="even">
-<td align="center">gWidgetsRGtk2</td>
-<td align="left">&gt;= 0.0-54</td>
-<td align="left"><span class="citation">(Lawrence and Verzani 2013)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">hash</td>
-<td align="left">&gt;= 2.2.6</td>
-<td align="left"><span class="citation">(Brown 2013)</span></td>
-</tr>
-<tr class="even">
-<td align="center">plyr</td>
-<td align="left">&gt;= 1.8.3</td>
-<td align="left"><span class="citation">(Wickham 2012)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">raster</td>
-<td align="left">&gt;= 2.5-2</td>
-<td align="left"><span class="citation">(Hijmans 2014)</span></td>
-</tr>
-<tr class="even">
-<td align="center">RCurl</td>
-<td align="left">&gt;= 1.95-4.8</td>
-<td align="left"><span class="citation">(Lang 2013a)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">rgdal</td>
-<td align="left">&gt;= 1.1-8</td>
-<td align="left"><span class="citation">(Bivand, Keitt, and Rowlingson 2014)</span></td>
-</tr>
-<tr class="even">
-<td align="center">rgeos</td>
-<td align="left">&gt;= 0.3-8</td>
-<td align="left"><span class="citation">(Bivand and Rundel 2014)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">xts</td>
-<td align="left">&gt;= 1.0-10</td>
-<td align="left"><span class="citation">(Ryan and Ulrich 2015)</span></td>
-</tr>
-<tr class="even">
-<td align="center">sp</td>
-<td align="left">&gt;= 1.2-2</td>
-<td align="left"><span class="citation">(Pebesma and Bivand 2005)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">stringr</td>
-<td align="left">&gt;= 1.0.0</td>
-<td align="left"><span class="citation">(Wickham 2012)</span></td>
-</tr>
-<tr class="even">
-<td align="center">XML</td>
-<td align="left">&gt;= 3.98-1.1</td>
-<td align="left"><span class="citation">(Lang 2013b)</span></td>
-</tr>
-</tbody>
-</table>
+<p>MODIStsp exploits functionalities of several other “R” packages. In particular, the following packages are imported:</p>
+<p><code>bitops (&gt;= 1.9.6)</code>, <code>data.table (&gt;= 1.9.6)</code> , <code>gdalUtils (&gt;= 2.0.1.7)</code>, <code>gWidgetsRGtk2 (&gt;= 0.0-54)</code>, <code>hash (&gt;= 2.2.6)</code>, <code>plyr (&gt;= 1.8.3)</code>, <code>raster (&gt;= 2.5-2)</code>, <code>RCurl (&gt;= 1.95-4.8)</code>, <code>rgdal (&gt;= 1.1-8)</code>, <code>rgeos (&gt;= 0.3-8)</code>, <code>xts (&gt;= 1.0-10)</code>, <code>sp (&gt;= 1.2-2)</code>, <code>stringr (&gt;= 1.0.0)</code>, <code>XML (&gt;= 3.98-1.1)</code></p>
+<p>, while the following are suggestes:</p>
+<p><code>knitr</code>, <code>rmarkdown</code>, <code>png</code>, <code>grid</code></p>
 <p>Additionaly, MODIStsp <strong>requires availability of the GDAL - Geospatial Data Abstraction Library v. &gt;1.10, with support for HDF4 raster format</strong>.</p>
 </div>
 </div>
@@ -304,7 +221,7 @@ The “Select Processing Layers” GUI
 </tr>
 <tr class="even">
 <td align="left">EVI</td>
-<td align="left">Enhanced Vegetation Index <span class="citation">(Huete et al. 2002)</span></td>
+<td align="left">Enhanced Vegetation Index <span class="citation">(A. Huete et al. 2002)</span></td>
 </tr>
 <tr class="odd">
 <td align="left">SR</td>
@@ -320,7 +237,7 @@ The “Select Processing Layers” GUI
 </tr>
 <tr class="even">
 <td align="left">SAVI</td>
-<td align="left">Soil Adjusted Vegetation Index <span class="citation">(Huete 1988)</span></td>
+<td align="left">Soil Adjusted Vegetation Index <span class="citation">(A.R Huete 1988)</span></td>
 </tr>
 <tr class="odd">
 <td align="left">NDSI</td>
@@ -487,23 +404,11 @@ The GUI for insertion of additional Spectral Indexes
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 <div id="refs" class="references">
-<div id="ref-Bivand2014">
-<p>Bivand, R., and C. Rundel. 2014. “geos: Interface to Geometry Engine - Open Source (GEOS). R package version 0.3-8.” <a href="http://cran.r-project.org/package=rgeos" class="uri">http://cran.r-project.org/package=rgeos</a>.</p>
-</div>
-<div id="ref-Bivand2014a">
-<p>Bivand, R., T. Keitt, and B Rowlingson. 2014. “rgdal: Bindings for the Geospatial Data Abstraction Library. R package version 0.8-16.” <a href="http://cran.r-project.org/package=rgdal" class="uri">http://cran.r-project.org/package=rgdal</a>.</p>
-</div>
 <div id="ref-Boschetti2014">
 <p>Boschetti, M., F. Nutini, G. Manfron, P. A. Brivio, and A. Nelson. 2014. “Comparative analysis of normalised difference spectral indices derived from MODIS for detecting surface water in flooded rice cropping systems.” <em>PLoS ONE</em> 9 (2). doi:<a href="https://doi.org/10.1371/journal.pone.0088741">10.1371/journal.pone.0088741</a>.</p>
 </div>
-<div id="ref-Brown2013">
-<p>Brown, C. 2013. “Hash: Full Feature Implementation of Hash/associated Arrays/dictionaries. R Package Version 2.2.6.” <a href="http://cran.r-project.org/package=hash" class="uri">http://cran.r-project.org/package=hash</a>.</p>
-</div>
 <div id="ref-Chemin2008">
 <p>Chemin, Y. 2008. <em>modis.qc.R “R” script</em>.</p>
-</div>
-<div id="ref-data.table">
-<p>Dowle, M, A Srinivasan, T Short, S Lianoglou with contributions from R Saporta, and E Antonyan. 2015. <em>Data.table: Extension of Data.frame</em>. <a href="http://CRAN.R-project.org/package=data.table" class="uri">http://CRAN.R-project.org/package=data.table</a>.</p>
 </div>
 <div id="ref-Dutky2013">
 <p>Dutky, S., and M. Maechler. 2013. “bitops: Bitwise Operations. R package version 1.0-6.” <a href="http://cran.r-project.org/package=bitops" class="uri">http://cran.r-project.org/package=bitops</a>.</p>
@@ -523,9 +428,6 @@ The GUI for insertion of additional Spectral Indexes
 <div id="ref-Hengl2010">
 <p>Hengl, T. 2010. “Download and resampling of MODIS images.” <a href="http://es" class="uri">http://es</a>.</p>
 </div>
-<div id="ref-Hijmans2014">
-<p>Hijmans, R.J. 2014. “raster: raster: Geographic data analysis and modeling. R package version 2.3-0.” <a href="http://cran.r-project.org/package=raster" class="uri">http://cran.r-project.org/package=raster</a>.</p>
-</div>
 <div id="ref-Huete2002">
 <p>Huete, A., K. Didan, T. Miura, E.P. Rodriguez, X. Gao, and L.G. Ferreira. 2002. “Overview of the radiometric and biophysical performance of the MODIS vegetation indices.” <em>Remote Sensing of Environment</em> 83 (1-2): 195–213. doi:<a href="https://doi.org/10.1016/S0034-4257(02)00096-2">10.1016/S0034-4257(02)00096-2</a>.</p>
 </div>
@@ -535,32 +437,14 @@ The GUI for insertion of additional Spectral Indexes
 <div id="ref-HUNTJR1989">
 <p>Hunt, J.R., and B. Rock. 1989. “Detection of changes in leaf water content using Near- and Middle-Infrared reflectances.” <em>Remote Sensing of Environment</em> 30 (1): 43–54. doi:<a href="https://doi.org/10.1016/0034-4257(89)90046-1">10.1016/0034-4257(89)90046-1</a>.</p>
 </div>
-<div id="ref-Lang2013">
-<p>Lang, D.T. 2013a. “RCurl: General network (HTTP/FTP/...) client interface for R. R package version 1.95-4.1.” <a href="http://cran.r-project.org/package=RCurl" class="uri">http://cran.r-project.org/package=RCurl</a>.</p>
-</div>
-<div id="ref-Lang2013a">
-<p>———. 2013b. “XML: Tools for parsing and generating XML within R and S-Plus. R package version 3.98-1.1.” <a href="http://cran.r-project.org/package=XML" class="uri">http://cran.r-project.org/package=XML</a>.</p>
-</div>
-<div id="ref-Lawrence2013">
-<p>Lawrence, M., and J. Verzani. 2013. “gWidgetsRGtk2: Toolkit implementation of gWidgets for RGtk2. R package version 0.0-82.” <a href="http://cran.r-project.org/package=gWidgetsRGtk2" class="uri">http://cran.r-project.org/package=gWidgetsRGtk2</a>.</p>
-</div>
 <div id="ref-Naimi2014">
 <p>Naimi, B. 2014. “ModisDownload: an R function to download, mosaic, and reproject the MODIS images.” <a href="http://r-gis.net/?q=ModisDownload" class="uri">http://r-gis.net/?q=ModisDownload</a>.</p>
-</div>
-<div id="ref-sp">
-<p>Pebesma, Edzer J., and Roger S. Bivand. 2005. “Classes and Methods for Spatial Data in R.” <em>R News</em> 5 (2): 9–13. <a href="http://CRAN.R-project.org/doc/Rnews/" class="uri">http://CRAN.R-project.org/doc/Rnews/</a>.</p>
 </div>
 <div id="ref-Rouse1973">
 <p>Rouse, J.W.J., R.H. Haas, J.A. Schell, and D.W. Deering. 1973. “Monitoring vegetation systems in the Great Plains with ERTS. Third ERTS Symposium, NASA SP-351. U.S. Gov. Printing office.” Edited by S.C. Freden, E.P. Mercanti, and M.A. Becker. NASA.</p>
 </div>
-<div id="ref-xts">
-<p>Ryan, Jeffrey A., and Joshua M. Ulrich. 2015. <em>Xts: EXtensible Time Series</em>. <a href="https://R-Forge.R-project.org/projects/xts/" class="uri">https://R-Forge.R-project.org/projects/xts/</a>.</p>
-</div>
 <div id="ref-Tucker1979">
 <p>Tucker, C.J. 1979. “Red and photographic infrared linear combinations for monitoring vegetation.” <em>Remote Sensing of Environment</em> 8 (2): 127–50. doi:<a href="https://doi.org/10.1016/0034-4257(79)90013-0">10.1016/0034-4257(79)90013-0</a>.</p>
-</div>
-<div id="ref-Wickham2012">
-<p>Wickham, H. 2012. “stringr: Make it easier to work with strings.. R package version 0.6.2.” <a href="http://cran.r-project.org/package=stringr" class="uri">http://cran.r-project.org/package=stringr</a>.</p>
 </div>
 </div>
 </div>
@@ -568,7 +452,7 @@ The GUI for insertion of additional Spectral Indexes
 <hr />
 <ol>
 <li id="fn1"><p>If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the <a href="https://github.com/lbusett/MODIStsp/issues">issues</a> GitHub page of MODIStsp and we’ll try to help you !<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>At the first execution of <em>MODIStsp</em>, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. If it is installed but not found try consulting the <em>MODIStsp</em> FAQ section for possible solutions 3. If nothing works, signal it in the <a href="https://github.com/lbusett/MODIStsp/issues">issues</a> GitHub page of MODIStsp and we’ll try to help !<a href="#fnref2">↩</a></p></li>
+<li id="fn2"><p>At the first execution of <em>MODIStsp</em>, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: * Ensure that GDAL is properly installed in your system * (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the <em>GDAL_DATA</em> environment variable is correctly set (You can find simple instructions [HERE] (<a href="http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/" class="uri">http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/</a>)) * If nothing works, signal it in the <a href="https://github.com/lbusett/MODIStsp/issues">issues</a> GitHub page of MODIStsp and we’ll try to help !<a href="#fnref2">↩</a></p></li>
 <li id="fn3"><p>The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the “MODIStsp_Products_Opts” XML file distributed with the package in /ExtData subfolder.<a href="#fnref3">↩</a></p></li>
 </ol>
 </div>

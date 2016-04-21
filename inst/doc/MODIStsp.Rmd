@@ -18,13 +18,13 @@ output:
     fig_caption: yes
     number_section: yes
     toc: yes
-
+  
+header-includes: \usepackage{graphicx}
 bibliography: MODIStsp.bib
 vignette: >
-  %\VignetteIndexEntry{MODIStsp}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{MODIStsp}
   \usepackage[utf8]{inputenc}
-  %\VignetteIndexEntry{Sending Messages With Gmailr}
 ---
 
 # Introduction
@@ -43,60 +43,39 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
 
 # Installation 
 
-_MODIStsp_ was developed completely in the "R" Language and Environment for Statistical Computing (R Development Core Team 2014) v. 3.1.3 and is distributed as open source software under the GNU-GPL 3.0 License. Source code can be downloaded at the GITHUB repository https://github.com/lbusett/MODIStsp.
-
 **IMPORTANT:** _MODIStsp_ requires [GDAL](http://www.gdal.org/) (Geospatial Data Abstraction Library) v >1.2 To be installed in your system. Brief instructions for installing GDAL can be found [HERE](#gdal_inst)
 
 ## On Windows
 
-**1)** Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+**1)** Install and load the ```RGtk2``` package:
 
-```{r eval=FALSE}
+```r
+  install.packages("RGtk2")
+  library(RGtk2)
+```
+at the end of the installation, an error window will probably appear. **Don’t worry !** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]
+
+**2)** Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+
+```r
   install.packages("devtools", repos = "http://cran.us.r-project.org")
   library(devtools)
   install_github("lbusett/MODIStsp")
 ```
 
-**2)** Finalize the installation of the _gWidgetsRGtk2_ library:
-
-```{r eval=FALSE}
-  library(gWidgetsRGtk2)
-```
-    
-"R" will probably throw a Warning: 
-```{r  echo = F}
-  warning("Failed to load RGtk2 dynamic library, attempting to install it")
-```
-and an error window will appear. **Don’t worry !** This is just signaling that   _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]  
-
 ## On Linux
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+COMING SOON !
 
 ## Dependencies
 
-MODIStsp exploits functionalities of several additional "R" packages. A complete list of required packages is shown in the following table. 
+MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:
 
-<center>**Table I: List of "R" package dependencies for the MODIStsp tool.**</center>
+``` bitops (>= 1.9.6) ```, ``` data.table (>= 1.9.6) ``` , ``` gdalUtils (>= 2.0.1.7) ```, ``` gWidgetsRGtk2 (>= 0.0-54) ```, ``` hash (>= 2.2.6) ```, ``` plyr (>= 1.8.3) ```, ``` raster (>= 2.5-2) ```, ``` RCurl (>= 1.95-4.8) ```, ``` rgdal (>= 1.1-8) ```, ``` rgeos (>= 0.3-8) ```, ``` xts (>= 1.0-10) ```, ``` sp (>= 1.2-2) ```, ``` stringr (>= 1.0.0) ```, ``` XML (>= 3.98-1.1)```
 
-| "R" package    | Version    | Authors          |
-|:----------------:|------------|----------------|
-|  bitops        |>= 1.9.6    | [@Dutky2013]     |
-|  data.table    |>= 1.9.6    | [@data.table]    |
-|  gdalUtils     |>= 2.0.1.7  | [@Greenberg2014] |
-|  gWidgetsRGtk2 |>= 0.0-54   | [@Lawrence2013]  |
-|  hash          |>= 2.2.6    | [@Brown2013]     |
-|  plyr          |>= 1.8.3    | [@Wickham2012]   |
-|  raster        |>= 2.5-2    | [@Hijmans2014]   |
-|  RCurl         |>= 1.95-4.8 | [@Lang2013]      |
-|  rgdal         |>= 1.1-8    | [@Bivand2014a]   |
-|  rgeos         |>= 0.3-8    | [@Bivand2014]    |
-|  xts           |>= 1.0-10   | [@xts]           |
-|  sp            |>= 1.2-2    | [@sp]            |
-|  stringr       |>= 1.0.0    | [@Wickham2012]   |
-|  XML           |>= 3.98-1.1 | [@Lang2013a]     |
+, while the following are suggestes: 
 
-
+```knitr ```, ```rmarkdown ```, ```png```, ```grid```
 
 Additionaly, MODIStsp **requires availability of the GDAL - Geospatial Data Abstraction Library  v. >1.10, with support for HDF4 raster format**. 
 
@@ -146,6 +125,7 @@ When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection 
 ```{r fig.width=7, fig.height=7, fig.cap = "The MODIStsp main GUI", echo=FALSE}
   library(png)
   library(grid)
+  library(knitr)
   img <- readPNG("Figure_2.png")
   grid.raster(img)
 ```
@@ -339,9 +319,9 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 [^1^]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
 
 [^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
-1. Ensure that GDAL is properly installed in your system
-2. If it is installed but not found try consulting the _MODIStsp_ FAQ section for possible solutions
-3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help !
+* Ensure that GDAL is properly installed in your system
+* (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE] (http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/))
+* If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help !
 
 [^3^]:The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
 
