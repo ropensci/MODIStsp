@@ -18,22 +18,19 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ## On Windows
 
-**1)** Install and load the _RGtk2_ library:
-
+1. Install and load the _RGtk2_ library:
 ```r
   install.packages("RGtk2")
   library(RGtk2)
 ```
     
-"R" will probably throw a Warning: 
-
+    "R" will probably throw a Warning: 
 ```r
   warning("Failed to load RGtk2 dynamic library, attempting to install it")
 ```
-and an error window will appear. **Don’t worry !** This is just signaling that   _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]  
+    and an error window will appear. **Don’t worry !** This is just signaling that   _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]  
 
-**2)** Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
-
+2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 ```r 
   install.packages("devtools", repos = "http://cran.us.r-project.org")
   library(devtools)
@@ -42,7 +39,37 @@ and an error window will appear. **Don’t worry !** This is just signaling that
 
 ## On Linux
 
-COMING SOON !!!!
+1. Be sure that R >= 3.2.1 and GDAL >= 1.11.1 are installed.
+    
+    With Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) it is necessary to install packages from CRAN and UbuntuGIS-unstable repositories (follow instructions [here](https://cran.r-project.org/bin/linux/ubuntu) and [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)); with Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended).
+    
+    On Debian-based systems, to install packages open a terminal and type 
+```bash
+  sudo apt-get install r-base gdal-bin
+```
+
+2. Install the dependencies requested by MODIStsp package and relative package dependencies: 
+    * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (requested from library ```RGtk2```)
+    * Curl (requested from library ```curl```)
+    * GDAL >= 1.6.3, PROJ.4  >= 4.4.9 (requested from library ```rgdal```)
+    
+    On Debian-based systems, to install packages open a terminal and type 
+```bash
+  sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
+```
+
+3. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:
+```r
+ install.packages("devtools", repos = "http://cran.us.r-project.org")
+ library(devtools)
+ install_github("lbusett/MODIStsp")
+```
+
+4. Install ```MODIStsp``` package from GitHub:
+```r
+ library(devtools)
+ install_github("lbusett/MODIStsp")
+```
 
 ## Dependencies <a name="Dependencies"></a> 
 
