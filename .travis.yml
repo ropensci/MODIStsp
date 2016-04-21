@@ -17,6 +17,7 @@ addons:
       - libgdal-dev
       - libproj-dev
       - libcurl4-openssl-dev
+      - libgtk-3-dev
 r_binary_packages:
   - cairodevice
   - rgtk2
