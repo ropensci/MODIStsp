@@ -18,11 +18,11 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ## On Windows
 
-**1)** Install and load the _gWidgetsRGtk2_ library:
+**1)** Install and load the _RGtk2_ library:
 
 ```r
-  install.packages("gWidgetsRGtk2")
-  library(gWidgetsRGtk2)
+  install.packages("RGtk2")
+  library(RGtk2)
 ```
     
 "R" will probably throw a Warning: 
