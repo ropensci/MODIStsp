@@ -168,5 +168,5 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
     +  Click on "Next" a few times to install GDAL
     
     
-<b id="f1">1</b> Footnote content here. [↩](#a1): If you encounter problems installing the ``` gWidgetsRgtk2 ``` library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
+<b id="f1">1</b> If you encounter problems installing the ``` gWidgetsRgtk2 ``` library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you ! [↩](#a1)
 
