@@ -24,7 +24,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
   install.packages("gWidgetsRGtk2")
   library(gWidgetsRGtk2)
 ```
-  upon loading the package, an error window will probably appear. **Don’t worry !** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]
+  upon loading the package, an error window will probably appear. **Don’t worry !** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1]
 
 2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 
@@ -168,5 +168,5 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
     +  Click on "Next" a few times to install GDAL
     
     
-[^1^]: If you encounter problems installing the ``` gWidgetsRgtk2 ``` library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
+[^1]: If you encounter problems installing the ``` gWidgetsRgtk2 ``` library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you !
 
