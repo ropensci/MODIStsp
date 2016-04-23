@@ -4,7 +4,7 @@ citEntry(entry = "Manual",
   author = "Lorenzo Busetto and Luigi Ranghetti",
   title        = "MODIStsp: an R packadge for preprocessing of MODIS time series",
   year         = "2016",
-  url          = "https://github.com/lbusett/MODIStsp/",
+  url          = "https://github.com/lbusett/MODIStsp",
   note         = "R package version 1.2.1 .",
 
   textVersion  =

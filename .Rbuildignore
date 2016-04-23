@@ -9,3 +9,5 @@
 ^inst/Previous/
 ^sketched_routines/
 ^ExtData/
+^README\.Rmd$
+^README-.*\.png$
