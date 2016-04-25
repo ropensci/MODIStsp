@@ -127,56 +127,33 @@ $(document).ready(function () {
 </ul>
 <p>All processing parameters can be easily set with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an “R” environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.</p>
 <p>Required MODIS HDF files are automatically downloaded from NASA servers and resized, reprojected, resampled and processed according to user’s choices. For each desired output layer, outputs are saved as single-band rasters corresponding to each acquisition date available for the selected MODIS product within the specified time period. “R” <em>RasterStack</em> objects with temporal information as well as Virtual raster files (GDAL vrt and ENVI META files) facilitating access to the entire time series can be also created.</p>
-</div>
-<div id="installation" class="section level1">
-<h1>Installation</h1>
-<p><strong>IMPORTANT:</strong> <em>MODIStsp</em> requires <a href="http://www.gdal.org/">GDAL</a> (Geospatial Data Abstraction Library) v &gt;1.11.1 To be installed in your system. Brief instructions for installing GDAL on Windows can be found <a href="#gdal_inst">HERE</a></p>
-<div id="on-windows" class="section level2">
-<h2>On Windows</h2>
+<div id="installation" class="section level2">
+<h2>Installation <a name="Installation"></a></h2>
+<p><strong>IMPORTANT:</strong> <em>MODIStsp</em> requires <a href="http://cran.r-project.org">R</a> v <span class="math inline">\(\ge\)</span> 3.2.1 and <a href="http://www.gdal.org">GDAL</a> (Geospatial Data Abstraction Library) v <span class="math inline">\(\ge\)</span> 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found <a href="#gdal_inst">HERE</a>.</p>
 <ol style="list-style-type: decimal">
 <li><p>Install and load the <code>gWidgetsRGtk2</code> package:</p>
-<pre class="r"><code>  install.packages(&quot;gWidgetsRGtk2&quot;)
-  library(gWidgetsRGtk2)</code></pre>
-<p>upon loading the package, an error window will probably appear. <strong>Don’t worry !</strong> This is just signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go !<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p></li>
-<li><p>Install MODIStsp package from GitHub. (You’ll need to have the “devtools” package installed and loaded)</p>
-<pre class="r"><code>  install.packages(&quot;devtools&quot;, repos = &quot;http://cran.us.r-project.org&quot;)
-  library(devtools)
-  install_github(&quot;lbusett/MODIStsp&quot;)</code></pre></li>
-</ol>
-</div>
-<div id="on-linux" class="section level2">
-<h2>On Linux</h2>
-<ol style="list-style-type: decimal">
-<li><p>Ensure that R &gt;= 3.2.1 and GDAL &gt;= 1.11.1 are installed.</p>
-<p>With Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) it is necessary to install packages from CRAN and UbuntuGIS-unstable repositories (follow instructions <a href="https://cran.r-project.org/bin/linux/ubuntu">here</a> and <a href="https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable">here</a>); with Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended).</p>
-<p>On Debian-based systems, to install packages open a terminal and type</p>
-<pre class="bash"><code>  sudo apt-get install r-base gdal-bin</code></pre>
-<p><strong>Warning:</strong> in order to allow MODIStsp to work properly, <code>gdal</code> <strong>must</strong> support for HDF5 format. Most of the Linux distributions already provide precompiled <code>gdal</code> which support it; i.e., in Ubuntu distributions the required libraries (<code>libhdf4-0-alt</code> and <code>libhdf4-dev</code> are automatically installed by installing resplectively <code>gdal-bin</code> and <code>libgdal-dev</code>). If using a distribution which provides precompiled <code>gdal</code> binaries without HDF4 support (i.e. ArchLinux), it is necessary to manually compile <code>gdal</code> adding the support for HDF4 format: this can be done adding the parameter <code>--with-hdf4</code> to <code>configure</code> instruction.</p></li>
-<li>Install the dependencies requested by MODIStsp package and relative package dependencies:
+<pre class="r"><code>install.packages(&quot;gWidgetsRGtk2&quot;)
+library(gWidgetsRGtk2)</code></pre>
+<p>On Windows, upon loading the package, an error window will probably appear. <strong>Don’t worry!</strong> This is just signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup id="a1"><a href="#f1">1</a></sup></p></li>
+<li><strong>Only for Linux users:</strong> install the dependencies requested by MODIStsp package and relative package dependencies:
 <ul>
-<li>Cairo &gt;= 1.0.0, ATK &gt;= 1.10.0, Pango &gt;= 1.10.0, GTK+ &gt;= 2.8.0, GLib &gt;= 2.8.0 (requested from library <code>RGtk2</code>)</li>
+<li>Cairo <span class="math inline">\(\ge\)</span> 1.0.0, ATK <span class="math inline">\(\ge\)</span> 1.10.0, Pango <span class="math inline">\(\ge\)</span> 1.10.0, GTK+ <span class="math inline">\(\ge\)</span> 2.8.0, GLib <span class="math inline">\(\ge\)</span> 2.8.0 (requested from library <code>RGtk2</code>)</li>
 <li>Curl (requested from library <code>curl</code>)</li>
-<li>GDAL &gt;= 1.6.3, PROJ.4 &gt;= 4.4.9 (requested from library <code>rgdal</code>)</li>
+<li>GDAL <span class="math inline">\(\ge\)</span> 1.6.3, PROJ.4 <span class="math inline">\(\ge\)</span> 4.4.9 (requested from library <code>rgdal</code>)</li>
 </ul>
 <p>On Debian-based systems, to install packages open a terminal and type</p>
-<pre class="bash"><code>  sudo apt-get install r-cran-cairodevice r-cran-rgtk2 \
-  libcurl4-openssl-dev libgdal-dev libproj-dev</code></pre></li>
-<li><p>From R install the libraries <code>gWidgetsRGtk2</code> and <code>devtools</code>:</p>
-<pre class="r"><code> install.packages(&quot;gWidgetsRGtk2&quot;, repos = &quot;http://cran.us.r-project.org&quot;)
- install.packages(&quot;devtools&quot;, repos = &quot;http://cran.us.r-project.org&quot;)
- library(devtools)</code></pre></li>
-<li><p>Install <code>MODIStsp</code> package from GitHub:</p>
-<pre class="r"><code> library(devtools)
- install_github(&quot;lbusett/MODIStsp&quot;)</code></pre></li>
+<pre class="bash"><code>sudo apt-get install r-cran-cairodevice r-cran-rgtk2 \\
+libcurl4-openssl-dev libgdal-dev libproj-dev</code></pre></li>
+<li><p>Install MODIStsp package from GitHub. (You’ll need to have the “devtools” package installed and loaded) ````</p></li>
 </ol>
 </div>
 <div id="dependencies" class="section level2">
 <h2>Dependencies</h2>
-<p>MODIStsp exploits functionalities of several other “R” packages. In particular, the following packages are imported:</p>
-<p><code>bitops (&gt;= 1.9.6)</code>, <code>data.table (&gt;= 1.9.6)</code> , <code>gdalUtils (&gt;= 2.0.1.7)</code>, <code>gWidgetsRGtk2 (&gt;= 0.0-54)</code>, <code>hash (&gt;= 2.2.6)</code>, <code>plyr (&gt;= 1.8.3)</code>, <code>raster (&gt;= 2.5-2)</code>, <code>RCurl (&gt;= 1.95-4.8)</code>, <code>rgdal (&gt;= 1.1-8)</code>, <code>rgeos (&gt;= 0.3-8)</code>, <code>xts (&gt;= 1.0-10)</code>, <code>sp (&gt;= 1.2-2)</code>, <code>stringr (&gt;= 1.0.0)</code>, <code>XML (&gt;= 3.98-1.1)</code></p>
-<p>, while the following are suggestes:</p>
-<p><code>knitr</code>, <code>rmarkdown</code>, <code>png</code>, <code>grid</code></p>
-<p>Additionaly, MODIStsp <strong>requires availability of the GDAL - Geospatial Data Abstraction Library v. &gt;1.11.1, with support for HDF4 raster format</strong>.</p>
+<p>MODIStsp exploits functionalities of several other “R” packages. In particular, the following packages are imported:<br />
+<code>bitops</code> (<span class="math inline">\(\ge\)</span> 1.9.6), <code>data.table</code> (<span class="math inline">\(\ge\)</span> 1.9.6), <code>gdalUtils</code> (<span class="math inline">\(\ge\)</span> 2.0.1.7), <code>gWidgetsRGtk2</code> (<span class="math inline">\(\ge\)</span> 0.0-54), <code>hash</code> (<span class="math inline">\(\ge\)</span> 2.2.6), <code>plyr</code> (<span class="math inline">\(\ge\)</span> 1.8.3), <code>raster</code> (<span class="math inline">\(\ge\)</span> 2.5-2), <code>RCurl</code> (<span class="math inline">\(\ge\)</span> 1.95-4.8), <code>rgdal</code> (<span class="math inline">\(\ge\)</span> 1.1-8), <code>rgeos</code> (<span class="math inline">\(\ge\)</span> 0.3-8), <code>xts</code> (<span class="math inline">\(\ge\)</span> 1.0-10), <code>sp</code> (<span class="math inline">\(\ge\)</span> 1.2-2), <code>stringr</code> (<span class="math inline">\(\ge\)</span> 1.0.0), <code>XML</code> (<span class="math inline">\(\ge\)</span> 3.98-1.1),</p>
+<p>while the following are suggestes:<br />
+<code>knitr</code>, <code>rmarkdown</code>, <code>png</code>, <code>grid</code>.</p>
+<p>Additionaly, <strong>MODIStsp requires availability of the GDAL - Geospatial Data Abstraction Library v. &gt;1.11.1, with support for HDF4 raster format</strong>.</p>
 </div>
 </div>
 <div id="running-the-tool" class="section level1">
@@ -186,7 +163,7 @@ $(document).ready(function () {
 <p>To run the tool in interactive mode, load the package and launch the MODIS_tsp function, with no parameters:</p>
 <pre class="r"><code>library(MODIStsp)
 MODIStsp()</code></pre>
-<p>This opens a GUI from which processing options can be specified and eventually saved (or loaded).<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> A description of the different processing parameters to be selected is reported in the “Selection of Processing parameters” subsection.</p>
+<p>This opens a GUI from which processing options can be specified and eventually saved (or loaded).<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> A description of the different processing parameters to be selected is reported in the “Selection of Processing parameters” subsection.</p>
 </div>
 <div id="non-interactive-mode-using-a-previously-saved-options-file" class="section level2">
 <h2>Non-Interactive mode (Using a previously saved options file)</h2>
@@ -230,7 +207,7 @@ The “Select Processing Layers” GUI
 <ol style="list-style-type: decimal">
 <li>The left-hand frame allows to select which original MODIS layers should be processed</li>
 <li>The central frame allows to select which Quality Indicators should be extracted from the original MODIS Quality Assurance layers.</li>
-<li>For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></li>
+<li>For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></li>
 </ol>
 <p>Some of the most commonly used Spectral Indexes are available for computation by default (Table II).</p>
 <center>
@@ -403,9 +380,24 @@ The GUI for insertion of additional Spectral Indexes
 <p>See <code>?install_MODIStsp_launcher</code> for details and path customisations.</p>
 <p><a name="gdal_inst"></a></p>
 </div>
+<div id="installing-r-and-gdal" class="section level2">
+<h2>Installing R and GDAL</h2>
+<div id="installing-r" class="section level3">
+<h3>Installing R</h3>
+<div id="windows" class="section level4">
+<h4>Windows</h4>
+<p>Download and install the latest version of R which can be found <a href="https://cran.r-project.org/bin/windows/base">here</a>.</p>
 </div>
-<div id="installing-gdal-on-windows" class="section level1">
-<h1>Installing GDAL on Windows</h1>
+<div id="linux" class="section level4">
+<h4>Linux</h4>
+<p>Please refer to the documentation which can be found <a href="https://cran.r-project.org/bin/linux">here</a>, opening the directory relative to the user Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version. With Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended), since packaged version of R is <span class="math inline">\(\ge\)</span> 3.2.1 (although not the latest); in this case, user can insall R by simply typing in a terminal</p>
+<pre class="bash"><code>sudo apt-get install r-base</code></pre>
+</div>
+</div>
+<div id="installing-gdal-ge-1.11.1" class="section level3">
+<h3>Installing GDAL <span class="math inline">\(\ge\)</span> 1.11.1</h3>
+<div id="windows-1" class="section level4">
+<h4>Windows</h4>
 <p>The easiest way to install GDAL on Windows is from the <a href="https://trac.osgeo.org/osgeo4w/">OSGeo4W Website</a></p>
 <ol style="list-style-type: decimal">
 <li>Open the <a href="https://trac.osgeo.org/osgeo4w/">OSGeo4W Website</a></li>
@@ -422,6 +414,25 @@ The GUI for insertion of additional Spectral Indexes
 <li>Click on “Next” a few times to install GDAL</li>
 </ul></li>
 </ul>
+</div>
+<div id="debiam-and-ubuntu-based-systems" class="section level4">
+<h4>Debiam and Ubuntu-based systems</h4>
+<ol style="list-style-type: decimal">
+<li><p>Ensure that your repositories contains a version of <code>gdal-bin</code> <span class="math inline">\(\ge\)</span> 1.11.1. In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do it, follow instructions <a href="https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable">here</a>). With Ubuntu 15.10 Wily (and newer) this step is not mandatory, altough recommended in order to have updated version of GDAL installed.</p></li>
+<li><p>To install GDAL a terminal and type</p>
+<pre class="bash"><code>sudo apt-get install gdal-bin</code></pre></li>
+</ol>
+</div>
+<div id="archlinux" class="section level4">
+<h4>ArchLinux</h4>
+<p>GDAL is maintained updated to the latest version as binary package within the community repository; although that, the support for HDF4 format is not included. To bypass this problem, ArchLinux users can install <code>gdal-hdf4</code> package from AUR. This package is updated manually after each release of <code>gdal</code> on the community repository, a temporal shift between a new <code>gdal</code> release and the update of <code>gdal-hdf4</code> could happen. The user which want to manually add the support for HDF4 in case <code>gdal-hdf4</code> is out-of-date can do it following <a href="https://notehub.org/fctdn">these instructions</a>.</p>
+</div>
+<div id="other-linux-systems" class="section level4">
+<h4>Other Linux systems</h4>
+<p>Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, the user probably must manually compile the source code. To do it, add the parameter <code>--with-hdf4</code> to <code>configure</code> instruction.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
@@ -473,9 +484,8 @@ The GUI for insertion of additional Spectral Indexes
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the <a href="https://github.com/lbusett/MODIStsp/issues">issues</a> GitHub page of MODIStsp and we’ll try to help you !<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>At the first execution of <em>MODIStsp</em>, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: * Ensure that GDAL is properly installed in your system * (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the <em>GDAL_DATA</em> environment variable is correctly set (You can find simple instructions [HERE] (<a href="http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/" class="uri">http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/</a>)) * If nothing works, signal it in the <a href="https://github.com/lbusett/MODIStsp/issues">issues</a> GitHub page of MODIStsp and we’ll try to help !<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the “MODIStsp_Products_Opts” XML file distributed with the package in /ExtData subfolder.<a href="#fnref3">↩</a></p></li>
+<li id="fn1"><p>At the first execution of <em>MODIStsp</em>, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: * Ensure that GDAL is properly installed in your system * (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the <em>GDAL_DATA</em> environment variable is correctly set (You can find simple instructions [HERE] (<a href="http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/" class="uri">http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/</a>)) * If nothing works, signal it in the <a href="https://github.com/lbusett/MODIStsp/issues">issues</a> GitHub page of MODIStsp and we’ll try to help!<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the “MODIStsp_Products_Opts” XML file distributed with the package in /ExtData subfolder.<a href="#fnref2">↩</a></p></li>
 </ol>
 </div>
 
