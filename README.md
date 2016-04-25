@@ -44,6 +44,11 @@ An extended description of MODIStsp functionalities is provided in the [package 
 ```bash
   sudo apt-get install r-base gdal-bin
 ```
+    
+    **Warning:** in order to allow MODIStsp to work properly, ```gdal``` **must** support for HDF5 format. 
+Most of the Linux distributions already provide precompiled ```gdal``` which support it; i.e., in Ubuntu distributions the required libraries (```libhdf4-0-alt``` and ```libhdf4-dev``` are automatically installed by installing resplectively ```gdal-bin``` and ```libgdal-dev```).
+If using a distribution which provides precompiled ```gdal``` binariesw without HDF4 support (i.e. ArchLinux), it is necessary to manually compile ```gdal``` adding the support for HDF4 format: this can be done adding the parameter ```--with-hdf4``` to ```configure``` instruction.
+
 2. Install the dependencies requested by MODIStsp package and relative package dependencies: 
     * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (requested from library ```RGtk2```)
     * Curl (requested from library ```curl```)
