@@ -14,7 +14,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ## Installation <a name="Installation"></a> 
 
-**IMPORTANT:** _MODIStsp_ requires [R](http://cran.r-project.org) v $\ge$ 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v $\ge$ 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
+**IMPORTANT:** _MODIStsp_ requires [R](http://cran.r-project.org) v ≥ 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v ≥ 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
 
 1. Install and load the ```gWidgetsRGtk2``` package:
     ```r
@@ -25,9 +25,9 @@ An extended description of MODIStsp functionalities is provided in the [package 
     On Windows, upon loading the package, an error window will probably appear. **Don’t worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup id="a1">[1](#f1)</sup>
     
 2. **Only for Linux users:** install the dependencies requested by MODIStsp package and relative package dependencies: 
-    * Cairo $\ge$ 1.0.0, ATK $\ge$ 1.10.0, Pango $\ge$ 1.10.0, GTK+ $\ge$ 2.8.0, GLib $\ge$ 2.8.0 (requested from library ```RGtk2```)
+    * Cairo ≥ 1.0.0, ATK ≥ 1.10.0, Pango ≥ 1.10.0, GTK+ ≥ 2.8.0, GLib ≥ 2.8.0 (requested from library ```RGtk2```)
     * Curl (requested from library ```curl```)
-    * GDAL $\ge$ 1.6.3, PROJ.4  $\ge$ 4.4.9 (requested from library ```rgdal```)
+    * GDAL ≥ 1.6.3, PROJ.4  ≥ 4.4.9 (requested from library ```rgdal```)
     
     On Debian-based systems, to install packages open a terminal and type  
     ```bash
@@ -44,7 +44,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 ## Dependencies <a name="Dependencies"></a> 
 
 MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:  
-``` bitops``` ($\ge$ 1.9.6), ``` data.table``` ($\ge$ 1.9.6), ``` gdalUtils``` ($\ge$ 2.0.1.7), ```gWidgetsRGtk2``` ($\ge$ 0.0-54), ```hash``` ($\ge$ 2.2.6), ```plyr``` ($\ge$ 1.8.3), ```raster``` ($\ge$ 2.5-2), ```RCurl``` ($\ge$ 1.95-4.8), ```rgdal``` ($\ge$ 1.1-8), ```rgeos``` ($\ge$ 0.3-8), ```xts``` ($\ge$ 1.0-10), ```sp``` ($\ge$ 1.2-2), ```stringr``` ($\ge$ 1.0.0), ```XML``` ($\ge$ 3.98-1.1).
+``` bitops``` (≥ 1.9.6), ``` data.table``` (≥ 1.9.6), ``` gdalUtils``` (≥ 2.0.1.7), ```gWidgetsRGtk2``` (≥ 0.0-54), ```hash``` (≥ 2.2.6), ```plyr``` (≥ 1.8.3), ```raster``` (≥ 2.5-2), ```RCurl``` (≥ 1.95-4.8), ```rgdal``` (≥ 1.1-8), ```rgeos``` (≥ 0.3-8), ```xts``` (≥ 1.0-10), ```sp``` (≥ 1.2-2), ```stringr``` (≥ 1.0.0), ```XML``` (≥ 3.98-1.1).
 
 
 ## Running the tool <a name="Running"></a> 
@@ -133,12 +133,12 @@ Download and install the latest version of R which can be found [here](https://c
 #### Linux
 
 Please refer to the documentation which can be found [here](https://cran.r-project.org/bin/linux), opening the directory relative to the user Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version.
-With Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended), since packaged version of R is $\ge$ 3.2.1 (although not the latest); in this case, user can insall R by simply typing in a terminal
+With Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended), since packaged version of R is ≥ 3.2.1 (although not the latest); in this case, user can insall R by simply typing in a terminal
 ```bash
 sudo apt-get install r-base
 ```
 
-### Installing GDAL $\ge$ 1.11.1
+### Installing GDAL ≥ 1.11.1
 
 #### Windows
 
@@ -157,7 +157,7 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
     
 #### Debiam and Ubuntu-based systems
 
-1. Ensure that your repositories contains a version of ```gdal-bin``` $\ge$ 1.11.1. 
+1. Ensure that your repositories contains a version of ```gdal-bin``` ≥ 1.11.1. 
     In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do it, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). 
     With Ubuntu 15.10 Wily (and newer) this step is not mandatory, altough recommended in order to have updated version of GDAL installed.
     
