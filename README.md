@@ -20,52 +20,60 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 1. Install and load the ```gWidgetsRGtk2``` package:
     ```r
-      install.packages("gWidgetsRGtk2")
-      library(gWidgetsRGtk2)
+    install.packages("gWidgetsRGtk2")
+    library(gWidgetsRGtk2)
     ```
+    
     upon loading the package, an error window will probably appear. **Don’t worry !** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go !<sup id="a1">[1](#f1)</sup>
+    
 2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
     ```r 
-      install.packages("devtools", repos = "http://cran.us.r-project.org")
-      library(devtools)
-      install_github("lbusett/MODIStsp")
+    install.packages("devtools", repos = "http://cran.us.r-project.org")
+    library(devtools)
+    install_github("lbusett/MODIStsp")
     ```
 
 ## On Linux
 
 1. Ensure that R >= 3.2.1 and GDAL >= 1.11.1 are installed.
+    
     With Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) it is necessary to install packages from CRAN and UbuntuGIS-unstable repositories (follow instructions [here](https://cran.r-project.org/bin/linux/ubuntu) and [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)); with Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended).
-    On Debian-based systems, to install packages open a terminal and type 
+    
+    On Debian-based systems, to install packages open a terminal and type  
     ```bash
-      sudo apt-get install r-base gdal-bin
+    sudo apt-get install r-base gdal-bin
     ```
-    **Warning:** in order to allow MODIStsp to work properly, ```gdal``` **must** support for HDF5 format. 
+    
+    **Warning:** in order to allow MODIStsp to work properly, ```gdal``` **must** support for HDF5 format.
     Most of the Linux distributions already provide precompiled ```gdal``` which support it; i.e., in Ubuntu distributions the required libraries (```libhdf4-0-alt``` and ```libhdf4-dev``` are automatically installed by installing resplectively ```gdal-bin``` and ```libgdal-dev```).
     If using a distribution which provides precompiled ```gdal``` binaries without HDF4 support (i.e. ArchLinux), it is necessary to manually compile ```gdal``` adding the support for HDF4 format: this can be done adding the parameter ```--with-hdf4``` to ```configure``` instruction.
+    
 2. Install the dependencies requested by MODIStsp package and relative package dependencies: 
     * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (requested from library ```RGtk2```)
     * Curl (requested from library ```curl```)
     * GDAL >= 1.6.3, PROJ.4  >= 4.4.9 (requested from library ```rgdal```)
-    On Debian-based systems, to install packages open a terminal and type 
+    
+    On Debian-based systems, to install packages open a terminal and type  
     ```bash
-      sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
+    sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
     ```
-3. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:
+    
+3. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:  
     ```r
-      install.packages("gWidgetsRGtk2", repos = "http://cran.us.r-project.org")
-      install.packages("devtools", repos = "http://cran.us.r-project.org")
-      library(devtools)
+    install.packages("gWidgetsRGtk2", repos = "http://cran.us.r-project.org")
+    install.packages("devtools", repos = "http://cran.us.r-project.org")
+    library(devtools)
     ```
+    
 4. Install ```MODIStsp``` package from GitHub:
     ```r
-      library(devtools)
-      install_github("lbusett/MODIStsp")
+    library(devtools)
+    install_github("lbusett/MODIStsp")
     ```
 
 ## Dependencies <a name="Dependencies"></a> 
 
-MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:
-
+MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:  
 ``` bitops (>= 1.9.6) ```, ``` data.table (>= 1.9.6) ``` , ``` gdalUtils (>= 2.0.1.7) ```, ``` gWidgetsRGtk2 (>= 0.0-54) ```, ``` hash (>= 2.2.6) ```, ``` plyr (>= 1.8.3) ```, ``` raster (>= 2.5-2) ```, ``` RCurl (>= 1.95-4.8) ```, ``` rgdal (>= 1.1-8) ```, ``` rgeos (>= 0.3-8) ```, ``` xts (>= 1.0-10) ```, ``` sp (>= 1.2-2) ```, ``` stringr (>= 1.0.0) ```, ``` XML (>= 3.98-1.1)```
 
 
@@ -74,8 +82,8 @@ MODIStsp exploits functionalities of several other "R" packages. In particular, 
 ### Interactive mode
 To run the tool in interactive mode, load the package and launch the MODIS_tsp function, with no parameters
 ```r
-  library(MODIStsp)
-  MODIStsp()
+library(MODIStsp)
+MODIStsp()
 ```
 This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the package PDF vignette for details)
 
@@ -85,24 +93,24 @@ This will open a GUI from which processing options can be specified and eventual
 MODIStsp can be also launched in non-interactive mode by setting the optional "GUI" parameter to FALSE, and the "Options_File" parameter to the path of a previously saved Options file.  This allows to exploit MODIStsp functionalities within generic "R" processing scripts
 
 ```r
-  library(MODIStsp) 
-  options_file = "X:/yourpath/youroptions.RData"  # --> Specify the path to a valid options file saved in advance from the GUI
-  MODIStsp(gui = FALSE, options_File = options_file)
+library(MODIStsp) 
+options_file = "X:/yourpath/youroptions.RData"  # --> Specify the path to a valid options file saved in advance from the GUI
+MODIStsp(gui = FALSE, options_File = options_file)
 ```
 
 Specifying also the "spatial_file_path" optional parameter overrides the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents.
 
 For example:
 ```r
-  # Create a character array containing a list of shapefiles (or other spatial files)
-  extent_list = list.files("X:/path/containing/some/shapefiles/", "\\.shp$")  
-  
-  # loop on the list of spatial files and run MODIStsp using each of them to automatically 
-  # define the output extent (A separate output folder is created for each input spatial file).
-  
-  for (single_shape in extent_list) {
-    MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData", spatial_file_path = single_shape )
-  }
+# Create a character array containing a list of shapefiles (or other spatial files)
+extent_list = list.files("X:/path/containing/some/shapefiles/", "\\.shp$")  
+
+# loop on the list of spatial files and run MODIStsp using each of them to automatically 
+# define the output extent (A separate output folder is created for each input spatial file).
+
+for (single_shape in extent_list) {
+  MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData", spatial_file_path = single_shape )
+}
 ```
 
 ### Standalone execution and scheduled processing 
