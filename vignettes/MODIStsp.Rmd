@@ -47,18 +47,18 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
 ## On Windows
 
 1. Install and load the ```gWidgetsRGtk2``` package:
-```r
-  install.packages("gWidgetsRGtk2")
-  library(gWidgetsRGtk2)
-```
+    ```r
+      install.packages("gWidgetsRGtk2")
+      library(gWidgetsRGtk2)
+    ```
     upon loading the package, an error window will probably appear. **Don’t worry !** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go ![^1^]
 
 2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
-```r
-  install.packages("devtools", repos = "http://cran.us.r-project.org")
-  library(devtools)
-  install_github("lbusett/MODIStsp")
-```
+    ```r
+      install.packages("devtools", repos = "http://cran.us.r-project.org")
+      library(devtools)
+      install_github("lbusett/MODIStsp")
+    ```
 
 ## On Linux
 
@@ -67,13 +67,13 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
     With Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) it is necessary to install packages from CRAN and UbuntuGIS-unstable repositories (follow instructions [here](https://cran.r-project.org/bin/linux/ubuntu) and [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)); with Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended).
     
     On Debian-based systems, to install packages open a terminal and type 
-```bash
-  sudo apt-get install r-base gdal-bin
-```
+    ```bash
+      sudo apt-get install r-base gdal-bin
+    ```
     
-    **Warning:** in order to allow MODIStsp to work properly, ```gdal``` **must** support for HDF5 format. 
-Most of the Linux distributions already provide precompiled ```gdal``` which support it; i.e., in Ubuntu distributions the required libraries (```libhdf4-0-alt``` and ```libhdf4-dev``` are automatically installed by installing resplectively ```gdal-bin``` and ```libgdal-dev```).
-If using a distribution which provides precompiled ```gdal``` binaries without HDF4 support (i.e. ArchLinux), it is necessary to manually compile ```gdal``` adding the support for HDF4 format: this can be done adding the parameter ```--with-hdf4``` to ```configure``` instruction.
+    **Warning:** in order to allow MODIStsp to work properly, ```gdal``` **must** support for HDF5 format.
+    Most of the Linux distributions already provide precompiled ```gdal``` which support it; i.e., in Ubuntu distributions the required libraries (```libhdf4-0-alt``` and ```libhdf4-dev``` are automatically installed by installing resplectively ```gdal-bin``` and ```libgdal-dev```).
+    If using a distribution which provides precompiled ```gdal``` binaries without HDF4 support (i.e. ArchLinux), it is necessary to manually compile ```gdal``` adding the support for HDF4 format: this can be done adding the parameter ```--with-hdf4``` to ```configure``` instruction.
 
 2. Install the dependencies requested by MODIStsp package and relative package dependencies: 
     * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (requested from library ```RGtk2```)
@@ -81,21 +81,22 @@ If using a distribution which provides precompiled ```gdal``` binaries without H
     * GDAL >= 1.6.3, PROJ.4  >= 4.4.9 (requested from library ```rgdal```)
     
     On Debian-based systems, to install packages open a terminal and type 
-```bash
-  sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
-```
+    ```bash
+      sudo apt-get install r-cran-cairodevice r-cran-rgtk2 \
+      libcurl4-openssl-dev libgdal-dev libproj-dev
+    ```
 
 3. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:
-```r
- install.packages("gWidgetsRGtk2", repos = "http://cran.us.r-project.org")
- install.packages("devtools", repos = "http://cran.us.r-project.org")
- library(devtools)
-```
+    ```r
+     install.packages("gWidgetsRGtk2", repos = "http://cran.us.r-project.org")
+     install.packages("devtools", repos = "http://cran.us.r-project.org")
+     library(devtools)
+    ```
 4. Install ```MODIStsp``` package from GitHub:
-```r
- library(devtools)
- install_github("lbusett/MODIStsp")
-```
+    ```r
+     library(devtools)
+     install_github("lbusett/MODIStsp")
+    ```
 
 ## Dependencies
 
