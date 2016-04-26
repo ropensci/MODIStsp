@@ -16,27 +16,42 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 **IMPORTANT:** _MODIStsp_ requires [R](http://cran.r-project.org) v ≥ 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v ≥ 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
 
+### On Windows
+
 1. Install and load the ```gWidgetsRGtk2``` package:
     ```r
     install.packages("gWidgetsRGtk2")
     library(gWidgetsRGtk2)
     ```
     
-    On Windows, upon loading the package, an error window will probably appear. **Don’t worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup id="a1">[1](#f1)</sup>
+    Upon loading the package, an error window will probably appear. **Don’t worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup id="a1">[1](#f1)</sup>
     
-2. **Only for Linux users:** install the dependencies requested by MODIStsp package and relative package dependencies: 
+2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+    ```r 
+    install.packages("devtools")
+    library(devtools)
+    install_github("lbusett/MODIStsp")
+    ```
+
+### On Linux systems
+
+1. Install the requested dependencies: 
     * Cairo ≥ 1.0.0, ATK ≥ 1.10.0, Pango ≥ 1.10.0, GTK+ ≥ 2.8.0, GLib ≥ 2.8.0 (requested from library ```RGtk2```)
     * Curl (requested from library ```curl```)
     * GDAL ≥ 1.6.3, PROJ.4  ≥ 4.4.9 (requested from library ```rgdal```)
     
-    On Debian-based systems, to install packages open a terminal and type  
+    On Debian and Ubuntu-based systems, to install packages open a terminal and type  
     ```bash
     sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
     ```
     
-3. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+2. In R, install and load the ```gWidgetsRGtk2``` and ```devtools``` packages:
+    ```r
+    install.packages(c("devtools","gWidgetsRGtk2"))
+    ```
+    
+3. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package loaded)
     ```r 
-    install.packages("devtools")
     library(devtools)
     install_github("lbusett/MODIStsp")
     ```
