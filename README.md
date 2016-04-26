@@ -184,9 +184,9 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 #### ArchLinux
 
 GDAL is maintained updated to the latest version as binary package within the community repository; although that, the support for HDF4 format is not included. 
-To bypass this problem, ArchLinux users can install ```gdal-hdf4``` package from AUR. 
+To bypass this problem, ArchLinux users can install ```gdal-hdf4``` package from AUR (see [here](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages) or [here](https://archlinux.fr/yaourt-en) for the package installation from AUR). 
 This package is updated manually after each release of ```gdal``` on the community repository, a temporal shift between a new ```gdal``` release and the update of ```gdal-hdf4``` could happen.
-The user which want to manually add the support for HDF4 in case ```gdal-hdf4``` is out-of-date can do it following [these instructions](https://notehub.org/fctdn).
+The user who wants to manually add the support for HDF4 in case ```gdal-hdf4``` is out-of-date can do it following [these instructions](https://notehub.org/fctdn).
 
 #### Other Linux systems
 
