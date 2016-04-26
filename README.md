@@ -190,8 +190,7 @@ The user who wants to manually add the support for HDF4 in case ```gdal-hdf4``` 
 
 #### Other Linux systems
 
-Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, the user probably must manually compile the source code. 
-To do it, add the parameter ```--with-hdf4``` to ```configure``` instruction.
+Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, the user probably must manually install HDF4 library and compile the source code (to do it, add the parameter ```--with-hdf4``` to ```configure``` instruction).
 
 
 <b id="f1">1</b> If you encounter problems installing the ``` gWidgetsRgtk2 ``` library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you! [↩](#a1)
