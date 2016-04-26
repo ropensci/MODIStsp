@@ -45,12 +45,12 @@ An extended description of MODIStsp functionalities is provided in the [package 
     sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
     ```
     
-2. In R, install and load the ```gWidgetsRGtk2``` and ```devtools``` packages:
+2. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:
     ```r
     install.packages(c("devtools","gWidgetsRGtk2"))
     ```
     
-3. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package loaded)
+3. Install MODIStsp package from GitHub (you'll need to have the "devtools" package loaded): 
     ```r 
     library(devtools)
     install_github("lbusett/MODIStsp")
