@@ -590,7 +590,7 @@ MODIStsp_GUI <- function(general_opts){
   font(resmeth_lab) <- list(family = "sans",weight = "bold")
   #	size(resmeth_lab) = c(120,20)
   # resamp_array <- c("near","bilinear","cubic", "cubicspline","lanczos","average","mode")
-  resamp_array <- c("near")
+  resamp_array <- c("near","mode")
   output_resmeth_wid <-  gcombobox(resamp_array, container = resopts_group, selected = match(general_opts$resampling, resamp_array))
   #	size(output_resmeth_wid) <- c(120,20)
 

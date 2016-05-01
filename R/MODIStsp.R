@@ -221,6 +221,10 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
                                                   quality_nodata_out = prod_opts$quality_nodata_out,
                                                   file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder, gui = gui))
 
+    # At end of succesfull execution, save he options used in the main output folder
+    load(previous_file)
+    optfilename = file.path(general_opts$out_folder,paste0('MODIStsp_', Sys.Date(),'.RData'))
+    save(general_opts,prod_opt_list,mod_prod_list, file = optfilename)
   } # End If on "Quit" --> If "Quit" above is skipped and program terminates
 
   # Clean up at end of processing ----

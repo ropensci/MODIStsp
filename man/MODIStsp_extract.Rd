@@ -13,7 +13,7 @@ MODIStsp_extract(in_rts, sp_object, start_date = NULL, end_date = NULL,
 
 \item{sp_object}{"sp" object OR name of an ESRI shapefile specifying the "positions" from which data has to be extracted
    If sp_object represents lines, the output object contains one column for each polygon, containing values obtained applying the function
-specified as the FUN argument over all pixels touched by the line, and one line for each
+specified as the FUN argument over all pixels touched by the line, and one line for each date.
 If sp_object represents points, the output object contains one column for each point, containing values of the cells corresponding to the pint,
 and one line for each date.
 If sp_object represents polygons, the output object contains one column for each polygon, containing values obtained applying the function
