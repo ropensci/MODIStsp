@@ -1,7 +1,6 @@
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
 [![DOI](https://zenodo.org/badge/21458/lbusett/MODIStsp.svg)](https://zenodo.org/badge/latestdoi/21458/lbusett/MODIStsp)
 [![GitHub version](https://badge.fury.io/gh/lbusett%2FMODIStsp.svg)](https://badge.fury.io/gh/lbusett%2FMODIStsp)
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg?maxAge=2592000)](https://github.com/lbusett/MODIStsp)
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
