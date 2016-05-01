@@ -4,7 +4,8 @@
 1. [MODIStsp](#MODIStsp)
 2. [Installation](#Installation)
 3. [Dependencies](#Dependencies)
-3. [Running the Tools](#Running)
+4. [Running the Tool](#Running)
+5. [Install R and GDAL](#gdal_inst)
 
 # MODIStsp <a name="MODIStsp"></a>
 
@@ -14,20 +15,20 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ## Installation <a name="Installation"></a> 
 
-**IMPORTANT:** _MODIStsp_ requires [R](http://cran.r-project.org) v ≥ 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v ≥ 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
+**IMPORTANT:** _MODIStsp_ requires [R](http://cran.r-project.org) v $\ge$ 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v $\ge$ 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
 
 ### On Windows
 
 1. Install and load the ```gWidgetsRGtk2``` package:
-    ```r
+    ```
     install.packages("gWidgetsRGtk2")
     library(gWidgetsRGtk2)
     ```
     
-    Upon loading the package, an error window will probably appear. **Don’t worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup id="a1">[1](#f1)</sup>
+    Upon loading the package, an error window will probably appear. **Don’t worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go! [^1^]
     
 2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
-    ```r 
+    ```
     install.packages("devtools")
     library(devtools)
     install_github("lbusett/MODIStsp")
@@ -35,10 +36,10 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ### On Linux systems
 
-1. Install the requested dependencies: 
-    * Cairo ≥ 1.0.0, ATK ≥ 1.10.0, Pango ≥ 1.10.0, GTK+ ≥ 2.8.0, GLib ≥ 2.8.0 (requested from library ```RGtk2```)
-    * Curl (requested from library ```curl```)
-    * GDAL ≥ 1.6.3, PROJ.4  ≥ 4.4.9 (requested from library ```rgdal```)
+1. Install the following required dependencies: 
+    * Cairo $\ge$ 1.0.0, ATK $\ge$ 1.10.0, Pango $\ge$ 1.10.0, GTK+ $\ge$ 2.8.0, GLib $\ge$ 2.8.0 (required by package ```RGtk2```)
+    * Curl (required by package ```curl```)
+    * GDAL $\ge$ 1.6.3, PROJ.4 $\ge$ 4.4.9 (required by package ```rgdal```)
     
     On Debian and Ubuntu-based systems, to install packages open a terminal and type  
     ```bash
@@ -46,12 +47,12 @@ An extended description of MODIStsp functionalities is provided in the [package 
     ```
     
 2. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:
-    ```r
+    ```
     install.packages(c("devtools","gWidgetsRGtk2"))
     ```
     
 3. Install MODIStsp package from GitHub (you'll need to have the "devtools" package loaded): 
-    ```r 
+    ```
     library(devtools)
     install_github("lbusett/MODIStsp")
     ```
@@ -59,8 +60,10 @@ An extended description of MODIStsp functionalities is provided in the [package 
 ## Dependencies <a name="Dependencies"></a> 
 
 MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:  
-``` bitops``` (≥ 1.9.6), ``` data.table``` (≥ 1.9.6), ``` gdalUtils``` (≥ 2.0.1.7), ```gWidgetsRGtk2``` (≥ 0.0-54), ```hash``` (≥ 2.2.6), ```plyr``` (≥ 1.8.3), ```raster``` (≥ 2.5-2), ```RCurl``` (≥ 1.95-4.8), ```rgdal``` (≥ 1.1-8), ```rgeos``` (≥ 0.3-8), ```xts``` (≥ 1.0-10), ```sp``` (≥ 1.2-2), ```stringr``` (≥ 1.0.0), ```XML``` (≥ 3.98-1.1).
+``` bitops``` ($\ge$ 1.9.6), ``` data.table``` ($\ge$ 1.9.6), ``` gdalUtils``` ($\ge$ 2.0.1.7), ```gWidgetsRGtk2``` ($\ge$ 0.0-54), ```hash``` ($\ge$ 2.2.6), ```plyr``` ($\ge$ 1.8.3), ```raster``` ($\ge$ 2.5-2), ```RCurl``` ($\ge$ 1.95-4.8), ```rgdal``` ($\ge$ 1.1-8), ```rgeos``` ($\ge$ 0.3-8), ```xts``` ($\ge$ 1.0-10), ```sp``` ($\ge$ 1.2-2), ```stringr``` ($\ge$ 1.0.0), ```XML``` ($\ge$ 3.98-1.1),
 
+, while the following are suggestes:  
+```knitr ```, ```rmarkdown```, ```png```, ```grid```.
 
 ## Running the tool <a name="Running"></a> 
 
@@ -70,7 +73,7 @@ To run the tool in interactive mode, load the package and launch the MODIS_tsp f
 library(MODIStsp)
 MODIStsp()
 ```
-This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the package PDF vignette for details)
+This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the package PDF vignette for details)[^2^]
 
 ### Non Interactive mode
 (Exploiting a previously saved options file)
@@ -137,25 +140,25 @@ Standalone non-interactive execution can be used to periodically and automatical
     
 <a name="gdal_inst"/>
 
-## Installing R and GDAL
+# Installing R and GDAL
 
-### Installing R
+## Installing R
 
-#### Windows
+### Windows
 
 Download and install the latest version of R which can be found [here](https://cran.r-project.org/bin/windows/base).
 
-#### Linux
+### Linux
 
 Please refer to the documentation which can be found [here](https://cran.r-project.org/bin/linux), opening the directory relative to the user Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version.
-With Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended), since packaged version of R is ≥ 3.2.1 (although not the latest); in this case, user can insall R by simply typing in a terminal
+With Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended), since packaged version of R is $\ge$ 3.2.1 (although not the latest); in this case, user can insall R by simply typing in a terminal
 ```bash
 sudo apt-get install r-base
 ```
 
-### Installing GDAL ≥ 1.11.1
+## Installing GDAL $\ge$ 1.11.1
 
-#### Windows
+### Windows
 
 The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
 
@@ -163,17 +166,17 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 2. In the **Quick Start for OSGeo4W Users** section, select the download of 32bit or 64bit of OSGeo4W network installer
 3. Run the installer
   + _Easiest Option_: 
-    +Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing softwares like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
+    +  Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing softwares like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
   + _Advanded Option_: 
     +  Select **Advanced Install**, then click on "Next" a few times until you reach the "Select Packages" screen. 
     +  Click on "Commandline_Utilities_", and on the list look for "_gdal: The GDAL/OGR library..." entry
     +  Click on "Skip": the word "skip" will be replaced by the current GDAL version number
     +  Click on "Next" a few times to install GDAL
     
-#### Debiam and Ubuntu-based systems
+### Debian and Ubuntu-based systems
 
-1. Ensure that your repositories contains a version of ```gdal-bin``` ≥ 1.11.1. 
-    In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do it, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). 
+1. Ensure that your repositories contain a version of ```gdal-bin``` $\ge$ 1.11.1. 
+    In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). 
     With Ubuntu 15.10 Wily (and newer) this step is not mandatory, altough recommended in order to have updated version of GDAL installed.
     
 2. To install GDAL a terminal and type  
@@ -181,17 +184,20 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
     sudo apt-get install gdal-bin
     ```
     
-#### ArchLinux
+### ArchLinux
 
 GDAL is maintained updated to the latest version as binary package within the community repository; although that, the support for HDF4 format is not included. 
 To bypass this problem, ArchLinux users can install ```gdal-hdf4``` package from AUR (see [here](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages) or [here](https://archlinux.fr/yaourt-en) for the package installation from AUR). 
-This package is updated manually after each release of ```gdal``` on the community repository, a temporal shift between a new ```gdal``` release and the update of ```gdal-hdf4``` could happen.
-The user who wants to manually add the support for HDF4 in case ```gdal-hdf4``` is out-of-date can do it following [these instructions](https://notehub.org/fctdn).
+This package is updated manually after each release of ```gdal``` on the community repository, so a temporal shift between a new ```gdal``` release and the update of ```gdal-hdf4``` could happen.
+If you want to manually add the support for HDF4 in case ```gdal-hdf4``` is out-of-date, you can do it following [these instructions](https://notehub.org/fctdn).
 
-#### Other Linux systems
+### Other Linux systems
 
-Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, the user probably must manually install HDF4 library and compile the source code (to do it, add the parameter ```--with-hdf4``` to ```configure``` instruction).
+Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter ```--with-hdf4``` to the ```configure``` instruction).
 
+[^1^]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you!
 
-<b id="f1">1</b> If you encounter problems installing the ``` gWidgetsRgtk2 ``` library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you! [↩](#a1)
-
+[^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
+1. Ensure that GDAL is properly installed in your system
+2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/))
+3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help!
