@@ -1,4 +1,4 @@
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp)
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
@@ -11,7 +11,7 @@
 
 MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data.  MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
 
-An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the pdf file_) 
+An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the pdf file_) 
 
 ## Installation <a name="Installation"></a> 
 
@@ -73,7 +73,7 @@ To run the tool in interactive mode, load the package and launch the MODIS_tsp f
 library(MODIStsp)
 MODIStsp()
 ```
-This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the [package vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf) for details)<sup name="a2">[2](#f2)</sup>
+This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) for details)<sup name="a2">[2](#f2)</sup>
 
 ### Non Interactive mode
 (Exploiting a previously saved options file)
