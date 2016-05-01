@@ -1,5 +1,5 @@
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp)
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg?maxAge=2592000)](https://github.com/lbusett/MODIStsp)
+[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg?maxAge=2592000)](https://github.com/lbusett/MODIStsp/releases/tag/v1.2.1)
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
