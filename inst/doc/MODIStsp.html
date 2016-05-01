@@ -96,19 +96,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#processing"><span class="toc-section-number">5</span> Processing</a></li>
 <li><a href="#output-format-and-naming-conventions"><span class="toc-section-number">6</span> Output format and naming conventions</a></li>
-<li><a href="#standalone-execution-and-scheduled-processing"><span class="toc-section-number">7</span> Standalone execution and scheduled processing</a><ul>
-<li><a href="#adding-links-to-desktopstart-menu-for-standalone-execution"><span class="toc-section-number">7.1</span> Adding links to desktop/Start menu for standalone execution</a></li>
+<li><a href="#accessing-and-analyzing-the-processed-time-series-from-r"><span class="toc-section-number">7</span> Accessing and analyzing the processed time series from R</a></li>
+<li><a href="#standalone-execution-and-scheduled-processing"><span class="toc-section-number">8</span> Standalone execution and scheduled processing</a><ul>
+<li><a href="#adding-links-to-desktopstart-menu-for-standalone-execution"><span class="toc-section-number">8.1</span> Adding links to desktop/Start menu for standalone execution</a></li>
 </ul></li>
-<li><a href="#installing-r-and-gdal"><span class="toc-section-number">8</span> Installing R and GDAL</a><ul>
-<li><a href="#installing-r"><span class="toc-section-number">8.1</span> Installing R</a><ul>
-<li><a href="#windows"><span class="toc-section-number">8.1.1</span> Windows</a></li>
-<li><a href="#linux"><span class="toc-section-number">8.1.2</span> Linux</a></li>
+<li><a href="#installing-r-and-gdal"><span class="toc-section-number">9</span> Installing R and GDAL</a><ul>
+<li><a href="#installing-r"><span class="toc-section-number">9.1</span> Installing R</a><ul>
+<li><a href="#windows"><span class="toc-section-number">9.1.1</span> Windows</a></li>
+<li><a href="#linux"><span class="toc-section-number">9.1.2</span> Linux</a></li>
 </ul></li>
-<li><a href="#installing-gdal-ge-1.11.1"><span class="toc-section-number">8.2</span> Installing GDAL <span class="math inline">\(\ge\)</span> 1.11.1</a><ul>
-<li><a href="#windows-1"><span class="toc-section-number">8.2.1</span> Windows</a></li>
-<li><a href="#debian-and-ubuntu-based-systems"><span class="toc-section-number">8.2.2</span> Debian and Ubuntu-based systems</a></li>
-<li><a href="#archlinux"><span class="toc-section-number">8.2.3</span> ArchLinux</a></li>
-<li><a href="#other-linux-systems"><span class="toc-section-number">8.2.4</span> Other Linux systems</a></li>
+<li><a href="#installing-gdal-ge-1.11.1"><span class="toc-section-number">9.2</span> Installing GDAL <span class="math inline">\(\ge\)</span> 1.11.1</a><ul>
+<li><a href="#windows-1"><span class="toc-section-number">9.2.1</span> Windows</a></li>
+<li><a href="#debian-and-ubuntu-based-systems"><span class="toc-section-number">9.2.2</span> Debian and Ubuntu-based systems</a></li>
+<li><a href="#archlinux"><span class="toc-section-number">9.2.3</span> ArchLinux</a></li>
+<li><a href="#other-linux-systems"><span class="toc-section-number">9.2.4</span> Other Linux systems</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#references">References</a></li>
@@ -361,9 +362,29 @@ The GUI for insertion of additional Spectral Indexes
 <p>“ProdCode”_“Layer”_“StartDOY”_“StartYear_”EndDOY“_”EndYear2_“suffix”.ext&quot;</p>
 <p><em>(MOD13Q1_NDVI_49_2000_17_2015_RData.dat)</em></p>
 <p>where <em>suffix</em> indicates the type of virtual file (ENVI, GDAL or RData), while <em>StartDOY</em>, <em>StartYear</em>, <em>EndDOY</em> and <em>EndYear</em> indicate the temporal extent of the time serie created.</p>
+<p><a name="Access"></a></p>
+</div>
+<div id="accessing-and-analyzing-the-processed-time-series-from-r" class="section level1">
+<h1><span class="header-section-number">7</span> Accessing and analyzing the processed time series from R</h1>
+<p>Preprocessed MODIS data can be retrieved within R scripts either by accessing the single-date raster files, or by loading the saved <em>RasterStack</em> objects. This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <code>raster</code> or <code>rasterVis</code> packages. <em>MODIStsp</em> provides however an efficient function <em>MODIStsp_extract</em> for extracting time series data at specific locations. The function takes as input a <em>RasterStack</em> object with temporal information created by <em>MODIStsp</em>, the starting and ending dates for the extraction and a standard _Sp*_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a _ <em>xts</em> object containing time series for those locations. If the input is of class <em>SpatialPoints</em>, the output object contains one column for each point specified, and one row for each date. If it is of class <em>SpatialPolygons</em> (or <em>SpatialLines</em>), it contains one column for each polygon (or each line), with values obtained applying the function specified as the “FUN” argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.</p>
+<p>As an example the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co">#Set the input paths to raster and shape file</span>
+  infile =<span class="st"> 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'</span>  
+  shpname =<span class="st"> 'path_to_file/rois.shp'</span>  
+  <span class="co">#Set the start/end dates for extraction</span>
+  startdate =<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2010-01-01&quot;</span>)  
+  enddate =<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2014-12-31&quot;</span>)    
+  <span class="co">#Load the RasterStack</span>
+  inrts =<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(infile)) 
+  <span class="co"># Compute average and St.dev</span>
+  dataavg =<span class="st"> </span><span class="kw">MODIStsp_extract</span>(inrts, shpname, startdate, enddate, <span class="dt">FUN =</span> <span class="st">'mean'</span>, <span class="dt">na.rm =</span> T)
+  datasd =<span class="st"> </span><span class="kw">MODIStsp_extract</span> (inrts, shpname, startdate, enddate, <span class="dt">FUN =</span> <span class="st">'sd'</span>, <span class="dt">na.rm =</span> T)
+  <span class="co"># Plot average time series for the polygons</span>
+  <span class="kw">plot.xts</span>(dataavg) </code></pre></div>
+<p>loads a <em>RasterStack</em> object containing 8-days 250 m resolution time series for the 2000-2015 period and extracts time series of average and standard deviation values over the different polygons of a user’s selected shapefile on the 2010-2014 period.</p>
 </div>
 <div id="standalone-execution-and-scheduled-processing" class="section level1">
-<h1><span class="header-section-number">7</span> Standalone execution and scheduled processing</h1>
+<h1><span class="header-section-number">8</span> Standalone execution and scheduled processing</h1>
 <p>MODIStsp can be executed as a standalone application using the MODIStsp.bat (for Windows) or MODIStsp.sh (for Linux) batch execution scripts available in the “MODIStsp/ExtData/launcher” subfolder of the package installation. Double-clicking the files or launching them from a shell without parameters launches MODIStsp in interactive mode.</p>
 <p>Non-interactive mode is triggered by adding the “-g” argument to the call, and specifying the path to a valid Options File as “-s” argument</p>
 <ul>
@@ -389,7 +410,7 @@ The GUI for insertion of additional Spectral Indexes
 <li><strong>In Windows:</strong> create a Task following <a href="https://technet.microsoft.com/en-us/library/cc748993.aspx">these instructions</a>; add the path of the MODIStsp.bat launcher as Action (point 6), and specify <code>-g -s &quot;X:/yourpath/youroptions.RData&quot;</code> as argument.</li>
 </ul>
 <div id="adding-links-to-desktopstart-menu-for-standalone-execution" class="section level2">
-<h2><span class="header-section-number">7.1</span> Adding links to desktop/Start menu for standalone execution</h2>
+<h2><span class="header-section-number">8.1</span> Adding links to desktop/Start menu for standalone execution</h2>
 <p>Links to the MODIStsp.bat or MODIStsp.sh standalone launchers can be created automatically launching from R the function <code>MODIStsp_install_launcher()</code></p>
 <ul>
 <li><p><strong>In Linux:</strong> this creates a desktop entry (accessible from the menu in the sections “Science” and “Geography”), and a symbolic link in a known path (default: /usr/bin/MODIStsp). If the path of the symbolic link is included in the user PATH variable, the standalone execution can be done simply calling <code>MODIStsp -g -s &quot;/yourpath/youroptions.RData&quot;</code>.</p></li>
@@ -400,23 +421,23 @@ The GUI for insertion of additional Spectral Indexes
 </div>
 </div>
 <div id="installing-r-and-gdal" class="section level1">
-<h1><span class="header-section-number">8</span> Installing R and GDAL</h1>
+<h1><span class="header-section-number">9</span> Installing R and GDAL</h1>
 <div id="installing-r" class="section level2">
-<h2><span class="header-section-number">8.1</span> Installing R</h2>
+<h2><span class="header-section-number">9.1</span> Installing R</h2>
 <div id="windows" class="section level3">
-<h3><span class="header-section-number">8.1.1</span> Windows</h3>
+<h3><span class="header-section-number">9.1.1</span> Windows</h3>
 <p>Download and install the latest version of R which can be found <a href="https://cran.r-project.org/bin/windows/base">here</a>.</p>
 </div>
 <div id="linux" class="section level3">
-<h3><span class="header-section-number">8.1.2</span> Linux</h3>
+<h3><span class="header-section-number">9.1.2</span> Linux</h3>
 <p>Please refer to the documentation which can be found <a href="https://cran.r-project.org/bin/linux">here</a>, opening the directory relative to the user Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version. With Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended), since packaged version of R is <span class="math inline">\(\ge\)</span> 3.2.1 (although not the latest); in this case, user can insall R by simply typing in a terminal</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install r-base</code></pre></div>
 </div>
 </div>
 <div id="installing-gdal-ge-1.11.1" class="section level2">
-<h2><span class="header-section-number">8.2</span> Installing GDAL <span class="math inline">\(\ge\)</span> 1.11.1</h2>
+<h2><span class="header-section-number">9.2</span> Installing GDAL <span class="math inline">\(\ge\)</span> 1.11.1</h2>
 <div id="windows-1" class="section level3">
-<h3><span class="header-section-number">8.2.1</span> Windows</h3>
+<h3><span class="header-section-number">9.2.1</span> Windows</h3>
 <p>The easiest way to install GDAL on Windows is from the <a href="https://trac.osgeo.org/osgeo4w/">OSGeo4W Website</a></p>
 <ol style="list-style-type: decimal">
 <li>Open the <a href="https://trac.osgeo.org/osgeo4w/">OSGeo4W Website</a></li>
@@ -438,7 +459,7 @@ The GUI for insertion of additional Spectral Indexes
 </ul>
 </div>
 <div id="debian-and-ubuntu-based-systems" class="section level3">
-<h3><span class="header-section-number">8.2.2</span> Debian and Ubuntu-based systems</h3>
+<h3><span class="header-section-number">9.2.2</span> Debian and Ubuntu-based systems</h3>
 <ol style="list-style-type: decimal">
 <li><p>Ensure that your repositories contain a version of <code>gdal-bin</code> <span class="math inline">\(\ge\)</span> 1.11.1. In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions <a href="https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable">here</a>). With Ubuntu 15.10 Wily (and newer) this step is not mandatory, altough recommended in order to have updated version of GDAL installed.</p></li>
 <li><p>To install GDAL a terminal and type</p>
@@ -446,11 +467,11 @@ The GUI for insertion of additional Spectral Indexes
 </ol>
 </div>
 <div id="archlinux" class="section level3">
-<h3><span class="header-section-number">8.2.3</span> ArchLinux</h3>
+<h3><span class="header-section-number">9.2.3</span> ArchLinux</h3>
 <p>GDAL is maintained updated to the latest version as binary package within the community repository; although that, the support for HDF4 format is not included. To bypass this problem, ArchLinux users can install <code>gdal-hdf4</code> package from AUR (see <a href="https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages">here</a> or <a href="https://archlinux.fr/yaourt-en">here</a> for the package installation from AUR). This package is updated manually after each release of <code>gdal</code> on the community repository, so a temporal shift between a new <code>gdal</code> release and the update of <code>gdal-hdf4</code> could happen. If you want to manually add the support for HDF4 in case <code>gdal-hdf4</code> is out-of-date, you can do it following <a href="https://notehub.org/fctdn">these instructions</a>.</p>
 </div>
 <div id="other-linux-systems" class="section level3">
-<h3><span class="header-section-number">8.2.4</span> Other Linux systems</h3>
+<h3><span class="header-section-number">9.2.4</span> Other Linux systems</h3>
 <p>Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter <code>--with-hdf4</code> to the <code>configure</code> instruction).</p>
 </div>
 </div>

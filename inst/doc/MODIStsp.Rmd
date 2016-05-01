@@ -4,14 +4,14 @@ author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it))
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
+  rmarkdown::pdf_document:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
   rmarkdown::html_vignette:
     depth: 3
     fig_caption: yes
     number_section: yes
-    toc: yes
-  rmarkdown::pdf_document:
-    fig_caption: yes
-    number_sections: yes
     toc: yes
   rmarkdown::html_document:
     depth: 3
@@ -20,7 +20,7 @@ output:
     toc: yes
 bibliography: MODIStsp.bib
 vignette: >
-  %\VignetteEngine{knitr::rmarkdown}   
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{MODIStsp}
   \usepackage[utf8]{inputenc}
 ---
@@ -262,6 +262,31 @@ _(MOD13Q1\_NDVI\_49\_2000\_17\_2015\_RData.dat)_
              
 where _suffix_ indicates the type of virtual file (ENVI, GDAL or RData), while _StartDOY_, _StartYear_, _EndDOY_ and _EndYear_ indicate the temporal extent of the time serie created.
 
+<a name="Access"/>
+
+# Accessing and analyzing the processed time series from R
+
+Preprocessed MODIS data can be retrieved within R scripts either by accessing the single-date raster files, or by loading the saved _RasterStack_ objects. This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the ```raster``` or   ```rasterVis``` packages. _MODIStsp_ provides however an efficient function _MODIStsp\_extract_ for extracting time series data at specific locations. The function takes as input a _RasterStack_ object with temporal information created by _MODIStsp_, the starting and ending dates for the extraction and a standard _Sp*_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a _ _xts_ object containing time series for those locations. If the input is of class _SpatialPoints_, the output object contains one column for each point specified, and one row for each date. If it is of class _SpatialPolygons_ (or _SpatialLines_), it contains one column for each polygon (or each line), with values obtained applying the function specified as the "FUN" argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date. 
+
+As an example the following code:
+
+```{r, eval=FALSE}
+  #Set the input paths to raster and shape file
+  infile = 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'  
+  shpname = 'path_to_file/rois.shp'  
+  #Set the start/end dates for extraction
+  startdate = as.Date("2010-01-01")  
+  enddate = as.Date("2014-12-31")    
+  #Load the RasterStack
+  inrts = get(load(infile)) 
+  # Compute average and St.dev
+  dataavg = MODIStsp_extract(inrts, shpname, startdate, enddate, FUN = 'mean', na.rm = T)
+  datasd = MODIStsp_extract (inrts, shpname, startdate, enddate, FUN = 'sd', na.rm = T)
+  # Plot average time series for the polygons
+  plot.xts(dataavg) 
+```
+
+  loads a _RasterStack_ object containing 8-days 250 m resolution time series for the 2000-2015 period and extracts time series of average and standard deviation values over the different polygons of a user's selected shapefile on the 2010-2014 period.
 
 # Standalone execution and scheduled processing 
 
