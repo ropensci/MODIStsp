@@ -25,7 +25,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
     library(gWidgetsRGtk2)
     ```
     
-    Upon loading the package, an error window will probably appear. **Don’t worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup id="a1">[1](#f1)</sup>
+    Upon loading the package, an error window will probably appear. **Don’t worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
     
 2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
     ```
@@ -73,7 +73,7 @@ To run the tool in interactive mode, load the package and launch the MODIS_tsp f
 library(MODIStsp)
 MODIStsp()
 ```
-This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the package PDF vignette for details)<sup id="a2">[2](#f2)</sup>
+This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the package PDF vignette for details)<sup name="a2">[2](#f2)</sup>
 
 ### Non Interactive mode
 (Exploiting a previously saved options file)
