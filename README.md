@@ -1,4 +1,5 @@
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp)
+[![GitHub version](https://badge.fury.io/gh/lbusett%2FMODIStsp.svg)](https://badge.fury.io/gh/lbusett%2FMODIStsp)
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
