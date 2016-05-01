@@ -73,7 +73,7 @@ To run the tool in interactive mode, load the package and launch the MODIS_tsp f
 library(MODIStsp)
 MODIStsp()
 ```
-This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the package PDF vignette for details)<sup name="a2">[2](#f2)</sup>
+This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the [package vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf) for details)<sup name="a2">[2](#f2)</sup>
 
 ### Non Interactive mode
 (Exploiting a previously saved options file)
