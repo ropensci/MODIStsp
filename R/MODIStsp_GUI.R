@@ -717,13 +717,6 @@ MODIStsp_GUI <- function(general_opts){
     general_opts$prod_opt_list <- prod_opt_list	# workaround to export prod_opt_list from function.
     # Remember to do "prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL" after running the function!
 
-    # general_opts$start_day <- svalue(start_day_wid)		# Retrieve Dates options
-    # general_opts$start_month <- svalue(start_month_wid)
-    # general_opts$start_year <- svalue(start_year_wid)
-    # general_opts$end_day <- svalue(end_day_wid)
-    # general_opts$end_month <- svalue(end_month_wid)
-    # general_opts$end_year <- svalue(end_year_wid)
-
     general_opts$start_date <- svalue(start_date_wid)
     general_opts$end_date <- svalue(end_date_wid)
 
@@ -789,9 +782,11 @@ MODIStsp_GUI <- function(general_opts){
     }
 
     # Check if bbox is consistent
-    general_opts$bbox <- as.numeric(general_opts$bbox)
-    n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
 
+    n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
+    if (n_bbox_compiled == 4) {
+      general_opts$bbox <- as.numeric(general_opts$bbox)
+    }
     if (general_opts$full_ext == "Resized") {
       if (n_bbox_compiled == 4) {
         if ( (general_opts$bbox[1] > general_opts$bbox[3]) | (general_opts$bbox[2] > general_opts$bbox[4])) {
@@ -864,6 +859,14 @@ MODIStsp_GUI <- function(general_opts){
       check_save_opts <<- FALSE
     }
 
+    if (general_opts$resampling == "mode" & check_save_opts) {
+      check_mode = gconfirm("Warning ! You selected 'mode' resampling. Be aware that 'mode' resampling can provide inconsistent results in areas
+affected by mixed high and low quality data, and in properly keeping track of quality indicators ! Do you wish to continue ?", title = "Warning")
+      if (check_mode == FALSE) {
+        check_save_opts <<- FALSE
+      }
+    }
+
     return(general_opts)
 
   }
@@ -873,10 +876,9 @@ MODIStsp_GUI <- function(general_opts){
 
   start_but <- gbutton(text = "Start Processing", container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
     general_opts <- prepare_to_save_options(general_opts)
-    prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL # see the function definition
+    prod_opt_list <- general_opts$prod_opt_list
+    general_opts$prod_opt_list <- NULL # see the function definition
     if (check_save_opts) {					# If check passed, save previous file and return
-      #					dir.create(file.path(getwd(),"Previous"),showWarnings=FALSE)
-
       save(general_opts,prod_opt_list,mod_prod_list, file = general_opts$previous_file) # Save options to previous file
       assign("Quit", F, envir = globalenv()) # If "Start", set "Quit to F
       rm(temp_wid_bands, envir = globalenv())
