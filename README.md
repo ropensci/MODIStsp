@@ -1,5 +1,6 @@
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
 ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.50798.svg)](http://dx.doi.org/10.5281/zenodo.50798)
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
