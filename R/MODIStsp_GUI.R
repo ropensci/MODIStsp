@@ -783,10 +783,8 @@ MODIStsp_GUI <- function(general_opts){
 
     # Check if bbox is consistent
 
+    general_opts$bbox <- as.numeric(general_opts$bbox)
     n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
-    if (n_bbox_compiled == 4) {
-      general_opts$bbox <- as.numeric(general_opts$bbox)
-    }
     if (general_opts$full_ext == "Resized") {
       if (n_bbox_compiled == 4) {
         if ( (general_opts$bbox[1] > general_opts$bbox[3]) | (general_opts$bbox[2] > general_opts$bbox[4])) {
