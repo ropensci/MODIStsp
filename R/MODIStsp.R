@@ -57,11 +57,24 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
   #- ------------------------------------------------------------------------------- -#
   #  Initialize project
   #- ------------------------------------------------------------------------------- -#
+  
+  # On interactive execution, load Rgtk2
+  if (gui) {
+    requireNamespace("gWidgetsRGtk2")
+    options("guiToolkit" = "RGtk2")
+  }
+  
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
     # gdal_setInstallation(ignore.full_scan = FALSE)
-    mess <- gmessage(title = "Welcome", "Welcome to MODIStsp !\n We will now search for a valid GDAL installation - please Wait !
-                         \n This will happen only once !", do.buttons = FALSE)
+    welcome_text <- "Welcome to MODIStsp!\n\nWe will now search for a valid GDAL installation - please wait\n(this will happen only once)"
+    if (gui) {
+      welcome_win <- gwindow(title = "Welcome", container = TRUE, width = 400, height = 100)
+      welcome_lab <- glabel(welcome_text, editable = FALSE, container = welcome_win)
+      # mess <- gmessage(title = "Welcome", welcome_text, do.buttons = FALSE)
+    } else {
+      message("[",date(),"]",welcome_text)
+    }
     gdal_setInstallation(ignore.full_scan = TRUE, verbose = TRUE)
   }
   gdal_version <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", getGDALVersionInfo(str = "--version")))
@@ -77,12 +90,6 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
   }
 
   cat("GDAL version in use:",as.character(gdal_version),"\n")
-
-  # On interactive execution, load Rgtk2
-  if (gui) {
-    requireNamespace("gWidgetsRGtk2")
-    options("guiToolkit" = "RGtk2")
-  }
 
   # Increase memory limit on winzozz
   if (Sys.info()["sysname"] == "Windows") {
@@ -131,6 +138,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
 
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
+    if (exists("welcome_lab")) {dispose(welcome_lab)}
     MODIStsp_GUI(general_opts)
   } else {
     Quit <<- FALSE
