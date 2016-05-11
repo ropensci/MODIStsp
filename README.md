@@ -1,7 +1,6 @@
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
 ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg)
 
-
 # Table of contents
 1. [MODIStsp](#MODIStsp)
 2. [Installation](#Installation)
@@ -64,7 +63,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:  
 ``` bitops``` (>= 1.9.6), ``` data.table``` (>= 1.9.6), ``` gdalUtils``` (>= 2.0.1.7), ```gWidgetsRGtk2``` (>= 0.0-54), ```hash``` (>= 2.2.6), ```plyr``` (>= 1.8.3), ```raster``` (>= 2.5-2), ```RCurl``` (>= 1.95-4.8), ```rgdal``` (>= 1.1-8), ```rgeos``` (>=0.3-8), ```xts``` (>= 1.0-10), ```sp``` (>= 1.2-2), ```stringr``` (>= 1.0.0), ```XML``` (>= 3.98-1.1),
 
-, while the following are suggestes:  
+, while the following are suggested:  
 ```knitr ```, ```rmarkdown```, ```png```, ```grid```.
 
 ## Running the tool <a name="Running"></a> 
@@ -181,7 +180,7 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
     In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). 
     With Ubuntu 15.10 Wily (and newer) this step is not mandatory, altough recommended in order to have updated version of GDAL installed.
     
-2. To install GDAL a terminal and type  
+2. To install GDAL, open a terminal and type  
     ```bash
     sudo apt-get install gdal-bin
     ```
