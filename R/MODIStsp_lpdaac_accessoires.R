@@ -28,50 +28,25 @@ lpdaac_getmod_dirs <- function(ftp, http, .Platform) {
   class(items) <- "try-error"
   ce <- 0
   
-  # Try FTP download
+  # Try HTTP download
   while (class(items) == "try-error") {
-    items <- try(strsplit(getURL(ftp,  ftp.use.epsv = FALSE, dirlistonly = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = TRUE)), "\r*\n")[[1]], silent = TRUE)
+    items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
+                 silent = TRUE)
     if (class(items) == "try-error") {
       Sys.sleep(1)
       ce <- ce + 1
-      message("Trying to reach ftp server - attempt ", ce)
+      message("Trying to reach http server - attempt ", ce)
       print(ce)
       if (ce == 50)  {
-        confirm <- gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
+        confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
         if (confirm == "FALSE") {
-          warning("[",date(),"] Error: ftp server seems to be down! Trying with http server...")
+          warning("[",date(),"] Error: http server seems to be down! Trying with http server...")
           break()
         }
       }
     }
   }
   if (class(items) != "try-error") { # run only if ftp download works
-    items_1 <- items[!is.na(as.integer(items))] # maintaining only directories with numeric names (year)
-    items_2 <- strsplit(getURL(paste0(ftp,items_1,"/"), ftp.use.epsv = FALSE, dirlistonly = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)), "\r*\n")
-    full_dirs <- unlist(lapply(seq_along(items_2),function(x){paste0(names(items_2[x]),items_2[[x]],"/")}))
-    date_dirs <- sapply(strsplit(full_dirs,"/"),function(x){strftime(as.Date(paste(x[length(x)-1],x[length(x)]),format="%Y %j"),"%Y.%m.%d")})
-    attr(date_dirs,"server") <- "ftp"
-  }
-  
-  # Try HTTP download
-  if (class(items) == "try-error") { # try it only if FTP failed
-    while (class(items) == "try-error") {
-      items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
-                   silent = TRUE)
-      if (class(items) == "try-error") {
-        Sys.sleep(1)
-        ce <- ce + 1
-        message("Trying to reach http server - attempt ", ce)
-        print(ce)
-        if (ce == 50)  {
-          confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
-          if (confirm == "FALSE") {
-            warning("[",date(),"] Error: http server seems to be down! Please Retry Later!")
-            stop()
-          }
-        }
-      }
-    }
     items <- items[-1]
     # get the directory names (available dates)
     date_dirs <- unlist(lapply(strsplit(items, ">"), function(x){
@@ -82,6 +57,33 @@ lpdaac_getmod_dirs <- function(ftp, http, .Platform) {
       x[1]
     }))
     attr(date_dirs,"server") <- "http"
+  }
+  
+  # Try FTP download
+  if (class(items) == "try-error") { # run only if http download works
+    while (class(items) == "try-error") { # try it only if HTTP failed
+      items <- try(strsplit(getURL(ftp,  ftp.use.epsv = FALSE, dirlistonly = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = TRUE)), "\r*\n")[[1]], silent = TRUE)
+      if (class(items) == "try-error") {
+        Sys.sleep(1)
+        ce <- ce + 1
+        message("Trying to reach ftp server - attempt ", ce)
+        print(ce)
+        if (ce == 50)  {
+          confirm <- gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
+          if (confirm == "FALSE") {
+            warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
+            stop()
+          }
+        }
+      }
+    }
+    if (class(items) != "try-error") { # run only if ftp download works
+      items_1 <- items[!is.na(as.integer(items))] # maintaining only directories with numeric names (year)
+      items_2 <- strsplit(getURL(paste0(ftp,items_1,"/"), ftp.use.epsv = FALSE, dirlistonly = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)), "\r*\n")
+      full_dirs <- unlist(lapply(seq_along(items_2),function(x){paste0(names(items_2[x]),items_2[[x]],"/")}))
+      date_dirs <- sapply(strsplit(full_dirs,"/"),function(x){strftime(as.Date(paste(x[length(x)-1],x[length(x)]),format="%Y %j"),"%Y.%m.%d")})
+      attr(date_dirs,"server") <- "ftp"
+    }
   }
 
   return(date_dirs)
