@@ -214,7 +214,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
     # launch MODIStsp_process to Download and preprocess the selected images ----
     output <- with(general_opts, MODIStsp_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
                                                   out_folder = out_folder, out_folder_mod = out_folder_mod, reprocess = reprocess,
-                                                  delete_hdf = delete_hdf, sensor = sensor, https = prod_opts$http,
+                                                  delete_hdf = delete_hdf, sensor = sensor, https = prod_opts$http, ftps = prod_opts$ftp,
                                                   start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
                                                   full_ext = full_ext, bbox = bbox, out_format = out_format, out_res_sel = out_res_sel,
                                                   out_res = as.numeric(out_res), native_res = prod_opts$native_res,  tiled = prod_opts$tiled,
