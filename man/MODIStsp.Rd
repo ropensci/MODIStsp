@@ -5,7 +5,7 @@
 \title{MODIStsp}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  MODIStsp_dir = NA)
+  MODIStsp_dir = NA, download_server = NA)
 }
 \arguments{
 \item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are retrieved from "options_file")}
@@ -17,6 +17,9 @@ extent, the selected tiles and the "Full Tile / Resized" options are not conside
 spatial file.}
 
 \item{MODIStsp_dir}{(optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)}
+
+\item{download_server}{(optional): service used to download MODIS tiles, one of: 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov).
+If not specified, MODIStsp tries to download using http; if http fails, it tries with ftp.}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MODIStsp)

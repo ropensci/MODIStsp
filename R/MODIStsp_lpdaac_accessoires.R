@@ -5,6 +5,8 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @description Accessory function to get the full list of directories on the lpdaac http site (modified after Barry Rowlingson function):
 #'
 #' @param http string http site on lpdaac corresponding to a given MODIS product
+#' @param ftp string ftp site corresponding to a given MODIS product
+#' @param used_server string can assume values "http" or "ftp" depending on the used download server; if NA, the script tries to download with http, using ftp if the download fails
 #' @param .Platform string os platform (from call to .Platform)
 #' @return list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
 #'
@@ -13,7 +15,7 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @note License: GPL 3.0
 #' @importFrom gWidgets gconfirm
 #' @importFrom RCurl getURL
-lpdaac_getmod_dirs <- function(ftp, http, .Platform) {
+lpdaac_getmod_dirs <- function(ftp, http, used_server=NA, .Platform) {
 
   if (strsplit(http,"")[[1]][length(strsplit(http,"")[[1]])] != "/") {
     http <- paste(http,"/",sep = "")
@@ -29,38 +31,40 @@ lpdaac_getmod_dirs <- function(ftp, http, .Platform) {
   ce <- 0
   
   # Try HTTP download
-  while (class(items) == "try-error") {
-    items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
-                 silent = TRUE)
-    if (class(items) == "try-error") {
-      Sys.sleep(1)
-      ce <- ce + 1
-      message("Trying to reach http server - attempt ", ce)
-      print(ce)
-      if (ce == 50)  {
-        confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
-        if (confirm == "FALSE") {
-          warning("[",date(),"] Error: http server seems to be down! Trying with http server...")
-          break()
+  if (class(items) == "try-error" & used_server != "ftp") {
+    while (class(items) == "try-error") {
+      items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
+                   silent = TRUE)
+      if (class(items) == "try-error") {
+        Sys.sleep(1)
+        ce <- ce + 1
+        message("Trying to reach http server - attempt ", ce)
+        print(ce)
+        if (ce == 50)  {
+          confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
+          if (confirm == "FALSE") {
+            warning("[",date(),"] Error: http server seems to be down! Please Retry Later!")
+            break()
+          }
         }
       }
     }
-  }
-  if (class(items) != "try-error") { # run only if ftp download works
-    items <- items[-1]
-    # get the directory names (available dates)
-    date_dirs <- unlist(lapply(strsplit(items, ">"), function(x){
-      x[length(x) - 1]
-    }))
-    date_dirs <- date_dirs[seq(3,length(date_dirs) - 2)]
-    date_dirs <- unlist(lapply(strsplit(date_dirs, "/"), function(x){
-      x[1]
-    }))
-    attr(date_dirs,"server") <- "http"
+    if (class(items) != "try-error") { # run only if ftp download works
+      items <- items[-1]
+      # get the directory names (available dates)
+      date_dirs <- unlist(lapply(strsplit(items, ">"), function(x){
+        x[length(x) - 1]
+      }))
+      date_dirs <- date_dirs[seq(3,length(date_dirs) - 2)]
+      date_dirs <- unlist(lapply(strsplit(date_dirs, "/"), function(x){
+        x[1]
+      }))
+      attr(date_dirs,"server") <- "http"
+    }
   }
   
   # Try FTP download
-  if (class(items) == "try-error") { # run only if http download works
+  if (class(items) == "try-error" & used_server != "http") { # run only if http download works
     while (class(items) == "try-error") { # try it only if HTTP failed
       items <- try(strsplit(getURL(ftp,  ftp.use.epsv = FALSE, dirlistonly = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = TRUE)), "\r*\n")[[1]], silent = TRUE)
       if (class(items) == "try-error") {
@@ -145,6 +149,8 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' lpdaac_getmod_names
 #' @description Accessory function to find the names of HDF images corresponding to a given date and interval of spatial tiles within the lpdaac archive
 #' @param http string http site on lpdaac corresponding to a given MODIS product
+#' @param ftp string ftp site corresponding to a given MODIS product
+#' @param used_server string can assume values "http" or "ftp" depending on the used download server; it cannot be NA
 #' @param date_dirs array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)
 #' @param date string date for which the HDF filenames has to be retrieved
 #' @param v int. array containing a sequence of the vertical tiles of interest (e.g., c(18,19))

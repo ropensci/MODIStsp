@@ -8,6 +8,8 @@
 #'  extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 #'  spatial file.
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
+#' @param download_server (optional): service used to download MODIS tiles, one of: 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov).
+#'  If not specified, MODIStsp tries to download using http; if http fails, it tries with ftp.
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -48,7 +50,7 @@
 #'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
 #'     spatial_file_path = single_shape )}
 
-MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA) {
+MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA, download_server=NA) {
 
   if (is.na(MODIStsp_dir)) {
     MODIStsp_dir <- system.file(package = "MODIStsp")
@@ -214,7 +216,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
     # launch MODIStsp_process to Download and preprocess the selected images ----
     output <- with(general_opts, MODIStsp_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
                                                   out_folder = out_folder, out_folder_mod = out_folder_mod, reprocess = reprocess,
-                                                  delete_hdf = delete_hdf, sensor = sensor, https = prod_opts$http, ftps = prod_opts$ftp,
+                                                  delete_hdf = delete_hdf, sensor = sensor, download_server = download_server, 
+                                                  https = prod_opts$http, ftps = prod_opts$ftp,
                                                   start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
                                                   full_ext = full_ext, bbox = bbox, out_format = out_format, out_res_sel = out_res_sel,
                                                   out_res = as.numeric(out_res), native_res = prod_opts$native_res,  tiled = prod_opts$tiled,

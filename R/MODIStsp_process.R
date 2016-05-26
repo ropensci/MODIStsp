@@ -16,6 +16,8 @@
 #' @param delete_hdf string ("Yes"/"No") If Yes, delete original hdf after completion
 #' @param sensor string ("Terra" or "Aqua" or "Both")
 #' @param https hash https site for download of hdf of selected product
+#' @param ftps hash ftps site for download of hdf of selected product
+#' @param download_server: service used to download MODIS tiles, one of: 'http', 'ftp', NA.
 #' @param start_x int start horiz. tile
 #' @param start_y int start vertical. tile
 #' @param end_x int end horiz. tile
@@ -65,7 +67,7 @@
 #' @importFrom XML xmlParse xmlRoot xmlToList
 #' @import gWidgets
 
-MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor, https, ftps,
+MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor, download_server, https, ftps,
                              start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str, nodata_in,
                              nodata_out,nodata_change,rts, datatype,	bandsel, bandnames, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
                              quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in, full_ext,
@@ -179,8 +181,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
       # Get a list of the folders containing hdf images required (Corresponding to the subfolders in lpdaac corresponding to
       # selected product, dates, and current year under processing)
 
-      date_dirs_all <- lpdaac_getmod_dirs(ftp = ftp, http = http, .Platform = .Platform)
-      used_server <- attr(date_dirs_all, "server") # specify if ftp or http has been used (need to reconstruct the url)
+      date_dirs_all <- lpdaac_getmod_dirs(ftp = ftp, http = http, used_server = download_server, .Platform = .Platform)
+      download_server <- attr(date_dirs_all, "server") # overwrite with the used setting (if already specified it does not change, if NA, it is set with the working one)
       date_dirs <- lpdaac_getmod_dates(dates = dates, date_dirs =  date_dirs_all)  # First, find the folders in lpdaac corresponding to the required dates
       
       if (length(date_dirs) > 0) {
@@ -198,7 +200,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
           if (check_files == FALSE | reprocess == "Yes") {  		# If not all output files are already present or reprocess = "Yes", start downloading hdfs
 
             # Create vector of image names required (corresponding to the selected tiles, within current dir)
-            modislist <- lpdaac_getmod_names(http = http, ftp = ftp, used_server = used_server, date_dir = date_dirs[date], v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), tiled)
+            modislist <- lpdaac_getmod_names(http = http, ftp = ftp, used_server = download_server, date_dir = date_dirs[date], v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), tiled)
 
             # ---------------------------------- ----------------------------------------------#
             # Download and preprocess Imagesin modislist vector -----------
@@ -213,13 +215,13 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 # Check file size (if the local file size is differente, re-download)
                 local_filename <- file.path(out_folder_mod,modisname)
                 local_filesize <- file.info(local_filename)$size
-                remote_filename <- if (used_server == "http") {
+                remote_filename <- if (download_server == "http") {
                   paste0(http,date_dirs[date], "/",modisname)
-                  } else if (used_server == "ftp") {
+                  } else if (download_server == "ftp") {
                     paste0(ftp,YEAR,"/",DOY,"/",modisname)
                   }
                 
-                if (used_server == "http") { # in case of http download, try to catch size information from xml file
+                if (download_server == "http") { # in case of http download, try to catch size information from xml file
                   remote_xml_tries <- 30 # numbers of tryouts for xml metafile
                   remote_xml <- NA
                   class(remote_xml) <- "try-error"
@@ -239,7 +241,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   } else {
                     remote_filesize <- as.integer(xmlToList(xmlRoot(remote_xml)[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]]))
                   }
-                } else if (used_server == "ftp") { # in case of ftp download, do not perform the check. 
+                } else if (download_server == "ftp") { # in case of ftp download, do not perform the check. 
                   remote_filesize <- local_filesize
                   # TODO: implement check using curl library (http://stackoverflow.com/questions/32488644/retrieve-modified-datetime-of-a-file-from-an-ftp-server)
                   # and check if RCurl functions could be replaced by curl ones
