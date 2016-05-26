@@ -32,7 +32,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server=NA, gui, .Platform) {
   ce <- 0
   
   # Try HTTP download
-  if (class(items) == "try-error" & !is.na(used_server) & used_server != "ftp") {
+  if (class(items) == "try-error" & is.na(used_server) | used_server != "ftp") {
     while (class(items) == "try-error") {
       items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
                    silent = TRUE)
@@ -67,7 +67,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server=NA, gui, .Platform) {
   }
   
   # Try FTP download
-  if (class(items) == "try-error" & !is.na(used_server) & used_server != "http") { # run only if http download works
+  if (class(items) == "try-error" & is.na(used_server) | used_server != "http") { # run only if http download works
     while (class(items) == "try-error") { # try it only if HTTP failed
       items <- try(strsplit(getURL(ftp,  ftp.use.epsv = FALSE, dirlistonly = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = TRUE)), "\r*\n")[[1]], silent = TRUE)
       if (class(items) == "try-error") {
