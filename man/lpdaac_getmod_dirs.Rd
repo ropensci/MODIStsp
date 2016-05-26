@@ -4,7 +4,7 @@
 \alias{lpdaac_getmod_dirs}
 \title{lpdaac_getmod_dirs}
 \usage{
-lpdaac_getmod_dirs(ftp, http, used_server = NA, .Platform)
+lpdaac_getmod_dirs(ftp, http, used_server = NA, gui, .Platform)
 }
 \arguments{
 \item{ftp}{string ftp site corresponding to a given MODIS product}
@@ -12,6 +12,8 @@ lpdaac_getmod_dirs(ftp, http, used_server = NA, .Platform)
 \item{http}{string http site on lpdaac corresponding to a given MODIS product}
 
 \item{used_server}{string can assume values "http" or "ftp" depending on the used download server; if NA, the script tries to download with http, using ftp if the download fails}
+
+\item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
 
 \item{.Platform}{string os platform (from call to .Platform)}
 }

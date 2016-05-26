@@ -4,7 +4,7 @@
 \alias{lpdaac_getmod_names}
 \title{lpdaac_getmod_names}
 \usage{
-lpdaac_getmod_names(http, ftp, used_server, date_dir, v, h, tiled)
+lpdaac_getmod_names(http, ftp, used_server, date_dir, v, h, tiled, gui)
 }
 \arguments{
 \item{http}{string http site on lpdaac corresponding to a given MODIS product}
@@ -18,6 +18,8 @@ lpdaac_getmod_names(http, ftp, used_server, date_dir, v, h, tiled)
 \item{h}{int. array containing a sequence of the horizontal  tiles of interest (e.g., c(3,4))}
 
 \item{tiled}{0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)}
+
+\item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
 
 \item{date_dirs}{array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)}
 

@@ -7,6 +7,7 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @param http string http site on lpdaac corresponding to a given MODIS product
 #' @param ftp string ftp site corresponding to a given MODIS product
 #' @param used_server string can assume values "http" or "ftp" depending on the used download server; if NA, the script tries to download with http, using ftp if the download fails
+#' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
 #' @param .Platform string os platform (from call to .Platform)
 #' @return list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
 #'
@@ -15,7 +16,7 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @note License: GPL 3.0
 #' @importFrom gWidgets gconfirm
 #' @importFrom RCurl getURL
-lpdaac_getmod_dirs <- function(ftp, http, used_server=NA, .Platform) {
+lpdaac_getmod_dirs <- function(ftp, http, used_server=NA, gui, .Platform) {
 
   if (strsplit(http,"")[[1]][length(strsplit(http,"")[[1]])] != "/") {
     http <- paste(http,"/",sep = "")
@@ -41,7 +42,9 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server=NA, .Platform) {
         message("Trying to reach http server - attempt ", ce)
         print(ce)
         if (ce == 50)  {
-          confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
+          confirm <- if (gui) { # ask to retry only if gui=TRUE
+            gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
+          } else FALSE
           if (confirm == "FALSE") {
             warning("[",date(),"] Error: http server seems to be down! Please Retry Later!")
             break()
@@ -73,7 +76,9 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server=NA, .Platform) {
         message("Trying to reach ftp server - attempt ", ce)
         print(ce)
         if (ce == 50)  {
-          confirm <- gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
+          confirm <- if (gui) {
+            gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...) {} )
+          } else FALSE
           if (confirm == "FALSE") {
             warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
             stop()
@@ -156,6 +161,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' @param v int. array containing a sequence of the vertical tiles of interest (e.g., c(18,19))
 #' @param h int. array containing a sequence of the horizontal  tiles of interest (e.g., c(3,4))
 #' @param tiled 0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)
+#' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
 #' @return Modislist names of HDF images corresponding to the requested tiles available for the product in the selected date
 #'
 #' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
@@ -163,7 +169,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' email: busetto.l@@irea.cnr.it
 #' license  GPL 3.0
 #' @import RCurl
-lpdaac_getmod_names <- function(http, ftp, used_server, date_dir, v, h, tiled) {
+lpdaac_getmod_names <- function(http, ftp, used_server, date_dir, v, h, tiled, gui) {
   getlist <- 0
   class(getlist) <- "try-error"
   ce <- 0
@@ -178,8 +184,9 @@ lpdaac_getmod_names <- function(http, ftp, used_server, date_dir, v, h, tiled) {
         message("Trying to reach http server - attempt ", ce)
         ce <- ce + 1
         if (ce == 50) {
-          confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question",
-                              handler = function(h,...){})
+          confirm <- if (gui) {
+            gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...){})
+          } else FALSE
           if (confirm == "FALSE") {
             warning("[",date(),"] Error: http server seems to be down! Please Retry Later!")
             stop()
@@ -208,8 +215,9 @@ lpdaac_getmod_names <- function(http, ftp, used_server, date_dir, v, h, tiled) {
         message("Trying to reach ftp server - attempt ", ce)
         ce <- ce + 1
         if (ce == 50) {
-          confirm <- gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question",
-                              handler = function(h,...){})
+          confirm <- if (gui) {
+            gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h,...){})
+          } else FALSE
           if (confirm == "FALSE") {
             warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
             stop()
