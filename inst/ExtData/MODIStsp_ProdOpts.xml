@@ -253,7 +253,7 @@
                 <quality_bitN>13</quality_bitN>
             </quality>
             <quality>
-                <quality_bandname>MOD35_Cld</quality_bandname>
+                <quality_bandname>MOD35_snow</quality_bandname>
                 <quality_fullname>MOD35 snow/ice flag</quality_fullname>
                 <quality_source>State_500</quality_source>
                 <quality_bitN>12</quality_bitN>
