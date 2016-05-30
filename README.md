@@ -14,7 +14,7 @@ MODIStsp is a "R" package devoted to automatizing the creation of time series of
 
 An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the pdf file_) 
 
-## Impoortant note - MODIS collection 006
+## Important note - MODIS collection 006
 
 NASA recently switched to provision of Collection 6 datasets for most Land Products. At the moment, MODIStsp only allows download for Collection 5 datasets. **Support for Collection 6 will be added as soon as possible !**
 
