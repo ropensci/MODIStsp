@@ -14,6 +14,11 @@ MODIStsp is a "R" package devoted to automatizing the creation of time series of
 
 An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the pdf file_) 
 
+## Impoortant note - MODIS collection 006
+
+NASA recently switched to provision of Collection 6 datasets for most Land Products. At the moment, MODIStsp only allows download for Collection 5 datasets. **Support for Collection 6 will be added as soon as possible !**
+
+
 ## Installation <a name="Installation"></a> 
 
 **IMPORTANT:** _MODIStsp_ requires [R](http://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
