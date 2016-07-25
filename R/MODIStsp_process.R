@@ -65,6 +65,7 @@
 #' @note License: GPL 3.0
 #' @importFrom gdalUtils gdal_translate gdalbuildvrt gdalwarp
 #' @importFrom hash hash
+#' @importFrom httr GET
 #' @importFrom tools file_path_sans_ext
 #' @importFrom XML xmlParse xmlRoot xmlToList
 #' @import gWidgets
