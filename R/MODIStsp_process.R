@@ -572,7 +572,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
           if (delete_hdf == "Yes") {
 
             for (dir in 1:length(date_dirs)) {
-              modislist <- lpdaac_getmod_names(http = ftp, date_dirs = date_dirs,  date = date , v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), tiled)
+              # modislist <- lpdaac_getmod_names(http = ftp, date_dirs = date_dirs,  date = date , v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), tiled)
+              modislist <- lpdaac_getmod_names(http = http, ftp = ftp, used_server = download_server, date_dir = date_dirs[dir], v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), tiled, gui = gui)
               for (modisname in modislist) {
                 unlink(file.path(out_folder_mod,modisname))
               }
