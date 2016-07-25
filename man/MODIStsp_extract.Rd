@@ -72,15 +72,15 @@ License: GPL 3.0
 # for each polygon of a shapefile, for each date in the period between 2001-01-01 and 2014-12-31
 \dontrun{
 #Set the inputs
-infile = "in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"  # Input rts file
-shpname = "path_to_file/rois.shp"  # Path to Polygon Shapefile
-startdate = as.Date("2010-01-01")  # Start date for extraction
-enddate = as.Date("2014-12-31")    # End date for extraction
+infile <- "in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"  # Input rts file
+shpname <- "path_to_file/rois.shp"  # Path to Polygon Shapefile
+startdate <- as.Date("2010-01-01")  # Start date for extraction
+enddate <- as.Date("2014-12-31")    # End date for extraction
 #Load Data
-inrts = get(load(infile))          # Load the rts file
+inrts <- get(load(infile))          # Load the rts file
 # Compute average and St.dev
-dataavg = MODIStsp_extract(inrts,shpname, startdate, enddate, FUN = 'mean', na.rm = T)
-datasd = MODIStsp_extract(inrts,shpname,  startdate,  enddate,  FUN = 'sd', na.rm = T)
+dataavg <- MODIStsp_extract(inrts,shpname, startdate, enddate, FUN = 'mean', na.rm = T)
+datasd <- MODIStsp_extract(inrts,shpname,  startdate,  enddate,  FUN = 'sd', na.rm = T)
 plot(dataavg)
 }
 }
