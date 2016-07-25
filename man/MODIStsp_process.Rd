@@ -5,14 +5,14 @@
 \title{MODIStsp_process}
 \usage{
 MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
-  reprocess = "Yes", delete_hdf = "No", sensor, download_server, https,
-  ftps, start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel,
-  out_res, native_res, tiled, MOD_proj_str, outproj_str, nodata_in, nodata_out,
-  nodata_change, rts, datatype, bandsel, bandnames, indexes_bandsel,
-  indexes_bandnames, indexes_formula, indexes_nodata_out, quality_bandnames,
-  quality_bandsel, quality_bitN, quality_source, quality_nodata_in, full_ext,
-  quality_nodata_out, file_prefixes, main_out_folder, resampling, ts_format,
-  gui = TRUE)
+  reprocess = "Yes", delete_hdf = "No", sensor, download_server, user,
+  password, https, ftps, start_x, start_y, end_x, end_y, bbox, out_format,
+  compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str,
+  nodata_in, nodata_out, nodata_change, rts, datatype, bandsel, bandnames,
+  indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
+  quality_bandnames, quality_bandsel, quality_bitN, quality_source,
+  quality_nodata_in, full_ext, quality_nodata_out, file_prefixes,
+  main_out_folder, resampling, ts_format, gui = TRUE)
 }
 \arguments{
 \item{sel_prod}{string selected MODIS product}
@@ -108,6 +108,10 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
 
 \item{download_server:}{service used to download MODIS tiles, one of: 'http', 'ftp', NA.}
+
+\item{user:}{Username for http download (https://urs.earthdata.nasa.gov/home)}
+
+\item{password:}{Password for http download (https://urs.earthdata.nasa.gov/home)}
 }
 \description{
 main function of MODIStsp tool. Takes as input processing parameters specified by the user using moddl_GUI and saved in

@@ -18,6 +18,8 @@
 #' @param https hash https site for download of hdf of selected product
 #' @param ftps hash ftps site for download of hdf of selected product
 #' @param download_server: service used to download MODIS tiles, one of: 'http', 'ftp', NA.
+#' @param user: Username for http download (https://urs.earthdata.nasa.gov/home)
+#' @param password: Password for http download (https://urs.earthdata.nasa.gov/home)
 #' @param start_x int start horiz. tile
 #' @param start_y int start vertical. tile
 #' @param end_x int end horiz. tile
