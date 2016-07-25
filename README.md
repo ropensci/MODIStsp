@@ -1,11 +1,7 @@
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp)
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
 ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg)
 
-# IMPORTANT NEWS !
-
-Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, the user can specify if downloading data via http or via ftp. In the formercase, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: 
-[https://urs.earthdata.nasa.gov/profile] (https://urs.earthdata.nasa.gov/profile).
-
+Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, the user can specify if downloading data via http or via ftp. In the formercase, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: https://urs.earthdata.nasa.gov/profile.
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
@@ -18,12 +14,11 @@ Due to recent changes in rules for accessing NASA LPDAAC data via http, which no
 
 MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data.  MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
 
-An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the pdf file_) 
+An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the pdf file_) 
 
 ## Important note - MODIS collection 006
 
 NASA recently switched to provision of Collection 6 datasets for most Land Products. At the moment, MODIStsp only allows download for Collection 5 datasets. **Support for Collection 6 will be added as soon as possible !**
-
 
 ## Installation <a name="Installation"></a> 
 
@@ -85,7 +80,7 @@ To run the tool in interactive mode, load the package and launch the MODIS_tsp f
 library(MODIStsp)
 MODIStsp()
 ```
-This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the [package vignette](https://github.com/lbusett/MODIStsp/blob/devel/inst/doc/MODIStsp.pdf) for details)<sup name="a2">[2](#f2)</sup>
+This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) for details)<sup name="a2">[2](#f2)</sup>
 
 ### Non Interactive mode
 (Exploiting a previously saved options file)
