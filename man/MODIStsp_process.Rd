@@ -31,6 +31,12 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 
 \item{sensor}{string ("Terra" or "Aqua" or "Both")}
 
+\item{download_server}{service used to download MODIS tiles, one of: 'http', 'ftp', NA.}
+
+\item{user}{Username for http download (https://urs.earthdata.nasa.gov/home)}
+
+\item{password}{Password for http download (https://urs.earthdata.nasa.gov/home)}
+
 \item{https}{hash https site for download of hdf of selected product}
 
 \item{ftps}{hash ftps site for download of hdf of selected product}
@@ -106,12 +112,6 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \item{ts_format}{string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)}
 
 \item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
-
-\item{download_server:}{service used to download MODIS tiles, one of: 'http', 'ftp', NA.}
-
-\item{user:}{Username for http download (https://urs.earthdata.nasa.gov/home)}
-
-\item{password:}{Password for http download (https://urs.earthdata.nasa.gov/home)}
 }
 \description{
 main function of MODIStsp tool. Takes as input processing parameters specified by the user using moddl_GUI and saved in

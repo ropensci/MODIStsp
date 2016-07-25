@@ -13,6 +13,8 @@ lpdaac_getmod_names(http, ftp, used_server, date_dir, v, h, tiled, gui)
 
 \item{used_server}{string can assume values "http" or "ftp" depending on the used download server; it cannot be NA}
 
+\item{date_dir}{array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)}
+
 \item{v}{int. array containing a sequence of the vertical tiles of interest (e.g., c(18,19))}
 
 \item{h}{int. array containing a sequence of the horizontal  tiles of interest (e.g., c(3,4))}
@@ -20,10 +22,6 @@ lpdaac_getmod_names(http, ftp, used_server, date_dir, v, h, tiled, gui)
 \item{tiled}{0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)}
 
 \item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
-
-\item{date_dirs}{array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)}
-
-\item{date}{string date for which the HDF filenames has to be retrieved}
 }
 \value{
 Modislist names of HDF images corresponding to the requested tiles available for the product in the selected date

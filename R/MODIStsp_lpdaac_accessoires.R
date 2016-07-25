@@ -158,8 +158,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' @param http string http site on lpdaac corresponding to a given MODIS product
 #' @param ftp string ftp site corresponding to a given MODIS product
 #' @param used_server string can assume values "http" or "ftp" depending on the used download server; it cannot be NA
-#' @param date_dirs array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)
-#' @param date string date for which the HDF filenames has to be retrieved
+#' @param date_dir array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)
 #' @param v int. array containing a sequence of the vertical tiles of interest (e.g., c(18,19))
 #' @param h int. array containing a sequence of the horizontal  tiles of interest (e.g., c(3,4))
 #' @param tiled 0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)
