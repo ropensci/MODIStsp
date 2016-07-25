@@ -199,7 +199,38 @@ MODIStsp_GUI <- function(general_opts){
 
                       },container = prod_group, width = 120, expand = TRUE)
 
+  #- ------------------------------------------------------------------------------- -#
+  # Widgets for authentication/download mode selection
+  #- ------------------------------------------------------------------------------- -#
+  download_frame <- gframe(text = "<span foreground='blue' size='x-large'>Download Method</span>", markup = TRUE, container = main_group, horizontal = TRUE, expand = TRUE)
+  # start and end date ----
+  methods_group <- ggroup(container = download_frame, horizontal = TRUE)
+  
+  method_lab <- glabel(text = " Download Server:", container = methods_group)
+  server_wid <- gdroplist(items = c("http","ftp"), text = "Select", container = methods_group, 
+                          selected = match(general_opts$download_server, c("http","ftp")),handler = function(h,....) {
+    current_sel <- svalue(server_wid)
+    if (current_sel != "http") {
+      enabled(authenticate_group) <- FALSE
+    } else {
+      enabled(authenticate_group) <- TRUE
+    }
+  })
+  authenticate_group = ggroup(container = methods_group)
+  user_lab <- glabel(text = " User Name:", container = authenticate_group)
+  user_wid = gedit(text = general_opts$user, container = authenticate_group, width = 15)
+  addSpace(authenticate_group,9)
+  password_lab <- glabel(text = " Password:", container = authenticate_group)
+  password_wid = gedit(text = general_opts$password, container = authenticate_group, width = 15)
 
+  if (svalue(server_wid) != "http") {
+    enabled(authenticate_group) <- F
+  } else {
+    (enabled(authenticate_group) <- T)
+  }
+  
+  font(user_lab) <- font(password_lab) <- list(family = "sans",weight = "bold")
+  
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Dates selection
   #- ------------------------------------------------------------------------------- -#
@@ -717,6 +748,10 @@ MODIStsp_GUI <- function(general_opts){
     general_opts$prod_opt_list <- prod_opt_list	# workaround to export prod_opt_list from function.
     # Remember to do "prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL" after running the function!
 
+    general_opts$user = svalue(user_wid)
+    general_opts$password = svalue(password_wid)
+    general_opts$download_server = svalue(server_wid)
+    
     general_opts$start_date <- svalue(start_date_wid)
     general_opts$end_date <- svalue(end_date_wid)
 
@@ -915,6 +950,10 @@ affected by mixed high and low quality data, and in properly keeping track of qu
       # svalue(end_day_wid) <- general_opts$end_day
       # svalue(end_month_wid) <- general_opts$end_month
       # svalue(end_year_wid) <- general_opts$end_year
+      svalue(server_wid) = general_opts$download_server
+      svalue(user_wid) = general_opts$user
+      svalue(password_wid) = general_opts$user
+      
       svalue(start_date_wid) <- general_opts$start_date # Dates options
       svalue(end_date_wid) <- general_opts$end_date
 

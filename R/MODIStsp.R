@@ -8,6 +8,8 @@
 #'  extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 #'  spatial file.
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
+#' @param download_server (optional): service used to download MODIS tiles, one of: 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov).
+#'  If not specified, MODIStsp tries to download using http; if http fails, it tries with ftp.
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -48,7 +50,7 @@
 #'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
 #'     spatial_file_path = single_shape )}
 
-MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA) {
+MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA, download_server=NA) {
 
   if (is.na(MODIStsp_dir)) {
     MODIStsp_dir <- system.file(package = "MODIStsp")
@@ -131,7 +133,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
   # Create the general_opts structure used to communicate with the GUI and set default values
   general_opts <- list(MODIStsp_dir = MODIStsp_dir, previous_file = previous_file,xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
                        sel_prod = "Surf_Ref_8Days_500m (M*D09A1)",sensor = "Terra",start_date = "2015-01-01",end_date = "2015-01-01",
-                       start_x = 18, end_x = 18, start_y = 4, end_y = 4,
+                       start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = '', password = '', download_server = 'http',
                        proj = "Sinusoidal",out_res_sel = "Native", out_res = "",full_ext = "Full Tiles Extent", resampling = "near",out_format = "ENVI",ts_format = "ENVI Meta Files", rts = "Yes",compress = "None",
                        nodata_change = "No",delete_hdf = "No",reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "")
   attr(general_opts,"GeneratedBy") <- "MODIStsp"
@@ -214,7 +216,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
     # launch MODIStsp_process to Download and preprocess the selected images ----
     output <- with(general_opts, MODIStsp_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
                                                   out_folder = out_folder, out_folder_mod = out_folder_mod, reprocess = reprocess,
-                                                  delete_hdf = delete_hdf, sensor = sensor, https = prod_opts$http,
+                                                  delete_hdf = delete_hdf, sensor = sensor, download_server = download_server, 
+                                                  user = user, password = password,
+                                                  https = prod_opts$http, ftps = prod_opts$ftp,
                                                   start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
                                                   full_ext = full_ext, bbox = bbox, out_format = out_format, out_res_sel = out_res_sel,
                                                   out_res = as.numeric(out_res), native_res = prod_opts$native_res,  tiled = prod_opts$tiled,

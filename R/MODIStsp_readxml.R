@@ -34,11 +34,14 @@ MODIStsp_read_xml <- function(previous_file = previous_file, xml_file = xml_file
     prodopts$tiled <- xmlToList(xmltop[[prod]][["tiled"]])
     file_prefix_terra <- xmlToList(xmltop[[prod]][["file_prefix_terra"]])
     http_terra <- xmlToList(xmltop[[prod]][["http_terra"]])
+    ftp_terra <- xmlToList(xmltop[[prod]][["ftp_terra"]])
     file_prefix_aqua <- xmlToList(xmltop[[prod]][["file_prefix_aqua"]])
     http_aqua <- xmlToList(xmltop[[prod]][["http_aqua"]])
+    ftp_aqua <- xmlToList(xmltop[[prod]][["ftp_aqua"]])
     prodopts$www <- xmlToList(xmltop[[prod]][["www"]])
     prodopts$file_prefix <- hash("Terra" = file_prefix_terra,"Aqua" = file_prefix_aqua)
     prodopts$http <- hash("Terra" = http_terra,"Aqua" = http_aqua)
+    prodopts$ftp <- hash("Terra" =ftp_terra,"Aqua" = ftp_aqua)
     prodopts$multiband_bsq <- T
     nbands <- xmlSize(xmltop[[prod]][["bands"]])  # number of original layers
     bandnames <- NULL
