@@ -67,7 +67,7 @@
 #' @importFrom XML xmlParse xmlRoot xmlToList
 #' @import gWidgets
 
-MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor, download_server, https, ftps,
+MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor, download_server, user, password, https, ftps,
                              start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str, nodata_in,
                              nodata_out,nodata_change,rts, datatype,	bandsel, bandnames, indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
                              quality_bandnames, quality_bandsel, quality_bitN ,quality_source, quality_nodata_in, full_ext,
@@ -211,7 +211,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
               #  Download images (If HDF file already in out_mod_folder, it is not redownloaded !!!!
               #- ------------------------------------------------------------------------------- -#
               for (modisname in modislist) {
-
                 # Check file size (if the local file size is differente, re-download)
                 local_filename <- file.path(out_folder_mod,modisname)
                 local_filesize <- file.info(local_filename)$size
@@ -221,19 +220,27 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     paste0(ftp,YEAR,"/",DOY,"/",modisname)
                   }
                 
+                
                 if (download_server == "http") { # in case of http download, try to catch size information from xml file
-                  remote_xml_tries <- 30 # numbers of tryouts for xml metafile
+                 
+                   remote_xml_tries <- 30 # numbers of tryouts for xml metafile
                   remote_xml <- NA
                   class(remote_xml) <- "try-error"
                   while (remote_xml_tries > 0) {
-                    remote_xml <- try(xmlParse(paste0(remote_filename,".xml")))
-                    if (class(remote_xml)[1] == "try-error") {
+                    
+                    tempfile = tempfile()
+                    cookiefile = paste0(tempfile, "cookie")
+                    xmldown = GET(paste0(remote_filename,".xml"),authenticate(user,password))
+                    if (xmldown$status_code != 200) {
                       remote_xml_tries <- remote_xml_tries - 1
                     } else {
+                      writeBin(xmldown$content, tempfile)
+                      remote_xml <- try(xmlParse(tempfile))
                       remote_xml_tries <- 0
+                      unlink(tempfile)
                     }
                   }
-  
+                  
                   # if the xml was available, check the size; otherwise, set as the local size to skip the check
                   if (class(remote_xml)[1] == "try-error") {
   
@@ -241,6 +248,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   } else {
                     remote_filesize <- as.integer(xmlToList(xmlRoot(remote_xml)[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]]))
                   }
+                  
                 } else if (download_server == "ftp") { # in case of ftp download, do not perform the check. 
                   remote_filesize <- local_filesize
                   # TODO: implement check using curl library (http://stackoverflow.com/questions/32488644/retrieve-modified-datetime-of-a-file-from-an-ftp-server)
@@ -256,18 +264,18 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     } else {
                       message("[",date(),"]",mess_text)
                     }	# Update progress window
-                    er <- tryCatch(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = FALSE, cacheOK = FALSE),
-                                   warning = function(war) {
-                                     print(war)
-                                     return(1)
-                                   }, error = function(err) {
-                                     print(err)
-                                     return(1)
-                                   } )
-                    if (er != 0) {	# Stop after 30 failed attempts
+                 
+                    if (download_server == "http") {
+                      download <- GET(remote_filename, authenticate(user, password), progress())
+                    } else {
+                      download <- GET(remote_filename, progress())
+                      }
+                
+                    if ((download$status_code != 200 & download$status_code != 226)) {	# Stop after 30 failed attempts
                       message("[",date(),"] Download Error -Retrying...")
                       unlink(local_filename)
                       Sys.sleep(10)
+                      er = 5
                       ce <- ce + 1
                       if (ce == 30) {
                         # on error, delete last hdf file (to be sure no incomplete files are left behind)
@@ -276,6 +284,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                           warning("[",date(),"] Error: server seems to be down! Please Retry Later!"); stop()
                         }
                       }
+                    } else {
+                      writeBin(download$content, local_filename)
+                      er = 0 
                     }
                   }
                 } # end IF on hdf existence
