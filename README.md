@@ -1,10 +1,11 @@
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp)
 ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg)
 
-# Warning !
+# IMPORTANT NEWS !
 
-The download functionality is currently broken due to changes in NASA access system to data (i.e., username, password request). 
-It will be fixes ASAP !
+Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, the user can specify if downloading data via http or via ftp. In the formercase, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: 
+[https://urs.earthdata.nasa.gov/profile] (https://urs.earthdata.nasa.gov/profile).
+
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
