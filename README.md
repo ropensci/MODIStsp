@@ -1,6 +1,11 @@
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp)
 ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg)
 
+# Warning !
+
+The download functionality is currently broken due to changes in NASA access system to data (i.e., username, password request). 
+It will be fixes ASAP !
+
 # Table of contents
 1. [MODIStsp](#MODIStsp)
 2. [Installation](#Installation)
