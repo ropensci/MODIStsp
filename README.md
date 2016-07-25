@@ -3,7 +3,7 @@
 
 # Important News !!!!!
 
-Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, the user can specify if downloading data via http or via ftp. In the formercase, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: https://urs.earthdata.nasa.gov/profile.
+Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, the user can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: https://urs.earthdata.nasa.gov/profile.
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
