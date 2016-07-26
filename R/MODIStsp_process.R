@@ -235,7 +235,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     cookiefile = paste0(tempfile, "cookie")
                     
                     xmldown = try(GET(paste0(remote_filename,".xml"),authenticate(user,password), timeout(5)))
-                    browser() # Check if download was good: check class of xmldown and status of xmldown
+                    # Check if download was good: check class of xmldown and status of xmldown
                     if (class(xmldown) == "try-error") {
                       remote_xml_tries <- remote_xml_tries - 1
                     } else {
