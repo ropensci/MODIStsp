@@ -239,7 +239,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     if (class(xmldown) == "try-error") {
                       remote_xml_tries <- remote_xml_tries - 1
                     } else {
-                      if (xmldown$status_code != 200 & download$status_code != 226) {
+                      if (xmldown$status_code != 200 & xmldown$status_code != 226) {
                         remote_xml_tries <- remote_xml_tries - 1
                       } else {
                         writeBin(xmldown$content, tempfile)
