@@ -218,10 +218,11 @@ MODIStsp_GUI <- function(general_opts){
   })
   authenticate_group = ggroup(container = methods_group)
   user_lab <- glabel(text = " User Name:", container = authenticate_group)
-  user_wid = gedit(text = general_opts$user, container = authenticate_group, width = 15)
+  user_wid <- gedit(text = general_opts$user, container = authenticate_group, width = 15)
   addSpace(authenticate_group,9)
   password_lab <- glabel(text = " Password:", container = authenticate_group)
-  password_wid = gedit(text = general_opts$password, container = authenticate_group, width = 15)
+  password_wid <- gedit(text = general_opts$password, container = authenticate_group, width = 15)
+  visible(password_wid) <- FALSE
 
   if (svalue(server_wid) != "http") {
     enabled(authenticate_group) <- F

@@ -133,7 +133,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
   # Create the general_opts structure used to communicate with the GUI and set default values
   general_opts <- list(MODIStsp_dir = MODIStsp_dir, previous_file = previous_file,xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
                        sel_prod = "Surf_Ref_8Days_500m (M*D09A1)",sensor = "Terra",start_date = "2015-01-01",end_date = "2015-01-01",
-                       start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = '', password = '', download_server = 'http',
+                       start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
                        proj = "Sinusoidal",out_res_sel = "Native", out_res = "",full_ext = "Full Tiles Extent", resampling = "near",out_format = "ENVI",ts_format = "ENVI Meta Files", rts = "Yes",compress = "None",
                        nodata_change = "No",delete_hdf = "No",reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "")
   attr(general_opts,"GeneratedBy") <- "MODIStsp"
