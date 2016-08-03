@@ -4,7 +4,8 @@
 \alias{lpdaac_getmod_names}
 \title{lpdaac_getmod_names}
 \usage{
-lpdaac_getmod_names(http, ftp, used_server, date_dir, v, h, tiled, gui)
+lpdaac_getmod_names(http, ftp, used_server, user, password, date_dir, v, h,
+  tiled, gui)
 }
 \arguments{
 \item{http}{string http site on lpdaac corresponding to a given MODIS product}
@@ -12,6 +13,10 @@ lpdaac_getmod_names(http, ftp, used_server, date_dir, v, h, tiled, gui)
 \item{ftp}{string ftp site corresponding to a given MODIS product}
 
 \item{used_server}{string can assume values "http" or "ftp" depending on the used download server; it cannot be NA}
+
+\item{user}{username for earthdata server}
+
+\item{password}{password for earthdata server}
 
 \item{date_dir}{array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)}
 
