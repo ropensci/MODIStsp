@@ -184,7 +184,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
       # Get a list of the folders containing hdf images required (Corresponding to the subfolders in lpdaac corresponding to
       # selected product, dates, and current year under processing)
       
-      date_dirs_all <- lpdaac_getmod_dirs(ftp = ftp, http = http, used_server = download_server, gui = gui, .Platform = .Platform)
+      date_dirs_all <- lpdaac_getmod_dirs(ftp = ftp, http = http, used_server = download_server, user = user, password = password, gui = gui, .Platform = .Platform)
       download_server <- attr(date_dirs_all, "server") # overwrite with the used setting (if already specified it does not change, if NA, it is set with the working one)
       date_dirs <- lpdaac_getmod_dates(dates = dates, date_dirs =  date_dirs_all)  # First, find the folders in lpdaac corresponding to the required dates
       
@@ -203,7 +203,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
           if (check_files == FALSE | reprocess == "Yes") {  		# If not all output files are already present or reprocess = "Yes", start downloading hdfs
             
             # Create vector of image names required (corresponding to the selected tiles, within current dir)
-            modislist <- lpdaac_getmod_names(http = http, ftp = ftp, used_server = download_server, date_dir = date_dirs[date], v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), tiled, gui = gui)
+            modislist <- lpdaac_getmod_names(http = http, ftp = ftp, used_server = download_server, user = user, password = password, date_dir = date_dirs[date], v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), tiled, gui = gui)
             
             # ---------------------------------- ----------------------------------------------#
             # Download and preprocess Imagesin modislist vector -----------
@@ -222,6 +222,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 } else if (download_server == "ftp") {
                   paste0(ftp,YEAR,"/",DOY,"/",modisname)
                 }
+                browser()
                 
                 
                 if (download_server == "http") { # in case of http download, try to catch size information from xml file
@@ -231,27 +232,30 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   class(remote_xml) <- "try-error"
                   while (remote_xml_tries > 0) {
                     
-                    tempfile = tempfile()
-                    cookiefile = paste0(tempfile, "cookie")
+                    
                     
                     xmldown = try(GET(paste0(remote_filename,".xml"),authenticate(user,password), timeout(5)))
                     # Check if download was good: check class of xmldown and status of xmldown
                     if (class(xmldown) == "try-error") {
                       remote_xml_tries <- remote_xml_tries - 1
                     } else {
-                      if (xmldown$status_code != 200 & xmldown$status_code != 226) {
+                      if (xmldown$status_code != 200 ) {   #& xmldown$status_code != 226
                         remote_xml_tries <- remote_xml_tries - 1
                       } else {
-                        writeBin(xmldown$content, tempfile)
-                        remote_xml <- try(xmlParse(tempfile))
+                        tempfile = tempfile()
+                        cookiefile = paste0(tempfile, "cookie")
+                        remote_xml <- content(xmldown, "xml")
+                        # writeBin(xmldown$content, tempfile)
+                        # remote_xml <- try(xmlParse(tempfile))
                         remote_xml_tries <- 0
-                        unlink(tempfile)
+                        # unlink(tempfile)
+                        # browser()
                       }
                     }
                   }
                   
                   # if the xml was available, check the size; otherwise, set as the local size to skip the check
-                  if (class(remote_xml)[1] == "try-error") {
+                  if (class(xmldown)[1] == "try-error") {
                     
                     remote_filesize <- local_filesize
                   } else {
@@ -275,9 +279,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     }	# Update progress window
                     
                     if (download_server == "http") {
-                      download <- GET(remote_filename, authenticate(user, password), progress(), timeout(0.1))
+                      download <- GET(remote_filename, authenticate(user, password), progress(), timeout(5))
                     } else {
-                      download <- GET(remote_filename, progress())
+                      download <- GET(remote_filename, progress(), timeout(5))
                     }
                     
                     if (class(download) == "try-error") {
