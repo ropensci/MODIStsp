@@ -10,6 +10,7 @@
 #' @importFrom gdalUtils gdalinfo gdalsrsinfo ogrinfo
 #' @importFrom sp CRS
 #' @importFrom rgeos show
+#' @importFrom stats na.omit
 #' @note License: GPL 3.0
 #'
 #' @importFrom sp CRS

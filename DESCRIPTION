@@ -2,8 +2,8 @@ Package: MODIStsp
 Title: An R package for automatic download and preprocessing of time series of
     MODIS Land Products data
 Type: Package
-Version: 1.2.1
-Date: 2016-04-20
+Version: 1.2.2
+Date: 2016-08-03
 url: https://github.com/lbusett/MODIStsp/
 Authors@R: c(person("Lorenzo", "Busetto", , "busetto.l@irea.cnr.it", role = c("aut", "cre")),
            person("Luigi", "Ranghetti", , "ranghetti.l@irea.cnr.it", role = c("aut")))

@@ -8,8 +8,8 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @param http string http site on lpdaac corresponding to a given MODIS product
 #' @param ftp string ftp site corresponding to a given MODIS product
 #' @param used_server string can assume values "http" or "ftp" depending on the used download server; if NA, the script tries to download with http, using ftp if the download fails
-#' @user username for earthdata server
-#' @password password for earthdata server
+#' @param user username for earthdata server
+#' @param password password for earthdata server
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
 #' @param .Platform string os platform (from call to .Platform)
 #' @return list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
@@ -19,7 +19,9 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @note License: GPL 3.0
 #' @importFrom gWidgets gconfirm
 #' @importFrom RCurl getURL
-#' @importFrom httr GET content authenticate
+#' @importFrom httr GET content authenticate timeout
+#' @importFrom stringr str_extract
+#' @importFrom utils download.file
 
 lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, password = password, gui, .Platform) {
   
@@ -60,7 +62,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
         }
         
         if (class(items) != "try-error") { # on good response, parse the contents to retrieve the date folders
-          # run only if ftp download works
+          # run only if http download works
           items <- items[-1]
           # get the directory names (available dates)
           date_dirs <- unlist(lapply(strsplit(items, ">"), function(x) { x[length(x) - 1] }))
@@ -99,34 +101,31 @@ check_used_server <- if (is.na(used_server)) TRUE else if (used_server != "http"
 if (class(items) == "try-error" & check_used_server) {
   
   while (class(items) == "try-error") {
-     # items <- try(strsplit(getURL(ftp, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
-     # silent = TRUE)
-    response = try(GET(ftp,timeout(10), authenticate(user, password)))   # send request to server
     
-    if (class(response) == "try-error") {   # if error on response, retry
+     items <- try(strsplit(getURL(ftp, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)), "\r*\n")[[1]],
+     silent = TRUE)
+    # response = try(GET(ftp,timeout(10)))   # send request to server
+    
+    if (class(items) == "try-error") {   # if error on response, retry
       Sys.sleep(1)
       ce <- ce + 1
+      
       message("Trying to reach ftp server - attempt ", ce)
-    } else { # If good response, get the result
-      if (response$status_code == 200) {
-        items <- strsplit(content(response, "text"), "\r*\n")[[1]]
-      } else {
-        ce <- ce + 1
-        message("Trying to reach ftp server - attempt ", ce)
-      }
-    }
+    } 
     
   if (class(items) != "try-error") {
     # run only if ftp download works
     
-    items_1 <- items[!is.na(as.integer(items))] # maintaining only directories with numeric names (year)
+    items_1 = str_extract(items,"20[0-9][0-9]$")
+    items_1 = items_1[!is.na(items_1)]
     items_2 <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
         .opts = list(timeout = 10,maxredirs = 5,verbose = FALSE)),"\r*\n")
     full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(items_2[x]), items_2[[x]], "/")}))
     date_dirs <- sapply(strsplit(full_dirs, "/"), function(x) {strftime(as.Date(paste(x[length(x) - 1], x[length(x)]), format = "%Y %j"), "%Y.%m.%d")})
     attr(date_dirs, "server") <- "ftp"
+    
   } else {
-    if (ce == 2)  {
+    if (ce == 50)  {
       if (gui) {
         # ask to retry only if gui=TRUE
         confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", 
@@ -169,6 +168,8 @@ return(date_dirs)
 #' email: busetto.l@@irea.cnr.it
 #' license GPL 3.0
 #' @import RCurl
+#' @importFrom httr GET content authenticate timeout 
+#' 
 lpdaac_getmod_dates <- function(dates, date_dirs) {
   if (length(dates) > 1) {
     start.date <- strsplit(dates[1], "\\.")[[1]]
@@ -220,8 +221,8 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' @param http string http site on lpdaac corresponding to a given MODIS product
 #' @param ftp string ftp site corresponding to a given MODIS product
 #' @param used_server string can assume values "http" or "ftp" depending on the used download server; it cannot be NA
-#' @user username for earthdata server
-#' @password password for earthdata server
+#' @param user username for earthdata server
+#' @param password password for earthdata server
 #' @param date_dir array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)
 #' @param v int. array containing a sequence of the vertical tiles of interest (e.g., c(18,19))
 #' @param h int. array containing a sequence of the horizontal  tiles of interest (e.g., c(3,4))
@@ -288,10 +289,11 @@ lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir,
       date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
       date_doy <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
       while (class(getlist) == "try-error") {
-        getlist <- getlist <- GET(paste0(http, date_dir, "/"), timeout = 5, authenticate(user, password))
-          # try(strsplit(getURL(paste(ftp, date_year, "/", date_doy, "/", sep = ""), ftp.use.epsv = FALSE,
-            # dirlistonly = TRUE,.opts = list(timeout = 10, maxredirs = 5, verbose = TRUE ) ),
-            # "\r*\n")[[1]], silent = TRUE)
+        # getlist <- try(strsplit(content(GET(paste0(http, date_dir, "/"), timeout = 5, authenticate(user, password)),"\r*\n"))
+         getlist <- try(strsplit(getURL(paste(ftp, date_year, "/", date_doy, "/", sep = ""), ftp.use.epsv = FALSE,
+          dirlistonly = TRUE,.opts = list(timeout = 10, maxredirs = 5, verbose = FALSE ) ),
+          "\r*\n")[[1]], silent = TRUE)
+         
         if (class(getlist) == "try-error") {
           Sys.sleep(1)
           message("Trying to reach ftp server - attempt ", ce)
@@ -332,8 +334,7 @@ lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir,
             hc <- paste0("0", as.character(hh))
           else
             hc <- as.character(hh)
-          ModisName <-
-            grep(".hdf$", grep(paste0("h", hc, "v", vc), getlist, value = TRUE), value = TRUE)
+          ModisName <- grep(".hdf$", grep(paste0("h", hc, "v", vc), getlist, value = TRUE), value = TRUE)
           if (length(ModisName) >= 1)
             Modislist <- c(Modislist, ModisName[1])
         }

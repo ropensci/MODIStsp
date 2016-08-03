@@ -13,6 +13,8 @@
 #' @importFrom hash keys
 #' @importFrom raster crop extent raster plot
 #' @importFrom sp CRS
+#' @importFrom grDevices dev.new
+#' @importFrom utils browseURL head tail
 #' @import gWidgets
 
 MODIStsp_GUI <- function(general_opts){
