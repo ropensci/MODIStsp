@@ -281,7 +281,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     
                     if (download_server == "http") {
                       download <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
-                      browser()
                     } else {
                       
                       download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = TRUE, cacheOK = FALSE,
