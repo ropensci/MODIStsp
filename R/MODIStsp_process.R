@@ -241,13 +241,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       if (xmldown$status_code != 200 ) {   #& xmldown$status_code != 226
                         remote_xml_tries <- remote_xml_tries - 1
                       } else {
-                        # tempfile = tempfile()
-                        # cookiefile = paste0(tempfile, "cookie")
+                        
                         remote_xml <- content(xmldown, "text")
                         remote_xml <- try(xmlParse(remote_xml))
                         remote_xml_tries <- 0
-                        # unlink(tempfile)
-                        # browser()
+                        
                       }
                     }
                   }
@@ -281,6 +279,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     
                     if (download_server == "http") {
                       download <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
+                      
                     } else {
                       
                       download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = TRUE, cacheOK = FALSE,
@@ -295,7 +294,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       Sys.sleep(10)
                     } else {
                       if (download_server == "http") {
-                        if (download$status_code != 200) {	
+                        if (download$status_code != 200 & length(content(download, "text")) > 1) {	
                           message("[",date(),"] Download Error - Retrying...")
                           unlink(local_filename) # on error, delete last hdf file (to be sure no incomplete files are left behind and send message)
                           Sys.sleep(10)
