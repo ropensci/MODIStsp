@@ -26,6 +26,8 @@ NASA recently switched to provision of Collection 6 datasets for most Land Produ
 
 **IMPORTANT:** _MODIStsp_ requires [R](http://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
 
+**22/08/2016 - NOTE:** There seem to be some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github problem ? ). We are working to understand the issue ! 
+
 ### On Windows
 
 1. Install and load the ```gWidgetsRGtk2``` package:
