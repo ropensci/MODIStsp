@@ -150,6 +150,9 @@ if (class(items) == "try-error" & check_used_server) {
   }
 }
 
+# If the server is definitively down, create an empty date_dir in order not to get error
+if (!exists("date_dirs")) {date_dirs <- character(0); attr(date_dirs, "server") <- "http"}
+
 return(date_dirs)
 
 }
