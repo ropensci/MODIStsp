@@ -1,7 +1,21 @@
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
 ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg)
 
-Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, the user can specify if downloading data via http or via ftp. In the formercase, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: https://urs.earthdata.nasa.gov/profile.
+# News !
+
+* **22/08/2016**
+
+There seem to be currently some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github). We are working to understand the issue. For the time being, installing the development version of devtools could solve the issue. To do so, please try doing: 
+  ```
+    install.packages(c("devtools"))
+    devtools::install_github("hadley/devtools")
+    library(devtools)
+ ```
+ , then continue with standard "MODIStsp" installation. If you still don't succedd, please try contacting us ! 
+
+* **20/07/2016**
+
+Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, the user can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: https://urs.earthdata.nasa.gov/profile.
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
@@ -23,8 +37,6 @@ NASA recently switched to provision of Collection 6 datasets for most Land Produ
 ## Installation <a name="Installation"></a> 
 
 **IMPORTANT:** _MODIStsp_ requires [R](http://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
-
-**22/08/2016 - NOTE:** There seem to be some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github problem ? ). We are working to understand the issue ! 
 
 ### On Windows
 
