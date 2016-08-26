@@ -5,12 +5,11 @@
 
 * **22/08/2016**
 
-There seem to be currently some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github). We are working to understand the issue. For the time being, installing the development version of devtools could solve the issue. To do so, please try doing: 
+There seem to be currently some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github). We are working to understand the issue. For the time being, manually installing all the dependencies could solve the issue. To do so, please try doing: 
   ```
-    install.packages(c("devtools"))
-    devtools::install_github("hadley/devtools")
-    library(devtools)
- ```
+    install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets", "hash", "plyr", "raster", "RCurl",
+      "rgdal", "rgeos", "xts", "XML", "sp", "stringr", "httr"))
+  ```
  , then continue with standard "MODIStsp" installation. If you still don't succedd, please try contacting us ! 
 
 * **20/07/2016**
