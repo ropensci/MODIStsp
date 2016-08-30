@@ -16,7 +16,6 @@
 #' @importFrom hash hash
 MODIStsp_read_xml <- function(previous_file = previous_file, xml_file = xml_file) {
   
-browser()
   prod_opt_list <- NULL
   mod_prod_list <- NULL
 
