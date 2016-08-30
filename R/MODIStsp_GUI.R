@@ -13,8 +13,6 @@
 #' @importFrom hash keys
 #' @importFrom raster crop extent raster plot
 #' @importFrom sp CRS
-#' @importFrom grDevices dev.new
-#' @importFrom utils browseURL head tail
 #' @import gWidgets
 
 MODIStsp_GUI <- function(general_opts){
@@ -58,10 +56,15 @@ MODIStsp_GUI <- function(general_opts){
   temp_wid_bands_quality <<- prod_opt_list[[checked]]$quality_bandsel
   
   labels_group <- ggroup(horizontal = TRUE, container = satprod_frame)
-  label <- glabel(text = "			        	Product ", container = labels_group)
-  addSpace(labels_group, 130)
-  label2 <- glabel(text = "  Platform ", container = labels_group)
   addSpace(labels_group, 65)
+  label <- glabel(text = "Product", container = labels_group)
+  addSpace(labels_group, 130)
+  label2 <- glabel(text = "Platform", container = labels_group)
+  addSpace(labels_group, 65)
+  label2 <- glabel(text = "Version", container = labels_group)
+  addSpace(labels_group, 65)
+  label3 <- glabel(text = "Processing Layers", container = labels_group)
+  
   label3 <- glabel(text = "        Processing Layers", container = labels_group)
   
   font(label) <- font(label2) <- font(label3) <- list(family = "sans",weight = "bold", size = "medium")
@@ -92,6 +95,14 @@ MODIStsp_GUI <- function(general_opts){
   sens_wid <- gdroplist(items = c("Terra","Aqua", "Both"), container = prod_group, text = "Select Layers",
                         selected = match(general_opts$sensor, c("Terra","Aqua", "Both")))
   addSpace(satprod_frame, 20, horizontal = TRUE)
+  
+  # #- ------------------------------------------------------------------------------- -#
+  # # Widgets for Version selection
+  # #- ------------------------------------------------------------------------------- -#
+  # vers_wid <- gdroplist(items = c("Terra","Aqua", "Both"), container = prod_group, text = "Select Version",
+  #                       selected = match(general_opts$sensor, c("Terra","Aqua", "Both")))
+  # addSpace(satprod_frame, 20, horizontal = TRUE)
+  
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Layers selection
