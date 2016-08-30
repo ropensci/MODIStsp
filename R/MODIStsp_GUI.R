@@ -773,6 +773,7 @@ MODIStsp_GUI <- function(general_opts){
     general_opts <- tmp_general_opts; rm(tmp_general_opts)
     
     general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
+    general_opts$sel_version <- prod_opt_list[[general_opts$sel_prod]][[which(sapply(prod_opt_list[[general_opts$sel_prod]],function(x){x$v_number}) == svalue(vers_wid))]]$v_number
     # sel_prod = general_opts$sel_prod    # When saving, set sel_prod to current selection (may be good to change)
     general_opts$sensor <- svalue(sens_wid)
     
