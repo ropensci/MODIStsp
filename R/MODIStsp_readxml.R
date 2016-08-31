@@ -34,9 +34,9 @@ MODIStsp_read_xml <- function(previous_file = previous_file, xml_file = xml_file
     for (n_version in 1:n_versions) {
 
       # General info
-      version_name <- paste0("v",xmlToList(xmltop[[prod]][["versions"]][[n_version]][["v_number"]]))
+      version_name <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["v_number"]])
       prodopts[[version_name]] <- list()	# one element per version
-      prodopts[[version_name]]$v_number <- gsub("^v(.+)","\\1",version_name)
+      prodopts[[version_name]]$v_number <- version_name
       # prodopts[[version_name]]$fullname <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["prod_fullname"]])
       prodopts[[version_name]]$main_out_folder <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["main_out_folder"]])
       prodopts[[version_name]]$native_res <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["native_res"]])

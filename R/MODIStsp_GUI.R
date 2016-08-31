@@ -40,23 +40,21 @@ MODIStsp_GUI <- function(general_opts){
   
   main_win <- gbasicdialog(title = "Select Main Processing Options", parent = NULL, do.buttons = FALSE)
   main_group <- ggroup(container = main_win, horizontal = FALSE, expand = TRUE)
-  sel_prod <- general_opts$sel_prod # get the product name selectedin the previous options file
-  
+
   #- ------------------------------------------------------------------------------- -#
   # Widgets for product selection and bands selection
   #- ------------------------------------------------------------------------------- -#
   satprod_frame <- gframe(text = "<span foreground='blue' size='x-large'>MODIS Product, Satellites and Layers selection</span>",
                           markup = TRUE,horizontal = FALSE, container = main_group)
+
   
   checked <- which(mod_prod_list == general_opts$sel_prod)
   prod_versions <- sapply(prod_opt_list[[checked]],function(x){x[["v_number"]]})
   sel_version <- which(prod_versions == general_opts$prod_version)
   
   # set dummy global variables holding the initial values of selected bands
-  temp_wid_bands <<- prod_opt_list[[checked]][[sel_version]]$bandsel
-  temp_wid_bands_indexes <<- prod_opt_list[[checked]][[sel_version]]$indexes_bandsel
-  temp_wid_bands_quality <<- prod_opt_list[[checked]][[sel_version]]$quality_bandsel
-
+  temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
+  
   labels_group <- ggroup(horizontal = TRUE, container = satprod_frame)
   addSpace(labels_group, 140)
   label <- glabel(text = "Product", container = labels_group)
@@ -73,16 +71,12 @@ MODIStsp_GUI <- function(general_opts){
   # Widgets for Product selection
   #- ------------------------------------------------------------------------------- -#
   prod_group <- ggroup(horizontal = TRUE, container = satprod_frame)
-  prod_wid <- gdroplist(items = mod_prod_list, container = prod_group, horizontal = TRUE, selected = checked,  handler = function(h,...) {
-    checked <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]		# find index of sel. product
-    prod_versions <- sapply(prod_opt_list[[checked]],function(x){x[["v_number"]]})
-    sel_version <- length(prod_versions) # the last one is selected by default
-    sel_prod <- svalue(prod_wid)
+  prod_wid <- gdroplist(items = mod_prod_list, container = prod_group, horizontal = TRUE, selected = match(general_opts$sel_prod, mod_prod_list),  handler = function(h,...) {
     # Select the last version (it assumes that versions in xml file are in increasing order)
-    vers_wid[] <- prod_versions
-    svalue(vers_wid) <- prod_versions[sel_version]
+    vers_wid[] <- names(prod_opt_list[[svalue(prod_wid)]])
+    svalue(vers_wid) <- prod_opt_list[[svalue(prod_wid)]][[length(prod_opt_list[[svalue(prod_wid)]])]]$v_number
     # Disable sensor choice for combined datasets
-    if (prod_opt_list[[checked]][[sel_version]]$combined == 1) {
+    if (prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$combined == 1) {
       enabled(sens_wid) <- FALSE
       sens_wid[] <- "Combined"
       svalue(sens_wid) <- "Combined"
@@ -92,7 +86,7 @@ MODIStsp_GUI <- function(general_opts){
       svalue(sens_wid) <- general_opts$sensor
     }
     # On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
-    if (prod_opt_list[[checked]][[sel_version]]$tiled == 0) {
+    if (prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$tiled == 0) {
       enabled(tiles_group) <- FALSE
       svalue(proj_wid) <- "Latlon WGS84"
     } else {
@@ -100,16 +94,14 @@ MODIStsp_GUI <- function(general_opts){
       svalue(proj_wid) <- "Sinusoidal"
     }
     # reset dummy variables for band selection to 0 on product change
-    temp_wid_bands <<- rep(0, length(prod_opt_list[[checked]][[sel_version]]$bandsel))
-    temp_wid_bands_indexes <<- rep(0, length(prod_opt_list[[checked]][[sel_version]]$indexes_bandsel))
-    temp_wid_bands_quality <<- rep(0, length(prod_opt_list[[checked]][[sel_version]]$quality_bandsel))
+    temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
   })
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Sensor selection
   #- ------------------------------------------------------------------------------- -#
   sens_wid <- gdroplist(items = c("Combined"), container = prod_group, text = "Select Layers", selected = 1)
-  if (prod_opt_list[[checked]][[sel_version]]$combined == 1) {
+  if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$combined == 1) {
     enabled(sens_wid) <- FALSE
   } else {
     sens_wid[] <- c("Terra","Aqua","Both")
@@ -120,13 +112,11 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Version selection
   #- ------------------------------------------------------------------------------- -#
-  vers_wid <- gdroplist(items = prod_versions, container = prod_group, text = "Select Version", selected = match(general_opts$prod_version, prod_versions), handler = function(h,...) {
-    prod_versions <- sapply(prod_opt_list[[checked]],function(x){x[["v_number"]]})
-    # # reset dummy variables for band selection to 0 on product change
-    temp_wid_bands <<- rep(0, length(prod_opt_list[[checked]][[sel_version]]$bandsel))
-    temp_wid_bands_indexes <<- rep(0, length(prod_opt_list[[checked]][[sel_version]]$indexes_bandsel))
-    temp_wid_bands_quality <<- rep(0, length(prod_opt_list[[checked]][[sel_version]]$quality_bandsel))
-  })
+  vers_wid <- gdroplist(items = sapply(prod_opt_list[[svalue(prod_wid)]],function(x){x[["v_number"]]}),
+    container = prod_group, text = "Select Version", selected = match(general_opts$prod_version, names(prod_opt_list[[svalue(prod_wid)]])), handler = function(h,...) {
+      # reset dummy variables for band selection to 0 on product change
+      temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
+    })
   
   addSpace(satprod_frame, 20, horizontal = TRUE)
   
@@ -137,9 +127,7 @@ MODIStsp_GUI <- function(general_opts){
                       handler = function(h,....) {
                         
                         load(general_opts$previous_file)
-                        checked <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]		# find index of sel. product
-                        sel_version <- which(prod_versions == svalue(vers_wid))
-                        check_names <- prod_opt_list[[checked]][[sel_version]]$band_fullnames					# retrieve band names of sel. product
+                        check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
                         check_wid <- temp_wid_bands												# retrieve currently selected original layers
                         selgroup <- gbasicdialog(title = "Select Processing Layers						", parent = NULL, do.buttons = FALSE, width = 450, horizontal = TRUE)
                         
@@ -150,7 +138,7 @@ MODIStsp_GUI <- function(general_opts){
                                                     container = cbox, use.table = FALSE, width = 450)
                         
                         # widgets for band selection - quality
-                        check_names_quality <- prod_opt_list[[checked]][[sel_version]]$quality_fullnames # retrieve quality band names (if existing for sel. product)
+                        check_names_quality <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$quality_fullnames # retrieve quality band names (if existing for sel. product)
                         if ( !is.null(check_names_quality) ) {
                           check_wid_quality <- temp_wid_bands_quality						    # retrieve currently selected quality layers (if existing for sel. product)
                           cbox_quality <- gframe(text = "<span foreground='blue' size='x-large'>		Quality Indicators				</span>", markup = TRUE, container = cbox_total, horizontal = FALSE, width = 450)
@@ -159,7 +147,7 @@ MODIStsp_GUI <- function(general_opts){
                         }
                         
                         # widgets for band selection - indexes ----
-                        check_names_indexes <- prod_opt_list[[checked]][[sel_version]]$indexes_fullnames # retrieve indexes band names (if existing for sel. product)
+                        check_names_indexes <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$indexes_fullnames # retrieve indexes band names (if existing for sel. product)
                         if (!is.null(check_names_indexes)) {
                           check_wid_indexes <- temp_wid_bands_indexes							# retrieve currently selected indexes layers
                           cbox_indexes <- gframe(text = "<span foreground='blue' size='x-large'>		Additional Spectral Indexes				</span>", markup = TRUE, container = cbox_total, horizontal = FALSE, width = 450)
@@ -233,7 +221,7 @@ MODIStsp_GUI <- function(general_opts){
                         
                         # Widget for "www" button ----
                         addSpace(bands_group, 760, horizontal = TRUE)
-                        www_but <- gbutton(text = "Product details", container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[checked]][[sel_version]]$www))
+                        www_but <- gbutton(text = "Product details", container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$www))
 
                         visible(selgroup, set = TRUE)    # visualize band selection widgets
 
@@ -318,7 +306,6 @@ MODIStsp_GUI <- function(general_opts){
   
   ## Function to update the selected tiles with the intersection with the bounding box
   update_tiles <- function(bbox,...) {
-    # browser()
     bbox_mod <- reproj_bbox(bbox, svalue(output_proj4_wid), general_opts$MOD_proj_str, enlarge = TRUE)
     d_bbox_mod_tiled <- crop(modis_grid,extent(bbox_mod))
     svalue(start_x_wid)  <- min(d_bbox_mod_tiled$H)
@@ -438,7 +425,7 @@ MODIStsp_GUI <- function(general_opts){
   #	size(start_y_lab) = c(120,20)
   # 	size(start_y_wid) = size(end_y_wid) = size(end_y_lab) = size(start_y_start) = c(35,25)
 
-  if (prod_opt_list[[checked]][[sel_version]]$tiled == 0) {
+  if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$tiled == 0) {
     enabled(tiles_group) <- FALSE
   } else {
     (enabled(tiles_group) <- TRUE)
@@ -773,20 +760,20 @@ MODIStsp_GUI <- function(general_opts){
     general_opts <- tmp_general_opts; rm(tmp_general_opts)
     
     general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
-    general_opts$sel_version <- prod_opt_list[[general_opts$sel_prod]][[which(sapply(prod_opt_list[[general_opts$sel_prod]],function(x){x$v_number}) == svalue(vers_wid))]]$v_number
+    general_opts$prod_version <- prod_opt_list[[general_opts$sel_prod]][[which(sapply(prod_opt_list[[general_opts$sel_prod]],function(x){x$v_number}) == svalue(vers_wid))]]$v_number
     # sel_prod = general_opts$sel_prod    # When saving, set sel_prod to current selection (may be good to change)
     general_opts$sensor <- svalue(sens_wid)
     
     if (exists("temp_wid_bands")) {
-      prod_opt_list[[general_opts$sel_prod]][[sel_version]]$bandsel <- temp_wid_bands			#retrieve selected bands
+      prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$bandsel <- temp_wid_bands			#retrieve selected bands
 
     }
     if (exists("temp_wid_bands_indexes")) {
-      prod_opt_list[[general_opts$sel_prod]][[sel_version]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
+      prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
 
     }
     if (exists("temp_wid_bands_quality")) {
-      prod_opt_list[[general_opts$sel_prod]][[sel_version]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
+      prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
 
     }
     general_opts$prod_opt_list <- prod_opt_list	# workaround to export prod_opt_list from function.
@@ -836,16 +823,15 @@ MODIStsp_GUI <- function(general_opts){
     
     # Check if at least 1 layer selected
 
-    if (max(prod_opt_list[[general_opts$sel_prod]][[general_opts$sel_version]]$bandsel) +
-        ifelse((length(prod_opt_list[[general_opts$sel_prod]][[general_opts$sel_version]]$indexes_bandsel) > 0), max(prod_opt_list[[general_opts$sel_prod]][[general_opts$sel_version]]$indexes_bandsel),0) +
-        max(prod_opt_list[[general_opts$sel_prod]][[general_opts$sel_version]]$quality_bandsel) == 0) {
+    if (max(prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$bandsel) +
+        ifelse((length(prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$indexes_bandsel) > 0), max(prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$indexes_bandsel),0) +
+        max(prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$quality_bandsel) == 0) {
       gmessage("No Output bands or indexes selected - Please Correct !", title = "Warning")
       check_save_opts <<- FALSE
     }
     
     # Check if dates, processing extent and tiles selection make sense
-    if (as.Date(general_opts$start_date) >
-        as.Date(general_opts$end_date)) {
+    if (as.Date(general_opts$start_date) > as.Date(general_opts$end_date)) {
       gmessage("Ending date earlier than starting date - Please correct !", title = "Warning")
       check_save_opts <<- FALSE
     }
@@ -861,6 +847,8 @@ MODIStsp_GUI <- function(general_opts){
     }
     
     # Check if bbox is consistent
+
+    suppressWarnings(general_opts$bbox <- as.numeric(general_opts$bbox))
     
     general_opts$bbox <- as.numeric(general_opts$bbox)
     n_bbox_compiled <- length(which(is.finite(general_opts$bbox)))
@@ -989,12 +977,12 @@ MODIStsp_GUI <- function(general_opts){
     if (!is.na(choice)) {
       load(choice)  # load file and reset all widgets to values found in the loaded file
       svalue(prod_wid) <- general_opts$sel_prod
-      
+      svalue(vers_wid) <- general_opts$prod_version
       svalue(sens_wid) <- general_opts$sensor
 
-      temp_wid_bands <<- prod_opt_list[[general_opts$sel_prod]][[general_opts$sel_version]]$bandsel				# set dummy variables holding the initial values of selected bands
-      temp_wid_bands_indexes <<- prod_opt_list[[general_opts$sel_prod]][[general_opts$sel_version]]$indexes_bandsel
-      temp_wid_bands_quality <<- prod_opt_list[[general_opts$sel_prod]][[general_opts$sel_version]]$quality_bandsel
+      temp_wid_bands <<- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$bandsel				# set dummy variables holding the initial values of selected bands
+      temp_wid_bands_indexes <<- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$indexes_bandsel
+      temp_wid_bands_quality <<- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$quality_bandsel
 
       # svalue(start_day_wid) <- general_opts$start_day
       # svalue(start_month_wid) <- general_opts$start_month

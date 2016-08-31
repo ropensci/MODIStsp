@@ -156,7 +156,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
     } else {
       cat("[",date(),"] Processing Options file not found ! Exiting !\n"); stop()
     }
-    prod_opts <- prod_opt_list[[general_opts$sel_prod]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
+    prod_opts <- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
 
     # Create variables needed to launch the processing
     # start_date <- paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = ".")
