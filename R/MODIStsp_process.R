@@ -96,7 +96,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     mess <- gwindow(title = "Processing Status", container = TRUE, width = 400, height = 40)
     mess_lab <- glabel(text = paste("---",mess_text,"---"), editable = FALSE, container = mess)
   } else {
-    message("[",date(),"]",mess_text)
+    message("[",date(),"] ",mess_text)
   }
   
   if (sensor == "Both") {
@@ -176,11 +176,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
       
       # Processing status message
       
-      mes_text <- paste("Retrieving Files for Year ",as.character(yy))
+      mes_text <- paste("Retrieving Files for Year",as.character(yy))
       if (gui) {
         svalue(mess_lab) <- paste("---",mess_text,"---")
       } else {
-        message("[",date(),"]",mess_text)
+        message("[",date(),"] ",mess_text)
       }
       
       # Get a list of the folders containing hdf images required (Corresponding to the subfolders in lpdaac corresponding to
@@ -207,12 +207,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
           if (check_files == FALSE | reprocess == "Yes") {  		# If not all output files are already present or reprocess = "Yes", start downloading hdfs
             
             # Create vector of image names required (corresponding to the selected tiles, within current dir)
-browser()
             modislist <- lpdaac_getmod_names(http = http, ftp = ftp, used_server = download_server, user = user, password = password, 
-                                             date_dir = date_dirs[date], v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), 
-                                             tiled, gui = gui)
-browser()
-            
+                                             date_dir = date_dirs[date], v = seq(from = start_y, to = end_y), h = seq(from = start_x, to = end_x), 
+                                             tiled, out_folder_mod = out_folder_mod, gui = gui)
+
             # ---------------------------------- ----------------------------------------------#
             # Download and preprocess Imagesin modislist vector -----------
             # ---------------------------------- ----------------------------------------------#
@@ -227,9 +225,9 @@ browser()
                 local_filesize <- file.info(local_filename)$size
                 remote_filename <- if (download_server == "http") {
                   paste0(http,date_dirs[date], "/",modisname)
-                } else  {
+                } else if (download_server == "ftp") {
                   paste0(ftp,YEAR,"/",DOY,"/",modisname)
-                }
+                } else if (download_server == "offline") {NA}
                 
                 if (download_server == "http") { # in case of http download, try to catch size information from xml file
                   
@@ -263,23 +261,23 @@ browser()
                     remote_filesize <- as.integer(xmlToList(xmlRoot(remote_xml)[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]]))
                   }
                   
-                } else {
-                  if (download_server == "ftp") { # in case of ftp download, do not perform the check. 
-                    remote_filesize <- local_filesize
-                  }
+                } else if (download_server == "ftp") { # in case of ftp download, do not perform the check. 
+                  remote_filesize <- local_filesize
                   # TODO: implement check using curl library (http://stackoverflow.com/questions/32488644/retrieve-modified-datetime-of-a-file-from-an-ftp-server)
                   # and check if RCurl functions could be replaced by curl ones
+                } else if (download_server == "offline") {
+                  remote_filesize <- local_filesize
                 }
                 
                 if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
                   er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
                   while (er != 0) {   # repeat until no error or > 30 tryyouts
-                    mess_text <- paste("Downloading", sens_sel, "Files for date", date_name, ":" ,which(modislist == modisname)," of ", length(modislist))
+                    mess_text <- paste("Downloading", sens_sel, "Files for date", date_name, ":" ,which(modislist == modisname), "of", length(modislist))
                     if (gui) {
                       svalue(mess_lab) <- paste("---",mess_text,"---")
-                      message("[",date(),"]",mess_text)
+                      message("[",date(),"] ",mess_text)
                     } else {
-                      message("[",date(),"]",mess_text)
+                      message("[",date(),"] ",mess_text)
                     }	# Update progress window
                     
                     if (download_server == "http") {
@@ -338,7 +336,7 @@ browser()
               # } # End if on length modislist > 1
               
               
-              message("[",date(),"]",length(modislist)," files for date of ",date_dirs[date]," were successfully downloaded!")
+              message("[",date(),"] ",length(modislist)," files for date of ",date_dirs[date]," were successfully downloaded!")
               
               # -------------------------------------------------------------------------
               # After all required tiles for the date are downloaded, start geoprocessing
@@ -438,15 +436,15 @@ browser()
                     # ---------------------------------- ----------------------------------------------#
                     
                     if (outproj_str != MOD_proj_str) {
-                      mess_text <- paste(" Processing and Reprojecting", sens_sel, bandnames[band],"files for date: ",date_name)
+                      mess_text <- paste("Processing and Reprojecting", sens_sel, bandnames[band], "files for date:", date_name)
                     } else {
-                      mess_text <- paste(" Processing",  sens_sel, bandnames[band],"files for date: ",date_name)
+                      mess_text <- paste("Processing", sens_sel, bandnames[band], "files for date:", date_name)
                     }
                     if (gui) {
                       svalue(mess_lab) <- paste("---",mess_text,"---")
-                      message("[",date(),"]",mess_text)
+                      message("[",date(),"] ",mess_text)
                     } else {
-                      message("[",date(),"]",mess_text)
+                      message("[",date(),"] ",mess_text)
                     }
                     
                     if (full_ext == "Resized") {
@@ -535,11 +533,11 @@ browser()
               for (band in which(indexes_bandsel == 1)) {
                 indexes_band <- indexes_bandnames[band] 	# index name
                 formula <- indexes_formula[band]				#index formula
-                mess_text <- paste("Computing ", sens_sel , " ",  indexes_band," for date: ", date_name)
+                mess_text <- paste("Computing", sens_sel, indexes_band, "for date:", date_name)
                 if (gui) {
-                  message("[",date(),"]",mess_text)
+                  message("[",date(),"] ",mess_text)
                 } else {
-                  message("[",date(),"]",mess_text)
+                  message("[",date(),"] ",mess_text)
                 }
                 out_filename <- file.path(out_prod_folder,indexes_band,paste0(file_prefix,"_",indexes_band,"_",yy,"_", DOY))
                 if (out_format == "GTiff") {
@@ -566,12 +564,12 @@ browser()
                 bitN <- quality_bitN[band]  #  bitfields corresponding to indicator within source
                 nodata_qa_in <- quality_nodata_in[band]
                 nodata_qa_out <- quality_nodata_out[band]
-                mess_text <- paste("Computing ",  quality_band," for date: ",date_name)
+                mess_text <- paste("Computing", quality_band, "for date:", date_name)
                 if (gui) {
                   svalue(mess_lab) <- paste("---",mess_text,"---")
-                  message("[",date(),"]",mess_text)
+                  message("[",date(),"] ",mess_text)
                 } else {
-                  message("[",date(),"]",mess_text)
+                  message("[",date(),"] ",mess_text)
                 }
                 out_filename <- file.path(out_prod_folder,quality_band,paste0(file_prefix,"_",quality_band,"_",yy,"_", DOY))
                 if (out_format == "GTiff") {
@@ -615,7 +613,7 @@ browser()
             } # End check on at least one image available
             
           } else {
-            message("[",date(),"] All Required output files for date ",date_name, " are already existing - Doing Nothing !")
+            message("[",date(),"] All Required output files for date ",date_name, " are already existing - Doing Nothing!")
           } # End check on all data already processed for date or reprocees = Yes
           
           #- ------------------------------------------------------------------------------- -#
@@ -637,7 +635,7 @@ browser()
         }   # End cycling on available dates for selected year
         
       } else {
-        message("[",date(),"]", "No available data for year: ", yy, " for Sensor ",sens_sel," in selected dates.")
+        message("[",date(),"] No available data for year: ",yy," for Sensor ",sens_sel," in selected dates.")
         }
       
     }	# End Cycling on selected years
@@ -658,21 +656,21 @@ browser()
   for (sens_sel in senslist) {		# cycle on selected sensors
     
     for (band in which(bandsel == 1)) { # Create virtual files for original layers
-      message("[",date(),"]", "Creating Virtual Files and rts time series for layer ", bandnames[band])
+      message("[",date(),"] Creating Virtual Files and rts time series for layer ",bandnames[band])
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = bandnames[band],
                           file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format,  nodata_value = nodata_out[band], 
                           out_format = out_format, rts = rts)
     } #End Cycle on bandsel
     
     for (band in which(indexes_bandsel == 1)) {  # Create virtual files for QI layers
-      message("[",date(),"]", "Creating Virtual Files and rts time series for layer ", indexes_bandnames[band])
+      message("[",date(),"] Creating Virtual Files and rts time series for layer ",indexes_bandnames[band])
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = indexes_bandnames[band],
                           file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = indexes_nodata_out[band], 
                           out_format = out_format, rts = rts)
     } #End Cycle on indexes_bandsel
     
     for (band in which(quality_bandsel == 1)) {	# Create virtual files for SI layers
-      message("[",date(),"]","Creating Virtual Files and rts time series for layer ", quality_bandnames[band])
+      message("[",date(),"] Creating Virtual Files and rts time series for layer ",quality_bandnames[band])
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, meta_band = quality_bandnames[band]		,
                           file_prefixes = file_prefixes, sens_sel = sens_sel, ts_format = ts_format, nodata_value = quality_nodata_out[band], 
                           out_format = out_format, rts = rts)

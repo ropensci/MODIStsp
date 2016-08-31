@@ -11,6 +11,7 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @param user username for earthdata server
 #' @param password password for earthdata server
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
+#' @param out_folder_mod  ouput folder for original HDF storage
 #' @param .Platform string os platform (from call to .Platform)
 #' @return list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
 #'
@@ -239,6 +240,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' @param h int. array containing a sequence of the horizontal  tiles of interest (e.g., c(3,4))
 #' @param tiled 0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
+#' @param out_folder_mod  ouput folder for original HDF storage
 #' @return Modislist names of HDF images corresponding to the requested tiles available for the product in the selected date
 #'
 #' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
@@ -246,7 +248,7 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' email: busetto.l@@irea.cnr.it
 #' license  GPL 3.0
 #' @import RCurl
-lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir, v, h, tiled,gui) {
+lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir, v, h, tiled, out_folder_mod, gui) {
   getlist <- 0
   class(getlist) <- "try-error"
   ce <- 0
@@ -270,13 +272,12 @@ lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir,
       }
     
       if (class(getlist) != "try-error") {
-        getlist <- getlist[-1]
-        getlist <- unlist(lapply(strsplit(getlist, ">"), function(x) {x[length(x) - 1]}))
-        getlist <- getlist[seq(3, length(getlist) - 2)]
-        getlist <- unlist(lapply(strsplit(getlist, "<"), function(x) {x[1]}))
+        getlist <- getlist[grep(".*>([A-Z0-9]+\\.A[0-9]+\\.[hv0-9]+\\.[0-9]+\\.[0-9]+\\.hdf)<.*",getlist)]
+        getlist <- gsub(".*>([A-Z0-9]+\\.A[0-9]+\\.[hv0-9]+\\.[0-9]+\\.[0-9]+\\.hdf)<.*","\\1",getlist)
+
       } else if (ce == 5)  {
         if (gui) {
-          confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question",  # ask to retry only if gui=TRUE
+          confirm <- gconfirm("http server seems to be down! Do you want to retry?", icon = "question",  # ask to retry only if gui=TRUE
                               handler = function(h, ...) {})
         } else {
           confirm <- FALSE
@@ -284,7 +285,7 @@ lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir,
         if (confirm == "FALSE") {
           warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
           if (gui) {
-            gmessage("User elected to quit !", icon = "info")
+            gmessage("User selected to quit!", icon = "info")
             stop()    # if user selected to quit, exit program
           } else {
             break()  # on non-interactive, if limit exceeded try ftp downolad as backup
@@ -310,7 +311,7 @@ lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir,
         ce <- ce + 1
         if (ce == 50) {
           if (gui) {
-            confirm <- gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h, ...) {})
+            confirm <- gconfirm("ftp server seems to be down! Do you want to retry?", icon = "question", handler = function(h, ...) {})
           } else {
             confirm <- FALSE
           }
@@ -318,7 +319,7 @@ lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir,
           if (confirm == "FALSE") {
             warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
             if (gui) {
-              gmessage("User elected to quit !", icon = "info")
+              gmessage("User selected to quit!", icon = "info")
               stop()    # if user selected to quit, exit program
             } else {
               break()  # on non-interactive, if limit exceeded try ftp downolad as backup
@@ -331,55 +332,20 @@ lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir,
       }
     }
   } else if (used_server == "offline") {
-browser()
-    date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
-    date_doy <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
-    while (class(getlist) == "try-error") {
-      # getlist <- try(strsplit(content(GET(paste0(http, date_dir, "/"), timeout = 5, authenticate(user, password)),"\r*\n"))
-      getlist <- try(strsplit(getURL(paste(ftp, date_year, "/", date_doy, "/", sep = ""), ftp.use.epsv = FALSE,
-                                     dirlistonly = TRUE,.opts = list(timeout = 10, maxredirs = 5, verbose = FALSE ) ),
-                              "\r*\n")[[1]], silent = TRUE)
-      
-      if (class(getlist) == "try-error") {
-        Sys.sleep(1)
-        message("Trying to reach ftp server - attempt ", ce)
-        ce <- ce + 1
-        if (ce == 50) {
-          if (gui) {
-            confirm <- gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h, ...) {})
-          } else {
-            confirm <- FALSE
-          }
-          
-          if (confirm == "FALSE") {
-            warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
-            if (gui) {
-              gmessage("User elected to quit !", icon = "info")
-              stop()    # if user selected to quit, exit program
-            } else {
-              break()  # on non-interactive, if limit exceeded try ftp downolad as backup
-            }
-            # on NOT retry, quit the program
-          } else {
-            ce = 0   # if retry, reset the counter
-          }
-        }
-      }
-    }
+
+    # Retrieve the list of hdf files matching the product / version / date
+    getlist <- list.files(out_folder_mod, "\\.hdf$")
+    sel_prod_vers <- unlist(str_split(gsub("http:\\/\\/[A-Za-z0-9\\.]+\\/[A-Z]+\\/([A-Z0-9]+)\\.([0-9]+)\\/","\\1 \\2",http)," "))
+    getlist <- getlist[grep(paste0(sel_prod_vers[1],"\\.A",strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y%j"),"\\.h[0-9][0-9]v[0-9][0-9]\\.",sel_prod_vers[2],"\\.[0-9]+\\.hdf$"),getlist)]
+    
   }
   
   Modislist <- c()
   if (tiled == 1) {
     for (vv in v) {
       for (hh in h) {
-        if (vv < 10)
-          vc <- paste0("0", as.character(vv))
-        else
-          vc <- as.character(vv)
-        if (hh < 10)
-          hc <- paste0("0", as.character(hh))
-        else
-          hc <- as.character(hh)
+        vc <- str_pad(vv,2,"left","0")
+        hc <- str_pad(hh,2,"left","0")
         ModisName <- grep(".hdf$", grep(paste0("h", hc, "v", vc), getlist, value = TRUE), value = TRUE)
         if (length(ModisName) >= 1)
           Modislist <- c(Modislist, ModisName[1])
