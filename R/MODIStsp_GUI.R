@@ -860,7 +860,7 @@ MODIStsp_GUI <- function(general_opts){
       # If not all the required tiles are selected, ask to select them
       if (!all(required_tiles %in% selected_tiles) & check_save_opts) {
         gconfirm(paste("The following tiles not currently selected are required to cover the output bounding box (",paste(required_tiles[!(required_tiles %in% selected_tiles)],collapse = ", "),
-                       "). Do you want to add them to the processing? Otherwise, nodata will be produced in the non-covered area."),
+                       "). Do you want to add them to the processing ? Otherwise, nodata will be produced in the non-covered area."),
                  handler = function(h,...) {
                    selected_tiles <<- required_tiles
                    general_opts$start_x <<- min(d_bbox_mod_tiled$H)
@@ -873,7 +873,7 @@ MODIStsp_GUI <- function(general_opts){
       # If some selected tiles are not useful, ask to remove them
       if (!all(selected_tiles %in% required_tiles) & check_save_opts) {
         gconfirm(paste("The following tiles are not required to cover the output bounding box (",paste(selected_tiles[!(selected_tiles %in% required_tiles)], collapse = ", "),
-                       "). Do you want to remove them from processing?"),
+                       "). Do you want to remove them from processing ?"),
                  handler = function(h,...) {
                    selected_tiles <<- required_tiles
                    general_opts$start_x <<- min(d_bbox_mod_tiled$H)
@@ -887,7 +887,7 @@ MODIStsp_GUI <- function(general_opts){
 
     # check if folders are defined
     if (general_opts$out_folder == "" & check_save_opts) {
-      gmessage("Please Select an output folder!", title = "Warning")
+      gmessage("Please Select an output folder !", title = "Warning")
       check_save_opts <<- FALSE
     }
     if (general_opts$out_folder_mod == "" & check_save_opts) {
@@ -896,21 +896,13 @@ MODIStsp_GUI <- function(general_opts){
     }
 
     if (general_opts$resampling == "mode" & check_save_opts) {
-      check_mode = gconfirm(paste("Warning! You selected 'mode' resampling. Be aware that 'mode'", 
-                                  "resampling can provide inconsistent results in areas affected",
-                                  "by mixed high and low quality data, and in properly keeping track",
-                                  "of quality indicators! Do you wish to continue?"), title = "Warning")
+      check_mode = gconfirm("Warning ! You selected 'mode' resampling. Be aware that 'mode' resampling can provide inconsistent results in areas
+affected by mixed high and low quality data, and in properly keeping track of quality indicators ! Do you wish to continue ?", title = "Warning")
       if (check_mode == FALSE) {
         check_save_opts <<- FALSE
       }
     }
-    
-    # check that user/password were provided in case of html download
-    if ((general_opts$user == "" | general_opts$password == "") & general_opts$download_server=="http") {
-      gmessage("Username and password are mandatory in case of 'http' download! Please provide them or choose 'ftp' download.", title = "Warning")
-      check_save_opts <<- FALSE
-    }
-    
+
     return(general_opts)
 
   }
