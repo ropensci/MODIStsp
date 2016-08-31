@@ -187,7 +187,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
       # selected product, dates, and current year under processing)
       
       date_dirs_all <- lpdaac_getmod_dirs(ftp = ftp, http = http, used_server = download_server, user = user, password = password, gui = gui, 
-                                          .Platform = .Platform)
+                                          out_folder_mod = out_folder_mod, .Platform = .Platform)
       download_server <- attr(date_dirs_all, "server") # overwrite with the used setting (if already specified it does not change, if NA, it is set with the working one)
       date_dirs <- lpdaac_getmod_dates(dates = dates, date_dirs =  date_dirs_all)  # First, find the folders in lpdaac corresponding to the required dates
       
@@ -207,9 +207,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
           if (check_files == FALSE | reprocess == "Yes") {  		# If not all output files are already present or reprocess = "Yes", start downloading hdfs
             
             # Create vector of image names required (corresponding to the selected tiles, within current dir)
+browser()
             modislist <- lpdaac_getmod_names(http = http, ftp = ftp, used_server = download_server, user = user, password = password, 
                                              date_dir = date_dirs[date], v = seq(from = start_y, to =  end_y), h = seq(from = start_x, to = end_x), 
                                              tiled, gui = gui)
+browser()
             
             # ---------------------------------- ----------------------------------------------#
             # Download and preprocess Imagesin modislist vector -----------

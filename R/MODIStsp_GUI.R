@@ -235,15 +235,15 @@ MODIStsp_GUI <- function(general_opts){
   methods_group <- ggroup(container = download_frame, horizontal = TRUE)
   
   method_lab <- glabel(text = " Download Server:", container = methods_group)
-  server_wid <- gdroplist(items = c("http","ftp"), text = "Select", container = methods_group, 
-                          selected = match(general_opts$download_server, c("http","ftp")),handler = function(h,....) {
-                            current_sel <- svalue(server_wid)
-                            if (current_sel != "http") {
-                              enabled(authenticate_group) <- FALSE
-                            } else {
-                              enabled(authenticate_group) <- TRUE
-                            }
-                          })
+  server_wid <- gdroplist(items = c("http","ftp","offline"), text = "Select", container = methods_group, 
+                          selected = match(general_opts$download_server, c("http","ftp","offline")),handler = function(h,....) {
+    current_sel <- svalue(server_wid)
+    if (current_sel != "http") {
+      enabled(authenticate_group) <- FALSE
+    } else {
+      enabled(authenticate_group) <- TRUE
+    }
+  })
   authenticate_group = ggroup(container = methods_group)
   user_lab <- glabel(text = " User Name:", container = authenticate_group)
   user_wid <- gedit(text = general_opts$user, container = authenticate_group, width = 15)
@@ -253,9 +253,9 @@ MODIStsp_GUI <- function(general_opts){
   visible(password_wid) <- FALSE
   
   if (svalue(server_wid) != "http") {
-    enabled(authenticate_group) <- F
+    enabled(authenticate_group) <- FALSE
   } else {
-    (enabled(authenticate_group) <- T)
+    (enabled(authenticate_group) <- TRUE)
   }
   
   font(user_lab) <- font(password_lab) <- list(family = "sans",weight = "bold")

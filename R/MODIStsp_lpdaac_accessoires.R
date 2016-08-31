@@ -23,137 +23,145 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @importFrom stringr str_extract
 #' @importFrom utils download.file
 
-lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, password = password, gui, .Platform) {
+lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, password = password, gui, out_folder_mod, .Platform) {
   
-    if (strsplit(http, "")[[1]][length(strsplit(http, "")[[1]])] != "/") {
-      http <- paste(http, "/", sep = "")
-    }
-    if (.Platform$OS.type == "unix") {
-      options("download.file.method" = "wget")
-    }
-    else {
-      options("download.file.method" = "auto")
-    }
-    items <- 0
-    class(items) <- "try-error"
-    ce <- 0
+  if (strsplit(http, "")[[1]][length(strsplit(http, "")[[1]])] != "/") {
+    http <- paste(http, "/", sep = "")
+  }
+  if (.Platform$OS.type == "unix") {
+    options("download.file.method" = "wget")
+  }
+  else {
+    options("download.file.method" = "auto")
+  }
+  items <- 0
+  class(items) <- "try-error"
+  ce <- 0
+  
+  # Try HTTP download
+  check_used_server <- if (is.na(used_server)) TRUE else if (used_server == "http") TRUE else FALSE
+  if (class(items) == "try-error" & check_used_server) {
     
-    # Try HTTP download
-    check_used_server <- if (is.na(used_server)) TRUE else if (used_server != "ftp") TRUE else FALSE
-    if (class(items) == "try-error" & check_used_server) {
+    while (class(items) == "try-error") {
+      # items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
+      # silent = TRUE)
       
-      while (class(items) == "try-error") {
-        # items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
-        # silent = TRUE)
-        
-        response <- try(GET(http, authenticate(user, password), timeout(10)))   # send request to server
-        
-        if (class(response) == "try-error") {   # if error on response, retry
-          Sys.sleep(1)
+      response <- try(GET(http, authenticate(user, password), timeout(10)))   # send request to server
+      
+      if (class(response) == "try-error") {   # if error on response, retry
+        Sys.sleep(1)
+        ce <- ce + 1
+        message("Trying to reach http server - attempt ", ce)
+      } else { # If good response, get the result
+      if (response$status_code == 200) {
+          items <- strsplit(content(response, "text"), "\r*\n")[[1]]
+        } else {
           ce <- ce + 1
           message("Trying to reach http server - attempt ", ce)
-        } else { # If good response, get the result
-        if (response$status_code == 200) {
-            items <- strsplit(content(response, "text"), "\r*\n")[[1]]
-          } else {
-            ce <- ce + 1
-            message("Trying to reach http server - attempt ", ce)
-          }
-        }
-        
-        if (class(items) != "try-error") { # on good response, parse the contents to retrieve the date folders
-          # run only if http download works
-          items <- items[-1]
-          # get the directory names (available dates)
-          date_dirs <- unlist(lapply(strsplit(items, ">"), function(x) { x[length(x) - 1] }))
-          date_dirs <- date_dirs[seq(3, length(date_dirs) - 2)]
-          date_dirs <- unlist(lapply(strsplit(date_dirs, "/"), function(x) {x[1]}))
-          attr(date_dirs, "server") <- "http"
-        } else {
-          if (ce == 50)  {
-            if (gui) {
-              # ask to retry only if gui=TRUE
-              confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", 
-                                  handler = function(h, ...) {})
-            } else {
-              confirm <- FALSE
-            }
-            if (confirm == "FALSE") {
-              warning("[",date(),"] Error: http server seems to be down! Please Retry Later!")
-              if (gui) {
-                gmessage("User elected to quit !", icon = "info")
-                stop()    # if user selected to quit, exit program
-              } else {
-                  break()  # on non-interactive, if limit exceeded try ftp downolad as backup
-                }
-              # on NOT retry, quit the program
-            } else {
-              ce = 0   # if retry, reset the counter
-            }
-          }
         }
       }
-    }
-
-# Try FTP download: If method = ftp, or if method = http and limit exceeded on non-interactive execution
-check_used_server <- if (is.na(used_server)) TRUE else if (used_server != "http") TRUE else FALSE
-
-if (class(items) == "try-error" & check_used_server) {
-  
-  while (class(items) == "try-error") {
-    
-     items <- try(strsplit(getURL(ftp, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)), "\r*\n")[[1]],
-     silent = TRUE)
-    # response = try(GET(ftp,timeout(10)))   # send request to server
-    
-    if (class(items) == "try-error") {   # if error on response, retry
-      Sys.sleep(1)
-      ce <- ce + 1
       
-      message("Trying to reach ftp server - attempt ", ce)
-    } 
-    
-  if (class(items) != "try-error") {
-    # run only if ftp download works
-    
-    items_1 = str_extract(items,"20[0-9][0-9]$")
-    items_1 = items_1[!is.na(items_1)]
-    items_2 <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
-        .opts = list(timeout = 10,maxredirs = 5,verbose = FALSE)),"\r*\n")
-    full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(items_2[x]), items_2[[x]], "/")}))
-    date_dirs <- sapply(strsplit(full_dirs, "/"), function(x) {strftime(as.Date(paste(x[length(x) - 1], x[length(x)]), format = "%Y %j"), "%Y.%m.%d")})
-    attr(date_dirs, "server") <- "ftp"
-    
-  } else {
-    if (ce == 50)  {
-      if (gui) {
-        # ask to retry only if gui=TRUE
-        confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question", 
-                            handler = function(h, ...) {})
+      if (class(items) != "try-error") { # on good response, parse the contents to retrieve the date folders
+        # run only if http download works
+        # get the directory names (available dates)
+        date_dirs <- gsub(".*>(20[0-9][0-9]\\.[01][0-9]\\.[0-3][0-9])\\/<.*","\\1",items)
+        date_dirs <- date_dirs[grep("20[0-9][0-9]\\.[01][0-9]\\.[0-3][0-9]",date_dirs)]
+        attr(date_dirs, "server") <- "http"
       } else {
-        confirm <- FALSE
-      }
-      if (confirm == "FALSE") {
-        warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
-        if (gui) {
-          gmessage("User elected to quit !", icon = "info")
-          stop()    # if user selected to quit, exit program
-        } else {
-          break()  # on non-interactive, if limit exceeded try ftp downolad as backup
+        if (ce == 50)  {
+          if (gui) {
+            # ask to retry only if gui=TRUE
+            confirm <- gconfirm("http server seems to be down! Do you want to retry?", icon = "question", 
+                                handler = function(h, ...) {})
+          } else {
+            confirm <- FALSE
+          }
+          if (confirm == "FALSE") {
+            warning("[",date(),"] Error: http server seems to be down! Please Retry Later!")
+            if (gui) {
+              gmessage("User selected to quit!", icon = "info")
+              stop()    # if user selected to quit, exit program
+            } else {
+                break()  # on non-interactive, if limit exceeded try ftp downolad as backup
+              }
+            # on NOT retry, quit the program
+          } else {
+            ce = 0   # if retry, reset the counter
+          }
         }
-        # on NOT retry, quit the program
-      } else {
-        ce = 0   # if retry, reset the counter
       }
     }
   }
+
+  # Try FTP download: If method = ftp, or if method = http and limit exceeded on non-interactive execution
+  check_used_server <- if (is.na(used_server)) TRUE else if (used_server == "ftp") TRUE else FALSE
+  
+  if (class(items) == "try-error" & check_used_server) {
+    
+    while (class(items) == "try-error") {
+      
+       items <- try(strsplit(getURL(ftp, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)), "\r*\n")[[1]],
+       silent = TRUE)
+      # response = try(GET(ftp,timeout(10)))   # send request to server
+      
+      if (class(items) == "try-error") {   # if error on response, retry
+        Sys.sleep(1)
+        ce <- ce + 1
+        
+        message("Trying to reach ftp server - attempt ", ce)
+      } 
+      
+    if (class(items) != "try-error") {
+      # run only if ftp download works
+      
+      items_1 = str_extract(items,"20[0-9][0-9]$")
+      items_1 = items_1[!is.na(items_1)]
+      items_2 <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
+          .opts = list(timeout = 10,maxredirs = 5,verbose = FALSE)),"\r*\n")
+      full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(items_2[x]), items_2[[x]], "/")}))
+      date_dirs <- sapply(strsplit(full_dirs, "/"), function(x) {strftime(as.Date(paste(x[length(x) - 1], x[length(x)]), format = "%Y %j"), "%Y.%m.%d")})
+      attr(date_dirs, "server") <- "ftp"
+      
+    } else {
+      if (ce == 50)  {
+        if (gui) {
+          # ask to retry only if gui=TRUE
+          confirm <- gconfirm("http server seems to be down! Do you want to retry?", icon = "question", 
+                              handler = function(h, ...) {})
+        } else {
+          confirm <- FALSE
+        }
+        if (confirm == "FALSE") {
+          warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
+          if (gui) {
+            gmessage("User selected to quit!", icon = "info")
+            stop()    # if user selected to quit, exit program
+          } else {
+            break()  # on non-interactive, if limit exceeded try ftp downolad as backup
+          }
+          # on NOT retry, quit the program
+        } else {
+          ce = 0   # if retry, reset the counter
+        }
+      }
+    }
+    }
   }
-}
+  
+  # If the server is definitively down, or if "offline" method was chosen, use the dates already available in local directory
+  if (!exists("date_dirs")) {
+    
+    # Retrieve the list of hdf files matching the product / version
+    items <- list.files(out_folder_mod, "\\.hdf$")
+    sel_prod_vers <- unlist(str_split(gsub("http:\\/\\/[A-Za-z0-9\\.]+\\/[A-Z]+\\/([A-Z0-9]+)\\.([0-9]+)\\/","\\1 \\2",http)," "))
+    items <- items[grep(paste0(sel_prod_vers[1],"\\.A20[0-9][0-9][0-3][0-9][0-9]\\.h[0-9][0-9]v[0-9][0-9]\\.",sel_prod_vers[2],"\\.[0-9]+\\.hdf$"),items)]
+    
+    # Extract dates
+    date_dirs <- strftime(as.Date(gsub(paste0(sel_prod_vers[1],"\\.A(20[0-9][0-9][0-3][0-9][0-9])\\..*"),"\\1",items),format="%Y%j"),"%Y.%m.%d")
+    attr(date_dirs, "server") <- "offline"
+  }
 
-# If the server is definitively down, create an empty date_dir in order not to get error
-if (!exists("date_dirs")) {date_dirs <- character(0); attr(date_dirs, "server") <- "http"}
-
-return(date_dirs)
+  return(date_dirs)
 
 }
 
@@ -239,40 +247,74 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' license  GPL 3.0
 #' @import RCurl
 lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir, v, h, tiled,gui) {
-    getlist <- 0
-    class(getlist) <- "try-error"
-    ce <- 0
-    if (used_server == "http") {
-      
-      while (class(getlist) == "try-error") {
-        getlist <- try(GET(paste0(http, date_dir, "/"), timeout = 5, authenticate(user, password)))
-          # try(strsplit(getURL(paste(http, date_dir, "/", sep = ""),followLocation = TRUE,
-            # .opts = list(timeout = 10,maxredirs = 5,verbose = FALSE)),"\r*\n")[[1]], silent = TRUE)
-        if (class(getlist) == "try-error") {   # if error on response, retry
-          Sys.sleep(1)
+  getlist <- 0
+  class(getlist) <- "try-error"
+  ce <- 0
+  if (used_server == "http") {
+    
+    while (class(getlist) == "try-error") {
+      getlist <- try(GET(paste0(http, date_dir, "/"), timeout = 5, authenticate(user, password)))
+        # try(strsplit(getURL(paste(http, date_dir, "/", sep = ""),followLocation = TRUE,
+          # .opts = list(timeout = 10,maxredirs = 5,verbose = FALSE)),"\r*\n")[[1]], silent = TRUE)
+      if (class(getlist) == "try-error") {   # if error on response, retry
+        Sys.sleep(1)
+        ce <- ce + 1
+        message("Trying to reach ftp server - attempt ", ce)
+      } else { # If good response, get the result
+        if (getlist$status_code == 200) {
+          getlist <- strsplit(content(getlist, "text"), "\r*\n")[[1]]
+        } else {
           ce <- ce + 1
-          message("Trying to reach ftp server - attempt ", ce)
-        } else { # If good response, get the result
-          if (getlist$status_code == 200) {
-            getlist <- strsplit(content(getlist, "text"), "\r*\n")[[1]]
-          } else {
-            ce <- ce + 1
-            message("Trying to reach http server - attempt ", ce)
-          }
+          message("Trying to reach http server - attempt ", ce)
         }
-      
+      }
+    
       if (class(getlist) != "try-error") {
         getlist <- getlist[-1]
         getlist <- unlist(lapply(strsplit(getlist, ">"), function(x) {x[length(x) - 1]}))
         getlist <- getlist[seq(3, length(getlist) - 2)]
         getlist <- unlist(lapply(strsplit(getlist, "<"), function(x) {x[1]}))
-      } else{ if (ce == 5)  {
+      } else if (ce == 5)  {
+        if (gui) {
+          confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question",  # ask to retry only if gui=TRUE
+                              handler = function(h, ...) {})
+        } else {
+          confirm <- FALSE
+        }
+        if (confirm == "FALSE") {
+          warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
           if (gui) {
-            confirm <- gconfirm("http server seems to be down! Do you want to retry ? ", icon = "question",  # ask to retry only if gui=TRUE
-                                handler = function(h, ...) {})
+            gmessage("User elected to quit !", icon = "info")
+            stop()    # if user selected to quit, exit program
+          } else {
+            break()  # on non-interactive, if limit exceeded try ftp downolad as backup
+          }
+          # on NOT retry, quit the program
+        } else {
+          ce = 0   # if retry, reset the counter
+        }
+      }
+    }
+  } else if (used_server == "ftp") {
+    date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
+    date_doy <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
+    while (class(getlist) == "try-error") {
+      # getlist <- try(strsplit(content(GET(paste0(http, date_dir, "/"), timeout = 5, authenticate(user, password)),"\r*\n"))
+      getlist <- try(strsplit(getURL(paste(ftp, date_year, "/", date_doy, "/", sep = ""), ftp.use.epsv = FALSE,
+        dirlistonly = TRUE,.opts = list(timeout = 10, maxredirs = 5, verbose = FALSE ) ),
+        "\r*\n")[[1]], silent = TRUE)
+       
+      if (class(getlist) == "try-error") {
+        Sys.sleep(1)
+        message("Trying to reach ftp server - attempt ", ce)
+        ce <- ce + 1
+        if (ce == 50) {
+          if (gui) {
+            confirm <- gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h, ...) {})
           } else {
             confirm <- FALSE
           }
+            
           if (confirm == "FALSE") {
             warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
             if (gui) {
@@ -287,64 +329,65 @@ lpdaac_getmod_names <- function(http,ftp, used_server, user, password, date_dir,
           }
         }
       }
-      }
-    } else if (used_server == "ftp") {
-      date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
-      date_doy <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
-      while (class(getlist) == "try-error") {
-        # getlist <- try(strsplit(content(GET(paste0(http, date_dir, "/"), timeout = 5, authenticate(user, password)),"\r*\n"))
-         getlist <- try(strsplit(getURL(paste(ftp, date_year, "/", date_doy, "/", sep = ""), ftp.use.epsv = FALSE,
-          dirlistonly = TRUE,.opts = list(timeout = 10, maxredirs = 5, verbose = FALSE ) ),
-          "\r*\n")[[1]], silent = TRUE)
-         
-        if (class(getlist) == "try-error") {
-          Sys.sleep(1)
-          message("Trying to reach ftp server - attempt ", ce)
-          ce <- ce + 1
-          if (ce == 50) {
+    }
+  } else if (used_server == "offline") {
+browser()
+    date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
+    date_doy <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
+    while (class(getlist) == "try-error") {
+      # getlist <- try(strsplit(content(GET(paste0(http, date_dir, "/"), timeout = 5, authenticate(user, password)),"\r*\n"))
+      getlist <- try(strsplit(getURL(paste(ftp, date_year, "/", date_doy, "/", sep = ""), ftp.use.epsv = FALSE,
+                                     dirlistonly = TRUE,.opts = list(timeout = 10, maxredirs = 5, verbose = FALSE ) ),
+                              "\r*\n")[[1]], silent = TRUE)
+      
+      if (class(getlist) == "try-error") {
+        Sys.sleep(1)
+        message("Trying to reach ftp server - attempt ", ce)
+        ce <- ce + 1
+        if (ce == 50) {
+          if (gui) {
+            confirm <- gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h, ...) {})
+          } else {
+            confirm <- FALSE
+          }
+          
+          if (confirm == "FALSE") {
+            warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
             if (gui) {
-              confirm <- gconfirm("ftp server seems to be down! Do you want to retry ? ", icon = "question", handler = function(h, ...) {})
+              gmessage("User elected to quit !", icon = "info")
+              stop()    # if user selected to quit, exit program
             } else {
-              confirm <- FALSE
+              break()  # on non-interactive, if limit exceeded try ftp downolad as backup
             }
-              
-            if (confirm == "FALSE") {
-              warning("[",date(),"] Error: ftp server seems to be down! Please Retry Later!")
-              if (gui) {
-                gmessage("User elected to quit !", icon = "info")
-                stop()    # if user selected to quit, exit program
-              } else {
-                break()  # on non-interactive, if limit exceeded try ftp downolad as backup
-              }
-              # on NOT retry, quit the program
-            } else {
-              ce = 0   # if retry, reset the counter
-            }
+            # on NOT retry, quit the program
+          } else {
+            ce = 0   # if retry, reset the counter
           }
         }
       }
     }
-    
-    Modislist <- c()
-    if (tiled == 1) {
-      for (vv in v) {
-        for (hh in h) {
-          if (vv < 10)
-            vc <- paste0("0", as.character(vv))
-          else
-            vc <- as.character(vv)
-          if (hh < 10)
-            hc <- paste0("0", as.character(hh))
-          else
-            hc <- as.character(hh)
-          ModisName <- grep(".hdf$", grep(paste0("h", hc, "v", vc), getlist, value = TRUE), value = TRUE)
-          if (length(ModisName) >= 1)
-            Modislist <- c(Modislist, ModisName[1])
-        }
-      }
-    } else {
-      Modislist <- grep(".hdf$", getlist, value = TRUE)
-    }
-    return(Modislist)
-    
   }
+  
+  Modislist <- c()
+  if (tiled == 1) {
+    for (vv in v) {
+      for (hh in h) {
+        if (vv < 10)
+          vc <- paste0("0", as.character(vv))
+        else
+          vc <- as.character(vv)
+        if (hh < 10)
+          hc <- paste0("0", as.character(hh))
+        else
+          hc <- as.character(hh)
+        ModisName <- grep(".hdf$", grep(paste0("h", hc, "v", vc), getlist, value = TRUE), value = TRUE)
+        if (length(ModisName) >= 1)
+          Modislist <- c(Modislist, ModisName[1])
+      }
+    }
+  } else {
+    Modislist <- grep(".hdf$", getlist, value = TRUE)
+  }
+  return(Modislist)
+  
+}
