@@ -304,7 +304,7 @@
                         <quality_source>State_500</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
             <version>
                 <v_number>6</v_number>
@@ -480,132 +480,132 @@
                 </indexes>
                 <quality_indicators>
                     <quality>
-                        <quality_bandname>Adj_Cor</quality_bandname>
+                        <quality_bandname>QA_adj_Cor</quality_bandname>
                         <quality_fullname>adjacency correction performed</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>31</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>Atm_cor</quality_bandname>
+                        <quality_bandname>QA_atm_cor</quality_bandname>
                         <quality_fullname>atmospheric correction performed</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>30</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>b7_QA</quality_bandname>
+                        <quality_bandname>QA_b7</quality_bandname>
                         <quality_fullname>band 7 data quality four bit range</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>26-29</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>b6_QA</quality_bandname>
+                        <quality_bandname>QA_b6</quality_bandname>
                         <quality_fullname>band 6 data quality four bit range</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>22-25</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>b5_QA</quality_bandname>
+                        <quality_bandname>QA_b5</quality_bandname>
                         <quality_fullname>band 5 data quality four bit range</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>18-21</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>b4_QA</quality_bandname>
+                        <quality_bandname>QA_b4</quality_bandname>
                         <quality_fullname>band 4 data quality four bit range</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>14-17</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>b3_QA</quality_bandname>
+                        <quality_bandname>QA_b3</quality_bandname>
                         <quality_fullname>band 3 data quality four bit range</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>10-13</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>b2_QA</quality_bandname>
+                        <quality_bandname>QA_b2</quality_bandname>
                         <quality_fullname>band 2 data quality four bit range</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>6-9</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>b1_QA</quality_bandname>
+                        <quality_bandname>QA_b1</quality_bandname>
                         <quality_fullname>band 1 data quality four bit range</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>2-5</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>QA</quality_bandname>
+                        <quality_bandname>QA_bits</quality_bandname>
                         <quality_fullname>MODLAND QA bits</quality_fullname>
                         <quality_source>sur_refl_qc_500m</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>int_snow</quality_bandname>
+                        <quality_bandname>state_int_snow</quality_bandname>
                         <quality_fullname>internal snow algorithm flag</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>BRDF</quality_bandname>
-                        <quality_fullname>BRDF correction performed</quality_fullname>
+                        <quality_bandname>state_pan</quality_bandname>
+                        <quality_fullname>Salt pan</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>Adj_Cld</quality_bandname>
-                        <quality_fullname> Pixel is adjacent to cloud</quality_fullname>
+                        <quality_bandname>state_adj_cld</quality_bandname>
+                        <quality_fullname>Pixel is adjacent to cloud</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>13</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>MOD35_snow</quality_bandname>
+                        <quality_bandname>state_MOD35_snow</quality_bandname>
                         <quality_fullname>MOD35 snow/ice flag</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>12</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>int_fire</quality_bandname>
+                        <quality_bandname>state_int_fire</quality_bandname>
                         <quality_fullname>internal fire algorithm flag</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>11</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>int_cld</quality_bandname>
+                        <quality_bandname>state_int_cld</quality_bandname>
                         <quality_fullname>internal cloud algorithm flag</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>10</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>cirr</quality_bandname>
+                        <quality_bandname>state_cirr</quality_bandname>
                         <quality_fullname>cirrus detected</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>8-9</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>aer</quality_bandname>
+                        <quality_bandname>state_aer</quality_bandname>
                         <quality_fullname>aerosol quantity</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>land_wat</quality_bandname>
+                        <quality_bandname>state_land_wat</quality_bandname>
                         <quality_fullname>land/water flag</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>3-5</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>cld_shd</quality_bandname>
+                        <quality_bandname>state_cld_shd</quality_bandname>
                         <quality_fullname>cloud shadow</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>MOD35_cld</quality_bandname>
+                        <quality_bandname>state_MOD35_cld</quality_bandname>
                         <quality_fullname>MOD35 cloud</quality_fullname>
                         <quality_source>sur_refl_state_500m</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD09A1>
@@ -616,6 +616,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname>Surface Reflectance Daily L3 Global 0.05Deg CMG</prod_fullname>
                 <main_out_folder>Surf_Ref_Daily_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09CMG.005/</http_terra>
@@ -750,7 +751,7 @@
                         <fullname>Coarse Resolution QA</fullname>
                         <datatype>32-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
-                        <nodata_out>65535</nodata_out>
+                        <nodata_out>4294967295</nodata_out>
                     </band>
                     <band>
                         <bandname>Int_CM</bandname>
@@ -902,7 +903,506 @@
                         <quality_source>BQ</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD09CMG: MODIS/Terra Surface Reflectance Daily L3 Global 0.05Deg CMG V006</prod_fullname>
+                <main_out_folder>Surf_Ref_Daily_005dg_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09CMG.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09CMG.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD09CMG/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD09CMG/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>0</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09cmg_v006</www>
+                <bands>
+                    <band>
+                        <bandname>b1_Red</bandname>
+                        <fullname>Coarse Resolution Surface Reflectance Band 1 (620-670 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>b2_NIR</bandname>
+                        <fullname>Coarse Resolution Surface Reflectance Band 2 (841-876 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>b3_Blue</bandname>
+                        <fullname>Coarse Resolution Surface Reflectance Band 3 (459-479 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>b4_Green</bandname>
+                        <fullname>Coarse Resolution Surface Reflectance Band 4 (545-565 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>b5_SWIR</bandname>
+                        <fullname>Coarse Resolution Surface Reflectance Band 5 (1230-1250 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>b6_SWIR</bandname>
+                        <fullname>Coarse Resolution Surface Reflectance Band 6 (1628-1652 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>b7_SWIR</bandname>
+                        <fullname>Coarse Resolution Surface Reflectance Band 7 (2105-2155 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sun_zen</bandname>
+                        <fullname>Coarse Resolution Solar Zenith Angle</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>View_Zen</bandname>
+                        <fullname>Coarse Resolution View Zenith Angle</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Rel_Az</bandname>
+                        <fullname>Coarse Resolution Relative Azimuth Angle</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Ozone</bandname>
+                        <fullname>Coarse Resolution Ozone</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Br_T_b20</bandname>
+                        <fullname>Coarse Resolution Brightness Temperature Band 20</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Br_T_b21</bandname>
+                        <fullname>Coarse Resolution Brightness Temperature Band 21</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Br_T_b31</bandname>
+                        <fullname>Coarse Resolution Brightness Temperature Band 31</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Br_T_b32</bandname>
+                        <fullname>Coarse Resolution Brightness Temperature Band 32</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Gr_Time</bandname>
+                        <fullname>Coarse Resolution Granule Time</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Int_CM</bandname>
+                        <fullname>Coarse Resolution Band 3 Path Radiance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>BQ</bandname>
+                        <fullname>Coarse Resolution QA</fullname>
+                        <datatype>32-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Int_CM</bandname>
+                        <fullname>Coarse Resolution Internal CM</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>State_QA</bandname>
+                        <fullname>Coarse Resolution State QA</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>NMap</bandname>
+                        <fullname>Coarse Resolution Number Mapping</fullname>
+                        <datatype>32-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>N500pxl_avr_b37</bandname>
+                        <fullname>Number of 500m pixels averaged b3-7</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Npxl_rej</bandname>
+                        <fullname>Number of 500m rej. Detector</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>N250pxl_avr_b12</bandname>
+                        <fullname>Number of 250m pixels averaged b1-2</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Npxl_avr</bandname>
+                        <fullname>N pixels averaged</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <indexes>
+                    <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SR</indexes_bandname>
+                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDFI</indexes_bandname>
+                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII6</indexes_bandname>
+                        <indexes_fullname>NDII6 (b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII7</indexes_bandname>
+                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDSI</indexes_bandname>
+                        <indexes_fullname>NDSI (b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_fullname>
+                        <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>GNDVI</indexes_bandname>
+                        <indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>RGRI</indexes_bandname>
+                        <indexes_fullname>RGRI (b1_Red/b4_Green)</indexes_fullname>
+                        <indexes_formula>(b1_Red/b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>        <index>
+                        <indexes_bandname>GRVI</indexes_bandname>
+                        <indexes_fullname>GRVI (b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                </indexes>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>NMap_cloudy</quality_bandname>
+                        <quality_fullname>Number of pixel mapping flagged as cloudy</quality_fullname>
+                        <quality_source>NMap</quality_source>
+                        <quality_bitN>0-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>NMap_shadow</quality_bandname>
+                        <quality_fullname>Number of pixel mapping flagged as cloud shadow</quality_fullname>
+                        <quality_source>NMap</quality_source>
+                        <quality_bitN>8-15</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>NMap_adj_cloudy</quality_bandname>
+                        <quality_fullname>Number of pixel mapping flagged as adjacent to cloud</quality_fullname>
+                        <quality_source>NMap</quality_source>
+                        <quality_bitN>16-23</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>NMap_snow</quality_bandname>
+                        <quality_fullname>Number of pixel mapping flagged for snow</quality_fullname>
+                        <quality_source>NMap</quality_source>
+                        <quality_bitN>24-31</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_cld</quality_bandname>
+                        <quality_fullname>Cloudy</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>0</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_clr</quality_bandname>
+                        <quality_fullname>Clear</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_hcld</quality_bandname>
+                        <quality_fullname>High clouds</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_lcld</quality_bandname>
+                        <quality_fullname>Low clouds</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_snow</quality_bandname>
+                        <quality_fullname>Snow</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_fire</quality_bandname>
+                        <quality_fullname>Fire</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_sun</quality_bandname>
+                        <quality_fullname>Sun glint</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>6</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_dust</quality_bandname>
+                        <quality_fullname>Dust</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_shd</quality_bandname>
+                        <quality_fullname>Cloud shadow</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>8</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_adj_cld</quality_bandname>
+                        <quality_fullname>Pixel is adjacent to cloud</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>9</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_cirr</quality_bandname>
+                        <quality_fullname>Cirrus</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>10-11</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_pan</quality_bandname>
+                        <quality_fullname>Pan flag</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>12</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_aer</quality_bandname>
+                        <quality_fullname>Criteria used for aerosol retrieval</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>13</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_aot</quality_bandname>
+                        <quality_fullname>AOT (aerosol optical thickness) has climatological values</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>14</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>IntCM_intrp</quality_bandname>
+                        <quality_fullname>Pixel has interpolated TR, PR or SA data</quality_fullname>
+                        <quality_source>Int_CM</quality_source>
+                        <quality_bitN>15</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_cloud</quality_bandname>
+                        <quality_fullname>cloud state</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_cld_shd</quality_bandname>
+                        <quality_fullname>cloud shadow</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_lnd_wat</quality_bandname>
+                        <quality_fullname>land/water flag</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>3-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_aer</quality_bandname>
+                        <quality_fullname>aerosol quantity</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_cirrus</quality_bandname>
+                        <quality_fullname>cirrus detected</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>8-9</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_int_cld</quality_bandname>
+                        <quality_fullname>internal cloud algorithm flag</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>10</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_int_fire</quality_bandname>
+                        <quality_fullname>internal fire algorithm flag</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>11</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_MOD35_snow</quality_bandname>
+                        <quality_fullname>MOD35 snow/ice flag</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>12</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_adj_cld</quality_bandname>
+                        <quality_fullname>Pixel is adjacent to cloud</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>13</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_pan</quality_bandname>
+                        <quality_fullname>Salt pan</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>14</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_int_snow</quality_bandname>
+                        <quality_fullname>internal snow mask</quality_fullname>
+                        <quality_source>State_QA</quality_source>
+                        <quality_bitN>15</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>Adj_Cor</quality_bandname>
+                        <quality_fullname>adjacency correction performed</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>31</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_Atm_cor</quality_bandname>
+                        <quality_fullname>atmospheric correction performed</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>30</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b7</quality_bandname>
+                        <quality_fullname>band 7 data quality four bit range</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>26-29</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b6</quality_bandname>
+                        <quality_fullname>band 6 data quality four bit range</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>22-25</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b5</quality_bandname>
+                        <quality_fullname>band 5 data quality four bit range</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>18-21</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b4</quality_bandname>
+                        <quality_fullname>band 4 data quality four bit range</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>14-17</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b3</quality_bandname>
+                        <quality_fullname>band 3 data quality four bit range</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>10-13</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b2</quality_bandname>
+                        <quality_fullname>band 2 data quality four bit range</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>6-9</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b1</quality_bandname>
+                        <quality_fullname>band 1 data quality four bit range</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>2-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_bits</quality_bandname>
+                        <quality_fullname>MODLAND QA bits</quality_fullname>
+                        <quality_source>BQ</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                </quality_indicators>
             </version>
         </versions>
     </MOD09CMG>
@@ -913,6 +1413,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Surf_Ref_Daily_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.005/</http_terra>
@@ -1047,7 +1548,7 @@
                         <fullname>QC_500m: 500m Reflectance Band Quality</fullname>
                         <datatype>32-bit unsigned integer</datatype>
                         <nodata_in>787410671</nodata_in>
-                        <nodata_out>787410671</nodata_out>
+                        <nodata_out>4294967295</nodata_out>
                     </band>
                     <band>
                         <bandname>Obs_Cov_500</bandname>
@@ -1265,7 +1766,401 @@
                         <quality_source>QC_500</quality_source>
                         <quality_bitN>31</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD09GA: MODIS/Terra Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V006</prod_fullname>
+                <main_out_folder>Surf_Ref_Daily_500m_v6</main_out_folder>
+                <native_res>463.3127</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD09GA/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD09GA/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09ga_v006</www>
+                <bands>
+                    <band>
+                        <bandname>num_observations_1km</bandname>
+                        <fullname>Number of Observations 1Km</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>state_1km_1</bandname>
+                        <fullname>Reflectance Data State QA</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>65535</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SensorZenith_1</bandname>
+                        <fullname>Sensor Zenith</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-32767</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SensorAzimuth_1</bandname>
+                        <fullname>Sensor Azimuth</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-32767</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Range_1</bandname>
+                        <fullname>Range: pixel to sensor</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>65535</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SolarZenith_1</bandname>
+                        <fullname>Solar Zenith</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-32767</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SolarAzimuth_1</bandname>
+                        <fullname>Solar Azimuth</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-32767</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>gflags_1</bandname>
+                        <fullname>Geolocation flags</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>orbit_pnt_1</bandname>
+                        <fullname>Orbit pointer</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>128</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>granule_pnt_1</bandname>
+                        <fullname>Granule pointer</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>num_observations_500m</bandname>
+                        <fullname>Number of observations per 500m pixel</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_b01_1</bandname>
+                        <fullname>sur_refl_b01: 500m Surface Reflectance Band 1 (620-670 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_b02_1</bandname>
+                        <fullname>sur_refl_b02: 500m Surface Reflectance Band 2 (841-876 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_b03_1</bandname>
+                        <fullname>sur_refl_b03: 500m Surface Reflectance Band 3 (459-479 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_b04_1</bandname>
+                        <fullname>sur_refl_b04: 500m Surface Reflectance Band 4 (545-565 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_b05_1</bandname>
+                        <fullname>sur_refl_b05: 500m Surface Reflectance Band 5 (1230-1250 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_b06_1</bandname>
+                        <fullname>sur_refl_b06: 500m Surface Reflectance Band 6 (1628-1652 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_b07_1</bandname>
+                        <fullname>sur_refl_b07: 500m Surface Reflectance Band 7 (2105-2155 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_500m_1</bandname>
+                        <fullname>QC_500m: 500m Reflectance Band Quality</fullname>
+                        <datatype>32-bit unsigned integer</datatype>
+                        <nodata_in>787410671</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>obscov_500m_1</bandname>
+                        <fullname>Obs_cov_500m: Observation coverage</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>128</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>iobs_res_1</bandname>
+                        <fullname>iobs_res: Observation number</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>q_scan_1</bandname>
+                        <fullname>q_scan: 250m scan value information</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <indexes>
+                    <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SR</indexes_bandname>
+                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDFI</indexes_bandname>
+                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII6</indexes_bandname>
+                        <indexes_fullname>NDII6 (b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII7</indexes_bandname>
+                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDSI</indexes_bandname>
+                        <indexes_fullname>NDSI (b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_fullname>
+                        <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>GNDVI</indexes_bandname>
+                        <indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>RGRI</indexes_bandname>
+                        <indexes_fullname>RGRI (b1_Red/b4_Green)</indexes_fullname>
+                        <indexes_formula>(b1_Red/b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>        <index>
+                        <indexes_bandname>GRVI</indexes_bandname>
+                        <indexes_fullname>GRVI (b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                </indexes>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>state_cloud</quality_bandname>
+                        <quality_fullname>cloud state</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_cld_shd</quality_bandname>
+                        <quality_fullname>cloud shadow</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_lnd_wat</quality_bandname>
+                        <quality_fullname>land/water flag</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>3-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_aer</quality_bandname>
+                        <quality_fullname>aerosol quantity</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_cirr</quality_bandname>
+                        <quality_fullname>cirrus detected</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>8-9</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_int_cld</quality_bandname>
+                        <quality_fullname>internal cloud algorithm flag</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>10</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_int_fire</quality_bandname>
+                        <quality_fullname>internal fire algorithm flag</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>11</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_MOD35_snow</quality_bandname>
+                        <quality_fullname>MOD35 snow/ice flag</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>12</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_adj_cld</quality_bandname>
+                        <quality_fullname>Pixel is adjacent to cloud</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>13</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_pan</quality_bandname>
+                        <quality_fullname>Salt pan</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>14</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_int_snow</quality_bandname>
+                        <quality_fullname>internal snow mask</quality_fullname>
+                        <quality_source>state_1km_1</quality_source>
+                        <quality_bitN>15</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_bits</quality_bandname>
+                        <quality_fullname>MODLAND QA bits</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b1</quality_bandname>
+                        <quality_fullname>band 1 data quality four bit range</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>2-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b2</quality_bandname>
+                        <quality_fullname>band 2 data quality four bit range</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>6-9</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b3</quality_bandname>
+                        <quality_fullname>band 3 data quality four bit range</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>10-13</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b4</quality_bandname>
+                        <quality_fullname>band 4 data quality four bit range</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>14-17</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b5</quality_bandname>
+                        <quality_fullname>band 5 data quality four bit range</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>18-21</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b6</quality_bandname>
+                        <quality_fullname>band 6 data quality four bit range</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>22-25</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b7</quality_bandname>
+                        <quality_fullname>band 7 data quality four bit range</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>26-29</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_atm_cor</quality_bandname>
+                        <quality_fullname>atmospheric correction performed</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>30</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_adj_cor</quality_bandname>
+                        <quality_fullname>adjacency correction performed</quality_fullname>
+                        <quality_source>QC_500m_1</quality_source>
+                        <quality_bitN>31</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>gflag_range</quality_bandname>
+                        <quality_fullname>Sensor range validity flag</quality_fullname>
+                        <quality_source>gflags_1</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>gflag_dem</quality_bandname>
+                        <quality_fullname>Digital elevation model quality flag</quality_fullname>
+                        <quality_source>gflags_1</quality_source>
+                        <quality_bitN>4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>gflag_terr</quality_bandname>
+                        <quality_fullname>Terrain data validity</quality_fullname>
+                        <quality_source>gflags_1</quality_source>
+                        <quality_bitN>5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>gflag_ellps</quality_bandname>
+                        <quality_fullname>Ellipsoid intersection flag</quality_fullname>
+                        <quality_source>gflags_1</quality_source>
+                        <quality_bitN>6</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>gflag_indata</quality_bandname>
+                        <quality_fullname>Input data flag</quality_fullname>
+                        <quality_source>gflags_1</quality_source>
+                        <quality_bitN>7</quality_bitN>
+                    </quality>
+                </quality_indicators>
             </version>
         </versions>
     </MOD09GA>
@@ -1276,6 +2171,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname>Surface Reflectance Daily L2G Global 250m</prod_fullname>
                 <main_out_folder>Surf_Ref_Daily_250m_v5</main_out_folder>
                 <native_res>231.656358</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.005/</http_terra>
@@ -1376,7 +2272,133 @@
                         <quality_source>BQ</quality_source>
                         <quality_bitN>13</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD09GQ: MODIS/Terra Surface Reflectance Daily L2G Global 250m SIN Grid V006</prod_fullname>
+                <main_out_folder>Surf_Ref_Daily_250m_v6</main_out_folder>
+                <native_res>231.656358</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD09GQ/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD09GQ/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09gq_v006</www>
+                <bands>
+                    <band>
+                        <bandname>num_observations</bandname>
+                        <fullname>Number of observations within the pixel</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>128</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_b01_1</bandname>
+                        <fullname>250m Surface Reflectance Band 1 (620-670 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_b02_1</bandname>
+                        <fullname>250m Surface Reflectance Band 2 (841-876 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_250m_1</bandname>
+                        <fullname>250m Reflectance Band Quality</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>2995</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>obscov_1</bandname>
+                        <fullname>percentage of the grid cell area covered by the observation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>iobs_res_1</bandname>
+                        <fullname>Observation number</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>orbit_pnt_1</bandname>
+                        <fullname>Orbit pointer</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>granule_pnt_1</bandname>
+                        <fullname>Granule pointer</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <indexes>
+                    <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SR</indexes_bandname>
+                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                </indexes>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QA_bits</quality_bandname>
+                        <quality_fullname>MODLAND QA bits</quality_fullname>
+                        <quality_source>QC_250m_1</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_cloud</quality_bandname>
+                        <quality_fullname>cloud state</quality_fullname>
+                        <quality_source>QC_250m_1</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b1</quality_bandname>
+                        <quality_fullname>band 1 data quality four bit range</quality_fullname>
+                        <quality_source>QC_250m_1</quality_source>
+                        <quality_bitN>4-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b2</quality_bandname>
+                        <quality_fullname>band 2 data quality four bit range</quality_fullname>
+                        <quality_source>QC_250m_1</quality_source>
+                        <quality_bitN>8-11</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_atm_cor</quality_bandname>
+                        <quality_fullname>atmospheric correction performed</quality_fullname>
+                        <quality_source>QC_250m_1</quality_source>
+                        <quality_bitN>12</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_adj_cor</quality_bandname>
+                        <quality_fullname>adjacency correction performed</quality_fullname>
+                        <quality_source>QC_250m_1</quality_source>
+                        <quality_bitN>13</quality_bitN>
+                    </quality>
+                </quality_indicators>
             </version>
         </versions>
     </MOD09GQ>
@@ -1387,6 +2409,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname>Surface Reflectance 8-Day L3 Global 250m</prod_fullname>
                 <main_out_folder>Surf_Ref_8Days_250m_v5</main_out_folder>
                 <native_res>231.656358</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09Q1.005/</http_terra>
@@ -1479,7 +2502,171 @@
                         <quality_source>BQ_250</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD09Q1: MODIS/Terra Surface Reflectance 8-Day L3 Global 250m SIN Grid V006</prod_fullname>
+                <main_out_folder>Surf_Ref_8Days_250m_v6</main_out_folder>
+                <native_res>231.656358</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09Q1.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD09Q1/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD09Q1/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09q1_v006</www>
+                <bands>
+                    <band>
+                        <bandname>Sur_refl_b01</bandname>
+                        <fullname>250m Surface Reflectance Band 1 (620-670 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b02</bandname>
+                        <fullname>250m Surface Reflectance Band 2 (841-876 nm)</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sur_refl_250m_state_flag</bandname>
+                        <fullname>Surface Reflectance 250m State flags</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>65535</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_qc_250m</bandname>
+                        <fullname>Surface Reflectance 250m Band Quality Control flags</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>65535</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                </bands>
+                <indexes>
+                    <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SR</indexes_bandname>
+                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                </indexes>
+                <quality_indicators>
+                   <quality>
+                        <quality_bandname>flag_int_snow</quality_bandname>
+                        <quality_fullname>internal snow algorithm flag</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>15</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_span</quality_bandname>
+                        <quality_fullname>salt span</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>14</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_adj_cld</quality_bandname>
+                        <quality_fullname> Pixel is adjacent to cloud</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>13</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_mod35_snow</quality_bandname>
+                        <quality_fullname>MOD35 snow/ice flag</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>12</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_int_fire</quality_bandname>
+                        <quality_fullname>internal fire algorithm flag</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>11</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_int_cld</quality_bandname>
+                        <quality_fullname>internal cloud algorithm flag</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>10</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_cirr</quality_bandname>
+                        <quality_fullname>cirrus detected</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>8-9</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_aer</quality_bandname>
+                        <quality_fullname>aerosol quantity</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_land_wat</quality_bandname>
+                        <quality_fullname>land/water flag</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>3-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_cld_shd</quality_bandname>
+                        <quality_fullname>cloud shadow</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>state_cld</quality_bandname>
+                        <quality_fullname>cloud state</quality_fullname>
+                        <quality_source>sur_refl_250m_state_flag</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_orb_500</quality_bandname>
+                        <quality_fullname>different orbit from 500 m</quality_fullname>
+                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_bitN>14</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_adj_cor</quality_bandname>
+                        <quality_fullname>adjacency correction performed</quality_fullname>
+                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_bitN>13</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_atm_cor</quality_bandname>
+                        <quality_fullname>atmospheric correction performed</quality_fullname>
+                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_bitN>12</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b2</quality_bandname>
+                        <quality_fullname>band 2 data quality four bit range</quality_fullname>
+                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_bitN>8-11</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_b1</quality_bandname>
+                        <quality_fullname>band 1 data quality four bit range</quality_fullname>
+                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_bitN>4-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_bits</quality_bandname>
+                        <quality_fullname>MODLAND QA bits</quality_fullname>
+                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                </quality_indicators>
             </version>
         </versions>
     </MOD09Q1>
@@ -1490,6 +2677,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname>Land Surface Temperature and Emissivity Daily L3 Global 1 km Grid SIN</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.005/</http_terra>
@@ -1610,7 +2798,156 @@
                         <quality_source>LST_QC</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD11A1: MODIS/Terra Land Surface Temperature and Emissivity Daily L3 Global 1 km Grid SIN V006</prod_fullname>
+                <main_out_folder>Surf_Temp_Daily_1Km_v6</main_out_folder>
+                <native_res>926.6254</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11A1/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11A1/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a1_v006</www>
+                <bands>
+                    <band>
+                        <bandname>LST_Day_1km</bandname>
+                        <fullname>Daytime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Day</bandname>
+                        <fullname>Daytime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_time</bandname>
+                        <fullname>Daytime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_angle</bandname>
+                        <fullname>Daytime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_1km</bandname>
+                        <fullname>Nighttime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Night</bandname>
+                        <fullname>Nighttime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_time</bandname>
+                        <fullname>Nighttime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_angle</bandname>
+                        <fullname>Nighttime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_day_cov</bandname>
+                        <fullname>Daytime clear-sky coverage</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_night_cov</bandname>
+                        <fullname>Nighttime clear-sky coverage</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QAday_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_emis_err</quality_bandname>
+                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
             </version>
         </versions>
     </MOD11A1>
@@ -1621,6 +2958,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname>Land Surface Temperature and Emissivity 8-Day L3 Global 1km</prod_fullname>
                 <main_out_folder>Surf_Temp_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.005/</http_terra>
@@ -1765,7 +3103,156 @@
                         <quality_source>LST_Night_QC</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD11A2: MODIS/Terra Land Surface Temperature and Emissivity 8-Day L3 Global 1 km Grid SIN V006</prod_fullname>
+                <main_out_folder>Surf_Temp_8Days_1Km_v6</main_out_folder>
+                <native_res>926.6254</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A2.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11A2/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11A2/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a2_v006</www>
+                <bands>
+                    <band>
+                        <bandname>LST_Day_1km</bandname>
+                        <fullname>8-Day daytime 1km grid land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Day</bandname>
+                        <fullname>Daytime LST Quality Indicators</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>-999</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_time</bandname>
+                        <fullname>Local time of day observation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_angle</bandname>
+                        <fullname>View zenith angle of day observation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_1km</bandname>
+                        <fullname>8-Day nighttime 1km grid land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Night</bandname>
+                        <fullname>Nighttime LST Quality indivators</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>-999</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_time</bandname>
+                        <fullname>Local time of night observation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_angle</bandname>
+                        <fullname>View zenith angle of night observation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
+                        <fullname>Emis_31: Band 31 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_33</bandname>
+                        <fullname>Emis_32: Band 32 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_day_cov</bandname>
+                        <fullname>Clear_sky_days</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_night_cov</bandname>
+                        <fullname>Clear_sky_nights</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QAday_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_emis_err</quality_bandname>
+                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
             </version>
         </versions>
     </MOD11A2>
@@ -1776,6 +3263,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname>MODIS/Terra Land Surface Temperature and Emissivity Daily L3 Global Grid SIN</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_GridSin_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.005/</http_terra>
@@ -1931,10 +3419,252 @@
                         <quality_source>LST_QC</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD11B1: MODIS/Terra Land Surface Temperature and Emissivity Daily L3 Global 6 km Grid SIN V006</prod_fullname>
+                <main_out_folder>Surf_Temp_Daily_GridSin_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B1.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11B1/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11B1/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b1_v006</www>
+                <bands>
+                    <band>
+                        <bandname>LST_Day_6km</bandname>
+                        <fullname>Daytime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Day</bandname>
+                        <fullname>Daytime LST quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_time</bandname>
+                        <fullname>Daytime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_angle</bandname>
+                        <fullname>Daytime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_6km</bandname>
+                        <fullname>Nighttime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Night</bandname>
+                        <fullname>Nighttime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_time</bandname>
+                        <fullname>Nighttime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_angle</bandname>
+                        <fullname>Nighttime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_20</bandname>
+                        <fullname>Band 20 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_22</bandname>
+                        <fullname>Band 22 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_23</bandname>
+                        <fullname>Band 23 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_29</bandname>
+                        <fullname>Band 29 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Day_6km_Aggregated_from_1km</bandname>
+                        <fullname>Daytime 5-Km LST aggregated from 1-Km</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_6km_Aggregated_from_1km</bandname>
+                        <fullname>Nighttime 5-Km LST aggregated from 1-Km</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_20_night</bandname>
+                        <fullname>Band 20 Emissivity night</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_22_night</bandname>
+                        <fullname>Band 22 Emissivity night</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_23_night</bandname>
+                        <fullname>Band 23 Emissivity night</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_29_night</bandname>
+                        <fullname>Band 29 Emissivity night</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Emis</bandname>
+                        <fullname>Daytime emissivity quality indicators</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Emis_night</bandname>
+                        <fullname>Nighttime emissivity quality indicators</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Percent_land_in_grid</bandname>
+                        <fullname>Percentage of land in the grid</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QAday_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Emis</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Emis</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_emis_err</quality_bandname>
+                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_source>QC_Emis</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Emis</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Emis_night</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Emis_night</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_source>QC_Emis_night</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Emis_night</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
             </version>
         </versions>
     </MOD11B1>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <MOD11C1>
         <name>Surf_Temp_Daily_005dg (M*D11C1)</name>
         <file_prefix_terra>MOD09C1</file_prefix_terra>
@@ -1942,6 +3672,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.005/</http_terra>
@@ -2097,7 +3828,7 @@
                         <quality_source>LST_QC</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD11C1>
@@ -2108,6 +3839,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Surf_Temp_8Days_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.005/</http_terra>
@@ -2249,7 +3981,7 @@
                         <quality_source>LST_QC</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD11C2>
@@ -2260,6 +3992,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Surf_Temp_Monthly_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.005/</http_terra>
@@ -2303,7 +4036,7 @@
                         <fullname>Days with clear-sky conditions and validated LSTs</fullname>
                         <datatype>32-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
-                    <nodata_out>255</nodata_out>
+                        <nodata_out>4294967295</nodata_out>
                     </band>
                     <band>
                         <bandname>LST_Night</bandname>
@@ -2338,7 +4071,7 @@
                         <fullname>Nights with clear-sky conditions and validated LSTs</fullname>
                         <datatype>32-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
-                        <nodata_out>4294967296</nodata_out>
+                        <nodata_out>4294967295</nodata_out>
                     </band>
                     <band>
                         <bandname>Emiss_B20</bandname>
@@ -2408,7 +4141,7 @@
                         <quality_source>LST_QC</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD11C3>
@@ -2419,6 +4152,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Surf_Temp_5Min_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11_L2.005/</http_terra>
@@ -2483,14 +4217,14 @@
                         <fullname>Latitude (every 5 scan lines/pixels</fullname>
                         <datatype>32-bit Unsigned integer</datatype>
                         <nodata_in>-999</nodata_in>
-                        <nodata_out>4294967296</nodata_out>
+                        <nodata_out>4294967295</nodata_out>
                     </band>
                     <band>
                         <bandname>Long</bandname>
                         <fullname>Longitude (every 5 scan lines/pixels</fullname>
                         <datatype>32-bit Unsigned integer</datatype>
                         <nodata_in>-999</nodata_in>
-                        <nodata_out>4294967296</nodata_out>
+                        <nodata_out>4294967295</nodata_out>
                     </band>
                 </bands>
                 <quality_indicators>
@@ -2518,7 +4252,7 @@
                         <quality_source>LST_QC</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD11_L2>
@@ -2529,6 +4263,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>BRDF_Albedo_ModelPar_16Days_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_terra>
@@ -2627,6 +4362,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>BRDF_Albedo_Quality_16Days_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_terra>
@@ -2720,7 +4456,7 @@
                         <quality_source>BQ</quality_source>
                         <quality_bitN>31</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MCD43A2>
@@ -2731,6 +4467,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Albedo_16Days_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_terra>
@@ -2892,6 +4629,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>BRDF_Adj_Refl_16Days_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_terra>
@@ -2962,6 +4700,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>BRDF_Albedo_ModelPar_16Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_terra>
@@ -3060,6 +4799,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>BRDF_Albedo_Quality_16Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_terra>
@@ -3153,7 +4893,7 @@
                         <quality_source>BQ</quality_source>
                         <quality_bitN>31</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MCD43B2>
@@ -3164,6 +4904,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Albedo_16Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_terra>
@@ -3325,6 +5066,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>BRDF_Adj_Refl_16Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_terra>
@@ -3395,6 +5137,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>BRDF_Albedo_ModelPar_16Days_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_terra>
@@ -3493,6 +5236,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>BRDF_Albedo_Quality_16Days_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_terra>
@@ -3586,7 +5330,7 @@
                         <quality_source>BQ</quality_source>
                         <quality_bitN>31</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MCD43C2>
@@ -3597,6 +5341,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Albedo_16Days_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_terra>
@@ -3758,6 +5503,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>BRDF_Adj_Refl_16Day_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.005/</http_terra>
@@ -3828,6 +5574,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>VI_16Days_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A1.005/</http_terra>
@@ -4001,7 +5748,7 @@
                         <quality_source>VI_QA</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD13A1>
@@ -4012,6 +5759,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>VI_16Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.005/</http_terra>
@@ -4185,7 +5933,7 @@
                         <quality_source>VI_QA</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD13A2>
@@ -4196,6 +5944,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>VI_Monthly_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A3.005/</http_terra>
@@ -4362,7 +6111,7 @@
                         <quality_source>VI_QA</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD13A3>
@@ -4373,6 +6122,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>VI_16Days_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C1.005/</http_terra>
@@ -4547,7 +6297,7 @@
                         <quality_source>QA</quality_source>
                         <quality_bitN>14-15</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD13C1>
@@ -4558,6 +6308,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>VI_Monthly_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.005/</http_terra>
@@ -4732,7 +6483,7 @@
                         <quality_source>VI_QA</quality_source>
                         <quality_bitN>14-15</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD13C2>
@@ -4743,6 +6494,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>VI_16Days_250m_v5</main_out_folder>
                 <native_res>231.656358</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.005/</http_terra>
@@ -4919,7 +6671,7 @@
                         <quality_source>VI_QA</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD13Q1>
@@ -4930,6 +6682,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>LAI_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_terra>
@@ -5056,7 +6809,7 @@
                         <quality_source>QA_extra</quality_source>
                         <quality_bitN>7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MCD15A2>
@@ -5067,6 +6820,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>LAI_4Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_terra>
@@ -5193,7 +6947,7 @@
                         <quality_source>QA_extra</quality_source>
                         <quality_bitN>7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MCD15A3>
@@ -5204,6 +6958,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>LAI_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD15A2.005/</http_terra>
@@ -5329,7 +7084,7 @@
                         <quality_source>QA_extra</quality_source>
                         <quality_bitN>7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD15A2>
@@ -5340,6 +7095,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Gross_PP_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2.005/</http_terra>
@@ -5403,7 +7159,7 @@
                         <quality_source>GPP_QA</quality_source>
                         <quality_bitN>5-7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MOD17A2>
@@ -5414,6 +7170,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Net_PP_Yearly_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A3.005/</http_terra>
@@ -5456,6 +7213,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>Burned_Monthly_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_terra>
@@ -5533,6 +7291,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>ThermalAn_Fire_5Min_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14.005/</http_terra>
@@ -5546,15 +7305,15 @@
                     <band>
                         <bandname>Fire_Mask</bandname>
                         <fullname>Fire mask</fullname>
-                        <datatype>Class</datatype>
-                        <nodata_in>8-bit unsigned integer</nodata_in>
-                        <nodata_out>0</nodata_out>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>QA</bandname>
                         <fullname>Algorithm QA</fullname>
-                        <datatype>Bits</datatype>
-                        <nodata_in>32-bit unsigned integer</nodata_in>
+                        <datatype>32-bit unsigned integer</datatype>
+                        <nodata_in>4294967295</nodata_in>
                         <nodata_out>4294967295</nodata_out>
                     </band>
                 </bands>        <quality_indicators>
@@ -5684,7 +7443,7 @@
                         <quality_source>QA</quality_source>
                         <quality_bitN>27-31</quality_bitN>
                     </quality>
-        </quality_indicators><fixme>TODO: download of fire table (see www)</fixme>
+                </quality_indicators><fixme>TODO: download of fire table (see www)</fixme>
             </version>
         </versions>
     </MOD14>
@@ -5695,6 +7454,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>ThermalAn_Fire_Daily_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.005/</http_terra>
@@ -5744,6 +7504,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>ThermalAn_Fire_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.005/</http_terra>
@@ -5779,6 +7540,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>LandCover_Type_Yearly_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_terra>
@@ -5867,7 +7629,7 @@
                         <quality_source>LC1_QC</quality_source>
                         <quality_bitN>1-2</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MCD12C1>
@@ -5878,6 +7640,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>LandCover_Type_Yearly_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_terra>
@@ -6019,7 +7782,7 @@
                         <quality_source>LC_QC</quality_source>
                         <quality_bitN>4-7</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MCD12Q1>
@@ -6030,6 +7793,7 @@
         <versions>
             <version>
                 <v_number>5</v_number>
+                <prod_fullname></prod_fullname>
                 <main_out_folder>LandCover_Dynamics_Yearly_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_terra>
@@ -6121,7 +7885,7 @@
                         <quality_source>QC</quality_source>
                         <quality_bitN>8-15</quality_bitN>
                     </quality>
-        </quality_indicators>
+                </quality_indicators>
             </version>
         </versions>
     </MCD12Q2>
