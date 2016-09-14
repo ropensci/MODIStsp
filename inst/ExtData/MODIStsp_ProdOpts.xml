@@ -2,6 +2,8 @@
 <products>
     <MOD09A1>
         <name>Surf_Ref_8Days_500m (M*D09A1)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Reflectance</cat_01>
         <file_prefix_terra>MOD09A1</file_prefix_terra>
         <file_prefix_aqua>MYD09A1</file_prefix_aqua>
         <versions>
@@ -308,7 +310,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D09A1: MODIS/Terra Surface Reflectance 8-Day L3 Global 500m SIN Grid V006</prod_fullname>
+                <prod_fullname>M*D09A1: MODIS/Terra/Aqua Surface Reflectance 8-Day L3 Global 500m SIN Grid V006</prod_fullname>
                 <main_out_folder>Surf_Ref_8Days_500m_v6</main_out_folder>
                 <native_res>463.3127</native_res>
                 <combined>0</combined>
@@ -611,6 +613,8 @@
     </MOD09A1>
     <MOD09CMG>
         <name>Surf_Ref_Daily_005dg (M*D09CMG)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Reflectance</cat_01>
         <file_prefix_terra>MOD09CMG</file_prefix_terra>
         <file_prefix_aqua>MYD09CMG</file_prefix_aqua>
         <versions>
@@ -907,7 +911,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>MOD09CMG: MODIS/Terra Surface Reflectance Daily L3 Global 0.05Deg CMG V006</prod_fullname>
+                <prod_fullname>M*D09CMG: MODIS/Terra/Aqua Surface Reflectance Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                 <main_out_folder>Surf_Ref_Daily_005dg_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09CMG.006/</http_terra>
@@ -1408,6 +1412,8 @@
     </MOD09CMG>
     <MOD09GA>
         <name>Surf_Ref_Daily_500m (M*D09GA)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Reflectance</cat_01>
         <file_prefix_terra>MOD09GA</file_prefix_terra>
         <file_prefix_aqua>MYD09GA</file_prefix_aqua>
         <versions>
@@ -1770,7 +1776,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>MOD09GA: MODIS/Terra Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V006</prod_fullname>
+                <prod_fullname>M*D09GA: MODIS/Terra/Aqua Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V006</prod_fullname>
                 <main_out_folder>Surf_Ref_Daily_500m_v6</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.006/</http_terra>
@@ -2165,6 +2171,8 @@
         </versions>
     </MOD09GA>
     <MOD09GQ>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Reflectance</cat_01>
         <name>Surf_Ref_Daily_250m (M*D09GQ)</name>
         <file_prefix_terra>MOD09GQ</file_prefix_terra>
         <file_prefix_aqua>MYD09GQ</file_prefix_aqua>
@@ -2276,7 +2284,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>MOD09GQ: MODIS/Terra Surface Reflectance Daily L2G Global 250m SIN Grid V006</prod_fullname>
+                <prod_fullname>M*D09GQ: MODIS/Terra/Aqua Surface Reflectance Daily L2G Global 250m SIN Grid V006</prod_fullname>
                 <main_out_folder>Surf_Ref_Daily_250m_v6</main_out_folder>
                 <native_res>231.656358</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.006/</http_terra>
@@ -2404,6 +2412,8 @@
     </MOD09GQ>
     <MOD09Q1>
         <name>Surf_Ref_8Days_250m (M*D09Q1)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Reflectance</cat_01>
         <file_prefix_terra>MOD09Q1</file_prefix_terra>
         <file_prefix_aqua>MYD09Q1</file_prefix_aqua>
         <versions>
@@ -2506,7 +2516,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>MOD09Q1: MODIS/Terra Surface Reflectance 8-Day L3 Global 250m SIN Grid V006</prod_fullname>
+                <prod_fullname>M*D09Q1: MODIS/Terra/Aqua Surface Reflectance 8-Day L3 Global 250m SIN Grid V006</prod_fullname>
                 <main_out_folder>Surf_Ref_8Days_250m_v6</main_out_folder>
                 <native_res>231.656358</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09Q1.006/</http_terra>
@@ -2670,8 +2680,502 @@
             </version>
         </versions>
     </MOD09Q1>
+    <MODOCGA>
+        <name>Oc_Ref_Daily_1Km (M*DOCGA)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Reflectance</cat_01>
+        <file_prefix_terra>MODOCGA</file_prefix_terra>
+        <file_prefix_aqua>MYDOCGA</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*DOCGA: MODIS/Terra/Aqua Ocean Reflectance Daily L2G-Lite Global 1 km SIN Grid V006</prod_fullname>
+                <main_out_folder>Oc_Ref_Daily_1Km_v6</main_out_folder>
+                <native_res>926.6254</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MODOCGA.006006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYDOCGA.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MODOCGA/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYDOCGA/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/modocga_v006</www>
+                <bands>
+                    <band>
+                        <bandname>num_observations</bandname>
+                        <fullname>Number of observations per pixel</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>128</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b08_1</bandname>
+                        <fullname>MODIS band 8 Surface Reflectance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b09_1</bandname>
+                        <fullname>MODIS band 9 Surface Reflectance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b10_1</bandname>
+                        <fullname>MODIS band 10 Surface Reflectance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b11_1</bandname>
+                        <fullname>MODIS band 11 Surface Reflectance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b12_1</bandname>
+                        <fullname>MODIS band 12 Surface Reflectance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b13_1</bandname>
+                        <fullname>MODIS band 13 Surface Reflectance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b14_1</bandname>
+                        <fullname>MODIS band 14 Surface Reflectance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b15_1</bandname>
+                        <fullname>MODIS band 15 Surface Reflectance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Sur_refl_b16_1</bandname>
+                        <fullname>MODIS band 16 Surface Reflectance</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_b8_15_1km_1</bandname>
+                        <fullname>Band quality for MODIS bands 8-15</fullname>
+                        <datatype>32-bit unsigned integer</datatype>
+                        <nodata_in>787410671</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_b16_1km_1</bandname>
+                        <fullname>Band quality for MODIS band 16</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>3</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>orbit_pnt_1</bandname>
+                        <fullname>Pointer to the orbit of each observation</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>128</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>granule_pnt_1</bandname>
+                        <fullname>Pointer to the granule of  each observation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                   <quality>
+                        <quality_bandname>QA_b16_1</quality_bandname>
+                        <quality_fullname>Band 16 data quality four bit range</quality_fullname>
+                        <quality_source>QC_b16_1km_1</quality_source>
+                        <quality_bitN>4-7</quality_bitN>
+                    </quality>
+                   <quality>
+                        <quality_bandname>QA_b15_1</quality_bandname>
+                        <quality_fullname>Band 15 data quality four bit range</quality_fullname>
+                        <quality_source>QC_b8_15_1km_1</quality_source>
+                        <quality_bitN>28-31</quality_bitN>
+                    </quality>
+                   <quality>
+                        <quality_bandname>QA_b14_1</quality_bandname>
+                        <quality_fullname>Band 14 data quality four bit range</quality_fullname>
+                        <quality_source>QC_b8_15_1km_1</quality_source>
+                        <quality_bitN>24-27</quality_bitN>
+                    </quality>
+                   <quality>
+                        <quality_bandname>QA_b13_1</quality_bandname>
+                        <quality_fullname>Band 13 data quality four bit range</quality_fullname>
+                        <quality_source>QC_b8_15_1km_1</quality_source>
+                        <quality_bitN>20-23</quality_bitN>
+                    </quality>
+                   <quality>
+                        <quality_bandname>QA_b12_1</quality_bandname>
+                        <quality_fullname>Band 12 data quality four bit range</quality_fullname>
+                        <quality_source>QC_b8_15_1km_1</quality_source>
+                        <quality_bitN>16-19</quality_bitN>
+                    </quality>
+                   <quality>
+                        <quality_bandname>QA_b11_1</quality_bandname>
+                        <quality_fullname>Band 11 data quality four bit range</quality_fullname>
+                        <quality_source>QC_b8_15_1km_1</quality_source>
+                        <quality_bitN>12-15</quality_bitN>
+                    </quality>
+                   <quality>
+                        <quality_bandname>QA_b10_1</quality_bandname>
+                        <quality_fullname>Band 10 data quality four bit range</quality_fullname>
+                        <quality_source>QC_b8_15_1km_1</quality_source>
+                        <quality_bitN>8-11</quality_bitN>
+                    </quality>
+                   <quality>
+                        <quality_bandname>QA_b9_1</quality_bandname>
+                        <quality_fullname>Band 9 data quality four bit range</quality_fullname>
+                        <quality_source>QC_b8_15_1km_1</quality_source>
+                        <quality_bitN>4-7</quality_bitN>
+                    </quality>
+                   <quality>
+                        <quality_bandname>QA_b8_1</quality_bandname>
+                        <quality_fullname>Band 8 data quality four bit range</quality_fullname>
+                        <quality_source>QC_b8_15_1km_1</quality_source>
+                        <quality_bitN>0-3</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MODOCGA>
+    <MODTBGA>
+        <name>Therm_Daily_1Km (M*D09Q1)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Reflectance</cat_01>
+        <file_prefix_terra>MODTBGA</file_prefix_terra>
+        <file_prefix_aqua>MYDTBGA</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*DTBGA: MODIS/Terra/Aqua Thermal Bands Daily L2G Global 1 km SIN Grid V006</prod_fullname>
+                <main_out_folder>Therm_Daily_1Km_v6</main_out_folder>
+                <native_res>926.6254</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MODTBGA.006006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYDTBGA.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MODTBGA/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYDTBGA/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/modtbga_v006</www>
+                <bands>
+                    <band>
+                        <bandname>num_observations</bandname>
+                        <fullname>Number of observations per pixel</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>128</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Band20_1</bandname>
+                        <fullname>Band 20 Brightness Temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Band31_1</bandname>
+                        <fullname>Band 31 Brightness Temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Band32_1</bandname>
+                        <fullname>Band 32 Brightness Temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Band20Albedo</bandname>
+                        <fullname>Band 20 Albedo</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>-28672</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Orbit_pnt_1</bandname>
+                        <fullname>Pointer to the orbit of each observation</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>128</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Granule_pnt_1</bandname>
+                        <fullname>Pointer to the granule of  each observation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+            </version>
+        </versions>
+    </MODTBGA>
+    <MOD11_L2>
+        <name>Surf_Temp_5Min_1Km (M*D11_L2)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <file_prefix_terra>MOD11_L2</file_prefix_terra>
+        <file_prefix_aqua>MYD11_L2</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>5</v_number>
+                <prod_fullname>MODIS/Terra/Aqua Land Surface Temperature and Emissivity 5-Minute L2 Swath 1 km</prod_fullname>
+                <main_out_folder>Surf_Temp_5Min_1Km_v5</main_out_folder>
+                <native_res>926.6254</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11_L2.005/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11_L2.005/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11_L2/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11_L2/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11_l2</www>
+                <bands>
+                    <band>
+                        <bandname>LST</bandname>
+                        <fullname>Land Surface Temperature</fullname>
+                        <datatype>16-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_QC</bandname>
+                        <fullname>Daytime LSTE QC</fullname>
+                        <datatype>16-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Err</bandname>
+                        <fullname>LST Error</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emiss_B31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emiss_B32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                    <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>View_Zen</bandname>
+                        <fullname>Zenith angle of the pixel view</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Time_Night</bandname>
+                        <fullname>LST Observation time</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Lat</bandname>
+                        <fullname>Latitude (every 5 scan lines/pixels</fullname>
+                        <datatype>32-bit Unsigned integer</datatype>
+                        <nodata_in>-999</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Long</bandname>
+                        <fullname>Longitude (every 5 scan lines/pixels</fullname>
+                        <datatype>32-bit Unsigned integer</datatype>
+                        <nodata_in>-999</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QA</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>LST_QC</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>DQ</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>LST_QC</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>EEr_Flag</quality_bandname>
+                        <quality_fullname>Emissivity error flag</quality_fullname>
+                        <quality_source>LST_QC</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>LSTEr</quality_bandname>
+                        <quality_fullname>LST error flag</quality_fullname>
+                        <quality_source>LST_QC</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*D11_L2: MODIS/Terra/Aqua Land Surface Temperature and Emissivity 5-Minute L2 Swath 1 km</prod_fullname>
+                <main_out_folder>Surf_Temp_5Min_1Km_v6</main_out_folder>
+                <native_res>926.6254</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11_L2.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11_L2.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11_L2/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11_L2/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11_l2_v006</www>
+                <bands>
+                    <band>
+                        <bandname>LST</bandname>
+                        <fullname>Land Surface Temperature</fullname>
+                        <datatype>16-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC</bandname>
+                        <fullname>Quality control for LST and emissivity</fullname>
+                        <datatype>16-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Error_LST</bandname>
+                        <fullname>Land-surface temperature error</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                    <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>View_angle</bandname>
+                        <fullname>Zenith angle of the pixel view</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>View_time</bandname>
+                        <fullname>Time of Land-surface Temperature observation</fullname>
+                        <datatype>8-bit Unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Latitude</bandname>
+                        <fullname>Latitude (every 5 scan lines/pixels</fullname>
+                        <datatype>32-bit Unsigned integer</datatype>
+                        <nodata_in>-999</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Longitude</bandname>
+                        <fullname>Longitude (every 5 scan lines/pixels</fullname>
+                        <datatype>32-bit Unsigned integer</datatype>
+                        <nodata_in>-999</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QA_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_cloud</quality_bandname>
+                        <quality_fullname>Cloud flag</quality_fullname>
+                        <quality_source>QC</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_LST_mod_n</quality_bandname>
+                        <quality_fullname>LST model number</quality_fullname>
+                        <quality_source>QC</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_LST_qual</quality_bandname>
+                        <quality_fullname>LST quality flag</quality_fullname>
+                        <quality_source>QC</quality_source>
+                        <quality_bitN>8-9</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_emis</quality_bandname>
+                        <quality_fullname>Emissivity flag</quality_fullname>
+                        <quality_source>QC</quality_source>
+                        <quality_bitN>10-11</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_emis_qual</quality_bandname>
+                        <quality_fullname>Emis quality flag</quality_fullname>
+                        <quality_source>QC</quality_source>
+                        <quality_bitN>12-13</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QA_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_source>QC</quality_source>
+                        <quality_bitN>14-15</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MOD11_L2>
     <MOD11A1>
         <name>Surf_Temp_Daily_1Km (M*D11A1)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_01>
         <file_prefix_terra>MOD11A1</file_prefix_terra>
         <file_prefix_aqua>MYD11A1</file_prefix_aqua>
         <versions>
@@ -2802,7 +3306,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>MOD11A1: MODIS/Terra Land Surface Temperature and Emissivity Daily L3 Global 1 km Grid SIN V006</prod_fullname>
+                <prod_fullname>M*D11A1: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Daily L3 Global 1 km Grid SIN V006</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_1Km_v6</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.006/</http_terra>
@@ -2953,6 +3457,8 @@
     </MOD11A1>
     <MOD11A2>
         <name>Surf_Temp_8Days_1Km (M*D11A2)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_01>
         <file_prefix_terra>MOD11A2</file_prefix_terra>
         <file_prefix_aqua>MYD11A2</file_prefix_aqua>
         <versions>
@@ -3107,7 +3613,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>MOD11A2: MODIS/Terra Land Surface Temperature and Emissivity 8-Day L3 Global 1 km Grid SIN V006</prod_fullname>
+                <prod_fullname>M*D11A2: MODIS/Terra/Aqua Land Surface Temperature and Emissivity 8-Day L3 Global 1 km Grid SIN V006</prod_fullname>
                 <main_out_folder>Surf_Temp_8Days_1Km_v6</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.006/</http_terra>
@@ -3258,8 +3764,10 @@
     </MOD11A2>
     <MOD11B1>
         <name>Surf_Temp_Daily_GridSin (M*D11B1)</name>
-        <file_prefix_terra>MOD09B1</file_prefix_terra>
-        <file_prefix_aqua>MYD09B1</file_prefix_aqua>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <file_prefix_terra>MOD11B1</file_prefix_terra>
+        <file_prefix_aqua>MYD11B1</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
@@ -3423,7 +3931,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>MOD11B1: MODIS/Terra Land Surface Temperature and Emissivity Daily L3 Global 6 km Grid SIN V006</prod_fullname>
+                <prod_fullname>M*D11B1: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Daily L3 Global 6 km Grid SIN V006</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_GridSin_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.006/</http_terra>
@@ -3600,79 +4108,515 @@
                     <quality>
                         <quality_bandname>QAday_mand</quality_bandname>
                         <quality_fullname>Mandatory QA flag</quality_fullname>
-                        <quality_source>QC_Emis</quality_source>
+                        <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_qual</quality_bandname>
                         <quality_fullname>Data quality flag</quality_fullname>
-                        <quality_source>QC_Emis</quality_source>
-                        <quality_bitN>2-3</quality_bitN>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_emis_err</quality_bandname>
                         <quality_fullname>Emis Error flag</quality_fullname>
-                        <quality_source>QC_Emis</quality_source>
+                        <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_LST_err</quality_bandname>
                         <quality_fullname>LST Error flag</quality_fullname>
-                        <quality_source>QC_Emis</quality_source>
+                        <quality_source>QC_Day</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_mand</quality_bandname>
                         <quality_fullname>Mandatory QA flag</quality_fullname>
-                        <quality_source>QC_Emis_night</quality_source>
+                        <quality_source>QC_Night</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_qual</quality_bandname>
                         <quality_fullname>Data quality flag</quality_fullname>
-                        <quality_source>QC_Emis_night</quality_source>
-                        <quality_bitN>2-3</quality_bitN>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_emis_err</quality_bandname>
                         <quality_fullname>Emis error flag</quality_fullname>
-                        <quality_source>QC_Emis_night</quality_source>
+                        <quality_source>QC_Night</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_LST_err</quality_bandname>
                         <quality_fullname>LST Error flag</quality_fullname>
-                        <quality_source>QC_Emis_night</quality_source>
+                        <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                 </quality_indicators>
             </version>
         </versions>
     </MOD11B1>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    <MOD11B2>
+        <name>Surf_Temp_8Days_GridSin (M*D11B2)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <file_prefix_terra>MOD11B2</file_prefix_terra>
+        <file_prefix_aqua>MYD11B2</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*D11B2: MODIS/Terra/Aqua Land Surface Temperature and Emissivity 8-Day L3 Global 6 km Grid SIN V006</prod_fullname>
+                <main_out_folder>Surf_Temp_8Days_GridSin_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B2.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B2.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11B2/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11B2/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b2_v006</www>
+                <bands>
+                    <band>
+                        <bandname>LST_Day_6km</bandname>
+                        <fullname>Daytime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Day</bandname>
+                        <fullname>Daytime LST quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_time</bandname>
+                        <fullname>Daytime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_angle</bandname>
+                        <fullname>Daytime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_6km</bandname>
+                        <fullname>Nighttime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Night</bandname>
+                        <fullname>Nighttime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_time</bandname>
+                        <fullname>Nighttime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_angle</bandname>
+                        <fullname>Nighttime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_20</bandname>
+                        <fullname>Band 20 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_22</bandname>
+                        <fullname>Band 22 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_23</bandname>
+                        <fullname>Band 23 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_29</bandname>
+                        <fullname>Band 29 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Day_6km_Aggregated_from_1km</bandname>
+                        <fullname>Daytime 5-Km LST aggregated from 1-Km</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_6km_Aggregated_from_1km</bandname>
+                        <fullname>Nighttime 5-Km LST aggregated from 1-Km</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_sky_days</bandname>
+                        <fullname>Days in clear sky condition</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_sky_nights</bandname>
+                        <fullname>Nights in clear sky condition</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Percent_land_in_grid</bandname>
+                        <fullname>Percentage of land in the grid</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QAday_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_emis_err</quality_bandname>
+                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MOD11B2>
+    <MOD11B3>
+        <name>Surf_Temp_Monthly_GridSin (M*D11B3)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <file_prefix_terra>MOD11B3</file_prefix_terra>
+        <file_prefix_aqua>MYD11B3</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*D11B3: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Monthly L3 Global 6 km Grid SIN V006</prod_fullname>
+                <main_out_folder>Surf_Temp_Monthly_GridSin_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B3.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B3.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11B3/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11B3/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b3_v006</www>
+                <bands>
+                    <band>
+                        <bandname>LST_Day_6km</bandname>
+                        <fullname>Daytime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Day</bandname>
+                        <fullname>Daytime LST quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_time</bandname>
+                        <fullname>Daytime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_angle</bandname>
+                        <fullname>Daytime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_6km</bandname>
+                        <fullname>Nighttime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Night</bandname>
+                        <fullname>Nighttime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_time</bandname>
+                        <fullname>Nighttime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_angle</bandname>
+                        <fullname>Nighttime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_20</bandname>
+                        <fullname>Band 20 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_22</bandname>
+                        <fullname>Band 22 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_23</bandname>
+                        <fullname>Band 23 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_29</bandname>
+                        <fullname>Band 29 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>0</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Day_6km_Aggregated_from_1km</bandname>
+                        <fullname>Daytime 5-Km LST aggregated from 1-Km</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_6km_Aggregated_from_1km</bandname>
+                        <fullname>Nighttime 5-Km LST aggregated from 1-Km</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_sky_days</bandname>
+                        <fullname>Days in clear sky condition</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_sky_nights</bandname>
+                        <fullname>Nights in clear sky condition</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Percent_land_in_grid</bandname>
+                        <fullname>Percentage of land in the grid</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QAday_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_emis_err</quality_bandname>
+                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MOD11B3>
     <MOD11C1>
         <name>Surf_Temp_Daily_005dg (M*D11C1)</name>
-        <file_prefix_terra>MOD09C1</file_prefix_terra>
-        <file_prefix_aqua>MYD09C1</file_prefix_aqua>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <file_prefix_terra>MOD11C1</file_prefix_terra>
+        <file_prefix_aqua>MYD11C1</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>MODIS/Terra Land Surface Temperature and Emissivity Daily L3 Global 0.05Deg CMG</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.005/</http_terra>
@@ -3830,16 +4774,207 @@
                     </quality>
                 </quality_indicators>
             </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*D11C1: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Daily L3 Global 0.05Deg CMG V006</prod_fullname>
+                <main_out_folder>Surf_Temp_Daily_005dg_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11C1/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11C1/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>0</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1_v006</www>
+                <bands>
+                    <band>
+                        <bandname>LST_Day_CMG</bandname>
+                        <fullname>Daytime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Day</bandname>
+                        <fullname>Daytime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_time</bandname>
+                        <fullname>Daytime LST observation time (UTC)</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_angle</bandname>
+                        <fullname>Daytime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_CMG</bandname>
+                        <fullname>Nighttime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Night</bandname>
+                        <fullname>Nighttime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_time</bandname>
+                        <fullname>Nighttime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_angle</bandname>
+                        <fullname>Nighttime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_20</bandname>
+                        <fullname>Band 20 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_22</bandname>
+                        <fullname>Band 22 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_23</bandname>
+                        <fullname>Band 23 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_29</bandname>
+                        <fullname>Band 29 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Emis</bandname>
+                        <fullname>Daytime emissivity quality indicators</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Percent_land_in_grid</bandname>
+                        <fullname>Percentage of land in the grid</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QAday_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_emis_err</quality_bandname>
+                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
         </versions>
     </MOD11C1>
     <MOD11C2>
         <name>Surf_Temp_8Days_005dg (M*D11C2)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_01>
         <file_prefix_terra>MOD11C2</file_prefix_terra>
         <file_prefix_aqua>MYD11C2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>MODIS/Terra Land Surface Temperature and Emissivity 8-Day L3 Global 0.05Deg CMG</prod_fullname>
                 <main_out_folder>Surf_Temp_8Days_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.005/</http_terra>
@@ -3983,16 +5118,214 @@
                     </quality>
                 </quality_indicators>
             </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*D11C2: MODIS/Terra/Aqua Land Surface Temperature and Emissivity 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
+                <main_out_folder>Surf_Temp_8Days_005dg_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C2.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11C2/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11C2/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>0</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c2_v006</www>
+                <bands>
+                    <band>
+                        <bandname>LST_Day_CMG</bandname>
+                        <fullname>Daytime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Day</bandname>
+                        <fullname>Daytime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_time</bandname>
+                        <fullname>Daytime LST observation time (UTC)</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_angle</bandname>
+                        <fullname>Daytime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_sky_days</bandname>
+                        <fullname>Days with clear-sky conditions and validated LSTs</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                    <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Night</bandname>
+                        <fullname>Nighttime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_time</bandname>
+                        <fullname>Nighttime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_angle</bandname>
+                        <fullname>Nighttime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_sky_nights</bandname>
+                        <fullname>Nights with clear-sky conditions and validated LSTs</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_20</bandname>
+                        <fullname>Band 20 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_22</bandname>
+                        <fullname>Band 22 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_23</bandname>
+                        <fullname>Band 23 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_29</bandname>
+                        <fullname>Band 29 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_sky_nights</bandname>
+                        <fullname>Nights in clear sky condition</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Percent_Iand_in_grid</bandname>
+                        <fullname>Percentage of land in the grid</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QAday_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_emis_err</quality_bandname>
+                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
         </versions>
     </MOD11C2>
     <MOD11C3>
         <name>Surf_Temp_Monthly_005dg (M*D11C3)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_01>
         <file_prefix_terra>MOD11C3</file_prefix_terra>
         <file_prefix_aqua>MYD11C3</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>MODIS/Terra Land Surface Temperature and Emissivity Monthly L3 Global 0.05Deg CMG</prod_fullname>
                 <main_out_folder>Surf_Temp_Monthly_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.005/</http_terra>
@@ -4143,119 +5476,221 @@
                     </quality>
                 </quality_indicators>
             </version>
-        </versions>
-    </MOD11C3>
-    <MOD11_L2>
-        <name>Surf_Temp_5Min_1Km (M*D11_L2)</name>
-        <file_prefix_terra>MOD09_L2</file_prefix_terra>
-        <file_prefix_aqua>MYD09_L2</file_prefix_aqua>
-        <versions>
             <version>
-                <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
-                <main_out_folder>Surf_Temp_5Min_1Km_v5</main_out_folder>
-                <native_res>926.6254</native_res>
-                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11_L2.005/</http_terra>
-                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11_L2.005/</http_aqua>
-                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11_L2/</ftp_terra>
-                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11_L2/</ftp_aqua>
+                <v_number>6</v_number>
+                <prod_fullname>M*D11C3: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
+                <main_out_folder>Surf_Temp_Monthly_005dg_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11C3/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11C3/</ftp_aqua>
                 <combined>0</combined>
-                <tiled>1</tiled>
-                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11_l2</www>
+                <tiled>0</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c3_v006</www>
                 <bands>
                     <band>
-                        <bandname>LST</bandname>
-                        <fullname>Land Surface Temperature</fullname>
-                        <datatype>16-bit Unsigned integer</datatype>
+                        <bandname>LST_Day_CMG</bandname>
+                        <fullname>Daytime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>LST_QC</bandname>
-                        <fullname>Daytime LSTE QC</fullname>
-                        <datatype>16-bit Unsigned integer</datatype>
-                        <nodata_in>0</nodata_in>
-                        <nodata_out>65535</nodata_out>
-                    </band>
-                    <band>
-                        <bandname>LST_Err</bandname>
-                        <fullname>LST Error</fullname>
-                        <datatype>8-bit Unsigned integer</datatype>
+                        <bandname>QC_Day</bandname>
+                        <fullname>Daytime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>Emiss_B31</bandname>
+                        <bandname>Day_view_time</bandname>
+                        <fullname>Daytime LST observation time (UTC)</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_angle</bandname>
+                        <fullname>Daytime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_sky_days</bandname>
+                        <fullname>Days with clear-sky conditions and validated LSTs</fullname>
+                        <datatype>32-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_CMG</bandname>
+                        <fullname>Nighttime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Night</bandname>
+                        <fullname>Nighttime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_time</bandname>
+                        <fullname>Nighttime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_angle</bandname>
+                        <fullname>Nighttime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Clear_sky_nights</bandname>
+                        <fullname>Nights with clear-sky conditions and validated LSTs</fullname>
+                        <datatype>32-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_20</bandname>
+                        <fullname>Band 20 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_22</bandname>
+                        <fullname>Band 22 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_23</bandname>
+                        <fullname>Band 23 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_29</bandname>
+                        <fullname>Band 29 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
                         <fullname>Band 31 Emissivity</fullname>
-                        <datatype>8-bit Unsigned integer</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>Emiss_B32</bandname>
+                        <bandname>Emis_32</bandname>
                         <fullname>Band 32 Emissivity</fullname>
-                        <datatype>8-bit Unsigned integer</datatype>
-                        <nodata_in>0</nodata_in>
-                    <nodata_out>255</nodata_out>
-                    </band>
-                    <band>
-                        <bandname>View_Zen</bandname>
-                        <fullname>Zenith angle of the pixel view</fullname>
-                        <datatype>8-bit Unsigned integer</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>LST_Time_Night</bandname>
-                        <fullname>LST Observation time</fullname>
-                        <datatype>8-bit Unsigned integer</datatype>
+                        <bandname>Percent_Iand_in_grid</bandname>
+                        <fullname>Percentage of land in the grid	</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
                         <nodata_out>255</nodata_out>
-                    </band>
-                    <band>
-                        <bandname>Lat</bandname>
-                        <fullname>Latitude (every 5 scan lines/pixels</fullname>
-                        <datatype>32-bit Unsigned integer</datatype>
-                        <nodata_in>-999</nodata_in>
-                        <nodata_out>4294967295</nodata_out>
-                    </band>
-                    <band>
-                        <bandname>Long</bandname>
-                        <fullname>Longitude (every 5 scan lines/pixels</fullname>
-                        <datatype>32-bit Unsigned integer</datatype>
-                        <nodata_in>-999</nodata_in>
-                        <nodata_out>4294967295</nodata_out>
                     </band>
                 </bands>
                 <quality_indicators>
                     <quality>
-                        <quality_bandname>QA</quality_bandname>
+                        <quality_bandname>QAday_mand</quality_bandname>
                         <quality_fullname>Mandatory QA flag</quality_fullname>
-                        <quality_source>LST_QC</quality_source>
+                        <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>DQ</quality_bandname>
+                        <quality_bandname>QAday_qual</quality_bandname>
                         <quality_fullname>Data quality flag</quality_fullname>
-                        <quality_source>LST_QC</quality_source>
-                        <quality_bitN>2-3</quality_bitN>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>EEr_Flag</quality_bandname>
-                        <quality_fullname>Emissivity error flag</quality_fullname>
-                        <quality_source>LST_QC</quality_source>
+                        <quality_bandname>QAday_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_emis_err</quality_bandname>
+                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>LSTEr</quality_bandname>
-                        <quality_fullname>LST error flag</quality_fullname>
-                        <quality_source>LST_QC</quality_source>
+                        <quality_bandname>QAday_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_qual</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                 </quality_indicators>
             </version>
         </versions>
-    </MOD11_L2>
+    </MOD11C3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <MCD43A1>
         <name>BRDF_Albedo_ModelPar_16Days_500m (MCD43A1)</name>
         <file_prefix_terra>MCD43A1</file_prefix_terra>
