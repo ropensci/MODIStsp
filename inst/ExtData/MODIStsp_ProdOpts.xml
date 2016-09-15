@@ -3,7 +3,7 @@
     <MOD09A1>
         <name>Surf_Ref_8Days_500m (M*D09A1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Reflectance</cat_01>
+        <cat_02>Land Surface Reflectance</cat_02>
         <file_prefix_terra>MOD09A1</file_prefix_terra>
         <file_prefix_aqua>MYD09A1</file_prefix_aqua>
         <versions>
@@ -416,66 +416,66 @@
                 <indexes>
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_fullname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
                         <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1)))</indexes_fullname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
                         <indexes_formula>2.5*((sur_refl_b02-sur_refl_b01)/(sur_refl_b02+6*sur_refl_b01-7.5*sur_refl_b03+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
                         <indexes_formula>(sur_refl_b01-sur_refl_b07)/(sur_refl_b01+sur_refl_b07)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII6</indexes_bandname>
-                        <indexes_fullname>NDII6 (b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_fullname>
+                        <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
                         <indexes_formula>(sur_refl_b02-sur_refl_b06)/(sur_refl_b02+sur_refl_b06)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
                         <indexes_formula>(sur_refl_b02-sur_refl_b07)/(sur_refl_b02+sur_refl_b07)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDSI</indexes_bandname>
-                        <indexes_fullname>NDSI (b4_Green-b6_SWIR)/(b4_Green+-b6_SWIR)</indexes_fullname>
+                        <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
                         <indexes_formula>(sur_refl_b04-sur_refl_b06)/(sur_refl_b04+sur_refl_b06)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>GNDVI</indexes_bandname>
-                        <indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
+                        <indexes_fullname>GNDVI (NIR-Green)/(Red+Green)</indexes_fullname>
                         <indexes_formula>(sur_refl_b02-sur_refl_b04)/(sur_refl_b02+sur_refl_b04)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>RGRI</indexes_bandname>
-                        <indexes_fullname>RGRI (b1_Red/b4_Green)</indexes_fullname>
+                        <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
                         <indexes_formula>(sur_refl_b01/sur_refl_b04)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>        <index>
                         <indexes_bandname>GRVI</indexes_bandname>
-                        <indexes_fullname>GRVI (b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
+                        <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
                         <indexes_formula>(sur_refl_b01-sur_refl_b04)/(sur_refl_b01+sur_refl_b04)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
@@ -614,7 +614,7 @@
     <MOD09CMG>
         <name>Surf_Ref_Daily_005dg (M*D09CMG)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Reflectance</cat_01>
+        <cat_02>Land Surface Reflectance</cat_02>
         <file_prefix_terra>MOD09CMG</file_prefix_terra>
         <file_prefix_aqua>MYD09CMG</file_prefix_aqua>
         <versions>
@@ -923,84 +923,84 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09cmg_v006</www>
                 <bands>
                     <band>
-                        <bandname>b1_Red</bandname>
+                        <bandname>sur_refl_b01</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 1 (620-670 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>b2_NIR</bandname>
+                        <bandname>sur_refl_b02</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 2 (841-876 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>b3_Blue</bandname>
+                        <bandname>sur_refl_b03</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 3 (459-479 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>b4_Green</bandname>
+                        <bandname>sur_refl_b04</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 4 (545-565 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>b5_SWIR</bandname>
+                        <bandname>sur_refl_b05</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 5 (1230-1250 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>b6_SWIR</bandname>
+                        <bandname>sur_refl_b06</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 6 (1628-1652 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>b7_SWIR</bandname>
+                        <bandname>sur_refl_b07</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 7 (2105-2155 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sun_zen</bandname>
+                        <bandname>sur_refl_szen</bandname>
                         <fullname>Coarse Resolution Solar Zenith Angle</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>0</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>View_Zen</bandname>
+                        <bandname>sur_refl_vzen</bandname>
                         <fullname>Coarse Resolution View Zenith Angle</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>0</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Rel_Az</bandname>
+                        <bandname>sur_refl_raz</bandname>
                         <fullname>Coarse Resolution Relative Azimuth Angle</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>0</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Ozone</bandname>
+                        <bandname>sur_refl_Ozone</bandname>
                         <fullname>Coarse Resolution Ozone</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>Br_T_b20</bandname>
+                        <bandname>Band20_1</bandname>
                         <fullname>Coarse Resolution Brightness Temperature Band 20</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>0</nodata_in>
@@ -1101,67 +1101,67 @@
                 <indexes>
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((sur_refl_b02-sur_refl_b01)/(sur_refl_b02+6*sur_refl_b01-7.5*sur_refl_b03+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
-                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b01-sur_refl_b07)/(sur_refl_b01+sur_refl_b07)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII6</indexes_bandname>
-                        <indexes_fullname>NDII6 (b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_formula>
+                        <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02-sur_refl_b06)/(sur_refl_b02+sur_refl_b06)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02-sur_refl_b07)/(sur_refl_b02+sur_refl_b07)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDSI</indexes_bandname>
-                        <indexes_fullname>NDSI (b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_fullname>
-                        <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
+                        <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b04-sur_refl_b06)/(sur_refl_b04+sur_refl_b06)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>GNDVI</indexes_bandname>
-                        <indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
+                        <indexes_fullname>GNDVI (NIR-Green)/(Red+Green)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02-sur_refl_b04)/(sur_refl_b02+sur_refl_b04)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>RGRI</indexes_bandname>
-                        <indexes_fullname>RGRI (b1_Red/b4_Green)</indexes_fullname>
-                        <indexes_formula>(b1_Red/b4_Green)</indexes_formula>
+                        <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b01/sur_refl_b04)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>        <index>
                         <indexes_bandname>GRVI</indexes_bandname>
-                        <indexes_fullname>GRVI (b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
-                        <indexes_formula>(b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_formula>
+                        <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b01-sur_refl_b04)/(sur_refl_b01+sur_refl_b04)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -1413,7 +1413,7 @@
     <MOD09GA>
         <name>Surf_Ref_Daily_500m (M*D09GA)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Reflectance</cat_01>
+        <cat_02>Land Surface Reflectance</cat_02>
         <file_prefix_terra>MOD09GA</file_prefix_terra>
         <file_prefix_aqua>MYD09GA</file_prefix_aqua>
         <versions>
@@ -1945,67 +1945,67 @@
                 <indexes>
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+6*sur_refl_b01_1-7.5*sur_refl_b03_1+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
-                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b01_1-sur_refl_b07_1)/(sur_refl_b01_1+sur_refl_b07_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII6</indexes_bandname>
-                        <indexes_fullname>NDII6 (b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_formula>
+                        <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02_1-sur_refl_b06_1)/(sur_refl_b02_1+sur_refl_b06_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02_1-sur_refl_b07_1)/(sur_refl_b02_1+sur_refl_b07_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDSI</indexes_bandname>
-                        <indexes_fullname>NDSI (b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_fullname>
-                        <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
+                        <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b04_1-sur_refl_b06_1)/(sur_refl_b04_1+sur_refl_b06_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>GNDVI</indexes_bandname>
-                        <indexes_fullname>GNDVI (b2_NIR-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
+                        <indexes_fullname>GNDVI (NIR-Green)/(Red+Green)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02_1-sur_refl_b04_1)/(sur_refl_b02_1+sur_refl_b04_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>RGRI</indexes_bandname>
-                        <indexes_fullname>RGRI (b1_Red/b4_Green)</indexes_fullname>
-                        <indexes_formula>(b1_Red/b4_Green)</indexes_formula>
+                        <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b01_1/sur_refl_b04_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>        <index>
                         <indexes_bandname>GRVI</indexes_bandname>
-                        <indexes_fullname>GRVI (b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_fullname>
-                        <indexes_formula>(b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_formula>
+                        <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b01_1-sur_refl_b04_1)/(sur_refl_b01_1+sur_refl_b04_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -2172,7 +2172,7 @@
     </MOD09GA>
     <MOD09GQ>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Reflectance</cat_01>
+        <cat_02>Land Surface Reflectance</cat_02>
         <name>Surf_Ref_Daily_250m (M*D09GQ)</name>
         <file_prefix_terra>MOD09GQ</file_prefix_terra>
         <file_prefix_aqua>MYD09GQ</file_prefix_aqua>
@@ -2355,19 +2355,22 @@
                 <indexes>
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
                 </indexes>
                 <quality_indicators>
                     <quality>
@@ -2413,7 +2416,7 @@
     <MOD09Q1>
         <name>Surf_Ref_8Days_250m (M*D09Q1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Reflectance</cat_01>
+        <cat_02>Land Surface Reflectance</cat_02>
         <file_prefix_terra>MOD09Q1</file_prefix_terra>
         <file_prefix_aqua>MYD09Q1</file_prefix_aqua>
         <versions>
@@ -2528,14 +2531,14 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09q1_v006</www>
                 <bands>
                     <band>
-                        <bandname>Sur_refl_b01</bandname>
+                        <bandname>sur_refl_b01</bandname>
                         <fullname>250m Surface Reflectance Band 1 (620-670 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b02</bandname>
+                        <bandname>sur_refl_b02</bandname>
                         <fullname>250m Surface Reflectance Band 2 (841-876 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
@@ -2549,7 +2552,7 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_qc_250m</bandname>
+                        <bandname>sur_refl_qc_250m</bandname>
                         <fullname>Surface Reflectance 250m Band Quality Control flags</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>65535</nodata_in>
@@ -2559,19 +2562,22 @@
                 <indexes>
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
                 </indexes>
                 <quality_indicators>
                    <quality>
@@ -2643,37 +2649,37 @@
                     <quality>
                         <quality_bandname>QA_orb_500</quality_bandname>
                         <quality_fullname>different orbit from 500 m</quality_fullname>
-                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc_250m</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cor</quality_bandname>
                         <quality_fullname>adjacency correction performed</quality_fullname>
-                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc_250m</quality_source>
                         <quality_bitN>13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_atm_cor</quality_bandname>
                         <quality_fullname>atmospheric correction performed</quality_fullname>
-                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc_250m</quality_source>
                         <quality_bitN>12</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b2</quality_bandname>
                         <quality_fullname>band 2 data quality four bit range</quality_fullname>
-                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc_250m</quality_source>
                         <quality_bitN>8-11</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b1</quality_bandname>
                         <quality_fullname>band 1 data quality four bit range</quality_fullname>
-                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc_250m</quality_source>
                         <quality_bitN>4-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_bits</quality_bandname>
                         <quality_fullname>MODLAND QA bits</quality_fullname>
-                        <quality_source>Sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc_250m</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -2683,7 +2689,7 @@
     <MODOCGA>
         <name>Oc_Ref_Daily_1Km (M*DOCGA)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Reflectance</cat_01>
+        <cat_02>Land Surface Reflectance</cat_02>
         <file_prefix_terra>MODOCGA</file_prefix_terra>
         <file_prefix_aqua>MYDOCGA</file_prefix_aqua>
         <versions>
@@ -2708,63 +2714,63 @@
                         <nodata_out>128</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b08_1</bandname>
+                        <bandname>sur_refl_b08_1</bandname>
                         <fullname>MODIS band 8 Surface Reflectance</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b09_1</bandname>
+                        <bandname>sur_refl_b09_1</bandname>
                         <fullname>MODIS band 9 Surface Reflectance</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b10_1</bandname>
+                        <bandname>sur_refl_b10_1</bandname>
                         <fullname>MODIS band 10 Surface Reflectance</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b11_1</bandname>
+                        <bandname>sur_refl_b11_1</bandname>
                         <fullname>MODIS band 11 Surface Reflectance</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b12_1</bandname>
+                        <bandname>sur_refl_b12_1</bandname>
                         <fullname>MODIS band 12 Surface Reflectance</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b13_1</bandname>
+                        <bandname>sur_refl_b13_1</bandname>
                         <fullname>MODIS band 13 Surface Reflectance</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b14_1</bandname>
+                        <bandname>sur_refl_b14_1</bandname>
                         <fullname>MODIS band 14 Surface Reflectance</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b15_1</bandname>
+                        <bandname>sur_refl_b15_1</bandname>
                         <fullname>MODIS band 15 Surface Reflectance</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Sur_refl_b16_1</bandname>
+                        <bandname>sur_refl_b16_1</bandname>
                         <fullname>MODIS band 16 Surface Reflectance</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
@@ -2793,7 +2799,7 @@
                     </band>
                     <band>
                         <bandname>granule_pnt_1</bandname>
-                        <fullname>Pointer to the granule of  each observation</fullname>
+                        <fullname>Pointer to the granule of each observation</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
@@ -2861,7 +2867,7 @@
     <MODTBGA>
         <name>Therm_Daily_1Km (M*D09Q1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Reflectance</cat_01>
+        <cat_02>Land Surface Reflectance</cat_02>
         <file_prefix_terra>MODTBGA</file_prefix_terra>
         <file_prefix_aqua>MYDTBGA</file_prefix_aqua>
         <versions>
@@ -2934,7 +2940,7 @@
     <MOD11_L2>
         <name>Surf_Temp_5Min_1Km (M*D11_L2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_02>
         <file_prefix_terra>MOD11_L2</file_prefix_terra>
         <file_prefix_aqua>MYD11_L2</file_prefix_aqua>
         <versions>
@@ -3175,7 +3181,7 @@
     <MOD11A1>
         <name>Surf_Temp_Daily_1Km (M*D11A1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_02>
         <file_prefix_terra>MOD11A1</file_prefix_terra>
         <file_prefix_aqua>MYD11A1</file_prefix_aqua>
         <versions>
@@ -3458,7 +3464,7 @@
     <MOD11A2>
         <name>Surf_Temp_8Days_1Km (M*D11A2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_02>
         <file_prefix_terra>MOD11A2</file_prefix_terra>
         <file_prefix_aqua>MYD11A2</file_prefix_aqua>
         <versions>
@@ -3765,7 +3771,7 @@
     <MOD11B1>
         <name>Surf_Temp_Daily_GridSin (M*D11B1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_02>
         <file_prefix_terra>MOD11B1</file_prefix_terra>
         <file_prefix_aqua>MYD11B1</file_prefix_aqua>
         <versions>
@@ -4172,7 +4178,7 @@
     <MOD11B2>
         <name>Surf_Temp_8Days_GridSin (M*D11B2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_02>
         <file_prefix_terra>MOD11B2</file_prefix_terra>
         <file_prefix_aqua>MYD11B2</file_prefix_aqua>
         <versions>
@@ -4391,7 +4397,7 @@
     <MOD11B3>
         <name>Surf_Temp_Monthly_GridSin (M*D11B3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_02>
         <file_prefix_terra>MOD11B3</file_prefix_terra>
         <file_prefix_aqua>MYD11B3</file_prefix_aqua>
         <versions>
@@ -4610,7 +4616,7 @@
     <MOD11C1>
         <name>Surf_Temp_Daily_005dg (M*D11C1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_02>
         <file_prefix_terra>MOD11C1</file_prefix_terra>
         <file_prefix_aqua>MYD11C1</file_prefix_aqua>
         <versions>
@@ -4968,7 +4974,7 @@
     <MOD11C2>
         <name>Surf_Temp_8Days_005dg (M*D11C2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_02>
         <file_prefix_terra>MOD11C2</file_prefix_terra>
         <file_prefix_aqua>MYD11C2</file_prefix_aqua>
         <versions>
@@ -5319,7 +5325,7 @@
     <MOD11C3>
         <name>Surf_Temp_Monthly_005dg (M*D11C3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_01>
+        <cat_02>Land Surface Temperature and Emissivity</cat_02>
         <file_prefix_terra>MOD11C3</file_prefix_terra>
         <file_prefix_aqua>MYD11C3</file_prefix_aqua>
         <versions>
@@ -5677,7 +5683,7 @@
     <MCD43A1>
         <name>BRDF_Albedo_ModelPar_16Days_500m (MCD43A1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43A1</file_prefix_terra>
         <file_prefix_aqua>MCD43A1</file_prefix_aqua>
         <versions>
@@ -5926,7 +5932,7 @@
     <MCD43A2>
         <name>BRDF_Albedo_Quality_16Days_500m (MCD43A2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43A2</file_prefix_terra>
         <file_prefix_aqua>MCD43A2</file_prefix_aqua>
         <versions>
@@ -6181,7 +6187,7 @@
     <MCD43A3>
         <name>Albedo_16Days_500m (MCD43A3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43A3</file_prefix_terra>
         <file_prefix_aqua>MCD43A3</file_prefix_aqua>
         <versions>
@@ -6570,7 +6576,7 @@
     <MCD43A4>
         <name>BRDF_Adj_Refl_16Days_500m (MCD43A4)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43A4</file_prefix_terra>
         <file_prefix_aqua>MCD43A4</file_prefix_aqua>
         <versions>
@@ -6756,7 +6762,7 @@
     <MCD43B1>
         <name>BRDF_Albedo_ModelPar_16Days_1Km (MCD43B1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43B1</file_prefix_terra>
         <file_prefix_aqua>MCD43B1</file_prefix_aqua>
         <versions>
@@ -6857,7 +6863,7 @@
     <MCD43B2>
         <name>BRDF_Albedo_Quality_16Days_1Km (MCD43B2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43B2</file_prefix_terra>
         <file_prefix_aqua>MCD43B2</file_prefix_aqua>
         <versions>
@@ -6964,7 +6970,7 @@
     <MCD43B3>
         <name>Albedo_16Days_1Km (MCD43B3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43B3</file_prefix_terra>
         <file_prefix_aqua>MCD43B3</file_prefix_aqua>
         <versions>
@@ -7128,7 +7134,7 @@
     <MCD43B4>
         <name>BRDF_Adj_Refl_16Days_1Km (MCD43B4)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43B4</file_prefix_terra>
         <file_prefix_aqua>MCD43B4</file_prefix_aqua>
         <versions>
@@ -7201,7 +7207,7 @@
     <MCD43C1>
         <name>BRDF_Albedo_ModelPar_16Days_005dg (MCD43C1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43C1</file_prefix_terra>
         <file_prefix_aqua>MCD43C1</file_prefix_aqua>
         <versions>
@@ -7562,7 +7568,7 @@
     <MCD43C2>
         <name>BRDF_Albedo_Quality_16Days_005dg (MCD43C2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43C2</file_prefix_terra>
         <file_prefix_aqua>MCD43C2</file_prefix_aqua>
         <versions>
@@ -7922,7 +7928,7 @@
     <MCD43C3>
         <name>Albedo_16Days_005dg (MCD43C3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43C3</file_prefix_terra>
         <file_prefix_aqua>MCD43C3</file_prefix_aqua>
         <versions>
@@ -8276,7 +8282,7 @@
     <MCD43C4>
         <name>BRDF_Adj_Refl_16Day_005dg (MCD43C4)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43C4</file_prefix_terra>
         <file_prefix_aqua>MCD43C4</file_prefix_aqua>
         <versions>
@@ -8448,7 +8454,7 @@
     <MCD43D01>
         <name>BRDF_Albedo_Parameter1_Band1_Daily_30ArcSec (MCD43D01)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D01</file_prefix_terra>
         <file_prefix_aqua>MCD43D01</file_prefix_aqua>
         <versions>
@@ -8479,7 +8485,7 @@
     <MCD43D02>
         <name>BRDF_Albedo_Parameter2_Band1_Daily_30ArcSec (MCD43D02)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D02</file_prefix_terra>
         <file_prefix_aqua>MCD43D02</file_prefix_aqua>
         <versions>
@@ -8510,7 +8516,7 @@
     <MCD43D03>
         <name>BRDF_Albedo_Parameter3_Band1_Daily_30ArcSec (MCD43D03)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D03</file_prefix_terra>
         <file_prefix_aqua>MCD43D03</file_prefix_aqua>
         <versions>
@@ -8541,7 +8547,7 @@
     <MCD43D04>
         <name>BRDF_Albedo_Parameter1_Band2_Daily_30ArcSec (MCD43D04)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D04</file_prefix_terra>
         <file_prefix_aqua>MCD43D04</file_prefix_aqua>
         <versions>
@@ -8572,7 +8578,7 @@
     <MCD43D05>
         <name>BRDF_Albedo_Parameter2_Band2_Daily_30ArcSec (MCD43D05)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D05</file_prefix_terra>
         <file_prefix_aqua>MCD43D05</file_prefix_aqua>
         <versions>
@@ -8603,7 +8609,7 @@
     <MCD43D06>
         <name>BRDF_Albedo_Parameter3_Band2_Daily_30ArcSec (MCD43D06)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D06</file_prefix_terra>
         <file_prefix_aqua>MCD43D06</file_prefix_aqua>
         <versions>
@@ -8634,7 +8640,7 @@
     <MCD43D07>
         <name>BRDF_Albedo_Parameter1_Band3_Daily_30ArcSec (MCD43D07)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D07</file_prefix_terra>
         <file_prefix_aqua>MCD43D07</file_prefix_aqua>
         <versions>
@@ -8665,7 +8671,7 @@
     <MCD43D08>
         <name>BRDF_Albedo_Parameter2_Band3_Daily_30ArcSec (MCD43D08)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D08</file_prefix_terra>
         <file_prefix_aqua>MCD43D08</file_prefix_aqua>
         <versions>
@@ -8696,7 +8702,7 @@
     <MCD43D09>
         <name>BRDF_Albedo_Parameter3_Band3_Daily_30ArcSec (MCD43D09)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D09</file_prefix_terra>
         <file_prefix_aqua>MCD43D09</file_prefix_aqua>
         <versions>
@@ -8727,7 +8733,7 @@
     <MCD43D10>
         <name>BRDF_Albedo_Parameter1_Band4_Daily_30ArcSec (MCD43D10)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D10</file_prefix_terra>
         <file_prefix_aqua>MCD43D10</file_prefix_aqua>
         <versions>
@@ -8758,7 +8764,7 @@
     <MCD43D11>
         <name>BRDF_Albedo_Parameter2_Band4_Daily_30ArcSec (MCD43D11)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D11</file_prefix_terra>
         <file_prefix_aqua>MCD43D11</file_prefix_aqua>
         <versions>
@@ -8789,7 +8795,7 @@
     <MCD43D12>
         <name>BRDF_Albedo_Parameter3_Band4_Daily_30ArcSec (MCD43D12)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D12</file_prefix_terra>
         <file_prefix_aqua>MCD43D12</file_prefix_aqua>
         <versions>
@@ -8820,7 +8826,7 @@
     <MCD43D13>
         <name>BRDF_Albedo_Parameter1_Band4_Daily_30ArcSec (MCD43D13)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D13</file_prefix_terra>
         <file_prefix_aqua>MCD43D13</file_prefix_aqua>
         <versions>
@@ -8851,7 +8857,7 @@
     <MCD43D14>
         <name>BRDF_Albedo_Parameter2_Band4_Daily_30ArcSec (MCD43D14)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D14</file_prefix_terra>
         <file_prefix_aqua>MCD43D14</file_prefix_aqua>
         <versions>
@@ -8882,7 +8888,7 @@
     <MCD43D15>
         <name>BRDF_Albedo_Parameter3_Band4_Daily_30ArcSec (MCD43D15)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D15</file_prefix_terra>
         <file_prefix_aqua>MCD43D15</file_prefix_aqua>
         <versions>
@@ -8913,7 +8919,7 @@
     <MCD43D16>
         <name>BRDF_Albedo_Parameter1_Band5_Daily_30ArcSec (MCD43D16)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D16</file_prefix_terra>
         <file_prefix_aqua>MCD43D16</file_prefix_aqua>
         <versions>
@@ -8944,7 +8950,7 @@
     <MCD43D17>
         <name>BRDF_Albedo_Parameter2_Band5_Daily_30ArcSec (MCD43D17)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D17</file_prefix_terra>
         <file_prefix_aqua>MCD43D17</file_prefix_aqua>
         <versions>
@@ -8975,7 +8981,7 @@
     <MCD43D18>
         <name>BRDF_Albedo_Parameter3_Band5_Daily_30ArcSec (MCD43D18)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D18</file_prefix_terra>
         <file_prefix_aqua>MCD43D18</file_prefix_aqua>
         <versions>
@@ -9006,7 +9012,7 @@
     <MCD43D19>
         <name>BRDF_Albedo_Parameter1_Band6_Daily_30ArcSec (MCD43D19)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D19</file_prefix_terra>
         <file_prefix_aqua>MCD43D19</file_prefix_aqua>
         <versions>
@@ -9037,7 +9043,7 @@
     <MCD43D20>
         <name>BRDF_Albedo_Parameter2_Band6_Daily_30ArcSec (MCD43D20)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D20</file_prefix_terra>
         <file_prefix_aqua>MCD43D20</file_prefix_aqua>
         <versions>
@@ -9068,7 +9074,7 @@
     <MCD43D21>
         <name>BRDF_Albedo_Parameter3_Band6_Daily_30ArcSec (MCD43D21)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D21</file_prefix_terra>
         <file_prefix_aqua>MCD43D21</file_prefix_aqua>
         <versions>
@@ -9099,7 +9105,7 @@
     <MCD43D22>
         <name>BRDF_Albedo_Parameter1_Vis_Daily_30ArcSec (MCD43D22)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D22</file_prefix_terra>
         <file_prefix_aqua>MCD43D22</file_prefix_aqua>
         <versions>
@@ -9130,7 +9136,7 @@
     <MCD43D23>
         <name>BRDF_Albedo_Parameter2_Vis_Daily_30ArcSec (MCD43D23)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D23</file_prefix_terra>
         <file_prefix_aqua>MCD43D23</file_prefix_aqua>
         <versions>
@@ -9161,7 +9167,7 @@
     <MCD43D24>
         <name>BRDF_Albedo_Parameter3_Vis_Daily_30ArcSec (MCD43D24)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D24</file_prefix_terra>
         <file_prefix_aqua>MCD43D24</file_prefix_aqua>
         <versions>
@@ -9192,7 +9198,7 @@
     <MCD43D25>
         <name>BRDF_Albedo_Parameter1_NIR_Daily_30ArcSec (MCD43D25)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D25</file_prefix_terra>
         <file_prefix_aqua>MCD43D25</file_prefix_aqua>
         <versions>
@@ -9223,7 +9229,7 @@
     <MCD43D26>
         <name>BRDF_Albedo_Parameter2_NIR_Daily_30ArcSec (MCD43D26)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D26</file_prefix_terra>
         <file_prefix_aqua>MCD43D26</file_prefix_aqua>
         <versions>
@@ -9254,7 +9260,7 @@
     <MCD43D27>
         <name>BRDF_Albedo_Parameter3_NIR_Daily_30ArcSec (MCD43D27)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D27</file_prefix_terra>
         <file_prefix_aqua>MCD43D27</file_prefix_aqua>
         <versions>
@@ -9285,7 +9291,7 @@
     <MCD43D28>
         <name>BRDF_Albedo_Parameter1_Shortwave_Daily_30ArcSec (MCD43D28)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D28</file_prefix_terra>
         <file_prefix_aqua>MCD43D28</file_prefix_aqua>
         <versions>
@@ -9316,7 +9322,7 @@
     <MCD43D29>
         <name>BRDF_Albedo_Parameter2_Shortwave_Daily_30ArcSec (MCD43D29)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D29</file_prefix_terra>
         <file_prefix_aqua>MCD43D29</file_prefix_aqua>
         <versions>
@@ -9347,7 +9353,7 @@
     <MCD43D30>
         <name>BRDF_Albedo_Parameter3_Shortwave_Daily_30ArcSec (MCD43D30)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D30</file_prefix_terra>
         <file_prefix_aqua>MCD43D30</file_prefix_aqua>
         <versions>
@@ -9378,7 +9384,7 @@
     <MCD43D31>
         <name>BRDF_Albedo_Quality_Daily_30ArcSec (MCD43D31)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D31</file_prefix_terra>
         <file_prefix_aqua>MCD43D31</file_prefix_aqua>
         <versions>
@@ -9409,7 +9415,7 @@
     <MCD43D32>
         <name>BRDF_Albedo_Local_Solar_Noon_Daily_30ArcSec (MCD43D32)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D32</file_prefix_terra>
         <file_prefix_aqua>MCD43D32</file_prefix_aqua>
         <versions>
@@ -9440,7 +9446,7 @@
     <MCD43D33>
         <name>BRDF_Albedo_ValidObs_Band1_Daily_30ArcSec (MCD43D33)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D33</file_prefix_terra>
         <file_prefix_aqua>MCD43D33</file_prefix_aqua>
         <versions>
@@ -9471,7 +9477,7 @@
     <MCD43D34>
         <name>BRDF_Albedo_ValidObs_Band2_Daily_30ArcSec (MCD43D34)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D34</file_prefix_terra>
         <file_prefix_aqua>MCD43D34</file_prefix_aqua>
         <versions>
@@ -9502,7 +9508,7 @@
     <MCD43D35>
         <name>BRDF_Albedo_ValidObs_Band3_Daily_30ArcSec (MCD43D35)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D35</file_prefix_terra>
         <file_prefix_aqua>MCD43D35</file_prefix_aqua>
         <versions>
@@ -9533,7 +9539,7 @@
     <MCD43D36>
         <name>BRDF_Albedo_ValidObs_Band4_Daily_30ArcSec (MCD43D36)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D36</file_prefix_terra>
         <file_prefix_aqua>MCD43D36</file_prefix_aqua>
         <versions>
@@ -9564,7 +9570,7 @@
     <MCD43D37>
         <name>BRDF_Albedo_ValidObs_Band5_Daily_30ArcSec (MCD43D37)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D37</file_prefix_terra>
         <file_prefix_aqua>MCD43D37</file_prefix_aqua>
         <versions>
@@ -9595,7 +9601,7 @@
     <MCD43D38>
         <name>BRDF_Albedo_ValidObs_Band6_Daily_30ArcSec (MCD43D38)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D38</file_prefix_terra>
         <file_prefix_aqua>MCD43D38</file_prefix_aqua>
         <versions>
@@ -9626,7 +9632,7 @@
     <MCD43D39>
         <name>BRDF_Albedo_ValidObs_Band7_Daily_30ArcSec (MCD43D39)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D39</file_prefix_terra>
         <file_prefix_aqua>MCD43D39</file_prefix_aqua>
         <versions>
@@ -9657,7 +9663,7 @@
     <MCD43D40>
         <name>BRDF_Albedo_Snow_Daily_30ArcSec (MCD43D40)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D40</file_prefix_terra>
         <file_prefix_aqua>MCD43D40</file_prefix_aqua>
         <versions>
@@ -9688,7 +9694,7 @@
     <MCD43D41>
         <name>BRDF_Albedo_Uncertainty_Daily_30ArcSec (MCD43D41)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D41</file_prefix_terra>
         <file_prefix_aqua>MCD43D41</file_prefix_aqua>
         <versions>
@@ -9719,7 +9725,7 @@
     <MCD43D42>
         <name>BRDF_Albedo_BSA_Band1_Daily_30ArcSec (MCD43D42)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D42</file_prefix_terra>
         <file_prefix_aqua>MCD43D42</file_prefix_aqua>
         <versions>
@@ -9750,7 +9756,7 @@
     <MCD43D43>
         <name>BRDF_Albedo_BSA_Band2_Daily_30ArcSec (MCD43D43)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D43</file_prefix_terra>
         <file_prefix_aqua>MCD43D43</file_prefix_aqua>
         <versions>
@@ -9781,7 +9787,7 @@
     <MCD43D44>
         <name>BRDF_Albedo_BSA_Band3_Daily_30ArcSec (MCD43D44)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D44</file_prefix_terra>
         <file_prefix_aqua>MCD43D44</file_prefix_aqua>
         <versions>
@@ -9812,7 +9818,7 @@
     <MCD43D45>
         <name>BRDF_Albedo_BSA_Band4_Daily_30ArcSec (MCD43D45)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D45</file_prefix_terra>
         <file_prefix_aqua>MCD43D45</file_prefix_aqua>
         <versions>
@@ -9843,7 +9849,7 @@
     <MCD43D46>
         <name>BRDF_Albedo_BSA_Band5_Daily_30ArcSec (MCD43D46)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D46</file_prefix_terra>
         <file_prefix_aqua>MCD43D46</file_prefix_aqua>
         <versions>
@@ -9874,7 +9880,7 @@
     <MCD43D47>
         <name>BRDF_Albedo_BSA_Band6_Daily_30ArcSec (MCD43D47)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D47</file_prefix_terra>
         <file_prefix_aqua>MCD43D47</file_prefix_aqua>
         <versions>
@@ -9905,7 +9911,7 @@
     <MCD43D48>
         <name>BRDF_Albedo_BSA_Band7_Daily_30ArcSec (MCD43D48)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D48</file_prefix_terra>
         <file_prefix_aqua>MCD43D48</file_prefix_aqua>
         <versions>
@@ -9936,7 +9942,7 @@
     <MCD43D49>
         <name>BRDF_Albedo_BSA_Vis_Daily_30ArcSec (MCD43D49)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D49</file_prefix_terra>
         <file_prefix_aqua>MCD43D49</file_prefix_aqua>
         <versions>
@@ -9967,7 +9973,7 @@
     <MCD43D50>
         <name>BRDF_Albedo_BSA_Nir_Daily_30ArcSec (MCD43D50)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D50</file_prefix_terra>
         <file_prefix_aqua>MCD43D50</file_prefix_aqua>
         <versions>
@@ -9998,7 +10004,7 @@
     <MCD43D51>
         <name>BRDF_Albedo_BSA_Shortwave_Daily_30ArcSec (MCD43D51)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D51</file_prefix_terra>
         <file_prefix_aqua>MCD43D51</file_prefix_aqua>
         <versions>
@@ -10029,7 +10035,7 @@
     <MCD43D52>
         <name>BRDF_Albedo_WSA_Band1_Daily_30ArcSec (MCD43D52)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D52</file_prefix_terra>
         <file_prefix_aqua>MCD43D52</file_prefix_aqua>
         <versions>
@@ -10060,7 +10066,7 @@
     <MCD43D53>
         <name>BRDF_Albedo_WSA_Band2_Daily_30ArcSec (MCD43D53)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D53</file_prefix_terra>
         <file_prefix_aqua>MCD43D53</file_prefix_aqua>
         <versions>
@@ -10091,7 +10097,7 @@
     <MCD43D54>
         <name>BRDF_Albedo_WSA_Band3_Daily_30ArcSec (MCD43D54)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D54</file_prefix_terra>
         <file_prefix_aqua>MCD43D54</file_prefix_aqua>
         <versions>
@@ -10122,7 +10128,7 @@
     <MCD43D55>
         <name>BRDF_Albedo_WSA_Band4_Daily_30ArcSec (MCD43D55)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D55</file_prefix_terra>
         <file_prefix_aqua>MCD43D55</file_prefix_aqua>
         <versions>
@@ -10153,7 +10159,7 @@
     <MCD43D56>
         <name>BRDF_Albedo_WSA_Band5_Daily_30ArcSec (MCD43D56)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D56</file_prefix_terra>
         <file_prefix_aqua>MCD43D56</file_prefix_aqua>
         <versions>
@@ -10184,7 +10190,7 @@
     <MCD43D57>
         <name>BRDF_Albedo_WSA_Band6_Daily_30ArcSec (MCD43D57)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D57</file_prefix_terra>
         <file_prefix_aqua>MCD43D57</file_prefix_aqua>
         <versions>
@@ -10215,7 +10221,7 @@
     <MCD43D58>
         <name>BRDF_Albedo_WSA_Band7_Daily_30ArcSec (MCD43D58)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D58</file_prefix_terra>
         <file_prefix_aqua>MCD43D58</file_prefix_aqua>
         <versions>
@@ -10246,7 +10252,7 @@
     <MCD43D59>
         <name>BRDF_Albedo_WSA_Vis_Daily_30ArcSec (MCD43D59)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D59</file_prefix_terra>
         <file_prefix_aqua>MCD43D59</file_prefix_aqua>
         <versions>
@@ -10277,7 +10283,7 @@
     <MCD43D60>
         <name>BRDF_Albedo_WSA_Nir_Daily_30ArcSec (MCD43D60)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D60</file_prefix_terra>
         <file_prefix_aqua>MCD43D60</file_prefix_aqua>
         <versions>
@@ -10308,7 +10314,7 @@
     <MCD43D61>
         <name>BRDF_Albedo_WSA_Shortwave_Daily_30ArcSec (MCD43D61)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D61</file_prefix_terra>
         <file_prefix_aqua>MCD43D61</file_prefix_aqua>
         <versions>
@@ -10339,7 +10345,7 @@
     <MCD43D62>
         <name>BRDF_Albedo_NBAR_Band1_Daily_30ArcSec (MCD43D62)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D62</file_prefix_terra>
         <file_prefix_aqua>MCD43D62</file_prefix_aqua>
         <versions>
@@ -10370,7 +10376,7 @@
     <MCD43D63>
         <name>BRDF_Albedo_NBAR_Band2_Daily_30ArcSec (MCD43D63)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D63</file_prefix_terra>
         <file_prefix_aqua>MCD43D63</file_prefix_aqua>
         <versions>
@@ -10401,7 +10407,7 @@
     <MCD43D64>
         <name>BRDF_Albedo_NBAR_Band3_Daily_30ArcSec (MCD43D64)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D64</file_prefix_terra>
         <file_prefix_aqua>MCD43D64</file_prefix_aqua>
         <versions>
@@ -10432,7 +10438,7 @@
     <MCD43D65>
         <name>BRDF_Albedo_NBAR_Band4_Daily_30ArcSec (MCD43D65)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D65</file_prefix_terra>
         <file_prefix_aqua>MCD43D65</file_prefix_aqua>
         <versions>
@@ -10463,7 +10469,7 @@
     <MCD43D66>
         <name>BRDF_Albedo_NBAR_Band5_Daily_30ArcSec (MCD43D66)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D66</file_prefix_terra>
         <file_prefix_aqua>MCD43D66</file_prefix_aqua>
         <versions>
@@ -10494,7 +10500,7 @@
     <MCD43D67>
         <name>BRDF_Albedo_NBAR_Band6_Daily_30ArcSec (MCD43D67)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D67</file_prefix_terra>
         <file_prefix_aqua>MCD43D67</file_prefix_aqua>
         <versions>
@@ -10525,7 +10531,7 @@
     <MCD43D68>
         <name>BRDF_Albedo_NBAR_Band7_Daily_30ArcSec (MCD43D68)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>BRDF and Albedo</cat_01>
+        <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43D68</file_prefix_terra>
         <file_prefix_aqua>MCD43D68</file_prefix_aqua>
         <versions>
@@ -10556,7 +10562,7 @@
     <MOD13A1>
         <name>Vegetation_Indexes_16Days_500m (M*D13A1)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Vegetation Indices</cat_01>
+        <cat_02>Vegetation Indices</cat_02>
         <file_prefix_terra>MOD13A1</file_prefix_terra>
         <file_prefix_aqua>MYD13A1</file_prefix_aqua>
         <versions>
@@ -10839,23 +10845,25 @@
                 <indexes>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (500m_16_days_NIR_reflectance/500m_16_days_red_reflectance)</indexes_fullname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_fullname>
+                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
                         <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_fullname>
+                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
                         <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_fullname>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
@@ -10922,7 +10930,7 @@
     <MOD13A2>
         <name>Vegetation_Indexes_16Days_1Km (M*D13A2)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Vegetation Indices</cat_01>
+        <cat_02>Vegetation Indices</cat_02>
         <file_prefix_terra>MOD13A2</file_prefix_terra>
         <file_prefix_aqua>MYD13A2</file_prefix_aqua>
         <versions>
@@ -11205,24 +11213,26 @@
                 <indexes>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (1000m_16_days_NIR_reflectance/1000m_16_days_red_reflectance)</indexes_fullname>
-                        <indexes_formula>(1000m_16_days_NIR_reflectance-1000m_16_days_red_reflectance)/(1000m_16_days_NIR_reflectance+1000m_16_days_red_reflectance)</indexes_formula>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (1000m_16_days_red_reflectance-1000m_16_days_MIR_reflectanc)/(1000m_16_days_red_reflectance+1000m_16_days_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(1000m_16_days_red_reflectance-1000m_16_days_MIR_reflectanc)/(1000m_16_days_red_reflectance+1000m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (1000m_16_days_NIR_reflectance-1000m_16_days_MIR_reflectanc)/(1000m_16_days_NIR_reflectance+1000m_16_days_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(1000m_16_days_NIR_reflectance-1000m_16_days_MIR_reflectanc)/(1000m_16_days_NIR_reflectance+1000m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (1000m_16_days_NIR_reflectance-1000m_16_days_red_reflectance)/(1000m_16_days_NIR_reflectance+1000m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(1000m_16_days_NIR_reflectance-1000m_16_days_red_reflectance)/(1000m_16_days_NIR_reflectance+1000m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -11288,7 +11298,7 @@
     <MOD13A3>
         <name>Vegetation_Indexes_Monthly_1Km (M*D13A3)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Vegetation Indices</cat_01>
+        <cat_02>Vegetation Indices</cat_02>
         <file_prefix_terra>MOD13A3</file_prefix_terra>
         <file_prefix_aqua>MYD13A3</file_prefix_aqua>
         <versions>
@@ -11564,24 +11574,26 @@
                 <indexes>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (1000m_monthly_NIR_reflectance/1000m_monthly_red_reflectance)</indexes_fullname>
-                        <indexes_formula>(1000m_monthly_NIR_reflectance-1000m_monthly_red_reflectance)/(1000m_monthly_NIR_reflectance+1000m_monthly_red_reflectance)</indexes_formula>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (1000m_monthly_red_reflectance-1000m_monthly_MIR_reflectanc)/(1000m_monthly_red_reflectance+1000m_monthly_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(1000m_monthly_red_reflectance-1000m_monthly_MIR_reflectanc)/(1000m_monthly_red_reflectance+1000m_monthly_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (1000m_monthly_NIR_reflectance-1000m_monthly_MIR_reflectanc)/(1000m_monthly_NIR_reflectance+1000m_monthly_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(1000m_monthly_NIR_reflectance-1000m_monthly_MIR_reflectanc)/(1000m_monthly_NIR_reflectance+1000m_monthly_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (1000m_monthly_NIR_reflectance-1000m_monthly_red_reflectance)/(1000m_monthly_NIR_reflectance+1000m_monthly_red_reflectance+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(1000m_monthly_NIR_reflectance-1000m_monthly_red_reflectance)/(1000m_monthly_NIR_reflectance+1000m_monthly_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -11647,7 +11659,7 @@
     <MOD13C1>
         <name>Vegetation_Indexes_16Days_005dg (M*D13C1)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Vegetation Indices</cat_01>
+        <cat_02>Vegetation Indices</cat_02>
         <file_prefix_terra>MOD13C1</file_prefix_terra>
         <file_prefix_aqua>MYD13C1</file_prefix_aqua>
         <versions>
@@ -11931,24 +11943,26 @@
                 <indexes>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (005deg_16_days_NIR_reflectance/005deg_16_days_red_reflectance)</indexes_fullname>
-                        <indexes_formula>(005deg_16_days_NIR_reflectance-005deg_16_days_red_reflectance)/(005deg_16_days_NIR_reflectance+005deg_16_days_red_reflectance)</indexes_formula>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (005deg_16_days_red_reflectance-005deg_16_days_MIR_reflectanc)/(005deg_16_days_red_reflectance+005deg_16_days_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(005deg_16_days_red_reflectance-005deg_16_days_MIR_reflectanc)/(005deg_16_days_red_reflectance+005deg_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (005deg_16_days_NIR_reflectance-005deg_16_days_MIR_reflectanc)/(005deg_16_days_NIR_reflectance+005deg_16_days_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(005deg_16_days_NIR_reflectance-005deg_16_days_MIR_reflectanc)/(005deg_16_days_NIR_reflectance+005deg_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (005deg_16_days_NIR_reflectance-005deg_16_days_red_reflectance)/(005deg_16_days_NIR_reflectance+005deg_16_days_red_reflectance+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(005deg_16_days_NIR_reflectance-005deg_16_days_red_reflectance)/(005deg_16_days_NIR_reflectance+005deg_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -12014,7 +12028,7 @@
     <MOD13C2>
         <name>Vegetation_Indexes_Monthly_005dg (M*D13C2)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Vegetation Indices</cat_01>
+        <cat_02>Vegetation Indices</cat_02>
         <file_prefix_terra>MOD13C2</file_prefix_terra>
         <file_prefix_aqua>MYD13C2</file_prefix_aqua>
         <versions>
@@ -12298,24 +12312,26 @@
                 <indexes>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (005deg_monthly_NIR_reflectance/005deg_monthly_red_reflectance)</indexes_fullname>
-                        <indexes_formula>(005deg_monthly_NIR_reflectance-005deg_monthly_red_reflectance)/(005deg_monthly_NIR_reflectance+005deg_monthly_red_reflectance)</indexes_formula>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (005deg_monthly_red_reflectance-005deg_monthly_MIR_reflectanc)/(005deg_monthly_red_reflectance+005deg_monthly_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(005deg_monthly_red_reflectance-005deg_monthly_MIR_reflectanc)/(005deg_monthly_red_reflectance+005deg_monthly_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (005deg_monthly_NIR_reflectance-005deg_monthly_MIR_reflectanc)/(005deg_monthly_NIR_reflectance+005deg_monthly_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(005deg_monthly_NIR_reflectance-005deg_monthly_MIR_reflectanc)/(005deg_monthly_NIR_reflectance+005deg_monthly_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (005deg_monthly_NIR_reflectance-005deg_monthly_red_reflectance)/(005deg_monthly_NIR_reflectance+005deg_monthly_red_reflectance+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(005deg_monthly_NIR_reflectance-005deg_monthly_red_reflectance)/(005deg_monthly_NIR_reflectance+005deg_monthly_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -12381,7 +12397,7 @@
     <MOD13Q1>
         <name>Vegetation Indexes_16Days_250m (M*D13Q1)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Vegetation Indices</cat_01>
+        <cat_02>Vegetation Indices</cat_02>
         <file_prefix_terra>MOD13Q1</file_prefix_terra>
         <file_prefix_aqua>MYD13Q1</file_prefix_aqua>
         <versions>
@@ -12667,24 +12683,26 @@
                 <indexes>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (250m_16_days_NIR_reflectance/250m_16_days_red_reflectance)</indexes_fullname>
-                        <indexes_formula>(250m_16_days_NIR_reflectance-250m_16_days_red_reflectance)/(250m_16_days_NIR_reflectance+250m_16_days_red_reflectance)</indexes_formula>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (250m_16_days_red_reflectance-250m_16_days_MIR_reflectanc)/(250m_16_days_red_reflectance+250m_16_days_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(250m_16_days_red_reflectance-250m_16_days_MIR_reflectanc)/(250m_16_days_red_reflectance+250m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (250m_16_days_NIR_reflectance-250m_16_days_MIR_reflectanc)/(250m_16_days_NIR_reflectance+250m_16_days_MIR_reflectanc)</indexes_fullname>
-                        <indexes_formula>(250m_16_days_NIR_reflectance-250m_16_days_MIR_reflectanc)/(250m_16_days_NIR_reflectance+250m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (250m_16_days_NIR_reflectance-250m_16_days_red_reflectance)/(250m_16_days_NIR_reflectance+250m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(250m_16_days_NIR_reflectance-250m_16_days_red_reflectance)/(250m_16_days_NIR_reflectance+250m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -12750,7 +12768,7 @@
     <MCD15A2>
         <name>LAI_8Days_1Km (MCD15A2)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>LAI/FPAR</cat_01>
+        <cat_02>LAI/FPAR</cat_02>
         <file_prefix_terra>MCD15A2</file_prefix_terra>
         <file_prefix_aqua>MCD15A2</file_prefix_aqua>
         <versions>
@@ -12890,7 +12908,7 @@
     <MCD15A2H>
         <name>LAI_8Days_500m (MCD15A2H)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>LAI/FPAR</cat_01>
+        <cat_02>LAI/FPAR</cat_02>
         <file_prefix_terra>MCD15A2H</file_prefix_terra>
         <file_prefix_aqua>MCD15A2H</file_prefix_aqua>
         <versions>
@@ -13030,7 +13048,7 @@
     <MCD15A3>
         <name>LAI_4Days_1Km (MCD15A3)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>LAI/FPAR</cat_01>
+        <cat_02>LAI/FPAR</cat_02>
         <file_prefix_terra>MCD15A3</file_prefix_terra>
         <file_prefix_aqua>MCD15A3</file_prefix_aqua>
         <versions>
@@ -13170,7 +13188,7 @@
     <MCD15A3H>
         <name>LAI_4Days_500m (MCD15A3H)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>LAI/FPAR</cat_01>
+        <cat_02>LAI/FPAR</cat_02>
         <file_prefix_terra>MCD15A3H</file_prefix_terra>
         <file_prefix_aqua>MCD15A3H</file_prefix_aqua>
         <versions>
@@ -13310,7 +13328,7 @@
     <MOD15A2>
         <name>LAI_8Days_1Km (M*D15A2)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>LAI/FPAR</cat_01>
+        <cat_02>LAI/FPAR</cat_02>
         <file_prefix_terra>MOD15A2</file_prefix_terra>
         <file_prefix_aqua>MYD15A2</file_prefix_aqua>
         <versions>
@@ -13449,7 +13467,7 @@
     <MOD15A2H>
         <name>LAI_8Days_500m (M*D15A2)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>LAI/FPAR</cat_01>
+        <cat_02>LAI/FPAR</cat_02>
         <file_prefix_terra>MOD15A2</file_prefix_terra>
         <file_prefix_aqua>MYD15A2</file_prefix_aqua>
         <versions>
@@ -13589,7 +13607,7 @@
     <MOD17A2>
         <name>Gross_PP_8Days_1Km (M*D17A2)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Gross Primary Productivity</cat_01>
+        <cat_02>Gross Primary Productivity</cat_02>
         <file_prefix_terra>MOD17A2</file_prefix_terra>
         <file_prefix_aqua>MYD17A2</file_prefix_aqua>
         <versions>
@@ -13666,7 +13684,7 @@
     <MOD17A2H>
         <name>Gross_PP_8Days_500m (M*D17A2H)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Gross Primary Productivity</cat_01>
+        <cat_02>Gross Primary Productivity</cat_02>
         <file_prefix_terra>MOD17A2H</file_prefix_terra>
         <file_prefix_aqua>MYD17A2H</file_prefix_aqua>
         <versions>
@@ -13743,7 +13761,7 @@
     <MOD17A3>
         <name>Net_PP_Yearly_1Km (M*D17A3)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Net Primary Productivity</cat_01>
+        <cat_02>Net Primary Productivity</cat_02>
         <file_prefix_terra>MOD17A3</file_prefix_terra>
         <file_prefix_aqua>MYD17A3</file_prefix_aqua>
         <versions>
@@ -13788,7 +13806,7 @@
     <MOD17A3H>
         <name>Net_PP_Yearly_500m (M*D17A3H)</name>
         <cat_01>Ecosystem Variables</cat_01>
-        <cat_02>Net Primary Productivity</cat_01>
+        <cat_02>Net Primary Productivity</cat_02>
         <file_prefix_terra>MOD17A3H</file_prefix_terra>
         <file_prefix_aqua>MYD17A3H</file_prefix_aqua>
         <versions>
@@ -13858,7 +13876,7 @@
     <MCD45A1>
         <name>Burned_Monthly_500m (MCD45A1)</name>
         <cat_01>Land Cover Characteristics</cat_01>
-        <cat_02>Thermal Anomalies and Fire</cat_01>
+        <cat_02>Thermal Anomalies and Fire</cat_02>
         <file_prefix_terra>MCD45A1</file_prefix_terra>
         <file_prefix_aqua>MCD45A1</file_prefix_aqua>
         <versions>
@@ -13938,7 +13956,7 @@
     <MOD14>
         <name>ThermalAn_Fire_5Min_1Km (M*D14)</name>
         <cat_01>Land Cover Characteristics</cat_01>
-        <cat_02>Thermal Anomalies and Fire</cat_01>
+        <cat_02>Thermal Anomalies and Fire</cat_02>
         <file_prefix_terra>MOD14</file_prefix_terra>
         <file_prefix_aqua>MYD14</file_prefix_aqua>
         <versions>
@@ -14243,7 +14261,7 @@
     <MOD14A1>
         <name>ThermalAn_Fire_Daily_1Km (M*D14A1)</name>
         <cat_01>Land Cover Characteristics</cat_01>
-        <cat_02>Thermal Anomalies and Fire</cat_01>
+        <cat_02>Thermal Anomalies and Fire</cat_02>
         <file_prefix_terra>MOD14A1</file_prefix_terra>
         <file_prefix_aqua>MYD14A1</file_prefix_aqua>
         <versions>
@@ -14352,7 +14370,7 @@
     <MOD14A2>
         <name>ThermalAn_Fire_8Days_1Km (M*D14A2)</name>
         <cat_01>Land Cover Characteristics</cat_01>
-        <cat_02>Thermal Anomalies and Fire</cat_01>
+        <cat_02>Thermal Anomalies and Fire</cat_02>
         <file_prefix_terra>MOD14A2</file_prefix_terra>
         <file_prefix_aqua>MYD14A2</file_prefix_aqua>
         <versions>
@@ -14433,7 +14451,7 @@
     <MCD12C1>
         <name>LandCover_Type_Yearly_005dg (MCD12C1)</name>
         <cat_01>Land Cover Characteristics</cat_01>
-        <cat_02>Land Cover</cat_01>
+        <cat_02>Land Cover</cat_02>
         <file_prefix_terra>MCD12C1</file_prefix_terra>
         <file_prefix_aqua>MCD12C1</file_prefix_aqua>
         <versions>
@@ -14535,7 +14553,7 @@
     <MCD12Q1>
         <name>LandCover_Type_Yearly_500m (MCD12Q1)</name>
         <cat_01>Land Cover Characteristics</cat_01>
-        <cat_02>Land Cover</cat_01>
+        <cat_02>Land Cover</cat_02>
         <file_prefix_terra>MCD12Q1</file_prefix_terra>
         <file_prefix_aqua>MCD12Q1</file_prefix_aqua>
         <versions>
@@ -14690,7 +14708,7 @@
     <MCD12Q2>
         <name>LandCover_Dynamics_Yearly_500m (MCD12Q2)</name>
         <cat_01>Land Cover Characteristics</cat_01>
-        <cat_02>Land Cover</cat_01>
+        <cat_02>Land Cover</cat_02>
         <file_prefix_terra>MCD12Q2</file_prefix_terra>
         <file_prefix_aqua>MCD12Q2</file_prefix_aqua>
         <versions>

@@ -40,67 +40,113 @@ MODIStsp_GUI <- function(general_opts){
   
   main_win <- gbasicdialog(title = "Select Main Processing Options", parent = NULL, do.buttons = FALSE)
   main_group <- ggroup(container = main_win, horizontal = FALSE, expand = TRUE)
-
+  mod_prod_cat <- as.data.frame(t(sapply(prod_opt_list,function(x){c(x[[1]]$cat01,x[[1]]$cat02)}))); names(mod_prod_cat) <- c('cat01','cat02')
+  mod_prod_cat$cat <- apply(mod_prod_cat,1,paste,collapse=' - ')
+  
+  sel_prod <- general_opts$sel_prod # get the product name selectedin the previous options file
+  sel_cat <- mod_prod_cat$cat[match(sel_prod, mod_prod_list)]
+  
   #- ------------------------------------------------------------------------------- -#
   # Widgets for product selection and bands selection
   #- ------------------------------------------------------------------------------- -#
   satprod_frame <- gframe(text = "<span foreground='blue' size='x-large'>MODIS Product, Satellites and Layers selection</span>",
                           markup = TRUE,horizontal = FALSE, container = main_group)
-
-  
-  checked <- which(mod_prod_list == general_opts$sel_prod)
-  prod_versions <- sapply(prod_opt_list[[checked]],function(x){x[["v_number"]]})
-  sel_version <- which(prod_versions == general_opts$prod_version)
+  satprod_group <- ggroup(horizontal = TRUE, container = satprod_frame)
   
   # set dummy global variables holding the initial values of selected bands
   temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
   
-  labels_group <- ggroup(horizontal = TRUE, container = satprod_frame)
-  addSpace(labels_group, 140)
-  label <- glabel(text = "Product", container = labels_group)
-  addSpace(labels_group, 180)
-  label2 <- glabel(text = "Platform", container = labels_group)
-  addSpace(labels_group, 10)
-  label3 <- glabel(text = "Version", container = labels_group)
-  addSpace(labels_group, 65)
-  label4 <- glabel(text = "Processing Layers", container = labels_group)
+  # labels_group <- ggroup(horizontal = TRUE, container = satprod_frame)
+  # addSpace(labels_group, 140)
+  # label <- glabel(text = "Product", container = labels_group)
+  # addSpace(labels_group, 180)
+  # label2 <- glabel(text = "Platform", container = labels_group)
+  # addSpace(labels_group, 10)
+  # label3 <- glabel(text = "Version", container = labels_group)
+  # addSpace(labels_group, 65)
+  # label4 <- glabel(text = "Processing Layers", container = labels_group)
+  # 
+  # font(label) <- font(label2) <- font(label3) <- font(label4) <- list(family = "sans",weight = "bold", size = "medium")
   
-  font(label) <- font(label2) <- font(label3) <- font(label4) <- list(family = "sans",weight = "bold", size = "medium")
+  #- ------------------------------------------------------------------------------- -#
+  # Widgets for category selection
+  #- ------------------------------------------------------------------------------- -#
+  satprod1_group <- ggroup(horizontal = FALSE, container = satprod_group)
+  cat_group <- ggroup(horizontal = TRUE, container = satprod1_group)
+  cat_label <- glabel(text = "Category", container = cat_group)
+  cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = cat_group, horizontal = TRUE, 
+    selected = match(sel_cat, unique(mod_prod_cat$cat)),
+    handler = function(h,...) {
+      # Select only products of this category
+      sel_prod <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)][1]
+      prod_wid[] <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)]
+      svalue(prod_wid) <- sel_prod
+      # Select the last version (it assumes that versions in xml file are in increasing order)
+      vers_wid[] <- names(prod_opt_list[[sel_prod]])
+      svalue(vers_wid) <- prod_opt_list[[sel_prod]][[length(prod_opt_list[[sel_prod]])]]$v_number
+      # Disable sensor choice for combined datasets
+      if (prod_opt_list[[sel_prod]][[svalue(vers_wid)]]$combined == 1) {
+        enabled(sens_wid) <- FALSE
+        sens_wid[] <- "Combined"
+        svalue(sens_wid) <- "Combined"
+      } else {
+        (enabled(sens_wid) <- TRUE)
+        sens_wid[] <- c("Terra","Aqua","Both")
+        svalue(sens_wid) <- general_opts$sensor
+      }
+      # On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
+      if (prod_opt_list[[sel_prod]][[svalue(vers_wid)]]$tiled == 0) {
+        enabled(tiles_group) <- FALSE
+        svalue(proj_wid) <- "Latlon WGS84"
+      } else {
+        (enabled(tiles_group) <- TRUE)
+        svalue(proj_wid) <- "Sinusoidal"
+      }
+      # reset dummy variables for band selection to 0 on product change
+      temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
+    })
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Product selection
   #- ------------------------------------------------------------------------------- -#
-  prod_group <- ggroup(horizontal = TRUE, container = satprod_frame)
-  prod_wid <- gdroplist(items = mod_prod_list, container = prod_group, horizontal = TRUE, selected = match(general_opts$sel_prod, mod_prod_list),  handler = function(h,...) {
-    # Select the last version (it assumes that versions in xml file are in increasing order)
-    vers_wid[] <- names(prod_opt_list[[svalue(prod_wid)]])
-    svalue(vers_wid) <- prod_opt_list[[svalue(prod_wid)]][[length(prod_opt_list[[svalue(prod_wid)]])]]$v_number
-    # Disable sensor choice for combined datasets
-    if (prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$combined == 1) {
-      enabled(sens_wid) <- FALSE
-      sens_wid[] <- "Combined"
-      svalue(sens_wid) <- "Combined"
-    } else {
-      (enabled(sens_wid) <- TRUE)
-      sens_wid[] <- c("Terra","Aqua","Both")
-      svalue(sens_wid) <- general_opts$sensor
-    }
-    # On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
-    if (prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$tiled == 0) {
-      enabled(tiles_group) <- FALSE
-      svalue(proj_wid) <- "Latlon WGS84"
-    } else {
-      (enabled(tiles_group) <- TRUE)
-      svalue(proj_wid) <- "Sinusoidal"
-    }
-    # reset dummy variables for band selection to 0 on product change
-    temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
-  })
+  prod_group <- ggroup(horizontal = TRUE, container = satprod1_group)
+  prod_label <- glabel(text = "Product   ", container = prod_group)
+  prod_wid <- gdroplist(items = mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)], 
+    container = prod_group, horizontal = TRUE, selected = match(general_opts$sel_prod, mod_prod_list),  
+    handler = function(h,...) {
+      sel_prod <- if (!is.null(svalue(prod_wid))) {svalue(prod_wid)} else {sel_prod}
+      # Select the last version (it assumes that versions in xml file are in increasing order)
+      vers_wid[] <- names(prod_opt_list[[sel_prod]])
+      svalue(vers_wid) <- prod_opt_list[[sel_prod]][[length(prod_opt_list[[sel_prod]])]]$v_number
+      # Disable sensor choice for combined datasets
+      if (prod_opt_list[[sel_prod]][[svalue(vers_wid)]]$combined == 1) {
+        enabled(sens_wid) <- FALSE
+        sens_wid[] <- "Combined"
+        svalue(sens_wid) <- "Combined"
+      } else {
+        (enabled(sens_wid) <- TRUE)
+        sens_wid[] <- c("Terra","Aqua","Both")
+        svalue(sens_wid) <- general_opts$sensor
+      }
+      # On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
+      if (prod_opt_list[[sel_prod]][[svalue(vers_wid)]]$tiled == 0) {
+        enabled(tiles_group) <- FALSE
+        svalue(proj_wid) <- "Latlon WGS84"
+      } else {
+        (enabled(tiles_group) <- TRUE)
+        svalue(proj_wid) <- "Sinusoidal"
+      }
+      # reset dummy variables for band selection to 0 on product change
+      temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
+    })
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Sensor selection
   #- ------------------------------------------------------------------------------- -#
-  sens_wid <- gdroplist(items = c("Combined"), container = prod_group, text = "Select Layers", selected = 1)
+  satprod2_group <- ggroup(horizontal = FALSE, container = satprod_group)
+  sens_group <- ggroup(horizontal = TRUE, container = satprod2_group)
+  sens_label <- glabel(text = "Platform", container = sens_group)
+  sens_wid <- gdroplist(items = c("Combined"), container = sens_group, text = "Select Layers", selected = 1)
   if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$combined == 1) {
     enabled(sens_wid) <- FALSE
   } else {
@@ -112,8 +158,10 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Version selection
   #- ------------------------------------------------------------------------------- -#
-  vers_wid <- gdroplist(items = sapply(prod_opt_list[[svalue(prod_wid)]],function(x){x[["v_number"]]}),
-    container = prod_group, text = "Select Version", selected = match(general_opts$prod_version, names(prod_opt_list[[svalue(prod_wid)]])), handler = function(h,...) {
+  vers_label <- glabel(text = "Version", container = sens_group)
+  vers_wid <- gdroplist(items = sapply(prod_opt_list[[sel_prod]],function(x){x[["v_number"]]}),
+    container = sens_group, text = "Select Version", selected = match(general_opts$prod_version, names(prod_opt_list[[sel_prod]])),
+    handler = function(h,...) {
       # reset dummy variables for band selection to 0 on product change
       temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
     })
@@ -123,6 +171,8 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Layers selection
   #- ------------------------------------------------------------------------------- -#
+  band_group <- ggroup(horizontal = TRUE, container = satprod2_group)
+  band_label <- glabel(text = "Processing layers", container = band_group)
   band_wid <- gbutton(text = "Click To Select", border = TRUE,				# Child widget for processing bands selection
                       handler = function(h,....) {
                         
@@ -176,7 +226,7 @@ MODIStsp_GUI <- function(general_opts){
                                                          }
                                                          dispose(selgroup)
                                                        },
-                                                       container = cbox_indexes, width = 120, expand = TRUE)
+                                                       container = cbox_indexes, width = 120, expand = FALSE)
                         }
                         
                         # Start/Cancel widgets ----
@@ -225,7 +275,7 @@ MODIStsp_GUI <- function(general_opts){
 
                         visible(selgroup, set = TRUE)    # visualize band selection widgets
 
-                      },container = prod_group, expand = TRUE)
+                      },container = band_group, expand = TRUE)
 
   #- ------------------------------------------------------------------------------- -#
   # Widgets for authentication/download mode selection
