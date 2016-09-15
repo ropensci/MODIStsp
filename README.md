@@ -5,6 +5,17 @@
 
 * **22/08/2016**
 
+There seem to be currently some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github). We are working to understand the issue. For the time being, manually installing all the dependencies could solve the issue. To do so, please try doing: 
+  ```
+    install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets", "hash", "plyr", "raster", "RCurl",
+      "rgdal", "rgeos", "xts", "XML", "sp", "stringr", "httr"))
+  ```
+ , then continue with standard "MODIStsp" installation. If you still don't succedd, please try contacting us ! 
+
+* **20/07/2016**
+
+Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, the user can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: https://urs.earthdata.nasa.gov/profile.
+
 There seem to be currently some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github). We are working to understand the issue. For the time being, installing the development version of devtools could solve the issue. To do so, please try doing: 
   ```
     install.packages(c("devtools"))
@@ -14,8 +25,6 @@ There seem to be currently some problems in installing MODIStsp via install_gith
  , then continue with standard "MODIStsp" installation. If you still don't succedd, please try contacting us ! 
 
 * **20/07/2016**
-
-Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, the user can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: https://urs.earthdata.nasa.gov/profile.
 
 # Table of contents
 1. [MODIStsp](#MODIStsp)
