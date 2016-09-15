@@ -42,6 +42,8 @@ MODIStsp_read_xml <- function(previous_file = previous_file, xml_file = xml_file
       prodopts[[version_name]]$native_res <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["native_res"]])
       prodopts[[version_name]]$tiled <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["tiled"]])
       prodopts[[version_name]]$combined <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["combined"]])
+      prodopts[[version_name]]$cat01 <- xmlToList(xmltop[[prod]][["cat_01"]])
+      prodopts[[version_name]]$cat02 <- xmlToList(xmltop[[prod]][["cat_02"]])
       file_prefix_terra <- xmlToList(xmltop[[prod]][["file_prefix_terra"]])
       http_terra <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["http_terra"]])
       ftp_terra <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["ftp_terra"]])
