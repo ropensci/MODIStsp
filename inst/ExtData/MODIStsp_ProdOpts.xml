@@ -12747,25 +12747,16 @@
             </version>
         </versions>
     </MOD13Q1>
-
-
-
-
-
-
-
-
-
-
-
     <MCD15A2>
         <name>LAI_8Days_1Km (MCD15A2)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>LAI/FPAR</cat_01>
         <file_prefix_terra>MCD15A2</file_prefix_terra>
         <file_prefix_aqua>MCD15A2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Leaf Area Index - Fraction of Photosynthetically Active Radiation 8-Day L4 Global 1km</prod_fullname>
                 <main_out_folder>LAI_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_terra>
@@ -12896,14 +12887,156 @@
             </version>
         </versions>
     </MCD15A2>
+    <MCD15A2H>
+        <name>LAI_8Days_500m (MCD15A2H)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>LAI/FPAR</cat_01>
+        <file_prefix_terra>MCD15A2H</file_prefix_terra>
+        <file_prefix_aqua>MCD15A2H</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MCD15A2H: MODIS/Terra+Aqua Leaf Area Index/FPAR 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
+                <main_out_folder>LAI_8Days_500m_v6</main_out_folder>
+                <native_res>463.3127</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2H.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2H.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD15A2H/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD15A2H/</ftp_aqua>
+                <combined>1</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a2h_v006</www>
+                <bands>
+                    <band>
+                        <bandname>Fpar_500m</bandname>
+                        <fullname>Fraction of photosynthetically active radiation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Lai_500m</bandname>
+                        <fullname>Leaf area index</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>FparLai_QC</bandname>
+                        <fullname>Quality for Lai and Fpar</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>FparExtra_QC</bandname>
+                        <fullname>Extra detail Quality for Lai and Fpar</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>FparStdDev_500m</bandname>
+                        <fullname>Standard deviation of Fpar</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LaiStdDev_500m</bandname>
+                        <fullname>Standard deviation for Lai</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QC_bits</quality_bandname>
+                        <quality_fullname>MODLAND_QC bits</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>0</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_sensor</quality_bandname>
+                        <quality_fullname>Sensor</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_DeadDet</quality_bandname>
+                        <quality_fullname>DeadDetector</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_cld</quality_bandname>
+                        <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>3-4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_SCF</quality_bandname>
+                        <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>5-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_PT</quality_bandname>
+                        <quality_fullname>LandSea Pass-Thru</quality_fullname>
+                    <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_snow</quality_bandname>
+                        <quality_fullname>Snow_Ice (from Aggregate_QC bits)</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_aero</quality_bandname>
+                        <quality_fullname>Aerosol</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_cirr</quality_bandname>
+                        <quality_fullname>Cirrus</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_MODAG_cld</quality_bandname>
+                        <quality_fullname>MODAGAGG_Internal_CloudMask</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_MODAG_cld_shd</quality_bandname>
+                        <quality_fullname>MODAGAGG_Cloud_Shadow</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>6</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_SCF</quality_bandname>
+                        <quality_fullname>SCF_Biome_Mask</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MCD15A2H>
     <MCD15A3>
-        <name>LAI_4Days_1Km (MCD15A2)</name>
+        <name>LAI_4Days_1Km (MCD15A3)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>LAI/FPAR</cat_01>
         <file_prefix_terra>MCD15A3</file_prefix_terra>
         <file_prefix_aqua>MCD15A3</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Leaf Area Index - Fraction of Photosynthetically Active Radiation 4-Day L4 Global 1km</prod_fullname>
                 <main_out_folder>LAI_4Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_terra>
@@ -13034,14 +13167,156 @@
             </version>
         </versions>
     </MCD15A3>
+    <MCD15A3H>
+        <name>LAI_4Days_500m (MCD15A3H)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>LAI/FPAR</cat_01>
+        <file_prefix_terra>MCD15A3H</file_prefix_terra>
+        <file_prefix_aqua>MCD15A3H</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MCD15A3H: MODIS/Terra+Aqua Leaf Area Index/FPAR 4-Day L4 Global 500 m SIN Grid V006</prod_fullname>
+                <main_out_folder>LAI_4Days_500m_v6</main_out_folder>
+                <native_res>463.3127</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3H.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3H.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD15A3H/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD15A3H/</ftp_aqua>
+                <combined>1</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a3h_v006</www>
+                <bands>
+                    <band>
+                        <bandname>Fpar_500m</bandname>
+                        <fullname>Fraction of photosynthetically active radiation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Lai_500m</bandname>
+                        <fullname>Leaf area index</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>FparLai_QC</bandname>
+                        <fullname>Quality for Lai and Fpar</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>FparExtra_QC</bandname>
+                        <fullname>Extra detail Quality for Lai and Fpar</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>FparStdDev_500m</bandname>
+                        <fullname>Standard deviation of Fpar</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LaiStdDev_500m</bandname>
+                        <fullname>Standard deviation for Lai</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QC_bits</quality_bandname>
+                        <quality_fullname>MODLAND_QC bits</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>0</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_sensor</quality_bandname>
+                        <quality_fullname>Sensor</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_DeadDet</quality_bandname>
+                        <quality_fullname>DeadDetector</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_cld</quality_bandname>
+                        <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>3-4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_SCF</quality_bandname>
+                        <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>5-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_PT</quality_bandname>
+                        <quality_fullname>LandSea Pass-Thru</quality_fullname>
+                    <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_snow</quality_bandname>
+                        <quality_fullname>Snow_Ice (from Aggregate_QC bits)</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_aero</quality_bandname>
+                        <quality_fullname>Aerosol</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_cirr</quality_bandname>
+                        <quality_fullname>Cirrus</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_MODAG_cld</quality_bandname>
+                        <quality_fullname>MODAGAGG_Internal_CloudMask</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_MODAG_cld_shd</quality_bandname>
+                        <quality_fullname>MODAGAGG_Cloud_Shadow</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>6</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_SCF</quality_bandname>
+                        <quality_fullname>SCF_Biome_Mask</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MCD15A3H>
     <MOD15A2>
         <name>LAI_8Days_1Km (M*D15A2)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>LAI/FPAR</cat_01>
         <file_prefix_terra>MOD15A2</file_prefix_terra>
         <file_prefix_aqua>MYD15A2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Leaf Area Index - Fraction of Photosynthetically Active Radiation 8-Day L4 Global 1km</prod_fullname>
                 <main_out_folder>LAI_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD15A2.005/</http_terra>
@@ -13171,14 +13446,156 @@
             </version>
         </versions>
     </MOD15A2>
+    <MOD15A2H>
+        <name>LAI_8Days_500m (M*D15A2)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>LAI/FPAR</cat_01>
+        <file_prefix_terra>MOD15A2</file_prefix_terra>
+        <file_prefix_aqua>MYD15A2</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*D15A2H: MODIS/Terra/Aqua Leaf Area Index/FPAR 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
+                <main_out_folder>LAI_8Days_500m_v6</main_out_folder>
+                <native_res>463.3127</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD15A2H.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2H.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD15A2H/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD15A2H/</ftp_aqua>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod15a2h_v006</www>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <bands>
+                    <band>
+                        <bandname>Fpar_500m</bandname>
+                        <fullname>Fraction of photosynthetically active radiation</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Lai_500m</bandname>
+                        <fullname>Leaf area index</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>FparLai_QC</bandname>
+                        <fullname>Quality for Lai and Fpar</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>FparExtra_QC</bandname>
+                        <fullname>Extra detail Quality for Lai and Fpar</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>FparStdDev_500m</bandname>
+                        <fullname>Standard deviation of Fpar</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LaiStdDev_500m</bandname>
+                        <fullname>Standard deviation for Lai</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QC_bits</quality_bandname>
+                        <quality_fullname>MODLAND_QC bits</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>0</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_sensor</quality_bandname>
+                        <quality_fullname>Sensor</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_DeadDet</quality_bandname>
+                        <quality_fullname>DeadDetector</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_cld</quality_bandname>
+                        <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>3-4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_SCF</quality_bandname>
+                        <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
+                        <quality_source>FparLai_QC</quality_source>
+                        <quality_bitN>5-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_PT</quality_bandname>
+                        <quality_fullname>LandSea Pass-Thru</quality_fullname>
+                    <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_snow</quality_bandname>
+                        <quality_fullname>Snow_Ice (from Aggregate_QC bits)</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_aero</quality_bandname>
+                        <quality_fullname>Aerosol</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_cirr</quality_bandname>
+                        <quality_fullname>Cirrus</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_MODAG_cld</quality_bandname>
+                        <quality_fullname>MODAGAGG_Internal_CloudMask</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_MODAG_cld_shd</quality_bandname>
+                        <quality_fullname>MODAGAGG_Cloud_Shadow</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>6</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QCextra_SCF</quality_bandname>
+                        <quality_fullname>SCF_Biome_Mask</quality_fullname>
+                        <quality_source>FparExtra_QC</quality_source>
+                        <quality_bitN>7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MOD15A2H>
     <MOD17A2>
         <name>Gross_PP_8Days_1Km (M*D17A2)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>Gross Primary Productivity</cat_01>
         <file_prefix_terra>MOD17A2</file_prefix_terra>
         <file_prefix_aqua>MYD17A2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Gross Primary Productivity 8-Day L4 Global 1km</prod_fullname>
                 <main_out_folder>Gross_PP_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2.005/</http_terra>
@@ -13246,14 +13663,93 @@
             </version>
         </versions>
     </MOD17A2>
+    <MOD17A2H>
+        <name>Gross_PP_8Days_500m (M*D17A2H)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>Gross Primary Productivity</cat_01>
+        <file_prefix_terra>MOD17A2H</file_prefix_terra>
+        <file_prefix_aqua>MYD17A2H</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*D17A2H: MODIS/Terra/Aqua Gross Primary Productivity 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
+                <main_out_folder>Gross_PP_8Days_500m_v6</main_out_folder>
+                <native_res>463.3127</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2H.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2H.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD17A2H/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD17A2H/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a2h_v006</www>
+                <bands>
+                    <band>
+                        <bandname>GPP_500m</bandname>
+                        <fullname>Gross Primary Production</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>32767</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>PsnNet_500m</bandname>
+                        <fullname>Net Photosynthesis</fullname>
+                        <datatype>16-bit signed integer</datatype>
+                        <nodata_in>32767</nodata_in>
+                        <nodata_out>32767</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Psn_QC_500m</bandname>
+                        <fullname>Quality Control bits</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QC_bits</quality_bandname>
+                        <quality_fullname>MODLAND_QC bits</quality_fullname>
+                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_bitN>0</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_sensor</quality_bandname>
+                        <quality_fullname>Sensor</quality_fullname>
+                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_bitN>1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_DeadDet</quality_bandname>
+                        <quality_fullname>DeadDetector</quality_fullname>
+                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_cld</quality_bandname>
+                        <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
+                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_bitN>3-4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_SCF</quality_bandname>
+                        <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
+                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_bitN>5-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MOD17A2H>
     <MOD17A3>
         <name>Net_PP_Yearly_1Km (M*D17A3)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>Net Primary Productivity</cat_01>
         <file_prefix_terra>MOD17A3</file_prefix_terra>
         <file_prefix_aqua>MYD17A3</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Terra/MODIS Net Primary Production Yearly L4 Global 1km</prod_fullname>
                 <main_out_folder>Net_PP_Yearly_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A3.005/</http_terra>
@@ -13289,14 +13785,86 @@
             </version>
         </versions>
     </MOD17A3>
+    <MOD17A3H>
+        <name>Net_PP_Yearly_500m (M*D17A3H)</name>
+        <cat_01>Ecosystem Variables</cat_01>
+        <cat_02>Net Primary Productivity</cat_01>
+        <file_prefix_terra>MOD17A3H</file_prefix_terra>
+        <file_prefix_aqua>MYD17A3H</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*D17A3H: MODIS/Terra/Aqua Net Primary Production Yearly L4 Global 500 m SIN Grid V006</prod_fullname>
+                <main_out_folder>Net_PP_Yearly_500m_v6</main_out_folder>
+                <native_res>463.3127</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A3H.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A3H.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD17A3H/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD17A3H/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a3h_v006</www>
+                <bands>
+                    <band>
+                        <bandname>Npp_500m</bandname>
+                        <fullname>Net Primary Productivity</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>32767</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Npp_QC_500m</bandname>
+                        <fullname>Quality Control bits</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QC_bits</quality_bandname>
+                        <quality_fullname>MODLAND_QC bits</quality_fullname>
+                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_bitN>0</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_sensor</quality_bandname>
+                        <quality_fullname>Sensor</quality_fullname>
+                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_bitN>1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_DeadDet</quality_bandname>
+                        <quality_fullname>DeadDetector</quality_fullname>
+                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_cld</quality_bandname>
+                        <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
+                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_bitN>3-4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_SCF</quality_bandname>
+                        <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
+                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_bitN>5-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MOD17A3H>
     <MCD45A1>
         <name>Burned_Monthly_500m (MCD45A1)</name>
+        <cat_01>Land Cover Characteristics</cat_01>
+        <cat_02>Thermal Anomalies and Fire</cat_01>
         <file_prefix_terra>MCD45A1</file_prefix_terra>
         <file_prefix_aqua>MCD45A1</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Burned Area Monthly L3 Global 500m</prod_fullname>
                 <main_out_folder>Burned_Monthly_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_terra>
@@ -13369,12 +13937,14 @@
     </MCD45A1>
     <MOD14>
         <name>ThermalAn_Fire_5Min_1Km (M*D14)</name>
+        <cat_01>Land Cover Characteristics</cat_01>
+        <cat_02>Thermal Anomalies and Fire</cat_01>
         <file_prefix_terra>MOD14</file_prefix_terra>
         <file_prefix_aqua>MYD14</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Thermal Anomalies and Fire 5-Min L2 Swath 1km</prod_fullname>
                 <main_out_folder>ThermalAn_Fire_5Min_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14.005/</http_terra>
@@ -13399,7 +13969,8 @@
                         <nodata_in>4294967295</nodata_in>
                         <nodata_out>4294967295</nodata_out>
                     </band>
-                </bands>        <quality_indicators>
+                </bands>
+                <quality_indicators>
                     <quality>
                         <quality_bandname>QC</quality_bandname>
                         <quality_fullname>MODLAND QA bits</quality_fullname>
@@ -13528,16 +14099,157 @@
                     </quality>
                 </quality_indicators><fixme>TODO: download of fire table (see www)</fixme>
             </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD14: MODIS/Terra Thermal Anomalies and Fire 5-Min L2 Swath 1km V006</prod_fullname>
+                <main_out_folder>ThermalAn_Fire_5Min_1Km_v6</main_out_folder>
+                <native_res>926.6254</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD14/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD14/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14_v006</www>
+                <bands>
+                    <band>
+                        <bandname>Fire_Mask</bandname>
+                        <fullname>Confidence of fire</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QA</bandname>
+                        <fullname>Pixel quality indicators</fullname>
+                        <datatype>32-bit unsigned integer</datatype>
+                        <nodata_in>4294967295</nodata_in>
+                        <nodata_out>4294967295</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QC_land_water</quality_bandname>
+                        <quality_fullname>Land/water state</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_flag_39</quality_bandname>
+                        <quality_fullname>3.9 micron high-gain flag</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_atm_cor</quality_bandname>
+                        <quality_fullname>Atmospheric correction</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_day_night</quality_bandname>
+                        <quality_fullname>Day/night algorithm</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>4</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_pot_fire</quality_bandname>
+                        <quality_fullname>Potential fire pixel</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_R</quality_bandname>
+                        <quality_fullname>Background window size parameter, R</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>7-10</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_test_360</quality_bandname>
+                        <quality_fullname>360 K T21 test</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>11</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_test_DT_Rel</quality_bandname>
+                        <quality_fullname>DT relative test</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>12</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_test_DT_Abs</quality_bandname>
+                        <quality_fullname>DT absolute test</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>13</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_test_T21_i</quality_bandname>
+                        <quality_fullname>T21 relative test i</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>14</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_test_T21_ii</quality_bandname>
+                        <quality_fullname>T31 relative test ii</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>15</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_test_BG_Fire_T21</quality_bandname>
+                        <quality_fullname>Background fire T21 deviation test</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>16</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_adj_cld</quality_bandname>
+                        <quality_fullname>Adjacent cloud pixel (valid only if fire mask = 7, 8, or 9)</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>20</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_adj_water</quality_bandname>
+                        <quality_fullname>Adjacent water pixel (valid only if fire mask = 7, 8, or 9)</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>21</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_glint</quality_bandname>
+                        <quality_fullname>Sun glint level</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>22-23</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_rej_glint</quality_bandname>
+                        <quality_fullname>Sun glint rejection flag</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>24</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_rej_hot_surf</quality_bandname>
+                        <quality_fullname>Hot surface boundary rejection flag</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>25</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_rej_coast</quality_bandname>
+                        <quality_fullname>Coastal false alarm rejection flag</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>26</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
         </versions>
     </MOD14>
     <MOD14A1>
         <name>ThermalAn_Fire_Daily_1Km (M*D14A1)</name>
+        <cat_01>Land Cover Characteristics</cat_01>
+        <cat_02>Thermal Anomalies and Fire</cat_01>
         <file_prefix_terra>MOD14A1</file_prefix_terra>
         <file_prefix_aqua>MYD14A1</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Thermal Anomalies and Fire Daily L3 Global 1km</prod_fullname>
                 <main_out_folder>ThermalAn_Fire_Daily_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.005/</http_terra>
@@ -13578,16 +14290,75 @@
                     </band>
                 </bands><fixme>TODO: download of fire table (see www)</fixme>
             </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD14A1: MODIS/Terra Thermal Anomalies and Fire Daily L3 Global 1km V006</prod_fullname>
+                <main_out_folder>ThermalAn_Fire_Daily_1Km_v6</main_out_folder>
+                <native_res>926.6254</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD14A1/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD14A1/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a1_v006</www>
+                <bands>
+                    <band>
+                        <bandname>Fire_Mask</bandname>
+                        <fullname>Confidence of fire</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QA</bandname>
+                        <fullname>Pixel quality indicators</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>MaxFRP</bandname>
+                        <fullname>Maximum Fire Radiative Power</fullname>
+                        <datatype>32-bit signed integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>2147483647</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>sample</bandname>
+                        <fullname>Position of fire pixel within scan</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>65535</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QC_land_water</quality_bandname>
+                        <quality_fullname>Land/water state</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_day_night</quality_bandname>
+                        <quality_fullname>Day/night algorithm</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
         </versions>
     </MOD14A1>
     <MOD14A2>
         <name>ThermalAn_Fire_8Days_1Km (M*D14A2)</name>
+        <cat_01>Land Cover Characteristics</cat_01>
+        <cat_02>Thermal Anomalies and Fire</cat_01>
         <file_prefix_terra>MOD14A2</file_prefix_terra>
         <file_prefix_aqua>MYD14A2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Thermal Anomalies and Fire 8-Day L3 Global 1km</prod_fullname>
                 <main_out_folder>ThermalAn_Fire_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.005/</http_terra>
@@ -13614,16 +14385,61 @@
                     </band>
                 </bands>
             </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MOD14A2: MODIS/Terra Thermal Anomalies and Fire 8-Day L3 Global 1km V006</prod_fullname>
+                <main_out_folder>ThermalAn_Fire_8Days_1Km_v6</main_out_folder>
+                <native_res>926.6254</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD14A2/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD14A2/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a2_v006</www>
+                <bands>
+                    <band>
+                        <bandname>Fire_Mask</bandname>
+                        <fullname>Confidence of fire</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QA</bandname>
+                        <fullname>Pixel quality indicators</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QC_land_water</quality_bandname>
+                        <quality_fullname>Land/water state</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QC_day_night</quality_bandname>
+                        <quality_fullname>Day/night algorithm</quality_fullname>
+                        <quality_source>QA</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
         </versions>
     </MOD14A2>
     <MCD12C1>
         <name>LandCover_Type_Yearly_005dg (MCD12C1)</name>
+        <cat_01>Land Cover Characteristics</cat_01>
+        <cat_02>Land Cover</cat_01>
         <file_prefix_terra>MCD12C1</file_prefix_terra>
         <file_prefix_aqua>MCD12C1</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Land Cover Type Yearly L3 Global 0.05Deg CMG</prod_fullname>
                 <main_out_folder>LandCover_Type_Yearly_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_terra>
@@ -13718,12 +14534,14 @@
     </MCD12C1>
     <MCD12Q1>
         <name>LandCover_Type_Yearly_500m (MCD12Q1)</name>
+        <cat_01>Land Cover Characteristics</cat_01>
+        <cat_02>Land Cover</cat_01>
         <file_prefix_terra>MCD12Q1</file_prefix_terra>
         <file_prefix_aqua>MCD12Q1</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Land Cover Type Yearly L3 Global 500 m SIN Grid</prod_fullname>
                 <main_out_folder>LandCover_Type_Yearly_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_terra>
@@ -13871,12 +14689,14 @@
     </MCD12Q1>
     <MCD12Q2>
         <name>LandCover_Dynamics_Yearly_500m (MCD12Q2)</name>
+        <cat_01>Land Cover Characteristics</cat_01>
+        <cat_02>Land Cover</cat_01>
         <file_prefix_terra>MCD12Q2</file_prefix_terra>
         <file_prefix_aqua>MCD12Q2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname></prod_fullname>
+                <prod_fullname>Land Cover Dynamics Yearly L3 Global 500 m SIN Grid</prod_fullname>
                 <main_out_folder>LandCover_Dynamics_Yearly_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_terra>
