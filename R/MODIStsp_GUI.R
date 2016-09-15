@@ -39,7 +39,7 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   
   main_win <- gbasicdialog(title = "Select Main Processing Options", parent = NULL, do.buttons = FALSE)
-  main_group <- ggroup(container = main_win, horizontal = FALSE, expand = TRUE)
+  main_group <- ggroup(container = main_win, horizontal = FALSE, expand = FALSE)
   mod_prod_cat <- as.data.frame(t(sapply(prod_opt_list,function(x){c(x[[1]]$cat01,x[[1]]$cat02)}))); names(mod_prod_cat) <- c('cat01','cat02')
   mod_prod_cat$cat <- apply(mod_prod_cat,1,paste,collapse=' - ')
   
@@ -143,10 +143,12 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Sensor selection
   #- ------------------------------------------------------------------------------- -#
+  addSpace(satprod_group, 2, horizontal=TRUE)
+  addSpring(satprod_group, horizontal=TRUE)
   satprod2_group <- ggroup(horizontal = FALSE, container = satprod_group)
   sens_group <- ggroup(horizontal = TRUE, container = satprod2_group)
   sens_label <- glabel(text = "Platform", container = sens_group)
-  sens_wid <- gdroplist(items = c("Combined"), container = sens_group, text = "Select Layers", selected = 1)
+  sens_wid <- gdroplist(items = c("Terra"), container = sens_group, text = "Select Layers", selected = 1)
   if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$combined == 1) {
     enabled(sens_wid) <- FALSE
   } else {
@@ -179,30 +181,31 @@ MODIStsp_GUI <- function(general_opts){
                         load(general_opts$previous_file)
                         check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
                         check_wid <- temp_wid_bands												# retrieve currently selected original layers
-                        selgroup <- gbasicdialog(title = "Select Processing Layers						", parent = NULL, do.buttons = FALSE, width = 450, horizontal = TRUE)
-                        
+                        selgroup <- gbasicdialog(title = "Select Processing Layers", parent = NULL, do.buttons = FALSE, horizontal = TRUE)
+
                         # widgets for band selection - original ----
-                        cbox_total <- gframe(text = "", container = selgroup, horizontal = TRUE, width = 450)
-                        cbox <- gframe(text = "<span foreground='blue' size='x-large'>		Original MODIS Layers			</span>", markup = TRUE, container = cbox_total, horizontal = TRUE, width = 450)
+                        cbox_total <- ggroup(container = selgroup, horizontal = TRUE)
+                        cbox <- gframe(text = "<span foreground='blue' size='large'>Original MODIS Layers</span>", markup = TRUE, container = cbox_total, horizontal = FALSE)
                         bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid),
-                                                    container = cbox, use.table = FALSE, width = 450)
-                        
+                                                    container = cbox, use.table = FALSE)
+
                         # widgets for band selection - quality
                         check_names_quality <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$quality_fullnames # retrieve quality band names (if existing for sel. product)
                         if ( !is.null(check_names_quality) ) {
                           check_wid_quality <- temp_wid_bands_quality						    # retrieve currently selected quality layers (if existing for sel. product)
-                          cbox_quality <- gframe(text = "<span foreground='blue' size='x-large'>		Quality Indicators				</span>", markup = TRUE, container = cbox_total, horizontal = FALSE, width = 450)
+                          cbox_quality <- gframe(text = "<span foreground='blue' size='large'>Quality Indicators</span>", markup = TRUE, container = cbox_total, horizontal = FALSE)
                           bands_wid_quality <- gcheckboxgroup(items = check_names_quality, checked = as.logical(check_wid_quality),
-                                                              container = cbox_quality, use.table = FALSE, width = 450)
+                                                              container = cbox_quality, use.table = FALSE)
                         }
                         
                         # widgets for band selection - indexes ----
                         check_names_indexes <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$indexes_fullnames # retrieve indexes band names (if existing for sel. product)
                         if (!is.null(check_names_indexes)) {
                           check_wid_indexes <- temp_wid_bands_indexes							# retrieve currently selected indexes layers
-                          cbox_indexes <- gframe(text = "<span foreground='blue' size='x-large'>		Additional Spectral Indexes				</span>", markup = TRUE, container = cbox_total, horizontal = FALSE, width = 450)
+                          cbox_indexes <- gframe(text = "<span foreground='blue' size='large'>Additional Spectral Indexes</span>", markup = TRUE, container = cbox_total, horizontal = FALSE)
                           bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes),
-                                                              container = cbox_indexes, use.table = FALSE, width = 450)
+                                                              container = cbox_indexes, use.table = FALSE)
+                          band_indexes_space <- glabel(text = "", container = cbox_indexes)
                           band_wid_newindex <- gbutton(text = "Add custom index", border = TRUE,
                                                        handler = function(h,...) {
                                                          # Run addindex() function ----
@@ -226,7 +229,7 @@ MODIStsp_GUI <- function(general_opts){
                                                          }
                                                          dispose(selgroup)
                                                        },
-                                                       container = cbox_indexes, width = 120, expand = FALSE)
+                                                       container = cbox_indexes, expand = FALSE)
                         }
                         
                         # Start/Cancel widgets ----
@@ -270,7 +273,7 @@ MODIStsp_GUI <- function(general_opts){
                         })
                         
                         # Widget for "www" button ----
-                        addSpace(bands_group, 760, horizontal = TRUE)
+                        addSpring(bands_group, horizontal = TRUE)
                         www_but <- gbutton(text = "Product details", container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$www))
 
                         visible(selgroup, set = TRUE)    # visualize band selection widgets
@@ -745,12 +748,12 @@ MODIStsp_GUI <- function(general_opts){
                                selected <- match(general_opts$ts_format, c("None","ENVI Meta Files","GDAL vrt Files","ENVI and GDAL")), handler = function(h,....) {
                                  current_sel <- svalue(timeseries_wid)
                                })
-  addSpace(other_group,14 )
-
+  addSpring(other_group, horizontal=TRUE)
+  
   rts_lab <- glabel(text = "RasterStacks: ", container = other_group)
   rts_wid <- gradio(items = c("Yes","No"), text = "Select", container = other_group, selected = match(general_opts$rts, c("Yes","No")), horizontal = TRUE)
   font(rts_lab) <- list(family = "sans",weight = "bold")
-  addSpace(other_group,14 )
+  addSpace(other_group,15)
   nodata_lab <- glabel(text = "Change NODATA values", container = other_group)
   nodata_wid <- gradio(items = c("Yes","No"), text = "Select", container = other_group, selected = match(general_opts$nodata_change, c("Yes","No")), horizontal = TRUE)
   font(nodata_lab) <- list(family = "sans",weight = "bold")
@@ -759,8 +762,8 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   
   # Main output folder ----
-  outfold_frame <- gframe(text = "<span foreground='blue' size='x-large'>Main Output Folder for Time Series storage</span>", markup = T, container = main_group, expand = TRUE)    			# Frame group
-  outfold_group <- ggroup(horizontal = TRUE, container = outfold_frame)  				# Main group
+  outfold_frame <- gframe(text = "<span foreground='blue' size='x-large'>Main Output Folder for Time Series storage</span>", markup = T, container = main_group, expand=TRUE, fill=TRUE)    			# Frame group
+  outfold_group <- ggroup(horizontal = TRUE, container = outfold_frame, expand=TRUE, fill=TRUE)  				# Main group
   outfold_wid <- gedit(text = format(general_opts$out_folder, justify = "right"), container = outfold_group, width = 46)			# Selected file
   fold_choose <- gbutton("Browse", handler = function(h,...) {
     choice <- gfile(type = "selectdir", text = "Select the Output Folder for MODIS data...")		# File selection widget
@@ -771,15 +774,15 @@ MODIStsp_GUI <- function(general_opts){
   }, container = outfold_group)
   
   # Reprocessing options checkbox ----
+  addSpring(outfold_group, horizontal = TRUE)
   reprocess_lab <- glabel(text = "ReProcess Existing Data", container = outfold_group)
   font(reprocess_lab) <- list(family = "sans",weight = "bold")
   reprocess_wid <- gradio(items = c("Yes","No"), text = "Select", container = outfold_group, selected = match(general_opts$reprocess, c("Yes","No")), horizontal = TRUE)
-  addSpace(outfold_group, 5, horizontal = TRUE)
-  
-  
+
+
   # HDF output folder ----
-  outfoldmod_frame <- gframe(text = "<span foreground='blue' size='x-large'>Output Folder for Original HDF files download</span>", markup = TRUE, container = main_group, expand = TRUE)    			# Frame group
-  outfoldmod_group <- ggroup(horizontal = TRUE, container = outfoldmod_frame)  				# Main group
+  outfoldmod_frame <- gframe(text = "<span foreground='blue' size='x-large'>Output Folder for Original HDF files download</span>", markup = TRUE, container = main_group, expand=TRUE, fill=TRUE)    			# Frame group
+  outfoldmod_group <- ggroup(horizontal = TRUE, container = outfoldmod_frame, expand=TRUE, fill=TRUE)  				# Main group
   outfoldmod_wid <- gedit(text = format(general_opts$out_folder_mod, justify = "right") , container = outfoldmod_group, width = 46)			# Selected file
   fold_choose <- gbutton("Browse", handler = function(h,...) {
     choice <- gfile(type = "selectdir", text = "Select the Output Folder for storage of original HDFs...")		# File selection widget
@@ -791,12 +794,12 @@ MODIStsp_GUI <- function(general_opts){
   
   
   # HDF delete option checkbox ----
-  delete_group <- ggroup(container = outfoldmod_group, horizontal = TRUE)
-  delete_lab <- glabel(text = "Delete original HDF files", container = delete_group)
+  addSpring(outfoldmod_group, horizontal = TRUE)
+  delete_lab <- glabel(text = "Delete original HDF files", container = outfoldmod_group)
   font(delete_lab) <- list(family = "sans",weight = "bold")
-  delete_wid <- gradio(items = c("Yes","No"), text = "Select", container = delete_group, selected = 2, horizontal = T)
-  
-  
+  delete_wid <- gradio(items = c("Yes","No"), text = "Select", container = outfoldmod_group, selected = 2, horizontal = T)
+
+
   #- ------------------------------------------------------------------------------- -#
   # Start/Quit/Save/Load buttons
   #- ------------------------------------------------------------------------------- -#
@@ -1016,9 +1019,9 @@ MODIStsp_GUI <- function(general_opts){
     assign("Quit", TRUE, envir = globalenv())
     dispose(main_win)
   })
-  
-  addSpace(but_group, 370, horizontal = TRUE)
-  
+
+  addSpring(but_group, horizontal = TRUE)
+
   # On "Load", ask for a old options file and load it --------
   load_but <- gbutton(text = "Load Options", container = but_group, handler = function(h,....){
     
