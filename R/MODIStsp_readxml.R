@@ -4,7 +4,7 @@
 #' MODIS Land Products and store them in the "prod_opts" data frame
 #' @details The function parses the XML file product by product, stores data in a data frame
 #' and saves the data frame within the "MODIStsp_previous" RData file as a list of lists
-#' @param previous_file string filename of the RData in which to store the data parsed from the XML file
+#' @param prodopts_file string filename of the RData in which to store the data parsed from the XML file
 #' @param xml_file string filename of the XML file containing the MODIS products characteristics
 #' @return NULL - retrieved data are stored in the specified RData file
 #'
@@ -14,10 +14,9 @@
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom plyr revalue
 #' @importFrom hash hash
-MODIStsp_read_xml <- function(previous_file = previous_file, xml_file = xml_file) {
+MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file) {
   
   prod_opt_list <- NULL
-  mod_prod_list <- NULL
 
   xmlfile <- xmlParse(xml_file)  # initialize xml parsing
 
@@ -78,7 +77,7 @@ MODIStsp_read_xml <- function(previous_file = previous_file, xml_file = xml_file
       prodopts[[version_name]]$datatype <- datatype
       prodopts[[version_name]]$nodata_in <- nodata_in
       prodopts[[version_name]]$nodata_out <- nodata_out
-      prodopts[[version_name]]$bandsel <- rep(0, length(prodopts[[version_name]]$bandnames))
+      # prodopts[[version_name]]$bandsel <- rep(0, length(prodopts[[version_name]]$bandnames))
       
       # Indices info
       nindexes <- xmlSize(xmltop[[prod]][["versions"]][[n_version]][["indexes"]])		# number of Spectral Indexes
@@ -95,7 +94,7 @@ MODIStsp_read_xml <- function(previous_file = previous_file, xml_file = xml_file
         prodopts[[version_name]]$indexes_fullnames <- indexes_fullnames
         prodopts[[version_name]]$indexes_formulas <- indexes_formulas
         prodopts[[version_name]]$indexes_nodata_out <- indexes_nodata_out
-        prodopts[[version_name]]$indexes_bandsel <- rep(0, length(prodopts[[version_name]]$indexes_bandnames))
+        # prodopts[[version_name]]$indexes_bandsel <- rep(0, length(prodopts[[version_name]]$indexes_bandnames))
       }   #end if on indexes existence
       
       # Quality flag info
@@ -114,23 +113,21 @@ MODIStsp_read_xml <- function(previous_file = previous_file, xml_file = xml_file
         prodopts[[version_name]]$quality_bitN <- quality_bitN
         prodopts[[version_name]]$quality_nodata_in <- rep("255", length(prodopts[[version_name]]$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
         prodopts[[version_name]]$quality_nodata_out <- rep("255", length(prodopts[[version_name]]$quality_bandnames)) # nodata out for quality bands (always 255)
-        prodopts[[version_name]]$quality_bandsel <- rep(0, length(prodopts[[version_name]]$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
+        # prodopts[[version_name]]$quality_bandsel <- rep(0, length(prodopts[[version_name]]$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
       } # end if on quality existence
       
     } # end of n_versions cycle
 
     # At each cycle, add product name to mod_prod_list and prodopts to prod_opt_list
-    mod_prod_list <- c(mod_prod_list, prodopts_name )
     prod_opt_list[[prodopts_name]] <- prodopts
 
   }  #End Cycle on products
 
   # Add attributes to these 3 lists (this is used as a check when charging them)
-  attr(mod_prod_list,"GeneratedBy") <- "MODIStsp"
   attr(prod_opt_list,"GeneratedBy") <- "MODIStsp"
 
   # Save the products list and the chars of the products in previous file
-  dir.create(dirname(previous_file), recursive = TRUE, showWarnings = FALSE)
-  save(prod_opt_list, mod_prod_list, file = previous_file)
+  dir.create(dirname(prodopts_file), recursive = TRUE, showWarnings = FALSE)
+  save(prod_opt_list, file = prodopts_file)
 
 }

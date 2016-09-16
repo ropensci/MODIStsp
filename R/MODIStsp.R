@@ -103,14 +103,16 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
     stop("Please provide a valid \"option_file\" path value (or run with gui=TRUE).")
   }
 
-  # Folder in which the previous options file is saved
+  # Folders in which the RData files (previous settings and product descriptions) are saved
   if (is.null(options_file)) {
     previous_dir <- file.path(MODIStsp_dir,"Previous")
   } else {
     previous_dir <- dirname(options_file)
   }
+  prodopts_dir <- file.path(MODIStsp_dir,"Previous")
   dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
-
+  dir.create(prodopts_dir, showWarnings = FALSE, recursive = TRUE)
+  
   # Previous options file (or file passed by user in non-interactive mode)
   previous_file <- if (is.null(options_file)) {
     file.path(previous_dir, "MODIStsp_Previous.RData")
@@ -118,7 +120,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
     options_file
   }
   xml_file <- file.path(MODIStsp_dir,"ExtData","MODIStsp_ProdOpts.xml")  #XML file describing MODIS products
-
+  prodopts_file <- file.path(prodopts_dir, "MODIStsp_ProdOpts.RData") # this is created to speed up XML reading (done only the first time)
+  
   #- ------------------------------------------------------------------------------- -#
   #  Set general processing options - used at first execution to initialize GUI
   #- ------------------------------------------------------------------------------- -#
@@ -129,13 +132,21 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
                         "User Defined" = "")
   MOD_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs "
 
-  # Create the general_opts structure used to communicate with the GUI and set default values
-  general_opts <- list(MODIStsp_dir = MODIStsp_dir, previous_file = previous_file, xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
-                       sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = "2015-01-01", end_date = "2015-01-01",
-                       start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
-                       proj = "Sinusoidal", out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
-                       nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "")
-  attr(general_opts,"GeneratedBy") <- "MODIStsp"
+  # Load options if existing, otherwise initialise them ----
+  if (file.exists(previous_file)) {
+    load(previous_file)
+  }
+  if (!exists("general_opts") | if (exists("general_opts")) {is.null(attr(general_opts,"GeneratedBy"))} else {FALSE}) {
+    # Create the general_opts structure used to communicate with the GUI and set default values
+    general_opts <- list(MODIStsp_dir = MODIStsp_dir, previous_file = previous_file, prodopts_file = prodopts_file, xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
+                         sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = strftime(Sys.Date(),"%Y-01-01"), end_date = Sys.Date(),
+                         bandsel = NA, indexes_bandsel = NA, quality_bandsel = NA,
+                         start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
+                         proj = "Sinusoidal", out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
+                         nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "")
+    attr(general_opts,"GeneratedBy") <- "MODIStsp"
+    save(general_opts, file = previous_file) # Save options to previous file
+  }
 
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
@@ -232,7 +243,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
                                                   quality_nodata_out = prod_opts$quality_nodata_out,
                                                   file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder, gui = gui))
 
-    # At end of succesfull execution, save he options used in the main output folder
+    # At end of succesfull execution, save the options used in the main output folder
     load(previous_file)
     optfilename = file.path(general_opts$out_folder,paste0('MODIStsp_', Sys.Date(),'.RData'))
     save(general_opts,prod_opt_list,mod_prod_list, file = optfilename)

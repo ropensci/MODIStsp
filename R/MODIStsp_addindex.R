@@ -59,27 +59,11 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
   }
   previous_dir <- file.path(MODIStsp_dir,"Previous")
   previous_file <- ifelse(is.na(option_file), file.path(previous_dir, "MODIStsp_Previous.RData"), option_file)
-  if (file.exists(previous_file)) {
-    load(previous_file)
-  }
-  xml_file <- file.path(MODIStsp_dir, "ExtData/MODIStsp_ProdOpts.xml")
+  load(previous_file)
 
-  # Restore previous options file if existing, otherwise create a "new" one with default values, by retrieving data from xml file
-  # (Allows to run even if MODIStsp_Previuos missing)
-  if (!exists("mod_prod_list") | !exists("prod_opt_list")) {
-    warning("The previously saved options file is missing or corrupted; a new default one will be generated...")
-    MODIStsp_read_xml(previous_file = previous_file,xml_file = xml_file )
-    load(previous_file)
-  } else if (is.null(attr(mod_prod_list,"GeneratedBy")) | is.null(attr(prod_opt_list,"GeneratedBy"))) {
-    warning("The previously saved options file is missing or corrupted; a new default one will be generated...")
-    MODIStsp_read_xml(previous_file = previous_file,xml_file = xml_file )
-    load(previous_file)
-  }
-
-  # retrieve information from xml ----
-  xmlfile <- xmlParse(xml_file)  # initialize xml parsing
-  xmltop <- xmlRoot(xmlfile) #gives content of root
-  n_products <- xmlSize(xmltop) #how many product available ? = elements in root
+  # Restore MODIS products if existing, otherwise retrieve data from xml file ----
+  load(general_opts$prodopts_file)
+  n_products <- length(prod_opt_list) #how many product available ? = elements in root
 
   # Valid names for reflectance bands
   refbands_names <- c("b1_Red","b2_NIR","b3_Blue","b4_Green","b5_SWIR","b6_SWIR", "b7_SWIR")
@@ -127,13 +111,20 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
 
     ## generate the list of all the index names
     all_indexes_bandnames <- all_indexes_fullnames <- NA
-    for (prod in 1:n_products) {  # cycle on available products
-      all_indexes_bandnames <- c(all_indexes_bandnames, prod_opt_list[[prod]]$indexes_bandnames)
-      all_indexes_fullnames <- c(all_indexes_fullnames, prod_opt_list[[prod]]$indexes_fullnames)
+    for (prod in names(prod_opt_list)) {  # cycle on available products
+      for (vers in names(prod_opt_list[[prod]])) {  # cycle on available product versions
+        all_indexes_bandnames <- c(all_indexes_bandnames, prod_opt_list[[prod]][[vers]]$indexes_bandnames)
+        all_indexes_fullnames <- c(all_indexes_fullnames, prod_opt_list[[prod]][[vers]]$indexes_fullnames)
+        if (exists("custom_indexes")) {
+          all_indexes_bandnames <- c(all_indexes_bandnames, custom_indexes[[prod]][[vers]]$indexes_bandnames)
+          all_indexes_fullnames <- c(all_indexes_fullnames, custom_indexes[[prod]][[vers]]$indexes_fullnames)
+        }
+      }
     }
     all_indexes_bandnames <- unique(all_indexes_bandnames)
     all_indexes_fullnames <- unique(all_indexes_fullnames)
 
+browser()
     # verify that the index name and fullname is not already present
     if (new_indexbandname %in% all_indexes_bandnames | new_indexfullname %in% all_indexes_fullnames) {
       catch_err <- 2 # error 2: index name or fullname already present
@@ -141,49 +132,56 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
 
     attr(catch_err,"req_bands") <- req_bands
     return(catch_err)
-
+browser()
+    
   } # end of check_formula_errors()
 
   # Function to add the formula in previous file ----
   # (it is called if no errors are detected)
-  save_formula <- function(n_products, xmltop, refbands_names, req_bands, new_indexbandname, new_indexfullname,
-                           new_indexformula, new_indexnodata_out, general_opts, mod_prod_list, previous_file) {
+  save_formula <- function(refbands_names, req_bands, new_indexbandname, new_indexfullname,
+                           new_indexformula, new_indexnodata_out, general_opts, prod_opt_list, previous_file) {
 
-    for (prod in 1:n_products) {  # cycle on available products
-      nbands <- xmlSize(xmltop[[prod]][["bands"]])  # number of original layers
-      bandnames <- NULL ;  band_fullname <- NULL ;  datatype <- NULL ;   nodata_in <- NULL ;  nodata_out <- NULL
-      for (band in 1:nbands) { # get bandnames of available products
-        bandnames <- c(bandnames,xmlToList(xmltop[[prod]][["bands"]][[band]][["bandname"]]))
-      } #End Cycle on band
-
-      # check if bands required for index computation are avilable for the product
-      check <- 0
-      for (reqband in refbands_names[which(req_bands == TRUE)]) {
-        if (reqband %in% bandnames) {
-          check <- check + 1
+    # initialise list of custom indexes, if it does not exist yet
+    if (!exists("custom_indexes")) {
+      custom_indexes <- list() 
+      for (prod in names(prod_opt_list)) {
+        custom_indexes[[prod]] <- list()
+        for (vers in names(prod_opt_list[[prod]])) {
+          custom_indexes[[prod]][[vers]] <- list()
+          custom_indexes[[prod]][[vers]]$indexes_bandnames <- custom_indexes[[prod]][[vers]]$indexes_fullnames <-
+            custom_indexes[[prod]][[vers]]$indexes_formulas <- custom_indexes[[prod]][[vers]]$indexes_nodata_out <-
+            custom_indexes[[prod]][[vers]]$indexes_bandsel <- character(0)
         }
-      } #End Cycle on reqband
-
-      # if all required bands are available in product, add the new index to the indexes list for the product in the previous_opts file.
-      # in this way, at next execution, the new index should be available. Moreover, loading and use of old RData options files
-      # won't be broken if an index is added later than their creation.
-      n_req_bands <- sum(req_bands)
-      if (n_req_bands == check ) {
-        prod_opt_list[[prod]]$indexes_bandnames <- c(prod_opt_list[[prod]]$indexes_bandnames,new_indexbandname)
-        prod_opt_list[[prod]]$indexes_fullnames <- c(prod_opt_list[[prod]]$indexes_fullnames,new_indexfullname)
-        prod_opt_list[[prod]]$indexes_formulas <- c(prod_opt_list[[prod]]$indexes_formulas,new_indexformula)
-        prod_opt_list[[prod]]$indexes_nodata_out <- c(prod_opt_list[[prod]]$indexes_nodata_out,new_indexnodata_out)
-        prod_opt_list[[prod]]$indexes_bandsel <- c(prod_opt_list[[prod]]$indexes_bandsel,0)
       }
+    }
+    
+    for (prod in names(prod_opt_list)) {  # cycle on available products
+      for (vers in names(prod_opt_list[[prod]])) {  # cycle on available product versions
 
+        # check if bands required for index computation are avilable for the product
+        check <- 0
+        for (reqband in refbands_names[req_bands]) {
+          if (reqband %in% prod_opt_list[[prod]][[vers]]$bandnames) {
+            check <- check + 1
+          }
+        } #End Cycle on reqband
+  
+        # if all required bands are available in product, add the new index to the indexes list for the product in the previous_opts file.
+        # in this way, at next execution, the new index should be available. Moreover, loading and use of old RData options files
+        # won't be broken if an index is added later than their creation.
+        n_req_bands <- sum(req_bands)
+        if (n_req_bands == check ) {
+          custom_indexes[[prod]][[vers]]$indexes_bandnames <- c(custom_indexes[[prod]][[vers]]$indexes_bandnames,new_indexbandname)
+          custom_indexes[[prod]][[vers]]$indexes_fullnames <- c(custom_indexes[[prod]][[vers]]$indexes_fullnames,new_indexfullname)
+          custom_indexes[[prod]][[vers]]$indexes_formulas <- c(custom_indexes[[prod]][[vers]]$indexes_formulas,new_indexformula)
+          custom_indexes[[prod]][[vers]]$indexes_nodata_out <- c(custom_indexes[[prod]][[vers]]$indexes_nodata_out,new_indexnodata_out)
+          custom_indexes[[prod]][[vers]]$indexes_bandsel <- c(custom_indexes[[prod]][[vers]]$indexes_bandsel,0)
+        }
+      }
     }  #End Cycle on products
 
     # Save the products list and the chars of the products in previous file
-    if (!is.null(general_opts)) {
-      save(general_opts, prod_opt_list, mod_prod_list, file = previous_file)
-    } else {
-      save(prod_opt_list, mod_prod_list, file = previous_file)
-    }
+    save(general_opts, custom_indexes, file = previous_file)
 
     return(NULL)
 
@@ -228,11 +226,12 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
 
       catch_err <- check_formula_errors(new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                                         n_products = n_products, prod_opt_list = prod_opt_list, refbands_names = refbands_names)
+browser()
       if (catch_err == 0) {
-        save_formula(n_products = n_products, xmltop = xmltop, refbands_names = refbands_names, req_bands = attr(catch_err,"req_bands"),
+        save_formula(refbands_names = refbands_names, req_bands = attr(catch_err,"req_bands"),
                      new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                      new_indexnodata_out = new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
-                     mod_prod_list = mod_prod_list, previous_file = previous_file)
+                     prod_opt_list = prod_opt_list, previous_file = previous_file)
         if (exists("Quit")) {
           gmessage("The new Spectral Index was correctly added! To use it, Re-open the 'Select Processing Layer' window.")
         } else {
@@ -240,6 +239,7 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
         }
         dispose(main_win)
       } else if (catch_err == 1) {
+        #FIXME check why gmessage causes a block (maybe gwindow not initialised?)
         gmessage(paste0("The formula of the new index is not computable. Please check it (Valid band names are: ",paste(refbands_names,collapse = ", "),"."))
       } else if (catch_err == 2) {
         gmessage("The index acronym and/or the full name are already present; please specify different ones.")

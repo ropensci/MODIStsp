@@ -15,24 +15,23 @@
 #' @importFrom sp CRS
 #' @import gWidgets
 
-MODIStsp_GUI <- function(general_opts,scrollWindow){
+MODIStsp_GUI <- function(general_opts, scrollWindow){
   
   assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
   
-  # Restore previous options file if existing, otherwise create a "new" one with default values, by retrieving data from xml file ----
-  
-  if (file.exists(general_opts$previous_file)) {
-    load(general_opts$previous_file)
+  # Restore MODIS products if existing, otherwise retrieve data from xml file ----
+  if (file.exists(general_opts$prodopts_file)) {
+    load(general_opts$prodopts_file)
   }
-  if (!exists("general_opts") | !exists("mod_prod_list") | !exists("prod_opt_list")) {
-    warning("The previously saved options file is corrupted or missing; a new default one will be generated...")
-    MODIStsp_read_xml(previous_file = general_opts$previous_file, xml_file = general_opts$xml_file )
-    load(general_opts$previous_file)
-  } else if (is.null(attr(general_opts,"GeneratedBy")) | is.null(attr(mod_prod_list,"GeneratedBy")) | is.null(attr(prod_opt_list,"GeneratedBy"))) {
-    warning("The previously saved options file is corrupted or missing; a new default one will be generated...")
-    MODIStsp_read_xml(previous_file = general_opts$previous_file, xml_file = general_opts$xml_file )
-    load(general_opts$previous_file)
+  if (!exists("prod_opt_list") | if (exists("prod_opt_list")) {is.null(attr(prod_opt_list,"GeneratedBy"))} else {FALSE}) {
+    mess <- gwindow(title = "Please wait...", container = TRUE, width = 400, height = 40)
+    mess_lab <- glabel(text = "Waiting while reading the MODIS products list...", editable = FALSE, container = mess)
+    MODIStsp_read_xml(prodopts_file = general_opts$prodopts_file, xml_file = general_opts$xml_file )
+    load(general_opts$prodopts_file)
+    addHandlerUnrealize(mess_lab, handler = function(h,...) {return(FALSE)})
+    dispose(mess_lab)
   }
+
   
   #- ------------------------------------------------------------------------------- -#
   #  Start Building the GUI
@@ -48,6 +47,7 @@ MODIStsp_GUI <- function(general_opts,scrollWindow){
   mod_prod_cat$cat <- apply(mod_prod_cat,1,paste,collapse=' - ')
   
   sel_prod <- general_opts$sel_prod # get the product name selectedin the previous options file
+  mod_prod_list <- names(prod_opt_list)
   sel_cat <- mod_prod_cat$cat[match(sel_prod, mod_prod_list)]
   
   #- ------------------------------------------------------------------------------- -#
@@ -70,7 +70,6 @@ MODIStsp_GUI <- function(general_opts,scrollWindow){
   cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = cat_group, horizontal = TRUE,
     selected = match(sel_cat, unique(mod_prod_cat$cat)),
     handler = function(h,...) {
-browser()
       # Select only products of this category
       sel_prod <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)][1]
       prod_wid[] <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)]
@@ -176,7 +175,7 @@ browser()
   band_wid <- gbutton(text = "Click To Select", border = TRUE,				# Child widget for processing bands selection
                       handler = function(h,....) {
                         
-                        load(general_opts$previous_file)
+                        load(general_opts$prodopts_file)
                         check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
                         check_wid <- temp_wid_bands												# retrieve currently selected original layers
                         selgroup <- gbasicdialog(title = "Select Processing Layers", parent = NULL, do.buttons = FALSE, horizontal = TRUE)
@@ -833,15 +832,15 @@ browser()
     general_opts$sensor <- svalue(sens_wid)
     
     if (exists("temp_wid_bands")) {
-      prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$bandsel <- temp_wid_bands			#retrieve selected bands
+      general_opts$bandsel <- temp_wid_bands			#retrieve selected bands
 
     }
     if (exists("temp_wid_bands_indexes")) {
-      prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
+      general_opts$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
 
     }
     if (exists("temp_wid_bands_quality")) {
-      prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
+      general_opts$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
 
     }
     general_opts$prod_opt_list <- prod_opt_list	# workaround to export prod_opt_list from function.
@@ -891,9 +890,9 @@ browser()
     
     # Check if at least 1 layer selected
 
-    if (max(prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$bandsel) +
-        ifelse((length(prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$indexes_bandsel) > 0), max(prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$indexes_bandsel),0) +
-        max(prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$quality_bandsel) == 0) {
+    if (max(general_opts$bandsel) +
+        ifelse((length(general_opts$indexes_bandsel) > 0), max(general_opts$indexes_bandsel),0) +
+        max(general_opts$quality_bandsel) == 0) {
       gmessage("No Output bands or indexes selected - Please Correct !", title = "Warning")
       check_save_opts <<- FALSE
     }
@@ -1020,7 +1019,7 @@ browser()
     prod_opt_list <- general_opts$prod_opt_list
     general_opts$prod_opt_list <- NULL # see the function definition
     if (check_save_opts) {					# If check passed, save previous file and return
-      save(general_opts,prod_opt_list,mod_prod_list, file = general_opts$previous_file) # Save options to previous file
+      save(general_opts, file = general_opts$previous_file) # Save options to previous file
       assign("Quit", F, envir = globalenv()) # If "Start", set "Quit to F
       rm(temp_wid_bands, envir = globalenv())
       rm(temp_wid_bands_indexes, envir = globalenv())
@@ -1048,9 +1047,9 @@ browser()
       svalue(vers_wid) <- general_opts$prod_version
       svalue(sens_wid) <- general_opts$sensor
 
-      temp_wid_bands <<- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$bandsel				# set dummy variables holding the initial values of selected bands
-      temp_wid_bands_indexes <<- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$indexes_bandsel
-      temp_wid_bands_quality <<- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$quality_bandsel
+      temp_wid_bands <<- general_opts$bandsel				# set dummy variables holding the initial values of selected bands
+      temp_wid_bands_indexes <<- general_opts$indexes_bandsel
+      temp_wid_bands_quality <<- general_opts$quality_bandsel
 
       # svalue(start_day_wid) <- general_opts$start_day
       # svalue(start_month_wid) <- general_opts$start_month
@@ -1103,7 +1102,7 @@ browser()
       general_opts <- prepare_to_save_options(general_opts)
       prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL # see the function definition
       if (check_save_opts) {					# If check passed, save previous file and return
-        save(general_opts,prod_opt_list,mod_prod_list, file = choice)
+        save(general_opts, file = choice)
       }
     }
   })
