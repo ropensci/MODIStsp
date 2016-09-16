@@ -2,23 +2,18 @@ citHeader("To cite MODIStsp in publications use:")
 
 citEntry(entry = "Article",
   author = "Lorenzo Busetto and Luigi Ranghetti",
-  journal = "Computers & Geosciences ",
-  volume = "97",
-  title        = "MODIStsp: an R packadge for preprocessing of MODIS Land Products time series",
-  volume = "97",
-  number = "",
-  pages = "40 - 48",
+  title = "MODIStsp: an R packadge for preprocessing of MODIS Land Products time series",
+  journal = "Computers & Geosciences",
   year = "2016",
-  note = "",
+  volume = "97",
+  pages = "40-48",
   issn = "0098-3004",
-  doi = "http://dx.doi.org/10.1016/j.cageo.2016.08.020",
-  url = "http://www.sciencedirect.com/science/article/pii/S0098300416303107",
-  url          = "https://github.com/lbusett/MODIStsp",
-  note         = "R package version 1.2.1 .",
-
-  textVersion  =
-  paste("L. Busetto, L. Ranghetti, MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series, Computers & Geosciences, Volume 97, December 2016, Pages 40-48, ISSN 0098-3004, http://dx.doi.org/10.1016/j.cageo.2016.08.020.
-(http://www.sciencedirect.com/science/article/pii/S0098300416303107)")
+  doi = "10.1016/j.cageo.2016.08.020",
+  url = "https://github.com/lbusett/MODIStsp",
+  textVersion  = paste("L. Busetto, L. Ranghetti,",
+      "MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series,",
+      "Computers & Geosciences, Volume 97, December 2016, Pages 40-48,",
+      "ISSN 0098-3004, http://dx.doi.org/10.1016/j.cageo.2016.08.020.")
 )
 
 citEntry(entry = "Manual",
@@ -26,11 +21,9 @@ citEntry(entry = "Manual",
   title        = "MODIStsp: an R packadge for preprocessing of MODIS time series",
   year         = "2016",
   url          = "https://github.com/lbusett/MODIStsp",
-  note         = "R package version 1.2.1 .",
-
-  textVersion  =
-  paste("Busetto Lorenzo, Ranghetti Luigi (2016).",
-        "MODIStsp: an R package for preprocessing of MODIS time series.",
-        "R package version 1.2.1",
-        "URL https://github.com/lbusett/MODIStsp/. ")
+  note         = "R package version 1.2.1",
+  textVersion  = paste("Busetto Lorenzo, Ranghetti Luigi (2016).",
+      "MODIStsp: an R package for preprocessing of MODIS time series.",
+      "R package version 1.2.1.",
+      "URL https://github.com/lbusett/MODIStsp/.")
 )
