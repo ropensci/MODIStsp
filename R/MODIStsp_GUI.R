@@ -39,7 +39,8 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   
   main_win <- gbasicdialog(title = "Select Main Processing Options", parent = NULL, do.buttons = FALSE)
-  main_group <- ggroup(container = main_win, horizontal = FALSE, expand = FALSE)
+  main_group <- ggroup(container = main_win, horizontal = FALSE, expand = FALSE, use.scrollwindow=TRUE)
+  size(main_group) <- c(800,600)
   mod_prod_cat <- as.data.frame(t(sapply(prod_opt_list,function(x){c(x[[1]]$cat01,x[[1]]$cat02)}))); names(mod_prod_cat) <- c('cat01','cat02')
   mod_prod_cat$cat <- apply(mod_prod_cat,1,paste,collapse=' - ')
   
@@ -63,7 +64,7 @@ MODIStsp_GUI <- function(general_opts){
                            horizontal = FALSE, container = satprod_group)
   cat_group <- ggroup(horizontal = TRUE, container = satprod1_group)
   cat_label <- glabel(text = "Category", container = cat_group)
-  cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = cat_group, horizontal = TRUE, 
+  cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = cat_group, horizontal = TRUE,
     selected = match(sel_cat, unique(mod_prod_cat$cat)),
     handler = function(h,...) {
       # Select only products of this category
@@ -94,7 +95,7 @@ MODIStsp_GUI <- function(general_opts){
       # reset dummy variables for band selection to 0 on product change
       temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
     })
-  
+
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Product selection
   #- ------------------------------------------------------------------------------- -#
@@ -446,17 +447,17 @@ MODIStsp_GUI <- function(general_opts){
   # horizontal ----
   x_group <- ggroup(container = tiles_group, horizontal = TRUE,spacing = 5)
   start_x_lab <- glabel(text = "Horizontal:", container = x_group)
-  start_x_start <- glabel(text = "Start: ", container = x_group)
+  start_x_start <- glabel(text = "Start", container = x_group)
   start_x_wid <- gspinbutton(1, 35, text = "Select", container = x_group, value = general_opts$start_x)
-  end_x_lab <- glabel(text = "End: ", container = x_group)
+  end_x_lab <- glabel(text = "End", container = x_group)
   end_x_wid <- gspinbutton(1, 35, text = "Select", container = x_group, value = general_opts$end_x)
   
   # vertical ----
   y_group <- ggroup(container = tiles_group, horizontal = TRUE ,spacing = 5)
-  start_y_lab <- glabel(text = "Vertical:    ", container = y_group)
-  start_y_start <- glabel(text = "Start: ", container = y_group)
+  start_y_lab <- glabel(text = "Vertical:   ", container = y_group)
+  start_y_start <- glabel(text = "Start", container = y_group)
   start_y_wid <- gspinbutton(0,17, text = "Select", container = y_group, value = general_opts$start_y)
-  end_y_lab <- glabel(text = "End: ", container = y_group)
+  end_y_lab <- glabel(text = "End", container = y_group)
   end_y_wid <- gspinbutton(0,17, text = "Select", container = y_group, value = general_opts$end_y)
   
   font(start_x_lab) <-  font(start_y_lab)  <- list(family = "sans",weight = "bold")
@@ -464,14 +465,14 @@ MODIStsp_GUI <- function(general_opts){
   # 	size(start_y_wid) = size(end_y_wid) = size(end_y_lab) = size(start_y_start) = c(35,25)
 
   # map button
-  tileb_group <- ggroup(container = tiles_group, horizontal = TRUE ,spacing = 10)
-  addSpring(tileb_group, horizontal=TRUE)
+  # tileb_group <- ggroup(container = tiles_group, horizontal = TRUE ,spacing = 10)
+  # addSpring(tileb_group, horizontal=TRUE)
   show_map <- gbutton(text = "Show Tiles Map", border = TRUE,
                       handler = function(h,....) {
                         dev.new(width = 8, height = 4.8, noRStudioGD = TRUE)
                         plot(raster(file.path(general_opts$MODIStsp_dir, "/ExtData/MODIS_Tiles.gif")))
                       },
-                      container = tileb_group )
+                      container = y_group )
   
   
   if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$tiled == 0) {
