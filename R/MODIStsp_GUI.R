@@ -59,7 +59,8 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   # Widgets for category selection
   #- ------------------------------------------------------------------------------- -#
-  satprod1_group <- ggroup(horizontal = FALSE, container = satprod_group)
+  satprod1_group <- gframe(text = "<span weight='bold'>MODIS product</span>", markup = TRUE, pos=1,
+                           horizontal = FALSE, container = satprod_group)
   cat_group <- ggroup(horizontal = TRUE, container = satprod1_group)
   cat_label <- glabel(text = "Category", container = cat_group)
   cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = cat_group, horizontal = TRUE, 
@@ -133,10 +134,11 @@ MODIStsp_GUI <- function(general_opts){
   # Widgets for Sensor selection
   #- ------------------------------------------------------------------------------- -#
   addSpace(satprod_group, 2, horizontal=TRUE)
-  gseparator(horizontal=FALSE, container=satprod_group, expand=TRUE)
+  # gseparator(horizontal=FALSE, container=satprod_group, expand=TRUE)
   addSpring(satprod_group, horizontal=TRUE)
   addSpace(satprod_group, 2, horizontal=TRUE)
-  satprod2_group <- ggroup(horizontal = FALSE, container = satprod_group)
+  satprod2_group <- gframe(text = "<span weight='bold'>Product specifications</span>", markup = TRUE, pos=1,
+                           horizontal = FALSE, container = satprod_group)
   sens_group <- ggroup(horizontal = TRUE, container = satprod2_group)
   sens_label <- glabel(text = "Platform", container = sens_group)
   sens_wid <- gdroplist(items = c("Terra"), container = sens_group, text = "Select Layers", selected = 1)
