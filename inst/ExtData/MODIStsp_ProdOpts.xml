@@ -371,7 +371,7 @@
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_qc_500m</bandname>
+                        <bandname>sur_refl_qc</bandname>
                         <fullname>500m Reflectance Band Quality</fullname>
                         <datatype>32-bit unsigned integer</datatype>
                         <nodata_in>4294967295</nodata_in>
@@ -399,7 +399,7 @@
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_state_500m</bandname>
+                        <bandname>sur_refl_state</bandname>
                         <fullname>500m State Flags</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>65535</nodata_in>
@@ -484,127 +484,127 @@
                     <quality>
                         <quality_bandname>QA_adj_Cor</quality_bandname>
                         <quality_fullname>adjacency correction performed</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>31</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_atm_cor</quality_bandname>
                         <quality_fullname>atmospheric correction performed</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>30</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b7</quality_bandname>
                         <quality_fullname>band 7 data quality four bit range</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>26-29</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b6</quality_bandname>
                         <quality_fullname>band 6 data quality four bit range</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>22-25</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b5</quality_bandname>
                         <quality_fullname>band 5 data quality four bit range</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>18-21</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b4</quality_bandname>
                         <quality_fullname>band 4 data quality four bit range</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>14-17</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b3</quality_bandname>
                         <quality_fullname>band 3 data quality four bit range</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>10-13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b2</quality_bandname>
                         <quality_fullname>band 2 data quality four bit range</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>6-9</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b1</quality_bandname>
                         <quality_fullname>band 1 data quality four bit range</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>2-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_bits</quality_bandname>
                         <quality_fullname>MODLAND QA bits</quality_fullname>
-                        <quality_source>sur_refl_qc_500m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_int_snow</quality_bandname>
                         <quality_fullname>internal snow algorithm flag</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_pan</quality_bandname>
                         <quality_fullname>Salt pan</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_adj_cld</quality_bandname>
                         <quality_fullname>Pixel is adjacent to cloud</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_MOD35_snow</quality_bandname>
                         <quality_fullname>MOD35 snow/ice flag</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>12</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_int_fire</quality_bandname>
                         <quality_fullname>internal fire algorithm flag</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>11</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_int_cld</quality_bandname>
                         <quality_fullname>internal cloud algorithm flag</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>10</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_cirr</quality_bandname>
                         <quality_fullname>cirrus detected</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>8-9</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_aer</quality_bandname>
                         <quality_fullname>aerosol quantity</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_land_wat</quality_bandname>
                         <quality_fullname>land/water flag</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>3-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_cld_shd</quality_bandname>
                         <quality_fullname>cloud shadow</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>state_MOD35_cld</quality_bandname>
                         <quality_fullname>MOD35 cloud</quality_fullname>
-                        <quality_source>sur_refl_state_500m</quality_source>
+                        <quality_source>sur_refl_state</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -1495,7 +1495,7 @@
                     </band>
                     <band>
                         <bandname>NumObs_500</bandname>
-                        <fullname>num_observations_500m</fullname>
+                        <fullname>num_observations</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
                         <nodata_out>255</nodata_out>
@@ -1858,7 +1858,7 @@
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>num_observations_500m</bandname>
+                        <bandname>num_observations</bandname>
                         <fullname>Number of observations per 500m pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
@@ -1914,14 +1914,14 @@
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>QC_500m_1</bandname>
+                        <bandname>QC_1</bandname>
                         <fullname>QC_500m: 500m Reflectance Band Quality</fullname>
                         <datatype>32-bit unsigned integer</datatype>
                         <nodata_in>787410671</nodata_in>
                         <nodata_out>4294967295</nodata_out>
                     </band>
                     <band>
-                        <bandname>obscov_500m_1</bandname>
+                        <bandname>obscov_1</bandname>
                         <fullname>Obs_cov_500m: Observation coverage</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
@@ -2079,61 +2079,61 @@
                     <quality>
                         <quality_bandname>QA_bits</quality_bandname>
                         <quality_fullname>MODLAND QA bits</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b1</quality_bandname>
                         <quality_fullname>band 1 data quality four bit range</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>2-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b2</quality_bandname>
                         <quality_fullname>band 2 data quality four bit range</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>6-9</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b3</quality_bandname>
                         <quality_fullname>band 3 data quality four bit range</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>10-13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b4</quality_bandname>
                         <quality_fullname>band 4 data quality four bit range</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>14-17</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b5</quality_bandname>
                         <quality_fullname>band 5 data quality four bit range</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>18-21</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b6</quality_bandname>
                         <quality_fullname>band 6 data quality four bit range</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>22-25</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b7</quality_bandname>
                         <quality_fullname>band 7 data quality four bit range</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>26-29</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_atm_cor</quality_bandname>
                         <quality_fullname>atmospheric correction performed</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>30</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cor</quality_bandname>
                         <quality_fullname>adjacency correction performed</quality_fullname>
-                        <quality_source>QC_500m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>31</quality_bitN>
                     </quality>
                     <quality>
@@ -2317,7 +2317,7 @@
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>QC_250m_1</bandname>
+                        <bandname>QC_1</bandname>
                         <fullname>250m Reflectance Band Quality</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>2995</nodata_in>
@@ -2376,37 +2376,37 @@
                     <quality>
                         <quality_bandname>QA_bits</quality_bandname>
                         <quality_fullname>MODLAND QA bits</quality_fullname>
-                        <quality_source>QC_250m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_cloud</quality_bandname>
                         <quality_fullname>cloud state</quality_fullname>
-                        <quality_source>QC_250m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>2-3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b1</quality_bandname>
                         <quality_fullname>band 1 data quality four bit range</quality_fullname>
-                        <quality_source>QC_250m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>4-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b2</quality_bandname>
                         <quality_fullname>band 2 data quality four bit range</quality_fullname>
-                        <quality_source>QC_250m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>8-11</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_atm_cor</quality_bandname>
                         <quality_fullname>atmospheric correction performed</quality_fullname>
-                        <quality_source>QC_250m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>12</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cor</quality_bandname>
                         <quality_fullname>adjacency correction performed</quality_fullname>
-                        <quality_source>QC_250m_1</quality_source>
+                        <quality_source>QC_1</quality_source>
                         <quality_bitN>13</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -2552,7 +2552,7 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_qc_250m</bandname>
+                        <bandname>sur_refl_qc</bandname>
                         <fullname>Surface Reflectance 250m Band Quality Control flags</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>65535</nodata_in>
@@ -2649,37 +2649,37 @@
                     <quality>
                         <quality_bandname>QA_orb_500</quality_bandname>
                         <quality_fullname>different orbit from 500 m</quality_fullname>
-                        <quality_source>sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cor</quality_bandname>
                         <quality_fullname>adjacency correction performed</quality_fullname>
-                        <quality_source>sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_atm_cor</quality_bandname>
                         <quality_fullname>atmospheric correction performed</quality_fullname>
-                        <quality_source>sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>12</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b2</quality_bandname>
                         <quality_fullname>band 2 data quality four bit range</quality_fullname>
-                        <quality_source>sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>8-11</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_b1</quality_bandname>
                         <quality_fullname>band 1 data quality four bit range</quality_fullname>
-                        <quality_source>sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>4-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_bits</quality_bandname>
                         <quality_fullname>MODLAND QA bits</quality_fullname>
-                        <quality_source>sur_refl_qc_250m</quality_source>
+                        <quality_source>sur_refl_qc</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -10758,84 +10758,84 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a1_v006</www>
                 <bands>
                     <band>
-                        <bandname>500m_16_days_NDVI</bandname>
+                        <bandname>NDVI</bandname>
                         <fullname>16 day NDVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_EVI</bandname>
+                        <bandname>EVI</bandname>
                         <fullname>16 day EVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_VI_Quality</bandname>
+                        <bandname>VI_Quality</bandname>
                         <fullname>VI quality indicators</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>65535</nodata_in>
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_red_reflectance</bandname>
+                        <bandname>red_reflectance</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_NIR_reflectance</bandname>
+                        <bandname>NIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_blue_reflectance</bandname>
+                        <bandname>blue_reflectance</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_MIR_reflectance</bandname>
+                        <bandname>MIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_view_zenith_angle</bandname>
+                        <bandname>view_zenith_angle</bandname>
                         <fullname>View zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_sun_zenith_angle</bandname>
+                        <bandname>sun_zenith_angle</bandname>
                         <fullname>Sun zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_relative_azimuth_angle</bandname>
+                        <bandname>relative_azimuth_angle</bandname>
                         <fullname>Relative azimuth angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-4000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_composite_day_of_the_year</bandname>
+                        <bandname>composite_day_of_the_year</bandname>
                         <fullname>Day of year of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>500m_16_days_pixel_reliability</bandname>
+                        <bandname>pixel_reliability</bandname>
                         <fullname>Quality reliability of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
@@ -10846,25 +10846,25 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
                         <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
                         <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -10872,55 +10872,55 @@
                     <quality>
                         <quality_bandname>QA_qual</quality_bandname>
                         <quality_fullname>VI Quality</quality_fullname>
-                        <quality_source>500m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_usef</quality_bandname>
                         <quality_fullname>VI usefulness</quality_fullname>
-                        <quality_source>500m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>2-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_aer</quality_bandname>
                         <quality_fullname>Aerosol quantity</quality_fullname>
-                        <quality_source>500m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cld</quality_bandname>
                         <quality_fullname>Adjacent cloud detected</quality_fullname>
-                        <quality_source>500m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>8</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_BRDF</quality_bandname>
                         <quality_fullname>Atmosphere BRDF correction performed</quality_fullname>
-                        <quality_source>500m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>9</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_mix_cld</quality_bandname>
                         <quality_fullname>Mixed Clouds</quality_fullname>
-                        <quality_source>500m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>10</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_land_wat</quality_bandname>
                         <quality_fullname>Land/Water Flag</quality_fullname>
-                        <quality_source>500m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>11-13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_snow_ice</quality_bandname>
                         <quality_fullname>Possible snow/ice</quality_fullname>
-                        <quality_source>500m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_shd</quality_bandname>
                         <quality_fullname>Possible shadow</quality_fullname>
-                        <quality_source>500m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -11126,84 +11126,84 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a2_v006</www>
                 <bands>
                     <band>
-                        <bandname>1000m_16_days_NDVI</bandname>
+                        <bandname>NDVI</bandname>
                         <fullname>16 day NDVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_EVI</bandname>
+                        <bandname>EVI</bandname>
                         <fullname>16 day EVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_VI_Quality</bandname>
+                        <bandname>VI_Quality</bandname>
                         <fullname>VI quality indicators</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>65535</nodata_in>
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_red_reflectance</bandname>
+                        <bandname>red_reflectance</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_NIR_reflectance</bandname>
+                        <bandname>NIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_blue_reflectance</bandname>
+                        <bandname>blue_reflectance</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_MIR_reflectance</bandname>
+                        <bandname>MIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_view_zenith_angle</bandname>
+                        <bandname>view_zenith_angle</bandname>
                         <fullname>View zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_sun_zenith_angle</bandname>
+                        <bandname>sun_zenith_angle</bandname>
                         <fullname>Sun zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_relative_azimuth_angle</bandname>
+                        <bandname>relative_azimuth_angle</bandname>
                         <fullname>Relative azimuth angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-4000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_composite_day_of_the_year</bandname>
+                        <bandname>composite_day_of_the_year</bandname>
                         <fullname>Day of year of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_16_days_pixel_reliability</bandname>
+                        <bandname>pixel_reliability</bandname>
                         <fullname>Quality reliability of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
@@ -11214,25 +11214,25 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
                         <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
                         <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -11240,55 +11240,55 @@
                     <quality>
                         <quality_bandname>QA_qual</quality_bandname>
                         <quality_fullname>VI Quality</quality_fullname>
-                        <quality_source>1000m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_usef</quality_bandname>
                         <quality_fullname>VI usefulness</quality_fullname>
-                        <quality_source>1000m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>2-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_aer</quality_bandname>
                         <quality_fullname>Aerosol quantity</quality_fullname>
-                        <quality_source>1000m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cld</quality_bandname>
                         <quality_fullname>Adjacent cloud detected</quality_fullname>
-                        <quality_source>1000m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>8</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_BRDF</quality_bandname>
                         <quality_fullname>Atmosphere BRDF correction performed</quality_fullname>
-                        <quality_source>1000m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>9</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_mix_cld</quality_bandname>
                         <quality_fullname>Mixed Clouds</quality_fullname>
-                        <quality_source>1000m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>10</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_land_wat</quality_bandname>
                         <quality_fullname>Land/Water Flag</quality_fullname>
-                        <quality_source>1000m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>11-13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_snow_ice</quality_bandname>
                         <quality_fullname>Possible snow/ice</quality_fullname>
-                        <quality_source>1000m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_shd</quality_bandname>
                         <quality_fullname>Possible shadow</quality_fullname>
-                        <quality_source>1000m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -11487,84 +11487,84 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a3_v006</www>
                 <bands>
                     <band>
-                        <bandname>1000m_monthly_NDVI</bandname>
+                        <bandname>NDVI</bandname>
                         <fullname>16 day NDVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_EVI</bandname>
+                        <bandname>EVI</bandname>
                         <fullname>16 day EVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_VI_Quality</bandname>
+                        <bandname>VI_Quality</bandname>
                         <fullname>VI quality indicators</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>65535</nodata_in>
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_red_reflectance</bandname>
+                        <bandname>red_reflectance</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_NIR_reflectance</bandname>
+                        <bandname>NIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_blue_reflectance</bandname>
+                        <bandname>blue_reflectance</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_MIR_reflectance</bandname>
+                        <bandname>MIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_view_zenith_angle</bandname>
+                        <bandname>view_zenith_angle</bandname>
                         <fullname>View zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_sun_zenith_angle</bandname>
+                        <bandname>sun_zenith_angle</bandname>
                         <fullname>Sun zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_relative_azimuth_angle</bandname>
+                        <bandname>relative_azimuth_angle</bandname>
                         <fullname>Relative azimuth angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-4000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_composite_day_of_the_year</bandname>
+                        <bandname>composite_day_of_the_year</bandname>
                         <fullname>Day of year of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>1000m_monthly_pixel_reliability</bandname>
+                        <bandname>pixel_reliability</bandname>
                         <fullname>Quality reliability of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
@@ -11575,25 +11575,25 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
                         <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
                         <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -11601,55 +11601,55 @@
                     <quality>
                         <quality_bandname>QA_qual</quality_bandname>
                         <quality_fullname>VI Quality</quality_fullname>
-                        <quality_source>1000m_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_usef</quality_bandname>
                         <quality_fullname>VI usefulness</quality_fullname>
-                        <quality_source>1000m_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>2-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_aer</quality_bandname>
                         <quality_fullname>Aerosol quantity</quality_fullname>
-                        <quality_source>1000m_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cld</quality_bandname>
                         <quality_fullname>Adjacent cloud detected</quality_fullname>
-                        <quality_source>1000m_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>8</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_BRDF</quality_bandname>
                         <quality_fullname>Atmosphere BRDF correction performed</quality_fullname>
-                        <quality_source>1000m_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>9</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_mix_cld</quality_bandname>
                         <quality_fullname>Mixed Clouds</quality_fullname>
-                        <quality_source>1000m_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>10</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_land_wat</quality_bandname>
                         <quality_fullname>Land/Water Flag</quality_fullname>
-                        <quality_source>1000m_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>11-13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_snow_ice</quality_bandname>
                         <quality_fullname>Possible snow/ice</quality_fullname>
-                        <quality_source>1000m_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_shd</quality_bandname>
                         <quality_fullname>Possible shadow</quality_fullname>
-                        <quality_source>1000m_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -11856,84 +11856,84 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c1_v006</www>
                 <bands>
                     <band>
-                        <bandname>005deg_16_days_NDVI</bandname>
+                        <bandname>NDVI</bandname>
                         <fullname>16 day NDVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_EVI</bandname>
+                        <bandname>EVI</bandname>
                         <fullname>16 day EVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_VI_Quality</bandname>
+                        <bandname>VI_Quality</bandname>
                         <fullname>VI quality indicators</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>65535</nodata_in>
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_red_reflectance</bandname>
+                        <bandname>red_reflectance</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_NIR_reflectance</bandname>
+                        <bandname>NIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_blue_reflectance</bandname>
+                        <bandname>blue_reflectance</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_MIR_reflectance</bandname>
+                        <bandname>MIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_view_zenith_angle</bandname>
+                        <bandname>view_zenith_angle</bandname>
                         <fullname>View zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_sun_zenith_angle</bandname>
+                        <bandname>sun_zenith_angle</bandname>
                         <fullname>Sun zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_relative_azimuth_angle</bandname>
+                        <bandname>relative_azimuth_angle</bandname>
                         <fullname>Relative azimuth angle of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_composite_day_of_the_year</bandname>
+                        <bandname>composite_day_of_the_year</bandname>
                         <fullname>Day of year of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_16_days_pixel_reliability</bandname>
+                        <bandname>pixel_reliability</bandname>
                         <fullname>Quality reliability of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
@@ -11944,25 +11944,25 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
                         <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
                         <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -11970,55 +11970,55 @@
                     <quality>
                         <quality_bandname>QA_qual</quality_bandname>
                         <quality_fullname>VI Quality</quality_fullname>
-                        <quality_source>005deg_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_usef</quality_bandname>
                         <quality_fullname>VI usefulness</quality_fullname>
-                        <quality_source>005deg_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>2-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_aer</quality_bandname>
                         <quality_fullname>Aerosol quantity</quality_fullname>
-                        <quality_source>005deg_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cld</quality_bandname>
                         <quality_fullname>Adjacent cloud detected</quality_fullname>
-                        <quality_source>005deg_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>8</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_BRDF</quality_bandname>
                         <quality_fullname>Atmosphere BRDF correction performed</quality_fullname>
-                        <quality_source>005deg_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>9</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_mix_cld</quality_bandname>
                         <quality_fullname>Mixed Clouds</quality_fullname>
-                        <quality_source>005deg_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>10</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_land_wat</quality_bandname>
                         <quality_fullname>Land/Water Flag</quality_fullname>
-                        <quality_source>005deg_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>11-13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_snow_ice</quality_bandname>
                         <quality_fullname>Possible snow/ice</quality_fullname>
-                        <quality_source>005deg_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_shd</quality_bandname>
                         <quality_fullname>Possible shadow</quality_fullname>
-                        <quality_source>005deg_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -12225,84 +12225,84 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c2_v006</www>
                 <bands>
                     <band>
-                        <bandname>005deg_monthly_NDVI</bandname>
+                        <bandname>NDVI</bandname>
                         <fullname>16 day NDVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_EVI</bandname>
+                        <bandname>EVI</bandname>
                         <fullname>16 day EVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_VI_Quality</bandname>
+                        <bandname>VI_Quality</bandname>
                         <fullname>VI quality indicators</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>65535</nodata_in>
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_red_reflectance</bandname>
+                        <bandname>red_reflectance</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_NIR_reflectance</bandname>
+                        <bandname>NIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_blue_reflectance</bandname>
+                        <bandname>blue_reflectance</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_MIR_reflectance</bandname>
+                        <bandname>MIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_view_zenith_angle</bandname>
+                        <bandname>view_zenith_angle</bandname>
                         <fullname>View zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_sun_zenith_angle</bandname>
+                        <bandname>sun_zenith_angle</bandname>
                         <fullname>Sun zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_relative_azimuth_angle</bandname>
+                        <bandname>relative_azimuth_angle</bandname>
                         <fullname>Relative azimuth angle of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_composite_day_of_the_year</bandname>
+                        <bandname>composite_day_of_the_year</bandname>
                         <fullname>Day of year of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>005deg_monthly_pixel_reliability</bandname>
+                        <bandname>pixel_reliability</bandname>
                         <fullname>Quality reliability of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
@@ -12313,25 +12313,25 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
                         <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
                         <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -12339,55 +12339,55 @@
                     <quality>
                         <quality_bandname>QA_qual</quality_bandname>
                         <quality_fullname>VI Quality</quality_fullname>
-                        <quality_source>005deg_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_usef</quality_bandname>
                         <quality_fullname>VI usefulness</quality_fullname>
-                        <quality_source>005deg_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>2-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_aer</quality_bandname>
                         <quality_fullname>Aerosol quantity</quality_fullname>
-                        <quality_source>005deg_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cld</quality_bandname>
                         <quality_fullname>Adjacent cloud detected</quality_fullname>
-                        <quality_source>005deg_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>8</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_BRDF</quality_bandname>
                         <quality_fullname>Atmosphere BRDF correction performed</quality_fullname>
-                        <quality_source>005deg_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>9</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_mix_cld</quality_bandname>
                         <quality_fullname>Mixed Clouds</quality_fullname>
-                        <quality_source>005deg_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>10</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_land_wat</quality_bandname>
                         <quality_fullname>Land/Water Flag</quality_fullname>
-                        <quality_source>005deg_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>11-13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_snow_ice</quality_bandname>
                         <quality_fullname>Possible snow/ice</quality_fullname>
-                        <quality_source>005deg_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_shd</quality_bandname>
                         <quality_fullname>Possible shadow</quality_fullname>
-                        <quality_source>005deg_monthly_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -12596,84 +12596,84 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13q1_v006</www>
                 <bands>
                     <band>
-                        <bandname>250m_16_days_NDVI</bandname>
+                        <bandname>NDVI</bandname>
                         <fullname>16 day NDVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_EVI</bandname>
+                        <bandname>EVI</bandname>
                         <fullname>16 day EVI average</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-3000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_VI_Quality</bandname>
+                        <bandname>VI_Quality</bandname>
                         <fullname>VI quality indicators</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>65535</nodata_in>
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_red_reflectance</bandname>
+                        <bandname>red_reflectance</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_NIR_reflectance</bandname>
+                        <bandname>NIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_blue_reflectance</bandname>
+                        <bandname>blue_reflectance</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_MIR_reflectance</bandname>
+                        <bandname>MIR_reflectance</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_view_zenith_angle</bandname>
+                        <bandname>view_zenith_angle</bandname>
                         <fullname>View zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_sun_zenith_angle</bandname>
+                        <bandname>sun_zenith_angle</bandname>
                         <fullname>Sun zenith angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-10000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_relative_azimuth_angle</bandname>
+                        <bandname>relative_azimuth_angle</bandname>
                         <fullname>Relative azimuth angle of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-4000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_composite_day_of_the_year</bandname>
+                        <bandname>composite_day_of_the_year</bandname>
                         <fullname>Day of year of VI pixel</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>250m_16_days_pixel_reliability</bandname>
+                        <bandname>pixel_reliability</bandname>
                         <fullname>Quality reliability of VI pixel</fullname>
                         <datatype>8-bit signed integer</datatype>
                         <nodata_in>-1</nodata_in>
@@ -12684,25 +12684,25 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
                         <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_red_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_red_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
                         <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_MIR_reflectanc)/(500m_16_days_NIR_reflectance+500m_16_days_MIR_reflectanc)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(500m_16_days_NIR_reflectance-500m_16_days_red_reflectance)/(500m_16_days_NIR_reflectance+500m_16_days_red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -12710,55 +12710,55 @@
                     <quality>
                         <quality_bandname>QA_qual</quality_bandname>
                         <quality_fullname>VI Quality</quality_fullname>
-                        <quality_source>250m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_usef</quality_bandname>
                         <quality_fullname>VI usefulness</quality_fullname>
-                        <quality_source>250m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>2-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_aer</quality_bandname>
                         <quality_fullname>Aerosol quantity</quality_fullname>
-                        <quality_source>250m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_adj_cld</quality_bandname>
                         <quality_fullname>Adjacent cloud detected</quality_fullname>
-                        <quality_source>250m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>8</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_BRDF</quality_bandname>
                         <quality_fullname>Atmosphere BRDF correction performed</quality_fullname>
-                        <quality_source>250m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>9</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_mix_cld</quality_bandname>
                         <quality_fullname>Mixed Clouds</quality_fullname>
-                        <quality_source>250m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>10</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_land_wat</quality_bandname>
                         <quality_fullname>Land/Water Flag</quality_fullname>
-                        <quality_source>250m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>11-13</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_snow_ice</quality_bandname>
                         <quality_fullname>Possible snow/ice</quality_fullname>
-                        <quality_source>250m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>14</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QA_shd</quality_bandname>
                         <quality_fullname>Possible shadow</quality_fullname>
-                        <quality_source>250m_16_days_VI_Quality</quality_source>
+                        <quality_source>VI_Quality</quality_source>
                         <quality_bitN>15</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -12926,14 +12926,14 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a2h_v006</www>
                 <bands>
                     <band>
-                        <bandname>Fpar_500m</bandname>
+                        <bandname>Fpar</bandname>
                         <fullname>Fraction of photosynthetically active radiation</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>Lai_500m</bandname>
+                        <bandname>Lai</bandname>
                         <fullname>Leaf area index</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
@@ -12954,14 +12954,14 @@
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>FparStdDev_500m</bandname>
+                        <bandname>FparStdDev</bandname>
                         <fullname>Standard deviation of Fpar</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>LaiStdDev_500m</bandname>
+                        <bandname>LaiStdDev</bandname>
                         <fullname>Standard deviation for Lai</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
@@ -13206,14 +13206,14 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a3h_v006</www>
                 <bands>
                     <band>
-                        <bandname>Fpar_500m</bandname>
+                        <bandname>Fpar</bandname>
                         <fullname>Fraction of photosynthetically active radiation</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>Lai_500m</bandname>
+                        <bandname>Lai</bandname>
                         <fullname>Leaf area index</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
@@ -13234,14 +13234,14 @@
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>FparStdDev_500m</bandname>
+                        <bandname>FparStdDev</bandname>
                         <fullname>Standard deviation of Fpar</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>LaiStdDev_500m</bandname>
+                        <bandname>LaiStdDev</bandname>
                         <fullname>Standard deviation for Lai</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
@@ -13485,14 +13485,14 @@
                 <tiled>1</tiled>
                 <bands>
                     <band>
-                        <bandname>Fpar_500m</bandname>
+                        <bandname>Fpar</bandname>
                         <fullname>Fraction of photosynthetically active radiation</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>Lai_500m</bandname>
+                        <bandname>Lai</bandname>
                         <fullname>Leaf area index</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
@@ -13513,14 +13513,14 @@
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>FparStdDev_500m</bandname>
+                        <bandname>FparStdDev</bandname>
                         <fullname>Standard deviation of Fpar</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>LaiStdDev_500m</bandname>
+                        <bandname>LaiStdDev</bandname>
                         <fullname>Standard deviation for Lai</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
@@ -13702,21 +13702,21 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a2h_v006</www>
                 <bands>
                     <band>
-                        <bandname>GPP_500m</bandname>
+                        <bandname>GPP</bandname>
                         <fullname>Gross Primary Production</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>32767</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>PsnNet_500m</bandname>
+                        <bandname>PsnNet</bandname>
                         <fullname>Net Photosynthesis</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>32767</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>Psn_QC_500m</bandname>
+                        <bandname>Psn_QC</bandname>
                         <fullname>Quality Control bits</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
@@ -13727,31 +13727,31 @@
                     <quality>
                         <quality_bandname>QC_bits</quality_bandname>
                         <quality_fullname>MODLAND_QC bits</quality_fullname>
-                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_source>Psn_QC</quality_source>
                         <quality_bitN>0</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QC_sensor</quality_bandname>
                         <quality_fullname>Sensor</quality_fullname>
-                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_source>Psn_QC</quality_source>
                         <quality_bitN>1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QC_DeadDet</quality_bandname>
                         <quality_fullname>DeadDetector</quality_fullname>
-                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_source>Psn_QC</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QC_cld</quality_bandname>
                         <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
-                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_source>Psn_QC</quality_source>
                         <quality_bitN>3-4</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QC_SCF</quality_bandname>
                         <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
-                        <quality_source>Psn_QC_500m</quality_source>
+                        <quality_source>Psn_QC</quality_source>
                         <quality_bitN>5-7</quality_bitN>
                     </quality>
                 </quality_indicators>
@@ -13824,14 +13824,14 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a3h_v006</www>
                 <bands>
                     <band>
-                        <bandname>Npp_500m</bandname>
+                        <bandname>Npp</bandname>
                         <fullname>Net Primary Productivity</fullname>
                         <datatype>16-bit unsigned integer</datatype>
                         <nodata_in>32767</nodata_in>
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>Npp_QC_500m</bandname>
+                        <bandname>Npp_QC</bandname>
                         <fullname>Quality Control bits</fullname>
                         <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
@@ -13842,31 +13842,31 @@
                     <quality>
                         <quality_bandname>QC_bits</quality_bandname>
                         <quality_fullname>MODLAND_QC bits</quality_fullname>
-                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_source>Npp_QC</quality_source>
                         <quality_bitN>0</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QC_sensor</quality_bandname>
                         <quality_fullname>Sensor</quality_fullname>
-                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_source>Npp_QC</quality_source>
                         <quality_bitN>1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QC_DeadDet</quality_bandname>
                         <quality_fullname>DeadDetector</quality_fullname>
-                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_source>Npp_QC</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QC_cld</quality_bandname>
                         <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
-                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_source>Npp_QC</quality_source>
                         <quality_bitN>3-4</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QC_SCF</quality_bandname>
                         <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
-                        <quality_source>Npp_QC_500m</quality_source>
+                        <quality_source>Npp_QC</quality_source>
                         <quality_bitN>5-7</quality_bitN>
                     </quality>
                 </quality_indicators>
