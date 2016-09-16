@@ -7,7 +7,6 @@
 #' @param spatial_file_path (optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 #'  extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 #'  spatial file.
-#' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
 #' @param download_server (optional): service used to download MODIS tiles, one of: 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov).
 #'  If not specified, MODIStsp tries to download using http; if http fails, it tries with ftp.
 #' @param scrollWindow (optional) logical parameter: if TRUE, the GUI window is opened fullscreen with scrollbars (this is useful on devices with
@@ -52,11 +51,9 @@
 #'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
 #'     spatial_file_path = single_shape )}
 
-MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA, download_server=NA, scrollWindow=FALSE) {
+MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, download_server=NA, scrollWindow=FALSE) {
 
-  if (is.na(MODIStsp_dir)) {
-    MODIStsp_dir <- system.file(package = "MODIStsp")
-  }
+  MODIStsp_dir <- system.file(package = "MODIStsp")
   options("guiToolkit" = "RGtk2")
   #- ------------------------------------------------------------------------------- -#
   #  Initialize project

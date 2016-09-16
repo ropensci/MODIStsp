@@ -5,7 +5,7 @@
 \title{MODIStsp}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  MODIStsp_dir = NA, download_server = NA, scrollWindow = FALSE)
+  download_server = NA, scrollWindow = FALSE)
 }
 \arguments{
 \item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are retrieved from "options_file")}
@@ -15,8 +15,6 @@ MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
 \item{spatial_file_path}{(optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
 extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
 spatial file.}
-
-\item{MODIStsp_dir}{(optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)}
 
 \item{download_server}{(optional): service used to download MODIS tiles, one of: 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov).
 If not specified, MODIStsp tries to download using http; if http fails, it tries with ftp.}
