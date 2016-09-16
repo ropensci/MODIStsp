@@ -5,7 +5,7 @@
 \title{MODIStsp}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  MODIStsp_dir = NA, download_server = NA)
+  MODIStsp_dir = NA, download_server = NA, scrollWindow = FALSE)
 }
 \arguments{
 \item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are retrieved from "options_file")}
@@ -20,6 +20,9 @@ spatial file.}
 
 \item{download_server}{(optional): service used to download MODIS tiles, one of: 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov).
 If not specified, MODIStsp tries to download using http; if http fails, it tries with ftp.}
+
+\item{scrollWindow}{(optional) logical parameter: if TRUE, the GUI window is opened fullscreen with scrollbars (this is useful on devices with
+small display). If using a device with a display resolution >= 1024x768, leaving this parameter to FALSE is suggested.}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MODIStsp)

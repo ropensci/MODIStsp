@@ -15,7 +15,7 @@
 #' @importFrom sp CRS
 #' @import gWidgets
 
-MODIStsp_GUI <- function(general_opts){
+MODIStsp_GUI <- function(general_opts,scrollWindow){
   
   assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
   
@@ -39,8 +39,11 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   
   main_win <- gbasicdialog(title = "Select Main Processing Options", parent = NULL, do.buttons = FALSE)
-  main_group <- ggroup(container = main_win, horizontal = FALSE, expand = FALSE, use.scrollwindow=TRUE)
-  size(main_group) <- c(800,600)
+  main_frame1 <- ggroup(container = main_win, horizontal = TRUE, expand = FALSE, use.scrollwindow=scrollWindow)
+  main_frame2 <- ggroup(container = main_frame1, horizontal = FALSE, expand = FALSE)
+  # frame1 and 2 with expand=FALSE grant that widgets are not "too much expanded", nor horizontally neither vertically
+  main_group <- ggroup(container = main_frame2, horizontal = FALSE, expand = FALSE)
+  if (scrollWindow) {getToolkitWidget(main_win)$maximize()}
   mod_prod_cat <- as.data.frame(t(sapply(prod_opt_list,function(x){c(x[[1]]$cat01,x[[1]]$cat02)}))); names(mod_prod_cat) <- c('cat01','cat02')
   mod_prod_cat$cat <- apply(mod_prod_cat,1,paste,collapse=' - ')
   
@@ -67,6 +70,7 @@ MODIStsp_GUI <- function(general_opts){
   cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = cat_group, horizontal = TRUE,
     selected = match(sel_cat, unique(mod_prod_cat$cat)),
     handler = function(h,...) {
+browser()
       # Select only products of this category
       sel_prod <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)][1]
       prod_wid[] <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)]

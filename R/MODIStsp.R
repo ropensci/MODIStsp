@@ -10,6 +10,8 @@
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
 #' @param download_server (optional): service used to download MODIS tiles, one of: 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov).
 #'  If not specified, MODIStsp tries to download using http; if http fails, it tries with ftp.
+#' @param scrollWindow (optional) logical parameter: if TRUE, the GUI window is opened fullscreen with scrollbars (this is useful on devices with
+#'  small display). If using a device with a display resolution >= 1024x768, leaving this parameter to FALSE is suggested.
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -50,7 +52,7 @@
 #'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
 #'     spatial_file_path = single_shape )}
 
-MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA, download_server=NA) {
+MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODIStsp_dir=NA, download_server=NA, scrollWindow=FALSE) {
 
   if (is.na(MODIStsp_dir)) {
     MODIStsp_dir <- system.file(package = "MODIStsp")
@@ -141,7 +143,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, MODISt
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    MODIStsp_GUI(general_opts)
+    MODIStsp_GUI(general_opts, scrollWindow=scrollWindow)
   } else {
     Quit <<- FALSE
   }
