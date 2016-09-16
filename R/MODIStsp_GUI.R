@@ -56,18 +56,6 @@ MODIStsp_GUI <- function(general_opts){
   # set dummy global variables holding the initial values of selected bands
   temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
   
-  # labels_group <- ggroup(horizontal = TRUE, container = satprod_frame)
-  # addSpace(labels_group, 140)
-  # label <- glabel(text = "Product", container = labels_group)
-  # addSpace(labels_group, 180)
-  # label2 <- glabel(text = "Platform", container = labels_group)
-  # addSpace(labels_group, 10)
-  # label3 <- glabel(text = "Version", container = labels_group)
-  # addSpace(labels_group, 65)
-  # label4 <- glabel(text = "Processing Layers", container = labels_group)
-  # 
-  # font(label) <- font(label2) <- font(label3) <- font(label4) <- list(family = "sans",weight = "bold", size = "medium")
-  
   #- ------------------------------------------------------------------------------- -#
   # Widgets for category selection
   #- ------------------------------------------------------------------------------- -#
