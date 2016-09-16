@@ -322,49 +322,49 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09a1_v006</www>
                 <bands>
                     <band>
-                        <bandname>sur_refl_b01</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>500m Surface Reflectance Band 1 (620-670 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b02</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>500m Surface Reflectance Band 2 (841-876 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b03</bandname>
+                        <bandname>b3_Blue</bandname>
                         <fullname>500m Surface Reflectance Band 3 (459-479 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b04</bandname>
+                        <bandname>b4_Green</bandname>
                         <fullname>500m Surface Reflectance Band 4 (545-565 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b05</bandname>
+                        <bandname>b5_SWIR</bandname>
                         <fullname>500m Surface Reflectance Band 5 (1230-1250 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b06</bandname>
+                        <bandname>b6_SWIR</bandname>
                         <fullname>500m Surface Reflectance Band 6 (1628-1652 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b07</bandname>
+                        <bandname>b7_SWIR</bandname>
                         <fullname>500m Surface Reflectance Band 7 (2105-2155 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
@@ -417,66 +417,66 @@
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
                         <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((sur_refl_b02-sur_refl_b01)/(sur_refl_b02+6*sur_refl_b01-7.5*sur_refl_b03+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
                         <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b01-sur_refl_b07)/(sur_refl_b01+sur_refl_b07)</indexes_formula>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII6</indexes_bandname>
                         <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b06)/(sur_refl_b02+sur_refl_b06)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
                         <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b07)/(sur_refl_b02+sur_refl_b07)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDSI</indexes_bandname>
                         <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b04-sur_refl_b06)/(sur_refl_b04+sur_refl_b06)</indexes_formula>
+                        <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>GNDVI</indexes_bandname>
                         <indexes_fullname>GNDVI (NIR-Green)/(Red+Green)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b04)/(sur_refl_b02+sur_refl_b04)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>RGRI</indexes_bandname>
                         <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b01/sur_refl_b04)</indexes_formula>
+                        <indexes_formula>(b1_Red/b4_Green)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>        <index>
                         <indexes_bandname>GRVI</indexes_bandname>
                         <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b01-sur_refl_b04)/(sur_refl_b01+sur_refl_b04)</indexes_formula>
+                        <indexes_formula>(b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -923,49 +923,49 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09cmg_v006</www>
                 <bands>
                     <band>
-                        <bandname>sur_refl_b01</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 1 (620-670 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b02</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 2 (841-876 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b03</bandname>
+                        <bandname>b3_Blue</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 3 (459-479 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b04</bandname>
+                        <bandname>b4_Green</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 4 (545-565 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b05</bandname>
+                        <bandname>b5_SWIR</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 5 (1230-1250 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b06</bandname>
+                        <bandname>b6_SWIR</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 6 (1628-1652 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b07</bandname>
+                        <bandname>b7_SWIR</bandname>
                         <fullname>Coarse Resolution Surface Reflectance Band 7 (2105-2155 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
@@ -1102,66 +1102,66 @@
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
                         <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((sur_refl_b02-sur_refl_b01)/(sur_refl_b02+6*sur_refl_b01-7.5*sur_refl_b03+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
                         <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b01-sur_refl_b07)/(sur_refl_b01+sur_refl_b07)</indexes_formula>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII6</indexes_bandname>
                         <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b06)/(sur_refl_b02+sur_refl_b06)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
                         <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b07)/(sur_refl_b02+sur_refl_b07)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDSI</indexes_bandname>
                         <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b04-sur_refl_b06)/(sur_refl_b04+sur_refl_b06)</indexes_formula>
+                        <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>GNDVI</indexes_bandname>
                         <indexes_fullname>GNDVI (NIR-Green)/(Red+Green)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b04)/(sur_refl_b02+sur_refl_b04)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>RGRI</indexes_bandname>
                         <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b01/sur_refl_b04)</indexes_formula>
+                        <indexes_formula>(b1_Red/b4_Green)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>        <index>
                         <indexes_bandname>GRVI</indexes_bandname>
                         <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b01-sur_refl_b04)/(sur_refl_b01+sur_refl_b04)</indexes_formula>
+                        <indexes_formula>(b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -1502,49 +1502,49 @@
                     </band>
                     <band>
                         <bandname>b1_Red</bandname>
-                        <fullname>sur_refl_b01: 500m Surface Reflectance Band 1 (620-670 nm)</fullname>
+                        <fullname>b1_Red: 500m Surface Reflectance Band 1 (620-670 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
                         <bandname>b2_NIR</bandname>
-                        <fullname>sur_refl_b02: 500m Surface Reflectance Band 2 (841-876 nm)</fullname>
+                        <fullname>b2_NIR: 500m Surface Reflectance Band 2 (841-876 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
                         <bandname>b3_Blue</bandname>
-                        <fullname>sur_refl_b03: 500m Surface Reflectance Band 3 (459-479 nm)</fullname>
+                        <fullname>b3_Blue: 500m Surface Reflectance Band 3 (459-479 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
                         <bandname>b4_Green</bandname>
-                        <fullname>sur_refl_b04: 500m Surface Reflectance Band 4 (545-565 nm)</fullname>
+                        <fullname>b4_Green: 500m Surface Reflectance Band 4 (545-565 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
                         <bandname>b5_SWIR</bandname>
-                        <fullname>sur_refl_b05: 500m Surface Reflectance Band 5 (1230-1250 nm)</fullname>
+                        <fullname>b5_SWIR: 500m Surface Reflectance Band 5 (1230-1250 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
                         <bandname>b6_SWIR</bandname>
-                        <fullname>sur_refl_b06: 500m Surface Reflectance Band 6 (1628-1652 nm)</fullname>
+                        <fullname>b6_SWIR: 500m Surface Reflectance Band 6 (1628-1652 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
                         <bandname>b7_SWIR</bandname>
-                        <fullname>sur_refl_b07: 500m Surface Reflectance Band 7 (2105-2155 nm)</fullname>
+                        <fullname>b7_SWIR: 500m Surface Reflectance Band 7 (2105-2155 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
@@ -1865,50 +1865,50 @@
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b01_1</bandname>
-                        <fullname>sur_refl_b01: 500m Surface Reflectance Band 1 (620-670 nm)</fullname>
+                        <bandname>b1_Red</bandname>
+                        <fullname>b1_Red: 500m Surface Reflectance Band 1 (620-670 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b02_1</bandname>
-                        <fullname>sur_refl_b02: 500m Surface Reflectance Band 2 (841-876 nm)</fullname>
+                        <bandname>b2_NIR</bandname>
+                        <fullname>b2_NIR: 500m Surface Reflectance Band 2 (841-876 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b03_1</bandname>
-                        <fullname>sur_refl_b03: 500m Surface Reflectance Band 3 (459-479 nm)</fullname>
+                        <bandname>b3_Blue_1</bandname>
+                        <fullname>b3_Blue: 500m Surface Reflectance Band 3 (459-479 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b04_1</bandname>
-                        <fullname>sur_refl_b04: 500m Surface Reflectance Band 4 (545-565 nm)</fullname>
+                        <bandname>b4_Green</bandname>
+                        <fullname>b4_Green: 500m Surface Reflectance Band 4 (545-565 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b05_1</bandname>
-                        <fullname>sur_refl_b05: 500m Surface Reflectance Band 5 (1230-1250 nm)</fullname>
+                        <bandname>b5_SWIR</bandname>
+                        <fullname>b5_SWIR: 500m Surface Reflectance Band 5 (1230-1250 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b06_1</bandname>
-                        <fullname>sur_refl_b06: 500m Surface Reflectance Band 6 (1628-1652 nm)</fullname>
+                        <bandname>b6_SWIR</bandname>
+                        <fullname>b6_SWIR: 500m Surface Reflectance Band 6 (1628-1652 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b07_1</bandname>
-                        <fullname>sur_refl_b07: 500m Surface Reflectance Band 7 (2105-2155 nm)</fullname>
+                        <bandname>b7_SWIR</bandname>
+                        <fullname>b7_SWIR: 500m Surface Reflectance Band 7 (2105-2155 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
@@ -1946,66 +1946,66 @@
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
                         <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+6*sur_refl_b01_1-7.5*sur_refl_b03_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
                         <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b01_1-sur_refl_b07_1)/(sur_refl_b01_1+sur_refl_b07_1)</indexes_formula>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII6</indexes_bandname>
                         <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02_1-sur_refl_b06_1)/(sur_refl_b02_1+sur_refl_b06_1)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b6_SWIR)/(b2_NIR+b6_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
                         <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02_1-sur_refl_b07_1)/(sur_refl_b02_1+sur_refl_b07_1)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDSI</indexes_bandname>
                         <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b04_1-sur_refl_b06_1)/(sur_refl_b04_1+sur_refl_b06_1)</indexes_formula>
+                        <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>GNDVI</indexes_bandname>
                         <indexes_fullname>GNDVI (NIR-Green)/(Red+Green)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02_1-sur_refl_b04_1)/(sur_refl_b02_1+sur_refl_b04_1)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b4_Green)/(b2_NIR+b4_Green)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>RGRI</indexes_bandname>
                         <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b01_1/sur_refl_b04_1)</indexes_formula>
+                        <indexes_formula>(b1_Red/b4_Green)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>        <index>
                         <indexes_bandname>GRVI</indexes_bandname>
                         <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b01_1-sur_refl_b04_1)/(sur_refl_b01_1+sur_refl_b04_1)</indexes_formula>
+                        <indexes_formula>(b1_Red-b4_Green)/(b1_Red+b4_Green)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -2241,7 +2241,8 @@
                     </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
                 </indexes>
                 <quality_indicators>
                     <quality>
@@ -2303,14 +2304,14 @@
                         <nodata_out>128</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b01_1</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>250m Surface Reflectance Band 1 (620-670 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b02_1</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>250m Surface Reflectance Band 2 (841-876 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
@@ -2356,19 +2357,19 @@
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
                         <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02_1-sur_refl_b01_1)/(sur_refl_b02_1+sur_refl_b01_1+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -2470,7 +2471,8 @@
                     </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
                 </indexes>
                 <quality_indicators>
                     <quality>
@@ -2531,14 +2533,14 @@
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09q1_v006</www>
                 <bands>
                     <band>
-                        <bandname>sur_refl_b01</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>250m Surface Reflectance Band 1 (620-670 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>sur_refl_b02</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>250m Surface Reflectance Band 2 (841-876 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
@@ -2563,19 +2565,19 @@
                     <index>
                         <indexes_bandname>NDVI</indexes_bandname>
                         <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(sur_refl_b02-sur_refl_b01)/(sur_refl_b02+sur_refl_b01+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -10666,26 +10668,41 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
                         <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
                 </indexes>
                 <quality_indicators>
                     <quality>
@@ -10779,28 +10796,28 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>red_reflectance</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>NIR_reflectance</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>blue_reflectance</bandname>
+                        <bandname>b3_Blue</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>MIR_reflectance</bandname>
+                        <bandname>b7_SWIR</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
@@ -10844,27 +10861,39 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -11034,26 +11063,41 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
                         <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
                 </indexes>
                 <quality_indicators>
                     <quality>
@@ -11147,28 +11191,28 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>red_reflectance</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>NIR_reflectance</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>blue_reflectance</bandname>
+                        <bandname>b3_Blue</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>MIR_reflectance</bandname>
+                        <bandname>b7_SWIR</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
@@ -11212,27 +11256,39 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -11395,26 +11451,41 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
                         <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
                 </indexes>
                 <quality_indicators>
                     <quality>
@@ -11508,28 +11579,28 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>red_reflectance</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>NIR_reflectance</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>blue_reflectance</bandname>
+                        <bandname>b3_Blue</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>MIR_reflectance</bandname>
+                        <bandname>b7_SWIR</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
@@ -11573,27 +11644,39 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -11770,26 +11853,41 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
                         <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
                 </indexes>
                 <quality_indicators>
                     <quality>
@@ -11877,28 +11975,28 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>red_reflectance</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>NIR_reflectance</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>blue_reflectance</bandname>
+                        <bandname>b3_Blue</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>MIR_reflectance</bandname>
+                        <bandname>b7_SWIR</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
@@ -11942,27 +12040,39 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -12139,26 +12249,41 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
                         <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>        </index>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
                 </indexes>
                 <quality_indicators>
                     <quality>
@@ -12246,28 +12371,28 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>red_reflectance</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>NIR_reflectance</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>blue_reflectance</bandname>
+                        <bandname>b3_Blue</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>MIR_reflectance</bandname>
+                        <bandname>b7_SWIR</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
@@ -12311,27 +12436,39 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
@@ -12501,26 +12638,38 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
-                        <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
                         <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_fullname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
-                        <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
@@ -12617,28 +12766,28 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                     <band>
-                        <bandname>red_reflectance</bandname>
+                        <bandname>b1_Red</bandname>
                         <fullname>Surface Reflectance Band 1</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>NIR_reflectance</bandname>
+                        <bandname>b2_NIR</bandname>
                         <fullname>Surface Reflectance Band 2</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>blue_reflectance</bandname>
+                        <bandname>b3_Blue</bandname>
                         <fullname>Surface Reflectance Band 3</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>MIR_reflectance</bandname>
+                        <bandname>b7_SWIR</bandname>
                         <fullname>Surface Reflectance Band 7</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-1000</nodata_in>
@@ -12682,27 +12831,39 @@
                 </bands>
                 <indexes>
                     <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDFI</indexes_bandname>
-                        <indexes_fullname>Flood Index (Red-SWIR)/(Red+SWIR)</indexes_fullname>
-                        <indexes_formula>(red_reflectance-MIR_reflectance)/(red_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b1_Red-b7_SWIR)/(b1_Red+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>NDII7</indexes_bandname>
-                        <indexes_fullname>NDII7 (NIR-SWIR)/(NIR+SWIR)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-MIR_reflectance)/(NIR_reflectance+MIR_reflectance)</indexes_formula>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(b2_NIR-b7_SWIR)/(b2_NIR+b7_SWIR)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
                         <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
-                        <indexes_formula>(NIR_reflectance-red_reflectance)/(NIR_reflectance+red_reflectance+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                 </indexes>
