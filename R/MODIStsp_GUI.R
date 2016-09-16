@@ -133,12 +133,12 @@ MODIStsp_GUI <- function(general_opts){
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Sensor selection
   #- ------------------------------------------------------------------------------- -#
-  addSpace(satprod1_group, 2, horizontal=TRUE)
+  addSpace(satprod1_group, 1, horizontal=TRUE)
   # gseparator(horizontal=FALSE, container=satprod_group, expand=TRUE)
   addSpring(satprod_group, horizontal=TRUE)
   satprod2_group <- gframe(text = "<span weight='bold'>Product specifications</span>", markup = TRUE, pos=1,
                            horizontal = FALSE, container = satprod_group)
-  addSpace(satprod2_group, 2, horizontal=TRUE)
+  addSpace(satprod2_group, 1, horizontal=TRUE)
   sens_group <- ggroup(horizontal = TRUE, container = satprod2_group)
   sens_label <- glabel(text = "Platform", container = sens_group)
   sens_wid <- gdroplist(items = c("Terra"), container = sens_group, text = "Select Layers", selected = 1)
@@ -439,38 +439,41 @@ MODIStsp_GUI <- function(general_opts){
   
   
   # Group to select which tiles should be downloaded ----
-
+  spatial_group <- ggroup(container = Spatial_Frame, horizontal = TRUE)
   tiles_group <- gframe(text = "<span weight='bold'>Required MODIS Tiles</span>", markup = TRUE,
-                        container = Spatial_Frame, horizontal = FALSE, expand = TRUE, pos = 1)
+                        container = spatial_group, horizontal = FALSE, expand = FALSE, pos = 1)
   
   # horizontal ----
-  x_group <- ggroup(container = tiles_group, horizontal = TRUE,spacing = 10)
-  start_x_lab <- glabel(text = "Horizontal Tiles:", container = x_group)
+  x_group <- ggroup(container = tiles_group, horizontal = TRUE,spacing = 5)
+  start_x_lab <- glabel(text = "Horizontal:", container = x_group)
   start_x_start <- glabel(text = "Start: ", container = x_group)
   start_x_wid <- gspinbutton(1, 35, text = "Select", container = x_group, value = general_opts$start_x)
   end_x_lab <- glabel(text = "End: ", container = x_group)
   end_x_wid <- gspinbutton(1, 35, text = "Select", container = x_group, value = general_opts$end_x)
   
-  show_map <- gbutton(text = "Show Tiles Map", border = TRUE,
-                      handler = function(h,....) {
-                        dev.new(width = 8, height = 4.8, noRStudioGD = TRUE)
-                        plot(raster(file.path(general_opts$MODIStsp_dir, "/ExtData/MODIS_Tiles.gif")))
-                      },
-                      container = x_group )
-  
   # vertical ----
-  y_group <- ggroup(container = tiles_group, horizontal = TRUE ,spacing = 10)
-  start_y_lab <- glabel(text = "Vertical Tiles:    ", container = y_group)
+  y_group <- ggroup(container = tiles_group, horizontal = TRUE ,spacing = 5)
+  start_y_lab <- glabel(text = "Vertical:    ", container = y_group)
   start_y_start <- glabel(text = "Start: ", container = y_group)
   start_y_wid <- gspinbutton(0,17, text = "Select", container = y_group, value = general_opts$start_y)
   end_y_lab <- glabel(text = "End: ", container = y_group)
   end_y_wid <- gspinbutton(0,17, text = "Select", container = y_group, value = general_opts$end_y)
   
   font(start_x_lab) <-  font(start_y_lab)  <- list(family = "sans",weight = "bold")
-  
   #	size(start_y_lab) = c(120,20)
   # 	size(start_y_wid) = size(end_y_wid) = size(end_y_lab) = size(start_y_start) = c(35,25)
 
+  # map button
+  tileb_group <- ggroup(container = tiles_group, horizontal = TRUE ,spacing = 10)
+  addSpring(tileb_group, horizontal=TRUE)
+  show_map <- gbutton(text = "Show Tiles Map", border = TRUE,
+                      handler = function(h,....) {
+                        dev.new(width = 8, height = 4.8, noRStudioGD = TRUE)
+                        plot(raster(file.path(general_opts$MODIStsp_dir, "/ExtData/MODIS_Tiles.gif")))
+                      },
+                      container = tileb_group )
+  
+  
   if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$tiled == 0) {
     enabled(tiles_group) <- FALSE
   } else {
@@ -478,33 +481,44 @@ MODIStsp_GUI <- function(general_opts){
   }
   
   # Extent ----
-  bounding_group <- gframe(text = "<span weight='bold'>Bounding Box</span>", markup=TRUE, 
-                           container = Spatial_Frame, horizontal = FALSE, expand = TRUE,  pos = 1)
+  addSpace(tiles_group, 1, horizontal=TRUE)
+  addSpring(spatial_group, horizontal=TRUE)
+  bounding_group <- gframe(text = "<span weight='bold'>Output Bounding Box (in output proj!)</span>", markup=TRUE, 
+                           container = spatial_group, horizontal = FALSE, expand = FALSE,  pos = 1)
   font(bounding_group) <- list(family = "sans",weight = "bold")
+  addSpace(bounding_group, 1, horizontal=TRUE)
   
   # bounding box ----
-  bbox_group <- ggroup(horizontal = FALSE, container = bounding_group)
-  output_bbox_lab <- glabel(text = " Bounding Box for output images <span weight='bold'>(in output projection!)</span>", 
-                            markup=TRUE, container = bbox_group, expand = TRUE)
+  bbox_group <- ggroup(horizontal = TRUE, container = bounding_group)
+  # output_bbox_lab <- glabel(text = " Bounding Box for output images <span weight='bold'>(in output projection!)</span>", 
+  #                           markup=TRUE, container = bbox_group, expand = TRUE)
   #	size(output_ext_lab) <- c(120,15)
   
-  Lon_group <- ggroup(horizontal = TRUE, container = bbox_group)
-  output_ULeast_lab <- glabel("Upper Left Easting (xmin)     ", container = Lon_group)
-  output_ULeast_wid <- gedit(text = general_opts$bbox[1], container = Lon_group, width = 10)
-  addSpace(Lon_group, 30, horizontal = TRUE)
-  output_LReast_lab <- glabel("Lower Right Easting (xmax)", container = Lon_group)
-  output_LReast_wid <- gedit(text = general_opts$bbox[3], container = Lon_group, width = 10)
+  min_group <- ggroup(horizontal = FALSE, container = bbox_group)
+  latW_group <- ggroup(horizontal=TRUE, container=min_group)
+  addSpring(latW_group, horizontal = TRUE)
+  output_ULeast_lab <- glabel("Left East. (xmin)", container = latW_group)
+  output_ULeast_wid <- gedit(text = general_opts$bbox[1], container = latW_group, width = 10)
+  longS_group <- ggroup(horizontal=TRUE, container=min_group)
+  addSpring(longS_group, horizontal = TRUE)
+  output_LRnorth_lab <- glabel("Lower North. (ymin)", container = longS_group)
+  output_LRnorth_wid <- gedit(text = general_opts$bbox[2], container = longS_group, width = 10)
   #	size(output_ULeast_lab) = size(output_LReast_lab) <- c(160,20)
+
+  addSpace(bbox_group, 10, horizontal = TRUE)
   
-  Lat_group <- ggroup(horizontal = TRUE, container = bbox_group)
-  output_LRnorth_lab <- glabel("Lower Right Northing (ymin) ", container = Lat_group)
-  output_LRnorth_wid <- gedit(text = general_opts$bbox[2], container = Lat_group, width = 10)
-  addSpace(Lat_group, 30, horizontal = TRUE)
-  output_ULnorth_lab <- glabel("Upper Left Northing (ymax) ", container = Lat_group)
-  output_ULnorth_wid <- gedit(text = general_opts$bbox[4], container = Lat_group, width = 10)
+  max_group <- ggroup(horizontal = FALSE, container = bbox_group)
+  latE_group <- ggroup(horizontal=TRUE, container=max_group)
+  addSpring(latE_group, horizontal = TRUE)
+  output_LReast_lab <- glabel("Right East. (xmax)", container = latE_group)
+  output_LReast_wid <- gedit(text = general_opts$bbox[3], container = latE_group, width = 10)
+  longN_group <- ggroup(horizontal=TRUE, container=max_group)
+  addSpring(longN_group, horizontal = TRUE)
+  output_ULnorth_lab <- glabel("Upper North. (ymax)", container = longN_group)
+  output_ULnorth_wid <- gedit(text = general_opts$bbox[4], container = longN_group, width = 10)
   
   font(output_ULeast_lab) <- font(output_LReast_lab) <-
-    font(output_LRnorth_lab) <- font(output_ULnorth_lab) <- list(family = "sans",weight = "bold")
+    font(output_LRnorth_lab) <- font(output_ULnorth_lab) <- list(family = "sans")
   #	size(output_LRnorth_lab) = size(output_ULnorth_lab) = c(160,20)
   
   if (general_opts$full_ext == "Full Tiles Extent") {
@@ -522,7 +536,7 @@ MODIStsp_GUI <- function(general_opts){
   output_proj_group <- ggroup(container = output_proj_frame, horizontal = TRUE)
   
   # Projection ----
-  output_proj_lab <- glabel(text = "Output Projection:     ", container = output_proj_group)
+  output_proj_lab <- glabel(text = "Output Projection: ", container = output_proj_group)
   font(output_proj_lab) <- list(family = "sans",weight = "bold")
   #	size(output_proj_lab) = c(120,20)
   proj_wid <- gcombobox(general_opts$out_proj_names, container = output_proj_group,
@@ -595,11 +609,12 @@ MODIStsp_GUI <- function(general_opts){
                         })
   #	size(proj_wid) = c(120,20)
   
-  outproj_user_lab <- glabel(text = "   PROJ4 String:", container = output_proj_group)
+  # addSpring(output_proj_group, horizontal = TRUE)
+  outproj_user_lab <- glabel(text = "  PROJ4 String:", container = output_proj_group)
   font(outproj_user_lab) <- list(family = "sans",weight = "bold")
   #	size(outproj_user_lab) = c(120,20)
   
-  output_proj4_wid <- gtext(text = general_opts$proj, container = output_proj_group, width = 300, height = 20,editable = FALSE)
+  output_proj4_wid <- gtext(text = general_opts$proj, container = output_proj_group, width = 300, height = 20,editable = FALSE, expand=TRUE)
   svalue(output_proj4_wid) <- general_opts$out_proj_list[[svalue(proj_wid)]]
   #	size(output_proj4_wid) = c(250,20)
   change_proj_but <- gbutton(text = "Change", container = output_proj_group, handler = function(h,....) {  # Button to change the user define projection
@@ -646,7 +661,7 @@ MODIStsp_GUI <- function(general_opts){
   
   # Resolution ----
   output_res_group <- ggroup(container = output_proj_frame, horizontal = TRUE)
-  output_res_lab <- glabel(text = "Output Resolution:    ", container = output_res_group)
+  output_res_lab <- glabel(text = "Output Resolution:", container = output_res_group)
   font(output_res_lab) <- list(family = "sans",weight = "bold")
   #	size(output_res_lab) = c(120,20)
   
@@ -655,7 +670,7 @@ MODIStsp_GUI <- function(general_opts){
                                       current_sel <- svalue(output_res_sel_wid)
                                       if (current_sel == "Native") {
                                         enabled(output_res_wid) <- FALSE
-                                        svalue(output_res_wid) <- paste("Auto - from Native Res.")
+                                        svalue(output_res_wid) <- paste("native")
                                       } else {
                                         enabled(output_res_wid) <- TRUE
                                         svalue(output_res_wid) <- ""
@@ -664,15 +679,15 @@ MODIStsp_GUI <- function(general_opts){
   
   #	size(output_res_sel_wid) = c(120,20)
   
-  pixsize_lab <- glabel(text = "        Pixel Size:         ", container = output_res_group)
+  pixsize_lab <- glabel(text = "      Pixel Size:", container = output_res_group)
   font(pixsize_lab) <- list(family = "sans",weight = "bold")
   #	size(pixsize_lab) <- c(120,20)
   
-  output_res_wid <- gedit(text = general_opts$out_res , container = output_res_group)
+  output_res_wid <- gedit(text = general_opts$out_res , container = output_res_group, width=10)
   #	size(output_res_wid) <- c(140,20)
   #	if (general_opts$out_res_sel == "Native") { enabled(output_res_wid) <- F} else {(enabled(output_res_wid) <- T)}
   if (svalue(output_res_sel_wid) == "Native") {
-    svalue(output_res_wid) <- paste("Auto - from Native Res.")
+    svalue(output_res_wid) <- paste("native")
     enabled(output_res_wid) <- FALSE
   } else {
     svalue(output_res_wid) <- general_opts$out_res
@@ -692,13 +707,14 @@ MODIStsp_GUI <- function(general_opts){
   pixsize2_lab <- glabel(text = units, container = output_res_group)
   
   # Resampling ----
-  resopts_group <- ggroup(container = output_proj_frame, horizontal = TRUE)
-  resmeth_lab <- glabel(text = "Resampling Method:  ", container = resopts_group)
+  # resopts_group <- ggroup(container = output_proj_frame, horizontal = TRUE)
+  addSpring(output_res_group, horizontal = TRUE)
+  resmeth_lab <- glabel(text = "    Resampling Method:  ", container = output_res_group)
   font(resmeth_lab) <- list(family = "sans",weight = "bold")
   #	size(resmeth_lab) = c(120,20)
   # resamp_array <- c("near","bilinear","cubic", "cubicspline","lanczos","average","mode")
   resamp_array <- c("near","mode")
-  output_resmeth_wid <-  gcombobox(resamp_array, container = resopts_group, selected = match(general_opts$resampling, resamp_array))
+  output_resmeth_wid <-  gcombobox(resamp_array, container = output_res_group, selected = match(general_opts$resampling, resamp_array))
   #	size(output_resmeth_wid) <- c(120,20)
   
   #- ------------------------------------------------------------------------------- -#
@@ -708,34 +724,35 @@ MODIStsp_GUI <- function(general_opts){
   opt_group <- ggroup(container = options_frame, horizontal = TRUE, expand = TRUE)
   
   # Out format ----
-  format_lab <- glabel(text = "Output Files Format:  ", container = opt_group)
+  format_lab <- glabel(text = "Output Files Format: ", container = opt_group)
   font(format_lab) <- list(family = "sans",weight = "bold")
   format_wid <- gdroplist(items = c("ENVI","GTiff"), text = "Select", container = opt_group, selected = match(general_opts$out_format, c("ENVI","GTiff")),handler = function(h,....) {
     current_sel <- svalue(format_wid)
     if (current_sel != "GTiff") {
-      enabled(compress_wid) <- FALSE
+      enabled(compress_group) <- FALSE
     } else {
-      (enabled(compress_wid) <- TRUE)
+      (enabled(compress_group) <- TRUE)
     }
   })
   addSpace(opt_group, 80, horizontal = TRUE)
 
   # Compression ----
+  compress_group = ggroup(container=opt_group, horizontal=TRUE)
   compress_dict <- c("None","PACKBITS","LZW","DEFLATE")
   names(compress_dict) <- c("None","Low (PACKBITS)","Medium (LZW)","High (DEFLATE)")
-  compress_lab <- glabel(text = "GTiff Compression: ", container = opt_group)
+  compress_lab <- glabel(text = "GTiff Compression: ", container = compress_group)
   font(compress_lab) <- list(family = "sans",weight = "bold")
-  compress_wid <- gcombobox( names(compress_dict), container = opt_group,selected <- match(general_opts$compress, names(compress_dict)))
+  compress_wid <- gcombobox( names(compress_dict), container = compress_group,selected <- match(general_opts$compress, names(compress_dict)))
   if (general_opts$out_format == "GTiff") {
-    enabled(compress_wid) <- TRUE
+    enabled(compress_group) <- TRUE
   } else {
-    enabled(compress_wid) <- FALSE
+    enabled(compress_group) <- FALSE
   } # grey out compression if ENVI output
   
   # virtual and NODATA ----
   other_group <- ggroup(container = options_frame, horizontal = TRUE)
   
-  timeseries_lab <- glabel(text = "Virtual Rasters:          ", container = other_group)
+  timeseries_lab <- glabel(text = "Virtual Rasters:        ", container = other_group)
   font(timeseries_lab) <- list(family = "sans",weight = "bold")
   timeseries_wid <- gcombobox( c("None","ENVI Meta Files","GDAL vrt Files","ENVI and GDAL"), container = other_group,
                                selected <- match(general_opts$ts_format, c("None","ENVI Meta Files","GDAL vrt Files","ENVI and GDAL")), handler = function(h,....) {
@@ -757,7 +774,7 @@ MODIStsp_GUI <- function(general_opts){
   # Main output folder ----
   outfold_frame <- gframe(text = "<span foreground='blue' size='x-large'>Main Output Folder for Time Series storage</span>", markup = T, container = main_group, expand=TRUE, fill=TRUE)    			# Frame group
   outfold_group <- ggroup(horizontal = TRUE, container = outfold_frame, expand=TRUE, fill=TRUE)  				# Main group
-  outfold_wid <- gedit(text = format(general_opts$out_folder, justify = "right"), container = outfold_group, width = 46)			# Selected file
+  outfold_wid <- gedit(text = format(general_opts$out_folder, justify = "right"), container = outfold_group, width = 46, expand=TRUE)			# Selected file
   fold_choose <- gbutton("Browse", handler = function(h,...) {
     choice <- gfile(type = "selectdir", text = "Select the Output Folder for MODIS data...")		# File selection widget
     if (!is.na(choice)) {
@@ -767,7 +784,7 @@ MODIStsp_GUI <- function(general_opts){
   }, container = outfold_group)
   
   # Reprocessing options checkbox ----
-  addSpring(outfold_group, horizontal = TRUE)
+  addSpace(outfold_group, 5, horizontal = TRUE)
   reprocess_lab <- glabel(text = "ReProcess Existing Data", container = outfold_group)
   font(reprocess_lab) <- list(family = "sans",weight = "bold")
   reprocess_wid <- gradio(items = c("Yes","No"), text = "Select", container = outfold_group, selected = match(general_opts$reprocess, c("Yes","No")), horizontal = TRUE)
@@ -776,7 +793,7 @@ MODIStsp_GUI <- function(general_opts){
   # HDF output folder ----
   outfoldmod_frame <- gframe(text = "<span foreground='blue' size='x-large'>Output Folder for Original HDF files download</span>", markup = TRUE, container = main_group, expand=TRUE, fill=TRUE)    			# Frame group
   outfoldmod_group <- ggroup(horizontal = TRUE, container = outfoldmod_frame, expand=TRUE, fill=TRUE)  				# Main group
-  outfoldmod_wid <- gedit(text = format(general_opts$out_folder_mod, justify = "right") , container = outfoldmod_group, width = 46)			# Selected file
+  outfoldmod_wid <- gedit(text = format(general_opts$out_folder_mod, justify = "right") , container = outfoldmod_group, width = 46, expand=TRUE)			# Selected file
   fold_choose <- gbutton("Browse", handler = function(h,...) {
     choice <- gfile(type = "selectdir", text = "Select the Output Folder for storage of original HDFs...")		# File selection widget
     if (!is.na(choice)) {
@@ -787,7 +804,7 @@ MODIStsp_GUI <- function(general_opts){
   
   
   # HDF delete option checkbox ----
-  addSpring(outfoldmod_group, horizontal = TRUE)
+  addSpace(outfoldmod_group, 5, horizontal = TRUE)
   delete_lab <- glabel(text = "Delete original HDF files", container = outfoldmod_group)
   font(delete_lab) <- list(family = "sans",weight = "bold")
   delete_wid <- gradio(items = c("Yes","No"), text = "Select", container = outfoldmod_group, selected = 2, horizontal = T)
