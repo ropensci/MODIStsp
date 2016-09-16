@@ -3,6 +3,15 @@
 
 # News !
 
+* **15/09/2016**
+
+An article about MODIStsp was recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020). You can cite it as: 
+
+L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series, Computers & Geosciences,
+  Volume 97, Pages 40-48, ISSN 0098-3004, http://dx.doi.org/10.1016/j.cageo.2016.08.020.
+  
+
+
 * **22/08/2016**
 
 There seem to be currently some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github). We are working to understand the issue. For the time being, manually installing all the dependencies could solve the issue. To do so, please try doing: 
