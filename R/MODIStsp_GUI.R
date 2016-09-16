@@ -100,7 +100,8 @@ MODIStsp_GUI <- function(general_opts){
   prod_group <- ggroup(horizontal = TRUE, container = satprod1_group)
   prod_label <- glabel(text = "Product   ", container = prod_group)
   prod_wid <- gdroplist(items = mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)], 
-    container = prod_group, horizontal = TRUE, selected = match(general_opts$sel_prod, mod_prod_list),  
+    container = prod_group, horizontal = TRUE,
+    selected = match(general_opts$sel_prod, mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)]),
     handler = function(h,...) {
       sel_prod <- if (!is.null(svalue(prod_wid))) {svalue(prod_wid)} else {sel_prod}
       # Select the last version (it assumes that versions in xml file are in increasing order)
@@ -132,7 +133,9 @@ MODIStsp_GUI <- function(general_opts){
   # Widgets for Sensor selection
   #- ------------------------------------------------------------------------------- -#
   addSpace(satprod_group, 2, horizontal=TRUE)
+  gseparator(horizontal=FALSE, container=satprod_group, expand=TRUE)
   addSpring(satprod_group, horizontal=TRUE)
+  addSpace(satprod_group, 2, horizontal=TRUE)
   satprod2_group <- ggroup(horizontal = FALSE, container = satprod_group)
   sens_group <- ggroup(horizontal = TRUE, container = satprod2_group)
   sens_label <- glabel(text = "Platform", container = sens_group)
