@@ -15,7 +15,7 @@
 #' @importFrom sp CRS
 #' @import gWidgets
 
-MODIStsp_GUI <- function(general_opts, scrollWindow){
+MODIStsp_GUI <- function(general_opts, custom_indexes, scrollWindow){
   
   assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
   
@@ -32,7 +32,6 @@ MODIStsp_GUI <- function(general_opts, scrollWindow){
     dispose(mess_lab)
   }
 
-  
   #- ------------------------------------------------------------------------------- -#
   #  Start Building the GUI
   #- ------------------------------------------------------------------------------- -#
@@ -176,6 +175,7 @@ MODIStsp_GUI <- function(general_opts, scrollWindow){
                       handler = function(h,....) {
                         
                         load(general_opts$prodopts_file)
+                        load(general_opts$previous_file)
                         check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
                         check_wid <- temp_wid_bands												# retrieve currently selected original layers
                         selgroup <- gbasicdialog(title = "Select Processing Layers", parent = NULL, do.buttons = FALSE, horizontal = TRUE)
@@ -196,7 +196,7 @@ MODIStsp_GUI <- function(general_opts, scrollWindow){
                         }
                         
                         # widgets for band selection - indexes ----
-                        check_names_indexes <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$indexes_fullnames # retrieve indexes band names (if existing for sel. product)
+                        check_names_indexes <- c(prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$indexes_fullnames, custom_indexes[[svalue(prod_wid)]][[svalue(vers_wid)]]$indexes_fullnames) # retrieve indexes band names (if existing for sel. product)
                         if (!is.null(check_names_indexes)) {
                           check_wid_indexes <- temp_wid_bands_indexes							# retrieve currently selected indexes layers
                           cbox_indexes <- gframe(text = "<span foreground='blue' size='large'>Additional Spectral Indexes</span>", markup = TRUE, container = cbox_total, horizontal = FALSE)

@@ -145,13 +145,14 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
                          proj = "Sinusoidal", out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
                          nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "")
     attr(general_opts,"GeneratedBy") <- "MODIStsp"
-    save(general_opts, file = previous_file) # Save options to previous file
+    custom_indexes <- list()
+    save(general_opts, custom_indexes, file = previous_file) # Save options to previous file
   }
 
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    MODIStsp_GUI(general_opts, scrollWindow=scrollWindow)
+    MODIStsp_GUI(general_opts, custom_indexes=custom_indexes, scrollWindow=scrollWindow)
   } else {
     Quit <<- FALSE
   }
@@ -164,7 +165,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
     if (file.exists(general_opts$previous_file)) {
       load(general_opts$previous_file)
     } else {
-      cat("[",date(),"] Processing Options file not found ! Exiting !\n"); stop()
+      cat("[",date(),"] Processing Options file not found! Exiting!\n"); stop()
     }
     prod_opts <- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
 

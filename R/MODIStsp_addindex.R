@@ -124,7 +124,6 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
     all_indexes_bandnames <- unique(all_indexes_bandnames)
     all_indexes_fullnames <- unique(all_indexes_fullnames)
 
-browser()
     # verify that the index name and fullname is not already present
     if (new_indexbandname %in% all_indexes_bandnames | new_indexfullname %in% all_indexes_fullnames) {
       catch_err <- 2 # error 2: index name or fullname already present
@@ -132,8 +131,7 @@ browser()
 
     attr(catch_err,"req_bands") <- req_bands
     return(catch_err)
-browser()
-    
+
   } # end of check_formula_errors()
 
   # Function to add the formula in previous file ----
@@ -226,25 +224,23 @@ browser()
 
       catch_err <- check_formula_errors(new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                                         n_products = n_products, prod_opt_list = prod_opt_list, refbands_names = refbands_names)
-browser()
       if (catch_err == 0) {
         save_formula(refbands_names = refbands_names, req_bands = attr(catch_err,"req_bands"),
                      new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                      new_indexnodata_out = new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
                      prod_opt_list = prod_opt_list, previous_file = previous_file)
         if (exists("Quit")) {
-          gmessage("The new Spectral Index was correctly added! To use it, Re-open the 'Select Processing Layer' window.")
+          gmessage("The new Spectral Index was correctly added! To use it, Re-open the 'Select Processing Layer' window.", title = "Index added")
         } else {
-          gmessage("The new Spectral Index was correctly added!")
+          gmessage("The new Spectral Index was correctly added!", title = "Index added")
         }
         dispose(main_win)
       } else if (catch_err == 1) {
-        #FIXME check why gmessage causes a block (maybe gwindow not initialised?)
-        gmessage(paste0("The formula of the new index is not computable. Please check it (Valid band names are: ",paste(refbands_names,collapse = ", "),"."))
+        gmessage(paste0("The formula of the new index is not computable. Please check it (Valid band names are: ",paste(refbands_names,collapse = ", "),")."), title = "Error")
       } else if (catch_err == 2) {
-        gmessage("The index acronym and/or the full name are already present; please specify different ones.")
+        gmessage("The index acronym and/or the full name are already present; please specify different ones.", title = "Error")
       } else if (catch_err == 3) {
-        gmessage("Some parameters are still blank; please provide valid values for the index name, the index fullname and the formula.")
+        gmessage("Some parameters are still blank; please provide valid values for the index name, the index fullname and the formula.", title = "Error")
       }
     })
 
