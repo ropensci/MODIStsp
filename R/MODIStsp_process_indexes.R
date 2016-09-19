@@ -57,7 +57,7 @@ MODIStsp_process_indexes <- function(out_filename, formula,bandnames,nodata_out,
   raster::NAvalue(tmp_index) <- as.numeric(indexes_nodata_out)
   writeRaster(tmp_index, out_filename, format = out_format,NAflag = as.numeric(indexes_nodata_out), datatype = "INT2S", overwrite = TRUE)
   if (out_format == "ENVI") { # IF "ENVI", write the nodata value in the header
-    fileConn_meta_hdr <- file(paste0(file_path_sans_ext(out_filename),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
+    fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(out_filename),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
     writeLines(c("data ignore value = ", indexes_nodata_out ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
     writeLines("", fileConn_meta_hdr)
     close(fileConn_meta_hdr)

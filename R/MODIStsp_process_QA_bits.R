@@ -57,7 +57,7 @@ MODIStsp_process_QA_bits <- function(out_filename,in_raster_name,bitN, source, o
   in_raster <- setValues(in_raster, values = bitfield_vals)	# Set the retrieved values in the raster
   writeRaster(in_raster, out_filename, format = out_format, overwrite = TRUE, datatype = "INT1U", NAflag = as.numeric(nodata_qa_out))	# save file
   if (out_format == "ENVI") { # IF "ENVI", write the nodata value in the header
-    fileConn_meta_hdr <- file(paste0(file_path_sans_ext(out_filename),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
+    fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(out_filename),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
     writeLines(c("data ignore value = ", nodata_qa_out), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
     writeLines("", fileConn_meta_hdr)
     close(fileConn_meta_hdr)

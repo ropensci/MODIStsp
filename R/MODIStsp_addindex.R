@@ -148,7 +148,7 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
           custom_indexes[[prod]][[vers]] <- list()
           custom_indexes[[prod]][[vers]]$indexes_bandnames <- custom_indexes[[prod]][[vers]]$indexes_fullnames <-
             custom_indexes[[prod]][[vers]]$indexes_formulas <- custom_indexes[[prod]][[vers]]$indexes_nodata_out <-
-            custom_indexes[[prod]][[vers]]$indexes_bandsel <- character(0)
+            character(0)
         }
       }
     }
@@ -173,7 +173,6 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
           custom_indexes[[prod]][[vers]]$indexes_fullnames <- c(custom_indexes[[prod]][[vers]]$indexes_fullnames,new_indexfullname)
           custom_indexes[[prod]][[vers]]$indexes_formulas <- c(custom_indexes[[prod]][[vers]]$indexes_formulas,new_indexformula)
           custom_indexes[[prod]][[vers]]$indexes_nodata_out <- c(custom_indexes[[prod]][[vers]]$indexes_nodata_out,new_indexnodata_out)
-          custom_indexes[[prod]][[vers]]$indexes_bandsel <- c(custom_indexes[[prod]][[vers]]$indexes_bandsel,0)
         }
       }
     }  #End Cycle on products

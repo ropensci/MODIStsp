@@ -511,7 +511,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                                                              overwrite = TRUE),
                               quit("Internal error in out_res_sel, outproj_str or full_ext."))
                       
-                      fileConn_meta_hdr <- file(paste0(file_path_sans_ext(outrep_file),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
+                      fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(outrep_file),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
                       writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
                       writeLines("", fileConn_meta_hdr)
                       close(fileConn_meta_hdr)

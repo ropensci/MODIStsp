@@ -167,8 +167,14 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
     } else {
       cat("[",date(),"] Processing Options file not found! Exiting!\n"); stop()
     }
+    if (file.exists(general_opts$prodopts_file)) {
+      load(general_opts$prodopts_file)
+    } else {
+      cat("[",date(),"] Product information file not found! Exiting!\n"); stop()
+    }
     prod_opts <- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
-
+    custom_idx <- custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]]
+    
     # Create variables needed to launch the processing
     # start_date <- paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = ".")
     # end_date <- paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = ".")
@@ -236,10 +242,10 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
                                                   resampling = resampling, ts_format = ts_format, compress = compress,
                                                   MOD_proj_str = MOD_proj_str,outproj_str = user_proj4,
                                                   nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out,rts = rts, nodata_change = nodata_change,
-                                                  datatype = prod_opts$datatype,	bandsel = prod_opts$bandsel, bandnames = prod_opts$bandnames,
-                                                  indexes_bandsel = prod_opts$indexes_bandsel, indexes_bandnames = prod_opts$indexes_bandnames,
-                                                  indexes_formula = prod_opts$indexes_formula, indexes_nodata_out = prod_opts$indexes_nodata_out,
-                                                  quality_bandnames = prod_opts$quality_bandnames,quality_bandsel = prod_opts$quality_bandsel, quality_bitN = prod_opts$quality_bitN,
+                                                  datatype = prod_opts$datatype,	bandsel = general_opts$bandsel, bandnames = prod_opts$bandnames,
+                                                  indexes_bandsel = general_opts$indexes_bandsel, indexes_bandnames = c(prod_opts$indexes_bandnames,custom_idx$indexes_bandnames),
+                                                  indexes_formula = c(prod_opts$indexes_formula,custom_idx$indexes_formula), indexes_nodata_out = c(prod_opts$indexes_nodata_out,custom_idx$indexes_nodata_out),
+                                                  quality_bandnames = prod_opts$quality_bandnames,quality_bandsel = general_opts$quality_bandsel, quality_bitN = prod_opts$quality_bitN,
                                                   quality_source = prod_opts$quality_source, quality_nodata_in = prod_opts$quality_nodata_in,
                                                   quality_nodata_out = prod_opts$quality_nodata_out,
                                                   file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder, gui = gui))

@@ -893,18 +893,18 @@ MODIStsp_GUI <- function(general_opts, custom_indexes, scrollWindow){
     if (max(general_opts$bandsel) +
         ifelse((length(general_opts$indexes_bandsel) > 0), max(general_opts$indexes_bandsel),0) +
         max(general_opts$quality_bandsel) == 0) {
-      gmessage("No Output bands or indexes selected - Please Correct !", title = "Warning")
+      gmessage("No Output bands or indexes selected - Please Correct!", title = "Warning")
       check_save_opts <<- FALSE
     }
     
     # Check if dates, processing extent and tiles selection make sense
     if (as.Date(general_opts$start_date) > as.Date(general_opts$end_date)) {
-      gmessage("Ending date earlier than starting date - Please correct !", title = "Warning")
+      gmessage("Ending date earlier than starting date - Please correct!", title = "Warning")
       check_save_opts <<- FALSE
     }
     
     if (class(try(as.Date(general_opts$start_date), silent = TRUE)) == "try-error" | class(try(as.Date(general_opts$end_date), silent = TRUE)) == "try-error") {
-      gmessage("One or both dates are not in correct format - Please correct !", title = "Warning")
+      gmessage("One or both dates are not in correct format - Please correct!", title = "Warning")
       check_save_opts <<- FALSE
     }
     
@@ -1019,7 +1019,7 @@ MODIStsp_GUI <- function(general_opts, custom_indexes, scrollWindow){
     prod_opt_list <- general_opts$prod_opt_list
     general_opts$prod_opt_list <- NULL # see the function definition
     if (check_save_opts) {					# If check passed, save previous file and return
-      save(general_opts, file = general_opts$previous_file) # Save options to previous file
+      save(general_opts, custom_indexes, file = general_opts$previous_file) # Save options to previous file
       assign("Quit", F, envir = globalenv()) # If "Start", set "Quit to F
       rm(temp_wid_bands, envir = globalenv())
       rm(temp_wid_bands_indexes, envir = globalenv())
@@ -1102,7 +1102,7 @@ MODIStsp_GUI <- function(general_opts, custom_indexes, scrollWindow){
       general_opts <- prepare_to_save_options(general_opts)
       prod_opt_list <- general_opts$prod_opt_list; general_opts$prod_opt_list <- NULL # see the function definition
       if (check_save_opts) {					# If check passed, save previous file and return
-        save(general_opts, file = choice)
+        save(general_opts, custom_indexes, file = choice)
       }
     }
   })
