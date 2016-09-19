@@ -210,7 +210,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
             modislist <- lpdaac_getmod_names(http = http, ftp = ftp, used_server = download_server, user = user, password = password, 
                                              date_dir = date_dirs[date], v = seq(from = start_y, to = end_y), h = seq(from = start_x, to = end_x), 
                                              tiled, out_folder_mod = out_folder_mod, gui = gui)
-
+            
             # ---------------------------------- ----------------------------------------------#
             # Download and preprocess Imagesin modislist vector -----------
             # ---------------------------------- ----------------------------------------------#
@@ -229,112 +229,107 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   paste0(ftp,YEAR,"/",DOY,"/",modisname)
                 } else if (download_server == "offline") {NA}
                 
-                if (download_server == "http") { # in case of http download, try to catch size information from xml file
+                # Get remote file size
+                res <-getURL(remote_filename, nobody=1L, header=1L)
+                
+                
+                if (download_server != "offline") { # in case of http or ftp download, try to catch size information from xml file
                   
-                  remote_xml_tries <- 30 # numbers of tryouts for xml metafile
-                  remote_xml <- NA
-                  class(remote_xml) <- "try-error"
-                  while (remote_xml_tries > 0) {
-                     
-                    xmldown = try(GET(paste0(remote_filename,".xml"),authenticate(user,password), timeout(5)))
+                  # All this substituted with direct assessment of filesize from CURL call - left here while completing feature
+                  remote_size_tries <- 30 # numbers of tryouts for xml metafile
+                  size_string <- NA
+                  class(size_string) <- "try-error"
+                  
+                  while (remote_size_tries > 0) {
+                    size_string <- try(getURL(remote_filename, nobody=1L, header=1L))
                     # Check if download was good: check class of xmldown and status of xmldown
-                    if (class(xmldown) == "try-error") {
-                      remote_xml_tries <- remote_xml_tries - 1
+                    if (class(size_string) == "try-error") {
+                      remote_size_tries <- remote_size_tries - 1
                     } else {
-                      if (xmldown$status_code != 200 ) {   #& xmldown$status_code != 226
-                        remote_xml_tries <- remote_xml_tries - 1
-                      } else {
-                        
-                        remote_xml <- content(xmldown, "text")
-                        remote_xml <- try(xmlParse(remote_xml))
-                        remote_xml_tries <- 0
-                        
-                      }
+                      remote_size_tries <- 0
+                      
                     }
                   }
                   
                   # if the xml was available, check the size; otherwise, set as the local size to skip the check
-                  if (class(remote_xml)[1] == "try-error") {
-                    
+                  if (class(size_string) == "try-error") {
                     remote_filesize <- local_filesize
                   } else {
-                    remote_filesize <- as.integer(xmlToList(xmlRoot(remote_xml)[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]]))
+                    remote_filesize <- as.numeric(substr(size_string, str_locate(res, ":")[1]+1 , str_locate(res, "\r")[1]-1))
                   }
                   
-                } else if (download_server == "ftp") { # in case of ftp download, do not perform the check. 
-                  remote_filesize <- local_filesize
-                  # TODO: implement check using curl library (http://stackoverflow.com/questions/32488644/retrieve-modified-datetime-of-a-file-from-an-ftp-server)
-                  # and check if RCurl functions could be replaced by curl ones
-                } else if (download_server == "offline") {
+                } else {  # On offline mode, don't perform file size check. 
                   remote_filesize <- local_filesize
                 }
                 
                 if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
                   er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
-                  while (er != 0) {   # repeat until no error or > 30 tryyouts
-                    mess_text <- paste("Downloading", sens_sel, "Files for date", date_name, ":" ,which(modislist == modisname), "of", length(modislist))
-                    if (gui) {
-                      svalue(mess_lab) <- paste("---",mess_text,"---")
-                      message("[",date(),"] ",mess_text)
-                    } else {
-                      message("[",date(),"] ",mess_text)
-                    }	# Update progress window
+                  
+                 
+                  local_filesize = 0  
+                  while (local_filesize != remote_filesize) {   # Add here a while loop: Only exit if local file size equals remote filesize
                     
-                    if (download_server == "http") {
-                      download <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
+                    while (er != 0) {   # repeat until no error or > 30 tryyouts
+                      mess_text <- paste("Downloading", sens_sel, "Files for date", date_name, ":" ,which(modislist == modisname), "of", length(modislist))
+                      if (gui) {
+                        svalue(mess_lab) <- paste("---",mess_text,"---")
+                        message("[",date(),"] ",mess_text)
+                      } else {
+                        message("[",date(),"] ",mess_text)
+                      }	# Update progress window
                       
-                    } else {
-                      
-                      download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = TRUE, cacheOK = FALSE,
-                                                    extra = c("-L")))
-                    }
-                    
-                    if (class(download) == "try-error") {
-                      er <- 5
-                      ce <- ce + 1
-                      message("[",date(),"] Download Error - Retrying...")
-                      unlink(local_filename)
-                      Sys.sleep(10)
-                    } else {
                       if (download_server == "http") {
-                        if (download$status_code != 200 & length(content(download, "text")) == 1) {	
-                          message("[",date(),"] Download Error - Retrying...")
-                          unlink(local_filename) # on error, delete last hdf file (to be sure no incomplete files are left behind and send message)
-                          Sys.sleep(10)
-                          er <- 5
-                          ce <- ce + 1
+                        download <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
+                      } else {
+                        download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = TRUE, cacheOK = FALSE,
+                                                      extra = c("-L")))
+                      }
+                      
+                      if (class(download) == "try-error") {
+                        er <- 5
+                        ce <- ce + 1
+                        message("[",date(),"] Download Error - Retrying...")
+                        unlink(local_filename)  # On download error, delete bad files
+                        Sys.sleep(10)    # sleep for a while....
+                      } else {
+                        if (download_server == "http") {
+                          if (download$status_code != 200 & length(content(download, "text")) == 1) {	
+                            message("[",date(),"] Download Error - Retrying...")
+                            unlink(local_filename) # on error, delete last hdf file (to be sure no incomplete files are left behind and send message)
+                            Sys.sleep(10)
+                            er <- 5
+                            ce <- ce + 1
+                          } else {
+                            writeBin(download$content, local_filename)
+                            er <- 0 
+                          }
                         } else {
-                          writeBin(download$content, local_filename)
                           er <- 0 
                         }
-                        
-                      } else {
-                        
-                        er <- 0 
-                      }
+                      } 
                       
-                    } 
+                      if (ce == 30) {
+                        # Ask if Stop after 30 failed attempts
+                        if (gui) {
+                          confirm <- gconfirm(paste0(download_server," server seems to be down! Do you want to retry ? "), icon = "question", 
+                                              handler = function(h,...){})
+                        } else {
+                          confirm <- "FALSE"
+                        }
+                        if (confirm == "FALSE") {
+                          warning("[",date(),"] Error: server seems to be down! Please Retry Later!")
+                          unlink(local_filename)
+                          stop()
+                        }
+                      }  
+                    }  # end while on download tries
                     
-                    if (ce == 30) {
-                      # Ask if Stop after 30 failed attempts
-                      
-                      if (gui) {
-                        confirm <- gconfirm(paste0(download_server," server seems to be down! Do you want to retry ? "), icon = "question", 
-                                            handler = function(h,...){})
-                      } else {
-                        confirm <- "FALSE"
-                      }
-                      if (confirm == "FALSE") {
-                        warning("[",date(),"] Error: server seems to be down! Please Retry Later!")
-                        unlink(local_filename)
-                        stop()
-                      }
-                    }  
-                  }  # end while on download tries
+                    local_filesize <- file.info(local_filename)$size    # Find the size of the new file downloaded to allow comparison with remote 
+                    
+                  } # end here the while loop on file size chek
+                  
                 }  # end IF on hdf existence
               } # End cycle for downloading the images in modislist vector
-              # } # End if on length modislist > 1
-              
               
               message("[",date(),"] ",length(modislist)," files for date of ",date_dirs[date]," were successfully downloaded!")
               
@@ -349,7 +344,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
               # at the end of this step, "bandsel" is recreated as the union of the bands selected by the user and the bands required
               # by indexes and quality bands, but only those ones which are not already present.
               
-              # do a chack to see if the product hasat least one Quality Layer or Possible Index
+              # do a chack to see if the product has at least one Quality Layer or Possible Index
               if (length(indexes_bandnames) != 0 | length(quality_bandnames) != 0 ) {
                 
                 req_bands_indexes <- bands_indexes
@@ -357,9 +352,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   req_bands_indexes[i] <- 0
                 }	# matrix similar to band_indexes, but specific for this year-doy process
                 
-                #							if (length(which(indexes_bandsel==1) >= 1)) {
-                #								for (band in seq(along = indexes_bandsel)) {
-                #									if (indexes_bandsel[band] ==1 ) {
                 for (band in which(indexes_bandsel == 1)) {
                   indexes_band <- indexes_bandnames[band]
                   out_filename <- file.path(out_prod_folder,indexes_band,paste0(file_prefix,"_",indexes_band,"_",yy,"_", DOY))
@@ -369,7 +361,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     out_filename <- paste0(out_filename, ".dat")
                   }
                   if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
-                    req_bands_indexes[,band] <- bands_indexes[,band] # if the index does not exists then consider the original bands required for it
+                    req_bands_indexes[,band] <- bands_indexes[,band] # if the index does not exists then find out the original bands required for it
                   }
                 }
                 
@@ -381,7 +373,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   } else {
                     out_filename <- paste0(out_filename, ".dat")
                   }
-                  if (file.exists(out_filename) == FALSE | reprocess == "Yes") {# if the index does not exists then consider the original bands required for it
+                  if (file.exists(out_filename) == FALSE | reprocess == "Yes") {# if the index does not exists then find out the original bands required for it
                     req_bands_indexes[,band + length(indexes_bandsel)] <- bands_indexes[,band + length(indexes_bandsel)] 
                   }
                 }
@@ -416,17 +408,15 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   outfile <- paste0(bandnames[band],"_",yy,"_",DOY,".tif")  	# Create name for the temporary tif mosaic
                   # NOTE: Change outrep_file to a list of rep files: only one for original bands, multiple for indexes and quality
                   outrep_file <- file.path(out_prod_folder, bandnames[band], paste0(file_prefix,"_",sub("[.][^.]*$", "", 
-                                            basename(outfile), perl = TRUE)))	# Create name for the TIFF reprojected  mosaic
+                                                                                                        basename(outfile), perl = TRUE)))	# Create name for the TIFF reprojected  mosaic
                   if (out_format == "GTiff") {
                     outrep_file <- paste0(outrep_file, ".tif")
                   } else {
                     outrep_file <- paste0(outrep_file, ".dat")
                   }
                   
-                  # integrate bandsel (bands directly selected) with band_indexes (bands needed by indexes or quality bands)
-                  outfile_vrt <- tempfile(fileext = ".vrt")
-                  # outfile_vrt <- paste0(tmp_prod_folder, "/",bandnames[band],"_",yy,"_",DOY,"vrt.tif")    # Create name for the vrt mosaic
-                  
+                  outfile_vrt <- tempfile(fileext = ".vrt")   # filename of temporary vrt file 
+             
                   if (file.exists(outrep_file) == FALSE | reprocess == "Yes") {
                     
                     files_in <- file.path(out_folder_mod, modislist)
@@ -462,7 +452,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     ## resampling are required
                     
                     
-                  reproj_type <- if (out_res_sel == "Native" & outproj_str == MOD_proj_str) {
+                    reproj_type <- if (out_res_sel == "Native" & outproj_str == MOD_proj_str) {
                       "GdalTranslate"
                     } else if (out_res_sel == "Resampled" & outproj_str == MOD_proj_str) {
                       "Resample1_Resize0"
@@ -477,7 +467,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     } else {
                       "Error"
                     }
-                  
+                    
                     if (out_format == "GTiff") {
                       switch( reproj_type,
                               GdalTranslate = gdal_translate(outfile_vrt,  outrep_file, a_srs = MOD_proj_str, of = out_format, ot = datatype[band], 
@@ -561,7 +551,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
               for (band in which(quality_bandsel == 1)) {
                 quality_band <- quality_bandnames[band]		 # indicator name
                 source <- quality_source[band]  #  Original MODIS layer containing data of the indicator
-                bitN <- quality_bitN[band]  #  bitfields corresponding to indicator within source
+                bitN <- quality_bitN[band]      #  bitfields corresponding to indicator within source
                 nodata_qa_in <- quality_nodata_in[band]
                 nodata_qa_out <- quality_nodata_out[band]
                 mess_text <- paste("Computing", quality_band, "for date:", date_name)
@@ -607,8 +597,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   unlink(dirname(out_filename),recursive = TRUE)
                 } #End If on delbands[banddel] == 1
               } #End Cycle on banddel
-
-              } else {
+              
+            } else {
               message("[",date(),"] No available image for selected Tiles in ",date_dirs[date])
             } # End check on at least one image available
             
@@ -636,7 +626,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
         
       } else {
         message("[",date(),"] No available data for year: ",yy," for Sensor ",sens_sel," in selected dates.")
-        }
+      }
       
     }	# End Cycling on selected years
     
