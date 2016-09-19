@@ -1,7 +1,7 @@
 #'
 #' MODIStsp_process
-#' @description main function of MODIStsp tool. Takes as input processing parameters specified by the user using moddl_GUI and saved in
-#' MODIStsp_Previous.RData (Interactive use), or a user specified RData file (batch use) (See MODIStsp_main for details ) and performs all required
+#' @description main function of MODIStsp tool. Takes as input processing parameters specified by the user using MODIStsp_GUI and saved in
+#' MODIStsp_Previous.json (Interactive use), or a user specified JSON file (batch use) (See MODIStsp_main for details ) and performs all required
 #' processing.
 #' @details After retrieving the input processing options, the function accesses lpdaac htttp archive to determine the list of dates
 #' to be processed. It then perform all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
@@ -511,7 +511,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                                                              overwrite = TRUE),
                               quit("Internal error in out_res_sel, outproj_str or full_ext."))
                       
-                      fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(outrep_file),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
+                      fileConn_meta_hdr <- file(paste0(file_path_sans_ext(outrep_file),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
                       writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
                       writeLines("", fileConn_meta_hdr)
                       close(fileConn_meta_hdr)

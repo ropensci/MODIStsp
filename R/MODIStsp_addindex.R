@@ -5,10 +5,10 @@
 #' checks for correctness of provided information (e.g., correct bandnames, computable formula, etc...). If the index is legit,
 #' it modifies the MODIStsp_Previous.RData file so to allow computation of the additional index within MODIStsp.
 #' To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Previous subfolder of the
-#' folder in which the package was installed, or the alternative RData specified by the parameter "option_file".
+#' folder in which the package was installed, or the alternative JSON specified by the parameter "option_jsfile".
 #' The function can be run either from within the main MODIStsp GUI, or a standalone script. In the latter case, it modifies either the
 #' MODIStsp_Previous.RData options file, or the optins_file specified by the user, to add the new index.
-#' @param option_file settings (optional): full path of the RData file containing the processing options in which the new indexes
+#' @param option_jsfile settings (optional): full path of the JSON file containing the processing options in which the new indexes
 #'  are saved (default: MODIStsp_Previous.RData in subdir Previous).
 #' @param gui logical value (default: TRUE): if TRUE, the GUI is opened to define the new index; otherwise use the "new_indexbandname",
 #'  "new_indexfullname" and "new_indexformula" parameters to define it non-interactively.
@@ -35,7 +35,7 @@
 #'
 #' # Run the GUI and save the new index in a custom RData file
 #' \dontrun{
-#' MODIStsp_addindex(option_file = "X:/yourpath/youroptions.RData")}
+#' MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")}
 #'
 #' # Define the new index non-interactively
 #' \dontrun{
@@ -45,7 +45,7 @@
 #'
 #'
 
-MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", new_indexfullname="",
+MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", new_indexfullname="",
                               new_indexformula="", new_indexnodata_out = "32767", MODIStsp_dir=NA) {
 
   # Initialization and retrieval of parameters ----
@@ -58,9 +58,9 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
     MODIStsp_dir <- system.file(package = "MODIStsp")
   }
   previous_dir <- file.path(MODIStsp_dir,"Previous")
-  previous_file <- ifelse(is.na(option_file), file.path(previous_dir, "MODIStsp_Previous.RData"), option_file)
-  load(previous_file)
-
+  previous_jsfile <- ifelse(is.na(option_jsfile), file.path(previous_dir, "MODIStsp_Previous.json"), option_jsfile)
+  general_opts <- RJSONIO::fromJSON(previous_jsfile)
+  
   # Restore MODIS products if existing, otherwise retrieve data from xml file ----
   load(general_opts$prodopts_file)
   n_products <- length(prod_opt_list) #how many product available ? = elements in root
@@ -113,11 +113,11 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
     all_indexes_bandnames <- all_indexes_fullnames <- NA
     for (prod in names(prod_opt_list)) {  # cycle on available products
       for (vers in names(prod_opt_list[[prod]])) {  # cycle on available product versions
-        all_indexes_bandnames <- c(all_indexes_bandnames, prod_opt_list[[prod]][[vers]]$indexes_bandnames)
-        all_indexes_fullnames <- c(all_indexes_fullnames, prod_opt_list[[prod]][[vers]]$indexes_fullnames)
-        if (exists("custom_indexes")) {
-          all_indexes_bandnames <- c(all_indexes_bandnames, custom_indexes[[prod]][[vers]]$indexes_bandnames)
-          all_indexes_fullnames <- c(all_indexes_fullnames, custom_indexes[[prod]][[vers]]$indexes_fullnames)
+        all_indexes_bandnames <- c(all_indexes_bandnames, as.list(prod_opt_list[[prod]][[vers]])$indexes_bandnames)
+        all_indexes_fullnames <- c(all_indexes_fullnames, as.list(prod_opt_list[[prod]][[vers]])$indexes_fullnames)
+        if (is.null(general_opts$custom_indexes[[prod]][[vers]])) {
+          all_indexes_bandnames <- c(all_indexes_bandnames, as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_bandnames)
+          all_indexes_fullnames <- c(all_indexes_fullnames, as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_fullnames)
         }
       }
     }
@@ -137,17 +137,19 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
   # Function to add the formula in previous file ----
   # (it is called if no errors are detected)
   save_formula <- function(refbands_names, req_bands, new_indexbandname, new_indexfullname,
-                           new_indexformula, new_indexnodata_out, general_opts, prod_opt_list, previous_file) {
+                           new_indexformula, new_indexnodata_out, general_opts, prod_opt_list, previous_jsfile) {
 
     # initialise list of custom indexes, if it does not exist yet
-    if (!exists("custom_indexes")) {
-      custom_indexes <- list() 
+    if (is.null(general_opts$custom_indexes)) {
+      general_opts$custom_indexes <- list() 
       for (prod in names(prod_opt_list)) {
-        custom_indexes[[prod]] <- list()
+        general_opts$custom_indexes[[prod]] <- list()
         for (vers in names(prod_opt_list[[prod]])) {
-          custom_indexes[[prod]][[vers]] <- list()
-          custom_indexes[[prod]][[vers]]$indexes_bandnames <- custom_indexes[[prod]][[vers]]$indexes_fullnames <-
-            custom_indexes[[prod]][[vers]]$indexes_formulas <- custom_indexes[[prod]][[vers]]$indexes_nodata_out <-
+          general_opts$custom_indexes[[prod]][[vers]] <- list()
+          general_opts$custom_indexes[[prod]][[vers]]$indexes_bandnames <- 
+            general_opts$custom_indexes[[prod]][[vers]]$indexes_fullnames <-
+            general_opts$custom_indexes[[prod]][[vers]]$indexes_formulas <-
+            general_opts$custom_indexes[[prod]][[vers]]$indexes_nodata_out <-
             character(0)
         }
       }
@@ -169,17 +171,22 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
         # won't be broken if an index is added later than their creation.
         n_req_bands <- sum(req_bands)
         if (n_req_bands == check ) {
-          custom_indexes[[prod]][[vers]]$indexes_bandnames <- c(custom_indexes[[prod]][[vers]]$indexes_bandnames,new_indexbandname)
-          custom_indexes[[prod]][[vers]]$indexes_fullnames <- c(custom_indexes[[prod]][[vers]]$indexes_fullnames,new_indexfullname)
-          custom_indexes[[prod]][[vers]]$indexes_formulas <- c(custom_indexes[[prod]][[vers]]$indexes_formulas,new_indexformula)
-          custom_indexes[[prod]][[vers]]$indexes_nodata_out <- c(custom_indexes[[prod]][[vers]]$indexes_nodata_out,new_indexnodata_out)
+          tmp_indexes_bandnames <- c(as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_bandnames,new_indexbandname)
+          tmp_indexes_fullnames <- c(as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_fullnames,new_indexfullname)
+          tmp_indexes_formulas <- c(as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_formulas,new_indexformula)
+          tmp_indexes_nodata_out <- c(as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_nodata_out,new_indexnodata_out)
+          general_opts$custom_indexes[[prod]][[vers]] <- list("indexes_bandnames"=tmp_indexes_bandnames,
+                                                              "indexes_fullnames"=tmp_indexes_fullnames,
+                                                              "indexes_formulas"=tmp_indexes_formulas,
+                                                              "indexes_nodata_out"=tmp_indexes_nodata_out)
+          rm(tmp_indexes_bandnames,tmp_indexes_fullnames,tmp_indexes_formulas,tmp_indexes_nodata_out)
         }
       }
     }  #End Cycle on products
 
     # Save the products list and the chars of the products in previous file
-    save(general_opts, custom_indexes, file = previous_file)
-
+    write(RJSONIO::toJSON(general_opts),previous_jsfile)
+    
     return(NULL)
 
   } # end of save_formula()
@@ -227,7 +234,7 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
         save_formula(refbands_names = refbands_names, req_bands = attr(catch_err,"req_bands"),
                      new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                      new_indexnodata_out = new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
-                     prod_opt_list = prod_opt_list, previous_file = previous_file)
+                     prod_opt_list = prod_opt_list, previous_jsfile = previous_jsfile)
         if (exists("Quit")) {
           gmessage("The new Spectral Index was correctly added! To use it, Re-open the 'Select Processing Layer' window.", title = "Index added")
         } else {
@@ -267,7 +274,7 @@ MODIStsp_addindex <- function(option_file=NA, gui=TRUE, new_indexbandname="", ne
       save_formula(n_products = n_products, xmltop = xmltop, refbands_names = refbands_names, req_bands = attr(catch_err,"req_bands"),
                    new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                    new_indexnodata_out = new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
-                   mod_prod_list = mod_prod_list, previous_file = previous_file)
+                   mod_prod_list = mod_prod_list, previous_jsfile = previous_jsfile)
       message("The new Spectral Index was correctly added! It will be available from the next running of MODIStsp().")
     } else if (catch_err == 1) {
       stop(paste0("The formula of the new index is not computable. Please check it (Valid band names are: ",paste(refbands_names,collapse = ", "),"."))

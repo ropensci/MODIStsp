@@ -103,7 +103,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
     stop("Please provide a valid \"option_file\" path value (or run with gui=TRUE).")
   }
 
-  # Folders in which the RData files (previous settings and product descriptions) are saved
+  # Folders in which the JSON/RData files (previous settings and product descriptions) are saved
   if (is.null(options_file)) {
     previous_dir <- file.path(MODIStsp_dir,"Previous")
   } else {
@@ -114,8 +114,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   dir.create(prodopts_dir, showWarnings = FALSE, recursive = TRUE)
   
   # Previous options file (or file passed by user in non-interactive mode)
-  previous_file <- if (is.null(options_file)) {
-    file.path(previous_dir, "MODIStsp_Previous.RData")
+  previous_jsfile <- if (is.null(options_file)) {
+    file.path(previous_dir, "MODIStsp_Previous.json")
   } else {
     options_file
   }
@@ -125,33 +125,32 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   #- ------------------------------------------------------------------------------- -#
   #  Set general processing options - used at first execution to initialize GUI
   #- ------------------------------------------------------------------------------- -#
-  out_proj_names <- c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
-  out_proj_list <- hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs ",
-                        "UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
-                        "Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-                        "User Defined" = "")
+  # out_proj_names <- c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
+  # out_proj_list <- hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs ",
+  #                       "UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+  #                       "Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+  #                       "User Defined" = "")
   MOD_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs "
 
   # Load options if existing, otherwise initialise them ----
-  if (file.exists(previous_file)) {
-    load(previous_file)
+  if (file.exists(previous_jsfile)) {
+    general_opts <- RJSONIO::fromJSON(previous_jsfile)
   }
-  if (!exists("general_opts") | if (exists("general_opts")) {is.null(attr(general_opts,"GeneratedBy"))} else {FALSE}) {
+  if (!exists("general_opts")) {
     # Create the general_opts structure used to communicate with the GUI and set default values
-    general_opts <- list(MODIStsp_dir = MODIStsp_dir, previous_file = previous_file, prodopts_file = prodopts_file, xml_file = xml_file, out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
-                         sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = strftime(Sys.Date(),"%Y-01-01"), end_date = Sys.Date(),
-                         bandsel = NA, indexes_bandsel = NA, quality_bandsel = NA,
+    general_opts <- list(MODIStsp_dir = MODIStsp_dir, previous_jsfile = previous_jsfile, prodopts_file = prodopts_file, xml_file = xml_file, #out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
+                         sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = strftime(Sys.Date(),"%Y-01-01"), end_date = as.character(Sys.Date()),
+                         bandsel = rep(0,13), indexes_bandsel = rep(0,11), quality_bandsel = rep(0,21), # lenghts refearred to "Surf_Ref_8Days_500m (M*D09A1)" v6!
                          start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
-                         proj = "Sinusoidal", out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
-                         nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "")
-    custom_indexes <- list()
-    attr(general_opts,"GeneratedBy") <- attr(custom_indexes,"GeneratedBy") <- "MODIStsp"
-    attr(general_opts,"MODIStspVersion") <- attr(custom_indexes,"MODIStspVersion") <- packageVersion("MODIStsp")
-    save(general_opts, custom_indexes, file = previous_file) # Save options to previous file
-  } else if (is.null(attr(general_opts,"MODIStspVersion"))) {
-    stop(paste0("The option file in use (",previous_file,") was created with an too old MODIStsp version (<=1.2.2), and can not be used with the current version. Please delete it or specify a different value for option_file parameter."))
-  } else if (attr(general_opts,"MODIStspVersion")<packageVersion("MODIStsp")) {
-    warning(paste0("The option file in use (",previous_file,") was created with an old MODIStsp version (",attr(general_opts,"MODIStspVersion"),"): this could lead to errors!"))
+                         proj = "Sinusoidal", user_proj4 = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
+                         out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
+                         nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
+                         MODIStspVersion = as.character(packageVersion("MODIStsp")), custom_indexes = list())
+    write(RJSONIO::toJSON(general_opts),previous_jsfile)
+  } else if (is.null(general_opts$MODIStspVersion)) {
+    stop(paste0("The option file in use (",previous_jsfile,") was created with an too old MODIStsp version (<=1.2.2), and can not be used with the current version. Please delete it or specify a different value for option_file parameter."))
+  } else if (general_opts$MODIStspVersion<packageVersion("MODIStsp")) {
+    warning(paste0("The option file in use (",previous_jsfile,") was created with an old MODIStsp version (",general_opts$MODIStspVersion,"): this could lead to errors!"))
   }
   
   # Restore MODIS products if existing, otherwise retrieve data from xml file ----
@@ -179,7 +178,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    MODIStsp_GUI(general_opts, prod_opt_list, custom_indexes=custom_indexes, scrollWindow=scrollWindow)
+    MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow=scrollWindow)
   } else {
     Quit <<- FALSE
   }
@@ -189,8 +188,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   # When GUI is closed (or in a non-interactive run): If not Quit selected, restore the user selected options from previous file and launch the processing ----
   if (!Quit) {
 
-    if (file.exists(general_opts$previous_file)) {
-      load(general_opts$previous_file)
+    if (file.exists(general_opts$previous_jsfile)) {
+      general_opts <- RJSONIO::fromJSON(previous_jsfile)
     } else {
       cat("[",date(),"] Processing Options file not found! Exiting!\n"); stop()
     }
@@ -200,7 +199,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
       cat("[",date(),"] Product information file not found! Exiting!\n"); stop()
     }
     prod_opts <- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
-    custom_idx <- custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]]
+    custom_idx <- general_opts$custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]]
     
     # Create variables needed to launch the processing
     # start_date <- paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = ".")
@@ -278,9 +277,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
                                                   file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder, gui = gui))
 
     # At end of succesfull execution, save the options used in the main output folder
-    load(previous_file)
-    optfilename = file.path(general_opts$out_folder,paste0('MODIStsp_', Sys.Date(),'.RData'))
-    save(general_opts,prod_opt_list,mod_prod_list, file = optfilename)
+    general_opts <- RJSONIO::fromJSON(previous_jsfile)
+    optfilename = file.path(general_opts$out_folder,paste0('MODIStsp_', Sys.Date(),'.json'))
+    write(RJSONIO::toJSON(general_opts),optfilename)
   } # End If on "Quit" --> If "Quit" above is skipped and program terminates
 
   # Clean up at end of processing ----

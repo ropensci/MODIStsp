@@ -4,12 +4,12 @@
 \alias{MODIStsp_addindex}
 \title{MODIStsp_addindex}
 \usage{
-MODIStsp_addindex(option_file = NA, gui = TRUE, new_indexbandname = "",
+MODIStsp_addindex(option_jsfile = NA, gui = TRUE, new_indexbandname = "",
   new_indexfullname = "", new_indexformula = "",
   new_indexnodata_out = "32767", MODIStsp_dir = NA)
 }
 \arguments{
-\item{option_file}{settings (optional): full path of the RData file containing the processing options in which the new indexes
+\item{option_jsfile}{settings (optional): full path of the JSON file containing the processing options in which the new indexes
 are saved (default: MODIStsp_Previous.RData in subdir Previous).}
 
 \item{gui}{logical value (default: TRUE): if TRUE, the GUI is opened to define the new index; otherwise use the "new_indexbandname",
@@ -38,7 +38,7 @@ The function asks the user to provide the info related to the new desired Spectr
 checks for correctness of provided information (e.g., correct bandnames, computable formula, etc...). If the index is legit,
 it modifies the MODIStsp_Previous.RData file so to allow computation of the additional index within MODIStsp.
 To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Previous subfolder of the
-folder in which the package was installed, or the alternative RData specified by the parameter "option_file".
+folder in which the package was installed, or the alternative JSON specified by the parameter "option_jsfile".
 The function can be run either from within the main MODIStsp GUI, or a standalone script. In the latter case, it modifies either the
 MODIStsp_Previous.RData options file, or the optins_file specified by the user, to add the new index.
 }
@@ -52,7 +52,7 @@ License: GPL 3.0
 
 # Run the GUI and save the new index in a custom RData file
 \dontrun{
-MODIStsp_addindex(option_file = "X:/yourpath/youroptions.RData")}
+MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")}
 
 # Define the new index non-interactively
 \dontrun{
