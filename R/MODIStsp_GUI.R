@@ -67,6 +67,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = cat_group, horizontal = TRUE,
     selected = match(sel_cat, unique(mod_prod_cat$cat)),
     handler = function(h,...) {
+
       # Select only products of this category
       sel_prod <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)][1]
       prod_wid[] <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)]
