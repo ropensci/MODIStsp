@@ -144,15 +144,42 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
                          start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
                          proj = "Sinusoidal", out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
                          nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "")
-    attr(general_opts,"GeneratedBy") <- "MODIStsp"
     custom_indexes <- list()
+    attr(general_opts,"GeneratedBy") <- attr(custom_indexes,"GeneratedBy") <- "MODIStsp"
+    attr(general_opts,"MODIStspVersion") <- attr(custom_indexes,"MODIStspVersion") <- packageVersion("MODIStsp")
     save(general_opts, custom_indexes, file = previous_file) # Save options to previous file
+  } else if (is.null(attr(general_opts,"MODIStspVersion"))) {
+    stop(paste0("The option file in use (",previous_file,") was created with an too old MODIStsp version (<=1.2.2), and can not be used with the current version. Please delete it or specify a different value for option_file parameter."))
+  } else if (attr(general_opts,"MODIStspVersion")<packageVersion("MODIStsp")) {
+    warning(paste0("The option file in use (",previous_file,") was created with an old MODIStsp version (",attr(general_opts,"MODIStspVersion"),"): this could lead to errors!"))
   }
-
+  
+  # Restore MODIS products if existing, otherwise retrieve data from xml file ----
+  if (file.exists(prodopts_file)) {
+    load(prodopts_file)
+  }
+  if (!exists("prod_opt_list") | if (exists("prod_opt_list")) {
+      is.null(attr(prod_opt_list,"MODIStspVersion")) | if (!is.null(attr(prod_opt_list,"MODIStspVersion"))) {
+          attr(prod_opt_list,"MODIStspVersion")<packageVersion("MODIStsp")
+        } else {FALSE}
+    } else {FALSE}) {
+    mess_text <- "Waiting while reading the MODIS products list..."
+    if (gui) {
+      mess <- gwindow(title = "Please wait...", container = TRUE, width = 400, height = 40)
+      mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
+    } else {message(mess_text)}
+    MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file )
+    load(prodopts_file)
+    if (gui) {
+      addHandlerUnrealize(mess_lab, handler = function(h,...) {return(FALSE)})
+      dispose(mess_lab)
+    }
+  }
+  
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    MODIStsp_GUI(general_opts, custom_indexes=custom_indexes, scrollWindow=scrollWindow)
+    MODIStsp_GUI(general_opts, prod_opt_list, custom_indexes=custom_indexes, scrollWindow=scrollWindow)
   } else {
     Quit <<- FALSE
   }

@@ -6,6 +6,9 @@
 #'
 #' @param general_opts General options data frame passed by MODIStsp_main. Contains paths and other variables used to initialize the GUI
 #' 						if a previous options file is not existing.
+#' @param prod_opt_list List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)
+#' @param custom_indexes List of potential indices added by the user
+#' @param scrollWindow logical parameter passed by MODIStsp main function.
 #' @return NULL - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
@@ -15,23 +18,10 @@
 #' @importFrom sp CRS
 #' @import gWidgets
 
-MODIStsp_GUI <- function(general_opts, custom_indexes, scrollWindow){
+MODIStsp_GUI <- function(general_opts, prod_opt_list, custom_indexes, scrollWindow){
   
   assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
   
-  # Restore MODIS products if existing, otherwise retrieve data from xml file ----
-  if (file.exists(general_opts$prodopts_file)) {
-    load(general_opts$prodopts_file)
-  }
-  if (!exists("prod_opt_list") | if (exists("prod_opt_list")) {is.null(attr(prod_opt_list,"GeneratedBy"))} else {FALSE}) {
-    mess <- gwindow(title = "Please wait...", container = TRUE, width = 400, height = 40)
-    mess_lab <- glabel(text = "Waiting while reading the MODIS products list...", editable = FALSE, container = mess)
-    MODIStsp_read_xml(prodopts_file = general_opts$prodopts_file, xml_file = general_opts$xml_file )
-    load(general_opts$prodopts_file)
-    addHandlerUnrealize(mess_lab, handler = function(h,...) {return(FALSE)})
-    dispose(mess_lab)
-  }
-
   #- ------------------------------------------------------------------------------- -#
   #  Start Building the GUI
   #- ------------------------------------------------------------------------------- -#

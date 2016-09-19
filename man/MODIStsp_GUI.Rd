@@ -4,11 +4,17 @@
 \alias{MODIStsp_GUI}
 \title{MODIStsp_GUI}
 \usage{
-MODIStsp_GUI(general_opts, scrollWindow)
+MODIStsp_GUI(general_opts, prod_opt_list, custom_indexes, scrollWindow)
 }
 \arguments{
 \item{general_opts}{General options data frame passed by MODIStsp_main. Contains paths and other variables used to initialize the GUI
 if a previous options file is not existing.}
+
+\item{prod_opt_list}{List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)}
+
+\item{custom_indexes}{List of potential indices added by the user}
+
+\item{scrollWindow}{logical parameter passed by MODIStsp main function.}
 }
 \value{
 NULL - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
