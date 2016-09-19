@@ -57,7 +57,9 @@ MODIStsp_GUI <- function(general_opts, custom_indexes, scrollWindow){
   satprod_group <- ggroup(horizontal = TRUE, container = satprod_frame)
   
   # set dummy global variables holding the initial values of selected bands
-  temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
+  temp_wid_bands <<- general_opts$bandsel
+  temp_wid_bands_indexes <<- general_opts$indexes_bandsel
+  temp_wid_bands_quality <<- general_opts$quality_bandsel
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for category selection

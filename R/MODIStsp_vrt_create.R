@@ -116,7 +116,7 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,sens_s
         elapsed <- signif(difftime(temp_dates, strptime(paste(2000, 001), format = "%Y %j"), units = "days"), 5)
 
         # Write the hdr file for the meta file
-        fileConn_meta_hdr <- file(paste0(file_path_sans_ext(meta_filename),".hdr"), "w")
+        fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(meta_filename),".hdr"), "w")
         writeLines(c("ENVI"), fileConn_meta_hdr)		# Write first line
         writeLines(c("Description = {ENVI META FILE}"), fileConn_meta_hdr)		# Dummy
         writeLines(paste0("samples = ", nsamp), fileConn_meta_hdr)			#nsamp
