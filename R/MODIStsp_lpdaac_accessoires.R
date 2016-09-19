@@ -256,7 +256,7 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
     
     while (class(getlist) == "try-error") {
       getlist <- try(GET(paste0(http, date_dir, "/"), timeout = 5, authenticate(user, password)))
-        # try(strsplit(getURL(paste(http, date_dir, "/", sep = ""),followLocation = TRUE,
+      # try(strsplit(getURL(paste(http, date_dir, "/", sep = ""),followLocation = TRUE,
           # .opts = list(timeout = 10,maxredirs = 5,verbose = FALSE)),"\r*\n")[[1]], silent = TRUE)
       if (class(getlist) == "try-error") {   # if error on response, retry
         Sys.sleep(1)
@@ -272,8 +272,8 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
       }
     
       if (class(getlist) != "try-error") {
-        getlist <- getlist[grep(".*>([A-Z0-9]+\\.A[0-9]+\\.[hv0-9]+\\.[0-9]+\\.[0-9]+\\.hdf)<.*",getlist)]
-        getlist <- gsub(".*>([A-Z0-9]+\\.A[0-9]+\\.[hv0-9]+\\.[0-9]+\\.[0-9]+\\.hdf)<.*","\\1",getlist)
+        getlist <- getlist[grep(".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*",getlist)]
+        getlist <- gsub(".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*","\\1",getlist)
 
       } else if (ce == 5)  {
         if (gui) {
