@@ -11,7 +11,6 @@ L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessi
   Volume 97, Pages 40-48, ISSN 0098-3004, http://dx.doi.org/10.1016/j.cageo.2016.08.020.
   
 
-
 * **22/08/2016**
 
 There seem to be currently some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github). We are working to understand the issue. For the time being, manually installing all the dependencies could solve the issue. To do so, please try doing: 
@@ -50,7 +49,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 ## Important note - MODIS collection 006
 
-NASA recently switched to provision of Collection 6 datasets for most Land Products. At the moment, MODIStsp only allows download for Collection 5 datasets. **Support for Collection 6 will be added as soon as possible !**
+NASA recently switched to provision of Collection 6 datasets for most Land Products. At the moment, MODIStsp stable release only allows download for Collection 5 datasets. If you want to test the download of collection 6 datasets, please use the "devel" branch (follow instructions below; at point 3 use the command `install_github("lbusett/MODIStsp", ref="devel")`). Note that this is development branch, so do not hexitate to report us any potential problem. **Stable support for Collection 6 will be added as soon as possible!**
 
 ## Installation <a name="Installation"></a> 
 
