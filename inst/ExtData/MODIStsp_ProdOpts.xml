@@ -2942,13 +2942,13 @@
     <MOD11_L2>
         <name>Surf_Temp_5Min_1Km (M*D11_L2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_02>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
         <file_prefix_terra>MOD11_L2</file_prefix_terra>
         <file_prefix_aqua>MYD11_L2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname>MODIS/Terra/Aqua Land Surface Temperature and Emissivity 5-Minute L2 Swath 1 km</prod_fullname>
+                <prod_fullname>MODIS/Terra/Aqua Land Surface Temperature/Emissivity 5-Minute L2 Swath 1 km</prod_fullname>
                 <main_out_folder>Surf_Temp_5Min_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11_L2.005/</http_terra>
@@ -3052,7 +3052,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D11_L2: MODIS/Terra/Aqua Land Surface Temperature and Emissivity 5-Minute L2 Swath 1 km</prod_fullname>
+                <prod_fullname>M*D11_L2: MODIS/Terra/Aqua Land Surface Temperature/Emissivity 5-Minute L2 Swath 1 km</prod_fullname>
                 <main_out_folder>Surf_Temp_5Min_1Km_v6</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11_L2.006/</http_terra>
@@ -3183,13 +3183,13 @@
     <MOD11A1>
         <name>Surf_Temp_Daily_1Km (M*D11A1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_02>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
         <file_prefix_terra>MOD11A1</file_prefix_terra>
         <file_prefix_aqua>MYD11A1</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname>Land Surface Temperature and Emissivity Daily L3 Global 1 km Grid SIN</prod_fullname>
+                <prod_fullname>Land Surface Temperature/Emissivity Daily L3 Global 1 km Grid SIN</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.005/</http_terra>
@@ -3314,7 +3314,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D11A1: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Daily L3 Global 1 km Grid SIN V006</prod_fullname>
+                <prod_fullname>M*D11A1: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Daily L3 Global 1 km Grid SIN V006</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_1Km_v6</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.006/</http_terra>
@@ -3466,13 +3466,13 @@
     <MOD11A2>
         <name>Surf_Temp_8Days_1Km (M*D11A2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_02>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
         <file_prefix_terra>MOD11A2</file_prefix_terra>
         <file_prefix_aqua>MYD11A2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname>Land Surface Temperature and Emissivity 8-Day L3 Global 1km</prod_fullname>
+                <prod_fullname>Land Surface Temperature/Emissivity 8-Day L3 Global 1km</prod_fullname>
                 <main_out_folder>Surf_Temp_8Days_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.005/</http_terra>
@@ -3621,7 +3621,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D11A2: MODIS/Terra/Aqua Land Surface Temperature and Emissivity 8-Day L3 Global 1 km Grid SIN V006</prod_fullname>
+                <prod_fullname>M*D11A2: MODIS/Terra/Aqua Land Surface Temperature/Emissivity 8-Day L3 Global 1 km Grid SIN V006</prod_fullname>
                 <main_out_folder>Surf_Temp_8Days_1Km_v6</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.006/</http_terra>
@@ -3773,13 +3773,13 @@
     <MOD11B1>
         <name>Surf_Temp_Daily_GridSin (M*D11B1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_02>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
         <file_prefix_terra>MOD11B1</file_prefix_terra>
         <file_prefix_aqua>MYD11B1</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname>MODIS/Terra Land Surface Temperature and Emissivity Daily L3 Global Grid SIN</prod_fullname>
+                <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global Grid SIN</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_GridSin_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.005/</http_terra>
@@ -3939,7 +3939,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D11B1: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Daily L3 Global 6 km Grid SIN V006</prod_fullname>
+                <prod_fullname>M*D11B1: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Daily L3 Global 6 km Grid SIN V006</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_GridSin_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.006/</http_terra>
@@ -4180,13 +4180,13 @@
     <MOD11B2>
         <name>Surf_Temp_8Days_GridSin (M*D11B2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_02>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
         <file_prefix_terra>MOD11B2</file_prefix_terra>
         <file_prefix_aqua>MYD11B2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D11B2: MODIS/Terra/Aqua Land Surface Temperature and Emissivity 8-Day L3 Global 6 km Grid SIN V006</prod_fullname>
+                <prod_fullname>M*D11B2: MODIS/Terra/Aqua Land Surface Temperature/Emissivity 8-Day L3 Global 6 km Grid SIN V006</prod_fullname>
                 <main_out_folder>Surf_Temp_8Days_GridSin_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B2.006/</http_terra>
@@ -4399,13 +4399,13 @@
     <MOD11B3>
         <name>Surf_Temp_Monthly_GridSin (M*D11B3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_02>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
         <file_prefix_terra>MOD11B3</file_prefix_terra>
         <file_prefix_aqua>MYD11B3</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D11B3: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Monthly L3 Global 6 km Grid SIN V006</prod_fullname>
+                <prod_fullname>M*D11B3: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Monthly L3 Global 6 km Grid SIN V006</prod_fullname>
                 <main_out_folder>Surf_Temp_Monthly_GridSin_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B3.006/</http_terra>
@@ -4618,13 +4618,13 @@
     <MOD11C1>
         <name>Surf_Temp_Daily_005dg (M*D11C1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_02>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
         <file_prefix_terra>MOD11C1</file_prefix_terra>
         <file_prefix_aqua>MYD11C1</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname>MODIS/Terra Land Surface Temperature and Emissivity Daily L3 Global 0.05Deg CMG</prod_fullname>
+                <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.005/</http_terra>
@@ -4784,7 +4784,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D11C1: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Daily L3 Global 0.05Deg CMG V006</prod_fullname>
+                <prod_fullname>M*D11C1: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                 <main_out_folder>Surf_Temp_Daily_005dg_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.006/</http_terra>
@@ -4976,13 +4976,13 @@
     <MOD11C2>
         <name>Surf_Temp_8Days_005dg (M*D11C2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_02>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
         <file_prefix_terra>MOD11C2</file_prefix_terra>
         <file_prefix_aqua>MYD11C2</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname>MODIS/Terra Land Surface Temperature and Emissivity 8-Day L3 Global 0.05Deg CMG</prod_fullname>
+                <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 0.05Deg CMG</prod_fullname>
                 <main_out_folder>Surf_Temp_8Days_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.005/</http_terra>
@@ -5128,7 +5128,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D11C2: MODIS/Terra/Aqua Land Surface Temperature and Emissivity 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
+                <prod_fullname>M*D11C2: MODIS/Terra/Aqua Land Surface Temperature/Emissivity 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
                 <main_out_folder>Surf_Temp_8Days_005dg_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.006/</http_terra>
@@ -5327,13 +5327,13 @@
     <MOD11C3>
         <name>Surf_Temp_Monthly_005dg (M*D11C3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
-        <cat_02>Land Surface Temperature and Emissivity</cat_02>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
         <file_prefix_terra>MOD11C3</file_prefix_terra>
         <file_prefix_aqua>MYD11C3</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname>MODIS/Terra Land Surface Temperature and Emissivity Monthly L3 Global 0.05Deg CMG</prod_fullname>
+                <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity Monthly L3 Global 0.05Deg CMG</prod_fullname>
                 <main_out_folder>Surf_Temp_Monthly_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.005/</http_terra>
@@ -5486,7 +5486,7 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>M*D11C3: MODIS/Terra/Aqua Land Surface Temperature and Emissivity Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
+                <prod_fullname>M*D11C3: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
                 <main_out_folder>Surf_Temp_Monthly_005dg_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.006/</http_terra>
