@@ -174,7 +174,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   #- ------------------------------------------------------------------------------- -#
   band_group <- ggroup(horizontal = TRUE, container = satprod2_group)
   band_label <- glabel(text = "  Processing layers: ", container = band_group)
-  band_wid <- gbutton(text = "Click To Select", border = TRUE,				# Child widget for processing bands selection
+  band_wid <- gbutton(text = "Click To Select Desired Layers", border = TRUE,				# Child widget for processing bands selection
                       handler = function(h,....) {
                         
                         load(general_opts$prodopts_file)
