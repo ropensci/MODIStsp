@@ -21,7 +21,7 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @importFrom gWidgets gconfirm
 #' @importFrom RCurl getURL
 #' @importFrom httr GET content authenticate timeout
-#' @importFrom stringr str_extract
+#' @importFrom stringr str_extract str_pad str_split
 #' @importFrom utils download.file
 
 lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, password = password, gui, out_folder_mod, .Platform) {

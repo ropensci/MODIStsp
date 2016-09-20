@@ -69,6 +69,7 @@
 #' @importFrom tools file_path_sans_ext
 #' @importFrom XML xmlParse xmlRoot xmlToList
 #' @importFrom RCurl getBinaryURL
+#' @importFrom stringr str_locate
 #' @import gWidgets
 
 MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor, download_server, 
