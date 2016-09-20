@@ -139,13 +139,14 @@ When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection 
   library(png)
   library(grid)
   library(knitr)
-  img <- readPNG("Figure_2.png")
+  img <- readPNG("Figure_2_new.png")
   grid.raster(img)
 ```
 
-##	MODIS Product, Satellites and Layers
+##	MODIS Product, Platform and Layers
 
-Allows to select the MODIS product of interest from a drop-down menu. The user can also select which MODIS sensors should be considered for download and creation of the time series ("Terra", "Aqua" or both). After selecting the product, pushing the "Select Layers" button opens the "Select Processing Layers" GUI panel (Figure 2), from which the user **must** select which MODIS original and/or derived QI and SI layers should be processed: 
+Allows to select the MODIS product of interest using the **"Category"** and **"Product"** drop down menus. 
+The user can then  select which **MODIS platform(s)** should be considered for download and creation of the time series ("Terra", "Aqua" or "Both"), and which **version** of the product - 5 or 6 (when available) - should be considered. After selecting the product, pushing the **"Click to Select Desired Layers"** button opens the "Select Processing Layers" GUI panel (Figure 2), from which the user **must** select which MODIS original and/or derived QI and SI layers should be processed: 
 
 ```{r fig.width = 7,  fig.height = 2.8, fig.align = "center", fig.cap = 'The "Select Processing Layers" GUI',echo=FALSE}
   library(png)
@@ -189,19 +190,25 @@ Users can however **specify other SIs to be computed without modifying MODIStsp 
 
 Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked,  and the new index added in the list of available ones for all products allowing its computation at the next MODIStsp execution (Figure 4). 
 
+##	Download Method
+Allows to specify which download method should be used. Available choices are: 
+1. **http:** Download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). This requires providing a user name and password, which can be obtained by registrering an account at the address: https://urs.earthdata.nasa.gov/profile 
+2. **ftp:** Download from NASA ftp archive (ftp://ladsweb.nascom.nasa.gov/)
+3. **offline:** This option allows to process/reprocess HDF files already available on the user's PC without downloading from NASA - useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp (for example, to create time series for an additional layer)
+
 ## Processing Period
-Allows to specify the starting and ending dates (dd/mm/yyyy) to be considered for the creation of the time series. 
+Allows to specify the starting and ending dates to be considered for the creation of the time series. Dates **must** be provided in the _yyyy-mm--dd_ format (e.g., 2015-01-31)
 
 ## Spatial Extent
 Allows to define the area of interest for the processing. Two main options are possible:  .
 
 1.  _Full Tiles Extent_: the user must specify which MODIS tiles he would like to process using the "Start" and "End" horizontal and vertical sliders in the "Required MODIS Tiles" frame.  During processing, data from the different tiles is mosaiced, and a single file covering the total area is produced for each acquisition date (Note:  pressing the "show map" button, a representation of the MODIS tiles grid is shown to facilitate the selection).
 
-2.  _Resized_: the user can specify the spatial extent of the desired outputs either; 
+2.  _Resized_: the user can specify the spatial extent of the desired outputs either by; 
 
-  a. **Manually inserting** the coordinates of the Upper Left and Lower Right corners of the area of interest in the "Bounding Box" frame. _Coordinates of the corners must be provided in the coordinate system of the selected  output projection_. 
+  a. **manually inserting** the coordinates of the Upper Left and Lower Right corners of the area of interest in the "Bounding Box" frame. _Coordinates of the corners must be provided in the coordinate system of the selected  output projection_. 
     
-  b. **pressing the "Load Extent from a Spatial File" and selecting a raster or vector spatial file**. In this case, the bounding box of the selected file is retrieved, converted in the selected output projection, and shown in the "Bounding Box" frame.Required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
+  b. **pressing the "Load Extent from a Spatial File" and selecting a raster or vector spatial file**. In this case, the bounding box of the selected file is retrieved, converted in the selected output projection, and shown in the "Bounding Box" frame. Required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
     
 ## Reprojection and Resize
 Allows to specify the options to be used for reprojecting and resizing the MODIS images. In particular:
