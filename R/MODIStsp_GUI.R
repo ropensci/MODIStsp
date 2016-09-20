@@ -49,9 +49,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   # Widgets for product selection and bands selection
   #- ------------------------------------------------------------------------------- -#
   satprod_frame <- gframe(text = "<span foreground='red' size='x-large'>MODIS Product, Platform and Layers selection</span>",
-                          markup = TRUE,horizontal = FALSE, container = main_group)
-  
-  satprod_group <- ggroup(horizontal = TRUE, container = satprod_frame)
+                          markup = TRUE, horizontal = FALSE, container = main_group)
   
   # set dummy global variables holding the initial values of selected bands
   temp_wid_bands <<- general_opts$bandsel
@@ -61,11 +59,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   #- ------------------------------------------------------------------------------- -#
   # Widgets for category selection
   #- ------------------------------------------------------------------------------- -#
-  satprod1_group <- gframe(text = "<span weight='bold'></span>", markup = TRUE, pos=0,
-                           horizontal = TRUE, container = satprod_group)
-  cat_group <- ggroup(horizontal = TRUE, container = satprod1_group)
-  cat_label <- glabel(text = " Category:  ", container = cat_group)
-  cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = cat_group, horizontal = TRUE,
+  satprod1_group <- ggroup(horizontal = TRUE, container = satprod_frame)
+  cat_label <- glabel(text = " Category:", container = satprod1_group)
+  cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = satprod1_group, horizontal = TRUE,
                        selected = match(sel_cat, unique(mod_prod_cat$cat)),
                        handler = function(h,...) {
                          
@@ -97,14 +93,15 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                          # reset dummy variables for band selection to 0 on product change
                          temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
                        })
+  size(cat_wid) <- list(width=325)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Product selection
   #- ------------------------------------------------------------------------------- -#
-  prod_group <- ggroup(horizontal = TRUE, container = satprod1_group)
-  prod_label <- glabel(text = "   Product:   ", container = prod_group)
+  addSpring(satprod1_group, horizontal=TRUE)
+  prod_label <- glabel(text = "   Product:", container = satprod1_group)
   prod_wid <- gdroplist(items = mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)], 
-                        container = prod_group, horizontal = TRUE,
+                        container = satprod1_group, horizontal = TRUE,
                         selected = match(general_opts$sel_prod, mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)]),
                         handler = function(h,...) {
                           sel_prod <- if (!is.null(svalue(prod_wid))) {svalue(prod_wid)} else {sel_prod}
@@ -132,49 +129,47 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                           # reset dummy variables for band selection to 0 on product change
                           temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
                         })
+  size(prod_wid) <- list(width=325)
   
   font(prod_label) <- font(cat_label) <- list(family = "sans",weight = "bold")
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Sensor selection
   #- ------------------------------------------------------------------------------- -#
-  addSpace(satprod1_group, 1, horizontal=TRUE)
-  # gseparator(horizontal=FALSE, container=satprod_group, expand=TRUE)
-  addSpring(satprod_group, horizontal=TRUE)
-  satprod2_group <- gframe(text = "<span weight='bold'></span>", markup = TRUE, pos=0,
-                           horizontal = TRUE, container = satprod_frame)
-  addSpace(satprod2_group, 1, horizontal=TRUE)
-  
+  satprod2_group <- ggroup(horizontal = TRUE, container = satprod_frame)
+
   # addSpace(satprod_frame, 20, horizontal = TRUE)
-  sens_group <- ggroup(horizontal = TRUE, container = satprod2_group)
-  sens_label <- glabel(text = "Platform:  ", container = sens_group)
-  sens_wid <- gdroplist(items = c("Terra"), container = sens_group, text = "Select Layers", selected = 1)
+  sens_label <- glabel(text = " Platform:", container = satprod2_group)
+  sens_wid <- gdroplist(items = c("Terra"), container = satprod2_group, text = "Select Layers", selected = 1)
   if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$combined == 1) {
     enabled(sens_wid) <- FALSE
   } else {
     sens_wid[] <- c("Terra","Aqua","Both")
     svalue(sens_wid) <- general_opts$sensor
   }
+  size(sens_wid) <- list(width=150)
+  
+  addSpace(satprod2_group, 20, horizontal = TRUE)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Version selection
   #- ------------------------------------------------------------------------------- -#
-  vers_label <- glabel(text = "  Version: ", container = sens_group)
+  vers_label <- glabel(text = " Version:", container = satprod2_group)
   vers_wid <- gdroplist(items = sapply(prod_opt_list[[sel_prod]],function(x){x[["v_number"]]}),
-                        container = sens_group, text = "Select Version", selected = match(general_opts$prod_version, names(prod_opt_list[[sel_prod]])),
+                        container = satprod2_group, text = "Select Version", selected = match(general_opts$prod_version, names(prod_opt_list[[sel_prod]])),
                         handler = function(h,...) {
                           # reset dummy variables for band selection to 0 on product change
                           temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
                         })
+  size(vers_wid) <- list(width=100)
   
-  addSpace(satprod_frame, 20, horizontal = TRUE)
+  addSpace(satprod2_group, 20, horizontal = TRUE)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Layers selection
   #- ------------------------------------------------------------------------------- -#
-  band_group <- ggroup(horizontal = TRUE, container = satprod2_group)
-  band_label <- glabel(text = "  Processing layers: ", container = band_group)
-  band_wid <- gbutton(text = "Click To Select", border = TRUE,				# Child widget for processing bands selection
+  band_label <- glabel(text = " Processing layers:", container = satprod2_group)
+  band_wid <- gbutton(text = "   Click To Select   ", border = TRUE,				# Child widget for processing bands selection
                       handler = function(h,....) {
                         
                         load(general_opts$prodopts_file)
@@ -278,7 +273,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                         
                         visible(selgroup, set = TRUE)    # visualize band selection widgets
                         
-                      },container = band_group, expand = TRUE)
+                      },container = satprod2_group, expand = FALSE)
   
   font(vers_label) <- font(sens_label) <- font(band_label) <- list(family = "sans",weight = "bold")
   
@@ -299,11 +294,11 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                               enabled(authenticate_group) <- TRUE
                             }
                           })
-  addSpace(methods_group,2)
+  addSpace(methods_group, 20, horizontal = TRUE)
   authenticate_group = ggroup(container = methods_group)
   user_lab <- glabel(text = " User Name:", container = authenticate_group)
   user_wid <- gedit(text = general_opts$user, container = authenticate_group, width = 15)
-  addSpace(authenticate_group, 50)
+  addSpace(authenticate_group, 20)
   password_lab <- glabel(text = " Password:", container = authenticate_group)
   password_wid <- gedit(text = general_opts$password, container = authenticate_group, width = 15)
   visible(password_wid) <- FALSE
@@ -483,10 +478,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   font(start_x_lab) <-  font(start_y_lab)  <- list(family = "sans",weight = "bold")
   #	size(start_y_lab) = c(120,20)
   # 	size(start_y_wid) = size(end_y_wid) = size(end_y_lab) = size(start_y_start) = c(35,25)
-  
-  
-  
-  
+
   if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$tiled == 0) {
     enabled(tiles_group) <- FALSE
   } else {
@@ -691,7 +683,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                                       }
                                     })
   
-  size(output_res_sel_wid) <- size(proj_wid) <-c(120,22)
+  size(output_res_sel_wid) <- size(proj_wid) <-list(width=120)
   
   pixsize_lab <- glabel(text = "  Pixel Size:", container = output_res_group)
   font(pixsize_lab) <- list(family = "sans",weight = "bold")
