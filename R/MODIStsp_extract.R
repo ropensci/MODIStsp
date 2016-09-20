@@ -278,8 +278,8 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
       }
 
       ts_outside <- matrix(nrow = length(sel_dates), ncol = length(feat_names_outside))
-      ts_outsidedata.frame(ts_outside)
-      names(ts_outside) <- feat_names_outsides
+      ts_outside <- data.frame(ts_outside)
+      names(ts_outside) <- feat_names_outside
       ts <- cbind(ts, ts_outside)
       if (length(id_field) == 1) {
         sortindex <- match(sp_object@data[,eval(id_field)], names(ts))
