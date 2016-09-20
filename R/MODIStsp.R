@@ -22,7 +22,7 @@
 #' @importFrom rgdal getGDALVersionInfo
 #' @importFrom raster extent rasterOptions
 #' @importFrom tools file_path_sans_ext
-#' @importFrom utils memory.limit
+#' @importFrom utils memory.limit packageVersion
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used settings
 #' \dontrun{
