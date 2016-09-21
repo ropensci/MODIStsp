@@ -8,32 +8,41 @@ MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
   download_server = NA, scrollWindow = FALSE)
 }
 \arguments{
-\item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the saved parameters are retrieved from "options_file")}
+\item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the 
+saved parameters are retrieved from "options_file")}
 
-\item{options_file}{settings (optional): full path of the RData file containing the processing options (default: Previous.RData in subdir Previous);}
+\item{options_file}{settings (optional): full path of the RData file containing the 
+processing options (default: Previous.RData in subdir Previous);}
 
-\item{spatial_file_path}{(optional): full path of a spatial file to use as extent (default=NULL): if defined, the processing options which define the
-extent, the selected tiles and the "Full Tile / Resized" options are not considered; instead, new files are created on the extent of the provided
-spatial file.}
+\item{spatial_file_path}{(optional): full path of a spatial file to use as extent 
+(default=NULL): if defined, the processing options which define the extent, the 
+selected tiles and the "Full Tile / Resized" options are not considered; instead, new 
+files are created on the extent of the provided spatial file.}
 
-\item{download_server}{(optional): service used to download MODIS tiles, one of: 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov).
-If not specified, MODIStsp tries to download using http; if http fails, it tries with ftp.}
+\item{download_server}{(optional): service used to download MODIS tiles, one of: 
+'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov) or 'offline'
+ If not specified, MODIStsp tries to download using http; if http fails, it tries 
+ with ftp.}
 
-\item{scrollWindow}{(optional) logical parameter: if TRUE, the GUI window is opened fullscreen with scrollbars (this is useful on devices with
-small display). If using a device with a display resolution >= 1024x768, leaving this parameter to FALSE is suggested.}
+\item{scrollWindow}{(optional) logical parameter: if TRUE, the GUI window is opened 
+fullscreen with scrollbars (this is useful on devices with small display). If using a
+ device with a display resolution >= 1024x768, leaving this parameter to FALSE is 
+ suggested.}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MODIStsp)
 }
 \details{
-The function is used to initialize the processing (folder names, packages, etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs,
- and to launch the required routines for downloading and processing the requested datasets.
+The function is used to initialize the processing (folder names, packages, 
+ etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs, and to launch the 
+ required routines for downloading and processing the requested datasets.
 }
 \note{
 License: GPL 3.0
 }
 \examples{
-# Running the tool without any option will start the GUI with the default or last used settings
+# Running the tool without any option will start the GUI with the default or last used 
+# settings
 \dontrun{
 MODIStsp()}
 
