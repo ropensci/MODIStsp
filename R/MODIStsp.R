@@ -23,6 +23,7 @@
 #' @importFrom raster extent rasterOptions
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils memory.limit packageVersion
+#' @import gWidgetsRGtk2
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used settings
 #' \dontrun{
@@ -182,16 +183,15 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    
-    MODIStsp_GUI(general_opts, prod_opt_list, MODIStsp.env, scrollWindow=scrollWindow)
+    Quit = MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow=scrollWindow)
   } else {
-    MODIStsp.env$Quit <- FALSE
+    Quit <- FALSE
   }
   start.time <- Sys.time()
 
   # Launch the processing ----
   # When GUI is closed (or in a non-interactive run): If not Quit selected, restore the user selected options from previous file and launch the processing ----
-  if (!MODIStsp.env$Quit) {
+  if (!Quit) {
 
     if (file.exists(general_opts$previous_jsfile)) {
       general_opts <- RJSONIO::fromJSON(previous_jsfile)
@@ -285,12 +285,15 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
     general_opts <- RJSONIO::fromJSON(previous_jsfile)
     optfilename = file.path(general_opts$out_folder,paste0('MODIStsp_', Sys.Date(),'.json'))
     write(RJSONIO::toJSON(general_opts),optfilename)
-  } # End If on "Quit" --> If "Quit" above is skipped and program terminates
-
+  
   # Clean up at end of processing ----
   # End of processing
   end.time <- Sys.time()
   time.taken <- end.time - start.time
   print(time.taken)
   gc()
+  } else {# End If on "Quit" --> If "Quit" above is skipped and program terminates
+    message("[",date(),"] "," You Selected to Quit ! Goodbye !")
+  }
+    
 }

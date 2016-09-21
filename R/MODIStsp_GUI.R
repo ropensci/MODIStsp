@@ -8,7 +8,7 @@
 #' 						if a previous options file is not existing.
 #' @param prod_opt_list List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)
 #' @param scrollWindow logical parameter passed by MODIStsp main function.
-#' @return NULL - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
+#' @return Quit - Logical - tells the main if running processing or exiting (also, Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file)
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
@@ -19,11 +19,12 @@
 #' @importFrom grDevices dev.new
 #' @import gWidgets
 
-MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow){
+MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   
   # assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
-  MODIStsp.env$Quit <- TRUE
-  GUI.env <- new.env(parent = emptyenv())
+  
+  GUI.env <- new.env()
+  GUI.env$Quit <- TRUE
   #- ------------------------------------------------------------------------------- -#
   #  Start Building the GUI
   #- ------------------------------------------------------------------------------- -#
@@ -552,7 +553,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
                         selected = match(general_opts$proj, out_proj_names), handler = function(h,....) {
                           
                           current_sel <- svalue(proj_wid)
-                          MODIStsp.env$old_proj4 <- svalue(output_proj4_wid)
+                          GUI.env$old_proj4 <- svalue(output_proj4_wid)
                           
                           if (current_sel != "User Defined") {
                             enabled(output_proj4_wid) <- FALSE
@@ -571,7 +572,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
                             #----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
                             if (svalue(output_ext_wid) != "Full Tiles Extent") {
                               bbox_in <- as.numeric(c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
-                              bbox_out <- reproj_bbox(bbox_in, MODIStsp.env$old_proj4, sel_output_proj@projargs, enlarge = FALSE)
+                              bbox_out <- reproj_bbox(bbox_in, GUI.env$old_proj4, sel_output_proj@projargs, enlarge = FALSE)
                               
                               svalue(output_ULeast_wid)  <- formatC(bbox_out[1,1], digits = ifelse(units == "dec. degrees",4,1), format = "f")
                               svalue(output_ULnorth_wid) <- formatC(bbox_out[2,2], digits = ifelse(units == "dec. degrees",4,1), format = "f")
@@ -581,7 +582,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
                           }
                           
                           else {
-                            old_sel_projwid <- hash::keys(out_proj_list)[which(hash::values(out_proj_list) == MODIStsp.env$old_proj4)]    # Retrieve previous selection of proj_wid
+                            old_sel_projwid <- hash::keys(out_proj_list)[which(hash::values(out_proj_list) == GUI.env$old_proj4)]    # Retrieve previous selection of proj_wid
                             (enabled(output_proj4_wid) <- F)
                             (enabled(change_proj_but) <- T)
                             selproj <- ginput(message = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
@@ -589,7 +590,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
                               sel_output_proj <- try(CRS(selproj),silent = TRUE)
                               if (class(sel_output_proj) == "try-error") {  # On error, send out a message and reset proj_wid and proj4 wid to previous values
                                 gmessage(sel_output_proj, title = "Proj4 String Not Recognized")
-                                svalue(output_proj4_wid) <- MODIStsp.env$old_proj4
+                                svalue(output_proj4_wid) <- GUI.env$old_proj4
                                 svalue(proj_wid) <- old_sel_projwid
                                 
                               } else {
@@ -598,7 +599,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
                                 #----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
                                 
                                 bbox_in <- as.numeric(c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
-                                bbox_out <- reproj_bbox(bbox_in, MODIStsp.env$old_proj4, sel_output_proj@projargs, enlarge = FALSE)
+                                bbox_out <- reproj_bbox(bbox_in, GUI.env$old_proj4, sel_output_proj@projargs, enlarge = FALSE)
                                 
                                 # Get the units and kind of proj
                                 
@@ -648,7 +649,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
         #----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
         if (svalue(output_ext_wid) != "Full Tiles Extent") {
           bbox_in <- as.numeric(c(svalue(output_ULeast_wid), svalue(output_LRnorth_wid), svalue(output_LReast_wid), svalue(output_ULnorth_wid)))
-          bbox_out <- reproj_bbox(bbox_in, MODIStsp.env$old_proj4, sel_output_proj@projargs, enlarge = FALSE)
+          bbox_out <- reproj_bbox(bbox_in, GUI.env$old_proj4, sel_output_proj@projargs, enlarge = FALSE)
           
           svalue(output_ULeast_wid) <- formatC(bbox_out[1,1], digits = ifelse(units == "dec. degrees",4,1), format = "f")
           svalue(output_ULnorth_wid) <- formatC(bbox_out[2,2], digits = ifelse(units == "dec. degrees",4,1), format = "f")
@@ -884,10 +885,10 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
     general_opts$out_folder <- svalue(outfold_wid)		# # Retrieve Folder options
     general_opts$out_folder_mod <- svalue(outfoldmod_wid)
     
-    MODIStsp.env$check_save_opts <- TRUE
+    GUI.env$check_save_opts <- TRUE
     # Send warning if HDF deletion selected
     if (general_opts$delete_hdf == "Yes") {
-      MODIStsp.env$check_save_opts <- gconfirm("Warning! HDF files in Original MODIS folder will be deleted at the end of processing! Are you sure? ", title = "Warning", icon = "warning")
+      GUI.env$check_save_opts <- gconfirm("Warning! HDF files in Original MODIS folder will be deleted at the end of processing! Are you sure? ", title = "Warning", icon = "warning")
     }
     
     #- Perform checks on options consistency ---------------
@@ -898,23 +899,23 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
         ifelse((length(general_opts$indexes_bandsel) > 0), max(general_opts$indexes_bandsel),0) +
         max(general_opts$quality_bandsel) == 0) {
       gmessage("No Output bands or indexes selected - Please Correct!", title = "Warning")
-      MODIStsp.env$check_save_opts <- FALSE
+      GUI.env$check_save_opts <- FALSE
     }
     
     # Check if dates, processing extent and tiles selection make sense
     if (as.Date(general_opts$start_date) > as.Date(general_opts$end_date)) {
       gmessage("Ending date earlier than starting date - Please correct!", title = "Warning")
-      MODIStsp.env$check_save_opts <- FALSE
+      GUI.env$check_save_opts <- FALSE
     }
     
     if (class(try(as.Date(general_opts$start_date), silent = TRUE)) == "try-error" | class(try(as.Date(general_opts$end_date), silent = TRUE)) == "try-error") {
       gmessage("One or both dates are not in correct format - Please correct!", title = "Warning")
-      MODIStsp.env$check_save_opts <- FALSE
+      GUI.env$check_save_opts <- FALSE
     }
     
     if ((general_opts$start_x > general_opts$end_x ) | (general_opts$start_y > general_opts$end_y )) {
       gmessage("Error in Selected Tiles", title = "Warning")
-      MODIStsp.env$check_save_opts <- FALSE
+      GUI.env$check_save_opts <- FALSE
     }
     
     # Check if bbox is consistent
@@ -927,17 +928,17 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
       if (n_bbox_compiled == 4) {
         if ( (general_opts$bbox[1] > general_opts$bbox[3]) | (general_opts$bbox[2] > general_opts$bbox[4])) {
           gmessage("Error in Selected Output extent", title = "Warning")
-          MODIStsp.env$check_save_opts <- FALSE
+          GUI.env$check_save_opts <- FALSE
         }
       }
       if ((n_bbox_compiled < 4) & (n_bbox_compiled >= 0)) {
         gmessage("Error in Selected Output extent", title = "Warning")
-        MODIStsp.env$check_save_opts <- FALSE
+        GUI.env$check_save_opts <- FALSE
       }
     }
     
     # Check if selected tiles are consistent with the bounding box
-    if (general_opts$full_ext == "Resized" & MODIStsp.env$check_save_opts == TRUE) {
+    if (general_opts$full_ext == "Resized" & GUI.env$check_save_opts == TRUE) {
       bbox_mod <- reproj_bbox( general_opts$bbox, svalue(output_proj4_wid), MOD_proj_str, enlarge = TRUE)
       d_bbox_mod_tiled <- crop(modis_grid,extent(bbox_mod))
       required_tiles <- paste0("H",apply(expand.grid("H" = min(d_bbox_mod_tiled$H):max(d_bbox_mod_tiled$H),
@@ -947,7 +948,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
       
       # If the bounding box does not interrsect with the tiles, return an error
       if (!any(required_tiles %in% selected_tiles)) {
-        MODIStsp.env$check_save_opts <- gconfirm(paste("The selected tiles does not intersect the output bounding box. Do you want to automatically retrieve the required tiles?"),
+        GUI.env$check_save_opts <- gconfirm(paste("The selected tiles does not intersect the output bounding box. Do you want to automatically retrieve the required tiles?"),
                                      handler = function(h,...) {
                                        selected_tiles <<- required_tiles
                                        general_opts$start_x <<- min(d_bbox_mod_tiled$H)
@@ -958,7 +959,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
       }
       
       # If not all the required tiles are selected, ask to select them
-      if (!all(required_tiles %in% selected_tiles) & MODIStsp.env$check_save_opts) {
+      if (!all(required_tiles %in% selected_tiles) & GUI.env$check_save_opts) {
         gconfirm(paste("The following tiles not currently selected are required to cover the output bounding box (",paste(required_tiles[!(required_tiles %in% selected_tiles)],collapse = ", "),
                        "). Do you want to add them to the processing? Otherwise, nodata will be produced in the non-covered area."),
                  handler = function(h,...) {
@@ -971,7 +972,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
       }
       
       # If some selected tiles are not useful, ask to remove them
-      if (!all(selected_tiles %in% required_tiles) & MODIStsp.env$check_save_opts) {
+      if (!all(selected_tiles %in% required_tiles) & GUI.env$check_save_opts) {
         gconfirm(paste("The following tiles are not required to cover the output bounding box (",paste(selected_tiles[!(selected_tiles %in% required_tiles)], collapse = ", "),
                        "). Do you want to remove them from processing?"),
                  handler = function(h,...) {
@@ -986,29 +987,29 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
     }
     
     # check if folders are defined
-    if (general_opts$out_folder == "" & MODIStsp.env$check_save_opts) {
+    if (general_opts$out_folder == "" & GUI.env$check_save_opts) {
       gmessage("Please Select an output folder!", title = "Warning")
-      MODIStsp.env$check_save_opts <- FALSE
+      GUI.env$check_save_opts <- FALSE
     }
-    if (general_opts$out_folder_mod == "" & MODIStsp.env$check_save_opts) {
+    if (general_opts$out_folder_mod == "" & GUI.env$check_save_opts) {
       gmessage("Please Select an output folder for storing original HDFs!", title = "Warning")
-      MODIStsp.env$check_save_opts <- FALSE
+      GUI.env$check_save_opts <- FALSE
     }
     
-    if (general_opts$resampling == "mode" & MODIStsp.env$check_save_opts) {
+    if (general_opts$resampling == "mode" & GUI.env$check_save_opts) {
       check_mode = gconfirm(paste("Warning! You selected 'mode' resampling. Be aware that 'mode'", 
                                   "resampling can provide inconsistent results in areas affected",
                                   "by mixed high and low quality data, and in properly keeping track",
                                   "of quality indicators! Do you wish to continue?"), title = "Warning")
       if (check_mode == FALSE) {
-        MODIStsp.env$check_save_opts <- FALSE
+        GUI.env$check_save_opts <- FALSE
       }
     }
     
     # check that user/password were provided in case of html download
     if ((general_opts$user == "" | general_opts$password == "") & general_opts$download_server=="http") {
       gmessage("Username and password are mandatory in case of 'http' download! Please provide them or choose 'ftp' download.", title = "Warning")
-      MODIStsp.env$check_save_opts <- FALSE
+      GUI.env$check_save_opts <- FALSE
     }
     
     return(general_opts)
@@ -1020,22 +1021,24 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
   
   start_but <- gbutton(text = "Start Processing", container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
     general_opts <- prepare_to_save_options(general_opts, GUI.env)
-    if (MODIStsp.env$check_save_opts) {					# If check passed, save previous file and return
+    if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
       write(RJSONIO::toJSON(general_opts),general_opts$previous_jsfile)
       # assign("Quit", F, envir = globalenv()) # If "Start", set "Quit to F
-      MODIStsp.env$Quit <- FALSE
+      GUI.env$Quit <- FALSE
       # rm(GUI.env$temp_wid_bands, envir = globalenv())
       # rm(GUI.env$temp_wid_bands_indexes, envir = globalenv())
       # rm(GUI.env$temp_wid_bands_indexes, envir = globalenv())
       dispose(main_win)
+      
     }
   })
   
   # On "Quit", exit
   quit_but <- gbutton(text = "Quit Program", container = but_group, handler = function(h,...) { # If "Quit", set "Quit to T and exit
     # assign("Quit", TRUE, envir = globalenv())
-    MODIStsp.env$Quit <- TRUE
+    GUI.env$Quit <- TRUE
     dispose(main_win)
+    
   })
   
   addSpring(but_group, horizontal = TRUE)
@@ -1046,7 +1049,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
     choice <- gfile(type = "open", text = "Select file for loading processing options...")	# ask for file
     
     if (!is.na(choice)) {
-      load(choice)  # load file and reset all widgets to values found in the loaded file
+      
+      general_opts <- RJSONIO::fromJSON(general_opts$previous_jsfile)  # load file and reset all widgets to values found in the loaded file
       svalue(prod_wid) <- general_opts$sel_prod
       svalue(vers_wid) <- general_opts$prod_version
       svalue(sens_wid) <- general_opts$sensor
@@ -1103,13 +1107,14 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow
     choice <- gfile(type = "save", text = "Select file for saving processing options...")		# File selection widget
     
     if (!is.na(choice)) {
-      general_opts <- prepare_to_save_options(general_opts)
-      if (MODIStsp.env$check_save_opts) {					# If check passed, save previous file and return
+      general_opts <- prepare_to_save_options(general_opts, GUI.env)
+      if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
         write(RJSONIO::toJSON(general_opts),choice)
       }
     }
   })
   
   visible(main_win, set = TRUE) ## show the selection GUI
+  return(GUI.env$Quit)
   
 }  # END

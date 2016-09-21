@@ -4,7 +4,7 @@
 \alias{MODIStsp_GUI}
 \title{MODIStsp_GUI}
 \usage{
-MODIStsp_GUI(general_opts, prod_opt_list, MODIStsp.env, scrollWindow)
+MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow)
 }
 \arguments{
 \item{general_opts}{General options data frame passed by MODIStsp_main. Contains paths and other variables used to initialize the GUI
@@ -15,7 +15,7 @@ if a previous options file is not existing.}
 \item{scrollWindow}{logical parameter passed by MODIStsp main function.}
 }
 \value{
-NULL - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
+Quit - Logical - tells the main if running processing or exiting (also, Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file)
 }
 \description{
 Function used to generate and handle the GUI used to allow selection of MODIStsp processing parameters
