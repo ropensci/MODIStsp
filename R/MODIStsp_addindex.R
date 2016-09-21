@@ -46,7 +46,7 @@
 #'
 
 MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", new_indexfullname="",
-                              new_indexformula="", new_indexnodata_out = "32767", MODIStsp_dir=NA) {
+                              new_indexformula="", new_indexnodata_out = "32767", MODIStsp_dir = NA) {
 
   # Initialization and retrieval of parameters ----
   if (gui) {
@@ -62,7 +62,7 @@ MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", 
   general_opts <- RJSONIO::fromJSON(previous_jsfile)
   
   # Restore MODIS products if existing, otherwise retrieve data from xml file ----
-  load(general_opts$prodopts_file)
+  prod_opt_list <- get(load(general_opts$prodopts_file))
   n_products <- length(prod_opt_list) #how many product available ? = elements in root
 
   # Valid names for reflectance bands
@@ -271,10 +271,10 @@ MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", 
     catch_err <- check_formula_errors(new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                                       n_products = n_products, prod_opt_list = prod_opt_list, refbands_names = refbands_names)
     if (catch_err == 0) {
-      save_formula(n_products = n_products, xmltop = xmltop, refbands_names = refbands_names, req_bands = attr(catch_err,"req_bands"),
+      save_formula(refbands_names = refbands_names, req_bands = attr(catch_err,"req_bands"),
                    new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                    new_indexnodata_out = new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
-                   mod_prod_list = mod_prod_list, previous_jsfile = previous_jsfile)
+                   prod_opt_list = prod_opt_list, previous_jsfile = previous_jsfile)
       message("The new Spectral Index was correctly added! It will be available from the next running of MODIStsp().")
     } else if (catch_err == 1) {
       stop(paste0("The formula of the new index is not computable. Please check it (Valid band names are: ",paste(refbands_names,collapse = ", "),"."))

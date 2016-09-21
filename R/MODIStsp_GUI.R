@@ -19,10 +19,11 @@
 #' @importFrom grDevices dev.new
 #' @import gWidgets
 
-MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
+MODIStsp_GUI <- function(general_opts, prod_opt_list, MODIStsp.env, scrollWindow){
   
-  assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
-  
+  # assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
+  MODIStsp.env$Quit <- TRUE
+  GUI.env <- new.env(parent = emptyenv())
   #- ------------------------------------------------------------------------------- -#
   #  Start Building the GUI
   #- ------------------------------------------------------------------------------- -#
@@ -54,9 +55,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                           markup = TRUE, horizontal = FALSE, container = main_group)
   
   # set dummy global variables holding the initial values of selected bands
-  temp_wid_bands <<- general_opts$bandsel
-  temp_wid_bands_indexes <<- general_opts$indexes_bandsel
-  temp_wid_bands_quality <<- general_opts$quality_bandsel
+  GUI.env$temp_wid_bands         <- general_opts$bandsel
+  GUI.env$temp_wid_bands_indexes <- general_opts$indexes_bandsel
+  GUI.env$temp_wid_bands_quality <- general_opts$quality_bandsel
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for category selection
@@ -93,7 +94,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                            svalue(proj_wid) <- "Sinusoidal"
                          }
                          # reset dummy variables for band selection to 0 on product change
-                         temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
+                         
+                         GUI.env$temp_wid_bands <- GUI.env$temp_wid_bands_indexes <- GUI.env$temp_wid_bands_quality <- 0
                        })
   size(cat_wid) <- list(width=325)
   
@@ -129,7 +131,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                             svalue(proj_wid) <- "Sinusoidal"
                           }
                           # reset dummy variables for band selection to 0 on product change
-                          temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
+                          GUI.env$temp_wid_bands <- GUI.env$temp_wid_bands_indexes <- GUI.env$temp_wid_bands_quality <- 0
                         })
   size(prod_wid) <- list(width=325)
   
@@ -161,7 +163,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                         container = satprod2_group, text = "Select Version", selected = match(general_opts$prod_version, names(prod_opt_list[[sel_prod]])),
                         handler = function(h,...) {
                           # reset dummy variables for band selection to 0 on product change
-                          temp_wid_bands <<- temp_wid_bands_indexes <<- temp_wid_bands_quality <<- 0
+                          GUI.env$temp_wid_bands <- GUI.env$temp_wid_bands_indexes <- GUI.env$temp_wid_bands_quality <- 0
                         })
   size(vers_wid) <- list(width=100)
   
@@ -174,10 +176,10 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   band_wid <- gbutton(text = "   Click To Select   ", border = TRUE,				# Child widget for processing bands selection
                       handler = function(h,....) {
                         
-                        load(general_opts$prodopts_file)
+                        prod_opt_list <- get(load(general_opts$prodopts_file))
                         general_opts <- RJSONIO::fromJSON(general_opts$previous_jsfile)
                         check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
-                        check_wid <- temp_wid_bands												# retrieve currently selected original layers
+                        check_wid <- GUI.env$temp_wid_bands												# retrieve currently selected original layers
                         selgroup <- gbasicdialog(title = "Select Processing Layers", parent = NULL, do.buttons = FALSE, horizontal = TRUE)
                         
                         # widgets for band selection - original ----
@@ -189,7 +191,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                         # widgets for band selection - quality
                         check_names_quality <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$quality_fullnames # retrieve quality band names (if existing for sel. product)
                         if ( !is.null(check_names_quality) ) {
-                          check_wid_quality <- temp_wid_bands_quality						    # retrieve currently selected quality layers (if existing for sel. product)
+                          check_wid_quality <- GUI.env$temp_wid_bands_quality						    # retrieve currently selected quality layers (if existing for sel. product)
                           cbox_quality <- gframe(text = "<span foreground='red' size='large'>Quality Indicators</span>", markup = TRUE, container = cbox_total, horizontal = FALSE)
                           bands_wid_quality <- gcheckboxgroup(items = check_names_quality, checked = as.logical(check_wid_quality),
                                                               container = cbox_quality, use.table = FALSE)
@@ -198,7 +200,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                         # widgets for band selection - indexes ----
                         check_names_indexes <- c(prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$indexes_fullnames, as.list(general_opts$custom_indexes[[svalue(prod_wid)]][[svalue(vers_wid)]])$indexes_fullnames) # retrieve indexes band names (if existing for sel. product)
                         if (!is.null(check_names_indexes)) {
-                          check_wid_indexes <- temp_wid_bands_indexes							# retrieve currently selected indexes layers
+                          check_wid_indexes <- GUI.env$temp_wid_bands_indexes							# retrieve currently selected indexes layers
                           cbox_indexes <- gframe(text = "<span foreground='red' size='large'>Additional Spectral Indexes</span>", markup = TRUE, container = cbox_total, horizontal = FALSE)
                           bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes),
                                                               container = cbox_indexes, use.table = FALSE)
@@ -208,21 +210,21 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                                                          # Run addindex() function ----
                                                          MODIStsp_addindex(option_jsfile = general_opts$previous_jsfile)
                                                          general_opts <- RJSONIO::fromJSON(general_opts$previous_jsfile)
-                                                         pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
+                                                         pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                                                          tmp_arr_bands <- array(data = 0 , dim = length(check_names))
                                                          tmp_arr_bands[pos_wid] <- 1
-                                                         temp_wid_bands <<- tmp_arr_bands
-                                                         if (length(which(check_names_indexes != "") > 0)) {    # ? which indexes selected ? --> store in temp_wid_bands_indexes array
+                                                         GUI.env$temp_wid_bands <- tmp_arr_bands
+                                                         if (length(which(check_names_indexes != "") > 0)) {    # ? which indexes selected ? --> store in GUI.env$temp_wid_bands_indexes array
                                                            pos_wid <- which(check_names_indexes %in% svalue(bands_wid_indexes))
                                                            tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
                                                            tmp_arr_ind[pos_wid] <- 1
-                                                           temp_wid_bands_indexes <<- tmp_arr_ind
+                                                           GUI.env$temp_wid_bands_indexes <- tmp_arr_ind
                                                          }
-                                                         if (length(which(check_names_quality != "") > 0)) {    # ? which quality selected ? --> store in temp_wid_bands_quality array
+                                                         if (length(which(check_names_quality != "") > 0)) {    # ? which quality selected ? --> store in GUI.env$temp_wid_bands_quality array
                                                            pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))
                                                            tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
                                                            tmp_arr_qual[pos_wid] <- 1
-                                                           temp_wid_bands_quality <<- tmp_arr_qual
+                                                           GUI.env$temp_wid_bands_quality <- tmp_arr_qual
                                                          }
                                                          dispose(selgroup)
                                                        },
@@ -233,21 +235,21 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                         bands_group <- ggroup(container = selgroup, horizontal = TRUE)
                         accept_but <- gbutton(text = "Accept", container = bands_group, handler = function(button,...){ # On accept, retrieve and save selected layers
                           
-                          pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in temp_wid_bands array
+                          pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                           tmp_arr_bands <- array(data = 0 , dim = length(check_names))
                           tmp_arr_bands[pos_wid] <- 1
-                          temp_wid_bands <<- tmp_arr_bands
-                          if (length(which(check_names_indexes != "") > 0)) {    # ? which indexes selected ? --> store in temp_wid_bands_indexes array
+                          GUI.env$temp_wid_bands <- tmp_arr_bands
+                          if (length(which(check_names_indexes != "") > 0)) {    # ? which indexes selected ? --> store in GUI.env$temp_wid_bands_indexes array
                             pos_wid <- which(check_names_indexes %in% svalue(bands_wid_indexes))
                             tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
                             tmp_arr_ind[pos_wid] <- 1
-                            temp_wid_bands_indexes <<- tmp_arr_ind
+                            GUI.env$temp_wid_bands_indexes <- tmp_arr_ind
                           }
-                          if (length(which(check_names_quality != "") > 0)) {    # ? which quality selected ? --> store in temp_wid_bands_quality array
+                          if (length(which(check_names_quality != "") > 0)) {    # ? which quality selected ? --> store in GUI.env$temp_wid_bands_quality array
                             pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))
                             tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
                             tmp_arr_qual[pos_wid] <- 1
-                            temp_wid_bands_quality <<- tmp_arr_qual
+                            GUI.env$temp_wid_bands_quality <- tmp_arr_qual
                             
                           }
                           
@@ -257,14 +259,14 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                         # if Cancel, reset selected layers to previous choice and exit ----
                         cancel_but <- gbutton(text = "Cancel", container = bands_group, handler = function(button,...){
                           
-                          if (exists("check_wid")) {
-                            temp_wid_bands <<- check_wid
+                          if (exists("check_wid", where = GUI.env)) {
+                            GUI.env$temp_wid_bands <- check_wid
                           }
-                          if (exists("check_wid_indexes")) {
-                            temp_wid_bands_indexes <<- check_wid_indexes
+                          if (exists("check_wid_indexes", where = GUI.env)) {
+                            GUI.env$temp_wid_bands_indexes <- check_wid_indexes
                           }
-                          if (exists("check_wid_quality")) {
-                            temp_wid_bands_quality <<- check_wid_quality
+                          if (exists("check_wid_quality", where = GUI.env)) {
+                            GUI.env$temp_wid_bands_quality <- check_wid_quality
                           }
                           dispose(selgroup)
                         })
@@ -369,7 +371,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   }
   
   if (!exists("modis_grid")) {
-    load(file.path(general_opts$MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))
+    modis_grid <- get(load(file.path(general_opts$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
   }  # Laod MODIS grid ancillary file
   tiles_from_bbox <- gbutton(text = "Retrieve Tiles from bounding box", border = TRUE,
                              handler = function(h,...) {
@@ -548,8 +550,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   #	size(output_proj_lab) = c(120,20)
   proj_wid <- gcombobox(out_proj_names, container = output_proj_group,
                         selected = match(general_opts$proj, out_proj_names), handler = function(h,....) {
+                          
                           current_sel <- svalue(proj_wid)
-                          old_proj4 <- svalue(output_proj4_wid)
+                          MODIStsp.env$old_proj4 <- svalue(output_proj4_wid)
                           
                           if (current_sel != "User Defined") {
                             enabled(output_proj4_wid) <- FALSE
@@ -568,7 +571,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                             #----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
                             if (svalue(output_ext_wid) != "Full Tiles Extent") {
                               bbox_in <- as.numeric(c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
-                              bbox_out <- reproj_bbox(bbox_in, old_proj4, sel_output_proj@projargs, enlarge = FALSE)
+                              bbox_out <- reproj_bbox(bbox_in, MODIStsp.env$old_proj4, sel_output_proj@projargs, enlarge = FALSE)
                               
                               svalue(output_ULeast_wid)  <- formatC(bbox_out[1,1], digits = ifelse(units == "dec. degrees",4,1), format = "f")
                               svalue(output_ULnorth_wid) <- formatC(bbox_out[2,2], digits = ifelse(units == "dec. degrees",4,1), format = "f")
@@ -578,7 +581,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                           }
                           
                           else {
-                            old_sel_projwid <- hash::keys(out_proj_list)[which(hash::values(out_proj_list) == old_proj4)]    # Retrieve previous selection of proj_wid
+                            old_sel_projwid <- hash::keys(out_proj_list)[which(hash::values(out_proj_list) == MODIStsp.env$old_proj4)]    # Retrieve previous selection of proj_wid
                             (enabled(output_proj4_wid) <- F)
                             (enabled(change_proj_but) <- T)
                             selproj <- ginput(message = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
@@ -586,7 +589,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                               sel_output_proj <- try(CRS(selproj),silent = TRUE)
                               if (class(sel_output_proj) == "try-error") {  # On error, send out a message and reset proj_wid and proj4 wid to previous values
                                 gmessage(sel_output_proj, title = "Proj4 String Not Recognized")
-                                svalue(output_proj4_wid) <- old_proj4
+                                svalue(output_proj4_wid) <- MODIStsp.env$old_proj4
                                 svalue(proj_wid) <- old_sel_projwid
                                 
                               } else {
@@ -595,7 +598,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                                 #----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
                                 
                                 bbox_in <- as.numeric(c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),svalue(output_LReast_wid),svalue(output_ULnorth_wid)))
-                                bbox_out <- reproj_bbox(bbox_in, old_proj4, sel_output_proj@projargs, enlarge = FALSE)
+                                bbox_out <- reproj_bbox(bbox_in, MODIStsp.env$old_proj4, sel_output_proj@projargs, enlarge = FALSE)
                                 
                                 # Get the units and kind of proj
                                 
@@ -645,7 +648,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
         #----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
         if (svalue(output_ext_wid) != "Full Tiles Extent") {
           bbox_in <- as.numeric(c(svalue(output_ULeast_wid), svalue(output_LRnorth_wid), svalue(output_LReast_wid), svalue(output_ULnorth_wid)))
-          bbox_out <- reproj_bbox(bbox_in, old_proj4, sel_output_proj@projargs, enlarge = FALSE)
+          bbox_out <- reproj_bbox(bbox_in, MODIStsp.env$old_proj4, sel_output_proj@projargs, enlarge = FALSE)
           
           svalue(output_ULeast_wid) <- formatC(bbox_out[1,1], digits = ifelse(units == "dec. degrees",4,1), format = "f")
           svalue(output_ULnorth_wid) <- formatC(bbox_out[2,2], digits = ifelse(units == "dec. degrees",4,1), format = "f")
@@ -823,7 +826,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   #- ------------------------------------------------------------------------------- -#
   
   # Various checks and generation of general_opts common to both Start and Save buttons
-  prepare_to_save_options <- function(general_opts,...) {
+  prepare_to_save_options <- function(general_opts,GUI.env,...) {
     
     # workaround to retrieve custom index
     general_opts$custom_indexes <- RJSONIO::fromJSON(general_opts$previous_jsfile)$custom_indexes
@@ -833,16 +836,17 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
     # sel_prod = general_opts$sel_prod    # When saving, set sel_prod to current selection (may be good to change)
     general_opts$sensor <- svalue(sens_wid)
     
-    if (exists("temp_wid_bands")) {
-      general_opts$bandsel <- temp_wid_bands			#retrieve selected bands
+    if (exists("temp_wid_bands", where = GUI.env)) {
+    
+      general_opts$bandsel <- GUI.env$temp_wid_bands			#retrieve selected bands
       
     }
-    if (exists("temp_wid_bands_indexes")) {
-      general_opts$indexes_bandsel <- temp_wid_bands_indexes #retrieve selected indexes
+    if (exists("temp_wid_bands_indexes", where = GUI.env)) {
+      general_opts$indexes_bandsel <- GUI.env$temp_wid_bands_indexes #retrieve selected indexes
       
     }
-    if (exists("temp_wid_bands_quality")) {
-      general_opts$quality_bandsel <- temp_wid_bands_quality 	#retrieve selected quality ind.
+    if (exists("temp_wid_bands_indexes", where = GUI.env)) {
+      general_opts$quality_bandsel <- GUI.env$temp_wid_bands_quality 	#retrieve selected quality ind.
       
     }
     
@@ -880,10 +884,10 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
     general_opts$out_folder <- svalue(outfold_wid)		# # Retrieve Folder options
     general_opts$out_folder_mod <- svalue(outfoldmod_wid)
     
-    check_save_opts <<- TRUE
+    MODIStsp.env$check_save_opts <- TRUE
     # Send warning if HDF deletion selected
     if (general_opts$delete_hdf == "Yes") {
-      check_save_opts <<- gconfirm("Warning! HDF files in Original MODIS folder will be deleted at the end of processing! Are you sure? ", title = "Warning", icon = "warning")
+      MODIStsp.env$check_save_opts <- gconfirm("Warning! HDF files in Original MODIS folder will be deleted at the end of processing! Are you sure? ", title = "Warning", icon = "warning")
     }
     
     #- Perform checks on options consistency ---------------
@@ -894,23 +898,23 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
         ifelse((length(general_opts$indexes_bandsel) > 0), max(general_opts$indexes_bandsel),0) +
         max(general_opts$quality_bandsel) == 0) {
       gmessage("No Output bands or indexes selected - Please Correct!", title = "Warning")
-      check_save_opts <<- FALSE
+      MODIStsp.env$check_save_opts <- FALSE
     }
     
     # Check if dates, processing extent and tiles selection make sense
     if (as.Date(general_opts$start_date) > as.Date(general_opts$end_date)) {
       gmessage("Ending date earlier than starting date - Please correct!", title = "Warning")
-      check_save_opts <<- FALSE
+      MODIStsp.env$check_save_opts <- FALSE
     }
     
     if (class(try(as.Date(general_opts$start_date), silent = TRUE)) == "try-error" | class(try(as.Date(general_opts$end_date), silent = TRUE)) == "try-error") {
       gmessage("One or both dates are not in correct format - Please correct!", title = "Warning")
-      check_save_opts <<- FALSE
+      MODIStsp.env$check_save_opts <- FALSE
     }
     
     if ((general_opts$start_x > general_opts$end_x ) | (general_opts$start_y > general_opts$end_y )) {
       gmessage("Error in Selected Tiles", title = "Warning")
-      check_save_opts <<- FALSE
+      MODIStsp.env$check_save_opts <- FALSE
     }
     
     # Check if bbox is consistent
@@ -923,17 +927,17 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
       if (n_bbox_compiled == 4) {
         if ( (general_opts$bbox[1] > general_opts$bbox[3]) | (general_opts$bbox[2] > general_opts$bbox[4])) {
           gmessage("Error in Selected Output extent", title = "Warning")
-          check_save_opts <<- FALSE
+          MODIStsp.env$check_save_opts <- FALSE
         }
       }
       if ((n_bbox_compiled < 4) & (n_bbox_compiled >= 0)) {
         gmessage("Error in Selected Output extent", title = "Warning")
-        check_save_opts <<- FALSE
+        MODIStsp.env$check_save_opts <- FALSE
       }
     }
     
     # Check if selected tiles are consistent with the bounding box
-    if (general_opts$full_ext == "Resized" & check_save_opts == TRUE) {
+    if (general_opts$full_ext == "Resized" & MODIStsp.env$check_save_opts == TRUE) {
       bbox_mod <- reproj_bbox( general_opts$bbox, svalue(output_proj4_wid), MOD_proj_str, enlarge = TRUE)
       d_bbox_mod_tiled <- crop(modis_grid,extent(bbox_mod))
       required_tiles <- paste0("H",apply(expand.grid("H" = min(d_bbox_mod_tiled$H):max(d_bbox_mod_tiled$H),
@@ -943,7 +947,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
       
       # If the bounding box does not interrsect with the tiles, return an error
       if (!any(required_tiles %in% selected_tiles)) {
-        check_save_opts <<- gconfirm(paste("The selected tiles does not intersect the output bounding box. Do you want to automatically retrieve the required tiles?"),
+        MODIStsp.env$check_save_opts <- gconfirm(paste("The selected tiles does not intersect the output bounding box. Do you want to automatically retrieve the required tiles?"),
                                      handler = function(h,...) {
                                        selected_tiles <<- required_tiles
                                        general_opts$start_x <<- min(d_bbox_mod_tiled$H)
@@ -954,7 +958,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
       }
       
       # If not all the required tiles are selected, ask to select them
-      if (!all(required_tiles %in% selected_tiles) & check_save_opts) {
+      if (!all(required_tiles %in% selected_tiles) & MODIStsp.env$check_save_opts) {
         gconfirm(paste("The following tiles not currently selected are required to cover the output bounding box (",paste(required_tiles[!(required_tiles %in% selected_tiles)],collapse = ", "),
                        "). Do you want to add them to the processing? Otherwise, nodata will be produced in the non-covered area."),
                  handler = function(h,...) {
@@ -967,7 +971,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
       }
       
       # If some selected tiles are not useful, ask to remove them
-      if (!all(selected_tiles %in% required_tiles) & check_save_opts) {
+      if (!all(selected_tiles %in% required_tiles) & MODIStsp.env$check_save_opts) {
         gconfirm(paste("The following tiles are not required to cover the output bounding box (",paste(selected_tiles[!(selected_tiles %in% required_tiles)], collapse = ", "),
                        "). Do you want to remove them from processing?"),
                  handler = function(h,...) {
@@ -982,29 +986,29 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
     }
     
     # check if folders are defined
-    if (general_opts$out_folder == "" & check_save_opts) {
+    if (general_opts$out_folder == "" & MODIStsp.env$check_save_opts) {
       gmessage("Please Select an output folder!", title = "Warning")
-      check_save_opts <<- FALSE
+      MODIStsp.env$check_save_opts <- FALSE
     }
-    if (general_opts$out_folder_mod == "" & check_save_opts) {
+    if (general_opts$out_folder_mod == "" & MODIStsp.env$check_save_opts) {
       gmessage("Please Select an output folder for storing original HDFs!", title = "Warning")
-      check_save_opts <<- FALSE
+      MODIStsp.env$check_save_opts <- FALSE
     }
     
-    if (general_opts$resampling == "mode" & check_save_opts) {
+    if (general_opts$resampling == "mode" & MODIStsp.env$check_save_opts) {
       check_mode = gconfirm(paste("Warning! You selected 'mode' resampling. Be aware that 'mode'", 
                                   "resampling can provide inconsistent results in areas affected",
                                   "by mixed high and low quality data, and in properly keeping track",
                                   "of quality indicators! Do you wish to continue?"), title = "Warning")
       if (check_mode == FALSE) {
-        check_save_opts <<- FALSE
+        MODIStsp.env$check_save_opts <- FALSE
       }
     }
     
     # check that user/password were provided in case of html download
     if ((general_opts$user == "" | general_opts$password == "") & general_opts$download_server=="http") {
       gmessage("Username and password are mandatory in case of 'http' download! Please provide them or choose 'ftp' download.", title = "Warning")
-      check_save_opts <<- FALSE
+      MODIStsp.env$check_save_opts <- FALSE
     }
     
     return(general_opts)
@@ -1015,20 +1019,22 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   but_group <- ggroup(container = main_group, horizontal = TRUE)
   
   start_but <- gbutton(text = "Start Processing", container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
-    general_opts <- prepare_to_save_options(general_opts)
-    if (check_save_opts) {					# If check passed, save previous file and return
+    general_opts <- prepare_to_save_options(general_opts, GUI.env)
+    if (MODIStsp.env$check_save_opts) {					# If check passed, save previous file and return
       write(RJSONIO::toJSON(general_opts),general_opts$previous_jsfile)
-      assign("Quit", F, envir = globalenv()) # If "Start", set "Quit to F
-      rm(temp_wid_bands, envir = globalenv())
-      rm(temp_wid_bands_indexes, envir = globalenv())
-      rm(temp_wid_bands_quality, envir = globalenv())
+      # assign("Quit", F, envir = globalenv()) # If "Start", set "Quit to F
+      MODIStsp.env$Quit <- FALSE
+      # rm(GUI.env$temp_wid_bands, envir = globalenv())
+      # rm(GUI.env$temp_wid_bands_indexes, envir = globalenv())
+      # rm(GUI.env$temp_wid_bands_indexes, envir = globalenv())
       dispose(main_win)
     }
   })
   
   # On "Quit", exit
   quit_but <- gbutton(text = "Quit Program", container = but_group, handler = function(h,...) { # If "Quit", set "Quit to T and exit
-    assign("Quit", TRUE, envir = globalenv())
+    # assign("Quit", TRUE, envir = globalenv())
+    MODIStsp.env$Quit <- TRUE
     dispose(main_win)
   })
   
@@ -1045,9 +1051,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
       svalue(vers_wid) <- general_opts$prod_version
       svalue(sens_wid) <- general_opts$sensor
       
-      temp_wid_bands <<- general_opts$bandsel				# set dummy variables holding the initial values of selected bands
-      temp_wid_bands_indexes <<- general_opts$indexes_bandsel
-      temp_wid_bands_quality <<- general_opts$quality_bandsel
+      GUI.env$temp_wid_bands <- general_opts$bandsel				# set dummy variables holding the initial values of selected bands
+      GUI.env$temp_wid_bands_indexes <- general_opts$indexes_bandsel
+      GUI.env$temp_wid_bands_quality <- general_opts$quality_bandsel
       
       # svalue(start_day_wid) <- general_opts$start_day
       # svalue(start_month_wid) <- general_opts$start_month
@@ -1098,7 +1104,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
     
     if (!is.na(choice)) {
       general_opts <- prepare_to_save_options(general_opts)
-      if (check_save_opts) {					# If check passed, save previous file and return
+      if (MODIStsp.env$check_save_opts) {					# If check passed, save previous file and return
         write(RJSONIO::toJSON(general_opts),choice)
       }
     }

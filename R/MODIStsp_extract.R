@@ -215,11 +215,11 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
           message(paste0("Extracting data from date: ",
                          dates[sel_dates[f]]))
         }
-        # browser()
+        
         value <- getValues(in_rts[[sel_dates[f]]])[ok_zones]
         rDT <- data.table(value, zones)
         setkey(rDT, zones)
-        # browser()
+        .SD = NULL # Workaround to avoid note on package check
         ts[f, 1:ncols] <- rDT[, lapply(.SD, match.fun(FUN),
                                        na.rm = na.rm), by = zones]$value
       }

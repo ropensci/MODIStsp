@@ -53,8 +53,12 @@
 
 MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, download_server=NA, scrollWindow=FALSE) {
 
-  MODIStsp_dir <- system.file(package = "MODIStsp")
+  
   options("guiToolkit" = "RGtk2")
+  
+  MODIStsp.env <- new.env()
+  MODIStsp.env$MODIStsp_dir <- system.file(package = "MODIStsp")
+  
   #- ------------------------------------------------------------------------------- -#
   #  Initialize project
   #- ------------------------------------------------------------------------------- -#
@@ -105,11 +109,11 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
 
   # Folders in which the JSON/RData files (previous settings and product descriptions) are saved
   if (is.null(options_file)) {
-    previous_dir <- file.path(MODIStsp_dir,"Previous")
+    previous_dir <- file.path(MODIStsp.env$MODIStsp_dir,"Previous")
   } else {
     previous_dir <- dirname(options_file)
   }
-  prodopts_dir <- file.path(MODIStsp_dir,"Previous")
+  prodopts_dir <- file.path(MODIStsp.env$MODIStsp_dir,"Previous")
   dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
   dir.create(prodopts_dir, showWarnings = FALSE, recursive = TRUE)
   
@@ -119,7 +123,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   } else {
     options_file
   }
-  xml_file <- file.path(MODIStsp_dir,"ExtData","MODIStsp_ProdOpts.xml")  #XML file describing MODIS products
+  xml_file <- file.path(MODIStsp.env$MODIStsp_dir,"ExtData","MODIStsp_ProdOpts.xml")  #XML file describing MODIS products
   prodopts_file <- file.path(prodopts_dir, "MODIStsp_ProdOpts.RData") # this is created to speed up XML reading (done only the first time)
   
   #- ------------------------------------------------------------------------------- -#
@@ -138,7 +142,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   }
   if (!exists("general_opts")) {
     # Create the general_opts structure used to communicate with the GUI and set default values
-    general_opts <- list(MODIStsp_dir = MODIStsp_dir, previous_jsfile = previous_jsfile, prodopts_file = prodopts_file, xml_file = xml_file, #out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
+    general_opts <- list(MODIStsp_dir = MODIStsp.env$MODIStsp_dir, previous_jsfile = previous_jsfile, prodopts_file = prodopts_file, xml_file = xml_file, #out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
                          sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = strftime(Sys.Date(),"%Y-01-01"), end_date = as.character(Sys.Date()),
                          bandsel = rep(0,13), indexes_bandsel = rep(0,11), quality_bandsel = rep(0,21), # lenghts refearred to "Surf_Ref_8Days_500m (M*D09A1)" v6!
                          start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
@@ -155,7 +159,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   
   # Restore MODIS products if existing, otherwise retrieve data from xml file ----
   if (file.exists(prodopts_file)) {
-    load(prodopts_file)
+    prod_opt_list <- get(load(prodopts_file))
   }
   if (!exists("prod_opt_list") | if (exists("prod_opt_list")) {
       is.null(attr(prod_opt_list,"MODIStspVersion")) | if (!is.null(attr(prod_opt_list,"MODIStspVersion"))) {
@@ -178,15 +182,16 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow=scrollWindow)
+    
+    MODIStsp_GUI(general_opts, prod_opt_list, MODIStsp.env, scrollWindow=scrollWindow)
   } else {
-    Quit <<- FALSE
+    MODIStsp.env$Quit <- FALSE
   }
   start.time <- Sys.time()
 
   # Launch the processing ----
   # When GUI is closed (or in a non-interactive run): If not Quit selected, restore the user selected options from previous file and launch the processing ----
-  if (!Quit) {
+  if (!MODIStsp.env$Quit) {
 
     if (file.exists(general_opts$previous_jsfile)) {
       general_opts <- RJSONIO::fromJSON(previous_jsfile)
@@ -194,7 +199,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
       cat("[",date(),"] Processing Options file not found! Exiting!\n"); stop()
     }
     if (file.exists(general_opts$prodopts_file)) {
-      load(general_opts$prodopts_file)
+      prod_opt_list <- get(load(general_opts$prodopts_file))
     } else {
       cat("[",date(),"] Product information file not found! Exiting!\n"); stop()
     }
@@ -246,7 +251,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
       general_opts$full_ext <- "Resized"
 
       # Automatically retrieve the tiles requested to cover the extent
-      load(file.path(MODIStsp_dir, "ExtData/MODIS_Tiles.RData"))
+      modis_grid <- get(load(file.path(MODIStsp.env$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
       external_bbox_mod <- reproj_bbox(external_bbox, general_opts$user_proj4, general_opts$MOD_proj_str, enlarge = TRUE)
       d_bbox_mod_tiled <- intersect(modis_grid, extent(external_bbox_mod))
       general_opts$start_x <- min(d_bbox_mod_tiled$H)
@@ -283,11 +288,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   } # End If on "Quit" --> If "Quit" above is skipped and program terminates
 
   # Clean up at end of processing ----
-  if (exists("Quit")) {
-    rm(Quit, envir = globalenv())
-  }    # Remove Quit if defined
   # End of processing
   end.time <- Sys.time()
   time.taken <- end.time - start.time
   print(time.taken)
+  gc()
 }

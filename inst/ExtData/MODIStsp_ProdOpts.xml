@@ -1879,7 +1879,7 @@
                         <nodata_out>32767</nodata_out>
                     </band>
                     <band>
-                        <bandname>b3_Blue_1</bandname>
+                        <bandname>b3_Blue</bandname>
                         <fullname>b3_Blue: 500m Surface Reflectance Band 3 (459-479 nm)</fullname>
                         <datatype>16-bit signed integer</datatype>
                         <nodata_in>-28672</nodata_in>
@@ -1952,7 +1952,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -10676,7 +10676,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -10869,7 +10869,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11071,7 +11071,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11264,7 +11264,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11459,7 +11459,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11652,7 +11652,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11861,7 +11861,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -12048,7 +12048,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -12257,7 +12257,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -12444,7 +12444,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -12646,7 +12646,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -12839,7 +12839,7 @@
                     <index>
                         <indexes_bandname>EVI</indexes_bandname>
                         <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue_1+1))</indexes_formula>
+                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>

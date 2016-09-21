@@ -50,6 +50,7 @@ MODIStsp_process_indexes <- function(out_filename, formula,bandnames,nodata_out,
   }
   call_string <- paste0(substr(call_string,1,nchar(call_string) - 1), ")")  #Finalize the call_string
   fun_string <- paste0(fun_string,"...)","{round(10000*(",formula, "))}") # Finalize the fun_string
+  
   eval(parse(text = fun_string)) # Parse "fun_string" to create a new function
   eval(parse(text = call_string))    # parse call_string to launch the new function for index computation
 
