@@ -4,7 +4,8 @@
 \alias{MODIStsp_GUI}
 \title{MODIStsp_GUI}
 \usage{
-MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow)
+MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir,
+  previous_jsfile, prodopts_file)
 }
 \arguments{
 \item{general_opts}{General options data frame passed by MODIStsp_main. Contains paths and other variables used to initialize the GUI

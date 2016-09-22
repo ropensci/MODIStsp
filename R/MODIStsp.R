@@ -5,8 +5,8 @@
 #'  required routines for downloading and processing the requested datasets.
 #' @param gui logical parameter (TRUE: the GUI is opened before processing; FALSE: the 
 #'  saved parameters are retrieved from "options_file")
-#' @param options_file settings (optional): full path of the RData file containing the 
-#'  processing options (default: Previous.RData in subdir Previous);
+#' @param options_file settings (optional): full path of the JSON file containing the 
+#'  processing options (default: MODIStsp_Previous.json in subdir Previous);
 #' @param spatial_file_path (optional): full path of a spatial file to use as extent 
 #'  (default=NULL): if defined, the processing options which define the extent, the 
 #'  selected tiles and the "Full Tile / Resized" options are not considered; instead, new 
@@ -19,6 +19,94 @@
 #' fullscreen with scrollbars (this is useful on devices with small display). If using a
 #'  device with a display resolution >= 1024x768, leaving this parameter to FALSE is 
 #'  suggested.
+#' @param sel_prod (optional): MODIS product name. 
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param sensor (optional) MODIS platform (one between "Terra", "Aqua" or "Both").
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param prod_version (optional) integer: product version (5 or 6).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param start_date (optional) starting date (string with format "YYYY-MM-DD").
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param end_date (optional) ending date (string with format "YYYY-MM-DD").
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param bandsel (optional) numeric vector of MODIS selected bands (0 = not selected,
+#' 1 = selected). The lenght must be the same of the available bands for the selected MODIS product.
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param indexes_bandsel (optional) numeric vector of MODIS selected indices (0 = not selected,
+#' 1 = selected). The lenght must be the same of the available indices for the selected MODIS product.
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param quality_bandsel (optional)  numeric vector of MODIS selected quality flags (0 = not selected,
+#' 1 = selected). The lenght must be the same of the available quality flags for the selected MODIS product.
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param start_x (optional) integer: starting MODIS tile (X value).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param end_x (optional) integer: ending MODIS tile (X value).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param start_y (optional) integer: starting MODIS tile (Y value).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param end_y (optional) integer: ending MODIS tile (Y value).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param download_server (optional) method for downloading MODIS products:
+#' one between "http" (download through ftp from NASA lpdaac http archive),
+#' "ftp" (download from NASA ftp archive), "offline" (use only HDF files
+#' alreadyavailable on the user’s PC without downloading from NASA).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param user (optional) user name for accessing NASA lpdaac http archive
+#' (required for http download).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param password (optional) password for accessing NASA lpdaac http archive
+#' (required for http download).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param proj (optional) output projection: one between "Sinusoidal" 
+#' (original MODIS sinusoidal), "UTM 32N" (UTM zone 32 North, WGS84), 
+#' "Latlon WGS84" (geographic coordinates, WGS84) and "User Defined"
+#' (defined with user_proj4 PROJ4 string).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param user_proj4 (optional) PROJ4 string of custom output projection.
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param out_res (optional) one between "Native" (MODIS native resolution) 
+#' and "Resampled" (resolution set with out_res_sel parameter).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param out_res_sel (optional) numeric: output resolution.
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param full_ext (optional) one between "Full tiles Extent" (the output
+#' is maintained at the original extension) and "Resized" (the output is
+#' clipped with the bounding box provided with spatial_file_path or
+#' bbox parameters)
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param bbox (optional) numeric: vector of clipping bounding box
+#' (xmin, ymin, xmax, ymax).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param resampling (optional) resampling method, one between "near"
+#' (nearest neighbour) or "mode" (modal value). 
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param out_format (optional) output format of spatial files, one between 
+#' "ENVI" or "GTiff". 
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param ts_format (optional) output format of time series, one between
+#' "None" (no virtual rasters are created), "ENVI Meta Files", "GDAL vrt files"
+#' and "ENVI and GDAL".
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param rts (optional) logical: if TRUE, RasterStack of output products are created.
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param compress (optional) GeoTIFF compression, one between "None", 
+#' "Low (PACKBITS)", "Medium (LZW)" and "High (DEFLATE)".
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param nodata_change (optional) logical: if TRUE, change original
+#' MODIS nodata values with standard ones (see vignette).
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param delete_hdf (optional) logical: if TRUE, delete ofignal MODIS HDf
+#' files after processing them.
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param reprocess (optional) logical: if TRUE, existing products in output
+#' directories are re-processed and overwritten.
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param out_folder (optional) path of the main output folder for
+#' output storage.
+#' If provided, the value saved in the options_file JSON file is replaced.
+#' @param out_folder_mod (optional) path of the output folder for original
+#' HDF files.
+#' If provided, the value saved in the options_file JSON file is replaced.
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -61,7 +149,13 @@
 #'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
 #'     spatial_file_path = single_shape )}
 
-MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, download_server=NA, scrollWindow=FALSE) {
+MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scrollWindow=FALSE,
+                     sel_prod = NA, sensor = NA, prod_version = NA, start_date = NA, end_date = NA,
+                     bandsel = NA, indexes_bandsel = NA, quality_bandsel = NA,
+                     start_x = NA, end_x = NA, start_y = NA, end_y = NA, user = NA, password = NA, download_server = NA,
+                     proj = NA, user_proj4 = NA,
+                     out_res_sel = NA, out_res = NA, full_ext = NA, resampling = NA, out_format = NA, ts_format = NA, rts = NA, compress = NA,
+                     nodata_change = NA, delete_hdf = NA, reprocess = NA, bbox = NA, out_folder = NA, out_folder_mod = NA) {
 
   
   options("guiToolkit" = "RGtk2")
@@ -149,22 +243,33 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   # Load options if existing, otherwise initialise them ----
   if (file.exists(previous_jsfile)) {
     general_opts <- RJSONIO::fromJSON(previous_jsfile)
-  }
+  } 
   if (!exists("general_opts")) {
     # Create the general_opts structure used to communicate with the GUI and set default values
-    general_opts <- list(MODIStsp_dir = MODIStsp.env$MODIStsp_dir, previous_jsfile = previous_jsfile, prodopts_file = prodopts_file, xml_file = xml_file, #out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
-                         sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = strftime(Sys.Date(),"%Y-01-01"), end_date = as.character(Sys.Date()),
-                         bandsel = rep(0,13), indexes_bandsel = rep(0,11), quality_bandsel = rep(0,21), # lenghts refearred to "Surf_Ref_8Days_500m (M*D09A1)" v6!
-                         start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
-                         proj = "Sinusoidal", user_proj4 = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
-                         out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
-                         nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
-                         MODIStspVersion = as.character(packageVersion("MODIStsp")), custom_indexes = list())
+    general_opts <- list(#previous_jsfile = previous_jsfile, prodopts_file = prodopts_file, xml_file = xml_file, #out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
+      sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = strftime(Sys.Date(),"%Y-01-01"), end_date = as.character(Sys.Date()),
+      bandsel = rep(0,13), indexes_bandsel = rep(0,11), quality_bandsel = rep(0,21), # lenghts refearred to "Surf_Ref_8Days_500m (M*D09A1)" v6!
+      start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
+      proj = "Sinusoidal", user_proj4 = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
+      out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
+      nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
+      MODIStspVersion = as.character(packageVersion("MODIStsp")), custom_indexes = list())
     write(RJSONIO::toJSON(general_opts),previous_jsfile)
   } else if (is.null(general_opts$MODIStspVersion)) {
     stop(paste0("The option file in use (",previous_jsfile,") was created with an too old MODIStsp version (<=1.2.2), and can not be used with the current version. Please delete it or specify a different value for option_file parameter."))
   } else if (general_opts$MODIStspVersion<packageVersion("MODIStsp")) {
     warning(paste0("The option file in use (",previous_jsfile,") was created with an old MODIStsp version (",general_opts$MODIStspVersion,"): this could lead to errors!"))
+  }
+  
+  # Replace values of options if passed as parameters
+  for (sel_param in c("sel_prod", "sensor", "prod_version", "start_date", "end_date", "bandsel", "indexes_bandsel", "quality_bandsel",
+                      "start_x", "end_x", "start_y", "end_y", "user", "password", "download_server", "proj", "user_proj4",
+                      "out_res_sel", "out_res", "full_ext", "resampling", "out_format", "ts_format", "compress",
+                      "bbox", "out_folder", "out_folder_mod")) {
+    if (!is.na(get(sel_param))) {general_opts[[sel_param]] <- get(sel_param)}
+  }
+  for (sel_param in c("rts", "nodata_change", "delete_hdf", "reprocess")) {
+    if (!is.na(get(sel_param))) {general_opts[[sel_param]] <- if (get(sel_param)) {"Yes"} else {"No"}}
   }
   
   # Restore MODIS products if existing, otherwise retrieve data from xml file ----
@@ -192,7 +297,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    Quit = MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow=scrollWindow)
+    Quit = MODIStsp_GUI(general_opts=general_opts, prod_opt_list=prod_opt_list, MODIStsp_dir=MODIStsp.env$MODIStsp_dir,
+                        previous_jsfile=previous_jsfile, prodopts_file=prodopts_file,
+                        scrollWindow=scrollWindow)
   } else {
     Quit <- FALSE
   }
@@ -202,13 +309,13 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   # When GUI is closed (or in a non-interactive run): If not Quit selected, restore the user selected options from previous file and launch the processing ----
   if (!Quit) {
 
-    if (file.exists(general_opts$previous_jsfile)) {
+    if (file.exists(previous_jsfile)) {
       general_opts <- RJSONIO::fromJSON(previous_jsfile)
     } else {
       cat("[",date(),"] Processing Options file not found! Exiting!\n"); stop()
     }
-    if (file.exists(general_opts$prodopts_file)) {
-      prod_opt_list <- get(load(general_opts$prodopts_file))
+    if (file.exists(prodopts_file)) {
+      prod_opt_list <- get(load(prodopts_file))
     } else {
       cat("[",date(),"] Product information file not found! Exiting!\n"); stop()
     }
@@ -224,7 +331,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
 
     # If the product is NOT tiled, change or_proj to WGS84 and or_res to 0.05 deg
     if (prod_opts$tiled == 0) {
-      general_opts$MOD_proj_str <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+      general_opts$MOD_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
       prod_opts$native_res <- "0.05"
     }
     # get native resolution if out_res empty (Probably obsolete...)
@@ -271,24 +378,23 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
     }
 
     # launch MODIStsp_process to Download and preprocess the selected images ----
-    output <- with(general_opts, MODIStsp_process(sel_prod = sel_prod, start_date = start_date,end_date = end_date,
-                                                  out_folder = out_folder, out_folder_mod = out_folder_mod, reprocess = reprocess,
-                                                  delete_hdf = delete_hdf, sensor = sensor, download_server = download_server, 
-                                                  user = user, password = password,
-                                                  https = prod_opts$http, ftps = prod_opts$ftp,
-                                                  start_x = start_x,start_y = start_y, end_x = end_x, end_y = end_y,
-                                                  full_ext = full_ext, bbox = bbox, out_format = out_format, out_res_sel = out_res_sel,
-                                                  out_res = as.numeric(out_res), native_res = prod_opts$native_res,  tiled = prod_opts$tiled,
-                                                  resampling = resampling, ts_format = ts_format, compress = compress,
-                                                  MOD_proj_str = MOD_proj_str,outproj_str = user_proj4,
-                                                  nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out,rts = rts, nodata_change = nodata_change,
-                                                  datatype = prod_opts$datatype,	bandsel = general_opts$bandsel, bandnames = prod_opts$bandnames,
-                                                  indexes_bandsel = general_opts$indexes_bandsel, indexes_bandnames = c(prod_opts$indexes_bandnames,custom_idx$indexes_bandnames),
-                                                  indexes_formula = c(prod_opts$indexes_formula,custom_idx$indexes_formula), indexes_nodata_out = c(prod_opts$indexes_nodata_out,custom_idx$indexes_nodata_out),
-                                                  quality_bandnames = prod_opts$quality_bandnames,quality_bandsel = general_opts$quality_bandsel, quality_bitN = prod_opts$quality_bitN,
-                                                  quality_source = prod_opts$quality_source, quality_nodata_in = prod_opts$quality_nodata_in,
-                                                  quality_nodata_out = prod_opts$quality_nodata_out,
-                                                  file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder, gui = gui))
+    output <- MODIStsp_process(sel_prod = general_opts$sel_prod, start_date = general_opts$start_date, end_date = general_opts$end_date,
+                               out_folder = general_opts$out_folder, out_folder_mod = general_opts$out_folder_mod, reprocess = general_opts$reprocess,
+                               delete_hdf = general_opts$delete_hdf, sensor = general_opts$sensor, download_server = general_opts$download_server, 
+                               user = general_opts$user, password = general_opts$password,
+                               https = prod_opts$http, ftps = prod_opts$ftp,
+                               start_x = general_opts$start_x, start_y = general_opts$start_y, end_x = general_opts$end_x, end_y = general_opts$end_y,
+                               full_ext = general_opts$full_ext, bbox = general_opts$bbox, out_format = general_opts$out_format, out_res_sel = general_opts$out_res_sel,
+                               out_res = as.numeric(general_opts$out_res), native_res = prod_opts$native_res,  tiled = prod_opts$tiled,
+                               resampling = general_opts$resampling, ts_format = general_opts$ts_format, compress = general_opts$compress,
+                               MOD_proj_str = MOD_proj_str, outproj_str = general_opts$user_proj4,
+                               nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out, rts = general_opts$rts, nodata_change = general_opts$nodata_change,
+                               datatype = prod_opts$datatype,	bandsel = general_opts$bandsel, bandnames = prod_opts$bandnames,
+                               indexes_bandsel = general_opts$indexes_bandsel, indexes_bandnames = c(prod_opts$indexes_bandnames,custom_idx$indexes_bandnames),
+                               indexes_formula = c(prod_opts$indexes_formula,custom_idx$indexes_formula), indexes_nodata_out = c(prod_opts$indexes_nodata_out,custom_idx$indexes_nodata_out),
+                               quality_bandnames = prod_opts$quality_bandnames,quality_bandsel = general_opts$quality_bandsel, quality_bitN = prod_opts$quality_bitN,
+                               quality_source = prod_opts$quality_source, quality_nodata_in = prod_opts$quality_nodata_in, quality_nodata_out = prod_opts$quality_nodata_out,
+                               file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder, gui = gui)
 
     # At end of succesfull execution, save the options used in the main output folder
     general_opts <- RJSONIO::fromJSON(previous_jsfile)
@@ -302,7 +408,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, downlo
   print(time.taken)
   gc()
   } else {# End If on "Quit" --> If "Quit" above is skipped and program terminates
-    message("[",date(),"] "," You Selected to Quit ! Goodbye !")
+    message("[",date(),"] "," You Selected to Quit! Goodbye!")
   }
     
 }

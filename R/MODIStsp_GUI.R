@@ -19,7 +19,7 @@
 #' @importFrom grDevices dev.new
 #' @import gWidgets
 
-MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
+MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir, previous_jsfile, prodopts_file){
   
   # assign("Quit", T, envir = globalenv())	# Assigng "Quit" to true
   
@@ -177,8 +177,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   band_wid <- gbutton(text = "   Click To Select   ", border = TRUE,				# Child widget for processing bands selection
                       handler = function(h,....) {
                         
-                        prod_opt_list <- get(load(general_opts$prodopts_file))
-                        general_opts <- RJSONIO::fromJSON(general_opts$previous_jsfile)
+                        prod_opt_list <- get(load(prodopts_file))
+                        general_opts <- RJSONIO::fromJSON(previous_jsfile)
                         check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
                         check_wid <- GUI.env$temp_wid_bands												# retrieve currently selected original layers
                         selgroup <- gbasicdialog(title = "Select Processing Layers", parent = NULL, do.buttons = FALSE, horizontal = TRUE)
@@ -209,8 +209,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
                           band_wid_newindex <- gbutton(text = "Add custom index", border = TRUE,
                                                        handler = function(h,...) {
                                                          # Run addindex() function ----
-                                                         MODIStsp_addindex(option_jsfile = general_opts$previous_jsfile)
-                                                         general_opts <- RJSONIO::fromJSON(general_opts$previous_jsfile)
+                                                         MODIStsp_addindex(option_jsfile = previous_jsfile)
+                                                         general_opts <- RJSONIO::fromJSON(previous_jsfile)
                                                          pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                                                          tmp_arr_bands <- array(data = 0 , dim = length(check_names))
                                                          tmp_arr_bands[pos_wid] <- 1
@@ -372,7 +372,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   }
   
   if (!exists("modis_grid")) {
-    modis_grid <- get(load(file.path(general_opts$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
+    modis_grid <- get(load(file.path(MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
   }  # Laod MODIS grid ancillary file
   tiles_from_bbox <- gbutton(text = "Retrieve Tiles from bounding box", border = TRUE,
                              handler = function(h,...) {
@@ -468,7 +468,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   show_map <- gbutton(text = "Show Tiles Map", border = TRUE,
                       handler = function(h,....) {
                         dev.new(width = 8, height = 4.8, noRStudioGD = TRUE)
-                        plot(raster(file.path(general_opts$MODIStsp_dir, "/ExtData/MODIS_Tiles.gif")))
+                        plot(raster(file.path(MODIStsp_dir, "/ExtData/MODIS_Tiles.gif")))
                       },
                       container = x_group )
   
@@ -830,7 +830,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   prepare_to_save_options <- function(general_opts,GUI.env,...) {
     
     # workaround to retrieve custom index
-    general_opts$custom_indexes <- RJSONIO::fromJSON(general_opts$previous_jsfile)$custom_indexes
+    general_opts$custom_indexes <- RJSONIO::fromJSON(previous_jsfile)$custom_indexes
     
     general_opts$sel_prod <- mod_prod_list[which(mod_prod_list == svalue(prod_wid))]						# Products options
     general_opts$prod_version <- prod_opt_list[[general_opts$sel_prod]][[which(sapply(prod_opt_list[[general_opts$sel_prod]],function(x){x$v_number}) == svalue(vers_wid))]]$v_number
@@ -1022,7 +1022,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
   start_but <- gbutton(text = "Start Processing", container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
     general_opts <- prepare_to_save_options(general_opts, GUI.env)
     if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
-      write(RJSONIO::toJSON(general_opts),general_opts$previous_jsfile)
+      write(RJSONIO::toJSON(general_opts),previous_jsfile)
       # assign("Quit", F, envir = globalenv()) # If "Start", set "Quit to F
       GUI.env$Quit <- FALSE
       # rm(GUI.env$temp_wid_bands, envir = globalenv())
@@ -1050,7 +1050,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow){
     
     if (!is.na(choice)) {
       
-      general_opts <- RJSONIO::fromJSON(general_opts$previous_jsfile)  # load file and reset all widgets to values found in the loaded file
+      general_opts <- RJSONIO::fromJSON(previous_jsfile)  # load file and reset all widgets to values found in the loaded file
       svalue(prod_wid) <- general_opts$sel_prod
       svalue(vers_wid) <- general_opts$prod_version
       svalue(sens_wid) <- general_opts$sensor
