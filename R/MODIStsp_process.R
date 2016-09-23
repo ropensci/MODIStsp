@@ -263,6 +263,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   remote_filesize <- local_filesize
                 }
                 
+browser()
                 if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
                   er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
                   
