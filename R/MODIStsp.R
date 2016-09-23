@@ -144,7 +144,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #                       "UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
   #                       "Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
   #                       "User Defined" = "")
-  MOD_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs "
+  MOD_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs"
 
   # Load options if existing, otherwise initialise them ----
   if (file.exists(previous_jsfile)) {
@@ -226,7 +226,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
 
     # If the product is NOT tiled, change or_proj to WGS84 and or_res to 0.05 deg
     if (prod_opts$tiled == 0) {
-      general_opts$MOD_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
+      MOD_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
       prod_opts$native_res <- "0.05"
     }
     # get native resolution if out_res empty (Probably obsolete...)
@@ -263,7 +263,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
 
       # Automatically retrieve the tiles requested to cover the extent
       modis_grid <- get(load(file.path(MODIStsp.env$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
-      external_bbox_mod <- reproj_bbox(external_bbox, general_opts$user_proj4, general_opts$MOD_proj_str, enlarge = TRUE)
+      external_bbox_mod <- reproj_bbox(external_bbox, general_opts$user_proj4, MOD_proj_str, enlarge = TRUE)
       d_bbox_mod_tiled <- intersect(modis_grid, extent(external_bbox_mod))
       general_opts$start_x <- min(d_bbox_mod_tiled$H)
       general_opts$end_x <- max(d_bbox_mod_tiled$H)
