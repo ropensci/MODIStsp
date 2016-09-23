@@ -230,21 +230,21 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   paste0(ftp,YEAR,"/",DOY,"/",modisname)
                 } else if (download_server == "offline") {NA}
                 
-                # Get remote file size
-                res <-getURL(remote_filename, nobody=1L, header=1L)
-                
-                
                 if (download_server != "offline") { # in case of http or ftp download, try to catch size information from xml file
                   
+                  # # Get remote file size
+                  # res <-getURL(remote_filename, nobody=1L, header=1L)
+
                   # All this substituted with direct assessment of filesize from CURL call - left here while completing feature
                   remote_size_tries <- 30 # numbers of tryouts for xml metafile
                   size_string <- NA
                   class(size_string) <- "try-error"
                   
                   while (remote_size_tries > 0) {
-                    size_string <- try(getURL(remote_filename, nobody=1L, header=1L))
+                    size_string <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
+# browser()
                     # Check if download was good: check class of xmldown and status of xmldown
-                    if (class(size_string) == "try-error" | length(grep("401 Unauthorized|503 Service Unavailable",size_string))>0) {
+                    if (class(size_string) == "try-error") {
                       remote_size_tries <- remote_size_tries - 1
                     } else {
                       remote_size_tries <- 0
@@ -253,10 +253,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   }
                   
                   # if the xml was available, check the size; otherwise, set as the local size to skip the check
-                  if (class(size_string) == "try-error" | length(grep("401 Unauthorized|503 Service Unavailable",size_string))>0) {
+                  if (class(size_string) == "try-error") {
                     remote_filesize <- local_filesize
                   } else {
-                    remote_filesize <- as.numeric(substr(size_string, str_locate(res, ":")[1]+1 , str_locate(res, "\r")[1]-1))
+                    remote_filesize <- as.numeric(substr(size_string, str_locate(size_string, ":")[1]+1 , str_locate(size_string, "\r")[1]-1))
                   }
                   
                 } else {  # On offline mode, don't perform file size check. 
@@ -313,7 +313,7 @@ browser()
                       if (ce == 30) {
                         # Ask if Stop after 30 failed attempts
                         if (gui) {
-                          confirm <- gconfirm(paste0(download_server," server seems to be down! Do you want to retry ? "), icon = "question", 
+                          confirm <- gconfirm(paste0(download_server," server seems to be down! Do you want to retry?"), icon = "question", 
                                               handler = function(h,...){})
                         } else {
                           confirm <- "FALSE"
