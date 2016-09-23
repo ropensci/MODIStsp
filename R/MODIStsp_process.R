@@ -241,14 +241,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   class(size_string) <- "try-error"
                   
                   while (remote_size_tries > 0) {
-                    size_string <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
-# browser()
+                    size_string <- try(GET(paste0(remote_filename,".xml"), authenticate(user, password), progress(), timeout(600)))
                     # Check if download was good: check class of xmldown and status of xmldown
                     if (class(size_string) == "try-error") {
                       remote_size_tries <- remote_size_tries - 1
                     } else {
                       remote_size_tries <- 0
-                      
                     }
                   }
                   
@@ -256,14 +254,13 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   if (class(size_string) == "try-error") {
                     remote_filesize <- local_filesize
                   } else {
-                    remote_filesize <- as.numeric(substr(size_string, str_locate(size_string, ":")[1]+1 , str_locate(size_string, "\r")[1]-1))
+                    remote_filesize <- as.integer(xmlToList(xmlParse(content(size_string)))[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]])
                   }
                   
                 } else {  # On offline mode, don't perform file size check. 
                   remote_filesize <- local_filesize
                 }
                 
-browser()
                 if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
                   er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
                   
