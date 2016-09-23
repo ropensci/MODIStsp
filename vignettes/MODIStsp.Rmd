@@ -87,7 +87,7 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
 
 MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:  
 
-``` bitops``` ($\ge$ 1.9.6), ``` data.table``` ($\ge$ 1.9.6), ``` gdalUtils``` ($\ge$ 2.0.1.7), ```gWidgetsRGtk2``` ($\ge$ 0.0-54), ```hash``` ($\ge$ 2.2.6), ```plyr``` ($\ge$ 1.8.3), ```raster``` ($\ge$ 2.5-2), ```RCurl``` ($\ge$ 1.95-4.8), ```rgdal``` ($\ge$ 1.1-8), ```rgeos``` ($\ge$ 0.3-8), ```xts``` ($\ge$ 1.0-10), ```sp``` ($\ge$ 1.2-2), ```stringr``` ($\ge$ 1.0.0), ```XML``` ($\ge$ 3.98-1.1), ```httr``` ($\ge$ 1.1.0), ```RJSONIO``` ($\ge$ 1.3.0)
+``` bitops``` ($\ge$ 1.9.6), ``` data.table``` ($\ge$ 1.9.6), ``` gdalUtils``` ($\ge$ 2.0.1.7), ```gWidgetsRGtk2``` ($\ge$ 0.0-54), ```hash``` ($\ge$ 2.2.6), ```plyr``` ($\ge$ 1.8.3), ```raster``` ($\ge$ 2.5-2), ```RCurl``` ($\ge$ 1.95-4.8), ```rgdal``` ($\ge$ 1.1-8), ```rgeos``` ($\ge$ 0.3-8), ```xts``` ($\ge$ 1.0-10), ```sp``` ($\ge$ 1.2-2), ```stringr``` ($\ge$ 1.0.0), ```XML``` ($\ge$ 3.98-1.1), ```xml2``` ($\ge$ 0.1.2), ```httr``` ($\ge$ 1.1.0), ```RJSONIO``` ($\ge$ 1.3.0)
 
 while the following are suggested:  
 

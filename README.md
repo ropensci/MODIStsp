@@ -16,7 +16,7 @@ L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessi
 There seem to be currently some problems in installing MODIStsp via install_github on R 3.3.1 due to not correct installation of dependencies (probably related to a install_github). We are working to understand the issue. For the time being, manually installing all the dependencies could solve the issue. To do so, please try doing: 
   ```
     install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets", "hash", "plyr", "raster", "RCurl",
-      "rgdal", "rgeos", "xts", "XML", "sp", "stringr", "httr", "RJSONIO"))
+      "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO"))
   ```
  , then continue with standard "MODIStsp" installation. If you still don't succedd, please try contacting us ! 
 
@@ -98,7 +98,7 @@ NASA recently switched to provision of Collection 6 datasets for most Land Produ
 ## Dependencies <a name="Dependencies"></a> 
 
 MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:  
-``` bitops``` (>= 1.9.6), ``` data.table``` (>= 1.9.6), ``` gdalUtils``` (>= 2.0.1.7), ```gWidgetsRGtk2``` (>= 0.0-54), ```hash``` (>= 2.2.6), ```plyr``` (>= 1.8.3), ```raster``` (>= 2.5-2), ```RCurl``` (>= 1.95-4.8), ```rgdal``` (>= 1.1-8), ```rgeos``` (>=0.3-8), ```xts``` (>= 1.0-10), ```sp``` (>= 1.2-2), ```stringr``` (>= 1.0.0), ```XML``` (>= 3.98-1.1),
+``` bitops``` (>= 1.9.6), ``` data.table``` (>= 1.9.6), ``` gdalUtils``` (>= 2.0.1.7), ```gWidgetsRGtk2``` (>= 0.0-54), ```hash``` (>= 2.2.6), ```plyr``` (>= 1.8.3), ```raster``` (>= 2.5-2), ```RCurl``` (>= 1.95-4.8), ```rgdal``` (>= 1.1-8), ```rgeos``` (>=0.3-8), ```xts``` (>= 1.0-10), ```sp``` (>= 1.2-2), ```stringr``` (>= 1.0.0), ```XML``` (>= 3.98-1.1), ```xml2``` (>= 0.1.2)
 
 , while the following are suggested:  
 ```knitr ```, ```rmarkdown```, ```png```, ```grid```.
