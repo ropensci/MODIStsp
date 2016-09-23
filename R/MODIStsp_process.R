@@ -241,7 +241,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   class(size_string) <- "try-error"
                   
                   while (remote_size_tries > 0) {
-                    size_string <- try(GET(paste0(remote_filename,".xml"), authenticate(user, password), progress(), timeout(600)))
+                    size_string <- if (download_server=="http") {
+                      try(GET(paste0(remote_filename,".xml"), authenticate(user, password), timeout(600)))
+                    } else if (download_server=="ftp") {
+                      try(getURL(remote_filename, nobody=1L, header=1L))
+                    }
                     # Check if download was good: check class of xmldown and status of xmldown
                     if (class(size_string) == "try-error") {
                       remote_size_tries <- remote_size_tries - 1
@@ -254,7 +258,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   if (class(size_string) == "try-error") {
                     remote_filesize <- local_filesize
                   } else {
-                    remote_filesize <- as.integer(xmlToList(xmlParse(content(size_string)))[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]])
+                    remote_filesize <- if (download_server=="http") {
+                      as.integer(xmlToList(xmlParse(content(size_string)))[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]])
+                    } else if (download_server=="ftp") {
+                      as.integer(gsub("[^:]+: ([0-9]+)\\r.*","\\1",size_string))
+                    }
                   }
                   
                 } else {  # On offline mode, don't perform file size check. 
