@@ -244,7 +244,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   while (remote_size_tries > 0) {
                     size_string <- try(getURL(remote_filename, nobody=1L, header=1L))
                     # Check if download was good: check class of xmldown and status of xmldown
-                    if (class(size_string) == "try-error") {
+                    if (class(size_string) == "try-error" | length(grep("401 Unauthorized|503 Service Unavailable",size_string))>0) {
                       remote_size_tries <- remote_size_tries - 1
                     } else {
                       remote_size_tries <- 0
@@ -253,7 +253,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   }
                   
                   # if the xml was available, check the size; otherwise, set as the local size to skip the check
-                  if (class(size_string) == "try-error") {
+                  if (class(size_string) == "try-error" | length(grep("401 Unauthorized|503 Service Unavailable",size_string))>0) {
                     remote_filesize <- local_filesize
                   } else {
                     remote_filesize <- as.numeric(substr(size_string, str_locate(res, ":")[1]+1 , str_locate(res, "\r")[1]-1))
