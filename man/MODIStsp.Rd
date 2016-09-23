@@ -5,14 +5,7 @@
 \title{MODIStsp}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  scrollWindow = FALSE, sel_prod = NA, sensor = NA, prod_version = NA,
-  start_date = NA, end_date = NA, bandsel = NA, indexes_bandsel = NA,
-  quality_bandsel = NA, start_x = NA, end_x = NA, start_y = NA,
-  end_y = NA, user = NA, password = NA, download_server = NA,
-  proj = NA, user_proj4 = NA, out_res_sel = NA, out_res = NA,
-  full_ext = NA, resampling = NA, out_format = NA, ts_format = NA,
-  rts = NA, compress = NA, nodata_change = NA, delete_hdf = NA,
-  reprocess = NA, bbox = NA, out_folder = NA, out_folder_mod = NA)
+  scrollWindow = FALSE)
 }
 \arguments{
 \item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the 
@@ -31,129 +24,10 @@ fullscreen with scrollbars (this is useful on devices with small display). If us
  device with a display resolution >= 1024x768, leaving this parameter to FALSE is 
  suggested.}
 
-\item{sel_prod}{(optional): MODIS product name. 
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{sensor}{(optional) MODIS platform (one between "Terra", "Aqua" or "Both").
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{prod_version}{(optional) integer: product version (5 or 6).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{start_date}{(optional) starting date (string with format "YYYY-MM-DD").
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{end_date}{(optional) ending date (string with format "YYYY-MM-DD").
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{bandsel}{(optional) numeric vector of MODIS selected bands (0 = not selected,
-1 = selected). The lenght must be the same of the available bands for the selected MODIS product.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{indexes_bandsel}{(optional) numeric vector of MODIS selected indices (0 = not selected,
-1 = selected). The lenght must be the same of the available indices for the selected MODIS product.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{quality_bandsel}{(optional)  numeric vector of MODIS selected quality flags (0 = not selected,
-1 = selected). The lenght must be the same of the available quality flags for the selected MODIS product.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{start_x}{(optional) integer: starting MODIS tile (X value).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{end_x}{(optional) integer: ending MODIS tile (X value).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{start_y}{(optional) integer: starting MODIS tile (Y value).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{end_y}{(optional) integer: ending MODIS tile (Y value).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{user}{(optional) user name for accessing NASA lpdaac http archive
-(required for http download).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{password}{(optional) password for accessing NASA lpdaac http archive
-(required for http download).
-If provided, the value saved in the options_file JSON file is replaced.}
-
 \item{download_server}{(optional): service used to download MODIS tiles, one of: 
 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov) or 'offline'
  If not specified, MODIStsp tries to download using http; if http fails, it tries 
  with ftp.}
-
-\item{proj}{(optional) output projection: one between "Sinusoidal" 
-(original MODIS sinusoidal), "UTM 32N" (UTM zone 32 North, WGS84), 
-"Latlon WGS84" (geographic coordinates, WGS84) and "User Defined"
-(defined with user_proj4 PROJ4 string).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{user_proj4}{(optional) PROJ4 string of custom output projection.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{out_res_sel}{(optional) numeric: output resolution.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{out_res}{(optional) one between "Native" (MODIS native resolution) 
-and "Resampled" (resolution set with out_res_sel parameter).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{full_ext}{(optional) one between "Full tiles Extent" (the output
-is maintained at the original extension) and "Resized" (the output is
-clipped with the bounding box provided with spatial_file_path or
-bbox parameters)
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{resampling}{(optional) resampling method, one between "near"
-(nearest neighbour) or "mode" (modal value). 
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{out_format}{(optional) output format of spatial files, one between 
-"ENVI" or "GTiff". 
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{ts_format}{(optional) output format of time series, one between
-"None" (no virtual rasters are created), "ENVI Meta Files", "GDAL vrt files"
-and "ENVI and GDAL".
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{rts}{(optional) logical: if TRUE, RasterStack of output products are created.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{compress}{(optional) GeoTIFF compression, one between "None", 
-"Low (PACKBITS)", "Medium (LZW)" and "High (DEFLATE)".
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{nodata_change}{(optional) logical: if TRUE, change original
-MODIS nodata values with standard ones (see vignette).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{delete_hdf}{(optional) logical: if TRUE, delete ofignal MODIS HDf
-files after processing them.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{reprocess}{(optional) logical: if TRUE, existing products in output
-directories are re-processed and overwritten.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{bbox}{(optional) numeric: vector of clipping bounding box
-(xmin, ymin, xmax, ymax).
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{out_folder}{(optional) path of the main output folder for
-output storage.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{out_folder_mod}{(optional) path of the output folder for original
-HDF files.
-If provided, the value saved in the options_file JSON file is replaced.}
-
-\item{download_server}{(optional) method for downloading MODIS products:
-one between "http" (download through ftp from NASA lpdaac http archive),
-"ftp" (download from NASA ftp archive), "offline" (use only HDF files
-alreadyavailable on the user’s PC without downloading from NASA).
-If provided, the value saved in the options_file JSON file is replaced.}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MODIStsp)
@@ -174,17 +48,17 @@ MODIStsp()}
 
 # Run the tool using the settings previously saved in a specific option file
 \dontrun{
-MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData")}
+MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json")}
 
 # Run the tool using a previously saved options file,
 # but editing it with the GUI before starting the processing
 \dontrun{
-MODIStsp(options_File = "X:/yourpath/youroptions.RData")}
+MODIStsp(options_File = "X:/yourpath/youroptions.json")}
 
 # Run the tool using the settings previously saved in a specific option file
 # and specifying the extent from a spatial file
 \dontrun{
-MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
+MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json",
   spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
 
 # Run the tool in a batch mode, using the settings previously saved in a specific
@@ -192,7 +66,7 @@ MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
 \dontrun{
 extent_list = list.files("X:/path/containing/some/shapefiles/", "\\\\.shp$")
 for (single_shape in extent_list)
-  MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.RData",
+  MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json",
     spatial_file_path = single_shape )}
 }
 \author{

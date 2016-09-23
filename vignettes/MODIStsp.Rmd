@@ -126,7 +126,6 @@ MODIStsp(gui = FALSE, options_File = options_file, download_server = "Aqua")
 ```
 will launch MODIStsp with the parameters saved in "X:/yourpath/youroptions.json" options file, with the exception of
 "download_server" parameter, which is set to "Aqua". Details about the parameter names can be found with ```?MODIStsp```.
-Pay attention to the fact that, in this case, internal checks about parameter consistency (i.e. cross-check between bounding box for resizing and selected tiles) will not be executed! So be careful by directly passing option parameters.
 
 Specifying also the "_spatial\_file\_path_" parameter overrides the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents.
 
