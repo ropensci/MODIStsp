@@ -1048,7 +1048,12 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     
     choice <- gfile(type = "open", text = "Select file for loading processing options...")	# ask for file
     
-    if (!is.na(choice)) {
+    continue_load <- if (length(grep("\\.json$",choice))==0) {
+      gconfirm("The selected file does not seem to be a JSON file. Do you want to continue?", title = "Warning", icon = "warning")
+    } else {
+      TRUE
+    }
+    if (continue_load) {
       
       general_opts <- RJSONIO::fromJSON(choice)  # load file and reset all widgets to values found in the loaded file
       svalue(prod_wid) <- general_opts$sel_prod
@@ -1105,6 +1110,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   save_but <- gbutton(text = "Save Options", container = but_group, handler = function(h,....) {
     
     choice <- gfile(type = "save", text = "Select file for saving processing options...")		# File selection widget
+    choice <- paste0(gsub("\\.json$","",choice),".json") # add file extension if missing
     
     if (!is.na(choice)) {
       general_opts <- prepare_to_save_options(general_opts, GUI.env)
