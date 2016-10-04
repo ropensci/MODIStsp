@@ -1056,6 +1056,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     if (continue_load) {
       
       general_opts <- RJSONIO::fromJSON(choice)  # load file and reset all widgets to values found in the loaded file
+      svalue(cat_wid)  <- with(prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]],paste(cat01,cat02,sep=" - "))
       svalue(prod_wid) <- general_opts$sel_prod
       svalue(vers_wid) <- general_opts$prod_version
       svalue(sens_wid) <- general_opts$sensor
