@@ -10668,18 +10668,6 @@
                 </bands>
                 <indexes>
                     <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
@@ -10860,18 +10848,6 @@
                     </band>
                 </bands>
                 <indexes>
-                    <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
@@ -11063,18 +11039,6 @@
                 </bands>
                 <indexes>
                     <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
@@ -11255,18 +11219,6 @@
                     </band>
                 </bands>
                 <indexes>
-                    <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
@@ -11451,18 +11403,6 @@
                 </bands>
                 <indexes>
                     <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
@@ -11643,18 +11583,6 @@
                     </band>
                 </bands>
                 <indexes>
-                    <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
@@ -11853,18 +11781,6 @@
                 </bands>
                 <indexes>
                     <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
@@ -12039,18 +11955,6 @@
                     </band>
                 </bands>
                 <indexes>
-                    <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
@@ -12249,18 +12153,6 @@
                 </bands>
                 <indexes>
                     <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
@@ -12435,18 +12327,6 @@
                     </band>
                 </bands>
                 <indexes>
-                    <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
@@ -12638,18 +12518,6 @@
                 </bands>
                 <indexes>
                     <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
                         <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
@@ -12830,18 +12698,6 @@
                     </band>
                 </bands>
                 <indexes>
-                    <index>
-                        <indexes_bandname>NDVI</indexes_bandname>
-                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
-                    <index>
-                        <indexes_bandname>EVI</indexes_bandname>
-                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
-                        <indexes_formula>2.5*((b2_NIR-b1_Red)/(b2_NIR+6*b1_Red-7.5*b3_Blue+1))</indexes_formula>
-                        <indexes_nodata_out>32767</indexes_nodata_out>
-                    </index>
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
