@@ -1050,7 +1050,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     
     if (!is.na(choice)) {
       
-      general_opts <- RJSONIO::fromJSON(previous_jsfile)  # load file and reset all widgets to values found in the loaded file
+      general_opts <- RJSONIO::fromJSON(choice)  # load file and reset all widgets to values found in the loaded file
       svalue(prod_wid) <- general_opts$sel_prod
       svalue(vers_wid) <- general_opts$prod_version
       svalue(sens_wid) <- general_opts$sensor
