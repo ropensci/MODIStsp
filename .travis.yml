@@ -3,21 +3,33 @@
 language: r
 cache: packages
 warnings_are_errors: false
-sudo: required
-dist: trusty
-env:
-   global:
-     - R_BUILD_ARGS=" "
-     - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings"
-     - R_CHECK_TIMINGS_="0"
-     - BOOTSTRAP_LATEX="1"
-addons:
-  apt:
-    packages:
-      - libgdal-dev
-      - libproj-dev
-      - libcurl4-openssl-dev
-      - libgtk-3-dev
-r_binary_packages:
-  - cairoDevice
-  - RGtk2
+
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+      env:
+      global:
+      - R_BUILD_ARGS=" "
+      - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings"
+      - R_CHECK_TIMINGS_="0"
+      - BOOTSTRAP_LATEX="1"    
+      addons:
+        apt:
+          packages:
+            - libgdal-dev
+            - libproj-dev
+            - libcurl4-openssl-dev
+            - libgtk-3-dev
+      r_binary_packages:
+        - cairoDevice
+        - RGtk2
+    - os: osx
+      osx_image: xcode8
+      brew_packages: jq # to test for conflicts
+      latex: false
+    - os: osx
+      osx_image: beta-xcode6.1
+      disable_homebrew: true
