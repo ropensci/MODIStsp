@@ -27,7 +27,7 @@
 #' @importFrom raster extent rasterOptions
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils memory.limit packageVersion
-#' @import gWidgetsRGtk2
+#' 
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used 
 #' # settings
