@@ -11,10 +11,6 @@
 #'  (default=NULL): if defined, the processing options which define the extent, the 
 #'  selected tiles and the "Full Tile / Resized" options are not considered; instead, new 
 #'  files are created on the extent of the provided spatial file.
-#' @param download_server (optional): service used to download MODIS tiles, one of: 
-#' 'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov) or 'offline'
-#'  If not specified, MODIStsp tries to download using http; if http fails, it tries 
-#'  with ftp.
 #' @param scrollWindow (optional) logical parameter: if TRUE, the GUI window is opened 
 #' fullscreen with scrollbars (this is useful on devices with small display). If using a
 #'  device with a display resolution >= 1024x768, leaving this parameter to FALSE is 
