@@ -23,11 +23,6 @@ files are created on the extent of the provided spatial file.}
 fullscreen with scrollbars (this is useful on devices with small display). If using a
  device with a display resolution >= 1024x768, leaving this parameter to FALSE is 
  suggested.}
-
-\item{download_server}{(optional): service used to download MODIS tiles, one of: 
-'http' (https://lpdaac.usgs.gov), 'ftp' (ftp://ladsweb.nascom.nasa.gov) or 'offline'
- If not specified, MODIStsp tries to download using http; if http fails, it tries 
- with ftp.}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MODIStsp)

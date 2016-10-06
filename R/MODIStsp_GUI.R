@@ -8,6 +8,9 @@
 #' 						if a previous options file is not existing.
 #' @param prod_opt_list List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)
 #' @param scrollWindow logical parameter passed by MODIStsp main function.
+#' @param MODIStsp_dir main folder of the package
+#' @param previous_jsfile json parameters file containgn data of the last execution
+#' @param prodopts_file rdata file containing info about MODIS products
 #' @return Quit - Logical - tells the main if running processing or exiting (also, Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file)
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
