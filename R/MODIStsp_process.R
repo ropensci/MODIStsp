@@ -124,6 +124,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     #  if not, select them and set the "delete" option for them to 1
     #- ------------------------------------------------------------------------------- -#
     
+    # patch not to generate error in indexes and/or quality bands are missing for the selected product
+    if (length(indexes_bandnames)==0) {indexes_bandsel <- integer(0)}
+    if (length(quality_bandnames)==0) {quality_bandsel <- integer(0)}
+
     bands_indexes <- matrix(0, nrow = length(bandsel), ncol = length(indexes_bandsel) + length(quality_bandsel),# dummy matrix which associate, to each couple of index or quality band (col) - original band (row),
                             dimnames = list(bandnames,c(indexes_bandnames,quality_bandnames)))								# info on wether that band is required to build that index
     
