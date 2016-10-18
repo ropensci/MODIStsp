@@ -21,8 +21,6 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @export
-#' @import gWidgetsRGtk2
-#' @import RGtk2
 #' @importFrom hash hash
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom rgdal getGDALVersionInfo
