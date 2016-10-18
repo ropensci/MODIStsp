@@ -26,10 +26,3 @@ matrix:
       r_binary_packages:
         - cairoDevice
         - RGtk2
-    - os: osx
-      osx_image: xcode8
-      brew_packages: jq # to test for conflicts
-      latex: false
-    - os: osx
-      osx_image: beta-xcode6.1
-      disable_homebrew: true
