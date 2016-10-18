@@ -21,6 +21,8 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @export
+#' @importFrom pacman p_load p_exists
+#' @importFrom utils winDialog
 #' @importFrom hash hash
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom rgdal getGDALVersionInfo
@@ -67,10 +69,19 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #- ------------------------------------------------------------------------------- -#
   #  Initialize project
   #- ------------------------------------------------------------------------------- -#
-  
   # On interactive execution, load Rgtk2
   if (gui) {
-    requireNamespace("gWidgetsRGtk2")
+    if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
+      inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
+      if (inst_gw =="YES") {
+        pacman::p_load("gWidgetsRGtk2")
+      } else {
+        
+        stop("MODIStsp can not work withouth gWidgetsRGtk2 ! Exiting !")
+      }
+        
+    }
+    # requireNamespace("gWidgetsRGtk2")
     options("guiToolkit" = "RGtk2")
   }
   

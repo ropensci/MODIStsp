@@ -21,6 +21,7 @@
 #' @import gWidgets
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom stringr str_detect
+#' @importFrom pacman p_load
 #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -50,7 +51,7 @@ MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", 
 
   # Initialization and retrieval of parameters ----
   if (gui) {
-    requireNamespace("gWidgetsRGtk2")
+    pacman::p_load("gWidgetsRGtk2")
     options("guiToolkit" = "RGtk2")
   }
 
