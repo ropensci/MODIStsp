@@ -22,7 +22,6 @@
 #' @note License: GPL 3.0
 #' @export
 #' @importFrom pacman p_load p_exists
-#' @importFrom utils winDialog
 #' @importFrom hash hash
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom rgdal getGDALVersionInfo
@@ -72,8 +71,11 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   # On interactive execution, load Rgtk2
   if (gui) {
     if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
-      inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
-      if (inst_gw =="YES") {
+      #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
+      message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! 
+              \n \n Do you want to install it now ?", type = " y / n")
+      inst_gw <- readline()
+      if (inst_gw =="y") {
         pacman::p_load("gWidgetsRGtk2")
       } else {
         
