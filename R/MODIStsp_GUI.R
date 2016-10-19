@@ -259,7 +259,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         })
                         # if Cancel, reset selected layers to previous choice and exit ----
                         cancel_but <- gbutton(text = "Cancel", container = bands_group, handler = function(button,...){
-                          
+
                           if (exists("check_wid", where = GUI.env)) {
                             GUI.env$temp_wid_bands <- check_wid
                           }
@@ -405,9 +405,10 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   bbox_from_file <- gbutton(text = "Load Extent from a spatial file", border = TRUE,
                             handler = function(h,...) {
                               choice <- gfile(type = "open", text = "Select a vector or raster file", # File selection widget
-                                              filter = list( "All files" = list(patterns = "*"),
+                                              filter = list( "Spatial files" = list(patterns = c("*.shp","*.kml","*.tif","*.dat")), # TODO add formats to the lists!
                                                              "Vector layers" = list(patterns = c("*.shp","*.kml")), # TODO add formats to the lists!
-                                                             "Raster layers" = list(patterns = c("*.tif","*.dat"))))
+                                                             "Raster layers" = list(patterns = c("*.tif","*.dat")),
+                                                             "All files" = list(patterns = "*")))
                               if (!is.na(choice)) {
                                 # Show window until the process had finished
                                 wait_window <- gwindow(title = "Please wait", container = TRUE, width = 400, height = 40)
@@ -1046,7 +1047,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # On "Load", ask for a old options file and load it --------
   load_but <- gbutton(text = "Load Options", container = but_group, handler = function(h,....){
     
-    choice <- gfile(type = "open", text = "Select file for loading processing options...")	# ask for file
+    choice <- gfile(type = "open", text = "Select file for loading processing options...", filter=c("JSON files"="json"))	# ask for file
+browser()
     
     continue_load <- if (length(grep("\\.json$",choice))==0) {
       gconfirm("The selected file does not seem to be a JSON file. Do you want to continue?", title = "Warning", icon = "warning")
@@ -1110,7 +1112,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # On "Save", ask for a file name and save options (must be a JSON file !)  --------
   save_but <- gbutton(text = "Save Options", container = but_group, handler = function(h,....) {
     
-    choice <- gfile(type = "save", text = "Select file for saving processing options...")		# File selection widget
+    choice <- gfile(type = "save", text = "Select file for saving processing options...", filter=c("JSON files"="json"))		# File selection widget
     choice <- paste0(gsub("\\.json$","",choice),".json") # add file extension if missing
     
     if (!is.na(choice)) {
