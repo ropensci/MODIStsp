@@ -1073,7 +1073,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
       # svalue(end_year_wid) <- general_opts$end_year
       svalue(server_wid) = general_opts$download_server
       svalue(user_wid) = general_opts$user
-      svalue(password_wid) = general_opts$user
+      svalue(password_wid) = general_opts$password
       
       svalue(start_date_wid) <- general_opts$start_date # Dates options
       svalue(end_date_wid) <- general_opts$end_date
