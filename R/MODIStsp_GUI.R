@@ -404,12 +404,12 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   
   bbox_from_file <- gbutton(text = "Load Extent from a spatial file", border = TRUE,
                             handler = function(h,...) {
-                              choice <- gfile(type = "open", text = "Select a vector or raster file", # File selection widget
+                              choice <- try(gfile(type = "open", text = "Select a vector or raster file", # File selection widget
                                               filter = list( "Spatial files" = list(patterns = c("*.shp","*.kml","*.tif","*.dat")), # TODO add formats to the lists!
                                                              "Vector layers" = list(patterns = c("*.shp","*.kml")), # TODO add formats to the lists!
                                                              "Raster layers" = list(patterns = c("*.tif","*.dat")),
-                                                             "All files" = list(patterns = "*")))
-                              if (!is.na(choice)) {
+                                                             "All files" = list(patterns = "*"))), silent=TRUE)
+                              if (class(choice)!="try-error") if (!is.na(choice)) {
                                 # Show window until the process had finished
                                 wait_window <- gwindow(title = "Please wait", container = TRUE, width = 400, height = 40)
                                 size(wait_window) <- c(100,8)
@@ -789,8 +789,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   outfold_group <- ggroup(horizontal = TRUE, container = outfold_frame, expand=TRUE, fill=TRUE)  				# Main group
   outfold_wid <- gedit(text = format(general_opts$out_folder, justify = "right"), container = outfold_group, width = 46, expand=TRUE)			# Selected file
   fold_choose <- gbutton("Browse", handler = function(h,...) {
-    choice <- gfile(type = "selectdir", text = "Select the Output Folder for MODIS data...")		# File selection widget
-    if (!is.na(choice)) {
+    choice <- try(gfile(type = "selectdir", text = "Select the Output Folder for MODIS data..."), silent=TRUE)		# File selection widget
+    if (class(choice)!="try-error") if (!is.na(choice)) {
       svalue(outfold_wid) <- choice						## On new selection, set value of the label widget
       general_opts$out_folder <- format(choice, justify = "left")	# 	On new selection,  Set value of the selected variable
     }
@@ -808,8 +808,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   outfoldmod_group <- ggroup(horizontal = TRUE, container = outfoldmod_frame, expand=TRUE, fill=TRUE)  				# Main group
   outfoldmod_wid <- gedit(text = format(general_opts$out_folder_mod, justify = "right") , container = outfoldmod_group, width = 46, expand=TRUE)			# Selected file
   fold_choose <- gbutton("Browse", handler = function(h,...) {
-    choice <- gfile(type = "selectdir", text = "Select the Output Folder for storage of original HDFs...")		# File selection widget
-    if (!is.na(choice)) {
+    choice <- try(gfile(type = "selectdir", text = "Select the Output Folder for storage of original HDFs..."), silent=TRUE)		# File selection widget
+    if (class(choice)!="try-error") if (!is.na(choice)) {
       svalue(outfoldmod_wid) <- choice						## On new selection, set value of the label widget
       general_opts$out_folder_mod <- format(choice, justify = "left")	# 	On new selection,  Set value of the selected variable
     }
@@ -1045,15 +1045,23 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   addSpring(but_group, horizontal = TRUE)
   
   # On "Load", ask for a old options file and load it --------
-  load_but <- gbutton(text = "Load Options", container = but_group, handler = function(h,....){
+  load_but <- gbutton(text = "Load Options", container = but_group, handler = function(h,...){
     
-    choice <- gfile(type = "open", text = "Select file for loading processing options...", filter=c("JSON files"="json"))	# ask for file
+    choice <- try(gfile(type = "open", text = "Select file for loading processing options...", initialfilename = getwd(),
+                    filter = list( "JSON files" = list(patterns=c("*.json")),
+                                   "text files" = list(mime.types = c("text/plain")),
+                                   "All files" = list(patterns = c("*")))), silent=TRUE)
+    # choice <-try(rChoiceDialogs::tkchoose.files(), silent=TRUE)
+    # choice <- try(file.choose(),silent=TRUE)
 
-    continue_load <- if (length(grep("\\.json$",choice))==0) {
+    continue_load <- if (class(choice)=="try-error") {
+      FALSE
+    } else if (length(grep("\\.json$",choice))==0) {
       gconfirm("The selected file does not seem to be a JSON file. Do you want to continue?", title = "Warning", icon = "warning")
     } else {
       TRUE
     }
+
     if (continue_load) {
       
       general_opts <- RJSONIO::fromJSON(choice)  # load file and reset all widgets to values found in the loaded file
@@ -1111,7 +1119,10 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # On "Save", ask for a file name and save options (must be a JSON file !)  --------
   save_but <- gbutton(text = "Save Options", container = but_group, handler = function(h,....) {
     
-    choice <- gfile(type = "save", text = "Select file for saving processing options...", filter=c("JSON files"="json"))		# File selection widget
+    choice <- gfile(type = "save", text = "Select file for saving processing options...", initialfilename = paste0('MODIStsp_', Sys.Date(),'.json'), # File selection widget
+                    filter = list( "JSON files" = list(patterns=c("*.json")),
+                                   "text files" = list(mime.types = c("text/plain")),
+                                   "All files" = list(patterns = c("*"))))
     choice <- paste0(gsub("\\.json$","",choice),".json") # add file extension if missing
     
     if (!is.na(choice)) {
