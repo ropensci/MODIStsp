@@ -1048,8 +1048,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   load_but <- gbutton(text = "Load Options", container = but_group, handler = function(h,....){
     
     choice <- gfile(type = "open", text = "Select file for loading processing options...", filter=c("JSON files"="json"))	# ask for file
-browser()
-    
+
     continue_load <- if (length(grep("\\.json$",choice))==0) {
       gconfirm("The selected file does not seem to be a JSON file. Do you want to continue?", title = "Warning", icon = "warning")
     } else {
