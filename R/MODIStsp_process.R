@@ -348,6 +348,27 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
               # After all required tiles for the date are downloaded, start geoprocessing
               # -------------------------------------------------------------------------
               
+              
+browser()
+              # STEP 0: patch to correct wrong resolution/bbox in some HDF4 original layers (e.g. albedo)
+              # Retrieve information from hdf4 with gdalinfo
+              gdalinfo_hdf_raw <- gdalinfo(file.path(out_folder_mod, modislist[1]))
+              gdalinfo_hdf_1stlayer <- gsub("^ *SUBDATASET_1_NAME=","",gdalinfo_hdf_raw[grep("^ *SUBDATASET_1_NAME",gdalinfo_hdf_raw)])
+              gdalinfo_hdf_resunit <- gsub("^ *NADIRDATARESOLUTION=[0-9.]+ ?","",gdalinfo_hdf_raw[grep("^ *NADIRDATARESOLUTION",gdalinfo_hdf_raw)])
+              gdalinfo_raw <- if (length(gdalinfo_hdf_1stlayer)>0) { # if more than a band is present, take gdalinfo from the first band
+                gdalinfo(gdalinfo_hdf_1stlayer)
+              } else { # otherwise, take from the hdf directly
+                gdalinfo_hdf_raw
+              }
+              gdalinfo_bbox <- cbind( na.omit(as.numeric(unlist(strsplit(gsub("[^0-9.\\-]+"," ",gdalinfo_raw[grep("^Lower Left",gdalinfo_raw)])," "))))[1:2],
+                                      na.omit(as.numeric(unlist(strsplit(gsub("[^0-9.\\-]+"," ",gdalinfo_raw[grep("^Upper Right",gdalinfo_raw)])," "))))[1:2])
+              # if HDF file is in degrees and with a small bounding box, correct
+              correct_hdf <- if (gdalinfo_hdf_resunit %in% c("degree","Arc Second") & all(gdalinfo_bbox==c(-0.05,-0.025,0.05,0.025))) {
+                TRUE
+              } else {
+                FALSE
+              }
+              
               # -------------------------------------------------------------------------
               # STEP 1: choose the layers (original, indexes and quality bands) to be created
               # -------------------------------------------------------------------------
@@ -448,16 +469,32 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       message("[",date(),"] ",mess_text)
                     }
                     
+browser()
+                    # Create a GDAL vrt file corresponding to the original hdf4
+                    gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band] , vrtnodata = nodata_out[band])
+                    # apply the patch if an error in the original hdf4 file at step 0 was detected
+                    if (correct_hdf) {
+                      outfile_vrt_or <- outfile_vrt
+                      outfile_vrt <- tempfile(fileext = ".vrt")   # filename of new temporary vrt file 
+                      outfile_vrt_cont <- readLines(outfile_vrt_or)
+                      outfile_vrt_linegeom <- grep("<GeoTransform>",outfile_vrt_cont)
+                      outfile_vrt_geom <- as.numeric(unlist(strsplit(gsub("<GeoTransform>(.*)</GeoTransform>","\\1",outfile_vrt_cont[outfile_vrt_linegeom]),",")))
+                      outfile_vrt_geom_corr <- outfile_vrt_geom*3600
+                      outfile_vrt_cont[outfile_vrt_linegeom] <- paste("<GeoTransform>",paste(outfile_vrt_geom_corr,collapse=", "),"</GeoTransform>")
+                      write(outfile_vrt_cont, outfile_vrt)
+                    }
+
+                    #If resize required,  convert bbox coordinates from t_srs to modis_srs, to get the correct extent
                     if (full_ext == "Resized") {
-                      #If resize required,  convert bbox coordinates from t_srs to modis_srs, to get the correct extent
+                      outfile_vrt_or <- outfile_vrt
+                      outfile_vrt <- tempfile(fileext = ".vrt")   # filename of new temporary vrt file 
                       # for resizing BEFORE reprojecting
                       bbox_mod <- reproj_bbox( bbox, outproj_str, MOD_proj_str, enlarge = TRUE)
                       # Create a resized and eventually mosaiced GDAL vrt file
-                      gdalbuildvrt(files_in, outfile_vrt, te = c(bbox_mod), tap = TRUE, tr = paste(rep(native_res,2),collapse = " "),
+                      gdalbuildvrt(outfile_vrt_or, outfile_vrt, te = c(bbox_mod), tap = TRUE, tr = paste(rep(native_res,2),collapse = " "),
                                    srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band], sd = band)
-                    } else {
-                      gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band] , vrtnodata = nodata_out[band])
-                    }  # Create a resized and eventually mosaiced GDAL vrt file
+                    }
+                    
                     
                     ## Launch the reprojection - operations to be done depends on whether resize and/or reprojection and/or
                     ## resampling are required
