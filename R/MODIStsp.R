@@ -70,11 +70,25 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #- ------------------------------------------------------------------------------- -#
   
   # On interactive execution, load Rgtk2
+   # On interactive execution, load Rgtk2
   if (gui) {
-    requireNamespace("gWidgets2RGtk2")
+    if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
+      #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
+      message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! 
+              \n \n Do you want to install it now ?", type = " y / n")
+      inst_gw <- readline()
+      if (inst_gw =="y") {
+        pacman::p_load("gWidgetsRGtk2")
+      } else {
+        
+        stop("MODIStsp can not work withouth gWidgetsRGtk2 ! Exiting !")
+      }
+        
+    }
+    # requireNamespace("gWidgetsRGtk2")
     options("guiToolkit" = "RGtk2")
   }
-  
+
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
     # gdal_setInstallation(ignore.full_scan = FALSE)
@@ -135,11 +149,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #- ------------------------------------------------------------------------------- -#
   #  Set general processing options - used at first execution to initialize GUI
   #- ------------------------------------------------------------------------------- -#
-  # out_proj_names <- c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
-  # out_proj_list <- hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs ",
-  #                       "UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
-  #                       "Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-  #                       "User Defined" = "")
+
   MOD_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs"
 
   # Load options if existing, otherwise initialise them ----
@@ -188,9 +198,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    Quit = MODIStsp_GUI(general_opts=general_opts, prod_opt_list=prod_opt_list, MODIStsp_dir=MODIStsp.env$MODIStsp_dir,
-                        previous_jsfile=previous_jsfile, prodopts_file=prodopts_file,
-                        scrollWindow=scrollWindow)
+    Quit = MODIStsp_GUI(general_opts = general_opts, prod_opt_list = prod_opt_list, MODIStsp_dir = MODIStsp.env$MODIStsp_dir,
+                        previous_jsfile = previous_jsfile, prodopts_file = prodopts_file,
+                        scrollWindow = scrollWindow)
     
   } else {
     Quit <- FALSE
@@ -215,9 +225,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     custom_idx <- general_opts$custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]]
     
     # Create variables needed to launch the processing
-    # start_date <- paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = ".")
-    # end_date <- paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = ".")
-    #
+    
     general_opts$start_date <- as.character(format(as.Date(general_opts$start_date), "%Y.%m.%d"))
     general_opts$end_date <- as.character(format(as.Date(general_opts$end_date), "%Y.%m.%d"))
 

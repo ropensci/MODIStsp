@@ -7,7 +7,7 @@
 #' To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Previous subfolder of the
 #' folder in which the package was installed, or the alternative JSON specified by the parameter "option_jsfile".
 #' The function can be run either from within the main MODIStsp GUI, or a standalone script. In the latter case, it modifies either the
-#' MODIStsp_Previous.RData options file, or the optins_file specified by the user, to add the new index.
+#' MODIStsp_Previous.RData options file, or the options_file specified by the user, to add the new index.
 #' @param option_jsfile settings (optional): full path of the JSON file containing the processing options in which the new indexes
 #'  are saved (default: MODIStsp_Previous.RData in subdir Previous).
 #' @param gui logical value (default: TRUE): if TRUE, the GUI is opened to define the new index; otherwise use the "new_indexbandname",
@@ -19,6 +19,7 @@
 #' @param new_indexnodata_out (optional): nodata value to assign to the rasters containing the new index
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
 #' @import gWidgets2
+#' @importFrom pacman p_load p_exists
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom stringr str_detect
 #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
@@ -50,7 +51,20 @@ MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", 
 
   # Initialization and retrieval of parameters ----
   if (gui) {
-    requireNamespace("gWidgets2RGtk2")
+    if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
+      #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
+      message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! 
+              \n \n Do you want to install it now ?", type = " y / n")
+      inst_gw <- readline()
+      if (inst_gw =="y") {
+        pacman::p_load("gWidgetsRGtk2")
+      } else {
+        
+        stop("MODIStsp can not work withouth gWidgetsRGtk2 ! Exiting !")
+      }
+        
+    }
+    # requireNamespace("gWidgetsRGtk2")
     options("guiToolkit" = "RGtk2")
   }
 

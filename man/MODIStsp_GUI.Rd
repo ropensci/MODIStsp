@@ -14,6 +14,12 @@ if a previous options file is not existing.}
 \item{prod_opt_list}{List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)}
 
 \item{scrollWindow}{logical parameter passed by MODIStsp main function.}
+
+\item{MODIStsp_dir}{main folder of the package}
+
+\item{previous_jsfile}{json parameters file containgn data of the last execution}
+
+\item{prodopts_file}{rdata file containing info about MODIS products}
 }
 \value{
 Quit - Logical - tells the main if running processing or exiting (also, Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file)

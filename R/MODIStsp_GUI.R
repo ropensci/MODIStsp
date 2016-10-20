@@ -15,6 +15,7 @@
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
+#' @importFrom pacman p_load p_exists
 #' @importFrom hash keys
 #' @importFrom raster crop extent raster plot
 #' @importFrom sp CRS
@@ -36,15 +37,10 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     general_opts <- prepare_to_save_options(general_opts, GUI.env)
     if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
       write(RJSONIO::toJSON(general_opts),previous_jsfile)
-      # assign("Quit", F, envir = globalenv()) # If "Start", set "Quit to F
       GUI.env$Quit <- FALSE
-      # rm(GUI.env$temp_wid_bands, envir = globalenv())
-      # rm(GUI.env$temp_wid_bands_indexes, envir = globalenv())
-      # rm(GUI.env$temp_wid_bands_indexes, envir = globalenv())
-      
-      
     }
   })
+  
   main_frame1 <- ggroup(container = main_win, horizontal = TRUE, expand = FALSE, use.scrollwindow=scrollWindow)
   main_frame2 <- ggroup(container = main_frame1, horizontal = FALSE, expand = FALSE)
   # frame1 and 2 with expand=FALSE grant that widgets are not "too much expanded", nor horizontally neither vertically
