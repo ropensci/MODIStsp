@@ -13970,7 +13970,7 @@
             </version>
         </versions>
     </MCD45A1>
-    <MOD14>
+    <!--<MOD14>
         <name>ThermalAn_Fire_5Min_1Km (M*D14)</name>
         <cat_01>Land Cover Characteristics</cat_01>
         <cat_02>Thermal Anomalies and Fire</cat_02>
@@ -14274,7 +14274,7 @@
                 </quality_indicators>
             </version>
         </versions>
-    </MOD14>
+    </MOD14>-->
     <MOD14A1>
         <name>ThermalAn_Fire_Daily_1Km (M*D14A1)</name>
         <cat_01>Land Cover Characteristics</cat_01>
