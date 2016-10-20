@@ -51,13 +51,13 @@ MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", 
 
   # Initialization and retrieval of parameters ----
   if (gui) {
-    if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
+    if (!pacman::p_exists("gWidgets2RGtk2", local = TRUE)) {
       #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
-      message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! 
+      message("Library 'gWidgets2Rgtk2' is not installed. It is required to run MODIStsp ! 
               \n \n Do you want to install it now ?", type = " y / n")
       inst_gw <- readline()
       if (inst_gw =="y") {
-        pacman::p_load("gWidgetsRGtk2")
+        pacman::p_load("gWidgets2RGtk2")
       } else {
         
         stop("MODIStsp can not work withouth gWidgetsRGtk2 ! Exiting !")

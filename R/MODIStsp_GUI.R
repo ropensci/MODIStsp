@@ -192,7 +192,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         general_opts <- RJSONIO::fromJSON(previous_jsfile)
                         check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
                         check_wid <- GUI.env$temp_wid_bands												# retrieve currently selected original layers
-                        selgroup <- gbasicdialog(title = "Select Processing Layers", parent = NULL, do.buttons = FALSE, horizontal = TRUE)
+                        selgroup <- gbasicdialog(title = "Select Processing Layers", parent = NULL, do.buttons = TRUE, horizontal = TRUE)
                         
                         # widgets for band selection - original ----
                         cbox_total <- ggroup(container = selgroup, horizontal = TRUE)
