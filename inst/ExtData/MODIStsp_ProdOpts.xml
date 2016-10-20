@@ -3413,49 +3413,49 @@
                 <quality_indicators>
                     <quality>
                         <quality_bandname>QAday_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>2-3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_emis_err</quality_bandname>
-                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_fullname>Emis Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>2-3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_emis_err</quality_bandname>
-                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_fullname>Emis error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
@@ -3720,49 +3720,49 @@
                 <quality_indicators>
                     <quality>
                         <quality_bandname>QAday_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>2-3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_emis_err</quality_bandname>
-                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_fullname>Emis Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>2-3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_emis_err</quality_bandname>
-                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_fullname>Emis error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
@@ -4115,61 +4115,61 @@
                 <quality_indicators>
                     <quality>
                         <quality_bandname>QAday_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_emis_err</quality_bandname>
-                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_fullname>Emis Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_emis_err</quality_bandname>
-                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_fullname>Emis error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
@@ -4334,61 +4334,61 @@
                 <quality_indicators>
                     <quality>
                         <quality_bandname>QAday_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_emis_err</quality_bandname>
-                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_fullname>Emis Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_emis_err</quality_bandname>
-                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_fullname>Emis error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
@@ -4553,61 +4553,61 @@
                 <quality_indicators>
                     <quality>
                         <quality_bandname>QAday_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_emis_err</quality_bandname>
-                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_fullname>Emis Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_emis_err</quality_bandname>
-                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_fullname>Emis error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
@@ -4911,61 +4911,61 @@
                 <quality_indicators>
                     <quality>
                         <quality_bandname>QAday_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_emis_err</quality_bandname>
-                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_fullname>Emis Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_emis_err</quality_bandname>
-                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_fullname>Emis error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
@@ -5262,61 +5262,61 @@
                 <quality_indicators>
                     <quality>
                         <quality_bandname>QAday_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_emis_err</quality_bandname>
-                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_fullname>Emis Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_emis_err</quality_bandname>
-                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_fullname>Emis error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
@@ -5620,61 +5620,61 @@
                 <quality_indicators>
                     <quality>
                         <quality_bandname>QAday_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_emis_err</quality_bandname>
-                        <quality_fullname>Emis Error flag</quality_fullname>
+                        <quality_fullname>Emis Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAday_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (day)</quality_fullname>
                         <quality_source>QC_Day</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_mand</quality_bandname>
-                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_fullname>Mandatory QA flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>0-1</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_qual</quality_bandname>
-                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_fullname>Data quality flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>2</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_comb</quality_bandname>
-                        <quality_fullname>Terra/Aqua Combined-use flag</quality_fullname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>3</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_emis_err</quality_bandname>
-                        <quality_fullname>Emis error flag</quality_fullname>
+                        <quality_fullname>Emis error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>4-5</quality_bitN>
                     </quality>
                     <quality>
                         <quality_bandname>QAnight_LST_err</quality_bandname>
-                        <quality_fullname>LST Error flag</quality_fullname>
+                        <quality_fullname>LST Error flag (night)</quality_fullname>
                         <quality_source>QC_Night</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
