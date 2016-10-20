@@ -424,7 +424,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                                              "All files" = list(patterns = "*"))), silent=TRUE)
                               if (class(choice)!="try-error")  {if (length(choice) != 0){
                                 # Show window until the process had finished
-                                wait_window <- gwindow(title = "Please wait", container = TRUE, width = 400, height = 40)
+                                wait_window <- gwindow(title = "Please wait", width = 400, height = 40)
                                 size(wait_window) <- c(100,8)
                                 addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
                                 wait_window_lab <- glabel(text = paste("Retrieving the Extent, please wait..."), editable = FALSE,
