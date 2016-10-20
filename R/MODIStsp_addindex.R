@@ -18,7 +18,7 @@
 #'  compute it are the names of the bands: b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.
 #' @param new_indexnodata_out (optional): nodata value to assign to the rasters containing the new index
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
-#' @import gWidgets
+#' @import gWidgets2
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom stringr str_detect
 #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
@@ -50,7 +50,7 @@ MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", 
 
   # Initialization and retrieval of parameters ----
   if (gui) {
-    requireNamespace("gWidgetsRGtk2")
+    requireNamespace("gWidgets2RGtk2")
     options("guiToolkit" = "RGtk2")
   }
 

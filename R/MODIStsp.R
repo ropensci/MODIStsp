@@ -71,7 +71,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   
   # On interactive execution, load Rgtk2
   if (gui) {
-    requireNamespace("gWidgetsRGtk2")
+    requireNamespace("gWidgets2RGtk2")
     options("guiToolkit" = "RGtk2")
   }
   
@@ -80,7 +80,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     # gdal_setInstallation(ignore.full_scan = FALSE)
     welcome_text <- "Welcome to MODIStsp!\n\nWe will now search for a valid GDAL installation - please wait\n(this will happen only once)"
     if (gui) {
-      welcome_win <- gwindow(title = "Welcome", container = TRUE, width = 400, height = 100)
+      welcome_win <- gwindow(title = "Welcome", width = 400, height = 100)
       welcome_lab <- glabel(welcome_text, editable = FALSE, container = welcome_win)
       # mess <- gmessage(title = "Welcome", welcome_text, do.buttons = FALSE)
     } else {
@@ -191,6 +191,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     Quit = MODIStsp_GUI(general_opts=general_opts, prod_opt_list=prod_opt_list, MODIStsp_dir=MODIStsp.env$MODIStsp_dir,
                         previous_jsfile=previous_jsfile, prodopts_file=prodopts_file,
                         scrollWindow=scrollWindow)
+    
   } else {
     Quit <- FALSE
   }
