@@ -348,8 +348,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
               # After all required tiles for the date are downloaded, start geoprocessing
               # -------------------------------------------------------------------------
               
-              
-browser()
               # STEP 0: patch to correct wrong resolution/bbox in some HDF4 original layers (e.g. albedo)
               # Retrieve information from hdf4 with gdalinfo
               gdalinfo_hdf_raw <- gdalinfo(file.path(out_folder_mod, modislist[1]))
@@ -469,7 +467,6 @@ browser()
                       message("[",date(),"] ",mess_text)
                     }
                     
-browser()
                     # Create a GDAL vrt file corresponding to the original hdf4
                     gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band] , vrtnodata = nodata_out[band])
                     # apply the patch if an error in the original hdf4 file at step 0 was detected
