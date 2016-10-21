@@ -18,9 +18,9 @@ Description: Allows automating the creation of time series of rasters derived fr
     are also created. Command-line execution exploiting a previously saved processing options file is also possible, 
     allowing to  automatically update time series related to a MODIS product whenever a new image is made available.
 Depends:
-    R (>= 3.1.3)
+    R (>= 3.1.3), RGtk2
 Imports:
-    bitops (>= 1.0-6), data.table (>= 1.9.6), gdalUtils (>= 2.0.1.7), RGtk2, gWidgets2,gWidgets2RGtk2,
+    bitops (>= 1.0-6), data.table (>= 1.9.6), gdalUtils (>= 2.0.1.7), gWidgets2,gWidgets2RGtk2,
     hash (>= 2.2.6), plyr (>= 1.8.3), raster (>= 2.5-2), RCurl (>= 1.95-4.8), rgdal (>= 1.0-3),
     rgeos (>= 0.3-8), xts (>= 0.9-7), XML (>= 3.98-1.1), xml2 (>= 0.1.2), sp (>= 1.2-2), 
     stringr (>= 1.0.0), httr (>= 1.1.0), RJSONIO (>= 1.3.0), pacman
