@@ -186,7 +186,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     } else {FALSE}) {
     mess_text <- "Waiting while reading the MODIS products list..."
     if (gui) {
-      mess <- gwindow(title = "Please wait...", container = TRUE, width = 400, height = 40)
+      mess <- gwindow(title = "Please wait...", width = 400, height = 40)
       mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
     } else {message(mess_text)}
     MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file )
