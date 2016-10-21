@@ -40,7 +40,7 @@ it modifies the MODIStsp_Previous.RData file so to allow computation of the addi
 To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Previous subfolder of the
 folder in which the package was installed, or the alternative JSON specified by the parameter "option_jsfile".
 The function can be run either from within the main MODIStsp GUI, or a standalone script. In the latter case, it modifies either the
-MODIStsp_Previous.RData options file, or the optins_file specified by the user, to add the new index.
+MODIStsp_Previous.RData options file, or the options_file specified by the user, to add the new index.
 }
 \note{
 License: GPL 3.0
