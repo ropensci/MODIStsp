@@ -220,10 +220,10 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     general_opts$start_date <- as.character(format(as.Date(general_opts$start_date), "%Y.%m.%d"))
     general_opts$end_date <- as.character(format(as.Date(general_opts$end_date), "%Y.%m.%d"))
 
-    # If the product is NOT tiled, change or_proj to WGS84 and or_res to 0.05 deg
+    # If the product is NOT tiled, change or_proj to WGS84 and or_res from metres to degrees
     if (prod_opts$tiled == 0) {
       MOD_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
-      prod_opts$native_res <- "0.05"
+      prod_opts$native_res <- format(as.numeric(prod_opts$native_res)*(0.05/5600))
     }
     # get native resolution if out_res empty (Probably obsolete...)
     if (general_opts$out_res == "" | general_opts$out_res_sel == "Native") {
