@@ -8464,7 +8464,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D01: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_Band1_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D01.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D01.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D01/</ftp_terra>
@@ -8495,7 +8495,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D02: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_Band1_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D02.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D02.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D02/</ftp_terra>
@@ -8526,7 +8526,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D03: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_Band1_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D03.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D03.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D03/</ftp_terra>
@@ -8557,7 +8557,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D04: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_Band2_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D04.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D04.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D04/</ftp_terra>
@@ -8588,7 +8588,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D05: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_Band2_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D05.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D05.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D05/</ftp_terra>
@@ -8619,7 +8619,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D06: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_Band2_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D06.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D06.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D06/</ftp_terra>
@@ -8650,7 +8650,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D07: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_Band3_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D07.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D07.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D07/</ftp_terra>
@@ -8681,7 +8681,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D08: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_Band3_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D08.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D08.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D08/</ftp_terra>
@@ -8712,7 +8712,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D09: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_Band3_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D09.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D09.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D09/</ftp_terra>
@@ -8743,7 +8743,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D10: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D10.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D10.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D10/</ftp_terra>
@@ -8774,7 +8774,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D11: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D11.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D11.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D11/</ftp_terra>
@@ -8805,7 +8805,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D12: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D12.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D12.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D12/</ftp_terra>
@@ -8836,7 +8836,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D13: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D13.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D13.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D13/</ftp_terra>
@@ -8867,7 +8867,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D14: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D14.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D14.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D14/</ftp_terra>
@@ -8898,7 +8898,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D15: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D15.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D15.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D15/</ftp_terra>
@@ -8929,7 +8929,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D16: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_Band5_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D16.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D16.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D16/</ftp_terra>
@@ -8960,7 +8960,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D17: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_Band5_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D17.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D17.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D17/</ftp_terra>
@@ -8991,7 +8991,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D18: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_Band5_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D18.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D18.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D18/</ftp_terra>
@@ -9022,7 +9022,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D19: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_Band6_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D19.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D19.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D19/</ftp_terra>
@@ -9053,7 +9053,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D20: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_Band6_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D20.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D20.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D20/</ftp_terra>
@@ -9084,7 +9084,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D21: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_Band6_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D21.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D21.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D21/</ftp_terra>
@@ -9115,7 +9115,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D22: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 VIS Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_Vis_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D22.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D22.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D22/</ftp_terra>
@@ -9146,7 +9146,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D23: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 VIS Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_Vis_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D23.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D23.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D23/</ftp_terra>
@@ -9177,7 +9177,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D24: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 VIS Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_Vis_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D24.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D24.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D24/</ftp_terra>
@@ -9208,7 +9208,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D25: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_NIR_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D25.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D25.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D25/</ftp_terra>
@@ -9239,7 +9239,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D26: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_NIR_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D26.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D26.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D26/</ftp_terra>
@@ -9270,7 +9270,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D27: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_NIR_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D27.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D27.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D27/</ftp_terra>
@@ -9301,7 +9301,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D28: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter1_Shortwave_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D28.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D28.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D28/</ftp_terra>
@@ -9332,7 +9332,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D29: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter2_Shortwave_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D29.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D29.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D29/</ftp_terra>
@@ -9363,7 +9363,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D30: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Parameter3_Shortwave_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D30.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D30.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D30/</ftp_terra>
@@ -9394,7 +9394,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D31: MODIS/Terra and Aqua BRDF/Albedo QA BRDF Quality Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Quality_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D31.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D31.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D31/</ftp_terra>
@@ -9425,7 +9425,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D32: MODIS/Terra and Aqua BRDF/Albedo Local Solar Noon Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Local_Solar_Noon_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D32.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D32.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D32/</ftp_terra>
@@ -9456,7 +9456,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D33: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_ValidObs_Band1_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D33.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D33.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D33/</ftp_terra>
@@ -9487,7 +9487,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D34: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_ValidObs_Band2_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D34.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D34.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D34/</ftp_terra>
@@ -9518,7 +9518,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D35: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_ValidObs_Band3_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D35.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D35.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D35/</ftp_terra>
@@ -9549,7 +9549,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D36: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_ValidObs_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D36.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D36.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D36/</ftp_terra>
@@ -9580,7 +9580,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D37: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_ValidObs_Band5_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D37.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D37.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D37/</ftp_terra>
@@ -9611,7 +9611,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D38: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_ValidObs_Band6_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D38.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D38.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D38/</ftp_terra>
@@ -9642,7 +9642,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D39: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 7 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_ValidObs_Band7_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D39.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D39.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D39/</ftp_terra>
@@ -9673,7 +9673,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D40: MODIS/Terra and Aqua BRDF/Albedo QA SnowStatus Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Snow_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D40.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D40.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D40/</ftp_terra>
@@ -9704,7 +9704,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D41: MODIS/Terra and Aqua BRDF/Albedo Uncertainty Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_Uncertainty_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D41.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D41.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D41/</ftp_terra>
@@ -9735,7 +9735,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D42: MODIS/Terra and Aqua BRDF/Albedo BSA Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Band1_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D42.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D42.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D42/</ftp_terra>
@@ -9766,7 +9766,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D43: MODIS/Terra and Aqua BRDF/Albedo BSA Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Band2_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D43.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D43.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D43/</ftp_terra>
@@ -9797,7 +9797,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D44: MODIS/Terra and Aqua BRDF/Albedo BSA Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Band3_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D44.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D44.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D44/</ftp_terra>
@@ -9828,7 +9828,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D45: MODIS/Terra and Aqua BRDF/Albedo BSA Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D45.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D45.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D45/</ftp_terra>
@@ -9859,7 +9859,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D46: MODIS/Terra and Aqua BRDF/Albedo BSA Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Band5_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D46.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D46.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D46/</ftp_terra>
@@ -9890,7 +9890,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D47: MODIS/Terra and Aqua BRDF/Albedo BSA Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Band6_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D47.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D47.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D47/</ftp_terra>
@@ -9921,7 +9921,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D48: MODIS/Terra and Aqua BRDF/Albedo BSA Band 7 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Band7_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D48.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D48.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D48/</ftp_terra>
@@ -9952,7 +9952,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D49: MODIS/Terra and Aqua BRDF/Albedo BSA Vis Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Vis_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D49.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D49.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D49/</ftp_terra>
@@ -9983,7 +9983,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D50: MODIS/Terra and Aqua BRDF/Albedo BSA Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Nir_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D50.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D50.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D50/</ftp_terra>
@@ -10014,7 +10014,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D51: MODIS/Terra and Aqua BRDF/Albedo BSA Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_BSA_Shortwave_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D51.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D51.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D51/</ftp_terra>
@@ -10045,7 +10045,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D52: MODIS/Terra and Aqua BRDF/Albedo WSA Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Band1_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D52.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D52.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D52/</ftp_terra>
@@ -10076,7 +10076,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D53: MODIS/Terra and Aqua BRDF/Albedo WSA Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Band2_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D53.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D53.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D53/</ftp_terra>
@@ -10107,7 +10107,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D54: MODIS/Terra and Aqua BRDF/Albedo WSA Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Band3_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D54.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D54.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D54/</ftp_terra>
@@ -10138,7 +10138,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D55: MODIS/Terra and Aqua BRDF/Albedo WSA Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D55.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D55.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D55/</ftp_terra>
@@ -10169,7 +10169,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D56: MODIS/Terra and Aqua BRDF/Albedo WSA Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Band5_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D56.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D56.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D56/</ftp_terra>
@@ -10200,7 +10200,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D57: MODIS/Terra and Aqua BRDF/Albedo WSA Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Band6_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D57.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D57.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D57/</ftp_terra>
@@ -10231,7 +10231,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D58: MODIS/Terra and Aqua BRDF/Albedo WSA Band 7 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Band7_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D58.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D58.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D58/</ftp_terra>
@@ -10262,7 +10262,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D59: MODIS/Terra and Aqua BRDF/Albedo WSA Vis Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Vis_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D59.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D59.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D59/</ftp_terra>
@@ -10293,7 +10293,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D60: MODIS/Terra and Aqua BRDF/Albedo WSA Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Nir_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D60.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D60.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D60/</ftp_terra>
@@ -10324,7 +10324,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D61: MODIS/Terra and Aqua BRDF/Albedo WSA Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_WSA_Shortwave_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D61.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D61.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D61/</ftp_terra>
@@ -10355,7 +10355,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D62: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_NBAR_Band1_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D62.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D62.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D62/</ftp_terra>
@@ -10386,7 +10386,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D63: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_NBAR_Band2_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D63.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D63.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D63/</ftp_terra>
@@ -10417,7 +10417,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D64: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_NBAR_Band3_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D64.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D64.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D64/</ftp_terra>
@@ -10448,7 +10448,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D65: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_NBAR_Band4_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D65.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D65.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D65/</ftp_terra>
@@ -10479,7 +10479,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D66: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_NBAR_Band5_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D66.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D66.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D66/</ftp_terra>
@@ -10510,7 +10510,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D67: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_NBAR_Band6_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D67.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D67.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D67/</ftp_terra>
@@ -10541,7 +10541,7 @@
                 <v_number>6</v_number>
                 <prod_fullname>MCD43D68: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 7 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                 <main_out_folder>BRDF_Albedo_NBAR_Band7_Daily_30ArcSec_v6</main_out_folder>
-                <native_res>1000</native_res>
+                <native_res>933.3333</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D68.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D68.006/</http_aqua>
                 <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D68/</ftp_terra>
