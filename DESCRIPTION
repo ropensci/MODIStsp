@@ -25,7 +25,7 @@ Imports:
     rgeos (>= 0.3-8), xts (>= 0.9-7), XML (>= 3.98-1.1), xml2 (>= 0.1.2), sp (>= 1.2-2), 
     stringr (>= 1.0.0), httr (>= 1.1.0), RJSONIO (>= 1.3.0), pacman
 Suggests:
-     gWidgets2RGtk2
+    gWidgets2RGtk2
 License: GPL-3
 LazyData: true
 Suggests:
