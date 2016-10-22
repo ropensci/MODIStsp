@@ -22,7 +22,6 @@
 #' @note License: GPL 3.0
 #' @export
 #' @import gWidgets2
-#' @import gWidgets2RGtk2
 #' @importFrom hash hash
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom rgdal getGDALVersionInfo
