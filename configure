@@ -5,8 +5,8 @@
 # R CMD INSTALL --configure-vars='INCLUDE_DIR=/.../include LIB_DIR=/.../lib'
 
 # Library settings
-PKG_CONFIG_NAME="libcairo, libatk-1.0, libpango-1.0, libpangocairo-1.0, libgtk2.0-0, libglib-2.0, libcurl, libgdal, libproj"
-PKG_DEB_NAME="r-cran-cairodevice, r-cran-rgtk2, libcurl4-openssl-dev, libgdal-dev, libproj-dev"
+PKG_CONFIG_NAME="cairo, atk, pango, gtk+-2.0, glib-2.0, libcurl, gdal, proj"
+PKG_DEB_NAME="libcairo2-dev, libatk1.0-dev, libpango1.0-dev, libgtk2.0-dev, libglib2.0-dev, libcurl4-openssl-dev, libgdal-dev, libproj-dev"
 # PKG_RPM_NAME="libcurl-devel"
 # PKG_CSW_NAME="libcurl_dev"
 PKG_TEST_HEADER1="<cairo/cairo.h>"
