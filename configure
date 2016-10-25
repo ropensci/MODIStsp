@@ -4,8 +4,11 @@
 # INCLUDE_DIR and LIB_DIR manually via e.g:
 # R CMD INSTALL --configure-vars='INCLUDE_DIR=/.../include LIB_DIR=/.../lib'
 
+# Please notice that checks of gdal and proj libs were removed: this because in Ubuntu<=14.04 gdal.pc and project.pc did not 
+# exist, so the check would have lead to errors. Remember to install them before installing MODIStsp.
+
 # Library settings
-PKG_CONFIG_NAME="cairo, atk, pango, gtk+-2.0, glib-2.0, libcurl" # gdal, proj should also be added, but they were removed because gdal.pc, glib.pc miss in trusty
+PKG_CONFIG_NAME="cairo, atk, pango, gtk+-2.0, glib-2.0, libcurl" # gdal, proj should also be added (see before)
 PKG_DEB_NAME="libcairo2-dev, libatk1.0-dev, libpango1.0-dev, libgtk2.0-dev, libglib2.0-dev, libcurl4-openssl-dev, libgdal-dev, libproj-dev"
 PKG_RPM_NAME="libcairo2-devel, libatk1.0-devel, libpango1.0-devel, gtk2-devel, glib2-devel, libcurl4-devel, gdal-devel, proj-devel"
 PKG_PACMAN_NAME="cairo, atk, pango, gtk2, glib2, curl, gdal, proj"
