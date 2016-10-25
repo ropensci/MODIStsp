@@ -11,7 +11,7 @@ warnings_are_errors: false
 matrix:
   include:
     - os: linux
-      dist: xenial
+      dist: trusty
       sudo: required
       env:
       global:
