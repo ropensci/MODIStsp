@@ -82,7 +82,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
         pacman::p_load("gWidgets2RGtk2")
       } else {
         
-        stop("MODIStsp can not work withouth gWidgetsRGtk2 ! Exiting !")
+        stop("MODIStsp can not work withouth gWidgets2RGtk2 ! Exiting !")
       }
         
     }
