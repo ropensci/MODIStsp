@@ -16,6 +16,7 @@
 #' @importFrom hash hash
 MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file) {
   
+browser()
   prod_opt_list <- NULL
 
   xmlfile <- xmlParse(xml_file)  # initialize xml parsing
@@ -27,6 +28,7 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
   
   for (prod in names_products) { # cycle on available products
 
+cat(prod,'\n'); browser()
     prodopts <- list()	# initialize the prodopts list
     prodopts_name <- xmlToList(xmltop[[prod]][["name"]])
     n_versions <- xmlSize(xmltop[[prod]][["versions"]]) # number of available versions
