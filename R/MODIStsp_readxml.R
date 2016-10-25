@@ -23,6 +23,7 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
   xmltop <- xmlRoot(xmlfile) # gives content of root
 
   names_products <- names(xmlChildren(xmltop)) # names of the single products
+  names_products <- names_products[names_products!="comment"] 
   
   for (prod in names_products) { # cycle on available products
 

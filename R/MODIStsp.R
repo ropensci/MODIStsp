@@ -21,13 +21,14 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @export
+#' @import gWidgets2
+#' @importFrom pacman p_load p_exists
 #' @importFrom hash hash
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom rgdal getGDALVersionInfo
 #' @importFrom raster extent rasterOptions
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils memory.limit packageVersion
-#' 
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used 
 #' # settings
@@ -68,19 +69,32 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #- ------------------------------------------------------------------------------- -#
   #  Initialize project
   #- ------------------------------------------------------------------------------- -#
-  
   # On interactive execution, load Rgtk2
+   # On interactive execution, load Rgtk2
   if (gui) {
-    requireNamespace("gWidgetsRGtk2")
+    if (!pacman::p_exists("gWidgets2RGtk2", local = TRUE)) {
+      #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
+      message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! 
+              \n \n Do you want to install it now ?", type = " y / n")
+      inst_gw <- readline()
+      if (inst_gw =="y") {
+        pacman::p_load("gWidgets2RGtk2")
+      } else {
+        
+        stop("MODIStsp can not work withouth gWidgets2RGtk2 ! Exiting !")
+      }
+        
+    }
+    # requireNamespace("gWidgetsRGtk2")
     options("guiToolkit" = "RGtk2")
   }
-  
+
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
     # gdal_setInstallation(ignore.full_scan = FALSE)
     welcome_text <- "Welcome to MODIStsp!\n\nWe will now search for a valid GDAL installation - please wait\n(this will happen only once)"
     if (gui) {
-      welcome_win <- gwindow(title = "Welcome", container = TRUE, width = 400, height = 100)
+      welcome_win <- gwindow(title = "Welcome", width = 400, height = 100)
       welcome_lab <- glabel(welcome_text, editable = FALSE, container = welcome_win)
       # mess <- gmessage(title = "Welcome", welcome_text, do.buttons = FALSE)
     } else {
@@ -135,11 +149,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #- ------------------------------------------------------------------------------- -#
   #  Set general processing options - used at first execution to initialize GUI
   #- ------------------------------------------------------------------------------- -#
-  # out_proj_names <- c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
-  # out_proj_list <- hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs ",
-  #                       "UTM 32N" = "+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
-  #                       "Latlon WGS84" = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
-  #                       "User Defined" = "")
+
   MOD_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs"
 
   # Load options if existing, otherwise initialise them ----
@@ -174,7 +184,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     } else {FALSE}) {
     mess_text <- "Waiting while reading the MODIS products list..."
     if (gui) {
-      mess <- gwindow(title = "Please wait...", container = TRUE, width = 400, height = 40)
+      mess <- gwindow(title = "Please wait...", width = 400, height = 40)
       mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
     } else {message(mess_text)}
     MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file )
@@ -188,9 +198,10 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    Quit = MODIStsp_GUI(general_opts=general_opts, prod_opt_list=prod_opt_list, MODIStsp_dir=MODIStsp.env$MODIStsp_dir,
-                        previous_jsfile=previous_jsfile, prodopts_file=prodopts_file,
-                        scrollWindow=scrollWindow)
+    Quit = MODIStsp_GUI(general_opts = general_opts, prod_opt_list = prod_opt_list, MODIStsp_dir = MODIStsp.env$MODIStsp_dir,
+                        previous_jsfile = previous_jsfile, prodopts_file = prodopts_file,
+                        scrollWindow = scrollWindow)
+    
   } else {
     Quit <- FALSE
   }
@@ -214,16 +225,14 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     custom_idx <- general_opts$custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]]
     
     # Create variables needed to launch the processing
-    # start_date <- paste(general_opts$start_year, general_opts$start_month, general_opts$start_day, sep = ".")
-    # end_date <- paste(general_opts$end_year, general_opts$end_month, general_opts$end_day, sep = ".")
-    #
+    
     general_opts$start_date <- as.character(format(as.Date(general_opts$start_date), "%Y.%m.%d"))
     general_opts$end_date <- as.character(format(as.Date(general_opts$end_date), "%Y.%m.%d"))
 
-    # If the product is NOT tiled, change or_proj to WGS84 and or_res to 0.05 deg
+    # If the product is NOT tiled, change or_proj to WGS84 and or_res from metres to degrees
     if (prod_opts$tiled == 0) {
       MOD_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
-      prod_opts$native_res <- "0.05"
+      prod_opts$native_res <- format(as.numeric(prod_opts$native_res)*(0.05/5600))
     }
     # get native resolution if out_res empty (Probably obsolete...)
     if (general_opts$out_res == "" | general_opts$out_res_sel == "Native") {
