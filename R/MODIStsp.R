@@ -177,7 +177,6 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
       mess <- gwindow(title = "Please wait...", container = TRUE, width = 400, height = 40)
       mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
     } else {message(mess_text)}
-browser()
     MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file )
     load(prodopts_file)
     if (gui) {
@@ -186,7 +185,6 @@ browser()
     }
   }
   
-browser()
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}

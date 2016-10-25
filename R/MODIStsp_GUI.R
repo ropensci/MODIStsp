@@ -316,7 +316,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   
   font(method_lab) <- list(family = "sans",weight = "bold")
   font(user_lab) <- font(password_lab) <- list(family = "sans",weight = "bold")
-
+  
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Dates selection
   #- ------------------------------------------------------------------------------- -#
