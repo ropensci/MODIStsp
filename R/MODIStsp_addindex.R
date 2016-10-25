@@ -22,6 +22,7 @@
 #' @importFrom pacman p_load p_exists
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom stringr str_detect
+#' @importFrom pacman p_load
 #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}

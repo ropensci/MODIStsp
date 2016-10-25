@@ -22,13 +22,13 @@
 #' @note License: GPL 3.0
 #' @export
 #' @import gWidgets2
+#' @importFrom pacman p_load p_exists
 #' @importFrom hash hash
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom rgdal getGDALVersionInfo
 #' @importFrom raster extent rasterOptions
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils memory.limit packageVersion
-#' 
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used 
 #' # settings
@@ -69,7 +69,6 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #- ------------------------------------------------------------------------------- -#
   #  Initialize project
   #- ------------------------------------------------------------------------------- -#
-  
   # On interactive execution, load Rgtk2
    # On interactive execution, load Rgtk2
   if (gui) {
