@@ -1,0 +1,90 @@
+# Anticonf (tm) script based on Jeroen Ooms configure scripts (https://github.com/jeroenooms)
+# This script will query 'pkg-config' for the required cflags and ldflags.
+# If pkg-config is unavailable or does not find the library, try setting
+# INCLUDE_DIR and LIB_DIR manually via e.g:
+# R CMD INSTALL --configure-vars='INCLUDE_DIR=/.../include LIB_DIR=/.../lib'
+
+# Please notice that checks of gdal and proj libs were removed: this because in Ubuntu<=14.04 gdal.pc and project.pc did not 
+# exist, so the check would have lead to errors. Remember to install them before installing MODIStsp.
+
+# Library settings
+PKG_CONFIG_NAME="cairo, atk, pango, gtk+-2.0, glib-2.0, libcurl" # gdal, proj should also be added (see before)
+PKG_DEB_NAME="libcairo2-dev, libatk1.0-dev, libpango1.0-dev, libgtk2.0-dev, libglib2.0-dev, libcurl4-openssl-dev, libgdal-dev, libproj-dev"
+PKG_RPM_NAME="libcairo2-devel, libatk1.0-devel, libpango1.0-devel, gtk2-devel, glib2-devel, libcurl4-devel, gdal-devel, proj-devel"
+PKG_PACMAN_NAME="cairo, atk, pango, gtk2, glib2, curl, gdal, proj"
+PKG_TEST_HEADER1="<cairo/cairo.h>"
+PKG_TEST_HEADER2="<atk-1.0/atk/atk.h>"
+PKG_TEST_HEADER3="<pango-1.0/pango/pango.h>"
+PKG_TEST_HEADER4="<pango-1.0/pango/pangocairo.h>"
+PKG_TEST_HEADER5="<gtk-2.0/gtk/gtk.h>"
+PKG_TEST_HEADER6="<glib-2.0/glib.h>"
+PKG_TEST_HEADER7="<curl/curl.h>"
+PKG_TEST_HEADER8="<gdal.h>"
+PKG_TEST_HEADER9="<projects.h>"
+PKG_LIBS=""
+PKG_CFLAGS=""
+
+# Use pkg-config if available
+pkg-config --version >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+  PKGCONFIG_CFLAGS=`pkg-config --cflags ${PKG_CONFIG_NAME}`
+  case "$PKGCONFIG_CFLAGS" in
+    *CURL_STATICLIB*) PKGCONFIG_LIBS=`pkg-config --libs --static ${PKG_CONFIG_NAME}`;;
+    *) PKGCONFIG_LIBS=`pkg-config --libs ${PKG_CONFIG_NAME}`;;
+  esac
+fi
+
+# Note that cflags may be empty in case of success
+if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
+  echo "Found INCLUDE_DIR and/or LIB_DIR!"
+  PKG_CFLAGS="-I$INCLUDE_DIR $PKG_CFLAGS"
+  PKG_LIBS="-L$LIB_DIR $PKG_LIBS"
+elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
+  echo "Found pkg-config cflags and libs!"
+  PKG_CFLAGS=${PKGCONFIG_CFLAGS}
+  PKG_LIBS=${PKGCONFIG_LIBS}
+fi
+
+# Find compiler
+CC=`${R_HOME}/bin/R CMD config CC`
+CFLAGS=`${R_HOME}/bin/R CMD config CFLAGS`
+CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
+
+# For debugging
+echo "Using PKG_CFLAGS=$PKG_CFLAGS"
+echo "Using PKG_LIBS=$PKG_LIBS"
+
+# Test configuration
+echo "#include $PKG_TEST_HEADER1" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+echo "#include $PKG_TEST_HEADER2" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+echo "#include $PKG_TEST_HEADER3" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+echo "#include $PKG_TEST_HEADER4" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+echo "#include $PKG_TEST_HEADER5" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+echo "#include $PKG_TEST_HEADER6" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+echo "#include $PKG_TEST_HEADER7" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+# echo "#include $PKG_TEST_HEADER8" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+# echo "#include $PKG_TEST_HEADER9" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+
+# Customize the error
+if [ $R_CONFIG_ERROR ]; then
+  echo "------------------------- ANTICONF ERROR ---------------------------"
+  echo "Configuration failed because $PKG_CONFIG_NAME were not found. Try installing:"
+  echo " * deb (Debian, Ubuntu, Linux Mint, etc): $PKG_DEB_NAME"
+  echo " * rpm (Fedora, CentOS, RHEL): $PKG_RPM_NAME"
+  echo " * pacman (ArchLinux): $PKG_PACMAN_NAME"
+  echo "If $PKG_CONFIG_NAME are already installed, check that 'pkg-config' is in your"
+  echo "PATH and PKG_CONFIG_PATH contains a $PKG_CONFIG_NAME.pc file. If pkg-config"
+  echo "is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:"
+  echo "R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'"
+  echo "--------------------------------------------------------------------"
+  exit 1;
+fi
+
+# Write to Makevars
+sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
+
+# Extract curlopt symbols
+echo '#include <curl/curl.h>' | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - | grep "^[ \t]*CURLOPT_.*," | sed s/,// > tools/option_table.txt
+
+# Success
+exit 0
