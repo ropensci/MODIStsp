@@ -5,7 +5,7 @@
 # R CMD INSTALL --configure-vars='INCLUDE_DIR=/.../include LIB_DIR=/.../lib'
 
 # Library settings
-PKG_CONFIG_NAME="cairo, atk, pango, gtk+-2.0, glib-2.0, libcurl, gdal, proj"
+PKG_CONFIG_NAME="cairo, atk, pango, gtk+-2.0, glib-2.0, libcurl" # gdal, proj should also be added, but they were removed because gdal.pc, glib.pc miss in trusty
 PKG_DEB_NAME="libcairo2-dev, libatk1.0-dev, libpango1.0-dev, libgtk2.0-dev, libglib2.0-dev, libcurl4-openssl-dev, libgdal-dev, libproj-dev"
 PKG_RPM_NAME="libcairo2-devel, libatk1.0-devel, libpango1.0-devel, gtk2-devel, glib2-devel, libcurl4-devel, gdal-devel, proj-devel"
 PKG_PACMAN_NAME="cairo, atk, pango, gtk2, glib2, curl, gdal, proj"
@@ -65,11 +65,11 @@ echo "#include $PKG_TEST_HEADER9" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E
 # Customize the error
 if [ $R_CONFIG_ERROR ]; then
   echo "------------------------- ANTICONF ERROR ---------------------------"
-  echo "Configuration failed because $PKG_CONFIG_NAME was not found. Try installing:"
-  echo " * deb: $PKG_DEB_NAME (Debian, Ubuntu, Linux Mint, etc)"
-  echo " * rpm: $PKG_RPM_NAME (Fedora, CentOS, RHEL)"
-  echo " * pacman: $PKG_PACMAN_NAME (ArchLinux)"
-  echo "If $PKG_CONFIG_NAME is already installed, check that 'pkg-config' is in your"
+  echo "Configuration failed because $PKG_CONFIG_NAME were not found. Try installing:"
+  echo " * deb (Debian, Ubuntu, Linux Mint, etc): $PKG_DEB_NAME"
+  echo " * rpm (Fedora, CentOS, RHEL): $PKG_RPM_NAME"
+  echo " * pacman (ArchLinux): $PKG_PACMAN_NAME"
+  echo "If $PKG_CONFIG_NAME are already installed, check that 'pkg-config' is in your"
   echo "PATH and PKG_CONFIG_PATH contains a $PKG_CONFIG_NAME.pc file. If pkg-config"
   echo "is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:"
   echo "R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'"
