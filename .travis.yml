@@ -6,8 +6,7 @@ warnings_are_errors: false
 
 # before_install:
 #   - sudo apt-get -qq update
-#   - sudo apt-get install -y libcairo2-dev libatk1.0-dev libpango1.0-dev libgtk2.0-dev libglib2.0-dev 
-libcurl4-openssl-dev libgdal-dev libproj-dev
+#   - sudo apt-get install -y libcairo2-dev libatk1.0-dev libpango1.0-dev libgtk2.0-dev libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev
 
 matrix:
   include:
