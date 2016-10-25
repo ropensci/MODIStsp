@@ -18,7 +18,7 @@ PKG_TEST_HEADER6="<glib-2.0/glib.h>"
 PKG_TEST_HEADER7="<curl/curl.h>"
 PKG_TEST_HEADER8="<gdal.h>"
 PKG_TEST_HEADER9="<projects.h>"
-PKG_LIBS=""
+PKG_LIBS="-lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lpangoft2-1.0 -lpango-1.0 -lgobject-2.0 -lfontconfig -lfreetype -lglib-2.0 -lcurl -lgdal -lproj"
 PKG_CFLAGS=""
 
 # Use pkg-config if available
