@@ -70,7 +70,7 @@
 #' @importFrom XML xmlParse xmlRoot xmlToList
 #' @importFrom RCurl getBinaryURL
 #' @importFrom stringr str_locate
-#' @import gWidgets
+#' @import gWidgets2
 
 MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor, download_server, 
                              user, password, https, ftps,start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, 
@@ -94,7 +94,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   # Add a message window while the file is charging (TODO: create a function to pass the message to cat if gui=FALSE and to svalue(mess_lab) if gui=TRUE)
   mess_text <- "Processing"
   if (gui) {
-    mess <- gwindow(title = "Processing Status", container = TRUE, width = 400, height = 40)
+    mess <- gwindow(title = "Processing Status", width = 400, height = 40)
     mess_lab <- glabel(text = paste("---",mess_text,"---"), editable = FALSE, container = mess)
   } else {
     message("[",date(),"] ",mess_text)
@@ -292,7 +292,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       if (download_server == "http") {
                         download <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
                       } else {
-                        download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = TRUE, cacheOK = FALSE,
+                        download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = FALSE, cacheOK = FALSE,
                                                       extra = c("-L")))
                       }
                       
