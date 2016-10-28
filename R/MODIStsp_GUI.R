@@ -53,10 +53,11 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   mod_prod_list <- names(prod_opt_list)
   sel_cat <- mod_prod_cat$cat[match(sel_prod, mod_prod_list)]
   
-  out_proj_names <- c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
+  out_proj_names <- c("Sinusoidal","UTM 32N","Latlon WGS84","Latlon MODIS","User Defined" )
   out_proj_list <- hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
                         "UTM 32N" = "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0",
                         "Latlon WGS84" = "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0",
+                        "Latlon MODIS" = "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs",
                         "User Defined" = "")
   MOD_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs"
   
@@ -101,9 +102,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                          # On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
                          if (prod_opt_list[[sel_prod]][[svalue(vers_wid)]]$tiled == 0) {
                            enabled(tiles_group) <- FALSE
-                           svalue(proj_wid) <- "Latlon WGS84"
+                           svalue(proj_wid) <- "Latlon MODIS"
                          } else {
-                           (enabled(tiles_group) <- TRUE)
+                           enabled(tiles_group) <- TRUE
                            svalue(proj_wid) <- "Sinusoidal"
                          }
                          # reset dummy variables for band selection to 0 on product change
@@ -139,9 +140,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           # On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
                           if (prod_opt_list[[sel_prod]][[svalue(vers_wid)]]$tiled == 0) {
                             enabled(tiles_group) <- FALSE
-                            svalue(proj_wid) <- "Latlon WGS84"
+                            svalue(proj_wid) <- "Latlon MODIS"
                           } else {
-                            (enabled(tiles_group) <- TRUE)
+                            enabled(tiles_group) <- TRUE
                             svalue(proj_wid) <- "Sinusoidal"
                           }
                           # reset dummy variables for band selection to 0 on product change
@@ -628,9 +629,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           
                           else {
                             old_sel_projwid <- hash::keys(out_proj_list)[which(hash::values(out_proj_list) == GUI.env$old_proj4)]    # Retrieve previous selection of proj_wid
-                            (enabled(output_proj4_wid) <- F)
-                            (enabled(change_proj_but) <- T)
-                            selproj <- ginput(message = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
+                            enabled(output_proj4_wid) <- FALSE
+                            enabled(change_proj_but) <- TRUE
+                            selproj <- ginput(msg = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
                             if (!is.na(selproj)) {
                               sel_output_proj <- try(CRS(selproj),silent = TRUE)
                               if (class(sel_output_proj) == "try-error") {  # On error, send out a message and reset proj_wid and proj4 wid to previous values
@@ -674,7 +675,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   svalue(output_proj4_wid) <- out_proj_list[[svalue(proj_wid)]]
   #	size(output_proj4_wid) = c(250,20)
   change_proj_but <- gbutton(text = "Change", container = output_proj_group, handler = function(h,....) {  # Button to change the user define projection
-    selproj <- ginput(message = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
+    selproj <- ginput(msg = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
     if (!is.na(selproj)) {
       sel_output_proj <- try(CRS(selproj),silent = TRUE)
       if (class(sel_output_proj) == "try-error") {	 	# Check if proj4string is valid
