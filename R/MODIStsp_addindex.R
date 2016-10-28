@@ -47,7 +47,7 @@
 #'
 #'
 
-MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", new_indexfullname="",
+MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, gui=TRUE, new_indexbandname="", new_indexfullname="",
                               new_indexformula="", new_indexnodata_out = "32767", MODIStsp_dir = NA) {
 
   # Initialization and retrieval of parameters ----
@@ -77,7 +77,7 @@ MODIStsp_addindex <- function(option_jsfile=NA, gui=TRUE, new_indexbandname="", 
   general_opts <- RJSONIO::fromJSON(previous_jsfile)
   
   # Restore MODIS products if existing, otherwise retrieve data from xml file ----
-  prod_opt_list <- get(load(general_opts$prodopts_file))
+  prod_opt_list <- get(load(prodopts_file))
   n_products <- length(prod_opt_list) #how many product available ? = elements in root
 
   # Valid names for reflectance bands

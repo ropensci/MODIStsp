@@ -196,7 +196,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         general_opts <- RJSONIO::fromJSON(previous_jsfile)
                         check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
                         check_wid <- GUI.env$temp_wid_bands												# retrieve currently selected original layers
-                        selgroup <- gbasicdialog(title = "Select Processing Layers", parent = NULL, do.buttons = TRUE, horizontal = TRUE, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
+                        selgroup <- gbasicdialog(title = paste0("Select Processing Layers -  ",svalue(prod_wid)," vers. ",svalue(vers_wid)), parent = NULL, do.buttons = TRUE, horizontal = FALSE, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
                           pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                           tmp_arr_bands <- array(data = 0 , dim = length(check_names))
                           tmp_arr_bands[pos_wid] <- 1
@@ -219,7 +219,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           })
                         
                         # widgets for band selection - original ----
-                        cbox_total <- ggroup(container = selgroup, horizontal = TRUE)
+                        cbox_main <- ggroup(container = selgroup, horizontal = FALSE)
+                        cbox_total <- ggroup(container = cbox_main, horizontal = TRUE)
                         cbox <- gframe(text = "<span foreground='red' size='large'>Original MODIS Layers</span>", markup = TRUE, container = cbox_total, horizontal = FALSE)
                         bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid),
                                                     container = cbox, use.table = FALSE)
@@ -244,7 +245,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           band_wid_newindex <- gbutton(text = "Add custom index",
                                                        handler = function(h,...) {
                                                          # Run addindex() function ----
-                                                         MODIStsp_addindex(option_jsfile = previous_jsfile)
+                                                         MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file)
                                                          general_opts <- RJSONIO::fromJSON(previous_jsfile)
                                                          pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                                                          tmp_arr_bands <- array(data = 0 , dim = length(check_names))
@@ -268,7 +269,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         }
                         
                         # Start/Cancel widgets ----
-                        bands_group <- ggroup(container = selgroup, horizontal = TRUE)
+                        bands_group <- ggroup(container = cbox_main, horizontal = FALSE)
                         # accept_but <- gbutton(text = "Accept", container = bands_group, handler = function(button,...){ # On accept, retrieve and save selected layers
                         #   
                         #   pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
@@ -309,7 +310,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         
                         # Widget for "www" button ----
                         addSpring(bands_group)
-                        www_but <- gbutton(text = "Product details", container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$www))
+                        www_but <- gbutton(text = paste0("Product Details  (",svalue(prod_wid)," vers. ",svalue(vers_wid),")"), container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$www))
                         
                         visible(selgroup, set = TRUE)    # visualize band selection widgets
                         
