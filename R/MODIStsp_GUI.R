@@ -1107,7 +1107,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # On "Load", ask for a old options file and load it --------
   load_but <- gbutton(text = "Load Options", container = but_group, handler = function(h,...){
     
-    choice <- try(gfile(type = "open", text = "Select file for loading processing options...", initialfilename = getwd(),
+    choice <- try(gfile(type = "open", text = "Select file for loading processing options...", initial.filename = getwd(),
                     filter = list( "JSON files" = list(patterns=c("*.json")),
                                    "text files" = list(mime.types = c("text/plain")),
                                    "All files" = list(patterns = c("*")))), silent=TRUE)
@@ -1178,14 +1178,13 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   
   # On "Save", ask for a file name and save options (must be a JSON file !)  --------
   save_but <- gbutton(text = "Save Options", container = but_group, handler = function(h,....) {
-    
-    choice <- gfile(type = "save", text = "Select file for saving processing options...", initialfilename = paste0('MODIStsp_', Sys.Date(),'.json'), # File selection widget
-                    filter = list( "JSON files" = list(patterns=c("*.json")),
+    choice <- gfile(type = "save", text = "Select file for saving processing options...", 
+                    # initial.filename = file.path(getwd(),paste0('MODIStsp_', Sys.Date(),'.json')),
                                    "text files" = list(mime.types = c("text/plain")),
-                                   "All files" = list(patterns = c("*"))))
+                                   "All files" = list(patterns = c("*")))
     choice <- paste0(gsub("\\.json$","",choice),".json") # add file extension if missing
     
-    if (length(choice != 0)) {
+    if (choice != ".json") {
       general_opts <- prepare_to_save_options(general_opts, GUI.env)
       if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
         write(RJSONIO::toJSON(general_opts),choice)

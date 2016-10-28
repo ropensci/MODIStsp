@@ -74,8 +74,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   if (gui) {
     if (!pacman::p_exists("gWidgets2RGtk2", local = TRUE)) {
       #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
-      message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! 
-              \n \n Do you want to install it now ?", type = " y / n")
+      message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp! 
+              \n\nDo you want to install it now?", type = " y / n")
       inst_gw <- readline()
       if (inst_gw =="y") {
         pacman::p_load("gWidgets2RGtk2")
