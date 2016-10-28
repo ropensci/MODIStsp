@@ -53,10 +53,11 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   mod_prod_list <- names(prod_opt_list)
   sel_cat <- mod_prod_cat$cat[match(sel_prod, mod_prod_list)]
   
-  out_proj_names <- c("Sinusoidal","UTM 32N","Latlon WGS84","User Defined" )
+  out_proj_names <- c("Sinusoidal","UTM 32N","Latlon WGS84","Latlon MODIS","User Defined" )
   out_proj_list <- hash("Sinusoidal" = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
                         "UTM 32N" = "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0",
                         "Latlon WGS84" = "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0",
+                        "Latlon MODIS" = "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs",
                         "User Defined" = "")
   MOD_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs"
   
@@ -101,9 +102,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                          # On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
                          if (prod_opt_list[[sel_prod]][[svalue(vers_wid)]]$tiled == 0) {
                            enabled(tiles_group) <- FALSE
-                           svalue(proj_wid) <- "Latlon WGS84"
+                           svalue(proj_wid) <- "Latlon MODIS"
                          } else {
-                           (enabled(tiles_group) <- TRUE)
+                           enabled(tiles_group) <- TRUE
                            svalue(proj_wid) <- "Sinusoidal"
                          }
                          # reset dummy variables for band selection to 0 on product change
@@ -139,9 +140,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           # On product change, automatically modify the default projection - latlon for tiled, Sinu for nontiled
                           if (prod_opt_list[[sel_prod]][[svalue(vers_wid)]]$tiled == 0) {
                             enabled(tiles_group) <- FALSE
-                            svalue(proj_wid) <- "Latlon WGS84"
+                            svalue(proj_wid) <- "Latlon MODIS"
                           } else {
-                            (enabled(tiles_group) <- TRUE)
+                            enabled(tiles_group) <- TRUE
                             svalue(proj_wid) <- "Sinusoidal"
                           }
                           # reset dummy variables for band selection to 0 on product change
@@ -195,7 +196,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         general_opts <- RJSONIO::fromJSON(previous_jsfile)
                         check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
                         check_wid <- GUI.env$temp_wid_bands												# retrieve currently selected original layers
-                        selgroup <- gbasicdialog(title = "Select Processing Layers", parent = NULL, do.buttons = TRUE, horizontal = TRUE, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
+                        selgroup <- gbasicdialog(title = paste0("Select Processing Layers -  ",svalue(prod_wid)," vers. ",svalue(vers_wid)), parent = NULL, do.buttons = TRUE, horizontal = FALSE, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
                           pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                           tmp_arr_bands <- array(data = 0 , dim = length(check_names))
                           tmp_arr_bands[pos_wid] <- 1
@@ -218,7 +219,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           })
                         
                         # widgets for band selection - original ----
-                        cbox_total <- ggroup(container = selgroup, horizontal = TRUE)
+                        cbox_main <- ggroup(container = selgroup, horizontal = FALSE)
+                        cbox_total <- ggroup(container = cbox_main, horizontal = TRUE)
                         cbox <- gframe(text = "<span foreground='red' size='large'>Original MODIS Layers</span>", markup = TRUE, container = cbox_total, horizontal = FALSE)
                         bands_wid <- gcheckboxgroup(items = check_names, checked = as.logical(check_wid),
                                                     container = cbox, use.table = FALSE)
@@ -243,7 +245,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           band_wid_newindex <- gbutton(text = "Add custom index",
                                                        handler = function(h,...) {
                                                          # Run addindex() function ----
-                                                         MODIStsp_addindex(option_jsfile = previous_jsfile)
+                                                         MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file)
                                                          general_opts <- RJSONIO::fromJSON(previous_jsfile)
                                                          pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                                                          tmp_arr_bands <- array(data = 0 , dim = length(check_names))
@@ -267,7 +269,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         }
                         
                         # Start/Cancel widgets ----
-                        bands_group <- ggroup(container = selgroup, horizontal = TRUE)
+                        bands_group <- ggroup(container = cbox_main, horizontal = FALSE)
                         # accept_but <- gbutton(text = "Accept", container = bands_group, handler = function(button,...){ # On accept, retrieve and save selected layers
                         #   
                         #   pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
@@ -308,7 +310,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         
                         # Widget for "www" button ----
                         addSpring(bands_group)
-                        www_but <- gbutton(text = "Product details", container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$www))
+                        www_but <- gbutton(text = paste0("Product Details  (",svalue(prod_wid)," vers. ",svalue(vers_wid),")"), container = bands_group, handler = function(button,...) browseURL(prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$www))
                         
                         visible(selgroup, set = TRUE)    # visualize band selection widgets
                         
@@ -628,9 +630,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           
                           else {
                             old_sel_projwid <- hash::keys(out_proj_list)[which(hash::values(out_proj_list) == GUI.env$old_proj4)]    # Retrieve previous selection of proj_wid
-                            (enabled(output_proj4_wid) <- F)
-                            (enabled(change_proj_but) <- T)
-                            selproj <- ginput(message = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
+                            enabled(output_proj4_wid) <- FALSE
+                            enabled(change_proj_but) <- TRUE
+                            selproj <- ginput(msg = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
                             if (!is.na(selproj)) {
                               sel_output_proj <- try(CRS(selproj),silent = TRUE)
                               if (class(sel_output_proj) == "try-error") {  # On error, send out a message and reset proj_wid and proj4 wid to previous values
@@ -674,7 +676,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   svalue(output_proj4_wid) <- out_proj_list[[svalue(proj_wid)]]
   #	size(output_proj4_wid) = c(250,20)
   change_proj_but <- gbutton(text = "Change", container = output_proj_group, handler = function(h,....) {  # Button to change the user define projection
-    selproj <- ginput(message = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
+    selproj <- ginput(msg = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
     if (!is.na(selproj)) {
       sel_output_proj <- try(CRS(selproj),silent = TRUE)
       if (class(sel_output_proj) == "try-error") {	 	# Check if proj4string is valid
@@ -1107,7 +1109,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # On "Load", ask for a old options file and load it --------
   load_but <- gbutton(text = "Load Options", container = but_group, handler = function(h,...){
     
-    choice <- try(gfile(type = "open", text = "Select file for loading processing options...", initialfilename = getwd(),
+    choice <- try(gfile(type = "open", text = "Select file for loading processing options...", initial.filename = getwd(),
                     filter = list( "JSON files" = list(patterns=c("*.json")),
                                    "text files" = list(mime.types = c("text/plain")),
                                    "All files" = list(patterns = c("*")))), silent=TRUE)
@@ -1178,14 +1180,13 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   
   # On "Save", ask for a file name and save options (must be a JSON file !)  --------
   save_but <- gbutton(text = "Save Options", container = but_group, handler = function(h,....) {
-    
-    choice <- gfile(type = "save", text = "Select file for saving processing options...", initialfilename = paste0('MODIStsp_', Sys.Date(),'.json'), # File selection widget
-                    filter = list( "JSON files" = list(patterns=c("*.json")),
+    choice <- gfile(type = "save", text = "Select file for saving processing options...", 
+                    # initial.filename = file.path(getwd(),paste0('MODIStsp_', Sys.Date(),'.json')),
                                    "text files" = list(mime.types = c("text/plain")),
-                                   "All files" = list(patterns = c("*"))))
+                                   "All files" = list(patterns = c("*")))
     choice <- paste0(gsub("\\.json$","",choice),".json") # add file extension if missing
     
-    if (length(choice != 0)) {
+    if (choice != ".json") {
       general_opts <- prepare_to_save_options(general_opts, GUI.env)
       if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
         write(RJSONIO::toJSON(general_opts),choice)

@@ -361,7 +361,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
               gdalinfo_bbox <- cbind( na.omit(as.numeric(unlist(strsplit(gsub("[^0-9.\\-]+"," ",gdalinfo_raw[grep("^Lower Left",gdalinfo_raw)])," "))))[1:2],
                                       na.omit(as.numeric(unlist(strsplit(gsub("[^0-9.\\-]+"," ",gdalinfo_raw[grep("^Upper Right",gdalinfo_raw)])," "))))[1:2])
               # if HDF file is in degrees and with a small bounding box, correct
-              correct_hdf <- if (gdalinfo_hdf_resunit %in% c("degree","Arc Second") & all(gdalinfo_bbox==c(-0.05,-0.025,0.05,0.025))) {
+              correct_hdf <- if (length(grep("(degree)|(Arc Second)",gdalinfo_hdf_resunit)) & all(gdalinfo_bbox==c(-0.05,-0.025,0.05,0.025))) {
                 TRUE
               } else {
                 FALSE
