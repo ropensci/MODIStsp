@@ -4,7 +4,6 @@
 #'  If the "previous options" file (MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
 #' 	the GUI to its last state. Otherwise, the previous options file is created by launching the MODIStsp_read_xml fucntion
 #'
-#' @param general_opts General options data frame passed by MODIStsp_main. Contains paths and other variables used to initialize the GUI
 #' 						if a previous options file is not existing.
 #' @param prod_opt_list List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)
 #' @param scrollWindow logical parameter passed by MODIStsp main function.
@@ -83,8 +82,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                        handler = function(h,...) {
                          
                          # Select only products of this category
-                         sel_prod <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)][1]
-                         prod_wid[] <- mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)]
+                         sel_prod   <- mod_prod_list[mod_prod_cat$cat == svalue(cat_wid)][1]
+                         prod_wid[] <- mod_prod_list[mod_prod_cat$cat == svalue(cat_wid)]
                          svalue(prod_wid) <- sel_prod
                          # Select the last version (it assumes that versions in xml file are in increasing order)
                          vers_wid[] <- names(prod_opt_list[[sel_prod]])
@@ -121,7 +120,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   
   prod_wid <- gcombobox(items = mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)], 
                         container = satprod1_group, horizontal = TRUE,
-                        selected = match(general_opts$sel_prod, mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)]),
+                        selected = match(general_opts$sel_prod, mod_prod_list[mod_prod_cat$cat == svalue(cat_wid)]),
                         handler = function(h,...) {
                           sel_prod <- if (!is.null(svalue(prod_wid))) {svalue(prod_wid)} else {sel_prod}
                           # Select the last version (it assumes that versions in xml file are in increasing order)
@@ -250,7 +249,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           band_wid_newindex <- gbutton(text = "Add custom index",
                                                        handler = function(h,...) {
                                                          # Run addindex() function ----
-                                                         MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file)
+                                                         MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file, selprod = svalue(prod_wid), selvers = svalue(vers_wid))
                                                          general_opts <- RJSONIO::fromJSON(previous_jsfile)
                                                          pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                                                          tmp_arr_bands <- array(data = 0 , dim = length(check_names))
@@ -268,7 +267,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                                            tmp_arr_qual[pos_wid] <- 1
                                                            GUI.env$temp_wid_bands_quality <- tmp_arr_qual
                                                          }
-                                                         dispose(selgroup)
+                                                          dispose(selgroup)
                                                        },
                                                        container = cbox_indexes, expand = FALSE)
                         }
