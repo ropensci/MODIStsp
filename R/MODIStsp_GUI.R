@@ -33,7 +33,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   #  Start Building the GUI
   #- ------------------------------------------------------------------------------- -#
   
-  main_win <- gbasicdialog(title = "Select Main Processing Options", parent = NULL, do.buttons = TRUE, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
+  main_win <- gbasicdialog(title = paste0("MODIStsp - v. ", packageVersion("MODIStsp")), parent = NULL, do.buttons = TRUE, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
     general_opts <- prepare_to_save_options(general_opts, GUI.env)
     if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
       write(RJSONIO::toJSON(general_opts),previous_jsfile)
@@ -148,9 +148,14 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           # reset dummy variables for band selection to 0 on product change
                           GUI.env$temp_wid_bands <- GUI.env$temp_wid_bands_indexes <- GUI.env$temp_wid_bands_quality <- 0
                         })
-  size(prod_wid) <- list(width=325)
+  size(prod_wid) <- list(width=325, height = 25)
   
   font(prod_label) <- font(cat_label) <- list(family = "sans",weight = "bold")
+
+    
+  fake_group = ggroup(container = satprod_frame)
+  fake_lab = glabel(text = " ", container = fake_group)
+  size(fake_lab) = list(height = 3)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Sensor selection
@@ -158,18 +163,18 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   satprod2_group <- ggroup(horizontal = TRUE, container = satprod_frame)
 
   # addSpace(satprod_frame, 20, horizontal = TRUE)
-  sens_label <- glabel(text = " Platform:", container = satprod2_group)
+  sens_label <- glabel(text = " Platform:", container = satprod2_group, align = 'left')
   size(sens_label) <- list(width = 100)
-  sens_wid <- gcombobox(items = c("Terra"), container = satprod2_group, text = "Select Layers", selected = 1)
+  sens_wid <- gcombobox(items = c("Terra"), container = satprod2_group, text = "Select Platform", selected = 1)
   if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$combined == 1) {
     enabled(sens_wid) <- FALSE
   } else {
     sens_wid[] <- c("Terra","Aqua","Both")
     svalue(sens_wid) <- general_opts$sensor
   }
-  size(sens_wid) <- list(width=150)
+  size(sens_wid) <- list(width = 150)
   
-  # addSpace(satprod2_group, 5)
+  addSpace(satprod2_group, 7)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Version selection
@@ -181,14 +186,14 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           # reset dummy variables for band selection to 0 on product change
                           GUI.env$temp_wid_bands <- GUI.env$temp_wid_bands_indexes <- GUI.env$temp_wid_bands_quality <- 0
                         })
-  size(vers_wid) <- list(width=100)
+  size(vers_wid) <- list(width = 100)
   
-  addSpring(satprod2_group)
+  addSpace(satprod2_group,16)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Layers selection
   #- ------------------------------------------------------------------------------- -#
-  band_label <- glabel(text = " Processing layers:", container = satprod2_group)
+  band_label <- glabel(text = "Processing layers:", container = satprod2_group)
   band_wid <- gbutton(text = "   Click To Select   ",				# Child widget for processing bands selection
                       handler = function(h,....) {
                         
@@ -316,8 +321,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         
                       },container = satprod2_group, expand = FALSE)
   
-  font(vers_label) <- font(sens_label) <- font(band_label) <- list(family = "sans",weight = "bold")
-  size(band_wid) = list ( width = 260)
+  font(vers_label) <- font(sens_label) <- font(band_label) <- list(family = "sans", weight = "bold")
+  size(band_wid) = list(width = 270)
   #- ------------------------------------------------------------------------------- -#
   # Widgets for authentication/download mode selection
   #- ------------------------------------------------------------------------------- -#
@@ -633,12 +638,11 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                             enabled(output_proj4_wid) <- FALSE
                             enabled(change_proj_but) <- TRUE
                             selproj <- ginput(msg = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
-                            if (!is.na(selproj)) {
+                            if (length(selproj) != 0) {
                               sel_output_proj <- try(CRS(selproj),silent = TRUE)
                               if (class(sel_output_proj) == "try-error") {  # On error, send out a message and reset proj_wid and proj4 wid to previous values
                                 gmessage(sel_output_proj, title = "Proj4 String Not Recognized")
-                                svalue(output_proj4_wid) <- GUI.env$old_proj4
-                                svalue(proj_wid) <- old_sel_projwid
+                                
                                 
                               } else {
                                 old_proj <- svalue(output_proj4_wid)
@@ -662,6 +666,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                 svalue(output_LReast_wid) <- formatC(bbox_out[1,2], digits = ifelse(units == "dec. degrees",4,1), format = "f")
                                 svalue(output_LRnorth_wid) <- formatC(bbox_out[2,1], digits = ifelse(units == "dec. degrees",4,1), format = "f")
                               }
+                            } else {
+                              svalue(output_proj4_wid) <- GUI.env$old_proj4
+                              svalue(proj_wid) <- old_sel_projwid
                             }
                           }
                         })
@@ -781,9 +788,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Format and reprocess options
   #- ------------------------------------------------------------------------------- -#
-  fake_group2 = ggroup(container = main_group)
-  fakelab2 = glabel("", container = fake_group2)
-  size(fakelab2) = list(height = 10)
+  # fake_group2 = ggroup(container = main_group)
+  # fakelab2 = glabel("", container = fake_group2)
+  # size(fakelab2) = list(height = 5)
   options_frame <- gframe(text = "<span foreground='red' size='x-large'>Processing Options</span>", markup = TRUE, container = main_group, expand = TRUE, horizontal = FALSE)
   opt_group <- ggroup(container = options_frame, horizontal = TRUE, expand = TRUE)
   
