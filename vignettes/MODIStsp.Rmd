@@ -1,27 +1,26 @@
 ---
 title: 'MODIStsp: A tool for automatic preprocessing of MODIS time series'
-author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it)), Luigi
-  Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
+author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it)), Luigi Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
-  rmarkdown::pdf_document:
+  rmarkdown::html_document:
+    depth: 3
     fig_caption: yes
-    number_sections: yes
+    number_section: yes
     toc: yes
   rmarkdown::html_vignette:
     depth: 3
     fig_caption: yes
     number_section: yes
     toc: yes
-  rmarkdown::html_document:
-    depth: 3
+  rmarkdown::pdf_document:
     fig_caption: yes
-    number_section: yes
+    number_sections: yes
     toc: yes
 bibliography: MODIStsp.bib
 vignette: >
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{MODIStsp}
+  %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
 
@@ -41,7 +40,7 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
 
 # Installation <a name="Installation"></a> 
 
-**IMPORTANT:** _MODIStsp_ requires [R](http://cran.r-project.org) v $\ge$ 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v $\ge$ 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
+**IMPORTANT:** _MODIStsp_ requires [R](https://cran.r-project.org) v $\ge$ 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v $\ge$ 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
 
 ## On Windows
 
@@ -122,10 +121,10 @@ Single parameters can be also be directly passed to the MODIStsp() function; for
 ```r
 library(MODIStsp) 
 options_file = "X:/yourpath/youroptions.json"
-MODIStsp(gui = FALSE, options_File = options_file, download_server = "Aqua")
+MODIStsp(gui = FALSE, options_File = options_file, download_server = "ftp")
 ```
 will launch MODIStsp with the parameters saved in "X:/yourpath/youroptions.json" options file, with the exception of
-"download_server" parameter, which is set to "Aqua". Details about the parameter names can be found with ```?MODIStsp```.
+"download_server" parameter, which is set to "ftp". Details about the parameter names can be found with ```?MODIStsp```.
 
 Specifying also the "_spatial\_file\_path_" parameter overrides the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents.
 
@@ -186,7 +185,7 @@ Some of the most commonly used Spectral Indexes are available for computation by
 | NDSI                | Normalized Difference Snow Index [@Hall2002]               |
 | NDII6               | Normalized Difference Infrared Index - band 6  [@HUNTJR1989]|
 | GNDVI               | Green Normalized Difference Vegetation Index [@Gitelson1998]|
-| RGRI                | Red Green Ration index  [@Gamon1999]                        |
+| RGRI                | Red Green Ratio index  [@Gamon1999]                        |
 | GRVI                | Green-red ratio vegetation index  [@Tucker1979]             |
 
 \pagebreak

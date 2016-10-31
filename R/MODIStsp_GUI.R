@@ -3,8 +3,7 @@
 #'	Function used to generate and handle the GUI used to allow selection of MODIStsp processing parameters
 #'  If the "previous options" file (MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
 #' 	the GUI to its last state. Otherwise, the previous options file is created by launching the MODIStsp_read_xml fucntion
-#'
-#' 						if a previous options file is not existing.
+#' @param general_opts data.frame containing general processing options passed by MODIStsp
 #' @param prod_opt_list List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)
 #' @param scrollWindow logical parameter passed by MODIStsp main function.
 #' @param MODIStsp_dir main folder of the package

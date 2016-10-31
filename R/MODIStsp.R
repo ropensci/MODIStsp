@@ -116,10 +116,10 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
 
   cat("GDAL version in use:",as.character(gdal_version),"\n")
 
-  # Increase memory limit on winzozz
+  # Increase memory limit on windows
   if (Sys.info()["sysname"] == "Windows") {
-    memory.limit(8000)
-  }							# Increase maximum allocsable memory
+    memory.limit() # Increase maximum allocsable memory
+  }							
   rasterOptions(setfileext = FALSE)				# Make so that "raster" functions doesn't automatically add extensions on output files
 
   # Parameter retrieval and Folder Initialization -----

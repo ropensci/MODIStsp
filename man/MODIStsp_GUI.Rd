@@ -8,8 +8,7 @@ MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir,
   previous_jsfile, prodopts_file)
 }
 \arguments{
-\item{general_opts}{General options data frame passed by MODIStsp_main. Contains paths and other variables used to initialize the GUI
-if a previous options file is not existing.}
+\item{general_opts}{data.frame containing general processing options passed by MODIStsp}
 
 \item{prod_opt_list}{List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)}
 

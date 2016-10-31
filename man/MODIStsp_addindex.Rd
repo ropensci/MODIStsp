@@ -4,13 +4,22 @@
 \alias{MODIStsp_addindex}
 \title{MODIStsp_addindex}
 \usage{
-MODIStsp_addindex(option_jsfile = NA, gui = TRUE, new_indexbandname = "",
+MODIStsp_addindex(option_jsfile = NA, prodopts_file = NA, selprod = NA,
+  selvers = NA, gui = TRUE, new_indexbandname = "",
   new_indexfullname = "", new_indexformula = "",
   new_indexnodata_out = "32767", MODIStsp_dir = NA)
 }
 \arguments{
 \item{option_jsfile}{settings (optional): full path of the JSON file containing the processing options in which the new indexes
-are saved (default: MODIStsp_Previous.RData in subdir Previous).}
+are saved (default: MODIStsp_Previous.JSON in subdir Previous).}
+
+\item{prodopts_file}{settings (optional): full path of the RData file containing products description 
+(default: MODIStsp_ProdOpts.RData in subdir Previous)}
+
+\item{selprod}{settings (optional): Name of the product to which the new index should be added. (Note: the index will be added to all other
+products allowing its computation !)}
+
+\item{selvers}{settings (optional): Version of the product to which the new index should be added.}
 
 \item{gui}{logical value (default: TRUE): if TRUE, the GUI is opened to define the new index; otherwise use the "new_indexbandname",
 "new_indexfullname" and "new_indexformula" parameters to define it non-interactively.}
