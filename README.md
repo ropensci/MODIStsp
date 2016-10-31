@@ -6,7 +6,7 @@
     -   [On Linux systems](#on-linux-systems)
 -   [Running the tool](#running-the-tool)
     -   [Interactive Execution](#interactive-execution)
-    -   [Non-Interactive Execution and scheduled processing](#non-interactive-execution-and-scheduled-processing)
+    -   [Non-Interactive Execution and scheduled processing&lt;](#non-interactive-execution-and-scheduled-processing)
 -   [Output format and naming conventions](#output-format-and-naming-conventions)
 -   [Accessing and analyzing the processed time series from R](#accessing-and-analyzing-the-processed-time-series-from-r)
 -   [Installing R and GDAL](#installing-r-and-gdal)
@@ -21,29 +21,29 @@ News !
 
 -   **15/09/2016 - MODIStsp paper published !**
 
-An article about MODIStsp was recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020). You can cite it as:
+An article about `MODIStsp` was recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020). You can cite it as:
 
 L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series, Computers & Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004, <http://dx.doi.org/10.1016/j.cageo.2016.08.020>.
 
 -   **01/09/2016 - MODIS collection 006 **
 
-NASA recently switched to provision of Collection 6 datasets for most Land Products. At the moment, MODIStsp stable release only allows download for Collection 5 datasets. If you want to test the download of collection 6 datasets, please use the "devel" branch (follow instructions below; at point 3 use the command `install_github("lbusett/MODIStsp", ref="devel")`). Note that this is development branch, so do not hexitate to report us any potential problem. **Stable support for Collection 6 will be added in the next MODIStsp release!**
+NASA recently switched to provision of Collection 6 datasets for most Land Products. At the moment, `MODIStsp` stable release only allows download for Collection 5 datasets. If you want to test the download of collection 6 datasets, please use the "devel" branch (follow instructions below; at point 3 use the command `install_github("lbusett/MODIStsp", ref="devel")`). Note that this is development branch, so do not hexitate to report us any potential problem. **Stable support for Collection 6 will be added in the next MODIStsp release!**
 
 -   **22/08/2016 - MODIStsp installation problems**
 
-There seem to be currently some problems in installing MODIStsp via install\_github on R 3.3.1 due to not correct installation of dependencies (a related to a bug in install\_github). installing the development version of devtools could solve the issue. To do so, on a clean R/RStudio session try doing:
+There are currently some problems in installing MODIStsp via install\_github on R 3.3.1 due to not correct installation of dependencies (related to a bug in `install_github`). Installing the development version of `devtools` should solve the issue. To do so, on a **clean** R/RStudio session do:
 
-`install.packages(c("devtools"))     devtools::install_github("hadley/devtools")     library(devtools)` , then continue with standard "MODIStsp" installation.
+`install.packages(c("devtools"))   devtools::install_github("hadley/devtools")   library(devtools)` , then continue with standard `MODIStsp` installation.
 
 If it still doesn't work, manually installing all the dependencies should solve the issue. To do so, please try doing:
 
-`install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets", "hash", "plyr", "raster", "RCurl",       "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators"))` , then continue with standard "MODIStsp" installation.
+`install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets2", "hash", "plyr", "raster", "RCurl",   "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators"))` , then continue with standard `MODIStsp` installation.
 
 If you still don't succedd, please contact us !
 
 -   **20/07/2016 - Changes in download options **
 
-Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of MODIStsp will no longer work ! Starting from v.1.2.2, you can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: <https://urs.earthdata.nasa.gov/profile>.
+Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of `MODIStsp` will no longer work ! Starting from v.1.2.2, you can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: <https://urs.earthdata.nasa.gov/profile>.
 
 MODIStsp <a name="MODIStsp"></a>
 ================================
@@ -59,10 +59,10 @@ Installation <a name="Installation"></a>
 
 ### On Windows
 
-1.  Install and load the `gWidgetsRGtk2` package:
+1.  Install and load the `gWidgets2RGtk2` package:
 
-        install.packages("gWidgetsRGtk2")
-        library(gWidgetsRGtk2)
+        install.packages("gWidgets2RGtk2")
+        library(gWidgets2RGtk2)
 
     Upon loading the package, an error window will probably appear. **Don’t worry!** This is just signaling that *libatk-1.0-0.dll* is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
 
@@ -85,9 +85,9 @@ Installation <a name="Installation"></a>
     sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
     ```
 
-2.  From R install the libraries `gWidgetsRGtk2` and `devtools`:
+2.  From R install the libraries `gWidgets2RGtk2` and `devtools`:
 
-        install.packages(c("devtools","gWidgetsRGtk2"))
+        install.packages(c("devtools","gWidgets2RGtk2"))
 
 3.  Install MODIStsp package from GitHub (you'll need to have the "devtools" package loaded):
 
@@ -97,10 +97,10 @@ Installation <a name="Installation"></a>
 #### Dependencies <a name="Dependencies"></a>
 
 MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:
-`bitops` (&gt;= 1.9.6), `data.table` (&gt;= 1.9.6), `gdalUtils` (&gt;= 2.0.1.7), `gWidgetsRGtk2` (&gt;= 0.0-54), `hash` (&gt;= 2.2.6), `plyr` (&gt;= 1.8.3), `raster` (&gt;= 2.5-2), `RCurl` (&gt;= 1.95-4.8), `rgdal` (&gt;= 1.1-8), `rgeos` (&gt;=0.3-8), `xts` (&gt;= 1.0-10), `sp` (&gt;= 1.2-2), `stringr` (&gt;= 1.0.0), `XML` (&gt;= 3.98-1.1), `xml2` (&gt;= 0.1.2)
+`bitops` (&gt;= 1.9.6), `data.table` (&gt;= 1.9.6), `gdalUtils` (&gt;= 2.0.1.7), `gWidgets2` (&gt;= 1.0-7), `hash` (&gt;= 2.2.6), `plyr` (&gt;= 1.8.3), `raster` (&gt;= 2.5-2), `RCurl` (&gt;= 1.95-4.8), `rgdal` (&gt;= 1.1-8), `rgeos` (&gt;=0.3-8), `xts` (&gt;= 1.0-10), `sp` (&gt;= 1.2-2), `stringr` (&gt;= 1.0.0), `XML` (&gt;= 3.98-1.1), `xml2` (&gt;= 0.1.2)
 
 , while the following are suggested:
-`knitr`, `rmarkdown`, `png`, `grid`.
+`knitr`, `rmarkdown`, `png`, `grid`,`gWidgets2RGtk2` (&gt;= 1.0-5).
 
 Running the tool
 ================
@@ -119,7 +119,7 @@ This will open a GUI from which processing options can be specified and eventual
 
 ### Selection of processing parameters <a name="Dependencies"></a>
 
-When running MODIStsp in Interactive Mode, a user-friendly GUI allows selection of all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.
+When running `MODIStsp` in Interactive Mode, a user-friendly GUI allows selection of all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.
 
 ![](README-GUI_fig-1.png)
 
@@ -149,11 +149,11 @@ The following commonly used Spectral Indexes are available for computation by de
 | RGRI          | Red Green Ratio index \[Gamon - 1999\]                           |
 | GRVI          | Green-red ratio vegetation index \[Tucker - 1979\]               |
 
-You can however **specify other SIs to be computed without modifying MODIStsp source code** by clicking on the ***"Add Custom Index"*** button, which allow to provide info related to the new desired SI using a simple GUI interface.
+You can however **specify other SIs to be computed without modifying `MODIStsp` source code** by clicking on the ***"Add Custom Index"*** button, which allow to provide info related to the new desired SI using a simple GUI interface.
 
 <img src="README-index_fig-1.png" style="display: block; margin: auto;" />
 
-Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked, and the new index added in the list of available ones for all products allowing its computation at the next MODIStsp execution.
+Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked, and the new index added in the list of available ones for all products allowing its computation at the next `MODIStsp` execution.
 
 #### Download Method
 
@@ -163,7 +163,7 @@ Allows to specify which download method should be used. Available choices are:
 
 2.  **ftp**: download from NASA ftp archive (<ftp://ladsweb.nascom.nasa.gov/>);
 
-3.  **offline**: process/reprocess HDF files already available on your PC without downloading from NASA -- useful if you have an aexisting archive of HDF images, or to reprocess data already downloaded via MODIStsp (for example, to create time series for an additional layer).
+3.  **offline**: process/reprocess HDF files already available on your PC without downloading from NASA -- useful if you have an aexisting archive of HDF images, or to reprocess data already downloaded via `MODIStsp` (for example, to create time series for an additional layer).
 
 ### Processing Period
 
@@ -199,18 +199,16 @@ Finally, you can select if the **NoData values** of MODIS layers should be kept 
 
 #### Main Output Folder for Time Series Storage
 
-Allows to specify the main folder where the pre-processed time series data will be saved stored. The **"Reprocess Existing Data"** checkbox allows to specify if images already available should be reprocessed if a new run of MODIStsp is launched with the same output folder. If set to "No", MODIStsp skips dates for which output files following the MODIStsp naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates.
+Allows to specify the main folder where the pre-processed time series data will be saved stored. The **"Reprocess Existing Data"** checkbox allows to specify if images already available should be reprocessed if a new run of `MODIStsp` is launched with the same output folder. If set to "No", `MODIStsp` skips dates for which output files following the `MODIStsp` naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates.
 
 #### Output Folder for Original HDF Storage
 
 Allows to specify the folder where downloaded **original MODIS HDF files** are stored. The **"delete original HDF files"** checkbox allows to specify if the downloaded images should be deleted from the file system at the end of the processing. To avoid accidental file deletion, this is always set to "No" by default, and a warning is issued before execution whenever the selection is changed to "Yes".
 
-Non-Interactive Execution and scheduled processing
---------------------------------------------------
+Non-Interactive Execution and scheduled processing&lt;
+------------------------------------------------------
 
-(Exploiting a previously saved options file)
-
-MODIStsp can be also launched in non-interactive mode by setting the optional "GUI" parameter to FALSE, and the "Options\_File" parameter to the path of a previously saved Options file. This allows to exploit MODIStsp functionalities within generic "R" processing scripts
+`MODIStsp` can be also launched in non-interactive mode by setting the optional `GUI` parameter to FALSE, and the "Options\_File" parameter to the path of a previously saved Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
 
 ``` r
 library(MODIStsp) 
@@ -219,7 +217,7 @@ options_file = "X:/yourpath/youroptions.json" # generated from the GUI
 MODIStsp(gui = FALSE, options_File = options_file)
 ```
 
-Single parameters can be also be directly passed to the MODIStsp() function; for example:
+Single parameters can be also be directly passed to the `MODIStsp()` function; for example:
 
 ``` r
 library(MODIStsp) 
@@ -227,7 +225,7 @@ options_file = "X:/yourpath/youroptions.json"
 MODIStsp(gui = FALSE, options_File = options_file, download_server = "ftp")
 ```
 
-will launch MODIStsp with the parameters saved in "X:/yourpath/youroptions.json" options file, with the exception of "download\_server" parameter, which is set to "ftp". Details about the parameter names can be found with `?MODIStsp`.
+will launch `MODIStsp` with the parameters saved in "X:/yourpath/youroptions.json" options file, with the exception of `download_server` parameter, which is set to "ftp". Details about the parameter names can be found with `?MODIStsp`.
 
 Specifying also the "*spatial\_file\_path*" parameter overrides the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents.
 
@@ -250,14 +248,14 @@ for (single_shape in extent_list) {
 
 MODIStsp can be also executed as a standalone application ; to do it, from R launch the function `MODIStsp_install_launcher()`. In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp). In Windows, a link in the Start Menu and optionally a desktop shortcut are created. See `?install_MODIStsp_launcher` for details and path customisations.
 
-Double-clicking the files or launching them from a shell without parameters launches MODIStsp in interactive mode. Non-interactive mode is triggered by adding the "-g" argument to the call, and specifying the path to a valid Options File as "-s" argument:
+Double-clicking the files or launching them from a shell without parameters launches `MODIStsp` in interactive mode. Non-interactive mode is triggered by adding the "-g" argument to the call, and specifying the path to a valid Options File as "-s" argument:
 
 -   Linux: `MODIStsp -g -s "/yourpath/youroptions.RData"` (see `MODIStsp -h` for details).
 -   Windows:`C:\Users\you\your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "X:/yourpath/youroptions.RData"` (see `C:\Users\you\Desktop\MODIStsp -h` for details).
 
 If you do not want to install any link, launchers can be found in the subdirectory "MODIStsp/ExtData/Launcher" of your library path.
 
-Standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply: 1) Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options. Then quit the program
+Standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply: 1) Open the `MODIStsp` GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options. Then quit the program
 
 1.  Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path) as windows scheduled task (or linux "cron" job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument :
     -   Linux: edit your crontab by opening a terminal and typing
@@ -296,7 +294,7 @@ where *suffix* indicates the type of virtual file (ENVI, GDAL or RData), while *
 Accessing and analyzing the processed time series from R
 ========================================================
 
-Preprocessed MODIS data can be retrieved within R scripts either by accessing the single-date raster files, or by loading the saved *RasterStack* objects. This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the `raster` or `rasterVis` packages. *MODIStsp* provides however an efficient function *MODIStsp\_extract* for extracting time series data at specific locations. The function takes as input a *RasterStack* object with temporal information created by *MODIStsp*, the starting and ending dates for the extraction and a standard \_Sp\*\_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a \_ *xts* object containing time series for those locations. If the input is of class *SpatialPoints*, the output object contains one column for each point specified, and one row for each date. If it is of class *SpatialPolygons* (or *SpatialLines*), it contains one column for each polygon (or each line), with values obtained applying the function specified as the "FUN" argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.
+Preprocessed MODIS data can be retrieved within R scripts either by accessing the single-date raster files, or by loading the saved *RasterStack* objects. This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the `raster` or `rasterVis` packages. `MODIStsp` provides however an efficient function `_MODIStsp\_extract_` for extracting time series data at specific locations. The function takes as input a *RasterStack* object with temporal information created by `MODIStsp`, the starting and ending dates for the extraction and a standard \_Sp\*\_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a \_ *xts* object containing time series for those locations. If the input is of class *SpatialPoints*, the output object contains one column for each point specified, and one row for each date. If it is of class *SpatialPolygons* (or *SpatialLines*), it contains one column for each polygon (or each line), with values obtained applying the function specified as the "FUN" argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.
 
 As an example the following code:
 
@@ -371,6 +369,6 @@ GDAL is maintained updated to the latest version as binary package within the co
 
 Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter `--with-hdf4` to the `configure` instruction).
 
-<b id="f1">1</b>: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you!
+<b id="f1">1</b>: If you encounter problems installing the gWidgets2RGtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help you!
 
-<b id="f2">2</b>: At the first execution of *MODIStsp*, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the *GDAL\_DATA* environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)) 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help!
+<b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the *GDAL\_DATA* environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)) 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!

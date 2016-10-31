@@ -59,7 +59,7 @@
 #'     spatial_file_path = single_shape )}
 
 MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scrollWindow=FALSE) {
-
+  
   
   options("guiToolkit" = "RGtk2")
   
@@ -70,7 +70,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #  Initialize project
   #- ------------------------------------------------------------------------------- -#
   # On interactive execution, load Rgtk2
-   # On interactive execution, load Rgtk2
+  # On interactive execution, load Rgtk2
   if (gui) {
     if (!pacman::p_exists("gWidgets2RGtk2", local = TRUE)) {
       #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
@@ -79,16 +79,16 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
       inst_gw <- readline()
       if (inst_gw =="y") {
         pacman::p_load("gWidgets2RGtk2")
+        suppressWarnings("gWidgets2RGtk2")
       } else {
-        
-        stop("MODIStsp can not work withouth gWidgets2RGtk2 ! Exiting !")
+        stop("MODIStsp can not work in Interactive mode withouth gWidgets2RGtk2 ! Exiting !")
       }
-        
+      
     }
     # requireNamespace("gWidgetsRGtk2")
     options("guiToolkit" = "RGtk2")
   }
-
+  
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
     # gdal_setInstallation(ignore.full_scan = FALSE)
@@ -102,31 +102,31 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     }
     gdal_setInstallation(ignore.full_scan = TRUE, verbose = TRUE)
   }
-  gdal_version <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", getGDALVersionInfo(str = "--version")))
+  gdal_version    <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", getGDALVersionInfo(str = "--version")))
   gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
   gdal_HDFsupport <- length(grep("HDF4", gdalinfo(formats = TRUE))) > 0
-
+  
   if (gdal_version < gdal_minversion) {
     stop(paste0("GDAL version must be at least ",gdal_minversion,". Please update it."))
   }
-
+  
   if (!gdal_HDFsupport) {
     stop("Your local GDAL installation does not support HDF4 format. Please install HDF4 support and recompile GDAL.")
   }
-
+  
   cat("GDAL version in use:",as.character(gdal_version),"\n")
-
+  
   # Increase memory limit on windows
   if (Sys.info()["sysname"] == "Windows") {
     memory.limit() # Increase maximum allocsable memory
   }							
   rasterOptions(setfileext = FALSE)				# Make so that "raster" functions doesn't automatically add extensions on output files
-
+  
   # Parameter retrieval and Folder Initialization -----
   if (is.null(options_file) & gui == FALSE) {
     stop("Please provide a valid \"option_file\" path value (or run with gui=TRUE).")
   }
-
+  
   # Folders in which the JSON/RData files (previous settings and product descriptions) are saved
   if (is.null(options_file)) {
     previous_dir <- file.path(MODIStsp.env$MODIStsp_dir,"Previous")
@@ -149,9 +149,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #- ------------------------------------------------------------------------------- -#
   #  Set general processing options - used at first execution to initialize GUI
   #- ------------------------------------------------------------------------------- -#
-
+  
   MOD_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs"
-
+  
   # Load options if existing, otherwise initialise them ----
   if (file.exists(previous_jsfile)) {
     general_opts <- RJSONIO::fromJSON(previous_jsfile)
@@ -178,13 +178,13 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     prod_opt_list <- get(load(prodopts_file))
   }
   if (!exists("prod_opt_list") | if (exists("prod_opt_list")) {
-      is.null(attr(prod_opt_list,"MODIStspVersion")) | if (!is.null(attr(prod_opt_list,"MODIStspVersion"))) {
-          attr(prod_opt_list,"MODIStspVersion")<packageVersion("MODIStsp")
-        } else {FALSE}
-    } else {FALSE}) {
+    is.null(attr(prod_opt_list,"MODIStspVersion")) | if (!is.null(attr(prod_opt_list,"MODIStspVersion"))) {
+      attr(prod_opt_list,"MODIStspVersion")<packageVersion("MODIStsp")
+    } else {FALSE}
+  } else {FALSE}) {
     mess_text <- "Waiting while reading the MODIS products list..."
     if (gui) {
-      mess <- gwindow(title = "Please wait...", width = 400, height = 40)
+      mess     <- gwindow(title = "Please wait...", width = 400, height = 40)
       mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
     } else {message(mess_text)}
     MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file )
@@ -206,11 +206,11 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     Quit <- FALSE
   }
   start.time <- Sys.time()
-
+  
   # Launch the processing ----
   # When GUI is closed (or in a non-interactive run): If not Quit selected, restore the user selected options from previous file and launch the processing ----
   if (!Quit) {
-
+    
     if (file.exists(previous_jsfile)) {
       general_opts <- RJSONIO::fromJSON(previous_jsfile)
     } else {
@@ -221,62 +221,62 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     } else {
       cat("[",date(),"] Product information file not found! Exiting!\n"); stop()
     }
-    prod_opts <- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
+    prod_opts  <- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
     custom_idx <- general_opts$custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]]
     
     # Create variables needed to launch the processing
     
     general_opts$start_date <- as.character(format(as.Date(general_opts$start_date), "%Y.%m.%d"))
-    general_opts$end_date <- as.character(format(as.Date(general_opts$end_date), "%Y.%m.%d"))
-
+    general_opts$end_date   <- as.character(format(as.Date(general_opts$end_date),   "%Y.%m.%d"))
+    
     # If the product is NOT tiled, change or_proj to WGS84 and or_res from metres to degrees
     if (prod_opts$tiled == 0) {
-      MOD_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
+      MOD_proj_str         <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
       prod_opts$native_res <- format(as.numeric(prod_opts$native_res)*(0.05/5600))
     }
     # get native resolution if out_res empty (Probably obsolete...)
     if (general_opts$out_res == "" | general_opts$out_res_sel == "Native") {
       general_opts$out_res <- prod_opts$native_res
     }
-
+    
     # Changes to perform in the case spatial_file_path is defined
     if (!is.null(spatial_file_path)) {
-
+      
       # Check if the input file is a valid spatial file and redefine the bounding box
       external_bbox <- try(bbox_from_file(file_path = spatial_file_path, out_crs = general_opts$user_proj4),silent = TRUE)
       if (class(external_bbox) == "try-error") {
         stop(external_bbox)
       }
       general_opts$bbox <- external_bbox
-
+      
       # Redefine the out_folder including the file name as subfolder
       # (this to avoid that, running in a cycle, files are overwritten every time)
       general_opts$out_folder <- file.path(general_opts$out_folder,file_path_sans_ext(basename(spatial_file_path)))
       if (file.exists(general_opts$out_folder)) {  # If out_folder already exists, create a new one with a suffix
-        tmp_counter <- 1
+        tmp_counter   <- 1
         out_newfolder <- paste(general_opts$out_folder,tmp_counter,sep = "_")
         while (file.exists(out_newfolder)) {
-          tmp_counter <- tmp_counter + 1
+          tmp_counter   <- tmp_counter + 1
           out_newfolder <- paste(general_opts$out_folder,tmp_counter,sep = "_")
         }
         general_opts$out_folder <- out_newfolder
       }
-
+      
       # Overwrite the full_ext option (avoids that , if the options_file specifies a full processing,
       # the incorrect parameter is passed)
       general_opts$full_ext <- "Resized"
-
+      
       # Automatically retrieve the tiles requested to cover the extent
       modis_grid <- get(load(file.path(MODIStsp.env$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
-      external_bbox_mod <- reproj_bbox(external_bbox, general_opts$user_proj4, MOD_proj_str, enlarge = TRUE)
-      d_bbox_mod_tiled <- intersect(modis_grid, extent(external_bbox_mod))
+      external_bbox_mod    <- reproj_bbox(external_bbox, general_opts$user_proj4, MOD_proj_str, enlarge = TRUE)
+      d_bbox_mod_tiled     <- intersect(modis_grid, extent(external_bbox_mod))
       general_opts$start_x <- min(d_bbox_mod_tiled$H)
-      general_opts$end_x <- max(d_bbox_mod_tiled$H)
+      general_opts$end_x   <- max(d_bbox_mod_tiled$H)
       general_opts$start_y <- min(d_bbox_mod_tiled$V)
-      general_opts$end_y <- max(d_bbox_mod_tiled$V)
-
+      general_opts$end_y   <- max(d_bbox_mod_tiled$V)
+      
     }
-
+    
     # launch MODIStsp_process to Download and preprocess the selected images ----
     output <- MODIStsp_process(sel_prod = general_opts$sel_prod, start_date = general_opts$start_date, end_date = general_opts$end_date,
                                out_folder = general_opts$out_folder, out_folder_mod = general_opts$out_folder_mod, reprocess = general_opts$reprocess,
@@ -295,20 +295,20 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
                                quality_bandnames = prod_opts$quality_bandnames,quality_bandsel = general_opts$quality_bandsel, quality_bitN = prod_opts$quality_bitN,
                                quality_source = prod_opts$quality_source, quality_nodata_in = prod_opts$quality_nodata_in, quality_nodata_out = prod_opts$quality_nodata_out,
                                file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder, gui = gui)
-
+    
     # At end of succesfull execution, save the options used in the main output folder
     general_opts <- RJSONIO::fromJSON(previous_jsfile)
     optfilename = file.path(general_opts$out_folder,paste0('MODIStsp_', Sys.Date(),'.json'))
     write(RJSONIO::toJSON(general_opts),optfilename)
-  
-  # Clean up at end of processing ----
-  # End of processing
-  end.time <- Sys.time()
-  time.taken <- end.time - start.time
-  print(time.taken)
-  gc()
+    
+    # Clean up at end of processing ----
+    # End of processing
+    end.time   <- Sys.time()
+    time.taken <- end.time - start.time
+    print(time.taken)
+    gc()
   } else {# End If on "Quit" --> If "Quit" above is skipped and program terminates
     message("[",date(),"] "," You Selected to Quit! Goodbye!")
   }
-    
+  
 }
