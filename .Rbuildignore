@@ -12,3 +12,4 @@
 ^README\.Rmd$
 ^README-.*\.png$
 configure.win
+cran-comments.md

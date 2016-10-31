@@ -28,7 +28,7 @@
 #' @importFrom rgdal getGDALVersionInfo
 #' @importFrom raster extent rasterOptions
 #' @importFrom tools file_path_sans_ext
-#' @importFrom utils memory.limit packageVersion
+#' @importFrom utils memory.limit packageVersion install.packages
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used 
 #' # settings
@@ -65,21 +65,20 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   
   MODIStsp.env <- new.env()
   MODIStsp.env$MODIStsp_dir <- system.file(package = "MODIStsp")
-  
+  suppressWarnings("gWidgets2RGtk2")
   #- ------------------------------------------------------------------------------- -#
   #  Initialize project
   #- ------------------------------------------------------------------------------- -#
   # On interactive execution, load Rgtk2
   # On interactive execution, load Rgtk2
   if (gui) {
-    if (!pacman::p_exists("gWidgets2RGtk2", local = TRUE)) {
+    if (!requireNamespace("gWidgets2RGtk2")) {
       #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
       message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp! 
               \n\nDo you want to install it now?", type = " y / n")
       inst_gw <- readline()
       if (inst_gw =="y") {
-        pacman::p_load("gWidgets2RGtk2")
-        suppressWarnings("gWidgets2RGtk2")
+       install.packages("gWidgets2RGtk2")
       } else {
         stop("MODIStsp can not work in Interactive mode withouth gWidgets2RGtk2 ! Exiting !")
       }

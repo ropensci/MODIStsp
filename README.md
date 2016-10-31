@@ -5,10 +5,11 @@
     -   [On Windows](#on-windows)
     -   [On Linux systems](#on-linux-systems)
 -   [Running the tool](#running-the-tool)
-    -   [Interactive Execution](#interactive-execution)
+    -   [Interactive Execution: the MODIStsp GUI](#interactive-execution-the-modistsp-gui)
     -   [Non-Interactive Execution and scheduled processing&lt;](#non-interactive-execution-and-scheduled-processing)
 -   [Output format and naming conventions](#output-format-and-naming-conventions)
 -   [Accessing and analyzing the processed time series from R](#accessing-and-analyzing-the-processed-time-series-from-r)
+-   [Citation](#citation)
 -   [Installing R and GDAL](#installing-r-and-gdal)
     -   [Installing R](#installing-r)
     -   [Installing GDAL &gt;= 1.11.1](#installing-gdal-1.11.1)
@@ -33,11 +34,19 @@ NASA recently switched to provision of Collection 6 datasets for most Land Produ
 
 There are currently some problems in installing MODIStsp via install\_github on R 3.3.1 due to not correct installation of dependencies (related to a bug in `install_github`). Installing the development version of `devtools` should solve the issue. To do so, on a **clean** R/RStudio session do:
 
-`install.packages(c("devtools"))   devtools::install_github("hadley/devtools")   library(devtools)` , then continue with standard `MODIStsp` installation.
+``` r
+  install.packages(c("devtools"))
+  devtools::install_github("hadley/devtools")
+  library(devtools)
+```
+
+, then continue with standard `MODIStsp` installation.
 
 If it still doesn't work, manually installing all the dependencies should solve the issue. To do so, please try doing:
 
-`install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets2", "hash", "plyr", "raster", "RCurl",   "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators"))` , then continue with standard `MODIStsp` installation.
+`install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets2", "hash", "plyr", "raster", "RCurl",   "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators"))`
+
+, then continue with standard `MODIStsp` installation.
 
 If you still don't succedd, please contact us !
 
@@ -52,25 +61,33 @@ MODIStsp is a "R" package devoted to automatizing the creation of time series of
 
 An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (*Click on "Raw" at the beginning of the document to download the pdf file*)
 
+**Solutions to common problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/MODIStsp-FAQ)**
+
+**Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
+
 Installation <a name="Installation"></a>
 ========================================
 
-**IMPORTANT:** *MODIStsp* requires [R](http://cran.r-project.org) v &gt;= 3.2.1 and [GDAL](https://www.gdal.org) (Geospatial Data Abstraction Library) v &gt;= 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
+**IMPORTANT:** *MODIStsp* requires [R](https://cran.r-project.org) v &gt;= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v &gt;= 1.11.1 To be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
 
 ### On Windows
 
 1.  Install and load the `gWidgets2RGtk2` package:
 
-        install.packages("gWidgets2RGtk2")
-        library(gWidgets2RGtk2)
+``` r
+install.packages("gWidgets2RGtk2")
+library(gWidgets2RGtk2)
+```
 
-    Upon loading the package, an error window will probably appear. **Don’t worry!** This is just signaling that *libatk-1.0-0.dll* is missing from your system. This is due to the fact that library “GTK+” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK+” and then “OK”. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
+    Upon loading the package, an error window will probably appear. **Donât worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library âGTK+â is not yet installed on your system and needs to be installed. To do so, press âOKâ. A new window dialog window will appear, asking if you want to install âGTK+â. Select âInstall GTK+â and then âOKâ. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
 
-2.  Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
+1.  Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 
-        install.packages("devtools")
-        library(devtools)
-        install_github("lbusett/MODIStsp")
+``` r
+install.packages("devtools")
+library(devtools)
+install_github("lbusett/MODIStsp")
+```
 
 ### On Linux systems
 
@@ -91,8 +108,10 @@ Installation <a name="Installation"></a>
 
 3.  Install MODIStsp package from GitHub (you'll need to have the "devtools" package loaded):
 
-        library(devtools)
-        install_github("lbusett/MODIStsp")
+``` r
+library(devtools)
+install_github("lbusett/MODIStsp")
+```
 
 #### Dependencies <a name="Dependencies"></a>
 
@@ -105,8 +124,8 @@ MODIStsp exploits functionalities of several other "R" packages. In particular, 
 Running the tool
 ================
 
-Interactive Execution
----------------------
+Interactive Execution: the MODIStsp GUI
+---------------------------------------
 
 To run the tool in interactive mode, load the package and launch the `MODIStsp` function, with no parameters
 
@@ -115,9 +134,9 @@ library(MODIStsp)
 MODIStsp()
 ```
 
-This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) for details)<sup name="a2">[2](#f2)</sup>
+This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see below for details).
 
-### Selection of processing parameters <a name="Dependencies"></a>
+### Selection of processing parameters
 
 When running `MODIStsp` in Interactive Mode, a user-friendly GUI allows selection of all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.
 
@@ -125,7 +144,7 @@ When running `MODIStsp` in Interactive Mode, a user-friendly GUI allows selectio
 
 #### MODIS Product, Platform and Layers
 
-Allows to select the MODIS product of interest using the **"Category"** and **"Product"** drop down menus. You can also select which **MODIS platform(s)** should be considered for download and creation of the time series ("Terra", "Aqua" or "Both"), and which **version** of the product - 5 or 6 (when available) - should be considered. After selecting the product, pushing the **"Click to Select Desired Layers"** button opens the "Select Processing Layers" GUI panel, from which you **must** select which MODIS original and/or derived QI and SI layers should be processed:
+Allows to select the MODIS product of interest using the **"Category"** and **"Product"** drop down menus. You can also select which **MODIS platform(s)** should be considered for download and creation of the time series ("Terra", "Aqua" or "Both"), and which **version** of the product - 5 or 6 (when available) - should be considered. After selecting the product, pushing the **"Click to Select"** button opens the "Select Processing Layers" GUI panel, from which you **must** select which MODIS original and/or derived QI and SI layers should be processed:
 
 <img src="README-select_layers_gui-1.png" style="display: block; margin: auto;" />
 
@@ -251,14 +270,14 @@ MODIStsp can be also executed as a standalone application ; to do it, from R lau
 Double-clicking the files or launching them from a shell without parameters launches `MODIStsp` in interactive mode. Non-interactive mode is triggered by adding the "-g" argument to the call, and specifying the path to a valid Options File as "-s" argument:
 
 -   Linux: `MODIStsp -g -s "/yourpath/youroptions.RData"` (see `MODIStsp -h` for details).
--   Windows:`C:\Users\you\your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "X:/yourpath/youroptions.RData"` (see `C:\Users\you\Desktop\MODIStsp -h` for details).
+-   Windows:`your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.RData"` (see `C:\Users\you\Desktop\MODIStsp -h` for details).
 
 If you do not want to install any link, launchers can be found in the subdirectory "MODIStsp/ExtData/Launcher" of your library path.
 
 Standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply: 1) Open the `MODIStsp` GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options. Then quit the program
 
 1.  Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path) as windows scheduled task (or linux "cron" job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument :
-    -   Linux: edit your crontab by opening a terminal and typing
+    -   Linux: edit your crontab by opening a terminal and type:
 
         ``` bash
         crontab -e
@@ -314,7 +333,14 @@ As an example the following code:
   plot.xts(dataavg) 
 ```
 
-loads a *RasterStack* object containing 8-days 250 m resolution time series for the 2000-2015 period and extracts time series of average and standard deviation values over the different polygons of a user's selected shapefile on the 2010-2014 period. <a name="gdal_inst"/>
+loads a *RasterStack* object containing 8-days 250 m resolution time series for the 2000-2015 period and extracts time series of average and standard deviation values over the different polygons of a user's selected shapefile on the 2010-2014 period.
+
+Citation
+========
+
+To cite MODIStsp please use:
+
+L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series, Computers & Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004, <http://dx.doi.org/10.1016/j.cageo.2016.08.020>, URL: <https://github.com/lbusett/MODIStsp>.
 
 Installing R and GDAL
 =====================
@@ -371,4 +397,4 @@ Install the packaged binary of GDAL included in your specific distribution; if t
 
 <b id="f1">1</b>: If you encounter problems installing the gWidgets2RGtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help you!
 
-<b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the *GDAL\_DATA* environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)) 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!
+<b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press âokâ and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the *GDAL\_DATA* environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)) 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!

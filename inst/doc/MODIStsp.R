@@ -1,17 +1,41 @@
-## ----fig.width=7, fig.height=6.8, fig.cap = "The MODIStsp main GUI", echo=FALSE----
+## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
+#  install.packages("gWidgets2Rgtk2")
+#  library(gWidgets2Rgtk2)
+
+## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
+#  install.packages("devtools")
+#  library(devtools)
+#  install_github("lbusett/MODIStsp")
+
+## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
+#  sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev
+#      libgdal-dev libproj-dev
+
+## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
+#  install.packages(c("devtools","gWidgets2Rgtk2"))
+
+## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
+#  library(devtools)
+#  install_github("lbusett/MODIStsp")
+
+## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
+#  library(MODIStsp)
+#  MODIStsp()
+
+## ----GUIfig, echo=FALSE, fig.cap="The MODIStsp main GUI", fig.height=6, fig.width=7, message=FALSE, warning=FALSE----
   library(png)
   library(grid)
   library(knitr)
   img <- readPNG("Figure_2_new.png")
   grid.raster(img)
 
-## ----fig.width = 7,  fig.height = 2.8, fig.align = "center", fig.cap = 'The "Select Processing Layers" GUI',echo=FALSE----
+## ----proc_layers, echo=FALSE, fig.cap='The "Select Processing Layers" GUI', fig.height=3.5, fig.width=6, message=FALSE, warning=FALSE----
   library(png)
   library(grid)
   img <- readPNG('Figure_3.png')
   grid.raster(img)
 
-## ----fig.width = 5, fig.height = 1.5, fig.cap = 'The GUI for insertion of additional Spectral Indexes',echo=FALSE----
+## ----indexfig, echo=FALSE, fig.cap='The GUI for insertion of additional Spectral Indexes', fig.height=1.5, fig.width=5, message=FALSE, warning=FALSE----
   library(png)
   library(grid)
   img <- readPNG('figure_4.png')
