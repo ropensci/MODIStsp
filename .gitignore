@@ -2,7 +2,7 @@
 .Rhistory
 .RData
 .Rprofile
-/inst/Previous/
-/MODIStsp.Rproj
-/vignettes/
-/old_and_various/
+^inst/Previous/
+MODIStsp.Rproj
+^vignettes/
+^old_and_various/
