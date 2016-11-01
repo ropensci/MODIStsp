@@ -22,7 +22,6 @@
 #' @note License: GPL 3.0
 #' @export
 #' @import gWidgets2
-#' @importFrom pacman p_load p_exists
 #' @importFrom hash hash
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom rgdal getGDALVersionInfo
@@ -72,7 +71,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   # On interactive execution, load Rgtk2
   # On interactive execution, load Rgtk2
   if (gui) {
-    if (!requireNamespace("gWidgets2RGtk2")) {
+    if (!requireNamespace("gWidgets2RGtk2", quietly = TRUE)) {
       #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
       message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp! 
               \n\nDo you want to install it now?", type = " y / n")

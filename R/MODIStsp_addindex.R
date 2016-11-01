@@ -24,10 +24,8 @@
 #' @param new_indexnodata_out (optional): nodata value to assign to the rasters containing the new index
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
 #' @import gWidgets2
-#' @importFrom pacman p_load p_exists
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom stringr str_detect
-#' @importFrom pacman p_load
 #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -57,18 +55,17 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
 
   # Initialization and retrieval of parameters ----
   if (gui) {
-    if (!pacman::p_exists("gWidgets2RGtk2", local = TRUE)) {
+    if (!requireNamespace("gWidgets2RGtk2", quietly = TRUE)) {
       #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
-      message("Library 'gWidgets2Rgtk2' is not installed. It is required to run MODIStsp ! 
-              \n \n Do you want to install it now ?", type = " y / n")
+      message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp! 
+              \n\nDo you want to install it now?", type = " y / n")
       inst_gw <- readline()
       if (inst_gw =="y") {
-        pacman::p_load("gWidgets2RGtk2")
+       install.packages("gWidgets2RGtk2")
       } else {
-        
-        stop("MODIStsp can not work withouth gWidgetsRGtk2 ! Exiting !")
+        stop("MODIStsp can not work in Interactive mode withouth gWidgets2RGtk2 ! Exiting !")
       }
-        
+      
     }
     # requireNamespace("gWidgetsRGtk2")
     options("guiToolkit" = "RGtk2")

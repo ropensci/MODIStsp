@@ -13,7 +13,6 @@
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom pacman p_load p_exists
 #' @importFrom hash keys
 #' @importFrom raster crop extent raster plot
 #' @importFrom sp CRS
@@ -454,11 +453,13 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                                              "All files" = list(patterns = "*"))), silent=TRUE)
                               if (class(choice)!="try-error")  {if (length(choice) != 0){
                                 # Show window until the process had finished
+                                message("[",date(),"]" , " Retrieving the Extent, please wait...")
                                 wait_window <- gwindow(title = "Please wait", width = 400, height = 40)
                                 size(wait_window) <- c(100,8)
                                 addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
                                 wait_window_lab <- glabel(text = paste("Retrieving the Extent, please wait..."), editable = FALSE,
                                                           container = wait_window)
+                             
                                 
                                 # Convert bbox coordinates in those of output projection
                                 out_proj_crs <- if (svalue(proj_wid) != "User Defined") {
@@ -470,7 +471,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                 # Create the bounding box in the chosen projection retrieving it from the specified file
                                 bbox_out <- try(bbox_from_file(file_path = choice,out_crs = out_proj_crs),silent = TRUE)
                                 if (class(bbox_out) == "try-error") {
-                                  gmessage(bbox_out, title = "Error")
+                                  gmessage(bbox_out, title = "Error Detected !")
                                 } else {
                                   # set bbox according to shape
                                   svalue(output_ULeast_wid) <- formatC(bbox_out[1,1], digits = ifelse(units == "deg",4,1), format = "f")
@@ -480,7 +481,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                   # Set tiles according with the bounding box
                                   update_tiles(bbox_out)
                                 }
-                                
+                                message("[",date(),"]" , " Retrieving the Extent, please wait... DONE !")
                                 dispose(wait_window)
                               }}
                               
