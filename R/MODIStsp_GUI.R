@@ -815,7 +815,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   compress_lab <- glabel(text = "GTiff Compression: ", container = compress_group)
   size(compress_lab) <-  list(width = 160)
   font(compress_lab) <- list(family = "sans",weight = "bold")
-  compress_wid <- gcombobox( names(compress_dict), container = compress_group,selected <- match(general_opts$compress, names(compress_dict)))
+  compress_wid <- gcombobox(names(compress_dict), container = compress_group,selected <- match(general_opts$compress, names(compress_dict)))
   if (general_opts$out_format == "GTiff") {
     enabled(compress_group) <- TRUE
   } else {
@@ -1074,7 +1074,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     }
     
     # check that user/password were provided in case of html download
-    if ((general_opts$user == "" | general_opts$password == "") & general_opts$download_server=="http") {
+    if ((general_opts$user == "" | general_opts$password == "") & general_opts$download_server=="http" & GUI.env$check_save_opts) {
       gmessage("Username and password are mandatory in case of 'http' download! Please provide them or choose 'ftp' download.", title = "Warning")
       GUI.env$check_save_opts <- FALSE
     }
@@ -1177,8 +1177,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
       
       svalue(format_wid) <- general_opts$out_format
       svalue(timeseries_wid) <- general_opts$ts_format
-      svalue(compress_wid) <- general_opts$compress
       
+      svalue(compress_wid) <- names(general_opts$compress)
       svalue(outfold_wid) <- 	general_opts$out_folder # Folder options
       svalue(outfoldmod_wid) <- general_opts$out_folder_mod
     }
