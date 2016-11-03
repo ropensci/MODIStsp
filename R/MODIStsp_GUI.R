@@ -265,6 +265,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                                            tmp_arr_qual[pos_wid] <- 1
                                                            GUI.env$temp_wid_bands_quality <- tmp_arr_qual
                                                          }
+                                                         
                                                           dispose(selgroup)
                                                        },
                                                        container = cbox_indexes, expand = FALSE)

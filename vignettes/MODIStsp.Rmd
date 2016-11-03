@@ -64,16 +64,21 @@ install_github("lbusett/MODIStsp")
 ## On Linux systems
 
 1. Install the following required dependencies: 
-    * Cairo $\ge$ 1.0.0, ATK $\ge$ 1.10.0, Pango $\ge$ 1.10.0, GTK+ $\ge$ 2.8.0, GLib $\ge$ 2.8.0 (required by package ```RGtk2```)
+    * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (required by package ```RGtk2```)
     * Curl (required by package ```curl```)
-    * GDAL $\ge$ 1.6.3, PROJ.4 $\ge$ 4.4.9 (required by package ```rgdal```)
+    * GDAL >= 1.6.3, PROJ.4 >= 4.4.9 (required by package ```rgdal```)
     
-    On Debian and Ubuntu-based systems, to install packages open a terminal and type  
-```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev 
-    libgdal-dev libproj-dev
+    On *Debian and Ubuntu-based* systems, to install packages open a terminal and type  
+```bash
+sudo apt-get install libcairo2-dev libatk1.0-dev libpango1.0-dev libgtk2.0-dev 
+libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev
 ```
     
+    On *rpm-base systems*, to install packages open a terminal and type  
+```bash
+sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2-devel 
+glib2-devel libcurl4-devel gdal-devel proj-devel
+```
 2. From R install the libraries ```gWidgets2Rgtk2``` and ```devtools```:
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages(c("devtools","gWidgets2Rgtk2"))

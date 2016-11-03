@@ -8,10 +8,6 @@
 #  install_github("lbusett/MODIStsp")
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
-#  sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev
-#      libgdal-dev libproj-dev
-
-## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  install.packages(c("devtools","gWidgets2Rgtk2"))
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------

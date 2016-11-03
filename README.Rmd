@@ -98,10 +98,15 @@ install_github("lbusett/MODIStsp")
     * Curl (required by package ```curl```)
     * GDAL >= 1.6.3, PROJ.4 >= 4.4.9 (required by package ```rgdal```)
     
-    On Debian and Ubuntu-based systems, to install packages open a terminal and type  
-    ```bash
-    sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
-    ```
+    On *Debian and Ubuntu-based* systems, to install packages open a terminal and type  
+```bash
+sudo apt-get install libcairo2-dev libatk1.0-dev libpango1.0-dev libgtk2.0-dev libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev
+```
+    
+    On *rpm-base systems*, to install packages open a terminal and type  
+```bash
+sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2-devel glib2-devel libcurl4-devel gdal-devel proj-devel
+```
     
 2. From R install the libraries ```gWidgets2RGtk2``` and ```devtools```:
 ```

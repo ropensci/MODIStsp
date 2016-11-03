@@ -148,15 +148,16 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
     all_indexes_fullnames <- unique(all_indexes_fullnames)
 
     # verify that the index name and fullname is not already present
-    if (new_indexbandname %in% all_indexes_bandnames | new_indexfullname %in% all_indexes_fullnames) {
+    if ((new_indexbandname %in% all_indexes_bandnames | new_indexfullname %in% all_indexes_fullnames) & catch_err == 0) {
       catch_err <- 2 # error 2: index name or fullname already present
     }
     # verify that the index is computable for the selected product
-   
+   if (catch_err == 0) {
     if (is.na(max(match(refbands_names[req_bands], avail_refbands)))) { # see if any of the bands required for the new index are NOT available for the product 
       catch_err <- 4  # error 4: index is ok, but not computable for the currently selected product
-    }              
-  
+    } 
+   }
+  print(catch_err)
     attr(catch_err,"req_bands") <- req_bands
     return(catch_err)
 
@@ -211,7 +212,7 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
         }
       }
     }  #End Cycle on products
-
+    
     # Save the products list and the chars of the products in previous file
     write(RJSONIO::toJSON(general_opts),previous_jsfile)
     
@@ -235,20 +236,24 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
 
       catch_err <- check_formula_errors(new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                                         n_products = n_products, prod_opt_list = prod_opt_list, refbands_names = refbands_names)
+      
       if (catch_err == 0) {
         
         save_formula(refbands_names = refbands_names, req_bands = attr(catch_err,"req_bands"),
                      new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                      new_indexnodata_out = new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
                      prod_opt_list = prod_opt_list, previous_jsfile = previous_jsfile)
-        if (exists("Quit")) {
-          gmessage("The new Spectral Index was correctly added! To use it, Re-open the 'Select Processing Layer' window.", title = "Index added")
-        } else {
-          gmessage("The new Spectral Index was correctly added!", title = "Index added")
-        }
-        # dispose(main_win)
+        
+        # if (exists("Quit")) {
+        #   gmessage("The new Spectral Index was correctly added! To use it, Re-open the 'Select Processing Layer' window.", title = "Index added")
+        # } else {
+          gmessage("The new Spectral Index was correctly added!", title = "Index added", delay = 5, parent = main_win)
+        # }
+      #dispose(main_win)
+      
       } else if (catch_err == 1) {
-        gmessage(paste0("The formula of the new index is not computable. Please check it !\nValid Band Names for this product are:\n", paste(avail_refbands,collapse = ", "),"."), title = "Error")
+        svalue(error_lab) <- paste0("The formula of the new index is not computable. Please check it !\nValid Band Names for this product are:\n", paste(avail_refbands,collapse = ", "),".")
+        # gmessage(paste0("The formula of the new index is not computable. Please check it !\nValid Band Names for this product are:\n", paste(avail_refbands,collapse = ", "),"."), title = "Error")
       } else if (catch_err == 2) {
         gmessage("The index acronym and/or the full name are already present.\nPlease specify different ones.", title = "Error")
       } else if (catch_err == 3) {
@@ -280,6 +285,14 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
 
     help_lab <- glabel(text = paste0("Valid band names for this product: ", paste(avail_refbands,collapse = ", ")), container = main_group, size = 800, horizontal = TRUE)
     font(help_lab)  <- list(family = "sans", style = "italic", size = 8)
+    
+    addSpace(main_group, 10)
+    error_frame <- gframe(container = main_group, horizontal = TRUE, expand = TRUE)
+    error_lab <-glabel(text = "", container = main_group, size = 800, horizontal = TRUE, editable = FALSE)
+    
+    
+    
+    
     # but_group <- ggroup(container = main_group, horizontal = TRUE)
     # 
     # start_but <- gbutton(text = "Add", container = but_group, handler = function(h,...) {# If "Start" pressed, retrieve selected values and save in previous file
@@ -351,3 +364,4 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
   } # end of non-gui actions
 
 }
+
