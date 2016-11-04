@@ -124,7 +124,8 @@ install_github("lbusett/MODIStsp")
 #### Dependencies <a name="Dependencies"></a> 
 
 MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:  
-``` bitops``` (>= 1.9.6), ``` data.table``` (>= 1.9.6), ``` gdalUtils``` (>= 2.0.1.7), ```gWidgets``` (>= 1.0-7), ```hash``` (>= 2.2.6), ```plyr``` (>= 1.8.3), ```raster``` (>= 2.5-2), ```RCurl``` (>= 1.95-4.8), ```rgdal``` (>= 1.1-8), ```rgeos``` (>=0.3-8), ```xts``` (>= 1.0-10), ```sp``` (>= 1.2-2), ```stringr``` (>= 1.0.0), ```XML``` (>= 3.98-1.1), ```xml2``` (>= 0.1.2)
+``` bitops``` (>= 1.9.6), ``` data.table``` (>= 1.9.6), ``` gdalUtils``` (>= 2.0.1.7), ```gWidgets``` (>= 0.0-54), ```hash``` (>= 2.2.6), ```plyr``` (>= 1.8.3), ```raster``` (>= 2.5-2), ```RCurl``` (>= 1.95-4.8), ```rgdal``` (>= 1.1-8), ```rgeos``` (>=0.3-8), ```xts``` (>= 1.0-10), ```sp``` (>= 1.2-2), ```stringr``` (>= 1.0.0), ```XML``` (>= 3.98-1.1), pacman,
+```xml2``` (>= 0.1.2), ```xts``` 
 
 , while the following are suggested:  
 ```knitr ```, ```rmarkdown```, ```png```, ```grid```,```gWidgetsRGtk2``` (>= 1.0-5).
