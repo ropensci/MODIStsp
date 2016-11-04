@@ -32,10 +32,10 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   
   main_win <- gbasicdialog(title = paste0("MODIStsp - v. ", packageVersion("MODIStsp")), parent = NULL, do.buttons = TRUE, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
     general_opts <- prepare_to_save_options(general_opts, GUI.env)
-    if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
+    if (GUI.env$check_save_opts) {					# If check passed, save previous file and return else, re-run the GUI
       write(RJSONIO::toJSON(general_opts),previous_jsfile)
       GUI.env$Quit <- FALSE
-    }
+    } 
   })
   
   main_frame1 <- ggroup(container = main_win, horizontal = TRUE, expand = FALSE, use.scrollwindow=scrollWindow)
@@ -148,8 +148,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   size(prod_wid) <- list(width=325, height = 25)
   
   font(prod_label) <- font(cat_label) <- list(family = "sans",weight = "bold")
-
-    
+  
+  
   fake_group = ggroup(container = satprod_frame)
   fake_lab = glabel(text = " ", container = fake_group)
   size(fake_lab) = list(height = 3)
@@ -158,7 +158,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # Widgets for Sensor selection
   #- ------------------------------------------------------------------------------- -#
   satprod2_group <- ggroup(horizontal = TRUE, container = satprod_frame)
-
+  
   # addSpace(satprod_frame, 20, horizontal = TRUE)
   sens_label <- glabel(text = " Platform:", container = satprod2_group, align = 'left')
   size(sens_label) <- list(width = 100)
@@ -198,7 +198,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                         general_opts <- RJSONIO::fromJSON(previous_jsfile)
                         check_names <- prod_opt_list[[svalue(prod_wid)]][[svalue(vers_wid)]]$band_fullnames					# retrieve band names of sel. product
                         check_wid <- GUI.env$temp_wid_bands												# retrieve currently selected original layers
-                        selgroup <- gbasicdialog(title = paste0("Select Processing Layers -  ",svalue(prod_wid)," vers. ",svalue(vers_wid)), parent = NULL, do.buttons = TRUE, horizontal = FALSE, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
+                        selgroup <- gbasicdialog(title = paste0("Select Processing Layers -  ",svalue(prod_wid)," vers. ",svalue(vers_wid)), 
+                                                 parent = NULL, do.buttons = TRUE, horizontal = FALSE, handler = function(h,....) {
                           pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                           tmp_arr_bands <- array(data = 0 , dim = length(check_names))
                           tmp_arr_bands[pos_wid] <- 1
@@ -217,8 +218,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                             
                           }
                           
-                          # dispose(selgroup)			 # close layers selection child widget
-                          })
+                        })
                         
                         # widgets for band selection - original ----
                         cbox_main <- ggroup(container = selgroup, horizontal = FALSE)
@@ -244,29 +244,30 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           bands_wid_indexes <- gcheckboxgroup(items = check_names_indexes, checked = as.logical(check_wid_indexes),
                                                               container = cbox_indexes, use.table = FALSE)
                           band_indexes_space <- glabel(text = "", container = cbox_indexes)
-                          band_wid_newindex <- gbutton(text = "Add custom index",
+                          band_wid_newindex <- gbutton(text = "Add custom indexes",
                                                        handler = function(h,...) {
                                                          # Run addindex() function ----
-                                                         MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file, selprod = svalue(prod_wid), selvers = svalue(vers_wid))
-                                                         general_opts <- RJSONIO::fromJSON(previous_jsfile)
-                                                         pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
-                                                         tmp_arr_bands <- array(data = 0 , dim = length(check_names))
-                                                         tmp_arr_bands[pos_wid] <- 1
-                                                         GUI.env$temp_wid_bands <- tmp_arr_bands
-                                                         if (length(which(check_names_indexes != "") > 0)) {    # ? which indexes selected ? --> store in GUI.env$temp_wid_bands_indexes array
-                                                           pos_wid <- which(check_names_indexes %in% svalue(bands_wid_indexes))
-                                                           tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
-                                                           tmp_arr_ind[pos_wid] <- 1
-                                                           GUI.env$temp_wid_bands_indexes <- tmp_arr_ind
+                                                         addind = MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file, selprod = svalue(prod_wid), selvers = svalue(vers_wid))
+                                                         if (addind) {
+                                                           general_opts <- RJSONIO::fromJSON(previous_jsfile)
+                                                           pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
+                                                           tmp_arr_bands <- array(data = 0 , dim = length(check_names))
+                                                           tmp_arr_bands[pos_wid] <- 1
+                                                           GUI.env$temp_wid_bands <- tmp_arr_bands
+                                                           if (length(which(check_names_indexes != "") > 0)) {    # ? which indexes selected ? --> store in GUI.env$temp_wid_bands_indexes array
+                                                             pos_wid <- which(check_names_indexes %in% svalue(bands_wid_indexes))
+                                                             tmp_arr_ind <- array(data = 0 , dim = length(check_names_indexes))
+                                                             tmp_arr_ind[pos_wid] <- 1
+                                                             GUI.env$temp_wid_bands_indexes <- tmp_arr_ind
+                                                           }
+                                                           if (length(which(check_names_quality != "") > 0)) {    # ? which quality selected ? --> store in GUI.env$temp_wid_bands_quality array
+                                                             pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))
+                                                             tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
+                                                             tmp_arr_qual[pos_wid] <- 1
+                                                             GUI.env$temp_wid_bands_quality <- tmp_arr_qual
+                                                           }
+                                                            dispose(selgroup)
                                                          }
-                                                         if (length(which(check_names_quality != "") > 0)) {    # ? which quality selected ? --> store in GUI.env$temp_wid_bands_quality array
-                                                           pos_wid <- which(check_names_quality %in% svalue(bands_wid_quality))
-                                                           tmp_arr_qual <- array(data = 0 , dim = length(check_names_quality))
-                                                           tmp_arr_qual[pos_wid] <- 1
-                                                           GUI.env$temp_wid_bands_quality <- tmp_arr_qual
-                                                         }
-                                                         
-                                                          dispose(selgroup)
                                                        },
                                                        container = cbox_indexes, expand = FALSE)
                         }
@@ -448,10 +449,10 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   bbox_from_file <- gbutton(text = "Load Extent from a spatial file",
                             handler = function(h,...) {
                               choice <- try(gfile(type = "open", text = "Select a vector or raster file", # File selection widget
-                                              filter = list( "Spatial files" = list(patterns = c("*.shp","*.kml","*.tif","*.dat")), # TODO add formats to the lists!
-                                                             "Vector layers" = list(patterns = c("*.shp","*.kml")), # TODO add formats to the lists!
-                                                             "Raster layers" = list(patterns = c("*.tif","*.dat")),
-                                                             "All files" = list(patterns = "*"))), silent=TRUE)
+                                                  filter = list( "Spatial files" = list(patterns = c("*.shp","*.kml","*.tif","*.dat")), # TODO add formats to the lists!
+                                                                 "Vector layers" = list(patterns = c("*.shp","*.kml")), # TODO add formats to the lists!
+                                                                 "Raster layers" = list(patterns = c("*.tif","*.dat")),
+                                                                 "All files" = list(patterns = "*"))), silent=TRUE)
                               if (class(choice)!="try-error")  {if (length(choice) != 0){
                                 # Show window until the process had finished
                                 message("[",date(),"]" , " Retrieving the Extent, please wait...")
@@ -460,7 +461,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                 addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
                                 wait_window_lab <- glabel(text = paste("Retrieving the Extent, please wait..."), editable = FALSE,
                                                           container = wait_window)
-                             
+                                
                                 
                                 # Convert bbox coordinates in those of output projection
                                 out_proj_crs <- if (svalue(proj_wid) != "User Defined") {
@@ -500,7 +501,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   size(fake_lab) = list(height = 15)
   # Group to select which tiles should be downloaded ----
   spatial_group <- ggroup(container = Spatial_Frame, horizontal = TRUE)
-
+  
   
   tiles_group <- gframe(text = "<b><i> Required MODIS Tiles </i></b>", markup = TRUE,
                         container = spatial_group, horizontal = FALSE, expand = FALSE, pos = 0.5)
@@ -534,7 +535,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   font(start_x_lab) <-  font(start_y_lab)  <- list(family = "sans",weight = "bold")
   #	size(start_y_lab) = c(120,20)
   # 	size(start_y_wid) = size(end_y_wid) = size(end_y_lab) = size(start_y_start) = c(35,25)
-
+  
   if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$tiled == 0) {
     enabled(tiles_group) <- FALSE
   } else {
@@ -847,7 +848,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # Widgets for output folders selection
   #- ------------------------------------------------------------------------------- -#
   
-
+  
   # HDF output folder ----
   outfoldmod_frame <- gframe(text = "<span foreground='red' size='x-large'>Output Folder for Original HDF files download</span>", markup = TRUE, container = main_group, expand=TRUE, fill=TRUE)    			# Frame group
   outfoldmod_group <- ggroup(horizontal = TRUE, container = outfoldmod_frame, expand=TRUE, fill=TRUE)  				# Main group
@@ -906,7 +907,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     general_opts$sensor <- svalue(sens_wid)
     
     if (exists("temp_wid_bands", where = GUI.env)) {
-    
+      
       general_opts$bandsel <- GUI.env$temp_wid_bands			#retrieve selected bands
       
     }
@@ -1017,13 +1018,13 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
       # If the bounding box does not interrsect with the tiles, return an error
       if (!any(required_tiles %in% selected_tiles)) {
         GUI.env$check_save_opts <- gconfirm(paste("The selected tiles does not intersect the output bounding box. Do you want to automatically retrieve the required tiles?"),
-                                     handler = function(h,...) {
-                                       selected_tiles <<- required_tiles
-                                       general_opts$start_x <<- min(d_bbox_mod_tiled$H)
-                                       general_opts$end_x <<- max(d_bbox_mod_tiled$H)
-                                       general_opts$start_y <<- min(d_bbox_mod_tiled$V)
-                                       general_opts$end_y <<- max(d_bbox_mod_tiled$V)
-                                     }, title = "Warning")
+                                            handler = function(h,...) {
+                                              selected_tiles <<- required_tiles
+                                              general_opts$start_x <<- min(d_bbox_mod_tiled$H)
+                                              general_opts$end_x <<- max(d_bbox_mod_tiled$H)
+                                              general_opts$start_y <<- min(d_bbox_mod_tiled$V)
+                                              general_opts$end_y <<- max(d_bbox_mod_tiled$V)
+                                            }, title = "Warning")
       }
       
       # If not all the required tiles are selected, ask to select them
@@ -1085,7 +1086,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   }
   
   
-   but_group <- ggroup(container = main_group, horizontal = TRUE)
+  but_group <- ggroup(container = main_group, horizontal = TRUE)
   # 
   # start_but <- gbutton(text = "Start Processing", container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
   #   general_opts <- prepare_to_save_options(general_opts, GUI.env)
@@ -1117,12 +1118,12 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   load_but <- gbutton(text = "Load Options", container = but_group, handler = function(h,...){
     
     choice <- try(gfile(type = "open", text = "Select file for loading processing options...", initial.filename = getwd(),
-                    filter = list( "JSON files" = list(patterns=c("*.json")),
-                                   "text files" = list(mime.types = c("text/plain")),
-                                   "All files" = list(patterns = c("*")))), silent=TRUE)
+                        filter = list( "JSON files" = list(patterns=c("*.json")),
+                                       "text files" = list(mime.types = c("text/plain")),
+                                       "All files" = list(patterns = c("*")))), silent=TRUE)
     # choice <-try(rChoiceDialogs::tkchoose.files(), silent=TRUE)
     # choice <- try(file.choose(),silent=TRUE)
-
+    
     continue_load <- if (length(choice) == 0){ #if (class(choice)!="try-error")  {
       FALSE
     } else if (length(grep("\\.json$",choice))==0) {
@@ -1130,7 +1131,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     } else {
       TRUE
     }
-
+    
     if (continue_load) {
       
       general_opts <- RJSONIO::fromJSON(choice)  # load file and reset all widgets to values found in the loaded file
@@ -1189,8 +1190,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   save_but <- gbutton(text = "Save Options", container = but_group, handler = function(h,....) {
     choice <- gfile(type = "save", text = "Select file for saving processing options...", 
                     # initial.filename = file.path(getwd(),paste0('MODIStsp_', Sys.Date(),'.json')),
-                                   "text files" = list(mime.types = c("text/plain")),
-                                   "All files" = list(patterns = c("*")))
+                    "text files" = list(mime.types = c("text/plain")),
+                    "All files" = list(patterns = c("*")))
     choice <- paste0(gsub("\\.json$","",choice),".json") # add file extension if missing
     
     if (choice != ".json") {
