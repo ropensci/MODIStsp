@@ -44,7 +44,7 @@ There are currently some problems in installing MODIStsp via install\_github on 
 
 If it still doesn't work, manually installing all the dependencies should solve the issue. To do so, please try doing:
 
-`install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets2", "hash", "plyr", "raster", "RCurl",   "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators"))`
+`install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets", "hash", "plyr", "raster", "RCurl",   "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators"))`
 
 , then continue with standard `MODIStsp` installation.
 
@@ -72,14 +72,14 @@ Installation <a name="Installation"></a>
 
 ### On Windows
 
-1.  Install and load the `gWidgets2RGtk2` package:
+1.  Install and load the `gWidgetsRGtk2` package:
 
 ``` r
-install.packages("gWidgets2RGtk2")
-library(gWidgets2RGtk2)
+install.packages("gWidgetsRGtk2")
+library(gWidgetsRGtk2)
 ```
 
-    Upon loading the package, an error window will probably appear. **Donât worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library âGTK+â is not yet installed on your system and needs to be installed. To do so, press âOKâ. A new window dialog window will appear, asking if you want to install âGTK+â. Select âInstall GTK+â and then âOKâ. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
+Upon loading the package, an error window will probably appear. **Donât worry!** This is just signaling that *libatk-1.0-0.dll* is missing from your system. This is due to the fact that library âGTK+â is not yet installed on your system and needs to be installed. To do so, press âOKâ. A new window dialog window will appear, asking if you want to install âGTK+â. Select âInstall GTK+â and then âOKâ. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
 
 1.  Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 
@@ -96,15 +96,23 @@ install_github("lbusett/MODIStsp")
     -   Curl (required by package `curl`)
     -   GDAL &gt;= 1.6.3, PROJ.4 &gt;= 4.4.9 (required by package `rgdal`)
 
-    On Debian and Ubuntu-based systems, to install packages open a terminal and type
+    On *Debian and Ubuntu-based* systems, to install packages open a terminal and type
 
     ``` bash
-    sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcurl4-openssl-dev libgdal-dev libproj-dev
+    sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
+    libgtk2.0-dev libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev
     ```
 
-2.  From R install the libraries `gWidgets2RGtk2` and `devtools`:
+    On *rpm-base systems*, to install packages open a terminal and type
 
-        install.packages(c("devtools","gWidgets2RGtk2"))
+    ``` bash
+    sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
+    glib2-devel libcurl4-devel gdal-devel proj-devel
+    ```
+
+2.  From R install the libraries `gWidgetsRGtk2` and `devtools`:
+
+        install.packages(c("devtools","gWidgetsRGtk2"))
 
 3.  Install MODIStsp package from GitHub (you'll need to have the "devtools" package loaded):
 
@@ -116,10 +124,10 @@ install_github("lbusett/MODIStsp")
 #### Dependencies <a name="Dependencies"></a>
 
 MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:
-`bitops` (&gt;= 1.9.6), `data.table` (&gt;= 1.9.6), `gdalUtils` (&gt;= 2.0.1.7), `gWidgets2` (&gt;= 1.0-7), `hash` (&gt;= 2.2.6), `plyr` (&gt;= 1.8.3), `raster` (&gt;= 2.5-2), `RCurl` (&gt;= 1.95-4.8), `rgdal` (&gt;= 1.1-8), `rgeos` (&gt;=0.3-8), `xts` (&gt;= 1.0-10), `sp` (&gt;= 1.2-2), `stringr` (&gt;= 1.0.0), `XML` (&gt;= 3.98-1.1), `xml2` (&gt;= 0.1.2)
+`bitops` (&gt;= 1.9.6), `data.table` (&gt;= 1.9.6), `gdalUtils` (&gt;= 2.0.1.7), `gWidgets` (&gt;= 1.0-7), `hash` (&gt;= 2.2.6), `plyr` (&gt;= 1.8.3), `raster` (&gt;= 2.5-2), `RCurl` (&gt;= 1.95-4.8), `rgdal` (&gt;= 1.1-8), `rgeos` (&gt;=0.3-8), `xts` (&gt;= 1.0-10), `sp` (&gt;= 1.2-2), `stringr` (&gt;= 1.0.0), `XML` (&gt;= 3.98-1.1), `xml2` (&gt;= 0.1.2)
 
 , while the following are suggested:
-`knitr`, `rmarkdown`, `png`, `grid`,`gWidgets2RGtk2` (&gt;= 1.0-5).
+`knitr`, `rmarkdown`, `png`, `grid`,`gWidgetsRGtk2` (&gt;= 1.0-5).
 
 Running the tool
 ================
@@ -395,6 +403,6 @@ GDAL is maintained updated to the latest version as binary package within the co
 
 Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter `--with-hdf4` to the `configure` instruction).
 
-<b id="f1">1</b>: If you encounter problems installing the gWidgets2RGtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help you!
+<b id="f1">1</b>: If you encounter problems installing the gWidgetsRGtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help you!
 
 <b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press âokâ and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the *GDAL\_DATA* environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)) 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!
