@@ -30,7 +30,7 @@ Imports:
     rgeos (>= 0.3-8), xts (>= 0.9-7), XML (>= 3.98-1.1), xml2 (>= 0.1.2), sp (>= 1.2-2), 
     stringr (>= 1.0.0), httr (>= 1.1.0), RJSONIO (>= 1.3.0)
 Suggests:
-    gWidgetsRGtk2 (>= 1.0-5), knitr, rmarkdown, png, grid
+    gWidgetsRGtk2 (>= 0.0-83), knitr, rmarkdown, png, grid
 SystemRequirements:
     Cairo >= 1.0.0, ATK (>= 1.10.0), Pango (>= 1.10.0), GTK+ (>= 2.8.0), 
     GLib (>= 2.8.0), Curl, GDAL (>= 1.6.3), PROJ.4 (>= 4.4.9)
