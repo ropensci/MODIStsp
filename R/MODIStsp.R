@@ -72,18 +72,18 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   # On interactive execution, load Rgtk2
   if (gui) {
     if (!requireNamespace("gWidgets2RGtk2", quietly = TRUE)) {
-      #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
+      #inst_gw <- utils::winDialog("Library 'gWidgets2Rgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
       message("Library 'gWidgets2RGtk2' is not installed. It is required to run MODIStsp! 
               \n\nDo you want to install it now?", type = " y / n")
       inst_gw <- readline()
       if (inst_gw =="y") {
-       install.packages("gWidgets2RGtk2")
+        install.packages("gWidgets2RGtk2")
       } else {
         stop("MODIStsp can not work in Interactive mode withouth gWidgets2RGtk2 ! Exiting !")
       }
       
     }
-    # requireNamespace("gWidgetsRGtk2")
+    # requireNamespace("gWidgets2RGtk2")
     options("guiToolkit" = "RGtk2")
   }
   
@@ -93,8 +93,10 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     welcome_text <- "Welcome to MODIStsp!\n\nWe will now search for a valid GDAL installation - please wait\n(this will happen only once)"
     if (gui) {
       welcome_win <- gwindow(title = "Welcome", width = 400, height = 100)
-      welcome_lab <- glabel(welcome_text, editable = FALSE, container = welcome_win)
-      # mess <- gmessage(title = "Welcome", welcome_text, do.buttons = FALSE)
+      welcome_lab <- glabel(text = welcome_text , container = welcome_win, editable = FALSE)
+      font(welcome_lab) <-  list(family = "sans", style = "italic", size = 10, color = "green")
+      Sys.sleep(0.05)
+      message("[",date(),"]",welcome_text)
     } else {
       message("[",date(),"]",welcome_text)
     }
@@ -182,8 +184,11 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   } else {FALSE}) {
     mess_text <- "Waiting while reading the MODIS products list..."
     if (gui) {
-      mess     <- gwindow(title = "Please wait...", width = 400, height = 40)
-      mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
+      
+       mess     <- gwindow(title = "Please wait...", width = 400, height = 40)
+       mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
+       Sys.sleep(0.05)
+       message(mess_text)
     } else {message(mess_text)}
     MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file )
     load(prodopts_file)

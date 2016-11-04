@@ -23,7 +23,7 @@
 #'  compute it are the names of the bands: b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.
 #' @param new_indexnodata_out (optional): nodata value to assign to the rasters containing the new index
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)
-#' @import gWidgets2
+#' @import gWidgets
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom stringr str_detect
 #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index
@@ -55,15 +55,15 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
   
   # Initialization and retrieval of parameters ----
   if (gui) {
-    if (!requireNamespace("gWidgets2RGtk2", quietly = TRUE)) {
+    if (!requireNamespace("gWidgetsRGtk2", quietly = TRUE)) {
       #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
       message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp! 
               \n\nDo you want to install it now?", type = " y / n")
       inst_gw <- readline()
       if (inst_gw =="y") {
-        install.packages("gWidgets2RGtk2")
+        install.packages("gWidgetsRGtk2")
       } else {
-        stop("MODIStsp can not work in Interactive mode withouth gWidgets2RGtk2 ! Exiting !")
+        stop("MODIStsp can not work in Interactive mode withouth gWidgetsRGtk2 ! Exiting !")
       }
       
     }
@@ -277,12 +277,13 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
       # Issue error warnings if something went wrong !!!!
       
       switch(as.character(catch_err), 
-             "0" = svalue(notes_lab) <- format("The new Spectral Index was correctly added! To use it, dismiss this window, then 
-                                                 Close and Re-open the 'Select Processing Layer' Window.", justify = "centre"),
+             "0" = svalue(notes_lab) <- format("The new Spectral Index was correctly added! To use it, dismiss this window,\n then Close and Re-open the 'Select Processing Layer' Window.", justify = "centre"),
              "1" = svalue(notes_lab) <- format(paste0("ERROR ! The Formula of the new Index is not computable. Please check it !\nValid Band Names are: ", paste(avail_refbands,collapse = ", "),"."), justify = "centre"),
-             "2" = svalue(notes_lab) <- format("ERROR ! The Index Acronym and/or its full name are already present. Please specify different ones.", justify = "centre"),
+             "2" = svalue(notes_lab) <- format("ERROR ! The Index Acronym and/or its full name are already present.\n Please specify different ones.", justify = "centre"),
              "3" = svalue(notes_lab) <- format("ERROR ! Please provide valid values for the Index Acronym, its fullname and the Formula.", justify = "centre"))
-      font(notes_lab)   <- list(family = "sans", style = "italic", size = 9, color = "red")
+      # font(notes_lab) <- list(family = "sans", style = "italic", size = 9, color = 'blue')
+      ifelse(as.character(catch_err) == "0", font(notes_lab) <- list(family = "sans", style = "italic", size = 9, color = 'green'), 
+             font(notes_lab) <- list(family = "sans", style = "italic", size = 9, color = 'red'))
     })
     size(set_but) <- list(width = 400)
     font(set_but) <- list(family = "monospace", size = 10 , color = "red", weight = "bold")
