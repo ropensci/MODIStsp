@@ -1,6 +1,6 @@
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
-#  install.packages("gWidgets2Rgtk2")
-#  library(gWidgets2Rgtk2)
+#  install.packages("gWidgetsRgtk2")
+#  library(gWidgetsRgtk2)
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  install.packages("devtools")
@@ -8,7 +8,7 @@
 #  install_github("lbusett/MODIStsp")
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
-#  install.packages(c("devtools","gWidgets2Rgtk2"))
+#  install.packages(c("devtools","gWidgetsRgtk2"))
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(devtools)
