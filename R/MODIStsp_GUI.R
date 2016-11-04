@@ -457,8 +457,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                 addHandlerUnrealize(wait_window, handler = function(h,...) {return(TRUE)})
                                 wait_window_lab <- glabel(text = paste("Retrieving the Extent, please wait..."), editable = FALSE,
                                                           container = wait_window)
-                                
-                                
+                                Sys.sleep(0.05)
+
                                 # Convert bbox coordinates in those of output projection
                                 out_proj_crs <- if (svalue(proj_wid) != "User Defined") {
                                   out_proj_list[[svalue(proj_wid)]]
@@ -469,7 +469,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                 # Create the bounding box in the chosen projection retrieving it from the specified file
                                 bbox_out <- try(bbox_from_file(file_path = choice,out_crs = out_proj_crs),silent = TRUE)
                                 if (class(bbox_out) == "try-error") {
-                                  gmessage(bbox_out, title = "Error Detected !")
+                                  gmessage(bbox_out, title = "Error Detected!")
                                 } else {
                                   # set bbox according to shape
                                   svalue(output_ULeast_wid) <- formatC(bbox_out[1,1], digits = ifelse(units == "deg",4,1), format = "f")

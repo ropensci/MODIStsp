@@ -94,7 +94,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     if (gui) {
       welcome_win <- gwindow(title = "Welcome", width = 400, height = 100)
       welcome_lab <- glabel(text = welcome_text , container = welcome_win, editable = FALSE)
-      font(welcome_lab) <-  list(family = "sans", style = "italic", size = 10, color = "green")
+      font(welcome_lab) <-  list(family = "sans", style = "italic", size = 10)
       Sys.sleep(0.05)
       message("[",date(),"]",welcome_text)
     } else {
@@ -184,7 +184,6 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   } else {FALSE}) {
     mess_text <- "Waiting while reading the MODIS products list..."
     if (gui) {
-      
        mess     <- gwindow(title = "Please wait...", width = 400, height = 40)
        mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
        Sys.sleep(0.05)

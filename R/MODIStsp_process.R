@@ -96,6 +96,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   if (gui) {
     mess <- gwindow(title = "Processing Status", width = 400, height = 40)
     mess_lab <- glabel(text = paste("---",mess_text,"---"), editable = FALSE, container = mess)
+    Sys.sleep(0.05)
   } else {
     message("[",date(),"] ",mess_text)
   }
