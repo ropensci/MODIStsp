@@ -18,7 +18,7 @@
 #' @importFrom sp CRS
 #' @importFrom utils browseURL
 #' @importFrom grDevices dev.new
-#' @import gWidgets2
+#' @import gWidgets
 
 MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir, previous_jsfile, prodopts_file){
   
@@ -30,13 +30,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   #  Start Building the GUI
   #- ------------------------------------------------------------------------------- -#
   
-  main_win <- gbasicdialog(title = paste0("MODIStsp - v. ", packageVersion("MODIStsp")), parent = NULL, do.buttons = TRUE, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
-    general_opts <- prepare_to_save_options(general_opts, GUI.env)
-    if (GUI.env$check_save_opts) {					# If check passed, save previous file and return else, re-run the GUI
-      write(RJSONIO::toJSON(general_opts),previous_jsfile)
-      GUI.env$Quit <- FALSE
-    } 
-  })
+  main_win <- gbasicdialog(title = paste0("MODIStsp - v. ", packageVersion("MODIStsp")), parent = NULL, do.buttons = FALSE, 
+                           handler = function(h,....) {})
   
   main_frame1 <- ggroup(container = main_win, horizontal = TRUE, expand = FALSE, use.scrollwindow=scrollWindow)
   main_frame2 <- ggroup(container = main_frame1, horizontal = FALSE, expand = FALSE)
@@ -1087,32 +1082,28 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   
   
   but_group <- ggroup(container = main_group, horizontal = TRUE)
-  # 
-  # start_but <- gbutton(text = "Start Processing", container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
-  #   general_opts <- prepare_to_save_options(general_opts, GUI.env)
-  #   if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
-  #     write(RJSONIO::toJSON(general_opts),previous_jsfile)
-  #     # assign("Quit", F, envir = globalenv()) # If "Start", set "Quit to F
-  #     GUI.env$Quit <- FALSE
-  #     # rm(GUI.env$temp_wid_bands, envir = globalenv())
-  #     # rm(GUI.env$temp_wid_bands_indexes, envir = globalenv())
-  #     # rm(GUI.env$temp_wid_bands_indexes, envir = globalenv())
-  #     dispose(main_win)
-  #     
-  #   }
-  # })
-  # 
-  # # On "Quit", exit
-  # quit_but <- gbutton(text = "Quit Program", container = but_group, handler = function(h,...) { # If "Quit", set "Quit to T and exit
-  #   # assign("Quit", TRUE, envir = globalenv())
-  #   GUI.env$Quit <- TRUE
-  #   
-  #   dispose(main_win)
-  #   
-  #   
-  # })
-  # 
-  # addSpring(but_group)
+   
+  start_but <- gbutton(text = "Start Processing", container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
+    browser()
+    general_opts <- prepare_to_save_options(general_opts, GUI.env)
+    if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
+      write(RJSONIO::toJSON(general_opts),previous_jsfile)
+      GUI.env$Quit <- FALSE
+      dispose(main_win)
+    }
+  })
+
+  # On "Quit", exit
+  quit_but <- gbutton(text = "Quit Program", container = but_group, handler = function(h,...) { # If "Quit", set "Quit to T and exit
+    # assign("Quit", TRUE, envir = globalenv())
+    GUI.env$Quit <- TRUE
+
+    dispose(main_win)
+
+
+  })
+
+  addSpring(but_group)
   
   # On "Load", ask for a old options file and load it --------
   load_but <- gbutton(text = "Load Options", container = but_group, handler = function(h,...){

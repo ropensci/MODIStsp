@@ -21,7 +21,7 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @export
-#' @import gWidgets2
+#' @import gWidgets
 #' @importFrom hash hash
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom rgdal getGDALVersionInfo
@@ -64,26 +64,26 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   
   MODIStsp.env <- new.env()
   MODIStsp.env$MODIStsp_dir <- system.file(package = "MODIStsp")
-  suppressWarnings("gWidgets2RGtk2")
+  suppressWarnings("gWidgetsRGtk2")
   #- ------------------------------------------------------------------------------- -#
   #  Initialize project
   #- ------------------------------------------------------------------------------- -#
   # On interactive execution, load Rgtk2
   # On interactive execution, load Rgtk2
   if (gui) {
-    if (!requireNamespace("gWidgets2RGtk2", quietly = TRUE)) {
-      #inst_gw <- utils::winDialog("Library 'gWidgets2Rgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
-      message("Library 'gWidgets2RGtk2' is not installed. It is required to run MODIStsp! 
+    if (!requireNamespace("gWidgetsRGtk2", quietly = TRUE)) {
+      #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
+      message("Library 'gWidgetsRGtk2' is not installed. It is required to run MODIStsp! 
               \n\nDo you want to install it now?", type = " y / n")
       inst_gw <- readline()
       if (inst_gw =="y") {
-        install.packages("gWidgets2RGtk2")
+        install.packages("gWidgetsRGtk2")
       } else {
-        stop("MODIStsp can not work in Interactive mode withouth gWidgets2RGtk2 ! Exiting !")
+        stop("MODIStsp can not work in Interactive mode withouth gWidgetsRGtk2 ! Exiting !")
       }
       
     }
-    # requireNamespace("gWidgets2RGtk2")
+    # requireNamespace("gWidgetsRGtk2")
     options("guiToolkit" = "RGtk2")
   }
   
