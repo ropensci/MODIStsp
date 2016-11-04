@@ -157,7 +157,7 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
         catch_err <- 1  # error 1 again: index is ok, but not computable for the currently selected product so we don't save it !
       } 
     }
-    print(catch_err)
+    
     attr(catch_err,"req_bands") <- req_bands
     return(catch_err)
     
@@ -226,27 +226,30 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
     
     main_win <- gbasicdialog(title = "Insert the new Spectral Index information and formula", parent = NULL, do.buttons = FALSE,
                              visible = TRUE, spacing = 10, handler = function(h,...) {# If "Start" pressed, retrieve selected values and save in previous file
-                               return(TRUE)  
                              })
     
     main_group <- ggroup(container = main_win, horizontal = FALSE, expand = TRUE)
     
     indexbandname_group <- ggroup(container = main_group, horizontal = T, expand = TRUE)
-    indexbandname_label <- glabel(text = "<span weight = 'bold'> Spectral Index Acronym (e.g., SR) </span>", markup = TRUE, container = indexbandname_group)
-    size(indexbandname_label) <- c(400,20)
+    indexbandname_label <- glabel(text = "Spectral Index Acronym (e.g., SR)", markup = TRUE, container = indexbandname_group)
+    size(indexbandname_label) <- c(500,20)
+    font(indexbandname_label) <- list(family = "sans", size = 10 , weight = "bold")
     sel_indexbandname <- gedit(text = new_indexbandname, label = "Please Insert a valid Proj4 string        ",
                                container = indexbandname_group, size = 800, horizontal = TRUE)
     
     indexbandfullname_group <- ggroup(container = main_group, horizontal = TRUE, expand = TRUE)
-    indexbandfullname_label <- glabel(text = "<span weight = 'bold'> Spectral Index Full Name (e.g., Simple Ratio (b2_NIR/b1_Red) )</span>", markup = TRUE,
+    indexbandfullname_label <- glabel(text = "Spectral Index Full Name (e.g., Simple Ratio (b2_NIR/b1_Red))", markup = TRUE,
                                       container = indexbandfullname_group)
-    size(indexbandfullname_label) <- c(400,20)
+    size(indexbandfullname_label) <- c(500,20)
+    font(indexbandfullname_label) <- list(family = "sans", size = 10 , weight = "bold")
+    
     sel_indexbandfullname <- gedit(text = new_indexfullname, container = indexbandfullname_group, size = 800, horizontal = TRUE)
     
     indexformula_group <- ggroup(container = main_group, horizontal = TRUE, expand = TRUE)
-    indexformula_label <- glabel(text = "<span weight = 'bold'>  Spectral Index Formula (e.g., (b2_NIR/b1_Red) ) </span>", markup = TRUE,
+    indexformula_label <- glabel(text = "Spectral Index Formula (e.g., (b2_NIR/b1_Red) )", markup = TRUE,
                                  container = indexformula_group)
-    size(indexformula_label) <- c(400,20)
+    size(indexformula_label) <- c(500,20)
+    font(indexformula_label) <- list(family = "sans", size = 10 , weight = "bold")
     sel_indexformula <- gedit(text = new_indexformula, container = indexformula_group, size = 800, horizontal = TRUE)
     
     # help_lab <- glabel(text = paste0("Valid band names for this product: ", paste(avail_refbands,collapse = ", ")), container = main_group, size = 800, horizontal = TRUE)
@@ -285,28 +288,28 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
       ifelse(as.character(catch_err) == "0", font(notes_lab) <- list(family = "sans", style = "italic", size = 9, color = 'green'), 
              font(notes_lab) <- list(family = "sans", style = "italic", size = 9, color = 'red'))
     })
-    size(set_but) <- list(width = 400)
-    font(set_but) <- list(family = "monospace", size = 10 , color = "red", weight = "bold")
+    
+    size(set_but) <- list(width = 500)
+    font(set_but) <- list(family = "sans", size = 10 , color = "red", weight = "bold")
     addSpace(main_group, 3)
     notes_frame <- gframe(text = "--- Hints ---", pos = 0.5, container = main_group, horizontal = TRUE, expand = TRUE)
     notes_group <- ggroup(container = notes_frame,  expand = TRUE, horizontal = FALSE)
     notes_lab   <- glabel(text = format(paste0("Valid band names are: ", paste(avail_refbands,collapse = ", ")), justify = "centre"), 
-                          container = notes_group, horizontal = TRUE, editable = FALSE, align = "right")
+                          container = notes_group, horizontal = TRUE, editable = FALSE)
     size(notes_lab) <- c(600,35)
-    notes_lab2   <- glabel(text = format("Dismiss the window using the 'x' on the right corner when you are done !", justify = "left"), 
-                           container = main_group, horizontal = TRUE, editable = FALSE)
-    font(notes_lab)  <- list(family = "monospace",  size = 9, color = "blue")
-    font(notes_lab2) <- list(family = "monospace", size = 8 , style = "italic")
-    # 
-    # # On quit, do nothing
-    # quit_but <- gbutton(text = if (exists("Quit")) {
-    #   "Cancel"
-    # } else {
-    #   "Quit"
-    # }, container = but_group, handler = function(h,...){ # If "Quit" exit
-    #   dispose(main_win)
-    # })
+    # notes_lab2   <- glabel(text = format("Dismiss the window using the 'x' on the right corner when you are done !", justify = "left"), 
+    #                        container = main_group, horizontal = TRUE, editable = FALSE)
+    font(notes_lab)  <- list(family = "sans",  size = 9, color = "blue")
+    # font(notes_lab2) <- list(family = "sans", size = 8 , style = "italic")
     
+    addSpring(but_group)
+    finish_but <- gbutton(text = "Done !", container = but_group, handler = function(h,...) {
+      dispose(main_win)
+      gmessage("ReOpen the 'Select Layers' window to use the new index(es)", title = "Done !")
+      return(TRUE)
+    }
+    )
+    font(finish_but)  <- list(family = "sans",  weight = "bold")
     visible(main_win, set = TRUE)
     
     # end of gui actions ----
@@ -323,7 +326,7 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
                    new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
                    new_indexnodata_out = new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
                    prod_opt_list = prod_opt_list, previous_jsfile = previous_jsfile)
-      message("The new Spectral Index was correctly added! It will be available from the next running of MODIStsp().")
+      message("The new Index was correctly added! It will be available from the next running of MODIStsp().")
     } else if (catch_err == 1) {
       stop(paste0("The formula of the new index is not computable for this product. Please check it (Valid band names or this product are: ",paste(avail_refbands,collapse = ", "),"."))
     } else if (catch_err == 2) {

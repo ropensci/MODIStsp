@@ -18,7 +18,7 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
 #' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom gWidgets2 gconfirm
+#' @importFrom gWidgets gconfirm
 #' @importFrom RCurl getURL
 #' @importFrom httr GET content authenticate timeout
 #' @importFrom stringr str_extract str_pad str_split

@@ -57,7 +57,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # Widgets for product selection and bands selection
   #- ------------------------------------------------------------------------------- -#
   satprod_frame <- gframe(text = "<span foreground='red' size='x-large'>MODIS Product, Platform and Layers selection</span>",
-                          markup = TRUE, horizontal = FALSE, container = main_group)
+                          markup = TRUE, horizontal = FALSE, container = main_group, spacing = 5)
   
   # set dummy global variables holding the initial values of selected bands
   GUI.env$temp_wid_bands         <- general_opts$bandsel
@@ -68,9 +68,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # Widgets for category selection
   #- ------------------------------------------------------------------------------- -#
   satprod1_group <- ggroup(horizontal = TRUE, container = satprod_frame)
-  cat_label <- glabel(text = "Category:", container = satprod1_group, align = "left")
+  cat_label <- glabel(text = "Category:", container = satprod1_group, editable = FALSE)
   size(cat_label) <- list(width = 100)
-  cat_wid <- gcombobox(items = unique(mod_prod_cat$cat), container = satprod1_group, horizontal = TRUE,
+  cat_wid <- gdroplist(items = unique(mod_prod_cat$cat), container = satprod1_group, horizontal = TRUE,
                        selected = match(sel_cat, unique(mod_prod_cat$cat)),
                        handler = function(h,...) {
                          
@@ -103,7 +103,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                          
                          GUI.env$temp_wid_bands <- GUI.env$temp_wid_bands_indexes <- GUI.env$temp_wid_bands_quality <- 0
                        })
-  size(cat_wid) <- list(width=325)
+  size(cat_wid) <- list(width=335, height = 30)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Product selection
@@ -111,7 +111,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   addSpring(satprod1_group)
   prod_label <- glabel(text = "Product:", container = satprod1_group)
   
-  prod_wid <- gcombobox(items = mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)], 
+  prod_wid <- gdroplist(items = mod_prod_list[mod_prod_cat$cat==svalue(cat_wid)], 
                         container = satprod1_group, horizontal = TRUE,
                         selected = match(general_opts$sel_prod, mod_prod_list[mod_prod_cat$cat == svalue(cat_wid)]),
                         handler = function(h,...) {
@@ -140,22 +140,21 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           # reset dummy variables for band selection to 0 on product change
                           GUI.env$temp_wid_bands <- GUI.env$temp_wid_bands_indexes <- GUI.env$temp_wid_bands_quality <- 0
                         })
-  size(prod_wid) <- list(width=325, height = 25)
-  
+  size(prod_wid)   <- list(width=325, height = 30)
   font(prod_label) <- font(cat_label) <- list(family = "sans",weight = "bold")
   
   
-  fake_group = ggroup(container = satprod_frame)
-  fake_lab = glabel(text = " ", container = fake_group)
-  size(fake_lab) = list(height = 3)
-  
+  # fake_group = ggroup(container = satprod_frame)
+  # fake_lab = glabel(text = " ", container = fake_group)
+  # size(fake_group) <- list(width=325, height = 0.1)
+  # 
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Sensor selection
   #- ------------------------------------------------------------------------------- -#
   satprod2_group <- ggroup(horizontal = TRUE, container = satprod_frame)
   
   # addSpace(satprod_frame, 20, horizontal = TRUE)
-  sens_label <- glabel(text = " Platform:", container = satprod2_group, align = 'left')
+  sens_label <- glabel(text = " Platform:", container = satprod2_group)
   size(sens_label) <- list(width = 100)
   sens_wid <- gcombobox(items = c("Terra"), container = satprod2_group, text = "Select Platform", selected = 1)
   if (prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$combined == 1) {
@@ -166,7 +165,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   }
   size(sens_wid) <- list(width = 150)
   
-  addSpace(satprod2_group, 7)
+  addSpace(satprod2_group, 5)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Version selection
@@ -179,13 +178,14 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                           GUI.env$temp_wid_bands <- GUI.env$temp_wid_bands_indexes <- GUI.env$temp_wid_bands_quality <- 0
                         })
   size(vers_wid) <- list(width = 100)
+  addSpace(satprod2_group, 1)
   
-  addSpace(satprod2_group,16)
+  addSpring(satprod2_group)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Layers selection
   #- ------------------------------------------------------------------------------- -#
-  band_label <- glabel(text = "Processing layers:", container = satprod2_group)
+  band_label <- glabel(text = "Processing Layers:", container = satprod2_group)
   band_wid <- gbutton(text = "   Click To Select   ",				# Child widget for processing bands selection
                       handler = function(h,....) {
                         
@@ -243,7 +243,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                                        handler = function(h,...) {
                                                          # Run addindex() function ----
                                                          addind = MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file, selprod = svalue(prod_wid), selvers = svalue(vers_wid))
-                                                         if (addind) {
+                                                         
+                                                         # if (addind ==TRUE) {
                                                            general_opts <- RJSONIO::fromJSON(previous_jsfile)
                                                            pos_wid <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                                                            tmp_arr_bands <- array(data = 0 , dim = length(check_names))
@@ -261,8 +262,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                                              tmp_arr_qual[pos_wid] <- 1
                                                              GUI.env$temp_wid_bands_quality <- tmp_arr_qual
                                                            }
-                                                            dispose(selgroup)
-                                                         }
+                                                           dispose(selgroup)
+                                                         # }
                                                        },
                                                        container = cbox_indexes, expand = FALSE)
                         }
@@ -1084,7 +1085,6 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   but_group <- ggroup(container = main_group, horizontal = TRUE)
    
   start_but <- gbutton(text = "Start Processing", container = but_group, handler = function(h,....) {# If "Start" pressed, retrieve selected values and save in previous file
-    browser()
     general_opts <- prepare_to_save_options(general_opts, GUI.env)
     if (GUI.env$check_save_opts) {					# If check passed, save previous file and return
       write(RJSONIO::toJSON(general_opts),previous_jsfile)
@@ -1193,7 +1193,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     }
   })
   
-  visible(main_win) ## show the selection GUI
+  visible(main_win, set = TRUE) ## show the selection GUI
   return(GUI.env$Quit)
   
 }  # END
