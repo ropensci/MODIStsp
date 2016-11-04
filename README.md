@@ -1,6 +1,6 @@
 
--   [News !](#news)
 -   [MODIStsp <a name="MODIStsp"></a>](#modistsp)
+-   [News !](#news)
 -   [Installation <a name="Installation"></a>](#installation)
     -   [On Windows](#on-windows)
     -   [On Linux systems](#on-linux-systems)
@@ -17,16 +17,23 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg)
 
+MODIStsp <a name="MODIStsp"></a>
+================================
+
+MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.
+
+An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (*Click on "Raw" at the beginning of the document to download the pdf file*)
+
+An article about `MODIStsp` was also recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020).
+
+**Solutions to common problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/MODIStsp-FAQ)**
+
+**Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
+
 News !
 ======
 
--   **15/09/2016 - MODIStsp paper published !**
-
-An article about `MODIStsp` was recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020). You can cite it as:
-
-L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series, Computers & Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004, <http://dx.doi.org/10.1016/j.cageo.2016.08.020>.
-
--   **01/09/2016 - MODIS collection 006 **
+-   **01/09/2016 - MODIS collection 006**
 
 NASA recently switched to provision of Collection 6 datasets for most Land Products. At the moment, `MODIStsp` stable release only allows download for Collection 5 datasets. If you want to test the download of collection 6 datasets, please use the "devel" branch (follow instructions below; at point 3 use the command `install_github("lbusett/MODIStsp", ref="devel")`). Note that this is development branch, so do not hexitate to report us any potential problem. **Stable support for Collection 6 will be added in the next MODIStsp release!**
 
@@ -54,17 +61,6 @@ If you still don't succedd, please contact us !
 
 Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of `MODIStsp` will no longer work ! Starting from v.1.2.2, you can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: <https://urs.earthdata.nasa.gov/profile>.
 
-MODIStsp <a name="MODIStsp"></a>
-================================
-
-MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.
-
-An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (*Click on "Raw" at the beginning of the document to download the pdf file*)
-
-**Solutions to common problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/MODIStsp-FAQ)**
-
-**Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
-
 Installation <a name="Installation"></a>
 ========================================
 
@@ -79,7 +75,7 @@ install.packages("gWidgetsRGtk2")
 library(gWidgetsRGtk2)
 ```
 
-Upon loading the package, an error window will probably appear. **Donât worry!** This is just signaling that *libatk-1.0-0.dll* is missing from your system. This is due to the fact that library âGTK+â is not yet installed on your system and needs to be installed. To do so, press âOKâ. A new window dialog window will appear, asking if you want to install âGTK+â. Select âInstall GTK+â and then âOKâ. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
+Upon loading the package, an error window will probably appear. **Don't worry!** This is just signaling that *libatk-1.0-0.dll* is missing from your system. This is due to the fact that library "GTK+ is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK"â. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
 
 1.  Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 
@@ -124,7 +120,7 @@ install_github("lbusett/MODIStsp")
 #### Dependencies <a name="Dependencies"></a>
 
 MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:
-`bitops` (&gt;= 1.9.6), `data.table` (&gt;= 1.9.6), `gdalUtils` (&gt;= 2.0.1.7), `gWidgets` (&gt;= 1.0-7), `hash` (&gt;= 2.2.6), `plyr` (&gt;= 1.8.3), `raster` (&gt;= 2.5-2), `RCurl` (&gt;= 1.95-4.8), `rgdal` (&gt;= 1.1-8), `rgeos` (&gt;=0.3-8), `xts` (&gt;= 1.0-10), `sp` (&gt;= 1.2-2), `stringr` (&gt;= 1.0.0), `XML` (&gt;= 3.98-1.1), `xml2` (&gt;= 0.1.2)
+`bitops` (&gt;= 1.9.6), `data.table` (&gt;= 1.9.6), `gdalUtils` (&gt;= 2.0.1.7), `gWidgets` (&gt;= 0.0-54), `hash` (&gt;= 2.2.6), `plyr` (&gt;= 1.8.3), `raster` (&gt;= 2.5-2), `RCurl` (&gt;= 1.95-4.8), `rgdal` (&gt;= 1.1-8), `rgeos` (&gt;=0.3-8), `xts` (&gt;= 1.0-10), `sp` (&gt;= 1.2-2), `stringr` (&gt;= 1.0.0), `XML` (&gt;= 3.98-1.1), pacman, `xml2` (&gt;= 0.1.2), `xts`
 
 , while the following are suggested:
 `knitr`, `rmarkdown`, `png`, `grid`,`gWidgetsRGtk2` (&gt;= 1.0-5).
@@ -186,7 +182,7 @@ Provided information (e.g., correct bandnames, computable formula, etc...) is au
 
 Allows to specify which download method should be used. Available choices are:
 
-1.  **http**: download through ftp from NASA lpdaac http archive (<http://e4ftl01.cr.usgs.gov>). This requires providing a user name and password, which can be obtained by registrering an account at the address <https://urs.earthdata.nasa.gov/profile>;
+1.  **http**: download through ftp from NASA lpdaac http archive (<http://e4ftl01.cr.usgs.gov>). This **requires providing a user name and password**, which can be obtained by registrering an account at the address <https://urs.earthdata.nasa.gov/profile>;
 
 2.  **ftp**: download from NASA ftp archive (<ftp://ladsweb.nascom.nasa.gov/>);
 
