@@ -205,9 +205,10 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
           tmp_indexes_fullnames <- c(as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_fullnames,new_indexfullname)
           tmp_indexes_formulas <- c(as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_formulas,new_indexformula)
           tmp_indexes_nodata_out <- c(as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_nodata_out,new_indexnodata_out)
-          general_opts$custom_indexes[[prod]][[vers]] <- list("indexes_bandnames" = tmp_indexes_bandnames,
-                                                              "indexes_fullnames"= tmp_indexes_fullnames,
-                                                              "indexes_formulas" = tmp_indexes_formulas,
+          
+          general_opts$custom_indexes[[prod]][[vers]] <- list("indexes_bandnames"  = tmp_indexes_bandnames,
+                                                              "indexes_fullnames"  =  tmp_indexes_fullnames,
+                                                              "indexes_formulas"   =  tmp_indexes_formulas,
                                                               "indexes_nodata_out" = tmp_indexes_nodata_out)
           rm(tmp_indexes_bandnames,tmp_indexes_fullnames,tmp_indexes_formulas,tmp_indexes_nodata_out)
         }
@@ -217,7 +218,7 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
     # Save the products list and the chars of the products in previous file
     write(RJSONIO::toJSON(general_opts),previous_jsfile)
     
-    return(NULL)
+    return(general_opts)
     
   } # end of save_formula()
   
@@ -281,13 +282,13 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
       # Issue error warnings if something went wrong !!!!
       
       switch(as.character(catch_err), 
-             "0" = svalue(notes_lab) <- format("The new Spectral Index was correctly added! To use it, dismiss this window,\n then Close and Re-open the 'Select Processing Layer' Window.", justify = "centre"),
+             "0" = svalue(notes_lab) <- format("The new Spectral Index was correctly added! To use it, click 'DONE', then \nre-open the 'Select Processing Layer' Window.", justify = "centre"),
              "1" = svalue(notes_lab) <- format(paste0("ERROR ! The Formula of the new Index is not computable. Please check it !\nValid Band Names are: ", paste(avail_refbands,collapse = ", "),"."), justify = "centre"),
              "2" = svalue(notes_lab) <- format("ERROR ! The Index Acronym and/or its full name are already present.\n Please specify different ones.", justify = "centre"),
              "3" = svalue(notes_lab) <- format("ERROR ! Please provide valid values for the Index Acronym, its fullname and the Formula.", justify = "centre"))
       # font(notes_lab) <- list(family = "sans", style = "italic", size = 9, color = 'blue')
-      ifelse(as.character(catch_err) == "0", font(notes_lab) <- list(family = "sans", style = "italic", size = 9, color = 'green'), 
-             font(notes_lab) <- list(family = "sans", style = "italic", size = 9, color = 'red'))
+      ifelse(as.character(catch_err) == "0", font(notes_lab) <- list(family = "sans", size = 9, weight = 'bold'), 
+             font(notes_lab) <- list(family = "sans", size = 9, weight = 'bold', color = 'red', style = "italic"))
     })
     
     size(set_but) <- list(width = 500)
@@ -298,13 +299,12 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
     notes_lab   <- glabel(text = format(paste0("Valid band names are: ", paste(avail_refbands,collapse = ", ")), justify = "centre"), 
                           container = notes_group, horizontal = TRUE, editable = FALSE)
     size(notes_lab) <- c(600,35)
-    # notes_lab2   <- glabel(text = format("Dismiss the window using the 'x' on the right corner when you are done !", justify = "left"), 
-    #                        container = main_group, horizontal = TRUE, editable = FALSE)
-    font(notes_lab)  <- list(family = "sans",  size = 9, color = "blue")
-    # font(notes_lab2) <- list(family = "sans", size = 8 , style = "italic")
+    font(notes_lab)  <- list(family = "sans",  size = 9, weight = 'bold')
+    
     
     addSpring(but_group)
     finish_but <- gbutton(text = "Done !", container = but_group, handler = function(h,...) {
+      
       dispose(main_win)
       gmessage("ReOpen the 'Select Layers' window to use the new index(es)", title = "Done !")
       return(TRUE)

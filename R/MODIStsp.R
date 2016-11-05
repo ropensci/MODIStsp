@@ -185,10 +185,10 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   } else {FALSE}) {
     mess_text <- "Waiting while reading the MODIS products list..."
     if (gui) {
-       mess     <- gwindow(title = "Please wait...", width = 400, height = 40)
-       mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
-       Sys.sleep(0.05)
-       message(mess_text)
+      mess     <- gwindow(title = "Please wait...", width = 400, height = 40)
+      mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
+      Sys.sleep(0.05)
+      message(mess_text)
     } else {message(mess_text)}
     MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file )
     load(prodopts_file)
@@ -225,7 +225,16 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
       cat("[",date(),"] Product information file not found! Exiting!\n"); stop()
     }
     prod_opts  <- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
-    custom_idx <- general_opts$custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]]
+    custom_idx <- (general_opts$custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]])
+    
+    # Workaround to avoid error if only one custom index exists
+    if (class(custom_idx) == "character") {
+      custom_idx = data.frame(indexes_bandnames  = custom_idx["indexes_bandnames"],
+                              indexes_fullnames  = custom_idx["indexes_fullnames"],
+                              indexes_formulas   = custom_idx["indexes_formulas"],
+                              indexes_nodata_out = custom_idx["indexes_nodata_out"], 
+                              stringsAsFactors = FALSE)
+    }
     
     # Create variables needed to launch the processing
     
@@ -270,7 +279,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
       general_opts$full_ext <- "Resized"
       
       # Automatically retrieve the tiles requested to cover the extent
-      modis_grid <- get(load(file.path(MODIStsp.env$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
+      modis_grid           <- get(load(file.path(MODIStsp.env$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
       external_bbox_mod    <- reproj_bbox(external_bbox, general_opts$user_proj4, MOD_proj_str, enlarge = TRUE)
       d_bbox_mod_tiled     <- intersect(modis_grid, extent(external_bbox_mod))
       general_opts$start_x <- min(d_bbox_mod_tiled$H)
@@ -280,28 +289,63 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
       
     }
     
+    
     # launch MODIStsp_process to Download and preprocess the selected images ----
-    output <- MODIStsp_process(sel_prod = general_opts$sel_prod, start_date = general_opts$start_date, end_date = general_opts$end_date,
-                               out_folder = general_opts$out_folder, out_folder_mod = general_opts$out_folder_mod, reprocess = general_opts$reprocess,
-                               delete_hdf = general_opts$delete_hdf, sensor = general_opts$sensor, download_server = general_opts$download_server, 
-                               user = general_opts$user, password = general_opts$password,
-                               https = prod_opts$http, ftps = prod_opts$ftp,
-                               start_x = general_opts$start_x, start_y = general_opts$start_y, end_x = general_opts$end_x, end_y = general_opts$end_y,
-                               full_ext = general_opts$full_ext, bbox = general_opts$bbox, out_format = general_opts$out_format, out_res_sel = general_opts$out_res_sel,
-                               out_res = as.numeric(general_opts$out_res), native_res = prod_opts$native_res,  tiled = prod_opts$tiled,
-                               resampling = general_opts$resampling, ts_format = general_opts$ts_format, compress = general_opts$compress,
-                               MOD_proj_str = MOD_proj_str, outproj_str = general_opts$user_proj4,
-                               nodata_in = prod_opts$nodata_in, nodata_out = prod_opts$nodata_out, rts = general_opts$rts, nodata_change = general_opts$nodata_change,
-                               datatype = prod_opts$datatype,	bandsel = general_opts$bandsel, bandnames = prod_opts$bandnames,
-                               indexes_bandsel = general_opts$indexes_bandsel, indexes_bandnames = c(prod_opts$indexes_bandnames,custom_idx$indexes_bandnames),
-                               indexes_formula = c(prod_opts$indexes_formula,custom_idx$indexes_formula), indexes_nodata_out = c(prod_opts$indexes_nodata_out,custom_idx$indexes_nodata_out),
-                               quality_bandnames = prod_opts$quality_bandnames,quality_bandsel = general_opts$quality_bandsel, quality_bitN = prod_opts$quality_bitN,
-                               quality_source = prod_opts$quality_source, quality_nodata_in = prod_opts$quality_nodata_in, quality_nodata_out = prod_opts$quality_nodata_out,
-                               file_prefixes = prod_opts$file_prefix, main_out_folder = prod_opts$main_out_folder, gui = gui)
+    output <- MODIStsp_process(
+      sel_prod           = general_opts$sel_prod, 
+      start_date         = general_opts$start_date, 
+      end_date           = general_opts$end_date,
+      out_folder         = general_opts$out_folder, 
+      out_folder_mod     = general_opts$out_folder_mod, 
+      reprocess          = general_opts$reprocess,
+      delete_hdf         = general_opts$delete_hdf, 
+      sensor             = general_opts$sensor, 
+      download_server    = general_opts$download_server, 
+      user               = general_opts$user, 
+      password           = general_opts$password,
+      https              = prod_opts$http, 
+      ftps               = prod_opts$ftp,
+      start_x            = general_opts$start_x, 
+      start_y            = general_opts$start_y, 
+      end_x              = general_opts$end_x, 
+      end_y              = general_opts$end_y,
+      full_ext           = general_opts$full_ext, 
+      bbox               = general_opts$bbox, 
+      out_format         = general_opts$out_format, 
+      out_res_sel        = general_opts$out_res_sel,
+      out_res            = as.numeric(general_opts$out_res), 
+      native_res         = prod_opts$native_res,  
+      tiled              = prod_opts$tiled,
+      resampling         = general_opts$resampling, 
+      ts_format          = general_opts$ts_format, 
+      compress           = general_opts$compress,
+      MOD_proj_str       = MOD_proj_str, 
+      outproj_str        = general_opts$user_proj4,
+      nodata_in          = prod_opts$nodata_in, 
+      nodata_out         = prod_opts$nodata_out, 
+      rts                = general_opts$rts, 
+      nodata_change      = general_opts$nodata_change,
+      datatype           = prod_opts$datatype,	
+      bandsel            = general_opts$bandsel, 
+      bandnames          = prod_opts$bandnames,
+      indexes_bandsel    = c(general_opts$indexes_bandsel), 
+      indexes_bandnames  = c(prod_opts$indexes_bandnames,  custom_idx$indexes_bandnames),
+      indexes_formula    = c(prod_opts$indexes_formula,    custom_idx$indexes_formulas),
+      indexes_nodata_out = c(prod_opts$indexes_nodata_out, custom_idx$indexes_nodata_out),
+      quality_bandnames  = prod_opts$quality_bandnames,
+      quality_bandsel    = general_opts$quality_bandsel, 
+      quality_bitN       = prod_opts$quality_bitN,
+      quality_source     = prod_opts$quality_source, 
+      quality_nodata_in  = prod_opts$quality_nodata_in, 
+      quality_nodata_out = prod_opts$quality_nodata_out,
+      file_prefixes      = prod_opts$file_prefix, 
+      main_out_folder    = prod_opts$main_out_folder, 
+      gui                = gui
+    )
     
     # At end of succesfull execution, save the options used in the main output folder
     general_opts <- RJSONIO::fromJSON(previous_jsfile)
-    optfilename = file.path(general_opts$out_folder,paste0('MODIStsp_', Sys.Date(),'.json'))
+    optfilename  <- file.path(general_opts$out_folder,paste0('MODIStsp_', Sys.Date(),'.json'))
     write(RJSONIO::toJSON(general_opts),optfilename)
     
     # Clean up at end of processing ----
