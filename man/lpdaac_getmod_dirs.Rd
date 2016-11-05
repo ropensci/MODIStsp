@@ -5,7 +5,7 @@
 \title{lpdaac_getmod_dirs}
 \usage{
 lpdaac_getmod_dirs(ftp, http, used_server = NA, user = user,
-  password = password, gui, .Platform)
+  password = password, gui, out_folder_mod, .Platform)
 }
 \arguments{
 \item{ftp}{string ftp site corresponding to a given MODIS product}
@@ -19,6 +19,8 @@ lpdaac_getmod_dirs(ftp, http, used_server = NA, user = user,
 \item{password}{password for earthdata server}
 
 \item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
+
+\item{out_folder_mod}{ouput folder for original HDF storage}
 
 \item{.Platform}{string os platform (from call to .Platform)}
 }

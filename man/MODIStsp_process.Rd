@@ -114,8 +114,8 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
 }
 \description{
-main function of MODIStsp tool. Takes as input processing parameters specified by the user using moddl_GUI and saved in
-MODIStsp_Previous.RData (Interactive use), or a user specified RData file (batch use) (See MODIStsp_main for details ) and performs all required
+main function of MODIStsp tool. Takes as input processing parameters specified by the user using MODIStsp_GUI and saved in
+MODIStsp_Previous.json (Interactive use), or a user specified JSON file (batch use) (See MODIStsp_main for details ) and performs all required
 processing.
 }
 \details{

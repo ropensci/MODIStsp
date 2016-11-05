@@ -4,18 +4,28 @@
 \alias{MODIStsp_GUI}
 \title{MODIStsp_GUI}
 \usage{
-MODIStsp_GUI(general_opts)
+MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir,
+  previous_jsfile, prodopts_file)
 }
 \arguments{
-\item{general_opts}{General options data frame passed by MODIStsp_main. Contains paths and other variables used to initialize the GUI
-if a previous options file is not existing.}
+\item{general_opts}{data.frame containing general processing options passed by MODIStsp}
+
+\item{prod_opt_list}{List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)}
+
+\item{scrollWindow}{logical parameter passed by MODIStsp main function.}
+
+\item{MODIStsp_dir}{main folder of the package}
+
+\item{previous_jsfile}{json parameters file containgn data of the last execution}
+
+\item{prodopts_file}{rdata file containing info about MODIS products}
 }
 \value{
-NULL - Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file
+Quit - Logical - tells the main if running processing or exiting (also, Processing options are saved in "previous" file and (if "Save options" is pressed) in user's selected file)
 }
 \description{
 Function used to generate and handle the GUI used to allow selection of MODIStsp processing parameters
- If the "previous options" file (MODIStsp_Previous.RData) already exists, it is loaded and used to reinstate
+ If the "previous options" file (MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
 	the GUI to its last state. Otherwise, the previous options file is created by launching the MODIStsp_read_xml fucntion
 }
 \note{

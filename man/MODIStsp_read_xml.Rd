@@ -4,10 +4,10 @@
 \alias{MODIStsp_read_xml}
 \title{MODIStsp_read_xml}
 \usage{
-MODIStsp_read_xml(previous_file = previous_file, xml_file = xml_file)
+MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file)
 }
 \arguments{
-\item{previous_file}{string filename of the RData in which to store the data parsed from the XML file}
+\item{prodopts_file}{string filename of the RData in which to store the data parsed from the XML file}
 
 \item{xml_file}{string filename of the XML file containing the MODIS products characteristics}
 }

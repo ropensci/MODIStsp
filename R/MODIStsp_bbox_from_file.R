@@ -15,6 +15,8 @@
 #'
 #' @importFrom sp CRS
 #' @importFrom gdalUtils gdalsrsinfo gdalinfo ogrinfo
+#' @importFrom utils head tail
+
 bbox_from_file <- function(file_path, out_crs) {
 
   # Retrieve CRS using gdal: if fails, then the file is not a valid spatial file

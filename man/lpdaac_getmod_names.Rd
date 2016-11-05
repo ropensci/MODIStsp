@@ -5,7 +5,7 @@
 \title{lpdaac_getmod_names}
 \usage{
 lpdaac_getmod_names(http, ftp, used_server, user, password, date_dir, v, h,
-  tiled, gui)
+  tiled, out_folder_mod, gui)
 }
 \arguments{
 \item{http}{string http site on lpdaac corresponding to a given MODIS product}
@@ -25,6 +25,8 @@ lpdaac_getmod_names(http, ftp, used_server, user, password, date_dir, v, h,
 \item{h}{int. array containing a sequence of the horizontal  tiles of interest (e.g., c(3,4))}
 
 \item{tiled}{0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)}
+
+\item{out_folder_mod}{ouput folder for original HDF storage}
 
 \item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
 }
