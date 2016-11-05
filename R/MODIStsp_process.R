@@ -91,12 +91,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   start_year <- unlist(strsplit(start_date, "[.]"))[1]
   end_year <- unlist(strsplit(end_date, "[.]"))[1]
   
-  # Add a message window while the file is charging (TODO: create a function to pass the message to cat if gui=FALSE and to svalue(mess_lab) if gui=TRUE)
-  mess_text <- "Processing"
+  mess_text <- "Retrieving list of files from NASA server"
   if (gui) {
-    mess <- gwindow(title = "Processing Status", width = 400, height = 40)
+    mess     <- gwindow(title = "Processing Status", width = 400, height = 40)
     mess_lab <- glabel(text = paste("---",mess_text,"---"), editable = FALSE, container = mess)
     Sys.sleep(0.05)
+    message("[",date(),"] ",mess_text)
   } else {
     message("[",date(),"] ",mess_text)
   }
@@ -126,9 +126,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     #- ------------------------------------------------------------------------------- -#
     
     # patch not to generate error in indexes and/or quality bands are missing for the selected product
-    if (length(indexes_bandnames)==0) {indexes_bandsel <- integer(0)}
-    if (length(quality_bandnames)==0) {quality_bandsel <- integer(0)}
-
+    if (length(indexes_bandnames) == 0) {indexes_bandsel <- integer(0)}
+    if (length(quality_bandnames) == 0) {quality_bandsel <- integer(0)}
+    
     bands_indexes <- matrix(0, nrow = length(bandsel), ncol = length(indexes_bandsel) + length(quality_bandsel),# dummy matrix which associate, to each couple of index or quality band (col) - original band (row),
                             dimnames = list(bandnames,c(indexes_bandnames,quality_bandnames)))								# info on wether that band is required to build that index
     
@@ -156,11 +156,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     # Start Cycle on selected years
     # ---------------------------------- #
     
-    # Get start and end years from start and end dates
-    
-    # start_year <- as.numeric(strsplit(start_date, ".", fixed = T)[[1]][1])
-    # end_year <- as.numeric(strsplit(end_date, ".", fixed = T)[[1]][1])
-    #
     for (yy in start_year:end_year) {
       
       # Create string representing the dates to be processed
@@ -182,9 +177,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
       
       # Processing status message
       
-      mes_text <- paste("Retrieving Files for Year",as.character(yy))
+      mess_text <- paste("Retrieving Files for Year",as.character(yy))
       if (gui) {
         svalue(mess_lab) <- paste("---",mess_text,"---")
+        Sys.sleep(0.05)
       } else {
         message("[",date(),"] ",mess_text)
       }
@@ -239,7 +235,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   
                   # # Get remote file size
                   # res <-getURL(remote_filename, nobody=1L, header=1L)
-
+                  
                   # All this substituted with direct assessment of filesize from CURL call - left here while completing feature
                   remote_size_tries <- 30 # numbers of tryouts for xml metafile
                   size_string <- NA
@@ -277,7 +273,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
                   er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
                   
-                 
+                  
                   local_filesize = 0  
                   while (local_filesize != remote_filesize) {   # Add here a while loop: Only exit if local file size equals remote filesize
                     
@@ -285,6 +281,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       mess_text <- paste("Downloading", sens_sel, "Files for date", date_name, ":" ,which(modislist == modisname), "of", length(modislist))
                       if (gui) {
                         svalue(mess_lab) <- paste("---",mess_text,"---")
+                        Sys.sleep(0.05)
                         message("[",date(),"] ",mess_text)
                       } else {
                         message("[",date(),"] ",mess_text)
@@ -293,8 +290,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       if (download_server == "http") {
                         download <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
                       } else {
-                        download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", quiet = FALSE, cacheOK = FALSE,
-                                                      extra = c("-L")))
+                        dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
+                        download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
+                                                      method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
                       }
                       
                       if (class(download) == "try-error") {
@@ -447,7 +445,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   }
                   
                   outfile_vrt <- tempfile(fileext = ".vrt")   # filename of temporary vrt file 
-             
+                  
                   if (file.exists(outrep_file) == FALSE | reprocess == "Yes") {
                     
                     files_in <- file.path(out_folder_mod, modislist)
@@ -463,6 +461,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     }
                     if (gui) {
                       svalue(mess_lab) <- paste("---",mess_text,"---")
+                      Sys.sleep(0.05)
                       message("[",date(),"] ",mess_text)
                     } else {
                       message("[",date(),"] ",mess_text)
@@ -481,7 +480,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       outfile_vrt_cont[outfile_vrt_linegeom] <- paste("<GeoTransform>",paste(outfile_vrt_geom_corr,collapse=", "),"</GeoTransform>")
                       write(outfile_vrt_cont, outfile_vrt)
                     }
-
+                    
                     #If resize required,  convert bbox coordinates from t_srs to modis_srs, to get the correct extent
                     if (full_ext == "Resized") {
                       outfile_vrt_or <- outfile_vrt
@@ -568,9 +567,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
               
               for (band in which(indexes_bandsel == 1)) {
                 indexes_band <- indexes_bandnames[band] 	# index name
-                formula <- indexes_formula[band]				#index formula
-                mess_text <- paste("Computing", sens_sel, indexes_band, "for date:", date_name)
+                formula      <- indexes_formula[band]				#index formula
+                mess_text    <- paste("Computing", sens_sel, indexes_band, "for date:", date_name)
                 if (gui) {
+                  svalue(mess_lab) <- paste("---",mess_text,"---")
+                  Sys.sleep(0.05)
                   message("[",date(),"] ",mess_text)
                 } else {
                   message("[",date(),"] ",mess_text)
@@ -603,6 +604,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 mess_text <- paste("Computing", quality_band, "for date:", date_name)
                 if (gui) {
                   svalue(mess_lab) <- paste("---",mess_text,"---")
+                  Sys.sleep(0.05)
                   message("[",date(),"] ",mess_text)
                 } else {
                   message("[",date(),"] ",mess_text)
