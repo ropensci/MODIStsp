@@ -45,13 +45,13 @@ MODIStsp_process_indexes <- function(out_filename, formula,bandnames,nodata_out,
       raster::NAvalue(temp_raster) <- as.numeric(nodata_out[band])  # assign NA value
       assign(temp_bandname, temp_raster) # assign the data to a object with name = bandname
       call_string <- paste0(call_string,temp_bandname,"=",temp_bandname,"," )  # add an "entry" in call_string (additional parameter to be passed to function
-      fun_string <- paste0(fun_string,temp_bandname,"=",temp_bandname,"," )  # add an "entry" in fun_string (additional input parameter)
+      fun_string  <- paste0(fun_string,temp_bandname,"=",temp_bandname,"," )  # add an "entry" in fun_string (additional input parameter)
     }
   }
   call_string <- paste0(substr(call_string,1,nchar(call_string) - 1), ")")  #Finalize the call_string
   fun_string <- paste0(fun_string,"...)","{round(10000*(",formula, "))}") # Finalize the fun_string
   
-  eval(parse(text = fun_string)) # Parse "fun_string" to create a new function
+  eval(parse(text = fun_string))     # Parse "fun_string" to create a new function
   eval(parse(text = call_string))    # parse call_string to launch the new function for index computation
 
   # Save output and remove aux file

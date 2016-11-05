@@ -1,6 +1,6 @@
 ---
-title: 'MODIStsp: A tool for automatic preprocessing of MODIS time series'
-author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:busetto.l@irea.cnr.it)), Luigi
+title: 'MODIStsp: A tool for automatic preprocessing of MODIS time series - v1.3.0'
+author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:lbusett@gmail.com)), Luigi
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
 output:
@@ -170,7 +170,7 @@ Users can however **specify other SIs to be computed without modifying MODIStsp 
   grid.raster(img)
 ```
 
-Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked,  and the new index added in the list of available ones for all products allowing its computation at the next MODIStsp execution. 
+Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked upon clicking "Set New Index". On success, the new index is added in the list of available ones for all products allowing its computation. Clicking "Done !" returns to the main. 
 
 ##	Download Method
 Allows to specify which download method should be used. Available choices are: 

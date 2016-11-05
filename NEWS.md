@@ -1,8 +1,35 @@
-# MODIStsp 1.3.0.9000
+# MODIStsp v 1.3.0  Release NOtes
+
+v1.2.1 was released on 11/05/2016
+
+## Major Changes
+
+1. Added functionality for downloading and preprocessing MODIS collection 006 datasets. For products with both 005 and 006 collections, the user can select the version using a new droplist in the GUI.
+
+2. Added functionality for off-line processing. This allows both to _i)_ reprocessing already downloaded data (for example, to create time series for an additional layer) without the need to connect to NASA servers, and _ii)_ process HDF files downloaded outside _MODIStsp_ (e.g., directly from NASA ftp) and stored on the user's PC, without the need of an active internet connection. 
+
+3. Improved the way in which options are saved. Much more readable .JSON files are now used instead than .RData. User options are no longer saved alongside products characteristics. This will allow to re-use an "old" options file even if changes are made on the XML file descriving the products.
+
+4. Improved the GUI inteface for specifying additional Spectral Indexes. Hints are now showed to the user, and multiple indexes can be added in the same session.
+
+## Minor Changes
+
+1. General improvements in the GUI inteface. Products are now grouped by categories, to allow easier identification and selection.
+
+2. Improvements in the README file and vignettes, providing more instructions on package use.
+
+3. Improved functionality for checking for "complete" download, by comparing the size of the downloaded files with that of files on the server. 
+
+4. Added "configure" file for Linux installation.
+
+4. Temporary files necessary for processing (e.g., vrt files) are now created (and destroyed) within the "R" temporary folder.
+
+5. Miscellaneous bug-fixing.
+
 
 # MODIStsp v 1.2.1 Release NOtes
 
-v1.2.1 was released on 20/04/2016
+v1.2.1 was released on 04/20/2016
  
 ## Major Changes
 
