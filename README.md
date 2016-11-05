@@ -6,7 +6,7 @@
     -   [On Linux systems](#on-linux-systems)
 -   [Running the tool](#running-the-tool)
     -   [Interactive Execution: the MODIStsp GUI](#interactive-execution-the-modistsp-gui)
-    -   [Non-Interactive Execution and scheduled processing&lt;](#non-interactive-execution-and-scheduled-processing)
+    -   [Non-Interactive Execution and scheduled processing](#non-interactive-execution-and-scheduled-processing)
 -   [Output format and naming conventions](#output-format-and-naming-conventions)
 -   [Accessing and analyzing the processed time series from R](#accessing-and-analyzing-the-processed-time-series-from-r)
 -   [Citation](#citation)
@@ -39,7 +39,7 @@ NASA recently switched to provision of Collection 6 datasets for most Land Produ
 
 -   **22/08/2016 - MODIStsp installation problems**
 
-There are currently some problems in installing MODIStsp via install\_github on R 3.3.1 due to not correct installation of dependencies (related to a bug in `install_github`). Installing the development version of `devtools` should solve the issue. To do so, on a **clean** R/RStudio session do:
+There are currently some problems in installing MODIStsp **via install\_github** on R &gt;= 3.3.1 due to not correct installation of dependencies (related to a bug in `install_github`). Installing the development version of `devtools` should solve the issue. To do so, on a **clean** R/RStudio session do:
 
 ``` r
   install.packages(c("devtools"))
@@ -59,7 +59,7 @@ If you still don't succedd, please contact us !
 
 -   **20/07/2016 - Changes in download options **
 
-Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of `MODIStsp` will no longer work ! Starting from v.1.2.2, you can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registrering an account at the address: <https://urs.earthdata.nasa.gov/profile>.
+Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of `MODIStsp` will no longer work ! Starting from v.1.2.2, you can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registering an account at the address: <https://urs.earthdata.nasa.gov/profile>.
 
 Installation <a name="Installation"></a>
 ========================================
@@ -123,7 +123,7 @@ MODIStsp exploits functionalities of several other "R" packages. In particular, 
 `bitops` (&gt;= 1.9.6), `data.table` (&gt;= 1.9.6), `gdalUtils` (&gt;= 2.0.1.7), `gWidgets` (&gt;= 0.0-54), `hash` (&gt;= 2.2.6), `plyr` (&gt;= 1.8.3), `raster` (&gt;= 2.5-2), `RCurl` (&gt;= 1.95-4.8), `rgdal` (&gt;= 1.1-8), `rgeos` (&gt;=0.3-8), `xts` (&gt;= 1.0-10), `sp` (&gt;= 1.2-2), `stringr` (&gt;= 1.0.0), `XML` (&gt;= 3.98-1.1), pacman, `xml2` (&gt;= 0.1.2), `xts`
 
 , while the following are suggested:
-`knitr`, `rmarkdown`, `png`, `grid`,`gWidgetsRGtk2` (&gt;= 1.0-5).
+`knitr`, `rmarkdown`, `png`, `grid`,`gWidgetsRGtk2`.
 
 Running the tool
 ================
@@ -138,15 +138,11 @@ library(MODIStsp)
 MODIStsp()
 ```
 
-This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see below for details).
-
-### Selection of processing parameters
-
-When running `MODIStsp` in Interactive Mode, a user-friendly GUI allows selection of all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.
+This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see below for details). The main available processing options are described in detail in the following.
 
 ![](README-GUI_fig-1.png)
 
-#### MODIS Product, Platform and Layers
+### MODIS Product, Platform and Layers
 
 Allows to select the MODIS product of interest using the **"Category"** and **"Product"** drop down menus. You can also select which **MODIS platform(s)** should be considered for download and creation of the time series ("Terra", "Aqua" or "Both"), and which **version** of the product - 5 or 6 (when available) - should be considered. After selecting the product, pushing the **"Click to Select"** button opens the "Select Processing Layers" GUI panel, from which you **must** select which MODIS original and/or derived QI and SI layers should be processed:
 
@@ -178,7 +174,7 @@ You can however **specify other SIs to be computed without modifying `MODIStsp` 
 
 Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked, and the new index added in the list of available ones for all products allowing its computation at the next `MODIStsp` execution.
 
-#### Download Method
+### Download Method
 
 Allows to specify which download method should be used. Available choices are:
 
@@ -192,7 +188,7 @@ Allows to specify which download method should be used. Available choices are:
 
 Allows to specify the starting and ending dates to be considered for the creation of the time series. Dates **must** be provided in the *yyyy--mm--dd* format (e.g., 2015-01-31)
 
-#### Spatial Extent
+### Spatial Extent
 
 Allows to define the area of interest for the processing. Two main options are possible:
 
@@ -204,7 +200,7 @@ Allows to define the area of interest for the processing. Two main options are p
 
     2.  **pressing the "Load Extent from a Spatial File" and selecting a raster or vector spatial file**. In this case, the bounding box of the selected file is retrieved, converted in the selected output projection, and shown in the "Bounding Box" frame. Required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
 
-#### Reprojection and Resize
+### Reprojection and Resize
 
 Allows to specify the options to be used for reprojecting and resizing the MODIS images. In particular:
 
@@ -212,7 +208,7 @@ Allows to specify the options to be used for reprojecting and resizing the MODIS
 
 2.  the **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, the resampling method can instead be chosen among "Nearest Neighbour" and "Mode" (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleanind would risk to contaminate the values of high-quality observations with those of low-quality ones.
 
-#### Processing Options
+### Processing Options
 
 Allows first of all to specify the **format desired for the output images**. Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among "None", "PACKBITS", "LZW" and "DEFLATE".
 
@@ -220,16 +216,16 @@ You can then specify if **virtual multitemporal files** should be created. These
 
 Finally, you can select if the **NoData values** of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts" XML file. By selecting "Yes" in the "Change Original NODATA values" checkbox, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them.
 
-#### Main Output Folder for Time Series Storage
+### Main Output Folder for Time Series Storage
 
 Allows to specify the main folder where the pre-processed time series data will be saved stored. The **"Reprocess Existing Data"** checkbox allows to specify if images already available should be reprocessed if a new run of `MODIStsp` is launched with the same output folder. If set to "No", `MODIStsp` skips dates for which output files following the `MODIStsp` naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates.
 
-#### Output Folder for Original HDF Storage
+### Output Folder for Original HDF Storage
 
 Allows to specify the folder where downloaded **original MODIS HDF files** are stored. The **"delete original HDF files"** checkbox allows to specify if the downloaded images should be deleted from the file system at the end of the processing. To avoid accidental file deletion, this is always set to "No" by default, and a warning is issued before execution whenever the selection is changed to "Yes".
 
-Non-Interactive Execution and scheduled processing&lt;
-------------------------------------------------------
+Non-Interactive Execution and scheduled processing
+--------------------------------------------------
 
 `MODIStsp` can be also launched in non-interactive mode by setting the optional `GUI` parameter to FALSE, and the "Options\_File" parameter to the path of a previously saved Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
 
@@ -267,7 +263,7 @@ for (single_shape in extent_list) {
 }
 ```
 
-#### Standalone execution and scheduled processing
+### Standalone execution and scheduled processing
 
 MODIStsp can be also executed as a standalone application ; to do it, from R launch the function `MODIStsp_install_launcher()`. In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp). In Windows, a link in the Start Menu and optionally a desktop shortcut are created. See `?install_MODIStsp_launcher` for details and path customisations.
 
@@ -293,7 +289,7 @@ Standalone non-interactive execution can be used to periodically and automatical
         0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
         ```
 
-    -   Windows: create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify `-g -s "X:/yourpath/youroptions.RData"` as argument.
+    -   Windows: create a Task following [this instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specify `-g -s "X:/yourpath/youroptions.RData"` as argument.
 
 Output format and naming conventions
 ====================================
