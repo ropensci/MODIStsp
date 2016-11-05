@@ -27,7 +27,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 An article about `MODIStsp` was also recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020). 
 
-**Solutions to common problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/MODIStsp-FAQ)**
+**Solutions to common problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
 
 **Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
 
@@ -78,7 +78,7 @@ install.packages("gWidgetsRGtk2")
 library(gWidgetsRGtk2)
 ```
     
- Upon loading the package, an error window will probably appear. **Don't worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library "GTK+ is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK"�. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
+ Upon loading the package, an error window will probably appear. **Don't worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library "GTK+ is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK"â. Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
     
 2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
@@ -414,7 +414,7 @@ Install the packaged binary of GDAL included in your specific distribution; if t
 
 <b id="f1">1</b>: If you encounter problems installing the gWidgetsRGtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help you!
 
-<b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press “ok” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
+<b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press âokâ and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
 1. Ensure that GDAL is properly installed in your system
 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/))
 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!
