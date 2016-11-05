@@ -31,6 +31,8 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 
 **Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
 
+_MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy (CNR-IREA)_
+
 # News !
 
 * **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data** 

@@ -30,36 +30,18 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 
 **Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
 
+*MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy (CNR-IREA)*
+
 News !
 ======
 
--   **01/09/2016 - MODIS collection 006**
+-   **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data**
 
-NASA recently switched to provision of Collection 6 datasets for most Land Products. At the moment, `MODIStsp` stable release only allows download for Collection 5 datasets. If you want to test the download of collection 6 datasets, please use the "devel" branch (follow instructions below; at point 3 use the command `install_github("lbusett/MODIStsp", ref="devel")`). Note that this is development branch, so do not hexitate to report us any potential problem. **Stable support for Collection 6 will be added in the next MODIStsp release!**
+MODIStsp v1.3.0 has been finally released. The major improvement consists in now allowing download and preprocessing of **MODIS Collecction 006 datasets**. Other changes concern improvements in the GUI, introduction of off-line functionality and various bug fixing. You can see the changelog \[here\]. Please report any issues you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.:
 
--   **22/08/2016 - MODIStsp installation problems**
+-   **11/03/2016 - MODIStsp FAQ**
 
-There are currently some problems in installing MODIStsp **via install\_github** on R &gt;= 3.3.1 due to not correct installation of dependencies (related to a bug in `install_github`). Installing the development version of `devtools` should solve the issue. To do so, on a **clean** R/RStudio session do:
-
-``` r
-  install.packages(c("devtools"))
-  devtools::install_github("hadley/devtools")
-  library(devtools)
-```
-
-, then continue with standard `MODIStsp` installation.
-
-If it still doesn't work, manually installing all the dependencies should solve the issue. To do so, please try doing:
-
-`install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets", "hash", "plyr", "raster", "RCurl",   "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators"))`
-
-, then continue with standard `MODIStsp` installation.
-
-If you still don't succedd, please contact us !
-
--   **20/07/2016 - Changes in download options **
-
-Due to recent changes in rules for accessing NASA LPDAAC data via http, which now requires to specify a username and password, previous versions of `MODIStsp` will no longer work ! Starting from v.1.2.2, you can specify if downloading data via http or via ftp. In the former case, a valid username and password will have to be specified ! Those can be obtained by registering an account at the address: <https://urs.earthdata.nasa.gov/profile>.
+Hints for solving common installation, downloading and processing problems are now provided in our [FAQ](https://github.com/lbusett/MODIStsp/wiki/) page.
 
 Installation <a name="Installation"></a>
 ========================================
