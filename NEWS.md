@@ -1,6 +1,10 @@
+# MODIStsp v 1.3.0.9000  
+
+
+
 # MODIStsp v 1.3.0  Release NOtes
 
-v1.2.1 was released on 11/05/2016
+v1.3.0 was released on 11/05/2016
 
 ## Major Changes
 
