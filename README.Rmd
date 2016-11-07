@@ -15,7 +15,8 @@ knitr::opts_chunk$set(
 )
 ```
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp)
-![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg)
+![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) 
+[![DOI](https://zenodo.org/badge/21656836.svg)](https://zenodo.org/badge/latestdoi/21656836)
 
 # MODIStsp
 
