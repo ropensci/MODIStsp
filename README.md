@@ -1,8 +1,20 @@
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg)
 
-MODIStsp
-========
+-   [News !](#news)
+-   [Installation](#installation)
+    -   [On Windows](#on-windows)
+    -   [On Linux systems](#on-linux-systems)
+-   [Running the tool](#running-the-tool)
+    -   [Interactive Execution: the MODIStsp GUI](#interactive-execution-the-modistsp-gui)
+    -   [Non-Interactive Execution and scheduled processing](#non-interactive-execution-and-scheduled-processing)
+-   [Output format and naming conventions](#output-format-and-naming-conventions)
+-   [Accessing and analyzing the processed time series from R](#accessing-and-analyzing-the-processed-time-series-from-r)
+-   [Citation](#citation)
+-   [Installing R and GDAL](#installing-r-and-gdal)
+    -   [Installing R](#installing-r)
+    -   [Installing GDAL &gt;= 1.11.1](#installing-gdal-1.11.1)
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) \# MODIStsp
 
 MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.
 
