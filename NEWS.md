@@ -1,5 +1,7 @@
 # MODIStsp v 1.3.0.9000  
 
+Fixed bug on selection of custom index (Issue #57)
+
 
 
 # MODIStsp v 1.3.0  Release NOtes
