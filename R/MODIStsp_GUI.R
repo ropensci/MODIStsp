@@ -598,15 +598,14 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                 else {
                   old_sel_projwid <- hash::keys(out_proj_list)[which(hash::values(out_proj_list) == GUI.env$old_proj4)]    # Retrieve previous selection of proj_wid
                   enabled(output_proj4_wid) <- FALSE
-                  enabled(change_proj_but) <- TRUE
-                  selproj <- ginput(msg = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
-                  if (length(selproj) != 0) {
+                  enabled(change_proj_but)  <- TRUE
+                  selproj <- ginput("Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
+                 
+                   if (length(selproj) != 0 & selproj != "") {
                     sel_output_proj <- try(CRS(selproj),silent = TRUE)
                     if (class(sel_output_proj) == "try-error") {  # On error, send out a message and reset proj_wid and proj4 wid to previous values
-                      gmessage(sel_output_proj, title = "Proj4 String Not Recognized")
-                      
-                      
-                    } else {
+                      gmessage(sel_output_proj, title = "Proj4 String Not Recognized - Keeping the old output projection")
+                      } else {
                       old_proj <- svalue(output_proj4_wid)
                       svalue(output_proj4_wid) <- sel_output_proj
                       #----- If valid proj4string, and output is a bounding box, recompute the bounding box in output proj coordinates
@@ -641,8 +640,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   svalue(output_proj4_wid) <- out_proj_list[[svalue(proj_wid)]]
   #	size(output_proj4_wid) = c(250,20)
   change_proj_but <- gbutton(text = "Change", container = output_proj_group, handler = function(h,....) {  # Button to change the user define projection
-    selproj <- ginput(msg = "Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
-    if (!is.na(selproj)) {
+    selproj <- ginput("Please Insert a valid Proj4 string				", parent = NULL, do.buttons = TRUE, size = 800, horizontal = TRUE)
+    if (length(selproj) != 0 & selproj != "")  {
       sel_output_proj <- try(CRS(selproj),silent = TRUE)
       if (class(sel_output_proj) == "try-error") {	 	# Check if proj4string is valid
         gmessage(sel_output_proj, title = "Proj4 String Not Recognized")
