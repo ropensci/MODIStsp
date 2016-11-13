@@ -56,7 +56,7 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
   
   # Initialization and retrieval of parameters ----
   if (gui) {
-    if (!p_exists("gWidgetsRGtk2")) {
+    if (!p_exists("gWidgetsRGtk2", local = TRUE)) {
       #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
       message("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp! 
               \n\nDo you want to install it now?", type = " y / n")
