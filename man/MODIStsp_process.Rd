@@ -12,7 +12,7 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
   quality_bandnames, quality_bandsel, quality_bitN, quality_source,
   quality_nodata_in, full_ext, quality_nodata_out, file_prefixes,
-  main_out_folder, resampling, ts_format, gui = TRUE)
+  main_out_folder, resampling, ts_format, gui = TRUE, use_aria = TRUE)
 }
 \arguments{
 \item{sel_prod}{string selected MODIS product}

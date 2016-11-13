@@ -162,7 +162,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     general_opts <- list(#previous_jsfile = previous_jsfile, prodopts_file = prodopts_file, xml_file = xml_file, #out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
       sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = strftime(Sys.Date(),"%Y-01-01"), end_date = as.character(Sys.Date()),
       bandsel = rep(0,13), indexes_bandsel = rep(0,11), quality_bandsel = rep(0,21), # lenghts refearred to "Surf_Ref_8Days_500m (M*D09A1)" v6!
-      start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
+      start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", use_aria = 0, download_server = "http",
       proj = "Sinusoidal", user_proj4 = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
       out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
       nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
