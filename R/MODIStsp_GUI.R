@@ -872,7 +872,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
       
     }
     
-    general_opts$user            <- svalue(aria_wid)
+    general_opts$user            <- svalue(user_wid)
     general_opts$password        <- svalue(password_wid)
     general_opts$download_server <- svalue(server_wid)
     general_opts$use_aria        <- svalue(aria_wid)
