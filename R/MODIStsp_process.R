@@ -344,7 +344,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                         unlink(local_filename)  # On download error, delete bad files
                         Sys.sleep(10)    # sleep for a while....
                       } else {
-                        if (download_server == "http") {
+                        if (download_server == "http" & use_aria == FALSE) {
                           if (download$status_code != 200 & length(content(download, "text")) == 1) {	
                             message("[",date(),"] Download Error - Retrying...")
                             unlink(local_filename) # on error, delete last hdf file (to be sure no incomplete files are left behind and send message)
