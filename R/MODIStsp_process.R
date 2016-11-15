@@ -56,6 +56,7 @@
 #' @param resampling string resampling method (near, bilinear, etc.)
 #' @param ts_format string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
+#' @param use_aria logical if TRUE, then aria2c is used to accelerate download (if available !)
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -262,12 +263,9 @@ Do you want to proceed with normal download ? ")
                   paste0(ftp,year,"/",DOY,"/",modisname)
                 } else if (download_server == "offline") {NA}
                 
-                if (download_server != "offline") { # in case of http or ftp download, try to catch size information from xml file
+                # in case of http or ftp download, try to catch size information from xml file ----
+                if (download_server != "offline") { 
                   
-                  
-                  # # Get remote file size
-                  
-                  # All this substituted with direct assessment of filesize from CURL call - left here while completing feature
                   remote_size_tries <- 30 # numbers of tryouts for xml metafile
                   size_string <- NA
                   class(size_string) <- "try-error"
@@ -301,6 +299,8 @@ Do you want to proceed with normal download ? ")
                   remote_filesize <- local_filesize
                 }
                 
+                # Perform download ----
+                
                 if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
                   er <- 5; class(er) <- "try-error"; ce <- 0
                   
@@ -323,7 +323,18 @@ Do you want to proceed with normal download ? ")
                                                "--http-user=",user," --http-passwd=",password) 
                           download <- try(system(aria_string))
                         } else {
-                          download <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
+                          download    <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
+                        } 
+                      } else {   # ftp download
+                        if (use_aria == TRUE) {
+                          aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", 
+                                               basename(remote_filename), remote_filename, "--allow-overwrite") 
+                          download    <- try(system(aria_string))
+                        } else {
+                          
+                          dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
+                          download   <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
+                                                          method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
                         }
                       } else {
                         if (use_aria == TRUE) {
@@ -335,7 +346,6 @@ Do you want to proceed with normal download ? ")
                                                         method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
                         }
                       }
-                      
                       if (class(download) == "try-error") {
                         er <- 5
                         ce <- ce + 1
@@ -384,11 +394,11 @@ Do you want to proceed with normal download ? ")
               
               message("[",date(),"] ",length(modislist)," files for date of ",date_dirs[date]," were successfully downloaded!")
               
-              # ____________________________________________________________________________
+              # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
               # After all required tiles for the date are downloaded, start geoprocessing -----
-              # ____________________________________________________________________________
+              # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
               
-              # STEP 0: patch to correct wrong resolution/bbox in some HDF4 original layers (e.g. albedo)
+              # STEP 0: patch to correct wrong resolution/bbox in some HDF4 original layers (e.g. albedo) ----
               # Retrieve information from hdf4 with gdalinfo
               gdalinfo_hdf_raw <- gdalinfo(file.path(out_folder_mod, modislist[1]))
               gdalinfo_hdf_1stlayer <- gsub("^ *SUBDATASET_1_NAME=","",gdalinfo_hdf_raw[grep("^ *SUBDATASET_1_NAME",gdalinfo_hdf_raw)])
@@ -407,14 +417,14 @@ Do you want to proceed with normal download ? ")
                 FALSE
               }
               
-              # ____________________________________________________________________________
-              # STEP 1: choose the layers (original, indexes and quality bands) to be created ----
-              # ____________________________________________________________________________
+              # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
+              # STEP 1: identify the layers (original, indexes and quality bands) to be created ----
+              # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
               
               # at the end of this step, "bandsel" is recreated as the union of the bands selected by the user and the bands required
               # by indexes and quality bands, but only those ones which are not already present.
               
-              # do a chack to see if the product has at least one Quality Layer or Possible Index
+              # do a check to see if the product has at least one Quality Layer or Possible Index
               if (length(indexes_bandnames) != 0 | length(quality_bandnames) != 0 ) {
                 
                 req_bands_indexes <- bands_indexes
@@ -455,22 +465,15 @@ Do you want to proceed with normal download ? ")
               
               delbands <- bandsel - bandsel_orig_choice    # dummy array set to 0 - will contain info on wether orignal downloaded bands has to be deleted
               
-              # -----------------------------------
-              # STEP 2: process the required original MODIS layers
-              # -----------------------------------
+              # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
+              # STEP 2: process the required original MODIS layers ----
+              # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
               
               for (band in 1:length(bandnames)) {														# Cycle on MODIS original layers
                 
                 bands <- numeric(length(bandnames))													# Create vector with length = bands, filled with zeroes
                 # er_mos = 1  														# dummies for error state
                 if (bandsel[band] == 1) {					# If band selected, process it
-                  # mess_text <- paste("Mosaicing ", bandnames[band]," files for date: ",date_name)
-                  # if (gui) {
-                  #   svalue(mess_lab) <- paste("---",mess_text,"---")
-                  #   message("[",date(),"]",mess_text)
-                  # } else {
-                  #   message("[",date(),"]",mess_text)
-                  # }
                   bands[band] <- 1																			# IF band selected for processing, put its value to 1
                   dir.create(file.path(out_prod_folder, bandnames[band]), showWarnings = FALSE, recursive = TRUE)
                   bands <- paste(as.character(bands), collapse = "", sep = " ")					# Convert to character
@@ -491,9 +494,9 @@ Do you want to proceed with normal download ? ")
                     
                     files_in <- file.path(out_folder_mod, modislist)
                     dir.create(tmp_prod_folder, recursive = TRUE, showWarnings = FALSE)
-                    # ---------------------------------- ----------------------------------------------#
+                    # ---------------------------------------------------------------------------------#
                     # Convert to output projection, extent and format using gdalwarp ----
-                    # ---------------------------------- ----------------------------------------------#
+                    # ---------------------------------------------------------------------------------#
                     
                     if (outproj_str != MOD_proj_str) {
                       mess_text <- paste("Processing and Reprojecting", sens_sel, bandnames[band], "files for date:", date_name)
@@ -536,7 +539,6 @@ Do you want to proceed with normal download ? ")
                     
                     ## Launch the reprojection - operations to be done depends on whether resize and/or reprojection and/or
                     ## resampling are required
-                    
                     
                     reproj_type <- if (out_res_sel == "Native" & outproj_str == MOD_proj_str) {
                       "GdalTranslate"
@@ -602,9 +604,9 @@ Do you want to proceed with normal download ? ")
                 }  # ENDIF band selected for processing
               }	# END Cycle on available MODIS Bands
               
-              # ---------------------------------- ----------------------------------------------#
+              # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
               # If Indexes selected, then start creating them
-              # ---------------------------------- ----------------------------------------------#
+              # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
               
               for (band in which(indexes_bandsel == 1)) {
                 indexes_band <- indexes_bandnames[band] 	# index name
