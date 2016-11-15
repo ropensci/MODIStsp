@@ -164,7 +164,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     # Check if "aria2c" requested. If so, verify that the executable is on the path
     
     if (use_aria == TRUE) {
-      test_aria = try(system("aria2c"), silent = TRUE)
+      test_aria = try(system2("aria2c"), silent = TRUE)
       if (test_aria != 1) {
         if (gui) {
           noaria <- gconfirm("aria2c was not found! It is either not installed or not on your path!\nDo you want to proceed with normal download? ")
@@ -321,7 +321,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                           aria_string <- paste("aria2c -x 6 -d ",dirname(local_filename),
                                                " -o ",basename(remote_filename)," ",remote_filename," --allow-overwrite",
                                                " --http-user=",user," --http-passwd=",password,sep="") 
-                          download    <- try(system(aria_string))
+                          download    <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows")) # intern=TRUE for Windows, FALSE for Unix
                         } else {
                           download    <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
                         } 
@@ -329,7 +329,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                         if (use_aria == TRUE) {
                           aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", 
                                                basename(remote_filename), remote_filename, "--allow-overwrite") 
-                          download    <- try(system(aria_string))
+                          download    <- try(system(aria_string, intern = , intern = Sys.info()["sysname"]=="Windows"))
                         } else {
                           
                           dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
