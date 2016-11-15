@@ -38,7 +38,7 @@
 #' @param nodata_change string (Yes/No) if Yes, nodata are set to nodata_out in output rasters
 #' @param rts string ("Yes"/"No") If Yes, create rts time series
 #' @param datatype string array datatypes of MODIS bands
-#' @param bandsel  array of lenght equal to number of original modis layers. set to 1 for bands to be processed
+#' @param bandsel  array of lengFht equal to number of original modis layers. set to 1 for bands to be processed
 #' @param bandnames array of Abbreviated Names of MODIS bands
 #' @param indexes_bandsel array of lenght equal to number of available spectral indexes, set to  1 for indexes to be processed
 #' @param indexes_bandnames array of Abbreviated Names of MODIS indexes
@@ -158,7 +158,30 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
       http <- https[["Aqua"]]
       ftp  <- ftps[["Aqua"]]
       file_prefix <- file_prefixes[["Aqua"]]
+    } 
+    
+    # Check if "aria2c" requested. If so, verify that the executable is on the path
+    
+    if (use_aria == TRUE) {
+      test_aria = try(system("aria2c"), silent = TRUE)
+      if (test_aria != 1) {
+        if (gui) {
+          noaria <- gconfirm("aria2c was not found ! It is either not installed or not on your path!\n
+Do you want to proceed with normal download ? ")
+          if (noaria == TRUE) {
+            use_aria <- 0
+          } else {
+            gmessage("Please ensure that aria2c is installed and in your path ! - See aria2.github.io ")
+            dispose(mess)
+            stop("aria2c was not found ! Ensure that aria2c is installed and in your path ! - See aria2.github.io ")
+          }
+        } else {
+          message("aria2c was not found ! It is either not installed or not on your path! - Continuing with normal downlad !")
+        }
+      }
     }
+    
+    
     
     # ---------------------------------- #
     # Start Cycle on required years
@@ -241,15 +264,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 
                 if (download_server != "offline") { # in case of http or ftp download, try to catch size information from xml file
                   
-                  # Check if "aria2c" requested. If so, verify that the executable is on the path
-                  if (use_aria == 1) {test_aria = try(system("aria2c"), silent = TRUE)
-                    if (test_aria != 1) {
-                            noaria <- gconfirm("aria2c was not found ! It is either not installed or not on your path!\n
-Do you want to proceed with normal download ? ")
-                            ifelse(noaria == TRUE, use_aria <- 0,   stop("Please ensure that aria2c is installed and in your path ! - See aria2.github.io "))
-                          } 
-                  }
-                  
                   
                   # # Get remote file size
                   
@@ -302,17 +316,24 @@ Do you want to proceed with normal download ? ")
                       } else {
                         message("[",date(),"] ",mess_text)
                       }	# Update progress window
-                      
-                      if (use_aria == TRUE) {
-                        aria_string <- paste("aria2c -X 6 -d", dirname(local_filename), "-o", basename(remote_filename), remote_filename)
-                        download    <- try(system(aria_string))
-                      } else {
-                        if (download_server == "http") {
+                      if (download_server == "http") {
+                        if (use_aria == TRUE) {
+                          aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", 
+                                               basename(remote_filename), remote_filename, "--allow-overwrite 
+                                               --http-user=", user, "--http-password=", password) 
+                          download    <- try(system(aria_string))
+                        } else{
                           download   <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
                         } else {
-                          dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
-                          download   <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
-                                                        method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
+                          if (use_aria == TRUE) {
+                            aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", basename(remote_filename), remote_filename, "--allow-overwrite") 
+                            download    <- try(system(aria_string))
+                          } else{
+                            
+                            dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
+                            download   <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
+                                                            method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
+                          }
                         }
                       }
                       
