@@ -77,7 +77,7 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 
 \item{datatype}{string array datatypes of MODIS bands}
 
-\item{bandsel}{array of lenght equal to number of original modis layers. set to 1 for bands to be processed}
+\item{bandsel}{array of lengFht equal to number of original modis layers. set to 1 for bands to be processed}
 
 \item{bandnames}{array of Abbreviated Names of MODIS bands}
 
@@ -112,6 +112,8 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \item{ts_format}{string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)}
 
 \item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
+
+\item{use_aria}{logical if TRUE, then aria2c is used to accelerate download (if available !)}
 }
 \description{
 main function of MODIStsp tool. Takes as input processing parameters specified by the user using MODIStsp_GUI and saved in

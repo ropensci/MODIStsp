@@ -38,7 +38,7 @@
 #' @param nodata_change string (Yes/No) if Yes, nodata are set to nodata_out in output rasters
 #' @param rts string ("Yes"/"No") If Yes, create rts time series
 #' @param datatype string array datatypes of MODIS bands
-#' @param bandsel  array of lengFht equal to number of original modis layers. set to 1 for bands to be processed
+#' @param bandsel  array of lenght equal to number of original modis layers. set to 1 for bands to be processed
 #' @param bandnames array of Abbreviated Names of MODIS bands
 #' @param indexes_bandsel array of lenght equal to number of available spectral indexes, set to  1 for indexes to be processed
 #' @param indexes_bandnames array of Abbreviated Names of MODIS indexes
