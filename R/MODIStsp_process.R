@@ -317,11 +317,11 @@ Do you want to proceed with normal download ? ")
                         message("[",date(),"] ",mess_text)
                       }	# Update progress window
                       if (download_server == "http") {
-                        if (use_aria == TRUE) {
-                          aria_string <- paste0("aria2c -x 6 -d ",dirname(local_filename)," -o ",
-                                               basename(remote_filename)," ",remote_filename," --allow-overwrite ",
-                                               "--http-user=",user," --http-passwd=",password) 
-                          download <- try(system(aria_string))
+                        if (use_aria == TRUE) {  # http download
+                          aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", 
+                                               basename(remote_filename), remote_filename, "--allow-overwrite --http-user=", 
+                                               user, "--http-passwd=", password) 
+                          download    <- try(system(aria_string))
                         } else {
                           download    <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
                         } 
@@ -336,16 +336,7 @@ Do you want to proceed with normal download ? ")
                           download   <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
                                                           method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
                         }
-                      } else {
-                        if (use_aria == TRUE) {
-                          aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", basename(remote_filename), remote_filename, "--allow-overwrite")
-                          download <- try(system(aria_string))
-                        } else {
-                          dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
-                          download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
-                                                        method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
-                        }
-                      }
+                      } 
                       if (class(download) == "try-error") {
                         er <- 5
                         ce <- ce + 1
