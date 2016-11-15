@@ -302,7 +302,7 @@ Do you want to proceed with normal download ? ")
                 }
                 
                 if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
-                  er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
+                  er <- 5; class(er) <- "try-error"; ce <- 0
                   
                   local_filesize = 0  
                   while (local_filesize != remote_filesize) {   # Add here a while loop: Only exit if local file size equals remote filesize
@@ -318,22 +318,21 @@ Do you want to proceed with normal download ? ")
                       }	# Update progress window
                       if (download_server == "http") {
                         if (use_aria == TRUE) {
-                          aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", 
-                                               basename(remote_filename), remote_filename, "--allow-overwrite 
-                                               --http-user=", user, "--http-password=", password) 
-                          download    <- try(system(aria_string))
-                        } else{
-                          download   <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
+                          aria_string <- paste0("aria2c -x 6 -d ",dirname(local_filename)," -o ",
+                                               basename(remote_filename)," ",remote_filename," --allow-overwrite ",
+                                               "--http-user=",user," --http-passwd=",password) 
+                          download <- try(system(aria_string))
                         } else {
-                          if (use_aria == TRUE) {
-                            aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", basename(remote_filename), remote_filename, "--allow-overwrite") 
-                            download    <- try(system(aria_string))
-                          } else{
-                            
-                            dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
-                            download   <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
-                                                            method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
-                          }
+                          download <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
+                        }
+                      } else {
+                        if (use_aria == TRUE) {
+                          aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", basename(remote_filename), remote_filename, "--allow-overwrite")
+                          download <- try(system(aria_string))
+                        } else {
+                          dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
+                          download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
+                                                        method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
                         }
                       }
                       
