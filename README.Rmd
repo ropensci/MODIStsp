@@ -80,7 +80,7 @@ libgtk2.0-dev libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev
     On *rpm-base systems*, to install packages open a terminal and type  
 ```bash
 sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
-glib2-devel libcurl4-devel gdal-devel proj-devel
+glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
 ```
     
 2. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:
