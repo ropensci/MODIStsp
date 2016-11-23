@@ -58,26 +58,27 @@
 #'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json",
 #'     spatial_file_path = single_shape )}
 
-MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scrollWindow=FALSE) {
+MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, 
+                     scrollWindow=FALSE) {
   
   
   options("guiToolkit" = "RGtk2")
   
   MODIStsp.env <- new.env()
   MODIStsp.env$MODIStsp_dir <- system.file(package = "MODIStsp")
-  
-  #- ------------------------------------------------------------------------------- -#
+
+  #- ------------------------------------------------------------------------ -#
   #  Initialize project
-  #- ------------------------------------------------------------------------------- -#
+  #- ------------------------------------------------------------------------ -#
   # On interactive execution, load Rgtk2
   # On interactive execution, load Rgtk2
   if (gui) {
     if (!p_exists("gWidgetsRGtk2", local = TRUE)) {
-      #inst_gw <- utils::winDialog("Library 'gWidgetsRgtk2' is not installed. It is required to run MODIStsp ! \n \n Do you want to install it now ?", type = "yesno")
+
       message("Library 'gWidgetsRGtk2' is not installed. It is required to run MODIStsp! 
               \n\nDo you want to install it now?", type = " y / n")
       inst_gw <- readline()
-      if (inst_gw =="y") {
+      if (inst_gw == "y") {
         p_load("gWidgetsRGtk2")
       } else {
         stop("MODIStsp can not work in Interactive mode withouth gWidgetsRGtk2 ! Exiting !")
@@ -90,8 +91,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
-    # gdal_setInstallation(ignore.full_scan = FALSE)
-    welcome_text <- "Welcome to MODIStsp!\n\nWe will now search for a valid GDAL installation - please wait\n(this will happen only once)"
+    
+    welcome_text <- "Welcome to MODIStsp!\n\nWe will now search for a valid GDAL 
+                     installation - please wait\n(this will happen only once)"
     if (gui) {
       welcome_win <- gwindow(title = "Welcome", width = 400, height = 100)
       welcome_lab <- glabel(text = welcome_text , container = welcome_win, editable = FALSE)
@@ -103,8 +105,10 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
     }
     gdal_setInstallation(ignore.full_scan = TRUE, verbose = TRUE)
   }
-  gdal_version    <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", getGDALVersionInfo(str = "--version")))
-  gdal_minversion <- package_version("1.11.1") # GDAL version used during the last test (for now used as minimum required version)
+  gdal_version    <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", 
+                                          getGDALVersionInfo(str = "--version")))
+  # GDAL version used during the last test (for now used as minimum required version)
+  gdal_minversion <- package_version("1.11.1") 
   gdal_HDFsupport <- length(grep("HDF4", gdalinfo(formats = TRUE))) > 0
   
   if (gdal_version < gdal_minversion) {
@@ -201,7 +205,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
-    Quit = MODIStsp_GUI(general_opts = general_opts, prod_opt_list = prod_opt_list, MODIStsp_dir = MODIStsp.env$MODIStsp_dir,
+    Quit <- MODIStsp_GUI(general_opts = general_opts, prod_opt_list = prod_opt_list, 
+                         MODIStsp_dir = MODIStsp.env$MODIStsp_dir,
                         previous_jsfile = previous_jsfile, prodopts_file = prodopts_file,
                         scrollWindow = scrollWindow)
     
@@ -211,7 +216,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
   start.time <- Sys.time()
   
   # Launch the processing ----
-  # When GUI is closed (or in a non-interactive run): If not Quit selected, restore the user selected options from previous file and launch the processing ----
+  # When GUI is closed (or in a non-interactive run): If not Quit selected, restore the
+  # user selected options from previous file and launch the processing ----
+  
   if (!Quit) {
     
     if (file.exists(previous_jsfile)) {
@@ -225,11 +232,11 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL, scroll
       cat("[",date(),"] Product information file not found! Exiting!\n"); stop()
     }
     prod_opts  <- prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]  # retrieve options relative to the selected product from the "prod_opt_list" data frame
-    custom_idx <- (general_opts$custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]])
+    custom_idx <- general_opts$custom_indexes[[general_opts$sel_prod]][[general_opts$prod_version]]
     
     # Workaround to avoid error if only one custom index exists
     if (class(custom_idx) == "character") {
-      custom_idx = data.frame(indexes_bandnames  = custom_idx["indexes_bandnames"],
+      custom_idx <- data.frame(indexes_bandnames  = custom_idx["indexes_bandnames"],
                               indexes_fullnames  = custom_idx["indexes_fullnames"],
                               indexes_formulas   = custom_idx["indexes_formulas"],
                               indexes_nodata_out = custom_idx["indexes_nodata_out"], 
