@@ -888,7 +888,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     general_opts$proj        <- svalue(proj_wid)		# Retrieve Proj and extent options
     general_opts$user_proj4  <- svalue(output_proj4_wid)
     general_opts$out_res_sel <- svalue(output_res_sel_wid)
-    general_opts$out_res     <- svalue(output_res_wid))
+    general_opts$out_res     <- svalue(output_res_wid)
     general_opts$resampling  <- svalue(output_resmeth_wid)
     general_opts$full_ext    <- svalue(output_ext_wid)
     general_opts$bbox        <- c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),
