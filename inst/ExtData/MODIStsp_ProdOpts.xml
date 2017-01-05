@@ -14590,112 +14590,112 @@
                     <band>
                         <bandname>LC1</bandname>
                         <fullname>Land Cover Type 1 (IGBP)*</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC2</bandname>
                         <fullname>Land Cover Type 2 (UMD)*</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC3</bandname>
                         <fullname>Land Cover Type 3 (LAI/fPAR)*</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC4</bandname>
                         <fullname>Land Cover Type 4 (NPP/BGC)*</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC5</bandname>
                         <fullname>Land Cover Type 5 (PFT)**</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC1_Assessment</bandname>
                         <fullname>Land Cover Type 1 Assessment</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC2_Assessment</bandname>
                         <fullname>Land Cover Type 2 Assessment</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC3_Assessment</bandname>
                         <fullname>Land Cover Type 3 Assessment</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC4_Assessment</bandname>
                         <fullname>Land Cover Type 4 Assessment</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC5_Assessment</bandname>
                         <fullname>Land Cover Type 5 Assessment</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC_QC</bandname>
                         <fullname>Land Cover QC</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC1_2</bandname>
                         <fullname>Land Cover Type 1 Secondary</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC1_2_Percent</bandname>
                         <fullname>Land Cover Type 1 Secondary %</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC_Property1</bandname>
                         <fullname>Land Cover Property 1</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC_Property2</bandname>
                         <fullname>Land Cover Property 2</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
                     <band>
                         <bandname>LC_Property3</bandname>
                         <fullname>Land Cover Property 3</fullname>
-                        <datatype>8-bit unsigned</datatype>
+                        <datatype>8-bit unsigned integer</datatype>
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>

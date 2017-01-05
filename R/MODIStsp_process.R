@@ -321,12 +321,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                           aria_string <- paste("aria2c -x 10 -d ",dirname(local_filename),
                                                " -o ",basename(remote_filename)," ",remote_filename," --allow-overwrite",
                                                " --http-user=",user," --http-passwd=",password,sep="") 
-                          download    <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows")) # intern=TRUE for Windows, FALSE for Unix
+                        
+                            download    <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows")) # intern=TRUE for Windows, FALSE for Unix
                         } else {
                           download    <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
                         } 
                       } else {   # ftp download
                         if (use_aria == TRUE) {
+                          
                           aria_string <- paste("aria2c -x 10 -d", dirname(local_filename), "-o", 
                                                basename(remote_filename), remote_filename, "--allow-overwrite") 
                           download    <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows"))

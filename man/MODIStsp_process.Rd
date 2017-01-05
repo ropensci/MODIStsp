@@ -77,7 +77,7 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 
 \item{datatype}{string array datatypes of MODIS bands}
 
-\item{bandsel}{array of lengFht equal to number of original modis layers. set to 1 for bands to be processed}
+\item{bandsel}{array of lenght equal to number of original modis layers. set to 1 for bands to be processed}
 
 \item{bandnames}{array of Abbreviated Names of MODIS bands}
 
