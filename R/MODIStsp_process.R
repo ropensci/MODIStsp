@@ -275,7 +275,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   er <- 5		; 	class(er) <- "try-error" ;	ce <- 0
                   
                   
-                  local_filesize = 0  
+                  local_filesize <- 0  
                   while (local_filesize != remote_filesize) {   # Add here a while loop: Only exit if local file size equals remote filesize
                     
                     while (er != 0) {   # repeat until no error or > 30 tryyouts
@@ -689,7 +689,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   
   
   if (sensor == "Both") {
-    senslist = c("Terra","Aqua","Mixed")
+    senslist <- c("Terra","Aqua","Mixed")
   } # selected sensors
   
   for (sens_sel in senslist) {		# cycle on selected sensors
