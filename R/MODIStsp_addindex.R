@@ -172,15 +172,17 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
     # initialise list of custom indexes, if it does not exist yet
     if (is.null(general_opts$custom_indexes)) {
       general_opts$custom_indexes <- list()
+      
       for (prod in names(prod_opt_list)) {
         general_opts$custom_indexes[[prod]] <- list()
+        
         for (vers in names(prod_opt_list[[prod]])) {
           general_opts$custom_indexes[[prod]][[vers]] <- list()
           general_opts$custom_indexes[[prod]][[vers]]$indexes_bandnames <-
             general_opts$custom_indexes[[prod]][[vers]]$indexes_fullnames <-
-            general_opts$custom_indexes[[prod]][[vers]]$indexes_formulas <-
-            general_opts$custom_indexes[[prod]][[vers]]$indexes_nodata_out <-
-            character(0)
+              general_opts$custom_indexes[[prod]][[vers]]$indexes_formulas <-
+               general_opts$custom_indexes[[prod]][[vers]]$indexes_nodata_out <-
+                 character(0)
         }
       }
     }
@@ -207,8 +209,8 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
           tmp_indexes_nodata_out <- c(as.list(general_opts$custom_indexes[[prod]][[vers]])$indexes_nodata_out,new_indexnodata_out)
 
           general_opts$custom_indexes[[prod]][[vers]] <- list("indexes_bandnames"  = tmp_indexes_bandnames,
-                                                              "indexes_fullnames"  =  tmp_indexes_fullnames,
-                                                              "indexes_formulas"   =  tmp_indexes_formulas,
+                                                              "indexes_fullnames"  = tmp_indexes_fullnames,
+                                                              "indexes_formulas"   = tmp_indexes_formulas,
                                                               "indexes_nodata_out" = tmp_indexes_nodata_out)
           rm(tmp_indexes_bandnames,tmp_indexes_fullnames,tmp_indexes_formulas,tmp_indexes_nodata_out)
         }
@@ -268,17 +270,26 @@ MODIStsp_addindex <- function(option_jsfile=NA, prodopts_file=NA, selprod = NA, 
       new_indexformula  <- svalue(sel_indexformula)
       # Check if formual is good. If so, add it in the options file ----
       # for products for which the formula is computable (i.e., they have the required bands)
-
-      catch_err <- check_formula_errors(new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
-                                        n_products = n_products, prod_opt_list = prod_opt_list, refbands_names = refbands_names)
-
+      
+      catch_err <- check_formula_errors(new_indexbandname = new_indexbandname, 
+                                        new_indexfullname = new_indexfullname, 
+                                        new_indexformula = new_indexformula,
+                                        n_products = n_products, 
+                                        prod_opt_list = prod_opt_list, 
+                                        refbands_names = refbands_names)
+      
       if (catch_err == 0) {
-
-        save_formula(refbands_names = refbands_names, req_bands = attr(catch_err,"req_bands"),
-                     new_indexbandname = new_indexbandname, new_indexfullname = new_indexfullname, new_indexformula = new_indexformula,
-                     new_indexnodata_out = new_indexnodata_out, general_opts = if (exists("general_opts")) general_opts else NULL,
-                     prod_opt_list = prod_opt_list, previous_jsfile = previous_jsfile)
-      }
+        
+        save_formula(refbands_names = refbands_names, 
+                     req_bands = attr(catch_err,"req_bands"),
+                     new_indexbandname = new_indexbandname, 
+                     new_indexfullname = new_indexfullname, 
+                     new_indexformula = new_indexformula,
+                     new_indexnodata_out = new_indexnodata_out, 
+                     general_opts = if (exists("general_opts")) general_opts else NULL,
+                     prod_opt_list = prod_opt_list, 
+                     previous_jsfile = previous_jsfile)
+      } 
       # Issue error warnings if something went wrong !!!!
 
       switch(as.character(catch_err),

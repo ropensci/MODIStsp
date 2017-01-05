@@ -145,7 +145,7 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
       warning("Some features of the spatial object are outside or partially outside\n the extent of the input RasterStack ! Output for features outside rasterstack extent\n will be set to NODATA. Outputs for features only partially inside will be retrieved\n using only the available pixels !")
       if (!setequal(sp_object$mdxtnq, shape$mdxtnq)){
 
-        outside_feat = setdiff(sp_object$mdxtnq, shape$mdxtnq)
+        outside_feat <- setdiff(sp_object$mdxtnq, shape$mdxtnq)
       }
     }
     if (class(shape) %in% c("SpatialPointsDataFrame", "SpatialPoints",
@@ -217,7 +217,7 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
         value <- getValues(in_rts[[sel_dates[f]]])[ok_zones]
         rDT <- data.table(value, zones)
         setkey(rDT, zones)
-        .SD = NULL # Workaround to avoid note on package check
+        .SD <- NULL # Workaround to avoid note on package check
         ts[f, 1:ncols] <- rDT[, lapply(.SD, match.fun(FUN), na.rm = na.rm), by = zones]$value
 
       }

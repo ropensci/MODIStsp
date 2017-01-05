@@ -14586,7 +14586,7 @@
                 <combined>1</combined>
                 <tiled>1</tiled>
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q1</www>
-                <bands>
+                              <bands>
                     <band>
                         <bandname>LC1</bandname>
                         <fullname>Land Cover Type 1 (IGBP)*</fullname>
@@ -14699,7 +14699,7 @@
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
-                </bands>        <quality_indicators>
+                </bands>     <quality_indicators>
                     <quality>
                         <quality_bandname>Mandatory_QA</quality_bandname>
                         <quality_fullname>Mandatory QA</quality_fullname>

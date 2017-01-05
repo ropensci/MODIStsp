@@ -245,7 +245,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                   gbutton(text = "Add custom indexes",
                           handler = function(h,...) {
                             # Run addindex() function ----
-                            addind = MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file, selprod = svalue(prod_wid), selvers = svalue(vers_wid))
+                            addind <- MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file, selprod = svalue(prod_wid), selvers = svalue(vers_wid))
                             
                             # if (addind ==TRUE) {
                             general_opts  <- RJSONIO::fromJSON(previous_jsfile)
@@ -284,8 +284,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
             },container = satprod2_group, expand = FALSE)
   
   font(vers_label) <- font(sens_label) <- font(band_label) <- list(family = "sans", weight = "bold")
-  size(band_wid) = list(width = 270)
-  
+  size(band_wid)   <- list(width = 270)
   #- ------------------------------------------------------------------------------- -#
   # Widgets for authentication/download mode selection ----
   #- ------------------------------------------------------------------------------- -#
@@ -306,7 +305,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   size(server_wid) <- list(width = 100)
   
   addSpace(methods_group, 20)
-  authenticate_group = ggroup(container = methods_group)
+  authenticate_group <- ggroup(container = methods_group)
   user_lab <- glabel(text = " User Name:", container = authenticate_group)
   user_wid <- gedit(text = general_opts$user, container = authenticate_group, width = 15)
   addSpace(authenticate_group, 20)
@@ -361,8 +360,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                   enabled(tiles_from_bbox) <- T
                   enabled(bbox_from_file)  <- T
                 }
-              })
-  size(output_ext_wid) <-  list(width = 150)
+              } )
+  size(output_ext_wid) <- list(width = 150)
   addSpring(output_ext_group)
   
   
@@ -464,7 +463,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   size(fake_lab) <- list(height = 15)
   
   # Group to select which tiles should be downloaded ----
-  spatial_group <- ggroup(container = Spatial_Frame, horizontal = TRUE)
+  spatial_group  <- ggroup(container = Spatial_Frame, horizontal = TRUE)
   
   tiles_group   <- gframe(text = "<b><i> Required MODIS Tiles </i></b>", markup = TRUE,
                         container = spatial_group, horizontal = FALSE, expand = FALSE, pos = 0.5)
@@ -729,7 +728,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   addSpring(output_res_group)
   resmeth_lab       <- glabel(text = "    Resampling Method:  ", container = output_res_group)
   font(resmeth_lab) <- list(family = "sans",weight = "bold")
-  size(resmeth_lab) <-  list(width = 200 )
+  size(resmeth_lab) <- list(width = 200 )
   
   resamp_array       <- c("near","mode")
   output_resmeth_wid <-  gcombobox(resamp_array, container = output_res_group, selected = match(general_opts$resampling, resamp_array))
@@ -762,7 +761,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # addSpace(opt_group, 80)
   
   # Compression ----
-  compress_group <-  ggroup(container = opt_group, horizontal = TRUE)
+  compress_group <- ggroup(container=opt_group, horizontal=TRUE)
   compress_dict  <- c("None","PACKBITS","LZW","DEFLATE")
   names(compress_dict) <- c("None","Low (PACKBITS)","Medium (LZW)","High (DEFLATE)")
   compress_lab   <- glabel(text = "GTiff Compression: ", container = compress_group)
@@ -891,8 +890,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     general_opts$out_res     <- svalue(output_res_wid)
     general_opts$resampling  <- svalue(output_resmeth_wid)
     general_opts$full_ext    <- svalue(output_ext_wid)
-    general_opts$bbox        <- ((c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),
-                                    svalue(output_LReast_wid),svalue(output_ULnorth_wid))))
+    general_opts$bbox        <- c(svalue(output_ULeast_wid),svalue(output_LRnorth_wid),
+                                  svalue(output_LReast_wid),svalue(output_ULnorth_wid))
     
     general_opts$reprocess  <- svalue(reprocess_wid)  # Retrieve reprocess, delete and nodata
     general_opts$delete_hdf <- svalue(delete_wid)
@@ -1019,7 +1018,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     }
     
     if (general_opts$resampling == "mode" & GUI.env$check_save_opts) {
-      check_mode = gconfirm(paste("Warning! You selected 'mode' resampling. Be aware that 'mode'", 
+      check_mode <- gconfirm(paste("Warning! You selected 'mode' resampling. Be aware that 'mode'", 
                                   "resampling can provide inconsistent results in areas affected",
                                   "by mixed high and low quality data, and in properly keeping track",
                                   "of quality indicators! Do you wish to continue?"), title = "Warning")

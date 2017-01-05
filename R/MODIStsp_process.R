@@ -72,6 +72,7 @@
 #' @importFrom RCurl getBinaryURL
 #' @importFrom stringr str_locate
 #' @import gWidgets
+#' @import gWidgetsRGtk2
 
 MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor, download_server, 
                              user, password, https, ftps,start_x, start_y, end_x, end_y, bbox, out_format, compress, out_res_sel, out_res, 
