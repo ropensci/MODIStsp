@@ -20,7 +20,7 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
 
   xmlfile <- xmlParse(xml_file)  # initialize xml parsing
 
-  xmltop <- xmlRoot(xmlfile) # gives content of root
+  xmltop  <- xmlRoot(xmlfile) # gives content of root
 
   names_products <- names(xmlChildren(xmltop)) # names of the single products
   names_products <- names_products[names_products!="comment"] 
@@ -39,31 +39,31 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
       prodopts[[version_name]]$v_number <- version_name
       # prodopts[[version_name]]$fullname <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["prod_fullname"]])
       prodopts[[version_name]]$main_out_folder <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["main_out_folder"]])
-      prodopts[[version_name]]$native_res <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["native_res"]])
-      prodopts[[version_name]]$tiled <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["tiled"]])
+      prodopts[[version_name]]$native_res      <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["native_res"]])
+      prodopts[[version_name]]$tiled    <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["tiled"]])
       prodopts[[version_name]]$combined <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["combined"]])
       prodopts[[version_name]]$cat01 <- xmlToList(xmltop[[prod]][["cat_01"]])
       prodopts[[version_name]]$cat02 <- xmlToList(xmltop[[prod]][["cat_02"]])
       file_prefix_terra <- xmlToList(xmltop[[prod]][["file_prefix_terra"]])
       http_terra <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["http_terra"]])
-      ftp_terra <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["ftp_terra"]])
+      ftp_terra  <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["ftp_terra"]])
       file_prefix_aqua <- xmlToList(xmltop[[prod]][["file_prefix_aqua"]])
       http_aqua <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["http_aqua"]])
-      ftp_aqua <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["ftp_aqua"]])
+      ftp_aqua  <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["ftp_aqua"]])
       prodopts[[version_name]]$www <- xmlToList(xmltop[[prod]][["versions"]][[n_version]][["www"]])
       prodopts[[version_name]]$file_prefix <- hash("Terra" = file_prefix_terra,"Aqua" = file_prefix_aqua)
       prodopts[[version_name]]$http <- hash("Terra" = http_terra,"Aqua" = http_aqua)
-      prodopts[[version_name]]$ftp <- hash("Terra" =ftp_terra,"Aqua" = ftp_aqua)
+      prodopts[[version_name]]$ftp  <- hash("Terra" =ftp_terra,"Aqua" = ftp_aqua)
       prodopts[[version_name]]$multiband_bsq <- T
       
       # Band info
       nbands <- xmlSize(xmltop[[prod]][["versions"]][[n_version]][["bands"]])  # number of original layers
       bandnames <- band_fullname <- datatype <- nodata_in <- nodata_out <- NULL
       for (band in 1:nbands) { # get chars of original layers
-        bandnames <- c(bandnames,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["bandname"]]))
+        bandnames     <- c(bandnames,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["bandname"]]))
         band_fullname <- c(band_fullname,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["fullname"]]))
-        datatype <- c(datatype,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["datatype"]]))
-        nodata_in <- c(nodata_in,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["nodata_in"]]))
+        datatype   <- c(datatype,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["datatype"]]))
+        nodata_in  <- c(nodata_in,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["nodata_in"]]))
         nodata_out <- c(nodata_out,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["nodata_out"]]))
       } #End Cycle on band
       prodopts[[version_name]]$bandnames <- bandnames # store in prodopts
@@ -85,15 +85,15 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
       if (nindexes > 0 ) {
         indexes_bandnames <- indexes_fullnames <- indexes_formulas <- indexes_nodata_out <- NULL
         for (index in 1:nindexes) {   # get charcteristics of indexes
-          indexes_bandnames <- c(indexes_bandnames,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["indexes"]][[index]][["indexes_bandname"]]))
-          indexes_fullnames <- c(indexes_fullnames,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["indexes"]][[index]][["indexes_fullname"]]))
-          indexes_formulas <- c(indexes_formulas,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["indexes"]][[index]][["indexes_formula"]]))
+          indexes_bandnames  <- c(indexes_bandnames,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["indexes"]][[index]][["indexes_bandname"]]))
+          indexes_fullnames  <- c(indexes_fullnames,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["indexes"]][[index]][["indexes_fullname"]]))
+          indexes_formulas   <- c(indexes_formulas,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["indexes"]][[index]][["indexes_formula"]]))
           indexes_nodata_out <- c(indexes_nodata_out,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["indexes"]][[index]][["indexes_nodata_out"]]))
         } #End Cycle on index
         
-        prodopts[[version_name]]$indexes_bandnames <- indexes_bandnames		# store in prodopts
-        prodopts[[version_name]]$indexes_fullnames <- indexes_fullnames
-        prodopts[[version_name]]$indexes_formulas <- indexes_formulas
+        prodopts[[version_name]]$indexes_bandnames  <- indexes_bandnames		# store in prodopts
+        prodopts[[version_name]]$indexes_fullnames  <- indexes_fullnames
+        prodopts[[version_name]]$indexes_formulas   <- indexes_formulas
         prodopts[[version_name]]$indexes_nodata_out <- indexes_nodata_out
         # prodopts[[version_name]]$indexes_bandsel <- rep(0, length(prodopts[[version_name]]$indexes_bandnames))
       }   #end if on indexes existence
@@ -106,13 +106,13 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
           quality_bandnames <- c(quality_bandnames,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["quality_indicators"]][[quality]][["quality_bandname"]]))
           quality_fullnames <- c(quality_fullnames,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["quality_indicators"]][[quality]][["quality_fullname"]]))
           quality_source <- c(quality_source,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["quality_indicators"]][[quality]][["quality_source"]]))
-          quality_bitN <- c(quality_bitN,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["quality_indicators"]][[quality]][["quality_bitN"]]))
+          quality_bitN   <- c(quality_bitN,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["quality_indicators"]][[quality]][["quality_bitN"]]))
         } #End Cycle on quality
-        prodopts[[version_name]]$quality_bandnames <- quality_bandnames
-        prodopts[[version_name]]$quality_fullnames <- quality_fullnames
-        prodopts[[version_name]]$quality_source <- quality_source
-        prodopts[[version_name]]$quality_bitN <- quality_bitN
-        prodopts[[version_name]]$quality_nodata_in <- rep("255", length(prodopts[[version_name]]$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
+        prodopts[[version_name]]$quality_bandnames  <- quality_bandnames
+        prodopts[[version_name]]$quality_fullnames  <- quality_fullnames
+        prodopts[[version_name]]$quality_source     <- quality_source
+        prodopts[[version_name]]$quality_bitN       <- quality_bitN
+        prodopts[[version_name]]$quality_nodata_in  <- rep("255", length(prodopts[[version_name]]$quality_bandnames))  # nodata in for quality bands (dummy - always 255)
         prodopts[[version_name]]$quality_nodata_out <- rep("255", length(prodopts[[version_name]]$quality_bandnames)) # nodata out for quality bands (always 255)
         # prodopts[[version_name]]$quality_bandsel <- rep(0, length(prodopts[[version_name]]$quality_bandnames))  	 #Selection of desired quality bands (all zeroes)
       } # end if on quality existence

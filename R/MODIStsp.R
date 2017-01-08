@@ -75,13 +75,13 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
   if (gui) {
     if (!p_exists("gWidgetsRGtk2", local = TRUE)) {
 
-      message("Library 'gWidgetsRGtk2' is not installed. It is required to run MODIStsp! 
-              \n\nDo you want to install it now?", type = " y / n")
+      message(paste0("Library 'gWidgetsRGtk2' is not installed. It is required to run MODIStsp!\n\n",
+                     "Do you want to install it now?"), type = " y / n")
       inst_gw <- readline()
       if (inst_gw == "y") {
         p_load("gWidgetsRGtk2")
       } else {
-        stop("MODIStsp can not work in Interactive mode withouth gWidgetsRGtk2 ! Exiting !")
+        stop("MODIStsp can not work in Interactive mode withouth gWidgetsRGtk2! Exiting!")
       }
       
     }
@@ -92,8 +92,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
     
-    welcome_text <- "Welcome to MODIStsp!\n\nWe will now search for a valid GDAL 
-                     installation - please wait\n(this will happen only once)"
+    welcome_text <- paste0("Welcome to MODIStsp!\n\nWe will now search for a valid GDAL ",
+                           "installation - please wait\n(this will happen only once)")
     if (gui) {
       welcome_win <- gwindow(title = "Welcome", width = 400, height = 100)
       welcome_lab <- glabel(text = welcome_text , container = welcome_win, editable = FALSE)
@@ -105,7 +105,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
     }
     gdal_setInstallation(ignore.full_scan = TRUE, verbose = TRUE)
   }
-  gdal_version    <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", 
+  gdal_version <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", 
                                           getGDALVersionInfo(str = "--version")))
   # GDAL version used during the last test (for now used as minimum required version)
   gdal_minversion <- package_version("1.11.1") 
@@ -166,7 +166,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
     general_opts <- list(#previous_jsfile = previous_jsfile, prodopts_file = prodopts_file, xml_file = xml_file, #out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
       sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = strftime(Sys.Date(),"%Y-01-01"), end_date = as.character(Sys.Date()),
       bandsel = rep(0,13), indexes_bandsel = rep(0,11), quality_bandsel = rep(0,21), # lenghts refearred to "Surf_Ref_8Days_500m (M*D09A1)" v6!
-      start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", download_server = "http",
+      start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", use_aria = FALSE, download_server = "http",
       proj = "Sinusoidal", user_proj4 = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
       out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
       nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
@@ -347,7 +347,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
       quality_nodata_out = prod_opts$quality_nodata_out,
       file_prefixes      = prod_opts$file_prefix, 
       main_out_folder    = prod_opts$main_out_folder, 
-      gui                = gui
+      gui                = gui,
+      use_aria           = general_opts$use_aria
     )
     
     # At end of succesfull execution, save the options used in the main output folder

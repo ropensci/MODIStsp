@@ -12,7 +12,7 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
   quality_bandnames, quality_bandsel, quality_bitN, quality_source,
   quality_nodata_in, full_ext, quality_nodata_out, file_prefixes,
-  main_out_folder, resampling, ts_format, gui = TRUE)
+  main_out_folder, resampling, ts_format, gui = TRUE, use_aria = TRUE)
 }
 \arguments{
 \item{sel_prod}{string selected MODIS product}
@@ -112,6 +112,8 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \item{ts_format}{string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)}
 
 \item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
+
+\item{use_aria}{logical if TRUE, then aria2c is used to accelerate download (if available !)}
 }
 \description{
 main function of MODIStsp tool. Takes as input processing parameters specified by the user using MODIStsp_GUI and saved in

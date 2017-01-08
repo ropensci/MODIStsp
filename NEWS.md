@@ -1,5 +1,11 @@
 # MODIStsp v 1.3.0.9000  
 
+Added functionality for accelerating download using aria2c (Issue [#55](https://github.com/lbusett/MODIStsp/issues/55))
+
+Fixed bug on insertion of custom projection (Issue [#57](https://github.com/lbusett/MODIStsp/issues/57))
+
+Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53))
+
 
 
 # MODIStsp v 1.3.0  Release NOtes
