@@ -75,13 +75,13 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
   if (gui) {
     if (!p_exists("gWidgetsRGtk2", local = TRUE)) {
 
-      message("Library 'gWidgetsRGtk2' is not installed. It is required to run MODIStsp! 
-              \n\nDo you want to install it now?", type = " y / n")
+      message(paste0("Library 'gWidgetsRGtk2' is not installed. It is required to run MODIStsp!\n\n",
+                     "Do you want to install it now?"), type = " y / n")
       inst_gw <- readline()
       if (inst_gw == "y") {
         p_load("gWidgetsRGtk2")
       } else {
-        stop("MODIStsp can not work in Interactive mode withouth gWidgetsRGtk2 ! Exiting !")
+        stop("MODIStsp can not work in Interactive mode withouth gWidgetsRGtk2! Exiting!")
       }
       
     }
@@ -92,8 +92,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
   # Check GDAL version
   if (is.null(getOption("gdalUtils_gdalPath"))) {
     
-    welcome_text <- "Welcome to MODIStsp!\n\nWe will now search for a valid GDAL 
-                     installation - please wait\n(this will happen only once)"
+    welcome_text <- paste0("Welcome to MODIStsp!\n\nWe will now search for a valid GDAL ",
+                           "installation - please wait\n(this will happen only once)")
     if (gui) {
       welcome_win <- gwindow(title = "Welcome", width = 400, height = 100)
       welcome_lab <- glabel(text = welcome_text , container = welcome_win, editable = FALSE)
@@ -105,7 +105,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
     }
     gdal_setInstallation(ignore.full_scan = TRUE, verbose = TRUE)
   }
-  gdal_version    <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", 
+  gdal_version <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*","\\1", 
                                           getGDALVersionInfo(str = "--version")))
   # GDAL version used during the last test (for now used as minimum required version)
   gdal_minversion <- package_version("1.11.1") 

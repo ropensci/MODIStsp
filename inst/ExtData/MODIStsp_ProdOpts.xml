@@ -128,7 +128,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -429,7 +429,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -795,7 +795,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -1114,7 +1114,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -1594,7 +1594,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -1958,7 +1958,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -2236,7 +2236,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
@@ -2363,7 +2363,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -2466,7 +2466,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (b2_NIR/b1_Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>        <index>        <indexes_bandname>SAVI</indexes_bandname>
                         <indexes_fullname>SAVI (b2_NIR-b1_Red)/(b2_NIR+b1_Red+0.5)*(1+0.5)</indexes_fullname>
@@ -2571,7 +2571,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -5683,7 +5683,7 @@
         </versions>
     </MOD11C3>
     <MCD43A1>
-        <name>BRDF_Albedo_ModelPar_16Days_500m (MCD43A1)</name>
+        <name>BRDF_Albedo_ModelPar_Daily_500m (MCD43A1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43A1</file_prefix_terra>
@@ -5692,7 +5692,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>BRDF-Albedo Model Parameters 16-Day L3 Global 500m</prod_fullname>
-                <main_out_folder>BRDF_Albedo_ModelPar_16Days_500m_v5</main_out_folder>
+                <main_out_folder>BRDF_Albedo_ModelPar_Daily_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_aqua>
@@ -5784,7 +5784,7 @@
             <version>
                 <v_number>6</v_number>
                 <prod_fullname>MCD43A1: MODIS/Terra and Aqua BRDF/Albedo Model Parameters Daily L3 Global 500 m SIN Grid</prod_fullname>
-                <main_out_folder>BRDF_Albedo_ModelPar_16Days_500m_v6</main_out_folder>
+                <main_out_folder>BRDF_Albedo_ModelPar_Daily_500m_v6</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.006/</http_aqua>
@@ -5932,7 +5932,7 @@
         </versions>
     </MCD43A1>
     <MCD43A2>
-        <name>BRDF_Albedo_Quality_16Days_500m (MCD43A2)</name>
+        <name>BRDF_Albedo_Quality_Daily_500m (MCD43A2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43A2</file_prefix_terra>
@@ -5941,7 +5941,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>BRDF-Albedo Quality 16-Day L3 Global 500m</prod_fullname>
-                <main_out_folder>BRDF_Albedo_Quality_16Days_500m_v5</main_out_folder>
+                <main_out_folder>BRDF_Albedo_Quality_Daily_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_aqua>
@@ -6039,7 +6039,7 @@
             <version>
                 <v_number>6</v_number>
                 <prod_fullname>MCD43A2: MODIS/Terra and Aqua BRDF/Albedo Quality Daily L3 Global 500 m SIN Grid V006500m</prod_fullname>
-                <main_out_folder>BRDF_Albedo_Quality_16Days_500m_v6</main_out_folder>
+                <main_out_folder>BRDF_Albedo_Quality_Daily_500m_v6</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.006/</http_aqua>
@@ -6187,7 +6187,7 @@
         </versions>
     </MCD43A2>
     <MCD43A3>
-        <name>Albedo_16Days_500m (MCD43A3)</name>
+        <name>Albedo_Daily_500m (MCD43A3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43A3</file_prefix_terra>
@@ -6196,7 +6196,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>Albedo 16-Day L3 Global 500m</prod_fullname>
-                <main_out_folder>Albedo_16Days_500m_v5</main_out_folder>
+                <main_out_folder>Albedo_Daily_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_aqua>
@@ -6351,7 +6351,7 @@
             <version>
                 <v_number>6</v_number>
                 <prod_fullname>MCD43A3: MODIS/Terra and Aqua Albedo Daily L3 Global 500 m SIN Grid V006</prod_fullname>
-                <main_out_folder>Albedo_16Days_500m_v6</main_out_folder>
+                <main_out_folder>Albedo_Daily_500m_v6</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.006/</http_aqua>
@@ -6576,7 +6576,7 @@
         </versions>
     </MCD43A3>
     <MCD43A4>
-        <name>BRDF_Adj_Refl_16Days_500m (MCD43A4)</name>
+        <name>BRDF_Adj_Refl_Daily_500m (MCD43A4)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43A4</file_prefix_terra>
@@ -6585,7 +6585,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>Nadir BRDF-Adjusted Reflectance 16-Day L3 Global 500m</prod_fullname>
-                <main_out_folder>BRDF_Adj_Refl_16Days_500m_v5</main_out_folder>
+                <main_out_folder>BRDF_Adj_Refl_Daily_500m_v5</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_aqua>
@@ -6645,11 +6645,78 @@
                         <nodata_out>32767</nodata_out>
                     </band>
                 </bands>
+                <indexes>
+                    <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+Nad_Refl_b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+6*Nad_Refl_b1_Red-7.5*Nad_Refl_b3_Blue+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SR</indexes_bandname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+Nad_Refl_b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDFI</indexes_bandname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b1_Red-Nad_Refl_b7_SWIR)/(Nad_Refl_b1_Red+Nad_Refl_b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII6</indexes_bandname>
+                        <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b6_SWIR)/(Nad_Refl_b2_NIR+Nad_Refl_b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII7</indexes_bandname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b7_SWIR)/(Nad_Refl_b2_NIR+Nad_Refl_b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+Nad_Refl_b1_Red+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDSI</indexes_bandname>
+                        <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b4_Green-Nad_Refl_b6_SWIR)/(Nad_Refl_b4_Green+Nad_Refl_b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>GNDVI</indexes_bandname>
+                        <indexes_fullname>GNDVI (Nad_Refl_b2_NIR-Nad_Refl_b4_Green)/(Nad_Refl_b1_Red+Nad_Refl_b4_Green)</indexes_fullname>
+                        <indexes_formula>(NIR-Green)/(NIR+Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>RGRI</indexes_bandname>
+                        <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b1_Red/Nad_Refl_b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>        <index>
+                        <indexes_bandname>GRVI</indexes_bandname>
+                        <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b1_Red-Nad_Refl_b4_Green)/(Nad_Refl_b1_Red+Nad_Refl_b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                </indexes>
             </version>
             <version>
                 <v_number>6</v_number>
                 <prod_fullname>MCD43A4: MODIS/Terra and Aqua Nadir BRDF-Adjusted Reflectance Daily L3 Global 500 m SIN Grid V006</prod_fullname>
-                <main_out_folder>BRDF_Adj_Refl_16Days_500m_v6</main_out_folder>
+                <main_out_folder>BRDF_Adj_Refl_Daily_500m_v6</main_out_folder>
                 <native_res>463.3127</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/</http_aqua>
@@ -6758,11 +6825,78 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                 </bands>
+                <indexes>
+                    <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band1)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+6*Nadir_Reflectance_Band1-7.5*Nadir_Reflectance_Band3+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SR</indexes_bandname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band1)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDFI</indexes_bandname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band1-Nadir_Reflectance_Band7)/(Nadir_Reflectance_Band1+Nadir_Reflectance_Band7)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII6</indexes_bandname>
+                        <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band6)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band6)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII7</indexes_bandname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band7)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band7)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band1+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDSI</indexes_bandname>
+                        <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band4-Nadir_Reflectance_Band6)/(Nadir_Reflectance_Band4+Nadir_Reflectance_Band6)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>GNDVI</indexes_bandname>
+                        <indexes_fullname>GNDVI (Nad_Refl_b2_NIR-Nad_Refl_b4_Green)/(Nad_Refl_b1_Red+Nad_Refl_b4_Green)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band4)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band4)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>RGRI</indexes_bandname>
+                        <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band1/Nadir_Reflectance_Band4)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>        <index>
+                        <indexes_bandname>GRVI</indexes_bandname>
+                        <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band1-Nadir_Reflectance_Band4)/(Nadir_Reflectance_Band1+Nadir_Reflectance_Band4)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                </indexes>
             </version>
         </versions>
     </MCD43A4>
     <MCD43B1>
-        <name>BRDF_Albedo_ModelPar_16Days_1Km (MCD43B1)</name>
+        <name>BRDF_Albedo_ModelPar_Daily_1Km (MCD43B1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43B1</file_prefix_terra>
@@ -6771,7 +6905,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>BRDF-Albedo Model Parameters 16-Day L3 Global 1km</prod_fullname>
-                <main_out_folder>BRDF_Albedo_ModelPar_16Days_1Km_v5</main_out_folder>
+                <main_out_folder>BRDF_Albedo_ModelPar_Daily_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_aqua>
@@ -6863,7 +6997,7 @@
         </versions>
     </MCD43B1>
     <MCD43B2>
-        <name>BRDF_Albedo_Quality_16Days_1Km (MCD43B2)</name>
+        <name>BRDF_Albedo_Quality_Daily_1Km (MCD43B2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43B2</file_prefix_terra>
@@ -6872,7 +7006,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>BRDF-Albedo Quality 16-Day L3 Global 1km</prod_fullname>
-                <main_out_folder>BRDF_Albedo_Quality_16Days_1Km_v5</main_out_folder>
+                <main_out_folder>BRDF_Albedo_Quality_Daily_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_aqua>
@@ -6970,7 +7104,7 @@
         </versions>
     </MCD43B2>
     <MCD43B3>
-        <name>Albedo_16Days_1Km (MCD43B3)</name>
+        <name>Albedo_Daily_1Km (MCD43B3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43B3</file_prefix_terra>
@@ -6979,7 +7113,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>Albedo 16-Day L3 Global 1km</prod_fullname>
-                <main_out_folder>Albedo_16Days_1Km_v5</main_out_folder>
+                <main_out_folder>Albedo_Daily_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_aqua>
@@ -7134,7 +7268,7 @@
         </versions>
     </MCD43B3>
     <MCD43B4>
-        <name>BRDF_Adj_Refl_16Days_1Km (MCD43B4)</name>
+        <name>BRDF_Adj_Refl_Daily_1Km (MCD43B4)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43B4</file_prefix_terra>
@@ -7143,7 +7277,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>Nadir BRDF-Adjusted Reflectance Reflectance 16-Day L3 Global 1km</prod_fullname>
-                <main_out_folder>BRDF_Adj_Refl_16Days_1Km_v5</main_out_folder>
+                <main_out_folder>BRDF_Adj_Refl_Daily_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_aqua>
@@ -7203,11 +7337,78 @@
                         <nodata_out>32767</nodata_out>
                     </band>
                 </bands>
+                <indexes>
+                    <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+Nad_Refl_b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+6*Nad_Refl_b1_Red-7.5*Nad_Refl_b3_Blue+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SR</indexes_bandname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+Nad_Refl_b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDFI</indexes_bandname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b1_Red-Nad_Refl_b7_SWIR)/(Nad_Refl_b1_Red+Nad_Refl_b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII6</indexes_bandname>
+                        <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b6_SWIR)/(Nad_Refl_b2_NIR+Nad_Refl_b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII7</indexes_bandname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b7_SWIR)/(Nad_Refl_b2_NIR+Nad_Refl_b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+Nad_Refl_b1_Red+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDSI</indexes_bandname>
+                        <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b4_Green-Nad_Refl_b6_SWIR)/(Nad_Refl_b4_Green+Nad_Refl_b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>GNDVI</indexes_bandname>
+                        <indexes_fullname>GNDVI (Nad_Refl_b2_NIR-Nad_Refl_b4_Green)/(Nad_Refl_b1_Red+Nad_Refl_b4_Green)</indexes_fullname>
+                        <indexes_formula>(NIR-Green)/(NIR+Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>RGRI</indexes_bandname>
+                        <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b1_Red/Nad_Refl_b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>        <index>
+                        <indexes_bandname>GRVI</indexes_bandname>
+                        <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b1_Red-Nad_Refl_b4_Green)/(Nad_Refl_b1_Red+Nad_Refl_b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                </indexes>
             </version>
         </versions>
     </MCD43B4>
     <MCD43C1>
-        <name>BRDF_Albedo_ModelPar_16Days_005dg (MCD43C1)</name>
+        <name>BRDF_Albedo_ModelPar_Daily_005dg (MCD43C1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43C1</file_prefix_terra>
@@ -7216,7 +7417,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>BRDF-Albedo Model Parameters 16-Day L3 0.05Deg CMG</prod_fullname>
-                <main_out_folder>BRDF_Albedo_ModelPar_16Days_005dg_v5</main_out_folder>
+                <main_out_folder>BRDF_Albedo_ModelPar_Daily_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_aqua>
@@ -7308,7 +7509,7 @@
             <version>
                 <v_number>6</v_number>
                 <prod_fullname>MCD43C1: MODIS/Terra and Aqua BRDF/Albedo Model Parameters Daily L3 Global 0.05Deg CMG V006</prod_fullname>
-                <main_out_folder>BRDF_Albedo_ModelPar_16Days_005dg_v6</main_out_folder>
+                <main_out_folder>BRDF_Albedo_ModelPar_Daily_005dg_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006/</http_aqua>
@@ -7568,7 +7769,7 @@
         </versions>
     </MCD43C1>
     <MCD43C2>
-        <name>BRDF_Albedo_Quality_16Days_005dg (MCD43C2)</name>
+        <name>BRDF_Albedo_Quality_Daily_005dg (MCD43C2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43C2</file_prefix_terra>
@@ -7577,7 +7778,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>BRDF-Albedo Snow-Free Quality 16-Day L3 Global 0.05Deg CMG</prod_fullname>
-                <main_out_folder>BRDF_Albedo_Quality_16Days_005dg_v5</main_out_folder>
+                <main_out_folder>BRDF_Albedo_Quality_Daily_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_aqua>
@@ -7675,7 +7876,7 @@
             <version>
                 <v_number>6</v_number>
                 <prod_fullname>MCD43C2: MODIS/Terra and Aqua BRDF/Albedo Snow-free Parameters Daily L3 Global 0.05Deg CMG V006</prod_fullname>
-                <main_out_folder>BRDF_Albedo_Quality_16Days_005dg_v6</main_out_folder>
+                <main_out_folder>BRDF_Albedo_Quality_Daily_005dg_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.006/</http_aqua>
@@ -7928,7 +8129,7 @@
          </versions>
     </MCD43C2>
     <MCD43C3>
-        <name>Albedo_16Days_005dg (MCD43C3)</name>
+        <name>Albedo_Daily_005dg (MCD43C3)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>BRDF and Albedo</cat_02>
         <file_prefix_terra>MCD43C3</file_prefix_terra>
@@ -7937,7 +8138,7 @@
             <version>
                 <v_number>5</v_number>
                 <prod_fullname>Albedo 16-Day L3 Global 0.05Deg CMG</prod_fullname>
-                <main_out_folder>Albedo_16Days_005dg_v5</main_out_folder>
+                <main_out_folder>Albedo_Daily_005dg_v5</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_aqua>
@@ -8092,7 +8293,7 @@
             <version>
                 <v_number>6</v_number>
                 <prod_fullname>MCD43C3: MODIS/Terra and Aqua BRDF/Albedo Daily L3 Global 0.05Deg CMG V006</prod_fullname>
-                <main_out_folder>Albedo_16Days_005dg_v6</main_out_folder>
+                <main_out_folder>Albedo_Daily_005dg_v6</main_out_folder>
                 <native_res>5600</native_res>
                 <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006/</http_terra>
                 <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006/</http_aqua>
@@ -8351,6 +8552,73 @@
                         <nodata_out>32767</nodata_out>
                     </band>
                 </bands>
+                <indexes>
+                    <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (NIR-Red)/(NIR+Red)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+Nad_Refl_b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((NIR-Red)/(NIR+6*Red-7.5*Blue+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+6*Nad_Refl_b1_Red-7.5*Nad_Refl_b3_Blue+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SR</indexes_bandname>
+                        <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+Nad_Refl_b1_Red)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDFI</indexes_bandname>
+                        <indexes_fullname>Flood Index (Red-SWIR2)/(Red+SWIR2)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b1_Red-Nad_Refl_b7_SWIR)/(Nad_Refl_b1_Red+Nad_Refl_b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII6</indexes_bandname>
+                        <indexes_fullname>NDII6 (NIR-SWIR1)/(NIR+SWIR1)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b6_SWIR)/(Nad_Refl_b2_NIR+Nad_Refl_b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII7</indexes_bandname>
+                        <indexes_fullname>NDII7 (NIR-SWIR2)/(NIR+SWIR2)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b7_SWIR)/(Nad_Refl_b2_NIR+Nad_Refl_b7_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b2_NIR-Nad_Refl_b1_Red)/(Nad_Refl_b2_NIR+Nad_Refl_b1_Red+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDSI</indexes_bandname>
+                        <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b4_Green-Nad_Refl_b6_SWIR)/(Nad_Refl_b4_Green+Nad_Refl_b6_SWIR)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>GNDVI</indexes_bandname>
+                        <indexes_fullname>GNDVI (Nad_Refl_b2_NIR-Nad_Refl_b4_Green)/(Nad_Refl_b1_Red+Nad_Refl_b4_Green)</indexes_fullname>
+                        <indexes_formula>(NIR-Green)/(NIR+Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>RGRI</indexes_bandname>
+                        <indexes_fullname>RGRI (Red/Green)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b1_Red/Nad_Refl_b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>        <index>
+                        <indexes_bandname>GRVI</indexes_bandname>
+                        <indexes_fullname>GRVI (Red-Green)/(Red+Green)</indexes_fullname>
+                        <indexes_formula>(Nad_Refl_b1_Red-Nad_Refl_b4_Green)/(Nad_Refl_b1_Red+Nad_Refl_b4_Green)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                </indexes>
             </version>
             <version>
                 <v_number>6</v_number>
@@ -8450,6 +8718,73 @@
                         <nodata_out>65535</nodata_out>
                     </band>
                 </bands>
+                <indexes>
+                    <index>
+                        <indexes_bandname>NDVI</indexes_bandname>
+                        <indexes_fullname>NDVI (Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band1)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band1)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>EVI</indexes_bandname>
+                        <indexes_fullname>EVI (2.5*((Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+6*Nadir_Reflectance_Band1-7.5*Nadir_Reflectance_Band3+1)))</indexes_fullname>
+                        <indexes_formula>2.5*((Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+6*Nadir_Reflectance_Band1-7.5*Nadir_Reflectance_Band3+1))</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SR</indexes_bandname>
+                        <indexes_fullname>Simple Ratio (Nadir_Reflectance_Band2/Nadir_Reflectance_Band1)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band1)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDFI</indexes_bandname>
+                        <indexes_fullname>Flood Index (Nadir_Reflectance_Band1-Nadir_Reflectance_Band7)/(Nadir_Reflectance_Band1+Nadir_Reflectance_Band7)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band1-Nadir_Reflectance_Band7)/(Nadir_Reflectance_Band1+Nadir_Reflectance_Band7)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII6</indexes_bandname>
+                        <indexes_fullname>NDII6 (Nadir_Reflectance_Band2-Nadir_Reflectance_Band6)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band6)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band6)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band6)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDII7</indexes_bandname>
+                        <indexes_fullname>NDII7 (Nadir_Reflectance_Band2-Nadir_Reflectance_Band7)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band7)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band7)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band7)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>SAVI</indexes_bandname>
+                        <indexes_fullname>SAVI (Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band1+0.5)*(1+0.5)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band1)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band1+0.5)*(1+0.5)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>NDSI</indexes_bandname>
+                        <indexes_fullname>NDSI (Nadir_Reflectance_Band4-Nadir_Reflectance_Band6)/(Nadir_Reflectance_Band4+-Nadir_Reflectance_Band6)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band4-Nadir_Reflectance_Band6)/(Nadir_Reflectance_Band4+Nadir_Reflectance_Band6)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>GNDVI</indexes_bandname>
+                        <indexes_fullname>GNDVI (Nadir_Reflectance_Band2-Nadir_Reflectance_Band4)/(Nadir_Reflectance_Band1+Nadir_Reflectance_Band4)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band2-Nadir_Reflectance_Band4)/(Nadir_Reflectance_Band2+Nadir_Reflectance_Band4)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                    <index>
+                        <indexes_bandname>RGRI</indexes_bandname>
+                        <indexes_fullname>RGRI (Nadir_Reflectance_Band1/Nadir_Reflectance_Band4)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band1/Nadir_Reflectance_Band4)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>        <index>
+                        <indexes_bandname>GRVI</indexes_bandname>
+                        <indexes_fullname>GRVI (Nadir_Reflectance_Band1-Nadir_Reflectance_Band4)/(Nadir_Reflectance_Band1+Nadir_Reflectance_Band4)</indexes_fullname>
+                        <indexes_formula>(Nadir_Reflectance_Band1-Nadir_Reflectance_Band4)/(Nadir_Reflectance_Band1+Nadir_Reflectance_Band4)</indexes_formula>
+                        <indexes_nodata_out>32767</indexes_nodata_out>
+                    </index>
+                </indexes>
             </version>
         </versions>
     </MCD43C4>
@@ -10670,7 +11005,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -10851,7 +11186,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11041,7 +11376,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11222,7 +11557,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11405,7 +11740,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11586,7 +11921,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11783,7 +12118,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -11958,7 +12293,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -12155,7 +12490,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -12330,7 +12665,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -12520,7 +12855,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -12701,7 +13036,7 @@
                     <index>
                         <indexes_bandname>SR</indexes_bandname>
                         <indexes_fullname>Simple Ratio (NIR/Red)</indexes_fullname>
-                        <indexes_formula>(b2_NIR-b1_Red)/(b2_NIR+b1_Red)</indexes_formula>
+                        <indexes_formula>b2_NIR/b1_Red</indexes_formula>
                         <indexes_nodata_out>32767</indexes_nodata_out>
                     </index>
                     <index>
@@ -14586,7 +14921,7 @@
                 <combined>1</combined>
                 <tiled>1</tiled>
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q1</www>
-                              <bands>
+                <bands>
                     <band>
                         <bandname>LC1</bandname>
                         <fullname>Land Cover Type 1 (IGBP)*</fullname>
@@ -14699,7 +15034,8 @@
                         <nodata_in>255</nodata_in>
                         <nodata_out>255</nodata_out>
                     </band>
-                </bands>     <quality_indicators>
+                </bands>
+                <quality_indicators>
                     <quality>
                         <quality_bandname>Mandatory_QA</quality_bandname>
                         <quality_fullname>Mandatory QA</quality_fullname>
@@ -14798,7 +15134,8 @@
                         <nodata_in>32767</nodata_in>
                         <nodata_out>32767</nodata_out>
                     </band>
-                </bands>        <quality_indicators>
+                </bands>
+                <quality_indicators>
                     <quality>
                         <quality_bandname>Mandatory_QA</quality_bandname>
                         <quality_fullname>Mandatory QA</quality_fullname>
