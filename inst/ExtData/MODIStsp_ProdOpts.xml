@@ -13817,11 +13817,11 @@
         </versions>
     </MOD15A2>
     <MOD15A2H>
-        <name>LAI_8Days_500m (M*D15A2)</name>
+        <name>LAI_8Days_500m (M*D15A2H)</name>
         <cat_01>Ecosystem Variables</cat_01>
         <cat_02>LAI/FPAR</cat_02>
-        <file_prefix_terra>MOD15A2</file_prefix_terra>
-        <file_prefix_aqua>MYD15A2</file_prefix_aqua>
+        <file_prefix_terra>MOD15A2H</file_prefix_terra>
+        <file_prefix_aqua>MYD15A2H</file_prefix_aqua>
         <versions>
             <version>
                 <v_number>6</v_number>
