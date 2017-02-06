@@ -84,7 +84,13 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   # Intialize variables ----------------------------------------------------- 
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  
+
+  # Fix on multiple nodata values
+  suppressWarnings( nodata_in[is.na(as.integer(nodata_in))] <- "None" )
+  suppressWarnings( quality_nodata_in[is.na(as.integer(quality_nodata_in))] <- "None" )
+  # FIXME: as.integer(nodata) cause nodata ranges (e.g. 249-255) to be suppressed. So, in this cases nodata values will not
+  # be recognised. This problem will be solved in future with a cycle on nodata range.
+
   if (nodata_change == "No") {
     nodata_out <- nodata_in
   }  # if nodata chande set to no, set ou_nodata to in_nodata
@@ -506,7 +512,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     }
                     
                     # Create a GDAL vrt file corresponding to the original hdf4
-                    gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band] , vrtnodata = nodata_out[band])
+                    gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band], vrtnodata = nodata_out[band])
+                    
                     # apply the patch if an error in the original hdf4 file at step 0 was detected
                     if (correct_hdf) {
                       outfile_vrt_or <- outfile_vrt
@@ -527,7 +534,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       bbox_mod <- reproj_bbox( bbox, outproj_str, MOD_proj_str, enlarge = TRUE)
                       # Create a resized and eventually mosaiced GDAL vrt file
                       gdalbuildvrt(outfile_vrt_or, outfile_vrt, te = c(bbox_mod), tap = TRUE, tr = paste(rep(native_res,2),collapse = " "),
-                                   srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band], sd = band)
+                                   srcnodata = nodata_in[band], vrtnodata = nodata_out[band], sd = band)
                     }
                     
                     
