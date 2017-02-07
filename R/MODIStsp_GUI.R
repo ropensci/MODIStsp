@@ -363,7 +363,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   font(seas_lab) <- list(family = "sans",weight = "bold")
   # size(seas_lab) <- list(width = 200 )
   seas_array       <- c("whole","seasonal")
-  seas_wid <-  gcombobox(seas_array, container = dates_group, selected = match(general_opts$split_years, seas_array))
+  seas_wid <-  gcombobox(seas_array, container = dates_group, selected = match(general_opts$download_range, seas_array))
   size(seas_wid) <- list(width = 120 )
   
   seas_help <- gbutton(text = " ? ",
