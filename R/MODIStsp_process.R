@@ -326,6 +326,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     }
                   }
                   
+                  # if user/password are not valid, notify
+                  if ( size_string["status_code"]==401) {
+                    stop("Username and/or password are not valid. Please retry with the correct ones or try with ftp download.")
+                  }
+                  
                   # if the xml was available, check the size; otherwise, set as the local size to skip the check
                   if (class(size_string) == "try-error") {
                     remote_filesize <- local_filesize
