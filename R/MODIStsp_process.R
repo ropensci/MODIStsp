@@ -57,6 +57,9 @@
 #' @param ts_format string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
 #' @param use_aria logical if TRUE, then aria2c is used to accelerate download (if available !)
+#' @param download_range character if "whole", all the available images between the startingand the ending dates are downloaded;
+#' if "seasonal", only the images included in the season (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, the images of December,
+#' January and February from 2005 to 2010 - excluding 2005-01, 2005-02 and 2010-12 - are downloaded)
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -79,7 +82,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                              native_res, tiled, MOD_proj_str, outproj_str, nodata_in,nodata_out, nodata_change,rts, datatype,	bandsel, bandnames, 
                              indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel, 
                              quality_bitN ,quality_source, quality_nodata_in, full_ext, quality_nodata_out, file_prefixes, main_out_folder, resampling, 
-                             ts_format, gui=TRUE, use_aria = TRUE) {
+                             ts_format, use_aria = TRUE, download_range="whole", gui=TRUE) {
   
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   # Intialize variables ----------------------------------------------------- 
@@ -183,7 +186,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
             stop("aria2c was not found! Ensure that aria2c is installed and in your path! - See http://aria2.github.io ")
           }
         } else {
-          message("aria2c was not found! It is either not installed or not on your path! - Continuing with normal downlad... ")
+          message("aria2c was not found! It is either not installed or not on your path! - Continuing with normal download... ")
         }
       }
     }
@@ -196,25 +199,58 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     
     for (yy in start_year:end_year) {
       
-      # Create string representing the dates to be processed
-      if (yy == start_year & yy == end_year) {
-        dates <- c(start_date,end_date)
-      }
-      
-      if (yy == start_year & yy != end_year) {
-        dates <- c(start_date,paste0(as.character(yy),".12.31"))
-      }
-      
-      if (yy != start_year & yy == end_year) {
-        dates <- c(paste0(as.character(yy),".1.1"),end_date)
-      }
-      
-      if (yy != start_year & yy != end_year) {
-        dates <- c(paste0(as.character(yy),".1.1"),paste0(as.character(yy),".12.31"))
-      }
+      if (download_range=="whole") {
+        # Create string representing the dates to be processed in the case 
+        # of continuous processing
+        
+        if (yy == start_year & yy == end_year) {
+          dates <- c(start_date, end_date)
+        }
+        
+        if (yy == start_year & yy != end_year) {
+          dates <- c(start_date, paste0(as.character(yy),".12.31"))
+        }
+        
+        if (yy != start_year & yy != end_year) {
+          dates <- c(paste0(as.character(yy),".1.1"), paste0(as.character(yy),".12.31"))
+        }
+        
+        if (yy != start_year & yy == end_year) {
+          dates <- c(paste0(as.character(yy),".1.1"), end_date)
+        }
+        
+      } else if (download_range=="seasonal") {
+        # Create string representing the dates to be processed in the case 
+        # of splitted processing
+        
+        start_seas <- as.Date(strftime(as.Date(start_date,format="%Y.%m.%d"),"0-%m-%d")) # the starting month-day 
+        end_seas <- as.Date(strftime(as.Date(end_date,format="%Y.%m.%d"),"0-%m-%d")) # the ending month-day 
+        
+        nye_incl <- start_seas > end_seas # TRUE if the period includes new year's eve, fasle if not
+        # start_temp <- ymd(paste(2000,month(ymd(start_date)),day(ymd(start_date)), sep = "-"))
+        
+        if (!nye_incl) {
+          dates <- c(gsub(paste0("^",start_year),yy,start_date), gsub(paste0("^",end_year),yy,end_date))
+        } else {
+          
+          if (yy == start_year & yy != end_year) {
+            dates <- c(gsub(paste0("^",start_year),yy,start_date), paste0(as.character(yy),".12.31"))
+          }
+          
+          if (yy != start_year & yy != end_year) {
+            dates <- c(paste0(as.character(yy),".1.1"), gsub(paste0("^",end_year),yy,end_date),
+                       gsub(paste0("^",start_year),yy,start_date), paste0(as.character(yy),".12.31"))
+          }
+          
+          if (yy != start_year & yy == end_year) {
+            dates <- c(paste0(as.character(yy),".1.1"), gsub(paste0("^",end_year),yy,end_date))
+          }
+          
+        }
+
+      } else stop("download_range value not valid (only \"whole\" and \"seasonal\" are admitted).")
       
       # Processing status message
-      
       mess_text <- paste("Retrieving Files for Year",as.character(yy))
       if (gui) {
         svalue(mess_lab) <- paste("---",mess_text,"---")
