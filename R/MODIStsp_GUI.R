@@ -318,7 +318,22 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   } else {
     (enabled(authenticate_group) <- TRUE)
   }
-  aria_wid <- gcheckbox("Use 'aria2c' to accelerate download", checked = general_opts$use_aria, container = methods_group)
+  
+  addSpring(methods_group)
+  aria_wid <- gcheckbox("Use 'aria2c'", checked = general_opts$use_aria, container = methods_group)
+  addSpace(methods_group,2)
+  aria_help <- gbutton(text = " ? ",
+          handler = function(h,....) {
+            help_box <- gbasicdialog(title = "Help", parent = NULL, do.buttons = FALSE, horizontal = FALSE, 
+                                     width = 400, height = 40, handler = function(h,....) {})
+            help_mess_lab <- glabel(text = paste("If selected, use aria2c to accelerate download.",
+                                                 "It is necessary that aria2c is installed and",
+                                                 "that the binary is in the PATH.",
+                                                 "See https://aria2.github.io",
+                                                 sep="\n"), editable = FALSE, container = help_box)
+            visible(help_box) = TRUE
+            }, container = methods_group, expand = FALSE)
+
   
   font(method_lab) <- list(family = "sans",weight = "bold")
   font(user_lab)   <- font(password_lab) <- list(family = "sans",weight = "bold")
