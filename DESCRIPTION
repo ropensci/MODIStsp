@@ -38,4 +38,4 @@ URL: https://github.com/lbusett/MODIStsp
 BugReports: https://github.com/lbusett/MODIStsp/issues
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.0

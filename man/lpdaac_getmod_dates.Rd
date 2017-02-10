@@ -24,4 +24,3 @@ Modified to adapt it to MODIStsp scheme and to http archive (instead than old FT
 email: busetto.l@irea.cnr.it
 license GPL 3.0
 }
-
