@@ -1,10 +1,22 @@
 # MODIStsp v 1.3.0.9000  
 
-Added functionality for accelerating download using aria2c (Issue [#55](https://github.com/lbusett/MODIStsp/issues/55))
+Added functionality for processing of MOD10A1 snow cover data (Issue [#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
 
-Fixed bug on insertion of custom projection (Issue [#57](https://github.com/lbusett/MODIStsp/issues/57))
+Fixed bug on M*D15A2 processing (Issue [#60](https://github.com/lbusett/MODIStsp/issues/60)) on devel/master
 
-Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53))
+Fixed bug on MCD12Q1 processing (Issue [#58](https://github.com/lbusett/MODIStsp/issues/58)) on devel/master
+
+Added functionality for downloading "partial" years(Issue [#54](https://github.com/lbusett/MODIStsp/issues/54)) on devel
+
+Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [#59](https://github.com/lbusett/MODIStsp/issues/59)) on master/devel
+
+Added functionality for accelerating download using aria2c (Issue [#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+
+Fixed bug on  MOD13C2 processing (Issue [#52](https://github.com/lbusett/MODIStsp/issues/52)) on devel/master
+
+Fixed bug on insertion of custom projection (Issue [#57](https://github.com/lbusett/MODIStsp/issues/57)) on devel/master
+
+Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53)) on devel/master
 
 
 

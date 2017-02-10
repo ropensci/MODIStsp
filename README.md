@@ -15,7 +15,7 @@
     -   [Installing GDAL &gt;= 1.11.1](#installing-gdal-1.11.1)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/21656836.svg)](https://zenodo.org/badge/latestdoi/21656836)
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/21656836.svg)](https://zenodo.org/badge/latestdoi/21656836)
 
 MODIStsp
 ========
@@ -34,6 +34,28 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 
 News !
 ======
+
+-   **10/02/2017 - Various updates in the last period**
+
+Added functionality for processing of MOD10A1 snow cover data (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+
+Fixed bug on M\*D15A2 processing (Issue [\#60](https://github.com/lbusett/MODIStsp/issues/60)) on devel/master
+
+Fixed bug on MCD12Q1 processing (Issue [\#58](https://github.com/lbusett/MODIStsp/issues/58)) on devel/master
+
+Added functionality for downloading "partial" years(Issue [\#54](https://github.com/lbusett/MODIStsp/issues/54)) on devel
+
+Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [\#59](https://github.com/lbusett/MODIStsp/issues/59)) on master/devel
+
+Added functionality for accelerating download using aria2c (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+
+Fixed bug on MOD13C2 processing (Issue [\#52](https://github.com/lbusett/MODIStsp/issues/52)) on devel/master
+
+Fixed bug on insertion of custom projection (Issue [\#57](https://github.com/lbusett/MODIStsp/issues/57)) on devel/master
+
+Fixed bug on selection of custom index (Issue [\#53](https://github.com/lbusett/MODIStsp/issues/53)) on devel/master
+
+-   **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data**
 
 -   **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data**
 
@@ -85,7 +107,7 @@ install_github("lbusett/MODIStsp")
 
     ``` bash
     sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
-    glib2-devel libcurl4-devel gdal-devel proj-devel
+    glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
     ```
 
 2.  From R install the libraries `gWidgetsRGtk2` and `devtools`:
