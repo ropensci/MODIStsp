@@ -54,4 +54,3 @@ install_MODIStsp_launcher()}
 \author{
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
-
