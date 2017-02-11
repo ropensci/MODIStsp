@@ -57,6 +57,9 @@
 #' @param ts_format string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
 #' @param use_aria logical if TRUE, then aria2c is used to accelerate download (if available !)
+#' @param download_range character if "whole", all the available images between the startingand the ending dates are downloaded;
+#' if "seasonal", only the images included in the season (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, the images of December,
+#' January and February from 2005 to 2010 - excluding 2005-01, 2005-02 and 2010-12 - are downloaded)
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -79,12 +82,18 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                              native_res, tiled, MOD_proj_str, outproj_str, nodata_in,nodata_out, nodata_change,rts, datatype,	bandsel, bandnames, 
                              indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel, 
                              quality_bitN ,quality_source, quality_nodata_in, full_ext, quality_nodata_out, file_prefixes, main_out_folder, resampling, 
-                             ts_format, gui=TRUE, use_aria = TRUE) {
+                             ts_format, use_aria = TRUE, download_range="whole", gui=TRUE) {
   
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   # Intialize variables ----------------------------------------------------- 
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  
+
+  # Fix on multiple nodata values
+  suppressWarnings( nodata_in[is.na(as.integer(nodata_in))] <- "None" )
+  suppressWarnings( quality_nodata_in[is.na(as.integer(quality_nodata_in))] <- "None" )
+  # FIXME: as.integer(nodata) cause nodata ranges (e.g. 249-255) to be suppressed. So, in this cases nodata values will not
+  # be recognised. This problem will be solved in future with a cycle on nodata range.
+
   if (nodata_change == "No") {
     nodata_out <- nodata_in
   }  # if nodata chande set to no, set ou_nodata to in_nodata
@@ -177,7 +186,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
             stop("aria2c was not found! Ensure that aria2c is installed and in your path! - See http://aria2.github.io ")
           }
         } else {
-          message("aria2c was not found! It is either not installed or not on your path! - Continuing with normal downlad... ")
+          message("aria2c was not found! It is either not installed or not on your path! - Continuing with normal download... ")
         }
       }
     }
@@ -190,25 +199,58 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     
     for (yy in start_year:end_year) {
       
-      # Create string representing the dates to be processed
-      if (yy == start_year & yy == end_year) {
-        dates <- c(start_date,end_date)
-      }
-      
-      if (yy == start_year & yy != end_year) {
-        dates <- c(start_date,paste0(as.character(yy),".12.31"))
-      }
-      
-      if (yy != start_year & yy == end_year) {
-        dates <- c(paste0(as.character(yy),".1.1"),end_date)
-      }
-      
-      if (yy != start_year & yy != end_year) {
-        dates <- c(paste0(as.character(yy),".1.1"),paste0(as.character(yy),".12.31"))
-      }
+      if (download_range=="whole") {
+        # Create string representing the dates to be processed in the case 
+        # of continuous processing
+        
+        if (yy == start_year & yy == end_year) {
+          dates <- c(start_date, end_date)
+        }
+        
+        if (yy == start_year & yy != end_year) {
+          dates <- c(start_date, paste0(as.character(yy),".12.31"))
+        }
+        
+        if (yy != start_year & yy != end_year) {
+          dates <- c(paste0(as.character(yy),".1.1"), paste0(as.character(yy),".12.31"))
+        }
+        
+        if (yy != start_year & yy == end_year) {
+          dates <- c(paste0(as.character(yy),".1.1"), end_date)
+        }
+        
+      } else if (download_range=="seasonal") {
+        # Create string representing the dates to be processed in the case 
+        # of splitted processing
+        
+        start_seas <- as.Date(strftime(as.Date(start_date,format="%Y.%m.%d"),"0-%m-%d")) # the starting month-day 
+        end_seas <- as.Date(strftime(as.Date(end_date,format="%Y.%m.%d"),"0-%m-%d")) # the ending month-day 
+        
+        nye_incl <- start_seas > end_seas # TRUE if the period includes new year's eve, fasle if not
+        # start_temp <- ymd(paste(2000,month(ymd(start_date)),day(ymd(start_date)), sep = "-"))
+        
+        if (!nye_incl) {
+          dates <- c(gsub(paste0("^",start_year),yy,start_date), gsub(paste0("^",end_year),yy,end_date))
+        } else {
+          
+          if (yy == start_year & yy != end_year) {
+            dates <- c(gsub(paste0("^",start_year),yy,start_date), paste0(as.character(yy),".12.31"))
+          }
+          
+          if (yy != start_year & yy != end_year) {
+            dates <- c(paste0(as.character(yy),".1.1"), gsub(paste0("^",end_year),yy,end_date),
+                       gsub(paste0("^",start_year),yy,start_date), paste0(as.character(yy),".12.31"))
+          }
+          
+          if (yy != start_year & yy == end_year) {
+            dates <- c(paste0(as.character(yy),".1.1"), gsub(paste0("^",end_year),yy,end_date))
+          }
+          
+        }
+
+      } else stop("download_range value not valid (only \"whole\" and \"seasonal\" are admitted).")
       
       # Processing status message
-      
       mess_text <- paste("Retrieving Files for Year",as.character(yy))
       if (gui) {
         svalue(mess_lab) <- paste("---",mess_text,"---")
@@ -282,6 +324,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     } else {
                       remote_size_tries <- 0
                     }
+                  }
+                  
+                  # if user/password are not valid, notify
+                  if ( size_string["status_code"]==401) {
+                    stop("Username and/or password are not valid. Please retry with the correct ones or try with ftp download.")
                   }
                   
                   # if the xml was available, check the size; otherwise, set as the local size to skip the check
@@ -506,7 +553,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     }
                     
                     # Create a GDAL vrt file corresponding to the original hdf4
-                    gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band] , vrtnodata = nodata_out[band])
+                    gdalbuildvrt(files_in, outfile_vrt,  sd = band,srcnodata = nodata_in[band], vrtnodata = nodata_out[band])
+                    
                     # apply the patch if an error in the original hdf4 file at step 0 was detected
                     if (correct_hdf) {
                       outfile_vrt_or <- outfile_vrt
@@ -527,7 +575,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       bbox_mod <- reproj_bbox( bbox, outproj_str, MOD_proj_str, enlarge = TRUE)
                       # Create a resized and eventually mosaiced GDAL vrt file
                       gdalbuildvrt(outfile_vrt_or, outfile_vrt, te = c(bbox_mod), tap = TRUE, tr = paste(rep(native_res,2),collapse = " "),
-                                   srcnodata = nodata_in[band] ,vrtnodata = nodata_out[band], sd = band)
+                                   srcnodata = nodata_in[band], vrtnodata = nodata_out[band], sd = band)
                     }
                     
                     

@@ -183,44 +183,59 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
 #' @importFrom httr GET content authenticate timeout 
 #' 
 lpdaac_getmod_dates <- function(dates, date_dirs) {
-  if (length(dates) > 1) {
-    start.date <- strsplit(dates[1], "\\.")[[1]]
-    end.date <- strsplit(dates[2], "\\.")[[1]]
-    wr <- c()
-    for (i in 1:length(date_dirs)) {
-      d <- unlist(strsplit(date_dirs[i], "\\."))
-      if (length(d) == 3)
-        if (as.numeric(d[1]) >= as.numeric(start.date[1]) &  as.numeric(d[1]) <= as.numeric(end.date[1]))  wr <- c(wr, i)
-    }
+  if (length(dates) == 1) {
+    date_dirs <- date_dirs[which(date_dirs == dates[1])]
+  } else if (length(dates) == 2) {
+    # OLD METHOD
+    # start.date <- strsplit(dates[1], "\\.")[[1]]
+    # end.date <- strsplit(dates[2], "\\.")[[1]]
+    # wr <- c()
+    # for (i in 1:length(date_dirs)) {
+    #   d <- unlist(strsplit(date_dirs[i], "\\."))
+    #   if (length(d) == 3)
+    #     if (as.numeric(d[1]) >= as.numeric(start.date[1]) &  as.numeric(d[1]) <= as.numeric(end.date[1]))  wr <- c(wr, i)
+    # }
+    # 
+    # if (length(wr) > 0)
+    #   date_dirs <- date_dirs[wr]
+    # else
+    #   return(NULL)
+    # wr <- c()
+    # for (i in 1:length(date_dirs)) {
+    #   d <- unlist(strsplit(date_dirs[i], "\\."))
+    #   if (as.numeric(d[2]) < as.numeric(start.date[2]) & as.numeric(d[1]) == as.numeric(start.date[1])) wr <- c(wr, i)
+    #   if (as.numeric(d[2]) > as.numeric(end.date[2]) &  as.numeric(d[1]) == as.numeric(end.date[1])) wr <- c(wr, i)
+    # }
+    # 
+    # if (length(wr) > 0)
+    #   date_dirs <- date_dirs[-wr]
+    # if (length(date_dirs) == 0)
+    #   return(NULL)
+    # wr <- c()
+    # for (i in 1:length(date_dirs)) {
+    #   d <- unlist(strsplit(date_dirs[i], "\\."))
+    #   if (as.numeric(d[3]) < as.numeric(start.date[3]) &  as.numeric(d[1]) == as.numeric(start.date[1]) & as.numeric(d[2]) == as.numeric(start.date[2])) wr <- c(wr, i)
+    #   if (as.numeric(d[3]) > as.numeric(end.date[3]) &  as.numeric(d[1]) == as.numeric(end.date[1]) & as.numeric(d[2]) == as.numeric(end.date[2]))  wr <- c(wr, i)
+    # }
+    # if (length(wr) > 0) {
+    #   date_dirs <- date_dirs[-wr]
+    # }
+    # if (length(date_dirs) == 0) {
+    #   return(NULL)
+    # }
     
-    if (length(wr) > 0)
-      date_dirs <- date_dirs[wr]
-    else
-      return(NULL)
-    wr <- c()
-    for (i in 1:length(date_dirs)) {
-      d <- unlist(strsplit(date_dirs[i], "\\."))
-      if (as.numeric(d[2]) < as.numeric(start.date[2]) & as.numeric(d[1]) == as.numeric(start.date[1])) wr <- c(wr, i)
-      if (as.numeric(d[2]) > as.numeric(end.date[2]) &  as.numeric(d[1]) == as.numeric(end.date[1])) wr <- c(wr, i)
-    }
+    # NEW METHOD
+    date_dirs <- date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[1] & 
+                           as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[2]]
     
-    if (length(wr) > 0)
-      date_dirs <- date_dirs[-wr]
-    if (length(date_dirs) == 0)
-      return(NULL)
-    wr <- c()
-    for (i in 1:length(date_dirs)) {
-      d <- unlist(strsplit(date_dirs[i], "\\."))
-      if (as.numeric(d[3]) < as.numeric(start.date[3]) &  as.numeric(d[1]) == as.numeric(start.date[1]) & as.numeric(d[2]) == as.numeric(start.date[2])) wr <- c(wr, i)
-      if (as.numeric(d[3]) > as.numeric(end.date[3]) &  as.numeric(d[1]) == as.numeric(end.date[1]) & as.numeric(d[2]) == as.numeric(end.date[2]))  wr <- c(wr, i)
-    }
-    if (length(wr) > 0) {
-      date_dirs <- date_dirs[-wr]
-    }
-    if (length(date_dirs) == 0) {
-      return(NULL)
-    }
-  } else date_dirs <- date_dirs[which(date_dirs == dates[1])]
+  } else if (length(dates) == 4) {
+    date_dirs <- c(date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[1] & 
+                             as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[2]],
+                   date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[3] & 
+                             as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[4]])
+  } else {
+    date_dirs <- NULL
+  }
   
   return(date_dirs)
 }
