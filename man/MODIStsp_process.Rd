@@ -13,7 +13,7 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   quality_bandnames, quality_bandsel, quality_bitN, quality_source,
   quality_nodata_in, full_ext, quality_nodata_out, file_prefixes,
   main_out_folder, resampling, ts_format, use_aria = TRUE,
-  download_range = "whole", gui = TRUE)
+  download_range = "full", gui = TRUE)
 }
 \arguments{
 \item{sel_prod}{string selected MODIS product}
@@ -114,7 +114,7 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 
 \item{use_aria}{logical if TRUE, then aria2c is used to accelerate download (if available !)}
 
-\item{download_range}{character if "whole", all the available images between the startingand the ending dates are downloaded;
+\item{download_range}{character if "full", all the available images between the startingand the ending dates are downloaded;
 if "seasonal", only the images included in the season (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, the images of December,
 January and February from 2005 to 2010 - excluding 2005-01, 2005-02 and 2010-12 - are downloaded)}
 

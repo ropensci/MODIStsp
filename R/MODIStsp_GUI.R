@@ -20,7 +20,7 @@
 #' @importFrom grDevices dev.new
 #' @import gWidgets
 
-MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir, previous_jsfile, prodopts_file){99
+MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir, previous_jsfile, prodopts_file){
   
   GUI.env      <- new.env()   # create a new env to facilitate values-passing between widgets
   GUI.env$Quit <- TRUE
@@ -247,7 +247,6 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                             # Run addindex() function ----
                             addind <- MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file, selprod = svalue(prod_wid), selvers = svalue(vers_wid))
                             
-                            # if (addind ==TRUE) {
                             general_opts  <- RJSONIO::fromJSON(previous_jsfile)
                             pos_wid       <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                             tmp_arr_bands <- array(data = 0 , dim = length(check_names))
@@ -267,7 +266,6 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                             }
                             
                             dispose(selgroup)
-                            # }
                           },
                           container = cbox_indexes, expand = FALSE)
               }
@@ -362,7 +360,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   seas_lab       <- glabel(text = "Period: ", container = dates_group)
   font(seas_lab) <- list(family = "sans",weight = "bold")
   # size(seas_lab) <- list(width = 200 )
-  seas_array       <- c("whole","seasonal")
+  seas_array       <- c("full","seasonal")
   seas_wid <-  gcombobox(seas_array, container = dates_group, selected = match(general_opts$download_range, seas_array))
   size(seas_wid) <- list(width = 120 )
   
@@ -370,7 +368,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
           handler = function(h,....) {
             help_box <- gbasicdialog(title = "Help", parent = NULL, do.buttons = FALSE, horizontal = FALSE, 
                                      width = 400, height = 40, handler = function(h,....) {})
-            help_mess_lab <- glabel(text = paste("If \"whole\" is selected, all the available images between the starting",
+            help_mess_lab <- glabel(text = paste("If \"full\" is selected, all the available images between the starting",
                                                  "and the ending dates will be downloaded; if \"seasonal\", the tool",
                                                  "donwloads only the images included in the season (e.g: if the starting",
                                                  "date is 2005-12-01 and the ending is 2010-02-31, the images of December,",

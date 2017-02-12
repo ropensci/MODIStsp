@@ -194,14 +194,22 @@ Provided information (e.g., correct bandnames, computable formula, etc...) is au
 ###	Download Method
 Allows to specify which download method should be used. Available choices are: 
 
-1.  **http**: download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). This **requires providing a user name and password**, which can be obtained by registrering an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
+1.  **http**:   download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). This requires providing a user name and password, which can be obtained by registrering an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
 
-2.  **ftp**: download from NASA ftp archive ([ftp://ladsweb.nascom.nasa.gov/](ftp://ladsweb.nascom.nasa.gov/));
+2.  **ftp**:     download from NASA ftp archive ([ftp://ladsweb.nascom.nasa.gov/](ftp://ladsweb.nascom.nasa.gov/));
 
-3.  **offline**: process/reprocess HDF files already available on your PC without downloading from NASA -- useful if you have an aexisting archive of HDF images, or to reprocess data already downloaded via `MODIStsp` (for example, to create time series for an additional layer).
+3.  **offline**: this option allows to process/reprocess HDF files already available on the user's PC without downloading from NASA -- useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp (for example, to create time series for an additional layer).
+
+The **use_aria2c** option allows to accelerate the download from NASA archives, provided that the "aria2c" software is installed in your system. To download it and install it, see: [aria2.github.io/](https://aria2.github.io/)
 
 ### Processing Period
 Allows to specify the starting and ending dates to be considered for the creation of the time series. Dates **must** be provided in the _yyyy--mm--dd_ format (e.g., 2015-01-31)
+
+The **Period** dropdown menu allows to choose between two options:
+
+1.  **full**:     all available images between the starting and ending dates are downloaded and processed;
+
+2.  **seasonal**: allows to download data for only one part of the year, but for multiple years (for example, if the starting date is 2005-03-01 and the ending is 2010-06-01, only the images of March, April and May for the year between 2005 and 2010 will be downloaded). This allows to easily process data concerning a particular season of interest.
 
 ### Spatial Extent
 Allows to define the area of interest for the processing. Two main options are possible: 
@@ -219,7 +227,7 @@ Allows to specify the options to be used for reprojecting and resizing the MODIS
 
 1.	the **"Output Projection"** menu allows to either select one of the pre-defined output projections or specify a user-defined one by selecting "User Defined" and then inserting a valid "Proj4" string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails; 
 
-2.	the **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, the resampling method can instead be chosen among "Nearest Neighbour" and "Mode" (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleanind would risk to contaminate the values of high-quality observations with those of low-quality ones.
+2.	the **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, the resampling method can instead be chosen among "Nearest Neighbour" and "Mode" (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleaning would risk to contaminate the values of high-quality observations with those of low-quality ones.
 
 ### Processing Options
 Allows first of all to specify the **format desired for the output images**. Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among "None", "PACKBITS", "LZW" and "DEFLATE".

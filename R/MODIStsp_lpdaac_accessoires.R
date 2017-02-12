@@ -87,7 +87,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
               }
             # on NOT retry, quit the program
           } else {
-            ce = 0   # if retry, reset the counter
+            ce <- 0   # if retry, reset the counter
           }
         }
       }
@@ -115,10 +115,10 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
     if (class(items) != "try-error") {
       # run only if ftp download works
       
-      items_1 = str_extract(items,"20[0-9][0-9]$")
-      items_1 = items_1[!is.na(items_1)]
-      items_2 <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
-          .opts = list(timeout = 10,maxredirs = 5,verbose = FALSE)),"\r*\n")
+      items_1   <- str_extract(items,"20[0-9][0-9]$")
+      items_1   <- items_1[!is.na(items_1)]
+      items_2   <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
+          .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)),"\r*\n")
       full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(items_2[x]), items_2[[x]], "/")}))
       date_dirs <- sapply(strsplit(full_dirs, "/"), function(x) {strftime(as.Date(paste(x[length(x) - 1], x[length(x)]), format = "%Y %j"), "%Y.%m.%d")})
       attr(date_dirs, "server") <- "ftp"
@@ -142,7 +142,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
           }
           # on NOT retry, quit the program
         } else {
-          ce = 0   # if retry, reset the counter
+          ce <- 0   # if retry, reset the counter
         }
       }
     }
