@@ -57,7 +57,7 @@
 #' @param ts_format string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
 #' @param use_aria logical if TRUE, then aria2c is used to accelerate download (if available !)
-#' @param download_range character if "whole", all the available images between the startingand the ending dates are downloaded;
+#' @param download_range character if "full", all the available images between the startingand the ending dates are downloaded;
 #' if "seasonal", only the images included in the season (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, the images of December,
 #' January and February from 2005 to 2010 - excluding 2005-01, 2005-02 and 2010-12 - are downloaded)
 #' @return NULL
@@ -82,7 +82,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                              native_res, tiled, MOD_proj_str, outproj_str, nodata_in,nodata_out, nodata_change,rts, datatype,	bandsel, bandnames, 
                              indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel, 
                              quality_bitN ,quality_source, quality_nodata_in, full_ext, quality_nodata_out, file_prefixes, main_out_folder, resampling, 
-                             ts_format, use_aria = TRUE, download_range="whole", gui=TRUE) {
+                             ts_format, use_aria = TRUE, download_range="full", gui=TRUE) {
   
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   # Intialize variables ----------------------------------------------------- 
@@ -199,7 +199,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     
     for (yy in start_year:end_year) {
       
-      if (download_range=="whole") {
+      if (download_range=="full") {
         # Create string representing the dates to be processed in the case 
         # of continuous processing
         
@@ -248,7 +248,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
           
         }
 
-      } else stop("download_range value not valid (only \"whole\" and \"seasonal\" are admitted).")
+      } else stop("download_range value not valid (only \"full\" and \"seasonal\" are admitted).")
       
       # Processing status message
       mess_text <- paste("Retrieving Files for Year",as.character(yy))
@@ -327,7 +327,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   }
                   
                   # if user/password are not valid, notify
-                  if ( size_string["status_code"]==401) {
+                  if (size_string["status_code"] == 401) {
                     stop("Username and/or password are not valid. Please retry with the correct ones or try with ftp download.")
                   }
                   
@@ -351,7 +351,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
                   er <- 5; class(er) <- "try-error"; ce <- 0
                   
-                  local_filesize = 0  
+                  local_filesize <- 0  
                   while (local_filesize != remote_filesize) {   # Add here a while loop: Only exit if local file size equals remote filesize
                     
                     while (er != 0) {   # repeat until no error or > 30 tryyouts
@@ -427,7 +427,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     }  # end while on download tries
                     
                     local_filesize <- file.info(local_filename)$size    # Find the size of the new file downloaded to allow comparison with remote 
-                    
+                    if (is.na(local_filesize)){
+                      local_filesize <- 0
+                      er <- 5
+                      ce <- ce + 1
+                    }
                   } # end here the while loop on file size check
                   
                 }  # end IF on hdf existence
