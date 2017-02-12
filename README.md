@@ -37,6 +37,8 @@ News !
 
 -   **10/02/2017 - Various updates in the last period**
 
+Fixed bug on download with aria, throwing an error on partial download on http downlaod with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
+
 Added functionality for processing of MOD10A1 snow cover data (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
 
 Fixed bug on M\*D15A2 processing (Issue [\#60](https://github.com/lbusett/MODIStsp/issues/60)) on devel/master
