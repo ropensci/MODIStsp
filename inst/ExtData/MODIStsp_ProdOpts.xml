@@ -2939,9 +2939,8 @@
             </version>
         </versions>
     </MODTBGA>
-    
-     <MOD10_A1>
-        <name>Snow_Cov_Daily_500m (M*D10_A2)</name>
+    <MOD10_A1>
+        <name>Snow_Cov_Daily_500m (M*D10_A1)</name>
         <cat_01>Radiation Budget Variables</cat_01>
         <cat_02>Snow Cover</cat_02>
         <file_prefix_terra>MOD10_A1</file_prefix_terra>
@@ -2949,11 +2948,11 @@
         <versions>
             <version>
                 <v_number>5</v_number>
-                <prod_fullname>MODIS/Terra Snow Cover Daily L3 Global 500m Grid</prod_fullname>
+                <prod_fullname>MODIS Snow Cover Daily L3 Global 500m Grid</prod_fullname>
                 <main_out_folder>Snow_Cov_Daily_500m_v5</main_out_folder>
                 <native_res>463.3128</native_res>
                 <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.005/</http_terra>
-                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.005/</http_aqua>
+                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MOD10A1.005/</http_aqua>
                 <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10A1.005/</ftp_terra>
                 <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10A1.005/</ftp_aqua>
                 <combined>0</combined>
@@ -2992,11 +2991,11 @@
             </version>
             <version>
                 <v_number>6</v_number>
-                <prod_fullname>MODIS/Terra Snow Cover Daily L3 Global 500m Grid</prod_fullname>
+                <prod_fullname>MODIS/Terra/Aqua Snow Cover Daily L3 Global 500m Grid</prod_fullname>
                 <main_out_folder>Snow_Cov_Daily_500m_v5</main_out_folder>
                 <native_res>463.3128</native_res>
                 <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.006/</http_terra>
-                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.006/</http_aqua>
+                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A1.006/</http_aqua>
                 <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10A1.006/</ftp_terra>
                 <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10A1.006/</ftp_aqua>
                 <combined>0</combined>
@@ -3094,8 +3093,738 @@
             </version>
         </versions>
     </MOD10_A1>
-
-
+    <MOD10_A2>
+        <name>Snow_Cov_8-Day_500m (M*D10_A2)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Snow Cover</cat_02>
+        <file_prefix_terra>MOD10_A2</file_prefix_terra>
+        <file_prefix_aqua>MYD10_A2</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>5</v_number>
+                <prod_fullname>MODIS Snow Cover 8-Day L3 Global 500m Grid</prod_fullname>
+                <main_out_folder>Snow_Cov_8-Day_500m_v5</main_out_folder>
+                <native_res>463.3128</native_res>
+                <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A2.005/</http_terra>
+                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A2.005/</http_aqua>
+                <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10A2.005/</ftp_terra>
+                <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10A2.005/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>http://nsidc.org/data/docs/daac/modis_v5/mod10a1_modis_terra_snow_daily_global_500m_grid.gd.html</www>
+                <bands>
+                    <band>
+                        <bandname>MAX_SNW</bandname>
+                        <fullname>Maximum Snow Extent</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SC_8DAY</bandname>
+                        <fullname>Eight Day Snow Cover</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MODIS Snow Cover 8-Day L3 Global 500m Grid</prod_fullname>
+                <main_out_folder>Snow_Cov_8-Day_500m_v6</main_out_folder>
+                <native_res>463.3128</native_res>
+                <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A2.006/</http_terra>
+                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A2.006/</http_aqua>
+                <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10A2.006/</ftp_terra>
+                <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10A2.006/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>1</tiled>
+                <www>https://nsidc.org/data/mod10a1</www>
+                <bands>
+                    <band>
+                        <bandname>MAX_SNW</bandname>
+                        <fullname>Maximum Snow Extent</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SC_8DAY_bitfield</bandname>
+                        <fullname>Eight Day Snow Cover (bitfield)</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>-1</nodata_in>
+                        <nodata_out>-1</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>SN_1</quality_bandname>
+                        <quality_fullname>Snow Presence in Day 1</quality_fullname>
+                        <quality_source>SC_8DAY_bitfield</quality_source>
+                        <quality_bitN>0 </quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>SN_2</quality_bandname>
+                        <quality_fullname>Snow Presence in Day 2</quality_fullname>
+                        <quality_source>SC_8DAY_bitfield</quality_source>
+                        <quality_bitN>1 </quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>SN_3</quality_bandname>
+                        <quality_fullname>Snow Presence in Day 3</quality_fullname>
+                        <quality_source>SC_8DAY_bitfield</quality_source>
+                        <quality_bitN>2 </quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>SN_5</quality_bandname>
+                        <quality_fullname>Snow Presence in Day 4</quality_fullname>
+                        <quality_source>SC_8DAY_bitfield</quality_source>
+                        <quality_bitN>3 </quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>SN_5</quality_bandname>
+                        <quality_fullname>Snow Presence in Day 5</quality_fullname>
+                        <quality_source>SC_8DAY_bitfield</quality_source>
+                        <quality_bitN>4 </quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>SN_6</quality_bandname>
+                        <quality_fullname>Snow Presence in Day 6</quality_fullname>
+                        <quality_source>SC_8DAY_bitfield</quality_source>
+                        <quality_bitN>5 </quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>SN_7</quality_bandname>
+                        <quality_fullname>Snow Presence in Day 7</quality_fullname>
+                        <quality_source>SC_8DAY_bitfield</quality_source>
+                        <quality_bitN>6 </quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>SN_8</quality_bandname>
+                        <quality_fullname>Snow Presence in Day 8</quality_fullname>
+                        <quality_source>SC_8DAY_bitfield</quality_source>
+                        <quality_bitN>7 </quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MOD10_A2>
+    <MOD10C1>
+      <name>Snow_Cov_Day_0.05Deg (M*D10C1)</name>
+      <cat_01>Radiation Budget Variables</cat_01>
+      <cat_02>Snow Cover</cat_02>
+      <file_prefix_terra>MOD10C1</file_prefix_terra>
+      <file_prefix_aqua>MYD10C1</file_prefix_aqua>
+      <versions>
+         <version>
+              <v_number>5</v_number>
+              <prod_fullname>MODIS Terra/Aqua Snow Cover Daily L3 Global 0.05Deg CMG V006</prod_fullname>
+              <main_out_folder>Snow_cov_daily_005dg_v5</main_out_folder>
+              <native_res>5600</native_res>
+              <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C1.005/</http_terra>
+              <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C1.005/</http_aqua>
+              <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10C1.005/</ftp_terra>
+              <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10C1.005/</ftp_aqua>
+              <combined>0</combined>
+              <tiled>0</tiled>
+              <www>https://http://nsidc.org/data/MOD10C1</www>
+              <bands>
+                  <band>
+                      <bandname>SN_COV</bandname>
+                      <fullname>Percentage of snow cover observations plus other results</fullname>
+                      <datatype>8-bit signed integer</datatype>
+                      <nodata_in> 255</nodata_in>
+                      <nodata_out>255</nodata_out>
+                  </band>
+                  <band>
+                      <bandname>CONF_IND</bandname>
+                      <fullname>Eight day confidence index</fullname>
+                      <datatype>8-bit signed integer</datatype>
+                      <nodata_in>255</nodata_in>
+                      <nodata_out>255</nodata_out>
+                  </band>
+                  <band>
+                      <bandname>CLD_OBS</bandname>
+                      <fullname>Eight_Day_CMG_Cloud_Obscured</fullname>
+                      <datatype>8-bit signed integer</datatype>
+                      <nodata_in>255</nodata_in>
+                      <nodata_out>255</nodata_out>
+                  </band>
+                  <band>
+                      <bandname>SN_QA</bandname>
+                      <fullname>Basic Snow_Spatial_QA plus other results</fullname>
+                      <datatype>8-bit signed integer</datatype>
+                      <nodata_in>255</nodata_in>
+                      <nodata_out>255</nodata_out>
+                  </band>
+              </bands>
+          </version>
+          <version>
+              <v_number>6</v_number>
+              <prod_fullname>MODIS Terra/Aqua Snow Cover Daily L3 Global 0.05Deg CMG V006</prod_fullname>
+              <main_out_folder>Snow_cov_daily_005dg_v6</main_out_folder>
+              <native_res>5600</native_res>
+              <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C1.006/</http_terra>
+              <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C1.006/</http_aqua>
+              <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10C1.006/</ftp_terra>
+              <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10C1.006/</ftp_aqua>
+              <combined>0</combined>
+              <tiled>0</tiled>
+              <www>https://http://nsidc.org/data/MOD10C1</www>
+              <bands>
+                  <band>
+                      <bandname>SN_COV</bandname>
+                      <fullname>Percentage of snow cover observations plus other results</fullname>
+                      <datatype>8-bit signed integer</datatype>
+                      <nodata_in> 255</nodata_in>
+                      <nodata_out>255</nodata_out>
+                  </band>
+                  <band>
+                      <bandname>CLD_OBS</bandname>
+                      <fullname>Percentage of input cells obscured by clouds plus other results</fullname>
+                      <datatype>8-bit signed integer</datatype>
+                      <nodata_in>255</nodata_in>
+                      <nodata_out>255</nodata_out>
+                  </band>
+                  <band>
+                      <bandname>CLEAR_IND</bandname>
+                      <fullname>Percentage of non-cloud input cells plus other results</fullname>
+                      <datatype>8-bit signed integer</datatype>
+                      <nodata_in>255</nodata_in>
+                      <nodata_out>255</nodata_out>
+                  </band>
+                  <band>
+                      <bandname>SN_QA</bandname>
+                      <fullname>Snow Basic QA plus other results</fullname>
+                      <datatype>8-bit signed integer</datatype>
+                      <nodata_in>255</nodata_in>
+                      <nodata_out>255</nodata_out>
+                  </band>
+              </bands>
+          </version>
+      </versions>
+  </MOD10C1>
+    <MOD10C2>
+        <name>Snow_Cov_8-Day0.05Deg CMG (M*D10C2)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Snow Cover</cat_02>
+        <file_prefix_terra>MOD10C2</file_prefix_terra>
+        <file_prefix_aqua>MYD10C2</file_prefix_aqua>
+        <versions>
+           <version>
+                <v_number>5</v_number>
+                <prod_fullname>MODIS Terra/Aqua Snow Cover 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
+                <main_out_folder>Snow_cov_daily_005dg_v5</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C2.005/</http_terra>
+                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C2.005/</http_aqua>
+                <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10C2.005/</ftp_terra>
+                <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10C2.005/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>0</tiled>
+                <www>https://http://nsidc.org/data/MOD10C2</www>
+                <bands>
+                    <band>
+                        <bandname>SN_COV</bandname>
+                        <fullname>Percentage of snow cover observations plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in> 255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>CONF_IND</bandname>
+                        <fullname>Eight day confidence index</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>CLD_OBS</bandname>
+                        <fullname>Eight_Day_CMG_Cloud_Obscured</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SN_QA</bandname>
+                        <fullname>Basic Snow_Spatial_QA plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MODIS Terra/Aqua Snow Cover 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
+                <main_out_folder>Snow_cov_daily_005dg_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C2.006/</http_terra>
+                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C2.006/</http_aqua>
+                <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10C2.006/</ftp_terra>
+                <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10C2.006/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>0</tiled>
+                <www>https://http://nsidc.org/data/MOD10C2</www>
+                <bands>
+                    <band>
+                        <bandname>SN_COV</bandname>
+                        <fullname>Percentage of snow cover observations plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in> 255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>CLD_OBS</bandname>
+                        <fullname>Percentage of input cells obscured by clouds plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>CLEAR_IND</bandname>
+                        <fullname>Percentage of non-cloud input cells plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SN_QA</bandname>
+                        <fullname>Snow Basic QA plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+            </version>
+        </versions>
+    </MOD10C2>
+    <MOD10CM>
+        <name>Snow_Cov_Month_0.05Deg CMG (M*D10CM)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Snow Cover</cat_02>
+        <file_prefix_terra>MOD10CM</file_prefix_terra>
+        <file_prefix_aqua>MYD10CM</file_prefix_aqua>
+        <versions>
+           <version>
+                <v_number>5</v_number>
+                <prod_fullname>MODIS Terra/Aqua Snow Cover Monthly L3 Global 0.05Deg CMG CMG V005</prod_fullname>
+                <main_out_folder>Snow_cov_mnt_005dg_v5</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10CM.005/</http_terra>
+                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10CM.005/</http_aqua>
+                <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10CM.005/</ftp_terra>
+                <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10CM.005/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>0</tiled>
+                <www>https://http://nsidc.org/data/MOD10CM</www>
+                <bands>
+                    <band>
+                        <bandname>SN_COV_MNT</bandname>
+                        <fullname>PMonthly average snow cover percentage plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in> 255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SN_QA</bandname>
+                        <fullname>Snow Basic QA plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>MODIS Terra/Aqua Snow Cover Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
+                <main_out_folder>Snow_cov_mnt_005dg_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10CM.006/</http_terra>
+                <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10CM.006/</http_aqua>
+                <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10CM.006/</ftp_terra>
+                <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10CM.006/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>0</tiled>
+                <www>https://http://nsidc.org/data/MOD10CM</www>
+                <bands>
+                    <band>
+                        <bandname>SN_COV_MNT</bandname>
+                        <fullname>PMonthly average snow cover percentage plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in> 255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>SN_QA</bandname>
+                        <fullname>Snow Basic QA plus other results</fullname>
+                        <datatype>8-bit signed integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+            </version>
+        </versions>
+    </MOD10CM>
+    <MOD11C1>
+        <name>Surf_Temp_Daily_005dg (M*D11C1)</name>
+        <cat_01>Radiation Budget Variables</cat_01>
+        <cat_02>Land Surface Temperature/Emissivity</cat_02>
+        <file_prefix_terra>MOD11C1</file_prefix_terra>
+        <file_prefix_aqua>MYD11C1</file_prefix_aqua>
+        <versions>
+            <version>
+                <v_number>5</v_number>
+                <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG</prod_fullname>
+                <main_out_folder>Surf_Temp_Daily_005dg_v5</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.005/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.005/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11C1/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11C1/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>0</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1</www>
+                <bands>
+                    <band>
+                        <bandname>LST</bandname>
+                        <fullname>Daytime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_QC</bandname>
+                        <fullname>Daytime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Time</bandname>
+                        <fullname>Daytime LST observation time (UTC)</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>View_Zen</bandname>
+                        <fullname>Daytime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night</bandname>
+                        <fullname>Nighttime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_QA</bandname>
+                        <fullname>Nighttime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Time_Night</bandname>
+                        <fullname>Nighttime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>View_Zen_Night</bandname>
+                        <fullname>Nighttime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emiss_B20</bandname>
+                        <fullname>Band 20 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emiss_B22</bandname>
+                        <fullname>Band 22 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emiss_B23</bandname>
+                        <fullname>Band 23 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emiss_B29</bandname>
+                        <fullname>Band 29 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emiss_B31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emiss_B32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Daytime_LST</bandname>
+                        <fullname>Daytime 5-Km LST aggregated from 1-Km</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Nighttime_LST</bandname>
+                        <fullname>Nighttime 5-Km LST aggregated from 1-Km</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emiss_QC</bandname>
+                        <fullname>Quality control for retrieved emissivities</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QA</quality_bandname>
+                        <quality_fullname>Mandatory QA flag</quality_fullname>
+                        <quality_source>LST_QC</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>DQ</quality_bandname>
+                        <quality_fullname>Data quality flag</quality_fullname>
+                        <quality_source>LST_QC</quality_source>
+                        <quality_bitN>2-3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>EEr_Flag</quality_bandname>
+                        <quality_fullname>Emissivity error flag</quality_fullname>
+                        <quality_source>LST_QC</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>LSTEr</quality_bandname>
+                        <quality_fullname>LST error flag</quality_fullname>
+                        <quality_source>LST_QC</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+            <version>
+                <v_number>6</v_number>
+                <prod_fullname>M*D11C1: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG V006</prod_fullname>
+                <main_out_folder>Surf_Temp_Daily_005dg_v6</main_out_folder>
+                <native_res>5600</native_res>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.006/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11C1/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11C1/</ftp_aqua>
+                <combined>0</combined>
+                <tiled>0</tiled>
+                <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1_v006</www>
+                <bands>
+                    <band>
+                        <bandname>LST_Day_CMG</bandname>
+                        <fullname>Daytime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Day</bandname>
+                        <fullname>Daytime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_time</bandname>
+                        <fullname>Daytime LST observation time (UTC)</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Day_view_angle</bandname>
+                        <fullname>Daytime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>LST_Night_CMG</bandname>
+                        <fullname>Nighttime land surface temperature</fullname>
+                        <datatype>16-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>65535</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Night</bandname>
+                        <fullname>Nighttime LSTE quality control</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_time</bandname>
+                        <fullname>Nighttime LST observation time</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Night_view_angle</bandname>
+                        <fullname>Nighttime LST view zenith angle</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>255</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_20</bandname>
+                        <fullname>Band 20 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_22</bandname>
+                        <fullname>Band 22 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_23</bandname>
+                        <fullname>Band 23 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_29</bandname>
+                        <fullname>Band 29 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_31</bandname>
+                        <fullname>Band 31 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Emis_32</bandname>
+                        <fullname>Band 32 Emissivity</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>QC_Emis</bandname>
+                        <fullname>Daytime emissivity quality indicators</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                    <band>
+                        <bandname>Percent_land_in_grid</bandname>
+                        <fullname>Percentage of land in the grid</fullname>
+                        <datatype>8-bit unsigned integer</datatype>
+                        <nodata_in>0</nodata_in>
+                        <nodata_out>255</nodata_out>
+                    </band>
+                </bands>
+                <quality_indicators>
+                    <quality>
+                        <quality_bandname>QAday_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag (day)</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_qual</quality_bandname>
+                        <quality_fullname>Data quality flag (day)</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (day)</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_emis_err</quality_bandname>
+                        <quality_fullname>Emis Error flag (day)</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAday_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag (day)</quality_fullname>
+                        <quality_source>QC_Day</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_mand</quality_bandname>
+                        <quality_fullname>Mandatory QA flag (night)</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>0-1</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_qual</quality_bandname>
+                        <quality_fullname>Data quality flag (night)</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>2</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_comb</quality_bandname>
+                        <quality_fullname>Terra/Aqua Combined-use flag (night)</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>3</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_emis_err</quality_bandname>
+                        <quality_fullname>Emis error flag (night)</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>4-5</quality_bitN>
+                    </quality>
+                    <quality>
+                        <quality_bandname>QAnight_LST_err</quality_bandname>
+                        <quality_fullname>LST Error flag (night)</quality_fullname>
+                        <quality_source>QC_Night</quality_source>
+                        <quality_bitN>6-7</quality_bitN>
+                    </quality>
+                </quality_indicators>
+            </version>
+        </versions>
+    </MOD11C1>
     <MOD11_L2>
         <name>Surf_Temp_5Min_1Km (M*D11_L2)</name>
         <cat_01>Radiation Budget Variables</cat_01>
