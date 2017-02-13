@@ -307,7 +307,7 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
           }
           # on NOT retry, quit the program
         } else {
-          ce = 0   # if retry, reset the counter
+          ce <- 0   # if retry, reset the counter
         }
       }
     }
@@ -341,7 +341,7 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
             }
             # on NOT retry, quit the program
           } else {
-            ce = 0   # if retry, reset the counter
+            ce <- 0   # if retry, reset the counter
           }
         }
       }

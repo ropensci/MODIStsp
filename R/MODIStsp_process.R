@@ -777,7 +777,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   
   
   if (sensor == "Both") {
-    senslist = c("Terra","Aqua","Mixed")
+    senslist <- c("Terra","Aqua","Mixed")
   } # selected sensors
   
   for (sens_sel in senslist) {		# cycle on selected sensors
