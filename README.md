@@ -35,7 +35,7 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 News !
 ======
 
-**13/02/2017 - MODIStsp v1.3.1 released **
+**13/02/2017 - MODIStsp v1.3.1 released**
 
 MODIStsp v1.3.1 has been released on 13/02/2017. Main changes and bug fixes are reported below
 
@@ -63,7 +63,7 @@ MODIStsp v1.3.1 has been released on 13/02/2017. Main changes and bug fixes are 
 
 MODIStsp v1.3.0 has been finally released. The major improvement consists in now allowing download and preprocessing of **MODIS Collection 006 datasets**. Other changes concern improvements in the GUI, introduction of off-line functionality and various bug fixing. You can see the changelog [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.0). Please report any issues you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.:
 
--   **11/03/2016 - MODIStsp FAQ**
+**11/03/2016 - MODIStsp FAQ**
 
 Hints for solving common installation, downloading and processing problems are now provided in our [FAQ](https://github.com/lbusett/MODIStsp/wiki/) page.
 
