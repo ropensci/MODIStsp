@@ -34,9 +34,9 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 
 \item{download_server}{service used to download MODIS tiles, one of: 'http', 'ftp', NA.}
 
-\item{user}{Username for http download (https://urs.earthdata.nasa.gov/home)}
+\item{user}{Username for http download (\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
 
-\item{password}{Password for http download (https://urs.earthdata.nasa.gov/home)}
+\item{password}{Password for http download (\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
 
 \item{https}{hash https site for download of hdf of selected product}
 
@@ -126,14 +126,22 @@ MODIStsp_Previous.json (Interactive use), or a user specified JSON file (batch u
 processing.
 }
 \details{
-After retrieving the input processing options, the function accesses lpdaac htttp archive to determine the list of dates
-to be processed. It then perform all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
-quality indicators computation), and finally performs virtual files creation. Checks are done in order to not re-download already existing HDF
-images, and not reprocess already processed dates (if the user didn'specify that)
+After retrieving the input processing options, the function
+\enumerate{
+\item Acesses lpdaac http or ftp archive to determine the list of dates to be processed
+\item Performs all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
+quality indicators computation)
+\item Creates virtual files of the processed time series.
+}
+
+Reprojection and resize is dealt with by accessing gdal routines through the \code{gdaUtils} package.
+Extraction of bitfields  from Quality layers is done though fast bitwise computation
+
+Checks are done in order to not re-download already existing HDF images, and not reprocess already processed dates (if the user didn'specify that)
 }
 \note{
-Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ( http://r-gis.net/?q=ModisDownload ; .
-http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images)
+Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
+\href{http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
 
 License: GPL 3.0
 }

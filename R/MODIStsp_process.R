@@ -3,10 +3,17 @@
 #' @description main function of MODIStsp tool. Takes as input processing parameters specified by the user using MODIStsp_GUI and saved in
 #' MODIStsp_Previous.json (Interactive use), or a user specified JSON file (batch use) (See MODIStsp_main for details ) and performs all required
 #' processing.
-#' @details After retrieving the input processing options, the function accesses lpdaac htttp archive to determine the list of dates
-#' to be processed. It then perform all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
-#' quality indicators computation), and finally performs virtual files creation. Checks are done in order to not re-download already existing HDF
-#' images, and not reprocess already processed dates (if the user didn'specify that)
+#' @details After retrieving the input processing options, the function 
+#' 1. Acesses lpdaac http or ftp archive to determine the list of dates to be processed
+#' 2. Performs all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
+#' quality indicators computation)
+#' 3. Creates virtual files of the processed time series.
+#' 
+#' Reprojection and resize is dealt with by accessing gdal routines through the `gdaUtils` package.
+#' Extraction of bitfields  from Quality layers is done though fast bitwise computation
+#' 
+#' Checks are done in order to not re-download already existing HDF images, and not reprocess already processed dates (if the user didn'specify that)
+#'
 #' @param sel_prod string selected MODIS product
 #' @param start_date string start_date for images download and preproc (yyyy.mm.dd)
 #' @param end_date string end_date for images download and preproc (yyyy.mm.dd)
@@ -18,8 +25,8 @@
 #' @param https hash https site for download of hdf of selected product
 #' @param ftps hash ftps site for download of hdf of selected product
 #' @param download_server service used to download MODIS tiles, one of: 'http', 'ftp', NA.
-#' @param user Username for http download (https://urs.earthdata.nasa.gov/home)
-#' @param password Password for http download (https://urs.earthdata.nasa.gov/home)
+#' @param user Username for http download ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))
+#' @param password Password for http download ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))
 #' @param start_x int start horiz. tile
 #' @param start_y int start vertical. tile
 #' @param end_x int end horiz. tile
@@ -64,8 +71,8 @@
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
-#' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ( http://r-gis.net/?q=ModisDownload ; .
-#' http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images)
+#' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ([ModisDownload](http://r-gis.net/?q=ModisDownload);
+#' [Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
 #' @importFrom gdalUtils gdal_translate gdalbuildvrt gdalwarp
 #' @importFrom hash hash
