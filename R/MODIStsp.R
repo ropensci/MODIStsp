@@ -166,7 +166,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
     general_opts <- list(#previous_jsfile = previous_jsfile, prodopts_file = prodopts_file, xml_file = xml_file, #out_proj_list = out_proj_list, out_proj_names = out_proj_names, MOD_proj_str = MOD_proj_str,
       sel_prod = "Surf_Ref_8Days_500m (M*D09A1)", sensor = "Terra", prod_version = "6", start_date = strftime(Sys.Date(),"%Y-01-01"), end_date = as.character(Sys.Date()),
       bandsel = rep(0,13), indexes_bandsel = rep(0,11), quality_bandsel = rep(0,21), # lenghts refearred to "Surf_Ref_8Days_500m (M*D09A1)" v6!
-      start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", use_aria = FALSE, download_server = "http",
+      start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", use_aria = FALSE, download_server = "http", download_range = "full",
       proj = "Sinusoidal", user_proj4 = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
       out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
       nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
@@ -348,7 +348,8 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
       file_prefixes      = prod_opts$file_prefix, 
       main_out_folder    = prod_opts$main_out_folder, 
       gui                = gui,
-      use_aria           = general_opts$use_aria
+      use_aria           = general_opts$use_aria,
+      download_range     = general_opts$download_range
     )
     
     # At end of succesfull execution, save the options used in the main output folder

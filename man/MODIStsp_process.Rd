@@ -12,7 +12,8 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
   quality_bandnames, quality_bandsel, quality_bitN, quality_source,
   quality_nodata_in, full_ext, quality_nodata_out, file_prefixes,
-  main_out_folder, resampling, ts_format, gui = TRUE, use_aria = TRUE)
+  main_out_folder, resampling, ts_format, use_aria = TRUE,
+  download_range = "full", gui = TRUE)
 }
 \arguments{
 \item{sel_prod}{string selected MODIS product}
@@ -33,9 +34,9 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 
 \item{download_server}{service used to download MODIS tiles, one of: 'http', 'ftp', NA.}
 
-\item{user}{Username for http download (https://urs.earthdata.nasa.gov/home)}
+\item{user}{Username for http download (\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
 
-\item{password}{Password for http download (https://urs.earthdata.nasa.gov/home)}
+\item{password}{Password for http download (\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
 
 \item{https}{hash https site for download of hdf of selected product}
 
@@ -111,9 +112,13 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 
 \item{ts_format}{string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)}
 
-\item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
-
 \item{use_aria}{logical if TRUE, then aria2c is used to accelerate download (if available !)}
+
+\item{download_range}{character if "full", all the available images between the startingand the ending dates are downloaded;
+if "seasonal", only the images included in the season (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, the images of December,
+January and February from 2005 to 2010 - excluding 2005-01, 2005-02 and 2010-12 - are downloaded)}
+
+\item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
 }
 \description{
 main function of MODIStsp tool. Takes as input processing parameters specified by the user using MODIStsp_GUI and saved in
@@ -121,14 +126,22 @@ MODIStsp_Previous.json (Interactive use), or a user specified JSON file (batch u
 processing.
 }
 \details{
-After retrieving the input processing options, the function accesses lpdaac htttp archive to determine the list of dates
-to be processed. It then perform all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
-quality indicators computation), and finally performs virtual files creation. Checks are done in order to not re-download already existing HDF
-images, and not reprocess already processed dates (if the user didn'specify that)
+After retrieving the input processing options, the function
+\enumerate{
+\item Acesses lpdaac http or ftp archive to determine the list of dates to be processed
+\item Performs all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
+quality indicators computation)
+\item Creates virtual files of the processed time series.
+}
+
+Reprojection and resize is dealt with by accessing gdal routines through the \code{gdaUtils} package.
+Extraction of bitfields  from Quality layers is done though fast bitwise computation
+
+Checks are done in order to not re-download already existing HDF images, and not reprocess already processed dates (if the user didn'specify that)
 }
 \note{
-Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ( http://r-gis.net/?q=ModisDownload ; .
-http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images)
+Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
+\href{http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
 
 License: GPL 3.0
 }
@@ -137,4 +150,3 @@ Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
-

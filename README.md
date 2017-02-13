@@ -15,7 +15,7 @@
     -   [Installing GDAL &gt;= 1.11.1](#installing-gdal-1.11.1)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/21656836.svg)](https://zenodo.org/badge/latestdoi/21656836)
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/21656836.svg)](https://zenodo.org/badge/latestdoi/21656836)
 
 MODIStsp
 ========
@@ -34,6 +34,28 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 
 News !
 ======
+
+-   **10/02/2017 - Various updates in the last period**
+
+-   Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+
+-   Added functionality for downloading "partial" years(Issue [\#54](https://github.com/lbusett/MODIStsp/issues/54)) on devel
+
+-   Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [\#59](https://github.com/lbusett/MODIStsp/issues/59)) on master/devel
+
+-   Added functionality for accelerating download using aria2c (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+
+-   Fixed bug on download with aria, throwing an error on partial download on http downlaod with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
+
+-   Fixed bug on M\*D15A2 processing (Issue [\#60](https://github.com/lbusett/MODIStsp/issues/60)) on devel/master
+
+-   Fixed bug on MCD12Q1 processing (Issue [\#58](https://github.com/lbusett/MODIStsp/issues/58)) on devel/master
+
+-   Fixed bug on MOD13C2 processing (Issue [\#52](https://github.com/lbusett/MODIStsp/issues/52)) on devel/master
+
+-   Fixed bug on insertion of custom projection (Issue [\#57](https://github.com/lbusett/MODIStsp/issues/57)) on devel/master
+
+-   Fixed bug on selection of custom index (Issue [\#53](https://github.com/lbusett/MODIStsp/issues/53)) on devel/master
 
 -   **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data**
 
@@ -85,7 +107,7 @@ install_github("lbusett/MODIStsp")
 
     ``` bash
     sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
-    glib2-devel libcurl4-devel gdal-devel proj-devel
+    glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
     ```
 
 2.  From R install the libraries `gWidgetsRGtk2` and `devtools`:
@@ -160,15 +182,23 @@ Provided information (e.g., correct bandnames, computable formula, etc...) is au
 
 Allows to specify which download method should be used. Available choices are:
 
-1.  **http**: download through ftp from NASA lpdaac http archive (<http://e4ftl01.cr.usgs.gov>). This **requires providing a user name and password**, which can be obtained by registrering an account at the address <https://urs.earthdata.nasa.gov/profile>;
+1.  **http**: download through ftp from NASA lpdaac http archive (<http://e4ftl01.cr.usgs.gov>). This requires providing a user name and password, which can be obtained by registrering an account at the address <https://urs.earthdata.nasa.gov/profile>;
 
 2.  **ftp**: download from NASA ftp archive (<ftp://ladsweb.nascom.nasa.gov/>);
 
-3.  **offline**: process/reprocess HDF files already available on your PC without downloading from NASA -- useful if you have an aexisting archive of HDF images, or to reprocess data already downloaded via `MODIStsp` (for example, to create time series for an additional layer).
+3.  **offline**: this option allows to process/reprocess HDF files already available on the user's PC without downloading from NASA -- useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp (for example, to create time series for an additional layer).
+
+The **use\_aria2c** option allows to accelerate the download from NASA archives, provided that the "aria2c" software is installed in your system. To download it and install it, see: [aria2.github.io/](https://aria2.github.io/)
 
 ### Processing Period
 
 Allows to specify the starting and ending dates to be considered for the creation of the time series. Dates **must** be provided in the *yyyy--mm--dd* format (e.g., 2015-01-31)
+
+The **Period** dropdown menu allows to choose between two options:
+
+1.  **full**: all available images between the starting and ending dates are downloaded and processed;
+
+2.  **seasonal**: allows to download data for only one part of the year, but for multiple years (for example, if the starting date is 2005-03-01 and the ending is 2010-06-01, only the images of March, April and May for the year between 2005 and 2010 will be downloaded). This allows to easily process data concerning a particular season of interest.
 
 ### Spatial Extent
 
@@ -188,7 +218,7 @@ Allows to specify the options to be used for reprojecting and resizing the MODIS
 
 1.  the **"Output Projection"** menu allows to either select one of the pre-defined output projections or specify a user-defined one by selecting "User Defined" and then inserting a valid "Proj4" string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails;
 
-2.  the **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, the resampling method can instead be chosen among "Nearest Neighbour" and "Mode" (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleanind would risk to contaminate the values of high-quality observations with those of low-quality ones.
+2.  the **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, the resampling method can instead be chosen among "Nearest Neighbour" and "Mode" (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleaning would risk to contaminate the values of high-quality observations with those of low-quality ones.
 
 ### Processing Options
 

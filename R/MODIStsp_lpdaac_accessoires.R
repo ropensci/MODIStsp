@@ -87,7 +87,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
               }
             # on NOT retry, quit the program
           } else {
-            ce = 0   # if retry, reset the counter
+            ce <- 0   # if retry, reset the counter
           }
         }
       }
@@ -115,10 +115,10 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
     if (class(items) != "try-error") {
       # run only if ftp download works
       
-      items_1 = str_extract(items,"20[0-9][0-9]$")
-      items_1 = items_1[!is.na(items_1)]
-      items_2 <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
-          .opts = list(timeout = 10,maxredirs = 5,verbose = FALSE)),"\r*\n")
+      items_1   <- str_extract(items,"20[0-9][0-9]$")
+      items_1   <- items_1[!is.na(items_1)]
+      items_2   <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
+          .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)),"\r*\n")
       full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(items_2[x]), items_2[[x]], "/")}))
       date_dirs <- sapply(strsplit(full_dirs, "/"), function(x) {strftime(as.Date(paste(x[length(x) - 1], x[length(x)]), format = "%Y %j"), "%Y.%m.%d")})
       attr(date_dirs, "server") <- "ftp"
@@ -142,7 +142,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
           }
           # on NOT retry, quit the program
         } else {
-          ce = 0   # if retry, reset the counter
+          ce <- 0   # if retry, reset the counter
         }
       }
     }
@@ -183,44 +183,59 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
 #' @importFrom httr GET content authenticate timeout 
 #' 
 lpdaac_getmod_dates <- function(dates, date_dirs) {
-  if (length(dates) > 1) {
-    start.date <- strsplit(dates[1], "\\.")[[1]]
-    end.date <- strsplit(dates[2], "\\.")[[1]]
-    wr <- c()
-    for (i in 1:length(date_dirs)) {
-      d <- unlist(strsplit(date_dirs[i], "\\."))
-      if (length(d) == 3)
-        if (as.numeric(d[1]) >= as.numeric(start.date[1]) &  as.numeric(d[1]) <= as.numeric(end.date[1]))  wr <- c(wr, i)
-    }
+  if (length(dates) == 1) {
+    date_dirs <- date_dirs[which(date_dirs == dates[1])]
+  } else if (length(dates) == 2) {
+    # OLD METHOD
+    # start.date <- strsplit(dates[1], "\\.")[[1]]
+    # end.date <- strsplit(dates[2], "\\.")[[1]]
+    # wr <- c()
+    # for (i in 1:length(date_dirs)) {
+    #   d <- unlist(strsplit(date_dirs[i], "\\."))
+    #   if (length(d) == 3)
+    #     if (as.numeric(d[1]) >= as.numeric(start.date[1]) &  as.numeric(d[1]) <= as.numeric(end.date[1]))  wr <- c(wr, i)
+    # }
+    # 
+    # if (length(wr) > 0)
+    #   date_dirs <- date_dirs[wr]
+    # else
+    #   return(NULL)
+    # wr <- c()
+    # for (i in 1:length(date_dirs)) {
+    #   d <- unlist(strsplit(date_dirs[i], "\\."))
+    #   if (as.numeric(d[2]) < as.numeric(start.date[2]) & as.numeric(d[1]) == as.numeric(start.date[1])) wr <- c(wr, i)
+    #   if (as.numeric(d[2]) > as.numeric(end.date[2]) &  as.numeric(d[1]) == as.numeric(end.date[1])) wr <- c(wr, i)
+    # }
+    # 
+    # if (length(wr) > 0)
+    #   date_dirs <- date_dirs[-wr]
+    # if (length(date_dirs) == 0)
+    #   return(NULL)
+    # wr <- c()
+    # for (i in 1:length(date_dirs)) {
+    #   d <- unlist(strsplit(date_dirs[i], "\\."))
+    #   if (as.numeric(d[3]) < as.numeric(start.date[3]) &  as.numeric(d[1]) == as.numeric(start.date[1]) & as.numeric(d[2]) == as.numeric(start.date[2])) wr <- c(wr, i)
+    #   if (as.numeric(d[3]) > as.numeric(end.date[3]) &  as.numeric(d[1]) == as.numeric(end.date[1]) & as.numeric(d[2]) == as.numeric(end.date[2]))  wr <- c(wr, i)
+    # }
+    # if (length(wr) > 0) {
+    #   date_dirs <- date_dirs[-wr]
+    # }
+    # if (length(date_dirs) == 0) {
+    #   return(NULL)
+    # }
     
-    if (length(wr) > 0)
-      date_dirs <- date_dirs[wr]
-    else
-      return(NULL)
-    wr <- c()
-    for (i in 1:length(date_dirs)) {
-      d <- unlist(strsplit(date_dirs[i], "\\."))
-      if (as.numeric(d[2]) < as.numeric(start.date[2]) & as.numeric(d[1]) == as.numeric(start.date[1])) wr <- c(wr, i)
-      if (as.numeric(d[2]) > as.numeric(end.date[2]) &  as.numeric(d[1]) == as.numeric(end.date[1])) wr <- c(wr, i)
-    }
+    # NEW METHOD
+    date_dirs <- date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[1] & 
+                           as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[2]]
     
-    if (length(wr) > 0)
-      date_dirs <- date_dirs[-wr]
-    if (length(date_dirs) == 0)
-      return(NULL)
-    wr <- c()
-    for (i in 1:length(date_dirs)) {
-      d <- unlist(strsplit(date_dirs[i], "\\."))
-      if (as.numeric(d[3]) < as.numeric(start.date[3]) &  as.numeric(d[1]) == as.numeric(start.date[1]) & as.numeric(d[2]) == as.numeric(start.date[2])) wr <- c(wr, i)
-      if (as.numeric(d[3]) > as.numeric(end.date[3]) &  as.numeric(d[1]) == as.numeric(end.date[1]) & as.numeric(d[2]) == as.numeric(end.date[2]))  wr <- c(wr, i)
-    }
-    if (length(wr) > 0) {
-      date_dirs <- date_dirs[-wr]
-    }
-    if (length(date_dirs) == 0) {
-      return(NULL)
-    }
-  } else date_dirs <- date_dirs[which(date_dirs == dates[1])]
+  } else if (length(dates) == 4) {
+    date_dirs <- c(date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[1] & 
+                             as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[2]],
+                   date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[3] & 
+                             as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[4]])
+  } else {
+    date_dirs <- NULL
+  }
   
   return(date_dirs)
 }
@@ -292,7 +307,7 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
           }
           # on NOT retry, quit the program
         } else {
-          ce = 0   # if retry, reset the counter
+          ce <- 0   # if retry, reset the counter
         }
       }
     }
@@ -326,7 +341,7 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
             }
             # on NOT retry, quit the program
           } else {
-            ce = 0   # if retry, reset the counter
+            ce <- 0   # if retry, reset the counter
           }
         }
       }

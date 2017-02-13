@@ -3,10 +3,17 @@
 #' @description main function of MODIStsp tool. Takes as input processing parameters specified by the user using MODIStsp_GUI and saved in
 #' MODIStsp_Previous.json (Interactive use), or a user specified JSON file (batch use) (See MODIStsp_main for details ) and performs all required
 #' processing.
-#' @details After retrieving the input processing options, the function accesses lpdaac htttp archive to determine the list of dates
-#' to be processed. It then perform all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
-#' quality indicators computation), and finally performs virtual files creation. Checks are done in order to not re-download already existing HDF
-#' images, and not reprocess already processed dates (if the user didn'specify that)
+#' @details After retrieving the input processing options, the function 
+#' 1. Acesses lpdaac http or ftp archive to determine the list of dates to be processed
+#' 2. Performs all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
+#' quality indicators computation)
+#' 3. Creates virtual files of the processed time series.
+#' 
+#' Reprojection and resize is dealt with by accessing gdal routines through the `gdaUtils` package.
+#' Extraction of bitfields  from Quality layers is done though fast bitwise computation
+#' 
+#' Checks are done in order to not re-download already existing HDF images, and not reprocess already processed dates (if the user didn'specify that)
+#'
 #' @param sel_prod string selected MODIS product
 #' @param start_date string start_date for images download and preproc (yyyy.mm.dd)
 #' @param end_date string end_date for images download and preproc (yyyy.mm.dd)
@@ -18,8 +25,8 @@
 #' @param https hash https site for download of hdf of selected product
 #' @param ftps hash ftps site for download of hdf of selected product
 #' @param download_server service used to download MODIS tiles, one of: 'http', 'ftp', NA.
-#' @param user Username for http download (https://urs.earthdata.nasa.gov/home)
-#' @param password Password for http download (https://urs.earthdata.nasa.gov/home)
+#' @param user Username for http download ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))
+#' @param password Password for http download ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))
 #' @param start_x int start horiz. tile
 #' @param start_y int start vertical. tile
 #' @param end_x int end horiz. tile
@@ -57,12 +64,15 @@
 #' @param ts_format string format of virtual files (None, ENVI Meta Files, GDAL vrt files, ENVI and GDAL)
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
 #' @param use_aria logical if TRUE, then aria2c is used to accelerate download (if available !)
+#' @param download_range character if "full", all the available images between the startingand the ending dates are downloaded;
+#' if "seasonal", only the images included in the season (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, the images of December,
+#' January and February from 2005 to 2010 - excluding 2005-01, 2005-02 and 2010-12 - are downloaded)
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
-#' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ( http://r-gis.net/?q=ModisDownload ; .
-#' http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images)
+#' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ([ModisDownload](http://r-gis.net/?q=ModisDownload);
+#' [Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
 #' @importFrom gdalUtils gdal_translate gdalbuildvrt gdalwarp
 #' @importFrom hash hash
@@ -79,7 +89,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                              native_res, tiled, MOD_proj_str, outproj_str, nodata_in,nodata_out, nodata_change,rts, datatype,	bandsel, bandnames, 
                              indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel, 
                              quality_bitN ,quality_source, quality_nodata_in, full_ext, quality_nodata_out, file_prefixes, main_out_folder, resampling, 
-                             ts_format, gui=TRUE, use_aria = TRUE) {
+                             ts_format, use_aria = TRUE, download_range="full", gui=TRUE) {
   
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   # Intialize variables ----------------------------------------------------- 
@@ -183,7 +193,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
             stop("aria2c was not found! Ensure that aria2c is installed and in your path! - See http://aria2.github.io ")
           }
         } else {
-          message("aria2c was not found! It is either not installed or not on your path! - Continuing with normal downlad... ")
+          message("aria2c was not found! It is either not installed or not on your path! - Continuing with normal download... ")
         }
       }
     }
@@ -196,25 +206,58 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     
     for (yy in start_year:end_year) {
       
-      # Create string representing the dates to be processed
-      if (yy == start_year & yy == end_year) {
-        dates <- c(start_date,end_date)
-      }
-      
-      if (yy == start_year & yy != end_year) {
-        dates <- c(start_date,paste0(as.character(yy),".12.31"))
-      }
-      
-      if (yy != start_year & yy == end_year) {
-        dates <- c(paste0(as.character(yy),".1.1"),end_date)
-      }
-      
-      if (yy != start_year & yy != end_year) {
-        dates <- c(paste0(as.character(yy),".1.1"),paste0(as.character(yy),".12.31"))
-      }
+      if (download_range=="full") {
+        # Create string representing the dates to be processed in the case 
+        # of continuous processing
+        
+        if (yy == start_year & yy == end_year) {
+          dates <- c(start_date, end_date)
+        }
+        
+        if (yy == start_year & yy != end_year) {
+          dates <- c(start_date, paste0(as.character(yy),".12.31"))
+        }
+        
+        if (yy != start_year & yy != end_year) {
+          dates <- c(paste0(as.character(yy),".1.1"), paste0(as.character(yy),".12.31"))
+        }
+        
+        if (yy != start_year & yy == end_year) {
+          dates <- c(paste0(as.character(yy),".1.1"), end_date)
+        }
+        
+      } else if (download_range=="seasonal") {
+        # Create string representing the dates to be processed in the case 
+        # of splitted processing
+        
+        start_seas <- as.Date(strftime(as.Date(start_date,format="%Y.%m.%d"),"0-%m-%d")) # the starting month-day 
+        end_seas <- as.Date(strftime(as.Date(end_date,format="%Y.%m.%d"),"0-%m-%d")) # the ending month-day 
+        
+        nye_incl <- start_seas > end_seas # TRUE if the period includes new year's eve, fasle if not
+        # start_temp <- ymd(paste(2000,month(ymd(start_date)),day(ymd(start_date)), sep = "-"))
+        
+        if (!nye_incl) {
+          dates <- c(gsub(paste0("^",start_year),yy,start_date), gsub(paste0("^",end_year),yy,end_date))
+        } else {
+          
+          if (yy == start_year & yy != end_year) {
+            dates <- c(gsub(paste0("^",start_year),yy,start_date), paste0(as.character(yy),".12.31"))
+          }
+          
+          if (yy != start_year & yy != end_year) {
+            dates <- c(paste0(as.character(yy),".1.1"), gsub(paste0("^",end_year),yy,end_date),
+                       gsub(paste0("^",start_year),yy,start_date), paste0(as.character(yy),".12.31"))
+          }
+          
+          if (yy != start_year & yy == end_year) {
+            dates <- c(paste0(as.character(yy),".1.1"), gsub(paste0("^",end_year),yy,end_date))
+          }
+          
+        }
+
+      } else stop("download_range value not valid (only \"full\" and \"seasonal\" are admitted).")
       
       # Processing status message
-      
       mess_text <- paste("Retrieving Files for Year",as.character(yy))
       if (gui) {
         svalue(mess_lab) <- paste("---",mess_text,"---")
@@ -291,7 +334,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   }
                   
                   # if user/password are not valid, notify
-                  if ( size_string["status_code"]==401) {
+                  if (size_string["status_code"] == 401) {
                     stop("Username and/or password are not valid. Please retry with the correct ones or try with ftp download.")
                   }
                   
@@ -315,7 +358,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 if (!file.exists(local_filename) | local_filesize != remote_filesize) {		# If HDF not existing or with different size, download.
                   er <- 5; class(er) <- "try-error"; ce <- 0
                   
-                  local_filesize = 0  
+                  local_filesize <- 0  
                   while (local_filesize != remote_filesize) {   # Add here a while loop: Only exit if local file size equals remote filesize
                     
                     while (er != 0) {   # repeat until no error or > 30 tryyouts
@@ -391,7 +434,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     }  # end while on download tries
                     
                     local_filesize <- file.info(local_filename)$size    # Find the size of the new file downloaded to allow comparison with remote 
-                    
+                    if (is.na(local_filesize)){
+                      local_filesize <- 0
+                      er <- 5
+                      ce <- ce + 1
+                    }
                   } # end here the while loop on file size check
                   
                 }  # end IF on hdf existence
@@ -737,7 +784,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
   
   
   if (sensor == "Both") {
-    senslist = c("Terra","Aqua","Mixed")
+    senslist <- c("Terra","Aqua","Mixed")
   } # selected sensors
   
   for (sens_sel in senslist) {		# cycle on selected sensors

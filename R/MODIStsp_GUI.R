@@ -20,7 +20,7 @@
 #' @importFrom grDevices dev.new
 #' @import gWidgets
 
-MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir, previous_jsfile, prodopts_file){99
+MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir, previous_jsfile, prodopts_file){
   
   GUI.env      <- new.env()   # create a new env to facilitate values-passing between widgets
   GUI.env$Quit <- TRUE
@@ -247,7 +247,6 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                             # Run addindex() function ----
                             addind <- MODIStsp_addindex(option_jsfile = previous_jsfile, prodopts_file = prodopts_file, selprod = svalue(prod_wid), selvers = svalue(vers_wid))
                             
-                            # if (addind ==TRUE) {
                             general_opts  <- RJSONIO::fromJSON(previous_jsfile)
                             pos_wid       <- which(check_names %in% svalue(bands_wid))   # ? which layers selected ? --> store in GUI.env$temp_wid_bands array
                             tmp_arr_bands <- array(data = 0 , dim = length(check_names))
@@ -267,7 +266,6 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                             }
                             
                             dispose(selgroup)
-                            # }
                           },
                           container = cbox_indexes, expand = FALSE)
               }
@@ -290,7 +288,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   #- ------------------------------------------------------------------------------- -#
   download_frame <- gframe(text = "<span foreground='red' size='x-large'>Download Method</span>", markup = TRUE, container = main_group, horizontal = TRUE, expand = TRUE)
   
-  methods_group  <- ggroup(container = download_frame, horizontal = TRUE)
+  methods_group  <- ggroup(container = download_frame, horizontal = TRUE, expand=TRUE)
   
   method_lab <- glabel(text = " Download Server:", container = methods_group)
   server_wid <- gcombobox(items = c("http","ftp","offline"), text = "Select", container = methods_group, 
@@ -300,6 +298,11 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                               enabled(authenticate_group) <- FALSE
                             } else {
                               enabled(authenticate_group) <- TRUE
+                            }
+                            if (current_sel != "offline") {
+                              enabled(aria_wid) <- enabled(aria_help) <- TRUE
+                            } else {
+                              enabled(aria_wid) <- enabled(aria_help) <- FALSE
                             }
                           })
   size(server_wid) <- list(width = 100)
@@ -318,7 +321,22 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   } else {
     (enabled(authenticate_group) <- TRUE)
   }
-  aria_wid <- gcheckbox("Use 'aria2c' to accelerate download", checked = general_opts$use_aria, container = methods_group)
+  
+  addSpring(methods_group)
+  aria_wid <- gcheckbox("Use 'aria2c'", checked = general_opts$use_aria, container = methods_group)
+  addSpace(methods_group,2)
+  aria_help <- gbutton(text = " ? ",
+          handler = function(h,....) {
+            help_box <- gbasicdialog(title = "Help", parent = NULL, do.buttons = FALSE, horizontal = FALSE, 
+                                     width = 400, height = 40, handler = function(h,....) {})
+            help_mess_lab <- glabel(text = paste("If selected, use aria2c to accelerate download.",
+                                                 "It is necessary that aria2c is installed and",
+                                                 "that the binary is in the user PATH.",
+                                                 "See https://aria2.github.io",
+                                                 sep="\n"), editable = FALSE, container = help_box)
+            visible(help_box) = TRUE
+            }, container = methods_group, expand = FALSE)
+
   
   font(method_lab) <- list(family = "sans",weight = "bold")
   font(user_lab)   <- font(password_lab) <- list(family = "sans",weight = "bold")
@@ -327,7 +345,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # Widgets for Dates selection ----
   #- ------------------------------------------------------------------------------- -#
   dates_frame <- gframe(text = "<span foreground='red' size='x-large'>Processing Period</span>", markup = TRUE, container = main_group, horizontal = TRUE, expand = TRUE)
-  dates_group <- ggroup(container = dates_frame, horizontal = TRUE)
+  dates_group <- ggroup(container = dates_frame, horizontal = TRUE, expand=TRUE)
   
   start_date_lab <- glabel(text = " Starting Date (yyyy-mm-dd):  ", container = dates_group)
   start_date_wid <- gedit(text = general_opts$start_date, container = dates_group, width = 15)
@@ -336,6 +354,29 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   end_date_wid <- gedit(text = general_opts$end_date, container = dates_group, width = 15)
   
   font(start_date_lab) <- font(end_date_lab) <- list(family = "sans",weight = "bold")
+  
+  addSpring(dates_group)
+  
+  seas_lab       <- glabel(text = "Period: ", container = dates_group)
+  font(seas_lab) <- list(family = "sans",weight = "bold")
+  # size(seas_lab) <- list(width = 200 )
+  seas_array       <- c("full","seasonal")
+  seas_wid <-  gcombobox(seas_array, container = dates_group, selected = match(general_opts$download_range, seas_array))
+  size(seas_wid) <- list(width = 120 )
+  
+  seas_help <- gbutton(text = " ? ",
+          handler = function(h,....) {
+            help_box <- gbasicdialog(title = "Help", parent = NULL, do.buttons = FALSE, horizontal = FALSE, 
+                                     width = 400, height = 40, handler = function(h,....) {})
+            help_mess_lab <- glabel(text = paste("If \"full\" is selected, all the available images between the starting",
+                                                 "and the ending dates will be downloaded; if \"seasonal\", the tool",
+                                                 "donwloads only the images included in the season (e.g: if the starting",
+                                                 "date is 2005-12-01 and the ending is 2010-02-31, the images of December,",
+                                                 "January and February from 2005 to 2010 - excluding 2005-01, 2005-02 and",
+                                                 "2010-12 - will be downloaded).",
+                                                 sep="\n"), editable = FALSE, container = help_box)
+            visible(help_box) = TRUE
+            }, container = dates_group, expand = FALSE)
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for Tiles selection ----
@@ -875,6 +916,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     general_opts$password        <- svalue(password_wid)
     general_opts$download_server <- svalue(server_wid)
     general_opts$use_aria        <- svalue(aria_wid)
+    general_opts$download_range  <- svalue(seas_wid)
     
     general_opts$start_date <- svalue(start_date_wid)
     general_opts$end_date   <- svalue(end_date_wid)
@@ -1092,6 +1134,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
       svalue(user_wid)     <- general_opts$user
       svalue(password_wid) <- general_opts$password
       svalue(aria_wid)     <- general_opts$use_aria  
+      svalue(seas_wid)     <- general_opts$download_range
       
       svalue(start_date_wid) <- general_opts$start_date # Dates options
       svalue(end_date_wid)   <- general_opts$end_date
