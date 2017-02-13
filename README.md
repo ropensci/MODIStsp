@@ -15,7 +15,7 @@
     -   [Installing GDAL &gt;= 1.11.1](#installing-gdal-1.11.1)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/21656836.svg)](https://zenodo.org/badge/latestdoi/21656836)
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/21656836.svg)](https://zenodo.org/badge/latestdoi/21656836)
 
 MODIStsp
 ========
@@ -35,7 +35,9 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 News !
 ======
 
--   **10/02/2017 - Various updates in the last period**
+-   **13/02/2017 - MODIStsp v1.3.1 released **
+
+MODIStsp v1.3.1 has been released on 13/02/2017. Main changes and bug fixes are reported below
 
 -   Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
 
