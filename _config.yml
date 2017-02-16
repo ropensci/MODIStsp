@@ -2,7 +2,7 @@ title: Modistsp
 description: An "R" package for automatic download and preprocessing of MODIS Land Products Time Series
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-slate
+theme: jekyll-theme-merlot
 
 gems:
   - jekyll-mentions
