@@ -16,6 +16,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
+
 MODIStsp
 ========
 
@@ -58,7 +59,7 @@ MODIStsp v1.3.1 has been released on 13/02/2017. Main changes and bug fixes are 
 
 -   Fixed bug on selection of custom index (Issue [\#53](https://github.com/lbusett/MODIStsp/issues/53))
 
-**11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data**
+-   **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data**
 
 MODIStsp v1.3.0 has been finally released. The major improvement consists in now allowing download and preprocessing of **MODIS Collection 006 datasets**. Other changes concern improvements in the GUI, introduction of off-line functionality and various bug fixing. You can see the changelog [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.0). Please report any issues you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.:
 
