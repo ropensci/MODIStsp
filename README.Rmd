@@ -14,9 +14,7 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp)
-![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) 
-[![DOI](https://zenodo.org/badge/21656836.svg)](https://zenodo.org/badge/latestdoi/21656836)
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
 
 # MODIStsp
 
@@ -26,36 +24,39 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 An article about `MODIStsp` was also recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020). 
 
-**Solutions to common problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
+**Solutions to common installation and processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
 
 **Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
 
 _MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy (CNR-IREA)_
 
-# News !
+News !
+======
 
-* **10/02/2017 - Various updates in the last period** 
+**13/02/2017 - MODIStsp v1.3.1 released **
+
+MODIStsp v1.3.1 has been released on 13/02/2017. Main changes and bug fixes are reported below
 
 - Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue
-[#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+[#55](https://github.com/lbusett/MODIStsp/issues/55)) 
 
-- Added functionality for downloading "partial" years(Issue [#54](https://github.com/lbusett/MODIStsp/issues/54)) on devel
+- Added functionality for downloading "partial" years(Issue [#54](https://github.com/lbusett/MODIStsp/issues/54)) 
 
-- Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [#59](https://github.com/lbusett/MODIStsp/issues/59)) on master/devel
+- Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [#59](https://github.com/lbusett/MODIStsp/issues/59))
 
-- Added functionality for accelerating download using aria2c (Issue [#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+- Added functionality for accelerating download using aria2c (Issue [#55](https://github.com/lbusett/MODIStsp/issues/55)) 
 
 - Fixed bug on download with aria, throwing an error on partial download on http downlaod with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
 
-- Fixed bug on M*D15A2 processing (Issue [#60](https://github.com/lbusett/MODIStsp/issues/60)) on devel/master
+- Fixed bug on M*D15A2 processing (Issue [#60](https://github.com/lbusett/MODIStsp/issues/60)) 
 
-- Fixed bug on MCD12Q1 processing (Issue [#58](https://github.com/lbusett/MODIStsp/issues/58)) on devel/master
+- Fixed bug on MCD12Q1 processing (Issue [#58](https://github.com/lbusett/MODIStsp/issues/58))
 
-- Fixed bug on  MOD13C2 processing (Issue [#52](https://github.com/lbusett/MODIStsp/issues/52)) on devel/master
+- Fixed bug on  MOD13C2 processing (Issue [#52](https://github.com/lbusett/MODIStsp/issues/52))
 
-- Fixed bug on insertion of custom projection (Issue [#57](https://github.com/lbusett/MODIStsp/issues/57)) on devel/master
+- Fixed bug on insertion of custom projection (Issue [#57](https://github.com/lbusett/MODIStsp/issues/57)) 
 
-- Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53)) on devel/master
+- Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53))
 
 * **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data** 
 
