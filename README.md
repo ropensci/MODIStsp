@@ -25,7 +25,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 An article about `MODIStsp` was also recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020).
 
-**Solutions to common problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
+**Solutions to common installation and processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
 
 **Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
 
