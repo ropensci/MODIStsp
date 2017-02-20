@@ -306,11 +306,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 # Check file size (if the local file size is different, re-download)
                 local_filename  <- file.path(out_folder_mod,modisname)
                 local_filesize  <- file.info(local_filename)$size
-                remote_filename <- if (download_server == "http") {
-                  paste0(http,date_dirs[date], "/",modisname)
-                } else if (download_server == "ftp") {
-                  paste0(ftp,year,"/",DOY,"/",modisname)
-                } else if (download_server == "offline") {NA}
+                if (download_server == "http") {remote_filename <- paste0(http,date_dirs[date], "/",modisname)}
+                if (download_server == "ftp")  {remote_filename <- paste0(ftp,year,"/",DOY,"/",modisname)}
+                if (download_server == "http") {remote_filename <- NA}
                 
                 # in case of http or ftp download, try to catch size information from xml file ----
                 if (download_server != "offline") { 
@@ -334,7 +332,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   }
                   
                   # if user/password are not valid, notify
-                  if (size_string["status_code"] == 401) {
+                  if (download_server == "http" & size_string["status_code"] == 401) {
                     stop("Username and/or password are not valid. Please retry with the correct ones or try with ftp download.")
                   }
                   
