@@ -17,9 +17,9 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
 
-*20/02/2017 IMPORTANT NOTES !*
+## _20/02/2017 IMPORTANT NOTES !_
 
--   We discovered a bug recently introduced on *ftp* download. If you recently installed `MODIStsp`, please delete your current version and re-install ! Sorry for the trouble !
+-   We discovered a bug recently introduced on *ftp* download. If you recently installed `MODIStsp`, please delete your current version and re-install it! Sorry for the trouble !
 
 -   If you have trouble downloading via *http*, please visit your earthdata "profile" page (\[<https://urs.earthdata.nasa.gov/profile>\], click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications, search for it in the list and approve it !")
 
