@@ -308,7 +308,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                 local_filesize  <- file.info(local_filename)$size
                 if (download_server == "http") {remote_filename <- paste0(http,date_dirs[date], "/",modisname)}
                 if (download_server == "ftp")  {remote_filename <- paste0(ftp,year,"/",DOY,"/",modisname)}
-                if (download_server == "http") {remote_filename <- NA}
+                if (download_server == "offline") {remote_filename <- NA}
                 
                 # in case of http or ftp download, try to catch size information from xml file ----
                 if (download_server != "offline") { 
