@@ -15008,10 +15008,10 @@
                 <prod_fullname>Terra/MODIS Net Primary Production Yearly L4 Global 1km</prod_fullname>
                 <main_out_folder>Net_PP_Yearly_1Km_v5</main_out_folder>
                 <native_res>926.6254</native_res>
-                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A3.005/</http_terra>
-                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A3.005/</http_aqua>
-                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD17A3/</ftp_terra>
-                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD17A3/</ftp_aqua>
+                <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A3.055/</http_terra>
+                <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A3.055/</http_aqua>
+                <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/55/MOD17A3/</ftp_terra>
+                <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/55/MYD17A3/</ftp_aqua>
                 <combined>0</combined>
                 <tiled>1</tiled>
                 <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a3</www>
