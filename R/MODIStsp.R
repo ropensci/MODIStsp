@@ -169,7 +169,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
       start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", use_aria = FALSE, download_server = "http", download_range = "full",
       proj = "Sinusoidal", user_proj4 = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
       out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
-      nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
+      nodata_change = "No", scale_val = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
       MODIStspVersion = as.character(packageVersion("MODIStsp")), custom_indexes = list())
     write(RJSONIO::toJSON(general_opts),previous_jsfile)
   } else if (is.null(general_opts$MODIStspVersion)) {
@@ -332,6 +332,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
       nodata_out         = prod_opts$nodata_out, 
       rts                = general_opts$rts, 
       nodata_change      = general_opts$nodata_change,
+      scale_val          = general_opts$scale_val,
       datatype           = prod_opts$datatype,	
       bandsel            = general_opts$bandsel, 
       bandnames          = prod_opts$bandnames,
