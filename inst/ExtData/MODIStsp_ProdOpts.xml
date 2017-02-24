@@ -6151,8 +6151,8 @@
                         <quality_source>LST_Night_QC</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
-                    <!--TODO add LST Clear-sky bit-field legend -->
                 </quality_indicators>
+                    <!--TODO add LST Clear-sky bit-field legend -->
             </version>
             <version>
                 <v_number>6</v_number>
@@ -6603,8 +6603,8 @@
                         <quality_source>LST_Night_QC</quality_source>
                         <quality_bitN>6-7</quality_bitN>
                     </quality>
-                    <!--TODO add LST Clear-sky bit-field legend -->
                 </quality_indicators>
+                    <!--TODO add LST Clear-sky bit-field legend -->
             </version>
             <version>
                 <v_number>6</v_number>
