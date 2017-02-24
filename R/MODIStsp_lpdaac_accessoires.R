@@ -40,14 +40,24 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
   ce <- 0
   
   # Try HTTP download
-  check_used_server <- if (is.na(used_server)) TRUE else if (used_server == "http") TRUE else FALSE
+  if (is.na(used_server)) {
+    check_used_server = TRUE
+  } else {
+    if (used_server == "http") {
+      check_used_server = TRUE
+    } else {
+      check_used_server = FALSE
+    }
+  }
+  
+  # check_used_server <- if (is.na(used_server)) {TRUE} else {if (used_server == "http") {TRUE} else {FALSE}
   if (class(items) == "try-error" & check_used_server) {
     
     while (class(items) == "try-error") {
       # items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
       # silent = TRUE)
       
-      response <- try(GET(http, authenticate(user, password), timeout(10)))   # send request to server
+      response <- try(GET(http, authenticate(user, password), timeout(10), encoding = "UTF-8"))   # send request to server
       
       if (class(response) == "try-error") {   # if error on response, retry
         Sys.sleep(1)
@@ -95,28 +105,58 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
   }
 
   # Try FTP download: If method = ftp, or if method = http and limit exceeded on non-interactive execution
-  check_used_server <- if (is.na(used_server)) TRUE else if (used_server == "ftp") TRUE else FALSE
+  if (is.na(used_server)) {
+    check_used_server = TRUE
+  } else {
+    if (used_server == "ftp") {
+      check_used_server = TRUE
+    } else {
+      check_used_server = FALSE
+    }
+  }
   
   if (class(items) == "try-error" & check_used_server) {
     
     while (class(items) == "try-error") {
       
-       items <- try(strsplit(getURL(ftp, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)), "\r*\n")[[1]],
-       silent = TRUE)
-      # response = try(GET(ftp,timeout(10)))   # send request to server
-      
-      if (class(items) == "try-error") {   # if error on response, retry
-        Sys.sleep(1)
-        ce <- ce + 1
-        
-        message("Trying to reach ftp server - attempt ", ce)
-      } 
+      #  items <- strsplit(content(GET(ftp,timeout(10)), "text"), "\r*\n")[[1]]
+      #  # try(strsplit(getURL(ftp, followLocation = TRUE, .opts = list(timeout = 50, maxredirs = 5, verbose = FALSE)), "\r*\n")[[1]],
+      #  # silent = TRUE)
+      # # response = try(GET(ftp,timeout(10)))   # send request to server
+      # 
+      # if (class(items) == "try-error") {   # if error on response, retry
+      #   Sys.sleep(1)
+      #   ce <- ce + 1
+      #   
+      #   message("Trying to reach ftp server - attempt ", ce)
+      # } 
+       
+       response <- try(GET(ftp, timeout(10)), config(verbose = FALSE))   # send request to server
+       
+       if (class(response) == "try-error") {   # if error on response, retry
+         Sys.sleep(1)
+         ce <- ce + 1
+         message("Trying to reach ftp server - attempt ", ce)
+       } else { # If good response, get the result
+         if (response$status_code == 226) {
+           items <- strsplit(content(response, "text", encoding = "UTF-8"), "\r*\n")[[1]]
+         } else {
+           ce <- ce + 1
+           message("Trying to reach http server - attempt ", ce)
+         }
+       }
       
     if (class(items) != "try-error") {
       # run only if ftp download works
       
       items_1   <- str_extract(items,"20[0-9][0-9]$")
       items_1   <- items_1[!is.na(items_1)]
+      # response_2 <- lapply(items_1, function(x) {content(GET(paste0(ftp,x,"/"), timeout(5)), "text", encoding = "UTF-8")})
+      # items_2    <- str_split(response_2,"\n")
+      # items_2    <- lapply(items_2, function(x){x[1]})
+      # full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(response_2[x]), items_2[[x]], "/")}))
+      # 
+      
       items_2   <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
           .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)),"\r*\n")
       full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(items_2[x]), items_2[[x]], "/")}))
@@ -225,14 +265,14 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
     # }
     
     # NEW METHOD
-    date_dirs <- date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[1] & 
-                           as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[2]]
+    date_dirs <- date_dirs[as.Date(date_dirs,format="%Y.%m.%d") >= as.Date(dates,format="%Y.%m.%d")[1] & 
+                           as.Date(date_dirs,format="%Y.%m.%d") <= as.Date(dates,format="%Y.%m.%d")[2]]
     
   } else if (length(dates) == 4) {
-    date_dirs <- c(date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[1] & 
-                             as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[2]],
-                   date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[3] & 
-                             as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[4]])
+    date_dirs <- c(date_dirs[as.Date(date_dirs,format="%Y.%m.%d") >= as.Date(dates,format="%Y.%m.%d")[1] & 
+                             as.Date(date_dirs,format="%Y.%m.%d") <= as.Date(dates,format="%Y.%m.%d")[2]],
+                   date_dirs[as.Date(date_dirs,format="%Y.%m.%d") >= as.Date(dates,format="%Y.%m.%d")[3] & 
+                             as.Date(date_dirs,format="%Y.%m.%d") <= as.Date(dates,format="%Y.%m.%d")[4]])
   } else {
     date_dirs <- NULL
   }
