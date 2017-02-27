@@ -65,8 +65,8 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
         datatype   <- c(datatype,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["datatype"]]))
         nodata_in  <- c(nodata_in,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["nodata_in"]]))
         nodata_out <- c(nodata_out,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["nodata_out"]]))
-        nodata_out <- c(scale_factor,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["scale_factor"]]))
-        nodata_out <- c(offset,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["offset"]]))
+        scale_factor <- c(scale_factor,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["scale_factor"]]))
+        offset <- c(offset,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["offset"]]))
       } #End Cycle on band
       prodopts[[version_name]]$bandnames <- bandnames # store in prodopts
       prodopts[[version_name]]$band_fullnames <- band_fullname
