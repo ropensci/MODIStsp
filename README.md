@@ -22,6 +22,12 @@
 
 -   If you have trouble downloading via *http*, please visit your earthdata "profile" page (\[<https://urs.earthdata.nasa.gov/profile>\], click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications, search for it in the list and approve it !")
 
+## _20/02/2017 IMPORTANT NOTES !_
+
+-   We discovered a bug recently introduced on *ftp* download. If you recently installed `MODIStsp`, please delete your current version and re-install it! Sorry for the trouble !
+
+-   If you have trouble downloading via *http*, please visit your earthdata "profile" page (\[<https://urs.earthdata.nasa.gov/profile>\], click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications, search for it in the list and approve it !")
+
 MODIStsp
 ========
 
