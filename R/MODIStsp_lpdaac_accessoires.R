@@ -14,14 +14,13 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @param out_folder_mod  ouput folder for original HDF storage
 #' @param .Platform string os platform (from call to .Platform)
 #' @return list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
-#'
-#' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
-#' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2016-2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @importFrom gWidgets gconfirm
 #' @importFrom RCurl getURL
 #' @importFrom httr GET content authenticate timeout
-#' @importFrom stringr str_extract str_pad str_split
+#' @importFrom stringr str_extract str_pad str_split str_split_fixed
 #' @importFrom utils download.file
 
 lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, password = password, gui, out_folder_mod, .Platform) {
@@ -148,17 +147,14 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
       
     if (class(items) != "try-error") {
       # run only if ftp download works
-      
+
       items_1   <- str_extract(items,"20[0-9][0-9]$")
       items_1   <- items_1[!is.na(items_1)]
-      # response_2 <- lapply(items_1, function(x) {content(GET(paste0(ftp,x,"/"), timeout(5)), "text", encoding = "UTF-8")})
-      # items_2    <- str_split(response_2,"\n")
-      # items_2    <- lapply(items_2, function(x){x[1]})
-      # full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(response_2[x]), items_2[[x]], "/")}))
-      # 
-      
-      items_2   <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
-          .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)),"\r*\n")
+      response_1 <- lapply(items_1, function(x) {GET(paste0(ftp,x,"/"), timeout(5))})
+      response_2 <- lapply(response_1, function(x) {content(x, "text", encoding = "UTF-8")})
+      response_3 <- lapply(str_split(response_2,"\n"),function(x){x[nchar(x)>0]})
+      items_2    <- sapply(response_3, function(x){str_split_fixed(x," +",9)[,9]})
+      names(items_2) <- sapply(response_1,function(x){x$url})
       full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(items_2[x]), items_2[[x]], "/")}))
       date_dirs <- sapply(strsplit(full_dirs, "/"), function(x) {strftime(as.Date(paste(x[length(x) - 1], x[length(x)]), format = "%Y %j"), "%Y.%m.%d")})
       attr(date_dirs, "server") <- "ftp"
@@ -214,57 +210,13 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
 #' (e.g., c("2015.1.1", "2015.12.31)
 #' @param date_dirs data frame full list of folders in lpdaa archive for product of interest
 #' @return array of folder names containing data for the modis product acquired in the period specified by "dates"
-#'
-#' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
-#' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' license GPL 3.0
-#' @import RCurl
-#' @importFrom httr GET content authenticate timeout 
+#' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' 
 lpdaac_getmod_dates <- function(dates, date_dirs) {
   if (length(dates) == 1) {
     date_dirs <- date_dirs[which(date_dirs == dates[1])]
   } else if (length(dates) == 2) {
-    # OLD METHOD
-    # start.date <- strsplit(dates[1], "\\.")[[1]]
-    # end.date <- strsplit(dates[2], "\\.")[[1]]
-    # wr <- c()
-    # for (i in 1:length(date_dirs)) {
-    #   d <- unlist(strsplit(date_dirs[i], "\\."))
-    #   if (length(d) == 3)
-    #     if (as.numeric(d[1]) >= as.numeric(start.date[1]) &  as.numeric(d[1]) <= as.numeric(end.date[1]))  wr <- c(wr, i)
-    # }
-    # 
-    # if (length(wr) > 0)
-    #   date_dirs <- date_dirs[wr]
-    # else
-    #   return(NULL)
-    # wr <- c()
-    # for (i in 1:length(date_dirs)) {
-    #   d <- unlist(strsplit(date_dirs[i], "\\."))
-    #   if (as.numeric(d[2]) < as.numeric(start.date[2]) & as.numeric(d[1]) == as.numeric(start.date[1])) wr <- c(wr, i)
-    #   if (as.numeric(d[2]) > as.numeric(end.date[2]) &  as.numeric(d[1]) == as.numeric(end.date[1])) wr <- c(wr, i)
-    # }
-    # 
-    # if (length(wr) > 0)
-    #   date_dirs <- date_dirs[-wr]
-    # if (length(date_dirs) == 0)
-    #   return(NULL)
-    # wr <- c()
-    # for (i in 1:length(date_dirs)) {
-    #   d <- unlist(strsplit(date_dirs[i], "\\."))
-    #   if (as.numeric(d[3]) < as.numeric(start.date[3]) &  as.numeric(d[1]) == as.numeric(start.date[1]) & as.numeric(d[2]) == as.numeric(start.date[2])) wr <- c(wr, i)
-    #   if (as.numeric(d[3]) > as.numeric(end.date[3]) &  as.numeric(d[1]) == as.numeric(end.date[1]) & as.numeric(d[2]) == as.numeric(end.date[2]))  wr <- c(wr, i)
-    # }
-    # if (length(wr) > 0) {
-    #   date_dirs <- date_dirs[-wr]
-    # }
-    # if (length(date_dirs) == 0) {
-    #   return(NULL)
-    # }
-    
-    # NEW METHOD
     date_dirs <- date_dirs[as.Date(date_dirs,format="%Y.%m.%d") >= as.Date(dates,format="%Y.%m.%d")[1] & 
                            as.Date(date_dirs,format="%Y.%m.%d") <= as.Date(dates,format="%Y.%m.%d")[2]]
     
@@ -297,11 +249,9 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
 #' @param out_folder_mod  ouput folder for original HDF storage
 #' @return Modislist names of HDF images corresponding to the requested tiles available for the product in the selected date
-#'
-#' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
-#' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' license  GPL 3.0
+#' @author Lorenzo Busetto, phD (2014-2016) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' @import RCurl
 lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir, v, h, tiled, out_folder_mod, gui) {
   getlist <- 0
