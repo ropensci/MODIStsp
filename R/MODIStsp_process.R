@@ -371,9 +371,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       if (download_server == "http") {
                         
                         if (use_aria == TRUE) {  # http download
-                          aria_string <- paste("aria2c -x 6 -d ",dirname(local_filename),
+                          aria_string <- paste("aria2c -x 10 -d ",dirname(local_filename),
                                                " -o ",basename(remote_filename)," ",remote_filename," --allow-overwrite",
-                                               " --http-user=",user," --http-passwd=",password,sep="") 
+                                               " --http-user=",user," --http-passwd=",password," --file-allocation=none",sep="") 
                         
                             download    <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows")) # intern=TRUE for Windows, FALSE for Unix
                         } else {
@@ -382,9 +382,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       } else {   # ftp download
                         if (use_aria == TRUE) {
                           
-                          aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", 
-                                               basename(remote_filename), remote_filename, "--allow-overwrite") 
-                          download    <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows"))
+                          aria_string <- paste("aria2c -x 10 -d", dirname(local_filename), "-o", 
+                                               basename(remote_filename), remote_filename, "--allow-overwrite --file-allocation=none") 
+                          download    <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows"))
                         } else {
                           
                           dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
@@ -400,7 +400,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                         Sys.sleep(10)    # sleep for a while....
                       } else {
                         if (download_server == "http" & use_aria == FALSE) {
-                          if (download$status_code != 200 & length(content(download, "text")) == 1) {	
+                          if (download$status_code != 200 & length(content(download, "text", encoding = "UTF-8")) == 1) {	
                             message("[",date(),"] Download Error - Retrying...")
                             unlink(local_filename) # on error, delete last hdf file (to be sure no incomplete files are left behind and send message)
                             Sys.sleep(10)

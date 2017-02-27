@@ -132,8 +132,8 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
       #   
       #   message("Trying to reach ftp server - attempt ", ce)
       # } 
-       
-       response <- try(GET(ftp, timeout(10)), config(verbose = FALSE))   # send request to server
+      
+      response <- try(httr::GET(ftp, timeout(10)))   # send request to server
        
        if (class(response) == "try-error") {   # if error on response, retry
          Sys.sleep(1)
@@ -144,7 +144,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
            items <- strsplit(content(response, "text", encoding = "UTF-8"), "\r*\n")[[1]]
          } else {
            ce <- ce + 1
-           message("Trying to reach http server - attempt ", ce)
+           message("Trying to reach ftp server - attempt ", ce)
          }
        }
       
@@ -153,7 +153,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
 
       items_1   <- str_extract(items,"20[0-9][0-9]$")
       items_1   <- items_1[!is.na(items_1)]
-      response_1 <- lapply(items_1, function(x) {GET(paste0(ftp,x,"/"), timeout(5))})
+      response_1 <- lapply(items_1, function(x) {GET(paste0(ftp,x,"/"), timeout(10))})
       response_2 <- lapply(response_1, function(x) {content(x, "text", encoding = "UTF-8")})
       response_3 <- lapply(str_split(response_2,"\n"),function(x){x[nchar(x)>0]})
       items_2    <- sapply(response_3, function(x){str_split_fixed(x," +",9)[,9]})
