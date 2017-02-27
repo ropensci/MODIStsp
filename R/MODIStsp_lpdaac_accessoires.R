@@ -14,6 +14,9 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @param out_folder_mod  ouput folder for original HDF storage
 #' @param .Platform string os platform (from call to .Platform)
 #' @return list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
+#'
+#' @author Original code by Babak Naimi (\code{.getModisList}, in \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
+#' modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by:
 #' @author Lorenzo Busetto, phD (2014-2017) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2016-2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
@@ -249,6 +252,9 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' @param gui logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log
 #' @param out_folder_mod  ouput folder for original HDF storage
 #' @return Modislist names of HDF images corresponding to the requested tiles available for the product in the selected date
+#'
+#' @author Original code by Babak Naimi (\code{.getModisList}, in \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
+#' modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by:
 #' @author Lorenzo Busetto, phD (2014-2016) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
