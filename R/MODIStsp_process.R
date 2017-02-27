@@ -321,7 +321,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     size_string <- if (download_server == "http") {
                       try(GET(paste0(remote_filename,".xml"), authenticate(user, password), timeout(600)))
                     } else if (download_server == "ftp") {
-                      try(getURL(remote_filename, nobody = 1L, header = 1L))
+                      try(getURL(remote_filename, nobody = 1L, header = 1L, .opts = list(timeout = 10, maxredirs = 5, verbose = TRUE)))
                     }
                     # Check if download was good: check class of xmldown and status of xmldown
                     if (class(size_string) == "try-error") {
@@ -371,7 +371,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       if (download_server == "http") {
                         
                         if (use_aria == TRUE) {  # http download
-                          aria_string <- paste("aria2c -x 10 -d ",dirname(local_filename),
+                          aria_string <- paste("aria2c -x 6 -d ",dirname(local_filename),
                                                " -o ",basename(remote_filename)," ",remote_filename," --allow-overwrite",
                                                " --http-user=",user," --http-passwd=",password,sep="") 
                         
@@ -382,7 +382,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       } else {   # ftp download
                         if (use_aria == TRUE) {
                           
-                          aria_string <- paste("aria2c -x 10 -d", dirname(local_filename), "-o", 
+                          aria_string <- paste("aria2c -x 6 -d", dirname(local_filename), "-o", 
                                                basename(remote_filename), remote_filename, "--allow-overwrite") 
                           download    <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows"))
                         } else {
