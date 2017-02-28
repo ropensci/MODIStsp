@@ -198,6 +198,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
       }
     }
     
+    # Retrieve available dates for the selected product
+    date_dirs_all <- lpdaac_getmod_dirs(ftp = ftp, http = http, used_server = download_server, user = user, password = password, gui = gui,
+                                        out_folder_mod = out_folder_mod, .Platform = .Platform)
+    download_server <- attr(date_dirs_all, "server") # overwrite with the used setting (if already specified it does not change, if NA, it is set with the working one)
     
     
     # ---------------------------------- #
@@ -268,11 +272,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
       
       # Get a list of the folders containing hdf images required (Corresponding to the subfolders in lpdaac corresponding to
       # selected product, dates, and current year under processing)
-      
-      date_dirs_all   <- lpdaac_getmod_dirs(ftp = ftp, http = http, used_server = download_server, user = user, password = password, gui = gui, 
-                                            out_folder_mod = out_folder_mod, .Platform = .Platform)
-      download_server <- attr(date_dirs_all, "server") # overwrite with the used setting (if already specified it does not change, if NA, it is set with the working one)
-      date_dirs       <- lpdaac_getmod_dates(dates = dates, date_dirs =  date_dirs_all)  # First, find the folders in lpdaac corresponding to the required dates
+      date_dirs <- lpdaac_getmod_dates(dates = dates, date_dirs =  date_dirs_all)  # First, find the folders in lpdaac corresponding to the required dates
       
       if (length(date_dirs) > 0) {
         modislist <- NULL

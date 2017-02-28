@@ -134,7 +134,6 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
       # } 
       
       response <- try(httr::GET(ftp, timeout(10)))   # send request to server
-       
        if (class(response) == "try-error") {   # if error on response, retry
          Sys.sleep(1)
          ce <- ce + 1
@@ -153,7 +152,26 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
 
       items_1   <- str_extract(items,"20[0-9][0-9]$")
       items_1   <- items_1[!is.na(items_1)]
-      response_1 <- lapply(items_1, function(x) {GET(paste0(ftp,x,"/"), timeout(10))})
+      
+      # response_1 <- lapply(items_1, function(x) {try(GET(paste0(ftp,x,"/"), timeout(10)))})
+      response_1 <- list() # replaces the line above to allow to repeat the try 10 times
+      for (sel_year in items_1) {
+        ce <- 1; while (ce < 10) { # try to download each year for 10 times
+          response_1[[sel_year]] <- try(httr::GET(paste0(ftp,sel_year,"/"), timeout(10)))
+          if (class(response_1[[sel_year]]) != "response") {   # if error on response, retry
+            Sys.sleep(1)
+            ce <- ce + 1
+            message("Trying to reach ftp server - attempt ", ce)
+          } else if (response_1[[sel_year]]$status_code != 226) {
+            ce <- ce + 1
+            message("Trying to reach ftp server - attempt ", ce)
+          } else {
+            ce <- ce + 10
+          }
+        }
+      }
+      response_1 <- response_1[sapply(response_1,class)=="response"] # remove unsuccessful years
+      
       response_2 <- lapply(response_1, function(x) {content(x, "text", encoding = "UTF-8")})
       response_3 <- lapply(str_split(response_2,"\n"),function(x){x[nchar(x)>0]})
       items_2    <- sapply(response_3, function(x){str_split_fixed(x," +",9)[,9]})
