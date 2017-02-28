@@ -839,12 +839,38 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   nodata_lab <- glabel(text = "Change NODATA values: ", container = other_group)
   nodata_wid <- gradio(items = c("Yes","No"), text = "Select", container = other_group, selected = match(general_opts$nodata_change, c("Yes","No")), horizontal = TRUE)
   font(nodata_lab) <- list(family = "sans",weight = "bold")
+  nodata_help <- gbutton(text = " ? ",
+                        handler = function(h,....) {
+                          help_box <- gbasicdialog(title = "Help", parent = NULL, do.buttons = FALSE, horizontal = FALSE, 
+                                                   width = 400, height = 40, handler = function(h,....) {})
+                          help_mess_lab <- glabel(text = paste("By selecting \"No\", original nodata values are",
+                                                               "maintained; if \"Yes\", they are replaced with",
+                                                               "default nodata values (e.g. 255 for unsigned",
+                                                               "8-bit integer, -32768 for signed 16-bit integer).",
+                                                               sep="\n"), editable = FALSE, container = help_box)
+                          visible(help_box) = TRUE
+                        }, container = other_group, expand = FALSE)
+  
   addSpace(other_group,15)
   scale_lab <- glabel(text = "Scale output values: ", container = other_group)
   if (with(general_opts,!exists("scale_val"))) {general_opts$scale_val <- "No"} # default value in case of use of old json settings files
   scale_wid <- gradio(items = c("Yes","No"), text = "Select", container = other_group, selected = match(general_opts$scale_val, c("Yes","No")), horizontal = TRUE)
   font(scale_lab) <- list(family = "sans",weight = "bold")
-
+  scale_help <- gbutton(text = " ? ",
+                       handler = function(h,....) {
+                         help_box <- gbasicdialog(title = "Help", parent = NULL, do.buttons = FALSE, horizontal = FALSE, 
+                                                  width = 400, height = 40, handler = function(h,....) {})
+                         help_mess_lab <- glabel(text = paste("NASA provides outputs as integer values, indicating a potential scale factor",
+                                                              "and/or an offset to apply in order to obtain values in the indicated measure units.",
+                                                              "Leaving \"Scale output values\" option to \"No\", output files are left",
+                                                              "as provided by NASA, and additional indices are produced as integer values",
+                                                              "with a 10000 factor scale; selecting \"Yes\", potential scale factor and offsets",
+                                                              "are applied, and indices are not scaled float values.",
+                                                              "Notice that, with this option, size of scaled output products is generally bigger.",
+                                                              sep="\n"), editable = FALSE, container = help_box)
+                         visible(help_box) = TRUE
+                       }, container = other_group, expand = FALSE)
+  
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for output folders selection ----
