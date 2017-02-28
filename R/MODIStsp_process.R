@@ -677,9 +677,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     
                     # If scale_factor="Yes", create final files by rescaling values
                     if (scale_val == "Yes") {
-browser()
                       if (out_format == "GTiff") {
-                        
                         system(paste0(Sys.which("gdal_calc.py")," -A ",outrep_file_0," --outfile=",outrep_file,
                                       " --calc=\"A*",scale_factor[band],"+",offset[band],"\"",
                                       " --format=",out_format)) # TODO replace system with OS dependent system-shell command
