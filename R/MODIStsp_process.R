@@ -674,6 +674,28 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       
                     }
                     
+                    
+                    # If scale_factor="Yes", create final files by rescaling values
+                    if (scale_val == "Yes") {
+browser()
+                      if (out_format == "GTiff") {
+                        
+                        system(paste0(Sys.which("gdal_calc.py")," -A ",outrep_file_0," --outfile=",outrep_file,
+                                      " --calc=\"A*",scale_factor[band],"+",offset[band],"\"",
+                                      " --format=",out_format)) # TODO replace system with OS dependent system-shell command
+                      } else {
+
+                        # fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(outrep_file_0),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
+                        # writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
+                        # writeLines("", fileConn_meta_hdr)
+                        # close(fileConn_meta_hdr)
+                        
+                      }
+                    }
+                    
+                    
+                    
+                    
                     gc()
                     xml_file <- paste0(outrep_file,".aux.xml")		# Delete xml files created by gdalwarp
                     # unlink(xml_file)
