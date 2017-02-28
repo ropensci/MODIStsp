@@ -5,7 +5,8 @@
 \title{MODIStsp_process_indexes}
 \usage{
 MODIStsp_process_indexes(out_filename, formula, bandnames, nodata_out,
-  out_prod_folder, indexes_nodata_out, file_prefix, yy, DOY, out_format)
+  out_prod_folder, indexes_nodata_out, file_prefix, yy, DOY, out_format,
+  scale_val)
 }
 \arguments{
 \item{out_filename}{basename of the file in to which save results}
@@ -27,6 +28,8 @@ MODIStsp_process_indexes(out_filename, formula, bandnames, nodata_out,
 \item{DOY}{string used to retrieve filenames of rasters of original bands to be used in computations}
 
 \item{out_format}{string used to retrieve filenames of rasters of original bands to be used in computations}
+
+\item{scale_val}{string (Yes/No) if Yes, output values in are computed as float -1 - 1, otherwise integer -10000 - 10000}
 }
 \value{
 NULL - new raster file saved in out_filename

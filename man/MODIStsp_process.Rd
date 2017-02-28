@@ -8,11 +8,11 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   reprocess = "Yes", delete_hdf = "No", sensor, download_server, user,
   password, https, ftps, start_x, start_y, end_x, end_y, bbox, out_format,
   compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str,
-  nodata_in, nodata_out, nodata_change, rts, datatype, bandsel, bandnames,
-  indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
-  quality_bandnames, quality_bandsel, quality_bitN, quality_source,
-  quality_nodata_in, full_ext, quality_nodata_out, file_prefixes,
-  main_out_folder, resampling, ts_format, use_aria = TRUE,
+  nodata_in, nodata_out, nodata_change, scale_val, scale_factor, offset, rts,
+  datatype, bandsel, bandnames, indexes_bandsel, indexes_bandnames,
+  indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel,
+  quality_bitN, quality_source, quality_nodata_in, full_ext, quality_nodata_out,
+  file_prefixes, main_out_folder, resampling, ts_format, use_aria = TRUE,
   download_range = "full", gui = TRUE)
 }
 \arguments{
@@ -73,6 +73,8 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \item{nodata_out}{Target nodata for MODIS bands}
 
 \item{nodata_change}{string (Yes/No) if Yes, nodata are set to nodata_out in output rasters}
+
+\item{scale_val}{string (Yes/No) if Yes, output values in are rescaled in the measure unit of the variable}
 
 \item{rts}{string ("Yes"/"No") If Yes, create rts time series}
 
