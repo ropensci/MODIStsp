@@ -371,25 +371,24 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       if (download_server == "http") {
                         
                         if (use_aria == TRUE) {  # http download
-                          aria_string <- paste("aria2c -x 10 -d ",dirname(local_filename),
+                          aria_string <- paste(Sys.which("aria2c")," -x 10 -d ",dirname(local_filename),
                                                " -o ",basename(remote_filename)," ",remote_filename," --allow-overwrite",
                                                " --http-user=",user," --http-passwd=",password," --file-allocation=none",sep="") 
-                        
-                            download    <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows")) # intern=TRUE for Windows, FALSE for Unix
+                          download <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows")) # intern=TRUE for Windows, FALSE for Unix
                         } else {
-                          download    <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
+                          download <- try(GET(remote_filename, authenticate(user, password), progress(), timeout(600)))
                         } 
                       } else {   # ftp download
                         if (use_aria == TRUE) {
-                          
-                          aria_string <- paste("aria2c -x 10 -d", dirname(local_filename), "-o", 
-                                               basename(remote_filename), remote_filename, "--allow-overwrite --file-allocation=none") 
-                          download    <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows"))
+                          aria_string <- paste(Sys.which("aria2c")," -x 10 -d",dirname(local_filename),
+                                               " -o ",basename(remote_filename)," ",remote_filename, "--allow-overwrite",
+                                               " --file-allocation=none",sep="") 
+                          download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows"))
                         } else {
-                          
-                          dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
-                          download   <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
-                                                          method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
+                          download <- try(GET(remote_filename, progress(), timeout(600)))
+                          # dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
+                          # download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
+                          #                                 method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
                         }
                       } 
                       if (class(download) == "try-error") {
