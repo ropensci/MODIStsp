@@ -77,7 +77,7 @@
 #' @note License: GPL 3.0
 #' @importFrom gdalUtils gdal_translate gdalbuildvrt gdalwarp
 #' @importFrom hash hash
-#' @importFrom httr GET authenticate timeout content progress
+#' @importFrom httr GET authenticate timeout content progress write_disk
 #' @importFrom tools file_path_sans_ext
 #' @importFrom XML xmlParse xmlRoot xmlToList
 #' @importFrom RCurl getBinaryURL
@@ -378,7 +378,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                                                " --http-user=",user," --http-passwd=",password," --file-allocation=none",sep="") 
                           download <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows")) # intern=TRUE for Windows, FALSE for Unix
                         } else {
-                          download <- try(GET(remote_filename, write_disk(local_filename), authenticate(user, password), progress(), timeout(600)))
+                          download <- try(GET(remote_filename, httr::write_disk(local_filename), authenticate(user, password), progress(), timeout(600)))
                         } 
                       } else {   # ftp download
                         if (use_aria == TRUE) {
@@ -387,7 +387,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                                                " --file-allocation=none",sep="") 
                           download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows"))
                         } else {
-                          download <- try(GET(remote_filename, write_disk(local_filename), progress(), timeout(600)))
+                          download <- try(GET(remote_filename, httr::write_disk(local_filename), progress(), timeout(600)))
                           # dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
                           # download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
                           #                                 method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
@@ -648,35 +648,31 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                                                              overwrite = TRUE),
                               quit("Internal error in out_res_sel, outproj_str or full_ext."))
                       
-                      fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(outrep_file_0),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
+                    }
+
+                    # If scale_factor="Yes", create final files by rescaling values
+                    if (scale_val == "Yes") {
+                      gdal_calc_string <- paste0(Sys.which("gdal_calc.py")," -A ",outrep_file_0," --outfile=",outrep_file,
+                                                 " --calc=\"A*",scale_factor[band],"+",offset[band],"\"",
+                                                 " --format=",out_format," --NoDataValue=",nodata_out[band])
+                      if (as.integer(scale_factor[band]) != as.numeric(scale_factor[band])) {
+                        gdal_calc_string <- paste(gdal_calc_string, "--type=Float32")
+                      }
+                      if (out_format == "GTiff") {
+                        gdal_calc_string <- paste0(gdal_calc_string," --co=\"COMPRESS=",compress,"\"")
+                      }
+                      system(gdal_calc_string, intern = Sys.info()["sysname"]=="Windows")
+                    }
+                    
+                    # If output format is ENVI, add data ignore value to the header file
+                    if (out_format == "ENVI") {
+                      fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(outrep_file),".hdr"), "a")  
                       writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
                       writeLines("", fileConn_meta_hdr)
                       close(fileConn_meta_hdr)
+                    } else {
                       
                     }
-                    
-                    
-                    # If scale_factor="Yes", create final files by rescaling values
-                    if (scale_val == "Yes") {
-browser()
-                      if (out_format == "GTiff") {
-                        
-                        system(paste0(Sys.which("gdal_calc.py")," -A ",outrep_file_0," --outfile=",outrep_file,
-                                      " --calc=\"A*",scale_factor[band],"+",offset[band],"\"",
-                                      " --format=",out_format),
-                               intern = Sys.info()["sysname"]=="Windows")
-                      } else {
-
-                        # fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(outrep_file_0),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
-                        # writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
-                        # writeLines("", fileConn_meta_hdr)
-                        # close(fileConn_meta_hdr)
-                        
-                      }
-                    }
-                    
-                    
-                    
                     
                     gc()
                     xml_file <- paste0(outrep_file,".aux.xml")		# Delete xml files created by gdalwarp
@@ -712,7 +708,7 @@ browser()
                   
                   MODIStsp_process_indexes(out_filename = out_filename, formula = formula,bandnames = bandnames, nodata_out = nodata_out,
                                            indexes_nodata_out = indexes_nodata_out[band],out_prod_folder = out_prod_folder, file_prefix = file_prefix,
-                                           yy = yy,out_format = out_format, DOY = DOY )
+                                           yy = yy,out_format = out_format, DOY = DOY, scale_val = scale_val )
                 }
               }
               
