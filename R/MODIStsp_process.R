@@ -92,7 +92,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                              indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel, 
                              quality_bitN ,quality_source, quality_nodata_in, full_ext, quality_nodata_out, file_prefixes, main_out_folder, resampling, 
                              ts_format, use_aria = TRUE, download_range="full", gui=TRUE) {
-  
+
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   # Intialize variables ----------------------------------------------------- 
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -652,16 +652,31 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
 
                     # If scale_factor="Yes", create final files by rescaling values
                     if (scale_val == "Yes") {
-                      gdal_calc_string <- paste0(Sys.which("gdal_calc.py")," -A ",outrep_file_0," --outfile=",outrep_file,
-                                                 " --calc=\"A*",scale_factor[band],"+",offset[band],"\"",
-                                                 " --format=",out_format," --NoDataValue=",nodata_out[band])
-                      if (as.integer(scale_factor[band]) != as.numeric(scale_factor[band])) {
-                        gdal_calc_string <- paste(gdal_calc_string, "--type=Float32")
-                      }
-                      if (out_format == "GTiff") {
-                        gdal_calc_string <- paste0(gdal_calc_string," --co=\"COMPRESS=",compress,"\"")
-                      }
-                      system(gdal_calc_string, intern = Sys.info()["sysname"]=="Windows")
+                      
+                      # mode with raster()
+                      outrep_0 <- raster(outrep_file_0)
+                      outrep <- outrep_0*as.numeric(scale_factor[band]) + as.numeric(offset[band])
+                      writeRaster(outrep, outrep_file, 
+                                  datatype = if (as.integer(scale_factor[band]) != as.numeric(scale_factor[band])) 
+                                    {"FLT4S"} else {"INT2S"},
+                                  options = if (out_format == "GTiff")
+                                    {c(paste0("COMPRESS=",compress))} else {character(0)},
+                                  NAflag=as.numeric(nodata_out[band]),
+                                  overwrite=TRUE)
+                      rm(outrep,outrep_0); gc()
+                      
+                      # # mode with gdal_calc: faster but unstable
+                      # gdal_calc_string <- paste0(Sys.which("gdal_calc.py")," -A ",outrep_file_0," --outfile=",outrep_file,
+                      #                            " --calc=\"A*",scale_factor[band],"+",offset[band],"\"",
+                      #                            " --format=",out_format," --NoDataValue=",nodata_out[band])
+                      # if (as.integer(scale_factor[band]) != as.numeric(scale_factor[band])) {
+                      #   gdal_calc_string <- paste(gdal_calc_string, "--type=Float32")
+                      # }
+                      # if (out_format == "GTiff") {
+                      #   gdal_calc_string <- paste0(gdal_calc_string," --co=\"COMPRESS=",compress,"\"")
+                      # }
+                      # system(gdal_calc_string, intern = Sys.info()["sysname"]=="Windows")
+                      
                     }
                     
                     # If output format is ENVI, add data ignore value to the header file
@@ -673,27 +688,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     } else {
                       
                     }
-                    
-                    
-                    # If scale_factor="Yes", create final files by rescaling values
-                    if (scale_val == "Yes") {
-                      if (out_format == "GTiff") {
-                        system(paste0(Sys.which("gdal_calc.py")," -A ",outrep_file_0," --outfile=",outrep_file,
-                                      " --calc=\"A*",scale_factor[band],"+",offset[band],"\"",
-                                      " --format=",out_format)) # TODO replace system with OS dependent system-shell command
-                      } else {
 
-                        # fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(outrep_file_0),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
-                        # writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
-                        # writeLines("", fileConn_meta_hdr)
-                        # close(fileConn_meta_hdr)
-                        
-                      }
-                    }
-                    
-                    
-                    
-                    
                     gc()
                     xml_file <- paste0(outrep_file,".aux.xml")		# Delete xml files created by gdalwarp
                     # unlink(xml_file)
