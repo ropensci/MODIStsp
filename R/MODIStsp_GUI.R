@@ -513,9 +513,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   x_group       <- ggroup(container = tiles_group, horizontal = TRUE,spacing = 5)
   start_x_lab   <- glabel(text = " Horizontal:", container = x_group)
   start_x_start <- glabel(text = "Start", container = x_group)
-  start_x_wid   <- gspinbutton(1, 35, text = "Select", container = x_group, value = general_opts$start_x)
+  start_x_wid   <- gspinbutton(0, 35, text = "Select", container = x_group, value = general_opts$start_x)
   end_x_lab     <- glabel(text = "End", container = x_group)
-  end_x_wid     <- gspinbutton(1, 35, text = "Select", container = x_group, value = general_opts$end_x)
+  end_x_wid     <- gspinbutton(0, 35, text = "Select", container = x_group, value = general_opts$end_x)
   
   # map button ----
   
