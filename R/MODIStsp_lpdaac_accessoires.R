@@ -43,12 +43,12 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
   
   # Try HTTP download
   if (is.na(used_server)) {
-    check_used_server = TRUE
+    check_used_server  <- TRUE
   } else {
     if (used_server == "http") {
-      check_used_server = TRUE
+      check_used_server  <- TRUE
     } else {
-      check_used_server = FALSE
+      check_used_server <- FALSE
     }
   }
   
@@ -108,12 +108,12 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
 
   # Try FTP download: If method = ftp, or if method = http and limit exceeded on non-interactive execution
   if (is.na(used_server)) {
-    check_used_server = TRUE
+    check_used_server  <- TRUE
   } else {
     if (used_server == "ftp") {
-      check_used_server = TRUE
+      check_used_server <- TRUE
     } else {
-      check_used_server = FALSE
+      check_used_server  <- FALSE
     }
   }
   
