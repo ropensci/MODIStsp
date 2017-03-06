@@ -381,7 +381,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                           download <- try(GET(remote_filename, httr::write_disk(local_filename), authenticate(user, password), progress(), timeout(600)))
                         } 
                       } else {   # ftp download
-                        browser()
+                        
                         if (use_aria == TRUE) {
                           aria_string <- paste(Sys.which("aria2c")," -x 10 -d",dirname(local_filename),
                                                " -o ",basename(remote_filename)," ",remote_filename, " --allow-overwrite",
