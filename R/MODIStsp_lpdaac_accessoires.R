@@ -59,7 +59,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
       # items <- try(strsplit(getURL(http, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = T)), "\r*\n")[[1]],
       # silent = TRUE)
       
-      response <- try(GET(http, authenticate(user, password), timeout(10), encoding = "UTF-8"))   # send request to server
+      response <- try(GET(http, authenticate(user, password), timeout(10)))   # send request to server
       
       if (class(response) == "try-error") {   # if error on response, retry
         Sys.sleep(1)
@@ -67,7 +67,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
         message("Trying to reach http server - attempt ", ce)
       } else { # If good response, get the result
       if (response$status_code == 200) {
-          items <- strsplit(content(response, "text"), "\r*\n")[[1]]
+          items <- strsplit(content(response, "text", encoding = "UTF-8"), "\r*\n")[[1]]
         } else {
           ce <- ce + 1
           message("Trying to reach http server - attempt ", ce)

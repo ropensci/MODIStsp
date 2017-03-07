@@ -92,17 +92,17 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                              indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel, 
                              quality_bitN ,quality_source, quality_nodata_in, full_ext, quality_nodata_out, file_prefixes, main_out_folder, resampling, 
                              ts_format, use_aria = TRUE, download_range="full", gui=TRUE) {
-
+  
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   # Intialize variables ----------------------------------------------------- 
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+  
   # Fix on multiple nodata values
   suppressWarnings( nodata_in[is.na(as.integer(nodata_in))] <- "None" )
   suppressWarnings( quality_nodata_in[is.na(as.integer(quality_nodata_in))] <- "None" )
   # FIXME: as.integer(nodata) cause nodata ranges (e.g. 249-255) to be suppressed. So, in this cases nodata values will not
   # be recognised. This problem will be solved in future with a cycle on nodata range.
-
+  
   if (nodata_change == "No") {
     nodata_out <- nodata_in
   }  # if nodata chande set to no, set ou_nodata to in_nodata
@@ -183,8 +183,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     # Check if "aria2c" requested. If so, verify that the executable is on the path
     
     if (use_aria == TRUE) {
-      test_aria = try(system2("aria2c", stderr = NULL), silent = TRUE)
-      if (test_aria != 1) {
+      test_aria = Sys.which("aria2c")
+      if (test_aria == "") {
         if (gui) {
           noaria <- gconfirm("aria2c was not found! It is either not installed or not on your path!\nDo you want to proceed with normal download? ")
           if (noaria == TRUE) {
@@ -260,7 +260,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
           }
           
         }
-
+        
       } else stop("download_range value not valid (only \"full\" and \"seasonal\" are admitted).")
       
       # Processing status message
@@ -321,9 +321,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   
                   while (remote_size_tries > 0) {
                     size_string <- if (download_server == "http") {
-                      try(GET(paste0(remote_filename,".xml"), authenticate(user, password), timeout(600)))
+                      try(GET(paste0(remote_filename,".xml"), authenticate(user, password), timeout(120)))
                     } else if (download_server == "ftp") {
-                      try(getURL(remote_filename, nobody = 1L, header = 1L, .opts = list(timeout = 10, maxredirs = 5, verbose = TRUE)))
+                      try(getURL(remote_filename, nobody = 1L, header = 1L, .opts = list(timeout = 120, maxredirs = 5, verbose = TRUE)))
                     }
                     # Check if download was good: check class of xmldown and status of xmldown
                     if (class(size_string) == "try-error") {
@@ -343,7 +343,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     remote_filesize <- local_filesize
                   } else {
                     remote_filesize <- if (download_server == "http") {
-                      as.integer(xmlToList(xmlParse(content(size_string)))[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]])
+                      as.integer(xmlToList(xmlParse(content(size_string, encoding = "UTF-8")))[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]])
                     } else if (download_server == "ftp") {
                       as.integer(gsub("[^:]+: ([0-9]+)\\r.*","\\1",size_string))
                     }
@@ -373,48 +373,56 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       if (download_server == "http") {
                         
                         if (use_aria == TRUE) {  # http download
-                          aria_string <- paste(Sys.which("aria2c")," -x 10 -d ",dirname(local_filename),
-                                               " -o ",basename(remote_filename)," ",remote_filename," --allow-overwrite",
-                                               " --http-user=",user," --http-passwd=",password," --file-allocation=none",sep="") 
-                          download <- try(system(aria_string, intern = Sys.info()["sysname"]=="Windows")) # intern=TRUE for Windows, FALSE for Unix
+                          aria_string <- paste(Sys.which("aria2c")," -x 6 -d ",dirname(local_filename),
+                                               " -o ",basename(remote_filename)," ",remote_filename,
+                                               " --allow-overwrite --file-allocation=none --retry-wait=2",
+                                               " --http-user=",user," --http-passwd=",password, sep = "") 
+                          download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows")) # intern=TRUE for Windows, FALSE for Unix
                         } else {
-                          download <- try(GET(remote_filename, httr::write_disk(local_filename), authenticate(user, password), progress(), timeout(600)))
+                          download <- try(GET(remote_filename, authenticate(user, password), 
+                                              progress(), timeout(1200)))
                         } 
                       } else {   # ftp download
                         
                         if (use_aria == TRUE) {
-                          aria_string <- paste(Sys.which("aria2c")," -x 10 -d",dirname(local_filename),
-                                               " -o ",basename(remote_filename)," ",remote_filename, " --allow-overwrite",
-                                               " --file-allocation=none",sep="") 
+                          aria_string <- paste(Sys.which("aria2c")," -x 6 -d ",dirname(local_filename),
+                                               " -o ",basename(remote_filename)," ",remote_filename, 
+                                               " --allow-overwrite --file-allocation=none --retry-wait=2", sep="") 
                           download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows"))
                         } else {
-                          download <- try(GET(remote_filename, httr::write_disk(local_filename), progress(), timeout(600)))
+                          download <- try(GET(remote_filename, authenticate(user, password), 
+                                              progress(), timeout(1200)))
+                          # try(GET(remote_filename, progress(), timeout(1200)))
+                          # 
+                          # 
                           # dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
                           # download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
                           #                                 method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
                         }
                       } 
-                      if (class(download) == "try-error") {
+                   
+                      if (class(download) == "try-error" | !is.null(attr(download,"status"))) {
                         er <- 5
                         ce <- ce + 1
                         message("[",date(),"] Download Error - Retrying...")
                         unlink(local_filename)  # On download error, delete bad files
-                        Sys.sleep(10)    # sleep for a while....
+                        Sys.sleep(1)    # sleep for a while....
                       } else {
                         if (download_server == "http" & use_aria == FALSE) {
+                          
                           if (download$status_code != 200 & length(content(download, "text", encoding = "UTF-8")) == 1) {	
                             message("[",date(),"] Download Error - Retrying...")
                             unlink(local_filename) # on error, delete last hdf file (to be sure no incomplete files are left behind and send message)
-                            Sys.sleep(10)
+                            Sys.sleep(1)
                             er <- 5
                             ce <- ce + 1
                           } else {
-                            # writeBin(download$content, local_filename)
+                            writeBin(download$content, local_filename)
                             er <- 0 
                           }
                         } else {
                           er <- 0 
-                        }
+                        } 
                       } 
                       
                       if (ce == 30) {
@@ -650,20 +658,20 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                               quit("Internal error in out_res_sel, outproj_str or full_ext."))
                       
                     }
-
+                    
                     # If scale_factor="Yes", create final files by rescaling values
                     if (scale_val == "Yes") {
                       
                       # mode with raster()
                       outrep_0 <- raster(outrep_file_0)
                       outrep <- outrep_0*as.numeric(scale_factor[band]) + as.numeric(offset[band])
+                     
                       writeRaster(outrep, outrep_file, 
-                                  datatype = if (as.integer(scale_factor[band]) != as.numeric(scale_factor[band])) 
-                                    {"FLT4S"} else {"INT2S"},
-                                  options = if (out_format == "GTiff")
-                                    {c(paste0("COMPRESS=",compress))} else {character(0)},
-                                  NAflag=as.numeric(nodata_out[band]),
-                                  overwrite=TRUE)
+                                  format    = out_format, 
+                                  datatype  = ifelse(as.integer(scale_factor[band]) != as.numeric(scale_factor[band]), "FLT4S", "INT2S"),
+                                  ifelse(out_format == "GTiff", paste0("options=c(COMPRESS=",compress,")"),""),
+                                  NAflag    = as.numeric(nodata_out[band]),
+                                  overwrite = TRUE)
                       rm(outrep,outrep_0); gc()
                       
                       # # mode with gdal_calc: faster but unstable
@@ -689,7 +697,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                     } else {
                       
                     }
-
+                    
                     gc()
                     xml_file <- paste0(outrep_file,".aux.xml")		# Delete xml files created by gdalwarp
                     # unlink(xml_file)
@@ -724,7 +732,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   
                   MODIStsp_process_indexes(out_filename = out_filename, formula = formula,bandnames = bandnames, nodata_out = nodata_out,
                                            indexes_nodata_out = indexes_nodata_out[band],out_prod_folder = out_prod_folder, file_prefix = file_prefix,
-                                           yy = yy,out_format = out_format, DOY = DOY, scale_val = scale_val )
+                                           yy = yy, out_format = out_format, DOY = DOY, scale_val = scale_val )
                 }
               }
               
@@ -862,7 +870,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
     })		# Allow message lab to be closed since processing ended .
     dispose(mess_lab)
   }
-  unlink(file.path(out_prod_folder,"Temp"),recursive = TRUE)
+  unlink(file.path(out_prod_folder,"Temp"), recursive = TRUE)
   return("DONE")
 }
 
