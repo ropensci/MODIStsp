@@ -409,7 +409,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                             er <- 5
                             ce <- ce + 1
                           } else {
-                            writeBin(download$content, local_filename)
+                            # writeBin(download$content, local_filename)
                             er <- 0 
                           }
                         } else {
