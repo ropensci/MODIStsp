@@ -390,17 +390,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                                                " --allow-overwrite --file-allocation=none --retry-wait=2", sep="") 
                           download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows"))
                         } else {
-                          download <- try(GET(remote_filename, authenticate(user, password), 
-                                              progress(), timeout(1200)))
-                          # try(GET(remote_filename, progress(), timeout(1200)))
-                          # 
-                          # 
+                          download <- try(GET(remote_filename,progress(), timeout(1200)))
+                          
                           # dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
                           # download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
                           #                                 method = dwl_method, quiet = FALSE, cacheOK = FALSE, extra = c("-L")))
                         }
                       } 
-                   
+                      # Check for errors on download try
                       if (class(download) == "try-error" | !is.null(attr(download,"status"))) {
                         er <- 5
                         ce <- ce + 1
@@ -422,6 +419,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                           }
                         } else {
                           er <- 0 
+                          if (use_aria == FALSE) {
+                            writeBin(download$content, local_filename)
+                            }
                         } 
                       } 
                       
@@ -441,6 +441,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                       }  
                     }  # end while on download tries
                     
+                    # Futher check on downloaded file size 
                     local_filesize <- file.info(local_filename)$size    # Find the size of the new file downloaded to allow comparison with remote 
                     if (is.na(local_filesize)){
                       local_filesize <- 0
