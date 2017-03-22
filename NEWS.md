@@ -1,3 +1,33 @@
+# MODIStsp v 1.3.2
+
+v1.3.2 was released on 22/03/2017
+
+## Major Changes:
+Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.
+
+### Details:
+NASA provides outputs as integer values, indicating a potential scale factor and/or an offset to apply in order to obtain values in the indicated measure units.
+- Leaving the "Scale output values" option to "No", output files are left as provided by NASA, and additional indices are produced as integer values with a 10000 factor scale; 
+- Setting the "Scale output values" option to "Yes", scale factor and offsets are applied if existing (for example, in this case Land Surface Temperature values in the output raster will be in °K), and  spectral indices are floating point values (for example, NDVI is between -1 and 1, etcetera).
+
+## Minor Changes:
+
+- Some product names and output layer names were modified to reduce the length of output file names, homogenize the names of the output and correct some naming errors.
+For compatibility with already created output files (versions up to 1.3.1), the old "XML" file specifying output files format is still available in `inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml`. To use the old file naming conventions, users have to 
+1. delete `inst/ExtData/MODIStsp_ProdOpts.xml` and rename `MODIStsp_ProdOpts_old_v1.3.1.xml` to `MODIStsp_ProdOpts.xml`.
+2. delete `MODIStsp_ProdOpts.RData` from the `Previous` folder within `your_R-library_path/MODIStsp/Previous`
+3. Restart `MODIStsp`
+
+- Some changes were done in timeouts of httr/ftp requests to prevent timeout problems
+
+## Bug fixing:
+
+- Fixed bug on FTP download speed (Issue [#65](https://github.com/lbusett/MODIStsp/issues/65)) 
+- Fixed bug on download of tile 0, preventing download of images with DOY 001 and of all "yearly based" products (e.g., MOD17)(Issue [#64](https://github.com/lbusett/MODIStsp/issues/64)) 
+- Fixed other bugs affecting FTP download (https://github.com/lbusett/MODIStsp/commit/efbf1b469e7518ffc8a7ec6d9922242d6a5c228f, https://github.com/lbusett/MODIStsp/commit/1dc53a5ff5b355965acec86678a3104bd2d27fd9, https://github.com/lbusett/MODIStsp/commit/fa6c7b42eadce516a2f781604c9db28418120f36)
+
+
+
 # MODIStsp v 1.3.1
 
 v1.3.1 was released on 13/02/2017
