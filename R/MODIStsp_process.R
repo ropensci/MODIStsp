@@ -67,6 +67,10 @@
 #' @param use_aria logical if TRUE, then aria2c is used to accelerate download (if available !)
 #' @param download_range character if "full", all the available images between the startingand the ending dates are downloaded;
 #' if "seasonal", only the images included in the season (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, the images of December,
+#' @param scale_factor scale factor to be applied to MODIS layer to convert form scaled integer to correct
+#' measure units
+#' @param offset offset to be applied to MODIS layer to convert form scaled integer to correct
+#' measure units
 #' January and February from 2005 to 2010 - excluding 2005-01, 2005-02 and 2010-12 - are downloaded)
 #' @return NULL
 #'

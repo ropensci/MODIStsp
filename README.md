@@ -172,7 +172,7 @@ MODIStsp()
 
 This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see below for details). The main available processing options are described in detail in the following.
 
-![](README-GUI_fig-1.png)
+<img src="README-GUI_fig-1.png" style="display: block; margin: auto;" />
 
 ### MODIS Product, Platform and Layers
 
