@@ -24,4 +24,3 @@ License: GPL 3.0
 \author{
 Luigi Ranghetti, phD (2016) \email{ranghetti.l@irea.cnr.it}
 }
-

@@ -41,4 +41,3 @@ Lorenzo Busetto, phD (2014-2017) \email{busetto.l@irea.cnr.it}
 
 Luigi Ranghetti, phD (2016-2017) \email{ranghetti.l@irea.cnr.it}
 }
-

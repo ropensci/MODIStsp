@@ -3,6 +3,8 @@
 ^packrat/
 ^\.Rprofile$
 .travis.yml
+.config.yml
+index.md
 ^Log/
 ^Previous/
 ^old_and_various/

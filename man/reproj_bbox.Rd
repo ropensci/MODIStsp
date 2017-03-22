@@ -28,4 +28,3 @@ License: GPL 3.0
 \author{
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
-
