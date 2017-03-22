@@ -1,4 +1,5 @@
 
+-   [*20/02/2017 IMPORTANT NOTES!*](#important-notes)
 -   [MODIStsp](#modistsp)
 -   [News !](#news)
 -   [Installation](#installation)
@@ -15,7 +16,14 @@
     -   [Installing GDAL &gt;= 1.11.1](#installing-gdal-1.11.1)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
+
+*20/02/2017 IMPORTANT NOTES!*
+=============================
+
+-   We discovered some bugs recently introduced on *ftp* download. If you recently installed `MODIStsp`, please delete your current version and install v.1.3.2.
+
+-   If you have trouble downloading via *http*, please visit [your earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
 
 MODIStsp
 ========
@@ -34,6 +42,24 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 
 News !
 ======
+
+**20/03/2017 - MODIStsp v1.3.2 released, supports applying scale and offsets **
+
+v1.3.2 was released on 22/03/2017
+
+-   Major Changes:
+
+Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.
+
+-   Minor Changes:
+
+Some product names and output layer names were modified to reduce the length of output file names
+
+Bug fixing:
+
+-   Fixed various bugs.
+
+For details on implemented changes see the release notes of v1.3.2.
 
 **13/02/2017 - MODIStsp v1.3.1 released **
 

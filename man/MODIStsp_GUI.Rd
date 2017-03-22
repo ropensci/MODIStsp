@@ -25,8 +25,8 @@ Quit - Logical - tells the main if running processing or exiting (also, Processi
 }
 \description{
 Function used to generate and handle the GUI used to allow selection of MODIStsp processing parameters
-If the "previous options" file (MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
-the GUI to its last state. Otherwise, the previous options file is created by launching the MODIStsp_read_xml fucntion
+ If the "previous options" file (MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
+	the GUI to its last state. Otherwise, the previous options file is created by launching the MODIStsp_read_xml fucntion
 }
 \note{
 License: GPL 3.0
@@ -36,3 +36,4 @@ Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
+

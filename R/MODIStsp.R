@@ -169,7 +169,7 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
       start_x = 18, end_x = 18, start_y = 4, end_y = 4, user = "", password = "", use_aria = FALSE, download_server = "http", download_range = "full",
       proj = "Sinusoidal", user_proj4 = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
       out_res_sel = "Native", out_res = "", full_ext = "Full Tiles Extent", resampling = "near", out_format = "ENVI", ts_format = "ENVI Meta Files", rts = "Yes", compress = "None",
-      nodata_change = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
+      nodata_change = "No", scale_val = "No", delete_hdf = "No", reprocess = "No", bbox = c("","","",""), out_folder = "", out_folder_mod = "",
       MODIStspVersion = as.character(packageVersion("MODIStsp")), custom_indexes = list())
     write(RJSONIO::toJSON(general_opts),previous_jsfile)
   } else if (is.null(general_opts$MODIStspVersion)) {
@@ -181,12 +181,15 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
   # Restore MODIS products if existing, otherwise retrieve data from xml file ----
   if (file.exists(prodopts_file)) {
     prod_opt_list <- get(load(prodopts_file))
+    if (is.null(attr(prod_opt_list,"MODIStspVersion"))) {
+      reload_prodlist <- TRUE
+    } else {
+      reload_prodlist <- attr(prod_opt_list,"MODIStspVersion")<packageVersion("MODIStsp") # load if prod_opt_list is old
+    }
+  } else {
+    reload_prodlist <- TRUE
   }
-  if (!exists("prod_opt_list") | if (exists("prod_opt_list")) {
-    is.null(attr(prod_opt_list,"MODIStspVersion")) | if (!is.null(attr(prod_opt_list,"MODIStspVersion"))) {
-      attr(prod_opt_list,"MODIStspVersion")<packageVersion("MODIStsp")
-    } else {FALSE}
-  } else {FALSE}) {
+  if (reload_prodlist) {
     mess_text <- "Waiting while reading the MODIS products list..."
     if (gui) {
       mess     <- gwindow(title = "Please wait...", width = 400, height = 40)
@@ -194,14 +197,14 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
       Sys.sleep(0.05)
       message(mess_text)
     } else {message(mess_text)}
-    MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file )
+    MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file)
     load(prodopts_file)
     if (gui) {
       addHandlerUnrealize(mess_lab, handler = function(h,...) {return(FALSE)})
       dispose(mess_lab)
     }
   }
-  
+
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {dispose(welcome_lab)}
@@ -332,6 +335,9 @@ MODIStsp <- function(gui=TRUE, options_file=NULL, spatial_file_path=NULL,
       nodata_out         = prod_opts$nodata_out, 
       rts                = general_opts$rts, 
       nodata_change      = general_opts$nodata_change,
+      scale_val          = general_opts$scale_val,
+      scale_factor       = prod_opts$scale_factor, 
+      offset             = prod_opts$offset, 
       datatype           = prod_opts$datatype,	
       bandsel            = general_opts$bandsel, 
       bandnames          = prod_opts$bandnames,

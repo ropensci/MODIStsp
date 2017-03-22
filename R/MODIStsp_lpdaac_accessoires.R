@@ -15,13 +15,15 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @param .Platform string os platform (from call to .Platform)
 #' @return list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
 #'
-#' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
-#' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Original code by Babak Naimi (\code{.getModisList}, in \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
+#' modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by:
+#' @author Lorenzo Busetto, phD (2014-2017) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2016-2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @importFrom gWidgets gconfirm
 #' @importFrom RCurl getURL
 #' @importFrom httr GET content authenticate timeout
-#' @importFrom stringr str_extract str_pad str_split
+#' @importFrom stringr str_extract str_pad str_split str_split_fixed
 #' @importFrom utils download.file
 
 lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, password = password, gui, out_folder_mod, .Platform) {
@@ -40,7 +42,17 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
   ce <- 0
   
   # Try HTTP download
-  check_used_server <- if (is.na(used_server)) TRUE else if (used_server == "http") TRUE else FALSE
+  if (is.na(used_server)) {
+    check_used_server  <- TRUE
+  } else {
+    if (used_server == "http") {
+      check_used_server  <- TRUE
+    } else {
+      check_used_server <- FALSE
+    }
+  }
+  
+  # check_used_server <- if (is.na(used_server)) {TRUE} else {if (used_server == "http") {TRUE} else {FALSE}
   if (class(items) == "try-error" & check_used_server) {
     
     while (class(items) == "try-error") {
@@ -55,7 +67,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
         message("Trying to reach http server - attempt ", ce)
       } else { # If good response, get the result
       if (response$status_code == 200) {
-          items <- strsplit(content(response, "text"), "\r*\n")[[1]]
+          items <- strsplit(content(response, "text", encoding = "UTF-8"), "\r*\n")[[1]]
         } else {
           ce <- ce + 1
           message("Trying to reach http server - attempt ", ce)
@@ -95,30 +107,75 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
   }
 
   # Try FTP download: If method = ftp, or if method = http and limit exceeded on non-interactive execution
-  check_used_server <- if (is.na(used_server)) TRUE else if (used_server == "ftp") TRUE else FALSE
+  if (is.na(used_server)) {
+    check_used_server  <- TRUE
+  } else {
+    if (used_server == "ftp") {
+      check_used_server <- TRUE
+    } else {
+      check_used_server  <- FALSE
+    }
+  }
   
   if (class(items) == "try-error" & check_used_server) {
     
     while (class(items) == "try-error") {
       
-       items <- try(strsplit(getURL(ftp, followLocation = TRUE, .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)), "\r*\n")[[1]],
-       silent = TRUE)
-      # response = try(GET(ftp,timeout(10)))   # send request to server
+      #  items <- strsplit(content(GET(ftp,timeout(10)), "text"), "\r*\n")[[1]]
+      #  # try(strsplit(getURL(ftp, followLocation = TRUE, .opts = list(timeout = 50, maxredirs = 5, verbose = FALSE)), "\r*\n")[[1]],
+      #  # silent = TRUE)
+      # # response = try(GET(ftp,timeout(10)))   # send request to server
+      # 
+      # if (class(items) == "try-error") {   # if error on response, retry
+      #   Sys.sleep(1)
+      #   ce <- ce + 1
+      #   
+      #   message("Trying to reach ftp server - attempt ", ce)
+      # } 
       
-      if (class(items) == "try-error") {   # if error on response, retry
-        Sys.sleep(1)
-        ce <- ce + 1
-        
-        message("Trying to reach ftp server - attempt ", ce)
-      } 
+      response <- try(httr::GET(ftp, timeout(10)))   # send request to server
+       if (class(response) == "try-error") {   # if error on response, retry
+         Sys.sleep(1)
+         ce <- ce + 1
+         message("Trying to reach ftp server - attempt ", ce)
+       } else { # If good response, get the result
+         if (response$status_code == 226) {
+           items <- strsplit(content(response, "text", encoding = "UTF-8"), "\r*\n")[[1]]
+         } else {
+           ce <- ce + 1
+           message("Trying to reach ftp server - attempt ", ce)
+         }
+       }
       
     if (class(items) != "try-error") {
       # run only if ftp download works
-      
+
       items_1   <- str_extract(items,"20[0-9][0-9]$")
       items_1   <- items_1[!is.na(items_1)]
-      items_2   <- strsplit(getURL(paste0(ftp, items_1, "/"), ftp.use.epsv = FALSE,dirlistonly = TRUE,
-          .opts = list(timeout = 10, maxredirs = 5, verbose = FALSE)),"\r*\n")
+      
+      # response_1 <- lapply(items_1, function(x) {try(GET(paste0(ftp,x,"/"), timeout(10)))})
+      response_1 <- list() # replaces the line above to allow to repeat the try 10 times
+      for (sel_year in items_1) {
+        ce <- 1; while (ce < 10) { # try to download each year for 10 times
+          response_1[[sel_year]] <- try(httr::GET(paste0(ftp,sel_year,"/"), timeout(10)))
+          if (class(response_1[[sel_year]]) != "response") {   # if error on response, retry
+            Sys.sleep(1)
+            ce <- ce + 1
+            message("Trying to reach ftp server - attempt ", ce)
+          } else if (response_1[[sel_year]]$status_code != 226) {
+            ce <- ce + 1
+            message("Trying to reach ftp server - attempt ", ce)
+          } else {
+            ce <- ce + 10
+          }
+        }
+      }
+      response_1 <- response_1[sapply(response_1,class)=="response"] # remove unsuccessful years
+      
+      response_2 <- lapply(response_1, function(x) {content(x, "text", encoding = "UTF-8")})
+      response_3 <- lapply(str_split(response_2,"\n"),function(x){x[nchar(x)>0]})
+      items_2    <- sapply(response_3, function(x){str_split_fixed(x," +",9)[,9]})
+      names(items_2) <- sapply(response_1,function(x){x$url})
       full_dirs <- unlist(lapply(seq_along(items_2), function(x) {paste0(names(items_2[x]), items_2[[x]], "/")}))
       date_dirs <- sapply(strsplit(full_dirs, "/"), function(x) {strftime(as.Date(paste(x[length(x) - 1], x[length(x)]), format = "%Y %j"), "%Y.%m.%d")})
       attr(date_dirs, "server") <- "ftp"
@@ -174,65 +231,21 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user, passwor
 #' (e.g., c("2015.1.1", "2015.12.31)
 #' @param date_dirs data frame full list of folders in lpdaa archive for product of interest
 #' @return array of folder names containing data for the modis product acquired in the period specified by "dates"
-#'
-#' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
-#' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' license GPL 3.0
-#' @import RCurl
-#' @importFrom httr GET content authenticate timeout 
+#' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' 
 lpdaac_getmod_dates <- function(dates, date_dirs) {
   if (length(dates) == 1) {
     date_dirs <- date_dirs[which(date_dirs == dates[1])]
   } else if (length(dates) == 2) {
-    # OLD METHOD
-    # start.date <- strsplit(dates[1], "\\.")[[1]]
-    # end.date <- strsplit(dates[2], "\\.")[[1]]
-    # wr <- c()
-    # for (i in 1:length(date_dirs)) {
-    #   d <- unlist(strsplit(date_dirs[i], "\\."))
-    #   if (length(d) == 3)
-    #     if (as.numeric(d[1]) >= as.numeric(start.date[1]) &  as.numeric(d[1]) <= as.numeric(end.date[1]))  wr <- c(wr, i)
-    # }
-    # 
-    # if (length(wr) > 0)
-    #   date_dirs <- date_dirs[wr]
-    # else
-    #   return(NULL)
-    # wr <- c()
-    # for (i in 1:length(date_dirs)) {
-    #   d <- unlist(strsplit(date_dirs[i], "\\."))
-    #   if (as.numeric(d[2]) < as.numeric(start.date[2]) & as.numeric(d[1]) == as.numeric(start.date[1])) wr <- c(wr, i)
-    #   if (as.numeric(d[2]) > as.numeric(end.date[2]) &  as.numeric(d[1]) == as.numeric(end.date[1])) wr <- c(wr, i)
-    # }
-    # 
-    # if (length(wr) > 0)
-    #   date_dirs <- date_dirs[-wr]
-    # if (length(date_dirs) == 0)
-    #   return(NULL)
-    # wr <- c()
-    # for (i in 1:length(date_dirs)) {
-    #   d <- unlist(strsplit(date_dirs[i], "\\."))
-    #   if (as.numeric(d[3]) < as.numeric(start.date[3]) &  as.numeric(d[1]) == as.numeric(start.date[1]) & as.numeric(d[2]) == as.numeric(start.date[2])) wr <- c(wr, i)
-    #   if (as.numeric(d[3]) > as.numeric(end.date[3]) &  as.numeric(d[1]) == as.numeric(end.date[1]) & as.numeric(d[2]) == as.numeric(end.date[2]))  wr <- c(wr, i)
-    # }
-    # if (length(wr) > 0) {
-    #   date_dirs <- date_dirs[-wr]
-    # }
-    # if (length(date_dirs) == 0) {
-    #   return(NULL)
-    # }
-    
-    # NEW METHOD
-    date_dirs <- date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[1] & 
-                           as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[2]]
+    date_dirs <- date_dirs[as.Date(date_dirs,format="%Y.%m.%d") >= as.Date(dates,format="%Y.%m.%d")[1] & 
+                           as.Date(date_dirs,format="%Y.%m.%d") <= as.Date(dates,format="%Y.%m.%d")[2]]
     
   } else if (length(dates) == 4) {
-    date_dirs <- c(date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[1] & 
-                             as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[2]],
-                   date_dirs[as.Date(date_dirs,format="%Y.%m.%d") > as.Date(dates,format="%Y.%m.%d")[3] & 
-                             as.Date(date_dirs,format="%Y.%m.%d") < as.Date(dates,format="%Y.%m.%d")[4]])
+    date_dirs <- c(date_dirs[as.Date(date_dirs,format="%Y.%m.%d") >= as.Date(dates,format="%Y.%m.%d")[1] & 
+                             as.Date(date_dirs,format="%Y.%m.%d") <= as.Date(dates,format="%Y.%m.%d")[2]],
+                   date_dirs[as.Date(date_dirs,format="%Y.%m.%d") >= as.Date(dates,format="%Y.%m.%d")[3] & 
+                             as.Date(date_dirs,format="%Y.%m.%d") <= as.Date(dates,format="%Y.%m.%d")[4]])
   } else {
     date_dirs <- NULL
   }
@@ -258,10 +271,11 @@ lpdaac_getmod_dates <- function(dates, date_dirs) {
 #' @param out_folder_mod  ouput folder for original HDF storage
 #' @return Modislist names of HDF images corresponding to the requested tiles available for the product in the selected date
 #'
-#' @author Original code by Babak Naimi (.getModisList, in ModisDownload.R - http://r-gis.net/?q=ModisDownload )
-#' Modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by Lorenzo Busetto, phD (2014-2015)
-#' email: busetto.l@@irea.cnr.it
-#' license  GPL 3.0
+#' @author Original code by Babak Naimi (\code{.getModisList}, in \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
+#' modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by:
+#' @author Lorenzo Busetto, phD (2014-2016) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
+#' @note License: GPL 3.0
 #' @import RCurl
 lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir, v, h, tiled, out_folder_mod, gui) {
   getlist <- 0

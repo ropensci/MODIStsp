@@ -513,9 +513,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   x_group       <- ggroup(container = tiles_group, horizontal = TRUE,spacing = 5)
   start_x_lab   <- glabel(text = " Horizontal:", container = x_group)
   start_x_start <- glabel(text = "Start", container = x_group)
-  start_x_wid   <- gspinbutton(1, 35, text = "Select", container = x_group, value = general_opts$start_x)
+  start_x_wid   <- gspinbutton(0, 35, text = "Select", container = x_group, value = general_opts$start_x)
   end_x_lab     <- glabel(text = "End", container = x_group)
-  end_x_wid     <- gspinbutton(1, 35, text = "Select", container = x_group, value = general_opts$end_x)
+  end_x_wid     <- gspinbutton(0, 35, text = "Select", container = x_group, value = general_opts$end_x)
   
   # map button ----
   
@@ -788,7 +788,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   # Out format ----
   format_lab       <- glabel(text = "Output Files Format:", container = opt_group)
   font(format_lab) <- list(family = "sans",weight = "bold")
-  size(format_lab) <-  list(width = 190)
+  size(format_lab) <-  list(width = 180)
   format_wid       <- gcombobox(items = c("ENVI","GTiff"), text = "Select", container = opt_group, 
                                 selected = match(general_opts$out_format, c("ENVI","GTiff")),handler = function(h,....) {
     current_sel <- svalue(format_wid)
@@ -798,15 +798,15 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
       enabled(compress_group) <- TRUE
     }
   })
-  size(format_wid) <- c(140, 30)
+  size(format_wid) <- c(100, 30)
   # addSpace(opt_group, 80)
   
   # Compression ----
   compress_group <- ggroup(container=opt_group, horizontal=TRUE)
   compress_dict  <- c("None","PACKBITS","LZW","DEFLATE")
   names(compress_dict) <- c("None","Low (PACKBITS)","Medium (LZW)","High (DEFLATE)")
-  compress_lab   <- glabel(text = "GTiff Compression: ", container = compress_group)
-  size(compress_lab) <- list(width = 160)
+  compress_lab   <- glabel(text = "Compression: ", container = compress_group)
+  size(compress_lab) <- list(width = 130)
   font(compress_lab) <- list(family = "sans",weight = "bold")
   compress_wid <- gcombobox(names(compress_dict), container = compress_group,selected <- match(general_opts$compress, names(compress_dict)))
   if (general_opts$out_format == "GTiff") {
@@ -815,27 +815,62 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     enabled(compress_group) <- FALSE
   } # grey out compression if ENVI output
   size(compress_wid) <- c(150, 30)
-  # virtual and NODATA ----
-  other_group <- ggroup(container = options_frame, horizontal = TRUE)
   
-  timeseries_lab       <- glabel(text = "Create Virtual Rasters:", container = other_group)
+  addSpring(opt_group)
+  
+  timeseries_lab       <- glabel(text = "Create Virtual Rasters:", container = opt_group)
   font(timeseries_lab) <- list(family = "sans",weight = "bold")
   timeseries_wid <- 
-    gcombobox(c("None","ENVI Meta Files","GDAL vrt Files","ENVI and GDAL"), container = other_group,
+    gcombobox(c("None","ENVI Meta Files","GDAL vrt Files","ENVI and GDAL"), container = opt_group,
                selected <- match(general_opts$ts_format, c("None","ENVI Meta Files","GDAL vrt Files","ENVI and GDAL")), handler = function(h,....) {
                current_sel <- svalue(timeseries_wid)
                })
   size(timeseries_lab) <- c(190, 30)
   size(timeseries_wid) <- c(140, 30)
-  addSpring(other_group)
   
+  # virtual and NODATA ----
+  other_group <- ggroup(container = options_frame, horizontal = TRUE)
   rts_lab <- glabel(text = "Create RasterStacks: ", container = other_group)
   rts_wid <- gradio(items = c("Yes","No"), text = "Select", container = other_group, selected = match(general_opts$rts, c("Yes","No")), horizontal = TRUE)
   font(rts_lab) <- list(family = "sans",weight = "bold")
   addSpace(other_group,15)
+
+  addSpring(other_group)
   nodata_lab <- glabel(text = "Change NODATA values: ", container = other_group)
   nodata_wid <- gradio(items = c("Yes","No"), text = "Select", container = other_group, selected = match(general_opts$nodata_change, c("Yes","No")), horizontal = TRUE)
   font(nodata_lab) <- list(family = "sans",weight = "bold")
+  nodata_help <- gbutton(text = " ? ",
+                        handler = function(h,....) {
+                          help_box <- gbasicdialog(title = "Help", parent = NULL, do.buttons = FALSE, horizontal = FALSE, 
+                                                   width = 400, height = 40, handler = function(h,....) {})
+                          help_mess_lab <- glabel(text = paste("By selecting \"No\", original nodata values are",
+                                                               "maintained; if \"Yes\", they are replaced with",
+                                                               "default nodata values (e.g. 255 for unsigned",
+                                                               "8-bit integer, -32768 for signed 16-bit integer).",
+                                                               sep="\n"), editable = FALSE, container = help_box)
+                          visible(help_box) = TRUE
+                        }, container = other_group, expand = FALSE)
+  
+  addSpace(other_group,15)
+  scale_lab <- glabel(text = "Scale output values: ", container = other_group)
+  if (with(general_opts,!exists("scale_val"))) {general_opts$scale_val <- "No"} # default value in case of use of old json settings files
+  scale_wid <- gradio(items = c("Yes","No"), text = "Select", container = other_group, selected = match(general_opts$scale_val, c("Yes","No")), horizontal = TRUE)
+  font(scale_lab) <- list(family = "sans",weight = "bold")
+  scale_help <- gbutton(text = " ? ",
+                       handler = function(h,....) {
+                         help_box <- gbasicdialog(title = "Help", parent = NULL, do.buttons = FALSE, horizontal = FALSE, 
+                                                  width = 400, height = 40, handler = function(h,....) {})
+                         help_mess_lab <- glabel(text = paste("NASA provides outputs as integer values, indicating a potential scale factor",
+                                                              "and/or an offset to apply in order to obtain values in the indicated measure units.",
+                                                              "Leaving \"Scale output values\" option to \"No\", output files are left",
+                                                              "as provided by NASA, and additional indices are produced as integer values",
+                                                              "with a 10000 factor scale; selecting \"Yes\", potential scale factor and offsets",
+                                                              "are applied, and indices are not scaled float values.",
+                                                              "Notice that, with this option, size of scaled output products is generally bigger.",
+                                                              sep="\n"), editable = FALSE, container = help_box)
+                         visible(help_box) = TRUE
+                       }, container = other_group, expand = FALSE)
+  
   
   #- ------------------------------------------------------------------------------- -#
   # Widgets for output folders selection ----
@@ -939,7 +974,8 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     general_opts$delete_hdf <- svalue(delete_wid)
     
     general_opts$nodata_change <- svalue(nodata_wid)
-    general_opts$rts           <- svalue(rts_wid)
+    general_opts$scale_val  <- svalue(scale_wid)
+    general_opts$rts        <- svalue(rts_wid)
     
     general_opts$out_format <- svalue(format_wid)   # Retrieve format, virtual and compression
     general_opts$ts_format  <- svalue(timeseries_wid)
@@ -1157,6 +1193,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
       svalue(reprocess_wid)      <- general_opts$reprocess
       svalue(delete_wid)         <- general_opts$delete_hdf
       svalue(nodata_wid)         <- general_opts$nodata_change
+      svalue(scale_wid)          <- general_opts$scale_val
       
       svalue(format_wid)     <- general_opts$out_format
       svalue(timeseries_wid) <- general_opts$ts_format

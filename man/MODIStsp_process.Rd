@@ -8,11 +8,11 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   reprocess = "Yes", delete_hdf = "No", sensor, download_server, user,
   password, https, ftps, start_x, start_y, end_x, end_y, bbox, out_format,
   compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str,
-  nodata_in, nodata_out, nodata_change, rts, datatype, bandsel, bandnames,
-  indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
-  quality_bandnames, quality_bandsel, quality_bitN, quality_source,
-  quality_nodata_in, full_ext, quality_nodata_out, file_prefixes,
-  main_out_folder, resampling, ts_format, use_aria = TRUE,
+  nodata_in, nodata_out, nodata_change, scale_val, scale_factor, offset, rts,
+  datatype, bandsel, bandnames, indexes_bandsel, indexes_bandnames,
+  indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel,
+  quality_bitN, quality_source, quality_nodata_in, full_ext, quality_nodata_out,
+  file_prefixes, main_out_folder, resampling, ts_format, use_aria = TRUE,
   download_range = "full", gui = TRUE)
 }
 \arguments{
@@ -34,9 +34,9 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 
 \item{download_server}{service used to download MODIS tiles, one of: 'http', 'ftp', NA.}
 
-\item{user}{Username for http download (\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
+\item{user}{Username for http download ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))}
 
-\item{password}{Password for http download (\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
+\item{password}{Password for http download ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))}
 
 \item{https}{hash https site for download of hdf of selected product}
 
@@ -73,6 +73,8 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \item{nodata_out}{Target nodata for MODIS bands}
 
 \item{nodata_change}{string (Yes/No) if Yes, nodata are set to nodata_out in output rasters}
+
+\item{scale_val}{string (Yes/No) if Yes, output values in are rescaled in the measure unit of the variable}
 
 \item{rts}{string ("Yes"/"No") If Yes, create rts time series}
 
@@ -126,22 +128,20 @@ MODIStsp_Previous.json (Interactive use), or a user specified JSON file (batch u
 processing.
 }
 \details{
-After retrieving the input processing options, the function
-\enumerate{
-\item Acesses lpdaac http or ftp archive to determine the list of dates to be processed
-\item Performs all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
+After retrieving the input processing options, the function 
+1. Acesses lpdaac http or ftp archive to determine the list of dates to be processed
+2. Performs all required processing steps on each date (download, reprojection, resize, mosaicing, indexes computation,
 quality indicators computation)
-\item Creates virtual files of the processed time series.
-}
+3. Creates virtual files of the processed time series.
 
-Reprojection and resize is dealt with by accessing gdal routines through the \code{gdaUtils} package.
+Reprojection and resize is dealt with by accessing gdal routines through the `gdaUtils` package.
 Extraction of bitfields  from Quality layers is done though fast bitwise computation
 
 Checks are done in order to not re-download already existing HDF images, and not reprocess already processed dates (if the user didn'specify that)
 }
 \note{
-Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
-\href{http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
+Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ([ModisDownload](http://r-gis.net/?q=ModisDownload);
+[Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
 
 License: GPL 3.0
 }
@@ -150,3 +150,4 @@ Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
+

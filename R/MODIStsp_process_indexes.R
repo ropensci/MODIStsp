@@ -14,6 +14,7 @@
 #' @param yy string string used to retrieve filenames of rasters of original bands to be used in computations
 #' @param DOY string used to retrieve filenames of rasters of original bands to be used in computations
 #' @param out_format string used to retrieve filenames of rasters of original bands to be used in computations
+#' @param scale_val string (Yes/No) if Yes, output values in are computed as float -1 - 1, otherwise integer -10000 - 10000
 #' @return NULL - new raster file saved in out_filename
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -22,7 +23,7 @@
 #' @importFrom raster NAvalue raster writeRaster
 #' @importFrom tools file_path_sans_ext
 MODIStsp_process_indexes <- function(out_filename, formula,bandnames,nodata_out,out_prod_folder,
-                                     indexes_nodata_out, file_prefix, yy, DOY, out_format) {
+                                     indexes_nodata_out, file_prefix, yy, DOY, out_format, scale_val) {
 
   # Retrieve necessary filenames (get names of single band files on the basis of Index formula)
 
@@ -49,14 +50,19 @@ MODIStsp_process_indexes <- function(out_filename, formula,bandnames,nodata_out,
     }
   }
   call_string <- paste0(substr(call_string,1,nchar(call_string) - 1), ")")  #Finalize the call_string
-  fun_string <- paste0(fun_string,"...)","{round(10000*(",formula, "))}") # Finalize the fun_string
+  if (scale_val == "Yes") { # if scale_val, indices are written as float -1 - 1
+    fun_string <- paste0(fun_string,"...)","{",formula, "}") # Finalize the fun_string
+  } else { # otherwise, they are written as integer -10000 - 10000
+    fun_string <- paste0(fun_string,"...)","{round(10000*(",formula, "))}") # Finalize the fun_string
+  }
   
   eval(parse(text = fun_string))     # Parse "fun_string" to create a new function
   eval(parse(text = call_string))    # parse call_string to launch the new function for index computation
 
   # Save output and remove aux file
   raster::NAvalue(tmp_index) <- as.numeric(indexes_nodata_out)
-  writeRaster(tmp_index, out_filename, format = out_format,NAflag = as.numeric(indexes_nodata_out), datatype = "INT2S", overwrite = TRUE)
+  writeRaster(tmp_index, out_filename, format = out_format, NAflag = as.numeric(indexes_nodata_out), #if(scale_val=="Yes"){-3.4e+38}else{as.numeric(indexes_nodata_out)}, 
+              datatype = if(scale_val=="Yes"){"FLT4S"}else{"INT2S"}, overwrite = TRUE)
   if (out_format == "ENVI") { # IF "ENVI", write the nodata value in the header
     fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(out_filename),".hdr"), "a")  # If output format is ENVI, add data ignore value to the header file
     writeLines(c("data ignore value = ", indexes_nodata_out ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value

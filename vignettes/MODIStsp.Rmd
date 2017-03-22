@@ -1,5 +1,5 @@
 ---
-title: 'MODIStsp: A tool for automatic preprocessing of MODIS time series - v1.3.0'
+title: 'MODIStsp: A tool for automatic preprocessing of MODIS time series - v1.3.1'
 author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:lbusett@gmail.com)), Luigi
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'

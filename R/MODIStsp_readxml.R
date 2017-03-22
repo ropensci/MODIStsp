@@ -58,13 +58,15 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
       
       # Band info
       nbands <- xmlSize(xmltop[[prod]][["versions"]][[n_version]][["bands"]])  # number of original layers
-      bandnames <- band_fullname <- datatype <- nodata_in <- nodata_out <- NULL
+      bandnames <- band_fullname <- datatype <- nodata_in <- nodata_out <- scale_factor <- offset <- NULL
       for (band in 1:nbands) { # get chars of original layers
         bandnames     <- c(bandnames,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["bandname"]]))
         band_fullname <- c(band_fullname,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["fullname"]]))
         datatype   <- c(datatype,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["datatype"]]))
         nodata_in  <- c(nodata_in,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["nodata_in"]]))
         nodata_out <- c(nodata_out,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["nodata_out"]]))
+        scale_factor <- c(scale_factor,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["scale_factor"]]))
+        offset <- c(offset,xmlToList(xmltop[[prod]][["versions"]][[n_version]][["bands"]][[band]][["offset"]]))
       } #End Cycle on band
       prodopts[[version_name]]$bandnames <- bandnames # store in prodopts
       prodopts[[version_name]]$band_fullnames <- band_fullname
@@ -78,6 +80,8 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
       prodopts[[version_name]]$datatype <- datatype
       prodopts[[version_name]]$nodata_in <- nodata_in
       prodopts[[version_name]]$nodata_out <- nodata_out
+      prodopts[[version_name]]$scale_factor <- scale_factor
+      prodopts[[version_name]]$offset <- offset
       # prodopts[[version_name]]$bandsel <- rep(0, length(prodopts[[version_name]]$bandnames))
       
       # Indices info
