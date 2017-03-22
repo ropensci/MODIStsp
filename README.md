@@ -2,6 +2,9 @@
 -   [*20/02/2017 IMPORTANT NOTES!*](#important-notes)
 -   [MODIStsp](#modistsp)
 -   [News !](#news)
+    -   [Major Changes:](#major-changes)
+    -   [Minor Changes:](#minor-changes)
+    -   [Bug fixing:](#bug-fixing)
 -   [Installation](#installation)
     -   [On Windows](#on-windows)
     -   [On Linux systems](#on-linux-systems)
@@ -21,7 +24,7 @@
 *20/02/2017 IMPORTANT NOTES!*
 =============================
 
--   We discovered a bug recently introduced on *ftp* download. If you recently installed `MODIStsp`, please delete your current version and re-install it. Sorry for the trouble!
+-   We discovered some bugs recently introduced on *ftp* download. If you recently installed `MODIStsp`, please delete your current version and install v.1.3.2.
 
 -   If you have trouble downloading via *http*, please visit [your earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
 
@@ -42,6 +45,27 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 
 News !
 ======
+
+**20/03/2017 - MODIStsp v1.3.2 released, supports applying scale and offsets **
+
+v1.3.2 was released on 22/03/2017
+
+Major Changes:
+--------------
+
+Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.
+
+Minor Changes:
+--------------
+
+-   Some product names and output layer names were modified to reduce the length of output file names
+
+Bug fixing:
+-----------
+
+-   Fixed various bugs.
+
+For details on implemented changes see the release notes.
 
 **13/02/2017 - MODIStsp v1.3.1 released **
 
