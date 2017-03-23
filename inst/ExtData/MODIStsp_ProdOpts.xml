@@ -1,4 +1,4 @@
-    <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
     <products>
         <MOD09A1>
             <name>Surf_Ref_8Days_500m (M*D09A1)</name>
@@ -7618,6 +7618,8 @@
                             <datatype>16-bit unsigned integer</datatype>
                             <nodata_in>32767</nodata_in>
                             <nodata_out>32767</nodata_out>
+                            <scale_factor>0.001</scale_factor>
+                            <offset>0</offset>
                         </band>
                     </bands>
                 </version>
