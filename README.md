@@ -22,7 +22,7 @@
 =============================
 -   If you have trouble downloading via *http*, please visit [your earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
 
-**Solutions to common installation and processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
+**Solutions to common installation and _processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
 
 MODIStsp
 ========
@@ -42,7 +42,7 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 News !
 ======
 
-**20/03/2017 - MODIStsp v1.3.2 released, supports applying scale and offsets **
+**20/03/2017 - MODIStsp v1.3.2 released, supports applying scale and offsets**
 
 v1.3.2 was released on 22/03/2017
 
@@ -60,11 +60,11 @@ Bug fixing:
 
 For details on implemented changes see the [release notes of v1.3.2](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.2)
 
-**13/02/2017 - MODIStsp v1.3.1 released **
+**13/02/2017 - MODIStsp v1.3.1 released**
 
 MODIStsp v1.3.1 was  released on 13/02/2017. Main changes and bug fixes are reported [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.1)
 
-**05/11/2016 - MODIStsp v1.3.0 released **
+**05/11/2016 - MODIStsp v1.3.0 released**
 
 MODIStsp v1.3.0 has been finally released. The major improvement consists in now allowing download and preprocessing of **MODIS Collection 006 datasets**. Other changes concern improvements in the GUI, introduction of off-line functionality and various bug fixing. You can see the changelog [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.0). Please report any issues you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.:
 
