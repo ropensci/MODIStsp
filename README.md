@@ -109,6 +109,16 @@ library(gWidgetsRGtk2)
 
 Upon loading the package, an error window will probably appear. **Don't worry!** This is just signaling that *libatk-1.0-0.dll* is missing from your system. This is due to the fact that library "GTK+" is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
 
+In case RStudio doesn't automatically restart after installing GTK+, try to kill it form "Task Manager" and reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go. 
+
+If it still fails, try following instructions reported here:
+
+https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2
+
+(starting from "Download the GTK+ all-in-one bundle")
+
+to correctly install the `GTK+` library.
+
 1.  Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 
 ``` r
