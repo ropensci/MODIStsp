@@ -20,10 +20,9 @@
 
 *20/02/2017 IMPORTANT NOTES!*
 =============================
-
--   We discovered some bugs recently introduced on *ftp* download. If you recently installed `MODIStsp`, please delete your current version and install v.1.3.2.
-
 -   If you have trouble downloading via *http*, please visit [your earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
+
+**Solutions to common installation and processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
 
 MODIStsp
 ========
@@ -34,7 +33,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 An article about `MODIStsp` was also recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020).
 
-**Solutions to common installation and processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
+
 
 **Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
 
@@ -59,37 +58,17 @@ Bug fixing:
 
 -   Fixed various bugs.
 
-For details on implemented changes see the release notes of v1.3.2.
+For details on implemented changes see the [release notes of v1.3.2](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.2)
 
 **13/02/2017 - MODIStsp v1.3.1 released **
 
-MODIStsp v1.3.1 has been released on 13/02/2017. Main changes and bug fixes are reported below
+MODIStsp v1.3.1 was  released on 13/02/2017. Main changes and bug fixes are reported [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.1)
 
--   Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55))
-
--   Added functionality for downloading "partial" years(Issue [\#54](https://github.com/lbusett/MODIStsp/issues/54))
-
--   Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [\#59](https://github.com/lbusett/MODIStsp/issues/59))
-
--   Added functionality for accelerating download using aria2c (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55))
-
--   Fixed bug on download with aria, throwing an error on partial download on http downlaod with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
-
--   Fixed bug on M\*D15A2 processing (Issue [\#60](https://github.com/lbusett/MODIStsp/issues/60))
-
--   Fixed bug on MCD12Q1 processing (Issue [\#58](https://github.com/lbusett/MODIStsp/issues/58))
-
--   Fixed bug on MOD13C2 processing (Issue [\#52](https://github.com/lbusett/MODIStsp/issues/52))
-
--   Fixed bug on insertion of custom projection (Issue [\#57](https://github.com/lbusett/MODIStsp/issues/57))
-
--   Fixed bug on selection of custom index (Issue [\#53](https://github.com/lbusett/MODIStsp/issues/53))
-
--   **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data**
+**05/11/2016 - MODIStsp v1.3.0 released **
 
 MODIStsp v1.3.0 has been finally released. The major improvement consists in now allowing download and preprocessing of **MODIS Collection 006 datasets**. Other changes concern improvements in the GUI, introduction of off-line functionality and various bug fixing. You can see the changelog [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.0). Please report any issues you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.:
 
--   **11/03/2016 - MODIStsp FAQ**
+**11/03/2016 - MODIStsp FAQ**
 
 Hints for solving common installation, downloading and processing problems are now provided in our [FAQ](https://github.com/lbusett/MODIStsp/wiki/) page.
 
