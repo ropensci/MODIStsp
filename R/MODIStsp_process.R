@@ -325,9 +325,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                   
                   while (remote_size_tries > 0) {
                     size_string <- if (download_server == "http") {
-                      try(GET(paste0(remote_filename,".xml"), authenticate(user, password), timeout(120)))
+                      try(GET(paste0(remote_filename,".xml"), authenticate(user, password), timeout(240)))
                     } else if (download_server == "ftp") {
-                      try(getURL(remote_filename, nobody = 1L, header = 1L, .opts = list(timeout = 120, maxredirs = 5, verbose = TRUE)))
+                      try(getURL(remote_filename, nobody = 1L, header = 1L, .opts = list(timeout = 240, maxredirs = 5, verbose = TRUE)))
                     }
                     # Check if download was good: check class of xmldown and status of xmldown
                     if (class(size_string) == "try-error") {
@@ -384,17 +384,17 @@ MODIStsp_process <- function(sel_prod, start_date, end_date ,out_folder, out_fol
                           download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows")) # intern=TRUE for Windows, FALSE for Unix
                         } else {
                           download <- try(GET(remote_filename, authenticate(user, password), 
-                                              progress(), timeout(1200)))
+                                              progress(), timeout(2400)))
                         } 
                       } else {   # ftp download
                         
                         if (use_aria == TRUE) {
                           aria_string <- paste(Sys.which("aria2c")," -x 6 -d ",dirname(local_filename),
                                                " -o ",basename(remote_filename)," ",remote_filename, 
-                                               " --allow-overwrite --file-allocation=none --retry-wait=2", sep="") 
+                                               " --allow-overwrite --file-allocation=none --retry-wait=2", sep = "") 
                           download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows"))
                         } else {
-                          download <- try(GET(remote_filename,progress(), timeout(1200)))
+                          download <- try(GET(remote_filename,progress(), timeout(2400)))
                           
                           # dwl_method <- ifelse((capabilities("libcurl") == TRUE), "libcurl", "auto")
                           # download <- try(download.file(url = remote_filename, destfile = local_filename, mode = "wb", 
