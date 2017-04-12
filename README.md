@@ -20,10 +20,9 @@
 
 *20/02/2017 IMPORTANT NOTES!*
 =============================
-
--   We discovered some bugs recently introduced on *ftp* download. If you recently installed `MODIStsp`, please delete your current version and install v.1.3.2.
-
 -   If you have trouble downloading via *http*, please visit [your earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
+
+**Solutions to common installation and _processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
 
 MODIStsp
 ========
@@ -34,7 +33,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 An article about `MODIStsp` was also recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020).
 
-**Solutions to common installation and processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
+
 
 **Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
 
@@ -43,54 +42,25 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 News !
 ======
 
-**20/03/2017 - MODIStsp v1.3.2 released, supports applying scale and offsets **
-
-v1.3.2 was released on 22/03/2017
-
+22/03/2017 - MODIStsp v1.3.2 released 
+---------------------------------
 -   Major Changes:
 
 Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.
 
--   Minor Changes:
+For details on other changes and bug fixing see the [release notes of v1.3.2](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.2)
 
-Some product names and output layer names were modified to reduce the length of output file names
+13/02/2017 - MODIStsp v1.3.1 released
+---------------------------------
+MODIStsp v1.3.1 was  released on 13/02/2017. Main changes and bug fixes are reported [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.1)
 
-Bug fixing:
+05/11/2016 - MODIStsp v1.3.0 released
+---------------------------------
 
--   Fixed various bugs.
+MODIStsp v1.3.0 has been finally released. Major improvement consists in now allowing download and preprocessing of **MODIS Collection 006 datasets**. Other changes concern improvements in the GUI, introduction of off-line functionality and various bug fixing. You can see the changelog [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.0). Please report any issues you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.:
 
-For details on implemented changes see the release notes of v1.3.2.
-
-**13/02/2017 - MODIStsp v1.3.1 released **
-
-MODIStsp v1.3.1 has been released on 13/02/2017. Main changes and bug fixes are reported below
-
--   Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55))
-
--   Added functionality for downloading "partial" years(Issue [\#54](https://github.com/lbusett/MODIStsp/issues/54))
-
--   Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [\#59](https://github.com/lbusett/MODIStsp/issues/59))
-
--   Added functionality for accelerating download using aria2c (Issue [\#55](https://github.com/lbusett/MODIStsp/issues/55))
-
--   Fixed bug on download with aria, throwing an error on partial download on http downlaod with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
-
--   Fixed bug on M\*D15A2 processing (Issue [\#60](https://github.com/lbusett/MODIStsp/issues/60))
-
--   Fixed bug on MCD12Q1 processing (Issue [\#58](https://github.com/lbusett/MODIStsp/issues/58))
-
--   Fixed bug on MOD13C2 processing (Issue [\#52](https://github.com/lbusett/MODIStsp/issues/52))
-
--   Fixed bug on insertion of custom projection (Issue [\#57](https://github.com/lbusett/MODIStsp/issues/57))
-
--   Fixed bug on selection of custom index (Issue [\#53](https://github.com/lbusett/MODIStsp/issues/53))
-
--   **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data**
-
-MODIStsp v1.3.0 has been finally released. The major improvement consists in now allowing download and preprocessing of **MODIS Collection 006 datasets**. Other changes concern improvements in the GUI, introduction of off-line functionality and various bug fixing. You can see the changelog [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.0). Please report any issues you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.:
-
--   **11/03/2016 - MODIStsp FAQ**
-
+11/03/2016 - MODIStsp FAQ
+--------------------------
 Hints for solving common installation, downloading and processing problems are now provided in our [FAQ](https://github.com/lbusett/MODIStsp/wiki/) page.
 
 Installation
@@ -108,6 +78,16 @@ library(gWidgetsRGtk2)
 ```
 
 Upon loading the package, an error window will probably appear. **Don't worry!** This is just signaling that *libatk-1.0-0.dll* is missing from your system. This is due to the fact that library "GTK+" is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
+
+In case RStudio doesn't automatically restart after installing GTK+, try to kill it form "Task Manager" and reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go. 
+
+If it still fails, try following instructions reported here:
+
+https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2
+
+(starting from "Download the GTK+ all-in-one bundle")
+
+to correctly install the `GTK+` library.
 
 1.  Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
 
