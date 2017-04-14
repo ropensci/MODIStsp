@@ -1,7 +1,7 @@
 ## Test environments
-* ubuntu 14.04 (on local install and travis-ci), R 3.3.1
+* ubuntu 16.10/14.04 (on local install/travis-ci), R 3.3.3
 * win-builder (devel and release)
-* local OS X install, R 3.3.1
+* local OS X install, R 3.3.3
 
 ## R CMD check results
 There were no ERRORs, WARNINGs 

@@ -12,13 +12,13 @@ NASA provides outputs as integer values, indicating a potential scale factor and
 
 ## Minor Changes:
 
-- Some product names and output layer names were modified to reduce the length of output file names, homogenize the names of the output and correct some naming errors.
-For compatibility with already created output files (versions up to 1.3.1), the old "XML" file specifying output files format is still available in `inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml`. To use the old file naming conventions, users have to 
+- Some product names and output layer names were modified to reduce the length of output file names, homogenize the names of the outputs and correct some errors.
+__For compatibility with already created output files__ (versions up to 1.3.1), the old "XML" file specifying output files format is still available in `inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml`. To use the old file naming conventions, users have to 
 1. delete `inst/ExtData/MODIStsp_ProdOpts.xml` and rename `MODIStsp_ProdOpts_old_v1.3.1.xml` to `MODIStsp_ProdOpts.xml`.
 2. delete `MODIStsp_ProdOpts.RData` from the `Previous` folder within `your_R-library_path/MODIStsp/Previous`
 3. Restart `MODIStsp`
 
-- Some changes were done in timeouts of httr/ftp requests to prevent timeout problems
+- Timeouts of httr/ftp requests were increased to prevent problems on download on slow connections
 
 ## Bug fixing:
 

@@ -2,6 +2,10 @@
 -   [*20/02/2017 IMPORTANT NOTES!*](#important-notes)
 -   [MODIStsp](#modistsp)
 -   [News !](#news)
+    -   [22/03/2017 - MODIStsp v1.3.2 released](#modistsp-v1.3.2-released)
+    -   [13/02/2017 - MODIStsp v1.3.1 released](#modistsp-v1.3.1-released)
+    -   [05/11/2016 - MODIStsp v1.3.0 released](#modistsp-v1.3.0-released)
+    -   [11/03/2016 - MODIStsp FAQ](#modistsp-faq)
 -   [Installation](#installation)
     -   [On Windows](#on-windows)
     -   [On Linux systems](#on-linux-systems)
@@ -20,9 +24,10 @@
 
 *20/02/2017 IMPORTANT NOTES!*
 =============================
+
 -   If you have trouble downloading via *http*, please visit [your earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
 
-**Solutions to common installation and _processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
+\*\*Solutions to common installation and \_processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)\*\*
 
 MODIStsp
 ========
@@ -33,7 +38,7 @@ An extended description of MODIStsp functionalities is provided in the [package 
 
 An article about `MODIStsp` was also recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020).
 
-
+**Solutions to common installation and processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
 
 **Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
 
@@ -42,25 +47,28 @@ An article about `MODIStsp` was also recently published on the "Computers & Geos
 News !
 ======
 
-22/03/2017 - MODIStsp v1.3.2 released 
----------------------------------
+22/03/2017 - MODIStsp v1.3.2 released
+-------------------------------------
+
 -   Major Changes:
 
-Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.
+Added functionality to apply scale and offset coefficients on MODIS original values according with the specifications of single MODIS products.
 
 For details on other changes and bug fixing see the [release notes of v1.3.2](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.2)
 
 13/02/2017 - MODIStsp v1.3.1 released
----------------------------------
-MODIStsp v1.3.1 was  released on 13/02/2017. Main changes and bug fixes are reported [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.1)
+-------------------------------------
+
+MODIStsp v1.3.1 was released on 13/02/2017. Main changes and bug fixes are reported [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.1)
 
 05/11/2016 - MODIStsp v1.3.0 released
----------------------------------
+-------------------------------------
 
 MODIStsp v1.3.0 has been finally released. Major improvement consists in now allowing download and preprocessing of **MODIS Collection 006 datasets**. Other changes concern improvements in the GUI, introduction of off-line functionality and various bug fixing. You can see the changelog [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.0). Please report any issues you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.:
 
 11/03/2016 - MODIStsp FAQ
---------------------------
+-------------------------
+
 Hints for solving common installation, downloading and processing problems are now provided in our [FAQ](https://github.com/lbusett/MODIStsp/wiki/) page.
 
 Installation
@@ -70,7 +78,11 @@ Installation
 
 ### On Windows
 
-1.  Install and load the `gWidgetsRGtk2` package:
+To install `MODIStsp`, just install the package from CRAN:
+
+`install.packagaes("MODIStsp")`
+
+However, if the `GTK+` library is not already installed on your system, installation may fail. In that case, please install and load the `gWidgetsRGtk2` library beforehand:
 
 ``` r
 install.packages("gWidgetsRGtk2")
@@ -79,23 +91,15 @@ library(gWidgetsRGtk2)
 
 Upon loading the package, an error window will probably appear. **Don't worry!** This is just signaling that *libatk-1.0-0.dll* is missing from your system. This is due to the fact that library "GTK+" is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
 
-In case RStudio doesn't automatically restart after installing GTK+, try to kill it form "Task Manager" and reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go. 
+In case RStudio doesn't automatically restart after installing GTK+ or it "freezes", try to kill it form "Task Manager", reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go.
 
 If it still fails, try following instructions reported here:
 
-https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2
+<https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2>
 
 (starting from "Download the GTK+ all-in-one bundle")
 
 to correctly install the `GTK+` library.
-
-1.  Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
-
-``` r
-install.packages("devtools")
-library(devtools)
-install_github("lbusett/MODIStsp")
-```
 
 ### On Linux systems
 
@@ -118,15 +122,10 @@ install_github("lbusett/MODIStsp")
     glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
     ```
 
-2.  From R install the libraries `gWidgetsRGtk2` and `devtools`:
-
-        install.packages(c("devtools","gWidgetsRGtk2"))
-
-3.  Install MODIStsp package from GitHub (you'll need to have the "devtools" package loaded):
+2.  Install MODIStsp package from CRAN
 
 ``` r
-library(devtools)
-install_github("lbusett/MODIStsp")
+install.packages("lbusett/MODIStsp")
 ```
 
 #### Dependencies <a name="Dependencies"></a>
@@ -152,7 +151,7 @@ MODIStsp()
 
 This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see below for details). The main available processing options are described in detail in the following.
 
-<img src="README-GUI_fig-1.png" style="display: block; margin: auto;" />
+![](README-GUI_fig-1.png)
 
 ### MODIS Product, Platform and Layers
 
