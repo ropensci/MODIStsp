@@ -32,7 +32,7 @@
   img <- readPNG('figure_4.png')
   grid.raster(img)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE-----------------------------------------------------------------------------------------------------
 #    #Set the input paths to raster and shape file
 #    infile = 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'
 #    shpname = 'path_to_file/rois.shp'

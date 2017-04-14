@@ -12,6 +12,5 @@ index.md
 ^sketched_routines/
 ^ExtData/
 ^README\.Rmd$
-^README-.*\.png$
 configure.win
 cran-comments.md
