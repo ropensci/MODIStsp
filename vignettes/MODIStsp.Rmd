@@ -32,7 +32,7 @@ MODIStsp is a novel "R" package allowing to automatize the creation of time seri
 
 Development of MODIStsp started from modifications of the ModisDownload "R" script by Thomas Hengl [-@Hengl2010], and successive adaptations by Babak Naimi [-@Naimi2014]. The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of: 
 
-* developing a standalone application allowing to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on all available MODIS land products by exploiting  a powerful and user-friendly GUI front-end;
+* developing a standalone application allowing to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on all available MODIS land products by exploiting  a powerful and user-friendly GUI front-end;
 * allowing the creation of time series of both MODIS original layers and additional Quality Indicators (e.g., data acquisition quality, cloud/snow presence, algorithm used for data production, etc. ) extracted from the aggregated bit-field QA layers;
 * allowing the automatic calculation and creation of time series of several additional Spectral Indexes starting form MODIS surface reflectance products.
 
@@ -66,7 +66,7 @@ If it still fails, try downloading the GTK+ bundle from:
 <http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip> 
 (OR <http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip> if on Win32)
 
-, unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), then add the path to the "bin" subfolder (e.g., `C:\\Program Files\\GTK+\\bin\\` to your system PATH environment variable.
+, unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), then add the path to the "bin" sub-folder (e.g., `C:\\Program Files\\GTK+\\bin\\` to your system PATH environment variable.
 
 Restart your system and try loading again `gWidgetsRGtk2`
     
@@ -114,11 +114,11 @@ MODIStsp()
 ```
 This **opens a GUI** from which processing options can be specified and eventually saved (or loaded).[^2^]
 
-_Note:_ PCs with a small screen can fail to visualise the whole GUI; in this case, the user can add scroll bars with ```MODIStsp(scrollWindow=TRUE)```.
+_Note:_ PCs with a small screen can fail to visualize the whole GUI; in this case, the user can add scroll bars with ```MODIStsp(scrollWindow=TRUE)```.
 
 ## Selection of processing parameters 
 
-The MODIStsp GUI allows selectiing all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.
+The MODIStsp GUI allows selecting all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.
 
 ```{r GUIfig, echo=FALSE, fig.cap="The MODIStsp main GUI", fig.height=6, fig.width=7, message=FALSE, warning=FALSE}
   library(png)
@@ -134,7 +134,7 @@ The following menus allow to specify details of the desired output time series:
 
 1. **"Category"** and **"Product"**: Select the MODIS product of interest  
 2. **MODIS platform(s)**: Select if only TERRA, only AQUA or Both MODIS platforms should be considered for download and creation of the time series
-3. **version**: Select wheter processing version 5 or 6 (when available) of MODIS products
+3. **version**: Select whether processing version 5 or 6 (when available) of MODIS products
 
 Clicking the **"Click to Select Desired Layers"** button opens the "Select Processing Layers" GUI panel, from which the user **must** select which MODIS original and/or derived QI and SI layers should be processed: 
 
@@ -177,13 +177,13 @@ You can however **specify other SIs to be computed without modifying MODIStsp so
   grid.raster(img)
 ```
 
-Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked upon clicking "Set New Index". On success, the new index is added in the list of available ones for all products allowing its computation. Clicking "Done !" returns to the main. 
+Provided information (e.g., correct band-names, computable formula, etc...) is automatically checked upon clicking "Set New Index". On success, the new index is added in the list of available ones for all products allowing its computation. Clicking "Done !" returns to the main. 
 
 ##	Download Method
 
 Available choices are: 
 
-1.  **http**:   download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). This requires providing a user name and password, which can be obtained by registrering an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
+1.  **http**:   download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). This requires providing a user name and password, which can be obtained by registering an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
 
 2.  **ftp**:     download from NASA ftp archive ([ftp://ladsweb.nascom.nasa.gov/](ftp://ladsweb.nascom.nasa.gov/));
 
@@ -195,7 +195,7 @@ The **use_aria2c** option allows to accelerate the download from NASA archives, 
 
 Specify the starting and ending dates to be considered for the creation of the time in the series corresponding fields. Dates **must** be provided in the _yyyy--mm--dd_ format (e.g., 2015-01-31)
 
-The **Period** dropdown menu allows to choose between two options:
+The **Period** drop-down menu allows to choose between two options:
 
 1.  **full**:     all available images between the starting and ending dates are downloaded and processed;
 
@@ -217,7 +217,7 @@ Specify the options to be used for reprojecting and resizing the MODIS images.
 
 1.  **"Output Projection"**: select one of the pre-defined output projections or specify a user-defined one. To specify a user selected projection, select "User Defined" and then insert a valid "Proj4" string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails; 
 
-2.	 **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"**: specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. Resampling method can  be chosen among "Nearest Neighbour" and "Mode" (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleaning would risk to contaminate the values of high-quality observations with those of low-quality ones.
+2.	 **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"**: specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. Resampling method can  be chosen among "Nearest Neighbour" and "Mode" (Useful for down-sampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleaning would risk to contaminate the values of high-quality observations with those of low-quality ones.
 
 ## Processing Options
 
@@ -231,7 +231,7 @@ Several processing options can be set using checkboxes:
 
 **Change NoData values**: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts" XML file. By selecting "Yes" in the "Change Original NODATA values" checkbox, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. 
 
-**Scale output values**: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately  rescaled on the fly, and saved in the true "measure units" of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etecetera). 
+**Scale output values**: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately  rescaled on the fly, and saved in the true "measure units" of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etc.). 
 
 ## Main Output Folder for Time Series Storage
 
@@ -322,7 +322,7 @@ Links to the MODIStsp.bat or MODIStsp.sh standalone launchers can be created aut
 
 * **In Windows:**: this creates a link in the Start Menu and optionally a desktop shortcut.
 
-See `?install_MODIStsp_launcher` for details and path customisations.
+See `?install_MODIStsp_launcher` for details and path customization.
 
 
 #	Output formats and naming conventions
@@ -391,7 +391,7 @@ Download and install the latest version of R which can be found [here](https://c
 ### Linux
 
 Please refer to the documentation which can be found [here](https://cran.r-project.org/bin/linux), opening the directory relative to the user Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version.
-With Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended), since packaged version of R is $\ge$ 3.2.1 (although not the latest); in this case, user can insall R by simply typing in a terminal
+With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommended), since packaged version of R is $\ge$ 3.2.1 (although not the latest); in this case, user can install R by simply typing in a terminal
 ```bash
 sudo apt-get install r-base
 ```
@@ -406,8 +406,8 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 2. In the **Quick Start for OSGeo4W Users** section, select the download of 32bit or 64bit of OSGeo4W network installer
 3. Run the installer
   + _Easiest Option_: 
-    +  Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing softwares like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
-  + _Advanded Option_: 
+    +  Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing software like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
+  + _Advanced Option_: 
     +  Select **Advanced Install**, then click on "Next" a few times until you reach the "Select Packages" screen. 
     +  Click on "Commandline_Utilities_", and on the list look for "_gdal: The GDAL/OGR library..." entry
     +  Click on "Skip": the word "skip" will be replaced by the current GDAL version number
@@ -417,7 +417,7 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 
 1. Ensure that your repositories contain a version of ```gdal-bin``` $\ge$ 1.11.1. 
     In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). 
-    With Ubuntu 15.10 Wily (and newer) this step is not mandatory, altough recommended in order to have updated version of GDAL installed.
+    With Ubuntu 15.10 Wily (and newer) this step is not mandatory, although recommended in order to have updated version of GDAL installed.
     
 2. To install GDAL a terminal and type  
     ```bash
@@ -437,7 +437,7 @@ Install the packaged binary of GDAL included in your specific distribution; if t
 
 [^1^]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you!
 
-[^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press "ok" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: i) ensure that GDAL is properly installed in your system; ii) (on Windows) if it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)); iii) if nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help!
+[^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: i) ensure that GDAL is properly installed in your system; ii) (on Windows) if it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)); iii) if nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help!
 
 [^3^]: The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
 
