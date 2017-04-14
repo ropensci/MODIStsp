@@ -136,7 +136,7 @@ MODIStsp()
 ```
 This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see below for details). The main available processing options are described in detail in the following.
 
-```{r GUI_fig, echo=FALSE, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
+```{r select_gui, echo=FALSE, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
   library(png)
   library(grid)
   library(knitr)
@@ -149,7 +149,7 @@ This will open a GUI from which processing options can be specified and eventual
 Allows to select the MODIS product of interest using the **"Category"** and **"Product"** drop down menus. 
 You can also select which **MODIS platform(s)** should be considered for download and creation of the time series ("Terra", "Aqua" or "Both"), and which **version** of the product - 5 or 6 (when available) - should be considered. After selecting the product, pushing the **"Click to Select"** button opens the "Select Processing Layers" GUI panel, from which you **must** select which MODIS original and/or derived QI and SI layers should be processed: 
 
-```{r select_layers_gui, echo=FALSE, fig.align="center", fig.width=10, message=FALSE, warning=FALSE}
+```{r select_layers, echo=FALSE, fig.align="center", fig.width=10, message=FALSE, warning=FALSE}
   library(png)
   library(grid)
   img <- readPNG('./vignettes/Figure_3.png')
@@ -179,7 +179,7 @@ The following commonly used Spectral Indexes are available for computation by de
 
 You can however **specify other SIs to be computed without modifying `MODIStsp` source code** by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related to the new desired SI using a simple GUI interface. 
 
-```{r index_fig, echo=FALSE, fig.align="center", fig.height=1.5}
+```{r select_index, echo=FALSE, fig.align="center", fig.height=1.5}
   library(png)
   library(grid)
   img <- readPNG('./vignettes/figure_4.png')

@@ -9,6 +9,7 @@
 -   [Installation](#installation)
     -   [On Windows](#on-windows)
     -   [On Linux systems](#on-linux-systems)
+    -   [Installing the `devel` version from github](#installing-the-devel-version-from-github)
 -   [Running the tool](#running-the-tool)
     -   [Interactive Execution: the MODIStsp GUI](#interactive-execution-the-modistsp-gui)
     -   [Non-Interactive Execution and scheduled processing](#non-interactive-execution-and-scheduled-processing)
@@ -128,13 +129,14 @@ to correctly install the `GTK+` library.
 install.packages("lbusett/MODIStsp")
 ```
 
-#### Dependencies <a name="Dependencies"></a>
+### Installing the `devel` version from github
 
-MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:
-`bitops` (&gt;= 1.9.6), `data.table` (&gt;= 1.9.6), `gdalUtils` (&gt;= 2.0.1.7), `gWidgets` (&gt;= 0.0-54), `hash` (&gt;= 2.2.6), `plyr` (&gt;= 1.8.3), `raster` (&gt;= 2.5-2), `RCurl` (&gt;= 1.95-4.8), `rgdal` (&gt;= 1.1-8), `rgeos` (&gt;=0.3-8), `xts` (&gt;= 1.0-10), `sp` (&gt;= 1.2-2), `stringr` (&gt;= 1.0.0), `XML` (&gt;= 3.98-1.1), pacman, `xml2` (&gt;= 0.1.2), `xts`
+The development version of MODIStsp is available on github. To install it, follow the previous instructions, but instead than `install.packages("MODIStsp")`, use:
 
-, while the following are suggested:
-`knitr`, `rmarkdown`, `png`, `grid`,`gWidgetsRGtk2`.
+``` r
+library(devtools)
+install_github("lbusett/MODIStsp", ref = "devel")
+```
 
 Running the tool
 ================
@@ -151,13 +153,13 @@ MODIStsp()
 
 This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see below for details). The main available processing options are described in detail in the following.
 
-![](README-GUI_fig-1.png)
+![](README-select_gui-1.png)
 
 ### MODIS Product, Platform and Layers
 
 Allows to select the MODIS product of interest using the **"Category"** and **"Product"** drop down menus. You can also select which **MODIS platform(s)** should be considered for download and creation of the time series ("Terra", "Aqua" or "Both"), and which **version** of the product - 5 or 6 (when available) - should be considered. After selecting the product, pushing the **"Click to Select"** button opens the "Select Processing Layers" GUI panel, from which you **must** select which MODIS original and/or derived QI and SI layers should be processed:
 
-<img src="README-select_layers_gui-1.png" style="display: block; margin: auto;" />
+<img src="README-select_layers-1.png" style="display: block; margin: auto;" />
 
 1.  The left-hand frame allows to select which original MODIS layers should be processed.
 2.  The central frame allows to select which Quality Indicators should be extracted from the original MODIS Quality Assurance layers.
@@ -181,7 +183,7 @@ The following commonly used Spectral Indexes are available for computation by de
 
 You can however **specify other SIs to be computed without modifying `MODIStsp` source code** by clicking on the ***"Add Custom Index"*** button, which allow to provide info related to the new desired SI using a simple GUI interface.
 
-<img src="README-index_fig-1.png" style="display: block; margin: auto;" />
+<img src="README-select_index-1.png" style="display: block; margin: auto;" />
 
 Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked upon clicking "Set New Index". On success, the new index is added in the list of available ones for all products allowing its computation. Clicking "Done !" returns to the main.
 
