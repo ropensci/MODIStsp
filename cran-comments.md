@@ -1,6 +1,10 @@
 ## Test environments
-* ubuntu 16.10/14.04 (on local install/travis-ci), R 3.3.3
+* ubuntu 16.10 on local install, R 3.3.3
+* ubuntu 14.04 on travis-ci, R 3.3.3 (https://travis-ci.org/lbusett/MODIStsp/builds/222174310)
 * win-builder (R-devel)
+* windows 10 on local install, R 3.3.3 (check passes if GTK+ library is
+  properly installed and on Windows PATH, otherwise the check causes an endless
+  GTK+ installation loop)
 * local OS X install, R 3.3.3
 
 ## R CMD check results

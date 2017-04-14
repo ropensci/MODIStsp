@@ -17,7 +17,7 @@
   library(png)
   library(grid)
   library(knitr)
-  img <- readPNG("Figure_1_vignette.png")
+  img <- readPNG("Figure_1_Vignette.png")
   grid.raster(img)
 
 ## ----proc_layers, echo=FALSE, fig.cap='The "Select Processing Layers" GUI', fig.height=3.5, fig.width=6, message=FALSE, warning=FALSE----
@@ -32,7 +32,7 @@
   img <- readPNG('figure_4.png')
   grid.raster(img)
 
-## ---- eval=FALSE-----------------------------------------------------------------------------------------------------
+## ---- eval=FALSE---------------------------------------------------------
 #    #Set the input paths to raster and shape file
 #    infile = 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'
 #    shpname = 'path_to_file/rois.shp'

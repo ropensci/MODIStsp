@@ -30,9 +30,9 @@
 MODIStsp
 ========
 
-MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.
+MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.
 
-An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (*Click on "Raw" at the beginning of the document to download the pdf file*)
+An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (*Click on "Raw" at the beginning of the document to download the PDF file*)
 
 An article about `MODIStsp` was recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020).
 
@@ -170,7 +170,7 @@ for (single_shape in extent_list) {
 
 ### Standalone execution and scheduled processing
 
-MODIStsp can be also executed as a standalone application ; to do it, from R launch the function `MODIStsp_install_launcher()`. In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp). In Windows, a link in the Start Menu and optionally a desktop shortcut are created. See `?install_MODIStsp_launcher` for details and path customisations.
+MODIStsp can be also executed as a standalone application ; to do it, from R launch the function `MODIStsp_install_launcher()`. In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp). In Windows, a link in the Start Menu and optionally a desktop shortcut are created. See `?install_MODIStsp_launcher` for details and path customization.
 
 Double-clicking the files or launching them from a shell without parameters launches `MODIStsp` in interactive mode. Non-interactive mode is triggered by adding the "-g" argument to the call, and specifying the path to a valid Options File as "-s" argument:
 
@@ -258,7 +258,7 @@ Download and install the latest version of R which can be found [here](https://c
 
 #### Linux
 
-Please refer to the documentation which can be found [here](https://cran.r-project.org/bin/linux), opening the directory relative to your Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version. With Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended), since packaged version of R is &gt;= 3.2.1 (although not the latest); in this case, user can insall R by simply typing in a terminal
+Please refer to the documentation which can be found [here](https://cran.r-project.org/bin/linux), opening the directory relative to your Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version. With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommended), since packaged version of R is &gt;= 3.2.1 (although not the latest); in this case, user can install R by simply typing in a terminal
 
 ``` bash
 sudo apt-get install r-base
@@ -275,8 +275,8 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 3.  Run the installer
 
 -   *Easiest Option*:
-    -   Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing softwares like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
--   *Advanded Option*:
+    -   Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing software like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
+-   *Advanced Option*:
     -   Select **Advanced Install**, then click on "Next" a few times until you reach the "Select Packages" screen.
     -   Click on "Commandline\_Utilities\_", and on the list look for "\_gdal: The GDAL/OGR library..." entry
     -   Click on "Skip": the word "skip" will be replaced by the current GDAL version number
@@ -284,7 +284,7 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 
 #### Debian and Ubuntu-based systems
 
-1.  Ensure that your repositories contain a version of `gdal-bin` &gt;= 1.11.1. In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). With Ubuntu 15.10 Wily (and newer) this step is not mandatory, altough recommended in order to have updated version of GDAL installed.
+1.  Ensure that your repositories contain a version of `gdal-bin` &gt;= 1.11.1. In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). With Ubuntu 15.10 Wily (and newer) this step is not mandatory, although recommended in order to have updated version of GDAL installed.
 
 2.  To install GDAL, open a terminal and type
 
@@ -302,4 +302,4 @@ Install the packaged binary of GDAL included in your specific distribution; if t
 
 <b id="f1">1</b>: If you encounter problems installing the gWidgetsRGtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help you!
 
-<b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press "ok" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the *GDAL\_DATA* environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)) 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!
+<b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the *GDAL\_DATA* environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)) 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!
