@@ -64,15 +64,16 @@ library(gWidgetsRGtk2)
     
  Upon loading the package, an error window will probably appear. **Don't worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library "GTK+" is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
  
- In case RStudio doesn't automatically restart after installing GTK+ or it "freezes", try to kill it form "Task Manager", reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go. 
+ In case RStudio doesn't automatically restart after installing GTK+ or continuously asks to install GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go. 
 
-If it still fails, try following instructions reported here:
+If it still fails, try downloading the GTK+ bundle from:
 
-https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2
+<http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip> 
+(OR <http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip> if on Win32)
 
-(starting from "Download the GTK+ all-in-one bundle")
+, unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), then add the path to the "bin" subfolder (e.g., `C:\\Program Files\\GTK+\\bin\\` to your system PATH environment variable.
 
-to correctly install the `GTK+` library.
+Restart your system and try loading again `gWidgetsRGtk2`
     
 ### On Linux systems
 
