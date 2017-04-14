@@ -136,11 +136,10 @@ MODIStsp()
 ```
 This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see below for details). The main available processing options are described in detail in the following.
 
-```{r select_gui, echo=FALSE, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
+```{r select_gui, echo=FALSE,  fig.align="center", fig.width=10, message=FALSE, warning=FALSE}
   library(png)
   library(grid)
-  library(knitr)
-  img <- readPNG("Figure_1_vignette.png")
+  img <- readPNG("vignettes/Figure_1_vignette.png")
   grid.raster(img)
 ```
 
@@ -152,7 +151,7 @@ You can also select which **MODIS platform(s)** should be considered for downloa
 ```{r select_layers, echo=FALSE, fig.align="center", fig.width=10, message=FALSE, warning=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('Figure_3.png')
+  img <- readPNG('vignettes/Figure_3.png')
   grid.raster(img)
 ```
 
@@ -182,7 +181,7 @@ You can however **specify other SIs to be computed without modifying `MODIStsp` 
 ```{r select_index, echo=FALSE, fig.align="center", fig.height=1.5}
   library(png)
   library(grid)
-  img <- readPNG('figure_4.png')
+  img <- readPNG('vignettes/figure_4.png')
   grid.raster(img)
 ```
 
