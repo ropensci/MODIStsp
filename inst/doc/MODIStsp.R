@@ -17,7 +17,7 @@
   library(png)
   library(grid)
   library(knitr)
-  img <- readPNG("Figure_2_new.png")
+  img <- readPNG("Figure_1_vignette.png")
   grid.raster(img)
 
 ## ----proc_layers, echo=FALSE, fig.cap='The "Select Processing Layers" GUI', fig.height=3.5, fig.width=6, message=FALSE, warning=FALSE----

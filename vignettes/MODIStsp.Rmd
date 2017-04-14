@@ -123,7 +123,7 @@ The MODIStsp GUI allows selectiing all processing options required for the creat
   library(png)
   library(grid)
   library(knitr)
-  img <- readPNG("Figure_2_new.png")
+  img <- readPNG("Figure_1_vignette.png")
   grid.raster(img)
 ```
 
