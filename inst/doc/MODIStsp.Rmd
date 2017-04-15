@@ -24,7 +24,7 @@ urlcolor: blue
 linkcolor: blue
 bibliography: MODIStsp.bib
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{"MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.2"}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
