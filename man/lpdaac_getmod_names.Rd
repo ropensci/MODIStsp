@@ -12,13 +12,15 @@ lpdaac_getmod_names(http, ftp, used_server, user, password, date_dir, v, h,
 
 \item{ftp}{string ftp site corresponding to a given MODIS product}
 
-\item{used_server}{string can assume values "http" or "ftp" depending on the used download server; it cannot be NA}
+\item{used_server}{string can assume values "http" or "ftp" depending on the
+used download server; it cannot be NA}
 
 \item{user}{username for earthdata server}
 
 \item{password}{password for earthdata server}
 
-\item{date_dir}{array of folder names containing data for the modis product acquired in a give period (return array from lpdaac_getmod_dates)}
+\item{date_dir}{array of folder names containing data for the modis product
+acquired in a given period (return array from lpdaac_getmod_dates)}
 
 \item{v}{int. array containing a sequence of the vertical tiles of interest (e.g., c(18,19))}
 
@@ -28,19 +30,23 @@ lpdaac_getmod_names(http, ftp, used_server, user, password, date_dir, v, h,
 
 \item{out_folder_mod}{ouput folder for original HDF storage}
 
-\item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
+\item{gui}{logical indicates if processing was called within the GUI environment
+or not. If not, direct processing messages to the log}
 }
 \value{
-Modislist names of HDF images corresponding to the requested tiles available for the product in the selected date
+Modislist names of HDF images corresponding to the requested tiles available
+for the product in the selected date
 }
 \description{
-Accessory function to find the names of HDF images corresponding to a given date and interval of spatial tiles within the lpdaac archive
+Accessory function to find the names of HDF images corresponding
+to a given date and interval of spatial tiles within the lpdaac archive
 }
 \note{
 License: GPL 3.0
 }
 \author{
-Original code by Babak Naimi (\code{.getModisList}, in \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
+Original code by Babak Naimi (\code{.getModisList}, in
+\href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
 modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by:
 
 Lorenzo Busetto, phD (2014-2016) \email{busetto.l@irea.cnr.it}

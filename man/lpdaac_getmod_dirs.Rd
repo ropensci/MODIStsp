@@ -12,13 +12,15 @@ lpdaac_getmod_dirs(ftp, http, used_server = NA, user = user,
 
 \item{http}{string http site on lpdaac corresponding to a given MODIS product}
 
-\item{used_server}{string can assume values "http" or "ftp" depending on the used download server; if NA, the script tries to download with http, using ftp if the download fails}
+\item{used_server}{string can assume values "http" or "ftp" depending on the used
+download server; if NA, the script tries to download with http, using ftp if the download fails}
 
 \item{user}{username for earthdata server}
 
 \item{password}{password for earthdata server}
 
-\item{gui}{logical indicates if processing was called within the GUI environment or not. If not, direct processing messages to the log}
+\item{gui}{logical indicates if processing was called within the GUI environment
+or not. If not, direct processing messages to the log}
 
 \item{out_folder_mod}{ouput folder for original HDF storage}
 
@@ -28,13 +30,15 @@ lpdaac_getmod_dirs(ftp, http, used_server = NA, user = user,
 list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
 }
 \description{
-Accessory function to get the full list of directories on the lpdaac http site (modified after Barry Rowlingson function):
+Accessory function to get the full list of directories on the lpdaac
+http site (modified after Barry Rowlingson function):
 }
 \note{
 License: GPL 3.0
 }
 \author{
-Original code by Babak Naimi (\code{.getModisList}, in \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
+Original code by Babak Naimi (\code{.getModisList}, in
+\href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
 modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by:
 
 Lorenzo Busetto, phD (2014-2017) \email{busetto.l@irea.cnr.it}
