@@ -7,13 +7,13 @@
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(devtools)
-#  install_github("lbusett/MODIStsp", ref = "devel")
+#  install_github("lbusett/MODIStsp", ref = "master")
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(MODIStsp)
 #  MODIStsp()
 
-## ----GUIfig, echo=FALSE, fig.cap="The MODIStsp main GUI", fig.height=6, fig.width=7, message=FALSE, warning=FALSE----
+## ----GUIfig, echo=FALSE, fig.cap="The MODIStsp main GUI", message=FALSE, warning=FALSE----
   library(png)
   library(grid)
   library(knitr)

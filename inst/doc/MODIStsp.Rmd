@@ -1,5 +1,5 @@
 ---
-title: 'MODIStsp: A tool for automatic preprocessing of MODIS time series - v1.3.2'
+title: 'MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.2'
 author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:lbusett@gmail.com)), Luigi
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 date: '`r Sys.Date()`'
@@ -8,7 +8,8 @@ output:
     fig_caption: yes
     number_sections: yes
     toc: yes
-    toc_depth: 1
+    toc_depth: 2
+ 
   rmarkdown::html_vignette:
     fig_caption: yes
     number_section: yes
@@ -19,6 +20,8 @@ output:
     number_section: yes
     toc: yes
     toc_depth: 1
+urlcolor: blue
+linkcolor: blue
 bibliography: MODIStsp.bib
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -44,7 +47,7 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
 
 **IMPORTANT:** _MODIStsp_ requires [R](https://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 __with support for HDF4 raster format__ to be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
 
-### On Windows
+## On Windows
 
 To install `MODIStsp`, just install the package from CRAN: 
 
@@ -70,20 +73,20 @@ If it still fails, try downloading the GTK+ bundle from:
 
 Restart your system and try loading again `gWidgetsRGtk2`
     
-### On Linux systems
+## On Linux systems
 
 1. Install the following required dependencies: 
     * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (required by package ```RGtk2```)
     * Curl (required by package ```curl```)
     * GDAL >= 1.6.3, PROJ.4 >= 4.4.9 (required by package ```rgdal```)
     
-    On *Debian and Ubuntu-based* systems, to install packages open a terminal and type  
+    On *Debian and Ubuntu-based* systems, to install required packages open a terminal and type  
 ```bash
 sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
 libgtk2.0-dev libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev
 ```
     
-    On *rpm-base systems*, to install packages open a terminal and type  
+    On *rpm-base systems*, to install required packages open a terminal and type  
 ```bash
 sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
 glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
@@ -95,13 +98,13 @@ glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
 install.packages("lbusett/MODIStsp")
 ```
 
-### Installing the `devel` version from github
+## Installing the `devel` version from GitHub
 
-The development version of MODIStsp is available on github. To install it, follow the previous instructions, but instead than `install.packages("MODIStsp")`, use:
+The development version of MODIStsp is available on GitHub To install it, follow the previous instructions, but instead than `install.packages("MODIStsp")`, use:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
-install_github("lbusett/MODIStsp", ref = "devel")
+install_github("lbusett/MODIStsp", ref = "master")
 ```
 
 
@@ -120,7 +123,7 @@ _Note:_ PCs with a small screen can fail to visualize the whole GUI; in this cas
 
 The MODIStsp GUI allows selecting all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.
 
-```{r GUIfig, echo=FALSE, fig.cap="The MODIStsp main GUI", fig.height=6, fig.width=7, message=FALSE, warning=FALSE}
+```{r GUIfig, echo=FALSE, fig.cap="The MODIStsp main GUI", message=FALSE, warning=FALSE}
   library(png)
   library(grid)
   library(knitr)
@@ -368,6 +371,17 @@ As an example the following code:
 ```
 
   loads a _RasterStack_ object containing 8-days 250 m resolution time series for the 2000-2015 period and extracts time series of average and standard deviation values over the different polygons of a user's selected shapefile on the 2010-2014 period.
+  
+# Problems and Issues
+
+Solutions to some common **installation and processing problems** can be found in MODIStsp FAQ: 
+
+https://github.com/lbusett/MODIStsp/wiki/
+
+- Please **report any issues** you may encounter in our issues page on GitHub:
+
+https://github.com/lbusett/MODIStsp/issues
+
   
 # Citation
   
