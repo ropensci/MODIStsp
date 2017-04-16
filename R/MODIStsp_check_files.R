@@ -19,15 +19,23 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 
-MODIStsp_check_files <- function(out_prod_folder, file_prefix,bandnames, bandsel_orig_choice, yy, DOY, out_format,
- indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel) {
+MODIStsp_check_files <- function(out_prod_folder, file_prefix, bandnames, 
+                                 bandsel_orig_choice, yy, DOY, out_format,
+                                 indexes_bandnames, indexes_bandsel, 
+                                 quality_bandnames, quality_bandsel) {
 
   check <- T   # Initialize check to T --> changed if even only one file missing
 
   # check existence of all files related to Original HDF layers ----
-  for (band in which(bandsel_orig_choice == 1)) {  # cycle on selected indexes
-    outfile <- paste0(out_prod_folder, "/",bandnames[band],"_",yy,"_",DOY,".hdf")    # Create name for the HDF mosaic
-    outrep_file <- file.path(out_prod_folder, bandnames[band], paste0(file_prefix,"_",sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
+  # cycle on selected bands
+  for (band in which(bandsel_orig_choice == 1)) {
+    # Create name for the HDF mosaic
+    outfile     <- paste0(out_prod_folder, "/", bandnames[band], "_", yy, "_", DOY, ".hdf")    
+    # Create name for the TIFF reprojected  mosaic
+    outrep_file <- file.path(out_prod_folder, bandnames[band], 
+                             paste0(file_prefix, "_",
+                                    sub("[.][^.]*$", "", 
+                                        basename(outfile), perl = TRUE)))
     if (out_format == "GTiff") {
       outder_file <- paste0(outrep_file, ".tif")
       }
@@ -40,9 +48,15 @@ MODIStsp_check_files <- function(out_prod_folder, file_prefix,bandnames, bandsel
   }
 
   # check existence of all files related to spectral indexes ----
+  # cycle on selected indexes
   for (band in which(indexes_bandsel == 1)) {
-    outfile <- paste0(out_prod_folder, "/",indexes_bandnames[band],"_",yy,"_",DOY,".hdf")  # Create name for the HDF mosaic
-    outder_file <- file.path(out_prod_folder, indexes_bandnames[band], paste0(file_prefix,"_",sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
+    # Create name for the HDF mosaic
+    outfile     <- paste0(out_prod_folder, "/", indexes_bandnames[band], "_", yy, "_", DOY, ".hdf") 
+    # Create name for the TIFF reprojected  mosaic
+    outder_file <- file.path(out_prod_folder, indexes_bandnames[band], 
+                             paste0(file_prefix, "_",
+                                    sub("[.][^.]*$", "",
+                                        basename(outfile), perl = TRUE)))
     if (out_format == "GTiff") {
       outder_file <- paste0(outder_file, ".tif")
       }
@@ -50,14 +64,20 @@ MODIStsp_check_files <- function(out_prod_folder, file_prefix,bandnames, bandsel
       outder_file <- paste0(outder_file, ".dat")
       }
     if (file.exists(outder_file) == FALSE) {
-      check <- F
+      check <- FALSE
       }
   }
 
   # check existence of all files related to quality indicators ----
+  # # cycle on selected quality
   for (band in which(quality_bandsel == 1)) {
-    outfile <- paste0(out_prod_folder, "/",quality_bandnames[band],"_",yy,"_",DOY,".hdf")    # Create name for the HDF mosaic
-    outder_file <- file.path(out_prod_folder, quality_bandnames[band], paste0(file_prefix,"_",sub("[.][^.]*$", "", basename(outfile), perl = TRUE)))  # Create name for the TIFF reprojected  mosaic
+    # Create name for the HDF mosaic
+    outfile <- paste0(out_prod_folder, "/", quality_bandnames[band], "_", yy, "_", DOY, ".hdf")   
+    # Create name for the TIFF reprojected  mosaic
+    outder_file <- file.path(out_prod_folder, quality_bandnames[band], 
+                             paste0(file_prefix, "_", 
+                                    sub("[.][^.]*$", "", 
+                                        basename(outfile), perl = TRUE)))  
     if (out_format == "GTiff") {
       outder_file <- paste0(outder_file, ".tif")
       }
@@ -65,7 +85,7 @@ MODIStsp_check_files <- function(out_prod_folder, file_prefix,bandnames, bandsel
       outder_file <- paste0(outder_file, ".dat")
       }
     if (file.exists(outder_file) == FALSE) {
-      check <- F
+      check <- FALSE
       }
   }
 
