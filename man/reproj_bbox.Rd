@@ -7,20 +7,24 @@
 reproj_bbox(bbox, in_proj, out_proj, enlarge = TRUE, N_dens = 1000)
 }
 \arguments{
-\item{bbox}{The input bounding box (it can be a matrix in the bbox format or a vector in the format (xmin, ymin, xmax, ymax).}
+\item{bbox}{The input bounding box (it can be a matrix in the bbox format or a
+vector in the format (xmin, ymin, xmax, ymax).}
 
 \item{in_proj}{The input projection (string format).}
 
 \item{out_proj}{The output projection (string format).}
 
-\item{enlarge}{Logical parameters: if TRUE, the reprojected bounding box is the one which completely include the original one;
-if FALSE, it is simply the one obtained by reprojecting the upper-left and the lower-right corners.}
+\item{enlarge}{Logical parameters: if TRUE, the reprojected bounding box is the
+one which completely include the original one; if FALSE, it is simply the one obtained
+by reprojecting the upper-left and the lower-right corners.}
 
 \item{N_dens}{Densification ratio used in the case enlarge is TRUE.}
 }
 \description{
-Ancillary function used to reproject bounding boxes; setting the parameter 'enlarge' allows to choose if the new one would be the
-one which completely include the old or if is simply the one obtained by reprojecting the upper-left and the lower-right corners.
+Ancillary function used to reproject bounding boxes; setting the parameter 'enlarge'
+allows to choose if the new one would be the one which completely include the old
+or if is simply the one obtained by reprojecting the upper-left and the
+lower-right corners.
 }
 \note{
 License: GPL 3.0
@@ -28,4 +32,3 @@ License: GPL 3.0
 \author{
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
-

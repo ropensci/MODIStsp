@@ -7,9 +7,11 @@
 MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file)
 }
 \arguments{
-\item{prodopts_file}{string filename of the RData in which to store the data parsed from the XML file}
+\item{prodopts_file}{string filename of the RData in which to store the data
+parsed from the XML file}
 
-\item{xml_file}{string filename of the XML file containing the MODIS products characteristics}
+\item{xml_file}{string filename of the XML file containing the MODIS products
+characteristics}
 }
 \value{
 NULL - retrieved data are stored in the specified RData file
@@ -30,4 +32,3 @@ Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
-

@@ -3,6 +3,8 @@
 ^packrat/
 ^\.Rprofile$
 .travis.yml
+.config.yml
+index.md
 ^Log/
 ^Previous/
 ^old_and_various/
@@ -10,6 +12,5 @@
 ^sketched_routines/
 ^ExtData/
 ^README\.Rmd$
-^README-.*\.png$
 configure.win
 cran-comments.md

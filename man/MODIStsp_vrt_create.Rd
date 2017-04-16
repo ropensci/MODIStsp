@@ -10,18 +10,24 @@ MODIStsp_vrt_create(out_prod_folder, meta_band, file_prefixes, sens_sel,
 \arguments{
 \item{out_prod_folder}{string main output folder}
 
-\item{meta_band}{string "name" of the band (or index, or qi) for which the virtual file is to be created}
+\item{meta_band}{string "name" of the band (or index, or qi) for which the
+virtual file is to be created}
 
-\item{file_prefixes}{string file_prefixes for terra and aqua - used to identify the files corresponding to each sensor}
+\item{file_prefixes}{string file_prefixes for terra and aqua - used to identify
+the files corresponding to each sensor}
 
-\item{sens_sel}{string name of the sensor for which the time serie has to be created (Aqua, Terra, Mixed) If "Mixed" and both terra and aqua
-images are available, a "mixed" virtual file comprising data from both sensors ordered on DOY base is created}
+\item{sens_sel}{string name of the sensor for which the time serie has to be
+created (Aqua, Terra, Mixed) If "Mixed" and both terra and aqua
+images are available, a "mixed" virtual file comprising data from both sensors
+ordered on DOY base is created}
 
 \item{ts_format}{string required output format for virtual file (ENVI, GDAL, Both)}
 
-\item{nodata_value}{string nodata value to be used for vrt files (equal to nodata value of inputs)}
+\item{nodata_value}{string nodata value to be used for vrt files
+(equal to nodata value of inputs)}
 
-\item{out_format}{format of images used as "input" for the vrt and contained in out_prod_folder/band folders (ENVI or GTiff)}
+\item{out_format}{format of images used as "input" for the vrt and contained
+in out_prod_folder/band folders (ENVI or GTiff)}
 
 \item{rts}{string ("Yes"/"No") If Yes, create rts time series}
 }
@@ -29,12 +35,13 @@ images are available, a "mixed" virtual file comprising data from both sensors o
 NULL - virtual files are stored in the "Time Series" subfolder of out_prod_folder
 }
 \description{
-Function used to create virtual files from time series of single-band files corresponding to
-different acquisition dates
+Function used to create virtual files from time series of single-band
+files corresponding to different acquisition dates
 }
 \details{
-The function takes as input the folder in which the single-band files are stored, and cretes a ENVI Meta file and/or
-a GDAL vrt file that allows access to the full time series as if it was a single physical file
+The function takes as input the folder in which the single-band files are
+stored, and cretes a ENVI Meta file and/or a GDAL vrt file that allows access to
+the full time series as if it was a single physical file
 }
 \note{
 License: GPL 3.0
@@ -44,4 +51,3 @@ Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
-

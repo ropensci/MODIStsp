@@ -7,16 +7,19 @@
 lpdaac_getmod_dates(dates, date_dirs)
 }
 \arguments{
-\item{dates}{2- element string array specifying start/end dates (yyyy.mm.dd) for which the http addresses of folders in lpdaac should be retrieved
+\item{dates}{2- element string array specifying start/end dates (yyyy.mm.dd)
+for which the http addresses of folders in lpdaac should be retrieved
 (e.g., c("2015.1.1", "2015.12.31)}
 
 \item{date_dirs}{data frame full list of folders in lpdaa archive for product of interest}
 }
 \value{
-array of folder names containing data for the modis product acquired in the period specified by "dates"
+array of folder names containing data for the modis product acquired in
+the period specified by "dates"
 }
 \description{
-Accessory function to find the folders corresponding to the requested dates period within the full list retrieved by lpdaac_getmod_dirs
+Accessory function to find the folders corresponding to the requested
+dates period within the full list retrieved by lpdaac_getmod_dirs
 }
 \note{
 License: GPL 3.0
@@ -24,4 +27,3 @@ License: GPL 3.0
 \author{
 Luigi Ranghetti, phD (2016) \email{ranghetti.l@irea.cnr.it}
 }
-

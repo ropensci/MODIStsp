@@ -11,25 +11,33 @@ MODIStsp_process_indexes(out_filename, formula, bandnames, nodata_out,
 \arguments{
 \item{out_filename}{basename of the file in to which save results}
 
-\item{formula}{string Index formula, as derived from XML file and stored in prod_opts within previous_file}
+\item{formula}{string Index formula, as derived from XML file and stored in prod_opts
+within previous_file}
 
-\item{bandnames}{string array of names of original HDF layer. Used to identify the bands required for index computation}
+\item{bandnames}{string array of names of original HDF layer. Used to identify the
+bands required for index computation}
 
 \item{nodata_out}{string array of nodata values of reflectance bands}
 
-\item{out_prod_folder}{strng output folder for the product used to retrieve filenames of rasters of original bands to be used in computations}
+\item{out_prod_folder}{strng output folder for the product used to retrieve filenames
+of rasters of original bands to be used in computations}
 
 \item{indexes_nodata_out}{string nodata value for resulting raster}
 
-\item{file_prefix}{string used to retrieve filenames of rasters of original bands to be used in computations}
+\item{file_prefix}{string used to retrieve filenames of rasters of original bands
+to be used in computations}
 
-\item{yy}{string string used to retrieve filenames of rasters of original bands to be used in computations}
+\item{yy}{string string used to retrieve filenames of rasters of original bands
+to be used in computations}
 
-\item{DOY}{string used to retrieve filenames of rasters of original bands to be used in computations}
+\item{DOY}{string used to retrieve filenames of rasters of original bands to be
+used in computations}
 
-\item{out_format}{string used to retrieve filenames of rasters of original bands to be used in computations}
+\item{out_format}{string used to retrieve filenames of rasters of original bands
+to be used in computations}
 
-\item{scale_val}{string (Yes/No) if Yes, output values in are computed as float -1 - 1, otherwise integer -10000 - 10000}
+\item{scale_val}{string (Yes/No) if Yes, output values in are computed as float -1 - 1,
+otherwise integer -10000 - 10000}
 }
 \value{
 NULL - new raster file saved in out_filename
@@ -50,4 +58,3 @@ Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
-

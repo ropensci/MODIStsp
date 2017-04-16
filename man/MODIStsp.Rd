@@ -8,29 +8,29 @@ MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
   scrollWindow = FALSE)
 }
 \arguments{
-\item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the 
+\item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the
 saved parameters are retrieved from "options_file")}
 
-\item{options_file}{settings (optional): full path of the JSON file containing the 
+\item{options_file}{settings (optional): full path of the JSON file containing the
 processing options (default: MODIStsp_Previous.json in subdir Previous);}
 
-\item{spatial_file_path}{(optional): full path of a spatial file to use as extent 
-(default=NULL): if defined, the processing options which define the extent, the 
-selected tiles and the "Full Tile / Resized" options are not considered; instead, new 
+\item{spatial_file_path}{(optional): full path of a spatial file to use as extent
+(default=NULL): if defined, the processing options which define the extent, the
+selected tiles and the "Full Tile / Resized" options are not considered; instead, new
 files are created on the extent of the provided spatial file.}
 
-\item{scrollWindow}{(optional) logical parameter: if TRUE, the GUI window is opened 
+\item{scrollWindow}{(optional) logical parameter: if TRUE, the GUI window is opened
 fullscreen with scrollbars (this is useful on devices with small display). If using a
- device with a display resolution >= 1024x768, leaving this parameter to FALSE is 
- suggested.}
+device with a display resolution >= 1024x768, leaving this parameter to FALSE is
+suggested.}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MODIStsp)
 }
 \details{
-The function is used to initialize the processing (folder names, packages, 
- etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs, and to launch the 
- required routines for downloading and processing the requested datasets.
+The function is used to initialize the processing (folder names, packages,
+etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs, and to launch the
+required routines for downloading and processing the requested datasets.
 }
 \note{
 License: GPL 3.0
@@ -69,4 +69,3 @@ Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
-
