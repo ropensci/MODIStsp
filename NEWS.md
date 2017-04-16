@@ -1,3 +1,14 @@
+# MODIStsp is now on CRAN !
+
+MODIStsp was recently accepted on CRAM. From now on, you can install it simply using
+
+`install.packages("MODIStsp")`
+
+You'll however still be able to install the `development` version from github,
+containing the last improvements and bug fixing using:
+
+`install_github("lbusett/MODIStsp", ref = "master")`
+
 # MODIStsp v 1.3.2
 
 v1.3.2 was released on 22/03/2017

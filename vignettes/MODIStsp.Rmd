@@ -51,7 +51,10 @@ Required MODIS HDF files are automatically downloaded from NASA servers and resi
 
 To install `MODIStsp`, just install the package from CRAN: 
 
-`install.packagaes("MODIStsp")`
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+install.packages("MODIStsp")
+```
 
 However, if  the `GTK+` library is not already installed on your system, installation may fail. In that case, please install and load the `gWidgetsRGtk2` library beforehand:
 
@@ -98,7 +101,7 @@ glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
 install.packages("lbusett/MODIStsp")
 ```
 
-## Installing the `devel` version from GitHub
+## Installing the `development` version from GitHub
 
 The development version of MODIStsp is available on GitHub To install it, follow the previous instructions, but instead than `install.packages("MODIStsp")`, use:
 

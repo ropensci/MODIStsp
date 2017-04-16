@@ -1,4 +1,7 @@
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
+#  install.packages("MODIStsp")
+
+## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  install.packages("gWidgetsRGtk2")
 #  library(gWidgetsRGtk2)
 

@@ -1,31 +1,28 @@
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
 
 -   [*NOTES !*](#notes)
 -   [MODIStsp](#modistsp)
-    -   [News !](#news)
+-   [News !](#news)
 -   [Installation](#installation)
-    -   [On Windows](#on-windows)
-    -   [On Linux systems](#on-linux-systems)
-    -   [Installing the `devel` version from github](#installing-the-devel-version-from-github)
 -   [Running the tool](#running-the-tool)
-    -   [Interactive Execution: the MODIStsp GUI](#interactive-execution-the-modistsp-gui)
-    -   [Non-Interactive Execution and scheduled processing](#non-interactive-execution-and-scheduled-processing)
 -   [Output format and naming conventions](#output-format-and-naming-conventions)
 -   [Accessing and analyzing the processed time series from R](#accessing-and-analyzing-the-processed-time-series-from-r)
 -   [Citation](#citation)
 -   [Installing R and GDAL](#installing-r-and-gdal)
-    -   [Installing R](#installing-r)
-    -   [Installing GDAL &gt;= 1.11.1](#installing-gdal-1.11.1)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
 
 ### *NOTES !*
+
+-   MODIStsp is now also available on [CRAN](https://cran.r-project.org/web/packages/MODIStsp/index.html) ! From now on, you can install it simply using:
+
+`install.packages("MODIStsp")`
 
 -   If you have **trouble downloading via *http* **, please visit your [earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
 
 -   Please **report any issues** you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.
 
--   Solutions to common **installation and processing problems** can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)\*\*
+-   Solutions to common **installation and processing problems** can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)
 
 MODIStsp
 ========
@@ -38,7 +35,16 @@ An article about `MODIStsp` was recently published on the "Computers & Geoscienc
 
 *MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy (CNR-IREA)*
 
-### News !
+News !
+======
+
+-   15/04/2017 - MODIStsp is now also available on [CRAN](https://cran.r-project.org/web/packages/MODIStsp/index.html) ! From now on, you can install it simply using
+
+`install.packages("MODIStsp")`
+
+You'll however still be able to install the `development` version from github, containing the last improvements and bug fixing using:
+
+`install_github("lbusett/MODIStsp", ref = "master")`
 
 -   22/03/2017 - MODIStsp **v1.3.2** released. Adds functionality to apply scale and offset coefficients on MODIS original values according with the specifications of single MODIS products. For details on other changes and bug fixing see the [release notes of v1.3.2](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.2)
 
@@ -57,7 +63,7 @@ Installation
 
 To install `MODIStsp`, just install the package from CRAN:
 
-`install.packagaes("MODIStsp")`
+`install.packages("MODIStsp")`
 
 However, if the `GTK+` library is not already installed on your system, installation may fail. In that case, please install and load the `gWidgetsRGtk2` library beforehand:
 
@@ -105,13 +111,13 @@ Restart your system and try loading again `gWidgetsRGtk2`
 install.packages("lbusett/MODIStsp")
 ```
 
-### Installing the `devel` version from github
+### Installing the `development` version from GitHub
 
 The development version of MODIStsp is available on github. To install it, follow the previous instructions, but instead than `install.packages("MODIStsp")`, use:
 
 ``` r
 library(devtools)
-install_github("lbusett/MODIStsp", ref = "devel")
+install_github("lbusett/MODIStsp", ref = "master")
 ```
 
 Running the tool
@@ -127,7 +133,7 @@ library(MODIStsp)
 MODIStsp()
 ```
 
-This will open a GUI from which processing options can be specified and eventually saved (or loaded) The main available processing options are described in detail in the package vignette.
+This will open a GUI from which processing options can be specified and eventually saved (or loaded) The main available processing options are described in detail in the package [vignette](https://cran.r-project.org/web/packages/MODIStsp/vignettes/MODIStsp.pdf).
 
 Non-Interactive Execution and scheduled processing
 --------------------------------------------------
