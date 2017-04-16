@@ -1,3 +1,14 @@
+# MODIStsp is now on CRAN !
+
+MODIStsp was recently accepted on CRAM. From now on, you can install it simply using
+
+`install.packages("MODIStsp")`
+
+You'll however still be able to install the `development` version from github,
+containing the last improvements and bug fixing using:
+
+`install_github("lbusett/MODIStsp", ref = "master")`
+
 # MODIStsp v 1.3.2
 
 v1.3.2 was released on 22/03/2017
@@ -12,13 +23,13 @@ NASA provides outputs as integer values, indicating a potential scale factor and
 
 ## Minor Changes:
 
-- Some product names and output layer names were modified to reduce the length of output file names, homogenize the names of the output and correct some naming errors.
-For compatibility with already created output files (versions up to 1.3.1), the old "XML" file specifying output files format is still available in `inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml`. To use the old file naming conventions, users have to 
+- Some product names and output layer names were modified to reduce the length of output file names, homogenize the names of the outputs and correct some errors.
+__For compatibility with already created output files__ (versions up to 1.3.1), the old "XML" file specifying output files format is still available in `inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml`. To use the old file naming conventions, users have to 
 1. delete `inst/ExtData/MODIStsp_ProdOpts.xml` and rename `MODIStsp_ProdOpts_old_v1.3.1.xml` to `MODIStsp_ProdOpts.xml`.
 2. delete `MODIStsp_ProdOpts.RData` from the `Previous` folder within `your_R-library_path/MODIStsp/Previous`
 3. Restart `MODIStsp`
 
-- Some changes were done in timeouts of httr/ftp requests to prevent timeout problems
+- Timeouts of httr/ftp requests were increased to prevent problems on download on slow connections
 
 ## Bug fixing:
 

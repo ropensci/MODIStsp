@@ -1,28 +1,26 @@
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
-#  install.packages("gWidgetsRgtk2")
-#  library(gWidgetsRgtk2)
+#  install.packages("MODIStsp")
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
-#  install.packages("devtools")
-#  library(devtools)
-#  install_github("lbusett/MODIStsp")
+#  install.packages("gWidgetsRGtk2")
+#  library(gWidgetsRGtk2)
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
-#  install.packages(c("devtools","gWidgetsRgtk2"))
+#  install.packages("MODIStsp")
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(devtools)
-#  install_github("lbusett/MODIStsp")
+#  install_github("lbusett/MODIStsp", ref = "master")
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(MODIStsp)
 #  MODIStsp()
 
-## ----GUIfig, echo=FALSE, fig.cap="The MODIStsp main GUI", fig.height=6, fig.width=7, message=FALSE, warning=FALSE----
+## ----GUIfig, echo=FALSE, fig.cap="The MODIStsp main GUI", message=FALSE, warning=FALSE----
   library(png)
   library(grid)
   library(knitr)
-  img <- readPNG("Figure_2_new.png")
+  img <- readPNG("Figure_1_Vignette.png")
   grid.raster(img)
 
 ## ----proc_layers, echo=FALSE, fig.cap='The "Select Processing Layers" GUI', fig.height=3.5, fig.width=6, message=FALSE, warning=FALSE----

@@ -1,8 +1,8 @@
 ---
 output:
   github_document:
-    toc: true
-    toc_depth: 2
+    toc: yes
+    toc_depth: 1
   fig_caption: no
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -14,84 +14,52 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=devel)](https://travis-ci.org/lbusett/MODIStsp) ![version](https://img.shields.io/github/release/lbusett/MODIStsp.svg) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
-
-# _20/02/2017 IMPORTANT NOTES!_
-
-- We discovered some bugs recently introduced on _ftp_ download. If you recently installed `MODIStsp`, please delete your current version and install v.1.3.2. 
-
-- If you have trouble downloading via _http_, please visit [your earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html)
+[![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
 
 
-# MODIStsp
+###*NOTES !*
 
-MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicking, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
+- MODIStsp is now also available on [CRAN](https://cran.r-project.org/web/packages/MODIStsp/index.html) ! From now on, you can install it simply using:
 
-An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the pdf file_) 
+`install.packages("MODIStsp")`
 
-An article about `MODIStsp` was also recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020). 
+-   If you have **trouble downloading via *http* **, please visit your [earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
 
-**Solutions to common installation and processing problems can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)**
+- Please **report any issues** you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.
 
-**Please report any problems in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.**
+-    Solutions to common **installation and processing problems** can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)
+
+MODIStsp
+=========
+MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
+
+An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (_Click on "Raw" at the beginning of the document to download the PDF file_) 
+
+An article about `MODIStsp` was recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020). 
 
 _MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy (CNR-IREA)_
 
-News !
-======
+# News !
 
-**20/03/2017 - MODIStsp v1.3.2 released, supports applying  scale and offsets ** 
+-   15/04/2017 - MODIStsp is now also available on [CRAN](https://cran.r-project.org/web/packages/MODIStsp/index.html) ! From now on, you can install it simply using
 
-v1.3.2 was released on 22/03/2017
+`install.packages("MODIStsp")`
 
-- Major Changes:
+You'll however still be able to install the `development` version from github,
+containing the last improvements and bug fixing using:
 
-Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.
+`install_github("lbusett/MODIStsp", ref = "master")`
 
-- Minor Changes:
+-   22/03/2017 - MODIStsp **v1.3.2** released. Adds functionality to apply scale and offset coefficients on MODIS original values according with the specifications of single MODIS products. For details on other changes and bug fixing see the [release notes of v1.3.2](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.2)
 
-  Some product names and output layer names were modified to reduce the length of output file names 
+-   13/02/2017 - MODIStsp **v1.3.1** released. Main changes and bug fixes are reported [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.1)
 
-Bug fixing:
+-   05/11/2016 - MODIStsp **v1.3.0** released. Major improvement consists in now allowing download and preprocessing of **MODIS Collection 006 datasets**. You can see the changelog [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.0).
 
-- Fixed various bugs.
-
-For details on implemented changes see the release notes of v1.3.2. 
-
-
-**13/02/2017 - MODIStsp v1.3.1 released **
-
-MODIStsp v1.3.1 has been released on 13/02/2017. Main changes and bug fixes are reported below
-
-- Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue
-[#55](https://github.com/lbusett/MODIStsp/issues/55)) 
-
-- Added functionality for downloading "partial" years(Issue [#54](https://github.com/lbusett/MODIStsp/issues/54)) 
-
-- Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [#59](https://github.com/lbusett/MODIStsp/issues/59))
-
-- Added functionality for accelerating download using aria2c (Issue [#55](https://github.com/lbusett/MODIStsp/issues/55)) 
-
-- Fixed bug on download with aria, throwing an error on partial download on http downlaod with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
-
-- Fixed bug on M*D15A2 processing (Issue [#60](https://github.com/lbusett/MODIStsp/issues/60)) 
-
-- Fixed bug on MCD12Q1 processing (Issue [#58](https://github.com/lbusett/MODIStsp/issues/58))
-
-- Fixed bug on  MOD13C2 processing (Issue [#52](https://github.com/lbusett/MODIStsp/issues/52))
-
-- Fixed bug on insertion of custom projection (Issue [#57](https://github.com/lbusett/MODIStsp/issues/57)) 
-
-- Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53))
-
-* **11/05/2016 - MODIStsp v1.3.0 released, supporting MODIS v006 data** 
-
-MODIStsp v1.3.0 has been finally released. The major improvement consists in now allowing
-download and preprocessing of **MODIS Collection 006 datasets**. Other changes concern improvements in the GUI, introduction of off-line functionality and various bug fixing. You can see the changelog [here](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.0). Please report any issues you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.: 
-
-* **11/03/2016 - MODIStsp FAQ**
-
-Hints for solving common installation, downloading and processing problems are now provided in our [FAQ](https://github.com/lbusett/MODIStsp/wiki/) page. 
+-   11/03/2016 - MODIStsp **FAQ**
 
 # Installation
 
@@ -99,21 +67,30 @@ Hints for solving common installation, downloading and processing problems are n
 
 ### On Windows
 
-1. Install and load the ```gWidgetsRGtk2``` package:
+To install `MODIStsp`, just install the package from CRAN: 
+
+`install.packages("MODIStsp")`
+
+However, if  the `GTK+` library is not already installed on your system, installation may fail. In that case, please install and load the `gWidgetsRGtk2` library beforehand:
+
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("gWidgetsRGtk2")
 library(gWidgetsRGtk2)
 ```
     
  Upon loading the package, an error window will probably appear. **Don't worry!** This is just signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library "GTK+" is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession will be restarted and you should be ready to go!<sup name="a1">[1](#f1)</sup>
-    
-2. Install MODIStsp package from GitHub. (You'll need to have the "devtools" package installed and loaded)
-```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-install.packages("devtools")
-library(devtools)
-install_github("lbusett/MODIStsp")
-```
+ 
+ In case RStudio doesn't automatically restart after installing GTK+ or continuously asks to install GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go. 
 
+If it still fails, try downloading the GTK+ bundle from:
+
+<http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip> 
+(OR <http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip> if on Win32)
+
+, unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), then add the path to the "bin" subfolder (e.g., `C:\\Program Files\\GTK+\\bin\\` to your system PATH environment variable.
+
+Restart your system and try loading again `gWidgetsRGtk2`
+    
 ### On Linux systems
 
 1. Install the following required dependencies: 
@@ -133,25 +110,21 @@ sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-dev
 glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
 ```
     
-2. From R install the libraries ```gWidgetsRGtk2``` and ```devtools```:
+2. Install MODIStsp package from CRAN
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+install.packages("MODIStsp")
 ```
-install.packages(c("devtools","gWidgetsRGtk2"))
-```
-    
-3. Install MODIStsp package from GitHub (you'll need to have the "devtools" package loaded): 
+
+### Installing the `development` version from GitHub
+
+The development version of MODIStsp is available on github. To install it, follow the previous instructions, but instead than `install.packages("MODIStsp")`, use:
+
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
-install_github("lbusett/MODIStsp")
+install_github("lbusett/MODIStsp", ref = "master")
 ```
 
-#### Dependencies <a name="Dependencies"></a> 
-
-MODIStsp exploits functionalities of several other "R" packages. In particular, the following packages are imported:  
-``` bitops``` (>= 1.9.6), ``` data.table``` (>= 1.9.6), ``` gdalUtils``` (>= 2.0.1.7), ```gWidgets``` (>= 0.0-54), ```hash``` (>= 2.2.6), ```plyr``` (>= 1.8.3), ```raster``` (>= 2.5-2), ```RCurl``` (>= 1.95-4.8), ```rgdal``` (>= 1.1-8), ```rgeos``` (>=0.3-8), ```xts``` (>= 1.0-10), ```sp``` (>= 1.2-2), ```stringr``` (>= 1.0.0), ```XML``` (>= 3.98-1.1), pacman,
-```xml2``` (>= 0.1.2), ```xts``` 
-
-, while the following are suggested:  
-```knitr ```, ```rmarkdown```, ```png```, ```grid```,```gWidgetsRGtk2```.
 
 # Running the tool
 
@@ -163,111 +136,7 @@ library(MODIStsp)
 MODIStsp()
 
 ```
-This will open a GUI from which processing options can be specified and eventually saved (or loaded) (see below for details). The main available processing options are described in detail in the following.
-
-```{r GUI_fig, echo=FALSE, fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
-  library(png)
-  library(grid)
-  library(knitr)
-  img <- readPNG("./vignettes/Figure_2_new.png")
-  grid.raster(img)
-```
-
-###	MODIS Product, Platform and Layers
-
-Allows to select the MODIS product of interest using the **"Category"** and **"Product"** drop down menus. 
-You can also select which **MODIS platform(s)** should be considered for download and creation of the time series ("Terra", "Aqua" or "Both"), and which **version** of the product - 5 or 6 (when available) - should be considered. After selecting the product, pushing the **"Click to Select"** button opens the "Select Processing Layers" GUI panel, from which you **must** select which MODIS original and/or derived QI and SI layers should be processed: 
-
-```{r select_layers_gui, echo=FALSE, fig.align="center", fig.width=10, message=FALSE, warning=FALSE}
-  library(png)
-  library(grid)
-  img <- readPNG('./vignettes/Figure_3.png')
-  grid.raster(img)
-```
-
-
-1. The left-hand frame allows to select which original MODIS layers should be processed.
-2. The central frame allows to select which Quality Indicators should be extracted from the original MODIS Quality Assurance layers. 
-3. For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional Spectral Indexes should be computed (The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder). 
-
-The following commonly used Spectral Indexes are available for computation by default: 
-
-| Index Acronym       | Index name and reference                                      |
-|---------------------|---------------------------------------------------------------|
-| NDVI                | Normalized Difference Vegetation Index [Rouse - 1973]         |  
-| EVI                 | Enhanced Vegetation Index [Huete - 2002]                      | 
-| SR                  | Simple Ratio[Tucker - 1979]                                   |
-| NDFI                | Normalized Difference Flood Index  [Boschetti - 2014]         |
-| NDII7 (NDWI)        | Normalized Difference Infrared Index - Band 7 [Hunt -1989]    |
-| SAVI                | Soil Adjusted Vegetation Index  [Huete - 1988]                |
-| NDSI                | Normalized Difference Snow Index [Hall - 2002]                |
-| NDII6               | Normalized Difference Infrared Index - band 6  [Hunt - 1989]  |
-| GNDVI               | Green Normalized Difference Vegetation Index [Gitelson - 1998]|
-| RGRI                | Red Green Ratio index  [Gamon - 1999]                         |
-| GRVI                | Green-red ratio vegetation index  [Tucker - 1979]             |
-
-You can however **specify other SIs to be computed without modifying `MODIStsp` source code** by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related to the new desired SI using a simple GUI interface. 
-
-```{r index_fig, echo=FALSE, fig.align="center", fig.height=1.5}
-  library(png)
-  library(grid)
-  img <- readPNG('./vignettes/figure_4.png')
-  grid.raster(img)
-```
-
-Provided information (e.g., correct bandnames, computable formula, etc...) is automatically checked upon clicking "Set New Index". On success, the new index is added in the list of available ones for all products allowing its computation. Clicking "Done !" returns to the main. 
-
-###	Download Method
-Allows to specify which download method should be used. Available choices are: 
-
-1.  **http**:   download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). This requires providing a user name and password, which can be obtained by registrering an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
-
-2.  **ftp**:     download from NASA ftp archive ([ftp://ladsweb.nascom.nasa.gov/](ftp://ladsweb.nascom.nasa.gov/));
-
-3.  **offline**: this option allows to process/reprocess HDF files already available on the user's PC without downloading from NASA -- useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp (for example, to create time series for an additional layer).
-
-The **use_aria2c** option allows to accelerate the download from NASA archives, provided that the "aria2c" software is installed in your system. To download it and install it, see: [aria2.github.io/](https://aria2.github.io/)
-
-### Processing Period
-Allows to specify the starting and ending dates to be considered for the creation of the time series. Dates **must** be provided in the _yyyy--mm--dd_ format (e.g., 2015-01-31)
-
-The **Period** dropdown menu allows to choose between two options:
-
-1.  **full**:     all available images between the starting and ending dates are downloaded and processed;
-
-2.  **seasonal**: allows to download data for only one part of the year, but for multiple years (for example, if the starting date is 2005-03-01 and the ending is 2010-06-01, only the images of March, April and May for the year between 2005 and 2010 will be downloaded). This allows to easily process data concerning a particular season of interest.
-
-### Spatial Extent
-Allows to define the area of interest for the processing. Two main options are possible: 
-
-1.  _Full Tiles Extent_: you must specify which MODIS tiles he would like to process using the "Start" and "End" horizontal and vertical sliders in the "Required MODIS Tiles" frame.  During processing, data from the different tiles is mosaiced, and a single file covering the total area is produced for each acquisition date (Note:  pressing the "show map" button, a representation of the MODIS tiles grid is shown to facilitate the selection).
-
-2.  _Resized_: you can specify the spatial extent of the desired outputs either by: 
-    
-    a. **manually inserting** the coordinates of the Upper Left and Lower Right corners of the area of interest in the "Bounding Box" frame. _Coordinates of the corners must be provided in the coordinate system of the selected  output projection_; 
-    
-    b. **pressing the "Load Extent from a Spatial File" and selecting a raster or vector spatial file**. In this case, the bounding box of the selected file is retrieved, converted in the selected output projection, and shown in the "Bounding Box" frame. Required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
-    
-### Reprojection and Resize
-Allows to specify the options to be used for reprojecting and resizing the MODIS images. In particular:
-
-1.	the **"Output Projection"** menu allows to either select one of the pre-defined output projections or specify a user-defined one by selecting "User Defined" and then inserting a valid "Proj4" string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails; 
-
-2.	the **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"** menus allow to specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. At the moment, the resampling method can instead be chosen among "Nearest Neighbour" and "Mode" (Useful for downsampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleaning would risk to contaminate the values of high-quality observations with those of low-quality ones.
-
-### Processing Options
-Allows first of all to specify the **format desired for the output images**. Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among "None", "PACKBITS", "LZW" and "DEFLATE".
-
-You can then specify if **virtual multitemporal files** should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are ENVI metafiles and GDAL "vrt" files.
-Additionally, you can select if you desire to save the time series also as "R" _rasterStack_ objects (with temporal information added through the "setZ" method of the _raster_ package). This may be useful in order to easily access the preprocessed MODIS data within "R" scripts.
-
-Finally, you can select if the **NoData values** of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts" XML file. By selecting "Yes" in the "Change Original NODATA values" checkbox, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. 
-
-### Main Output Folder for Time Series Storage
-Allows to specify the main folder where the pre-processed time series data will be saved stored. The **"Reprocess Existing Data"** checkbox  allows to specify if images already available should be reprocessed if a new run of `MODIStsp` is launched with the same output folder. If set to "No", `MODIStsp` skips dates for which output files following the `MODIStsp` naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates. 
-
-### Output Folder for Original HDF Storage
-Allows to specify the folder where downloaded **original MODIS HDF files** are stored. The **"delete original HDF files"** checkbox allows to specify if the downloaded images should be deleted from the file system at the end of the processing. To avoid accidental file deletion, this is always set to "No" by default, and a warning is issued before execution whenever the selection is changed to "Yes". 
+This will open a GUI from which processing options can be specified and eventually saved (or loaded) The main available processing options are described in detail in the package [vignette](https://cran.r-project.org/web/packages/MODIStsp/vignettes/MODIStsp.pdf).
 
 ## Non-Interactive Execution and scheduled processing
 
@@ -311,7 +180,7 @@ MODIStsp can be also executed as a standalone application ; to do it, from R lau
 In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography")
 and a symbolic link in a known path (default: /usr/bin/MODIStsp).
 In Windows, a link in the Start Menu and optionally a desktop shortcut are created.
-See `?install_MODIStsp_launcher` for details and path customisations.
+See `?install_MODIStsp_launcher` for details and path customization.
 
 Double-clicking the files or launching them from a shell without parameters launches `MODIStsp` in interactive mode. Non-interactive mode is triggered by adding the "-g"  argument to the call, and specifying the path to a valid Options File as "-s" argument:
 
@@ -403,7 +272,7 @@ Download and install the latest version of R which can be found [here](https://c
 #### Linux
 
 Please refer to the documentation which can be found [here](https://cran.r-project.org/bin/linux), opening the directory relative to your Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version.
-With Ubuntu 15.10 Wily (and newer) this step is not mandatory (altough recommended), since packaged version of R is >= 3.2.1 (although not the latest); in this case, user can insall R by simply typing in a terminal
+With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommended), since packaged version of R is >= 3.2.1 (although not the latest); in this case, user can install R by simply typing in a terminal
 ```bash
 sudo apt-get install r-base
 ```
@@ -418,8 +287,8 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 2. In the **Quick Start for OSGeo4W Users** section, select the download of 32bit or 64bit of OSGeo4W network installer
 3. Run the installer
   + _Easiest Option_: 
-    +  Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing softwares like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
-  + _Advanded Option_: 
+    +  Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing software like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
+  + _Advanced Option_: 
     +  Select **Advanced Install**, then click on "Next" a few times until you reach the "Select Packages" screen. 
     +  Click on "Commandline_Utilities_", and on the list look for "_gdal: The GDAL/OGR library..." entry
     +  Click on "Skip": the word "skip" will be replaced by the current GDAL version number
@@ -429,7 +298,7 @@ The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https:/
 
 1. Ensure that your repositories contain a version of ```gdal-bin``` >= 1.11.1. 
     In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). 
-    With Ubuntu 15.10 Wily (and newer) this step is not mandatory, altough recommended in order to have updated version of GDAL installed.
+    With Ubuntu 15.10 Wily (and newer) this step is not mandatory, although recommended in order to have updated version of GDAL installed.
     
 2. To install GDAL, open a terminal and type  
     ```bash
@@ -449,7 +318,7 @@ Install the packaged binary of GDAL included in your specific distribution; if t
 
 <b id="f1">1</b>: If you encounter problems installing the gWidgetsRGtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help you!
 
-<b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press "ok" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
+<b id="f2">2</b>: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
 1. Ensure that GDAL is properly installed in your system
 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/))
 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!
