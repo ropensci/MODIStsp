@@ -680,9 +680,37 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       message("[", date(), "] ", mess_text)
                     }
                     
+                    if (datatype[band] == "UInt32") {
+                      # fix due to bug in creation of vrt file for UIn32 data type - create tiff 
+                      # files from the original hdfs, and then use those to build the vrt
+                      
+                      
+                      files_out   <- NULL
+                      for(file in seq_along(along = files_in)) {
+                        file_out <- tempfile(fileext = ".tif")
+                        gdal_translate(files_in[file], 
+                                       file_out,  
+                                       sd_index  = band,
+                                       srcnodata = nodata_in[band], 
+                                       vrtnodata = nodata_out[band])
+                        files_in[file] <- file_out
+                      }
+                      
+                      outfile_vrt <- paste0(str_sub(outfile_vrt, 1,-5), ".tif")
+                      gdalwarp(files_in, 
+                               outfile_vrt,  
+                               sd        = band,
+                               srcnodata = nodata_in[band], 
+                               vrtnodata = nodata_out[band])
+
+                    } else {
                     # Create a GDAL vrt file corresponding to the original hdf4
-                    gdalbuildvrt(files_in, outfile_vrt,  sd = band,
-                                 srcnodata = nodata_in[band], vrtnodata = nodata_out[band])
+                    gdalbuildvrt(files_in, 
+                                 outfile_vrt,  
+                                 sd = band,
+                                 srcnodata = nodata_in[band], 
+                                 vrtnodata = nodata_out[band])
+                    }
                     
                     # apply the patch if an error in the original hdf4 file at step 0 was detected
                     if (correct_hdf) {
@@ -697,6 +725,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                                       paste(outfile_vrt_geom_corr, collapse = ", "), "</GeoTransform>")
                       write(outfile_vrt_cont, outfile_vrt)
                     }
+                  
                     
                     # If resize required,  convert bbox coordinates from t_srs 
                     # to modis_srs, to get the correct extent
@@ -704,12 +733,33 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       outfile_vrt_or <- outfile_vrt
                       outfile_vrt <- tempfile(fileext = ".vrt")   # filename of new temporary vrt file 
                       # for resizing BEFORE reprojecting
-                      bbox_mod <- reproj_bbox( bbox, outproj_str, MOD_proj_str, enlarge = TRUE)
+                      bbox_mod <- reproj_bbox(bbox, outproj_str, MOD_proj_str, enlarge = TRUE)
                       # Create a resized and eventually mosaiced GDAL vrt file
-                      gdalbuildvrt(outfile_vrt_or, outfile_vrt, te = c(bbox_mod), 
-                                   tap = TRUE, tr = paste(rep(native_res, 2 ), collapse = " "),
+                      
+                      if (datatype[band] == "UInt32") {
+                        # fix to avoid bug on gdalbuildvrt for UInt32 datasets; create a tif 
+                        # instead than a vrt
+                        outfile_vrt <- paste0(str_sub(outfile_vrt, 1,-5), ".tif")
+                        gdalwarp(outfile_vrt_or, 
+                                 outfile_vrt, 
+                                 te = c(bbox_mod), 
+                                 tap = TRUE, 
+                                 tr = res(raster(outfile_vrt_or)),    
+                                 sd        = band,
+                                 srcnodata = nodata_in[band], 
+                                 vrtnodata = nodata_out[band], 
+                                 overwrite = TRUE)
+                      } else {
+                      gdalbuildvrt(outfile_vrt_or, 
+                                   outfile_vrt, 
+                                   te = c(bbox_mod), 
+                                   tap = TRUE, 
+                                   tr = res(raster(outfile_vrt_or)), 
                                    srcnodata = nodata_in[band], 
-                                   vrtnodata = nodata_out[band], sd = band)
+                                   vrtnodata = nodata_out[band], 
+                                   sd = band, 
+                                   overwrite = TRUE)
+                      }
                     }
                     
                     
