@@ -33,6 +33,7 @@ Imports:
     hash (>= 2.2.6),
     httr (>= 1.1.0),
     pacman, 
+    parallel,
     plyr (>= 1.8.3),
     raster (>= 2.5-2),
     RCurl (>= 1.95-4.8),

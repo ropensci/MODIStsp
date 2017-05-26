@@ -103,6 +103,7 @@
 #' @importFrom XML xmlParse xmlRoot xmlToList
 #' @importFrom RCurl getBinaryURL
 #' @importFrom stringr str_locate
+#' @importFrom parallel detectCores
 #' @import gWidgets
 #' @import gWidgetsRGtk2
 
@@ -145,8 +146,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   out_prod_folder <- file.path(out_folder, main_out_folder)  # main output folder --> define on the basis of product name and create if necessary
   dir.create(out_prod_folder, showWarnings = FALSE, recursive = TRUE)
   tmp_prod_folder <- file.path(out_prod_folder, "tmp") # directory to store temporary [virtual] rasters
-  start_year <- unlist(strsplit(start_date, "[.]"))[1]
-  end_year <- unlist(strsplit(end_date, "[.]"))[1]
+  start_year      <- unlist(strsplit(start_date, "[.]"))[1]
+  end_year        <- unlist(strsplit(end_date, "[.]"))[1]
+  
+  
+  ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
+  ### Initialize number of cores for gdalwarp (equal to ncpus - 2 OR 10 if ncp####
+
+  ncores <- min(c(10, parallel::detectCores() - 2))
   
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   #  Verify if bands needed for computing spectral indexes and/or quality indicators are already selected
@@ -701,7 +708,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                outfile_vrt,  
                                sd        = band,
                                srcnodata = nodata_in[band], 
-                               vrtnodata = nodata_out[band])
+                               vrtnodata = nodata_out[band],
+                               multi     = TRUE, 
+                               wo        = paste0("NUM_THREADS=", ncores)
+                               )
 
                     } else {
                     # Create a GDAL vrt file corresponding to the original hdf4
@@ -742,22 +752,24 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                         outfile_vrt <- paste0(str_sub(outfile_vrt, 1,-5), ".tif")
                         gdalwarp(outfile_vrt_or, 
                                  outfile_vrt, 
-                                 te = c(bbox_mod), 
-                                 tap = TRUE, 
-                                 tr = res(raster(outfile_vrt_or)),    
+                                 te        = c(bbox_mod), 
+                                 tap       = TRUE, 
+                                 tr        = res(raster(outfile_vrt_or)),    
                                  sd        = band,
                                  srcnodata = nodata_in[band], 
                                  vrtnodata = nodata_out[band], 
-                                 overwrite = TRUE)
+                                 overwrite = TRUE,
+                                 multi     = TRUE, 
+                                 wo        = paste0("NUM_THREADS=", ncores))
                       } else {
                       gdalbuildvrt(outfile_vrt_or, 
                                    outfile_vrt, 
-                                   te = c(bbox_mod), 
-                                   tap = TRUE, 
-                                   tr = res(raster(outfile_vrt_or)), 
+                                   te        = c(bbox_mod), 
+                                   tap       = TRUE, 
+                                   tr        = res(raster(outfile_vrt_or)), 
                                    srcnodata = nodata_in[band], 
                                    vrtnodata = nodata_out[band], 
-                                   sd = band, 
+                                   sd        = band, 
                                    overwrite = TRUE)
                       }
                     }
@@ -791,77 +803,105 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                     
                     if (out_format == "GTiff") {
                       switch( reproj_type,
-                              GdalTranslate = gdal_translate(outfile_vrt,  outrep_file_0, 
-                                                             a_srs = MOD_proj_str, of = out_format, 
-                                                             ot = datatype[band], a_nodata = nodata_out[band], 
-                                                             co = paste("COMPRESS", compress, sep = "="), 
+                              GdalTranslate = gdal_translate(outfile_vrt,  
+                                                             outrep_file_0, 
+                                                             a_srs     = MOD_proj_str, of = out_format, 
+                                                             ot        = datatype[band], a_nodata = nodata_out[band], 
+                                                             co        = paste("COMPRESS", compress, sep = "="), 
                                                              overwrite = TRUE),
-                              Resample0_Resize0 = gdalwarp(outfile_vrt, outrep_file_0, 
-                                                           s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                           of = out_format, r = resampling, 
-                                                           co = paste("COMPRESS", compress, sep = "="),
-                                                           wo = "INIT_DEST = NO_DATA", 
-                                                           wt = datatype[band], 
-                                                           overwrite = TRUE),
-                              Resample0_Resize1 = gdalwarp(outfile_vrt, outrep_file_0, 
-                                                           s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                           of = out_format, r = resampling, 
-                                                           te = bbox, 
-                                                           co = paste("COMPRESS", compress, sep = "="), 
-                                                           wo = "INIT_DEST = NO_DATA", 
-                                                           wt = datatype[band],
-                                                           overwrite = TRUE),
-                              Resample1_Resize0 = gdalwarp(outfile_vrt, outrep_file_0, 
-                                                           s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                           of = out_format, r = resampling, 
-                                                           tr = rep(out_res, 2), 
-                                                           co = paste("COMPRESS", compress, sep = "="), 
-                                                           wo = "INIT_DEST = NO_DATA", 
-                                                           wt = datatype[band],
-                                                           overwrite = TRUE),
-                              Resample1_Resize1 =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                            s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                            of = out_format, 
-                                                            r = resampling, te = bbox, 
-                                                            tr = rep(out_res, 2), 
-                                                            co = paste("COMPRESS", compress, sep = "="), 
-                                                            wo = "INIT_DEST = NO_DATA", 
-                                                            wt = datatype[band], 
-                                                            overwrite = TRUE),
+                              
+                              Resample0_Resize0 = gdalwarp(outfile_vrt, 
+                                                           outrep_file_0, 
+                                                           s_srs     = MOD_proj_str, t_srs = outproj_str, 
+                                                           of        = out_format, r = resampling, 
+                                                           co        = paste("COMPRESS", compress, sep = "="),
+                                                           wo        = c("INIT_DEST = NO_DATA", paste0("NUM_THREADS=", ncores)), 
+                                                           wt        = datatype[band],
+                                                           overwrite = TRUE,
+                                                           multi     = TRUE),
+                              
+                              Resample0_Resize1 = gdalwarp(outfile_vrt,
+                                                           outrep_file_0, 
+                                                           s_srs     = MOD_proj_str, t_srs = outproj_str, 
+                                                           of        = out_format, r = resampling, 
+                                                           te        = bbox, 
+                                                           co        = paste("COMPRESS", compress, sep = "="), 
+                                                           wo        = c("INIT_DEST = NO_DATA", paste0("NUM_THREADS=", ncores)), 
+                                                           wt        = datatype[band],
+                                                           overwrite = TRUE,
+                                                           multi     = TRUE),
+                              
+                              Resample1_Resize0 = gdalwarp(outfile_vrt,
+                                                           outrep_file_0, 
+                                                           s_srs     = MOD_proj_str, t_srs = outproj_str, 
+                                                           of        = out_format, r = resampling, 
+                                                           tr        = rep(out_res, 2), 
+                                                           co        = paste("COMPRESS", compress, sep = "="), 
+                                                           wo        = c("INIT_DEST = NO_DATA", paste0("NUM_THREADS=", ncores)), 
+                                                           wt        = datatype[band],
+                                                           overwrite = TRUE,
+                                                           multi     = TRUE),
+                              
+                              Resample1_Resize1 = gdalwarp(outfile_vrt, 
+                                                           outrep_file_0, 
+                                                           s_srs     = MOD_proj_str, t_srs = outproj_str, 
+                                                           of        = out_format, 
+                                                           r         = resampling, te = bbox, 
+                                                           tr        = rep(out_res, 2), 
+                                                           co        = paste("COMPRESS", compress, sep = "="), 
+                                                           wo        = c("INIT_DEST = NO_DATA", paste0("NUM_THREADS=", ncores)), 
+                                                           wt        = datatype[band],
+                                                           overwrite = TRUE,
+                                                           multi     = TRUE),
+                              
                               quit("Internal error in out_res_sel, outproj_str or full_ext."))
                     } else {
                       switch( reproj_type,
-                              GdalTranslate =  gdal_translate(outfile_vrt,  outrep_file_0, 
-                                                              a_srs = MOD_proj_str, of = out_format, 
-                                                              ot = datatype[band], 
-                                                              a_nodata = nodata_out[band], 
+                              GdalTranslate =  gdal_translate(outfile_vrt, 
+                                                              outrep_file_0, 
+                                                              a_srs     = MOD_proj_str, of = out_format, 
+                                                              ot        = datatype[band], 
+                                                              a_nodata  = nodata_out[band], 
                                                               overwrite = TRUE),
-                              Resample0_Resize0  =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                             s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                             of = out_format, r = resampling, 
-                                                             wo = "INIT_DEST = NO_DATA",
-                                                             wt = datatype[band], 
-                                                             overwrite = TRUE),
+                              
+                              Resample0_Resize0  =  gdalwarp(outfile_vrt, 
+                                                             outrep_file_0, 
+                                                             s_srs     = MOD_proj_str, t_srs = outproj_str, 
+                                                             of        = out_format, r = resampling, 
+                                                             wo        = c("INIT_DEST = NO_DATA", paste0("NUM_THREADS=", ncores)),
+                                                             wt        = datatype[band], 
+                                                             overwrite = TRUE,
+                                                             multi     = TRUE),
+                              
                               Resample0_Resize1  =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                             s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                             of = out_format, r = resampling, 
-                                                             te = bbox, wo = "INIT_DEST = NO_DATA", 
-                                                             wt = datatype[band],
-                                                             overwrite = TRUE),
-                              Resample1_Resize0  =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                             s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                             of = out_format, r = resampling, 
-                                                             tr = rep(out_res, 2), 
-                                                             wo = "INIT_DEST = NO_DATA", 
-                                                             wt = datatype[band], 
-                                                             overwrite = TRUE),
-                              Resample1_Resize1  =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                             s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                             of = out_format, r = resampling, 
-                                                             te = bbox, tr = rep(out_res, 2), 
-                                                             wo = "INIT_DEST = NO_DATA", 
-                                                             wt = datatype[band], 
-                                                             overwrite = TRUE),
+                                                             s_srs     = MOD_proj_str, t_srs = outproj_str, 
+                                                             of        = out_format, r = resampling, 
+                                                             te        = bbox, 
+                                                             wo        = c("INIT_DEST = NO_DATA", paste0("NUM_THREADS=", ncores)),
+                                                             wt        = datatype[band],
+                                                             overwrite = TRUE,
+                                                             multi     = TRUE),
+                              
+                              Resample1_Resize0  =  gdalwarp(outfile_vrt, 
+                                                             outrep_file_0, 
+                                                             s_srs     = MOD_proj_str, t_srs = outproj_str, 
+                                                             of        = out_format, r = resampling, 
+                                                             tr        = rep(out_res, 2), 
+                                                             wo        = c("INIT_DEST = NO_DATA", paste0("NUM_THREADS=", ncores)), 
+                                                             wt        = datatype[band],
+                                                             overwrite = TRUE,
+                                                             multi     = TRUE),
+                              
+                              Resample1_Resize1  =  gdalwarp(outfile_vrt, 
+                                                             outrep_file_0, 
+                                                             s_srs     = MOD_proj_str, t_srs = outproj_str,
+                                                             of        = out_format, r = resampling, 
+                                                             te        = bbox, tr = rep(out_res, 2), 
+                                                             wo        = c("INIT_DEST = NO_DATA", paste0("NUM_THREADS=", ncores)), 
+                                                             wt        = datatype[band],
+                                                             overwrite = TRUE,
+                                                             multi     = TRUE),
+                              
                               quit("Internal error in out_res_sel, outproj_str or full_ext."))
                     }
                     
