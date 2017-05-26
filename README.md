@@ -1,4 +1,3 @@
-[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
 
 -   [*NOTES !*](#notes)
 -   [MODIStsp](#modistsp)
@@ -11,8 +10,23 @@
 -   [Installing R and GDAL](#installing-r-and-gdal)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
 
 ### *NOTES !*
+
+-   We recently fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in `gdalbuildvrt`, causing sometimes an incorrect translation from HDF to output formats (see <https://github.com/lbusett/MODIStsp/issues/72>).
+
+Layers likely affectred by the bug are the following:
+
+-   M\*D09A1 - 500m Reflectance Band Quality (V005 and V006)
+-   M\*DO9CMG - Coarse Resolution QA (V005 and V006)
+-   M\*D09CMG - Coarse Resolution Number Mapping (V006)
+-   M\*D09GA: 500m Reflectance Band Quality (V005 and V006)
+-   M\*DOCGA: Band quality for MODIS bands 8-15 (V006)
+-   M\*D11C3: Days with clear-sky conditions and validated LSTs; Nights with clear-sky conditions and validated LSTs (V005 and V006)
+-   MCD43A2: BRDF\_Albedo\_Band\_Quality (V005 and V006)
+
+The bug in now fixed in the `github` repo (devel and master). Bug fix will be included in CRAN in v 1.3.3, to be released soon. *If you rely on those layers, we suggest you to reprocess your time series !*
 
 -   MODIStsp is now also available on [CRAN](https://cran.r-project.org/web/packages/MODIStsp/index.html) ! From now on, you can install it simply using:
 
@@ -108,7 +122,7 @@ Restart your system and try loading again `gWidgetsRGtk2`
 2.  Install MODIStsp package from CRAN
 
 ``` r
-install.packages("lbusett/MODIStsp")
+install.packages("MODIStsp")
 ```
 
 ### Installing the `development` version from GitHub

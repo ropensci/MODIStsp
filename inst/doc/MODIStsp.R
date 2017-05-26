@@ -6,7 +6,7 @@
 #  library(gWidgetsRGtk2)
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
-#  install.packages("lbusett/MODIStsp")
+#  install.packages("MODIStsp")
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(devtools)
