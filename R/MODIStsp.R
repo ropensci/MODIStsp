@@ -344,7 +344,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       # Automatically retrieve the tiles requested to cover the extent
       modis_grid           <- get(load(file.path(MODIStsp.env$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
       external_bbox_mod    <- reproj_bbox(external_bbox, general_opts$user_proj4, MOD_proj_str, enlarge = TRUE)
-      d_bbox_mod_tiled     <- intersect(modis_grid, extent(external_bbox_mod))
+      d_bbox_mod_tiled     <- crop(modis_grid, extent(external_bbox_mod))
       general_opts$start_x <- min(d_bbox_mod_tiled$H)
       general_opts$end_x   <- max(d_bbox_mod_tiled$H)
       general_opts$start_y <- min(d_bbox_mod_tiled$V)
