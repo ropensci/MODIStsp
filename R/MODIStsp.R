@@ -326,16 +326,16 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       general_opts$out_folder <- file.path(general_opts$out_folder,
                                            file_path_sans_ext(basename(spatial_file_path)))
       
-      # If out_folder already exists, create a new one with a suffix
-      if (file.exists(general_opts$out_folder)) {
-        tmp_counter   <- 1
-        out_newfolder <- paste(general_opts$out_folder, tmp_counter, sep = "_")
-        while (file.exists(out_newfolder)) {
-          tmp_counter   <- tmp_counter + 1
-          out_newfolder <- paste(general_opts$out_folder, tmp_counter, sep = "_")
-        }
-        general_opts$out_folder <- out_newfolder
-      }
+      # # If out_folder already exists, create a new one with a suffix
+      # if (file.exists(general_opts$out_folder)) {
+      #   tmp_counter   <- 1
+      #   out_newfolder <- paste(general_opts$out_folder, tmp_counter, sep = "_")
+      #   while (file.exists(out_newfolder)) {
+      #     tmp_counter   <- tmp_counter + 1
+      #     out_newfolder <- paste(general_opts$out_folder, tmp_counter, sep = "_")
+      #   }
+      #   general_opts$out_folder <- out_newfolder
+      # }
       
       # Overwrite the full_ext option (avoids that , if the options_file specifies a full processing,
       # the incorrect parameter is passed)
