@@ -1111,6 +1111,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     for (band in which(bandsel == 1)) {
       message("[", date(), "] Creating Virtual Files and rts time series for layer ",
               bandnames[band])
+      
       MODIStsp_vrt_create(out_prod_folder = out_prod_folder, 
                           meta_band       = bandnames[band],
                           file_prefixes   = file_prefixes, 
