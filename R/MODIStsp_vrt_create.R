@@ -43,6 +43,10 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,
   if (sens_sel == "Mixed") {
     file_prefix <- paste(file_prefixes[["Terra"]], file_prefixes[["Aqua"]], sep = "_")
   }
+
+  if (sens_sel == "Combined") {
+    file_prefix <- file_prefixes[["Terra"]]
+  }
   # retrieve files list of the time serie (ENVI format)
   if (out_format == "ENVI") {
     out_meta_files <- list.files(file.path(out_prod_folder, meta_band), pattern = "\\.dat$", full.names = TRUE)	# get list of ENVI files
