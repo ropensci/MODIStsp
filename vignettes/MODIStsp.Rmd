@@ -300,6 +300,8 @@ Non-interactive mode is triggered by adding the "-g"  argument to the call, and 
 
 (launch `path_to_MODIStsp_bat\MODIStsp.bat -h` for details).
 
+In the case you encountered an error launching that, please edit the 4th line of the file `path_to_MODIStsp_bat\MODIStsp.bat`, replacing the R version with the one that you are using.
+
 Standalone non-interactive execution easily allows to automatically update the time series of a selected product over a given study area whenever a new MODIS image is available. To do that, the user must simply:
 
 1.  Open the MODIStsp GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options. Then quit the program
