@@ -10,7 +10,7 @@
 -   [Installing R and GDAL](#installing-r-and-gdal)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 ### *NOTES !*
 
