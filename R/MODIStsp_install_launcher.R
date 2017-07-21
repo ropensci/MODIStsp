@@ -38,10 +38,13 @@
 #' \dontrun{
 #' install_MODIStsp_launcher()}
 
-install_MODIStsp_launcher <- function(bin_dir = NA, desktop_dir = NA, desktop_shortcut = TRUE, sudo = FALSE) {
+install_MODIStsp_launcher <- function(bin_dir          = NA, 
+                                      desktop_dir      = NA, 
+                                      desktop_shortcut = TRUE, 
+                                      sudo             = FALSE) {
 
   MODIStsp_dir <- system.file(package = "MODIStsp")
-  running_os <- Sys.info()[["sysname"]]
+  running_os   <- Sys.info()[["sysname"]]
 
   if (running_os == "Linux") {
     if (is.na(bin_dir)) {

@@ -14,4 +14,8 @@ index.md
 ^README\.Rmd$
 configure.win
 cran-comments.md
+<<<<<<< HEAD
 ^docs$
+=======
+^pkgdown$
+>>>>>>> 23bfd19... Overhaul on MODIStsp website

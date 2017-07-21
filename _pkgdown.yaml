@@ -1,0 +1,47 @@
+title: MODIStsp
+template:
+  params:
+    bootswatch: united
+reference:
+  - title: Exported Functions
+    desc: ~
+    contents:
+      - '`MODIStsp`'
+      - '`MODIStsp_extract`'
+      - '`MODIStsp_addindex`'
+      - '`install_MODIStsp_launcher`'
+  - title: Internals
+    desc: ~
+    contents:
+      - '`MODIStsp_GUI`'
+      - '`MODIStsp_process`'
+      - '`MODIStsp_process_indexes`'
+      - '`MODIStsp_process_QA_bits`'
+      - '`MODIStsp_read_xml`'
+      - '`lpdaac_getmod_dirs`'
+      - '`lpdaac_getmod_dates`'
+      - '`lpdaac_getmod_names`'
+      - '`MODIStsp_check_files`'
+      - '`MODIStsp_vrt_create`'
+      - '`bbox_from_file`'
+      - '`reproj_bbox`'
+navbar:
+  type: inverse
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "How To"
+      menu: 
+      -  text: Installation
+         href: articles/installation.html
+      -  text: bbbb
+         href: articles/installation.html
+    - text: "Function Reference"
+      href: reference/index.html
+    - text: "Examples of Use"
+      href: articles/examples.html
+    - text: "FAQ"
+      href: articles/faq.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/lbusett/MODIStsp/

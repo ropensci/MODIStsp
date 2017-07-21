@@ -16,15 +16,3 @@ citEntry(entry = "Article",
       "ISSN 0098-3004, http://dx.doi.org/10.1016/j.cageo.2016.08.020.",
       "URL https://github.com/lbusett/MODIStsp/.")
 )
-
-citEntry(entry = "Manual",
-  author = "Lorenzo Busetto and Luigi Ranghetti",
-  title        = "MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series",
-  year         = "2016",
-  url          = "https://github.com/lbusett/MODIStsp",
-  note         = "R package version 1.3.0",
-  textVersion  = paste("L. Busetto, L. Ranghetti (2016).",
-      "MODIStsp: an R package for preprocessing of MODIS time series.",
-      "R package version 1.3.0.",
-      "URL https://github.com/lbusett/MODIStsp/.")
-)
