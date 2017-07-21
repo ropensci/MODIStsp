@@ -1,5 +1,4 @@
 
--   [*NOTES !*](#notes)
 -   [MODIStsp](#modistsp)
 -   [News !](#news)
 -   [Installation](#installation)
@@ -9,56 +8,38 @@
 -   [Citation](#citation)
 -   [Installing R and GDAL](#installing-r-and-gdal)
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-
-### *NOTES !*
-
--   We recently fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in `gdalbuildvrt`, causing sometimes an incorrect translation from HDF to output formats (see <https://github.com/lbusett/MODIStsp/issues/72>).
-
-Layers likely affectred by the bug are the following:
-
--   M\*D09A1 - 500m Reflectance Band Quality (V005 and V006)
--   M\*DO9CMG - Coarse Resolution QA (V005 and V006)
--   M\*D09CMG - Coarse Resolution Number Mapping (V006)
--   M\*D09GA: 500m Reflectance Band Quality (V005 and V006)
--   M\*DOCGA: Band quality for MODIS bands 8-15 (V006)
--   M\*D11C3: Days with clear-sky conditions and validated LSTs; Nights with clear-sky conditions and validated LSTs (V005 and V006)
--   MCD43A2: BRDF\_Albedo\_Band\_Quality (V005 and V006)
-
-The bug in now fixed in the `github` repo (devel and master). Bug fix will be included in CRAN in v 1.3.3, to be released soon. *If you rely on those layers, we suggest you to reprocess your time series !*
-
--   MODIStsp is now also available on [CRAN](https://cran.r-project.org/web/packages/MODIStsp/index.html) ! From now on, you can install it simply using:
-
-`install.packages("MODIStsp")`
-
--   If you have **trouble downloading via *http* **, please visit your [earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
-
--   Please **report any issues** you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.
-
--   Solutions to common **installation and processing problems** can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) subli
 
 MODIStsp
 ========
 
 MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.
 
-An extended description of MODIStsp functionalities is provided in the [package vignette](https://github.com/lbusett/MODIStsp/blob/master/inst/doc/MODIStsp.pdf) (*Click on "Raw" at the beginning of the document to download the PDF file*)
+NOTES
+-----
 
-An article about `MODIStsp` was recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020).
+-   MODIStsp (v 1.3.2 is also available on [CRAN](https://cran.r-project.org/web/packages/MODIStsp/index.html) ! You can install it simply using
+
+`install.packages("MODIStsp")`
+
+You can however install the `development` version from github, containing the last improvements and bug fixing using:
+
+`install_github("lbusett/MODIStsp", ref = "master")`
+
+-   An extended description of MODIStsp functionalities is provided in the [package vignette](https://cran.r-project.org/web/packages/MODIStsp/vignettes/MODIStsp.pdf)
+
+-   Solutions to common **installation and processing problems** can be found in MODIStsp [FAQ](https://github.com/lbusett/MODIStsp/wiki/)
+
+-   If you have **trouble downloading via *http* **, please visit your [earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
+
+-   Please **report any issues** you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page.
+
+-   An article about `MODIStsp` was recently published on the "Computers & Geosciences" journal. You can find it [here](http://dx.doi.org/10.1016/j.cageo.2016.08.020).
 
 *MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy (CNR-IREA)*
 
 News !
 ======
-
--   15/04/2017 - MODIStsp is now also available on [CRAN](https://cran.r-project.org/web/packages/MODIStsp/index.html) ! From now on, you can install it simply using
-
-`install.packages("MODIStsp")`
-
-You'll however still be able to install the `development` version from github, containing the last improvements and bug fixing using:
-
-`install_github("lbusett/MODIStsp", ref = "master")`
 
 -   22/03/2017 - MODIStsp **v1.3.2** released. Adds functionality to apply scale and offset coefficients on MODIS original values according with the specifications of single MODIS products. For details on other changes and bug fixing see the [release notes of v1.3.2](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.2)
 

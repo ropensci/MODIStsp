@@ -1,23 +1,21 @@
-# MODIStsp v 1.3.2.9000
+# MODIStsp 1.3.2.9000 Bug fixes on development version
 
 ## Bug fixing
 
--   We recently fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in `gdalbuildvrt`, causing sometimes an incorrect translation from HDF to output formats (see <https://github.com/lbusett/MODIStsp/issues/72>).
+-   We recently fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in `gdalbuildvrt`, causing sometimes an incorrect translation from HDF to output formats ([#72](https://github.com/lbusett/MODIStsp/issues/72)).
 
-Layers likely affectred by the bug are the following:
+     **M\*D09A1** - 500m Reflectance Band Quality (V005 and V006); **M\*DO9CMG** - Coarse Resolution QA (V005 and V006); **M\*D09CMG** - Coarse Resolution Number Mapping (V006); **M\*D09GA** - 500m Reflectance Band Quality (V005 and V006); **M\*DOCGA** - Band quality for MODIS bands 8-15 (V006); **M\*D11C3** - Days with clear-sky conditions and validated LSTs; Nights with clear-sky conditions and validated LSTs (V005 and V006); **MCD43A2** - BRDF\_Albedo\_Band\_Quality (V005 and V006).
 
--   M\*D09A1 - 500m Reflectance Band Quality (V005 and V006)
--   M\*DO9CMG - Coarse Resolution QA (V005 and V006)
--   M\*D09CMG - Coarse Resolution Number Mapping (V006)
--   M\*D09GA: 500m Reflectance Band Quality (V005 and V006)
--   M\*DOCGA: Band quality for MODIS bands 8-15 (V006)
--   M\*D11C3: Days with clear-sky conditions and validated LSTs; Nights with clear-sky conditions and validated LSTs (V005 and V006)
--   MCD43A2: BRDF\_Albedo\_Band\_Quality (V005 and V006)
+    The bug in now fixed in the `github` repo (devel and master). Bug fix will be included in CRAN in v 1.3.3, to be released soon. *If you rely on those layers, we suggest you to reprocess your time series !*
 
-The bug in now fixed in the `github` repo (devel and master). Bug fix will be included in CRAN in v 1.3.3, to be released soon. *If you rely on those layers, we suggest you to reprocess your time series !*
+- Fixed a bug affecting creation of time series files (RData and virtual rasters) on all MCD products ([#77](https://github.com/lbusett/MODIStsp/issues/77))
+
+- Fixed a bug a error on creation of "burn_date" layers for MCD45A1 product ([#77](https://github.com/lbusett/MODIStsp/issues/77))
+
+- Fixed bugs on specifying spatial extent files on non-interactive execution ([#75](https://github.com/lbusett/MODIStsp/issues/75))
 
 
-# 17/04/2017 - MODIStsp is now on CRAN !
+### 17/04/2017 - MODIStsp is now on CRAN !
 
 MODIStsp was recently accepted on CRAM. From now on, you can install it simply using
 
@@ -28,7 +26,7 @@ containing the last improvements and bug fixing using:
 
 `install_github("lbusett/MODIStsp", ref = "master")`
 
-# MODIStsp v 1.3.2
+# MODIStsp 1.3.2 Release Notes
 
 v1.3.2 was released on 22/03/2017
 
@@ -56,9 +54,7 @@ __For compatibility with already created output files__ (versions up to 1.3.1), 
 - Fixed bug on download of tile 0, preventing download of images with DOY 001 and of all "yearly based" products (e.g., MOD17)(Issue [#64](https://github.com/lbusett/MODIStsp/issues/64)) 
 - Fixed other bugs affecting FTP download (https://github.com/lbusett/MODIStsp/commit/efbf1b469e7518ffc8a7ec6d9922242d6a5c228f, https://github.com/lbusett/MODIStsp/commit/1dc53a5ff5b355965acec86678a3104bd2d27fd9, https://github.com/lbusett/MODIStsp/commit/fa6c7b42eadce516a2f781604c9db28418120f36)
 
-
-
-# MODIStsp v 1.3.1
+# MODIStsp 1.3.1 Release Notes
 
 v1.3.1 was released on 13/02/2017
 
@@ -88,7 +84,7 @@ v1.3.1 was released on 13/02/2017
 - Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53)) on devel/master
 
 
-# MODIStsp v 1.3.0  Release NOtes
+# MODIStsp 1.3.0  Release Notes
 
 v1.3.0 was released on 11/05/2016
 
