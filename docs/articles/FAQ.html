@@ -34,16 +34,16 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    How To Use It
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/installation.html">Installation</a>
+      <a href="../articles/Installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/installation.html">bbbb</a>
+      <a href="../articles/Interactive_Execution.html">Interactive Execution - the MODIStsp GUI</a>
     </li>
   </ul>
 </li>
@@ -142,7 +142,7 @@
 <a href="#installing-from-github-fails-due-to-missing-dependencies" class="anchor"></a>- Installing from github fails due to missing dependencies</h3>
 <p>There are currently some problems in installing <code>MODIStsp</code> <strong>via <code>install_github</code></strong> on R &gt;= 3.3.1 due to not correct installation of dependencies (related to a bug in CRAN version of <code>install_github</code>). Installing the development version of <code>devtools</code> should solve the issue. To do so, on a <strong>clean</strong> R/RStudio session do:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"devtools"</span>))
-  devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"hadley/devtools"</span>)
+  devtools::<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"hadley/devtools"</span>)
   <span class="kw">library</span>(devtools)</code></pre></div>
 <p>, then continue with standard <code>MODIStsp</code> installation.</p>
 <p>If you have problems in installing the “devel” version of <code>devtools</code>, manually installing all the dependencies should also solve the issue. To do so, please try doing:</p>

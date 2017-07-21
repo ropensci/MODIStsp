@@ -30,12 +30,12 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "How To"
+    - text: "How To Use It"
       menu: 
       -  text: Installation
-         href: articles/installation.html
-      -  text: bbbb
-         href: articles/installation.html
+         href: articles/Installation.html
+      -  text: Interactive Execution - the MODIStsp GUI
+         href: articles/Interactive_Execution.html
     - text: "Function Reference"
       href: reference/index.html
     - text: "Examples of Use"

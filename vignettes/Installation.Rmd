@@ -1,8 +1,6 @@
 ---
 title: Installation
-output: 
-  github_document:
-    toc_dept: 1
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
