@@ -52,16 +52,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Installation.html">Installation</a>
+      <a href="../articles/installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/Interactive_Execution.html">Interactive Execution - the MODIStsp GUI</a>
+      <a href="../articles/interactive_execution.html">Interactive Execution - the MODIStsp GUI</a>
     </li>
     <li>
-      <a href="../articles/NonInteractive_Execution.html">Non-Interactive Execution from within R</a>
+      <a href="../articles/noninteractive_execution.html">Non-Interactive Execution from within R</a>
     </li>
     <li>
-      <a href="../articles/Standalone_Execution.html">Standalone Execution and Scheduled Processing</a>
+      <a href="../articles/standalone_execution.html">Standalone Execution and Scheduled Processing</a>
     </li>
     <li>
       <a href="../articles/output.html">Outputs Format and Naming Conventions</a>
@@ -129,7 +129,7 @@
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>This <strong>opens a GUI</strong> from which processing options can be specified and eventually saved (or loaded) (Notes: <a href="#note-1">1</a>, <a href="#note-2">2</a>).</p>
 <p>The GUI allows selecting all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.</p>
-<p><img src="Interactive_Execution_files/figure-html/GUIfig-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="interactive_execution_files/figure-html/GUIfig-1.png" width="672" style="display: block; margin: auto;"></p>
 <hr>
 <div id="selecting-processing-parameters" class="section level2">
 <h2 class="hasAnchor">
@@ -149,7 +149,7 @@
 <li>
 <strong>version</strong>: Selects whether processing version 5 or 6 (when available) of MODIS products has to be processed</li>
 </ol>
-<p>After selecting the product and version, clicking the <strong>“Click to Select Desired Layers”</strong> button opens the <em><em>Select Processing Layers</em></em> GUI panel, from which the user <strong>must</strong> select which MODIS original layers and/or derived Quality Indexes (QI) and Spectral Indexes (SI) layers should be processed: <img src="Interactive_Execution_files/figure-html/proc_layers-1.png" width="672" style="display: block; margin: auto;"></p>
+<p>After selecting the product and version, clicking the <strong>“Click to Select Desired Layers”</strong> button opens the <em><em>Select Processing Layers</em></em> GUI panel, from which the user <strong>must</strong> select which MODIS original layers and/or derived Quality Indexes (QI) and Spectral Indexes (SI) layers should be processed: <img src="interactive_execution_files/figure-html/proc_layers-1.png" width="672" style="display: block; margin: auto;"></p>
 <ul>
 <li>The left-hand frame allows to select which <em>original MODIS layers</em> should be processed.</li>
 <li>The central frame allows to select which <em>Quality Indicators should be extracted</em> from the original MODIS Quality Assurance layers.</li>
@@ -157,7 +157,7 @@
 </ul>
 <p><br></p>
 <!-- html table generated in R 3.4.1 by xtable 1.8-2 package -->
-<!-- Mon Jul 24 10:52:17 2017 -->
+<!-- Mon Jul 24 11:33:27 2017 -->
 <table border="1" class="table">
 <tr>
 <th>
@@ -328,7 +328,7 @@ Green-Red ratio Vegetation Index <span class="citation">[@Tucker1979]</span>
 </tr>
 </table>
 <p>You can however <strong>specify other SIs to be computed without modifying MODIStsp source code</strong> by clicking on the <em><strong>“Add Custom Index”</strong></em> button, which allow to provide info related to the new desired SI using a simple GUI interface.</p>
-<p><img src="Interactive_Execution_files/figure-html/indexfig-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="interactive_execution_files/figure-html/indexfig-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>Provided information (e.g., correct band-names, computable formula, etc…) is automatically checked upon clicking “Set New Index”. On success, the new index is added in the list of available ones for all products allowing its computation. Clicking “Done !” returns to the main.</p>
 </div>
 <div id="download-method" class="section level4">

@@ -35,13 +35,13 @@ navbar:
     - text: "How To"
       menu: 
       -  text: Installation
-         href: articles/Installation.html
+         href: articles/installation.html
       -  text: Interactive Execution - the MODIStsp GUI
-         href: articles/Interactive_Execution.html
+         href: articles/interactive_execution.html
       -  text: Non-Interactive Execution from within R
-         href: articles/NonInteractive_Execution.html
+         href: articles/noninteractive_execution.html
       -  text: Standalone Execution and Scheduled Processing
-         href: articles/Standalone_Execution.html
+         href: articles/standalone_execution.html
       -  text: Outputs Format and Naming Conventions
          href: articles/output.html
       -  text: Accessing and Analyzing Processed Data from R

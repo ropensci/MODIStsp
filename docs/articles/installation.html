@@ -52,16 +52,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Installation.html">Installation</a>
+      <a href="../articles/installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/Interactive_Execution.html">Interactive Execution - the MODIStsp GUI</a>
+      <a href="../articles/interactive_execution.html">Interactive Execution - the MODIStsp GUI</a>
     </li>
     <li>
-      <a href="../articles/NonInteractive_Execution.html">Non-Interactive Execution from within R</a>
+      <a href="../articles/noninteractive_execution.html">Non-Interactive Execution from within R</a>
     </li>
     <li>
-      <a href="../articles/Standalone_Execution.html">Standalone Execution and Scheduled Processing</a>
+      <a href="../articles/standalone_execution.html">Standalone Execution and Scheduled Processing</a>
     </li>
     <li>
       <a href="../articles/output.html">Outputs Format and Naming Conventions</a>
@@ -136,7 +136,7 @@
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>gWidgetsRGtk2</code> library beforehand:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>)
 <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
@@ -161,16 +161,16 @@
 <code>GDAL</code> &gt;= 1.6.3, <code>PROJ.4</code> &gt;= 4.4.9 (required by package <code>rgdal</code>)</li>
 </ul>
 <p>On <em>Debian and Ubuntu-based</em> systems, to install those packages open a terminal and type:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
-<span class="ex">libgtk2.0-dev</span> libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
+<span class="kw">libgtk2.0-dev</span> libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev</code></pre></div>
 <p>On <em>rpm-base systems</em>, to install packages open a terminal and type:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
-<span class="ex">glib2-devel</span> libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
+<span class="kw">glib2-devel</span> libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad</code></pre></div>
 <p>Then, you can install the stable version of MODIStsp from CRAN:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <hr>
 </div>
 <div id="installing-r-and-gdal" class="section level1">
@@ -188,7 +188,7 @@
 <h4 class="hasAnchor">
 <a href="#linux" class="anchor"></a>Linux</h4>
 <p>Please refer to the documentation which can be found <a href="https://cran.r-project.org/bin/linux">here</a>, opening the directory relative to your Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version. With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommended), since packaged version of R is &gt;= 3.2.1 (although not the latest); in this case, user can install R by simply typing in a terminal</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install r-base</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install r-base</code></pre></div>
 </div>
 </div>
 <div id="installing-gdal-1-11-1" class="section level3">
@@ -230,7 +230,7 @@
 <li><p>Ensure that your repositories contain a version of <code>gdal-bin</code> &gt;= 1.11.1. In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions <a href="https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable">here</a>). With Ubuntu 15.10 Wily (and newer) this step is not mandatory, although recommended in order to have updated version of GDAL installed.</p></li>
 <li>
 <p>To install GDAL, open a terminal and type</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install gdal-bin</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install gdal-bin</code></pre></div>
 </li>
 </ol>
 </div>

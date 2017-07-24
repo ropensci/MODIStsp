@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Non-Interactive Execution from within R • MODIStsp</title>
+<title>Standalone execution and scheduled processing • MODIStsp</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -52,16 +52,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Installation.html">Installation</a>
+      <a href="../articles/installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/Interactive_Execution.html">Interactive Execution - the MODIStsp GUI</a>
+      <a href="../articles/interactive_execution.html">Interactive Execution - the MODIStsp GUI</a>
     </li>
     <li>
-      <a href="../articles/NonInteractive_Execution.html">Non-Interactive Execution from within R</a>
+      <a href="../articles/noninteractive_execution.html">Non-Interactive Execution from within R</a>
     </li>
     <li>
-      <a href="../articles/Standalone_Execution.html">Standalone Execution and Scheduled Processing</a>
+      <a href="../articles/standalone_execution.html">Standalone Execution and Scheduled Processing</a>
     </li>
     <li>
       <a href="../articles/output.html">Outputs Format and Naming Conventions</a>
@@ -116,42 +116,55 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Non-Interactive Execution from within R</h1>
+      <h1>Standalone execution and scheduled processing</h1>
             
           </div>
 
     
     
 <div class="contents">
-<div id="specifying-a-saved-options-file" class="section level2">
+<div id="standalone-execution" class="section level2">
 <h2 class="hasAnchor">
-<a href="#specifying-a-saved-options-file" class="anchor"></a>Specifying a saved “Options file”</h2>
-<p><code>MODIStsp</code> can be launched in non-interactive mode within an <code>R</code> session by setting the optional <code>GUI</code> parameter to FALSE, and the <code>Options_File</code> parameter to the path of a previously saved JSON Options file. This allows to exploit <code>MODIStsp</code> functionalities within generic “R” processing scripts</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MODIStsp) 
-<span class="co"># --&gt; Specify the path to a valid options file saved in advance from MODIStsp GUI </span>
-options_file &lt;-<span class="st"> "X:/yourpath/youroptions.json"</span> 
-  
-<span class="co"># --&gt; Launch the processing</span>
-<span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file)</code></pre></div>
+<a href="#standalone-execution" class="anchor"></a>Standalone execution</h2>
+<ul>
+<li>MODIStsp can be also executed as a “standalone” application(i.e., without having to open R/RStudio) ; to do it, from R launch the function <code>MODIStsp_install_launcher()</code>.</li>
+</ul>
+<p>In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections “Science” and “Geography”) and a symbolic link in a known path (default: /usr/bin/MODIStsp). In Windows, a link in the Start Menu and optionally a desktop shortcut are created. See <code><a href="../reference/install_MODIStsp_launcher.html">?install_MODIStsp_launcher</a></code> for details and path customization.</p>
+<p>Double-clicking those files or launching them from a shell without parameters will launch <code>MODIStsp</code> in interactive mode. Non-interactive mode is triggered by adding the “-g” argument to the call, and specifying the path to a valid Options File as “-s” argument:</p>
+<ul>
+<li><p>Linux: <code>MODIStsp -g -s "/yourpath/youroptions.RData"</code> (see <code>MODIStsp -h</code> for details).</p></li>
+<li><p>Windows:<code>your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.RData"</code> (see <code>C:\Users\you\Desktop\MODIStsp -h</code> for details).</p></li>
+</ul>
+<p>If you do not want to install any link, launchers can be found in the subdirectory “MODIStsp/ExtData/Launcher” of your library path.</p>
+<hr>
 </div>
-<div id="looping-on-different-spatial-extents" class="section level2">
+<div id="scheduled-processing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#looping-on-different-spatial-extents" class="anchor"></a>Looping on different spatial extents</h2>
-<p>Specifying also the <code>spatial_file_path_</code> parameter overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MODIStsp) 
-<span class="co"># --&gt; Specify the path to a valid options file saved in advance from MODIStsp GUI </span>
-options_file &lt;-<span class="st"> "X:/yourpath/youroptions.json"</span> 
-
-<span class="co"># --&gt; Create a character array containing a list of shapefiles (or other spatial files)</span>
-extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">"X:/path/containing/some/shapefiles/"</span>, <span class="st">"</span><span class="ch">\\</span><span class="st">.shp$"</span>)  
-
-<span class="co"># --&gt; Loop on the list of spatial files and run MODIStsp using each of them to automatically </span>
-<span class="co"># define the output extent (A separate output folder is created for each input spatial file).</span>
-
-<span class="cf">for</span> (single_shape <span class="cf">in</span> extent_list) {
-  <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, 
-          <span class="dt">spatial_file_path =</span> single_shape )
-}</code></pre></div>
+<a href="#scheduled-processing" class="anchor"></a>Scheduled Processing</h2>
+<p>Standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:</p>
+<ol style="list-style-type: decimal">
+<li><p>Open the <code>MODIStsp</code> GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options. Then quit the program.</p></li>
+<li><p>Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory “MODIStsp/ExtData/Launcher” of your library path) as windows scheduled task (or linux “cron” job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument:</p></li>
+</ol>
+<div id="on-linux" class="section level4">
+<h4 class="hasAnchor">
+<a href="#on-linux" class="anchor"></a>On Linux</h4>
+<ul>
+<li>edit your crontab by opening a terminal and type:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">  <span class="kw">crontab</span> -e</code></pre></div>
+<ul>
+<li>add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">  <span class="kw">0</span> 23 * * * /bin/bash /usr/bin/MODIStsp -g -s <span class="st">"/yourpath/youroptions.RData"</span></code></pre></div>
+</div>
+<div id="on-windows" class="section level4">
+<h4 class="hasAnchor">
+<a href="#on-windows" class="anchor"></a>On Windows</h4>
+<ul>
+<li>create a Task following <a href="https://technet.microsoft.com/en-us/library/cc748993.aspx">these instructions</a>; add the path of the MODIStsp.bat launcher as Action (point 6), and specifying <code>-g -s "X:/yourpath/youroptions.RData"</code> as argument.</li>
+</ul>
+</div>
 </div>
 </div>
   </div>
@@ -161,8 +174,8 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#specifying-a-saved-options-file">Specifying a saved “Options file”</a></li>
-      <li><a href="#looping-on-different-spatial-extents">Looping on different spatial extents</a></li>
+<li><a href="#standalone-execution">Standalone execution</a></li>
+      <li><a href="#scheduled-processing">Scheduled Processing</a></li>
       </ul>
 </div>
       </div>

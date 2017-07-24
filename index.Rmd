@@ -35,21 +35,21 @@ ________________________________________________________________________________
 
 ## <i class="fa fa-cog" aria-hidden="true"></i> Getting Started
 
-- To install `MODIStsp`, please follow instructions reported [HERE](articles/Installation.html)
+- To install `MODIStsp`, please follow instructions reported [here](articles/installation.html), both for [<i class="fa fa-windows" aria-hidden="true"></i>](articles/installation.html#installing-on-windows) and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/installation.html#installing-on-linux-systems)
 
-- `MODIStsp` can be used either in [interactive mode](articles/Interactive_Execution.html) exploiting its user-friendly GUI, or in [non-interactive mode](articles/NonInteractive_Execution.html) from within `R` scripts
+- `MODIStsp` can be used either in [interactive mode](articles/interactive_execution.html) exploiting its user-friendly GUI, or in [non-interactive mode](articles/noninteractive_execution.html) from within `R` scripts
 
-- [Scheduled Processing](articles/NonInteractive_Execution.html#scheduled-processing) allows automatic updating of MODIS time series through scheduled jobs (both on <i class="fa fa-windows" aria-hidden="true"></i> and <i class="fa fa-linux" aria-hidden="true"></i>)
+- [Scheduled Processing](articles/noninteractive_execution.html#scheduled-processing) allows automatic updating of MODIS time series through scheduled jobs, both on [<i class="fa fa-windows" aria-hidden="true"></i>](articles/standalone_execution.html#on-windows) and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/standalone_execution.html#on-linux)
 
-- Solutions to common **installation, data download and processing problems** can be found in our [FAQ](articles/FAQ.html)
+- Solutions to common **installation, data download and processing problems** can be found in our [<i class="fa fa-question-circle-o aria-hidden="true"></i> faq](articles/faq.html)
 
-- Please **report any issues** you may encounter in our [issues](https://github.com/lbusett/MODIStsp/issues) page on <i class="fa fa-github-square" aria-hidden="true"></i>.
+- Please **report any issues** you may encounter in our [issues page on github <i class="fa fa-github-square" aria-hidden="true"></i>](https://github.com/lbusett/MODIStsp/issues) .
 
 ____________________________________________________________________________________
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What's New 
 
-Several bugs were recently corrected in the "devel" version of `MODIStsp` on github. See our [news](news/index.html) page for a detailed changelog. A new release (1.3.3) is foreseen in the coming weeks to port the improvements on CRAN. 
+Several bugs were recently corrected in the "devel" version of `MODIStsp` on github. See our [<i class="fa fa-newspaper-o aria-hidden="true"></i> news](news/index.html) page for a detailed changelog. A new release (1.3.3) is foreseen in the coming weeks to port the improvements on CRAN. 
 
 ____________________________________________________________________________________
 
@@ -64,7 +64,7 @@ L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessi
 A BibTeX entry for LaTeX users is:
 
 ```
-  @Article{BusettoRanghetti,
+  @Article{,
     author  = {Lorenzo Busetto and Luigi Ranghetti},
     title   = {MODIStsp: an R package for preprocessing of MODIS Land Products time series},
     journal = {Computers & Geosciences},
