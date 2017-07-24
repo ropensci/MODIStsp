@@ -388,10 +388,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                   
                   while (remote_size_tries > 0) {
                     size_string <- if (download_server == "http") {
-                      try(GET(paste0(remote_filename, ".xml"), authenticate(user, password), 
-                              timeout(240)))
+                      try(httr::GET(paste0(remote_filename, ".xml"), httr::authenticate(user, password), 
+                              httr::timeout(240)))
                     } else if (download_server == "ftp") {
-                      try(getURL(remote_filename, nobody = 1L, header = 1L, 
+                      try(RCurl::getURL(remote_filename, nobody = 1L, header = 1L, 
                                  .opts = list(timeout = 240, maxredirs = 5, verbose = TRUE)))
                     }
                     # Check if download was good: check class of xmldown and status of xmldown
@@ -456,8 +456,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                           # intern=TRUE for Windows, FALSE for Unix
                           download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows")) 
                         } else {
-                          download <- try(GET(remote_filename, authenticate(user, password), 
-                                              progress(), timeout(2400)))
+                          download <- try(GET(remote_filename, httr::authenticate(user, password), 
+                                              httr::progress(), httr::timeout(2400)))
                         } 
                       } else {
                         # ftp download
@@ -468,7 +468,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                " --allow-overwrite --file-allocation=none --retry-wait=2", sep = "") 
                           download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows"))
                         } else {
-                          download <- try(GET(remote_filename, progress(), timeout(2400)))
+                          download <- try(GET(remote_filename, httr::progress(), httr::timeout(2400)))
                         }
                       } 
                       # Check for errors on download try
