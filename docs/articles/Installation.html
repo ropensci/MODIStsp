@@ -52,10 +52,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/installation.html">Installation</a>
+      <a href="../articles/Installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/installation.html">bbbb</a>
+      <a href="../articles/Interactive_Execution.html">Interactive Execution - the MODIStsp GUI</a>
     </li>
     <li>
       <a href="../articles/NonInteractive_Execution.html">Non-Interactive Execution from within R</a>
@@ -152,9 +152,14 @@
 <h2 class="hasAnchor">
 <a href="#installing-on-linux-systems" class="anchor"></a><i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems</h2>
 <p>To install <code>MODIStsp</code> on Linux, you have to first install the following required dependencies:</p>
-<pre><code>* Cairo &gt;= 1.0.0, ATK &gt;= 1.10.0, Pango &gt;= 1.10.0, GTK+ &gt;= 2.8.0, GLib &gt;= 2.8.0 (required by package ```RGtk2```)
-* Curl (required by package ```curl```)
-* GDAL &gt;= 1.6.3, PROJ.4 &gt;= 4.4.9 (required by package ```rgdal```)</code></pre>
+<ul>
+<li>
+<code>Cairo</code> &gt;= 1.0.0, <code>ATK</code> &gt;= 1.10.0, <code>Pango</code> &gt;= 1.10.0, <code>GTK+</code> &gt;= 2.8.0, <code>GLib</code> &gt;= 2.8.0 (required by package <code>RGtk2</code>)</li>
+<li>
+<code>Curl</code> (required by package <code>curl</code>)</li>
+<li>
+<code>GDAL</code> &gt;= 1.6.3, <code>PROJ.4</code> &gt;= 4.4.9 (required by package <code>rgdal</code>)</li>
+</ul>
 <p>On <em>Debian and Ubuntu-based</em> systems, to install those packages open a terminal and type:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
 <span class="ex">libgtk2.0-dev</span> libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev</code></pre></div>
