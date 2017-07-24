@@ -1,5 +1,4 @@
-#'
-#' MODIStsp_process
+#' @title MODIStsp_process
 #' @description main function of MODIStsp tool. Takes as input processing parameters 
 #' specified by the user using MODIStsp_GUI and saved in MODIStsp_Previous.json
 #' (Interactive use), or a user specified JSON file (batch use) 
@@ -12,7 +11,7 @@
 #' 3. Creates virtual files of the processed time series.
 #' 
 #' Reprojection and resize is dealt with by accessing gdal routines through the `gdaUtils` package.
-#' Extraction of bitfields  from Quality layers is done though fast bitwise computation
+#' Extraction of bitfields from Quality layers is done though fast bitwise computation
 #' 
 #' Checks are done in order to not re-download already existing HDF images, and not 
 #' reprocess already processed dates (if the user didn'specify that)
@@ -96,35 +95,34 @@
 #' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function ([ModisDownload](http://r-gis.net/?q=ModisDownload);
 #' [Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
-#' @importFrom gdalUtils gdal_translate gdalbuildvrt gdalwarp
-#' @importFrom hash hash
-#' @importFrom httr GET authenticate timeout content progress write_disk
+#' @rdname MODIStsp_process
+#' @importFrom gdalUtils gdalinfo gdal_translate gdalwarp gdalbuildvrt
+#' @importFrom gWidgets gwindow glabel dispose gconfirm svalue addHandlerUnrealize
+#' @importFrom httr content GET authenticate progress timeout
+#' @importFrom raster raster writeRaster
+#' @importFrom XML xmlToList xmlParse
 #' @importFrom tools file_path_sans_ext
-#' @importFrom XML xmlParse xmlRoot xmlToList
-#' @importFrom RCurl getBinaryURL
-#' @importFrom stringr str_locate
-#' @import gWidgets
-#' @import gWidgetsRGtk2
 
 MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder, 
-                             out_folder_mod, reprocess = "Yes", delete_hdf = "No", 
-                             sensor, download_server, user, password, 
-                             https, ftps, start_x, start_y, end_x, end_y, 
-                             bbox, out_format, compress, out_res_sel, out_res, 
-                             native_res, tiled, MOD_proj_str, outproj_str, 
-                             nodata_in, nodata_out, nodata_change, 
-                             scale_val, scale_factor, offset, 
-                             rts, datatype,	bandsel, bandnames, 
-                             indexes_bandsel, indexes_bandnames, 
+                             out_folder_mod, reprocess = "Yes",
+                             delete_hdf = "No",
+                             sensor, download_server, user, password,
+                             https, ftps, start_x, start_y, end_x, end_y,
+                             bbox, out_format, compress, out_res_sel, out_res,
+                             native_res, tiled, MOD_proj_str, outproj_str,
+                             nodata_in, nodata_out, nodata_change,
+                             scale_val, scale_factor, offset,
+                             rts, datatype,	bandsel, bandnames,
+                             indexes_bandsel, indexes_bandnames,
                              indexes_formula, indexes_nodata_out,
-                             quality_bandnames, quality_bandsel, 
-                             quality_bitN, quality_source, 
-                             quality_nodata_in, full_ext, 
-                             quality_nodata_out, 
-                             file_prefixes, main_out_folder, 
-                             resampling, ts_format, 
-                             use_aria       = TRUE, 
-                             download_range = "full", 
+                             quality_bandnames, quality_bandsel,
+                             quality_bitN, quality_source,
+                             quality_nodata_in, full_ext,
+                             quality_nodata_out,
+                             file_prefixes, main_out_folder,
+                             resampling, ts_format,
+                             use_aria       = TRUE,
+                             download_range = "full",
                              gui            = TRUE) {
   
   
@@ -145,8 +143,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   out_prod_folder <- file.path(out_folder, main_out_folder)  # main output folder --> define on the basis of product name and create if necessary
   dir.create(out_prod_folder, showWarnings = FALSE, recursive = TRUE)
   tmp_prod_folder <- file.path(out_prod_folder, "tmp") # directory to store temporary [virtual] rasters
-  start_year <- unlist(strsplit(start_date, "[.]"))[1]
-  end_year <- unlist(strsplit(end_date, "[.]"))[1]
+  start_year      <- unlist(strsplit(start_date, "[.]"))[1]
+  end_year        <- unlist(strsplit(end_date, "[.]"))[1]
+  
+  
+  ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
+  ### Initialize number of cores for gdalwarp (equal to ncpus - 2 OR 10 if ncp####
+
+  ncores <- min(c(10, parallel::detectCores() - 2))
   
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   #  Verify if bands needed for computing spectral indexes and/or quality indicators are already selected
@@ -160,8 +164,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   if (length(quality_bandnames) == 0) {quality_bandsel <- integer(0)}
   # dummy matrix which associate, to each couple of index or quality band (col) - original band (row),  
   # info on wether that band is required to build that index
-  bands_indexes <- matrix(0, nrow = length(bandsel),
-                          ncol = length(indexes_bandsel) + length(quality_bandsel),
+  bands_indexes <- matrix(0, nrow     = length(bandsel),
+                          ncol     = length(indexes_bandsel) + length(quality_bandsel),
                           dimnames = list(bandnames, c(indexes_bandnames, quality_bandnames)))
   
   # Save original choice of bands in bandsel_orig_choice (bandsel is later modified to 
@@ -171,7 +175,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   for (band in which(indexes_bandsel == 1)) {
     formula <- indexes_formula[band]	  # If an index is selected retrieve its formula
     # cycle on original bands
-    for (bandorig in seq(along = bandnames)) {
+    for (bandorig in seq(along.with = bandnames)) {
       # check if the original band is needed for the index
       if (length(grep(bandnames[bandorig], formula)) > 0) {
         # if yes and band not set to be processed, set it to be processed
@@ -196,8 +200,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   
   mess_text <- "Retrieving list of files from NASA server"
   if (gui) {
-    mess     <- gwindow(title = "Processing Status", width = 400, height = 40)
-    mess_lab <- glabel(text = paste("---", mess_text, "---"), editable = FALSE, container = mess)
+    mess     <- gWidgets::gwindow(title = "Processing Status", width = 400, height = 40)
+    mess_lab <- gWidgets::glabel(text = paste("---", mess_text, "---"), editable = FALSE, container = mess)
     Sys.sleep(0.05)
     message("[", date(), "] ", mess_text)
   } else {
@@ -237,7 +241,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
           } else {
             gmessage("Please ensure that aria2c is installed and in your path! 
                      - See http://aria2.github.io ")
-            dispose(mess)
+            gWidgets::dispose(mess)
             stop("aria2c was not found! Ensure that aria2c is installed and in your 
                  path! - See http://aria2.github.io ")
           }
@@ -249,10 +253,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     }
     
     # Retrieve available dates for the selected product
-    date_dirs_all <- lpdaac_getmod_dirs(ftp = ftp, http = http, used_server = download_server, 
-                                        user = user, password = password, gui = gui,
-                                        out_folder_mod = out_folder_mod,
-                                        .Platform = .Platform)
+    date_dirs_all   <- lpdaac_getmod_dirs(ftp = ftp, http = http, used_server = download_server, 
+                                          user = user, password = password, gui = gui,
+                                          out_folder_mod = out_folder_mod,
+                                          .Platform = .Platform)
     # overwrite with the used setting (if already specified it does not change, if NA, 
     # it is set with the working one)
     download_server <- attr(date_dirs_all, "server") 
@@ -291,28 +295,28 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
         # the starting month-day 
         start_seas <- as.Date(strftime(as.Date(start_date, format = "%Y.%m.%d"), "0-%m-%d"))
         # the ending month-day 
-        end_seas <- as.Date(strftime(as.Date(end_date, format = "%Y.%m.%d"), "0-%m-%d"))
+        end_seas   <- as.Date(strftime(as.Date(end_date, format = "%Y.%m.%d"), "0-%m-%d"))
         
-        nye_incl <- start_seas > end_seas # TRUE if the period includes new year's eve, fasle if not
+        nye_incl   <- start_seas > end_seas # TRUE if the period includes new year's eve, fasle if not
         
         if (!nye_incl) {
-          dates <- c(gsub(paste0("^", start_year), yy, start_date), gsub(paste0("^", end_year), 
-                                                                         yy, end_date))
+          dates    <- c(gsub(paste0("^", start_year), yy, start_date), gsub(paste0("^", end_year), 
+                                                                            yy, end_date))
         } else {
           
           if (yy == start_year & yy != end_year) {
-            dates <- c(gsub(paste0("^", start_year), yy, start_date), paste0(as.character(yy), 
-                                                                             ".12.31"))
+            dates  <- c(gsub(paste0("^", start_year), yy, start_date), paste0(as.character(yy), 
+                                                                              ".12.31"))
           }
           
           if (yy != start_year & yy != end_year) {
-            dates <- c(paste0(as.character(yy), ".1.1"), gsub(paste0("^", end_year), yy, end_date),
-                       gsub(paste0("^", start_year), yy, start_date), paste0(as.character(yy), 
-                                                                             ".12.31"))
+            dates  <- c(paste0(as.character(yy), ".1.1"), gsub(paste0("^", end_year), yy, end_date),
+                        gsub(paste0("^", start_year), yy, start_date), paste0(as.character(yy), 
+                                                                              ".12.31"))
           }
           
           if (yy != start_year & yy == end_year) {
-            dates <- c(paste0(as.character(yy), ".1.1"), gsub(paste0("^", end_year), yy, end_date))
+            dates  <- c(paste0(as.character(yy), ".1.1"), gsub(paste0("^", end_year), yy, end_date))
           }
           
         }
@@ -388,10 +392,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                   
                   while (remote_size_tries > 0) {
                     size_string <- if (download_server == "http") {
-                      try(httr::GET(paste0(remote_filename, ".xml"), httr::authenticate(user, password), 
-                              httr::timeout(240)))
+                      try(GET(paste0(remote_filename, ".xml"), authenticate(user, password), 
+                              timeout(240)))
                     } else if (download_server == "ftp") {
-                      try(RCurl::getURL(remote_filename, nobody = 1L, header = 1L, 
+                      try(getURL(remote_filename, nobody = 1L, header = 1L, 
                                  .opts = list(timeout = 240, maxredirs = 5, verbose = TRUE)))
                     }
                     # Check if download was good: check class of xmldown and status of xmldown
@@ -414,8 +418,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                     remote_filesize <- local_filesize
                   } else {
                     remote_filesize <- if (download_server == "http") {
-                      as.integer(xmlToList(xmlParse(content(size_string, 
-                                                            encoding = "UTF-8")))[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]])
+                      as.integer(XML::xmlToList(XML::xmlParse(httr::content(size_string, encoding = "UTF-8"))
+                      )[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]])
                     } else if (download_server == "ftp") {
                       as.integer(gsub("[^:]+: ([0-9]+)\\r.*", "\\1", size_string))
                     }
@@ -456,8 +460,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                           # intern=TRUE for Windows, FALSE for Unix
                           download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows")) 
                         } else {
-                          download <- try(GET(remote_filename, httr::authenticate(user, password), 
-                                              httr::progress(), httr::timeout(2400)))
+                          download <- try(httr::GET(remote_filename, httr::authenticate(user, password), 
+                                                    httr::progress(), httr::timeout(2400)))
                         } 
                       } else {
                         # ftp download
@@ -468,7 +472,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                " --allow-overwrite --file-allocation=none --retry-wait=2", sep = "") 
                           download <- try(system(aria_string, intern = Sys.info()["sysname"] == "Windows"))
                         } else {
-                          download <- try(GET(remote_filename, httr::progress(), httr::timeout(2400)))
+                          download <- try(httr::GET(remote_filename, httr::progress(), 
+                                                    httr::timeout(2400)))
                         }
                       } 
                       # Check for errors on download try
@@ -505,10 +510,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       if (ce == 30) {
                         # Ask if Stop after 30 failed attempts
                         if (gui) {
-                          confirm <- gconfirm(paste0(download_server,
-                                                     " server seems to be down! Do you want to retry?"), 
-                                              icon = "question", 
-                                              handler = function(h, ...){})
+                          confirm <- gWidgets::gconfirm(paste0(download_server,
+                                                               " server seems to be down! Do you want to retry?"), 
+                                                        icon = "question", 
+                                                        handler = function(h, ...){})
                         } else {
                           confirm <- "FALSE"
                         }
@@ -542,7 +547,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               
               # STEP 0: patch to correct wrong resolution/bbox in some HDF4 original layers (e.g. albedo) ----
               # Retrieve information from hdf4 with gdalinfo
-              gdalinfo_hdf_raw      <- gdalinfo(file.path(out_folder_mod, modislist[1]))
+              gdalinfo_hdf_raw      <- gdalUtils::gdalinfo(file.path(out_folder_mod, modislist[1]))
               gdalinfo_hdf_1stlayer <- gsub("^ *SUBDATASET_1_NAME=", "",
                                             gdalinfo_hdf_raw[grep("^ *SUBDATASET_1_NAME",
                                                                   gdalinfo_hdf_raw)])
@@ -551,7 +556,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                                   gdalinfo_hdf_raw)])
               gdalinfo_raw          <- if (length(gdalinfo_hdf_1stlayer) > 0) {
                 # if more than a band is present, take gdalinfo from the first band
-                gdalinfo(gdalinfo_hdf_1stlayer)
+                gdalUtils::gdalinfo(gdalinfo_hdf_1stlayer)
               } else {
                 # otherwise, take from the hdf directly
                 gdalinfo_hdf_raw
@@ -640,15 +645,15 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                   bands[band] <- 1		# IF band selected for processing, put its value to 1
                   dir.create(file.path(out_prod_folder, bandnames[band]), 
                              showWarnings = FALSE, recursive = TRUE)
-                  bands <- paste(as.character(bands), collapse = "", sep = " ")					# Convert to character
-                  outfile <- paste0(tmp_prod_folder, "/", bandnames[band], "_", yy, "_", DOY, ".tif")  	# Create name for the temporary tif mosaic
-                  outfile <- paste0(bandnames[band], "_", yy, "_", DOY, ".tif")  	# Create name for the temporary tif mosaic
+                  bands       <- paste(as.character(bands), collapse = "", sep = " ")					# Convert to character
+                  outfile     <- paste0(tmp_prod_folder, "/", bandnames[band], "_", yy, "_", DOY, ".tif")  	# Create name for the temporary tif mosaic
+                  outfile     <- paste0(bandnames[band], "_", yy, "_", DOY, ".tif")  	# Create name for the temporary tif mosaic
                   # NOTE: Change outrep_file to a list of rep files: only one for original bands, multiple for indexes and quality
                   
                   # Create name for the TIFF reprojected  mosaic
-                  outrep_file <- file.path(out_prod_folder, bandnames[band], 
-                                           paste0(file_prefix, "_", sub("[.][^.]*$", "", 
-                                                                        basename(outfile), perl = TRUE)))
+                  outrep_file   <- file.path(out_prod_folder, bandnames[band], 
+                                             paste0(file_prefix, "_", sub("[.][^.]*$", "", 
+                                                                          basename(outfile), perl = TRUE)))
                   if (out_format == "GTiff") {
                     outrep_file <- paste0(outrep_file, ".tif")
                   } else {
@@ -684,15 +689,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       # fix due to bug in creation of vrt file for UIn32 data type - create tiff 
                       # files from the original hdfs, and then use those to build the vrt
                       
-                      
                       files_out   <- NULL
                       for(file in seq_along(along = files_in)) {
                         file_out <- tempfile(fileext = ".tif")
-                        gdal_translate(files_in[file], 
-                                       file_out,  
-                                       sd_index  = band,
-                                       srcnodata = nodata_in[band], 
-                                       vrtnodata = nodata_out[band])
+                        gdalUtils::gdal_translate(files_in[file], 
+                                                  file_out,  
+                                                  sd_index  = band,
+                                                  srcnodata = nodata_in[band], 
+                                                  vrtnodata = nodata_out[band])
                         files_in[file] <- file_out
                       }
                       
@@ -701,15 +705,18 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                outfile_vrt,  
                                sd        = band,
                                srcnodata = nodata_in[band], 
-                               vrtnodata = nodata_out[band])
+                               vrtnodata = nodata_out[band],
+                               multi     = TRUE, 
+                               wo        = paste0("NUM_THREADS=", ncores)
+                               )
 
                     } else {
-                    # Create a GDAL vrt file corresponding to the original hdf4
-                    gdalbuildvrt(files_in, 
-                                 outfile_vrt,  
-                                 sd = band,
-                                 srcnodata = nodata_in[band], 
-                                 vrtnodata = nodata_out[band])
+                      # Create a GDAL vrt file corresponding to the original hdf4
+                      gdalUtils::gdalbuildvrt(files_in, 
+                                              outfile_vrt,  
+                                              sd = band,
+                                              srcnodata = nodata_in[band], 
+                                              vrtnodata = nodata_out[band])
                     }
                     
                     # apply the patch if an error in the original hdf4 file at step 0 was detected
@@ -725,7 +732,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                                       paste(outfile_vrt_geom_corr, collapse = ", "), "</GeoTransform>")
                       write(outfile_vrt_cont, outfile_vrt)
                     }
-                  
+                    
                     
                     # If resize required,  convert bbox coordinates from t_srs 
                     # to modis_srs, to get the correct extent
@@ -742,26 +749,27 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                         outfile_vrt <- paste0(str_sub(outfile_vrt, 1,-5), ".tif")
                         gdalwarp(outfile_vrt_or, 
                                  outfile_vrt, 
-                                 te = c(bbox_mod), 
-                                 tap = TRUE, 
-                                 tr = res(raster(outfile_vrt_or)),    
+                                 te        = c(bbox_mod), 
+                                 tap       = TRUE, 
+                                 tr        = res(raster(outfile_vrt_or)),    
                                  sd        = band,
                                  srcnodata = nodata_in[band], 
                                  vrtnodata = nodata_out[band], 
-                                 overwrite = TRUE)
+                                 overwrite = TRUE,
+                                 multi     = TRUE, 
+                                 wo        = paste0("NUM_THREADS=", ncores))
                       } else {
                       gdalbuildvrt(outfile_vrt_or, 
                                    outfile_vrt, 
-                                   te = c(bbox_mod), 
-                                   tap = TRUE, 
-                                   tr = res(raster(outfile_vrt_or)), 
+                                   te        = c(bbox_mod), 
+                                   tap       = TRUE, 
+                                   tr        = res(raster(outfile_vrt_or)), 
                                    srcnodata = nodata_in[band], 
                                    vrtnodata = nodata_out[band], 
-                                   sd = band, 
+                                   sd        = band, 
                                    overwrite = TRUE)
                       }
                     }
-                    
                     
                     # Launch the reprojection - operations to be done depends on whether resize 
                     # and/or reprojection and/or resampling are required
@@ -790,78 +798,77 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                     }
                     
                     if (out_format == "GTiff") {
-                      switch( reproj_type,
-                              GdalTranslate = gdal_translate(outfile_vrt,  outrep_file_0, 
-                                                             a_srs = MOD_proj_str, of = out_format, 
-                                                             ot = datatype[band], a_nodata = nodata_out[band], 
-                                                             co = paste("COMPRESS", compress, sep = "="), 
-                                                             overwrite = TRUE),
-                              Resample0_Resize0 = gdalwarp(outfile_vrt, outrep_file_0, 
-                                                           s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                           of = out_format, r = resampling, 
-                                                           co = paste("COMPRESS", compress, sep = "="),
-                                                           wo = "INIT_DEST = NO_DATA", 
-                                                           wt = datatype[band], 
-                                                           overwrite = TRUE),
-                              Resample0_Resize1 = gdalwarp(outfile_vrt, outrep_file_0, 
-                                                           s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                           of = out_format, r = resampling, 
-                                                           te = bbox, 
-                                                           co = paste("COMPRESS", compress, sep = "="), 
-                                                           wo = "INIT_DEST = NO_DATA", 
-                                                           wt = datatype[band],
-                                                           overwrite = TRUE),
-                              Resample1_Resize0 = gdalwarp(outfile_vrt, outrep_file_0, 
-                                                           s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                           of = out_format, r = resampling, 
-                                                           tr = rep(out_res, 2), 
-                                                           co = paste("COMPRESS", compress, sep = "="), 
-                                                           wo = "INIT_DEST = NO_DATA", 
-                                                           wt = datatype[band],
-                                                           overwrite = TRUE),
-                              Resample1_Resize1 =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                            s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                            of = out_format, 
-                                                            r = resampling, te = bbox, 
-                                                            tr = rep(out_res, 2), 
-                                                            co = paste("COMPRESS", compress, sep = "="), 
-                                                            wo = "INIT_DEST = NO_DATA", 
-                                                            wt = datatype[band], 
-                                                            overwrite = TRUE),
-                              quit("Internal error in out_res_sel, outproj_str or full_ext."))
+                      switch(reproj_type,
+                             GdalTranslate = gdalUtils::gdal_translate(outfile_vrt,  outrep_file_0, 
+                                                                       a_srs = MOD_proj_str, of = out_format, 
+                                                                       ot = datatype[band], a_nodata = nodata_out[band], 
+                                                                       co = paste("COMPRESS", compress, sep = "="), 
+                                                                       overwrite = TRUE),
+                             Resample0_Resize0 = gdalUtils::gdalwarp(outfile_vrt, outrep_file_0, 
+                                                                     s_srs = MOD_proj_str, t_srs = outproj_str, 
+                                                                     of = out_format, r = resampling, 
+                                                                     co = paste("COMPRESS", compress, sep = "="),
+                                                                     wo = "INIT_DEST = NO_DATA", 
+                                                                     wt = datatype[band]), 
+                             Resample0_Resize1 = gdalUtils::gdalwarp(outfile_vrt, outrep_file_0, 
+                                                                     s_srs = MOD_proj_str, t_srs = outproj_str, 
+                                                                     of = out_format, r = resampling, 
+                                                                     te = bbox, 
+                                                                     co = paste("COMPRESS", compress, sep = "="), 
+                                                                     wo = "INIT_DEST = NO_DATA", 
+                                                                     wt = datatype[band],
+                                                                     overwrite = TRUE),
+                             Resample1_Resize0 = gdalUtils::gdalwarp(outfile_vrt, outrep_file_0, 
+                                                                     s_srs = MOD_proj_str, t_srs = outproj_str, 
+                                                                     of = out_format, r = resampling, 
+                                                                     tr = rep(out_res, 2), 
+                                                                     co = paste("COMPRESS", compress, sep = "="), 
+                                                                     wo = "INIT_DEST = NO_DATA", 
+                                                                     wt = datatype[band],
+                                                                     overwrite = TRUE),
+                             Resample1_Resize1 =  gdalUtils::gdalwarp(outfile_vrt, outrep_file_0, 
+                                                                      s_srs = MOD_proj_str, t_srs = outproj_str, 
+                                                                      of = out_format, 
+                                                                      r = resampling, te = bbox, 
+                                                                      tr = rep(out_res, 2), 
+                                                                      co = paste("COMPRESS", compress, sep = "="), 
+                                                                      wo = "INIT_DEST = NO_DATA", 
+                                                                      wt = datatype[band], 
+                                                                      overwrite = TRUE),
+                             quit("Internal error in out_res_sel, outproj_str or full_ext."))
                     } else {
-                      switch( reproj_type,
-                              GdalTranslate =  gdal_translate(outfile_vrt,  outrep_file_0, 
-                                                              a_srs = MOD_proj_str, of = out_format, 
-                                                              ot = datatype[band], 
-                                                              a_nodata = nodata_out[band], 
-                                                              overwrite = TRUE),
-                              Resample0_Resize0  =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                             s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                             of = out_format, r = resampling, 
-                                                             wo = "INIT_DEST = NO_DATA",
-                                                             wt = datatype[band], 
-                                                             overwrite = TRUE),
-                              Resample0_Resize1  =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                             s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                             of = out_format, r = resampling, 
-                                                             te = bbox, wo = "INIT_DEST = NO_DATA", 
-                                                             wt = datatype[band],
-                                                             overwrite = TRUE),
-                              Resample1_Resize0  =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                             s_srs = MOD_proj_str, t_srs = outproj_str, 
-                                                             of = out_format, r = resampling, 
-                                                             tr = rep(out_res, 2), 
-                                                             wo = "INIT_DEST = NO_DATA", 
-                                                             wt = datatype[band], 
-                                                             overwrite = TRUE),
-                              Resample1_Resize1  =  gdalwarp(outfile_vrt, outrep_file_0, 
-                                                             s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                             of = out_format, r = resampling, 
-                                                             te = bbox, tr = rep(out_res, 2), 
-                                                             wo = "INIT_DEST = NO_DATA", 
-                                                             wt = datatype[band], 
-                                                             overwrite = TRUE),
+                      switch(reproj_type,
+                              GdalTranslate =  gdalUtils::gdal_translate(outfile_vrt,  outrep_file_0, 
+                                                                         a_srs = MOD_proj_str, of = out_format, 
+                                                                         ot = datatype[band], 
+                                                                         a_nodata = nodata_out[band], 
+                                                                         overwrite = TRUE),
+                              Resample0_Resize0  =  gdalUtils::gdalwarp(outfile_vrt, outrep_file_0, 
+                                                                        s_srs = MOD_proj_str, t_srs = outproj_str, 
+                                                                        of = out_format, r = resampling, 
+                                                                        wo = "INIT_DEST = NO_DATA",
+                                                                        wt = datatype[band], 
+                                                                        overwrite = TRUE),
+                              Resample0_Resize1  = gdalUtils::gdalwarp(outfile_vrt, outrep_file_0, 
+                                                                        s_srs = MOD_proj_str, t_srs = outproj_str, 
+                                                                        of = out_format, r = resampling, 
+                                                                        te = bbox, wo = "INIT_DEST = NO_DATA", 
+                                                                        wt = datatype[band],
+                                                                        overwrite = TRUE),
+                              Resample1_Resize0  =  gdalUtils::gdalwarp(outfile_vrt, outrep_file_0, 
+                                                                        s_srs = MOD_proj_str, t_srs = outproj_str, 
+                                                                        of = out_format, r = resampling, 
+                                                                        tr = rep(out_res, 2), 
+                                                                        wo = "INIT_DEST = NO_DATA", 
+                                                                        wt = datatype[band], 
+                                                                        overwrite = TRUE),
+                              Resample1_Resize1  =  gdalUtils::gdalwarp(outfile_vrt, outrep_file_0, 
+                                                                        s_srs = MOD_proj_str, t_srs = outproj_str,
+                                                                        of = out_format, r = resampling, 
+                                                                        te = bbox, tr = rep(out_res, 2), 
+                                                                        wo = "INIT_DEST = NO_DATA", 
+                                                                        wt = datatype[band], 
+                                                                        overwrite = TRUE),
                               quit("Internal error in out_res_sel, outproj_str or full_ext."))
                     }
                     
@@ -869,16 +876,16 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                     if (scale_val == "Yes"   & !(scale_factor[band] == 1 & offset[band] == 0)) {
                       # fixed: ignore scaling if slope = 1 AND offset = 0 
                       # mode with raster()
-                      outrep_0 <- raster(outrep_file_0)
-                      outrep <- outrep_0*as.numeric(scale_factor[band]) + as.numeric(offset[band])
+                      outrep_0 <- raster::raster(outrep_file_0)
+                      outrep   <- outrep_0 * as.numeric(scale_factor[band]) + as.numeric(offset[band])
                       
-                      writeRaster(outrep, outrep_file, 
+                      raster::writeRaster(outrep, outrep_file, 
                                   format    = out_format, 
                                   datatype  = ifelse(as.integer(scale_factor[band]) != as.numeric(scale_factor[band]), "FLT4S", "INT2S"),
                                   ifelse(out_format == "GTiff", paste0("options=c(COMPRESS=", compress, ")"), ""),
                                   NAflag    = as.numeric(nodata_out[band]),
                                   overwrite = TRUE)
-                      rm(outrep, outrep_0); gc()
+                      rm(outrep, outrep_0)
                       
                       # # mode with gdal_calc: faster but unstable
                       # gdal_calc_string <- paste0(Sys.which("gdal_calc.py")," -A ",outrep_file_0," --outfile=",outrep_file,
@@ -904,7 +911,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       
                     }
                     
-                    gc()
                     xml_file <- paste0(outrep_file, ".aux.xml")		# Delete xml files created by gdalwarp
                     unlink(tmp_prod_folder, recursive = TRUE)					# Delete temporary files in temp folder
                   }
@@ -920,7 +926,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                 formula      <- indexes_formula[band]				#index formula
                 mess_text    <- paste("Computing", sens_sel, indexes_band, "for date:", date_name)
                 if (gui) {
-                  svalue(mess_lab) <- paste("---", mess_text, "---")
+                  gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
                   Sys.sleep(0.05)
                   message("[", date(), "] ", mess_text)
                 } else {
@@ -961,7 +967,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                 nodata_qa_out <- quality_nodata_out[band]
                 mess_text     <- paste("Computing", quality_band, "for date:", date_name)
                 if (gui) {
-                  svalue(mess_lab) <- paste("---", mess_text, "---")
+                  gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
                   Sys.sleep(0.05)
                   message("[", date(), "] ", mess_text)
                 } else {
@@ -1036,14 +1042,16 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                date_dir = date_dirs[dir], 
                                                v = seq(from = start_y, to =  end_y), 
                                                h = seq(from = start_x, to = end_x), 
-                                               tiled, gui = gui)
+                                               tiled, 
+                                               out_folder_mod, 
+                                               gui = gui)
               for (modisname in modislist) {
                 unlink(file.path(out_folder_mod, modisname))
               }
             }
           } #end if on Delete original downloaded HDFs
           
-        }   # End cycling on available dates for selected year
+        } # End cycling on available dates for selected year
         
       } else {
         message("[", date(), "] No available data for year: ",
@@ -1060,7 +1068,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   #- ------------------------------------------------------------------------------- -#
   #  Create vrt files of time series - original and derived
   #- ------------------------------------------------------------------------------- -#
-  
   
   if (sensor == "Both") {
     senslist <- c("Terra", "Aqua", "Mixed")
@@ -1115,10 +1122,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   #- ------------------------------------------------------------------------------- -#
   gc()
   if (gui) {
-    addHandlerUnrealize(mess_lab, handler = function(h, ...) {
+    gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
       return(FALSE)
     })		# Allow message lab to be closed since processing ended .
-    dispose(mess_lab)
+    gWidgets::dispose(mess_lab)
   }
   unlink(file.path(out_prod_folder, "Temp"), recursive = TRUE)
   return("DONE")

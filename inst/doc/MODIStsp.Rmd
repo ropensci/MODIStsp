@@ -8,17 +8,16 @@ output:
     fig_caption: yes
     number_sections: yes
     toc: yes
-    toc_depth: 2
- 
+    toc_depth: 1
   rmarkdown::html_vignette:
     fig_caption: yes
     number_section: yes
-    toc: yes
-    toc_depth: 1
+    toc: no
+    toc_depth: 2
   rmarkdown::html_document:
     fig_caption: yes
     number_section: yes
-    toc: yes
+    toc: no
     toc_depth: 1
 urlcolor: blue
 linkcolor: blue
@@ -107,7 +106,7 @@ The development version of MODIStsp is available on GitHub To install it, follow
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
-install_github("lbusett/MODIStsp", ref = "master")
+install_github("lbusett/MODIStsp")
 ```
 
 

@@ -1,24 +1,31 @@
 ---
 title: Installation
-output: github_document
+output: 
+  github_document:
+    toc_dept: 1
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-**IMPORTANT:** _MODIStsp_ requires [R](https://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 __with support for HDF4 raster format__ to be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#gdal_inst).
 
-## On Windows
+## <i class="fa fa-desktop" aria-hidden="true"></i> System Requirements 
+
+`MODIStsp` requires [R](https://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 __with support for HDF4 raster format__ to be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#installing-r-and-gdal).
+
+____________________________________________________________________________________
+
+## <i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows
 
 You can install the stable version of `MODIStsp`, from CRAN: 
 
 `install.packages("MODIStsp")`
 
-, or the development version (containing the latest bug fixes) from github;
+, or the development version (containing the latest improvements and bug fixes):
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
-install_github("lbusett/MODIStsp", ref = "master")
+install_github("lbusett/MODIStsp")
 ```
 
 Note that **if the `GTK+` library is not already installed on your system, installation may fail**. In that case, please install and load the `gWidgetsRGtk2` library beforehand:
@@ -37,37 +44,99 @@ If it still fails, try downloading the GTK+ bundle from:
 <http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip> 
 (OR <http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip> if on Win32)
 
-, unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), then add the path to the "bin" subfolder (e.g., `C:\\Program Files\\GTK+\\bin\\` to your system PATH environment variable.
+, unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), then add the path to its "bin" subfolder (e.g., `C:\\Program Files\\GTK+\\bin\\` to your system PATH environment variable.
 
-Restart your system and try loading again `gWidgetsRGtk2`
-    
-## On Linux systems
+Restart your system and try loading again `gWidgetsRGtk2`: if it loads ok, you should be ready to install `MODIStsp`
 
-1. Install the following required dependencies: 
-    * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (required by package ```RGtk2```)
-    * Curl (required by package ```curl```)
-    * GDAL >= 1.6.3, PROJ.4 >= 4.4.9 (required by package ```rgdal```)
+____________________________________________________________________________________
+
+## <i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems
+
+To install `MODIStsp` on Linux, you have to first install the following required dependencies: 
+
+  * `Cairo` >= 1.0.0, `ATK` >= 1.10.0, `Pango` >= 1.10.0, `GTK+` >= 2.8.0, `GLib` >= 2.8.0 (required by package ```RGtk2```)
+  * `Curl` (required by package ```curl```)
+  * `GDAL` >= 1.6.3, `PROJ.4` >= 4.4.9 (required by package ```rgdal```)
     
-    On *Debian and Ubuntu-based* systems, to install packages open a terminal and type  
+On *Debian and Ubuntu-based* systems, to install those packages open a terminal and type: 
+    
 ```bash
 sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
 libgtk2.0-dev libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev
 ```
     
-    On *rpm-base systems*, to install packages open a terminal and type  
+On *rpm-base systems*, to install packages open a terminal and type:  
+
 ```bash
 sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
 glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
 ```
     
-2. Install the stable version of MODIStsp from CRAN:
+Then, you can install the stable version of MODIStsp from CRAN:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("MODIStsp")
 ```
-or the development version (containing the latest bug fixes) from github;
+, or the development version (containing the latest improvements and bug fixes) from github;
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
-install_github("lbusett/MODIStsp", ref = "master")
+install_github("lbusett/MODIStsp")
 ```
+____________________________________________________________________________________
+
+
+# Installing R and GDAL
+
+### Installing R
+
+#### Windows
+
+Download and install the latest version of R which can be found [here](https://cran.r-project.org/bin/windows/base).
+
+#### Linux
+
+Please refer to the documentation which can be found [here](https://cran.r-project.org/bin/linux), opening the directory relative to your Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version.
+With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommended), since packaged version of R is >= 3.2.1 (although not the latest); in this case, user can install R by simply typing in a terminal
+```bash
+sudo apt-get install r-base
+```
+
+### Installing GDAL >= 1.11.1
+
+#### Windows
+
+The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
+
+1. Open the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
+2. In the **Quick Start for OSGeo4W Users** section, select the download of 32bit or 64bit of OSGeo4W network installer
+3. Run the installer
+  + _Easiest Option_: 
+    +  Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing software like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
+  + _Advanced Option_: 
+    +  Select **Advanced Install**, then click on "Next" a few times until you reach the "Select Packages" screen. 
+    +  Click on "Commandline_Utilities_", and on the list look for "_gdal: The GDAL/OGR library..." entry
+    +  Click on "Skip": the word "skip" will be replaced by the current GDAL version number
+    +  Click on "Next" a few times to install GDAL
+    
+#### Debian and Ubuntu-based systems
+
+1. Ensure that your repositories contain a version of ```gdal-bin``` >= 1.11.1. 
+    In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). 
+    With Ubuntu 15.10 Wily (and newer) this step is not mandatory, although recommended in order to have updated version of GDAL installed.
+    
+2. To install GDAL, open a terminal and type  
+    ```bash
+    sudo apt-get install gdal-bin
+    ```
+    
+#### ArchLinux
+
+GDAL is maintained updated to the latest version as binary package within the community repository; although that, the support for HDF4 format is not included. 
+To bypass this problem, ArchLinux users can install ```gdal-hdf4``` package from AUR (see [here](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages) or [here](https://archlinux.fr/yaourt-en) for the package installation from AUR). 
+This package is updated manually after each release of ```gdal``` on the community repository, so a temporal shift between a new ```gdal``` release and the update of ```gdal-hdf4``` could happen.
+If you want to manually add the support for HDF4 in case ```gdal-hdf4``` is out-of-date, you can do it following [these instructions](https://notehub.org/fctdn).
+
+#### Other Linux systems
+
+Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter ```--with-hdf4``` to the ```configure``` instruction).

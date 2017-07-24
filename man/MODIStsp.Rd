@@ -64,6 +64,9 @@ for (single_shape in extent_list)
   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json",
     spatial_file_path = single_shape )}
 }
+\seealso{
+\code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_Process}}
+}
 \author{
 Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
 

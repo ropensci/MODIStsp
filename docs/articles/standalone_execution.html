@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Examples of use • MODIStsp</title>
+<title>Standalone execution and scheduled processing • MODIStsp</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -116,18 +116,68 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Examples of use</h1>
+      <h1>Standalone execution and scheduled processing</h1>
             
           </div>
 
     
     
 <div class="contents">
-<p><strong>Coming soon !</strong></p>
+<div id="standalone-execution" class="section level2">
+<h2 class="hasAnchor">
+<a href="#standalone-execution" class="anchor"></a>Standalone execution</h2>
+<ul>
+<li>MODIStsp can be also executed as a “standalone” application(i.e., without having to open R/RStudio) ; to do it, from R launch the function <code>MODIStsp_install_launcher()</code>.</li>
+</ul>
+<p>In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections “Science” and “Geography”) and a symbolic link in a known path (default: /usr/bin/MODIStsp). In Windows, a link in the Start Menu and optionally a desktop shortcut are created. See <code><a href="../reference/install_MODIStsp_launcher.html">?install_MODIStsp_launcher</a></code> for details and path customization.</p>
+<p>Double-clicking those files or launching them from a shell without parameters will launch <code>MODIStsp</code> in interactive mode. Non-interactive mode is triggered by adding the “-g” argument to the call, and specifying the path to a valid Options File as “-s” argument:</p>
+<ul>
+<li><p>Linux: <code>MODIStsp -g -s "/yourpath/youroptions.RData"</code> (see <code>MODIStsp -h</code> for details).</p></li>
+<li><p>Windows:<code>your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.RData"</code> (see <code>C:\Users\you\Desktop\MODIStsp -h</code> for details).</p></li>
+</ul>
+<p>If you do not want to install any link, launchers can be found in the subdirectory “MODIStsp/ExtData/Launcher” of your library path.</p>
+<hr>
+</div>
+<div id="scheduled-processing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#scheduled-processing" class="anchor"></a>Scheduled Processing</h2>
+<p>Standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:</p>
+<ol style="list-style-type: decimal">
+<li><p>Open the <code>MODIStsp</code> GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options. Then quit the program.</p></li>
+<li><p>Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory “MODIStsp/ExtData/Launcher” of your library path) as windows scheduled task (or linux “cron” job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument:</p></li>
+</ol>
+<div id="on-linux" class="section level4">
+<h4 class="hasAnchor">
+<a href="#on-linux" class="anchor"></a>On Linux</h4>
+<ul>
+<li>edit your crontab by opening a terminal and type:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">  <span class="kw">crontab</span> -e</code></pre></div>
+<ul>
+<li>add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">  <span class="kw">0</span> 23 * * * /bin/bash /usr/bin/MODIStsp -g -s <span class="st">"/yourpath/youroptions.RData"</span></code></pre></div>
+</div>
+<div id="on-windows" class="section level4">
+<h4 class="hasAnchor">
+<a href="#on-windows" class="anchor"></a>On Windows</h4>
+<ul>
+<li>create a Task following <a href="https://technet.microsoft.com/en-us/library/cc748993.aspx">these instructions</a>; add the path of the MODIStsp.bat launcher as Action (point 6), and specifying <code>-g -s "X:/yourpath/youroptions.RData"</code> as argument.</li>
+</ul>
+</div>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#standalone-execution">Standalone execution</a></li>
+      <li><a href="#scheduled-processing">Scheduled Processing</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
