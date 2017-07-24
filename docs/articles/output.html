@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Examples of use • MODIStsp</title>
+<title>Outputs Format and Naming Conventions • MODIStsp</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -46,16 +46,16 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    How To Use It
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/installation.html">Installation</a>
+      <a href="../articles/Installation.html">Installation</a>
     </li>
     <li>
-      <a href="../articles/installation.html">bbbb</a>
+      <a href="../articles/Interactive_Execution.html">Interactive Execution - the MODIStsp GUI</a>
     </li>
     <li>
       <a href="../articles/NonInteractive_Execution.html">Non-Interactive Execution from within R</a>
@@ -116,18 +116,65 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Examples of use</h1>
+      <h1>Outputs Format and Naming Conventions</h1>
             
           </div>
 
     
     
 <div class="contents">
-<p><strong>Coming soon !</strong></p>
+<div id="single-band-outputs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#single-band-outputs" class="anchor"></a>Single-band outputs</h2>
+<p>Output raster files are saved in specific subfolders of the main output folder. In particular, <strong>a separate subfolder</strong> is created for each processed original MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image for each processed date, created according to the following naming conventions:</p>
+<pre><code>"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"</code></pre>
+<p><font size="2"> <em>(e.g.,MOD13Q1_NDVI_2000_065.dat)</em> </font></p>
+<p>, where:</p>
+<ul>
+<li>
+<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
+<li>
+<strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
+<li>
+<strong><em>YYYY</em></strong> and <strong><em>DOY</em></strong> correspond to the year and DOY (Day of the Year) of acquisition of the original MODIS image;</li>
+<li>
+<strong><em>ext</em></strong> is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs).</li>
+</ul>
+<hr>
+</div>
+<div id="virtual-multi-band-outputs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#virtual-multi-band-outputs" class="anchor"></a>Virtual multi-band outputs</h2>
+<p>ENVI and/or GDAL virtual time series files and <em>RasterStack</em> RData objects are instead stored <strong>in the “Time_Series” subfolder</strong> if required.</p>
+<p>Naming convention for these files is as follow:</p>
+<pre><code>"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" </code></pre>
+<p><font size="2"> <em>(e.g., MOD13Q1_NDVI_49_2000_17_2015_RData.dat)</em> </font></p>
+<p>, where:</p>
+<ul>
+<li>
+<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
+<li>
+<strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
+<li>
+<strong><em>StartDOY</em></strong>, <strong><em>StartYear</em></strong>, <strong><em>EndDOY</em></strong> and <strong><em>EndYear</em></strong> indicate the temporal extent of the time serie created;</li>
+<li>
+<strong><em>suffix</em></strong> indicates the type of virtual file (ENVI, GDAL or RData);</li>
+<li>
+<strong><em>ext</em></strong> is the file extension (“.vrt” for gdal virtual files, “META” for ENVI meta files or “Rdata” for <code>R</code> raster stacks).</li>
+</ul>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#single-band-outputs">Single-band outputs</a></li>
+      <li><a href="#virtual-multi-band-outputs">Virtual multi-band outputs</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

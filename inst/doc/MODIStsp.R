@@ -10,7 +10,7 @@
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(devtools)
-#  install_github("lbusett/MODIStsp", ref = "master")
+#  install_github("lbusett/MODIStsp")
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(MODIStsp)

@@ -1,11 +1,10 @@
 ---
-output: html_document
+output: github_document
+title: Examples of use
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## Examples of use
 
 **Coming soon !**

@@ -6,20 +6,28 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <title>MODIStsp_process � MODIStsp_process • MODIStsp</title>
 =======
 <title>MODIStsp_process — MODIStsp_process • MODIStsp</title>
 >>>>>>> devel
+=======
+<title>MODIStsp_process � MODIStsp_process • MODIStsp</title>
+>>>>>>> Stashed changes
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 =======
 <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 >>>>>>> devel
+=======
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+>>>>>>> Stashed changes
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -46,6 +54,18 @@
 <![endif]-->
 
 
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84499524-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
   </head>
 
   <body>
@@ -68,8 +88,15 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   <a href="../index.html">Home</a>
+=======
+  <a href="../index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+>>>>>>> Stashed changes
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -84,14 +111,24 @@
     <li>
       <a href="../articles/installation.html">bbbb</a>
     </li>
+    <li>
+      <a href="../articles/NonInteractive_Execution.html">Non-Interactive Execution from within R</a>
+    </li>
+    <li>
+      <a href="../articles/Standalone_Execution.html">Standalone Execution and Scheduled Processing</a>
+    </li>
+    <li>
+      <a href="../articles/output.html">Outputs Format and Naming Conventions</a>
+    </li>
+    <li>
+      <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
+    </li>
   </ul>
-</li>
-<li>
-  <a href="../reference/index.html">Function Reference</a>
 </li>
 <li>
   <a href="../articles/examples.html">Examples of Use</a>
 </li>
+<<<<<<< Updated upstream
 <li>
   <a href="../articles/faq.html">FAQ</a>
 =======
@@ -110,17 +147,44 @@
   <a href="../news/index.html">News</a>
 >>>>>>> devel
 </li>
+=======
+>>>>>>> Stashed changes
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+  <a href="../articles/faq.html">
+    <span class="fa fa-question-circle-o"></span>
+     
+    faq
+  </a>
+</li>
+<li>
+  <a href="../news/index.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    news
+  </a>
+</li>
+<li>
+  <a href="../reference/index.html">
+    <span class="fa fa-file-code-o"></span>
+     
+    functions
+  </a>
+</li>
+<li>
+>>>>>>> Stashed changes
   <a href="https://github.com/lbusett/MODIStsp/">
 =======
   <a href="https://github.com/lbusett/MODIStsp">
 >>>>>>> devel
     <span class="fa fa-github fa-lg"></span>
      
+    github
   </a>
 </li>
       </ul>
@@ -405,7 +469,7 @@ resize, mosaicing, indexes computation, quality indicators computation)</p></li>
 <li><p>Creates virtual files of the processed time series.</p></li>
 </ol>
     <p>Reprojection and resize is dealt with by accessing gdal routines through the <code>gdaUtils</code> package.
-Extraction of bitfields  from Quality layers is done though fast bitwise computation</p>
+Extraction of bitfields from Quality layers is done though fast bitwise computation</p>
 <p>Checks are done in order to not re-download already existing HDF images, and not
 reprocess already processed dates (if the user didn'specify that)</p>
     

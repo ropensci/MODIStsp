@@ -106,7 +106,7 @@ The development version of MODIStsp is available on GitHub To install it, follow
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
-install_github("lbusett/MODIStsp", ref = "master")
+install_github("lbusett/MODIStsp")
 ```
 
 

@@ -1,4 +1,4 @@
-#' MODIStsp
+#' @title MODIStsp
 #' @description Main function for the MODIS Time Series Processing Tool (MODIStsp)
 #' @details The function is used to initialize the processing (folder names, packages,
 #'  etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs, and to launch the 
@@ -21,14 +21,17 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @export
-#' @import gWidgets
-#' @importFrom hash hash
+#' @seealso 
+#'  \code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_Process}}
+#' @rdname MODIStsp
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
+#' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose
+#' @importFrom pacman p_exists p_load
+#' @importFrom raster rasterOptions crop extent
 #' @importFrom rgdal getGDALVersionInfo
-#' @importFrom raster extent rasterOptions
+#' @importFrom RJSONIO fromJSON toJSON
 #' @importFrom tools file_path_sans_ext
-#' @importFrom utils memory.limit packageVersion install.packages
-#' @importFrom pacman p_load p_exists
+#' @importFrom utils packageVersion
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used 
 #' # settings
@@ -62,8 +65,11 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
                      spatial_file_path = NULL, scrollWindow = FALSE) {
   
   options("guiToolkit" = "RGtk2")
+  # Make so that "raster" functions doesn't automatically add extensions on output files
+  prevopt <- raster::rasterOptions()$setfileext
+  raster::rasterOptions(setfileext = FALSE)
   
-  MODIStsp.env <- new.env()
+  MODIStsp.env              <- new.env()
   MODIStsp.env$MODIStsp_dir <- system.file(package = "MODIStsp")
   #- ------------------------------------------------------------------------ -#
   #  Initialize project
@@ -71,13 +77,13 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   # On interactive execution, load Rgtk2
   # On interactive execution, load Rgtk2
   if (gui) {
-    if (!p_exists("gWidgetsRGtk2", local = TRUE)) {
+    if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
       
       message(paste0("Library 'gWidgetsRGtk2' is not installed. It is required to run MODIStsp!\n\n",
                      "Do you want to install it now?"), type = " y / n")
       inst_gw <- readline()
       if (inst_gw == "y") {
-        p_load("gWidgetsRGtk2")
+        pacman::p_load("gWidgetsRGtk2")
       } else {
         stop("MODIStsp can not work in Interactive mode withouth gWidgetsRGtk2! Exiting!")
       }
@@ -92,21 +98,21 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     welcome_text <- paste0("Welcome to MODIStsp!\n\nWe will now search for a valid GDAL ",
                            "installation - please wait\n(this will happen only once)")
     if (gui) {
-      welcome_win       <- gwindow(title = "Welcome", width = 400, height = 100)
-      welcome_lab       <- glabel(text = welcome_text, container = welcome_win, editable = FALSE)
-      font(welcome_lab) <-  list(family = "sans", style = "italic", size = 10)
+      welcome_win       <- gWidgets::gwindow(title = "Welcome", width = 400, height = 100)
+      welcome_lab       <- gWidgets::glabel(text = welcome_text, container = welcome_win, editable = FALSE)
+      font(welcome_lab) <- list(family = "sans", style = "italic", size = 10)
       Sys.sleep(0.05)
       message("[", date(), "]", welcome_text)
     } else {
       message("[", date(), "]", welcome_text)
     }
-    gdal_setInstallation(ignore.full_scan = TRUE, verbose = TRUE)
+    gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE, verbose = TRUE)
   }
   gdal_version <- package_version(gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*", "\\1",
-                                       getGDALVersionInfo(str = "--version")))
+                                       rgdal::getGDALVersionInfo(str = "--version")))
   # GDAL version used during the last test (for now used as minimum required version)
   gdal_minversion <- package_version("1.11.1")
-  gdal_HDFsupport <- length(grep("HDF4", gdalinfo(formats = TRUE))) > 0
+  gdal_HDFsupport <- length(grep("HDF4", gdalUtils::gdalinfo(formats = TRUE))) > 0
   
   if (gdal_version < gdal_minversion) {
     stop(paste0("GDAL version must be at least ", gdal_minversion, ". Please update it."))
@@ -118,12 +124,6 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   
   message("GDAL version in use:", as.character(gdal_version))
   
-  # Increase memory limit on windows
-  if (Sys.info()["sysname"] == "Windows") {
-    memory.limit() # Increase maximum allocsable memory
-  }
-  # Make so that "raster" functions doesn't automatically add extensions on output files
-  rasterOptions(setfileext = FALSE)
   # Parameter retrieval and Folder Initialization -----
   if (is.null(options_file) & gui == FALSE) {
     stop("Please provide a valid \"option_file\" path value (or run with gui=TRUE).")
@@ -195,7 +195,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       bbox            = c("", "", "", ""),
       out_folder      = "",
       out_folder_mod  = "",
-      MODIStspVersion = as.character(packageVersion("MODIStsp")),
+      MODIStspVersion = as.character(utils::packageVersion("MODIStsp")),
       custom_indexes  = list()
     )
     write(RJSONIO::toJSON(general_opts), previous_jsfile)
@@ -206,7 +206,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
                 version. Please delete it or specify a different value for the `option_file`
                 parameter."))
     } else {
-      if (general_opts$MODIStspVersion < packageVersion("MODIStsp")) {
+      if (general_opts$MODIStspVersion < utils::packageVersion("MODIStsp")) {
         warning(paste0("The option file in use (", previous_jsfile, ") was created with an 
                        old MODIStsp version (",
                        general_opts$MODIStspVersion, "): this could lead to errors!"))
@@ -220,7 +220,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       reload_prodlist <- TRUE
     } else {
       # load if prod_opt_list is old
-      reload_prodlist <- attr(prod_opt_list, "MODIStspVersion") < packageVersion("MODIStsp")
+      reload_prodlist <- attr(prod_opt_list, "MODIStspVersion") < utils::packageVersion("MODIStsp")
     }
   } else {
     reload_prodlist <- TRUE
@@ -228,8 +228,8 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   if (reload_prodlist) {
     mess_text <- "Waiting while reading the MODIS products list..."
     if (gui) {
-      mess     <- gwindow(title = "Please wait...", width = 400, height = 40)
-      mess_lab <- glabel(text = mess_text, editable = FALSE, container = mess)
+      mess     <- gWidgets::gwindow(title = "Please wait...", width = 400, height = 40)
+      mess_lab <- gWidgets::glabel(text = mess_text, editable = FALSE, container = mess)
       Sys.sleep(0.05)
       message(mess_text)
     } else {
@@ -238,17 +238,17 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file)
     load(prodopts_file)
     if (gui) {
-      addHandlerUnrealize(mess_lab, handler = function(h, ...) {
+      gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
         return(FALSE)
       })
-      dispose(mess_lab)
+      gWidgets::dispose(mess_lab)
     }
   }
   
   #launch the GUI if on an interactive session (i.e., gui = T) and wait for return----
   if (gui) {
     if (exists("welcome_lab")) {
-      dispose(welcome_lab)
+      gWidgets::dispose(welcome_lab)
     }
     Quit <- MODIStsp_GUI(general_opts    = general_opts,
                          prod_opt_list   = prod_opt_list,
@@ -266,7 +266,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   # Launch the processing ----
   # When GUI is closed (or in a non-interactive run): If not Quit selected, restore the
   # user selected options from previous file and launch the processing ----
-
+  
   if (!Quit) {
     
     if (file.exists(previous_jsfile)) {
@@ -324,7 +324,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       # Redefine the out_folder including the file name as subfolder
       # (this to avoid that, running in a cycle, files are overwritten every time)
       general_opts$out_folder <- file.path(general_opts$out_folder,
-                                           file_path_sans_ext(basename(spatial_file_path)))
+                                           tools::file_path_sans_ext(basename(spatial_file_path)))
       
       # # If out_folder already exists, create a new one with a suffix
       # if (file.exists(general_opts$out_folder)) {
@@ -344,7 +344,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       # Automatically retrieve the tiles requested to cover the extent
       modis_grid           <- get(load(file.path(MODIStsp.env$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
       external_bbox_mod    <- reproj_bbox(external_bbox, general_opts$user_proj4, MOD_proj_str, enlarge = TRUE)
-      d_bbox_mod_tiled     <- crop(modis_grid, extent(external_bbox_mod))
+      d_bbox_mod_tiled     <- raster::crop(modis_grid, raster::extent(external_bbox_mod))
       general_opts$start_x <- min(d_bbox_mod_tiled$H)
       general_opts$end_x   <- max(d_bbox_mod_tiled$H)
       general_opts$start_y <- min(d_bbox_mod_tiled$V)
@@ -353,7 +353,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     }
     
     # launch MODIStsp_process to Download and preprocess the selected images ----
-    output <- MODIStsp_process(
+    MODIStsp_process(
       sel_prod           = general_opts$sel_prod,
       start_date         = general_opts$start_date,
       end_date           = general_opts$end_date,
@@ -425,4 +425,5 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     message("[", date(), "] ", " You Selected to Quit! Goodbye!")
   }
   
+  on.exit(raster::rasterOptions(setfileext = prevopt))
 }

@@ -1,7 +1,9 @@
 title: MODIStsp
+url: http://lbusett.github.io/MODIStsp
 template:
   params:
-    bootswatch: united
+    bootswatch: flatly
+    ganalytics: UA-84499524-2
 reference:
   - title: Exported Functions
     desc: ~
@@ -28,20 +30,34 @@ reference:
 navbar:
   type: inverse
   left:
-    - text: "Home"
+    - icon: fa-home
       href: index.html
     - text: "How To"
       menu: 
       -  text: Installation
-         href: articles/installation.html
-      -  text: bbbb
-         href: articles/installation.html
-    - text: "Function Reference"
-      href: reference/index.html
+         href: articles/Installation.html
+      -  text: Interactive Execution - the MODIStsp GUI
+         href: articles/Interactive_Execution.html
+      -  text: Non-Interactive Execution from within R
+         href: articles/NonInteractive_Execution.html
+      -  text: Standalone Execution and Scheduled Processing
+         href: articles/Standalone_Execution.html
+      -  text: Outputs Format and Naming Conventions
+         href: articles/output.html
+      -  text: Accessing and Analyzing Processed Data from R
+         href: articles/analyze.html
     - text: "Examples of Use"
       href: articles/examples.html
-    - text: "FAQ"
-      href: articles/faq.html
   right:
+    - text: "faq"
+      icon: fa-question-circle-o
+      href: articles/faq.html
+    - icon: fa-newspaper-o
+      text: "news"
+      href: news/index.html
+    - icon: fa-file-code-o 
+      text: "functions"
+      href: reference/index.html
     - icon: fa-github fa-lg
+      text: "github"
       href: https://github.com/lbusett/MODIStsp/

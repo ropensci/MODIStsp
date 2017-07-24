@@ -5,6 +5,9 @@
 .travis.yml
 .config.yml
 index.md
+index.Rmd
+LICENSE.md
+_pkgdown.yaml
 ^Log/
 ^Previous/
 ^old_and_various/
@@ -14,4 +17,6 @@ index.md
 ^README\.Rmd$
 configure.win
 cran-comments.md
+^docs$
 ^pkgdown$
+

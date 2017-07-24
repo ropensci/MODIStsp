@@ -1,0 +1,14 @@
+urls:
+  reference: http://lbusett.github.io/MODIStsp/reference
+  article: http://lbusett.github.io/MODIStsp/articles
+articles:
+  analyze: analyze.html
+  Examples: Examples.html
+  FAQ: FAQ.html
+  Installation: Installation.html
+  Interactive_Execution: Interactive_Execution.html
+  MODIStsp: MODIStsp.html
+  NonInteractive_Execution: NonInteractive_Execution.html
+  output: output.html
+  Standalone_Execution: Standalone_Execution.html
+

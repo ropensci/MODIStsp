@@ -161,7 +161,7 @@ resize, mosaicing, indexes computation, quality indicators computation)
 }
 
 Reprojection and resize is dealt with by accessing gdal routines through the \code{gdaUtils} package.
-Extraction of bitfields  from Quality layers is done though fast bitwise computation
+Extraction of bitfields from Quality layers is done though fast bitwise computation
 
 Checks are done in order to not re-download already existing HDF images, and not
 reprocess already processed dates (if the user didn'specify that)
