@@ -17,6 +17,7 @@ _pkgdown.yaml
 ^README\.Rmd$
 configure.win
 cran-comments.md
+CODE_OF_CONDUCT.md
 ^docs$
 ^pkgdown$
 
