@@ -93,7 +93,7 @@ Select the method to be used for download. Available choices are:
 
 2.  **ftp**: download from NASA ftp archive ([ftp://ladsweb.nascom.nasa.gov/](ftp://ladsweb.nascom.nasa.gov/));
 
-3.  **offline**: this option allows to process/reprocess HDF files already available on the user's PC without downloading from NASA -- useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp to create time series for an additional layer (_It is fundamental that the HDFs are those directly downloaded from NASA servers_. See also [here] for additional details !). 
+3.  **offline**: this option allows to process/reprocess HDF files already available on the user's PC without downloading from NASA -- useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp to create time series for an additional layer (_It is fundamental that the HDFs are those directly downloaded from NASA servers_ ! (See [here](faq.html#working-with-already-downloaded-hdf-files) for additional details). 
 
 Checking the **use_aria2c** option allows to accelerate the download from NASA archives. This requires however that that the "aria2c" software is installed in your system. To download and install it, see: [https://aria2.github.io/](aria2.github.io/)
 
