@@ -157,7 +157,7 @@
 </ul>
 <p><br></p>
 <!-- html table generated in R 3.4.1 by xtable 1.8-2 package -->
-<!-- Mon Jul 24 11:33:27 2017 -->
+<!-- Mon Jul 24 12:44:33 2017 -->
 <table border="1" class="table">
 <tr>
 <th>
@@ -339,7 +339,7 @@ Green-Red ratio Vegetation Index <span class="citation">[@Tucker1979]</span>
 <ol style="list-style-type: decimal">
 <li><p><strong>http</strong>: download through ftp from NASA lpdaac http archive (<a href="http://e4ftl01.cr.usgs.gov" class="uri">http://e4ftl01.cr.usgs.gov</a>). This requires providing a user name and password, which can be obtained by registering an account at the address <a href="https://urs.earthdata.nasa.gov/profile" class="uri">https://urs.earthdata.nasa.gov/profile</a>;</p></li>
 <li><p><strong>ftp</strong>: download from NASA ftp archive (<a href="ftp://ladsweb.nascom.nasa.gov/" class="uri">ftp://ladsweb.nascom.nasa.gov/</a>);</p></li>
-<li><p><strong>offline</strong>: this option allows to process/reprocess HDF files already available on the user’s PC without downloading from NASA – useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp to create time series for an additional layer (<em>It is fundamental that the HDFs are those directly downloaded from NASA servers</em>. Notice that, if HDF available files do not match the criteria specified in the GUI, no output will be created.<!-- See also [here] for additional details!).--></p></li>
+<li><p><strong>offline</strong>: this option allows to process/reprocess HDF files already available on the user’s PC without downloading from NASA – useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp to create time series for an additional layer (<em>It is fundamental that the HDFs are those directly downloaded from NASA servers</em>. See <a href="faq.html#working-with-already-downloaded-hdf-files">here</a> for additional details !).</p></li>
 </ol>
 <p>Checking the <strong>use_aria2c</strong> option allows to accelerate the download from NASA archives. This requires however that that the “aria2c” software is installed in your system. To download and install it, see: <a href="aria2.github.io/">https://aria2.github.io/</a></p>
 <p><font size="2"> <em>NOTE: The best performances are usually achieved using <em>http</em>, though that may vary depending on network infrastructure.</em> </font></p>
@@ -416,7 +416,7 @@ Green-Red ratio Vegetation Index <span class="citation">[@Tucker1979]</span>
 </h2>
 <p>Specified processing parameters can be saved to a JSON file for later use by clicking on the <em><strong>Save Options</strong></em> button.</p>
 <p>Previously saved options can be restored clicking on the <em><strong>Load Options</strong></em> button and navigating to the previously saved JSON file.</p>
-<p><font size="2">(Note that at launch, <strong><code>MODIStsp</code> <em>always reloads automatically the processing options used for its last succesfull run</em></strong></font>).</p>
+<p><font size="2"> (Note that at launch, <strong><code>MODIStsp</code> <em>always reloads automatically the processing options used for its last succesfull run</em></strong> </font>.</p>
 <hr>
 </div>
 <div id="starting-the-processing" class="section level2">
