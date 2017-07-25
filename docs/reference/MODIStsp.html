@@ -203,17 +203,17 @@ required routines for downloading and processing the requested datasets.</p>
 <span class='co'># }</span><div class='input'>
 # Run the tool using the settings previously saved in a specific option file
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_File</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
+<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
 <span class='co'># }</span><div class='input'>
 # Run the tool using a previously saved options file,
 # but editing it with the GUI before starting the processing
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp</span>(<span class='kw'>options_File</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
+<span class='fu'>MODIStsp</span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
 <span class='co'># }</span><div class='input'>
 # Run the tool using the settings previously saved in a specific option file
 # and specifying the extent from a spatial file
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_File</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
+<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
   <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/yourspatialfile.shp"</span> )
 <span class='co'># }</span><div class='input'>
 # Run the tool in a batch mode, using the settings previously saved in a specific
@@ -221,7 +221,7 @@ required routines for downloading and processing the requested datasets.</p>
 </div><span class='co'># NOT RUN {</span>
 <span class='no'>extent_list</span> <span class='kw'>=</span> <span class='fu'>list.files</span>(<span class='st'>"X:/path/containing/some/shapefiles/"</span>, <span class='st'>"\\.shp$"</span>)
 <span class='kw'>for</span> (<span class='no'>single_shape</span> <span class='kw'>in</span> <span class='no'>extent_list</span>)
-  <span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_File</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
+  <span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
     <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>single_shape</span> )
 <span class='co'># }</span></pre>
   </div>
