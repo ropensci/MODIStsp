@@ -43,17 +43,17 @@ MODIStsp()}
 
 # Run the tool using the settings previously saved in a specific option file
 \dontrun{
-MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json")}
+MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json")}
 
 # Run the tool using a previously saved options file,
 # but editing it with the GUI before starting the processing
 \dontrun{
-MODIStsp(options_File = "X:/yourpath/youroptions.json")}
+MODIStsp(options_file = "X:/yourpath/youroptions.json")}
 
 # Run the tool using the settings previously saved in a specific option file
 # and specifying the extent from a spatial file
 \dontrun{
-MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json",
+MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
   spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
 
 # Run the tool in a batch mode, using the settings previously saved in a specific
@@ -61,7 +61,7 @@ MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json",
 \dontrun{
 extent_list = list.files("X:/path/containing/some/shapefiles/", "\\\\.shp$")
 for (single_shape in extent_list)
-  MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json",
+  MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
     spatial_file_path = single_shape )}
 }
 \seealso{

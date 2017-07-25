@@ -40,17 +40,17 @@
 #'
 #' # Run the tool using the settings previously saved in a specific option file
 #' \dontrun{
-#' MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json")}
+#' MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json")}
 #'
 #' # Run the tool using a previously saved options file,
 #' # but editing it with the GUI before starting the processing
 #' \dontrun{
-#' MODIStsp(options_File = "X:/yourpath/youroptions.json")}
+#' MODIStsp(options_file = "X:/yourpath/youroptions.json")}
 #'
 #' # Run the tool using the settings previously saved in a specific option file
 #' # and specifying the extent from a spatial file
 #' \dontrun{
-#' MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json",
+#' MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
 #'   spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
 #'
 #' # Run the tool in a batch mode, using the settings previously saved in a specific
@@ -58,7 +58,7 @@
 #' \dontrun{
 #' extent_list = list.files("X:/path/containing/some/shapefiles/", "\\.shp$")
 #' for (single_shape in extent_list)
-#'   MODIStsp(gui = FALSE, options_File = "X:/yourpath/youroptions.json",
+#'   MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
 #'     spatial_file_path = single_shape )}
 
 MODIStsp <- function(gui = TRUE, options_file = NULL, 
@@ -66,7 +66,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   
   options("guiToolkit" = "RGtk2")
   # Make so that "raster" functions doesn't automatically add extensions on output files
-  prevopt <- raster::rasterOptions()$setfileext
+  # prevopt <- raster::rasterOptions()$setfileext
   raster::rasterOptions(setfileext = FALSE)
   
   MODIStsp.env              <- new.env()
@@ -75,7 +75,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   #  Initialize project
   #- ------------------------------------------------------------------------ -#
   # On interactive execution, load Rgtk2
-  # On interactive execution, load Rgtk2
+
   if (gui) {
     if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
       
@@ -85,7 +85,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       if (inst_gw == "y") {
         pacman::p_load("gWidgetsRGtk2")
       } else {
-        stop("MODIStsp can not work in Interactive mode withouth gWidgetsRGtk2! Exiting!")
+        stop("MODIStsp can not work in Interactive mode without gWidgetsRGtk2! Exiting!")
       }
       
     }
@@ -425,5 +425,5 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     message("[", date(), "] ", " You Selected to Quit! Goodbye!")
   }
   
-  on.exit(raster::rasterOptions(setfileext = prevopt))
+  # on.exit(raster::rasterOptions(setfileext = prevopt))
 }
