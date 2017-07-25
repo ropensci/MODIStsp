@@ -2,7 +2,7 @@
 output:
   github_document:
     toc: yes
-    toc_depth: 1
+    toc_depth: 2
 ---
 
 
@@ -29,7 +29,7 @@ _MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Ins
 
 -   25/07/2017 - As of today, **most of the content related to MODIStsp has been moved to our new website at [lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/)**, which provides a much better user interface and ease of access to MODIStsp-related information. From now on, please **consult the new website for detailed and updated information on the package**. 
 
-Also our previosu FAQ page on github containing info for solving common installation, downloading and processing problems and issues was discontinued and **migrated at [lbusett.github.io/MODIStsp/articles/faq.html](http://lbusett.github.io/MODIStsp/articles/faq.html)**.  
+-   Also our previous FAQ page on github containing info for solving common installation, downloading and processing problems and issues was discontinued and **migrated at [lbusett.github.io/MODIStsp/articles/faq.html](http://lbusett.github.io/MODIStsp/articles/faq.html)**.  
 
 ## Problems and Issues
 
