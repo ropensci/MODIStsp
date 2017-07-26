@@ -35,7 +35,7 @@
 "reprocess": "Yes",
 "bbox": [ 6.1126e+05, 4.9603e+06, 9.155e+05, 5.089e+06 ],
 "out_folder": "tempdir()",
-"out_folder_mod": "inst/Tests",
+"out_folder_mod": "inst/Test_files",
 "MODIStspVersion": "1.3.0.9000",
 "custom_indexes": [],
 "use_aria": false,
