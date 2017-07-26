@@ -88,7 +88,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     gui <- FALSE
     message("MODIStsp is running in test mode.")
     # read names of available json
-    test_files <- sort(list.files(file.path(MODIStsp.env$MODIStsp_dir,"Tests"), 
+    test_files <- sort(list.files(file.path(MODIStsp.env$MODIStsp_dir,"Test_files"), 
                                   "^test[0-9]{2}\\.json$",
                                   full.names=TRUE))
     # if test=0, select the test file randomly
@@ -100,7 +100,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
                   " test Option Files are available."))
     }
     # check that the offline HDF files were unzipped
-    tests_hdf_zipped <- list.files(file.path(MODIStsp.env$MODIStsp_dir,"Tests"), 
+    tests_hdf_zipped <- list.files(file.path(MODIStsp.env$MODIStsp_dir,"Test_files"), 
                                    "\\.hdf\\.zip$",
                                    full.names=TRUE)
     for (test_hdf in gsub("\\.zip$","",tests_hdf_zipped)) {
