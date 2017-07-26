@@ -15,6 +15,12 @@
 #'  fullscreen with scrollbars (this is useful on devices with small display). If using a
 #'  device with a display resolution >= 1024x768, leaving this parameter to FALSE is 
 #'  suggested.
+#' @param test (optional) integer: if set, the tool is runned in test mode, using a
+#'  preset Option File instead than opening the GUI or accepting the option_file parameter.
+#'  The number indicates which preset file to be used (five files are available).
+#'  If test=0, the files sis selected randomly. Default value (-1) indicates that the 
+#'  tool is executed normally (not in test mode).
+#'  This modality is useful to test the tool in case of errors.
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -29,9 +35,11 @@
 #' @importFrom pacman p_exists p_load
 #' @importFrom raster rasterOptions crop extent
 #' @importFrom rgdal getGDALVersionInfo
+#' @importFrom stringr str_pad
 #' @importFrom RJSONIO fromJSON toJSON
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils packageVersion
+#' @importFrom utils unzip
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used 
 #' # settings
@@ -62,7 +70,7 @@
 #'     spatial_file_path = single_shape )}
 
 MODIStsp <- function(gui = TRUE, options_file = NULL, 
-                     spatial_file_path = NULL, scrollWindow = FALSE) {
+                     spatial_file_path = NULL, scrollWindow = FALSE, test = -1) {
   
   options("guiToolkit" = "RGtk2")
   # Make so that "raster" functions doesn't automatically add extensions on output files
@@ -74,6 +82,44 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   #- ------------------------------------------------------------------------ -#
   #  Initialize project
   #- ------------------------------------------------------------------------ -#
+
+  # If test mode is selected, change other parameters
+  if (test > -1) {
+    gui <- FALSE
+    message("MODIStsp is running in test mode.")
+    # read names of available json
+    test_files <- sort(list.files(file.path(MODIStsp.env$MODIStsp_dir,"Tests"), 
+                                  "^test[0-9]{2}\\.json$",
+                                  full.names=TRUE))
+    # if test=0, select the test file randomly
+    if (test == 0) {
+      test <- sample(seq_along(tests_files),1)
+      message(paste0("Randomly selected test ",test,"."))
+    } else if (test>length(test_files)) {
+      stop(paste0("Value of argument 'test' is too high: only ",length(test_files),
+                  " test Option Files are available."))
+    }
+    # check that the offline HDF files were unzipped
+    tests_hdf_zipped <- list.files(file.path(MODIStsp.env$MODIStsp_dir,"Tests"), 
+                                   "\\.hdf\\.zip$",
+                                   full.names=TRUE)
+    for (test_hdf in gsub("\\.zip$","",tests_hdf_zipped)) {
+      if (!file.exists(test_hdf)) {
+        unzip(zipfile=paste0(test_hdf,".zip"),
+              files=basename(test_hdf),
+              exdir=dirname(test_hdf),
+              unzip="internal")
+      }
+    }
+    # Assign the selected test Option File
+    options_file <- test_files[test]
+    # Workaround: if a test with http download was selected,
+    # open the GUI so that the user can insert his credentials.
+    if (test == 4) {
+      gui <- TRUE
+    }
+  }
+  
   # On interactive execution, load Rgtk2
 
   if (gui) {
@@ -122,7 +168,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     stop("Your local GDAL installation does not support HDF4 format. Please install HDF4 support and recompile GDAL.")
   }
   
-  message("GDAL version in use:", as.character(gdal_version))
+  message("GDAL version in use: ", as.character(gdal_version))
   
   # Parameter retrieval and Folder Initialization -----
   if (is.null(options_file) & gui == FALSE) {
@@ -352,6 +398,13 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       
     }
     
+    # if out_folder[_mod] is set to "tempdir()", define the tempdir path (used in test mode)
+    for (sel_out_folder in c("out_folder","out_folder_mod")) {
+      if (general_opts[[sel_out_folder]] == "tempdir()") {
+        general_opts[[sel_out_folder]] <- tempdir()
+      }
+    }
+    
     # launch MODIStsp_process to Download and preprocess the selected images ----
     MODIStsp_process(
       sel_prod           = general_opts$sel_prod,
@@ -411,8 +464,8 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     )
     
     # At end of succesfull execution, save the options used in the main output folder
-    general_opts <- RJSONIO::fromJSON(previous_jsfile)
     optfilename  <- file.path(general_opts$out_folder, paste0("MODIStsp_", Sys.Date(), ".json"))
+    general_opts <- RJSONIO::fromJSON(previous_jsfile)
     write(RJSONIO::toJSON(general_opts), optfilename)
     
     # Clean up at end of processing ----
