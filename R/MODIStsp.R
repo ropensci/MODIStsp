@@ -93,7 +93,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
                                   full.names=TRUE))
     # if test=0, select the test file randomly
     if (test == 0) {
-      test <- sample(seq_along(tests_files),1)
+      test <- sample(seq_along(test_files),1)
       message(paste0("Randomly selected test ",test,"."))
     } else if (test>length(test_files)) {
       stop(paste0("Value of argument 'test' is too high: only ",length(test_files),
