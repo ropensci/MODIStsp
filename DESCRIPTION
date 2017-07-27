@@ -42,7 +42,8 @@ Imports:
     sp (>= 1.2-2),
     stringr (>= 1.0.0),
     xts (>= 0.9-7),
-    XML (>= 3.98-1.1)
+    XML (>= 3.98-1.1), 
+    parallel
 Suggests:
     knitr,
     rmarkdown,
