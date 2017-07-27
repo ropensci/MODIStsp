@@ -397,10 +397,13 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       
     }
     
-    # if out_folder[_mod] is set to "tempdir()", define the tempdir path (used in test mode)
+    # if out_folder[_mod] is set to "$tempdir" or "$modispath", define the path (used in test mode)
     for (sel_out_folder in c("out_folder","out_folder_mod")) {
-      if (general_opts[[sel_out_folder]] == "tempdir()") {
+      if (general_opts[[sel_out_folder]] == "$tempdir") {
         general_opts[[sel_out_folder]] <- tempdir()
+      }
+      if (general_opts[[sel_out_folder]] == "$modistest") {
+        general_opts[[sel_out_folder]] <- system.file("Test_files", package="MODIStsp")
       }
     }
     
