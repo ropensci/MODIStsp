@@ -102,6 +102,7 @@
 #' @importFrom raster raster writeRaster
 #' @importFrom XML xmlToList xmlParse
 #' @importFrom tools file_path_sans_ext
+#' @importFrom parallel detectCores
 
 MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder, 
                              out_folder_mod, reprocess = "Yes",
@@ -150,7 +151,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   ### . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ..
   ### Initialize number of cores for gdalwarp (equal to ncpus - 2 OR 10 if ncp####
 
-  # ncores <- min(c(10, parallel::detectCores() - 2))
+  ncores <- min(c(10, parallel::detectCores() - 2))
   
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   #  Verify if bands needed for computing spectral indexes and/or quality indicators are already selected
