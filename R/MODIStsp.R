@@ -77,8 +77,6 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   # prevopt <- raster::rasterOptions()$setfileext
   raster::rasterOptions(setfileext = FALSE)
   
-  MODIStsp.env              <- new.env()
-  MODIStsp.env$MODIStsp_dir <- system.file(package = "MODIStsp")
   #- ------------------------------------------------------------------------ -#
   #  Initialize project
   #- ------------------------------------------------------------------------ -#
@@ -88,7 +86,11 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     gui <- FALSE
     message("MODIStsp is running in test mode.")
     # read names of available json
+<<<<<<< HEAD
+    test_files <- sort(list.files(system.file("Test_files", package="MODIStsp"), 
+=======
     test_files <- sort(list.files(file.path(MODIStsp.env$MODIStsp_dir,"Test_files"), 
+>>>>>>> test_mode
                                   "^test[0-9]{2}\\.json$",
                                   full.names=TRUE))
     # if test=0, select the test file randomly
@@ -100,7 +102,11 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
                   " test Option Files are available."))
     }
     # check that the offline HDF files were unzipped
+<<<<<<< HEAD
+    tests_hdf_zipped <- list.files(system.file("Test_files", package="MODIStsp"), 
+=======
     tests_hdf_zipped <- list.files(file.path(MODIStsp.env$MODIStsp_dir,"Test_files"), 
+>>>>>>> test_mode
                                    "\\.hdf\\.zip$",
                                    full.names=TRUE)
     for (test_hdf in gsub("\\.zip$","",tests_hdf_zipped)) {
@@ -116,7 +122,12 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     # Workaround: if a test with http download was selected,
     # open the GUI so that the user can insert his credentials.
     if (test == 4) {
+<<<<<<< HEAD
+      direct_username <- readline(prompt="Enter your USGS username: ")
+      direct_password <- readline(prompt="Enter your password: ")
+=======
       gui <- TRUE
+>>>>>>> test_mode
     }
   }
   
@@ -177,11 +188,11 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   
   # Folders in which the JSON/RData files (previous settings and product descriptions) are saved
   if (is.null(options_file)) {
-    previous_dir <- file.path(MODIStsp.env$MODIStsp_dir, "Previous")
+    previous_dir <- system.file("Previous", package = "MODIStsp")
   } else {
     previous_dir <- dirname(options_file)
   }
-  prodopts_dir <- file.path(MODIStsp.env$MODIStsp_dir, "Previous")
+  prodopts_dir <- system.file("Previous", package = "MODIStsp")
   dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
   dir.create(prodopts_dir, showWarnings = FALSE, recursive = TRUE)
   
@@ -191,7 +202,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
   } else {
     options_file
   }
-  xml_file      <- file.path(MODIStsp.env$MODIStsp_dir, "ExtData", "MODIStsp_ProdOpts.xml")  #XML file describing MODIS products
+  xml_file      <- system.file("ExtData","MODIStsp_ProdOpts.xml", package = "MODIStsp")  #XML file describing MODIS products
   prodopts_file <- file.path(prodopts_dir, "MODIStsp_ProdOpts.RData") # this is created to speed up XML reading (done only the first time)
   
   #- ------------------------------------------------------------------------------- -#
@@ -298,7 +309,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     }
     Quit <- MODIStsp_GUI(general_opts    = general_opts,
                          prod_opt_list   = prod_opt_list,
-                         MODIStsp_dir    = MODIStsp.env$MODIStsp_dir,
+                         MODIStsp_dir    = system.file(package = "MODIStsp"),
                          previous_jsfile = previous_jsfile,
                          prodopts_file   = prodopts_file,
                          scrollWindow    = scrollWindow
@@ -388,7 +399,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       general_opts$full_ext <- "Resized"
       
       # Automatically retrieve the tiles requested to cover the extent
-      modis_grid           <- get(load(file.path(MODIStsp.env$MODIStsp_dir, "ExtData/MODIS_Tiles.RData")))
+      modis_grid           <- get(load(system.file("ExtData","MODIS_Tiles.RData", package = "MODIStsp")))
       external_bbox_mod    <- reproj_bbox(external_bbox, general_opts$user_proj4, MOD_proj_str, enlarge = TRUE)
       d_bbox_mod_tiled     <- raster::crop(modis_grid, raster::extent(external_bbox_mod))
       general_opts$start_x <- min(d_bbox_mod_tiled$H)
@@ -416,8 +427,8 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
       delete_hdf         = general_opts$delete_hdf,
       sensor             = general_opts$sensor,
       download_server    = general_opts$download_server,
-      user               = general_opts$user,
-      password           = general_opts$password,
+      user               = if (exists("direct_username")) {direct_username} else {general_opts$user},
+      password           = if (exists("direct_password")) {direct_password} else {general_opts$password},
       https              = prod_opts$http,
       ftps               = prod_opts$ftp,
       start_x            = general_opts$start_x,
