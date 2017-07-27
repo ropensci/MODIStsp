@@ -2,11 +2,7 @@
  "sel_prod": "LAI_8Days_500m (MCD15A2H)",
 "sensor": "Combined",
 "prod_version": "6",
-<<<<<<< HEAD
 "start_date": "2016-07-16",
-=======
-"start_date": "2015-07-16",
->>>>>>> test_mode
 "end_date": "2016-07-31",
 "bandsel": [
      0,      1,      0,      0,      0,      0
@@ -38,11 +34,7 @@
 "bbox": [  2e+05, -1.45e+06,  7e+05, -8.5e+05 ],
 "out_folder": "tempdir()",
 "out_folder_mod": "tempdir()",
-<<<<<<< HEAD
 "MODIStspVersion": "1.3.3",
-=======
-"MODIStspVersion": "1.3.0.9000",
->>>>>>> test_mode
 "custom_indexes": [],
 "use_aria": false,
 "download_range": "seasonal",

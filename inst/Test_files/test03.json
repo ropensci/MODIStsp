@@ -38,11 +38,7 @@
 "bbox": [ 5.7e+05, 5.095e+06, 5.88e+05, 5.108e+06 ],
 "out_folder": "tempdir()",
 "out_folder_mod": "inst/Test_files",
-<<<<<<< HEAD
 "MODIStspVersion": "1.3.3",
-=======
-"MODIStspVersion": "1.3.0.9000",
->>>>>>> test_mode
 "custom_indexes": {
  "Surf_Ref_8Days_500m (M*D09A1)": {
 "6": {

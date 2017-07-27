@@ -2,11 +2,7 @@
  "sel_prod": "Snow_Cov_Month_0.05Deg CMG (M*D10CM)",
 "sensor": "Both",
 "prod_version": "6",
-<<<<<<< HEAD
 "start_date": "2015-07-31",
-=======
-"start_date": "2010-07-31",
->>>>>>> test_mode
 "end_date": "2016-08-02",
 "bandsel": [
      1,      0
@@ -38,11 +34,7 @@
 "bbox": [  2e+05, -1.42e+06, 6.1e+05, -8.8e+05 ],
 "out_folder": "tempdir()",
 "out_folder_mod": "tempdir()",
-<<<<<<< HEAD
 "MODIStspVersion": "1.3.3",
-=======
-"MODIStspVersion": "1.3.0.9000",
->>>>>>> test_mode
 "custom_indexes": [],
 "use_aria": true,
 "download_range": "seasonal",
