@@ -71,9 +71,6 @@
     </li>
   </ul>
 </li>
-<li>
-  <a href="../articles/examples.html">Examples of Use</a>
-</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -119,7 +116,7 @@
       <h1>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.2</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2017-07-25</h4>
+            <h4 class="date">2017-07-28</h4>
           </div>
 
     
@@ -168,11 +165,11 @@
 <li>GDAL &gt;= 1.6.3, PROJ.4 &gt;= 4.4.9 (required by package <code>rgdal</code>)</li>
 </ul>
 <p>On <em>Debian and Ubuntu-based</em> systems, to install required packages open a terminal and type</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
-<span class="kw">libgtk2.0-dev</span> libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
+<span class="ex">libgtk2.0-dev</span> libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev</code></pre></div>
 <p>On <em>rpm-base systems</em>, to install required packages open a terminal and type</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
-<span class="kw">glib2-devel</span> libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
+<span class="ex">glib2-devel</span> libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad</code></pre></div>
 </li>
 <li><p>Install MODIStsp package from CRAN</p></li>
 </ol>
@@ -183,7 +180,7 @@
 <a href="#installing-the-development-version-from-github" class="anchor"></a>Installing the <code>development</code> version from GitHub</h2>
 <p>The development version of MODIStsp is available on GitHub To install it, follow the previous instructions, but instead than <code>install.packages("MODIStsp")</code>, use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 </div>
 </div>
 <div id="running-the-tool-in-interactive-mode-the-modistsp-gui" class="section level1">
@@ -391,7 +388,7 @@ extent_list =<span class="st"> </span><span class="kw">list.files</span>(<span c
 <span class="co"># loop on the list of spatial files and run MODIStsp using each of them to automatically </span>
 <span class="co"># define the output extent (A separate output folder is created for each input file).</span>
 
-for (single_shape in extent_list) {
+<span class="cf">for</span> (single_shape <span class="cf">in</span> extent_list) {
   <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_File =</span> <span class="st">"yourpath/youroptions.json"</span>, 
           <span class="dt">spatial_file_path =</span> single_shape )
 }</code></pre></div>
@@ -420,9 +417,9 @@ for (single_shape in extent_list) {
 <li>
 <strong>In Linux:</strong> edit your crontab by opening a terminal and type:</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">crontab</span> -e</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">crontab</span> -e</code></pre></div>
 <p>Then add an entry for the MODIStsp.bsh For example, if you want to run the tool every day at 23.00, add the following row:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">0</span> 23 * * * /bin/bash /path_to_MODIStsp_sh/MODIStsp.sh -g -s <span class="st">"/yourpath/youroptions.json"</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">0</span> 23 * * * /bin/bash /path_to_MODIStsp_sh/MODIStsp.sh -g -s <span class="st">"/yourpath/youroptions.json"</span></code></pre></div>
 <ul>
 <li>
 <strong>In Windows:</strong> create a Task following <a href="https://technet.microsoft.com/en-us/library/cc748993.aspx">these instructions</a>; add the path of the MODIStsp.bat launcher as Action (point 6), and specify <code>-g -s "X:/yourpath/youroptions.json"</code> as argument.</li>
@@ -504,7 +501,7 @@ for (single_shape in extent_list) {
 <h3 class="hasAnchor">
 <a href="#linux" class="anchor"></a>Linux</h3>
 <p>Please refer to the documentation which can be found <a href="https://cran.r-project.org/bin/linux">here</a>, opening the directory relative to the user Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version. With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommended), since packaged version of R is <span class="math inline">\(\ge\)</span> 3.2.1 (although not the latest); in this case, user can install R by simply typing in a terminal</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install r-base</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install r-base</code></pre></div>
 </div>
 </div>
 <div id="installing-gdal-ge-1-11-1" class="section level2">
@@ -546,7 +543,7 @@ for (single_shape in extent_list) {
 <li><p>Ensure that your repositories contain a version of <code>gdal-bin</code> <span class="math inline">\(\ge\)</span> 1.11.1. In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions <a href="https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable">here</a>). With Ubuntu 15.10 Wily (and newer) this step is not mandatory, although recommended in order to have updated version of GDAL installed.</p></li>
 <li>
 <p>To install GDAL a terminal and type</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install gdal-bin</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install gdal-bin</code></pre></div>
 </li>
 </ol>
 </div>

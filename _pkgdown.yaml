@@ -46,8 +46,8 @@ navbar:
          href: articles/output.html
       -  text: Accessing and Analyzing Processed Data from R
          href: articles/analyze.html
-    - text: "Examples of Use"
-      href: articles/examples.html
+#    - text: "Examples of Use"
+#      href: articles/examples.html
   right:
     - text: "faq"
       icon: fa-question-circle-o
