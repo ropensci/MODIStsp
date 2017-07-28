@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_vrt_create.R
 \name{MODIStsp_vrt_create}
 \alias{MODIStsp_vrt_create}
-\title{MODIStsp_vrt_create}
+\title{Create MODIStsp virtual files}
 \usage{
 MODIStsp_vrt_create(out_prod_folder, meta_band, file_prefixes, sens_sel,
   ts_format, nodata_value, out_format, rts)

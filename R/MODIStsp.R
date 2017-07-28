@@ -15,7 +15,7 @@
 #'  fullscreen with scrollbars (this is useful on devices with small display). If using a
 #'  device with a display resolution >= 1024x768, leaving this parameter to FALSE is 
 #'  suggested.
-#' @param test (optional) integer: if set, the tool is runned in test mode, using a
+#' @param test (optional) integer: if set, the tool is run in test mode, using a
 #'  preset Option File instead than opening the GUI or accepting the option_file parameter.
 #'  The number indicates which preset file to be used (five files are available).
 #'  If test=0, the files sis selected randomly. Default value (-1) indicates that the 
@@ -86,27 +86,27 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     gui <- FALSE
     message("MODIStsp is running in test mode.")
     # read names of available json
-    test_files <- sort(list.files(system.file("Test_files", package="MODIStsp"), 
+    test_files <- sort(list.files(system.file("Test_files", package = "MODIStsp"), 
                                   "^test[0-9]{2}\\.json$",
-                                  full.names=TRUE))
+                                  full.names = TRUE))
     # if test=0, select the test file randomly
     if (test == 0) {
       test <- sample(seq_along(test_files),1)
       message(paste0("Randomly selected test ",test,"."))
-    } else if (test>length(test_files)) {
+    } else if (test > length(test_files)) {
       stop(paste0("Value of argument 'test' is too high: only ",length(test_files),
                   " test Option Files are available."))
     }
     # check that the offline HDF files were unzipped
-    tests_hdf_zipped <- list.files(system.file("Test_files", package="MODIStsp"), 
+    tests_hdf_zipped <- list.files(system.file("Test_files", package = "MODIStsp"), 
                                    "\\.hdf\\.zip$",
-                                   full.names=TRUE)
+                                   full.names = TRUE)
     for (test_hdf in gsub("\\.zip$","",tests_hdf_zipped)) {
       if (!file.exists(test_hdf)) {
-        unzip(zipfile=paste0(test_hdf,".zip"),
-              files=basename(test_hdf),
-              exdir=dirname(test_hdf),
-              unzip="internal")
+        unzip(zipfile = paste0(test_hdf,".zip"),
+              files   = basename(test_hdf),
+              exdir   = dirname(test_hdf),
+              unzip   = "internal")
       }
     }
     # Assign the selected test Option File
@@ -114,8 +114,8 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     # Workaround: if a test with http download was selected,
     # open the GUI so that the user can insert his credentials.
     if (test == 4) {
-      direct_username <- readline(prompt="Enter your USGS username: ")
-      direct_password <- readline(prompt="Enter your password: ")
+      direct_username <- readline(prompt = "Enter your USGS username: ")
+      direct_password <- readline(prompt = "Enter your password: ")
     }
   }
   

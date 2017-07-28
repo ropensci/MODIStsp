@@ -5,7 +5,7 @@
 \title{MODIStsp}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  scrollWindow = FALSE)
+  scrollWindow = FALSE, test = -1)
 }
 \arguments{
 \item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the
@@ -23,6 +23,13 @@ files are created on the extent of the provided spatial file.}
 fullscreen with scrollbars (this is useful on devices with small display). If using a
 device with a display resolution >= 1024x768, leaving this parameter to FALSE is
 suggested.}
+
+\item{test}{(optional) integer: if set, the tool is run in test mode, using a
+preset Option File instead than opening the GUI or accepting the option_file parameter.
+The number indicates which preset file to be used (five files are available).
+If test=0, the files sis selected randomly. Default value (-1) indicates that the
+tool is executed normally (not in test mode).
+This modality is useful to test the tool in case of errors.}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MODIStsp)

@@ -1,5 +1,5 @@
 
-#' MODIStsp_vrt_create
+#' @title Create MODIStsp virtual files
 #' @description	Function used to create virtual files from time series of single-band 
 #' files corresponding to different acquisition dates
 #'
