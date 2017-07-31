@@ -12,9 +12,3 @@ Rplot02\.pdf
 vignettes/MODIStsp\.R
 
 README_files/
-
-tests/testthat/test_http\.json
-
-tests/testthat/test-modistsp1\.R
-
-inst/Test_files/
