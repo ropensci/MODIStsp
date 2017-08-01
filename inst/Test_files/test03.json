@@ -4,22 +4,18 @@
 "prod_version": "6",
 "start_date": "2017-07-10",
 "end_date": "2017-07-15",
-"bandsel": [
-     0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      1
-],
-"indexes_bandsel": [
-     1,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,      1
-],
-"quality_bandsel": [
-     0,      0,      0,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0
-],
+"bandsel": [      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      1 ],
+"indexes_bandsel": [      1,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,      1 ],
+"quality_bandsel": [      0,      0,      0,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 ],
 "start_x":     18,
 "end_x":     18,
 "start_y":      4,
 "end_y":      4,
 "user": "",
 "password": "",
+"use_aria": false,
 "download_server": "offline",
+"download_range": "full",
 "proj": "UTM 32N",
 "user_proj4": "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0",
 "out_res_sel": "Resampled",
@@ -33,12 +29,13 @@
  "Medium (LZW)": "LZW" 
 },
 "nodata_change": "Yes",
+"scale_val": "Yes",
 "delete_hdf": "No",
 "reprocess": "Yes",
 "bbox": [ 5.7e+05, 5.095e+06, 5.88e+05, 5.108e+06 ],
 "out_folder": "$tempdir",
 "out_folder_mod": "$modistest",
-"MODIStspVersion": "1.3.3",
+"MODIStspVersion": "1.3.2",
 "custom_indexes": {
  "Surf_Ref_8Days_500m (M*D09A1)": {
 "6": {
@@ -49,7 +46,4 @@
 } 
 }
 },
-"use_aria": false,
-"download_range": "full",
-"scale_val": "Yes" 
 }

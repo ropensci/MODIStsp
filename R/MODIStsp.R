@@ -113,7 +113,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     options_file <- test_files[test]
     # Workaround: if a test with http download was selected,
     # open the GUI so that the user can insert his credentials.
-    if (test == 4) {
+    if (test %in% c(4,5)) {
       direct_username <- readline(prompt = "Enter your USGS username: ")
       direct_password <- readline(prompt = "Enter your password: ")
     }
