@@ -24,7 +24,7 @@
 "resampling": "near",
 "out_format": "GTiff",
 "ts_format": "None",
-"rts": "Yes",
+"rts": "No",
 "compress": {
  "None": "None" 
 },

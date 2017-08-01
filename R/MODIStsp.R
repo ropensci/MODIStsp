@@ -470,6 +470,11 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     general_opts <- RJSONIO::fromJSON(previous_jsfile)
     write(RJSONIO::toJSON(general_opts), optfilename)
     
+    # If running in test mode, check the output created
+    if (test>0) {
+      MODIStest_check_md5(test = test)
+    }
+    
     # Clean up at end of processing ----
     end.time   <- Sys.time()
     time.taken <- end.time - start.time
