@@ -40,7 +40,6 @@
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils packageVersion
 #' @importFrom utils unzip
-#' @import gWidgetsRGtk2
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used
 #' # settings
