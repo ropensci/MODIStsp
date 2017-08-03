@@ -1,25 +1,30 @@
 #'  install_MODIStsp_launcher
 #' @description Function which allows to use MODIStsp in batch mode by creating links
-#' @details MODIStsp tool can be used also as a standalone tool my launching a bash/batch script, which is stored in the function files.
-#'  In order to simply retrieve it, this function will create a desktop entry and a symbolic link to the bash script (in Linux)
+#' @details MODIStsp tool can be used also as a standalone tool my launching a bash/batch
+#'   script, which is stored in the function files. In order to simply retrieve it, this
+#'   function will create a desktop entry and a symbolic link to the bash script (in Linux)
 #'  or a link in the Start Menu to the batch script (in Windows).
-#'  Note that, if the packages MODIStsp is installed in a directory version-dependent (as the default one is), this function should be rerunned after
-#'  an R upgrade, otherwise the links would continue to point to the old package version!
-#' @param bin_dir in Linux, directory in which the link to the bash script should be placed (default: /usr/bin; a path included in the PATH
-#'  environment variable is suggested); in Windows, directory where to place the menu entry in the Start Menu (default: Start Menu -> Programs -> MODIStsp).
-#' @param desktop_shortcut logical value which indicates if the desktop entry or the desktop shortcut should be created (default: TRUE).
-#' @param desktop_dir if desktop_shortcut=TRUE: in Linux, directory in which the desktop entry should be placed (default: /usr/share/applications);
-#'  in Windows, directory where to place the desktop entry (default: Desktop).
-#' @param sudo (Linux only) logical value which indicates if administrator rights have to be used to write within bin_dir and desktop_dir (default: FALSE);
-#'  in this case, the root password is requested when launching the function. Note that default values of bin_dir and desktop_dir requires to set this
-#'  option to TRUE (or to lauch the script in a root session of R)!
+#'  Note that, if the packages MODIStsp is installed in a directory version-dependent
+#'  (as the default one is), this function should be rerunned after an R upgrade,
+#'  otherwise the links would continue to point to the old package version!
+#' @param bin_dir in Linux, directory in which the link to the bash script should be
+#'   placed (default: /usr/bin; a path included in the PATH environment variable is
+#'   suggested); in Windows, directory where to place the menu entry in the Start Menu
+#'    (default: Start Menu -> Programs -> MODIStsp).
+#' @param desktop_shortcut logical value which indicates if the desktop entry or the
+#' desktop shortcut should be created (default: TRUE).
+#' @param desktop_dir if desktop_shortcut=TRUE: in Linux, directory in which the desktop
+#'   entry should be placed (default: /usr/share/applications); in Windows, directory where
+#'   to place the desktop entry (default: Desktop).
+#' @param sudo (Linux only) logical value which indicates if administrator rights have to
+#'   be used to write within bin_dir and desktop_dir (default: FALSE);
+#'  in this case, the root password is requested when launching the function. Note that
+#'  default values of bin_dir and desktop_dir requires to set thisoption to TRUE (or to
+#'  launch the script in a root session of R)!
 #' @return NULL
-#'
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#'
 #' @export
-#' @importFrom hash hash
 #' @examples
 #' # Linux: common installation (script in /usr/bin,
 #' # desktop entry in /usr/share/applications)
@@ -38,9 +43,9 @@
 #' \dontrun{
 #' install_MODIStsp_launcher()}
 
-install_MODIStsp_launcher <- function(bin_dir          = NA, 
-                                      desktop_dir      = NA, 
-                                      desktop_shortcut = TRUE, 
+install_MODIStsp_launcher <- function(bin_dir          = NA,
+                                      desktop_dir      = NA,
+                                      desktop_shortcut = TRUE,
                                       sudo             = FALSE) {
 
   MODIStsp_dir <- system.file(package = "MODIStsp")
@@ -61,7 +66,7 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
       file.symlink(from = file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.sh"), to = bin_dir)
     }
     # Create desktop entry
-    desktopEntry <- paste0("[Desktop Entry]\nName=MODIStsp\nComment=Download and preprocessing of MODIS data\nExec=", 
+    desktopEntry <- paste0("[Desktop Entry]\nName=MODIStsp\nComment=Download and preprocessing of MODIS data\nExec=",
                            MODIStsp_dir,
                            "/ExtData/Launcher/Bash/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")
     fileConn <- file(file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.desktop"))
@@ -86,9 +91,9 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
       dir.create(bin_dir, recursive = TRUE, showWarnings = FALSE)
       shell("set create_script=\"%TEMP%\\create_MODIStsp_shortcut.vbs\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
       shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
-      shell(paste0("echo Set oLink = oWS.CreateShortcut(\"", bin_dir, 
+      shell(paste0("echo Set oLink = oWS.CreateShortcut(\"", bin_dir,
                    "\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
-      shell(paste0("echo oLink.TargetPath = \"", 
+      shell(paste0("echo oLink.TargetPath = \"",
                    MODIStsp_dir, "\\ExtData\\Launcher\\Batch\\MODIStsp.bat\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
       shell("echo oLink.Save >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
       shell("cscript /nologo \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
@@ -105,7 +110,7 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
         shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
         shell(paste0("echo Set oLink = oWS.CreateShortcut(\"", desktop_dir,
                      "\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
-        shell(paste0("echo oLink.TargetPath = \"", MODIStsp_dir, 
+        shell(paste0("echo oLink.TargetPath = \"", MODIStsp_dir,
                      "\\ExtData\\Launcher\\Batch\\MODIStsp.bat\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
         shell("echo oLink.Save >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
         shell("cscript /nologo \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
