@@ -128,7 +128,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user,
 
     while (class(items) == "try-error") {
 
-      response <- try(httr::GET(ftp, timeout(10)))   # send request to server
+      response <- try(suppressWarnings(httr::GET(ftp, timeout(10))))   # send request to server
       # if error on response, retry
       if (class(response) == "try-error") {
         Sys.sleep(1)
@@ -152,7 +152,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user,
         for (sel_year in items_1) {
           ce <- 1; while (ce < 10) {
             # try to download each year for 10 times
-            response_1[[sel_year]] <- try(httr::GET(paste0(ftp, sel_year, "/"), timeout(10)))
+            response_1[[sel_year]] <- suppressWarnings(try(httr::GET(paste0(ftp, sel_year, "/"), timeout(10))))
             if (class(response_1[[sel_year]]) != "response") {
               # if error on response, retry
               Sys.sleep(1)

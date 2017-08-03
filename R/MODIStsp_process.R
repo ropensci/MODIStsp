@@ -399,8 +399,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       try(GET(paste0(remote_filename, ".xml"), authenticate(user, password),
                               timeout(240)))
                     } else if (download_server == "ftp") {
-                      try(getURL(remote_filename, nobody = 1L, header = 1L,
-                                 .opts = list(timeout = 240, maxredirs = 5, verbose = TRUE)))
+                      try((getURL(remote_filename, nobody = 1L, header = 1L,
+                                 .opts = list(timeout = 240, maxredirs = 5, verbose = FALSE))))
                     }
                     # Check if download was good: check class of xmldown and status of xmldown
                     if (class(size_string) == "try-error") {

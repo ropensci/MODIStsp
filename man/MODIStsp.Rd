@@ -43,7 +43,7 @@ required routines for downloading and processing the requested datasets.
 License: GPL 3.0
 }
 \examples{
-# Running the tool without any option will start the GUI with the default or last used 
+# Running the tool without any option will start the GUI with the default or last used
 # settings
 \dontrun{
 MODIStsp()}

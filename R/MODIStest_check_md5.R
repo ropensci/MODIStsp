@@ -1,7 +1,8 @@
 #'  MODIStest_check_md5
 #' @description internal function which tests if the output of a test is corresponds to the expected one.
-#' @details When running in test mode, MODIStsp is expected to produce the same files 
+#' @details When running in test mode, MODIStsp is expected to produce the same files
 #' @param test integer number of the performed test
+#' @export
 #' @return NULL
 #'
 #' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}
@@ -11,17 +12,17 @@
 #' @importFrom RJSONIO fromJSON
 
 MODIStest_check_md5 <- function(test) {
-  
+
   # charge expected values
   exp_md5 <- as.data.frame(
-    fromJSON(system.file("Test_files", "tests_md5.json", package = "MODIStsp")), 
+    fromJSON(system.file("Test_files", "tests_md5.json", package = "MODIStsp")),
     stringsAsFactors=FALSE)
   exp_md5 <- exp_md5[exp_md5$test==test,]
-  
+
   n_err <- 0 # counter of the number of files which do not pass the test
   for (i in 1:nrow(exp_md5)) {
     sel_file <- file.path(tempdir(),exp_md5[i,"filename"])
-    
+
     # in case of vrt files, delete the line with the reference of the filename
     # (hdr files are not checked, since the corresponding dat is checked)
     if (length(grep("\\.vrt$",sel_file))>0) {
@@ -39,12 +40,12 @@ MODIStest_check_md5 <- function(test) {
       n_err <- n_err + 1
     }
   }
-  
+
   # summary
   if (n_err == 0) {
     message(paste0("Test ",test," runned succesfully.\n\n"))
   } else {
     message(paste0("Test ",test," failed on ",n_err,"/",nrow(exp_md5)," files.\n\n"))
   }
-  
+
 }
