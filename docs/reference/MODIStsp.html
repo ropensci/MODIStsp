@@ -149,7 +149,7 @@
     
 
     <pre class="usage"><span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scrollWindow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>scrollWindow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>test</span> <span class='kw'>=</span> -<span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -178,6 +178,15 @@ fullscreen with scrollbars (this is useful on devices with small display). If us
 device with a display resolution &gt;= 1024x768, leaving this parameter to FALSE is
 suggested.</p></td>
     </tr>
+    <tr>
+      <th>test</th>
+      <td><p>(optional) integer: if set, the tool is run in test mode, using a
+preset Option File instead than opening the GUI or accepting the option_file parameter.
+The number indicates which preset file to be used (five files are available).
+If test=0, the files sis selected randomly. Default value (-1) indicates that the
+tool is executed normally (not in test mode).
+This modality is useful to test the tool in case of errors.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -196,7 +205,7 @@ required routines for downloading and processing the requested datasets.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># Running the tool without any option will start the GUI with the default or last used 
+    <pre class="examples"><div class='input'># Running the tool without any option will start the GUI with the default or last used
 # settings
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'>MODIStsp</span>()

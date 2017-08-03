@@ -145,8 +145,9 @@
     </div>
 
     
-    <p>Function used to add a user-defined Spectral Index to the default list of computable spectral indexes
-Execution without the GUI (i.e., to add a new index from a script) is also possible (see examples)</p>
+    <p>Function used to add a user-defined Spectral Index to the default list of
+computable spectral indexes. Execution without the GUI (i.e., to add a new index from
+a script) is also possible (see examples)</p>
     
 
     <pre class="usage"><span class='fu'>MODIStsp_addindex</span>(<span class='kw'>option_jsfile</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>prodopts_file</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>selprod</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
@@ -159,31 +160,36 @@ Execution without the GUI (i.e., to add a new index from a script) is also possi
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>option_jsfile</th>
-      <td><p>settings (optional): full path of the JSON file containing the processing options in which the new indexes
+      <td><p>settings (optional): full path of the JSON file containing the
+processing options in which the new indexes
 are saved (default: MODIStsp_Previous.JSON in subdir Previous).</p></td>
     </tr>
     <tr>
       <th>prodopts_file</th>
-      <td><p>settings (optional): full path of the RData file containing products description
-(default: MODIStsp_ProdOpts.RData in subdir Previous)</p></td>
+      <td><p>settings (optional): full path of the RData file containing
+products description (default: MODIStsp_ProdOpts.RData in subdir Previous)</p></td>
     </tr>
     <tr>
       <th>selprod</th>
-      <td><p>settings (optional): Name of the product to which the new index should be added. (Note: the index will be added to all other
-products allowing its computation !)</p></td>
+      <td><p>settings (optional): Name of the product to which the new index should
+be added. (Note: the index will be added to all other products allowing its
+computation !)</p></td>
     </tr>
     <tr>
       <th>selvers</th>
-      <td><p>settings (optional): Version of the product to which the new index should be added.</p></td>
+      <td><p>settings (optional): Version of the product to which the new index
+should be added.</p></td>
     </tr>
     <tr>
       <th>gui</th>
-      <td><p>logical value (default: TRUE): if TRUE, the GUI is opened to define the new index; otherwise use the "new_indexbandname",
-"new_indexfullname" and "new_indexformula" parameters to define it non-interactively.</p></td>
+      <td><p>logical value (default: TRUE): if TRUE, the GUI is opened to define the new
+index; otherwise use the "new_indexbandname", "new_indexfullname" and
+"new_indexformula" parameters to define it non-interactively.</p></td>
     </tr>
     <tr>
       <th>new_indexbandname</th>
-      <td><p>(optional if gui=TRUE): short name (acronym) of the new spectral index.</p></td>
+      <td><p>(optional if gui=TRUE): short name (acronym) of the new
+spectral index.</p></td>
     </tr>
     <tr>
       <th>new_indexfullname</th>
@@ -191,32 +197,42 @@ products allowing its computation !)</p></td>
     </tr>
     <tr>
       <th>new_indexformula</th>
-      <td><p>(optional if gui=TRUE): string containing the formula of the new spectral indexes. Variables accepted to
-compute it are the names of the bands: b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.</p></td>
+      <td><p>(optional if gui=TRUE): string containing the formula of
+the new spectral indexes. Variables accepted to compute it are the names of the bands:
+b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.</p></td>
     </tr>
     <tr>
       <th>new_indexnodata_out</th>
-      <td><p>(optional): nodata value to assign to the rasters containing the new index</p></td>
+      <td><p>(optional): nodata value to assign to the rasters
+containing the new index</p></td>
     </tr>
     <tr>
       <th>MODIStsp_dir</th>
-      <td><p>(optional): main folder containing MODIStsp R files (used only to launche MODSItsp from outside the package using MODIStsp_std.R)</p></td>
+      <td><p>(optional): main folder containing MODIStsp R files (used only to
+launch MODSItsp from outside the package using MODIStsp_std.R)</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>NULL - the MODIStsp_Previous.RData file is modified so to allow computation of the additional index</p>
+    <p>NULL - the MODIStsp_Previous.RData file is modified so to allow computation of
+the additional index</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function asks the user to provide the info related to the new desired Spectral Index using a GUI interface,
-checks for correctness of provided information (e.g., correct bandnames, computable formula, etc...). If the index is legit,
-it modifies the MODIStsp_Previous.RData file so to allow computation of the additional index within MODIStsp.
-To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData file within the /Previous subfolder of the
-folder in which the package was installed, or the alternative JSON specified by the parameter "option_jsfile".
-The function can be run either from within the main MODIStsp GUI, or a standalone script. In the latter case, it modifies either the
-MODIStsp_Previous.RData options file, or the options_file specified by the user, to add the new index.</p>
+    <ul>
+<li><p>The function asks the user to provide the info related to the new desired
+Spectral Index using a GUI interface, checks for correctness of provided information
+(e.g., correct bandnames, computable formula, etc...). If the index is legit, it
+modifies the MODIStsp_Previous.RData file so to allow computation of the additional
+index within MODIStsp./n</p></li>
+<li><p>To remove all custom-added spectral indexes, simply delete the MODIStsp_Previous.RData
+file within the /Previous subfolder of the folder in which the package was installed,
+or the alternative JSON specified by the parameter "option_jsfile".</p></li>
+<li><p>The function can be run either from within the main MODIStsp GUI, or a standalone
+script. In the latter case, it modifies either the MODIStsp_Previous.RData options
+file, or the options_file specified by the user, to add the new index.</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 

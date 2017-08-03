@@ -188,7 +188,8 @@ processing.</p>
     </tr>
     <tr>
       <th>reprocess</th>
-      <td><p>string string ("Yes"/"No") If Yes, reprocess data for already existing dates (Default = 'Yes')</p></td>
+      <td><p>string string ("Yes"/"No") If Yes, reprocess data for already existing
+dates (Default = 'Yes')</p></td>
     </tr>
     <tr>
       <th>delete_hdf</th>
@@ -346,7 +347,8 @@ set to  1 for indicators to be processed</p></td>
     <tr>
       <th>quality_bitN</th>
       <td><p>list of strings with number of entries equal to number of
-quality indicators. each entry caontains position of bits corresponding to a QI (e.g., 0-1)</p></td>
+quality indicators. each entry caontains position of bits corresponding to a QI
+(e.g., 0-1)</p></td>
     </tr>
     <tr>
       <th>quality_source</th>
@@ -385,12 +387,13 @@ ENVI and GDAL)</p></td>
     </tr>
     <tr>
       <th>use_aria</th>
-      <td><p>logical if TRUE, then aria2c is used to accelerate download (if available !)</p></td>
+      <td><p>logical if TRUE, then aria2c is used to accelerate download
+(if available !)</p></td>
     </tr>
     <tr>
       <th>download_range</th>
       <td><p>character if "full", all the available images between the
-startingand the ending dates are downloaded; if "seasonal", only the images
+starting and the ending dates are downloaded; if "seasonal", only the images
 included in the season (e.g: if the starting date is 2005-12-01 and the ending
 is 2010-02-31, only the images of December, January and February from 2005 to 2010</p><ul>
 <li><p>excluding 2005-01, 2005-02 and 2010-12 - are downloaded)</p></li>
@@ -411,14 +414,16 @@ If not, direct processing messages to the log</p></td>
 resize, mosaicing, indexes computation, quality indicators computation)</p></li>
 <li><p>Creates virtual files of the processed time series.</p></li>
 </ol>
-    <p>Reprojection and resize is dealt with by accessing gdal routines through the <code>gdaUtils</code> package.
-Extraction of bitfields from Quality layers is done though fast bitwise computation</p>
-<p>Checks are done in order to not re-download already existing HDF images, and not
+    <p>Reprojection and resize is dealt with by accessing gdal routines through the <code>gdaUtils</code>
+package.
+Extraction of bitfields from Quality layers is done though fast bitwise computation
+Checks are done in order to not re-download already existing HDF images, and not
 reprocess already processed dates (if the user didn'specify that)</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function (<a href='http://r-gis.net/?q=ModisDownload'>ModisDownload</a>;
+    <p>Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
+development of this function (<a href='http://r-gis.net/?q=ModisDownload'>ModisDownload</a>;
 <a href='http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images'>Download_and_resampling_of_MODIS_images</a>)</p>
 <p>License: GPL 3.0</p>
     

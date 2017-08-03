@@ -1,5 +1,15 @@
 ## MODIStsp 1.3.2.9000 - development version
 
+### Major Changes
+
+-   Added "testing mode" to allow users to test proper functioning. (currently only in "devel")
+-   Added unit testing using `testthat` and codecov integration. (currently only in "devel")
+
+### Minor Changes
+
+-   Suppression of verbose messages and (useless) warning messages while parsing the NASA
+servers and downloading data using "ftp". (currently only in "devel")
+
 ### Bug fixing
 
 -   We recently fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in `gdalbuildvrt`, causing sometimes an incorrect translation from HDF to output formats ([#72](https://github.com/lbusett/MODIStsp/issues/72)).
