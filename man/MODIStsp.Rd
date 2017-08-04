@@ -72,7 +72,7 @@ for (single_shape in extent_list)
     spatial_file_path = single_shape )}
 }
 \seealso{
-\code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_Process}}
+\code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_process}}
 }
 \author{
 Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}

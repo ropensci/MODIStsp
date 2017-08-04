@@ -28,7 +28,7 @@
 #' @note License: GPL 3.0
 #' @export
 #' @seealso
-#'  \code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_Process}}
+#'  \code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_process}}
 #' @rdname MODIStsp
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose

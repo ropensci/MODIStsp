@@ -20,5 +20,4 @@ cran-comments.md
 CODE_OF_CONDUCT.md
 ^docs$
 ^pkgdown$
-
 ^codecov\.yml$
