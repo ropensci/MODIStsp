@@ -1038,7 +1038,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
           #- ------------------------------------------------------------------------------- -#
           if (delete_hdf == "Yes") {
 
-            for (dir in sLeq_along(date_dirs)) {
+            for (dir in seq_along(date_dirs)) {
 
               modislist <- lpdaac_getmod_names(http = http, ftp = ftp,
                                                used_server = download_server,
