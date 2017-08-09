@@ -146,7 +146,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   dir.create(out_folder_mod, recursive = TRUE, showWarnings = FALSE) # create out folder if not existing
   out_prod_folder <- file.path(out_folder, main_out_folder)  # main output folder --> define on the basis of product name and create if necessary
   dir.create(out_prod_folder, showWarnings = FALSE, recursive = TRUE)
-  tmp_prod_folder <- file.path(out_prod_folder, "tmp") # directory to store temporary [virtual] rasters
+  # tmp_prod_folder <- file.path(out_prod_folder, "tmp") # directory to store temporary [virtual] rasters
   start_year      <- unlist(strsplit(start_date, "[.]"))[1]
   end_year        <- unlist(strsplit(end_date, "[.]"))[1]
 
@@ -598,13 +598,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
                 for (band in which(indexes_bandsel == 1)) {
                   indexes_band <- indexes_bandnames[band]
-                  out_filename <- file.path(out_prod_folder, indexes_band,
-                                            paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY))
-                  if (out_format == "GTiff") {
-                    out_filename <- paste0(out_filename, ".tif")
-                  } else {
-                    out_filename <- paste0(out_filename, ".dat")
-                  }
+                  out_filename <- file.path(
+                    out_prod_folder,
+                    indexes_band,
+                    paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY, 
+                           ifelse(out_format == "GTiff", ".tif", ".dat"))
+                  )
                   if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
                     # if the index does not exists then find out the original bands required for it
                     req_bands_indexes[, band] <- bands_indexes[, band]
@@ -613,8 +612,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
                 for (band in which(quality_bandsel == 1)) {
                   quality_band <- quality_bandnames[band]
-                  out_filename <- file.path(out_prod_folder, quality_band,
-                                            paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY))
+                  out_filename <- file.path(
+                    out_prod_folder, quality_band,
+                    paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY, 
+                           ifelse(out_format == "GTiff", ".tif", ".dat"))
+                  )
                   if (out_format == "GTiff") {
                     out_filename <- paste0(out_filename, ".tif")
                   } else {
@@ -650,26 +652,24 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                   dir.create(file.path(out_prod_folder, bandnames[band]),
                              showWarnings = FALSE, recursive = TRUE)
                   bands       <- paste(as.character(bands), collapse = "", sep = " ")					# Convert to character
-                  outfile     <- paste0(tmp_prod_folder, "/", bandnames[band], "_", yy, "_", DOY, ".tif")  	# Create name for the temporary tif mosaic
+                  # outfile     <- paste0(tmp_prod_folder, "/", bandnames[band], "_", yy, "_", DOY, ".tif")  	# Create name for the temporary tif mosaic
                   outfile     <- paste0(bandnames[band], "_", yy, "_", DOY, ".tif")  	# Create name for the temporary tif mosaic
                   # NOTE: Change outrep_file to a list of rep files: only one for original bands, multiple for indexes and quality
 
                   # Create name for the TIFF reprojected  mosaic
-                  outrep_file   <- file.path(out_prod_folder, bandnames[band],
-                                             paste0(file_prefix, "_", sub("[.][^.]*$", "",
-                                                                          basename(outfile), perl = TRUE)))
-                  if (out_format == "GTiff") {
-                    outrep_file <- paste0(outrep_file, ".tif")
-                  } else {
-                    outrep_file <- paste0(outrep_file, ".dat")
-                  }
-
+                  outrep_file   <- file.path(
+                    out_prod_folder, bandnames[band],
+                    paste0(file_prefix, "_",
+                           sub("[.][^.]*$", "", basename(outfile), perl = TRUE), 
+                           ifelse(out_format == "GTiff", ".tif", ".dat"))
+                  )
+                  
                   outfile_vrt <- tempfile(fileext = ".vrt")   # filename of temporary vrt file
 
                   if (file.exists(outrep_file) == FALSE | reprocess == "Yes") {
 
                     files_in <- file.path(out_folder_mod, modislist)
-                    dir.create(tmp_prod_folder, recursive = TRUE, showWarnings = FALSE)
+                    # dir.create(tmp_prod_folder, recursive = TRUE, showWarnings = FALSE)
                     # ---------------------------------------------------------------------------------#
                     # Convert to output projection, extent and format using gdalwarp ----
                     # ---------------------------------------------------------------------------------#
@@ -700,7 +700,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                   file_out,
                                                   sd_index  = band,
                                                   srcnodata = nodata_in[band],
-                                                  vrtnodata = nodata_out[band])
+                                                  vrtnodata = nodata_out[band], 
+                                                  overwrite = TRUE)
                         files_in[file] <- file_out
                       }
 
@@ -711,7 +712,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                srcnodata = nodata_in[band],
                                vrtnodata = nodata_out[band],
                                multi     = TRUE,
-                               wo        = paste0("NUM_THREADS=", ncores)
+                               wo        = paste0("NUM_THREADS=", ncores), 
+                               overwrite = TRUE
                                )
 
                     } else {
@@ -796,127 +798,148 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
                     # If scale_factor="Yes", add a step before creating final files
                     outrep_file_0 <- if (scale_val == "Yes"   & !(scale_factor[band] == 1 & offset[band] == 0)) {
-                      tempfile(fileext = ifelse(out_format == "GTiff", ".tif", ".dat"))
+                      tempfile(fileext = ifelse(
+                        out_format == "GTiff", ".tif", ".dat")
+                      )
                     } else {
                       outrep_file
                     }
 
                     if (out_format == "GTiff") {
                       switch(reproj_type,
-                             GdalTranslate = gdalUtils::gdal_translate(outfile_vrt,  outrep_file_0,
-                                                                       a_srs = MOD_proj_str, of = out_format,
-                                                                       ot = datatype[band], a_nodata = nodata_out[band],
-                                                                       co = paste("COMPRESS", compress, sep = "="),
-                                                                       overwrite = TRUE),
-                             Resample0_Resize0 = gdalUtils::gdalwarp(outfile_vrt, outrep_file_0,
-                                                                     s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                                     of = out_format, r = resampling,
-                                                                     co = paste("COMPRESS", compress, sep = "="),
-                                                                     wo = "INIT_DEST = NO_DATA",
-                                                                     wt = datatype[band]),
-                             Resample0_Resize1 = gdalUtils::gdalwarp(outfile_vrt, outrep_file_0,
-                                                                     s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                                     of = out_format, r = resampling,
-                                                                     te = bbox,
-                                                                     co = paste("COMPRESS", compress, sep = "="),
-                                                                     wo = "INIT_DEST = NO_DATA",
-                                                                     wt = datatype[band],
-                                                                     overwrite = TRUE),
-                             Resample1_Resize0 = gdalUtils::gdalwarp(outfile_vrt, outrep_file_0,
-                                                                     s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                                     of = out_format, r = resampling,
-                                                                     tr = rep(out_res, 2),
-                                                                     co = paste("COMPRESS", compress, sep = "="),
-                                                                     wo = "INIT_DEST = NO_DATA",
-                                                                     wt = datatype[band],
-                                                                     overwrite = TRUE),
-                             Resample1_Resize1 =  gdalUtils::gdalwarp(outfile_vrt, outrep_file_0,
-                                                                      s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                                      of = out_format,
-                                                                      r = resampling, te = bbox,
-                                                                      tr = rep(out_res, 2),
-                                                                      co = paste("COMPRESS", compress, sep = "="),
-                                                                      wo = "INIT_DEST = NO_DATA",
-                                                                      wt = datatype[band],
-                                                                      overwrite = TRUE),
-                             quit("Internal error in out_res_sel, outproj_str or full_ext."))
+                             GdalTranslate = gdalUtils::gdal_translate(
+                               outfile_vrt,  outrep_file_0,
+                               a_srs = MOD_proj_str, of = out_format,
+                               ot = datatype[band], a_nodata = nodata_out[band],
+                               co = paste("COMPRESS", compress, sep = "="),
+                               overwrite = TRUE
+                             ),
+                             Resample0_Resize0 = gdalUtils::gdalwarp(
+                               outfile_vrt, outrep_file_0,
+                               s_srs = MOD_proj_str, t_srs = outproj_str,
+                               of = out_format, r = resampling,
+                               co = paste("COMPRESS", compress, sep = "="),
+                               wo = "INIT_DEST = NO_DATA",
+                               wt = datatype[band], 
+                               overwrite = TRUE
+                             ),
+                             Resample0_Resize1 = gdalUtils::gdalwarp(
+                               outfile_vrt, outrep_file_0,
+                               s_srs = MOD_proj_str, t_srs = outproj_str,
+                               of = out_format, r = resampling,
+                               te = bbox,
+                               co = paste("COMPRESS", compress, sep = "="),
+                               wo = "INIT_DEST = NO_DATA",
+                               wt = datatype[band],
+                               overwrite = TRUE
+                             ),
+                             Resample1_Resize0 = gdalUtils::gdalwarp(
+                               outfile_vrt, outrep_file_0,
+                               s_srs = MOD_proj_str, t_srs = outproj_str,
+                               of = out_format, r = resampling,
+                               tr = rep(out_res, 2),
+                               co = paste("COMPRESS", compress, sep = "="),
+                               wo = "INIT_DEST = NO_DATA",
+                               wt = datatype[band],
+                               overwrite = TRUE
+                             ),
+                             Resample1_Resize1 =  gdalUtils::gdalwarp(
+                               outfile_vrt, outrep_file_0,
+                               s_srs = MOD_proj_str, t_srs = outproj_str,
+                               of = out_format,
+                               r = resampling, te = bbox,
+                               tr = rep(out_res, 2),
+                               co = paste("COMPRESS", compress, sep = "="),
+                               wo = "INIT_DEST = NO_DATA",
+                               wt = datatype[band],
+                               overwrite = TRUE
+                             ),
+                             stop(
+                               "Internal error in out_res_sel, outproj_str or full_ext."))
                     } else {
                       switch(reproj_type,
-                              GdalTranslate =  gdalUtils::gdal_translate(outfile_vrt,  outrep_file_0,
-                                                                         a_srs = MOD_proj_str, of = out_format,
-                                                                         ot = datatype[band],
-                                                                         a_nodata = nodata_out[band],
-                                                                         overwrite = TRUE),
-                              Resample0_Resize0  =  gdalUtils::gdalwarp(outfile_vrt, outrep_file_0,
-                                                                        s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                                        of = out_format, r = resampling,
-                                                                        wo = "INIT_DEST = NO_DATA",
-                                                                        wt = datatype[band],
-                                                                        overwrite = TRUE),
-                              Resample0_Resize1  = gdalUtils::gdalwarp(outfile_vrt, outrep_file_0,
-                                                                        s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                                        of = out_format, r = resampling,
-                                                                        te = bbox, wo = "INIT_DEST = NO_DATA",
-                                                                        wt = datatype[band],
-                                                                        overwrite = TRUE),
-                              Resample1_Resize0  =  gdalUtils::gdalwarp(outfile_vrt, outrep_file_0,
-                                                                        s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                                        of = out_format, r = resampling,
-                                                                        tr = rep(out_res, 2),
-                                                                        wo = "INIT_DEST = NO_DATA",
-                                                                        wt = datatype[band],
-                                                                        overwrite = TRUE),
-                              Resample1_Resize1  =  gdalUtils::gdalwarp(outfile_vrt, outrep_file_0,
-                                                                        s_srs = MOD_proj_str, t_srs = outproj_str,
-                                                                        of = out_format, r = resampling,
-                                                                        te = bbox, tr = rep(out_res, 2),
-                                                                        wo = "INIT_DEST = NO_DATA",
-                                                                        wt = datatype[band],
-                                                                        overwrite = TRUE),
-                              quit("Internal error in out_res_sel, outproj_str or full_ext."))
+                              GdalTranslate =  gdalUtils::gdal_translate(
+                                outfile_vrt,  outrep_file_0,
+                                a_srs = MOD_proj_str, of = out_format,
+                                ot = datatype[band],
+                                a_nodata = nodata_out[band],
+                                overwrite = TRUE
+                              ),
+                             Resample0_Resize0  =  gdalUtils::gdalwarp(
+                               outfile_vrt, outrep_file_0,
+                               s_srs = MOD_proj_str, t_srs = outproj_str,
+                               of = out_format, r = resampling,
+                               wo = "INIT_DEST = NO_DATA",
+                               wt = datatype[band],
+                               overwrite = TRUE
+                             ),
+                             Resample0_Resize1  = gdalUtils::gdalwarp(
+                               outfile_vrt, outrep_file_0,
+                               s_srs = MOD_proj_str, t_srs = outproj_str,
+                               of = out_format, r = resampling,
+                               te = bbox, wo = "INIT_DEST = NO_DATA",
+                               wt = datatype[band],
+                               overwrite = TRUE
+                             ),
+                             Resample1_Resize0  =  gdalUtils::gdalwarp(
+                               outfile_vrt, outrep_file_0,
+                               s_srs = MOD_proj_str, t_srs = outproj_str,
+                               of = out_format, r = resampling,
+                               tr = rep(out_res, 2),
+                               wo = "INIT_DEST = NO_DATA",
+                               wt = datatype[band],
+                               overwrite = TRUE
+                             ),
+                             Resample1_Resize1  =  gdalUtils::gdalwarp(
+                               outfile_vrt, outrep_file_0,
+                               s_srs = MOD_proj_str, t_srs = outproj_str,
+                               of = out_format, r = resampling,
+                               te = bbox, tr = rep(out_res, 2),
+                               wo = "INIT_DEST = NO_DATA",
+                               wt = datatype[band],
+                               overwrite = TRUE
+                             ),
+                             quit("Internal error in out_res_sel, outproj_str or full_ext."))
                     }
-
+                    # TODO: Extract as function !
                     # If scale_factor="Yes", create final files by rescaling values
-                    if (scale_val == "Yes"   & !(scale_factor[band] == 1 & offset[band] == 0)) {
+                    if (scale_val == "Yes"   & 
+                        !(scale_factor[band] == 1 & offset[band] == 0)) {
                       # fixed: ignore scaling if slope = 1 AND offset = 0
                       # mode with raster()
+                     
                       outrep_0 <- raster::raster(outrep_file_0)
-                      outrep   <- outrep_0 * as.numeric(scale_factor[band]) + as.numeric(offset[band])
-
-                      raster::writeRaster(outrep, outrep_file,
-                                  format    = out_format,
-                                  datatype  = ifelse(as.integer(scale_factor[band]) != as.numeric(scale_factor[band]), "FLT4S", "INT2S"),
-                                  ifelse(out_format == "GTiff", paste0("options=c(COMPRESS=", compress, ")"), ""),
-                                  NAflag    = as.numeric(nodata_out[band]),
-                                  overwrite = TRUE)
+                      scl <- as.numeric(scale_factor[band])
+                      off <- as.numeric(offset[band])
+                      outrep <- raster::calc(
+                        x         = outrep_0,
+                        fun       = function(x) {
+                          x * scl + off
+                        }, 
+                        filename  = outrep_file,
+                        format    = out_format,
+                        datatype  = "FLT4S", 
+                        options   = ifelse(
+                          out_format == "GTiff",
+                          paste0("COMPRESS=", compress),
+                          ""),                       
+                        NAflag    = as.numeric(nodata_out[band]),
+                        overwrite = TRUE)
                       rm(outrep, outrep_0)
-
-                      # # mode with gdal_calc: faster but unstable
-                      # gdal_calc_string <- paste0(Sys.which("gdal_calc.py")," -A ",outrep_file_0," --outfile=",outrep_file,
-                      #                            " --calc=\"A*",scale_factor[band],"+",offset[band],"\"",
-                      #                            " --format=",out_format," --NoDataValue=",nodata_out[band])
-                      # if (as.integer(scale_factor[band]) != as.numeric(scale_factor[band])) {
-                      #   gdal_calc_string <- paste(gdal_calc_string, "--type=Float32")
-                      # }
-                      # if (out_format == "GTiff") {
-                      #   gdal_calc_string <- paste0(gdal_calc_string," --co=\"COMPRESS=",compress,"\"")
-                      # }
-                      # system(gdal_calc_string, intern = Sys.info()["sysname"]=="Windows")
-
                     }
 
                     # If output format is ENVI, add data ignore value to the header file
                     if (out_format == "ENVI") {
-                      fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(outrep_file), ".hdr"), "a")
-                      writeLines(c("data ignore value = ", nodata_out[band] ), fileConn_meta_hdr, sep = " ")		# Data Ignore Value
+                      fileConn_meta_hdr <- file(paste0(
+                        tools::file_path_sans_ext(outrep_file), ".hdr"), "a")
+                      writeLines(c("data ignore value = ",
+                                   nodata_out[band] ),
+                                 fileConn_meta_hdr, sep = " ")
                       writeLines("", fileConn_meta_hdr)
                       close(fileConn_meta_hdr)
-                    } else {
-
                     }
-
-                    xml_file <- paste0(outrep_file, ".aux.xml")		# Delete xml files created by gdalwarp
-                    unlink(tmp_prod_folder, recursive = TRUE)					# Delete temporary files in temp folder
+                    # xml_file <- paste0(outrep_file, ".aux.xml")		# Delete xml files created by gdalwarp
+                    # unlink(tmp_prod_folder, recursive = TRUE)			# Delete temporary files in temp folder
                   }
                 }  # ENDIF band selected for processing
               }	# END Cycle on available MODIS Bands
@@ -928,7 +951,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               for (band in which(indexes_bandsel == 1)) {
                 indexes_band <- indexes_bandnames[band] 	# index name
                 formula      <- indexes_formula[band]				#index formula
-                mess_text    <- paste("Computing", sens_sel, indexes_band, "for date:", date_name)
+                mess_text    <- paste("Computing", sens_sel, indexes_band,
+                                      "for date:", date_name)
                 if (gui) {
                   gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
                   Sys.sleep(0.05)
@@ -936,16 +960,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                 } else {
                   message("[", date(), "] ", mess_text)
                 }
-                out_filename <- file.path(out_prod_folder, indexes_band,
-                                          paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY))
-                if (out_format == "GTiff") {
-                  out_filename <- paste0(out_filename, ".tif")
-                } else {
-                  out_filename <- paste0(out_filename, ".dat")
-                }
-                # create folder for index
-                dir.create(file.path(out_prod_folder, indexes_band),
-                           showWarnings = FALSE, recursive = TRUE)
+                out_filename <- file.path(
+                  out_prod_folder,
+                  indexes_band,
+                  paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY,
+                         ifelse(out_format == "GTiff", ".tif", ".dat"))
+                )
+                
+
                 #If file not existing and reprocess = No, compute the index and save it
                 if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
                   MODIStsp_process_indexes(out_filename = out_filename, formula = formula,
@@ -953,6 +975,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                            indexes_nodata_out = indexes_nodata_out[band],
                                            out_prod_folder = out_prod_folder,
                                            file_prefix = file_prefix,
+                                           compress = compress, 
                                            yy = yy, out_format = out_format,
                                            DOY = DOY,
                                            scale_val = scale_val )
@@ -964,11 +987,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               # ---------------------------------- ----------------------------------------------#
 
               for (band in which(quality_bandsel == 1)) {
-                quality_band  <- quality_bandnames[band]		 # indicator name
-                source        <- quality_source[band]  #  Original MODIS layer containing data of the indicator
-                bitN          <- quality_bitN[band]      #  bitfields corresponding to indicator within source
-                nodata_qa_in  <- quality_nodata_in[band]
-                nodata_qa_out <- quality_nodata_out[band]
+                
                 mess_text     <- paste("Computing", quality_band, "for date:", date_name)
                 if (gui) {
                   gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
@@ -977,25 +996,39 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                 } else {
                   message("[", date(), "] ", mess_text)
                 }
-                out_filename <- file.path(out_prod_folder, quality_band,
-                                          paste0(file_prefix, "_",
-                                                 quality_band, "_",
-                                                 yy, "_", DOY))
-                if (out_format == "GTiff") {
-                  out_filename <- paste0(out_filename, ".tif")
-                } else {
-                  out_filename <- paste0(out_filename, ".dat")
-                }
-                dir.create(file.path(out_prod_folder, quality_band),
-                           showWarnings = FALSE, recursive = TRUE)
-                #If file not existing and reprocess = No, compute the indicator and save it
+                
+                quality_band  <- quality_bandnames[band]		 # indicator name
+                source        <- quality_source[band]  #  Original MODIS layer containing data of the indicator
+                bitN          <- quality_bitN[band]      #  bitfields corresponding to indicator within source
+                nodata_qa_in  <- quality_nodata_in[band]
+                nodata_qa_out <- quality_nodata_out[band]
+                nodata_source <- nodata_out[grep(source, bandnames)]
+               
+                out_filename <- file.path(
+                  out_prod_folder, quality_band,
+                  paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY,
+                         ifelse(out_format == "GTiff", ".tif", ".dat")
+                  )
+                )
+                
+                # If file not existing or reprocess = Yes, compute the indicator
+                # and save it
                 if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
-                  MODIStsp_process_QA_bits(out_filename,
-                                           in_raster_name = bandnames[grep(source, bandnames)],
-                                           bitN, source, out_prod_folder,
-                                           file_prefix, yy, DOY, out_format,
-                                           nodata_source = nodata_out[grep(source, bandnames)],
-                                           nodata_qa_in, nodata_qa_out)
+     
+                  in_source_filename <- file.path(
+                    out_prod_folder, source,
+                    paste0(file_prefix, "_", source, "_", yy, "_", DOY, 
+                           ifelse(out_format == "GTiff", ".tif", ".dat"))
+                  )
+                  
+                  MODIStsp_process_QA_bits(out_filename, 
+                                           in_source_filename,
+                                           bitN, 
+                                           out_format,
+                                           nodata_source,
+                                           nodata_qa_in,
+                                           nodata_qa_out, 
+                                           compress)
                 }
               }
 
@@ -1124,7 +1157,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   #- ------------------------------------------------------------------------------- -#
   # Close GUI and clean-up
   #- ------------------------------------------------------------------------------- -#
-  gc()
+  
   if (gui) {
     gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
       return(FALSE)
