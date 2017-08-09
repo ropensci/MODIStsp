@@ -9,9 +9,9 @@
 #' @param bandnames string array of names of original HDF layer. Used to identify the 
 #' bands required for index computation
 #' @param nodata_out string array of nodata values of reflectance bands
-#' @param indexes_nodata_out string nodata value for resulting raster
 #' @param out_prod_folder strng output folder for the product used to retrieve filenames 
 #' of rasters of original bands to be used in computations
+#' @param indexes_nodata_out string nodata value for resulting raster
 #' @param file_prefix string used to retrieve filenames of rasters of original bands 
 #' to be used in computations
 #' @param yy string string used to retrieve filenames of rasters of original bands 
@@ -24,75 +24,95 @@
 #' otherwise integer -10000 - 10000
 #' @return NULL - new raster file saved in out_filename
 #'
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
-#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2017) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom raster NAvalue raster writeRaster
+#' @importFrom raster stack NAvalue overlay
 #' @importFrom tools file_path_sans_ext
 MODIStsp_process_indexes <- function(out_filename, formula, bandnames,
                                      nodata_out, out_prod_folder,
                                      indexes_nodata_out, file_prefix, 
+                                     compress, 
                                      yy, DOY, out_format, scale_val) {
-
-  # Retrieve necessary filenames (get names of single band files on the basis of Index formula)
-
-  call_string <- "tmp_index <- index("   # initialize the "call string " for the computation
-  fun_string <- "index <- function("		 # initialize the "fun_string" --> in the end, fun_string contains a complete function definition
-  # Parsing it allows to create on the fly a function to compute the specific index required
-  # search in bandnames the original bands required for the index
+  
+  # create folder for index
+  dir.create(dirname(out_filename),
+             showWarnings = FALSE, recursive = TRUE)
+  
+  # initialize the "fun_string" --> in the end, fun_string contains a complete
+  # function definition. Parsing it allows to create on the fly a function to
+  # compute the specific index required 
+  fun_string <- "index <- function("		 
+  # initialize the "stack_string" for the overlay function
+  stack_string <- "tmp_stack <- raster::stack("   
+  
   for (band in seq(along = bandnames)) {
     bandsel <- bandnames[band]
-    # look if the bandname is present in the formula. If so, retrieve the filename for that band
-    # and store its data in a R object that takes its name from the band name
+    # look if the bandname is present in the formula. If so, retrieve the
+    # filename for that band and store its data in a R object that takes its
+    # name from the band name, then associate it with the corresponding raster
+    # file saved by MODIStsp beforehand
     if (length(grep(bandsel, formula)) > 0) {
       temp_bandname <- bandnames[grep(bandsel, bandnames)]
       # file name for the band, year, doy
-      temp_file <- file.path(out_prod_folder, temp_bandname, 
-                             paste0(file_prefix, "_", temp_bandname, "_", yy, "_", DOY))
-      if (out_format == "GTiff")  {
-        temp_file <- paste0(temp_file, ".tif")
-      }
-      if (out_format == "ENVI") {
-        temp_file <- paste0(temp_file, ".dat")
-      }
-      temp_raster <- raster(temp_file)   # put data in a raster object
-      raster::NAvalue(temp_raster) <- as.numeric(nodata_out[band])  # assign NA value
-      assign(temp_bandname, temp_raster) # assign the data to a object with name = bandname
-      # add an "entry" in call_string (additional parameter to be passed to function
-      call_string <- paste0(call_string, temp_bandname, "=", temp_bandname, "," )
+      temp_file <- file.path(
+        out_prod_folder, temp_bandname, 
+        paste0(file_prefix, "_", temp_bandname, "_", yy, "_", DOY)
+      )
+      
+      temp_file <- paste0(temp_file,
+                          ifelse(out_format == "GTiff", ".tif", ".dat"))
+      
+      temp_raster <- raster(temp_file) 
+      # assign NA value
+      raster::NAvalue(temp_raster) <- as.numeric(nodata_out[band])
+      # assign the data to a object with name = bandname
+      assign(temp_bandname, temp_raster)
       # add an "entry" in fun_string (additional input parameter)
       fun_string  <- paste0(fun_string, temp_bandname, "=", temp_bandname, "," )  
+      # add an "entry" in stack_string (additional input in the stack)
+      stack_string  <- paste0(stack_string, temp_bandname, ", ")
     }
   }
-  call_string <- paste0(substr(call_string, 1, nchar(call_string) - 1), ")")  #Finalize the call_string
+  
+  stack_string <- paste0(substr(stack_string, 1, nchar(stack_string) - 2), ")")
+  # Finalize the fun_string
   if (scale_val == "Yes") {
     # if scale_val, indices are written as float -1 - 1
-    fun_string <- paste0(fun_string, "...)", "{", formula, "}") # Finalize the fun_string
+    fun_string <- paste0(fun_string, "...)", "{", formula, "}")
+    dt  <- "FLT4S"
   } else {
     # otherwise, they are written as integer -10000 - 10000
-    fun_string <- paste0(fun_string, "...)", "{round(10000*(", formula, "))}") # Finalize the fun_string
+    fun_string <- paste0(fun_string, "...)", "{round(10000*(", formula, "))}")
+    dt  <- "INT2S"
   }
   
-  eval(parse(text = fun_string))     # Parse "fun_string" to create a new function
-  eval(parse(text = call_string))    # parse call_string to launch the new function for index computation
-
-  # Save output and remove aux file
-  raster::NAvalue(tmp_index) <- as.numeric(indexes_nodata_out)
-  writeRaster(tmp_index, out_filename, format = out_format, NAflag = as.numeric(indexes_nodata_out), 
-              datatype = if (scale_val == "Yes"){"FLT4S"} else {"INT2S"}, overwrite = TRUE)
+  #   __________________________________________________________________________
+  #   compute the index, by calling raster::overlay over fun_string, using  ####
+  #   stack_string as input
+  
+  raster::overlay(x         = eval(parse(text = stack_string)),
+                  fun       = eval(parse(text = fun_string)), 
+                  filename  = out_filename,
+                  format    = out_format,
+                  datatype  = dt, 
+                  options   = ifelse(out_format == "GTiff",
+                                     paste0("COMPRESS=", compress),
+                                     ""),                       
+                  NAflag    = as.numeric(nodata_out),
+                  overwrite = TRUE)
+  
   # IF "ENVI", write the nodata value in the header
   if (out_format == "ENVI") { 
     # If output format is ENVI, add data ignore value to the header file
-    fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(out_filename), ".hdr"), "a")  
-    # Data Ignore Value
-    writeLines(c("data ignore value = ", indexes_nodata_out ), fileConn_meta_hdr, sep = " ")		
+    fileConn_meta_hdr <- file(paste0(
+      tools::file_path_sans_ext(out_filename),
+      ".hdr"), "a")
+    
+    writeLines(c("data ignore value = ", nodata_out), fileConn_meta_hdr,
+               sep = " ")
     writeLines("", fileConn_meta_hdr)
     close(fileConn_meta_hdr)
   }
   # Delete xml files created by writeRaster
-  xml_file <- paste0(out_filename, ".aux.xml")		
-  unlink(xml_file)
-
-  gc()
-
 }
