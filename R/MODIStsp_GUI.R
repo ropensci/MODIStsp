@@ -847,7 +847,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   size(compress_lab) <- list(width = 130)
   font(compress_lab) <- list(family = "sans", weight = "bold")
   compress_wid <- gcombobox(names(compress_dict), container = compress_group,
-                            selected <- match(general_opts$compress, names(compress_dict)))
+                            selected <- match(general_opts$compress, compress_dict))
   if (general_opts$out_format == "GTiff") {
     enabled(compress_group) <- TRUE
   } else {
