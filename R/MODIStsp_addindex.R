@@ -38,7 +38,6 @@
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to
 #'   launch MODSItsp from outside the package using MODIStsp_std.R)
 #' @import gWidgets
-#' @import gWidgetsRGtk2
 #' @importFrom pacman p_load p_exists
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom stringr str_detect
