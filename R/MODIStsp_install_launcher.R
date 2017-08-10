@@ -4,8 +4,8 @@
 #'   script, which is stored in the function files. In order to simply retrieve it, this
 #'   function will create a desktop entry and a symbolic link to the bash script (in Linux)
 #'  or a link in the Start Menu to the batch script (in Windows).
-#'  Note that, if the packages MODIStsp is installed in a directory version-dependent
-#'  (as the default one is), this function should be rerunned after an R upgrade,
+#'  Note that, if the packages MODIStsp is installed in a version-dependent directory
+#'  (as the default one is), this function should be re-executed after an R upgrade,
 #'  otherwise the links would continue to point to the old package version!
 #' @param bin_dir in Linux, directory in which the link to the bash script should be
 #'   placed (default: /usr/bin; a path included in the PATH environment variable is
@@ -19,7 +19,7 @@
 #' @param sudo (Linux only) logical value which indicates if administrator rights have to
 #'   be used to write within bin_dir and desktop_dir (default: FALSE);
 #'  in this case, the root password is requested when launching the function. Note that
-#'  default values of bin_dir and desktop_dir requires to set thisoption to TRUE (or to
+#'  default values of bin_dir and desktop_dir requires to set this option to TRUE (or to
 #'  launch the script in a root session of R)!
 #' @return NULL
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}

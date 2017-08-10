@@ -6,13 +6,13 @@
 #' @param out_prod_folder string output folder name
 #' @param file_prefix string file prefix of the product (e.g., MOD13Q1)
 #' @param bandnames string array Bandnames of the MODIS product
-#' @param bandsel_orig_choice 0/1 array Indicates which original modis layers were s
+#' @param bandsel_orig_choice 0/1 array Indicates which original MODIS layers were s
 #'   elected to be processed
 #' @param yy string year
 #' @param DOY string doy
-#' @param out_format string Gtiff or ENVI
-#' @param indexes_bandnames string array Name of available spectral indexes forthe product
-#' @param indexes_bandsel  0/1 array Indicates which ospectral indexes were selected to
+#' @param out_format string GTiff or ENVI
+#' @param indexes_bandnames string array Name of available spectral indexes for the product
+#' @param indexes_bandsel  0/1 array Indicates which spectral indexes were selected to
 #'   be processed
 #' @param quality_bandnames string array Name of available Quality Indicators for the product
 #' @param quality_bandsel 0/1 array Indicates which Quality Indicators were selected to

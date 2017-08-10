@@ -11,10 +11,10 @@ lpdaac_getmod_dates(dates, date_dirs)
 for which the http addresses of folders in lpdaac should be retrieved
 (e.g., c("2015.1.1", "2015.12.31)}
 
-\item{date_dirs}{data frame full list of folders in lpdaa archive for product of interest}
+\item{date_dirs}{data frame full list of folders in lpdaac archive for product of interest}
 }
 \value{
-array of folder names containing data for the modis product acquired in
+array of folder names containing data for the MODIS product acquired in
 the period specified by "dates"
 }
 \description{

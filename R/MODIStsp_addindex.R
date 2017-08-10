@@ -16,9 +16,9 @@
 #'   file, or the options_file specified by the user, to add the new index.
 #' @param option_jsfile settings (optional): full path of the JSON file containing the
 #'   processing options in which the new indexes
-#'  are saved (default: MODIStsp_Previous.JSON in subdir Previous).
+#'  are saved (default: MODIStsp_Previous.JSON in subfolder Previous).
 #' @param prodopts_file settings (optional): full path of the RData file containing
-#'   products description (default: MODIStsp_ProdOpts.RData in subdir Previous)
+#'   products description (default: MODIStsp_ProdOpts.RData in subfolder Previous)
 #' @param selprod settings (optional): Name of the product to which the new index should
 #'   be added. (Note: the index will be added to all other products allowing its
 #'   computation !)
@@ -33,11 +33,12 @@
 #' @param new_indexformula (optional if gui=TRUE): string containing the formula of
 #'   the new spectral indexes. Variables accepted to compute it are the names of the bands:
 #'   b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.
-#' @param new_indexnodata_out (optional): nodata value to assign to the rasters
+#' @param new_indexnodata_out (optional): NoData value to assign to the rasters
 #'   containing the new index
 #' @param MODIStsp_dir (optional): main folder containing MODIStsp R files (used only to
 #'   launch MODSItsp from outside the package using MODIStsp_std.R)
 #' @import gWidgets
+#' @import gWidgetsRGtk2
 #' @importFrom pacman p_load p_exists
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom stringr str_detect
@@ -461,7 +462,7 @@ MODIStsp_addindex <- function(option_jsfile=NA,
     font(finish_but)  <- list(family = "sans",  weight = "bold")
     visible(main_win, set = TRUE)
 
-    # end of gui actions ----
+    # end of GUI actions ----
     # Actions on non-interactive execution
   } else {
 
@@ -502,6 +503,6 @@ MODIStsp_addindex <- function(option_jsfile=NA,
            name, the index fullname and the formula.")
     }
 
-  } # end of non-gui actions
+  } # end of non-GUI actions
 
 }

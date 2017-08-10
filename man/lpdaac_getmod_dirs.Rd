@@ -22,7 +22,7 @@ download server; if NA, the script tries to download with http, using ftp if the
 \item{gui}{logical indicates if processing was called within the GUI environment
 or not. If not, direct processing messages to the log}
 
-\item{out_folder_mod}{ouput folder for original HDF storage}
+\item{out_folder_mod}{output folder for original HDF storage}
 
 \item{.Platform}{string os platform (from call to .Platform)}
 }

@@ -1,6 +1,6 @@
 #' @title bbox_from_file
 #' @description Helper function used to retrieve the bounding box of a specified spatial file
-#'   recognised by GDAL or OGG: the function reads the extent using gdalinfo or ogrinfo,
+#'   recognized by GDAL or OGG: the function reads the extent using gdalinfo or ogrinfo,
 #'   converting it to a specified CRS.
 #' @param file_path The path of the spatial file.
 #' @param out_crs The output projection (string format).

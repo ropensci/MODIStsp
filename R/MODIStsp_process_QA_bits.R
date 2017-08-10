@@ -13,20 +13,18 @@
 #'   indicator of interest (e.g., 0-1 = first two bits; 2-5: bits from 2 to 5,
 #'   etc.)
 #' @param out_format output format (ENVI or GTiff)
-#' @param nodata_source `character` nodata values of the MODIS band containing
+#' @param nodata_source `character` NoData values of the MODIS band containing
 #'   data from which the bit field corresponding to the quality indicator must
 #'   be extracted
-#' @param nodata_qa_in `character` in nodata for quality bands ("255")
-#' @param nodata_qa_out `character` out nodata for quality bands ("255")
+#' @param nodata_qa_in `character` in NoData for quality bands ("255")
+#' @param nodata_qa_out `character` out NoData for quality bands ("255")
 #' @param compress `character` compression option for GTiff files
 #' @return NULL
 #' @author Lorenzo Busetto, phD (2017) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' Based on the "modis.qc.R" script by Yann Chemin (2008) 
-#' (https://r-forge.r-project.org/scm/viewvc.php/pkg/RemoteSensing/R/modis.qc.R?view=markup&root=remotesensing&pathrev=79) #nolint
-#'
-#' license GPL 3.0
+#'  Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
+#'  license GPL 3.0
 #' @importFrom bitops bitAnd bitShiftR
 #' @importFrom raster raster NAvalue calc
 #' @importFrom tools file_path_sans_ext
@@ -42,7 +40,7 @@ MODIStsp_process_QA_bits <- function(out_filename,
   dir.create(dirname(out_filename), showWarnings = FALSE, recursive = TRUE)
   # Open input file
   in_raster <- raster::raster(in_source_file, format = out_format)				
-  # reassign nodata to be sure
+  # reassign NoData to be sure
   raster::NAvalue(in_raster) <- as.numeric(nodata_source)					
   # what bits do we need ? 
   bits <- as.numeric(unlist(strsplit(bitN, "-")))

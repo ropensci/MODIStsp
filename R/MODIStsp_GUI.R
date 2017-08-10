@@ -3,13 +3,13 @@
 #'	Function used to generate and handle the GUI used to allow selection of MODIStsp
 #'	processing parameters. If the "previous options" file (MODIStsp_Previous.json)
 #'	already exists, it is loaded and used to reinstate the GUI to its last state.
-#'	Otherwise, the previous options file is created by launching the MODIStsp_read_xml fucntion
+#'	Otherwise, the previous options file is created by launching the MODIStsp_read_xml function
 #' @param general_opts data.frame containing general processing options passed by MODIStsp
 #' @param prod_opt_list List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)
 #' @param scrollWindow logical parameter passed by MODIStsp main function.
 #' @param MODIStsp_dir main folder of the package
-#' @param previous_jsfile json parameters file containgn data of the last execution
-#' @param prodopts_file rdata file containing info about MODIS products
+#' @param previous_jsfile json parameters file containing data of the last execution
+#' @param prodopts_file `character` name of RData file containing info about MODIS products
 #' @return Quit - Logical - tells the main if running processing or exiting (also, Processing
 #' options are saved in "previous" file and (if "Save options" is pressed) in user's selected file)
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}

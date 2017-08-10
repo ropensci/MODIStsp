@@ -12,10 +12,10 @@ MODIStsp_addindex(option_jsfile = NA, prodopts_file = NA, selprod = NA,
 \arguments{
 \item{option_jsfile}{settings (optional): full path of the JSON file containing the
 processing options in which the new indexes
-are saved (default: MODIStsp_Previous.JSON in subdir Previous).}
+are saved (default: MODIStsp_Previous.JSON in subfolder Previous).}
 
 \item{prodopts_file}{settings (optional): full path of the RData file containing
-products description (default: MODIStsp_ProdOpts.RData in subdir Previous)}
+products description (default: MODIStsp_ProdOpts.RData in subfolder Previous)}
 
 \item{selprod}{settings (optional): Name of the product to which the new index should
 be added. (Note: the index will be added to all other products allowing its
@@ -37,7 +37,7 @@ spectral index.}
 the new spectral indexes. Variables accepted to compute it are the names of the bands:
 b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.}
 
-\item{new_indexnodata_out}{(optional): nodata value to assign to the rasters
+\item{new_indexnodata_out}{(optional): NoData value to assign to the rasters
 containing the new index}
 
 \item{MODIStsp_dir}{(optional): main folder containing MODIStsp R files (used only to

@@ -15,7 +15,7 @@
 "end_y":      7,
 "user": "",
 "password": "",
-"use_aria": false,
+"use_aria": true,
 "download_server": "http",
 "download_range": "full",
 "proj": "User Defined",

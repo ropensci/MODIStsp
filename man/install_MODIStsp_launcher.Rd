@@ -23,7 +23,7 @@ desktop shortcut should be created (default: TRUE).}
 \item{sudo}{(Linux only) logical value which indicates if administrator rights have to
 be used to write within bin_dir and desktop_dir (default: FALSE);
 in this case, the root password is requested when launching the function. Note that
-default values of bin_dir and desktop_dir requires to set thisoption to TRUE (or to
+default values of bin_dir and desktop_dir requires to set this option to TRUE (or to
 launch the script in a root session of R)!}
 }
 \description{
@@ -34,8 +34,8 @@ MODIStsp tool can be used also as a standalone tool my launching a bash/batch
 script, which is stored in the function files. In order to simply retrieve it, this
 function will create a desktop entry and a symbolic link to the bash script (in Linux)
 or a link in the Start Menu to the batch script (in Windows).
-Note that, if the packages MODIStsp is installed in a directory version-dependent
-(as the default one is), this function should be rerunned after an R upgrade,
+Note that, if the packages MODIStsp is installed in a version-dependent directory
+(as the default one is), this function should be re-executed after an R upgrade,
 otherwise the links would continue to point to the old package version!
 }
 \note{

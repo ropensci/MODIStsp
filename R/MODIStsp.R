@@ -6,7 +6,7 @@
 #' @param gui logical parameter (TRUE: the GUI is opened before processing; FALSE: the
 #'  saved parameters are retrieved from "options_file")
 #' @param options_file settings (optional): full path of the JSON file containing the
-#'  processing options (default: MODIStsp_Previous.json in subdir Previous);
+#'  processing options (default: MODIStsp_Previous.json in subfolder Previous);
 #' @param spatial_file_path (optional): full path of a spatial file to use as extent
 #'  (default=NULL): if defined, the processing options which define the extent, the
 #'  selected tiles and the "Full Tile / Resized" options are not considered; instead, new
@@ -40,6 +40,7 @@
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils packageVersion
 #' @importFrom utils unzip
+#' @import gWidgetsRGtk2
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used
 #' # settings

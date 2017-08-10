@@ -5,7 +5,7 @@
 #' (See MODIStsp_main for details ) and performs all required
 #' processing.
 #' @details After retrieving the input processing options, the function
-#'   1. Acesses lpdaac http or ftp archive to determine the list of dates to be processed
+#'   1. Accesses lpdaac http or ftp archive to determine the list of dates to be processed
 #'   2. Performs all required processing steps on each date (download, reprojection,
 #'      resize, mosaicing, indexes computation, quality indicators computation)
 #'   3. Creates virtual files of the processed time series.
@@ -14,65 +14,67 @@
 #' package.
 #' Extraction of bitfields from Quality layers is done though fast bitwise computation
 #' Checks are done in order to not re-download already existing HDF images, and not
-#' reprocess already processed dates (if the user didn'specify that)
+#' reprocess already processed dates (if the user did not specify that)
 #'
 #' @param sel_prod string selected MODIS product
-#' @param start_date string start_date for images download and preproc (yyyy.mm.dd)
-#' @param end_date string end_date for images download and preproc (yyyy.mm.dd)
-#' @param out_folder  main ouput folder
-#' @param out_folder_mod  ouput folder for original HDF storage
+#' @param start_date string start_date for images download and preprocessing
+#'  (yyyy.mm.dd)
+#' @param end_date string end_date for images download and preprocessing
+#'  (yyyy.mm.dd)
+#' @param out_folder  main output folder
+#' @param out_folder_mod  output folder for original HDF storage
 #' @param reprocess string string ("Yes"/"No") If Yes, reprocess data for already existing
 #'   dates (Default = 'Yes')
-#' @param delete_hdf string ("Yes"/"No") If Yes, delete original hdf after completion
+#' @param delete_hdf string ("Yes"/"No") If Yes, delete original HDF after completion
 #' @param sensor string ("Terra" or "Aqua" or "Both")
-#' @param https hash https site for download of hdf of selected product
-#' @param ftps hash ftps site for download of hdf of selected product
+#' @param https hash https site for download of HDF of selected product
+#' @param ftps hash ftps site for download of HDF of selected product
 #' @param download_server service used to download MODIS tiles, one of: 'http', 'ftp', NA.
 #' @param user Username for http download
-#' ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))
+#'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))
 #' @param password Password for http download
-#' ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))
-#' @param start_x int start horiz. tile
-#' @param start_y int start vertical. tile
-#' @param end_x int end horiz. tile
-#' @param end_y int end vertical. tile
+#'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home))
+#' @param start_x int start horizontal tile
+#' @param start_y int start vertical tile
+#' @param end_x int end horizontal tile
+#' @param end_y int end vertical tile
 #' @param bbox array output bounding box (xmin, xmax, ymin, ymax ) in out proj coords
 #' @param out_format string output raster format (ENVI or GTiff)
 #' @param compress string compression for GTiff outputs (None, LZW, DEFLATE)
 #' @param out_res_sel string "Native" or "Resampled"
 #' @param out_res float Output resolution (in output projection measurement unit)
 #' @param native_res float Native resolution of MODIS product
-#' @param tiled 0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)
+#' @param tiled 0/1 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg)
 #' @param MOD_proj_str string proj4 string for MODIS product native projection
 #' @param outproj_str string proj4 string of selected output projection
-#' @param nodata_in array Original nodata for MODIS bands
-#' @param nodata_out Target nodata for MODIS bands
-#' @param nodata_change string (Yes/No) if Yes, nodata are set to nodata_out in
+#' @param nodata_in array Original NoData for MODIS bands
+#' @param nodata_out Target NoData for MODIS bands
+#' @param nodata_change string (Yes/No) if Yes, NoData are set to nodata_out in
 #' output rasters
 #' @param scale_val string (Yes/No) if Yes, output values in are rescaled in the
 #'  measure unit of the variable
 #' @param rts string ("Yes"/"No") If Yes, create rts time series
 #' @param datatype string array datatypes of MODIS bands
-#' @param bandsel  array of lenght equal to number of original modis layers. set
+#' @param bandsel  array of length equal to number of original modis layers. set
 #'  to 1 for bands to be processed
 #' @param bandnames array of Abbreviated Names of MODIS bands
-#' @param indexes_bandsel array of lenght equal to number of available spectral indexes,
+#' @param indexes_bandsel array of length equal to number of available spectral indexes,
 #'   set to  1 for indexes to be processed
 #' @param indexes_bandnames array of Abbreviated Names of MODIS indexes
 #' @param indexes_formula  array of indexes formulas
-#' @param indexes_nodata_out Nodata values for indexes
+#' @param indexes_nodata_out NoData values for indexes
 #' @param quality_bandnames array of  Names of MODIS quality indicators
-#' @param quality_bandsel array of lenght equal to number of available quality indicators,
+#' @param quality_bandsel array of length equal to number of available quality indicators,
 #'   set to  1 for indicators to be processed
 #' @param quality_bitN list of strings with number of entries equal to number of
-#'   quality indicators. each entry caontains position of bits corresponding to a QI
+#'   quality indicators. each entry contains position of bits corresponding to a QI
 #'   (e.g., 0-1)
 #' @param quality_source list of strings which connects each quality indicator to
 #' its source aggregated quality assurance layer
 #' @param quality_nodata_in Always 255
 #' @param full_ext string ("Full_Ext" or "Resized")
 #' @param quality_nodata_out Always 255
-#' @param file_prefixes output file prefix according to selelected product (e.g., MOD13Q1)
+#' @param file_prefixes output file prefix according to selected product (e.g., MOD13Q1)
 #' @param main_out_folder Suffix to add to the overall out_folder to create the out
 #'   dir for the product (corresponds to an abbreviation of the selected product)
 #' @param resampling string resampling method (near, bilinear, etc.)
@@ -133,16 +135,16 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   # Intialize variables -----------------------------------------------------
   #^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  # Fix on multiple nodata values
+  # Fix on multiple NoData values
   suppressWarnings(nodata_in[is.na(as.numeric(nodata_in))] <- "None" )
   suppressWarnings(quality_nodata_in[is.na(as.numeric(quality_nodata_in))] <- "None" )
-  # FIXME: as.integer(nodata) cause nodata ranges (e.g. 249-255) to be suppressed.
-  # So, in this cases nodata values will not
-  # be recognised. This problem will be solved in future with a cycle on nodata range.
+  # FIXME: as.integer(NoData) cause NoData ranges (e.g. 249-255) to be suppressed.
+  # So, in this cases NoData values will not
+  # be recognised. This problem will be solved in future with a cycle on NoData range.
 
   if (nodata_change == "No") {
     nodata_out <- nodata_in
-  }  # if nodata chande set to no, set ou_nodata to in_nodata
+  }  # if NoData chande set to no, set ou_nodata to in_nodata
   dir.create(out_folder_mod, recursive = TRUE, showWarnings = FALSE) # create out folder if not existing
   out_prod_folder <- file.path(out_folder, main_out_folder)  # main output folder --> define on the basis of product name and create if necessary
   dir.create(out_prod_folder, showWarnings = FALSE, recursive = TRUE)
@@ -336,7 +338,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
         message("[", date(), "] ", mess_text)
       }
 
-      # Get a list of the folders containing hdf images required (Corresponding to the
+      # Get a list of the folders containing HDF images required (Corresponding to the
       # subfolders in lpdaac corresponding to
       # selected product, dates, and current year under processing)
       date_dirs <- lpdaac_getmod_dates(dates = dates, date_dirs =  date_dirs_all)  # First, find the folders in lpdaac corresponding to the required dates
@@ -492,7 +494,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
                           if (download$status_code != 200 & length(content(download, "text",
                                                                            encoding = "UTF-8")) == 1) {
-                            # on error, delete last hdf file (to be sure no incomplete
+                            # on error, delete last HDF file (to be sure no incomplete
                             # files are left behind and send message)
                             message("[", date(), "] Download Error - Retrying...")
                             unlink(local_filename)
@@ -539,7 +541,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                     }
                   } # end here the while loop on file size check
 
-                }  # end IF on hdf existence
+                }  # end IF on HDF existence
               } # End cycle for downloading the images in modislist vector
 
               message("[", date(), "] ", length(modislist), " files for date of ",
@@ -562,7 +564,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                 # if more than a band is present, take gdalinfo from the first band
                 gdalUtils::gdalinfo(gdalinfo_hdf_1stlayer)
               } else {
-                # otherwise, take from the hdf directly
+                # otherwise, take from the HDF directly
                 gdalinfo_hdf_raw
               }
               gdalinfo_bbox <- cbind(na.omit(as.numeric(unlist(strsplit(gsub("[^0-9.\\-]+", " ",
@@ -694,7 +696,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       # files from the original hdfs, and then use those to build the vrt
 
                       files_out   <- NULL
-                      for(file in seq_along(along = files_in)) {
+                      for(file in seq_along(files_in)) {
                         file_out <- tempfile(fileext = ".tif")
                         gdalUtils::gdal_translate(files_in[file],
                                                   file_out,
@@ -761,9 +763,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                  sd        = band,
                                  srcnodata = nodata_in[band],
                                  vrtnodata = nodata_out[band],
-                                 overwrite = TRUE,
+                                 ot        = datatype[band],
                                  multi     = TRUE,
-                                 wo        = paste0("NUM_THREADS=", ncores))
+                                 wo        = c("INIT_DEST = NO_DATA",
+                                             paste0("NUM_THREADS=", ncores)),
+                                 overwrite  = TRUE, verbose = T
+                        )
                       } else {
                       gdalbuildvrt(outfile_vrt_or,
                                    outfile_vrt,
@@ -797,9 +802,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                     }
 
                     # If scale_factor="Yes", add a step before creating final files
-                    outrep_file_0 <- if (scale_val == "Yes"   & !(scale_factor[band] == 1 & offset[band] == 0)) {
-                      tempfile(fileext = ifelse(
-                        out_format == "GTiff", ".tif", ".dat")
+                    outrep_file_0 <- if (
+                      scale_val == "Yes" &
+                      !(scale_factor[band] == 1 & offset[band] == 0)
+                    ) {
+                      tempfile(fileext = ifelse(out_format == "GTiff",
+                                                ".tif", ".dat")
                       )
                     } else {
                       outrep_file
@@ -816,42 +824,51 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              ),
                              Resample0_Resize0 = gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
-                               s_srs = MOD_proj_str, t_srs = outproj_str,
-                               of = out_format, r = resampling,
-                               co = paste("COMPRESS", compress, sep = "="),
-                               wo = "INIT_DEST = NO_DATA",
-                               wt = datatype[band], 
+                               s_srs     = MOD_proj_str, t_srs = outproj_str,
+                               of        = out_format, r = resampling,
+                               co        = paste("COMPRESS", compress, sep = "="),
+                               ot        = datatype[band],
+                               multi     = TRUE,
+                               wo        = c("INIT_DEST = NO_DATA",
+                                             paste0("NUM_THREADS=", ncores)),
                                overwrite = TRUE
                              ),
                              Resample0_Resize1 = gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
-                               s_srs = MOD_proj_str, t_srs = outproj_str,
-                               of = out_format, r = resampling,
-                               te = bbox,
-                               co = paste("COMPRESS", compress, sep = "="),
-                               wo = "INIT_DEST = NO_DATA",
-                               wt = datatype[band],
-                               overwrite = TRUE
+                               s_srs      = MOD_proj_str, t_srs = outproj_str,
+                               of         = out_format, r = resampling,
+                               te         = bbox,
+                               co         = paste("COMPRESS", compress, sep = "="),
+                               ot         = datatype[band],
+                               multi      = TRUE,
+                               wo         = c("INIT_DEST = NO_DATA",
+                                             paste0("NUM_THREADS=", ncores)),
+                               overwrite  = TRUE
                              ),
                              Resample1_Resize0 = gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
-                               s_srs = MOD_proj_str, t_srs = outproj_str,
-                               of = out_format, r = resampling,
-                               tr = rep(out_res, 2),
-                               co = paste("COMPRESS", compress, sep = "="),
-                               wo = "INIT_DEST = NO_DATA",
-                               wt = datatype[band],
+                               s_srs      = MOD_proj_str, t_srs = outproj_str,
+                               of         = out_format, r = resampling,
+                               tr         = rep(out_res, 2),
+                               co         = paste("COMPRESS", compress, sep = "="),
+                               ot        = datatype[band],
+                               multi     = TRUE,
+                               wo        = c("INIT_DEST = NO_DATA",
+                                             paste0("NUM_THREADS=", ncores)),
                                overwrite = TRUE
                              ),
                              Resample1_Resize1 =  gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
-                               s_srs = MOD_proj_str, t_srs = outproj_str,
-                               of = out_format,
-                               r = resampling, te = bbox,
-                               tr = rep(out_res, 2),
-                               co = paste("COMPRESS", compress, sep = "="),
-                               wo = "INIT_DEST = NO_DATA",
-                               wt = datatype[band],
+                               s_srs     = MOD_proj_str, t_srs = outproj_str,
+                               of        = out_format,
+                               r         = resampling,
+                               te        = bbox,
+                               tr        = rep(out_res, 2),
+                               co        = paste("COMPRESS", compress, sep = "="),
+                               ot        = datatype[band],
+                               multi     = TRUE,
+                               wo        = c("INIT_DEST = NO_DATA",
+                                             paste0("NUM_THREADS=", ncores)),
                                overwrite = TRUE
                              ),
                              stop(
@@ -860,43 +877,62 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       switch(reproj_type,
                               GdalTranslate =  gdalUtils::gdal_translate(
                                 outfile_vrt,  outrep_file_0,
-                                a_srs = MOD_proj_str, of = out_format,
+                                a_srs = MOD_proj_str,
+                                of = out_format,
                                 ot = datatype[band],
                                 a_nodata = nodata_out[band],
                                 overwrite = TRUE
                               ),
                              Resample0_Resize0  =  gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
-                               s_srs = MOD_proj_str, t_srs = outproj_str,
-                               of = out_format, r = resampling,
-                               wo = "INIT_DEST = NO_DATA",
-                               wt = datatype[band],
+                               s_srs = MOD_proj_str,
+                               t_srs = outproj_str,
+                               of = out_format,
+                               r = resampling,
+                               ot        = datatype[band],
+                               multi     = TRUE,
+                               wo        = c("INIT_DEST = NO_DATA",
+                                             paste0("NUM_THREADS=", ncores)),
                                overwrite = TRUE
                              ),
                              Resample0_Resize1  = gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
-                               s_srs = MOD_proj_str, t_srs = outproj_str,
-                               of = out_format, r = resampling,
-                               te = bbox, wo = "INIT_DEST = NO_DATA",
-                               wt = datatype[band],
+                               s_srs = MOD_proj_str,
+                               t_srs = outproj_str,
+                               of = out_format,
+                               r = resampling,
+                               te = bbox,
+                               ot        = datatype[band],
+                               multi     = TRUE,
+                               wo        = c("INIT_DEST = NO_DATA",
+                                             paste0("NUM_THREADS=", ncores)),
                                overwrite = TRUE
                              ),
                              Resample1_Resize0  =  gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
-                               s_srs = MOD_proj_str, t_srs = outproj_str,
-                               of = out_format, r = resampling,
+                               s_srs = MOD_proj_str,
+                               t_srs = outproj_str,
+                               of = out_format,
+                               r = resampling,
                                tr = rep(out_res, 2),
-                               wo = "INIT_DEST = NO_DATA",
-                               wt = datatype[band],
+                               ot        = datatype[band],
+                               multi     = TRUE,
+                               wo        = c("INIT_DEST = NO_DATA",
+                                             paste0("NUM_THREADS=", ncores)),
                                overwrite = TRUE
                              ),
                              Resample1_Resize1  =  gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
-                               s_srs = MOD_proj_str, t_srs = outproj_str,
-                               of = out_format, r = resampling,
-                               te = bbox, tr = rep(out_res, 2),
-                               wo = "INIT_DEST = NO_DATA",
-                               wt = datatype[band],
+                               s_srs = MOD_proj_str,
+                               t_srs = outproj_str,
+                               of = out_format,
+                               r = resampling,
+                               te = bbox,
+                               tr = rep(out_res, 2),
+                               ot        = datatype[band],
+                               multi     = TRUE,
+                               wo        = c("INIT_DEST = NO_DATA",
+                                             paste0("NUM_THREADS=", ncores)),
                                overwrite = TRUE
                              ),
                              quit("Internal error in out_res_sel, outproj_str or full_ext."))

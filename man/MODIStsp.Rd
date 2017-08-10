@@ -12,7 +12,7 @@ MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
 saved parameters are retrieved from "options_file")}
 
 \item{options_file}{settings (optional): full path of the JSON file containing the
-processing options (default: MODIStsp_Previous.json in subdir Previous);}
+processing options (default: MODIStsp_Previous.json in subfolder Previous);}
 
 \item{spatial_file_path}{(optional): full path of a spatial file to use as extent
 (default=NULL): if defined, the processing options which define the extent, the
