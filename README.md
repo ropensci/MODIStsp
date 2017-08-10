@@ -17,7 +17,7 @@ MODIStsp is a "R" package devoted to automatizing the creation of time series of
 Important News ! MODIStsp content migrated to our new website !
 ---------------------------------------------------------------
 
--   11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes (thanks to all the users that signalled problems !). Check the Release Notes for further details !
+-   11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes (thanks to all the users that signalled problems !). Check the [Release Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.3) for further details !
 
 -   25/07/2017 - As of today, **most of the content related to MODIStsp has been moved to our new website at [lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/)**, which provides a much better user interface and ease of access to MODIStsp-related information. From now on, please **consult the new website for detailed and updated information on the package**.
 
