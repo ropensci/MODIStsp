@@ -30,6 +30,7 @@
 #' @seealso
 #'  \code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_process}}
 #' @rdname MODIStsp
+#' @import gWidgetsRGtk2
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose
 #' @importFrom pacman p_exists p_load
@@ -40,7 +41,6 @@
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils packageVersion
 #' @importFrom utils unzip
-#' @import gWidgetsRGtk2
 #' @examples
 #' # Running the tool without any option will start the GUI with the default or last used
 #' # settings
