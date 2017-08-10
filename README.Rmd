@@ -13,8 +13,8 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/web/packages/MODIStsp/index.html)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/web/packages/MODIStsp/index.html)
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
 [![Coverage Status](https://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](https://codecov.io/github/lbusett/MODIStsp?branch=master)
@@ -161,7 +161,7 @@ brew install --build-from-source --verbose gtk+
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
 ```
 
-3 - next, install `RGtk2`. Since install.packages("Rgtk2") is not going to work, go [here](https://cran.r-project.org/web/packages/RGtk2/index.html), download 
+3 - next, install `RGtk2`. Since install.packages("Rgtk2") is not going to work, go [here](https://cran.r-project.org/package=RGtk2), download 
 RGtk2_2.20.33.tar.gz and, from a terminal run:
 ```bash
 R CMD INSTALL RGtk2_2.20.33.tar.gz
@@ -176,7 +176,7 @@ hopefully, `RGTk2` will load without errors !
 4 - Install packages `gWidgetsRGtk2` and `cairoDevice`
 
 **Very important !!!!** from CRAN, download the **"OS X Mavericks binaries"** for 
-[gWidgetsRGtk2](https://cran.r-project.org/web/packages/gWidgetsRGtk2/index.html) and [cairoDevice](https://cran.r-project.org/web/packages/cairoDevice/index.html)(
+[gWidgetsRGtk2](https://cran.r-project.org/package=gWidgetsRGtk2) and [cairoDevice](https://cran.r-project.org/package=cairoDevice)(
 not "Package source"). Save both to Frameworks/R.framework/3.4..., open R and
 run the code below (This will also install cairoDevice) 
 

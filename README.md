@@ -7,8 +7,6 @@
     -   [<i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems](#installing-on-linux-systems)
     -   [<i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac](#installing-on-mac)
 
-[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) [![Coverage Status](https://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](https://codecov.io/github/lbusett/MODIStsp?branch=master)
-
 MODIStsp
 ========
 
@@ -16,13 +14,12 @@ MODIStsp is a "R" package devoted to automatizing the creation of time series of
 
 *MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy (CNR-IREA)*
 
-Important News !
-----------------
+Important News ! MODIStsp content migrated to our new website !
+---------------------------------------------------------------
 
-- 11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes
-(thanks to all the users that signalled problems !). Check the [Release Notes] for further details !
+-   11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes (thanks to all the users that signalled problems !). Check the \[Release Notes\] for further details !
 
-25/07/2017 - As of today, **most of the content related to MODIStsp has been moved to our new website at [lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/)**, which provides a much better user interface and ease of access to MODIStsp-related information. From now on, please **consult the new website for detailed and updated information on the package**.
+-   25/07/2017 - As of today, **most of the content related to MODIStsp has been moved to our new website at [lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/)**, which provides a much better user interface and ease of access to MODIStsp-related information. From now on, please **consult the new website for detailed and updated information on the package**.
 
 -   Also our previous FAQ page on github containing info for solving common installation, downloading and processing problems and issues was discontinued and **migrated at [lbusett.github.io/MODIStsp/articles/faq.html](http://lbusett.github.io/MODIStsp/articles/faq.html)**.
 
@@ -151,7 +148,7 @@ brew install --build-from-source --verbose gtk+
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
 ```
 
-3 - next, install `RGtk2`. Since install.packages("Rgtk2") is not going to work, go [here](https://cran.r-project.org/web/packages/RGtk2/index.html), download RGtk2\_2.20.33.tar.gz and, from a terminal run:
+3 - next, install `RGtk2`. Since install.packages("Rgtk2") is not going to work, go [here](https://cran.r-project.org/package=RGtk2), download RGtk2\_2.20.33.tar.gz and, from a terminal run:
 
 ``` bash
 R CMD INSTALL RGtk2_2.20.33.tar.gz
@@ -167,7 +164,7 @@ hopefully, `RGTk2` will load without errors !
 
 4 - Install packages `gWidgetsRGtk2` and `cairoDevice`
 
-**Very important !!!!** from CRAN, download the **"OS X Mavericks binaries"** for [gWidgetsRGtk2](https://cran.r-project.org/web/packages/gWidgetsRGtk2/index.html) and [cairoDevice](https://cran.r-project.org/web/packages/cairoDevice/index.html)( not "Package source"). Save both to Frameworks/R.framework/3.4..., open R and run the code below (This will also install cairoDevice)
+**Very important !!!!** from CRAN, download the **"OS X Mavericks binaries"** for [gWidgetsRGtk2](https://cran.r-project.org/package=gWidgetsRGtk2) and [cairoDevice](https://cran.r-project.org/package=cairoDevice)( not "Package source"). Save both to Frameworks/R.framework/3.4..., open R and run the code below (This will also install cairoDevice)
 
 ``` r
 install.packages("gWidgetsRGtk2",

@@ -426,8 +426,7 @@ extent_list <- list.files("X:/path/containing/some/shapefiles/", "\\.shp$")
 # define the output extent (A separate output folder is created for each input spatial file).
 
 for (single_shape in extent_list) {
-  MODIStsp(gui = FALSE, options_file = options_file, 
-          spatial_file_path = single_shape )
+  MODIStsp(gui = FALSE, options_file = options_file, spatial_file_path = single_shape )
 }
 
 ```
@@ -523,7 +522,7 @@ Preprocessed MODIS data can be retrieved within `R`  either by accessing the sin
 
 Any single-date image can be accessed by simply opening it with a `raster` command: 
 
-```{R eval=FALSE, tidy=TRUE}
+```{R eval=FALSE}
 library(raster)
 modistsp_file <- "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"
 my_raster     <- raster(modistsp_file)
