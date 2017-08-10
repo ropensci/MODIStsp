@@ -19,13 +19,13 @@ and one line for each date.
 If sp_object represents polygons, the output object contains one column for each polygon, containing values obtained applying the function
 specified as the FUN argument over all pixels belonging to the polygon, and one line for each date}
 
-\item{start_date}{"Date", "POSIXct" or "POSIXlt" starting date of the period to be considered for data extraction OR character string cohercible to
-Date class (format = "yyyy-mm-dd"). If not provided, the starting date of the rasterstack is used.}
+\item{start_date}{"Date", "POSIXct" or "POSIXlt" starting date of the period to be considered for data extraction OR character string coercible to
+Date class (format = "yyyy-mm-dd"). If not provided, the starting date of the rasterStack is used.}
 
-\item{end_date}{"Date", "POSIXct" or "POSIXlt" ending date of the period to be considered for data extraction OR character string cohercible to
-Date class (format = "yyyy-mm-dd").If not provided, the ending date of the rasterstack is used.}
+\item{end_date}{"Date", "POSIXct" or "POSIXlt" ending date of the period to be considered for data extraction OR character string coercible to
+Date class (format = "yyyy-mm-dd").If not provided, the ending date of the rasterStack is used.}
 
-\item{id_field}{character name of the column of the input sp object or shapefile to be used in the data extraction. Values conatined in the column MUST be unique
+\item{id_field}{character name of the column of the input sp object or shapefile to be used in the data extraction. Values contained in the column MUST be unique
 The names of the columns of the output are taken from this column. If not provided, or an invalid value is provided, then the names of the columns of the output
 reflect the number of the feature in the original sp object or shapefile.}
 
@@ -58,7 +58,7 @@ spatialPolygons, etc.)
 \details{
 The function takes as input a rasterStack object containing time information in the "z" attribute (set by "raster" function "SetZ"),
 a starting and ending date  and a standard "R" spatial object, and returns the time series for the spatial locations
-specified in the spatial object in the form of a "R" xts object ORr a plain data.frame with a "date" column in first position.
+specified in the spatial object in the form of a "R" xts object OR a plain data.frame with a "date" column in first position.
 If the input spatial object is a "point" or "line" one, the  output object contains one column for each specified point, or for each cell
 intersecting the line, and one line for each date. If the input spatial object is a "polygon" one, the output object contains one column
 for each polygon, containing values obtained applying the function specified as the FUN

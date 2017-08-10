@@ -146,6 +146,21 @@
     <div id="modistsp-1-3-2-9000---development-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-2-9000---development-version" class="anchor"></a>MODIStsp 1.3.2.9000 - development version</h2>
+<div id="major-changes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major Changes</h3>
+<ul>
+<li>Added “testing mode” to allow users to test proper functioning. (currently only in “devel”)</li>
+<li>Added unit testing using <code>testthat</code> and codecov integration. (currently only in “devel”)</li>
+</ul>
+</div>
+<div id="minor-changes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor Changes</h3>
+<ul>
+<li>Suppression of verbose messages and (useless) warning messages while parsing the NASA servers and downloading data using “ftp”. (currently only in “devel”)</li>
+</ul>
+</div>
 <div id="bug-fixing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bug-fixing" class="anchor"></a>Bug fixing</h3>
@@ -175,9 +190,9 @@
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-2-release-notes" class="anchor"></a>MODIStsp 1.3.2 Release Notes</h2>
 <p>v1.3.2 was released on 22/03/2017</p>
-<div id="major-changes" class="section level3">
+<div id="major-changes-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes" class="anchor"></a>Major Changes:</h3>
+<a href="#major-changes-1" class="anchor"></a>Major Changes:</h3>
 <ul>
 <li>Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.</li>
 </ul>
@@ -196,9 +211,9 @@
 </ul>
 </div>
 </div>
-<div id="minor-changes" class="section level3">
+<div id="minor-changes-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes" class="anchor"></a>Minor Changes:</h3>
+<a href="#minor-changes-1" class="anchor"></a>Minor Changes:</h3>
 <ul>
 <li>
 <p>Some product names and output layer names were modified to reduce the length of output file names, homogenize the names of the outputs and correct some errors. <strong>For compatibility with already created output files</strong> (versions up to 1.3.1), the old “XML” file specifying output files format is still available in <code>inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml</code>. To use the old file naming conventions, users have to:</p>
@@ -229,9 +244,9 @@
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-1-release-notes" class="anchor"></a>MODIStsp 1.3.1 Release Notes</h2>
 <p>v1.3.1 was released on 13/02/2017</p>
-<div id="major-changes-1" class="section level3">
+<div id="major-changes-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-1" class="anchor"></a>Major Changes</h3>
+<a href="#major-changes-2" class="anchor"></a>Major Changes</h3>
 <ul>
 <li><p>Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue <a href="https://github.com/lbusett/MODIStsp/issues/55">#55</a>) on devel</p></li>
 <li><p>Added functionality for downloading “partial” years(Issue <a href="https://github.com/lbusett/MODIStsp/issues/54">#54</a>) on devel</p></li>
@@ -257,9 +272,9 @@
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-0-release-notes" class="anchor"></a>MODIStsp 1.3.0 Release Notes</h2>
 <p>v1.3.0 was released on 11/05/2016</p>
-<div id="major-changes-2" class="section level3">
+<div id="major-changes-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-2" class="anchor"></a>Major Changes</h3>
+<a href="#major-changes-3" class="anchor"></a>Major Changes</h3>
 <ul>
 <li><p>Added functionality for downloading and preprocessing MODIS collection 006 datasets. For products with both 005 and 006 collections, the user can select the version using a new droplist in the GUI.</p></li>
 <li><p>Added functionality for off-line processing. This allows both to <em>i)</em> reprocessing already downloaded data (for example, to create time series for an additional layer) without the need to connect to NASA servers, and <em>ii)</em> process HDF files downloaded outside <em>MODIStsp</em> (e.g., directly from NASA ftp) and stored on the user’s PC, without the need of an active internet connection.</p></li>
@@ -267,9 +282,9 @@
 <li><p>Improved the GUI inteface for specifying additional Spectral Indexes. Hints are now showed to the user, and multiple indexes can be added in the same session.</p></li>
 </ul>
 </div>
-<div id="minor-changes-1" class="section level3">
+<div id="minor-changes-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-1" class="anchor"></a>Minor Changes</h3>
+<a href="#minor-changes-2" class="anchor"></a>Minor Changes</h3>
 <ul>
 <li><p>General improvements in the GUI inteface. Products are now grouped by categories, to allow easier identification and selection.</p></li>
 <li><p>Improvements in the README file and vignettes, providing more instructions on package use.</p></li>
@@ -285,9 +300,9 @@
 <h2 class="hasAnchor">
 <a href="#modistsp-1-2-1-release-notes" class="anchor"></a>MODIStsp 1.2.1 Release Notes</h2>
 <p>v1.2.1 was released on 11/05/2016</p>
-<div id="major-changes-3" class="section level3">
+<div id="major-changes-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-3" class="anchor"></a>Major Changes</h3>
+<a href="#major-changes-4" class="anchor"></a>Major Changes</h3>
 <ol>
 <li><p>Modified format of “R” output time series from <em>rts</em> objects to <em>RasterStack</em> objects with temporal information added in the “z” attribute via setZ()</p></li>
 <li>Major changes/improvements in <em>MODIStsp_extract</em> function:
@@ -306,9 +321,9 @@
 <li><p>Removed possibility to use “complex” resampling methods when reprojecting (e.g., bilinear, cubic, etc.) to avoid incorrect resampling on categorical variables and “contamination” of good pixels data.</p></li>
 </ol>
 </div>
-<div id="minor-changes-2" class="section level3">
+<div id="minor-changes-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-2" class="anchor"></a>Minor Changes</h3>
+<a href="#minor-changes-3" class="anchor"></a>Minor Changes</h3>
 <ul>
 <li>Changed the input method for starting and ending dates selection in the GUI. Now a text field is used</li>
 <li>Added functionaluty for writing data ignore value on ENVI files</li>
@@ -337,9 +352,9 @@
 <h2 class="hasAnchor">
 <a href="#modistsp-1-2-0-release-notes" class="anchor"></a>MODIStsp 1.2.0 Release Notes</h2>
 <p>v1.2.0 was released on 29/07/2015</p>
-<div id="major-changes-4" class="section level3">
+<div id="major-changes-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#major-changes-4" class="anchor"></a>Major changes</h3>
+<a href="#major-changes-5" class="anchor"></a>Major changes</h3>
 <p>First stable release of advanced implementation of MODIStsp ! We know it should be 1.0.0, but thats’it !</p>
 </div>
 </div>

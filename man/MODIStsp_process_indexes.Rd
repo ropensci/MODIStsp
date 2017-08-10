@@ -5,38 +5,40 @@
 \title{MODIStsp_process_indexes}
 \usage{
 MODIStsp_process_indexes(out_filename, formula, bandnames, nodata_out,
-  out_prod_folder, indexes_nodata_out, file_prefix, yy, DOY, out_format,
-  scale_val)
+  out_prod_folder, indexes_nodata_out, file_prefix, compress, yy, DOY,
+  out_format, scale_val)
 }
 \arguments{
-\item{out_filename}{basename of the file in to which save results}
+\item{out_filename}{\code{character} basename of the file in to which save results}
 
-\item{formula}{string Index formula, as derived from XML file and stored in prod_opts
+\item{formula}{\code{character} Index formula, as derived from XML file and stored in prod_opts
 within previous_file}
 
-\item{bandnames}{string array of names of original HDF layer. Used to identify the
+\item{bandnames}{\code{character} array of names of original HDF layer. Used to identify the
 bands required for index computation}
 
-\item{nodata_out}{string array of nodata values of reflectance bands}
+\item{nodata_out}{\code{character} array of NoData values of reflectance bands}
 
-\item{out_prod_folder}{strng output folder for the product used to retrieve filenames
+\item{out_prod_folder}{\code{character} output folder for the product used to retrieve filenames
 of rasters of original bands to be used in computations}
 
-\item{indexes_nodata_out}{string nodata value for resulting raster}
+\item{indexes_nodata_out}{\code{character} NoData value for resulting raster}
 
-\item{file_prefix}{string used to retrieve filenames of rasters of original bands
+\item{file_prefix}{\code{character} used to retrieve filenames of rasters of original bands
 to be used in computations}
 
-\item{yy}{string string used to retrieve filenames of rasters of original bands
+\item{compress}{\code{character} compression option for GTiff files}
+
+\item{yy}{\code{character} year string used to retrieve filenames of rasters of original bands
 to be used in computations}
 
-\item{DOY}{string used to retrieve filenames of rasters of original bands to be
+\item{DOY}{\code{character} doy string used to retrieve filenames of rasters of original bands to be
 used in computations}
 
-\item{out_format}{string used to retrieve filenames of rasters of original bands
+\item{out_format}{\code{character} string used to retrieve filenames of rasters of original bands
 to be used in computations}
 
-\item{scale_val}{string (Yes/No) if Yes, output values in are computed as float -1 - 1,
+\item{scale_val}{\code{character} (Yes/No) if Yes, output values in are computed as float -1 - 1,
 otherwise integer -10000 - 10000}
 }
 \value{
@@ -54,7 +56,7 @@ objects, performs the computation and stores results in a GeoTiff or ENVI raster
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2017) \email{busetto.l@irea.cnr.it}
 
-Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2017) \email{ranghetti.l@irea.cnr.it}
 }

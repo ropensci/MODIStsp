@@ -18,17 +18,20 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \arguments{
 \item{sel_prod}{string selected MODIS product}
 
-\item{start_date}{string start_date for images download and preproc (yyyy.mm.dd)}
+\item{start_date}{string start_date for images download and preprocessing
+(yyyy.mm.dd)}
 
-\item{end_date}{string end_date for images download and preproc (yyyy.mm.dd)}
+\item{end_date}{string end_date for images download and preprocessing
+(yyyy.mm.dd)}
 
-\item{out_folder}{main ouput folder}
+\item{out_folder}{main output folder}
 
-\item{out_folder_mod}{ouput folder for original HDF storage}
+\item{out_folder_mod}{output folder for original HDF storage}
 
-\item{reprocess}{string string ("Yes"/"No") If Yes, reprocess data for already existing dates (Default = 'Yes')}
+\item{reprocess}{string string ("Yes"/"No") If Yes, reprocess data for already existing
+dates (Default = 'Yes')}
 
-\item{delete_hdf}{string ("Yes"/"No") If Yes, delete original hdf after completion}
+\item{delete_hdf}{string ("Yes"/"No") If Yes, delete original HDF after completion}
 
 \item{sensor}{string ("Terra" or "Aqua" or "Both")}
 
@@ -40,17 +43,17 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 \item{password}{Password for http download
 (\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
 
-\item{https}{hash https site for download of hdf of selected product}
+\item{https}{hash https site for download of HDF of selected product}
 
-\item{ftps}{hash ftps site for download of hdf of selected product}
+\item{ftps}{hash ftps site for download of HDF of selected product}
 
-\item{start_x}{int start horiz. tile}
+\item{start_x}{int start horizontal tile}
 
-\item{start_y}{int start vertical. tile}
+\item{start_y}{int start vertical tile}
 
-\item{end_x}{int end horiz. tile}
+\item{end_x}{int end horizontal tile}
 
-\item{end_y}{int end vertical. tile}
+\item{end_y}{int end vertical tile}
 
 \item{bbox}{array output bounding box (xmin, xmax, ymin, ymax ) in out proj coords}
 
@@ -64,17 +67,17 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
 
 \item{native_res}{float Native resolution of MODIS product}
 
-\item{tiled}{0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)}
+\item{tiled}{0/1 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg)}
 
 \item{MOD_proj_str}{string proj4 string for MODIS product native projection}
 
 \item{outproj_str}{string proj4 string of selected output projection}
 
-\item{nodata_in}{array Original nodata for MODIS bands}
+\item{nodata_in}{array Original NoData for MODIS bands}
 
-\item{nodata_out}{Target nodata for MODIS bands}
+\item{nodata_out}{Target NoData for MODIS bands}
 
-\item{nodata_change}{string (Yes/No) if Yes, nodata are set to nodata_out in
+\item{nodata_change}{string (Yes/No) if Yes, NoData are set to nodata_out in
 output rasters}
 
 \item{scale_val}{string (Yes/No) if Yes, output values in are rescaled in the
@@ -90,27 +93,28 @@ to correct measure units}
 
 \item{datatype}{string array datatypes of MODIS bands}
 
-\item{bandsel}{array of lenght equal to number of original modis layers. set
+\item{bandsel}{array of length equal to number of original modis layers. set
 to 1 for bands to be processed}
 
 \item{bandnames}{array of Abbreviated Names of MODIS bands}
 
-\item{indexes_bandsel}{array of lenght equal to number of available spectral indexes,
+\item{indexes_bandsel}{array of length equal to number of available spectral indexes,
 set to  1 for indexes to be processed}
 
 \item{indexes_bandnames}{array of Abbreviated Names of MODIS indexes}
 
 \item{indexes_formula}{array of indexes formulas}
 
-\item{indexes_nodata_out}{Nodata values for indexes}
+\item{indexes_nodata_out}{NoData values for indexes}
 
 \item{quality_bandnames}{array of  Names of MODIS quality indicators}
 
-\item{quality_bandsel}{array of lenght equal to number of available quality indicators,
+\item{quality_bandsel}{array of length equal to number of available quality indicators,
 set to  1 for indicators to be processed}
 
 \item{quality_bitN}{list of strings with number of entries equal to number of
-quality indicators. each entry caontains position of bits corresponding to a QI (e.g., 0-1)}
+quality indicators. each entry contains position of bits corresponding to a QI
+(e.g., 0-1)}
 
 \item{quality_source}{list of strings which connects each quality indicator to
 its source aggregated quality assurance layer}
@@ -121,7 +125,7 @@ its source aggregated quality assurance layer}
 
 \item{quality_nodata_out}{Always 255}
 
-\item{file_prefixes}{output file prefix according to selelected product (e.g., MOD13Q1)}
+\item{file_prefixes}{output file prefix according to selected product (e.g., MOD13Q1)}
 
 \item{main_out_folder}{Suffix to add to the overall out_folder to create the out
 dir for the product (corresponds to an abbreviation of the selected product)}
@@ -131,10 +135,11 @@ dir for the product (corresponds to an abbreviation of the selected product)}
 \item{ts_format}{string format of virtual files (None, ENVI Meta Files, GDAL vrt files,
 ENVI and GDAL)}
 
-\item{use_aria}{logical if TRUE, then aria2c is used to accelerate download (if available !)}
+\item{use_aria}{logical if TRUE, then aria2c is used to accelerate download
+(if available !)}
 
 \item{download_range}{character if "full", all the available images between the
-startingand the ending dates are downloaded; if "seasonal", only the images
+starting and the ending dates are downloaded; if "seasonal", only the images
 included in the season (e.g: if the starting date is 2005-12-01 and the ending
 is 2010-02-31, only the images of December, January and February from 2005 to 2010
 \itemize{
@@ -154,20 +159,21 @@ processing.
 \details{
 After retrieving the input processing options, the function
 \enumerate{
-\item Acesses lpdaac http or ftp archive to determine the list of dates to be processed
+\item Accesses lpdaac http or ftp archive to determine the list of dates to be processed
 \item Performs all required processing steps on each date (download, reprojection,
 resize, mosaicing, indexes computation, quality indicators computation)
 \item Creates virtual files of the processed time series.
 }
 
-Reprojection and resize is dealt with by accessing gdal routines through the \code{gdaUtils} package.
+Reprojection and resize is dealt with by accessing gdal routines through the \code{gdaUtils}
+package.
 Extraction of bitfields from Quality layers is done though fast bitwise computation
-
 Checks are done in order to not re-download already existing HDF images, and not
-reprocess already processed dates (if the user didn'specify that)
+reprocess already processed dates (if the user did not specify that)
 }
 \note{
-Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
+Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
+development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
 \href{http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
 
 License: GPL 3.0

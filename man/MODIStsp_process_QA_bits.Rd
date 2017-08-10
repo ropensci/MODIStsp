@@ -2,60 +2,50 @@
 % Please edit documentation in R/MODIStsp_process_QA_bits.R
 \name{MODIStsp_process_QA_bits}
 \alias{MODIStsp_process_QA_bits}
-\title{MODIStsp_process_QA_bits}
+\title{compute Quality Indicators from HDF bit-field layers}
 \usage{
-MODIStsp_process_QA_bits(out_filename, in_raster_name, bitN, source,
-  out_prod_folder, file_prefix, yy, DOY, out_format, nodata_source,
-  nodata_qa_in, nodata_qa_out)
+MODIStsp_process_QA_bits(out_filename, in_source_file, bitN, out_format,
+  nodata_source, nodata_qa_in, nodata_qa_out, compress)
 }
 \arguments{
-\item{out_filename}{string file name of the output raster files containing QI values}
+\item{out_filename}{\code{character} file name of the output raster files
+containing QI values}
 
-\item{in_raster_name}{name of the MODIS band containing data from which the bit field
-corresponding to the quality indicator must be extracted}
+\item{in_source_file}{\code{character} name of the file created by MODIStsp
+containing the data required to compute the quality indicator}
 
-\item{bitN}{position of the bits corresponding to the quality indicator
-(e.g., 0-1 = first two bits; 2-5: bits from 2 to 5, etc.)}
-
-\item{source}{"name" of the MODIS band containing the values from which to extract
-the quality indicator (e.g., State_1km)}
-
-\item{out_prod_folder}{main folder used for storing the output data in MODIStsp
-processing. New quality indicator files are stored in out_prod_folder/derived_band}
-
-\item{file_prefix}{files_prefixes used to create output file names in MODIStsp (e.g., MOD13Q1)}
-
-\item{yy}{year of considered image}
-
-\item{DOY}{DOY of considered image}
+\item{bitN}{\code{character} position of the bits corresponding to the quality
+indicator of interest (e.g., 0-1 = first two bits; 2-5: bits from 2 to 5,
+etc.)}
 
 \item{out_format}{output format (ENVI or GTiff)}
 
-\item{nodata_source}{nodata values of the MODIS band containing data from which
-the bit field corresponding to the quality indicator must be extracted}
+\item{nodata_source}{\code{character} NoData values of the MODIS band containing
+data from which the bit field corresponding to the quality indicator must
+be extracted}
 
-\item{nodata_qa_in}{string in nodata for quality bands ("255")}
+\item{nodata_qa_in}{\code{character} in NoData for quality bands ("255")}
 
-\item{nodata_qa_out}{string out nodata for quality bands ("255")}
+\item{nodata_qa_out}{\code{character} out NoData for quality bands ("255")}
+
+\item{compress}{\code{character} compression option for GTiff files}
 }
 \description{
-function used to extract quality indicator from MODIS aggregated quality layers
+function used to extract quality indicator from MODIS aggregated
+quality layers
 }
 \details{
 On the basis of the name of the image containing the aggregated quality information
-(in_raster_name) and of the position of the bit fields corresponding to the QI of interest in
-the bitfield representation (bitN), the function extracts the correct information exploiting
+(\code{in_source_file``) and of the position of the bit fields corresponding to the QI of interest in the bitfield representation (}bitN``), the function extracts the correct information exploiting
 bitwise operators, and save the result in a new raster image
 }
 \note{
 License: GPL 3.0
-Based on the "modis.qc.R" script by Yann Chemin (2008)
-(https://r-forge.r-project.org/scm/viewvc.php/pkg/RemoteSensing/R/modis.qc.R?view=markup&root=remotesensing&pathrev=79)
-
+Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
 license GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2017) \email{busetto.l@irea.cnr.it}
 
-Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2017) \email{ranghetti.l@irea.cnr.it}
 }

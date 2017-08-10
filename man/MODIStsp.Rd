@@ -5,14 +5,14 @@
 \title{MODIStsp}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  scrollWindow = FALSE)
+  scrollWindow = FALSE, test = -1)
 }
 \arguments{
 \item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the
 saved parameters are retrieved from "options_file")}
 
 \item{options_file}{settings (optional): full path of the JSON file containing the
-processing options (default: MODIStsp_Previous.json in subdir Previous);}
+processing options (default: MODIStsp_Previous.json in subfolder Previous);}
 
 \item{spatial_file_path}{(optional): full path of a spatial file to use as extent
 (default=NULL): if defined, the processing options which define the extent, the
@@ -23,6 +23,13 @@ files are created on the extent of the provided spatial file.}
 fullscreen with scrollbars (this is useful on devices with small display). If using a
 device with a display resolution >= 1024x768, leaving this parameter to FALSE is
 suggested.}
+
+\item{test}{(optional) integer: if set, the tool is run in test mode, using a
+preset Option File instead than opening the GUI or accepting the option_file parameter.
+The number indicates which preset file to be used (five files are available).
+If test=0, the files sis selected randomly. Default value (-1) indicates that the
+tool is executed normally (not in test mode).
+This modality is useful to test the tool in case of errors.}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool (MODIStsp)
@@ -36,7 +43,7 @@ required routines for downloading and processing the requested datasets.
 License: GPL 3.0
 }
 \examples{
-# Running the tool without any option will start the GUI with the default or last used 
+# Running the tool without any option will start the GUI with the default or last used
 # settings
 \dontrun{
 MODIStsp()}
@@ -65,7 +72,7 @@ for (single_shape in extent_list)
     spatial_file_path = single_shape )}
 }
 \seealso{
-\code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_Process}}
+\code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_process}}
 }
 \author{
 Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}

@@ -1,23 +1,23 @@
 
-#' MODIStsp_vrt_create
+#' @title Create MODIStsp virtual files
 #' @description	Function used to create virtual files from time series of single-band 
 #' files corresponding to different acquisition dates
 #'
 #' @details	The function takes as input the folder in which the single-band files are
-#' stored, and cretes a ENVI Meta file and/or a GDAL vrt file that allows access to 
+#' stored, and creates a ENVI Meta file and/or a GDAL vrt file that allows access to 
 #' the full time series as if it was a single physical file
 #' @param out_prod_folder string main output folder
-#' @param meta_band string "name" of the band (or index, or qi) for which the 
+#' @param meta_band string "name" of the band (or SI, or QI) for which the 
 #' virtual file is to be created
-#' @param file_prefixes string file_prefixes for terra and aqua - used to identify 
+#' @param file_prefixes string file_prefixes for TERRA and AQUA - used to identify 
 #' the files corresponding to each sensor
-#' @param sens_sel string name of the sensor for which the time serie has to be 
-#' created (Aqua, Terra, Mixed) If "Mixed" and both terra and aqua
+#' @param sens_sel string name of the sensor for which the time series has to be 
+#' created (Aqua, Terra, Mixed) If "Mixed" and both TERRA and AQUA 
 #' images are available, a "mixed" virtual file comprising data from both sensors 
 #' ordered on DOY base is created
 #' @param ts_format string required output format for virtual file (ENVI, GDAL, Both)
-#' @param nodata_value string nodata value to be used for vrt files 
-#' (equal to nodata value of inputs)
+#' @param nodata_value string NoData value to be used for vrt files 
+#' (equal to NoData value of inputs)
 #' @param out_format format of images used as "input" for the vrt and contained 
 #' in out_prod_folder/band folders (ENVI or GTiff)
 #' @param rts string ("Yes"/"No") If Yes, create rts time series
@@ -47,7 +47,7 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,
   if (sens_sel == "Combined") {
     file_prefix <- file_prefixes[["Terra"]]
   }
-  # retrieve files list of the time serie (ENVI format)
+  # retrieve files list of the time series (ENVI format)
   if (out_format == "ENVI") {
     out_meta_files <- list.files(file.path(out_prod_folder, meta_band), pattern = "\\.dat$", full.names = TRUE)	# get list of ENVI files
     if (sens_sel != "Mixed")  {
@@ -59,7 +59,7 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,
       out_meta_files_hdr <- out_meta_files_hdr[grep(file_prefix, out_meta_files_hdr)]
     }	# get list of ENVI files
   }
-  # retrieve files list of the time serie (GTiff format)
+  # retrieve files list of the time series (GTiff format)
   if (out_format == "GTiff") {
     out_meta_files <- list.files(file.path(out_prod_folder, meta_band), pattern = "\\.tif$", full.names = TRUE)	# get list of ENVI files
     if (sens_sel != "Mixed")  {
@@ -68,12 +68,12 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,
   }
 
   skip_flag <- 0    # initialize skip_flag to 0
-  if ( (sens_sel == "Mixed") &  #Set a flag to 1 if "mixed" was selected but either 0 AQUA or 0 TERRA files are in the time serie
+  if ( (sens_sel == "Mixed") &  #Set a flag to 1 if "mixed" was selected but either 0 AQUA or 0 TERRA files are in the time series
       ((length(grep(file_prefixes[["Aqua"]], out_meta_files)) == 0) |   # in that case, the creation of META files for the mixed case is skipped !
        (length(grep(file_prefixes[["Terra"]], out_meta_files)) == 0))) {
     skip_flag <- 1
   }
-  # If skip_flag = 1 ( mixed TS, but data from terra or aqua missing) do nothing
+  # If skip_flag = 1 ( mixed TS, but data from TERRA or AQUA missing) do nothing
   if (skip_flag != 1) {
     # If no files available, skip metadata creation
     if (length(out_meta_files) > 0) {
@@ -180,5 +180,5 @@ MODIStsp_vrt_create <- function(out_prod_folder, meta_band, file_prefixes,
 
       }
     }
-  } # End if on check of existence of both aqua and terra files for "mixed" metafiles creation
+  } # End if on check of existence of both aqua and TERRA files for "mixed" metafiles creation
 }

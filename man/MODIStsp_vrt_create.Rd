@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_vrt_create.R
 \name{MODIStsp_vrt_create}
 \alias{MODIStsp_vrt_create}
-\title{MODIStsp_vrt_create}
+\title{Create MODIStsp virtual files}
 \usage{
 MODIStsp_vrt_create(out_prod_folder, meta_band, file_prefixes, sens_sel,
   ts_format, nodata_value, out_format, rts)
@@ -10,21 +10,21 @@ MODIStsp_vrt_create(out_prod_folder, meta_band, file_prefixes, sens_sel,
 \arguments{
 \item{out_prod_folder}{string main output folder}
 
-\item{meta_band}{string "name" of the band (or index, or qi) for which the
+\item{meta_band}{string "name" of the band (or SI, or QI) for which the
 virtual file is to be created}
 
-\item{file_prefixes}{string file_prefixes for terra and aqua - used to identify
+\item{file_prefixes}{string file_prefixes for TERRA and AQUA - used to identify
 the files corresponding to each sensor}
 
-\item{sens_sel}{string name of the sensor for which the time serie has to be
-created (Aqua, Terra, Mixed) If "Mixed" and both terra and aqua
+\item{sens_sel}{string name of the sensor for which the time series has to be
+created (Aqua, Terra, Mixed) If "Mixed" and both TERRA and AQUA
 images are available, a "mixed" virtual file comprising data from both sensors
 ordered on DOY base is created}
 
 \item{ts_format}{string required output format for virtual file (ENVI, GDAL, Both)}
 
-\item{nodata_value}{string nodata value to be used for vrt files
-(equal to nodata value of inputs)}
+\item{nodata_value}{string NoData value to be used for vrt files
+(equal to NoData value of inputs)}
 
 \item{out_format}{format of images used as "input" for the vrt and contained
 in out_prod_folder/band folders (ENVI or GTiff)}
@@ -40,7 +40,7 @@ files corresponding to different acquisition dates
 }
 \details{
 The function takes as input the folder in which the single-band files are
-stored, and cretes a ENVI Meta file and/or a GDAL vrt file that allows access to
+stored, and creates a ENVI Meta file and/or a GDAL vrt file that allows access to
 the full time series as if it was a single physical file
 }
 \note{

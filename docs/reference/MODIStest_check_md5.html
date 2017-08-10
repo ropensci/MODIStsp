@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>install_MODIStsp_launcher � install_MODIStsp_launcher • MODIStsp</title>
+<title>MODIStest_check_md5 — MODIStest_check_md5 • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -96,6 +96,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../articles/examples.html">Examples of Use</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -138,81 +141,34 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>install_MODIStsp_launcher</h1>
+    <h1>MODIStest_check_md5</h1>
     </div>
 
     
-    <p>Function which allows to use MODIStsp in batch mode by creating links</p>
+    <p>internal function which tests if the output of a test is corresponds to the expected one.</p>
     
 
-    <pre class="usage"><span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>bin_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>desktop_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>desktop_shortcut</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>MODIStest_check_md5</span>(<span class='no'>test</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>bin_dir</th>
-      <td><p>in Linux, directory in which the link to the bash script should be
-placed (default: /usr/bin; a path included in the PATH environment variable is
-suggested); in Windows, directory where to place the menu entry in the Start Menu
-(default: Start Menu -&gt; Programs -&gt; MODIStsp).</p></td>
-    </tr>
-    <tr>
-      <th>desktop_dir</th>
-      <td><p>if desktop_shortcut=TRUE: in Linux, directory in which the desktop
-entry should be placed (default: /usr/share/applications); in Windows, directory where
-to place the desktop entry (default: Desktop).</p></td>
-    </tr>
-    <tr>
-      <th>desktop_shortcut</th>
-      <td><p>logical value which indicates if the desktop entry or the
-desktop shortcut should be created (default: TRUE).</p></td>
-    </tr>
-    <tr>
-      <th>sudo</th>
-      <td><p>(Linux only) logical value which indicates if administrator rights have to
-be used to write within bin_dir and desktop_dir (default: FALSE);
-in this case, the root password is requested when launching the function. Note that
-default values of bin_dir and desktop_dir requires to set thisoption to TRUE (or to
-launch the script in a root session of R)!</p></td>
+      <th>test</th>
+      <td><p>integer number of the performed test</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>MODIStsp tool can be used also as a standalone tool my launching a bash/batch
-script, which is stored in the function files. In order to simply retrieve it, this
-function will create a desktop entry and a symbolic link to the bash script (in Linux)
-or a link in the Start Menu to the batch script (in Windows).
-Note that, if the packages MODIStsp is installed in a directory version-dependent
-(as the default one is), this function should be rerunned after an R upgrade,
-otherwise the links would continue to point to the old package version!</p>
+    <p>When running in test mode, MODIStsp is expected to produce the same files</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>License: GPL 3.0</p>
+    <p>License: GPL 3.0
+license GPL 3.0</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># Linux: common installation (script in /usr/bin,
-# desktop entry in /usr/share/applications)
-# (requires administrator permissions)
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-  <span class='co'># the administrator password is asked interactively</span>
-<span class='co'># }</span><div class='input'>
-# Linux: installation in a directory which does
-# not require administrator permissions
-</div># NOT RUN {
-install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"
-# }
-<div class='input'>
-# Windows: common installation
-# (script in the Start Menu and shortcut on the desktop)
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>install_MODIStsp_launcher</span>()
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -222,13 +178,11 @@ install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"
       <li><a href="#details">Details</a></li>
 
       <li><a href="#note">Note</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
     <h2>Author</h2>
     
-Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
+Luigi Ranghetti, phD (2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 
   </div>
 </div>

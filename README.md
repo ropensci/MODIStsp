@@ -5,8 +5,9 @@
     -   [<i class="fa fa-desktop" aria-hidden="true"></i> System Requirements](#system-requirements)
     -   [<i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows](#installing-on-windows)
     -   [<i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems](#installing-on-linux-systems)
+    -   [<i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac](#installing-on-mac)
 
-[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) [![Coverage Status](https://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](https://codecov.io/github/lbusett/MODIStsp?branch=master)
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) [![Coverage Status](https://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](https://codecov.io/github/lbusett/MODIStsp?branch=master)
 
 MODIStsp
 ========
@@ -101,4 +102,123 @@ install.packages("MODIStsp")
 ``` r
 library(devtools)
 install_github("lbusett/MODIStsp")
+```
+
+<i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
+----------------------------------------------------------------
+
+**NOTE: The following installation notes were kindly provided by a MODIStsp user and should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. Since we are not working on Mac we were not able yet to check this, but we hope it may be useful at least to put you in the right direction if you have installation problems)**
+
+Installing MODIStsp requires many dependencies:
+
+For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by **tobybot11** (<https://gist.github.com/sebkopf/9405675>), Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and doesn't work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version "OS X Mavericks binaries" and not "Package source" - You have to be sure that gdal is installed with HDF4 support.
+
+1 - Update to R &gt; 3.4 if needed, then update all packages
+
+``` r
+# update packages
+update.packages()
+# install the development version of devtools:
+install.packages(c("devtools"))
+devtools::install_github("hadley/devtools")
+```
+
+2 - Now, install RGtk2 using Homebrew (<https://gist.github.com/sebkopf/9405675>). First, ensure you have cairo installed with "--with-x11":
+
+``` bash
+brew uninstall cairo --ignore-dependencies
+brew install --with-x11 cairo 
+```
+
+next, edit the configure options for GTK to require x11 rather than Quartz:
+
+``` bash
+brew edit gtk+
+```
+
+in the def install section, remove the reference to quartz and switch to:
+
+    --with-gdktarget=x11,
+    --enable-x11-backend
+
+Now install:
+
+``` bash
+brew install --build-from-source --verbose gtk+
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
+```
+
+3 - next, install `RGtk2`. Since install.packages("Rgtk2") is not going to work, go [here](https://cran.r-project.org/web/packages/RGtk2/index.html), download RGtk2\_2.20.33.tar.gz and, from a terminal run:
+
+``` bash
+R CMD INSTALL RGtk2_2.20.33.tar.gz
+```
+
+Now, open R and run:
+
+``` r
+library(RGtk2)
+```
+
+hopefully, `RGTk2` will load without errors !
+
+4 - Install packages `gWidgetsRGtk2` and `cairoDevice`
+
+**Very important !!!!** from CRAN, download the **"OS X Mavericks binaries"** for [gWidgetsRGtk2](https://cran.r-project.org/web/packages/gWidgetsRGtk2/index.html) and [cairoDevice](https://cran.r-project.org/web/packages/cairoDevice/index.html)( not "Package source"). Save both to Frameworks/R.framework/3.4..., open R and run the code below (This will also install cairoDevice)
+
+``` r
+install.packages("gWidgetsRGtk2",
+                 lib="~/Library/Frameworks/R.framework/Versions/3.4/Resources/library/gWidgetsRGtk2")
+library(gWidgetsRGtk2)
+library(cairoDevice)
+```
+
+*(This will work for R version 3.4, mac OS X Sierra)*
+
+5 - Install GDAL with HDF4 support
+
+Check that gdal is installed with hdf4 support. From a terminal:
+
+``` bash
+> gdal-config --formats 
+```
+
+if gdal is installed, check what drivers are installed: the list should include hdf4.
+
+If gdal is not yet installed or hdf4 is not supproted, install/reinstall it following these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html)
+
+``` bash
+> brew install hdf4 
+# prefer hdf4 links over NetCDF 
+> brew link --overwrite hdf4 
+> brew install gdal --complete --enable-unsupported --with-hdf4 
+# check what drivers are installed, list should now include hdf4: 
+> gdal-config --formats 
+```
+
+6 - Install rgdal
+
+since rgdal is not usually looking in "/usr/local/lib"" you must include that with `install.packages()`:
+
+``` r
+install.packages('rgdal',
+                 type = "source",configure.args = c(
+                   '--with-proj-include=/usr/local/include',
+                   '--with-proj-lib=/usr/local/lib')
+                 )
+```
+
+7 - Finally, install MODIStsp from CRAN or GitHub:
+
+``` r
+install.packages("MODIStsp")
+MODIStsp()
+```
+
+OR
+
+``` r
+library(devtools) 
+install_github("lbusett/MODIStsp", ref = "master")
+MODIStsp()
 ```

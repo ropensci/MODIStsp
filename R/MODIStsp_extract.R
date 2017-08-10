@@ -6,7 +6,7 @@
 #' @details
 #' The function takes as input a rasterStack object containing time information in the "z" attribute (set by "raster" function "SetZ"),
 #' a starting and ending date  and a standard "R" spatial object, and returns the time series for the spatial locations
-#' specified in the spatial object in the form of a "R" xts object ORr a plain data.frame with a "date" column in first position.
+#' specified in the spatial object in the form of a "R" xts object OR a plain data.frame with a "date" column in first position.
 #' If the input spatial object is a "point" or "line" one, the  output object contains one column for each specified point, or for each cell
 #' intersecting the line, and one line for each date. If the input spatial object is a "polygon" one, the output object contains one column
 #' for each polygon, containing values obtained applying the function specified as the FUN
@@ -20,11 +20,11 @@
 #'  and one line for each date.
 #'  If sp_object represents polygons, the output object contains one column for each polygon, containing values obtained applying the function
 #'  specified as the FUN argument over all pixels belonging to the polygon, and one line for each date
-#' @param start_date "Date", "POSIXct" or "POSIXlt" starting date of the period to be considered for data extraction OR character string cohercible to
-#' Date class (format = "yyyy-mm-dd"). If not provided, the starting date of the rasterstack is used.
-#' @param end_date "Date", "POSIXct" or "POSIXlt" ending date of the period to be considered for data extraction OR character string cohercible to
-#' Date class (format = "yyyy-mm-dd").If not provided, the ending date of the rasterstack is used.
-#' @param id_field character name of the column of the input sp object or shapefile to be used in the data extraction. Values conatined in the column MUST be unique
+#' @param start_date "Date", "POSIXct" or "POSIXlt" starting date of the period to be considered for data extraction OR character string coercible to
+#' Date class (format = "yyyy-mm-dd"). If not provided, the starting date of the rasterStack is used.
+#' @param end_date "Date", "POSIXct" or "POSIXlt" ending date of the period to be considered for data extraction OR character string coercible to
+#' Date class (format = "yyyy-mm-dd").If not provided, the ending date of the rasterStack is used.
+#' @param id_field character name of the column of the input sp object or shapefile to be used in the data extraction. Values contained in the column MUST be unique
 #' The names of the columns of the output are taken from this column. If not provided, or an invalid value is provided, then the names of the columns of the output
 #' reflect the number of the feature in the original sp object or shapefile.
 #' @param FUN function to summarize the values (e.g. mean) on polygon data frames. The function should take a single numeric vector as argument and return a
@@ -95,13 +95,13 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
   if (!class(start_date) %in% c("Date", "POSIXct", "POSIXlt")) {
     start_date <- try(as.Date(start_date), silent = TRUE)
     if (class(start_date) == "try-error") {
-      stop("start_date is not a Date object or string cohercible to date")
+      stop("start_date is not a Date object or string coercible to date")
     }
   }
   if (!class(end_date) %in% c("Date", "POSIXct", "POSIXlt")) {
     end_date <- try(as.Date(end_date), silent = TRUE)
     if (class(end_date) == "try-error") {
-      stop("end_date is not a Date object or string cohercible to date")
+      stop("end_date is not a Date object or string coercible to date")
     }
   }
   if (start_date > end_date) {
@@ -144,7 +144,7 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
     shape <- crop(sp_object, extent(in_rts[[1]]))
     if (!isTRUE(all.equal(extent(shape), (extent(sp_object)), scale = 100))) {
       warning("Some features of the spatial object are outside or partially outside\n 
-              the extent of the input RasterStack ! Output for features outside rasterstack 
+              the extent of the input RasterStack ! Output for features outside rasterStack 
               extent\n will be set to NODATA. Outputs for features only partially inside will
               be retrieved\n using only the available pixels !")
       if (!setequal(sp_object$mdxtnq, shape$mdxtnq)){
@@ -297,7 +297,7 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
     }
     return(ts)
   } else {
-    warning("Selected time range does not overlap with the one of the rasterstack 
+    warning("Selected time range does not overlap with the one of the rasterStack 
             input dataset !")
   }
   

@@ -12,8 +12,9 @@ bbox_from_file(file_path, out_crs)
 \item{out_crs}{The output projection (string format).}
 }
 \description{
-Ancillary function used to retrieve the bounding box of a specified spatial file recognised by GDAL or ORG:
-the function reads the extent using gdalinfo or ogrinfo, converting it in a specified CRS.
+Helper function used to retrieve the bounding box of a specified spatial file
+recognized by GDAL or OGG: the function reads the extent using gdalinfo or ogrinfo,
+converting it to a specified CRS.
 }
 \note{
 License: GPL 3.0

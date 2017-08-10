@@ -15,31 +15,35 @@ MODIStsp_check_files(out_prod_folder, file_prefix, bandnames,
 
 \item{bandnames}{string array Bandnames of the MODIS product}
 
-\item{bandsel_orig_choice}{0/1 array Indicates which original modis layers were selected to be processed}
+\item{bandsel_orig_choice}{0/1 array Indicates which original MODIS layers were s
+elected to be processed}
 
 \item{yy}{string year}
 
 \item{DOY}{string doy}
 
-\item{out_format}{string Gtiff or ENVI}
+\item{out_format}{string GTiff or ENVI}
 
-\item{indexes_bandnames}{string array Name of available spectral indexes forthe product}
+\item{indexes_bandnames}{string array Name of available spectral indexes for the product}
 
-\item{indexes_bandsel}{0/1 array Indicates which ospectral indexes were selected to be processed}
+\item{indexes_bandsel}{0/1 array Indicates which spectral indexes were selected to
+be processed}
 
 \item{quality_bandnames}{string array Name of available Quality Indicators for the product}
 
-\item{quality_bandsel}{0/1 array Indicates which Quality Indicators were selected to be processed}
+\item{quality_bandsel}{0/1 array Indicates which Quality Indicators were selected to
+be processed}
 }
 \value{
 check - logical = 1 if all expected output files are already existing
 }
 \description{
-Accessory function used to see if all expected out files for the selected date are already present.
+Accessory function used to see if all expected out files for the
+selected date are already present.
 }
 \details{
-if all expected out files for the selected date are already present, check_files is set to TRUE, and date is skipped
-in MODIStsp_process
+if all expected out files for the selected date are already present,
+check_files is set to TRUE, and date is skipped in MODIStsp_process
 }
 \note{
 License: GPL 3.0

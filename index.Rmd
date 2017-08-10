@@ -20,31 +20,51 @@ knitr::opts_chunk$set(
 
 
 
-# <i class="fa fa-globe" aria-hidden="true"></i> MODIStsp: a "R" package for preprocessing MODIS time series
+# <i class="fa fa-globe" aria-hidden="true"></i> MODIStsp: a "R" package for preprocessing 
+MODIS time series
 
 **MODIStsp** is a "R" package devoted to **automatizing the creation of time series of raster images derived from MODIS Land Products data**. 
 
-**MODIStsp** allows to perform several preprocessing steps _(e.g., download, mosaicing, reprojection, resize, data extraction)_ on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional **Quality Indicators** should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which **Spectral Indexes** should be computed from the original reflectance bands. 
+**MODIStsp** allows to perform several preprocessing steps _(e.g., download, mosaicing, 
+reprojection, resize, data extraction)_ on MODIS data available within a given time period.
+Users have the ability to select which specific layers of the original MODIS HDF files they 
+want to process. They also can select which additional **Quality Indicators** should be 
+extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface 
+Reflectance products, which **Spectral Indexes** should be computed from the original reflectance 
+bands. 
 
-All processing parameters can be easily selected with a **powerful and user-friendly GUI**, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
+All processing parameters can be easily selected with a **powerful and user-friendly GUI**, 
+although non-interactive execution exploiting a previously created Options File is possible. 
+Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled 
+execution of MODIStsp to automatically update time series related to a MODIS product and extent 
+whenever a new image is available. 
 
-For each output layer, outputs are saved as **single-band raster** files corresponding to each available acquisition date. **Virtual files** allowing access to the entire time series as a single file can be also created. 
+For each output layer, outputs are saved as **single-band raster** files corresponding to 
+each available acquisition date. **Virtual files** allowing access to the entire time series 
+as a single file can be also created. 
 
 
-_The package is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy ([CNR-IREA](http://www.irea.cnr.it/en/))_
+_The package is developed and maintained by L.Busetto and L.Ranghetti, from the Institute 
+of Remote Sensing of Environment - National Research Council - Italy ([CNR-IREA](http://www.irea.cnr.it/en/))_
 
 
 ____________________________________________________________________________________
 
 ## <i class="fa fa-cog" aria-hidden="true"></i> Getting Started
 
-- To install `MODIStsp`, please follow instructions reported [here](articles/installation.html), both for [<i class="fa fa-windows" aria-hidden="true"></i>](articles/installation.html#installing-on-windows) and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/installation.html#installing-on-linux-systems)
+- To install `MODIStsp`, please follow instructions reported [here](articles/installation.html),
+both for [<i class="fa fa-windows" aria-hidden="true"></i>](articles/installation.html#installing-on-windows) 
+and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/installation.html#installing-on-linux-systems)
 
-- `MODIStsp` can be used either in [interactive mode](articles/interactive_execution.html) exploiting its user-friendly GUI, or in [non-interactive mode](articles/noninteractive_execution.html) from within `R` scripts
+- `MODIStsp` can be used either in [interactive mode](articles/interactive_execution.html) 
+exploiting its user-friendly GUI, or in [non-interactive mode](articles/noninteractive_execution.html) 
+from within `R` scripts
 
-- [Scheduled Processing](articles/noninteractive_execution.html#scheduled-processing) allows automatic updating of MODIS time series through scheduled jobs, both on [<i class="fa fa-windows" aria-hidden="true"></i>](articles/standalone_execution.html#on-windows) and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/standalone_execution.html#on-linux)
+- [Scheduled Processing](articles/noninteractive_execution.html#scheduled-processing) allows 
+automatic updating of MODIS time series through scheduled jobs, both on [<i class="fa fa-windows" aria-hidden="true"></i>](articles/standalone_execution.html#on-windows) and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/standalone_execution.html#on-linux)
 
-- Solutions to common **installation, data download and processing problems** can be found in our [<i class="fa fa-question-circle-o aria-hidden="true"></i> faq](articles/faq.html)
+- Solutions to common **installation, data download and processing problems** can be found 
+in our [<i class="fa fa-question-circle-o aria-hidden="true"></i> faq](articles/faq.html)
 
 - Please **report any issues** you may encounter in our [issues page on github <i class="fa fa-github-square" aria-hidden="true"></i>](https://github.com/lbusett/MODIStsp/issues) .
 
@@ -52,7 +72,10 @@ ________________________________________________________________________________
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What's New 
 
-Several bugs were recently corrected in the "devel" version of `MODIStsp` on github. See our [<i class="fa fa-newspaper-o aria-hidden="true"></i> news](news/index.html) page for a detailed changelog. A new release (1.3.3) is foreseen in the coming weeks to port the improvements on CRAN. 
+Several bugs were recently fixed in the development version of `MODIStsp` on github. See 
+our [<i class="fa fa-newspaper-o aria-hidden="true"></i> news](news/index.html) page for a 
+detailed changelog. A new release (1.3.3) is foreseen in the coming weeks to port the 
+improvements on CRAN. 
 
 ____________________________________________________________________________________
 

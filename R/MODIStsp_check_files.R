@@ -1,28 +1,38 @@
 #' MODIStsp_check_files
-#' @description Accessory function used to see if all expected out files for the selected date are already present.
-#' @details if all expected out files for the selected date are already present, check_files is set to TRUE, and date is skipped
-#' in MODIStsp_process
+#' @description Accessory function used to see if all expected out files for the
+#'   selected date are already present.
+#' @details if all expected out files for the selected date are already present,
+#'   check_files is set to TRUE, and date is skipped in MODIStsp_process
 #' @param out_prod_folder string output folder name
 #' @param file_prefix string file prefix of the product (e.g., MOD13Q1)
 #' @param bandnames string array Bandnames of the MODIS product
-#' @param bandsel_orig_choice 0/1 array Indicates which original modis layers were selected to be processed
+#' @param bandsel_orig_choice 0/1 array Indicates which original MODIS layers were s
+#'   elected to be processed
 #' @param yy string year
 #' @param DOY string doy
-#' @param out_format string Gtiff or ENVI
-#' @param indexes_bandnames string array Name of available spectral indexes forthe product
-#' @param indexes_bandsel  0/1 array Indicates which ospectral indexes were selected to be processed
+#' @param out_format string GTiff or ENVI
+#' @param indexes_bandnames string array Name of available spectral indexes for the product
+#' @param indexes_bandsel  0/1 array Indicates which spectral indexes were selected to
+#'   be processed
 #' @param quality_bandnames string array Name of available Quality Indicators for the product
-#' @param quality_bandsel 0/1 array Indicates which Quality Indicators were selected to be processed
+#' @param quality_bandsel 0/1 array Indicates which Quality Indicators were selected to
+#'   be processed
 #' @return check - logical = 1 if all expected output files are already existing
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 
-MODIStsp_check_files <- function(out_prod_folder, file_prefix, bandnames, 
-                                 bandsel_orig_choice, yy, DOY, out_format,
-                                 indexes_bandnames, indexes_bandsel, 
-                                 quality_bandnames, quality_bandsel) {
+MODIStsp_check_files <- function(out_prod_folder,
+                                 file_prefix, bandnames,
+                                 bandsel_orig_choice,
+                                 yy,
+                                 DOY,
+                                 out_format,
+                                 indexes_bandnames,
+                                 indexes_bandsel,
+                                 quality_bandnames,
+                                 quality_bandsel) {
 
   check <- T   # Initialize check to T --> changed if even only one file missing
 
@@ -30,11 +40,11 @@ MODIStsp_check_files <- function(out_prod_folder, file_prefix, bandnames,
   # cycle on selected bands
   for (band in which(bandsel_orig_choice == 1)) {
     # Create name for the HDF mosaic
-    outfile     <- paste0(out_prod_folder, "/", bandnames[band], "_", yy, "_", DOY, ".hdf")    
+    outfile <- paste0(out_prod_folder, "/", bandnames[band], "_", yy, "_", DOY, ".hdf")
     # Create name for the TIFF reprojected  mosaic
-    outrep_file <- file.path(out_prod_folder, bandnames[band], 
+    outrep_file <- file.path(out_prod_folder, bandnames[band],
                              paste0(file_prefix, "_",
-                                    sub("[.][^.]*$", "", 
+                                    sub("[.][^.]*$", "",
                                         basename(outfile), perl = TRUE)))
     if (out_format == "GTiff") {
       outder_file <- paste0(outrep_file, ".tif")
@@ -51,9 +61,9 @@ MODIStsp_check_files <- function(out_prod_folder, file_prefix, bandnames,
   # cycle on selected indexes
   for (band in which(indexes_bandsel == 1)) {
     # Create name for the HDF mosaic
-    outfile     <- paste0(out_prod_folder, "/", indexes_bandnames[band], "_", yy, "_", DOY, ".hdf") 
+    outfile <- paste0(out_prod_folder, "/", indexes_bandnames[band], "_", yy, "_", DOY, ".hdf")
     # Create name for the TIFF reprojected  mosaic
-    outder_file <- file.path(out_prod_folder, indexes_bandnames[band], 
+    outder_file <- file.path(out_prod_folder, indexes_bandnames[band],
                              paste0(file_prefix, "_",
                                     sub("[.][^.]*$", "",
                                         basename(outfile), perl = TRUE)))
@@ -72,12 +82,12 @@ MODIStsp_check_files <- function(out_prod_folder, file_prefix, bandnames,
   # # cycle on selected quality
   for (band in which(quality_bandsel == 1)) {
     # Create name for the HDF mosaic
-    outfile <- paste0(out_prod_folder, "/", quality_bandnames[band], "_", yy, "_", DOY, ".hdf")   
+    outfile <- paste0(out_prod_folder, "/", quality_bandnames[band], "_", yy, "_", DOY, ".hdf")
     # Create name for the TIFF reprojected  mosaic
-    outder_file <- file.path(out_prod_folder, quality_bandnames[band], 
-                             paste0(file_prefix, "_", 
-                                    sub("[.][^.]*$", "", 
-                                        basename(outfile), perl = TRUE)))  
+    outder_file <- file.path(out_prod_folder, quality_bandnames[band],
+                             paste0(file_prefix, "_",
+                                    sub("[.][^.]*$", "",
+                                        basename(outfile), perl = TRUE)))
     if (out_format == "GTiff") {
       outder_file <- paste0(outder_file, ".tif")
       }
