@@ -170,6 +170,68 @@
 <span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <hr>
 </div>
+<div id="installing-on-mac" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installing-on-mac" class="anchor"></a><i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac</h2>
+<p><strong>NOTE: The following installation notes were kindly provided by a MODIStsp user and should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. Since we are not working on Mac we were not able yet to check this, but we hope it may be useful at least to put you in the right direction if you have installation problems)</strong></p>
+<p>Installing MODIStsp requires many dependencies:</p>
+<p>For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by <strong>tobybot11</strong> (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>), Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and doesn’t work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version “OS X Mavericks binaries” and not “Package source” - You have to be sure that gdal is installed with HDF4 support.</p>
+<p>1 - Update to R &gt; 3.4 if needed, then update all packages</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># update packages</span>
+<span class="kw">update.packages</span>()
+<span class="co"># install the development version of devtools:</span>
+<span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"devtools"</span>))
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"hadley/devtools"</span>)</code></pre></div>
+<p>2 - Now, install RGtk2 using Homebrew (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>). First, ensure you have cairo installed with “–with-x11”:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> uninstall cairo --ignore-dependencies
+<span class="ex">brew</span> install --with-x11 cairo </code></pre></div>
+<p>next, edit the configure options for GTK to require x11 rather than Quartz:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> edit gtk+</code></pre></div>
+<p>in the def install section, remove the reference to quartz and switch to:</p>
+<pre><code>--with-gdktarget=x11,
+--enable-x11-backend</code></pre>
+<p>Now install:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> install --build-from-source --verbose gtk+
+<span class="bu">export</span> <span class="va">PKG_CONFIG_PATH=</span>/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig</code></pre></div>
+<p>3 - next, install <code>RGtk2</code>. Since install.packages(“Rgtk2”) is not going to work, go <a href="https://cran.r-project.org/web/packages/RGtk2/index.html">here</a>, download RGtk2_2.20.33.tar.gz and, from a terminal run:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">R</span> CMD INSTALL RGtk2_2.20.33.tar.gz</code></pre></div>
+<p>Now, open R and run:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RGtk2)</code></pre></div>
+<p>hopefully, <code>RGTk2</code> will load without errors !</p>
+<p>4 - Install packages <code>gWidgetsRGtk2</code> and <code>cairoDevice</code></p>
+<p><strong>Very important !!!!</strong> from CRAN, download the <strong>“OS X Mavericks binaries”</strong> for <a href="https://cran.r-project.org/web/packages/gWidgetsRGtk2/index.html">gWidgetsRGtk2</a> and <a href="https://cran.r-project.org/web/packages/cairoDevice/index.html">cairoDevice</a>( not “Package source”). Save both to Frameworks/R.framework/3.4…, open R and run the code below (This will also install cairoDevice)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>,
+                 <span class="dt">lib=</span><span class="st">"~/Library/Frameworks/R.framework/Versions/3.4/Resources/library/gWidgetsRGtk2"</span>)
+<span class="kw">library</span>(gWidgetsRGtk2)
+<span class="kw">library</span>(cairoDevice)</code></pre></div>
+<p><em>(This will work for R version 3.4, mac OS X Sierra)</em></p>
+<p>5 - Install GDAL with HDF4 support</p>
+<p>Check that gdal is installed with hdf4 support. From a terminal:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&gt;</span> <span class="ex">gdal-config</span> --formats </code></pre></div>
+<p>if gdal is installed, check what drivers are installed: the list should include hdf4.</p>
+<p>If gdal is not yet installed or hdf4 is not supproted, install/reinstall it following these <a href="http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html">notes</a></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&gt;</span> <span class="ex">brew</span> install hdf4 
+<span class="co"># prefer hdf4 links over NetCDF </span>
+<span class="op">&gt;</span> <span class="ex">brew</span> link --overwrite hdf4 
+<span class="op">&gt;</span> <span class="ex">brew</span> install gdal --complete --enable-unsupported --with-hdf4 
+<span class="co"># check what drivers are installed, list should now include hdf4: </span>
+<span class="op">&gt;</span> <span class="ex">gdal-config</span> --formats </code></pre></div>
+<p>6 - Install rgdal</p>
+<p>since rgdal is not usually looking in “/usr/local/lib”" you must include that with <code>install.packages()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'rgdal'</span>,
+                 <span class="dt">type =</span> <span class="st">"source"</span>,<span class="dt">configure.args =</span> <span class="kw">c</span>(
+                   <span class="st">'--with-proj-include=/usr/local/include'</span>,
+                   <span class="st">'--with-proj-lib=/usr/local/lib'</span>)
+                 )</code></pre></div>
+<p>7 - Finally, install MODIStsp from CRAN or GitHub:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)
+<span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
+<p>OR</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools) 
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
+<span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
+<p>Good luck! ________________________________________________________________________________</p>
+</div>
 <div id="installing-r-and-gdal" class="section level1">
 <h1 class="hasAnchor">
 <a href="#installing-r-and-gdal" class="anchor"></a>Installing R and GDAL</h1>
@@ -241,6 +303,10 @@
 <a href="#other-linux-systems" class="anchor"></a>Other Linux systems</h4>
 <p>Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter <code>--with-hdf4</code> to the <code>configure</code> instruction).</p>
 </div>
+<div id="macos" class="section level4">
+<h4 class="hasAnchor">
+<a href="#macos" class="anchor"></a>MacOs</h4>
+</div>
 </div>
 </div>
 </div>
@@ -254,6 +320,7 @@
 <li><a href="#system-requirements"><i class="fa fa-desktop" aria-hidden="true"></i> System Requirements</a></li>
       <li><a href="#installing-on-windows"><i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows</a></li>
       <li><a href="#installing-on-linux-systems"><i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems</a></li>
+      <li><a href="#installing-on-mac"><i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac</a></li>
       <li><a href="#installing-r-and-gdal">Installing R and GDAL</a></li>
       </ul>
 </div>

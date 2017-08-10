@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp_process_QA_bits — MODIStsp_process_QA_bits â€¢ MODIStsp</title>
+<title>compute Quality Indicators from HDF bit-field layers — MODIStsp_process_QA_bits â€¢ MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -138,55 +138,35 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>MODIStsp_process_QA_bits</h1>
+    <h1>compute Quality Indicators from HDF bit-field layers</h1>
     </div>
 
     
-    <p>function used to extract quality indicator from MODIS aggregated quality layers</p>
+    <p>function used to extract quality indicator from MODIS aggregated
+quality layers</p>
     
 
-    <pre class="usage"><span class='fu'>MODIStsp_process_QA_bits</span>(<span class='no'>out_filename</span>, <span class='no'>in_raster_name</span>, <span class='no'>bitN</span>, <span class='no'>source</span>,
-  <span class='no'>out_prod_folder</span>, <span class='no'>file_prefix</span>, <span class='no'>yy</span>, <span class='no'>DOY</span>, <span class='no'>out_format</span>, <span class='no'>nodata_source</span>,
-  <span class='no'>nodata_qa_in</span>, <span class='no'>nodata_qa_out</span>)</pre>
+    <pre class="usage"><span class='fu'>MODIStsp_process_QA_bits</span>(<span class='no'>out_filename</span>, <span class='no'>in_source_file</span>, <span class='no'>bitN</span>, <span class='no'>out_format</span>,
+  <span class='no'>nodata_source</span>, <span class='no'>nodata_qa_in</span>, <span class='no'>nodata_qa_out</span>, <span class='no'>compress</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>out_filename</th>
-      <td><p>string file name of the output raster files containing QI values</p></td>
+      <td><p><code>character</code> file name of the output raster files
+containing QI values</p></td>
     </tr>
     <tr>
-      <th>in_raster_name</th>
-      <td><p>name of the MODIS band containing data from which the bit field
-corresponding to the quality indicator must be extracted</p></td>
+      <th>in_source_file</th>
+      <td><p><code>character</code> name of the file created by MODIStsp
+containing the data required to compute the quality indicator</p></td>
     </tr>
     <tr>
       <th>bitN</th>
-      <td><p>position of the bits corresponding to the quality indicator
-(e.g., 0-1 = first two bits; 2-5: bits from 2 to 5, etc.)</p></td>
-    </tr>
-    <tr>
-      <th>source</th>
-      <td><p>"name" of the MODIS band containing the values from which to extract
-the quality indicator (e.g., State_1km)</p></td>
-    </tr>
-    <tr>
-      <th>out_prod_folder</th>
-      <td><p>main folder used for storing the output data in MODIStsp
-processing. New quality indicator files are stored in out_prod_folder/derived_band</p></td>
-    </tr>
-    <tr>
-      <th>file_prefix</th>
-      <td><p>files_prefixes used to create output file names in MODIStsp (e.g., MOD13Q1)</p></td>
-    </tr>
-    <tr>
-      <th>yy</th>
-      <td><p>year of considered image</p></td>
-    </tr>
-    <tr>
-      <th>DOY</th>
-      <td><p>DOY of considered image</p></td>
+      <td><p><code>character</code> position of the bits corresponding to the quality
+indicator of interest (e.g., 0-1 = first two bits; 2-5: bits from 2 to 5,
+etc.)</p></td>
     </tr>
     <tr>
       <th>out_format</th>
@@ -194,32 +174,35 @@ processing. New quality indicator files are stored in out_prod_folder/derived_ba
     </tr>
     <tr>
       <th>nodata_source</th>
-      <td><p>nodata values of the MODIS band containing data from which
-the bit field corresponding to the quality indicator must be extracted</p></td>
+      <td><p><code>character</code> NoData values of the MODIS band containing
+data from which the bit field corresponding to the quality indicator must
+be extracted</p></td>
     </tr>
     <tr>
       <th>nodata_qa_in</th>
-      <td><p>string in nodata for quality bands ("255")</p></td>
+      <td><p><code>character</code> in NoData for quality bands ("255")</p></td>
     </tr>
     <tr>
       <th>nodata_qa_out</th>
-      <td><p>string out nodata for quality bands ("255")</p></td>
+      <td><p><code>character</code> out NoData for quality bands ("255")</p></td>
+    </tr>
+    <tr>
+      <th>compress</th>
+      <td><p><code>character</code> compression option for GTiff files</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>On the basis of the name of the image containing the aggregated quality information
-(in_raster_name) and of the position of the bit fields corresponding to the QI of interest in
-the bitfield representation (bitN), the function extracts the correct information exploiting
+(<code>in_source_file``) and of the position of the bit fields corresponding to the QI of interest in the bitfield representation (</code>bitN``), the function extracts the correct information exploiting
 bitwise operators, and save the result in a new raster image</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>License: GPL 3.0
-Based on the "modis.qc.R" script by Yann Chemin (2008)
-(https://r-forge.r-project.org/scm/viewvc.php/pkg/RemoteSensing/R/modis.qc.R?view=markup&amp;root=remotesensing&amp;pathrev=79)</p>
-<p>license GPL 3.0</p>
+Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
+license GPL 3.0</p>
     
 
   </div>
@@ -235,9 +218,9 @@ Based on the "modis.qc.R" script by Yann Chemin (2008)
 
     <h2>Author</h2>
     
-Lorenzo Busetto, phD (2014-2015) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a>
+Lorenzo Busetto, phD (2017) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a>
 
-Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
+Luigi Ranghetti, phD (2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 
   </div>
 </div>

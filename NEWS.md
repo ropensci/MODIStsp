@@ -6,26 +6,26 @@ v1.3.3 was released on 10/08/2017
 
 -  Improved speed in computation of spectral indexes, quality indicators and in 
    computation of scaled variables by usind `raster::calc()` and `raster::overlay`
-   (commit 0f5d76de1661958cd5cbaa79f8115035cb9c348e, 0f5d76de1661958cd5cbaa79f8115035cb9c348e,
-   e462721a06a079185ec5a84270ea0c8bd8edf54d)
+   (commits [0f5d76d](https://github.com/lbusett/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e),     [0f5d76d](https://github.com/lbusett/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e), [e462721](https://github.com/lbusett/MODIStsp/commit/e462721a06a079185ec5a84270ea0c8bd8edf54d))
    
 -  Added functionality for unit testing using `testthat` and codecov integration.
-   (commit 0c00fc6bf07aed046b2b198e0278ab3264e5298a and others)
+   (commit [0c00fc6](https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a)
+   and others)
    
 -  Added "testing mode" to allow users to test proper functioning. Now, runnning 
    `MODIStsp(test = X)` (with X in (0,6)) runs the processing using default processing
-   parameters  (commit 0c00fc6bf07aed046b2b198e0278ab3264e5298a and others)
+   parameters  (commit [0c00fc6](https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a) and others)
 
 ### Minor Changes
 
 -  Suppression of verbose messages and (useless) warning messages while parsing the NASA
-servers and downloading data using "ftp" (3775d6099bc359925d3dcbd96c2ffe8455502648);
+servers and downloading data using "ftp" ( [3775d60](https://github.com/lbusett/MODIStsp/commit/3775d6099bc359925d3dcbd96c2ffe8455502648));
 
 ### Bug fixing
 
 -   Fxed a bug preventing the "last" choice (or that present in the json file) from 
     correctly showing in the GUI upon launch/restore of a saved json file (commit
-    633c2dddd29d45c618e4ca121112000ceefe91e3)
+    [633c2dd](https://github.com/lbusett/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3))
 
 -   Fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in `gdalbuildvrt`, causing sometimes an incorrect translation from HDF to output formats ([#72](https://github.com/lbusett/MODIStsp/issues/72)).
 
@@ -36,9 +36,6 @@ servers and downloading data using "ftp" (3775d6099bc359925d3dcbd96c2ffe84555026
 - Fixed a bug a error on creation of "burn_date" layers for MCD45A1 product ([#77](https://github.com/lbusett/MODIStsp/issues/77))
 
 - Fixed bugs on specifying spatial extent files on non-interactive execution ([#75](https://github.com/lbusett/MODIStsp/issues/75))
-
-- Fixed a bug on `MODIStsp_addindex`, affecting behaviour on non-interactive execution
-
 
 ____________________________________________________________________________________
 

@@ -169,19 +169,21 @@ processing.</p>
     </tr>
     <tr>
       <th>start_date</th>
-      <td><p>string start_date for images download and preproc (yyyy.mm.dd)</p></td>
+      <td><p>string start_date for images download and preprocessing
+(yyyy.mm.dd)</p></td>
     </tr>
     <tr>
       <th>end_date</th>
-      <td><p>string end_date for images download and preproc (yyyy.mm.dd)</p></td>
+      <td><p>string end_date for images download and preprocessing
+(yyyy.mm.dd)</p></td>
     </tr>
     <tr>
       <th>out_folder</th>
-      <td><p>main ouput folder</p></td>
+      <td><p>main output folder</p></td>
     </tr>
     <tr>
       <th>out_folder_mod</th>
-      <td><p>ouput folder for original HDF storage</p></td>
+      <td><p>output folder for original HDF storage</p></td>
     </tr>
     <tr>
       <th>reprocess</th>
@@ -190,7 +192,7 @@ dates (Default = 'Yes')</p></td>
     </tr>
     <tr>
       <th>delete_hdf</th>
-      <td><p>string ("Yes"/"No") If Yes, delete original hdf after completion</p></td>
+      <td><p>string ("Yes"/"No") If Yes, delete original HDF after completion</p></td>
     </tr>
     <tr>
       <th>sensor</th>
@@ -212,27 +214,27 @@ dates (Default = 'Yes')</p></td>
     </tr>
     <tr>
       <th>https</th>
-      <td><p>hash https site for download of hdf of selected product</p></td>
+      <td><p>hash https site for download of HDF of selected product</p></td>
     </tr>
     <tr>
       <th>ftps</th>
-      <td><p>hash ftps site for download of hdf of selected product</p></td>
+      <td><p>hash ftps site for download of HDF of selected product</p></td>
     </tr>
     <tr>
       <th>start_x</th>
-      <td><p>int start horiz. tile</p></td>
+      <td><p>int start horizontal tile</p></td>
     </tr>
     <tr>
       <th>start_y</th>
-      <td><p>int start vertical. tile</p></td>
+      <td><p>int start vertical tile</p></td>
     </tr>
     <tr>
       <th>end_x</th>
-      <td><p>int end horiz. tile</p></td>
+      <td><p>int end horizontal tile</p></td>
     </tr>
     <tr>
       <th>end_y</th>
-      <td><p>int end vertical. tile</p></td>
+      <td><p>int end vertical tile</p></td>
     </tr>
     <tr>
       <th>bbox</th>
@@ -260,7 +262,7 @@ dates (Default = 'Yes')</p></td>
     </tr>
     <tr>
       <th>tiled</th>
-      <td><p>0/1 1 = tiled product; 0 = nontiled product (resolution 0.05 deg)</p></td>
+      <td><p>0/1 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg)</p></td>
     </tr>
     <tr>
       <th>MOD_proj_str</th>
@@ -272,15 +274,15 @@ dates (Default = 'Yes')</p></td>
     </tr>
     <tr>
       <th>nodata_in</th>
-      <td><p>array Original nodata for MODIS bands</p></td>
+      <td><p>array Original NoData for MODIS bands</p></td>
     </tr>
     <tr>
       <th>nodata_out</th>
-      <td><p>Target nodata for MODIS bands</p></td>
+      <td><p>Target NoData for MODIS bands</p></td>
     </tr>
     <tr>
       <th>nodata_change</th>
-      <td><p>string (Yes/No) if Yes, nodata are set to nodata_out in
+      <td><p>string (Yes/No) if Yes, NoData are set to nodata_out in
 output rasters</p></td>
     </tr>
     <tr>
@@ -308,7 +310,7 @@ to correct measure units</p></td>
     </tr>
     <tr>
       <th>bandsel</th>
-      <td><p>array of lenght equal to number of original modis layers. set
+      <td><p>array of length equal to number of original modis layers. set
 to 1 for bands to be processed</p></td>
     </tr>
     <tr>
@@ -317,7 +319,7 @@ to 1 for bands to be processed</p></td>
     </tr>
     <tr>
       <th>indexes_bandsel</th>
-      <td><p>array of lenght equal to number of available spectral indexes,
+      <td><p>array of length equal to number of available spectral indexes,
 set to  1 for indexes to be processed</p></td>
     </tr>
     <tr>
@@ -330,7 +332,7 @@ set to  1 for indexes to be processed</p></td>
     </tr>
     <tr>
       <th>indexes_nodata_out</th>
-      <td><p>Nodata values for indexes</p></td>
+      <td><p>NoData values for indexes</p></td>
     </tr>
     <tr>
       <th>quality_bandnames</th>
@@ -338,13 +340,13 @@ set to  1 for indexes to be processed</p></td>
     </tr>
     <tr>
       <th>quality_bandsel</th>
-      <td><p>array of lenght equal to number of available quality indicators,
+      <td><p>array of length equal to number of available quality indicators,
 set to  1 for indicators to be processed</p></td>
     </tr>
     <tr>
       <th>quality_bitN</th>
       <td><p>list of strings with number of entries equal to number of
-quality indicators. each entry caontains position of bits corresponding to a QI
+quality indicators. each entry contains position of bits corresponding to a QI
 (e.g., 0-1)</p></td>
     </tr>
     <tr>
@@ -366,7 +368,7 @@ its source aggregated quality assurance layer</p></td>
     </tr>
     <tr>
       <th>file_prefixes</th>
-      <td><p>output file prefix according to selelected product (e.g., MOD13Q1)</p></td>
+      <td><p>output file prefix according to selected product (e.g., MOD13Q1)</p></td>
     </tr>
     <tr>
       <th>main_out_folder</th>
@@ -406,7 +408,7 @@ If not, direct processing messages to the log</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>After retrieving the input processing options, the function</p><ol>
-<li><p>Acesses lpdaac http or ftp archive to determine the list of dates to be processed</p></li>
+<li><p>Accesses lpdaac http or ftp archive to determine the list of dates to be processed</p></li>
 <li><p>Performs all required processing steps on each date (download, reprojection,
 resize, mosaicing, indexes computation, quality indicators computation)</p></li>
 <li><p>Creates virtual files of the processed time series.</p></li>
@@ -415,7 +417,7 @@ resize, mosaicing, indexes computation, quality indicators computation)</p></li>
 package.
 Extraction of bitfields from Quality layers is done though fast bitwise computation
 Checks are done in order to not re-download already existing HDF images, and not
-reprocess already processed dates (if the user didn'specify that)</p>
+reprocess already processed dates (if the user did not specify that)</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
