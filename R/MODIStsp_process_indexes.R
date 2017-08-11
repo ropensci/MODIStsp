@@ -99,7 +99,7 @@ MODIStsp_process_indexes <- function(out_filename, formula, bandnames,
   #   stack_string as input. NOTE: The fact that the bands are used in the 
   #   correct "order" is guaranteed by the fact that they are added in the 
   #   same order in "fun_string" and in "stack_string" in the cycle above !
-  
+
   raster::overlay(x         = eval(parse(text = stack_string)),
                   fun       = eval(parse(text = fun_string)), 
                   filename  = out_filename,
@@ -108,7 +108,7 @@ MODIStsp_process_indexes <- function(out_filename, formula, bandnames,
                   options   = ifelse(out_format == "GTiff",
                                      paste0("COMPRESS=", compress),
                                      ""),                       
-                  NAflag    = as.numeric(nodata_out),
+                  NAflag    = as.numeric(indexes_nodata_out),
                   overwrite = TRUE)
   
   # IF "ENVI", write the NoData value in the header
@@ -118,8 +118,8 @@ MODIStsp_process_indexes <- function(out_filename, formula, bandnames,
       tools::file_path_sans_ext(out_filename),
       ".hdr"), "a")
     
-    writeLines(c("data ignore value = ", nodata_out), fileConn_meta_hdr,
-               sep = " ")
+    writeLines(c("data ignore value = ", as.numeric(indexes_nodata_out)),
+               fileConn_meta_hdr, sep = " ")
     writeLines("", fileConn_meta_hdr)
     close(fileConn_meta_hdr)
   }

@@ -947,20 +947,20 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       outrep_0 <- raster::raster(outrep_file_0)
                       scl <- as.numeric(scale_factor[band])
                       off <- as.numeric(offset[band])
-                      outrep <- raster::calc(
-                        x         = outrep_0,
-                        fun       = function(x) {
-                          x * scl + off
-                        }, 
-                        filename  = outrep_file,
-                        format    = out_format,
-                        datatype  = "FLT4S", 
-                        options   = ifelse(
-                          out_format == "GTiff",
-                          paste0("COMPRESS=", compress),
-                          ""),                       
-                        NAflag    = as.numeric(nodata_out[band]),
-                        overwrite = TRUE)
+                      na  <- as.numeric(nodata_out[band])
+                      outrep <- raster::calc(x         = outrep_0,
+                                             fun       = function(x) {
+                                               x * scl + off
+                                             }, 
+                                             filename  = outrep_file,
+                                             format    = out_format,
+                                             datatype  = "FLT4S", 
+                                             options   = ifelse(
+                                               out_format == "GTiff",
+                                               paste0("COMPRESS=", compress),
+                                               ""),                       
+                                             NAflag    = na,
+                                             overwrite = TRUE)
                       rm(outrep, outrep_0)
                     }
 
@@ -1006,15 +1006,20 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
                 #If file not existing and reprocess = No, compute the index and save it
                 if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
-                  MODIStsp_process_indexes(out_filename = out_filename, formula = formula,
-                                           bandnames = bandnames, nodata_out = nodata_out,
-                                           indexes_nodata_out = indexes_nodata_out[band],
-                                           out_prod_folder = out_prod_folder,
-                                           file_prefix = file_prefix,
-                                           compress = compress, 
-                                           yy = yy, out_format = out_format,
-                                           DOY = DOY,
-                                           scale_val = scale_val )
+                  MODIStsp_process_indexes(
+                    out_filename       = out_filename,
+                    formula            = formula,
+                    bandnames          = bandnames,
+                    nodata_out         = nodata_out,
+                    indexes_nodata_out = indexes_nodata_out[band],
+                    out_prod_folder    = out_prod_folder,
+                    file_prefix        = file_prefix,
+                    compress           = compress, 
+                    yy                 = yy,
+                    out_format         = out_format,
+                    DOY                = DOY,
+                    scale_val          = scale_val
+                    )
                 }
               }
 
