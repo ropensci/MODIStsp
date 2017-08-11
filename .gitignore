@@ -15,6 +15,10 @@ README_files/
 
 tests/testthat/test_http\.json
 
+tests/testthat/test_modistsp_LB\.R
+
+tests/testthat/test_modistspGUI\.R
+
 inst/Test_files/MYD10CM\.A2016214\.006\.2016246092743\.hdf
 
 inst/Test_files/MYD10CM\.A2015213\.006\.2016180125140\.hdf
@@ -42,3 +46,5 @@ inst/Test_files/test05_LB\.json
 inst/Test_files/test5_LB\.json
 
 vignettes/Thumbs\.db
+
+tests/testthat/test-modistsp_LB\.R
