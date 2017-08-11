@@ -179,11 +179,11 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
 
   # Folders in which the JSON/RData files (previous settings and product descriptions) are saved
   if (is.null(options_file)) {
-    previous_dir <- system.file("Previous", package = "MODIStsp")
+    previous_dir <- file.path(system.file(package = "MODIStsp"), "Previous")
   } else {
     previous_dir <- dirname(options_file)
   }
-  prodopts_dir <- system.file("Previous", package = "MODIStsp")
+  prodopts_dir <- file.path(system.file(package = "MODIStsp"), "Previous")
   dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE) #; dir.create(log_dir, showWarnings = FALSE, recursive = TRUE)
   dir.create(prodopts_dir, showWarnings = FALSE, recursive = TRUE)
 
