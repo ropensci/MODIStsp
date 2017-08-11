@@ -114,7 +114,8 @@ devtools::install_github("hadley/devtools")
 ```
 
 2 - Now, install RGtk2 using Homebrew (https://gist.github.com/sebkopf/9405675).
-First, ensure you have cairo installed with "--with-x11":
+First, ensure you have cairo installed with "--with-x11". Open a terminal and 
+run:
 
 ```bash
 brew uninstall cairo --ignore-dependencies

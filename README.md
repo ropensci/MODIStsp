@@ -7,6 +7,9 @@
     -   [<i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems](#installing-on-linux-systems)
     -   [<i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac](#installing-on-mac)
 
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/package=MODIStsp) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](http://doi.org/10.5281/zenodo.290683)
+[![Coverage Status](https://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
+
 MODIStsp
 ========
 
@@ -123,7 +126,7 @@ install.packages(c("devtools"))
 devtools::install_github("hadley/devtools")
 ```
 
-2 - Now, install RGtk2 using Homebrew (<https://gist.github.com/sebkopf/9405675>). First, ensure you have cairo installed with "--with-x11":
+2 - Now, install RGtk2 using Homebrew (<https://gist.github.com/sebkopf/9405675>). First, ensure you have cairo installed with "--with-x11". Open a terminal and run:
 
 ``` bash
 brew uninstall cairo --ignore-dependencies
@@ -144,7 +147,7 @@ in the def install section, remove the reference to quartz and switch to:
 Now install:
 
 ``` bash
-brew install --build-from-source --verbose gtk+
+brew install --build-from-source --verbose gtk+ 
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
 ```
 
@@ -167,8 +170,7 @@ hopefully, `RGTk2` will load without errors !
 **Very important !!!!** from CRAN, download the **"OS X Mavericks binaries"** for [gWidgetsRGtk2](https://cran.r-project.org/package=gWidgetsRGtk2) and [cairoDevice](https://cran.r-project.org/package=cairoDevice)( not "Package source"). Save both to Frameworks/R.framework/3.4..., open R and run the code below (This will also install cairoDevice)
 
 ``` r
-install.packages("gWidgetsRGtk2",
-                 lib="~/Library/Frameworks/R.framework/Versions/3.4/Resources/library/gWidgetsRGtk2")
+install.packages("gWidgetsRGtk2", lib="~/Library/Frameworks/R.framework/Versions/3.4/Resources/library/gWidgetsRGtk2")
 library(gWidgetsRGtk2)
 library(cairoDevice)
 ```
