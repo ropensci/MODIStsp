@@ -259,7 +259,7 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
                 parameter."))
     } else {
       if (general_opts$MODIStspVersion < utils::packageVersion("MODIStsp")) {
-        warning(paste0("The option file in use (", previous_jsfile, ") was created with an
+        message(paste0("The option file in use (", previous_jsfile, ") was created with an
                        old MODIStsp version (",
                        general_opts$MODIStspVersion, "): this could lead to errors!"))
       }
