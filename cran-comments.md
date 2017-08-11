@@ -3,26 +3,32 @@ MODIStsp 1.3.3
 
 ## Test environments
 * ubuntu 17.10 on local install, R 3.4.1
-* ubuntu 16.04 on travis-ci, R 3.4.1 (https://travis-ci.org/lbusett/MODIStsp/builds/222347443)
+* ubuntu 16.04 on travis-ci, R 3.4.1 (https://travis-ci.org/lbusett/MODIStsp/builds/263472771)
 * win-builder (R-devel)
 * windows 10 on local install, R 3.4.1 (As for the previous reelease, 
   R CMD check passes if GTK+ library is properly installed and on Windows PATH,
   otherwise the check causes an endless GTK+ installation loop. This seems a 
   common behaviour for packages relying on RGtk2/gWidgetsRGtk2)
-* no checks on MacOs. Straight-on installation on El Capitain or Sierra is 
-  probably not possible at the moment, due to the lack of updated binaries for
-  RGtk2. A workaround solution using oldrel (Maverick) binaries is provided in 
-  the README
+* MacOs on rhub:
+  
+  Build on Maverick works (https://builder.r-hub.io/status/MODIStsp_1.3.3.tar.gz-a2c949420f21b9d8b9e173bdc00923db), 
+  though with one note on importing gWidgetsRGtk2
+  
+  Build on  El Capitain or Sierra is not possible at the moment, due to the lack
+  of updated binaries for RGtk2. A workaround solution using oldrel (Maverick)
+  binaries is provided in MODIStsp README and website  (http://lbusett.github.io/MODIStsp/articles/installation.html#installing-on-mac)
+
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs 
+There were no ERRORs, WARNINGs or NOTEs
 
 
 ## Downstream dependencies
 
 This package has no downstream dependencies.
 
+--------------------------------------------------------------------------------
 MODIStsp 1.3.2
 ==============
 
