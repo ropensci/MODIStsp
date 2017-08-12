@@ -32,9 +32,9 @@ vignettes/output.Rmd
 inst/ExtData/Diff_Prodopts.xml
 inst/ExtData/Diff_Prodopts_132_132.xml
 inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml
-inst/Test_files/MCD43A3.A2017200.h15v07.006.2017209032506.hdf
-inst/Test_files/MOD09A1.A2017193.h18v04.006.2017202035302.hdf
-inst/Test_files/MOD11B2.A2017001.h14v04.006.2017013155631.hdf
+inst/Test_files/MCD43A3.A2017200.h15v07.006.2017209032506.hdf$
+inst/Test_files/MOD09A1.A2017193.h18v04.006.2017202035302.hdf$
+inst/Test_files/MOD11B2.A2017001.h14v04.006.2017013155631.hdf$
 inst/Test_files/test04_LB.json
 inst/Test_files/test05_LB.json
 inst/Test_files/test5_LB.json

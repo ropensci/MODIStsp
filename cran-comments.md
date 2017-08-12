@@ -3,7 +3,7 @@ MODIStsp 1.3.3
 
 ## Test environments
 * ubuntu 17.10 on local install, R 3.4.1
-* ubuntu 16.04 on travis-ci (https://travis-ci.org/lbusett/MODIStsp/builds/263472771)
+* ubuntu 16.04 on travis-ci (https://travis-ci.org/lbusett/MODIStsp/builds/263768847)
 * win-builder (R-devel)
 * windows 10 on local install, R 3.4.1 (As for the previous reelease, 
   R CMD check passes if GTK+ library is properly installed and on Windows PATH,
