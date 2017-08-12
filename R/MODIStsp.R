@@ -253,15 +253,16 @@ MODIStsp <- function(gui = TRUE, options_file = NULL,
     write(RJSONIO::toJSON(general_opts), previous_jsfile)
   } else {
     if (is.null(general_opts$MODIStspVersion)) {
-      stop(paste0("The option file in use (", previous_jsfile, ") was created with an
-                too old MODIStsp version (<=1.2.2), and can not be used with the current
-                version. Please delete it or specify a different value for the `option_file`
-                parameter."))
+      stop(paste0("The option file in use (", previous_jsfile, ") was created with a\n",
+                "too old MODIStsp version (<=1.2.2), and can not be used with the current\n",
+                "version. Please delete it or specify a different value for the `options_file`\n",
+                "parameter."))
     } else {
       if (general_opts$MODIStspVersion < utils::packageVersion("MODIStsp")) {
-        message(paste0("The option file in use (", previous_jsfile, ") was created with an
-                       old MODIStsp version (",
-                       general_opts$MODIStspVersion, "): this could lead to errors!"))
+        message(paste0("The option file in use (", previous_jsfile, ") was created with\n",
+                       "an old MODIStsp version (", general_opts$MODIStspVersion, ").\n",
+                       "Although this should still work, please consider re-loading the file\n",
+                       "from the GUI and re-saving it!"))
       }
     }
   }
