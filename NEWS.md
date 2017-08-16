@@ -1,6 +1,6 @@
 ## MODIStsp 1.3.3.1 Release Notes
 
-Maintenance release - fixing a bug in 1.3.3 submission related to a missing import
+This is mostly a maintenance release - fixing a bug in 1.3.3 submission related to a missing import
 in NAMESPACE
 
 ### Minor Changes

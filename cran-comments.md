@@ -1,9 +1,21 @@
 MODIStsp 1.3.3.1
 ================
 
-re-submission of v 1.3.3 correcting an issue related to missing import of 
-gWidgetsRGtk2, leading to NOTES on Solaris, Fedora and OSX builds. For comments 
-on build environments etc. see the notes below concerning v 1.3.3
+re-submission of v 1.3.3 patching an issue related to missing import of 
+gWidgetsRGtk2, leading to NOTES on Solaris, Fedora and OSX builds (see this 
+thread on r-package-devel for details: 
+https://stat.ethz.ch/pipermail/r-package-devel/2017q3/001790.html)
+
+There were no ERRORs or WARNING. There was 1 NOTE:
+
+   * checking CRAN incoming feasibility ... NOTE
+   Maintainer: 'Lorenzo Busetto <lbusett@gmail.com>'
+
+   Days since last update: 4
+
+due to close resubmission. Sorry for this.
+
+For comments on build environments etc. see the notes below concerning v 1.3.3. 
 
 MODIStsp 1.3.3
 ==============
