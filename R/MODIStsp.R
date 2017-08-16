@@ -30,6 +30,7 @@
 #' @seealso
 #'  \code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_process}}
 #' @rdname MODIStsp
+#' @import gWidgetsRGtk2
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose
 #' @importFrom pacman p_exists p_load
