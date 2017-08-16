@@ -1,3 +1,16 @@
+## MODIStsp 1.3.3.1 Release Notes
+
+Maintenance release - fixing a bug in 1.3.3 submission related to a missing import
+in NAMESPACE
+
+### Minor Changes
+
+Improved organization of Virtual Raster files and RData files in the "Time_Series"
+output subfolder. Now virtual files and RData files are organized by sensor and 
+layer to facilitate access. 
+
+____________________________________________________________________________________
+
 ## MODIStsp 1.3.3 Release Notes
 
 v1.3.3 was released on 10/08/2017

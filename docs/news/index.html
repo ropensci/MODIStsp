@@ -143,6 +143,17 @@
     </div>
 
     <div class="contents">
+    <div id="modistsp-1-3-3-1-release-notes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#modistsp-1-3-3-1-release-notes" class="anchor"></a>MODIStsp 1.3.3.1 Release Notes</h2>
+<p>Maintenance release - fixing a bug in 1.3.3 submission related to a missing import in NAMESPACE</p>
+<div id="minor-changes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor Changes</h3>
+<p>Improved organization of Virtual Raster files and RData files in the “Time_Series” output subfolder. Now virtual files and RData files are organized by sensor and layer to facilitate access.</p>
+<hr>
+</div>
+</div>
     <div id="modistsp-1-3-3-release-notes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-3-release-notes" class="anchor"></a>MODIStsp 1.3.3 Release Notes</h2>
@@ -156,9 +167,9 @@
 <li><p>Added “testing mode” to allow users to test proper functioning. Now, runnning <code><a href="../reference/MODIStsp.html">MODIStsp(test = X)</a></code> (with X in (0,6)) runs the processing using default processing parameters (commit <a href="https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a">0c00fc6</a> and others)</p></li>
 </ul>
 </div>
-<div id="minor-changes" class="section level3">
+<div id="minor-changes-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes" class="anchor"></a>Minor Changes</h3>
+<a href="#minor-changes-1" class="anchor"></a>Minor Changes</h3>
 <ul>
 <li>Suppression of verbose messages and (useless) warning messages while parsing the NASA servers and downloading data using “ftp” ( <a href="https://github.com/lbusett/MODIStsp/commit/3775d6099bc359925d3dcbd96c2ffe8455502648">3775d60</a>);</li>
 </ul>
@@ -213,9 +224,9 @@
 </ul>
 </div>
 </div>
-<div id="minor-changes-1" class="section level3">
+<div id="minor-changes-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-1" class="anchor"></a>Minor Changes:</h3>
+<a href="#minor-changes-2" class="anchor"></a>Minor Changes:</h3>
 <ul>
 <li>
 <p>Some product names and output layer names were modified to reduce the length of output file names, homogenize the names of the outputs and correct some errors. <strong>For compatibility with already created output files</strong> (versions up to 1.3.1), the old “XML” file specifying output files format is still available in <code>inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml</code>. To use the old file naming conventions, users have to:</p>
@@ -284,9 +295,9 @@
 <li><p>Improved the GUI inteface for specifying additional Spectral Indexes. Hints are now showed to the user, and multiple indexes can be added in the same session.</p></li>
 </ul>
 </div>
-<div id="minor-changes-2" class="section level3">
+<div id="minor-changes-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-2" class="anchor"></a>Minor Changes</h3>
+<a href="#minor-changes-3" class="anchor"></a>Minor Changes</h3>
 <ul>
 <li><p>General improvements in the GUI inteface. Products are now grouped by categories, to allow easier identification and selection.</p></li>
 <li><p>Improvements in the README file and vignettes, providing more instructions on package use.</p></li>
@@ -323,9 +334,9 @@
 <li><p>Removed possibility to use “complex” resampling methods when reprojecting (e.g., bilinear, cubic, etc.) to avoid incorrect resampling on categorical variables and “contamination” of good pixels data.</p></li>
 </ol>
 </div>
-<div id="minor-changes-3" class="section level3">
+<div id="minor-changes-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-3" class="anchor"></a>Minor Changes</h3>
+<a href="#minor-changes-4" class="anchor"></a>Minor Changes</h3>
 <ul>
 <li>Changed the input method for starting and ending dates selection in the GUI. Now a text field is used</li>
 <li>Added functionaluty for writing data ignore value on ENVI files</li>
@@ -367,6 +378,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#modistsp-1-3-3-1-release-notes">1.3.3.1</a></li>
         <li><a href="#modistsp-1-3-3-release-notes">1.3.3</a></li>
         <li><a href="#modistsp-1-3-2-release-notes">1.3.2</a></li>
         <li><a href="#modistsp-1-3-1-release-notes">1.3.1</a></li>

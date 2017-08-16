@@ -1,3 +1,10 @@
+MODIStsp 1.3.3.1
+================
+
+re-submission of v 1.3.3 correcting an issue related to missing import of 
+gWidgetsRGtk2, leading to NOTES on Solaris, Fedora and OSX builds. For comments 
+on build environments etc. see the notes below concerning v 1.3.3
+
 MODIStsp 1.3.3
 ==============
 

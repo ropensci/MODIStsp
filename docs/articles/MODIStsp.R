@@ -89,12 +89,11 @@
 #  # define the output extent (A separate output folder is created for each input spatial file).
 #  
 #  for (single_shape in extent_list) {
-#    MODIStsp(gui = FALSE, options_file = options_file,
-#            spatial_file_path = single_shape )
+#    MODIStsp(gui = FALSE, options_file = options_file, spatial_file_path = single_shape )
 #  }
 #  
 
-## ----eval=FALSE, tidy=TRUE-----------------------------------------------
+## ----eval=FALSE----------------------------------------------------------
 #  library(raster)
 #  modistsp_file <- "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"
 #  my_raster     <- raster(modistsp_file)

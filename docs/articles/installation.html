@@ -182,7 +182,7 @@
 <span class="co"># install the development version of devtools:</span>
 <span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"devtools"</span>))
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"hadley/devtools"</span>)</code></pre></div>
-<p>2 - Now, install RGtk2 using Homebrew (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>). First, ensure you have cairo installed with “–with-x11”:</p>
+<p>2 - Now, install RGtk2 using Homebrew (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>). First, ensure you have cairo installed with “–with-x11”. Open a terminal and run:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> uninstall cairo --ignore-dependencies
 <span class="ex">brew</span> install --with-x11 cairo </code></pre></div>
 <p>next, edit the configure options for GTK to require x11 rather than Quartz:</p>

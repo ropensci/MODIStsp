@@ -116,7 +116,7 @@
       <h1>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.3</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2017-08-10</h4>
+            <h4 class="date">2017-08-16</h4>
           </div>
 
     
@@ -126,7 +126,7 @@
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
 <p>MODIStsp is a novel “R” package allowing to automatize the creation of time series of rasters derived from MODIS Land Products data. It allows to perform several preprocessing steps on MODIS data available within a given time period.</p>
-<p>Development of MODIStsp started from modifications of the ModisDownload “R” script by Thomas Hengl <span class="citation">(2010)</span>, and successive adaptations by Babak Naimi <span class="citation">(2014)</span>. The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of:</p>
+<p>Development of MODIStsp started from modifications of the ModisDownload “R” script by Thomas Hengl <span class="citation">[-@Hengl2010]</span>, and successive adaptations by Babak Naimi <span class="citation">[-@Naimi2014]</span>. The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of:</p>
 <ul>
 <li>developing a standalone application allowing to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on all available MODIS land products by exploiting a powerful and user-friendly GUI front-end;</li>
 <li>allowing the creation of time series of both MODIS original layers and additional Quality Indicators (e.g., data acquisition quality, cloud/snow presence, algorithm used for data production, etc. ) extracted from the aggregated bit-field QA layers;</li>
@@ -193,7 +193,7 @@
 <span class="co"># install the development version of devtools:</span>
 <span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">"devtools"</span>))
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"hadley/devtools"</span>)</code></pre></div>
-<p>2 - Now, install RGtk2 using Homebrew (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>). First, ensure you have cairo installed with “–with-x11”:</p>
+<p>2 - Now, install RGtk2 using Homebrew (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>). First, ensure you have cairo installed with “–with-x11”. Open a terminal and run:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">brew</span> uninstall cairo --ignore-dependencies
 <span class="ex">brew</span> install --with-x11 cairo </code></pre></div>
 <p>next, edit the configure options for GTK to require x11 rather than Quartz:</p>
@@ -292,57 +292,57 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <tbody>
 <tr class="odd">
 <td>NDVI</td>
-<td>Normalized Difference Vegetation Index <span class="citation">(Rouse et al. 1973)</span>
+<td>Normalized Difference Vegetation Index <span class="citation">[@Rouse1973]</span>
 </td>
 </tr>
 <tr class="even">
 <td>EVI</td>
-<td>Enhanced Vegetation Index <span class="citation">(A. Huete et al. 2002)</span>
+<td>Enhanced Vegetation Index <span class="citation">[@Huete2002]</span>
 </td>
 </tr>
 <tr class="odd">
 <td>SR</td>
-<td>Simple Ratio <span class="citation">(Tucker 1979)</span>
+<td>Simple Ratio <span class="citation">[@Tucker1979]</span>
 </td>
 </tr>
 <tr class="even">
 <td>NDFI</td>
-<td>Normalized Difference Flood Index <span class="citation">(Boschetti et al. 2014)</span>
+<td>Normalized Difference Flood Index <span class="citation">[@Boschetti2014]</span>
 </td>
 </tr>
 <tr class="odd">
 <td>NDII7 (NDWI)</td>
-<td>Normalized Difference Infrared Index - Band 7 <span class="citation">(Hunt and Rock 1989)</span>
+<td>Normalized Difference Infrared Index - Band 7 <span class="citation">[@HUNTJR1989]</span>
 </td>
 </tr>
 <tr class="even">
 <td>SAVI</td>
-<td>Soil Adjusted Vegetation Index <span class="citation">(A.R Huete 1988)</span>
+<td>Soil Adjusted Vegetation Index <span class="citation">[@Huete1988]</span>
 </td>
 </tr>
 <tr class="odd">
 <td>NDSI</td>
-<td>Normalized Difference Snow Index <span class="citation">(Hall et al. 2002)</span>
+<td>Normalized Difference Snow Index <span class="citation">[@Hall2002]</span>
 </td>
 </tr>
 <tr class="even">
 <td>NDII6</td>
-<td>Normalized Difference Infrared Index - band 6 <span class="citation">(Hunt and Rock 1989)</span>
+<td>Normalized Difference Infrared Index - band 6 <span class="citation">[@HUNTJR1989]</span>
 </td>
 </tr>
 <tr class="odd">
 <td>GNDVI</td>
-<td>Green Normalized Difference Vegetation Index <span class="citation">(Gitelson and Merzlyak 1998)</span>
+<td>Green Normalized Difference Vegetation Index <span class="citation">[@Gitelson1998]</span>
 </td>
 </tr>
 <tr class="even">
 <td>RGRI</td>
-<td>Red Green Ratio Index <span class="citation">(Gamon and Surfus 1999)</span>
+<td>Red Green Ratio Index <span class="citation">[@Gamon1999]</span>
 </td>
 </tr>
 <tr class="odd">
 <td>GRVI</td>
-<td>Green-Red ratio Vegetation Index <span class="citation">(Tucker 1979)</span>
+<td>Green-Red ratio Vegetation Index <span class="citation">[@Tucker1979]</span>
 </td>
 </tr>
 </tbody>
@@ -474,8 +474,7 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
 <span class="co"># define the output extent (A separate output folder is created for each input spatial file).</span>
 
 <span class="cf">for</span> (single_shape <span class="cf">in</span> extent_list) {
-  <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, 
-          <span class="dt">spatial_file_path =</span> single_shape )
+  <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, <span class="dt">spatial_file_path =</span> single_shape )
 }</code></pre></div>
 </div>
 </div>
@@ -575,7 +574,7 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
 <p>Any single-date image can be accessed by simply opening it with a <code>raster</code> command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
 modistsp_file &lt;-<span class="st"> "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"</span>
-my_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
+my_raster     &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
 <p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
 indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))</code></pre></div>
@@ -692,45 +691,6 @@ indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span 
 </div>
 </div>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references">
-<div id="ref-Boschetti2014">
-<p>Boschetti, M., F. Nutini, G. Manfron, P. A. Brivio, and A. Nelson. 2014. “Comparative analysis of normalised difference spectral indices derived from MODIS for detecting surface water in flooded rice cropping systems.” <em>PLoS ONE</em> 9 (2). doi:<a href="https://doi.org/10.1371/journal.pone.0088741">10.1371/journal.pone.0088741</a>.</p>
-</div>
-<div id="ref-Gamon1999">
-<p>Gamon, J.A., and J.S. Surfus. 1999. “Assessing leaf pigment content and activity with a reflectometer.” <em>New Phytologis</em> 143 (1): 105–17.</p>
-</div>
-<div id="ref-Gitelson1998">
-<p>Gitelson, A.A., and M.N. Merzlyak. 1998. “Remote sensing of chlorophyll concentration in higher plant leaves.” <em>Advances in Space Research</em> 22 (5): 689–92. doi:<a href="https://doi.org/10.1016/S0273-1177(97)01133-2">10.1016/S0273-1177(97)01133-2</a>.</p>
-</div>
-<div id="ref-Hall2002">
-<p>Hall, Dorothy K, George A Riggs, Vincent V Salomonson, Nicolo E DiGirolamo, and Klaus J Bayr. 2002. “MODIS snow-cover products.” <em>Remote Sensing of Environment</em> 83 (1-2): 181–94. doi:<a href="https://doi.org/10.1016/S0034-4257(02)00095-0">10.1016/S0034-4257(02)00095-0</a>.</p>
-</div>
-<div id="ref-Hengl2010">
-<p>Hengl, T. 2010. “Download and resampling of MODIS images.” <a href="http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images" class="uri">http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images</a>.</p>
-</div>
-<div id="ref-Huete2002">
-<p>Huete, A., K. Didan, T. Miura, E.P. Rodriguez, X. Gao, and L.G. Ferreira. 2002. “Overview of the radiometric and biophysical performance of the MODIS vegetation indices.” <em>Remote Sensing of Environment</em> 83 (1-2): 195–213. doi:<a href="https://doi.org/10.1016/S0034-4257(02)00096-2">10.1016/S0034-4257(02)00096-2</a>.</p>
-</div>
-<div id="ref-Huete1988">
-<p>Huete, A.R. 1988. “A soil-adjusted vegetation index (SAVI).” <em>Remote Sensing of Environment</em> 25 (3): 295–309. doi:<a href="https://doi.org/10.1016/0034-4257(88)90106-X">10.1016/0034-4257(88)90106-X</a>.</p>
-</div>
-<div id="ref-HUNTJR1989">
-<p>Hunt, J.R., and B. Rock. 1989. “Detection of changes in leaf water content using Near- and Middle-Infrared reflectances.” <em>Remote Sensing of Environment</em> 30 (1): 43–54. doi:<a href="https://doi.org/10.1016/0034-4257(89)90046-1">10.1016/0034-4257(89)90046-1</a>.</p>
-</div>
-<div id="ref-Naimi2014">
-<p>Naimi, B. 2014. “ModisDownload: an R function to download, mosaic, and reproject the MODIS images.” <a href="http://r-gis.net/?q=ModisDownload" class="uri">http://r-gis.net/?q=ModisDownload</a>.</p>
-</div>
-<div id="ref-Rouse1973">
-<p>Rouse, J.W.J., R.H. Haas, J.A. Schell, and D.W. Deering. 1973. “Monitoring vegetation systems in the Great Plains with ERTS. Third ERTS Symposium, NASA SP-351. U.S. Gov. Printing office.” Edited by S.C. Freden, E.P. Mercanti, and M.A. Becker. NASA.</p>
-</div>
-<div id="ref-Tucker1979">
-<p>Tucker, C.J. 1979. “Red and photographic infrared linear combinations for monitoring vegetation.” <em>Remote Sensing of Environment</em> 8 (2): 127–50. doi:<a href="https://doi.org/10.1016/0034-4257(79)90013-0">10.1016/0034-4257(79)90013-0</a>.</p>
-</div>
-</div>
-</div>
 </div>
   </div>
 
@@ -785,7 +745,6 @@ indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span 
       <li><a href="#installing-gdal-1-11-1">Installing GDAL &gt;= 1.11.1</a></li>
       </ul>
 </li>
-      <li><a href="#references">References</a></li>
       </ul>
 </div>
       </div>
