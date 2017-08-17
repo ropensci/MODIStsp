@@ -41,7 +41,7 @@ MODIStsp_process_indexes <- function(out_filename, formula, bandnames,
              showWarnings = FALSE, recursive = TRUE)
   
   #   _________________________________________________________________________
-  #   Create "fun_strin" and "stack_string". These are parsable character  ####
+  #   Create "fun_string" and "stack_string". These are parsable character  ####
   #   strings that can be parsed and evaluated to create on the fly the 
   #   function to be applied to compute the index and a temporary rasterstack
   #   containing required data. 
@@ -100,14 +100,14 @@ MODIStsp_process_indexes <- function(out_filename, formula, bandnames,
   #   correct "order" is guaranteed by the fact that they are added in the 
   #   same order in "fun_string" and in "stack_string" in the cycle above !
 
-  raster::overlay(x         = eval(parse(text = stack_string)),
+  raster::overlay(eval(parse(text = stack_string)),
                   fun       = eval(parse(text = fun_string)), 
                   filename  = out_filename,
                   format    = out_format,
-                  datatype  = dt, 
+                  datatype  = dt,
                   options   = ifelse(out_format == "GTiff",
                                      paste0("COMPRESS=", compress),
-                                     ""),                       
+                                     ""),
                   NAflag    = as.numeric(indexes_nodata_out),
                   overwrite = TRUE)
   
