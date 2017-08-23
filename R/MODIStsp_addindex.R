@@ -91,17 +91,16 @@ MODIStsp_addindex <- function(
   # Initialization and retrieval of parameters ----
   if (gui) {
     if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
-      message(glue::glue("Library 'gWidgetsRgtk2' is not installed but it is ",
-                         "required to run MODIStsp in interactive mode! \n\n",
-                         "Do you want to install it now?"),
+      message("Library 'gWidgetsRgtk2' is required to run MODIStsp_addindex ",
+              "in interactive mode but it is not installed! \n\n",
+              "Do you want to install it now?",
               type = " y / n")
       inst_gw <- readline()
       if (inst_gw == "y") {
         pacman::p_load("gWidgetsRGtk2")
       } else {
-        stop(glue::glue("MODIStsp can not work in Interactive mode without ",
-                        "gWidgetsRGtk2 ! \n\n",
-                        "Aborting !"))
+        stop("MODIStsp can not work in Interactive mode without gWidgetsRGtk2!",
+             "\n Aborting!")
       }
 
     }
@@ -150,10 +149,8 @@ MODIStsp_addindex <- function(
 
     catch_err <- 0 # error 0: no errors
 
-    # Check that both the name, the fullname and the formula fields are not null
-    if (new_indexbandname == "" |
-        new_indexfullname == "" |
-        new_indexformula == "") {
+    # Check that the name, the fullname and the formula fields are not null
+    if (any(c(new_indexbandname, new_indexfullname, new_indexformula) == "")) {
       catch_err <- 3 # error 3: blank parameters
     }
 
@@ -166,7 +163,7 @@ MODIStsp_addindex <- function(
                    stringr::str_detect(new_indexformula, "b6_SWIR"),
                    stringr::str_detect(new_indexformula, "b7_SWIR"))
 
-    # Create dummy varaibles named as the required bands, assign random values
+    # Create dummy variables named as the required bands, assign random values
     # to them, and then verify if formula is computable by evaluate/parse and
     # check for errors
 
@@ -194,26 +191,16 @@ MODIStsp_addindex <- function(
       # cycle on available product versions
       for (vers in names(prod_opt_list[[prod]])) {
         current_prodopts    <- as.list(prod_opt_list[[prod]][[vers]])
-        current_custindexes <- as.list(
-          general_opts$custom_indexes[[prod]][[vers]]
-        )
-        all_indexes_bandnames <- c(
-          all_indexes_bandnames,
-          current_prodopts$indexes_bandnames
-        )
-        all_indexes_fullnames <- c(
-          all_indexes_fullnames,
-          current_prodopts$indexes_fullnames
-        )
+        current_custindexes <- as.list(general_opts$custom_indexes[[prod]][[vers]]) #nolint
+        all_indexes_bandnames <- c(all_indexes_bandnames,
+                                   current_prodopts$indexes_bandnames)
+        all_indexes_fullnames <- c(all_indexes_fullnames,
+                                   current_prodopts$indexes_fullnames)
         if (!is.null(current_custindexes)) {
-          all_indexes_bandnames <- c(
-            all_indexes_bandnames,
-            current_custindexes$indexes_bandnames
-          )
-          all_indexes_fullnames <- c(
-            all_indexes_fullnames,
-            current_custindexes$indexes_fullnames
-          )
+          all_indexes_bandnames <- c(all_indexes_bandnames,
+                                     current_custindexes$indexes_bandnames)
+          all_indexes_fullnames <- c(all_indexes_fullnames,
+                                     current_custindexes$indexes_fullnames)
         }
       }
     }
@@ -221,9 +208,8 @@ MODIStsp_addindex <- function(
     all_indexes_fullnames <- unique(all_indexes_fullnames)
 
     # verify that the index name and fullname is not already present
-    if (catch_err == 0 &
-       (new_indexbandname %in% all_indexes_bandnames |
-        new_indexfullname %in% all_indexes_fullnames)) {
+    if (catch_err == 0 & (new_indexbandname %in% all_indexes_bandnames |
+                          new_indexfullname %in% all_indexes_fullnames)) {
       catch_err <- 2 # error 2: index name or fullname already present
     }
     # verify that the index is computable for the selected product
@@ -242,7 +228,7 @@ MODIStsp_addindex <- function(
 
   } # end of check_formula_errors()
 
-  # Function to add the formula in previous file ----
+  # Function to add the formula in the previous file ----
   # (it is called if no errors are detected)
   save_formula <- function(refbands_names,
                            req_bands,
@@ -262,18 +248,17 @@ MODIStsp_addindex <- function(
         general_opts$custom_indexes[[prod]] <- list()
 
         for (vers in names(prod_opt_list[[prod]])) {
-          general_opts$custom_indexes[[prod]][[vers]] <- list()
-          general_opts$custom_indexes[[prod]][[vers]]$indexes_bandnames <-
-            general_opts$custom_indexes[[prod]][[vers]]$indexes_fullnames <-
-            general_opts$custom_indexes[[prod]][[vers]]$indexes_formulas <-
-            general_opts$custom_indexes[[prod]][[vers]]$indexes_nodata_out <-
-            character(0)
+          general_opts$custom_indexes[[prod]][[vers]] <- list(
+            "indexes_bandnames"  = character(0),
+            "indexes_fullnames"  = character(0),
+            "indexes_formulas"   = character(0),
+            "indexes_nodata_out" = character(0)
+          )
         }
       }
     }
     # cycle on available products to add the new index to all products
     # allowing its computation
-
 
     for (prod in names(prod_opt_list)) {
       # cycle on available product versions
@@ -281,9 +266,7 @@ MODIStsp_addindex <- function(
         # check if bands required for index computation are available for the
         # product
         check <- 0
-        current_custindexes <- as.list(
-          general_opts$custom_indexes[[prod]][[vers]]
-        )
+        current_custindexes <- as.list(general_opts$custom_indexes[[prod]][[vers]]) #nolint
         for (reqband in refbands_names[req_bands]) {
           if (reqband %in% prod_opt_list[[prod]][[vers]]$bandnames) {
             check <- check + 1
@@ -298,22 +281,14 @@ MODIStsp_addindex <- function(
 
         n_req_bands <- sum(req_bands)
         if (n_req_bands == check) {
-          tmp_indexes_bandnames <- c(
-            current_custindexes$indexes_bandnames,
-            new_indexbandname
-          )
-          tmp_indexes_fullnames <- c(
-            current_custindexes$indexes_fullnames,
-            new_indexfullname
-          )
-          tmp_indexes_formulas <- c(
-            current_custindexes$indexes_formulas,
-            new_indexformula
-          )
-          tmp_indexes_nodata_out <- c(
-            current_custindexes$indexes_nodata_out,
-            new_indexnodata_out
-          )
+          tmp_indexes_bandnames <- c(current_custindexes$indexes_bandnames,
+                                     new_indexbandname)
+          tmp_indexes_fullnames <- c(current_custindexes$indexes_fullnames,
+                                     new_indexfullname)
+          tmp_indexes_formulas <- c(current_custindexes$indexes_formulas,
+                                    new_indexformula)
+          tmp_indexes_nodata_out <- c(current_custindexes$indexes_nodata_out,
+                                      new_indexnodata_out)
 
           general_opts$custom_indexes[[prod]][[vers]] <- list(
             "indexes_bandnames"  = tmp_indexes_bandnames,
@@ -350,12 +325,10 @@ MODIStsp_addindex <- function(
       }
     )
 
-    main_group <- ggroup(container  = main_win,
-                         horizontal = FALSE,
-                         expand     = TRUE)
+    main_group <- ggroup(container  = main_win, horizontal = FALSE,
+                         expand = TRUE)
 
-    indexbandname_group <- ggroup(container  = main_group,
-                                  horizontal = TRUE,
+    indexbandname_group <- ggroup(container  = main_group, horizontal = TRUE,
                                   expand     = TRUE)
     indexbandname_label <- glabel(text = "Spectral Index Acronym (e.g., SR)",
                                   markup    = TRUE,
@@ -364,12 +337,11 @@ MODIStsp_addindex <- function(
     font(indexbandname_label) <- list(family = "sans", size = 10,
                                       weight = "bold")
 
-    sel_indexbandname <- gedit(
-      text       = new_indexbandname,
-      label      = "Please Insert a valid Proj4 string        ",
-      container  = indexbandname_group,
-      size       = 800,
-      horizontal = TRUE
+    sel_indexbandname <- gedit(text       = new_indexbandname,
+                               label      = "Please Insert a valid Proj4 string        ", #nolint
+                               container  = indexbandname_group,
+                               size       = 800,
+                               horizontal = TRUE
     )
 
     indexbandfullname_group <- ggroup(container  = main_group,
@@ -440,9 +412,10 @@ MODIStsp_addindex <- function(
             new_indexformula    = new_indexformula,
             new_indexnodata_out = new_indexnodata_out,
             general_opts        = if (exists("general_opts")) {
-                                    general_opts
-                                  } else {
-                                    NULL},
+              general_opts
+            } else {
+              NULL
+            },
             prod_opt_list       = prod_opt_list,
             previous_jsfile     = previous_jsfile
           )
@@ -459,11 +432,11 @@ MODIStsp_addindex <- function(
           ),
           "1" = svalue(notes_lab) <- glue::glue(
             "ERROR ! The Formula of the new Index is not computable. ",
-             "Please check it ! \n\n Valid Band Names are: \n",
-                   paste(avail_refbands, collapse = ", "),
-                   "."),
+            "Please check it !\n Valid Band Names are: \n",
+            paste(avail_refbands, collapse = ", "),
+            "."),
           "2" = svalue(notes_lab) <- glue::glue(
-            "ERROR ! Index full or short name is already present.\n\n",
+            "ERROR ! Index full or short name is already present.\n",
             "Please specify different ones."
           ),
           "3" = svalue(notes_lab) <- glue::glue(
@@ -498,14 +471,14 @@ MODIStsp_addindex <- function(
     notes_lab <- glabel(
       text       = glue::glue(
         "ERROR ! The Formula of the new Index is not computable. Please ",
-        "check it !\n\n ",
+        "check it !\n ",
         "Valid Band Names are: ", paste(avail_refbands, collapse = ", "),
         "."
       ),
       container  = notes_group,
       horizontal = TRUE, editable = FALSE
     )
-    size(notes_lab) <- c(600, 45)
+    size(notes_lab) <- c(600, 50)
     font(notes_lab) <- list(family = "sans",  size = 9, weight = "bold")
     addSpring(but_group)
 
@@ -515,8 +488,8 @@ MODIStsp_addindex <- function(
       handler   = function(h, ...) {
         dispose(main_win)
         gmessage(
-         message = "ReOpen the 'Select Layers' window to use the new index(es)",
-         title = "Done !"
+          message = "ReOpen the 'Select Layers' window to use the new index",
+          title = "Done!"
         )
         return(TRUE)
       }
@@ -525,7 +498,7 @@ MODIStsp_addindex <- function(
     visible(main_win, set = TRUE)
 
     # end of gui actions ----
-    } else {
+  } else {
 
     #   ________________________________________________________________________
     #   Actions on non-interactive execution                                ####
@@ -550,30 +523,26 @@ MODIStsp_addindex <- function(
                    new_indexformula,
                    new_indexnodata_out,
                    general_opts = if (exists("general_opts")) {
-                                    general_opts
-                                  } else {
-                                    NULL},
+                     general_opts
+                   } else {
+                     NULL
+                   },
                    prod_opt_list,
                    previous_jsfile)
       message(glue::glue(
         "The new Index was correctly added! \n\n It will be available from ",
         "the next execution of MODIStsp()."))
     } else if (catch_err == 1) {
-      stop(glue::glue(
-        "The formula of the new index is not computable for this product. ",
-        "Please check it. \n\n",
-        "(Valid band names are: ",
-        paste(avail_refbands, collapse = ", "),
-        "."
-      ))
+      stop("The formula of the new index is not computable for this product. ",
+           "Please check it.\n",
+           "(Valid band names are: ", paste(avail_refbands, collapse = ", "),
+           ".")
     } else if (catch_err == 2) {
-      stop(glue::glue(
-        "The index acronym and/or full name are already present; \n",
-        "Please specify different ones."))
+      stop("The index acronym and/or full name are already present;\n",
+           "Please specify different ones.")
     } else if (catch_err == 3) {
-      stop(glue::glue(
-        "Some parameters are still blank; please provide valid values for \n",
-        "the index name, the index fullname and the formula."))
+      stop("Some parameters are still blank; please provide valid values for\n",
+           "the index name, the index fullname and the formula.")
     }
 
   } # end of non-gui actions
