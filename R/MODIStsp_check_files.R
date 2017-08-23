@@ -1,22 +1,26 @@
-#' MODIStsp_check_files
+#' @title MODIStsp_check_files
 #' @description Accessory function used to see if all expected out files for the
-#'   selected date are already present.
-#' @details if all expected out files for the selected date are already present,
-#'   check_files is set to TRUE, and date is skipped in MODIStsp_process
-#' @param out_prod_folder string output folder name
-#' @param file_prefix string file prefix of the product (e.g., MOD13Q1)
-#' @param bandnames string array Bandnames of the MODIS product
-#' @param bandsel_orig_choice 0/1 array Indicates which original MODIS layers were s
-#'   elected to be processed
-#' @param yy string year
-#' @param DOY string doy
-#' @param out_format string GTiff or ENVI
-#' @param indexes_bandnames string array Name of available spectral indexes for the product
-#' @param indexes_bandsel  0/1 array Indicates which spectral indexes were selected to
-#'   be processed
-#' @param quality_bandnames string array Name of available Quality Indicators for the product
-#' @param quality_bandsel 0/1 array Indicates which Quality Indicators were selected to
-#'   be processed
+#'   selected date are already present in th output folder. If all expected out
+#'   files are already present, check_files is set to TRUE, and the date is
+#'   skipped in MODIStsp_process.
+#' @param out_prod_folder `character` MODIStsp output folder
+#' @param file_prefix `character` File prefix of the processed product
+#'   (e.g., MOD13Q1)
+#' @param yy `character` year
+#' @param DOY `character` doy
+#' @param bandnames `character array` Bandnames of the MODIS product
+#' @param bandsel_orig_choice `numeric 0/1 array` Indicates which original MODIS
+#'   layers were selected for processing (doesn't contain names of bands needed
+#'   to compute SIs but not selected by the user!)
+#' @param indexes_bandnames `character array` Names of available spectral
+#'   indexes (standard + custom) available for the currently processed product
+#' @param indexes_bandsel `numeric 0/1 array` Indicates which spectral indexes
+#'   were selected for processing
+#' @param quality_bandnames `character array` Name of available Quality
+#'   Indicators for the currently processed product
+#' @param quality_bandsel `numeric 0/1 array` Indicates which Quality Indicators
+#'   were selected
+#' @param out_format `character` GTiff or ENVI
 #' @return check - logical = 1 if all expected output files are already existing
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -24,80 +28,73 @@
 #' @note License: GPL 3.0
 
 MODIStsp_check_files <- function(out_prod_folder,
-                                 file_prefix, bandnames,
-                                 bandsel_orig_choice,
+                                 file_prefix,
                                  yy,
                                  DOY,
-                                 out_format,
+                                 bandnames,
+                                 bandsel_orig_choice,
                                  indexes_bandnames,
                                  indexes_bandsel,
                                  quality_bandnames,
-                                 quality_bandsel) {
+                                 quality_bandsel,
+                                 out_format) {
 
-  check <- T   # Initialize check to T --> changed if even only one file missing
+  # Initialize check to TRUE --> changed if even only one file missing
+  check <- TRUE
 
-  # check existence of all files related to Original HDF layers ----
+  #  __________________________________________________________________________
+  #  check existence of all files related to Original HDF layers           ####
+
   # cycle on selected bands
   for (band in which(bandsel_orig_choice == 1)) {
-    # Create name for the HDF mosaic
-    outfile <- paste0(out_prod_folder, "/", bandnames[band], "_", yy, "_", DOY, ".hdf")
-    # Create name for the TIFF reprojected  mosaic
-    outrep_file <- file.path(out_prod_folder, bandnames[band],
-                             paste0(file_prefix, "_",
-                                    sub("[.][^.]*$", "",
-                                        basename(outfile), perl = TRUE)))
-    if (out_format == "GTiff") {
-      outder_file <- paste0(outrep_file, ".tif")
-      }
-    if (out_format == "ENVI") {
-      outder_file <- paste0(outrep_file, ".dat")
-      }
-    if (file.exists(outder_file) == FALSE) {
+    # Create name for the TIFF/ENVI reprojected file to be checked
+    outcheck_file <- file.path(
+      out_prod_folder, bandnames[band],
+      paste0(file_prefix, "_",
+             bandnames[band], "_", yy, "_", DOY,
+             ifelse(out_format == "GTiff", ".tif", ".dat"))
+    )
+    # check
+    if (file.exists(outcheck_file) == FALSE) {
       check <- F
-      }
+    }
   }
 
-  # check existence of all files related to spectral indexes ----
+  #  __________________________________________________________________________
+  #  check existence of all files related to spectral indexes              ####
+
   # cycle on selected indexes
   for (band in which(indexes_bandsel == 1)) {
-    # Create name for the HDF mosaic
-    outfile <- paste0(out_prod_folder, "/", indexes_bandnames[band], "_", yy, "_", DOY, ".hdf")
-    # Create name for the TIFF reprojected  mosaic
-    outder_file <- file.path(out_prod_folder, indexes_bandnames[band],
-                             paste0(file_prefix, "_",
-                                    sub("[.][^.]*$", "",
-                                        basename(outfile), perl = TRUE)))
-    if (out_format == "GTiff") {
-      outder_file <- paste0(outder_file, ".tif")
-      }
-    if (out_format == "ENVI") {
-      outder_file <- paste0(outder_file, ".dat")
-      }
-    if (file.exists(outder_file) == FALSE) {
+    # Create name for the TIFF/ENVI reprojected file to be checked
+    outcheck_file <- file.path(
+      out_prod_folder, indexes_bandnames[band],
+      paste0(file_prefix, "_",
+             indexes_bandnames[band], "_", yy, "_", DOY,
+             ifelse(out_format == "GTiff", ".tif", ".dat"))
+    )
+    # check
+    if (file.exists(outcheck_file) == FALSE) {
       check <- FALSE
-      }
+    }
   }
-
-  # check existence of all files related to quality indicators ----
-  # # cycle on selected quality
+  #  ___________________________________________________________________________
+  # check existence of all files related to quality indicators              ####
+  # cycle on selected quality indexes
   for (band in which(quality_bandsel == 1)) {
-    # Create name for the HDF mosaic
-    outfile <- paste0(out_prod_folder, "/", quality_bandnames[band], "_", yy, "_", DOY, ".hdf")
-    # Create name for the TIFF reprojected  mosaic
-    outder_file <- file.path(out_prod_folder, quality_bandnames[band],
-                             paste0(file_prefix, "_",
-                                    sub("[.][^.]*$", "",
-                                        basename(outfile), perl = TRUE)))
-    if (out_format == "GTiff") {
-      outder_file <- paste0(outder_file, ".tif")
-      }
-    if (out_format == "ENVI") {
-      outder_file <- paste0(outder_file, ".dat")
-      }
-    if (file.exists(outder_file) == FALSE) {
+    # Create name for the TIFF/ENVI reprojected file to be checked
+    outcheck_file <- file.path(
+      out_prod_folder, quality_bandnames[band],
+      paste0(file_prefix, "_",
+             quality_bandnames[band], "_", yy, "_", DOY,
+             ifelse(out_format == "GTiff", ".tif", ".dat"))
+    )
+    # check
+    if (file.exists(outcheck_file) == FALSE) {
       check <- FALSE
-      }
+    }
   }
-
-  return(check)  # return FALSE if at least one file missing
+  # return FALSE if at least one file was missing. Means that we cannot skip
+  # the date completely, but have at least to look for missing layers and
+  # process them
+  return(check)
 }

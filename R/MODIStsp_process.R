@@ -356,11 +356,17 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
           # check if all foreseen output rasters already exist. If so, skip the date. Otherwise start proecssing
           check_files <- FALSE
-          check_files <- MODIStsp_check_files(out_prod_folder, file_prefix,
-                                              bandnames, bandsel_orig_choice, yy,
-                                              DOY, out_format, indexes_bandnames,
-                                              indexes_bandsel, quality_bandnames,
-                                              quality_bandsel)
+          check_files <- MODIStsp_check_files(out_prod_folder,
+                                              file_prefix,
+                                              yy,
+                                              DOY,
+                                              bandnames,
+                                              bandsel_orig_choice,
+                                              indexes_bandnames,
+                                              indexes_bandsel,
+                                              quality_bandnames,
+                                              quality_bandsel, 
+                                              out_format)
           # If not all output files are already present or reprocess = "Yes", start downloading hdfs
           if (check_files == FALSE | reprocess == "Yes") {
 
@@ -767,8 +773,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                  multi     = TRUE,
                                  wo        = c("INIT_DEST = NO_DATA",
                                              paste0("NUM_THREADS=", ncores)),
-                                 overwrite  = TRUE, verbose = T
-                        )
+                                 overwrite  = TRUE)
                       } else {
                       gdalbuildvrt(outfile_vrt_or,
                                    outfile_vrt,

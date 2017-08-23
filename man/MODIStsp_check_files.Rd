@@ -4,46 +4,48 @@
 \alias{MODIStsp_check_files}
 \title{MODIStsp_check_files}
 \usage{
-MODIStsp_check_files(out_prod_folder, file_prefix, bandnames,
-  bandsel_orig_choice, yy, DOY, out_format, indexes_bandnames, indexes_bandsel,
-  quality_bandnames, quality_bandsel)
+MODIStsp_check_files(out_prod_folder, file_prefix, yy, DOY, bandnames,
+  bandsel_orig_choice, indexes_bandnames, indexes_bandsel, quality_bandnames,
+  quality_bandsel, out_format)
 }
 \arguments{
-\item{out_prod_folder}{string output folder name}
+\item{out_prod_folder}{\code{character} MODIStsp output folder}
 
-\item{file_prefix}{string file prefix of the product (e.g., MOD13Q1)}
+\item{file_prefix}{\code{character} File prefix of the processed product
+(e.g., MOD13Q1)}
 
-\item{bandnames}{string array Bandnames of the MODIS product}
+\item{yy}{\code{character} year}
 
-\item{bandsel_orig_choice}{0/1 array Indicates which original MODIS layers were s
-elected to be processed}
+\item{DOY}{\code{character} doy}
 
-\item{yy}{string year}
+\item{bandnames}{\code{character array} Bandnames of the MODIS product}
 
-\item{DOY}{string doy}
+\item{bandsel_orig_choice}{\code{numeric 0/1 array} Indicates which original MODIS
+layers were selected for processing (doesn't contain names of bands needed
+to compute SIs but not selected by the user!)}
 
-\item{out_format}{string GTiff or ENVI}
+\item{indexes_bandnames}{\code{character array} Names of available spectral
+indexes (standard + custom) available for the currently processed product}
 
-\item{indexes_bandnames}{string array Name of available spectral indexes for the product}
+\item{indexes_bandsel}{\code{numeric 0/1 array} Indicates which spectral indexes
+were selected for processing}
 
-\item{indexes_bandsel}{0/1 array Indicates which spectral indexes were selected to
-be processed}
+\item{quality_bandnames}{\code{character array} Name of available Quality
+Indicators for the currently processed product}
 
-\item{quality_bandnames}{string array Name of available Quality Indicators for the product}
+\item{quality_bandsel}{\code{numeric 0/1 array} Indicates which Quality Indicators
+were selected}
 
-\item{quality_bandsel}{0/1 array Indicates which Quality Indicators were selected to
-be processed}
+\item{out_format}{\code{character} GTiff or ENVI}
 }
 \value{
 check - logical = 1 if all expected output files are already existing
 }
 \description{
 Accessory function used to see if all expected out files for the
-selected date are already present.
-}
-\details{
-if all expected out files for the selected date are already present,
-check_files is set to TRUE, and date is skipped in MODIStsp_process
+selected date are already present in th output folder. If all expected out
+files are already present, check_files is set to TRUE, and the date is
+skipped in MODIStsp_process.
 }
 \note{
 License: GPL 3.0
