@@ -75,18 +75,16 @@
 #'
 #'
 
-MODIStsp_addindex <- function(
-  option_jsfile       = NULL,
-  prodopts_file       = NULL,
-  selprod             = NULL,
-  selvers             = NULL,
-  gui                 = TRUE,
-  new_indexbandname   = "",
-  new_indexfullname   = "",
-  new_indexformula    = "",
-  new_indexnodata_out = "32767",
-  MODIStsp_dir        = system.file(package = "MODIStsp")
-) {
+MODIStsp_addindex <- function(option_jsfile       = NULL,
+                              prodopts_file       = NULL,
+                              selprod             = NULL,
+                              selvers             = NULL,
+                              gui                 = TRUE,
+                              new_indexbandname   = "",
+                              new_indexfullname   = "",
+                              new_indexformula    = "",
+                              new_indexnodata_out = "32767",
+                              MODIStsp_dir = system.file(package = "MODIStsp")) { #nolint
 
   # Initialization and retrieval of parameters ----
   if (gui) {
@@ -112,10 +110,10 @@ MODIStsp_addindex <- function(
   previous_jsfile <- ifelse(is.null(option_jsfile),
                             file.path(previous_dir, "MODIStsp_Previous.json"),
                             option_jsfile)
-  prodopts_file <- ifelse(is.null(prodopts_file),
-                          file.path(previous_dir, "MODIStsp_ProdOpts.RData"),
-                          prodopts_file)
-  general_opts  <- RJSONIO::fromJSON(previous_jsfile)
+  prodopts_file   <- ifelse(is.null(prodopts_file),
+                            file.path(previous_dir, "MODIStsp_ProdOpts.RData"),
+                            prodopts_file)
+  general_opts    <- RJSONIO::fromJSON(previous_jsfile)
 
   # Restore MODIS products if existing, otherwise retrieve  from xml file ----
   prod_opt_list <- get(load(prodopts_file))
@@ -137,181 +135,6 @@ MODIStsp_addindex <- function(
     match_refbands <- avail_prodbands[match(refbands_names, avail_prodbands)]
     avail_refbands <- match_refbands[!is.na(match_refbands)]
   }
-  # Function to check for errors in formula ----
-  # (it is called from GUI when "Add" button is chosen, or when function starts
-  # in non-interactive mode
-  check_formula_errors <- function(new_indexbandname,
-                                   new_indexfullname,
-                                   new_indexformula,
-                                   n_products,
-                                   prod_opt_list,
-                                   refbands_names) {
-
-    catch_err <- 0 # error 0: no errors
-
-    # Check that the name, the fullname and the formula fields are not null
-    if (any(c(new_indexbandname, new_indexfullname, new_indexformula) == "")) {
-      catch_err <- 3 # error 3: blank parameters
-    }
-
-    # Look for valid band names in index formula
-    req_bands <- c(stringr::str_detect(new_indexformula, "b1_Red"),
-                   stringr::str_detect(new_indexformula, "b2_NIR"),
-                   stringr::str_detect(new_indexformula, "b3_Blue"),
-                   stringr::str_detect(new_indexformula, "b4_Green"),
-                   stringr::str_detect(new_indexformula, "b5_SWIR"),
-                   stringr::str_detect(new_indexformula, "b6_SWIR"),
-                   stringr::str_detect(new_indexformula, "b7_SWIR"))
-
-    # Create dummy variables named as the required bands, assign random values
-    # to them, and then verify if formula is computable by evaluate/parse and
-    # check for errors
-
-    if (req_bands[1] == TRUE) b1_Red   <- 5
-    if (req_bands[2] == TRUE) b2_NIR   <- 6
-    if (req_bands[3] == TRUE) b3_Blue  <- 7
-    if (req_bands[4] == TRUE) b4_Green <- 8
-    if (req_bands[5] == TRUE) b5_SWIR  <- 9
-    if (req_bands[6] == TRUE) b6_SWIR  <- 15
-    if (req_bands[7] == TRUE) b7_SWIR  <- 25
-
-    if (max(req_bands == 1)) {
-      try_parse <- try(eval(parse(text = new_indexformula)), silent = TRUE)
-      if (class(try_parse) == "try-error") {
-        catch_err <- 1
-      }
-    } else {
-      catch_err <- 1
-    } # error 1: error in the formula
-
-    ## generate the list of all the index names
-    all_indexes_bandnames <- all_indexes_fullnames <- NA
-    # cycle on available products
-    for (prod in names(prod_opt_list)) {
-      # cycle on available product versions
-      for (vers in names(prod_opt_list[[prod]])) {
-        current_prodopts    <- as.list(prod_opt_list[[prod]][[vers]])
-        current_custindexes <- as.list(general_opts$custom_indexes[[prod]][[vers]]) #nolint
-        all_indexes_bandnames <- c(all_indexes_bandnames,
-                                   current_prodopts$indexes_bandnames)
-        all_indexes_fullnames <- c(all_indexes_fullnames,
-                                   current_prodopts$indexes_fullnames)
-        if (!is.null(current_custindexes)) {
-          all_indexes_bandnames <- c(all_indexes_bandnames,
-                                     current_custindexes$indexes_bandnames)
-          all_indexes_fullnames <- c(all_indexes_fullnames,
-                                     current_custindexes$indexes_fullnames)
-        }
-      }
-    }
-    all_indexes_bandnames <- unique(all_indexes_bandnames)
-    all_indexes_fullnames <- unique(all_indexes_fullnames)
-
-    # verify that the index name and fullname is not already present
-    if (catch_err == 0 & (new_indexbandname %in% all_indexes_bandnames |
-                          new_indexfullname %in% all_indexes_fullnames)) {
-      catch_err <- 2 # error 2: index name or fullname already present
-    }
-    # verify that the index is computable for the selected product
-    if (catch_err == 0) {
-      # see if any of the bands required for the new index are NOT available for
-      # the product
-      if (is.na(max(match(refbands_names[req_bands], avail_refbands)))) {
-        # error 1 again: index is ok, but not computable for the currently
-        # selected product so we don't save it !
-        catch_err <- 1
-      }
-    }
-
-    attr(catch_err, "req_bands") <- req_bands
-    return(catch_err)
-
-  } # end of check_formula_errors()
-
-  # Function to add the formula in the previous file ----
-  # (it is called if no errors are detected)
-  save_formula <- function(refbands_names,
-                           req_bands,
-                           new_indexbandname,
-                           new_indexfullname,
-                           new_indexformula,
-                           new_indexnodata_out,
-                           general_opts,
-                           prod_opt_list,
-                           previous_jsfile) {
-
-    # initialise list of custom indexes, if it does not exist yet
-    if (is.null(general_opts$custom_indexes)) {
-      general_opts$custom_indexes <- list()
-
-      for (prod in names(prod_opt_list)) {
-        general_opts$custom_indexes[[prod]] <- list()
-
-        for (vers in names(prod_opt_list[[prod]])) {
-          general_opts$custom_indexes[[prod]][[vers]] <- list(
-            "indexes_bandnames"  = character(0),
-            "indexes_fullnames"  = character(0),
-            "indexes_formulas"   = character(0),
-            "indexes_nodata_out" = character(0)
-          )
-        }
-      }
-    }
-    # cycle on available products to add the new index to all products
-    # allowing its computation
-
-    for (prod in names(prod_opt_list)) {
-      # cycle on available product versions
-      for (vers in names(prod_opt_list[[prod]])) {
-        # check if bands required for index computation are available for the
-        # product
-        check <- 0
-        current_custindexes <- as.list(general_opts$custom_indexes[[prod]][[vers]]) #nolint
-        for (reqband in refbands_names[req_bands]) {
-          if (reqband %in% prod_opt_list[[prod]][[vers]]$bandnames) {
-            check <- check + 1
-          }
-        } #End Cycle on reqband
-
-        # if all required bands are available in product, add the new index to
-        # the indexes list for the product in the previous_opts file.
-        # In this way, at next execution, the new index should be available.
-        # Moreover, loading and use of old RData options files won't be broken
-        # if an index is added later than their creation.
-
-        n_req_bands <- sum(req_bands)
-        if (n_req_bands == check) {
-          tmp_indexes_bandnames <- c(current_custindexes$indexes_bandnames,
-                                     new_indexbandname)
-          tmp_indexes_fullnames <- c(current_custindexes$indexes_fullnames,
-                                     new_indexfullname)
-          tmp_indexes_formulas <- c(current_custindexes$indexes_formulas,
-                                    new_indexformula)
-          tmp_indexes_nodata_out <- c(current_custindexes$indexes_nodata_out,
-                                      new_indexnodata_out)
-
-          general_opts$custom_indexes[[prod]][[vers]] <- list(
-            "indexes_bandnames"  = tmp_indexes_bandnames,
-            "indexes_fullnames"  = tmp_indexes_fullnames,
-            "indexes_formulas"   = tmp_indexes_formulas,
-            "indexes_nodata_out" = tmp_indexes_nodata_out
-          )
-          rm(tmp_indexes_bandnames,
-             tmp_indexes_fullnames,
-             tmp_indexes_formulas,
-             tmp_indexes_nodata_out)
-        }
-      }
-    }  #End Cycle on products
-
-    # Save the products list and the chars of the products (including
-    # custom indexes) in previous file.
-    write(RJSONIO::toJSON(general_opts), previous_jsfile)
-
-    return(general_opts)
-
-  } # end of save_formula()
-
 
   # GUI Initialization -----
   if (gui) {
@@ -393,35 +216,30 @@ MODIStsp_addindex <- function(
         # for products for which the formula is computable (i.e., they have the
         # required bands)
 
-        catch_err <- check_formula_errors(
-          new_indexbandname = new_indexbandname,
-          new_indexfullname = new_indexfullname,
-          new_indexformula  = new_indexformula,
-          n_products        = n_products,
-          prod_opt_list     = prod_opt_list,
-          refbands_names    = refbands_names
-        )
+        catch_err <- check_formula_errors(new_indexbandname,
+                                          new_indexfullname,
+                                          new_indexformula,
+                                          n_products,
+                                          prod_opt_list,
+                                          refbands_names,
+                                          general_opts)
 
         if (catch_err == 0) {
-
-          save_formula(
-            refbands_names      = refbands_names,
-            req_bands           = attr(catch_err, "req_bands"),
-            new_indexbandname   = new_indexbandname,
-            new_indexfullname   = new_indexfullname,
-            new_indexformula    = new_indexformula,
-            new_indexnodata_out = new_indexnodata_out,
-            general_opts        = if (exists("general_opts")) {
-              general_opts
-            } else {
-              NULL
-            },
-            prod_opt_list       = prod_opt_list,
-            previous_jsfile     = previous_jsfile
-          )
+          save_formula(refbands_names,
+                       req_bands = attr(catch_err, "req_bands"),
+                       new_indexbandname,
+                       new_indexfullname,
+                       new_indexformula,
+                       new_indexnodata_out,
+                       general_opts = if (exists("general_opts")) {
+                         general_opts
+                       } else {
+                         NULL
+                       },
+                       prod_opt_list,
+                       previous_jsfile)
         }
-        # Issue error warnings if something went wrong !!!!
-
+        # Issue error warnings in the GUI if something went wrong!
         switch(
           as.character(catch_err),
           "0" = svalue(notes_lab) <- format(
@@ -506,17 +324,16 @@ MODIStsp_addindex <- function(
     # Check if formula is good. If so, add it in the options file
     # for all products for which the formula is computable (i.e., they have the
     # required bands)
-    catch_err <- check_formula_errors(
-      new_indexbandname = new_indexbandname,
-      new_indexfullname = new_indexfullname,
-      new_indexformula  = new_indexformula,
-      n_products        = n_products,
-      prod_opt_list     = prod_opt_list,
-      refbands_names    = refbands_names
-    )
+    catch_err <- check_formula_errors(new_indexbandname,
+                                      new_indexfullname,
+                                      new_indexformula,
+                                      n_products,
+                                      prod_opt_list,
+                                      refbands_names,
+                                      general_opts)
     if (catch_err == 0) {
 
-      save_formula(refbands_names = refbands_names,
+      save_formula(refbands_names,
                    req_bands = attr(catch_err, "req_bands"),
                    new_indexbandname,
                    new_indexfullname,
@@ -529,9 +346,8 @@ MODIStsp_addindex <- function(
                    },
                    prod_opt_list,
                    previous_jsfile)
-      message(glue::glue(
-        "The new Index was correctly added! \n\n It will be available from ",
-        "the next execution of MODIStsp()."))
+      message("The new Index was correctly added!\n It will be available at\n",
+        "the next execution of MODIStsp().")
     } else if (catch_err == 1) {
       stop("The formula of the new index is not computable for this product. ",
            "Please check it.\n",
@@ -547,4 +363,197 @@ MODIStsp_addindex <- function(
 
   } # end of non-gui actions
 
-}
+} # End of MAIN function
+
+# Helpers ####
+
+# Function to check for errors in formula ----
+# (it is called from GUI when "Add" button is chosen, or when function starts
+# in non-interactive mode
+#' @title check_formula_errors
+#' @description Function to check for errors in formula. It is called from
+#'   the GUI when "Add" button is chosen, or when function starts in
+#'   non-interactive mode
+#' @inheritParams MODIStsp_addindex
+#' @noRd
+#' @return `numeric` error code between 0 and 3. 0 means all checks passed
+#'   and formula can be saved
+
+check_formula_errors <- function(new_indexbandname,
+                                 new_indexfullname,
+                                 new_indexformula,
+                                 n_products,
+                                 prod_opt_list,
+                                 refbands_names,
+                                 general_opts) {
+
+  catch_err <- 0 # error 0: no errors
+
+  # Check that the name, the fullname and the formula fields are not null
+  if (any(c(new_indexbandname, new_indexfullname, new_indexformula) == "")) {
+    catch_err <- 3 # error 3: blank parameters
+  }
+
+  # Look for valid band names in index formula
+  req_bands <- c(stringr::str_detect(new_indexformula, "b1_Red"),
+                 stringr::str_detect(new_indexformula, "b2_NIR"),
+                 stringr::str_detect(new_indexformula, "b3_Blue"),
+                 stringr::str_detect(new_indexformula, "b4_Green"),
+                 stringr::str_detect(new_indexformula, "b5_SWIR"),
+                 stringr::str_detect(new_indexformula, "b6_SWIR"),
+                 stringr::str_detect(new_indexformula, "b7_SWIR"))
+
+  # Create dummy variables named as the required bands, assign random values
+  # to them, and then verify if formula is computable by evaluate/parse and
+  # check for errors
+
+  if (req_bands[1] == TRUE) b1_Red   <- 5
+  if (req_bands[2] == TRUE) b2_NIR   <- 6
+  if (req_bands[3] == TRUE) b3_Blue  <- 7
+  if (req_bands[4] == TRUE) b4_Green <- 8
+  if (req_bands[5] == TRUE) b5_SWIR  <- 9
+  if (req_bands[6] == TRUE) b6_SWIR  <- 15
+  if (req_bands[7] == TRUE) b7_SWIR  <- 25
+
+  if (max(req_bands == 1)) {
+    try_parse <- try(eval(parse(text = new_indexformula)), silent = TRUE)
+    if (class(try_parse) == "try-error") {
+      catch_err <- 1
+    }
+  } else {
+    catch_err <- 1
+  } # error 1: error in the formula
+
+  ## generate the list of all the index names
+  all_indexes_bandnames <- all_indexes_fullnames <- NA
+  # cycle on available products
+  for (prod in names(prod_opt_list)) {
+    # cycle on available product versions
+    for (vers in names(prod_opt_list[[prod]])) {
+      current_prodopts    <- as.list(prod_opt_list[[prod]][[vers]])
+      current_custindexes <- as.list(general_opts$custom_indexes[[prod]][[vers]]) #nolint
+      all_indexes_bandnames <- c(all_indexes_bandnames,
+                                 current_prodopts$indexes_bandnames)
+      all_indexes_fullnames <- c(all_indexes_fullnames,
+                                 current_prodopts$indexes_fullnames)
+      if (!is.null(current_custindexes)) {
+        all_indexes_bandnames <- c(all_indexes_bandnames,
+                                   current_custindexes$indexes_bandnames)
+        all_indexes_fullnames <- c(all_indexes_fullnames,
+                                   current_custindexes$indexes_fullnames)
+      }
+    }
+  }
+  all_indexes_bandnames <- unique(all_indexes_bandnames)
+  all_indexes_fullnames <- unique(all_indexes_fullnames)
+
+  # verify that the index name and fullname is not already present
+  if (catch_err == 0 & (new_indexbandname %in% all_indexes_bandnames |
+                        new_indexfullname %in% all_indexes_fullnames)) {
+    catch_err <- 2 # error 2: index name or fullname already present
+  }
+  # verify that the index is computable for the selected product
+  if (catch_err == 0) {
+    # see if any of the bands required for the new index are NOT available for
+    # the product
+    if (is.na(max(match(refbands_names[req_bands], avail_refbands)))) {
+      # error 1 again: index is ok, but not computable for the currently
+      # selected product so we don't save it !
+      catch_err <- 1
+    }
+  }
+
+  attr(catch_err, "req_bands") <- req_bands
+  return(catch_err)
+
+} # end of check_formula_errors()
+
+
+#' @title save_formula
+#' @description Function to add the formula to the optins file if no
+#'   errors are detected (internal - called from MODIStsp_add_index)
+#' @inheritParams MODIStsp_addindex
+#' @return NULL - the function updates the previous_jsfile with the info
+#'   on the new indexe
+#' @noRd
+save_formula <- function(refbands_names,
+                         req_bands,
+                         new_indexbandname,
+                         new_indexfullname,
+                         new_indexformula,
+                         new_indexnodata_out,
+                         general_opts,
+                         prod_opt_list,
+                         previous_jsfile) {
+
+  # initialise list of custom indexes, if it does not exist yet
+  if (is.null(general_opts$custom_indexes)) {
+    general_opts$custom_indexes <- list()
+
+    for (prod in names(prod_opt_list)) {
+      general_opts$custom_indexes[[prod]] <- list()
+
+      for (vers in names(prod_opt_list[[prod]])) {
+        general_opts$custom_indexes[[prod]][[vers]] <- list(
+          "indexes_bandnames"  = character(0),
+          "indexes_fullnames"  = character(0),
+          "indexes_formulas"   = character(0),
+          "indexes_nodata_out" = character(0)
+        )
+      }
+    }
+  }
+  # cycle on available products to add the new index to all products
+  # allowing its computation
+
+  for (prod in names(prod_opt_list)) {
+    # cycle on available product versions
+    for (vers in names(prod_opt_list[[prod]])) {
+      # check if bands required for index computation are available for the
+      # product
+      check <- 0
+      current_custindexes <- as.list(general_opts$custom_indexes[[prod]][[vers]]) #nolint
+      for (reqband in refbands_names[req_bands]) {
+        if (reqband %in% prod_opt_list[[prod]][[vers]]$bandnames) {
+          check <- check + 1
+        }
+      } #End Cycle on reqband
+
+      # if all required bands are available in product, add the new index to
+      # the indexes list for the product in the previous_opts file.
+      # In this way, at next execution, the new index should be available.
+      # Moreover, loading and use of old RData options files won't be broken
+      # if an index is added later than their creation.
+
+      n_req_bands <- sum(req_bands)
+      if (n_req_bands == check) {
+        tmp_indexes_bandnames <- c(current_custindexes$indexes_bandnames,
+                                   new_indexbandname)
+        tmp_indexes_fullnames <- c(current_custindexes$indexes_fullnames,
+                                   new_indexfullname)
+        tmp_indexes_formulas <- c(current_custindexes$indexes_formulas,
+                                  new_indexformula)
+        tmp_indexes_nodata_out <- c(current_custindexes$indexes_nodata_out,
+                                    new_indexnodata_out)
+
+        general_opts$custom_indexes[[prod]][[vers]] <- list(
+          "indexes_bandnames"  = tmp_indexes_bandnames,
+          "indexes_fullnames"  = tmp_indexes_fullnames,
+          "indexes_formulas"   = tmp_indexes_formulas,
+          "indexes_nodata_out" = tmp_indexes_nodata_out
+        )
+        rm(tmp_indexes_bandnames,
+           tmp_indexes_fullnames,
+           tmp_indexes_formulas,
+           tmp_indexes_nodata_out)
+      }
+    }
+  }  #End Cycle on products
+
+  # Save the products list and the chars of the products (including
+  # custom indexes) in previous file.
+  write(RJSONIO::toJSON(general_opts), previous_jsfile)
+
+  return(general_opts)
+
+} # end of save_formula()
