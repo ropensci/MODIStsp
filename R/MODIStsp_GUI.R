@@ -10,8 +10,8 @@
 #' @param MODIStsp_dir main folder of the package
 #' @param previous_jsfile json parameters file containing data of the last execution
 #' @param prodopts_file `character` name of RData file containing info about MODIS products
-#' @return Quit - Logical - tells the main if running processing or exiting (also, Processing
-#' options are saved in "previous" file and (if "Save options" is pressed) in user's selected file)
+#' @return start `logical` passed to main on GUI closure to tell if running
+#'   processing or exiting
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
@@ -25,8 +25,9 @@
 MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir,
                          previous_jsfile, prodopts_file){
 
-  GUI.env      <- new.env()   # create a new env to facilitate values-passing between widgets
-  GUI.env$Quit <- TRUE
+  # create a new env to facilitate values-passing between widgets
+  GUI.env       <- new.env()   
+  GUI.env$start <- FALSE
 
   #- ------------------------------------------------------------------------------- -#
   #  Start Building the GUI ----
@@ -1195,15 +1196,15 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
     # If check passed, save previous file and return
     if (GUI.env$check_save_opts) {
       write(RJSONIO::toJSON(general_opts), previous_jsfile)
-      GUI.env$Quit <- FALSE
+      GUI.env$start <- TRUE
       dispose(main_win)
     }
   })
 
-  # If "Quit", set "Quit to T and exit
+  # If "Quit" pressed, set "start" to FALSE and exit
   quit_but <- gbutton(text = "Quit Program", container = but_group, handler = function(h, ...) {
     # assign("Quit", TRUE, envir = globalenv())
-    GUI.env$Quit <- TRUE
+    GUI.env$start <- FALSE
     dispose(main_win)
   })
 
@@ -1321,6 +1322,6 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   })
   ## show the selection GU
   visible(main_win, set = TRUE)
-  return(GUI.env$Quit)
+  return(GUI.env$start)
 
 }  # END

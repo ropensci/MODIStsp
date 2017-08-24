@@ -21,8 +21,8 @@ MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir,
 \item{prodopts_file}{\code{character} name of RData file containing info about MODIS products}
 }
 \value{
-Quit - Logical - tells the main if running processing or exiting (also, Processing
-options are saved in "previous" file and (if "Save options" is pressed) in user's selected file)
+start \code{logical} passed to main on GUI closure to tell if running
+processing or exiting
 }
 \description{
 Function used to generate and handle the GUI used to allow selection of MODIStsp
