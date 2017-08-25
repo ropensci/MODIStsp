@@ -4,141 +4,129 @@
 \alias{MODIStsp_process}
 \title{MODIStsp_process}
 \usage{
-MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
-  reprocess = "Yes", delete_hdf = "No", sensor, download_server, user,
-  password, https, ftps, start_x, start_y, end_x, end_y, bbox, out_format,
-  compress, out_res_sel, out_res, native_res, tiled, MOD_proj_str, outproj_str,
-  nodata_in, nodata_out, nodata_change, scale_val, scale_factor, offset, rts,
-  datatype, bandsel, bandnames, indexes_bandsel, indexes_bandnames,
-  indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel,
-  quality_bitN, quality_source, quality_nodata_in, full_ext, quality_nodata_out,
-  file_prefixes, main_out_folder, resampling, ts_format, use_aria = TRUE,
-  download_range = "full", gui = TRUE)
+MODIStsp_process(p_opts)
 }
 \arguments{
-\item{sel_prod}{string selected MODIS product}
+\item{p_opts$sel_prod}{string selected MODIS product}
 
-\item{start_date}{string start_date for images download and preprocessing
+\item{p_opts$start_date}{string p_opts$start_date for images download and preprocessing
 (yyyy.mm.dd)}
 
-\item{end_date}{string end_date for images download and preprocessing
+\item{p_opts$end_date}{string p_opts$end_date for images download and preprocessing
 (yyyy.mm.dd)}
 
-\item{out_folder}{main output folder}
+\item{p_opts$out_folder}{main output folder}
 
-\item{out_folder_mod}{output folder for original HDF storage}
+\item{p_opts$out_folder_mod}{output folder for original HDF storage}
 
 \item{reprocess}{string string ("Yes"/"No") If Yes, reprocess data for already existing
 dates (Default = 'Yes')}
 
-\item{delete_hdf}{string ("Yes"/"No") If Yes, delete original HDF after completion}
+\item{p_opts$delete_hdf}{string ("Yes"/"No") If Yes, delete original HDF after completion}
 
-\item{sensor}{string ("Terra" or "Aqua" or "Both")}
-
-\item{download_server}{service used to download MODIS tiles, one of: 'http', 'ftp', NA.}
-
-\item{user}{Username for http download
-(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
-
-\item{password}{Password for http download
-(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
+\item{p_opts$sensor}{string ("Terra" or "Aqua" or "Both")}
 
 \item{https}{hash https site for download of HDF of selected product}
 
-\item{ftps}{hash ftps site for download of HDF of selected product}
+\item{p_opts$ftps}{hash p_opts$ftps site for download of HDF of selected product}
 
-\item{start_x}{int start horizontal tile}
+\item{p_opts$download_server}{service used to download MODIS tiles, one of: 'http', 'ftp', NA.}
 
-\item{start_y}{int start vertical tile}
+\item{p_opts$user}{p_opts$username for http download
+(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
 
-\item{end_x}{int end horizontal tile}
+\item{p_opts$password}{p_opts$password for http download
+(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
 
-\item{end_y}{int end vertical tile}
+\item{p_opts$start_x}{int start horizontal tile}
 
-\item{bbox}{array output bounding box (xmin, xmax, ymin, ymax ) in out proj coords}
+\item{p_opts$start_y}{int start vertical tile}
 
-\item{out_format}{string output raster format (ENVI or GTiff)}
+\item{p_opts$end_x}{int end horizontal tile}
 
-\item{compress}{string compression for GTiff outputs (None, LZW, DEFLATE)}
+\item{p_opts$end_y}{int end vertical tile}
 
-\item{out_res_sel}{string "Native" or "Resampled"}
+\item{p_opts$bbox}{array output bounding box (xmin, xmax, ymin, ymax ) in out proj coords}
 
-\item{out_res}{float Output resolution (in output projection measurement unit)}
+\item{p_opts$out_format}{string output raster format (ENVI or GTiff)}
+
+\item{p_opts$compress}{string p_opts$compression for GTiff outputs (None, LZW, DEFLATE)}
+
+\item{p_opts$native_res_sel}{string "Native" or "Resampled"}
+
+\item{p_opts$native_res}{float Output resolution (in output projection measurement unit)}
 
 \item{native_res}{float Native resolution of MODIS product}
 
-\item{tiled}{0/1 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg)}
+\item{p_opts$tiled}{0/1 1 = p_opts$tiled product; 0 = non-p_opts$tiled product (resolution 0.05 deg)}
 
-\item{MOD_proj_str}{string proj4 string for MODIS product native projection}
+\item{p_opts$mod_proj_str}{string proj4 string for MODIS product native projection}
 
-\item{outproj_str}{string proj4 string of selected output projection}
+\item{p_opts$outproj_str}{string proj4 string of selected output projection}
 
-\item{nodata_in}{array Original NoData for MODIS bands}
+\item{p_opts$nodata_in}{array Original NoData for MODIS bands}
 
-\item{nodata_out}{Target NoData for MODIS bands}
+\item{p_opts$nodata_out}{Target NoData for MODIS bands}
 
-\item{nodata_change}{string (Yes/No) if Yes, NoData are set to nodata_out in
+\item{p_opts$nodata_out}{string (Yes/No) if Yes, NoData are set to p_opts$nodata_out in
 output rasters}
 
-\item{scale_val}{string (Yes/No) if Yes, output values in are rescaled in the
+\item{p_opts$scale_val}{string (Yes/No) if Yes, output values in are rescaled in the
 measure unit of the variable}
 
-\item{scale_factor}{scale factor to be applied to MODIS layer to convert from
-scaled integer to correct measure units}
+\item{p_opts$rts}{string ("Yes"/"No") If Yes, create p_opts$rts time series}
 
-\item{offset}{offset to be applied to MODIS layer to convert form scaled integer
-to correct measure units}
-
-\item{rts}{string ("Yes"/"No") If Yes, create rts time series}
-
-\item{datatype}{string array datatypes of MODIS bands}
+\item{p_opts$datatype}{string array p_opts$datatypes of MODIS bands}
 
 \item{bandsel}{array of length equal to number of original modis layers. set
 to 1 for bands to be processed}
 
-\item{bandnames}{array of Abbreviated Names of MODIS bands}
+\item{p_opts$bandnames}{array of Abbreviated Names of MODIS bands}
 
-\item{indexes_bandsel}{array of length equal to number of available spectral indexes,
-set to  1 for indexes to be processed}
+\item{p_opts$indexes_bandsel}{array of length equal to number of available spectral p_opts$indexes,
+set to  1 for p_opts$indexes to be processed}
 
-\item{indexes_bandnames}{array of Abbreviated Names of MODIS indexes}
+\item{p_opts$indexes_bandnames}{array of Abbreviated Names of MODIS p_opts$indexes}
 
-\item{indexes_formula}{array of indexes formulas}
+\item{p_opts$indexes_formula}{array of p_opts$indexes formulas}
 
-\item{indexes_nodata_out}{NoData values for indexes}
+\item{p_opts$indexes_nodata_out}{NoData values for p_opts$indexes}
 
-\item{quality_bandnames}{array of  Names of MODIS quality indicators}
+\item{p_opts$quality_bandnames}{array of  Names of MODIS p_opts$quality indicators}
 
-\item{quality_bandsel}{array of length equal to number of available quality indicators,
+\item{p_opts$quality_bandsel}{array of length equal to number of available p_opts$quality indicators,
 set to  1 for indicators to be processed}
 
-\item{quality_bitN}{list of strings with number of entries equal to number of
-quality indicators. each entry contains position of bits corresponding to a QI
+\item{p_opts$quality_bitN}{list of strings with number of entries equal to number of
+p_opts$quality indicators. each entry contains position of bits corresponding to a QI
 (e.g., 0-1)}
 
-\item{quality_source}{list of strings which connects each quality indicator to
-its source aggregated quality assurance layer}
+\item{p_opts$quality_source}{list of strings which connects each p_opts$quality indicator to
+its source aggregated p_opts$quality assurance layer}
 
-\item{quality_nodata_in}{Always 255}
+\item{p_opts$quality_nodata_in}{Always 255}
 
-\item{full_ext}{string ("Full_Ext" or "Resized")}
+\item{p_opts$full_ext}{string ("p_opts$full_ext" or "Resized")}
 
-\item{quality_nodata_out}{Always 255}
+\item{p_opts$quality_nodata_out}{Always 255}
 
-\item{file_prefixes}{output file prefix according to selected product (e.g., MOD13Q1)}
+\item{p_opts$file_prefixes}{output file prefix according to selected product (e.g., MOD13Q1)}
 
-\item{main_out_folder}{Suffix to add to the overall out_folder to create the out
+\item{p_opts$main_out_folder}{Suffix to add to the overall p_opts$out_folder to create the out
 dir for the product (corresponds to an abbreviation of the selected product)}
 
-\item{resampling}{string resampling method (near, bilinear, etc.)}
+\item{p_opts$resampling}{string p_opts$resampling method (near, bilinear, etc.)}
 
-\item{ts_format}{string format of virtual files (None, ENVI Meta Files, GDAL vrt files,
+\item{p_opts$ts_format}{string format of virtual files (None, ENVI Meta Files, GDAL vrt files,
 ENVI and GDAL)}
 
-\item{use_aria}{logical if TRUE, then aria2c is used to accelerate download
+\item{p_opts$gui}{logical indicates if processing was called within the p_opts$gui environment or not.
+If not, direct processing messages to the log}
+
+\item{p_opts$use_aria}{logical if TRUE, then aria2c is used to accelerate download
 (if available !)}
 
-\item{download_range}{character if "full", all the available images between the
+\item{p_opts$download_range}{character if "full", all the available images between the
 starting and the ending dates are downloaded; if "seasonal", only the images
 included in the season (e.g: if the starting date is 2005-12-01 and the ending
 is 2010-02-31, only the images of December, January and February from 2005 to 2010
@@ -146,13 +134,16 @@ is 2010-02-31, only the images of December, January and February from 2005 to 20
 \item excluding 2005-01, 2005-02 and 2010-12 - are downloaded)
 }}
 
-\item{gui}{logical indicates if processing was called within the GUI environment or not.
-If not, direct processing messages to the log}
+\item{p_opts$scale_factor}{scale factor to be applied to MODIS layer to convert from
+scaled integer to correct measure units}
+
+\item{p_opts$offset}{p_opts$offset to be applied to MODIS layer to convert form scaled integer
+to correct measure units}
 }
 \description{
 main function of MODIStsp tool. Takes as input processing parameters
-specified by the user using MODIStsp_GUI and saved in MODIStsp_Previous.json
-(Interactive use), or a user specified JSON file (batch use)
+specified by the p_opts$user using MODIStsp_p_opts$gui and saved in MODIStsp_Previous.json
+(Interactive use), or a p_opts$user specified JSON file (batch use)
 (See MODIStsp_main for details ) and performs all required
 processing.
 }
@@ -161,20 +152,20 @@ After retrieving the input processing options, the function
 \enumerate{
 \item Accesses lpdaac http or ftp archive to determine the list of dates to be processed
 \item Performs all required processing steps on each date (download, reprojection,
-resize, mosaicing, indexes computation, quality indicators computation)
+resize, mosaicing, p_opts$indexes computation, p_opts$quality indicators computation)
 \item Creates virtual files of the processed time series.
 }
 
 Reprojection and resize is dealt with by accessing gdal routines through the \code{gdaUtils}
 package.
-Extraction of bitfields from Quality layers is done though fast bitwise computation
+Extraction of bitfields from p_opts$quality layers is done though fast bitwise computation
 Checks are done in order to not re-download already existing HDF images, and not
-reprocess already processed dates (if the user did not specify that)
+reprocess already processed dates (if the p_opts$user did not specify that)
 }
 \note{
 Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
 development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
-\href{http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
+\href{http://spatial-analyst.net/wiki/index.php?title=Download_and_p_opts$resampling_of_MODIS_images}{Download_and_p_opts$resampling_of_MODIS_images})
 
 License: GPL 3.0
 }

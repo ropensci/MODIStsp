@@ -384,8 +384,8 @@ MODIStsp <- function(gui               = TRUE,
 
       # Check if the input file is a valid spatial file and redefine the
       # bounding box
-      external_bbox <- try(bbox_from_file(file_path = spatial_file_path,
-                                          out_crs   = general_opts$user_proj4),
+      external_bbox <- try(bbox_from_file(spatial_file_path,
+                                          general_opts$user_proj4),
                            silent = TRUE)
       if (class(external_bbox) == "try-error") {
         stop("Failure in retrieving processing extent from ",

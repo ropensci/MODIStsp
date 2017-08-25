@@ -33,8 +33,11 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
   #  Start Building the GUI ----
   #- ------------------------------------------------------------------------------- -#
 
-  main_win <- gbasicdialog(title = paste0("MODIStsp - v. ", packageVersion("MODIStsp")), parent = NULL, do.buttons = FALSE,
-                           handler = function(h, ....) {})
+  main_win <- gbasicdialog(
+    title = paste0("MODIStsp - v. ", packageVersion("MODIStsp")),
+    parent = NULL,
+    do.buttons = FALSE
+  )
 
   main_frame1 <- ggroup(container = main_win, horizontal = TRUE, expand = FALSE, use.scrollwindow = scrollWindow)
   main_frame2 <- ggroup(container = main_frame1, horizontal = FALSE, expand = FALSE)
@@ -504,7 +507,7 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                 }
 
                 # Create the bounding box in the chosen projection retrieving it from the specified file
-                bbox_out <- try(bbox_from_file(file_path = choice, out_crs = out_proj_crs), silent = TRUE)
+                bbox_out <- try(bbox_from_file(choice, out_proj_crs), silent = TRUE)
                 if (class(bbox_out) == "try-error") {
                   gmessage(bbox_out, title = "Error Detected!")
                 } else {
