@@ -4,7 +4,7 @@
 #'   converting it to a specified CRS.
 #' @param file_path The path of the spatial file.
 #' @param out_crs The output projection (string format).
-#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
 #'
 #' @importFrom gdalUtils gdalinfo gdalsrsinfo ogrinfo
 #' @importFrom sp CRS
@@ -13,72 +13,44 @@
 #' @note License: GPL 3.0
 #'
 #' @importFrom sp CRS
-#' @importFrom gdalUtils gdalsrsinfo gdalinfo ogrinfo
+#' @importFrom gdalUtils gdalsrsinfo gdalinfo
+#' @importFrom rgdal GDALinfo ogrInfo
 #' @importFrom utils head tail
 
 bbox_from_file <- function(file_path, out_crs) {
 
   # Retrieve CRS using gdal: if fails, then the file is not a valid spatial file
-  reference_crs      <- try(gdalsrsinfo(file_path, as.CRS = TRUE),
-                            silent = TRUE)
-  reference_gdalinfo <- suppressWarnings(try(gdalinfo(file_path),
+  reference_gdalinfo <- suppressWarnings(try(GDALinfo(file_path),
                                              silent = TRUE))
-  reference_ogrinfo  <- suppressWarnings(try(ogrinfo(file_path,
-                                                     al = TRUE,
-                                                     so = TRUE),
+  reference_ogrinfo  <- suppressWarnings(try(ogrInfo(file_path),
                                              silent = TRUE))
-
-  if (
-    class(reference_crs) == "try-error" |
-    (!is.null(attr(reference_gdalinfo, "status")) &
-     !is.null(attr(reference_ogrinfo, "status")))
-  ) {
-    stop(paste("File format not recognized by GDAL or OGR.",
+  
+  if (is(reference_ogrinfo, "try-error") &
+      is(reference_gdalinfo, "try-error")) {
+    stop(paste("File format not recognised by GDAL or OGR.",
                if (class(reference_crs) == "try-error") {
                  paste("\n\nDetails:", reference_crs)
-               } else {
-                 ""
                }))
-  } else if (is.na(reference_crs@projargs)) {
-    # TODO: try to retrieve from WKT, or ask to insert as proj.4 string
-    stop("The CRS of the file is not recognized!")
-  } else {
-
-    # If it does not fail, then retrieve the bounding box
-    if (is.null(attr(reference_ogrinfo, "status"))) {
-      reference_ogrinfo <- ogrinfo(file_path, al = TRUE, so = TRUE)
-      reference_bbox    <- matrix(na.omit(as.numeric(unlist(strsplit(
-        gsub("([^0-9.\\-]+|( - ))+",
-             " ",
-             reference_ogrinfo[grep("Extent:", reference_ogrinfo)]),
-        " ")))),
-        nrow = 2)
-    } else if (is.null(attr(reference_gdalinfo, "status"))) {
-      reference_gdalinfo <- gdalinfo(file_path)
-      reference_bbox     <- cbind(na.omit(as.numeric(unlist(strsplit(
-        gsub("[^0-9.\\-]+", " ",
-             reference_gdalinfo[grep("^Lower Left",
-                                     reference_gdalinfo)]), " "))))[1:2],
-        na.omit(as.numeric(unlist(strsplit(gsub(
-          "[^0-9.\\-]+", " ",
-          reference_gdalinfo[grep("^Upper Right",
-                                  reference_gdalinfo)]), " "))))[1:2])
-    }
-
-    # Convert the bounding box in the chosen projection (ensuring to full
-    # include the original one)
-    bbox_out <- reproj_bbox(reference_bbox,
-                            reference_crs@projargs,
-                            out_crs,
-                            enlarge = TRUE)
-
-    # Get the units and kind of projection
-
-    proj  <- head(strsplit(tail(strsplit(CRS(out_crs)@projargs,
-                                         "+proj=")[[1]], 1), " +")[[1]], 1)
-    units <- ifelse(proj == "longlat", "deg", "metric")
-
   }
 
+  # If it does not fail, then retrieve the bounding box
+  if (is(reference_gdalinfo, "try-error")) {
+    reference_bbox <- matrix(
+      reference_ogrinfo$extent,
+      ncol=2, 
+      dimnames=list(c("x","y"),c("min","max")))
+    reference_crs <- gdalsrsinfo(file_path, as.CRS = TRUE)@projargs
+  } else if (is(reference_ogrinfo, "try-error")) {
+    reference_bbox <- gdalinfo(file_path, raw_output = FALSE)$bbox
+    reference_crs <- attr(reference_gdalinfo, "projection")
+  }
+  
+  # Convert the bounding box in the chosen projection (ensuring to full
+  # include the original one)
+  bbox_out <- reproj_bbox(reference_bbox,
+                          reference_crs,
+                          out_crs,
+                          enlarge = TRUE)
+  
   return(bbox_out)
 }
