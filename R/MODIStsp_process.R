@@ -367,6 +367,9 @@ MODIStsp_process <- function(p_opts) {
                                              p_opts$tiled, p_opts, p_opts$out_folder_mod,
                                              p_opts$gui)
             
+            
+              #TODO CUT HERE FUNCTION --> returns modislist
+            
             # ---------------------------------- ----------------------------------------------#
             # Download and preprocess Imagesin modislist vector -----------
             # ---------------------------------- ----------------------------------------------#
