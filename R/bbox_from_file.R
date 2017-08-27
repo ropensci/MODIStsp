@@ -6,14 +6,9 @@
 #' @param crs_out `string` proj4string of the desired output projection.
 #' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
 #'
-#' @importFrom gdalUtils gdalinfo gdalsrsinfo ogrinfo
-#' @importFrom sp CRS
-#' @importFrom rgeos show
-#' @importFrom stats na.omit
-#' @note License: GPL 3.0
-#'
 #' @importFrom gdalUtils gdalsrsinfo gdalinfo
 #' @importFrom rgdal GDALinfo ogrInfo
+#' @note License: GPL 3.0
 
 bbox_from_file <- function(file_path, crs_out) {
 

@@ -246,7 +246,7 @@ MODIStsp <- function(gui               = TRUE,
   # default projection string for MODIS gridded data
   mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
 
-  general_opts <- load_opts(previous_jsfile)
+  general_opts <- load_opts(previous_jsfile, mod_proj_str)
 
 
   #   __________________________________________________________________________
@@ -475,7 +475,7 @@ MODIStsp <- function(gui               = TRUE,
       resampling         = general_opts$resampling,
       ts_format          = general_opts$ts_format,
       compress           = general_opts$compress,
-      MOD_proj_str       = mod_proj_str,
+      mod_proj_str       = mod_proj_str,
       outproj_str        = general_opts$user_proj4,
       nodata_in          = prod_opts$nodata_in,
       nodata_out         = prod_opts$nodata_out,
