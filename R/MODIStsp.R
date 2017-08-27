@@ -136,6 +136,7 @@ MODIStsp <- function(gui               = TRUE,
       test_username <- readline(prompt = "Enter your USGS username: ")
       test_password <- readline(prompt = "Enter your password: ")
     }
+    start = TRUE
   }
 
 
@@ -312,7 +313,8 @@ MODIStsp <- function(gui               = TRUE,
                          scroll_window)
 
   } else {
-    start <- FALSE
+    start <- TRUE
+    gui   <- FALSE
   }
   start_time <- Sys.time()
 
@@ -362,7 +364,7 @@ MODIStsp <- function(gui               = TRUE,
     general_opts$end_date  <- as.character(
       format(as.Date(general_opts$end_date), "%Y.%m.%d")
     )
-
+browser()
     # If the product is NOT tiled, set or_proj to WGS84 and or_res from
     # metres to degrees
     if (prod_opts$tiled == 0) {
@@ -447,8 +449,7 @@ MODIStsp <- function(gui               = TRUE,
     #   the selected product - band names, available indexes, etcetera.) and
     #   put them in the `p_opts` list. Then launch `MODIStsp_process`
 
-    p_opts <- list(
-      sel_prod            = general_opts$sel_prod,
+    MODIStsp_process(sel_prod = general_opts$sel_prod,
       start_date         = general_opts$start_date,
       end_date           = general_opts$end_date,
       out_folder         = general_opts$out_folder,
@@ -505,8 +506,6 @@ MODIStsp <- function(gui               = TRUE,
       gui                = gui,
       use_aria           = general_opts$use_aria,
       download_range     = general_opts$download_range)
-
-    MODIStsp_process(p_opts)
 
     # At end of succesfull execution, save the options used in the main output
     # folder as a JSON file with name containing the date of processing.
