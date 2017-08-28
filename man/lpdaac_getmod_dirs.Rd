@@ -4,34 +4,38 @@
 \alias{lpdaac_getmod_dirs}
 \title{lpdaac_getmod_dirs}
 \usage{
-lpdaac_getmod_dirs(ftp, http, used_server = NA, user = user,
+lpdaac_getmod_dirs(ftp, http, download_server, user = user,
   password = password, gui, out_folder_mod, .Platform)
 }
 \arguments{
-\item{ftp}{string ftp site corresponding to a given MODIS product}
+\item{ftp}{\code{character} ftp site corresponding to the selected MODIS product}
 
-\item{http}{string http site on lpdaac corresponding to a given MODIS product}
+\item{http}{\code{character} http site on lpdaac corresponding to the selcted MODIS
+product}
 
-\item{used_server}{string can assume values "http" or "ftp" depending on the used
-download server; if NA, the script tries to download with http, using ftp if the download fails}
+\item{user}{\code{character} username for earthdata http server}
 
-\item{user}{username for earthdata server}
+\item{password}{\code{character} password for earthdata http server}
 
-\item{password}{password for earthdata server}
+\item{gui}{`logical`` indicates if processing was called within the GUI
+environment or not. If not, direct processing messages to the log}
 
-\item{gui}{logical indicates if processing was called within the GUI environment
-or not. If not, direct processing messages to the log}
+\item{out_folder_mod}{\code{character} output folder for MODIS HDF storage}
 
-\item{out_folder_mod}{output folder for original HDF storage}
+\item{.Platform}{\code{character} os platform (from call to .Platform)}
 
-\item{.Platform}{string os platform (from call to .Platform)}
+\item{downlad_server}{\code{character ["http" / "ftp" / "offline"]} download service
+to be used; if NA, the script tries to download with http, using ftp if the
+download fails (Used in non-interactive execution to allow trying to use
+ftp if http fails)}
 }
 \value{
-list of all available folders (a.k.a. dates) for the requested MODIS product on lpdaac archive
+list of all available folders (a.k.a. dates) for the requested MODIS
+product on lpdaac http or ftp archive#'
 }
 \description{
-Accessory function to get the full list of directories on the lpdaac
-http site (modified after Barry Rowlingson function):
+Accessory function to get the full list of directories on the
+lpdaac http site (modified after Barry Rowlingson function):
 }
 \note{
 License: GPL 3.0
@@ -39,7 +43,8 @@ License: GPL 3.0
 \author{
 Original code by Babak Naimi (\code{.getModisList}, in
 \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
-modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by:
+modified to adapt it to MODIStsp scheme and to http archive (instead than old
+FTP) by:
 
 Lorenzo Busetto, phD (2014-2017) \email{busetto.l@irea.cnr.it}
 

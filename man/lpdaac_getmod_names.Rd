@@ -36,8 +36,8 @@ acquired in a given period (return array from lpdaac_getmod_dates)}
 or not. If not, direct processing messages to the log}
 }
 \value{
-Modislist names of HDF images corresponding to the requested tiles available
-for the product in the selected date
+Modislist names of HDF images corresponding to the requested tiles
+available for the product in the selected date
 }
 \description{
 Accessory function to find the names of HDF images corresponding
@@ -49,7 +49,8 @@ License: GPL 3.0
 \author{
 Original code by Babak Naimi (\code{.getModisList}, in
 \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
-modified to adapt it to MODIStsp scheme and to http archive (instead than old FTP) by:
+modified to adapt it to MODIStsp scheme and to http archive (instead than old
+FTP) by:
 
 Lorenzo Busetto, phD (2014-2016) \email{busetto.l@irea.cnr.it}
 
