@@ -10,6 +10,7 @@
 #'   retrieved from the JSON file (or the defaults set at first execution).
 #'   See also `MODIStsp_GUI` and `MODIStsp_process`
 #' @rdname load_opts
+#' @export
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0

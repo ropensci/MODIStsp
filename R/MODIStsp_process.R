@@ -25,10 +25,10 @@
 #' @param out_folder `character` Main output folder
 #' @param out_folder_mod `character` Output folder for original HDF storage
 #' @param reprocess `character ["Yes"/"No"]` If Yes, reprocess data for already
-#'  existing dates 
+#'  existing dates
 #' @param delete_hdf `character ["Yes"/"No"]` If Yes, delete original HDF after
 #'  completion
-#' @param sensor `character ["Terra"/"Aqua"/"Both"]` MODIS platform to be considered. 
+#' @param sensor `character ["Terra"/"Aqua"/"Both"]` MODIS platform to be considered.
 #'   (Ignored for MCD* products)
 #' @param https `hash table` http addresses for download of HDF of selected product
 #' @param ftps `hash table` ftp addresses for download of HDF of selected product
@@ -42,15 +42,15 @@
 #' @param start_y `integer [0-17]` Start vertical tile
 #' @param end_x `integer [0-35]` End horizontal tile
 #' @param end_y `integer [0-17]` End vertical tile
-#' @param full_ext `characrter ["Full_Ext" / "Resized"]` If "Full_Ext", process 
-#'   the entire extention of the selected tiles. Otherwise, crop the output to 
+#' @param full_ext `characrter ["Full_Ext" / "Resized"]` If "Full_Ext", process
+#'   the entire extention of the selected tiles. Otherwise, crop the output to
 #'   output bbox
 #' @param bbox `numeric(4)` Output bounding box (xmin, xmax, ymin, ymax) in
 #'   out_proj coords
 #' @param out_format `character ["ENVI"/"GTiff"]` Desired output format
-#' @param compress `character` ["None", "PACKBITS", "LZW", "DEFLATE"] Compression
+#' @param compress `character ["None", "PACKBITS", "LZW", "DEFLATE"]` Compression
 #'  method for GTiff outputs
-#' @param out_res_sel `character ["Native"\"Resampled"] Indicates if the native
+#' @param out_res_sel `character ["Native"\"Resampled"]` Indicates if the native
 #'  resolution of the product or a user-sapplied one is to be used
 #' @param out_res `float` Output resolution (in output projection measurement
 #'  unit). Ignored if out_res_sel == "Native"
@@ -65,16 +65,16 @@
 #'  (Ignored if nodata_change == FALSE)
 #' @param nodata_change `character [Yes/No]` if Yes, NoData are set to nodata_out
 #'   in output rasters
-#' @param scale_val `character [Yes/No]` If Yes, scale and offset are applied to 
-#'  original MODIS layers, and Spectral Indexes are saved as fploating point. If 
-#'  No, no rescaling is done and Spectral Indexes are saved as integer, with a 
+#' @param scale_val `character [Yes/No]` If Yes, scale and offset are applied to
+#'  original MODIS layers, and Spectral Indexes are saved as fploating point. If
+#'  No, no rescaling is done and Spectral Indexes are saved as integer, with a
 #'  10000 scaling factor
 #' @param rts `character [Yes/No]` If Yes, create RasterStack time series
 #' @param datatype `character array` datatypes of original MODIS bands
 #'   (e.g., "INT2S")
 #' @param bandsel `integer array [0/1]` of length equal to number of original
 #'  layers of the selected product set to 1 for bands to be processed.
-#'@param bandnames `character array` Abbreviated Names of original layers of the 
+#'@param bandnames `character array` Abbreviated Names of original layers of the
 #'  selected product (used to build output file names)
 #' @param indexes_bandsel `integer array [0/1]` array of length equal to the number
 #'   of Spectral Indexes available for the product (standard + user-provided),
@@ -84,22 +84,22 @@
 #' @param indexes_formula `character array` formulas of SIs available for the
 #'   selected product (standard and custom)
 #' @param indexes_nodata_out `numeric array` NoData values to be used for SIs
-#' @param quality_bandnames `character array` Abbreviated Names of Quality 
+#' @param quality_bandnames `character array` Abbreviated Names of Quality
 #'  Indicators available for the selected product (used to build output file
 #'  names of QIs)
 #' @param quality_bandsel `integer array [0/1]` array of length equal to number
 #'   of available QIs, set to  1 for indexes to be processed
-#' @param quality_bitN `character array` with length equal to the number QIs 
-#'   available for the selected product. Each entry contains the position of the 
+#' @param quality_bitN `character array` with length equal to the number QIs
+#'   available for the selected product. Each entry contains the position of the
 #'   bits corresponding to a QI (e.g., 0-1) in its "source" MODIS layer
 #' @param quality_source `character array` which connects each QI to its "source"
-#'   original MODIS layer (multiple QIs share the same "source", since they are 
+#'   original MODIS layer (multiple QIs share the same "source", since they are
 #'   derivred from different bits of the bit-encoded layer)
 #' @param quality_nodata_in `integer` Always set to 255
 #' @param quality_nodata_out `integer` Always set to 255
 #' @param file_prefixes `character` output file prefix of selected product
 #'   (e.g., MOD13Q1). Used to build output filenames
-#' @param main_out_folder `character` Main folder for storager of MODIStsp 
+#' @param main_out_folder `character` Main folder for storager of MODIStsp
 #'   time series
 #' @param resampling `character ["near" / "bilinear" / "cubic" / "lanczos" / "mode]`
 #'   resampling method to be used by `gdalwarp`
@@ -112,7 +112,7 @@
 #'   (if available !)
 #' @param download_range `character ["full" / "seasonal"` If "full", all the
 #'   available images between the starting and the ending dates are downloaded;
-#'   if "seasonal", only the images included in the season are downloaded 
+#'   if "seasonal", only the images included in the season are downloaded
 #'   (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, only
 #'   the images of December, January and February from 2005 to 2010 - excluding
 #'   2005-01, 2005-02 and 2010-12 - are downloaded)
@@ -287,7 +287,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     }
 
     # Retrieve available dates for the selected product
-    date_dirs_all   <- lpdaac_getmod_dirs(ftp = ftp, http = http, used_server = download_server,
+    date_dirs_all   <- lpdaac_getmod_dirs(ftp = ftp, http = http, download_server,
                                           user = user, password = password, gui = gui,
                                           out_folder_mod = out_folder_mod,
                                           .Platform = .Platform)
@@ -315,47 +315,61 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
         }
 
         if (yy != start_year & yy != end_year) {
-          dates <- c(paste0(as.character(yy), ".1.1"), paste0(as.character(yy), ".12.31"))
+          dates <- c(paste0(as.character(yy), ".1.1"),
+                     paste0(as.character(yy), ".12.31"))
         }
 
         if (yy != start_year & yy == end_year) {
           dates <- c(paste0(as.character(yy), ".1.1"), end_date)
         }
 
-      } else if (download_range == "seasonal") {
-        # Create string representing the dates to be processed in the case
-        # of splitted processing
-        #
-        # the starting month-day
-        start_seas <- as.Date(strftime(as.Date(start_date, format = "%Y.%m.%d"), "0-%m-%d"))
-        # the ending month-day
-        end_seas   <- as.Date(strftime(as.Date(end_date, format = "%Y.%m.%d"), "0-%m-%d"))
+      } else {
 
-        nye_incl   <- start_seas > end_seas # TRUE if the period includes new year's eve, fasle if not
+        if (download_range == "seasonal") {
+          # Create string representing the dates to be processed in the case
+          # of splitted processing
+          #
+          # the starting month-day
+          start_seas <- as.Date(strftime(as.Date(start_date, format = "%Y.%m.%d"),
+                                         "0-%m-%d"))
+          # the ending month-day
+          end_seas   <- as.Date(strftime(as.Date(end_date, format = "%Y.%m.%d"),
+                                         "0-%m-%d"))
 
-        if (!nye_incl) {
-          dates    <- c(gsub(paste0("^", start_year), yy, start_date), gsub(paste0("^", end_year),
-                                                                            yy, end_date))
-        } else {
+          # TRUE if the period includes new year's eve, false if not
+          nye_incl   <- start_seas > end_seas
 
-          if (yy == start_year & yy != end_year) {
-            dates  <- c(gsub(paste0("^", start_year), yy, start_date), paste0(as.character(yy),
-                                                                              ".12.31"))
-          }
+          if (!nye_incl) {
+            dates    <- c(gsub(paste0("^", start_year), yy, start_date),
+                          gsub(paste0("^", end_year), yy, end_date))
+          } else {
 
-          if (yy != start_year & yy != end_year) {
-            dates  <- c(paste0(as.character(yy), ".1.1"), gsub(paste0("^", end_year), yy, end_date),
-                        gsub(paste0("^", start_year), yy, start_date), paste0(as.character(yy),
-                                                                              ".12.31"))
-          }
+            if (yy == start_year & yy != end_year) {
+              dates  <- c(gsub(paste0("^", start_year), yy, start_date),
+                          paste0(as.character(yy),".12.31"))
+            }
 
-          if (yy != start_year & yy == end_year) {
-            dates  <- c(paste0(as.character(yy), ".1.1"), gsub(paste0("^", end_year), yy, end_date))
+            if (yy != start_year & yy != end_year) {
+
+              dates  <- c(paste0(as.character(yy), ".1.1"),
+                          gsub(paste0("^", end_year), yy, end_date),
+                          gsub(paste0("^", start_year), yy, start_date),
+                          paste0(as.character(yy), ".12.31"))
+            }
+
+            if (yy != start_year & yy == end_year) {
+              dates  <- c(paste0(as.character(yy), ".1.1"),
+                          gsub(paste0("^", end_year), yy, end_date))
+            }
+
           }
 
         }
-
-      } else stop("download_range value not valid (only \"full\" and \"seasonal\" are admitted).")
+        else {
+          stop("Invalid download_range (only \"full\" and \"seasonal\" ",
+               "are admitted). Aborting!")
+        }
+      }
 
       # Processing status message
       mess_text <- paste("Retrieving Files for Year", as.character(yy))
@@ -430,7 +444,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                               timeout(240)))
                     } else if (download_server == "ftp") {
                       try((getURL(remote_filename, nobody = 1L, header = 1L,
-                                 .opts = list(timeout = 240, maxredirs = 5, verbose = FALSE))))
+                                  .opts = list(timeout = 240, maxredirs = 5, verbose = FALSE))))
                     }
                     # Check if download was good: check class of xmldown and status of xmldown
                     if (class(size_string) == "try-error") {
@@ -631,7 +645,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                   out_filename <- file.path(
                     out_prod_folder,
                     indexes_band,
-                    paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY, 
+                    paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY,
                            ifelse(out_format == "GTiff", ".tif", ".dat"))
                   )
                   if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
@@ -644,7 +658,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                   quality_band <- quality_bandnames[band]
                   out_filename <- file.path(
                     out_prod_folder, quality_band,
-                    paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY, 
+                    paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY,
                            ifelse(out_format == "GTiff", ".tif", ".dat"))
                   )
                   if (out_format == "GTiff") {
@@ -690,10 +704,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                   outrep_file   <- file.path(
                     out_prod_folder, bandnames[band],
                     paste0(file_prefix, "_",
-                           sub("[.][^.]*$", "", basename(outfile), perl = TRUE), 
+                           sub("[.][^.]*$", "", basename(outfile), perl = TRUE),
                            ifelse(out_format == "GTiff", ".tif", ".dat"))
                   )
-                  
+
                   outfile_vrt <- tempfile(fileext = ".vrt")   # filename of temporary vrt file
 
                   if (file.exists(outrep_file) == FALSE | reprocess == "Yes") {
@@ -730,7 +744,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                   file_out,
                                                   sd_index  = band,
                                                   srcnodata = nodata_in[band],
-                                                  vrtnodata = nodata_out[band], 
+                                                  vrtnodata = nodata_out[band],
                                                   overwrite = TRUE)
                         files_in[file] <- file_out
                       }
@@ -742,9 +756,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                srcnodata = nodata_in[band],
                                vrtnodata = nodata_out[band],
                                multi     = TRUE,
-                               wo        = paste0("NUM_THREADS=", ncores), 
+                               wo        = paste0("NUM_THREADS=", ncores),
                                overwrite = TRUE
-                               )
+                      )
 
                     } else {
                       # Create a GDAL vrt file corresponding to the original hdf4
@@ -783,30 +797,30 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                         # fix to avoid bug on gdalbuildvrt for UInt32 datasets; create a tif
                         # instead than a vrt
                         outfile_vrt <- paste0(str_sub(outfile_vrt, 1,-5), ".tif")
-                        gdalwarp(outfile_vrt_or,
+                        gdalUtils::gdalwarp(outfile_vrt_or,
                                  outfile_vrt,
                                  te        = c(bbox_mod),
                                  tap       = TRUE,
-                                 tr        = res(raster(outfile_vrt_or)),
+                                 tr        = raster::res(raster::raster(outfile_vrt_or)),
                                  sd        = band,
                                  srcnodata = nodata_in[band],
                                  vrtnodata = nodata_out[band],
                                  ot        = datatype[band],
                                  multi     = TRUE,
                                  wo        = c("INIT_DEST = NO_DATA",
-                                             paste0("NUM_THREADS=", ncores)),
+                                               paste0("NUM_THREADS=", ncores)),
                                  overwrite  = TRUE, verbose = T
                         )
                       } else {
-                      gdalbuildvrt(outfile_vrt_or,
-                                   outfile_vrt,
-                                   te        = c(bbox_mod),
-                                   tap       = TRUE,
-                                   tr        = res(raster(outfile_vrt_or)),
-                                   srcnodata = nodata_in[band],
-                                   vrtnodata = nodata_out[band],
-                                   sd        = band,
-                                   overwrite = TRUE)
+                        gdalUtils::gdalbuildvrt(outfile_vrt_or,
+                                     outfile_vrt,
+                                     te        = c(bbox_mod),
+                                     tap       = TRUE,
+                                     tr        = res(raster(outfile_vrt_or)),
+                                     srcnodata = nodata_in[band],
+                                     vrtnodata = nodata_out[band],
+                                     sd        = band,
+                                     overwrite = TRUE)
                       }
                     }
 
@@ -870,7 +884,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                ot         = datatype[band],
                                multi      = TRUE,
                                wo         = c("INIT_DEST = NO_DATA",
-                                             paste0("NUM_THREADS=", ncores)),
+                                              paste0("NUM_THREADS=", ncores)),
                                overwrite  = TRUE
                              ),
                              Resample1_Resize0 = gdalUtils::gdalwarp(
@@ -885,7 +899,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                              paste0("NUM_THREADS=", ncores)),
                                overwrite = TRUE
                              ),
-                             Resample1_Resize1 =  gdalUtils::gdalwarp(
+                             Resample1_Resize1 = gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
                                s_srs     = mod_proj_str, t_srs = outproj_str,
                                of        = out_format,
@@ -903,14 +917,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                "Internal error in out_res_sel, outproj_str or full_ext."))
                     } else {
                       switch(reproj_type,
-                              GdalTranslate =  gdalUtils::gdal_translate(
-                                outfile_vrt,  outrep_file_0,
-                                a_srs = mod_proj_str,
-                                of = out_format,
-                                ot = datatype[band],
-                                a_nodata = nodata_out[band],
-                                overwrite = TRUE
-                              ),
+                             GdalTranslate =  gdalUtils::gdal_translate(
+                               outfile_vrt,  outrep_file_0,
+                               a_srs = mod_proj_str,
+                               of = out_format,
+                               ot = datatype[band],
+                               a_nodata = nodata_out[band],
+                               overwrite = TRUE
+                             ),
                              Resample0_Resize0  =  gdalUtils::gdalwarp(
                                outfile_vrt, outrep_file_0,
                                s_srs = mod_proj_str,
@@ -967,11 +981,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                     }
                     # TODO: Extract as function !
                     # If scale_factor="Yes", create final files by rescaling values
-                    if (scale_val == "Yes"   & 
+                    if (scale_val == "Yes"   &
                         !(scale_factor[band] == 1 & offset[band] == 0)) {
                       # fixed: ignore scaling if slope = 1 AND offset = 0
                       # mode with raster()
-                     
+
                       outrep_0 <- raster::raster(outrep_file_0)
                       scl <- as.numeric(scale_factor[band])
                       off <- as.numeric(offset[band])
@@ -979,14 +993,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       outrep <- raster::calc(x         = outrep_0,
                                              fun       = function(x) {
                                                x * scl + off
-                                             }, 
+                                             },
                                              filename  = outrep_file,
                                              format    = out_format,
-                                             datatype  = "FLT4S", 
+                                             datatype  = "FLT4S",
                                              options   = ifelse(
                                                out_format == "GTiff",
                                                paste0("COMPRESS=", compress),
-                                               ""),                       
+                                               ""),
                                              NAflag    = na,
                                              overwrite = TRUE)
                       rm(outrep, outrep_0)
@@ -1030,7 +1044,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                   paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY,
                          ifelse(out_format == "GTiff", ".tif", ".dat"))
                 )
-                
+
 
                 #If file not existing and reprocess = No, compute the index and save it
                 if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
@@ -1042,12 +1056,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                     indexes_nodata_out = indexes_nodata_out[band],
                     out_prod_folder    = out_prod_folder,
                     file_prefix        = file_prefix,
-                    compress           = compress, 
+                    compress           = compress,
                     yy                 = yy,
                     out_format         = out_format,
                     DOY                = DOY,
                     scale_val          = scale_val
-                    )
+                  )
                 }
               }
 
@@ -1056,7 +1070,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               # ---------------------------------- ----------------------------------------------#
 
               for (band in which(quality_bandsel == 1)) {
-                
+
                 mess_text     <- paste("Computing", quality_band, "for date:", date_name)
                 if (gui) {
                   gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
@@ -1065,38 +1079,38 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                 } else {
                   message("[", date(), "] ", mess_text)
                 }
-                
+
                 quality_band  <- quality_bandnames[band]		 # indicator name
                 source        <- quality_source[band]  #  Original MODIS layer containing data of the indicator
                 bitN          <- quality_bitN[band]      #  bitfields corresponding to indicator within source
                 nodata_qa_in  <- quality_nodata_in[band]
                 nodata_qa_out <- quality_nodata_out[band]
                 nodata_source <- nodata_out[grep(source, bandnames)]
-               
+
                 out_filename <- file.path(
                   out_prod_folder, quality_band,
                   paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY,
                          ifelse(out_format == "GTiff", ".tif", ".dat")
                   )
                 )
-                
+
                 # If file not existing or reprocess = Yes, compute the indicator
                 # and save it
                 if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
-     
+
                   in_source_filename <- file.path(
                     out_prod_folder, source,
-                    paste0(file_prefix, "_", source, "_", yy, "_", DOY, 
+                    paste0(file_prefix, "_", source, "_", yy, "_", DOY,
                            ifelse(out_format == "GTiff", ".tif", ".dat"))
                   )
-                  
-                  MODIStsp_process_QA_bits(out_filename, 
+
+                  MODIStsp_process_QA_bits(out_filename,
                                            in_source_filename,
-                                           bitN, 
+                                           bitN,
                                            out_format,
                                            nodata_source,
                                            nodata_qa_in,
-                                           nodata_qa_out, 
+                                           nodata_qa_out,
                                            compress)
                 }
               }
@@ -1226,7 +1240,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   #- ------------------------------------------------------------------------------- -#
   # Close GUI and clean-up
   #- ------------------------------------------------------------------------------- -#
-  
+
   if (gui) {
     gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
       return(FALSE)

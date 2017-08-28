@@ -21,6 +21,7 @@
 #' @param quality_bandsel `numeric 0/1 array` Indicates which Quality Indicators
 #'   were selected
 #' @param out_format `character` GTiff or ENVI
+#' @export
 #' @return check - logical = 1 if all expected output files are already existing
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}

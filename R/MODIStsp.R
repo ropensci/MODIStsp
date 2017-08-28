@@ -364,7 +364,7 @@ MODIStsp <- function(gui               = TRUE,
     general_opts$end_date  <- as.character(
       format(as.Date(general_opts$end_date), "%Y.%m.%d")
     )
-browser()
+
     # If the product is NOT tiled, set or_proj to WGS84 and or_res from
     # metres to degrees
     if (prod_opts$tiled == 0) {
@@ -432,8 +432,7 @@ browser()
 
     if (test != -1) {
       general_opts$out_folder     <- normalizePath(tempdir())
-      general_opts$out_folder_mod <- system.file("Test_files",
-                                                 package = "MODIStsp")
+      general_opts$out_folder_mod <- normalizePath(tempdir())
       if (exists("test_username")) {
         general_opts$user     <- test_username
       }

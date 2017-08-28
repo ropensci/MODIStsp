@@ -1,5 +1,5 @@
 MODIStsp_lpdaac_accessoires <- function() {
-  
+
 }
 #' @title lpdaac_getmod_dirs
 #' @description Accessory function to get the full list of directories on the
@@ -8,9 +8,9 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @param http `character` http site on lpdaac corresponding to the selcted MODIS
 #'   product
 #' @param ftp `character` ftp site corresponding to the selected MODIS product
-#' @param used_server `character ["http" / "ftp" / "offline"]` download service
+#' @param downlad_server `character ["http" / "ftp" / "offline"]` download service
 #'   to be used; if NA, the script tries to download with http, using ftp if the
-#'   download fails (Used in non-interactive execution to allow trying to use 
+#'   download fails (Used in non-interactive execution to allow trying to use
 #'   ftp if http fails)
 #' @param user `character` username for earthdata http server
 #' @param password `character` password for earthdata http server
@@ -32,10 +32,10 @@ MODIStsp_lpdaac_accessoires <- function() {
 #' @importFrom stringr str_extract str_split str_split_fixed
 #' @importFrom utils download.file
 
-lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user,
+lpdaac_getmod_dirs <- function(ftp, http, download_server, user = user,
                                password = password, gui, out_folder_mod,
                                .Platform) {
-  
+
   if (strsplit(http, "")[[1]][length(strsplit(http, "")[[1]])] != "/") {
     http <- paste(http, "/", sep = "")
   }
@@ -48,25 +48,30 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user,
   items <- 0
   class(items) <- "try-error"
   ce <- 0
-  
+
   # Try HTTP download
-  if (is.na(used_server)) {
-    check_used_server  <- TRUE
-  } else {
-    if (used_server == "http") {
-      check_used_server  <- TRUE
-    } else {
-      check_used_server <- FALSE
-    }
-  }
-  
-  if (class(items) == "try-error" & check_used_server) {
-    
+  # if (is.na(used_server)) {
+  #   check_used_server  <- TRUE
+  # } else {
+  #   if (used_server == "http") {
+  #     check_used_server  <- TRUE
+  #   } else {
+  #     check_used_server <- FALSE
+  #   }
+  # }
+
+  # if (class(items) == "try-error" & check_used_server) {
+
+  #   ____________________________________________________________________________
+  #   retrieve list of folders in case of http download                        ####
+
+  if (download_server == "http") {
+
     while (class(items) == "try-error") {
       # send request to server
       response <- try(httr::GET(http,
                                 httr::authenticate(user, password),
-                                httr::timeout(10)))  
+                                httr::timeout(10)))
       # if error on response, retry up to 50 times
       if (class(response) == "try-error") {
         Sys.sleep(1)
@@ -110,6 +115,7 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user,
               # if user selected to quit, exit programstop()
             } else {
               # on non-interactive, if limit exceeded try ftp downolad as backup
+              download_server <- "ftp"
               break()
             }
             # on NOT retry, quit the program
@@ -120,134 +126,142 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user,
       }
     }
   }
-  
-  #TODO Ask luigi what we are doing here. NOt clear to me what "check_used_server
-  #is doing. could be simpler to reset to "ftp" and then break on failure. 
-  #It is already like that on get_names (should be checked !)
-  
-  
-#  ____________________________________________________________________________
-#  Retrieve available dates in case of ftp download or if http exceeded limit
-#  in non-interactive execution
 
-  if (is.na(used_server)) {
-    check_used_server  <- TRUE
-  } else {
-    if (used_server == "ftp") {
-      check_used_server <- TRUE
-    } else {
-      check_used_server  <- FALSE
-    }
-  }
-  
-  if (class(items) == "try-error" & check_used_server) {
-    
-    while (class(items) == "try-error") {
-      # send request to server
-      response <- try(suppressWarnings(httr::GET(ftp, httr::timeout(10))))
-      # if error on response, retry
-      if (class(response) == "try-error") {
-        Sys.sleep(1)
-        ce <- ce + 1
-        message("Trying to reach ftp server - attempt ", ce)
-      } else {
-        # If good response, get the result
-        if (response$status_code == 226) {
-          items <- strsplit(httr::content(response,
-                                          "text",
-                                          encoding = "UTF-8"), "\r*\n")[[1]]
-        } else {
+  #TODO Ask luigi what we are doing here. NOt clear to me what "check_used_server
+  #is doing. could be simpler to reset to "ftp" and then break on failure.
+  #It is already like that on get_names (should be checked !)
+
+
+  #  ____________________________________________________________________________
+  #  Retrieve available dates in case of ftp download or if http exceeded limit
+  #  in non-interactive execution
+
+  # if (is.na(used_server)) {
+  #   check_used_server  <- TRUE
+  # } else {
+  #   if (used_server == "ftp") {
+  #     check_used_server <- TRUE
+  #   } else {
+  #     check_used_server  <- FALSE
+  #   }
+  # }
+
+
+  #   ____________________________________________________________________________
+  #   retrieve list of folders in case of ftp download                        ####
+
+
+  if (download_server == "ftp") {
+    if (class(items) == "try-error") {
+
+      while (class(items) == "try-error") {
+        # send request to server
+        response <- try(suppressWarnings(httr::GET(ftp, httr::timeout(10))))
+        # if error on response, retry
+        if (class(response) == "try-error") {
+          Sys.sleep(1)
           ce <- ce + 1
           message("Trying to reach ftp server - attempt ", ce)
+        } else {
+          # If good response, get the result
+          if (response$status_code == 226) {
+            items <- strsplit(httr::content(response,
+                                            "text",
+                                            encoding = "UTF-8"), "\r*\n")[[1]]
+          } else {
+            ce <- ce + 1
+            message("Trying to reach ftp server - attempt ", ce)
+          }
         }
-      }
-      
-      if (class(items) != "try-error") {
-        # on success on the ftp call, retrieve available years and dates
-        items_1 <- stringr::str_extract(items, "20[0-9][0-9]$")
-        items_1 <- items_1[!is.na(items_1)]
-        # replaces the line above to allow to repeat the try 10 times
-        # If fails  10 times consecutively assume no data for that year
-        #TODO improve this ! Can lead to errors ! 
-        response_1 <- list() 
-        for (sel_year in items_1) {
-          ce <- 1
-          while (ce < 10) {
-            # try to download each year for 10 times
-            response_1[[sel_year]] <- suppressWarnings(
-              try(httr::GET(paste0(ftp, sel_year, "/"), httr::timeout(10)))
-            )
-            if (class(response_1[[sel_year]]) != "response") {
-              # if error on response, retry
-              Sys.sleep(0.1)
-              ce <- ce + 1
-              message("Trying to reach ftp server - attempt ", ce)
-            } else if (response_1[[sel_year]]$status_code != 226) {
-              ce <- ce + 1
-              message("Trying to reach ftp server - attempt ", ce)
-            } else {
-              ce <- ce + 10
+
+        if (class(items) != "try-error") {
+          # on success on the ftp call, retrieve available years and dates
+          items_1 <- stringr::str_extract(items, "20[0-9][0-9]$")
+          items_1 <- items_1[!is.na(items_1)]
+          # replaces the line above to allow to repeat the try 10 times
+          # If fails  10 times consecutively assume no data for that year
+          #TODO improve this ! Can lead to errors !
+          response_1 <- list()
+          for (sel_year in items_1) {
+            ce <- 1
+            while (ce < 10) {
+              # try to download each year for 10 times
+              response_1[[sel_year]] <- suppressWarnings(
+                try(httr::GET(paste0(ftp, sel_year, "/"), httr::timeout(10)))
+              )
+              if (class(response_1[[sel_year]]) != "response") {
+                # if error on response, retry
+                Sys.sleep(0.1)
+                ce <- ce + 1
+                message("Trying to reach ftp server - attempt ", ce)
+              } else if (response_1[[sel_year]]$status_code != 226) {
+                ce <- ce + 1
+                message("Trying to reach ftp server - attempt ", ce)
+              } else {
+                ce <- ce + 10
+              }
             }
           }
-        }
-        # remove unsuccessful years
-        response_1 <- response_1[sapply(response_1, class) == "response"] 
-        response_2 <- lapply(response_1, function(x) {
-          httr::content(x, "text", encoding = "UTF-8")
-        })
-        response_3 <- lapply(stringr::str_split(response_2, "\n"),
-                             function(x){x[nchar(x) > 0]})
-        items_2    <- sapply(
-          response_3,
-          function(x)(stringr::str_split_fixed(x, " +", 9))[, 9])
-        names(items_2) <- sapply(response_1, function(x)(x$url))
-        full_dirs <- unlist(
-          lapply(seq_along(items_2),
-                 function(x)(paste0(names(items_2[x]), items_2[[x]], "/"))))
-        date_dirs <- sapply(
-          strsplit(full_dirs, "/"),
-          function(x)(strftime(as.Date(paste(x[length(x) - 1], x[length(x)]),
-                           format = "%Y %j"), "%Y.%m.%d")))
-        attr(date_dirs, "server") <- "ftp"
-        
-      } else {
-        if (ce == 50)  {
-          if (gui) {
-            # ask to retry only if gui=TRUE
-            confirm <- gWidgets::gconfirm(
-              "http server seems to be down! Do you want to retry?",
-              icon = "question",
-              handler = function(h, ...) {})
-          } else {
-            confirm <- FALSE
-          }
-          if (confirm == "FALSE") {
-            warning("[",
-                    date(),
-                    "] Error: ftp server seems to be down! Please Retry Later!")
+          # remove unsuccessful years
+          response_1 <- response_1[sapply(response_1, class) == "response"]
+          response_2 <- lapply(response_1, function(x) {
+            httr::content(x, "text", encoding = "UTF-8")
+          })
+          response_3 <- lapply(stringr::str_split(response_2, "\n"),
+                               function(x){x[nchar(x) > 0]})
+          items_2    <- sapply(
+            response_3,
+            function(x)(stringr::str_split_fixed(x, " +", 9))[, 9])
+          names(items_2) <- sapply(response_1, function(x)(x$url))
+          full_dirs <- unlist(
+            lapply(seq_along(items_2),
+                   function(x)(paste0(names(items_2[x]), items_2[[x]], "/"))))
+          date_dirs <- sapply(
+            strsplit(full_dirs, "/"),
+            function(x)(strftime(as.Date(paste(x[length(x) - 1], x[length(x)]),
+                                         format = "%Y %j"), "%Y.%m.%d")))
+          attr(date_dirs, "server") <- "ftp"
+
+        } else {
+          if (ce == 50)  {
             if (gui) {
-              gmessage("User selected to quit!", icon = "info")
-              stop()    # if user selected to quit, exit program
+              # ask to retry only if gui=TRUE
+              confirm <- gWidgets::gconfirm(
+                "http server seems to be down! Do you want to retry?",
+                icon = "question",
+                handler = function(h, ...) {})
             } else {
-              # break on failure
-              break()  
+              confirm <- FALSE
             }
-            # on NOT retry, quit the program
-          } else {
-            ce <- 0   # if retry, reset the counter
+            if (confirm == "FALSE") {
+              warning("[",
+                      date(),
+                      "] Error: ftp server seems to be down! Please Retry Later!")
+              if (gui) {
+                gmessage("User selected to quit!", icon = "info")
+                stop()    # if user selected to quit, exit program
+              } else {
+                # break on failure
+                stop("[",
+                     date(),
+                     "] Error: ftp server seems to be down! Please Retry Later!")
+              }
+              # on NOT retry, quit the program
+            } else {
+              ce <- 0   # if retry, reset the counter
+            }
           }
         }
       }
     }
   }
-  
-  #TODO Why ? Availble dirs should be checked ONLY in offline mode! Failure 
-  # here should be followed by a stop, and the following done only on "offline"
-  
-  # If the server is definitively down, or if "offline" method was chosen, use
-  # the dates already available in local directory
-  if (!exists("date_dirs")) {
-    
+
+  #   ____________________________________________________________________________
+  #   retrieve list of already available dates of HDFs in case of "offline"   ####
+  #   mode
+
+  if (download_server == "offline") {
+
     # Retrieve the list of hdf files matching the product / version
     items <- list.files(out_folder_mod, "\\.hdf$")
     sel_prod_vers <- unlist(stringr::str_split(gsub(
@@ -256,16 +270,16 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user,
     items <- items[grep(paste0(
       sel_prod_vers[1], "\\.A20[0-9][0-9][0-3][0-9][0-9]\\.h[0-9][0-9]v[0-9][0-9]\\.",  #nolint
       sel_prod_vers[2], "\\.[0-9]+\\.hdf$"), items)]
-    
+
     # Extract dates
     date_dirs <- strftime(as.Date(gsub(
       paste0(sel_prod_vers[1], "\\.A(20[0-9][0-9][0-3][0-9][0-9])\\..*"),"\\1",
       items), format = "%Y%j"), "%Y.%m.%d")
     attr(date_dirs, "server") <- "offline"
   }
-  
+
   return(date_dirs)
-  
+
 }
 
 #' @title lpdaac_getmod_dates
@@ -278,31 +292,29 @@ lpdaac_getmod_dirs <- function(ftp, http, used_server = NA, user = user,
 #' @return array of folder names containing data for the MODIS product acquired in
 #' the period specified by "dates"
 #' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2017) \email{busetto.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #'
 lpdaac_getmod_dates <- function(dates, date_dirs) {
-  
-  #TODO simplify this: create helper vectors for date dirs and dates in the correct
-  #format, find the indices and then subset date_dirs on the indices
+
+  tmp_dates     <- as.Date(dates, format = "%Y.%m.%d")
+  tmp_date_dirs <- as.Date(date_dirs, format = "%Y.%m.%d")
   if (length(dates) == 1) {
-    date_dirs <- date_dirs[which(date_dirs == dates[1])]
-  } else if (length(dates) == 2) {
-    date_dirs <- date_dirs[
-      as.Date(date_dirs, format = "%Y.%m.%d") >= as.Date(dates, format = "%Y.%m.%d")[1] &
-        as.Date(date_dirs, format = "%Y.%m.%d") <= as.Date(dates, format = "%Y.%m.%d")[2]
-      ]
-    
-  } else if (length(dates) == 4) {
-    date_dirs <- c(
-      date_dirs[as.Date(date_dirs, format = "%Y.%m.%d") >= as.Date(dates, format = "%Y.%m.%d")[1] &
-                  as.Date(date_dirs, format = "%Y.%m.%d") <= as.Date(dates, format = "%Y.%m.%d")[2]],
-      date_dirs[as.Date(date_dirs, format = "%Y.%m.%d") >= as.Date(dates, format = "%Y.%m.%d")[3] &
-                  as.Date(date_dirs, format = "%Y.%m.%d") <= as.Date(dates, format = "%Y.%m.%d")[4]]
-    )
-  } else {
-    date_dirs <- NULL
+    date_dirs <- date_dirs[tmp_date_dirs == tmp_dates[1]]
   }
-  
+  if (length(dates) == 2) {
+    date_dirs <- date_dirs[tmp_date_dirs >= tmp_dates[1] &
+                             tmp_date_dirs <= tmp_dates[2]]
+  }
+  if (length(dates) == 4) {
+    # deals with the case of seasonal download, when yy != start_year &
+    # yy != end_year
+    date_dirs <- c(
+      date_dirs[tmp_date_dirs >= tmp_dates[1] & tmp_date_dirs <= tmp_dates[2]],
+      date_dirs[tmp_date_dirs >= tmp_dates[1] & tmp_date_dirs <= tmp_dates[4]]
+    )
+  }
+
   return(date_dirs)
 }
 # ------------------------------ ----------------------------------------------#
@@ -347,17 +359,17 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
   getlist <- 0
   class(getlist) <- "try-error"
   ce <- 0
-  
+
   if (used_server == "http") {
     #   ________________________________________________________________________
     #   Retrieve available hdf files in case of http download               ####
-    
+
     # http folders are organized by date subfolders containing all tiles
     while (class(getlist) == "try-error") {
       getlist <- try(httr::GET(paste0(http, date_dir, "/"),
                                httr::timeout(5),
                                httr::authenticate(user, password)))
-      
+
       if (class(getlist) == "try-error") {
         # if error on response, retry
         Sys.sleep(1)
@@ -372,7 +384,7 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
           message("Trying to reach http server - attempt ", ce)
         }
       }
-      
+
       if (class(getlist) != "try-error") {
         getlist <- getlist[
           grep(".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
@@ -382,7 +394,7 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
           ".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
           getlist
         )
-        
+
       } else if (ce == 5)  {
         if (gui) {
           # ask to retry only if gui=TRUE
@@ -414,13 +426,13 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
   if (used_server == "ftp") {
     #   ______________________________________________________________________
     #   Retrieve available hdf files in case of ftp download             ####
-    
-    # ftp folders are organized by /year/date subfolders, so there is an 
+
+    # ftp folders are organized by /year/date subfolders, so there is an
     # additional level to be "parsed" wrt http
     date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
     date_doy <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
     while (class(getlist) == "try-error") {
-      
+
       getlist <- try(
         strsplit(
           x = RCurl::getURL(paste(ftp, date_year, "/", date_doy, "/", sep = ""),
@@ -431,7 +443,7 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
           split = "\r*\n")[[1]],
         silent = TRUE
       )
-      
+
       if (class(getlist) == "try-error") {
         Sys.sleep(1)
         message("Trying to reach ftp server - attempt ", ce)
@@ -462,11 +474,11 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
       }
     }
   }
-  
+
   if (used_server == "offline") {
-    
+
     # __________________________________________________________________________
-    # Retrieve the list of hdf files matching the product / version / date #### 
+    # Retrieve the list of hdf files matching the product / version / date ####
     # in case of offline mode
     getlist <- list.files(out_folder_mod, "\\.hdf$")
     sel_prod_vers <- unlist(
@@ -483,13 +495,13 @@ lpdaac_getmod_names <- function(http, ftp, used_server, user, password, date_dir
                                    sel_prod_vers[2],
                                    "\\.[0-9]+\\.hdf$"),
                             getlist)]
-    
+
   }
 
   #   __________________________________________________________________________
   #   create the array of MODIS files to be processed by retrieveing from   ####
   #   getlist the images corresponding to the h and v tiles of interest
-  
+
   Modislist <- c()
   if (tiled == 1) {
     for (vv in v) {
