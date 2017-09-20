@@ -38,3 +38,4 @@ inst/Test_files/MOD11B2.A2017001.h14v04.006.2017013155631.hdf$
 inst/Test_files/test04_LB.json
 inst/Test_files/test05_LB.json
 inst/Test_files/test5_LB.json
+^appveyor\.yml$
