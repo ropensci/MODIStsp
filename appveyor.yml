@@ -9,14 +9,11 @@ init:
 
 install:
   ps: Bootstrap
-
+  cinst: gtk-runtime
 cache:
   - C:\RLibrary
 
 # Adapt as necessary starting from here
-
-install:
-  - cinst gtk-runtime
 
 build_script:
   - travis-tool.sh install_deps
