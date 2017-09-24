@@ -16,39 +16,39 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   download_range = "full", gui = TRUE)
 }
 \arguments{
-\item{sel_prod}{\code{character} Name of selected MODIS product}
+\item{sel_prod}{\code{character} Name of selected MODIS product.}
 
 \item{start_date}{\code{character} Start date for images download and preprocessing
-(yyyy.mm.dd)}
+(yyyy.mm.dd).}
 
 \item{end_date}{\code{character} End date for images download and preprocessing
-(yyyy.mm.dd)}
+(yyyy.mm.dd).}
 
-\item{out_folder}{\code{character} Main output folder}
+\item{out_folder}{\code{character} Main output folder.}
 
-\item{out_folder_mod}{\code{character} Output folder for original HDF storage}
+\item{out_folder_mod}{\code{character} Output folder for original HDF storage.}
 
 \item{reprocess}{\code{character ["Yes"/"No"]} If Yes, reprocess data for already
-existing dates}
+existing dates.}
 
 \item{delete_hdf}{\code{character ["Yes"/"No"]} If Yes, delete original HDF after
-completion}
+completion.}
 
 \item{sensor}{\code{character ["Terra"/"Aqua"/"Both"]} MODIS platform to be considered.
-(Ignored for MCD* products)}
+(Ignored for MCD* products).}
 
-\item{download_server}{\code{character ["http"/"ftp"/"NA"]} service to be used for
-(NA == offline))}
+\item{download_server}{\code{character ["http" / "ftp" / "offline"]} service to be used for
+download.}
 
-\item{user}{\code{character} Username (for http download)
-(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
+\item{user}{\code{character} Username for NASA http server
+(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home}).}
 
-\item{password}{\code{character} Password (for http download)
-(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home})}
+\item{password}{\code{character} Password for NASA http server
+(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home}).}
 
-\item{https}{\code{hash table} http addresses for download of HDF of selected product}
+\item{https}{\code{hash table} http addresses for download of HDF of selected product.}
 
-\item{ftps}{\code{hash table} ftp addresses for download of HDF of selected product}
+\item{ftps}{\code{hash table} ftp addresses for download of HDF of selected product.}
 
 \item{start_x}{\code{integer [0-35]} Start horizontal tile}
 
@@ -63,22 +63,22 @@ the entire extention of the selected tiles. Otherwise, crop the output to
 output bbox}
 
 \item{bbox}{\code{numeric(4)} Output bounding box (xmin, xmax, ymin, ymax) in
-out_proj coords}
+out_proj coordinate system.}
 
-\item{out_format}{\code{character ["ENVI"/"GTiff"]} Desired output format}
+\item{out_format}{\code{character ["ENVI" / "GTiff"]} Desired output format.}
 
-\item{compress}{\code{character ["None", "PACKBITS", "LZW", "DEFLATE"]} Compression
-method for GTiff outputs}
+\item{compress}{\code{character ["None" / "PACKBITS" / "LZW" / "DEFLATE"]}
+Compression method for GTiff outputs (Ignored if \code{out_format == ENVI})}
 
-\item{out_res_sel}{\code{character ["Native"\"Resampled"]} Indicates if the native
-resolution of the product or a user-sapplied one is to be used}
+\item{out_res_sel}{\code{character ["Native" / "Resampled"]} Indicates if the native
+resolution of the product or a user-sapplied one is to be used.}
 
 \item{out_res}{\code{float} Output resolution (in output projection measurement
-unit). Ignored if out_res_sel == "Native"}
+unit). Ignored if out_res_sel == "Native".}
 
 \item{native_res}{\code{float} Native resolution of MODIS product to be processed}
 
-\item{tiled}{\code{integer [0/1]} 1 = tiled product; 0 = non-tiled product
+\item{tiled}{\code{integer [0 / 1]} 1 = tiled product; 0 = non-tiled product
 (resolution 0.05 deg - latlong projection)}
 
 \item{mod_proj_str}{\code{character} proj4 string of MODIS product native projection}
@@ -91,34 +91,34 @@ the selected MODIS product}
 \item{nodata_out}{\code{numeric array} Target NoData values of MODIS original layers
 (Ignored if nodata_change == FALSE)}
 
-\item{nodata_change}{\code{character [Yes/No]} if Yes, NoData are set to nodata_out
+\item{nodata_change}{\code{character [Yes / No]} if Yes, NoData are set to nodata_out
 in output rasters}
 
-\item{scale_val}{\code{character [Yes/No]} If Yes, scale and offset are applied to
-original MODIS layers, and Spectral Indexes are saved as fploating point. If
-No, no rescaling is done and Spectral Indexes are saved as integer, with a
+\item{scale_val}{\code{character [Yes / No]} If == \code{Yes}, scale and offset are applied to
+original MODIS layers, and Spectral Indexes are saved as floating point. If
+== `No``, no rescaling is done and Spectral Indexes are saved as integer, with a
 10000 scaling factor}
 
 \item{scale_factor}{\code{numeric array} of length equal to the number of original
 layers of the selected product, containing scale factors to be applied to each
-original layer to convert it to "correct" measure units}
+original layer to convert it to "correct" measure units.}
 
 \item{offset}{\code{numeric array} of length equal to the number of original
 layers of the selected product, containing offsets to be applied to each
-original layer to convert it to "correct" measure units}
+original layer to convert it to "correct" measure units.}
 
-\item{rts}{\code{character [Yes/No]} If Yes, create RasterStack time series}
+\item{rts}{\code{character [Yes / No]} If Yes, create RasterStack time series}
 
 \item{datatype}{\code{character array} datatypes of original MODIS bands
 (e.g., "INT2S")}
 
-\item{bandsel}{\code{integer array [0/1]} of length equal to number of original
+\item{bandsel}{\code{integer 0/1 array} of length equal to number of original
 layers of the selected product set to 1 for bands to be processed.}
 
 \item{bandnames}{\code{character array} Abbreviated Names of original layers of the
 selected product (used to build output file names)}
 
-\item{indexes_bandsel}{\code{integer array [0/1]} array of length equal to the number
+\item{indexes_bandsel}{\code{integer 0/1 array} array of length equal to the number
 of Spectral Indexes available for the product (standard + user-provided),
 set to  1 for indexes to be processed}
 
@@ -134,7 +134,7 @@ selected product (standard and custom)}
 Indicators available for the selected product (used to build output file
 names of QIs)}
 
-\item{quality_bandsel}{\code{integer array [0/1]} array of length equal to number
+\item{quality_bandsel}{\code{integer 0/1 array} array of length equal to number
 of available QIs, set to  1 for indexes to be processed}
 
 \item{quality_bitN}{\code{character array} with length equal to the number QIs
@@ -150,33 +150,33 @@ derivred from different bits of the bit-encoded layer)}
 \item{quality_nodata_out}{\code{integer} Always set to 255}
 
 \item{file_prefixes}{\code{character} output file prefix of selected product
-(e.g., MOD13Q1). Used to build output filenames}
+(e.g., MOD13Q1). Used to build output filenames.}
 
 \item{main_out_folder}{\code{character} Main folder for storager of MODIStsp
 time series}
 
-\item{resampling}{\code{character ["near" / "bilinear" / "cubic" / "lanczos" / "mode]}
+\item{resampling}{\code{character ["near" / "bilinear" / "cubic" / "lanczos" / "mode"]}
 resampling method to be used by \code{gdalwarp}}
 
-\item{ts_format}{\code{character ["None" / "ENVI Meta Files" / "GDAL vrt files", "ENVI and GDAL"]})
-selected virtual time series format}
+\item{ts_format}{\code{character ["None" / "ENVI Meta Files" / "GDAL vrt files" / "ENVI and GDAL"]}
+selected virtual time series format.}
 
 \item{use_aria}{\code{logical} If TRUE, aria2c is used to accelerate download
-(if available !)}
+(if available !).}
 
-\item{download_range}{\code{character ["full" / "seasonal"} If "full", all the
+\item{download_range}{\code{character ["full" | "seasonal"]} If "full", all the
 available images between the starting and the ending dates are downloaded;
-if "seasonal", only the images included in the season are downloaded
+If "seasonal", only the images included in the season are downloaded
 (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, only
 the images of December, January and February from 2005 to 2010 - excluding
-2005-01, 2005-02 and 2010-12 - are downloaded)}
+2005-01, 2005-02 and 2010-12 - are downloaded).}
 
 \item{gui}{\code{logical} Indicates if processing was called starting from an
 interactive environment or not. If FALSE, processing messages are sent to a
 log file instead than to the console, and gWidgest messages are suppressed}
 }
 \value{
-The function is called for its side effects
+The function is called for its side effects.
 }
 \description{
 Main processing function of MODIStsp. Takes as input processing
@@ -187,8 +187,9 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
 \details{
 After retrieving the input processing options, the function
 \enumerate{
-\item Accesses lpdaac http or ftp archive to determine the list of dates to be
-processed;
+\item Accesses NASA http or ftp archive to determine the list of files to be
+downloaded/processed (or, in case of offline processing, get the list
+of already available hdf files present in \code{out_mod_folder});
 \item Performs all required processing steps on each date (download,
 reprojection, resize, mosaicing, Spectral Indexes and Quality indicators
 computation);
@@ -204,7 +205,8 @@ reprocess already processed dates (if the user did not specify that)
 \note{
 Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
 development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
-\href{http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
+\link{Download_and_resampling_of_MODIS_images}
+(http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
 
 License: GPL 3.0
 }
