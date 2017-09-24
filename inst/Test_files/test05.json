@@ -2,8 +2,8 @@
  "sel_prod": "Albedo_Daily_500m (MCD43A3)",
 "sensor": "Combined",
 "prod_version": "6",
-"start_date": "2017-07-19",
-"end_date": "2017-07-19",
+"start_date": "2017-07-18",
+"end_date": "2017-07-18",
 "bandsel": [
      0,      0,      0,      0,      0,      0,      0,      1,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0
 ],

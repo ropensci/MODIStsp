@@ -12,7 +12,7 @@ get_yeardates <- function(download_range,
                           yy, 
                           start_year, end_year, 
                           start_date, end_date) {
-  browser()
+  
   if (download_range == "full") {
     # Create string representing the dates to be processed in the case
     # of "full" time processing

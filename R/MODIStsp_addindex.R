@@ -23,12 +23,14 @@
 #'   if NULL, use MODIStsp_ProdOpts.RData in subdir Previous, Default: NULL
 #' @param selprod `character` Name of the product to which the new index should
 #'   be added (Note: the index will be added to all other products allowing its
-#'   computation !). If NULL, as in non-interactive exection, no check is
-#'   conducted check on available band names is skipped, Default: NULL
+#'   computation !). If NULL, as in non-interactive exection, no
+#'   check on available band names is skipped and the index (if valid) is
+#'   added to all products supporting it, Default: NULL
 #' @param selvers `character` Version of the product to which the new index
 #'   should be added (Note: the index will be added to all other products
 #'   allowing its computation !). If NULL, as in non-interactive exection, no
-#'   check is conducted check on available band names is skipped, Default: NULL
+#'   check on available band names is skipped and the index (if valid) is
+#'   added to all products supporting it, Default: NULL
 #' @param gui `logical` if TRUE, a GUI is opened to define the new
 #'    index; otherwise use the "new_indexbandname", "new_indexfullname" and
 #'    "new_indexformula" parameters to define it non-interactively,
@@ -85,7 +87,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
                               new_indexformula    = "",
                               new_indexnodata_out = "32767",
                               MODIStsp_dir = system.file(package = "MODIStsp")) { #nolint
-
+  
   # Initialization and retrieval of parameters ----
   if (gui) {
     if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
@@ -100,12 +102,12 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
         stop("MODIStsp can not work in Interactive mode without gWidgetsRGtk2!",
              "\n Aborting!")
       }
-
+      
     }
-
+    
     options("guiToolkit" = "RGtk2")
   }
-
+  
   previous_dir    <- file.path(MODIStsp_dir, "Previous")
   previous_jsfile <- ifelse(is.null(option_jsfile),
                             file.path(previous_dir, "MODIStsp_Previous.json"),
@@ -114,7 +116,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
                             file.path(previous_dir, "MODIStsp_ProdOpts.RData"),
                             prodopts_file)
   general_opts    <- RJSONIO::fromJSON(previous_jsfile)
-
+  
   # Restore MODIS products if existing, otherwise retrieve  from xml file ----
   prod_opt_list <- get(load(prodopts_file))
   #how many product available ? = elements in root
@@ -122,7 +124,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
   # Valid names for reflectance bands
   refbands_names <- c("b1_Red", "b2_NIR", "b3_Blue", "b4_Green", "b5_SWIR",
                       "b6_SWIR", "b7_SWIR")
-
+  
   # if selprod and selver not passed, i.e. outside a common execution from the
   # gui, skip check on bands available for a specific product
   if (is.null(selprod) | is.null(selvers)) {
@@ -130,12 +132,12 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
   } else {
     # Names of bands available for selected product
     avail_prodbands <- prod_opt_list[[selprod]][[selvers]]$bandnames
-
+    
     # reflectence bands available for selected product
     match_refbands <- avail_prodbands[match(refbands_names, avail_prodbands)]
     avail_refbands <- match_refbands[!is.na(match_refbands)]
   }
-
+  
   # GUI Initialization -----
   if (gui) {
     main_win <- gbasicdialog(
@@ -147,10 +149,10 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
       handler = function(h, ...) {
       }
     )
-
+    
     main_group <- ggroup(container  = main_win, horizontal = FALSE,
                          expand = TRUE)
-
+    
     indexbandname_group <- ggroup(container  = main_group, horizontal = TRUE,
                                   expand     = TRUE)
     indexbandname_label <- glabel(text = "Spectral Index Acronym (e.g., SR)",
@@ -159,18 +161,18 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
     size(indexbandname_label) <- c(500, 20)
     font(indexbandname_label) <- list(family = "sans", size = 10,
                                       weight = "bold")
-
+    
     sel_indexbandname <- gedit(text       = new_indexbandname,
                                label      = "Please Insert a valid Proj4 string        ", #nolint
                                container  = indexbandname_group,
                                size       = 800,
                                horizontal = TRUE
     )
-
+    
     indexbandfullname_group <- ggroup(container  = main_group,
                                       horizontal = TRUE,
                                       expand     = TRUE)
-
+    
     indexbandfullname_label <- glabel(
       text  = "Spectral Index Full Name (e.g., Simple Ratio (b2_NIR/b1_Red))",
       markup    = TRUE,
@@ -179,12 +181,12 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
     size(indexbandfullname_label) <- c(500, 20)
     font(indexbandfullname_label) <- list(family = "sans", size = 10,
                                           weight = "bold")
-
+    
     sel_indexbandfullname <- gedit(text       = new_indexfullname,
                                    container  = indexbandfullname_group,
                                    size       = 800,
                                    horizontal = TRUE)
-
+    
     indexformula_group <- ggroup(container  = main_group,
                                  horizontal = TRUE,
                                  expand     = TRUE)
@@ -196,15 +198,15 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
     size(indexformula_label) <- c(500, 20)
     font(indexformula_label) <- list(family = "sans", size = 10,
                                      weight = "bold")
-
+    
     sel_indexformula <- gedit(text       = new_indexformula,
                               container  = indexformula_group,
                               size       = 800,
                               horizontal = TRUE)
-
+    
     # Button for testing the new index
     but_group <- ggroup(container = main_group, horizontal = TRUE)
-
+    
     # If "Set" clicked, retrieve selected values and save in previous file
     set_but <- gbutton(
       text = "---  Set New Index  ---", container = but_group,
@@ -215,15 +217,16 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
         # Check if formual is good. If so, add it in the options file ----
         # for products for which the formula is computable (i.e., they have the
         # required bands)
-
+        
         catch_err <- check_formula_errors(new_indexbandname,
                                           new_indexfullname,
                                           new_indexformula,
                                           n_products,
                                           prod_opt_list,
                                           refbands_names,
+                                          avail_refbands,
                                           general_opts)
-
+        
         if (catch_err == 0) {
           save_formula(refbands_names,
                        req_bands = attr(catch_err, "req_bands"),
@@ -262,7 +265,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
             "its fullname and the Formula."
           )
         )
-
+        
         ifelse(
           as.character(catch_err) == "0",
           font(notes_lab) <- list(family = "sans", size = 9, weight = "bold"),
@@ -271,7 +274,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
         )
       }
     )
-
+    
     size(set_but) <- list(width = 500)
     font(set_but) <- list(family = "sans", size = 10, color = "red",
                           weight = "bold")
@@ -299,7 +302,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
     size(notes_lab) <- c(600, 50)
     font(notes_lab) <- list(family = "sans",  size = 9, weight = "bold")
     addSpring(but_group)
-
+    
     finish_but <- gbutton(
       text      = "Done !",
       container = but_group,
@@ -314,13 +317,13 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
     )
     font(finish_but) <- list(family = "sans",  weight = "bold")
     visible(main_win, set = TRUE)
-
+    
     # end of gui actions ----
   } else {
-
+    
     #   ________________________________________________________________________
     #   Actions on non-interactive execution                                ####
-
+    
     # Check if formula is good. If so, add it in the options file
     # for all products for which the formula is computable (i.e., they have the
     # required bands)
@@ -330,9 +333,10 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
                                       n_products,
                                       prod_opt_list,
                                       refbands_names,
+                                      avail_refbands,
                                       general_opts)
     if (catch_err == 0) {
-
+      
       save_formula(refbands_names,
                    req_bands = attr(catch_err, "req_bands"),
                    new_indexbandname,
@@ -347,7 +351,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
                    prod_opt_list,
                    previous_jsfile)
       message("The new Index was correctly added!\n It will be available at\n",
-        "the next execution of MODIStsp().")
+              "the next execution of MODIStsp().")
     } else if (catch_err == 1) {
       stop("The formula of the new index is not computable for this product. ",
            "Please check it.\n",
@@ -360,9 +364,9 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
       stop("Some parameters are still blank; please provide valid values for\n",
            "the index name, the index fullname and the formula.")
     }
-
+    
   } # end of non-gui actions
-
+  
 } # End of MAIN function
 
 # Helpers ####
@@ -385,15 +389,16 @@ check_formula_errors <- function(new_indexbandname,
                                  n_products,
                                  prod_opt_list,
                                  refbands_names,
+                                 avail_refbands,
                                  general_opts) {
-
+  
   catch_err <- 0 # error 0: no errors
-
+  
   # Check that the name, the fullname and the formula fields are not null
   if (any(c(new_indexbandname, new_indexfullname, new_indexformula) == "")) {
     catch_err <- 3 # error 3: blank parameters
   }
-
+  
   # Look for valid band names in index formula
   req_bands <- c(stringr::str_detect(new_indexformula, "b1_Red"),
                  stringr::str_detect(new_indexformula, "b2_NIR"),
@@ -402,11 +407,11 @@ check_formula_errors <- function(new_indexbandname,
                  stringr::str_detect(new_indexformula, "b5_SWIR"),
                  stringr::str_detect(new_indexformula, "b6_SWIR"),
                  stringr::str_detect(new_indexformula, "b7_SWIR"))
-
+  
   # Create dummy variables named as the required bands, assign random values
   # to them, and then verify if formula is computable by evaluate/parse and
   # check for errors
-
+  
   if (req_bands[1] == TRUE) b1_Red   <- 5
   if (req_bands[2] == TRUE) b2_NIR   <- 6
   if (req_bands[3] == TRUE) b3_Blue  <- 7
@@ -414,7 +419,7 @@ check_formula_errors <- function(new_indexbandname,
   if (req_bands[5] == TRUE) b5_SWIR  <- 9
   if (req_bands[6] == TRUE) b6_SWIR  <- 15
   if (req_bands[7] == TRUE) b7_SWIR  <- 25
-
+  
   if (max(req_bands == 1)) {
     try_parse <- try(eval(parse(text = new_indexformula)), silent = TRUE)
     if (class(try_parse) == "try-error") {
@@ -423,7 +428,7 @@ check_formula_errors <- function(new_indexbandname,
   } else {
     catch_err <- 1
   } # error 1: error in the formula
-
+  
   ## generate the list of all the index names
   all_indexes_bandnames <- all_indexes_fullnames <- NA
   # cycle on available products
@@ -446,7 +451,7 @@ check_formula_errors <- function(new_indexbandname,
   }
   all_indexes_bandnames <- unique(all_indexes_bandnames)
   all_indexes_fullnames <- unique(all_indexes_fullnames)
-
+  
   # verify that the index name and fullname is not already present
   if (catch_err == 0 & (new_indexbandname %in% all_indexes_bandnames |
                         new_indexfullname %in% all_indexes_fullnames)) {
@@ -462,10 +467,10 @@ check_formula_errors <- function(new_indexbandname,
       catch_err <- 1
     }
   }
-
+  
   attr(catch_err, "req_bands") <- req_bands
   return(catch_err)
-
+  
 } # end of check_formula_errors()
 
 
@@ -485,14 +490,14 @@ save_formula <- function(refbands_names,
                          general_opts,
                          prod_opt_list,
                          previous_jsfile) {
-
+  
   # initialise list of custom indexes, if it does not exist yet
   if (is.null(general_opts$custom_indexes)) {
     general_opts$custom_indexes <- list()
-
+    
     for (prod in names(prod_opt_list)) {
       general_opts$custom_indexes[[prod]] <- list()
-
+      
       for (vers in names(prod_opt_list[[prod]])) {
         general_opts$custom_indexes[[prod]][[vers]] <- list(
           "indexes_bandnames"  = character(0),
@@ -505,7 +510,7 @@ save_formula <- function(refbands_names,
   }
   # cycle on available products to add the new index to all products
   # allowing its computation
-
+  
   for (prod in names(prod_opt_list)) {
     # cycle on available product versions
     for (vers in names(prod_opt_list[[prod]])) {
@@ -518,13 +523,13 @@ save_formula <- function(refbands_names,
           check <- check + 1
         }
       } #End Cycle on reqband
-
+      
       # if all required bands are available in product, add the new index to
       # the indexes list for the product in the previous_opts file.
       # In this way, at next execution, the new index should be available.
       # Moreover, loading and use of old RData options files won't be broken
       # if an index is added later than their creation.
-
+      
       n_req_bands <- sum(req_bands)
       if (n_req_bands == check) {
         tmp_indexes_bandnames <- c(current_custindexes$indexes_bandnames,
@@ -535,7 +540,7 @@ save_formula <- function(refbands_names,
                                   new_indexformula)
         tmp_indexes_nodata_out <- c(current_custindexes$indexes_nodata_out,
                                     new_indexnodata_out)
-
+        
         general_opts$custom_indexes[[prod]][[vers]] <- list(
           "indexes_bandnames"  = tmp_indexes_bandnames,
           "indexes_fullnames"  = tmp_indexes_fullnames,
@@ -549,11 +554,11 @@ save_formula <- function(refbands_names,
       }
     }
   }  #End Cycle on products
-
+  
   # Save the products list and the chars of the products (including
   # custom indexes) in previous file.
   write(RJSONIO::toJSON(general_opts), previous_jsfile)
-
+  
   return(general_opts)
-
+  
 } # end of save_formula()

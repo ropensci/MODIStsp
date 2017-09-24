@@ -20,13 +20,15 @@ if NULL, use MODIStsp_ProdOpts.RData in subdir Previous, Default: NULL}
 
 \item{selprod}{\code{character} Name of the product to which the new index should
 be added (Note: the index will be added to all other products allowing its
-computation !). If NULL, as in non-interactive exection, no check is
-conducted check on available band names is skipped, Default: NULL}
+computation !). If NULL, as in non-interactive exection, no
+check on available band names is skipped and the index (if valid) is
+added to all products supporting it, Default: NULL}
 
 \item{selvers}{\code{character} Version of the product to which the new index
 should be added (Note: the index will be added to all other products
 allowing its computation !). If NULL, as in non-interactive exection, no
-check is conducted check on available band names is skipped, Default: NULL}
+check on available band names is skipped and the index (if valid) is
+added to all products supporting it, Default: NULL}
 
 \item{gui}{\code{logical} if TRUE, a GUI is opened to define the new
 index; otherwise use the "new_indexbandname", "new_indexfullname" and

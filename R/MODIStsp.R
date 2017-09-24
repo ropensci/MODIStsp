@@ -123,7 +123,7 @@ MODIStsp <- function(gui               = TRUE,
       if (!file.exists(test_hdf)) {
         unzip(zipfile = paste0(test_hdf, ".zip"),
               files   = basename(test_hdf),
-              exdir   = dirname(test_hdf),
+              exdir   = system.file("Test_files", package = "MODIStsp"),
               unzip   = "internal")
       }
     }
@@ -427,12 +427,14 @@ MODIStsp <- function(gui               = TRUE,
 
     #   ________________________________________________________________________
     #   If running a test, redefine set output folders to use `R` temporary
-    #   folder and (in case of tests using http) set the username and
-    #   password
+    #   folder to store results and the Test_Files subfolder of MODIStsp
+    #   to look for example files. Also, ask to set the username and
+    #   password in case of tests based on http download
 
     if (test != -1) {
       general_opts$out_folder     <- normalizePath(tempdir())
-      general_opts$out_folder_mod <- normalizePath(tempdir())
+      general_opts$out_folder_mod <- system.file("Test_files",
+                                                 package = "MODIStsp")
       if (exists("test_username")) {
         general_opts$user     <- test_username
       }

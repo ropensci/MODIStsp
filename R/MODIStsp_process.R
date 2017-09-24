@@ -325,12 +325,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
       file_prefix <- file_prefixes[["Aqua"]]
     }
     
-    #   __________________________________________________________________________
-    #   Retrieve list of files to be downloaded/processed from NASA http/ftp ####
+    #   ________________________________________________________________________
+    #   Retrieve list of files to be downloaded/processed from NASA http/ftp####
     #   servers
     
-    # Retrieve all available MODIS acquisition dates for the selected product 
-    # between start_year and end_year
+    # First, retrieve acquisition dates of all available MODIS hdfs for the
+    # selected product between start_year and end_year
     date_dirs_all   <- get_mod_dirs(http, ftp, download_server,
                                     user, password, 
                                     n_retries = 20, 
@@ -354,7 +354,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              yy, 
                              start_year, end_year, 
                              start_date, end_date)
-  browser()
+  
     # Processing status message
     mess_text <- paste("Retrieving Files for Year", as.character(yy))
     if (gui) {
@@ -384,11 +384,17 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
         
         # check if all foreseen output rasters already exist. If so, skip the date. Otherwise start proecssing
         check_files <- FALSE
-        check_files <- MODIStsp_check_files(out_prod_folder, file_prefix,
-                                            bandnames, bandsel_orig_choice, yy,
-                                            DOY, out_format, indexes_bandnames,
-                                            indexes_bandsel, quality_bandnames,
-                                            quality_bandsel)
+        check_files <- MODIStsp_check_files(out_prod_folder,
+                                 file_prefix,
+                                 yy,
+                                 DOY,
+                                 bandnames,
+                                 bandsel_orig_choice,
+                                 indexes_bandnames,
+                                 indexes_bandsel,
+                                 quality_bandnames,
+                                 quality_bandsel,
+                                 out_format)
         # If not all output files are already present or reprocess = "Yes", start downloading hdfs
         if (check_files == FALSE | reprocess == "Yes") {
           
@@ -735,7 +741,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       files_in[file] <- file_out
                     }
                     
-                    outfile_vrt <- paste0(str_sub(outfile_vrt, 1,-5), ".tif")
+                    outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1,-5), ".tif")
                     gdalwarp(files_in,
                              outfile_vrt,
                              sd        = band,
