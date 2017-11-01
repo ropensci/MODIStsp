@@ -65,7 +65,7 @@ install.packages("gWidgetsRGtk2")
 library(gWidgetsRGtk2)
 ```
     
- Upon loading `gWidgetsRGtk2` , an error window will probably appear. This signals that library "GTK+" is not yet installed on your system or is not on your PATH. To install itpress "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !<sup name="a1">
+ Upon loading `gWidgetsRGtk2` , an error window will probably appear. This signals that library "GTK+" is not yet installed on your system or is not on your PATH. To install it press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !<sup name="a1">
  
  In case RStudio doesn't automatically restart or continuously asks to install GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go. 
 
