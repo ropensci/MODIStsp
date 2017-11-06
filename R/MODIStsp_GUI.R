@@ -1118,9 +1118,9 @@ MODIStsp_GUI <- function(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir
                                             handler = function(h, ...) {
                                               selected_tiles <<- required_tiles
                                               general_opts$start_x <<- min(d_bbox_mod_tiled$H)
-                                              general_opts$end_x <<- max(d_bbox_mod_tiled$H)
+                                              general_opts$end_x   <<- max(d_bbox_mod_tiled$H)
                                               general_opts$start_y <<- min(d_bbox_mod_tiled$V)
-                                              general_opts$end_y <<- max(d_bbox_mod_tiled$V)
+                                              general_opts$end_y   <<- max(d_bbox_mod_tiled$V)
                                             }, title = "Warning")
       }
 
