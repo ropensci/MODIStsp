@@ -80,7 +80,8 @@ MODIStsp <- function(gui               = TRUE,
                      options_file      = NULL,
                      spatial_file_path = NULL,
                      scroll_window     = FALSE,
-                     test              = -1) {
+                     test              = -1, 
+                     n_retries         = 20) {
 
   options("guiToolkit" = "RGtk2")
 
@@ -506,7 +507,8 @@ MODIStsp <- function(gui               = TRUE,
       main_out_folder    = prod_opts$main_out_folder,
       gui                = gui,
       use_aria           = general_opts$use_aria,
-      download_range     = general_opts$download_range)
+      download_range     = general_opts$download_range, 
+      n_retries          = n_retries)
 
     # At end of succesfull execution, save the options used in the main output
     # folder as a JSON file with name containing the date of processing.

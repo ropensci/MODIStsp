@@ -123,6 +123,9 @@
 #' @param offset `numeric array` of length equal to the number of original
 #'   layers of the selected product, containing offsets to be applied to each
 #'   original layer to convert it to "correct" measure units.
+#' @param n_retries `numeric` maximum number of retries on download functions. 
+#'   In case any download function fails more than `n_retries` times consecutively, 
+#'   MODIStsp_process will abort, Default: 20
 #' @return The function is called for its side effects.
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
@@ -325,30 +328,32 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
       file_prefix <- file_prefixes[["Aqua"]]
     }
     
-    #   ________________________________________________________________________
-    #   Retrieve list of files to be downloaded/processed from NASA http/ftp####
-    #   servers
-    
-    # First, retrieve acquisition dates of all available MODIS hdfs for the
-    # selected product between start_year and end_year
-    date_dirs_all   <- get_mod_dirs(http, ftp, download_server,
-                                    user, password, 
-                                    n_retries = 20, 
-                                    gui,
-                                    out_folder_mod,
-                                    .Platform)
-    
-    # overwrite download_server with the setting used in the end to retrieve 
-    # folders. Used in scheduled execution in case http fails and download 
-    # switched automatically to ftp
-    download_server <- attr(date_dirs_all, "server")
-    
     # __________________________________________________________________________
     # Start Cycle on required years - needed since in case of "sesonal"     ####
     # download the dates to be downloaded need to be "tweaked" with respect
     # to start_date/end_date
     
     for (yy in start_year:end_year) {
+      
+      #   ________________________________________________________________________
+      #   Retrieve list of files to be downloaded/processed from NASA http/ftp####
+      #   servers
+      
+      # First, retrieve acquisition dates of all available MODIS hdfs for the
+      # selected product between in yy
+      date_dirs_all   <- get_mod_dirs(http, ftp, download_server,
+                                      user, password, 
+                                      yy,
+                                      n_retries, 
+                                      gui,
+                                      out_folder_mod,
+                                      .Platform)
+      
+      # overwrite download_server with the setting used in the end to retrieve 
+      # folders. Used in scheduled execution in case http fails and download 
+      # switched automatically to ftp
+      download_server <- attr(date_dirs_all, "server")
+      
       
       dates <- get_yeardates(download_range, 
                              yy, 
@@ -376,13 +381,16 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
       # Start Cycling on directories containing images to be downloaded and identify
       # the required ones (i.e., the ones corresponding to selected tiles)
       for (date in seq_along(date_dirs)) {
-        
+        #Create the date string
         date_name <- sub(sub(pattern = "\\.", replacement = "_", date_dirs[date]),
-                         pattern = "\\.", replacement = "_", date_dirs[date])  #Create the date string
-        year      <- strftime(as.Date(date_name, "%Y_%m_%d" ), format = "%Y")  # transform date to year
-        DOY       <- strftime(as.Date(date_name, "%Y_%m_%d" ), format = "%j")  # transform date to DOY
+                         pattern = "\\.", replacement = "_", date_dirs[date])
+        # transform date to year
+        year      <- strftime(as.Date(date_name, "%Y_%m_%d" ), format = "%Y")
+        # transform date to DOY
+        DOY       <- strftime(as.Date(date_name, "%Y_%m_%d" ), format = "%j")
         
-        # check if all foreseen output rasters already exist. If so, skip the date. Otherwise start proecssing
+        # check if all foreseen output rasters already exist. If so, skip the
+        # date. Otherwise start proecssing
         check_files <- FALSE
         check_files <- MODIStsp_check_files(out_prod_folder,
                                  file_prefix,
@@ -400,13 +408,13 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
           
           # Create vector of image names required (corresponding to the selected tiles,
           # within current dir)
-          modislist <- get_mod_filenames(http = http, ftp = ftp, used_server = download_server,
-                                         user = user, password = password,
+          modislist <- get_mod_filenames(http, ftp, used_server = download_server,
+                                         user, password, n_retries,
                                          date_dir = date_dirs[date],
                                          v = seq(from = start_y, to = end_y),
                                          h = seq(from = start_x, to = end_x),
-                                         tiled, out_folder_mod = out_folder_mod,
-                                         gui = gui)
+                                         tiled,out_folder_mod,
+                                         gui)
           
           # ---------------------------------- ----------------------------------------------#
           # Download and preprocess Imagesin modislist vector -----------

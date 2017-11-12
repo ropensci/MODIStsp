@@ -4,44 +4,50 @@
 \alias{get_mod_filenames}
 \title{get_mod_filenames}
 \usage{
-get_mod_filenames(http, ftp, used_server, user, password, date_dir, v, h, tiled,
-  out_folder_mod, gui)
+get_mod_filenames(http, ftp, used_server, user, password, n_retries, date_dir,
+  v, h, tiled, out_folder_mod, gui)
 }
 \arguments{
-\item{http}{string http site on lpdaac corresponding to a given MODIS product}
+\item{http}{\code{character} url of http site on lpdaac corresponding to a given MODIS
+product.}
 
-\item{ftp}{string ftp site corresponding to a given MODIS product}
+\item{ftp}{\code{character} url offtp site corresponding to a given MODIS product.}
 
-\item{used_server}{string can assume values "http" or "ftp" depending on the
-used download server; it cannot be NA}
+\item{used_server}{\code{character} can assume values "http" or "ftp" depending on the
+used download server; it cannot be NA.}
 
-\item{user}{username for earthdata server}
+\item{user}{\code{character} username for earthdata server (Ignored if used_server = "ftp").}
 
-\item{password}{password for earthdata server}
+\item{password}{\code{character} password for earthdata server  (Ignored if used_server = "ftp").}
 
-\item{date_dir}{array of folder names containing data for the MODIS product
-acquired in a given period (return array from get_mod_dates)}
+\item{n_retries}{\code{numeric} number of times the access to the http/ftp server
+should be retried in case of error befor quitting, Default: 20.}
 
-\item{v}{int. array containing a sequence of the vertical tiles of interest
-(e.g., c(18,19))}
+\item{date_dir}{\code{character array} array of folder names corresponding to acquisition
+containing dates where MODIS files to be downloaded are to be identified
+(return array from \code{get_mod_dates}).}
 
-\item{h}{int. array containing a sequence of the horizontal tiles of interest
-(e.g., c(3,4))}
+\item{v}{\code{integer array} containing a sequence of the vertical tiles of interest
+(e.g., c(18,19)).}
 
-\item{tiled}{0/1 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg)}
+\item{h}{\code{integer array} containing a sequence of the horizontal tiles of interest
+(e.g., c(3,4)).}
 
-\item{out_folder_mod}{output folder for original HDF storage}
+\item{tiled}{\code{numeric [0/1]} indicates if the product to be downloaded is
+tiled or not tiled. 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg).}
 
-\item{gui}{logical indicates if processing was called within the GUI environment
-or not. If not, direct processing messages to the log}
+\item{out_folder_mod}{\code{character} folder where hdf files have to be storedd.}
+
+\item{gui}{\code{logical} indicates if processing was called within the GUI environment
+or not. If not, processing messages are redirected direct to the log file.}
 }
 \value{
-Modislist names of HDF images corresponding to the requested tiles
-available for the product in the selected date
+\code{character array} containing names of HDF images corresponding to the
+requested tiles available for the product in the selected date
 }
 \description{
 Accessory function to find the names of HDF images corresponding
-to a given date and interval of spatial tiles within the lpdaac archive
+to a given date and interval of spatial tiles within the lpdaac archive.
 }
 \note{
 License: GPL 3.0

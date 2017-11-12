@@ -174,6 +174,10 @@ the images of December, January and February from 2005 to 2010 - excluding
 \item{gui}{\code{logical} Indicates if processing was called starting from an
 interactive environment or not. If FALSE, processing messages are sent to a
 log file instead than to the console, and gWidgest messages are suppressed}
+
+\item{n_retries}{\code{numeric} maximum number of retries on download functions.
+In case any download function fails more than \code{n_retries} times consecutively,
+MODIStsp_process will abort, Default: 20}
 }
 \value{
 The function is called for its side effects.

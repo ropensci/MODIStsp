@@ -36,6 +36,7 @@
 get_mod_dirs <- function(http, ftp, download_server,
                          user, password, 
                          n_retries = 20, 
+                         yy,
                          gui,
                          out_folder_mod,
                          .Platform) {
@@ -58,202 +59,90 @@ get_mod_dirs <- function(http, ftp, download_server,
   
   if (download_server == "http") {
     
-    # send request to server
-    response <- httr::RETRY("GET",
-                            http,
-                            httr::authenticate(user, password),
-                            times = n_retries,
-                            pause_base = 0.1, 
-                            pause_cap = 10, 
-                            quiet = FALSE)
-    if (response$status_code == 200)   
-      # if error on response, retry up to 50 times
-      if (class(response) == "try-error") {
-        Sys.sleep(1)
-        ce <- ce + 1
-        message("Trying to reach http server - attempt ", ce)
-      } else {
-        # If good response, get the result
-        if (response$status_code == 200) {
-          items <- strsplit(httr::content(response, "text",
-                                          encoding = "UTF-8"), "\r*\n")[[1]]
-        } else {
-          ce <- ce + 1
-          message("Trying to reach http server - attempt ", ce)
-        }
-      }
-    # on good response, parse the contents to retrieve the date folders
-    if (class(items) != "try-error") {
-      # On httr success get the directory names (available dates)
-      date_dirs <- gsub(
-        ".*>(20[0-9][0-9]\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
-      )
-      date_dirs <- date_dirs[grep("20[0-9][0-9]\\.[01][0-9]\\.[0-3][0-9]",
-                                  date_dirs)]
-      attr(date_dirs, "server") <- "http"
-    } else {
-      if (ce == 50)  {
+    success = FALSE
+    while (!success) {
+      # send request to server
+      response <- httr::RETRY("GET",
+                              http,
+                              httr::authenticate(user, password),
+                              times = n_retries,
+                              pause_base = 0.1, 
+                              pause_cap = 10, 
+                              quiet = FALSE)
+      # On interactive execution, after n_retries attempt ask if quit or ----
+      # retry
+      if (response$status_code != 200) {
         if (gui) {
-          # ask to retry only if gui=TRUE
           confirm <- gWidgets::gconfirm(
             "http server seems to be down! Do you want to retry?",
             icon = "question",
             handler = function(h, ...) {})
+          if (!confirm) stop("You selected to abort processing. Goodbye!")
         } else {
-          confirm <- FALSE
-        }
-        if (confirm == "FALSE") {
           warning("[", date(), "] Error: http server seems to be down! ",
-                  "Please Retry Later!")
-          if (gui) {
-            gmessage("User selected to quit!", icon = "info")
-            # if user selected to quit, exit programstop()
-          } else {
-            # on non-interactive, if limit exceeded try ftp downolad as backup
-            download_server <- "ftp"
-            break()
-          }
-          # on NOT retry, quit the program
-        } else {
-          ce <- 0   # if retry, reset the counter
+                  "Switching to ftp!")
+          download_server = "ftp"
+          success = TRUE
         }
+      } else {
+        # On httr success get the directory names (available dates) ----
+        items <- strsplit(httr::content(response, "text",
+                                        encoding = "UTF-8"), "\r*\n")[[1]]
+        date_dirs <- gsub(
+          ".*>(20[0-9][0-9]\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
+        )
+        date_dirs <- date_dirs[grep(paste0(yy, "\\.[01][0-9]\\.[0-3][0-9]"),
+                                    date_dirs)]
+        attr(date_dirs, "server") <- "http"
+        success = TRUE
       }
     }
   }
-  # }
-  
-  #TODO Ask luigi what we are doing here. NOt clear to me what "check_used_server
-  #is doing. could be simpler to reset to "ftp" and then break on failure.
-  #It is already like that on get_names (should be checked !)
-  
-  
-  #  ____________________________________________________________________________
-  #  Retrieve available dates in case of ftp download or if http exceeded limit
-  #  in non-interactive execution
-  
-  # if (is.na(used_server)) {
-  #   check_used_server  <- TRUE
-  # } else {
-  #   if (used_server == "ftp") {
-  #     check_used_server <- TRUE
-  #   } else {
-  #     check_used_server  <- FALSE
-  #   }
-  # }
-  
-  
-  #   ____________________________________________________________________________
-  #   retrieve list of folders in case of ftp download                        ####
-  
-  
+  # retrieve processign dates in case of "ftp" download ----
   if (download_server == "ftp") {
-    if (class(items) == "try-error") {
-      
-      while (class(items) == "try-error") {
-        # send request to server
-        response <- try(suppressWarnings(httr::GET(ftp, httr::timeout(10))))
-        # if error on response, retry
-        if (class(response) == "try-error") {
-          Sys.sleep(1)
-          ce <- ce + 1
-          message("Trying to reach ftp server - attempt ", ce)
+    while (!success) {
+      # send request to server
+      yeard_dir <- paste0(ftp, yy, "/")
+      response <- httr::RETRY("GET",
+                              ftp,
+                              times = n_retries,
+                              pause_base = 0.1, 
+                              pause_cap = 10, 
+                              quiet = FALSE)
+      # On interactive execution, after n_retries attempt ask if quit or ----
+      # retry
+      if (response$status_code != 226) {
+        if (gui) {
+          confirm <- gWidgets::gconfirm(
+            "ftp server seems to be down! Do you want to retry?",
+            icon = "question",
+            handler = function(h, ...) {})
+          if (!confirm) stop("You selected to abort processing. Goodbye!")
         } else {
-          # If good response, get the result
-          if (response$status_code == 226) {
-            items <- strsplit(httr::content(response,
+          # break on failure
+          stop("[",
+               date(),
+               "] Error: ftp server seems to be down! Please Retry Later!")
+        }
+      } else {
+        # On ftp success get the directory names of available dates ----
+        items     <- strsplit(httr::content(response,
                                             "text",
                                             encoding = "UTF-8"), "\r*\n")[[1]]
-          } else {
-            ce <- ce + 1
-            message("Trying to reach ftp server - attempt ", ce)
-          }
-        }
-        
-        if (class(items) != "try-error") {
-          # on success on the ftp call, retrieve available years and dates
-          items_1 <- stringr::str_extract(items, "20[0-9][0-9]$")
-          items_1 <- items_1[!is.na(items_1)]
-          # replaces the line above to allow to repeat the try 10 times
-          # If fails  10 times consecutively assume no data for that year
-          #TODO improve this ! Can lead to errors !
-          response_1 <- list()
-          for (sel_year in items_1) {
-            ce <- 1
-            while (ce < 10) {
-              # try to download each year for 10 times
-              response_1[[sel_year]] <- suppressWarnings(
-                try(httr::GET(paste0(ftp, sel_year, "/"), httr::timeout(10)))
-              )
-              if (class(response_1[[sel_year]]) != "response") {
-                # if error on response, retry
-                Sys.sleep(0.1)
-                ce <- ce + 1
-                message("Trying to reach ftp server - attempt ", ce)
-              } else if (response_1[[sel_year]]$status_code != 226) {
-                ce <- ce + 1
-                message("Trying to reach ftp server - attempt ", ce)
-              } else {
-                ce <- ce + 10
-              }
-            }
-          }
-          # remove unsuccessful years
-          response_1 <- response_1[sapply(response_1, class) == "response"]
-          response_2 <- lapply(response_1, function(x) {
-            httr::content(x, "text", encoding = "UTF-8")
-          })
-          response_3 <- lapply(stringr::str_split(response_2, "\n"),
-                               function(x){x[nchar(x) > 0]})
-          items_2    <- sapply(
-            response_3,
-            function(x)(stringr::str_split_fixed(x, " +", 9))[, 9])
-          names(items_2) <- sapply(response_1, function(x)(x$url))
-          full_dirs <- unlist(
-            lapply(seq_along(items_2),
-                   function(x)(paste0(names(items_2[x]), items_2[[x]], "/"))))
-          date_dirs <- sapply(
-            strsplit(full_dirs, "/"),
-            function(x)(strftime(as.Date(paste(x[length(x) - 1], x[length(x)]),
-                                         format = "%Y %j"), "%Y.%m.%d")))
-          attr(date_dirs, "server") <- "ftp"
-          
-        } else {
-          if (ce == 50)  {
-            if (gui) {
-              # ask to retry only if gui=TRUE
-              confirm <- gWidgets::gconfirm(
-                "http server seems to be down! Do you want to retry?",
-                icon = "question",
-                handler = function(h, ...) {})
-            } else {
-              confirm <- FALSE
-            }
-            if (confirm == "FALSE") {
-              warning("[",
-                      date(),
-                      "] Error: ftp server seems to be down! Please Retry Later!")
-              if (gui) {
-                gmessage("User selected to quit!", icon = "info")
-                stop()    # if user selected to quit, exit program
-              } else {
-                # break on failure
-                stop("[",
-                     date(),
-                     "] Error: ftp server seems to be down! Please Retry Later!")
-              }
-              # on NOT retry, quit the program
-            } else {
-              ce <- 0   # if retry, reset the counter
-            }
-          }
-        }
+        doys      <- as.numeric(
+          stringr::str_split_fixed(items, "[0-9][0-9]:[0-9][0-9]\\s", 2)[,2]
+        )
+        date_dirs <- format(as.Date(doys - 1, origin = paste0(yy, "-01-01")),
+                            format = "%Y.%m.%d")
+        attr(date_dirs, "server") <- "ftp"
+        success <- TRUE
       }
     }
   }
   
   #   ____________________________________________________________________________
   #   In offline mode, retrieve the dates of acquisition of hdfs already 
-  #   available in `out_folder_mod
+  #   available in `out_folder_mod`
   
   if (download_server == "offline") {
     
@@ -268,7 +157,7 @@ get_mod_dirs <- function(http, ftp, download_server,
     
     # Extract dates
     date_dirs <- strftime(as.Date(gsub(
-      paste0(sel_prod_vers[1], "\\.A(20[0-9][0-9][0-3][0-9][0-9])\\..*"),"\\1",
+      paste0(sel_prod_vers[1], "\\.A(20[0-9][0-9][0-3][0-9][0-9])\\..*"),"\\1", #nolint
       items), format = "%Y%j"), "%Y.%m.%d")
     attr(date_dirs, "server") <- "offline"
   }
@@ -319,25 +208,30 @@ get_mod_dates <- function(dates, date_dirs) {
 
 #' @title get_mod_filenames
 #' @description Accessory function to find the names of HDF images corresponding
-#' to a given date and interval of spatial tiles within the lpdaac archive
-#' @param http string http site on lpdaac corresponding to a given MODIS product
-#' @param ftp string ftp site corresponding to a given MODIS product
-#' @param used_server string can assume values "http" or "ftp" depending on the
-#'  used download server; it cannot be NA
-#' @param user username for earthdata server
-#' @param password password for earthdata server
-#' @param date_dir array of folder names containing data for the MODIS product
-#' acquired in a given period (return array from get_mod_dates)
-#' @param v int. array containing a sequence of the vertical tiles of interest
-#'   (e.g., c(18,19))
-#' @param h int. array containing a sequence of the horizontal tiles of interest
-#'   (e.g., c(3,4))
-#' @param tiled 0/1 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg)
-#' @param gui logical indicates if processing was called within the GUI environment
-#'   or not. If not, direct processing messages to the log
-#' @param out_folder_mod  output folder for original HDF storage
-#' @return Modislist names of HDF images corresponding to the requested tiles
-#'  available for the product in the selected date
+#' to a given date and interval of spatial tiles within the lpdaac archive.
+#' @param http `character` url of http site on lpdaac corresponding to a given MODIS 
+#'   product.
+#' @param ftp `character` url offtp site corresponding to a given MODIS product.
+#' @param used_server `character` can assume values "http" or "ftp" depending on the
+#'  used download server; it cannot be NA.
+#' @param user `character` username for earthdata server (Ignored if used_server = "ftp").
+#' @param password `character` password for earthdata server  (Ignored if used_server = "ftp").
+#' @param n_retries `numeric` number of times the access to the http/ftp server
+#'   should be retried in case of error befor quitting, Default: 20.
+#' @param date_dir `character array` array of folder names corresponding to acquisition 
+#'  containing dates where MODIS files to be downloaded are to be identified
+#'  (return array from `get_mod_dates`).
+#' @param v `integer array` containing a sequence of the vertical tiles of interest
+#'   (e.g., c(18,19)).
+#' @param h `integer array` containing a sequence of the horizontal tiles of interest
+#'   (e.g., c(3,4)).
+#' @param tiled `numeric [0/1]` indicates if the product to be downloaded is 
+#'   tiled or not tiled. 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg).
+#' @param out_folder_mod  `character` folder where hdf files have to be storedd.
+#' @param gui `logical` indicates if processing was called within the GUI environment
+#'   or not. If not, processing messages are redirected direct to the log file.
+#' @return `character array` containing names of HDF images corresponding to the
+#'  requested tiles available for the product in the selected date
 #' @author Original code by Babak Naimi (\code{.getModisList}, in
 #' \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
 #' modified to adapt it to MODIStsp scheme and to http archive (instead than old
@@ -349,8 +243,8 @@ get_mod_dates <- function(dates, date_dirs) {
 #' @importFrom httr GET timeout authenticate content
 #' @importFrom RCurl getURL
 #' @importFrom stringr str_split str_pad
-get_mod_filenames <- function(http, ftp, used_server, user, password, date_dir,
-                              v, h, tiled, out_folder_mod, gui) {
+get_mod_filenames <- function(http, ftp, used_server, user, password, n_retries, 
+                              date_dir, v, h, tiled, out_folder_mod, gui) {
   getlist <- 0
   class(getlist) <- "try-error"
   ce <- 0
@@ -425,7 +319,7 @@ get_mod_filenames <- function(http, ftp, used_server, user, password, date_dir,
     # ftp folders are organized by /year/date subfolders, so there is an
     # additional level to be "parsed" wrt http
     date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
-    date_doy <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
+    date_doy  <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
     while (class(getlist) == "try-error") {
       
       getlist <- try(

@@ -5,7 +5,7 @@
 \title{Main MODIStsp function}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  scroll_window = FALSE, test = -1)
+  scroll_window = FALSE, test = -1, n_retries = 20)
 }
 \arguments{
 \item{gui}{\code{logical} if TRUE: the GUI is opened before processing. If FALSE:
