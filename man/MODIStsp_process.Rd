@@ -13,7 +13,7 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel,
   quality_bitN, quality_source, quality_nodata_in, quality_nodata_out,
   file_prefixes, main_out_folder, resampling, ts_format, use_aria = TRUE,
-  download_range = "full", gui = TRUE)
+  download_range = "full", gui = TRUE, n_retries)
 }
 \arguments{
 \item{sel_prod}{\code{character} Name of selected MODIS product.}
