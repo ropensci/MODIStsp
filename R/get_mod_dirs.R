@@ -31,40 +31,32 @@
 #' @importFrom gWidgets gconfirm
 #' @importFrom httr GET authenticate timeout content
 #' @importFrom stringr str_extract str_split str_split_fixed str_sub
-#' @importFrom utils download.file
 
 get_mod_dirs <- function(http, ftp, download_server,
                          user, password, 
-                         n_retries = 20, 
                          yy,
+                         n_retries, 
                          gui,
                          out_folder_mod,
                          .Platform) {
   
+  # make sure that the http address terminates with a "/" (i.e., it is a 
+  # folder, not a file)
   if (stringr::str_sub(http ,-1) != "/") {
     http <- paste(http, "/", sep = "")
   }
-  if (.Platform$OS.type == "unix") {
-    options("download.file.method" = "wget")
-  }
-  else {
-    options("download.file.method" = "auto")
-  }
-  items <- 0
-  class(items) <- "try-error"
-  ce <- 0
-  
+  success = FALSE
   #   __________________________________________________________________________
   #   retrieve list of folders in case of http download                    ####
   
   if (download_server == "http") {
     
-    success = FALSE
+
     while (!success) {
       # send request to server
       response <- httr::RETRY("GET",
                               http,
-                              httr::authenticate(user, password),
+                              # httr::authenticate(user, password),
                               times = n_retries,
                               pause_base = 0.1, 
                               pause_cap = 10, 
@@ -100,11 +92,12 @@ get_mod_dirs <- function(http, ftp, download_server,
   }
   # retrieve processign dates in case of "ftp" download ----
   if (download_server == "ftp") {
+    browser()
     while (!success) {
       # send request to server
-      yeard_dir <- paste0(ftp, yy, "/")
+      year_ftp <- paste0(ftp, yy, "/")
       response <- httr::RETRY("GET",
-                              ftp,
+                              year_ftp,
                               times = n_retries,
                               pause_base = 0.1, 
                               pause_cap = 10, 

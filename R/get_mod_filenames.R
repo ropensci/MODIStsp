@@ -41,73 +41,59 @@
 #' @importFrom httr GET timeout authenticate content
 #' @importFrom RCurl getURL
 #' @importFrom stringr str_split str_pad
-get_mod_filenames <- function(http, ftp, used_server, user, password, n_retries, 
-                              date_dir, v, h, tiled, out_folder_mod, gui) {
-  getlist <- 0
-  class(getlist) <- "try-error"
-  ce <- 0
-  
+get_mod_filenames <- function(http,
+                              ftp,
+                              used_server,
+                              user,
+                              password,
+                              n_retries, 
+                              date_dir, 
+                              v,
+                              h,
+                              tiled, 
+                              out_folder_mod, 
+                              gui) {
+  success <- FALSE
   if (used_server == "http") {
     #   ________________________________________________________________________
     #   Retrieve available hdf files in case of http download               ####
     
     # http folders are organized by date subfolders containing all tiles
-    while (class(getlist) == "try-error") {
-      getlist <- try(httr::GET(paste0(http, date_dir, "/"),
-                               httr::timeout(5),
-                               httr::authenticate(user, password)))
+    while (!success) {
       
-      if (class(getlist) == "try-error") {
-        # if error on response, retry
-        Sys.sleep(1)
-        ce <- ce + 1
-        message("Trying to reach ftp server - attempt ", ce)
-      } else {
-        # If good response, get the result (all files available for the date)
-        if (getlist$status_code == 200) {
-          getlist <- strsplit(httr::content(getlist, "text"), "\r*\n")[[1]]
-        } else {
-          ce <- ce + 1
-          message("Trying to reach http server - attempt ", ce)
-        }
-      }
+      response <- httr::RETRY("GET",
+                              paste0(http, date_dir, "/"),
+                              # httr::authenticate(user, password),
+                              times = n_retries,
+                              pause_base = 0.1, 
+                              pause_cap = 10, 
+                              quiet = FALSE)
       
-      if (class(getlist) != "try-error") {
-        getlist <- getlist[
-          grep(".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
-               getlist)
-          ]
-        getlist <- gsub(
-          ".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
-          getlist
-        )
-        
-      } else if (ce == 5)  {
+      # On interactive execution, after n_retries attempt ask if quit or ----
+      # retry
+      if (response$status_code != 200) {
         if (gui) {
-          # ask to retry only if gui=TRUE
           confirm <- gWidgets::gconfirm(
             "http server seems to be down! Do you want to retry?",
             icon = "question",
             handler = function(h, ...) {})
+          if (!confirm) stop("You selected to abort processing. Goodbye!")
         } else {
-          confirm <- FALSE
+          warning("[", date(), "] Error: http server seems to be down! ",
+                  "Switching to ftp!")
+          download_server = "ftp"
+          success = TRUE
         }
-        if (confirm == "FALSE") {
-          warning("[", date(),
-                  "] Error: http server seems to be down! Please Retry Later!")
-          if (gui) {
-            gmessage("User selected to quit!", icon = "info")
-            # if user selected to quit, exit program
-            stop("You selected to abort processing. Goodbye!")
-          } else {
-            # on non-interactive, if limit exceeded try ftp downolad as backup
-            used_server = "ftp"
-            break()
-          }
-        } else {
-          ce <- 0   # if retry, reset the counter
-        }
-      }
+      } else {
+        getlist <- strsplit(httr::content(response, "text"), "\r*\n")[[1]]
+        getlist <- getlist[grep(
+          ".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
+          getlist)]
+        getlist <- gsub(
+          ".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
+          getlist)
+        
+      } 
     }
   }
   if (used_server == "ftp") {
@@ -118,46 +104,34 @@ get_mod_filenames <- function(http, ftp, used_server, user, password, n_retries,
     # additional level to be "parsed" wrt http
     date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
     date_doy  <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
-    while (class(getlist) == "try-error") {
-      
-      getlist <- try(
-        strsplit(
-          x = RCurl::getURL(paste(ftp, date_year, "/", date_doy, "/", sep = ""),
-                            ftp.use.epsv = FALSE,
-                            dirlistonly = TRUE,
-                            .opts = list(timeout = 10, maxredirs = 5,
-                                         verbose = FALSE)),
-          split = "\r*\n")[[1]],
-        silent = TRUE
-      )
-      
-      if (class(getlist) == "try-error") {
-        Sys.sleep(1)
-        message("Trying to reach ftp server - attempt ", ce)
-        ce <- ce + 1
-        if (ce == 50) {
-          if (gui) {
-            confirm <- gWidgets::gconfirm(
-              "ftp server seems to be down! Do you want to retry?",
-              icon = "question", handler = function(h, ...) {})
-          } else {
-            confirm <- FALSE
-          }
-          if (confirm == "FALSE") {
-            warning("[", date(),
-                    "] Error: ftp server seems to be down! Please Retry Later!")
-            if (gui) {
-              gmessage("User selected to quit!", icon = "info")
-              # if user selected to quit, exit program
-              stop("You selected to abort processing. Goodbye!")
-            } else {
-              stop("ftp server is down. Please retry later. Aborting!")
-            }
-            # on NOT retry, quit the program
-          } else {
-            ce <- 0   # if retry, reset the counter
-          }
+    browser()
+    while (!success) {
+      response <- httr::RETRY("GET",
+                              paste0(ftp, date_year, "/", date_doy, "/"),
+                              # httr::authenticate(user, password),
+                              times = n_retries,
+                              pause_base = 0.1, 
+                              pause_cap = 10, 
+                              quiet = FALSE)
+      # On interactive execution, after n_retries attempt ask if quit or ----
+      # retry
+      if (response$status_code != 226) {
+        if (gui) {
+          confirm <- gWidgets::gconfirm(
+            "ftp server seems to be down! Do you want to retry?",
+            icon = "question",
+            handler = function(h, ...) {})
+          if (!confirm) stop("You selected to abort processing. Goodbye!")
+        } else {
+          stop("[", date(), "] Error: ftp server seems to be down! ",
+               "Aborting! Please try again later!")
         }
+      } else {
+        
+        getlist <- strsplit(httr::content(response, "text"), "\r*\n")[[1]]
+        getlist <- stringr::str_extract(
+          getlist, 
+          "[A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf")
       }
     }
   }
