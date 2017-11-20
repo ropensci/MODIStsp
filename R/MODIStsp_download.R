@@ -48,11 +48,17 @@ MODIStsp_download <- function(modislist,
     # Check file size (if the local file size is different, re-download)
     local_filename  <- file.path(out_folder_mod, modisname)
     local_filesize  <- file.info(local_filename)$size
-    if (download_server == "http") {remote_filename <- paste0(http, date_dirs[date], "/", modisname)}
-    if (download_server == "ftp")  {remote_filename <- paste0(ftp, year, "/", DOY, "/", modisname)}
-    if (download_server == "offline") {remote_filename <- NA}
+    if (download_server == "http") {
+      remote_filename <- paste0(http, date_dirs[date], "/", modisname)
+    }
+    if (download_server == "ftp")  {
+      remote_filename <- paste0(ftp, year, "/", DOY, "/", modisname)
+    }
+    if (download_server == "offline") {
+      remote_filename <- NA
+    }
     
-    # in case of http or ftp download, try to catch size information from xml file ----
+    # On http or ftp download, try to catch size information from xml file ----
     if (download_server != "offline") {
       remote_size_tries  <- 30 # numbers of tryouts for xml metafile
       size_string        <- NA
