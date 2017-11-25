@@ -1,6 +1,14 @@
+## MODIStsp 1.3.3.9000 
+
+
+### Minor changes
+
+Addedd support for both V005 and V051 of MCD45A1 and for the new new MCD64A1 product.
+([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
+
 ## MODIStsp 1.3.3.1 Release Notes
 
-This is mostly a maintenance release - fixing a bug in 1.3.3 submission related to a missing import
+This was mostly a maintenance release - fixing a bug in 1.3.3 submission related to a missing import
 in NAMESPACE
 
 ### Minor Changes
