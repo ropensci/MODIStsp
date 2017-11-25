@@ -233,6 +233,14 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
       ftp  <- ftps[["Aqua"]]
       file_prefix <- file_prefixes[["Aqua"]]
     }
+    
+    # check if product is available on ftp
+    
+    if (download_server == "ftp" & ftp == "Not Available") {
+      if (gui) gWidgets::dispose(mess_lab)
+      stop("Product ", sel_prod, " is not available over ftp.\n", 
+           "Please switch to http download! Aborting!")
+    }
 
     # Check if "aria2c" requested. If so, verify that the executable is on the path
 
@@ -247,7 +255,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
           } else {
             gmessage("Please ensure that aria2c is installed and in your path!
                      - See http://aria2.github.io ")
-            gWidgets::dispose(mess)
+            if (gui) gWidgets::dispose(mess_lab)
             stop("aria2c was not found! Ensure that aria2c is installed and in your
                  path! - See http://aria2.github.io ")
           }
@@ -327,7 +335,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
         }
 
-      } else stop("download_range value not valid (only \"full\" and \"seasonal\" are admitted).")
+      } else {
+        if (gui) gWidgets::dispose(mess_lab)
+        stop("download_range value not valid (only \"full\" and \"seasonal\" are admitted).")
+      }
 
       # Processing status message
       mess_text <- paste("Retrieving Files for Year", as.character(yy))
@@ -414,6 +425,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
                   # if user/password are not valid, notify
                   if (download_server == "http" & size_string["status_code"] == 401) {
+                    if (gui) gWidgets::dispose(mess_lab)
                     stop("Username and/or password are not valid. Please retry with the
                          correct ones or try with ftp download.")
                   }
@@ -526,7 +538,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                         if (confirm == "FALSE") {
                           warning("[", date(), "] Error: server seems to be down! Please Retry Later!")
                           unlink(local_filename)
-                          stop()
+                          if (gui) gWidgets::dispose(mess_lab)
+                          stop("Server seems to be down! Please Retry Later! Aborting!")
                         }
                       }
                     }  # end while on download tries

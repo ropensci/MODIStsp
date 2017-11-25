@@ -17554,10 +17554,10 @@
                     <prod_fullname>Burned Area Monthly L3 Global 500m</prod_fullname>
                     <main_out_folder>Burned_Monthly_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.051/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.051/</http_aqua>
-                    <ftp_terra>Not available</ftp_terra>
-                    <ftp_aqua>Not available</ftp_aqua>
+                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_terra>
+                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd45a1</www>
@@ -17636,7 +17636,93 @@
                         </band>
                     </bands>
                 </version>
-
+                <version>
+                    <v_number>51</v_number>
+                    <prod_fullname>Burned Area Monthly L3 Global 500m</prod_fullname>
+                    <main_out_folder>Burned_Monthly_500m_v51</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.051/</http_terra>
+                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.051/</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>1</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd45a1</www>
+                    <bands>
+                        <band>
+                            <bandname>Burn_Date</bandname>
+                            <fullname>Burn Date</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>11111</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Burn_Area_QA</bandname>
+                            <fullname>Burned Area Pixel QA</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>N_Pass</bandname>
+                            <fullname>Number of Passes</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>N_Used</bandname>
+                            <fullname>Number Used</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Dir</bandname>
+                            <fullname>Direction</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Surface</bandname>
+                            <fullname>Surface Type</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Gap_R1</bandname>
+                            <fullname>Gap Range-1</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>65535</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Gap_R2</bandname>
+                            <fullname>Gap Range-2</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>65535</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                </version>
             </versions>
         </MCD45A1>
         <MCD64A1>
