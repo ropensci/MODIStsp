@@ -7681,7 +7681,7 @@
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
                         </band>
-                    </bands>       
+                    </bands>
                     <quality_indicators>
                         <quality>
                             <quality_bandname>b1_Red_QA</quality_bandname>
@@ -17556,8 +17556,95 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD45A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD45A1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>1</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd45a1</www>
+                    <bands>
+                        <band>
+                            <bandname>Burn_Date</bandname>
+                            <fullname>Burn Date</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>11111</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Burn_Area_QA</bandname>
+                            <fullname>Burned Area Pixel QA</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>N_Pass</bandname>
+                            <fullname>Number of Passes</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>N_Used</bandname>
+                            <fullname>Number Used</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Dir</bandname>
+                            <fullname>Direction</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Surface</bandname>
+                            <fullname>Surface Type</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Gap_R1</bandname>
+                            <fullname>Gap Range-1</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>65535</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Gap_R2</bandname>
+                            <fullname>Gap Range-2</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>65535</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                </version>
+                <version>
+                    <v_number>51</v_number>
+                    <prod_fullname>Burned Area Monthly L3 Global 500m</prod_fullname>
+                    <main_out_folder>Burned_Monthly_500m_v51</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.051/</http_terra>
+                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.051/</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd45a1</www>
@@ -17638,6 +17725,107 @@
                 </version>
             </versions>
         </MCD45A1>
+        <MCD64A1>
+            <name>Burned_Monthly_500m (MCD64A1)</name>
+            <cat_01>Land Cover Characteristics</cat_01>
+            <cat_02>Thermal Anomalies and Fire</cat_02>
+            <file_prefix_terra>MCD64A1</file_prefix_terra>
+            <file_prefix_aqua>MCD64A1</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>Burned Area Monthly L3 Global 500m</prod_fullname>
+                    <main_out_folder>Burned_Monthly_500m_v6</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD64A1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD64A1.006/</http_aqua>
+                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD64A1/</ftp_terra>
+                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD64A1/</ftp_aqua>
+                    <combined>1</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd64a1_v006</www>
+                    <bands>
+                        <band>
+                            <bandname>Burn_Date</bandname>
+                            <fullname>Burn day of year</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Burn_Date_Unc</bandname>
+                            <fullname>Burn Date Uncertainty</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>0</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>QA</bandname>
+                            <fullname>Quality Assurance Indicators</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>First_Day</bandname>
+                            <fullname>First Day</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Last_Day</bandname>
+                            <fullname>Last Day</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                     <quality_indicators>
+                        <quality>
+                            <quality_bandname>QC_land_water</quality_bandname>
+                            <quality_fullname>Land/water state</quality_fullname>
+                            <quality_source>QA</quality_source>
+                            <quality_bitN>0</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Valid_data</quality_bandname>
+                            <quality_fullname>Valid data flag</quality_fullname>
+                            <quality_source>QA</quality_source>
+                            <quality_bitN>1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Map_Period</quality_bandname>
+                            <quality_fullname>Shortened mapping period</quality_fullname>
+                            <quality_source>QA</quality_source>
+                            <quality_bitN>2</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Relab</quality_bandname>
+                            <quality_fullname>Relabeling</quality_fullname>
+                            <quality_source>QA</quality_source>
+                            <quality_bitN>3</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Spec_cond_code</quality_bandname>
+                            <quality_fullname>Special condition code for unburned grid cells</quality_fullname>
+                            <quality_source>QA</quality_source>
+                            <quality_bitN>5-7</quality_bitN>
+                        </quality>
+                    </quality_indicators>
+                </version>
+            </versions>
+        </MCD64A1>
         <MOD14A1>
             <name>ThermalAn_Fire_Daily_1Km (M*D14A1)</name>
             <cat_01>Land Cover Characteristics</cat_01>
