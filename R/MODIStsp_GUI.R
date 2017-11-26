@@ -14,7 +14,7 @@
 #' @param previous_jsfile json parameters file containgn data of the last
 #'   execution
 #' @param prodopts_file rdata file containing info about MODIS products
-#' @return quit - Logical - tells the main if running processing or exiting
+#' @return start - Logical - tells the main if running processing or exiting
 #'  (also, Processing options are saved in "previous" file and (if
 #'   "Save options" is pressed) in user's selected file)
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -42,7 +42,8 @@ MODIStsp_GUI <- function(general_opts,
   #### HELPER FUNCTIONS TO AVOID REPETITIONS AND FACILITATE READING  ####
   #### Putting these here allows to avoid to explicitly pass a lot of
   #### arguments!!!
-  ## Update the selected tiles with the intersection with the bounding box
+  
+  ## Update the selected tiles with the intersection with the bounding box ----
 
   update_tiles <- function(bbox_out,
                            output_proj4_wid,
@@ -65,7 +66,7 @@ MODIStsp_GUI <- function(general_opts,
     svalue(end_y_wid)   <- max(d_bbox_mod_tiled$V)
   }
 
-  ## Update the labels in the bbox group
+  ## Update the labels in the bbox group ----
   update_bboxlabels <- function(bbox_out,
                                 units,
                                 output_ul_east_wid,
@@ -84,7 +85,7 @@ MODIStsp_GUI <- function(general_opts,
                                            format = "f")
   }
 
-  ### Get currently selected projection and its measure units
+  ### Get currently selected projection and its measure units ----
   get_proj <- function(sel_output_proj) {
     head(strsplit(tail(
       strsplit(sel_output_proj@projargs, "+proj=")[[1]], 1), " +")[[1]], 1)
@@ -104,7 +105,7 @@ MODIStsp_GUI <- function(general_opts,
     units
   }
 
-  ### Save the options to a JSON file
+  ### Save the options to a JSON file ----
   prepare_to_save_options <- function(general_opts,
                                       gui_env,
                                       ...) {
@@ -382,7 +383,7 @@ MODIStsp_GUI <- function(general_opts,
     return(general_opts)
   } # END save options function
 
-  ## load options from JSON and set values of the GUI accordingly
+  ## load options from JSON and set values of the GUI accordingly ----
   load_options <- function(choice) {
     # load file and reset all widgets to values found in the loaded file
     general_opts     <- RJSONIO::fromJSON(choice)
@@ -442,8 +443,8 @@ MODIStsp_GUI <- function(general_opts,
   } # end load options
 
   # create a new env to facilitate values-passing between widgets
-  gui_env      <- new.env()
-  gui_env$quit <- TRUE
+  gui_env       <- new.env()
+  gui_env$start <- FALSE
 
   # -------------------------------------------------------------------------- #
   ####                      MAIN FUNCTION STARTS HERE                       ####
@@ -638,6 +639,7 @@ MODIStsp_GUI <- function(general_opts,
   sens_wid         <- gcombobox(items     = c("Terra"),
                                 container = satprod2_group,
                                 text      = "Select Platform", selected = 1)
+  
   if (sel_prodopts[[general_opts$prod_version]]$combined == 1) {
     enabled(sens_wid) <- FALSE
   } else {
@@ -1881,7 +1883,7 @@ MODIStsp_GUI <- function(general_opts,
       # If check passed, save previous file and return
       if (gui_env$check_save_opts) {
         write(RJSONIO::toJSON(general_opts), previous_jsfile)
-        gui_env$quit <- FALSE
+        gui_env$start <- TRUE
         dispose(main_win)
       }
     }
@@ -1892,8 +1894,9 @@ MODIStsp_GUI <- function(general_opts,
     text       = "Quit Program",
     container  = but_group,
     handler    = function(h, ...) {
-      gui_env$quit <- TRUE
+      gui_env$start <- FALSE
       dispose(main_win)
+      
     }
   )
   addSpring(but_group)
@@ -1987,6 +1990,7 @@ MODIStsp_GUI <- function(general_opts,
 
   ## show the selection GUI
   visible(main_win, set = TRUE)
-  return(gui_env$quit)
+  
+  return(gui_env$start)
 
 }  # END OF MAIN FUNCTION
