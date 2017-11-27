@@ -25,90 +25,90 @@
 #'  (yyyy.mm.dd).
 #' @param out_folder `character` Main output folder.
 #' @param out_folder_mod `character` Output folder for original HDF storage.
-#' @param reprocess `character ["Yes"/"No"]` If Yes, reprocess data for already
+#' @param reprocess `character ["Yes" | "No"]` If Yes, reprocess data for already
 #'  existing dates.
-#' @param delete_hdf `character ["Yes"/"No"]` If Yes, delete original HDF after
+#' @param delete_hdf `character ["Yes" | "No"]` If Yes, delete original HDF after
 #'  completion.
-#' @param sensor `character ["Terra"/"Aqua"/"Both"]` MODIS platform to be considered.
+#' @param sensor `character ["Terra"| "Aqua" | "Both"]` MODIS platform to be considered.
 #'   (Ignored for MCD* products).
 #' @param https `hash table` http addresses for download of HDF of selected product.
 #' @param ftps `hash table` ftp addresses for download of HDF of selected product.
-#' @param download_server `character ["http" / "ftp" / "offline"]` service to be used for
+#' @param download_server `character ["http" | "ftp" | "offline"]` service to be used for
 #'  download.
-#' @param user `character` Username for NASA http server
+#' @param user `character` Username for NASA http server.
 #'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home)).
 #' @param password `character` Password for NASA http server
 #'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home)).
-#' @param start_x `integer [0-35]` Start horizontal tile
-#' @param start_y `integer [0-17]` Start vertical tile
-#' @param end_x `integer [0-35]` End horizontal tile
-#' @param end_y `integer [0-17]` End vertical tile
-#' @param full_ext `characrter ["Full_Ext" / "Resized"]` If \"Full_Ext\", process
-#'   the entire extention of the selected tiles. Otherwise, crop the output to
-#'   output bbox
+#' @param start_x `integer [0-35]` Start horizontal tile.
+#' @param start_y `integer [0-17]` Start vertical tile.
+#' @param end_x `integer [0-35]` End horizontal tile.
+#' @param end_y `integer [0-17]` End vertical tile.
+#' @param full_ext `characrter ["Full_Ext" | "Resized"]` If \"Full_Ext\", process
+#'   the entire extent of the selected tiles. Otherwise, crop the output to
+#'   output bbox.
 #' @param bbox `numeric(4)` Output bounding box (xmin, xmax, ymin, ymax) in
 #'   out_proj coordinate system.
-#' @param out_format `character ["ENVI" / "GTiff"]` Desired output format.
-#' @param compress `character ["None" / "PACKBITS" / "LZW" / "DEFLATE"]`
+#' @param out_format `character ["ENVI" | "GTiff"]` Desired output format.
+#' @param compress `character ["None" | "PACKBITS" | "LZW" | "DEFLATE"]`
 #'   Compression method for GTiff outputs (Ignored if `out_format == ENVI`)
-#' @param out_res_sel `character ["Native" / "Resampled"]` Indicates if the native
-#'  resolution of the product or a user-sapplied one is to be used.
+#' @param out_res_sel `character ["Native" | "Resampled"]` Indicates if the native
+#'  resolution of the product or a user supplied one is to be used.
 #' @param out_res `float` Output resolution (in output projection measurement
 #'  unit). Ignored if out_res_sel == "Native".
-#' @param native_res `float` Native resolution of MODIS product to be processed
-#' @param tiled `integer [0 / 1]` 1 = tiled product; 0 = non-tiled product
-#'   (resolution 0.05 deg - latlong projection)
-#' @param mod_proj_str `character` proj4 string of MODIS product native projection
-#' @param outproj_str `character` proj4 string of selected output projection
+#' @param native_res `float` Native resolution of MODIS product to be processed.
+#' @param tiled `integer [0 | 1]` 1 = tiled product; 0 = non-tiled product
+#'   (resolution 0.05 deg - latlong projection).
+#' @param mod_proj_str `character` proj4 string of MODIS product native projection.
+#' @param outproj_str `character` proj4 string of selected output projection.
 #' @param nodata_in `numeric array` Original NoData values of original layers of
-#'  the selected MODIS product
+#'  the selected MODIS product.
 #' @param nodata_out `numeric array` Target NoData values of MODIS original layers
-#'  (Ignored if nodata_change == FALSE)
-#' @param nodata_change `character [Yes / No]` if Yes, NoData are set to nodata_out
-#'   in output rasters
-#' @param scale_val `character [Yes / No]` If == `Yes`, scale and offset are applied to
+#'  (Ignored if nodata_change == FALSE).
+#' @param nodata_change `character ["Yes" | "No"]` if Yes, NoData are set to nodata_out
+#'   in output rasters.
+#' @param scale_val `character ["Yes" | "No"]` If == "Yes", scale and offset are applied to
 #'  original MODIS layers, and Spectral Indexes are saved as floating point. If
-#'  == `No``, no rescaling is done and Spectral Indexes are saved as integer, with a
-#'  10000 scaling factor
-#' @param rts `character [Yes / No]` If Yes, create RasterStack time series
+#'  == "No", no rescaling is done and Spectral Indexes are saved as integer, with a
+#'  10000 scaling factor.
+#' @param rts `character ["Yes" | "No"]` If "Yes", create RasterStack time series
 #' @param datatype `character array` datatypes of original MODIS bands
-#'   (e.g., "INT2S")
+#'   (e.g., "INT2S").
 #' @param bandsel `integer 0/1 array` of length equal to number of original
 #'  layers of the selected product set to 1 for bands to be processed.
 #'@param bandnames `character array` Abbreviated Names of original layers of the
-#'  selected product (used to build output file names)
+#'  selected product (used to build output file names).
 #' @param indexes_bandsel `integer 0/1 array` array of length equal to the number
 #'   of Spectral Indexes available for the product (standard + user-provided),
-#'   set to  1 for indexes to be processed
+#'   set to  1 for indexes to be processed.
 #' @param indexes_bandnames `character array` Abbreviated Names of SIs available
-#'   for the selected product (used to build output file names of SIs)
+#'   for the selected product (used to build output file names of SIs).
 #' @param indexes_formula `character array` formulas of SIs available for the
-#'   selected product (standard and custom)
+#'   selected product (standard and custom).
 #' @param indexes_nodata_out `numeric array` NoData values to be used for SIs
 #' @param quality_bandnames `character array` Abbreviated Names of Quality
 #'  Indicators available for the selected product (used to build output file
-#'  names of QIs)
-#' @param quality_bandsel `integer 0/1 array` array of length equal to number
-#'   of available QIs, set to  1 for indexes to be processed
+#'  names of QIs).
+#' @param quality_bandsel `integer 0|1 array` array of length equal to number
+#'   of available QIs, set to  1 for indexes to be processed.
 #' @param quality_bitN `character array` with length equal to the number QIs
 #'   available for the selected product. Each entry contains the position of the
-#'   bits corresponding to a QI (e.g., 0-1) in its "source" MODIS layer
+#'   bits corresponding to a QI (e.g., 0-1) in its "source" MODIS layer.
 #' @param quality_source `character array` which connects each QI to its "source"
 #'   original MODIS layer (multiple QIs share the same "source", since they are
-#'   derivred from different bits of the bit-encoded layer)
-#' @param quality_nodata_in `integer` Always set to 255
-#' @param quality_nodata_out `integer` Always set to 255
+#'   derived from different bits of the bit-encoded layer).
+#' @param quality_nodata_in `integer` Always set to 255.
+#' @param quality_nodata_out `integer` Always set to 255.
 #' @param file_prefixes `character` output file prefix of selected product
 #'   (e.g., MOD13Q1). Used to build output filenames.
-#' @param main_out_folder `character` Main folder for storager of MODIStsp
-#'   time series
-#' @param resampling `character ["near" / "bilinear" / "cubic" / "lanczos" / "mode"]`
-#'   resampling method to be used by `gdalwarp`
-#' @param ts_format `character ["None" / "ENVI Meta Files" / "GDAL vrt files" / "ENVI and GDAL"]`
-#'   selected virtual time series format.
+#' @param main_out_folder `character` Main folder for storage of MODIStsp
+#'   time series.
+#' @param resampling `character ["near" | "bilinear" | "cubic" | "lanczos" | "mode"]`
+#'   Resampling method to be used by `gdalwarp`.
+#' @param ts_format `character ["None" | "ENVI Meta Files" | "GDAL vrt files" |
+#'  "ENVI and GDAL"]` Selected virtual time series format.
 #' @param gui `logical` Indicates if processing was called starting from an
 #'  interactive environment or not. If FALSE, processing messages are sent to a
-#'  log file instead than to the console, and gWidgest messages are suppressed
+#'  log file instead than to the console, and gWidgets messages are suppressed
 #' @param use_aria `logical` If TRUE, aria2c is used to accelerate download
 #'   (if available !).
 #' @param download_range `character ["full" | "seasonal"]` If "full", all the
@@ -142,6 +142,7 @@
 #' @importFrom XML xmlToList xmlParse
 #' @importFrom tools file_path_sans_ext
 #' @importFrom parallel detectCores
+#' @importFrom stringr str_sub
 
 MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              out_folder_mod, reprocess = "Yes",
@@ -217,13 +218,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   start_year <- unlist(strsplit(start_date, "[.]"))[1]
   end_year   <- unlist(strsplit(end_date, "[.]"))[1]
   
-  #   __________________________________________________________________________
-  #   Initialize number of cores for gdalwarp (equal to ncpus - 2 OR 10 if  ####
-  #   number of available cpus > 10 (this to avoid overloading servers with high 
-  #   number of cpus)
-  
-  ncores <- min(c(10, parallel::detectCores() - 2))
-  
   #  ___________________________________________________________________________
   #  Verify if bands needed for computing spectral indexes and/or quality   ####
   #  indicators are already selected if not, select them and set the "delete"
@@ -236,11 +230,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   if (length(quality_bandnames) == 0) {quality_bandsel <- integer(0)}
   
   # dummy matrix which associates, to each couple of index or quality band (col)
-  # - original band (row), info on wether that band is required to build that index
+  # - original band (row), info on wether that band is required to build that
+  # index
   bands_indexes <- matrix(
     0, 
     nrow     = length(bandsel),
-    ncol = length(indexes_bandsel) + length(quality_bandsel),
+    ncol     = length(indexes_bandsel) + length(quality_bandsel),
     dimnames = list(bandnames, c(indexes_bandnames, quality_bandnames))
   )
   
@@ -289,7 +284,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
         if (noaria) {
           use_aria <- 0
         } else {
-          gmessage(
+          gWidgets::gmessage(
             strwrap("Please ensure that aria2c is installed and in your path! \n
                     See http://aria2.github.io", width = 70))
           gWidgets::dispose(mess)
@@ -303,8 +298,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     }
   }
   
-  #   ____________________________________________________________________________
-  #   Start Working.                                                          ####
+  #   __________________________________________________________________________
+  #   Start Working.                                                        ####
   
   # check which platforms were selected,
   
@@ -328,7 +323,16 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
       ftp         <- ftps[["Aqua"]]
       file_prefix <- file_prefixes[["Aqua"]]
     }
-    browser()
+    
+    # check if product is available on ftp 
+    
+    if (download_server == "ftp" & ftp == "Not Available") { 
+      if (gui) gWidgets::dispose(mess_lab) 
+      stop("Product ", sel_prod, " is not available over ftp.\n",  
+           "Please switch to http download! Aborting!") 
+    } 
+    
+    
     # __________________________________________________________________________
     # Start Cycle on required years - needed since in case of "sesonal"     ####
     # download the dates to be downloaded need to be "tweaked" with respect
@@ -336,755 +340,465 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     
     for (yy in start_year:end_year) {
       
-      #   ________________________________________________________________________
-      #   Retrieve list of files to be downloaded/processed from NASA http/ftp####
-      #   servers
-      
-      # First, retrieve acquisition dates of all available MODIS hdfs for the
-      # selected product between in yy
-      date_dirs_all   <- get_mod_dirs(http, ftp, download_server,
-                                      user, password, 
-                                      yy,
-                                      n_retries, 
-                                      gui,
-                                      out_folder_mod,
-                                      .Platform)
-      
-      # overwrite download_server with the setting used in the end to retrieve 
-      # folders. Used in scheduled execution in case http fails and download 
-      # switched automatically to ftp
-      download_server <- attr(date_dirs_all, "server")
-      
-      dates <- get_yeardates(download_range, 
-                             yy, 
-                             start_year, end_year, 
-                             start_date, end_date)
-  
-    # Processing status message
-    mess_text <- paste("Retrieving Files for Year", as.character(yy))
-    if (gui) {
-      svalue(mess_lab) <- paste("---", mess_text, "---")
-      Sys.sleep(0.05)
-    } else {
-      message("[", date(), "] ", mess_text)
-    }
-    
-    # Get a list of the folders containing HDF images required (Corresponding to
-    # the subfolders in lpdaac corresponding to selected product, dates, and
-    # current year under processing)
-     
-    # First, find the folders in lpdaac corresponding to the required dates
-    date_dirs <- get_mod_dates(dates = dates, date_dirs =  date_dirs_all)  
-    
-    if (length(date_dirs) > 0 | download_server == "offline") {
-      modislist <- NULL
-      # Start Cycling on directories containing images to be downloaded and identify
-      # the required ones (i.e., the ones corresponding to selected tiles)
-      for (date in seq_along(date_dirs)) {
-        #Create the date string
-        date_name <- sub(sub(pattern = "\\.", replacement = "_", date_dirs[date]),
-                         pattern = "\\.", replacement = "_", date_dirs[date])
-        # transform date to year
-        year      <- strftime(as.Date(date_name, "%Y_%m_%d" ), format = "%Y")
-        # transform date to DOY
-        DOY       <- strftime(as.Date(date_name, "%Y_%m_%d" ), format = "%j")
+      get_modislist <- function(http, ftp, download_server, user, password, yy, n_retries, gui, out_folder_mod, .Platform, download_range, start_year, end_year, start_date, end_date, mess_lab, date, out_prod_folder, file_prefix, bandnames, bandsel_orig_choice, indexes_bandnames, indexes_bandsel, quality_bandnames, quality_bandsel, out_format, reprocess, start_y, end_y, start_x, end_x, tiled) {
+        #   ______________________________________________________________________
+        #   Retrieve list of files to be downloaded/processed from NASA       ####
+        #   http/ftp servers
         
-        # check if all foreseen output rasters already exist. If so, skip the
-        # date. Otherwise start proecssing
-        check_files <- FALSE
-        check_files <- MODIStsp_check_files(out_prod_folder,
-                                 file_prefix,
-                                 yy,
-                                 DOY,
-                                 bandnames,
-                                 bandsel_orig_choice,
-                                 indexes_bandnames,
-                                 indexes_bandsel,
-                                 quality_bandnames,
-                                 quality_bandsel,
-                                 out_format)
-        # If not all output files are already present or reprocess = "Yes", start downloading hdfs
-        if (check_files == FALSE | reprocess == "Yes") {
-          
-          # Create vector of image names required (corresponding to the selected tiles,
-          # within current dir)
-          modislist <- get_mod_filenames(http, ftp, used_server = download_server,
-                                         user, password, n_retries,
-                                         date_dir = date_dirs[date],
-                                         v = seq(from = start_y, to = end_y),
-                                         h = seq(from = start_x, to = end_x),
-                                         tiled,out_folder_mod,
-                                         gui)
-          
-          # ---------------------------------- ----------------------------------------------#
-          # Download and preprocess Imagesin modislist vector -----------
-          # ---------------------------------- ----------------------------------------------#
-          if (length(modislist) > 0) {
-            
-            #- ------------------------------------------------------------------------------- -#
-            #  Download images (If HDF file already in out_mod_folder, it is not redownloaded !!!!
-            #- ------------------------------------------------------------------------------- -#
-
-            MODIStsp_download(modislist, out_folder_mod, 
-                              download_server, http, 
-                              date_dirs, date, ftp, year, 
-                              DOY, user, password, sens_sel, 
-                              date_name, gui)
-            
-            message("[", date(), "] ", length(modislist), " files for date of ",
-                    date_dirs[date], " were successfully downloaded!")
-            
-            # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
-            # After all required tiles for the date are downloaded, start geoprocessing -----
-            # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
-            
-            # STEP 0: patch to correct wrong resolution/bbox in some HDF4 original layers (e.g. albedo) ----
-            # Retrieve information from hdf4 with gdalinfo
-            gdalinfo_hdf_raw      <- gdalUtils::gdalinfo(file.path(out_folder_mod, modislist[1]))
-            gdalinfo_hdf_1stlayer <- gsub("^ *SUBDATASET_1_NAME=", "",
-                                          gdalinfo_hdf_raw[grep("^ *SUBDATASET_1_NAME",
-                                                                gdalinfo_hdf_raw)])
-            gdalinfo_hdf_resunit  <- gsub("^ *NADIRDATARESOLUTION=[0-9.]+ ?", "",
-                                          gdalinfo_hdf_raw[grep("^ *NADIRDATARESOLUTION",
-                                                                gdalinfo_hdf_raw)])
-            gdalinfo_raw          <- if (length(gdalinfo_hdf_1stlayer) > 0) {
-              # if more than a band is present, take gdalinfo from the first band
-              gdalUtils::gdalinfo(gdalinfo_hdf_1stlayer)
-            } else {
-              # otherwise, take from the HDF directly
-              gdalinfo_hdf_raw
-            }
-            gdalinfo_bbox <- cbind(na.omit(as.numeric(unlist(strsplit(gsub("[^0-9.\\-]+", " ",
-                                                                           gdalinfo_raw[grep("^Lower Left", gdalinfo_raw)]),
-                                                                      " "))))[1:2],
-                                   na.omit(as.numeric(unlist(strsplit(gsub("[^0-9.\\-]+", " ",
-                                                                           gdalinfo_raw[grep("^Upper Right", gdalinfo_raw)]),
-                                                                      " "))))[1:2])
-            # if HDF file is in degrees and with a small bounding box, correct
-            correct_hdf <- if (length(grep("(degree)|(Arc Second)",
-                                           gdalinfo_hdf_resunit)) &
-                               all(gdalinfo_bbox == c(-0.05, -0.025, 0.05, 0.025))) {
-              TRUE
-            } else {
-              FALSE
-            }
-            
-            # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
-            # STEP 1: identify the layers (original, indexes and quality bands) to be created ----
-            # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
-            
-            # at the end of this step, "bandsel" is recreated as the union of the bands selected
-            # by the user and the bands required
-            # by indexes and quality bands, but only those ones which are not already present.
-            
-            # do a check to see if the product has at least one Quality Layer or Possible Index
-            if (length(indexes_bandnames) != 0 | length(quality_bandnames) != 0 ) {
-              
-              req_bands_indexes <- bands_indexes
-              for (i in seq_along(req_bands_indexes)) {
-                req_bands_indexes[i] <- 0
-              }	# matrix similar to band_indexes, but specific for this year-doy process
-              
-              for (band in which(indexes_bandsel == 1)) {
-                indexes_band <- indexes_bandnames[band]
-                out_filename <- file.path(
-                  out_prod_folder,
-                  indexes_band,
-                  paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY,
-                         ifelse(out_format == "GTiff", ".tif", ".dat"))
-                )
-                if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
-                  # if the index does not exists then find out the original bands required for it
-                  req_bands_indexes[, band] <- bands_indexes[, band]
-                }
-              }
-              
-              for (band in which(quality_bandsel == 1)) {
-                quality_band <- quality_bandnames[band]
-                out_filename <- file.path(
-                  out_prod_folder, quality_band,
-                  paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY,
-                         ifelse(out_format == "GTiff", ".tif", ".dat"))
-                )
-                if (out_format == "GTiff") {
-                  out_filename <- paste0(out_filename, ".tif")
-                } else {
-                  out_filename <- paste0(out_filename, ".dat")
-                }
-                # if the index does not exists then find out the original bands required for it
-                if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
-                  req_bands_indexes[, band + length(indexes_bandsel)] <- bands_indexes[, band + length(indexes_bandsel)]
-                }
-              }
-              
-              # Create the final vector of bands required for processing (bands
-              # chosen by the user + bands required for indexes and quality bands)
-              bandsel <- as.integer(as.logical(bandsel_orig_choice + apply(req_bands_indexes, 1, sum)))
-            } #end check on existence of quality/indexes layers
-            
-            # dummy array set to 0 - will contain info on wether orignal
-            # downloaded bands has to be deleted
-            delbands <- bandsel - bandsel_orig_choice
-            
-            # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
-            # STEP 2: process the required original MODIS layers ----
-            # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
-            
-            # Cycle on MODIS original layers
-            for (band in seq_along(bandnames)) {
-              
-              # Create vector with length = bands, filled with zeroes
-              bands <- numeric(length(bandnames))
-              # If band selected, process it
-              if (bandsel[band] == 1) {
-                bands[band] <- 1		# IF band selected for processing, put its value to 1
-                dir.create(file.path(out_prod_folder, bandnames[band]),
-                           showWarnings = FALSE, recursive = TRUE)
-                bands       <- paste(as.character(bands), collapse = "", sep = " ")					# Convert to character
-                # outfile     <- paste0(tmp_prod_folder, "/", bandnames[band], "_", yy, "_", DOY, ".tif")  	# Create name for the temporary tif mosaic
-                outfile     <- paste0(bandnames[band], "_", yy, "_", DOY, ".tif")  	# Create name for the temporary tif mosaic
-                # NOTE: Change outrep_file to a list of rep files: only one for original bands, multiple for indexes and quality
-                
-                # Create name for the TIFF reprojected  mosaic
-                outrep_file   <- file.path(
-                  out_prod_folder, bandnames[band],
-                  paste0(file_prefix, "_",
-                         sub("[.][^.]*$", "", basename(outfile), perl = TRUE),
-                         ifelse(out_format == "GTiff", ".tif", ".dat"))
-                )
-                
-                outfile_vrt <- tempfile(fileext = ".vrt")   # filename of temporary vrt file
-                
-                if (file.exists(outrep_file) == FALSE | reprocess == "Yes") {
-                  
-                  files_in <- file.path(out_folder_mod, modislist)
-                  # dir.create(tmp_prod_folder, recursive = TRUE, showWarnings = FALSE)
-                  # ---------------------------------------------------------------------------------#
-                  # Convert to output projection, extent and format using gdalwarp ----
-                  # ---------------------------------------------------------------------------------#
-                  
-                  if (outproj_str != mod_proj_str) {
-                    mess_text <- paste("Processing and Reprojecting", sens_sel,
-                                       bandnames[band], "files for date:", date_name)
-                  } else {
-                    mess_text <- paste("Processing", sens_sel, bandnames[band],
-                                       "files for date:", date_name)
-                  }
-                  if (gui) {
-                    svalue(mess_lab) <- paste("---", mess_text, "---")
-                    Sys.sleep(0.05)
-                    message("[", date(), "] ", mess_text)
-                  } else {
-                    message("[", date(), "] ", mess_text)
-                  }
-                  
-                  if (datatype[band] == "UInt32") {
-                    # fix due to bug in creation of vrt file for UIn32 data type - create tiff
-                    # files from the original hdfs, and then use those to build the vrt
-                    
-                    files_out   <- NULL
-                    for(file in seq_along(files_in)) {
-                      file_out <- tempfile(fileext = ".tif")
-                      gdalUtils::gdal_translate(files_in[file],
-                                                file_out,
-                                                sd_index  = band,
-                                                srcnodata = nodata_in[band],
-                                                vrtnodata = nodata_out[band],
-                                                overwrite = TRUE)
-                      files_in[file] <- file_out
-                    }
-                    
-                    outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1,-5), ".tif")
-                    gdalwarp(files_in,
-                             outfile_vrt,
-                             sd        = band,
-                             srcnodata = nodata_in[band],
-                             vrtnodata = nodata_out[band],
-                             multi     = TRUE,
-                             wo        = paste0("NUM_THREADS=", ncores),
-                             overwrite = TRUE
-                    )
-                    
-                  } else {
-                    # Create a GDAL vrt file corresponding to the original hdf4
-                    gdalUtils::gdalbuildvrt(files_in,
-                                            outfile_vrt,
-                                            sd = band,
-                                            srcnodata = nodata_in[band],
-                                            vrtnodata = nodata_out[band])
-                  }
-                  
-                  # apply the patch if an error in the original hdf4 file at step 0 was detected
-                  if (correct_hdf) {
-                    outfile_vrt_or        <- outfile_vrt
-                    outfile_vrt           <- tempfile(fileext = ".vrt")   # filename of new temporary vrt file
-                    outfile_vrt_cont      <- readLines(outfile_vrt_or)
-                    outfile_vrt_linegeom  <- grep("<GeoTransform>", outfile_vrt_cont)
-                    outfile_vrt_geom      <- as.numeric(unlist(strsplit(gsub("<GeoTransform>(.*)</GeoTransform>", "\\1",
-                                                                             outfile_vrt_cont[outfile_vrt_linegeom]), ",")))
-                    outfile_vrt_geom_corr <- outfile_vrt_geom * 3600
-                    outfile_vrt_cont[outfile_vrt_linegeom] <- paste("<GeoTransform>",
-                                                                    paste(outfile_vrt_geom_corr, collapse = ", "), "</GeoTransform>")
-                    write(outfile_vrt_cont, outfile_vrt)
-                  }
-                  
-                  
-                  # If resize required,  convert bbox coordinates from t_srs
-                  # to modis_srs, to get the correct extent
-                  if (full_ext == "Resized") {
-                    outfile_vrt_or <- outfile_vrt
-                    outfile_vrt <- tempfile(fileext = ".vrt")   # filename of new temporary vrt file
-                    # for resizing BEFORE reprojecting
-                    bbox_mod <- reproj_bbox(bbox, outproj_str, mod_proj_str, enlarge = TRUE)
-                    # Create a resized and eventually mosaiced GDAL vrt file
-                    
-                    if (datatype[band] == "UInt32") {
-                      # fix to avoid bug on gdalbuildvrt for UInt32 datasets; create a tif
-                      # instead than a vrt
-                      outfile_vrt <- paste0(str_sub(outfile_vrt, 1,-5), ".tif")
-                      gdalUtils::gdalwarp(outfile_vrt_or,
-                                          outfile_vrt,
-                                          te        = c(bbox_mod),
-                                          tap       = TRUE,
-                                          tr        = raster::res(raster::raster(outfile_vrt_or)),
-                                          sd        = band,
-                                          srcnodata = nodata_in[band],
-                                          vrtnodata = nodata_out[band],
-                                          ot        = datatype[band],
-                                          multi     = TRUE,
-                                          wo        = c("INIT_DEST = NO_DATA",
-                                                        paste0("NUM_THREADS=", ncores)),
-                                          overwrite  = TRUE, verbose = T
-                      )
-                    } else {
-                      gdalUtils::gdalbuildvrt(outfile_vrt_or,
-                                              outfile_vrt,
-                                              te        = c(bbox_mod),
-                                              tap       = TRUE,
-                                              tr        = res(raster(outfile_vrt_or)),
-                                              srcnodata = nodata_in[band],
-                                              vrtnodata = nodata_out[band],
-                                              sd        = band,
-                                              overwrite = TRUE)
-                    }
-                  }
-                  
-                  # Launch the reprojection - operations to be done depends on whether resize
-                  # and/or reprojection and/or resampling are required
-                  
-                  reproj_type <- if (out_res_sel == "Native" & outproj_str == mod_proj_str) {
-                    "GdalTranslate"
-                  } else if (out_res_sel == "Resampled" & outproj_str == mod_proj_str) {
-                    "Resample1_Resize0"
-                  } else if (out_res_sel == "Native"    & outproj_str != mod_proj_str & full_ext == "Full Tiles Extent") {
-                    "Resample0_Resize0"
-                  } else if (out_res_sel == "Native"    & outproj_str != mod_proj_str & full_ext == "Resized") {
-                    "Resample0_Resize1"
-                  } else if (out_res_sel == "Resampled" & outproj_str != mod_proj_str & full_ext == "Full Tiles Extent") {
-                    "Resample1_Resize0"
-                  } else if (out_res_sel == "Resampled" & outproj_str != mod_proj_str & full_ext == "Resized") {
-                    "Resample1_Resize1"
-                  } else {
-                    "Error"
-                  }
-                  
-                  # If scale_factor="Yes", add a step before creating final files
-                  outrep_file_0 <- if (
-                    scale_val == "Yes" &
-                    !(scale_factor[band] == 1 & offset[band] == 0)
-                  ) {
-                    tempfile(fileext = ifelse(out_format == "GTiff",
-                                              ".tif", ".dat")
-                    )
-                  } else {
-                    outrep_file
-                  }
-                  
-                  if (out_format == "GTiff") {
-                    switch(reproj_type,
-                           GdalTranslate = gdalUtils::gdal_translate(
-                             outfile_vrt,  outrep_file_0,
-                             a_srs = mod_proj_str, of = out_format,
-                             ot = datatype[band], a_nodata = nodata_out[band],
-                             co = paste("COMPRESS", compress, sep = "="),
-                             overwrite = TRUE
-                           ),
-                           Resample0_Resize0 = gdalUtils::gdalwarp(
-                             outfile_vrt, outrep_file_0,
-                             s_srs     = mod_proj_str, t_srs = outproj_str,
-                             of        = out_format, r = resampling,
-                             co        = paste("COMPRESS", compress, sep = "="),
-                             ot        = datatype[band],
-                             multi     = TRUE,
-                             wo        = c("INIT_DEST = NO_DATA",
-                                           paste0("NUM_THREADS=", ncores)),
-                             overwrite = TRUE
-                           ),
-                           Resample0_Resize1 = gdalUtils::gdalwarp(
-                             outfile_vrt, outrep_file_0,
-                             s_srs      = mod_proj_str, t_srs = outproj_str,
-                             of         = out_format, r = resampling,
-                             te         = bbox,
-                             co         = paste("COMPRESS", compress, sep = "="),
-                             ot         = datatype[band],
-                             multi      = TRUE,
-                             wo         = c("INIT_DEST = NO_DATA",
-                                            paste0("NUM_THREADS=", ncores)),
-                             overwrite  = TRUE
-                           ),
-                           Resample1_Resize0 = gdalUtils::gdalwarp(
-                             outfile_vrt, outrep_file_0,
-                             s_srs      = mod_proj_str, t_srs = outproj_str,
-                             of         = out_format, r = resampling,
-                             tr         = rep(out_res, 2),
-                             co         = paste("COMPRESS", compress, sep = "="),
-                             ot        = datatype[band],
-                             multi     = TRUE,
-                             wo        = c("INIT_DEST = NO_DATA",
-                                           paste0("NUM_THREADS=", ncores)),
-                             overwrite = TRUE
-                           ),
-                           Resample1_Resize1 = gdalUtils::gdalwarp(
-                             outfile_vrt, outrep_file_0,
-                             s_srs     = mod_proj_str, t_srs = outproj_str,
-                             of        = out_format,
-                             r         = resampling,
-                             te        = bbox,
-                             tr        = rep(out_res, 2),
-                             co        = paste("COMPRESS", compress, sep = "="),
-                             ot        = datatype[band],
-                             multi     = TRUE,
-                             wo        = c("INIT_DEST = NO_DATA",
-                                           paste0("NUM_THREADS=", ncores)),
-                             overwrite = TRUE
-                           ),
-                           stop(
-                             "Internal error in out_res_sel, outproj_str or full_ext."))
-                  } else {
-                    switch(reproj_type,
-                           GdalTranslate =  gdalUtils::gdal_translate(
-                             outfile_vrt,  outrep_file_0,
-                             a_srs = mod_proj_str,
-                             of = out_format,
-                             ot = datatype[band],
-                             a_nodata = nodata_out[band],
-                             overwrite = TRUE
-                           ),
-                           Resample0_Resize0  =  gdalUtils::gdalwarp(
-                             outfile_vrt, outrep_file_0,
-                             s_srs = mod_proj_str,
-                             t_srs = outproj_str,
-                             of = out_format,
-                             r = resampling,
-                             ot        = datatype[band],
-                             multi     = TRUE,
-                             wo        = c("INIT_DEST = NO_DATA",
-                                           paste0("NUM_THREADS=", ncores)),
-                             overwrite = TRUE
-                           ),
-                           Resample0_Resize1  = gdalUtils::gdalwarp(
-                             outfile_vrt, outrep_file_0,
-                             s_srs = mod_proj_str,
-                             t_srs = outproj_str,
-                             of = out_format,
-                             r = resampling,
-                             te = bbox,
-                             ot        = datatype[band],
-                             multi     = TRUE,
-                             wo        = c("INIT_DEST = NO_DATA",
-                                           paste0("NUM_THREADS=", ncores)),
-                             overwrite = TRUE
-                           ),
-                           Resample1_Resize0  =  gdalUtils::gdalwarp(
-                             outfile_vrt, outrep_file_0,
-                             s_srs = mod_proj_str,
-                             t_srs = outproj_str,
-                             of = out_format,
-                             r = resampling,
-                             tr = rep(out_res, 2),
-                             ot        = datatype[band],
-                             multi     = TRUE,
-                             wo        = c("INIT_DEST = NO_DATA",
-                                           paste0("NUM_THREADS=", ncores)),
-                             overwrite = TRUE
-                           ),
-                           Resample1_Resize1  =  gdalUtils::gdalwarp(
-                             outfile_vrt, outrep_file_0,
-                             s_srs = mod_proj_str,
-                             t_srs = outproj_str,
-                             of = out_format,
-                             r = resampling,
-                             te = bbox,
-                             tr = rep(out_res, 2),
-                             ot        = datatype[band],
-                             multi     = TRUE,
-                             wo        = c("INIT_DEST = NO_DATA",
-                                           paste0("NUM_THREADS=", ncores)),
-                             overwrite = TRUE
-                           ),
-                           quit("Internal error in out_res_sel, outproj_str or full_ext."))
-                  }
-                  # TODO: Extract as function !
-                  # If scale_factor="Yes", create final files by rescaling values
-                  if (scale_val == "Yes"   &
-                      !(scale_factor[band] == 1 & offset[band] == 0)) {
-                    # fixed: ignore scaling if slope = 1 AND offset = 0
-                    # mode with raster()
-                    
-                    outrep_0 <- raster::raster(outrep_file_0)
-                    scl <- as.numeric(scale_factor[band])
-                    off <- as.numeric(offset[band])
-                    na  <- as.numeric(nodata_out[band])
-                    outrep <- raster::calc(x         = outrep_0,
-                                           fun       = function(x) {
-                                             x * scl + off
-                                           },
-                                           filename  = outrep_file,
-                                           format    = out_format,
-                                           datatype  = "FLT4S",
-                                           options   = ifelse(
-                                             out_format == "GTiff",
-                                             paste0("COMPRESS=", compress),
-                                             ""),
-                                           NAflag    = na,
-                                           overwrite = TRUE)
-                    rm(outrep, outrep_0)
-                  }
-                  
-                  # If output format is ENVI, add data ignore value to the header file
-                  if (out_format == "ENVI") {
-                    fileConn_meta_hdr <- file(paste0(
-                      tools::file_path_sans_ext(outrep_file), ".hdr"), "a")
-                    writeLines(c("data ignore value = ",
-                                 nodata_out[band] ),
-                               fileConn_meta_hdr, sep = " ")
-                    writeLines("", fileConn_meta_hdr)
-                    close(fileConn_meta_hdr)
-                  }
-                  # xml_file <- paste0(outrep_file, ".aux.xml")		# Delete xml files created by gdalwarp
-                  # unlink(tmp_prod_folder, recursive = TRUE)			# Delete temporary files in temp folder
-                }
-              }  # ENDIF band selected for processing
-            }	# END Cycle on available MODIS Bands
-            
-            # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
-            # If Indexes selected, then start creating them
-            # ^ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^
-            
-            for (band in which(indexes_bandsel == 1)) {
-              indexes_band <- indexes_bandnames[band] 	# index name
-              formula      <- indexes_formula[band]				#index formula
-              mess_text    <- paste("Computing", sens_sel, indexes_band,
-                                    "for date:", date_name)
-              if (gui) {
-                gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
-                Sys.sleep(0.05)
-                message("[", date(), "] ", mess_text)
-              } else {
-                message("[", date(), "] ", mess_text)
-              }
-              out_filename <- file.path(
-                out_prod_folder,
-                indexes_band,
-                paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY,
-                       ifelse(out_format == "GTiff", ".tif", ".dat"))
-              )
-              
-              
-              #If file not existing and reprocess = No, compute the index and save it
-              if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
-                MODIStsp_process_indexes(
-                  out_filename       = out_filename,
-                  formula            = formula,
-                  bandnames          = bandnames,
-                  nodata_out         = nodata_out,
-                  indexes_nodata_out = indexes_nodata_out[band],
-                  out_prod_folder    = out_prod_folder,
-                  file_prefix        = file_prefix,
-                  compress           = compress,
-                  yy                 = yy,
-                  out_format         = out_format,
-                  DOY                = DOY,
-                  scale_val          = scale_val
-                )
-              }
-            }
-            
-            # ---------------------------------- ----------------------------------------------#
-            # If Quality indicators selected , then start creating them
-            # ---------------------------------- ----------------------------------------------#
-            
-            for (band in which(quality_bandsel == 1)) {
-              
-              mess_text     <- paste("Computing", quality_band, "for date:", date_name)
-              if (gui) {
-                gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
-                Sys.sleep(0.05)
-                message("[", date(), "] ", mess_text)
-              } else {
-                message("[", date(), "] ", mess_text)
-              }
-              
-              quality_band  <- quality_bandnames[band]		 # indicator name
-              source        <- quality_source[band]  #  Original MODIS layer containing data of the indicator
-              bitN          <- quality_bitN[band]      #  bitfields corresponding to indicator within source
-              nodata_qa_in  <- quality_nodata_in[band]
-              nodata_qa_out <- quality_nodata_out[band]
-              nodata_source <- nodata_out[grep(source, bandnames)]
-              
-              out_filename <- file.path(
-                out_prod_folder, quality_band,
-                paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY,
-                       ifelse(out_format == "GTiff", ".tif", ".dat")
-                )
-              )
-              
-              # If file not existing or reprocess = Yes, compute the indicator
-              # and save it
-              if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
-                
-                in_source_filename <- file.path(
-                  out_prod_folder, source,
-                  paste0(file_prefix, "_", source, "_", yy, "_", DOY,
-                         ifelse(out_format == "GTiff", ".tif", ".dat"))
-                )
-                
-                MODIStsp_process_QA_bits(out_filename,
-                                         in_source_filename,
-                                         bitN,
-                                         out_format,
-                                         nodata_source,
-                                         nodata_qa_in,
-                                         nodata_qa_out,
-                                         compress)
-              }
-            }
-            
-            #- ------------------------------------------------------------------------------- -#
-            #  Delete bands not needed (i.e., bands required for indexes or quality computation,
-            # but not requested by the user,
-            #- ------------------------------------------------------------------------------- -#
-            for (banddel in seq(along = delbands)) {
-              
-              if (delbands[banddel] == 1) {
-                out_filename <- file.path(out_prod_folder, bandnames[banddel],
-                                          paste0(file_prefix, "_", bandnames[banddel], "_", yy, "_", DOY))
-                if (out_format == "ENVI") {
-                  out_filename_dat <- paste0(out_filename, ".dat")
-                  unlink(out_filename_dat)
-                  out_filename_hdr <- paste0(out_filename, ".hdr")
-                  unlink(out_filename_hdr)
-                  
-                }
-                if (out_format == "GTiff") {
-                  out_filename_tif <- paste0(out_filename, ".tif")
-                  unlink(out_filename_tif)
-                }
-                unlink(dirname(out_filename), recursive = TRUE)
-              } #End If on delbands[banddel] == 1
-            } #End Cycle on banddel
-            
-          } else {
-            message("[", date(), "] No available image for selected Tiles in ",
-                    date_dirs[date])
-          } # End check on at least one image available
-          
+        # First, retrieve acquisition dates of all available MODIS hdfs for the
+        # selected product in yy
+        date_dirs_all   <- get_mod_dirs(http, ftp, download_server,
+                                        user, password, 
+                                        yy,
+                                        n_retries, 
+                                        gui,
+                                        out_folder_mod,
+                                        .Platform)
+        
+        # overwrite download_server with the setting used in the end to retrieve 
+        # folders. Used in scheduled execution in case http fails and download 
+        # switched automatically to ftp
+        download_server <- attr(date_dirs_all, "server")
+        
+        dates <- get_yeardates(download_range, 
+                               yy, 
+                               start_year, end_year, 
+                               start_date, end_date)
+        
+        # Processing status message
+        mess_text <- paste("Retrieving Files for Year", as.character(yy))
+        if (gui) {
+          svalue(mess_lab) <- paste("---", mess_text, "---")
+          Sys.sleep(0.05)
         } else {
-          message("[", date(), "] All Required output files for date ", date_name,
-                  " are already existing - Doing Nothing!")
-        } # End check on all data already processed for date or reprocees = Yes
+          message("[", date(), "] ", mess_text)
+        }
         
-        #- ------------------------------------------------------------------------------- -#
-        # If deletion selected, delete the HDF files in out_folder_mod directory
-        #- ------------------------------------------------------------------------------- -#
-        if (delete_hdf == "Yes") {
-          
-          for (dir in seq_along(date_dirs)) {
+        # Get a list of the folders containing HDF images required (Corresponding
+        # to the subfolders in lpdaac corresponding to selected product, dates and
+        # current year under processing)
+        
+        # First, find the folders in lpdaac corresponding to the required dates
+        date_dirs <- get_mod_dates(dates = dates, date_dirs =  date_dirs_all)  
+        
+        if (length(date_dirs) > 0 | download_server == "offline") {
+          modislist <- NULL
+          # Start Cycling on directories containing images to be downloaded and
+          # identify the required ones (i.e., the ones corresponding to selected
+          #  tiles)
+          for (date in seq_along(date_dirs)) {
+            #Create the date string
+            date_name <- sub(sub(
+              pattern = "\\.", replacement = "_", date_dirs[date]),
+              pattern = "\\.", replacement = "_", date_dirs[date]
+            )
+            # transform date to year
+            year      <- strftime(as.Date(date_name, "%Y_%m_%d" ), format = "%Y")
+            # transform date to DOY
+            DOY       <- strftime(as.Date(date_name, "%Y_%m_%d" ), format = "%j")
             
-            modislist <- get_mod_filenames(http = http, ftp = ftp,
-                                           used_server = download_server,
-                                           user = user, password = password,
-                                           date_dir = date_dirs[dir],
-                                           v = seq(from = start_y, to =  end_y),
-                                           h = seq(from = start_x, to = end_x),
-                                           tiled,
-                                           out_folder_mod,
-                                           gui = gui)
-            for (modisname in modislist) {
-              unlink(file.path(out_folder_mod, modisname))
+            # check if all foreseen output rasters already exist. If so, skip the
+            # date. Otherwise start processing
+            check_files <- FALSE
+            check_files <- MODIStsp_check_files(out_prod_folder,
+                                                file_prefix,
+                                                yy,
+                                                DOY,
+                                                bandnames,
+                                                bandsel_orig_choice,
+                                                indexes_bandnames,
+                                                indexes_bandsel,
+                                                quality_bandnames,
+                                                quality_bandsel,
+                                                out_format)
+            # If not all output files are already present or reprocess = "Yes",
+            # start downloading hdfs
+            if (check_files == FALSE | reprocess == "Yes") {
+              
+              # Create vector of image names required (corresponding to the 
+              # required tiles for the current date)
+              modislist <- get_mod_filenames(http, ftp,
+                                             used_server = download_server,
+                                             user, password, n_retries,
+                                             date_dir = date_dirs[date],
+                                             v = seq(from = start_y, to = end_y),
+                                             h = seq(from = start_x, to = end_x),
+                                             tiled, out_folder_mod,
+                                             gui)
+            #TODO put here the messages concerning all data/no data
+              
+              } else {
+              modislist <- NULL
+            }
+          } 
+        } else {
+          modislist <- NULL
+        }
+      }
+      
+      # -----------------------------------------------------------------#
+      # Download and process Images in modislist vector               ####
+      
+      if (length(modislist) > 0) {
+        
+        #- ------------------------------------------------------------ -#
+        #  STEP 1: Download images (If HDF file already in            ####
+        #  out_mod_folder, it is not redownloaded !!!!
+        
+        MODIStsp_download(modislist, out_folder_mod, 
+                          download_server, http, ftp, n_retries, use_aria,
+                          date_dirs[date], year, 
+                          DOY, user, password, sens_sel, 
+                          date_name, gui)
+        
+        message("[", date(), "] ", length(modislist),
+                " files for date of ",date_dirs[date],
+                " were successfully downloaded!")
+        
+        
+        # ______________________________________________________________
+        # After all required tiles for the date are downloaded, start 
+        # geoprocessin
+        
+        # ________________________________________________________________
+        # STEP 2: identify the layers to be processed.                ####
+        # (original, indexes and  quality bands).
+        # At the end of this step, "bandsel" is recreated as the union of
+        # the bands selected by the user and the bands required to 
+        # compute indexes and quality bands
+        
+        # do a check to see if the product has at least one Quality Layer
+        # or Possible Index
+        if (length(indexes_bandnames) != 0 | 
+            length(quality_bandnames) != 0 ) {
+          
+          req_bands_indexes <- bands_indexes
+          # build matrix similar to band_indexes, but specific for this 
+          # year-doy process
+          for (i in seq_along(req_bands_indexes)) {
+            req_bands_indexes[i] <- 0
+          }	
+          
+          for (band in which(indexes_bandsel == 1)) {
+            indexes_band <- indexes_bandnames[band]
+            out_filename <- file.path(
+              out_prod_folder,
+              indexes_band,
+              paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY,
+                     ifelse(out_format == "GTiff", ".tif", ".dat"))
+            )
+            if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
+              # if the index does not exists then find out the original
+              # bands required to compute it
+              req_bands_indexes[, band] <- bands_indexes[, band]
             }
           }
-        } #end if on Delete original downloaded HDFs
+          
+          for (band in which(quality_bandsel == 1)) {
+            quality_band <- quality_bandnames[band]
+            out_filename <- file.path(
+              out_prod_folder, quality_band,
+              paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY,
+                     ifelse(out_format == "GTiff", ".tif", ".dat"))
+            )
+            
+            # if the QI does not exists then find out the original
+            # bands required for it
+            if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
+              req_bands_indexes[, band + length(indexes_bandsel)] <- 
+                bands_indexes[, band + length(indexes_bandsel)]
+            }
+          }
+          
+          # Create the final vector of bands required for processing (
+          # bands chosen by the user + bands required for indexes and 
+          # quality bands)
+          bandsel <- as.integer(as.logical(
+            bandsel_orig_choice + apply(req_bands_indexes, 1, sum)
+          ))
+        } #end check on existence of quality/indexes layers
         
-      } # End cycling on available dates for selected year
+        # Create a delbands array. Contains info on wether original
+        # downloaded bands has to be deleted
+        delbands <- bandsel - bandsel_orig_choice
+        
+        # _______________________________________________________________
+        # STEP 3: process the required original MODIS layers          ####
+        
+        # Cycle on MODIS original layers
+        for (band in seq_along(bandnames)) {
+          
+          # Create vector with length = bands, filled with zeroes
+          bands <- numeric(length(bandnames))
+          # If band selected, process it
+          if (bandsel[band] == 1) {
+            # IF band selected for processing, put its value to 1
+            bands[band] <- 1		
+            dir.create(file.path(out_prod_folder, bandnames[band]),
+                       showWarnings = FALSE, recursive = TRUE)
+            bands <- paste(as.character(bands), collapse = "", sep = " ")
+            # Create name for the temporary tif mosaic
+            outfile <- paste0(bandnames[band], "_", yy, "_", DOY)
+            # NOTE: Change outrep_file to a list of rep files: only one 
+            # for original bands, multiple for indexes and quality
+            
+            # Create name for the TIFF reprojected mosaic
+            outrep_file   <- file.path(
+              out_prod_folder, bandnames[band],
+              paste0(file_prefix, "_",
+                     outfile,
+                     ifelse(out_format == "GTiff", ".tif", ".dat"))
+            )
+            
+            if (file.exists(outrep_file) == FALSE | reprocess == "Yes") {
+              
+              MODIStsp_process_bands(
+                out_folder_mod, modislist,
+                outproj_str, mod_proj_str, sens_sel,
+                band, bandnames[band], date_name,
+                datatype[band],
+                nodata_in[band], nodata_out[band], 
+                full_ext, bbox, 
+                scale_val, scale_factor[band], offset[band], 
+                out_format, outrep_file, compress, 
+                out_res_sel, out_res, resampling, 
+                gui, mess_lab
+              )
+            }
+          }  # ENDIF band selected for processing
+        }	# END Cycle on available MODIS Bands
+        
+        #  --------------------------------------------------------------#
+        # STEP 4: If any Indexes selected, compute them               ####
+        
+        # cycle on selected indexes
+        for (band in which(indexes_bandsel == 1)) {
+          indexes_band <- indexes_bandnames[band]
+          formula      <- indexes_formula[band]
+          mess_text    <- paste("Computing", sens_sel, indexes_band,
+                                "for date:", date_name)
+          if (gui) {
+            gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
+            Sys.sleep(0.05)
+            message("[", date(), "] ", mess_text)
+          } else {
+            message("[", date(), "] ", mess_text)
+          }
+          out_filename <- file.path(
+            out_prod_folder,
+            indexes_band,
+            paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY,
+                   ifelse(out_format == "GTiff", ".tif", ".dat"))
+          )
+          
+          # If file not existing and reprocess = No, compute the index and
+          # save it
+          if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
+            MODIStsp_process_indexes(out_filename,
+                                     out_prod_folder,
+                                     formula,
+                                     bandnames,
+                                     nodata_out,
+                                     indexes_nodata_out[band],
+                                     file_prefix,
+                                     compress,
+                                     yy,
+                                     out_format,
+                                     DOY,
+                                     scale_val)
+          }
+        }
+        
+        #  --------------------------------------------------------------#
+        # STEP 5: If any Quality indicators selected, compute them    ####
+        
+        #♣ cycle on selected quality indicators
+        for (band in which(quality_bandsel == 1)) {
+          
+          mess_text     <- paste("Computing", quality_band, "for date:",
+                                 date_name)
+          if (gui) {
+            gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
+            Sys.sleep(0.05)
+            message("[", date(), "] ", mess_text)
+          } else {
+            message("[", date(), "] ", mess_text)
+          }
+          # indicator name
+          quality_band  <- quality_bandnames[band]		 
+          #  Original MODIS layer containing data of the indicator
+          source        <- quality_source[band] 
+          #  bitfields corresponding to indicator within source
+          bitN          <- quality_bitN[band]   
+          nodata_qa_in  <- quality_nodata_in[band]
+          nodata_qa_out <- quality_nodata_out[band]
+          nodata_source <- nodata_out[grep(source, bandnames)]
+          
+          out_filename <- file.path(
+            out_prod_folder, quality_band,
+            paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY,
+                   ifelse(out_format == "GTiff", ".tif", ".dat")
+            )
+          )
+          
+          # If file not existing or reprocess = Yes, compute the indicator
+          # and save it
+          if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
+            
+            # get filename of the (processed) original MODIS layer which
+            # contains the required bit fields input data
+            in_source_filename <- file.path(
+              out_prod_folder, source,
+              paste0(file_prefix, "_", source, "_", yy, "_", DOY,
+                     ifelse(out_format == "GTiff", ".tif", ".dat"))
+            )
+            
+            MODIStsp_process_QA_bits(out_filename,
+                                     in_source_filename,
+                                     bitN,
+                                     out_format,
+                                     nodata_source,
+                                     nodata_qa_in,
+                                     nodata_qa_out,
+                                     compress)
+          }
+        }
+        
+        #  --------------------------------------------------------------#
+        #  STEP 6: Delete bands not needed (i.e., bands required for  ####
+        #  indexes or quality computation, but not requested by the user.
+        
+        for (banddel in seq(along = delbands)) {
+          
+          if (delbands[banddel] == 1) {
+            out_filename <- file.path(out_prod_folder, bandnames[banddel],
+                                      paste(file_prefix, 
+                                            bandnames[banddel], yy, 
+                                            DOY, sep = "_"))
+            if (out_format == "ENVI") {
+              out_filename_dat <- paste0(out_filename, ".dat")
+              unlink(out_filename_dat)
+              out_filename_hdr <- paste0(out_filename, ".hdr")
+              unlink(out_filename_hdr)
+              
+            }
+            if (out_format == "GTiff") {
+              out_filename_tif <- paste0(out_filename, ".tif")
+              unlink(out_filename_tif)
+            }
+            unlink(dirname(out_filename), recursive = TRUE)
+          } #End If on delbands[banddel] == 1
+        } #End Cycle on banddel
+        
+      } else {
+        message("[", date(), "] No images available for selected area",
+                "in date ", date_dirs[date])
+      } # End check on at least one image available
       
     } else {
-      message("[", date(), "] No available data for year: ",
-              yy, " for Sensor ",
-              sens_sel, " in selected dates.")
-    }
+      message("[", date(), "] All Required output files for date ",
+              date_name, " are already existing - Doing Nothing!")
+    } 
+    # End check on all data already processed for date or reprocees = Yes
     
-  }	# End Cycling on selected years
+    #- ---------------------------------------------------------------- -#
+    # If deletion selected, delete the HDF files in out_folder_mod  ####
+    # directory
+    
+    if (delete_hdf == "Yes") {
+      
+      for (dir in seq_along(date_dirs)) {
+        
+        modislist <- get_mod_filenames(
+          http, ftp,
+          download_server,
+          user,password,
+          n_retries,
+          date_dirs[dir],
+          v = seq(from = start_y, to =  end_y),
+          h = seq(from = start_x, to = end_x),
+          tiled,
+          out_folder_mod,
+          gui
+        )
+        
+        for (modisname in modislist) {
+          unlink(file.path(out_folder_mod, modisname))
+        }
+      }
+    } #end if on Delete original downloaded HDFs
+    
+  } # End cycling on available dates for selected year
   
-  bandsel <- bandsel_orig_choice  # reset bandsel to original user's choice
-  
+} else {
+  message("[", date(), "] No available data for year: ",
+          yy, " for Sensor ",
+          sens_sel, " in selected dates.")
+}
+
+}	# End Cycling on selected years
+
+bandsel <- bandsel_orig_choice  # reset bandsel to original user's choice
+
 } # End cycling on sensors
 
-#- ------------------------------------------------------------------------------- -#
-#  Create vrt files of time series - original and derived
-#- ------------------------------------------------------------------------------- -#
+#   __________________________________________________________________________
+#   STEP 7: Create vrt files of time series - original, SI and QI        ####
 
 if (sensor == "Both") {
   senslist <- c("Terra", "Aqua", "Mixed")
-} # selected sensors
+} 
+
 # cycle on selected sensors
 for (sens_sel in senslist) {
   # Create virtual files for original layers
   for (band in which(bandsel == 1)) {
-    message("[", date(), "] Creating Virtual Files and rts time series for layer ",
-            bandnames[band])
+    message("[", date(), "] Creating Virtual Files and R time series for ",
+            "layer ", bandnames[band])
     
-    MODIStsp_vrt_create(out_prod_folder = out_prod_folder,
-                        meta_band       = bandnames[band],
-                        file_prefixes   = file_prefixes,
-                        sens_sel        = sens_sel,
-                        ts_format       = ts_format,
-                        nodata_value    = nodata_out[band],
-                        out_format      = out_format,
-                        rts             = rts)
-  } #End Cycle on bandsel
+    MODIStsp_vrt_create(out_prod_folder,
+                        bandnames[band],
+                        file_prefixes,
+                        sens_sel,
+                        ts_format,
+                        nodata_out[band],
+                        out_format,
+                        rts)
+  } 
+  
   # Create virtual files for QI layers
   for (band in which(indexes_bandsel == 1)) {
-    message("[", date(), "] Creating Virtual Files and rts time series for layer ",
-            indexes_bandnames[band])
-    MODIStsp_vrt_create(out_prod_folder = out_prod_folder,
-                        meta_band       = indexes_bandnames[band],
-                        file_prefixes   = file_prefixes,
-                        sens_sel        = sens_sel,
-                        ts_format       = ts_format,
-                        nodata_value    = indexes_nodata_out[band],
-                        out_format      = out_format,
-                        rts             = rts)
-  } #End Cycle on indexes_bandsel
+    message("[", date(), "] Creating Virtual Files and R time series for ",
+            "layer ", indexes_bandnames[band])
+    MODIStsp_vrt_create(out_prod_folder,
+                        indexes_bandnames[band],
+                        file_prefixes,
+                        sens_sel,
+                        ts_format,
+                        nodata_out[band],
+                        out_format,
+                        rts)
+  }
   
   # Create virtual files for SI layers
   for (band in which(quality_bandsel == 1)) {
-    message("[", date(), "] Creating Virtual Files and rts time series for layer ",
-            quality_bandnames[band])
-    MODIStsp_vrt_create(out_prod_folder = out_prod_folder,
-                        meta_band       = quality_bandnames[band]		,
-                        file_prefixes   = file_prefixes,
-                        sens_sel        = sens_sel,
-                        ts_format       = ts_format,
-                        nodata_value    = quality_nodata_out[band],
-                        out_format      = out_format,
-                        rts             = rts)
-  } #End Cycle on quality_bandsel
+    message("[", date(), "] Creating Virtual Files and R time series for ",
+            "layer ", quality_bandnames[band])
+    MODIStsp_vrt_create(out_prod_folder,
+                        quality_bandnames[band],
+                        file_prefixes,
+                        sens_sel,
+                        ts_format,
+                        nodata_out[band],
+                        out_format,
+                        rts)
+  } 
   
 }
-#- ------------------------------------------------------------------------------- -#
-# Close GUI and clean-up
-#- ------------------------------------------------------------------------------- -#
+
+# ____________________________________________________________________________
+#  Close GUI and clean-up                                                 ####
+
 
 if (gui) {
   gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
@@ -1095,6 +809,3 @@ if (gui) {
 unlink(file.path(out_prod_folder, "Temp"), recursive = TRUE)
 return("DONE")
 }
-
-
-
