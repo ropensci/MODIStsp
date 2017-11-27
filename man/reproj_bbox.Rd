@@ -8,23 +8,23 @@ reproj_bbox(bbox, in_proj, out_proj, enlarge = TRUE, N_dens = 1000)
 }
 \arguments{
 \item{bbox}{The input bounding box (it can be a matrix in the bbox format or a
-vector in the format (xmin, ymin, xmax, ymax).}
+vector in the format (xmin, ymin, xmax, ymax)).}
 
-\item{in_proj}{The input projection (string format).}
+\item{in_proj}{\code{character} The input projection (proj4 format).}
 
-\item{out_proj}{The output projection (string format).}
+\item{out_proj}{\code{character} The output projection (proj4 format).}
 
-\item{enlarge}{Logical parameters: if TRUE, the reprojected bounding box is the
-one which completely include the original one; if FALSE, it is simply the one obtained
-by reprojecting the upper-left and the lower-right corners.}
+\item{enlarge}{`logical`` if TRUE, the reprojected bounding box is the
+one which completely include the original one; if FALSE, it is simply the
+one obtained by reprojecting the upper-left and the lower-right corners.}
 
 \item{N_dens}{Densification ratio used in the case enlarge is TRUE.}
 }
 \description{
-Ancillary function used to reproject bounding boxes; setting the parameter 'enlarge'
-allows to choose if the new one would be the one which completely include the old
-or if is simply the one obtained by reprojecting the upper-left and the
-lower-right corners.
+Ancillary function used to reproject bounding boxes; setting the parameter
+'enlarge' allows to choose if the new one would be the one which completely
+includes the original extent in the ooutput projection, or if is simply the
+one obtained by reprojecting the upper-left and the lower-right corners.
 }
 \note{
 License: GPL 3.0

@@ -2,8 +2,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![Coverage Status](https://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](https://codecov.io/github/lbusett/MODIStsp?branch=master)
 
-<i class="fa fa-globe" aria-hidden="true"></i> MODIStsp: a "R" package for preprocessing MODIS time series <img src="docs/logo.png" align="right" />
-====================================================================================================================================================
+<i class="fa fa-globe" aria-hidden="true"></i> MODIStsp: a "R" package for preprocessing MODIS time series <img src="docs/logo.png" width="147" height="170" align="right" />
+=============================================================================================================================================================================
 
 **MODIStsp** is a "R" package devoted to **automatizing the creation of time series of raster images derived from MODIS Land Products data**.
 

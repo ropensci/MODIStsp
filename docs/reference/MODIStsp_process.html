@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp_process � MODIStsp_process • MODIStsp</title>
+<title>MODIStsp_process — MODIStsp_process • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -241,7 +241,7 @@ download.</p></td>
     <tr>
       <th>full_ext</th>
       <td><p><code>characrter ["Full_Ext" | "Resized"]</code> If "Full_Ext", process
-the entire extention of the selected tiles. Otherwise, crop the output to
+the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.</p></td>
     </tr>
     <tr>
@@ -261,7 +261,7 @@ Compression method for GTiff outputs (Ignored if <code>out_format == ENVI</code>
     <tr>
       <th>out_res_sel</th>
       <td><p><code>character ["Native" | "Resampled"]</code> Indicates if the native
-resolution of the product or a user-sapplied one is to be used.</p></td>
+resolution of the product or a user supplied one is to be used.</p></td>
     </tr>
     <tr>
       <th>out_res</th>
@@ -379,7 +379,7 @@ bits corresponding to a QI (e.g., 0-1) in its "source" MODIS layer.</p></td>
       <th>quality_source</th>
       <td><p><code>character array</code> which connects each QI to its "source"
 original MODIS layer (multiple QIs share the same "source", since they are
-derivred from different bits of the bit-encoded layer).</p></td>
+derived from different bits of the bit-encoded layer).</p></td>
     </tr>
     <tr>
       <th>quality_nodata_in</th>
@@ -396,7 +396,7 @@ derivred from different bits of the bit-encoded layer).</p></td>
     </tr>
     <tr>
       <th>main_out_folder</th>
-      <td><p><code>character</code> Main folder for storager of MODIStsp
+      <td><p><code>character</code> Main folder for storage of MODIStsp
 time series.</p></td>
     </tr>
     <tr>
@@ -426,7 +426,7 @@ the images of December, January and February from 2005 to 2010 - excluding
       <th>gui</th>
       <td><p><code>logical</code> Indicates if processing was called starting from an
 interactive environment or not. If FALSE, processing messages are sent to a
-log file instead than to the console, and gWidgest messages are suppressed</p></td>
+log file instead than to the console, and gWidgets messages are suppressed</p></td>
     </tr>
     <tr>
       <th>n_retries</th>

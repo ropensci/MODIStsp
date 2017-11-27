@@ -4,14 +4,12 @@
 \alias{MODIStsp_vrt_create}
 \title{Create MODIStsp virtual files}
 \usage{
-MODIStsp_vrt_create(out_prod_folder, meta_band, file_prefixes, sens_sel,
-  ts_format, nodata_value, out_format, rts)
+MODIStsp_vrt_create(sensor, out_prod_folder, bandnames, indexes_bandnames,
+  quality_bandnames, bandsel, indexes_bandsel, quality_bandsel, file_prefixes,
+  sens_sel, ts_format, nodata_value, out_format, rts)
 }
 \arguments{
 \item{out_prod_folder}{\code{character} Main output folder.}
-
-\item{meta_band}{\code{character} Name of the band (or SI, or QI) for which the
-virtual file has to be created.}
 
 \item{file_prefixes}{\code{character array (2)} file_prefixes for TERRA and AQUA -
 used to identify the files corresponding to each sensor}
@@ -31,6 +29,9 @@ for virtual file.}
 "input" for the vrt and contained in out_prod_folder/band folders.}
 
 \item{rts}{\code{character ["Yes" | "No"]} If Yes, create "R" RasterStacks time series}
+
+\item{meta_band}{\code{character} Name of the band (or SI, or QI) for which the
+virtual file has to be created.}
 }
 \value{
 NULL -

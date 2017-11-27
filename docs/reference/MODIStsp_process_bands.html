@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp_process_bands � MODIStsp_process_bands • MODIStsp</title>
+<title>MODIStsp_process_bands — MODIStsp_process_bands • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -143,7 +143,7 @@
 
     
     <p>Internal function used to performed the required spatial
-processing on MODIS orignal hdf layers (reprojection, resizing, reampling,
+processing on MODIS original hdf layers (reprojection, resizing, resampling,
 mosaicing, computation of scaling factors). The function is based on the
 use of <code>gdal</code> routines.</p>
     
@@ -209,7 +209,7 @@ processed.</p></td>
     <tr>
       <th>full_ext</th>
       <td><p><code>characrter ["Full_Ext" | "Resized"]</code> If "Full_Ext", process
-the entire extention of the selected tiles. Otherwise, crop the output to
+the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.</p></td>
     </tr>
     <tr>
@@ -251,7 +251,7 @@ Compression method for GTiff outputs (Ignored if <code>out_format == ENVI</code>
     <tr>
       <th>out_res_sel</th>
       <td><p><code>character ["Native" | "Resampled"]</code> Indicates if the native
-resolution of the product or a user-sapplied one is to be used.</p></td>
+resolution of the product or a user supplied one is to be used.</p></td>
     </tr>
     <tr>
       <th>out_res</th>
@@ -267,7 +267,7 @@ Resampling method to be used by <code>gdalwarp</code>.</p></td>
       <th>gui</th>
       <td><p><code>logical</code> Indicates if processing was called starting from an
 interactive environment or not. If FALSE, processing messages are sent to a
-log file instead than to the console, and gWidgest messages are suppressed</p></td>
+log file instead than to the console, and gWidgets messages are suppressed</p></td>
     </tr>
     <tr>
       <th>mess_lab</th>

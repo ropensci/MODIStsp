@@ -133,12 +133,12 @@
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>gWidgetsRGtk2</code> library beforehand:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>)
 <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
 <p>Upon loading <code>gWidgetsRGtk2</code> , an error window will probably appear. This signals that library “GTK+” is not yet installed on your system or is not on your PATH. To install it press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK” and then “OK” . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !<sup name="a1"></sup></p>
-<p>In case RStudio doesn’t automatically restart or continuously asks to install GTK+ again, kill it form “Task Manager” (or restart the R session from RStudio “Session” menu), reload RStudio and the try to reload <code>gWidgetsRGtk2</code>. If it loads correctly, you should be ready to go.</p>
+<p>In case RStudio does not automatically restart or continuously asks to install GTK+ again, kill it form “Task Manager” (or restart the R session from RStudio “Session” menu), reload RStudio and the try to reload <code>gWidgetsRGtk2</code>. If it loads correctly, you should be ready to go.</p>
 <p>If it still fails, try downloading the GTK+ bundle from:</p>
 <p><a href="http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip" class="uri">http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip</a> (OR <a href="http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip" class="uri">http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip</a> if on Win32)</p>
 <p>, unzip the archive on a folder of your choice (e.g., <code>C:\\Program Files\\GTK+</code>), then add the path to its “bin” subfolder (e.g., <code>C:\\Program Files\\GTK+\\bin\\</code> to your system PATH environment variable.</p>
@@ -167,7 +167,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <hr>
 </div>
 <div id="installing-on-mac" class="section level2">
@@ -175,7 +175,7 @@
 <a href="#installing-on-mac" class="anchor"></a><i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac</h2>
 <p><strong>NOTE: The following installation notes were kindly provided by a MODIStsp user and should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. Since we are not working on Mac we were not able yet to check this, but we hope it may be useful at least to put you in the right direction if you have installation problems)</strong></p>
 <p>Installing MODIStsp requires many dependencies:</p>
-<p>For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by <strong>tobybot11</strong> (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>), Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and doesn’t work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version “OS X Mavericks binaries” and not “Package source” - You have to be sure that gdal is installed with HDF4 support.</p>
+<p>For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by <strong>tobybot11</strong> (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>), Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version “OS X Mavericks binaries” and not “Package source” - You have to be sure that gdal is installed with HDF4 support.</p>
 <p>1 - Update to R &gt; 3.4 if needed, then update all packages</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># update packages</span>
 <span class="kw">update.packages</span>()
@@ -209,7 +209,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p>Check that gdal is installed with hdf4 support. From a terminal:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&gt;</span> <span class="ex">gdal-config</span> --formats </code></pre></div>
 <p>if gdal is installed, check what drivers are installed: the list should include hdf4.</p>
-<p>If gdal is not yet installed or hdf4 is not supproted, install/reinstall it following these <a href="http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html">notes</a></p>
+<p>If gdal is not yet installed or hdf4 is not supported, install/reinstall it following these <a href="http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html">notes</a></p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&gt;</span> <span class="ex">brew</span> install hdf4 
 <span class="co"># prefer hdf4 links over NetCDF </span>
 <span class="op">&gt;</span> <span class="ex">brew</span> link --overwrite hdf4 
@@ -228,7 +228,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>OR</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools) 
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>Good luck! ________________________________________________________________________________</p>
 </div>
