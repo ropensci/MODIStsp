@@ -5,7 +5,7 @@
 #'  old version
 #' @param previous_jsfile Expected file name of the JSON file containing
 #'  processing options
-#' @param mod_proj_str poj4string defining MODIS standard sinusoidal projection
+#' @param mod_proj_str proj4 string defining MODIS standard sinusoidal projection
 #' @return `data frame` general_opts, containing the processing options
 #'   retrieved from the JSON file (or the defaults set at first execution).
 #'   See also `MODIStsp_GUI` and `MODIStsp_process`
@@ -30,7 +30,7 @@ load_opts <- function(previous_jsfile, mod_proj_str) {
         message(
           "The option file in use (", previous_jsfile, ") was created ",
           "with an old MODIStsp version (", general_opts$MODIStspVersion, ")",
-          "\n Although this should still work, please consider reopening",
+          "\n Although this should still work, please consider reopening ",
           "the JSON file from the GUI\n and resaving it."
         )
       }

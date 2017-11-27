@@ -1,6 +1,6 @@
 #' @title MODIStsp_check_files
 #' @description Accessory function used to see if all expected out files for the
-#'   selected date are already present in th output folder. If all expected out
+#'   selected date are already present in the output folder. If all expected out
 #'   files are already present, check_files is set to TRUE, and the date is
 #'   skipped in MODIStsp_process.
 #' @param out_prod_folder `character` MODIStsp output folder
@@ -10,7 +10,7 @@
 #' @param DOY `character` doy
 #' @param bandnames `character array` Bandnames of the MODIS product
 #' @param bandsel_orig_choice `numeric 0/1 array` Indicates which original MODIS
-#'   layers were selected for processing (doesn't contain names of bands needed
+#'   layers were selected for processing (does not contain names of bands needed
 #'   to compute SIs but not selected by the user!)
 #' @param indexes_bandnames `character array` Names of available spectral
 #'   indexes (standard + custom) available for the currently processed product

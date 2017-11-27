@@ -14,11 +14,11 @@ argument), Default: TRUE}
 
 \item{options_file}{\code{character} full path to a JSON file
 containing MODIStsp processing options saved from the GUI. If NULL,
-parameters of the last succesfull run are retrieved from file
+parameters of the last successful run are retrieved from file
 "MODIStsp_Previous.json" in subdir Previous), Default: NULL}
 
 \item{spatial_file_path}{\code{character} (optional) full path of a spatial file
-to use to derive te processing extent. If not NULL, the processing options
+to use to derive the processing extent. If not NULL, the processing options
 which define the extent, the selected tiles and the "Full Tile / Resized"
 in the JSON options file are overwritten and new files are created on the
 extent of the provided spatial file, Default: NULL}

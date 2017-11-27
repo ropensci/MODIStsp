@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_addindex.R
 \name{MODIStsp_addindex}
 \alias{MODIStsp_addindex}
-\title{add custom sepctral indexes}
+\title{add custom spectral indexes}
 \usage{
 MODIStsp_addindex(option_jsfile = NULL, prodopts_file = NULL,
   selprod = NULL, selvers = NULL, gui = TRUE, new_indexbandname = "",
@@ -20,13 +20,13 @@ if NULL, use MODIStsp_ProdOpts.RData in subdir Previous, Default: NULL}
 
 \item{selprod}{\code{character} Name of the product to which the new index should
 be added (Note: the index will be added to all other products allowing its
-computation !). If NULL, as in non-interactive exection, no
+computation !). If NULL, as in non-interactive execution, no
 check on available band names is skipped and the index (if valid) is
 added to all products supporting it, Default: NULL}
 
 \item{selvers}{\code{character} Version of the product to which the new index
 should be added (Note: the index will be added to all other products
-allowing its computation !). If NULL, as in non-interactive exection, no
+allowing its computation !). If NULL, as in non-interactive execution, no
 check on available band names is skipped and the index (if valid) is
 added to all products supporting it, Default: NULL}
 
@@ -51,7 +51,7 @@ Default: NULL}
 containing the new index}
 
 \item{MODIStsp_dir}{\code{character} main folder containing MODIStsp R files,
-Default: retrieved from package installation folder (obsolete - TBR)}
+Default: retrieved from package installation folder}
 }
 \value{
 NULL - the MODIStsp_Previous.RData file is modified so to allow
@@ -74,7 +74,7 @@ MODIStsp_Previous.RData file within the /Previous subfolder of the folder
 in which the package was installed, or the alternative JSON specified by
 the parameter "option_jsfile".
 \item The function can be run either from within the main MODIStsp GUI,
-or a standalone script. In the latter case, it modifies either the
+or a stand-alone script. In the latter case, it modifies either the
 MODIStsp_Previous.RData options file, or the options_file specified by
 the user to add the new index.
 }

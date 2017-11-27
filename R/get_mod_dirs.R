@@ -2,7 +2,7 @@
 #' @description Accessory function to get the full list of directories on the
 #'  lpdaac http site containing data included in the time range selected for
 #'  processing (modified after Barry Rowlingson function):
-#' @param http `character` http site on lpdaac corresponding to the selcted MODIS
+#' @param http `character` http site on lpdaac corresponding to the selected MODIS
 #'   product
 #' @param ftp `character` ftp site corresponding to the selected MODIS product
 #' @param downlad_server `character ["http" | "ftp" | "offline"]` download service
@@ -12,7 +12,7 @@
 #' @param user `character` username for earthdata http server
 #' @param password `character` password for earthdata http server
 #' @param n_retries `numeric` number of times the access to the http/ftp server
-#'   should be retried in case of error befor quitting, Default: 20
+#'   should be retried in case of error before quitting, Default: 20
 #' @param gui `logical`` indicates if processing was called from the GUI
 #'   environment or not. If not, processing messages are sent to a log file 
 #'   instead than to the console/GTK progress windows. 
@@ -45,7 +45,7 @@ get_mod_dirs <- function(http, ftp, download_server,
   if (stringr::str_sub(http ,-1) != "/") {
     http <- paste(http, "/", sep = "")
   }
-  success = FALSE
+  success <- FALSE
   #   __________________________________________________________________________
   #   retrieve list of folders in case of http download                    ####
   
@@ -56,13 +56,14 @@ get_mod_dirs <- function(http, ftp, download_server,
       # send request to server
       response <- httr::RETRY("GET",
                               http,
-                              # httr::authenticate(user, password),
+                              httr::authenticate(user, password),
                               times = n_retries,
                               pause_base = 0.1, 
-                              pause_cap = 10, 
+                              pause_cap = 3, 
                               quiet = FALSE)
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
+      
       if (response$status_code != 200) {
         if (gui) {
           confirm <- gWidgets::gconfirm(
@@ -71,28 +72,32 @@ get_mod_dirs <- function(http, ftp, download_server,
             handler = function(h, ...) {})
           if (!confirm) stop("You selected to abort processing. Goodbye!")
         } else {
-          warning("[", date(), "] Error: http server seems to be down! ",
+          message("[", date(), "] Error: http server seems to be down! ",
                   "Switching to ftp!")
-          download_server = "ftp"
-          success = TRUE
+          if (ftp == "Not Available") {
+            stop("The product is not available on ftp. Aborting!")
+          }
+          download_server <- "ftp"
+          success <- TRUE
         }
       } else {
         # On httr success get the directory names (available dates) ----
-        items <- strsplit(httr::content(response, "text",
-                                        encoding = "UTF-8"), "\r*\n")[[1]]
+        items <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
+                          "\r*\n")[[1]]
         date_dirs <- gsub(
           ".*>(20[0-9][0-9]\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
         )
         date_dirs <- date_dirs[grep(paste0(yy, "\\.[01][0-9]\\.[0-3][0-9]"),
                                     date_dirs)]
         attr(date_dirs, "server") <- "http"
-        success = TRUE
+        success <- TRUE
       }
     }
   }
+  success <- FALSE
   # retrieve processign dates in case of "ftp" download ----
   if (download_server == "ftp") {
-    browser()
+    
     while (!success) {
       # send request to server
       year_ftp <- paste0(ftp, yy, "/")
@@ -100,7 +105,7 @@ get_mod_dirs <- function(http, ftp, download_server,
                               year_ftp,
                               times = n_retries,
                               pause_base = 0.1, 
-                              pause_cap = 10, 
+                              pause_cap = 3, 
                               quiet = FALSE)
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
@@ -120,8 +125,8 @@ get_mod_dirs <- function(http, ftp, download_server,
       } else {
         # On ftp success get the directory names of available dates ----
         items     <- strsplit(httr::content(response,
-                                            "text",
-                                            encoding = "UTF-8"), "\r*\n")[[1]]
+                                            "text", encoding = "UTF-8"),
+                              "\r*\n")[[1]]
         doys      <- as.numeric(
           stringr::str_split_fixed(items, "[0-9][0-9]:[0-9][0-9]\\s", 2)[,2]
         )
@@ -133,7 +138,7 @@ get_mod_dirs <- function(http, ftp, download_server,
     }
   }
   
-  #   ____________________________________________________________________________
+  #   __________________________________________________________________________
   #   In offline mode, retrieve the dates of acquisition of hdfs already 
   #   available in `out_folder_mod`
   

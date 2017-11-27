@@ -4,14 +4,14 @@
 #'	MODIStsp processing parameters. If the "previous options" file
 #'	(MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
 #'	the GUI to its last state. Otherwise, the previous options file is created
-#'	by launching the MODIStsp_read_xml fucntion
+#'	by launching the MODIStsp_read_xml function
 #' @param general_opts data.frame containing general processing options passed
 #'   by MODIStsp
 #' @param prod_opt_list List of MODIS products specifications (read from
 #'   MODIStsp_ProdOpts.xml file)
 #' @param scroll_window logical parameter passed by MODIStsp main function.
 #' @param MODIStsp_dir main folder of the package
-#' @param previous_jsfile json parameters file containgn data of the last
+#' @param previous_jsfile json parameters file containing data of the last
 #'   execution
 #' @param prodopts_file rdata file containing info about MODIS products
 #' @return start - Logical - tells the main if running processing or exiting
@@ -283,7 +283,7 @@ MODIStsp_GUI <- function(general_opts,
       # asking to automatically retrieve from extent
       if (!any(required_tiles %in% selected_tiles)) {
         gui_env$check_save_opts <- gconfirm(
-          glue::glue("The selected tiles do not intersect the output bounding ", 
+          glue::glue("The selected tiles do not intersect the output bounding ",
                 "box. \n\n Do you want to discard your choice and retrieve ",
                 "automatically the required tiles from the bounding box? "),
           handler = function(h, ...) {
@@ -300,7 +300,7 @@ MODIStsp_GUI <- function(general_opts,
       if (!all(required_tiles %in% selected_tiles) & gui_env$check_save_opts) {
         gconfirm(
           message = glue::glue(
-            "The following tiles not currently selected are required to cover ", 
+            "The following tiles not currently selected are required to cover ",
             "the output bounding box (",
               paste(required_tiles[!(required_tiles %in% selected_tiles)],
                     collapse = ", "),
@@ -500,13 +500,13 @@ MODIStsp_GUI <- function(general_opts,
   out_proj_names <- c("Sinusoidal", "UTM 32N", "Latlon WGS84", "Latlon MODIS",
                       "User Defined")
   out_proj_list  <- hash::hash(
-    "Sinusoidal"   = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
-    "UTM 32N"      = "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0",
-    "Latlon WGS84" = "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0",
+    "Sinusoidal"   = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
+    "UTM 32N"      = "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0", #nolint
+    "Latlon WGS84" = "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0", #nolint
     "Latlon MODIS" = "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs",
     "User Defined" = ""
   )
-  mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs"
+  mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
 
   #   __________________________________________________________________________
   #   Initialize Widgets for product selection and bands selection          ####
@@ -1333,7 +1333,7 @@ MODIStsp_GUI <- function(general_opts,
     text       = glue::glue("<span foreground='red' size='x-large'>",
                             "Reprojection and Resize Options",
                             "</span>"),
-    markup     = T,
+    markup     = TRUE,
     container  = main_group,
     horizontal = FALSE,
     expand     = TRUE
@@ -1816,7 +1816,7 @@ MODIStsp_GUI <- function(general_opts,
                              text       = "Select",
                              container  = outfoldmod_group,
                              selected   = 2,
-                             horizontal = T)
+                             horizontal = TRUE)
 
   # Main output folder ----
   outfold_frame <- gframe(

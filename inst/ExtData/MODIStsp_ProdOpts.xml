@@ -3266,8 +3266,8 @@
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.005/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MOD10A1.005/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10A1.005/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10A1.005/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>http://nsidc.org/data/docs/daac/modis_v5/mod10a1_modis_terra_snow_daily_global_500m_grid.gd.html</www>
@@ -3317,8 +3317,8 @@
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A1.006/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10A1.006/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10A1.006/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://nsidc.org/data/mod10a1</www>
@@ -3442,8 +3442,8 @@
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A2.005/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A2.005/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10A2.005/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10A2.005/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>http://nsidc.org/data/docs/daac/modis_v5/mod10a1_modis_terra_snow_daily_global_500m_grid.gd.html</www>
@@ -3475,8 +3475,8 @@
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A2.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A2.006/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10A2.006/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10A2.006/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://nsidc.org/data/mod10a1</www>
@@ -3567,8 +3567,8 @@
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C1.005/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C1.005/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10C1.005/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10C1.005/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://nsidc.org/data/MOD10C1</www>
@@ -3618,8 +3618,8 @@
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C1.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C1.006/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10C1.006/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10C1.006/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://nsidc.org/data/MOD10C1</www>
@@ -3678,8 +3678,8 @@
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C2.005/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C2.005/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10C2.005/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10C2.005/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://nsidc.org/data/MOD10C2</www>
@@ -3729,8 +3729,8 @@
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C2.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C2.006/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10C2.006/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10C2.006/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://nsidc.org/data/MOD10C2</www>
@@ -3789,8 +3789,8 @@
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10CM.005/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10CM.005/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10CM.005/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10CM.005/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://nsidc.org/data/MOD10CM</www>
@@ -3822,8 +3822,8 @@
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10CM.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10CM.006/</http_aqua>
-                    <ftp_terra>ftp://n5eil01u.ecs.nsidc.org/SAN/MOST/MOD10CM.006/</ftp_terra>
-                    <ftp_aqua>ftp://n5eil01u.ecs.nsidc.org/SAN/MOSA/MYD10CM.006/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://nsidc.org/data/MOD10CM</www>

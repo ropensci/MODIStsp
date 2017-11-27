@@ -72,15 +72,17 @@
 #' plot(dataavg)
 #' }
 
-
-MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = NULL,
-                              id_field = NULL, FUN = "mean", out_format = "xts", small = TRUE,
-                              small_method = "centroids", na.rm = TRUE, verbose = FALSE) {
+MODIStsp_extract <- function (in_rts, sp_object,
+                              start_date = NULL,  end_date = NULL,
+                              id_field   = NULL,  FUN      = "mean",
+                              out_format = "xts", small    = TRUE,
+                              small_method = "centroids", 
+                              na.rm      = TRUE, verbose = FALSE) {
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
   if (!class(getZ(in_rts)) == "Date") {
-    stop("Input doesn't contain valid dates in its 'Z' attribute !")
+    stop("Input does not contain valid dates in its 'Z' attribute !")
   }
   if (length(start_date) == 0) {
     start_date <- min(getZ(in_rts))
@@ -120,7 +122,8 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
                                "SpatialPoints",
                                "SpatialLines", "SpatialLinesDataFrame")) {
     if (class(sp_object) == "character") {
-      sp_object <- try(readOGR(dirname(sp_object), basename(file_path_sans_ext(sp_object))))
+      sp_object <- try(readOGR(dirname(sp_object),
+                               basename(file_path_sans_ext(sp_object))))
       if (class(sp_object) == "try-error") {
         stop("sp_object is not a valid Spatial object or Shapefile")
       }
@@ -128,8 +131,8 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
   }
   if (length(id_field) != 0) {
     if (!id_field %in% names(sp_object)) {
-      warning("Invalid 'id_field' value - names of output columns will be the record 
-              number of the shapefile feature")
+      warning("Invalid 'id_field' value - names of output columns will be the ",
+              "record number of the shapefile feature")
       id_field <- NULL
     }
   }
@@ -143,10 +146,11 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
     sp_object@data$mdxtnq <- seq(1:length(sp_object@data[, 1]))
     shape <- crop(sp_object, extent(in_rts[[1]]))
     if (!isTRUE(all.equal(extent(shape), (extent(sp_object)), scale = 100))) {
-      warning("Some features of the spatial object are outside or partially outside\n 
-              the extent of the input RasterStack ! Output for features outside rasterStack 
-              extent\n will be set to NODATA. Outputs for features only partially inside will
-              be retrieved\n using only the available pixels !")
+      warning("Some features of the spatial object are outside or partially " ,
+              "outside\n the extent of the input RasterStack ! Output for ",
+              "features outside rasterStack extent\n will be set to NODATA. ",
+              "Outputs for features only partially inside will be retrieved\n ",
+              "using only the available pixels !")
       if (!setequal(sp_object$mdxtnq, shape$mdxtnq)){
         
         outside_feat <- setdiff(sp_object$mdxtnq, shape$mdxtnq)
@@ -183,7 +187,8 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
         message("Writing temporary shapefile")
       }
       tempshape <- tempfile(tmpdir = tempdir(), fileext = ".shp")
-      writeOGR(shape, dsn = dirname(tempshape), layer = basename(file_path_sans_ext(tempshape)),
+      writeOGR(shape, dsn = dirname(tempshape), 
+               layer = basename(file_path_sans_ext(tempshape)),
                driver = "ESRI Shapefile", overwrite_layer = TRUE,
                verbose = FALSE)
       if (verbose) {
@@ -223,12 +228,14 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
         rDT <- data.table(value, zones)
         setkey(rDT, zones)
         .SD <- NULL # Workaround to avoid note on package check
-        ts[f, 1:ncols] <- rDT[, lapply(.SD, match.fun(FUN), na.rm = na.rm), by = zones]$value
+        ts[f, 1:ncols] <- rDT[, lapply(.SD, match.fun(FUN), na.rm = na.rm),
+                              by = zones]$value
         
       }
       ts <- as.data.frame(ts)
       if (length(id_field) == 1) {
-        feat_names <- as.character(sp_object@data[, eval(id_field)])[sort(unique(zones))]
+        feat_names <- as.character(
+          sp_object@data[, eval(id_field)])[sort(unique(zones))]
         
         names(ts) <- feat_names
       }
@@ -242,10 +249,13 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
       
       if (small & ncols != length(shape@data[, 1])) {
         if (length(id_field) == 1) {
-          miss_feat <- setdiff(as.character(shape@data[, "mdxtnq"]), names(ts))
-          pos_missing <- which(as.character(shape@data[, "mdxtnq"]) %in% miss_feat)
+          miss_feat   <- setdiff(as.character(shape@data[, "mdxtnq"]), names(ts))
+          pos_missing <- which(
+            as.character(shape@data[, "mdxtnq"]) %in% miss_feat
+            )
         } else {
-          pos_missing <- miss_feat <- which(as.character(shape@data[, "mdxtnq"]) %in% miss_feat)
+          pos_missing <- miss_feat <- which(as.character(
+            shape@data[, "mdxtnq"]) %in% miss_feat)
         }
         
         shpsub <- shape[pos_missing, ]
@@ -256,7 +266,8 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
             
           }
           if (small_method == "centroids") {
-            ts_mis[f, ] <- extract(in_rts[[sel_dates[f]]], coordinates(shpsub), fun = mean)
+            ts_mis[f, ] <- extract(in_rts[[sel_dates[f]]], coordinates(shpsub),
+                                   fun = mean)
             
           } else {
             ts_mis[f, ] <- extract(in_rts[[sel_dates[f]]], shpsub, fun = mean)
@@ -274,14 +285,17 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
     
     if (exists("outside_feat")) {
       if (length(id_field) == 1) {
-        feat_names_outside <- as.character(sp_object@data[, eval(id_field)])[outside_feat]
+        feat_names_outside <- as.character(
+          sp_object@data[, eval(id_field)])[outside_feat]
         
       } else {
-        feat_names_outside <- as.character(sp_object@data[, "mdxtnq"])[outside_feat]
+        feat_names_outside <- as.character(
+          sp_object@data[, "mdxtnq"])[outside_feat]
         
       }
       
-      ts_outside <- matrix(nrow = length(sel_dates), ncol = length(feat_names_outside))
+      ts_outside <- matrix(nrow = length(sel_dates),
+                           ncol = length(feat_names_outside))
       ts_outside <- data.frame(ts_outside)
       names(ts_outside) <- feat_names_outside
       ts <- cbind(ts, ts_outside)
@@ -297,8 +311,8 @@ MODIStsp_extract <- function (in_rts, sp_object, start_date = NULL, end_date = N
     }
     return(ts)
   } else {
-    warning("Selected time range does not overlap with the one of the rasterStack 
-            input dataset !")
+    warning("Selected time range does not overlap with the one of the ",
+            "rasterStack input dataset !")
   }
   
 }

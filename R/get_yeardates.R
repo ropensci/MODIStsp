@@ -1,4 +1,4 @@
-#' @title identify dates to be preocessed for a year
+#' @title identify dates to be processed for a year
 #' @description helper function needed to identify the ranges of dates to 
 #'   be processed for a given year as a function of `download_range` selection 
 #'   and starting/ending dates and years

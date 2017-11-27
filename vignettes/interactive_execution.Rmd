@@ -164,7 +164,7 @@ Specified processing parameters can be saved to a JSON file for later use by cli
 
 Previously saved options can be restored clicking on the _**Load Options**_ button and navigating to the previously saved JSON file.
 
-<font size="2"> (Note that at launch, **`MODIStsp` _always reloads automatically the processing options used for its last succesfull run_** </font size="2">.
+<font size="2"> (Note that at launch, **`MODIStsp` _always reloads automatically the processing options used for its last successful run_** </font size="2">.
 
 ____________________________________________________________________________________
 

@@ -4,12 +4,15 @@
 \alias{MODIStsp_process_indexes}
 \title{MODIStsp_process_indexes}
 \usage{
-MODIStsp_process_indexes(out_filename, formula, bandnames, nodata_out,
-  out_prod_folder, indexes_nodata_out, file_prefix, compress, yy, DOY,
-  out_format, scale_val)
+MODIStsp_process_indexes(out_filename, out_prod_folder, formula, bandnames,
+  nodata_out, indexes_nodata_out, file_prefix, compress, yy, out_format, DOY,
+  scale_val)
 }
 \arguments{
 \item{out_filename}{\code{character} basename of the file in to which save results}
+
+\item{out_prod_folder}{\code{character} output folder for the product used to retrieve filenames
+of rasters of original bands to be used in computations}
 
 \item{formula}{\code{character} Index formula, as derived from XML file and stored in prod_opts
 within previous_file}
@@ -18,9 +21,6 @@ within previous_file}
 bands required for index computation}
 
 \item{nodata_out}{\code{character} array of NoData values of reflectance bands}
-
-\item{out_prod_folder}{\code{character} output folder for the product used to retrieve filenames
-of rasters of original bands to be used in computations}
 
 \item{indexes_nodata_out}{\code{character} NoData value for resulting raster}
 
@@ -32,11 +32,11 @@ to be used in computations}
 \item{yy}{\code{character} year string used to retrieve filenames of rasters of original bands
 to be used in computations}
 
-\item{DOY}{\code{character} doy string used to retrieve filenames of rasters of original bands to be
-used in computations}
-
 \item{out_format}{\code{character} string used to retrieve filenames of rasters of original bands
 to be used in computations}
+
+\item{DOY}{\code{character} doy string used to retrieve filenames of rasters of original bands to be
+used in computations}
 
 \item{scale_val}{\code{character} (Yes/No) if Yes, output values in are computed as float -1 - 1,
 otherwise integer -10000 - 10000}

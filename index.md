@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Coverage Status](https://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](https://codecov.io/github/lbusett/MODIStsp?branch=master)
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![Coverage Status](https://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](https://codecov.io/github/lbusett/MODIStsp?branch=master)
 
-<i class="fa fa-globe" aria-hidden="true"></i> MODIStsp: a "R" package for preprocessing MODIS time series
-==========================================================================================================
+<i class="fa fa-globe" aria-hidden="true"></i> MODIStsp: a "R" package for preprocessing MODIS time series <img src="docs/logo.png" align="right" />
+====================================================================================================================================================
 
 **MODIStsp** is a "R" package devoted to **automatizing the creation of time series of raster images derived from MODIS Land Products data**.
 
@@ -20,7 +20,7 @@ For each output layer, outputs are saved as **single-band raster** files corresp
 <i class="fa fa-cog" aria-hidden="true"></i> Getting Started
 ------------------------------------------------------------
 
--   To install `MODIStsp`, please follow instructions reported [here](articles/installation.html), both for [<i class="fa fa-windows" aria-hidden="true"></i>](articles/installation.html#installing-on-windows) and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/installation.html#installing-on-linux-systems)
+-   To install `MODIStsp`, please follow instructions reported [here](articles/installation.html), both for [<i class="fa fa-windows" aria-hidden="true"></i>](articles/installation.html#installing-on-windows) , [<i class="fa fa-linux" aria-hidden="true"></i>](articles/installation.html#installing-on-linux-systems) and [<i class="fa fa-apple" aria-hidden="true"></i>](articles/installation.html#installing-on-mac)
 
 -   `MODIStsp` can be used either in [interactive mode](articles/interactive_execution.html) exploiting its user-friendly GUI, or in [non-interactive mode](articles/noninteractive_execution.html) from within `R` scripts
 
@@ -35,7 +35,7 @@ For each output layer, outputs are saved as **single-band raster** files corresp
 <i class="fa fa-newspaper-o" aria-hidden="true"></i> What's New
 ---------------------------------------------------------------
 
-Several bugs were recently corrected in the "devel" version of `MODIStsp` on github. See our [<i class="fa fa-newspaper-o aria-hidden="true"></i> news](news/index.html) page for a detailed changelog. A new release (1.3.3) is foreseen in the coming weeks to port the improvements on CRAN.
+-   11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes. See our [<i class="fa fa-newspaper-o aria-hidden="true"></i> news](news/index.html) page for a detailed changelog. **We thank to all the users that signalled problems for their feedback for imporoving the package!**
 
 ------------------------------------------------------------------------
 

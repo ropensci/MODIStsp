@@ -11,7 +11,7 @@ get_mod_filenames(http, ftp, used_server, user, password, n_retries, date_dir,
 \item{http}{\code{character} url of http site on lpdaac corresponding to a given MODIS
 product.}
 
-\item{ftp}{\code{character} url offtp site corresponding to a given MODIS product.}
+\item{ftp}{\code{character} url of ftp site corresponding to a given MODIS product.}
 
 \item{used_server}{\code{character} can assume values "http" or "ftp" depending on the
 used download server; it cannot be NA.}
@@ -21,7 +21,7 @@ used download server; it cannot be NA.}
 \item{password}{\code{character} password for earthdata server  (Ignored if used_server = "ftp").}
 
 \item{n_retries}{\code{numeric} number of times the access to the http/ftp server
-should be retried in case of error befor quitting, Default: 20.}
+should be retried in case of error before quitting, Default: 20.}
 
 \item{date_dir}{\code{character array} array of folder names corresponding to acquisition
 containing dates where MODIS files to be downloaded are to be identified
@@ -36,7 +36,7 @@ containing dates where MODIS files to be downloaded are to be identified
 \item{tiled}{\code{numeric [0/1]} indicates if the product to be downloaded is
 tiled or not tiled. 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg).}
 
-\item{out_folder_mod}{\code{character} folder where hdf files have to be storedd.}
+\item{out_folder_mod}{\code{character} folder where hdf files have to be stored.}
 
 \item{gui}{\code{logical} indicates if processing was called within the GUI environment
 or not. If not, processing messages are redirected direct to the log file.}

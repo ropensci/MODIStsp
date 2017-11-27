@@ -1,11 +1,11 @@
 ---
-title: "Standalone execution and scheduled processing "
+title: "Stand-alone execution and scheduled processing "
 output: github_document
 ---
 
-## Standalone execution 
+## Stand-alone execution 
 
-- MODIStsp can be also executed as a "standalone" application(i.e., without having to open R/RStudio) ; to do it, from R launch the function `MODIStsp_install_launcher()`.
+- MODIStsp can be also executed as a "stand-alone" application(i.e., without having to open R/RStudio) ; to do it, from R launch the function `MODIStsp_install_launcher()`.
 
 In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp).
 In Windows, a link in the Start Menu and optionally a desktop shortcut are created.
@@ -25,7 +25,7 @@ ________________________________________________________________________________
 
 ## Scheduled Processing
 
-Standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:
+Stand-alone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:
 
 1.	Open the `MODIStsp` GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options. Then quit the program.
  

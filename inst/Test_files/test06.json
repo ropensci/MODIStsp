@@ -30,7 +30,7 @@
 },
 "nodata_change": "No",
 "scale_val": "Yes",
-"delete_hdf": "No",
+"delete_hdf": "Yes",
 "reprocess": "Yes",
 "bbox": [   3.77,   39.8,   4.34,   40.1 ],
 "out_folder": "$tempdir",

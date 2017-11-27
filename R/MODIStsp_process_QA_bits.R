@@ -75,6 +75,4 @@ MODIStsp_process_QA_bits <- function(out_filename,
     writeLines("", fileConn_meta_hdr)
     close(fileConn_meta_hdr)
   }
-  # xml_file <- paste(out_filename, ".aux.xml", sep = "")		# Delete xml files created by writeRaster
-  # unlink(xml_file)
 } #END

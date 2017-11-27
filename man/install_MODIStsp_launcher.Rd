@@ -30,7 +30,7 @@ launch the script in a root session of R)!}
 Function which allows to use MODIStsp in batch mode by creating links
 }
 \details{
-MODIStsp tool can be used also as a standalone tool my launching a bash/batch
+MODIStsp tool can be used also as a stand-alone tool my launching a bash/batch
 script, which is stored in the function files. In order to simply retrieve it, this
 function will create a desktop entry and a symbolic link to the bash script (in Linux)
 or a link in the Start Menu to the batch script (in Windows).

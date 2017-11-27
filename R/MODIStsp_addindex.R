@@ -1,4 +1,4 @@
-#' @title add custom sepctral indexes
+#' @title add custom spectral indexes
 #' @description Function used to add a user-defined Spectral Index to the
 #'   default list of computable spectral indexes. Execution without the GUI
 #'   (i.e., to add a new index from a script) is also possible (see examples)
@@ -13,7 +13,7 @@
 #'   in which the package was installed, or the alternative JSON specified by
 #'   the parameter "option_jsfile".
 #' - The function can be run either from within the main MODIStsp GUI,
-#'   or a standalone script. In the latter case, it modifies either the
+#'   or a stand-alone script. In the latter case, it modifies either the
 #'   MODIStsp_Previous.RData options file, or the options_file specified by
 #'   the user to add the new index.
 #' @param option_jsfile `character` full path of a JSON file
@@ -23,12 +23,12 @@
 #'   if NULL, use MODIStsp_ProdOpts.RData in subdir Previous, Default: NULL
 #' @param selprod `character` Name of the product to which the new index should
 #'   be added (Note: the index will be added to all other products allowing its
-#'   computation !). If NULL, as in non-interactive exection, no
+#'   computation !). If NULL, as in non-interactive execution, no
 #'   check on available band names is skipped and the index (if valid) is
 #'   added to all products supporting it, Default: NULL
 #' @param selvers `character` Version of the product to which the new index
 #'   should be added (Note: the index will be added to all other products
-#'   allowing its computation !). If NULL, as in non-interactive exection, no
+#'   allowing its computation !). If NULL, as in non-interactive execution, no
 #'   check on available band names is skipped and the index (if valid) is
 #'   added to all products supporting it, Default: NULL
 #' @param gui `logical` if TRUE, a GUI is opened to define the new
@@ -47,7 +47,7 @@
 #' @param new_indexnodata_out `character` nodata value to assign to the rasters
 #'   containing the new index
 #' @param MODIStsp_dir `character` main folder containing MODIStsp R files,
-#'   Default: retrieved from package installation folder (obsolete - TBR)
+#'   Default: retrieved from package installation folder
 #' @importFrom gWidgets gbasicdialog ggroup glabel gedit size gbutton svalue
 #' @importFrom pacman p_load p_exists
 #' @importFrom XML xmlParse xmlRoot xmlSize xmlToList

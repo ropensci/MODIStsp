@@ -30,11 +30,18 @@
 #' @note License: GPL 3.0
 #' @importFrom raster stack NAvalue overlay
 #' @importFrom tools file_path_sans_ext
-MODIStsp_process_indexes <- function(out_filename, formula, bandnames,
-                                     nodata_out, out_prod_folder,
-                                     indexes_nodata_out, file_prefix, 
-                                     compress, 
-                                     yy, DOY, out_format, scale_val) {
+MODIStsp_process_indexes <- function(out_filename,
+                                     out_prod_folder,
+                                     formula,
+                                     bandnames,
+                                     nodata_out,
+                                     indexes_nodata_out,
+                                     file_prefix,
+                                     compress,
+                                     yy,
+                                     out_format,
+                                     DOY,
+                                     scale_val) {
   
   # create folder for index
   dir.create(dirname(out_filename),
@@ -75,7 +82,7 @@ MODIStsp_process_indexes <- function(out_filename, formula, bandnames,
       # assign the data to a object with name = bandname
       assign(temp_bandname, temp_raster)
       # add an "entry" in fun_string (additional input parameter)
-      fun_string  <- paste0(fun_string, temp_bandname, "=", temp_bandname, "," )  
+      fun_string  <- paste0(fun_string, temp_bandname, "=", temp_bandname, "," )
       # add an "entry" in stack_string (additional input in the stack)
       stack_string  <- paste0(stack_string, temp_bandname, ", ")
     }

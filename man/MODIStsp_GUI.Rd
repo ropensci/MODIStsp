@@ -16,7 +16,7 @@ MODIStsp_ProdOpts.xml file)}
 
 \item{MODIStsp_dir}{main folder of the package}
 
-\item{previous_jsfile}{json parameters file containgn data of the last
+\item{previous_jsfile}{json parameters file containing data of the last
 execution}
 
 \item{prodopts_file}{rdata file containing info about MODIS products}
@@ -24,7 +24,7 @@ execution}
 \item{scroll_window}{logical parameter passed by MODIStsp main function.}
 }
 \value{
-quit - Logical - tells the main if running processing or exiting
+start - Logical - tells the main if running processing or exiting
 (also, Processing options are saved in "previous" file and (if
 "Save options" is pressed) in user's selected file)
 }
@@ -33,7 +33,7 @@ Function used to generate and handle the GUI used to allow selection of
 MODIStsp processing parameters. If the "previous options" file
 (MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
 the GUI to its last state. Otherwise, the previous options file is created
-by launching the MODIStsp_read_xml fucntion
+by launching the MODIStsp_read_xml function
 }
 \note{
 License: GPL 3.0

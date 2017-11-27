@@ -20,7 +20,7 @@ bbox_from_file <- function(file_path, crs_out) {
 
   if (is(in_ogrinfo, "try-error") &
       is(in_gdalinfo, "try-error")) {
-    stop("`file_path` not recognised by GDAL or OGR as a valid spatial",
+    stop(file_path, "is not recognised by GDAL or OGR as a valid spatial",
          "file. Please check your inputs. Aborting!")
   }
 

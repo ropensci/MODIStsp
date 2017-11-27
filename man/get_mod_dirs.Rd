@@ -8,7 +8,7 @@ get_mod_dirs(http, ftp, download_server, user, password, yy, n_retries, gui,
   out_folder_mod, .Platform)
 }
 \arguments{
-\item{http}{\code{character} http site on lpdaac corresponding to the selcted MODIS
+\item{http}{\code{character} http site on lpdaac corresponding to the selected MODIS
 product}
 
 \item{ftp}{\code{character} ftp site corresponding to the selected MODIS product}
@@ -18,7 +18,7 @@ product}
 \item{password}{\code{character} password for earthdata http server}
 
 \item{n_retries}{\code{numeric} number of times the access to the http/ftp server
-should be retried in case of error befor quitting, Default: 20}
+should be retried in case of error before quitting, Default: 20}
 
 \item{gui}{`logical`` indicates if processing was called from the GUI
 environment or not. If not, processing messages are sent to a log file

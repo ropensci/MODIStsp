@@ -143,73 +143,74 @@
 
     
     <p>Accessory function used to see if all expected out files for the
-selected date are already present.</p>
+selected date are already present in th output folder. If all expected out
+files are already present, check_files is set to TRUE, and the date is
+skipped in MODIStsp_process.</p>
     
 
-    <pre class="usage"><span class='fu'>MODIStsp_check_files</span>(<span class='no'>out_prod_folder</span>, <span class='no'>file_prefix</span>, <span class='no'>bandnames</span>,
-  <span class='no'>bandsel_orig_choice</span>, <span class='no'>yy</span>, <span class='no'>DOY</span>, <span class='no'>out_format</span>, <span class='no'>indexes_bandnames</span>, <span class='no'>indexes_bandsel</span>,
-  <span class='no'>quality_bandnames</span>, <span class='no'>quality_bandsel</span>)</pre>
+    <pre class="usage"><span class='fu'>MODIStsp_check_files</span>(<span class='no'>out_prod_folder</span>, <span class='no'>file_prefix</span>, <span class='no'>yy</span>, <span class='no'>DOY</span>, <span class='no'>bandnames</span>,
+  <span class='no'>bandsel_orig_choice</span>, <span class='no'>indexes_bandnames</span>, <span class='no'>indexes_bandsel</span>, <span class='no'>quality_bandnames</span>,
+  <span class='no'>quality_bandsel</span>, <span class='no'>out_format</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>out_prod_folder</th>
-      <td><p>string output folder name</p></td>
+      <td><p><code>character</code> MODIStsp output folder</p></td>
     </tr>
     <tr>
       <th>file_prefix</th>
-      <td><p>string file prefix of the product (e.g., MOD13Q1)</p></td>
-    </tr>
-    <tr>
-      <th>bandnames</th>
-      <td><p>string array Bandnames of the MODIS product</p></td>
-    </tr>
-    <tr>
-      <th>bandsel_orig_choice</th>
-      <td><p>0/1 array Indicates which original MODIS layers were s
-elected to be processed</p></td>
+      <td><p><code>character</code> File prefix of the processed product
+(e.g., MOD13Q1)</p></td>
     </tr>
     <tr>
       <th>yy</th>
-      <td><p>string year</p></td>
+      <td><p><code>character</code> year</p></td>
     </tr>
     <tr>
       <th>DOY</th>
-      <td><p>string doy</p></td>
+      <td><p><code>character</code> doy</p></td>
     </tr>
     <tr>
-      <th>out_format</th>
-      <td><p>string GTiff or ENVI</p></td>
+      <th>bandnames</th>
+      <td><p><code>character array</code> Bandnames of the MODIS product</p></td>
+    </tr>
+    <tr>
+      <th>bandsel_orig_choice</th>
+      <td><p><code>numeric 0/1 array</code> Indicates which original MODIS
+layers were selected for processing (doesn't contain names of bands needed
+to compute SIs but not selected by the user!)</p></td>
     </tr>
     <tr>
       <th>indexes_bandnames</th>
-      <td><p>string array Name of available spectral indexes for the product</p></td>
+      <td><p><code>character array</code> Names of available spectral
+indexes (standard + custom) available for the currently processed product</p></td>
     </tr>
     <tr>
       <th>indexes_bandsel</th>
-      <td><p>0/1 array Indicates which spectral indexes were selected to
-be processed</p></td>
+      <td><p><code>numeric 0/1 array</code> Indicates which spectral indexes
+were selected for processing</p></td>
     </tr>
     <tr>
       <th>quality_bandnames</th>
-      <td><p>string array Name of available Quality Indicators for the product</p></td>
+      <td><p><code>character array</code> Name of available Quality
+Indicators for the currently processed product</p></td>
     </tr>
     <tr>
       <th>quality_bandsel</th>
-      <td><p>0/1 array Indicates which Quality Indicators were selected to
-be processed</p></td>
+      <td><p><code>numeric 0/1 array</code> Indicates which Quality Indicators
+were selected</p></td>
+    </tr>
+    <tr>
+      <th>out_format</th>
+      <td><p><code>character</code> GTiff or ENVI</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>check - logical = 1 if all expected output files are already existing</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>if all expected out files for the selected date are already present,
-check_files is set to TRUE, and date is skipped in MODIStsp_process</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -223,8 +224,6 @@ check_files is set to TRUE, and date is skipped in MODIStsp_process</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#note">Note</a></li>
           </ul>

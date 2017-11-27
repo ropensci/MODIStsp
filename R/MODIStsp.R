@@ -13,10 +13,10 @@
 #'  argument), Default: TRUE
 #' @param options_file `character` full path to a JSON file
 #'  containing MODIStsp processing options saved from the GUI. If NULL,
-#'  parameters of the last succesfull run are retrieved from file
+#'  parameters of the last successful run are retrieved from file
 #'  "MODIStsp_Previous.json" in subdir Previous), Default: NULL
 #' @param spatial_file_path `character` (optional) full path of a spatial file
-#'  to use to derive te processing extent. If not NULL, the processing options
+#'  to use to derive the processing extent. If not NULL, the processing options
 #'  which define the extent, the selected tiles and the "Full Tile / Resized"
 #'  in the JSON options file are overwritten and new files are created on the
 #'  extent of the provided spatial file, Default: NULL
@@ -87,7 +87,7 @@ MODIStsp <- function(gui               = TRUE,
 
   options("guiToolkit" = "RGtk2")
 
-  # Make so that "raster" functions doesn't automatically add extensions on
+  # Make so that "raster" functions does not automatically add extensions on
   # output files. This is automatically reset to TRUE at the end of the session
   raster::rasterOptions(setfileext = FALSE)
 
@@ -126,7 +126,7 @@ MODIStsp <- function(gui               = TRUE,
       if (!file.exists(test_hdf)) {
         unzip(zipfile = paste0(test_hdf, ".zip"),
               files   = basename(test_hdf),
-              exdir   = system.file("Test_files", package = "MODIStsp"),
+              exdir   = tempdir(),
               unzip   = "internal")
       }
     }
@@ -139,9 +139,8 @@ MODIStsp <- function(gui               = TRUE,
       test_username <- readline(prompt = "Enter your USGS username: ")
       test_password <- readline(prompt = "Enter your password: ")
     }
-    start = TRUE
+    start <- TRUE
   }
-
 
   #   __________________________________________________________________________
   #   On interactive execution, ensure that gWidgetsRGtk2 is avauilable     ####
@@ -183,7 +182,7 @@ MODIStsp <- function(gui               = TRUE,
     } else {
       message("[", date(), "]", welcome_text)
     }
-    gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE, verbose = TRUE)
+    gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE)
   }
   gdal_version <- package_version(
     gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*", "\\1",
@@ -273,7 +272,7 @@ MODIStsp <- function(gui               = TRUE,
     reload_prodlist <- TRUE
   }
   if (reload_prodlist) {
-    mess_text <- "Reading the MODIS products characteristics from XML"
+    mess_text <- "Reading the MODIS products' characteristics from XML. Please wait!" #nolint
     message(mess_text)
     if (gui) {
       mess     <- gWidgets::gwindow(title  = "Please wait...",
@@ -314,7 +313,7 @@ MODIStsp <- function(gui               = TRUE,
                          previous_jsfile,
                          prodopts_file,
                          scroll_window)
-
+    
   } else {
     start <- TRUE
     gui   <- FALSE
@@ -436,8 +435,7 @@ MODIStsp <- function(gui               = TRUE,
 
     if (test != -1) {
       general_opts$out_folder     <- normalizePath(tempdir())
-      general_opts$out_folder_mod <- system.file("Test_files",
-                                                 package = "MODIStsp")
+      general_opts$out_folder_mod <- normalizePath(tempdir())
       if (exists("test_username")) {
         general_opts$user     <- test_username
       }
@@ -512,7 +510,7 @@ MODIStsp <- function(gui               = TRUE,
       download_range     = general_opts$download_range, 
       n_retries          = n_retries)
 
-    # At end of succesfull execution, save the options used in the main output
+    # At end of successful execution, save the options used in the main output
     # folder as a JSON file with name containing the date of processing.
     # Also update "MODIStsp_previous.json.
     optfilename  <- file.path(general_opts$out_folder,

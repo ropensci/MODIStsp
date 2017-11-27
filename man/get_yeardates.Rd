@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_yeardates.R
 \name{get_yeardates}
 \alias{get_yeardates}
-\title{identify dates to be preocessed for a year}
+\title{identify dates to be processed for a year}
 \usage{
 get_yeardates(download_range, yy, start_year, end_year, start_date, end_date)
 }

@@ -9,13 +9,13 @@
 #' to a given date and interval of spatial tiles within the lpdaac archive.
 #' @param http `character` url of http site on lpdaac corresponding to a given MODIS 
 #'   product.
-#' @param ftp `character` url offtp site corresponding to a given MODIS product.
+#' @param ftp `character` url of ftp site corresponding to a given MODIS product.
 #' @param used_server `character` can assume values "http" or "ftp" depending on the
 #'  used download server; it cannot be NA.
 #' @param user `character` username for earthdata server (Ignored if used_server = "ftp").
 #' @param password `character` password for earthdata server  (Ignored if used_server = "ftp").
 #' @param n_retries `numeric` number of times the access to the http/ftp server
-#'   should be retried in case of error befor quitting, Default: 20.
+#'   should be retried in case of error before quitting, Default: 20.
 #' @param date_dir `character array` array of folder names corresponding to acquisition 
 #'  containing dates where MODIS files to be downloaded are to be identified
 #'  (return array from `get_mod_dates`).
@@ -25,7 +25,7 @@
 #'   (e.g., c(3,4)).
 #' @param tiled `numeric [0/1]` indicates if the product to be downloaded is 
 #'   tiled or not tiled. 1 = tiled product; 0 = non-tiled product (resolution 0.05 deg).
-#' @param out_folder_mod  `character` folder where hdf files have to be storedd.
+#' @param out_folder_mod  `character` folder where hdf files have to be stored.
 #' @param gui `logical` indicates if processing was called within the GUI environment
 #'   or not. If not, processing messages are redirected direct to the log file.
 #' @return `character array` containing names of HDF images corresponding to the
@@ -39,7 +39,6 @@
 #' @note License: GPL 3.0
 #' @importFrom gWidgets gconfirm
 #' @importFrom httr GET timeout authenticate content
-#' @importFrom RCurl getURL
 #' @importFrom stringr str_split str_pad
 get_mod_filenames <- function(http,
                               ftp,
@@ -60,10 +59,10 @@ get_mod_filenames <- function(http,
     
     # http folders are organized by date subfolders containing all tiles
     while (!success) {
-      
+    
       response <- httr::RETRY("GET",
                               paste0(http, date_dir, "/"),
-                              # httr::authenticate(user, password),
+                              httr::authenticate(user, password),
                               times = n_retries,
                               pause_base = 0.1, 
                               pause_cap = 10, 
@@ -82,16 +81,18 @@ get_mod_filenames <- function(http,
           warning("[", date(), "] Error: http server seems to be down! ",
                   "Switching to ftp!")
           download_server = "ftp"
-          success = TRUE
+          success <- TRUE
         }
       } else {
-        getlist <- strsplit(httr::content(response, "text"), "\r*\n")[[1]]
+        getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
+                            "\r*\n")[[1]]
         getlist <- getlist[grep(
           ".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
           getlist)]
         getlist <- gsub(
           ".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
           getlist)
+        success <- TRUE
         
       } 
     }
@@ -104,7 +105,7 @@ get_mod_filenames <- function(http,
     # additional level to be "parsed" wrt http
     date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
     date_doy  <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
-    browser()
+    
     while (!success) {
       response <- httr::RETRY("GET",
                               paste0(ftp, date_year, "/", date_doy, "/"),
@@ -128,10 +129,12 @@ get_mod_filenames <- function(http,
         }
       } else {
         
-        getlist <- strsplit(httr::content(response, "text"), "\r*\n")[[1]]
+        getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
+                            "\r*\n")[[1]]
         getlist <- stringr::str_extract(
           getlist, 
           "[A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf")
+        success <- TRUE
       }
     }
   }

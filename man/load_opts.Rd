@@ -10,7 +10,7 @@ load_opts(previous_jsfile, mod_proj_str)
 \item{previous_jsfile}{Expected file name of the JSON file containing
 processing options}
 
-\item{mod_proj_str}{poj4string defining MODIS standard sinusoidal projection}
+\item{mod_proj_str}{proj4 string defining MODIS standard sinusoidal projection}
 }
 \value{
 \code{data frame} general_opts, containing the processing options

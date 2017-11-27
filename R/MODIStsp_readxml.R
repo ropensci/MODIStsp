@@ -15,7 +15,8 @@
 #' @note License: GPL 3.0
 #' @importFrom xml2 as_list read_xml
 #' @importFrom hash hash
-MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file) {
+MODIStsp_read_xml <- function(prodopts_file,
+                              xml_file) {
   
   prod_opt_list <- list()
   
@@ -125,13 +126,13 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
         # get charcteristics of indexes
         for (index in seq_len(nindexes)) {
           indexes_bandnames  <- c(indexes_bandnames,
-                                  prod_data[["indexes"]][[index]][["indexes_bandname"]][[1]])
+                                  prod_data[["indexes"]][[index]][["indexes_bandname"]][[1]]) #nolint
           indexes_fullnames  <- c(indexes_fullnames,
-                                  prod_data[["indexes"]][[index]][["indexes_fullname"]][[1]])
+                                  prod_data[["indexes"]][[index]][["indexes_fullname"]][[1]]) #nolint
           indexes_formulas   <- c(indexes_formulas,
-                                  prod_data[["indexes"]][[index]][["indexes_formula"]][[1]])
+                                  prod_data[["indexes"]][[index]][["indexes_formula"]][[1]]) #nolint
           indexes_nodata_out <- c(indexes_nodata_out,
-                                  prod_data[["indexes"]][[index]][["indexes_nodata_out"]][[1]])
+                                  prod_data[["indexes"]][[index]][["indexes_nodata_out"]][[1]]) #nolint
           
         } 
         
@@ -150,15 +151,23 @@ MODIStsp_read_xml <- function(prodopts_file = prodopts_file, xml_file = xml_file
           quality_bitN <- NULL
         # get charcteristics of QIs
         for (quality in seq_len(nquality)) {
-          quality_bandnames <- c(quality_bandnames, 
-                                 prod_data[["quality_indicators"]][[quality]][["quality_bandname"]][[1]])
-          quality_fullnames <- c(quality_fullnames, 
-                                 prod_data[["quality_indicators"]][[quality]][["quality_fullname"]][[1]])
-          quality_source    <- c(quality_source, 
-                                 prod_data[["quality_indicators"]][[quality]][["quality_source"]][[1]])
+          quality_bandnames <- c(
+            quality_bandnames, 
+            prod_data[["quality_indicators"]][[quality]][["quality_bandname"]][[1]] #nolint
+          )
+          quality_fullnames <- c(
+            quality_fullnames, 
+            prod_data[["quality_indicators"]][[quality]][["quality_fullname"]][[1]] #nolint
+          )
+          quality_source <- c(
+            quality_source, 
+            prod_data[["quality_indicators"]][[quality]][["quality_source"]][[1]] #nolint
+          )
           
-          quality_bitN      <- c(quality_bitN, 
-                                 prod_data[["quality_indicators"]][[quality]][["quality_bitN"]][[1]])
+          quality_bitN <- c(
+            quality_bitN,
+            prod_data[["quality_indicators"]][[quality]][["quality_bitN"]][[1]]
+          )
           
         }
         
