@@ -45,43 +45,40 @@ get_mod_filenames <- function(http,
                               used_server,
                               user,
                               password,
-                              n_retries, 
-                              date_dir, 
+                              n_retries,
+                              date_dir,
                               v,
                               h,
-                              tiled, 
-                              out_folder_mod, 
+                              tiled,
+                              out_folder_mod,
                               gui) {
   success <- FALSE
   if (used_server == "http") {
     #   ________________________________________________________________________
     #   Retrieve available hdf files in case of http download               ####
-    
+
     # http folders are organized by date subfolders containing all tiles
     while (!success) {
-    
+
       response <- httr::RETRY("GET",
                               paste0(http, date_dir, "/"),
                               httr::authenticate(user, password),
                               times = n_retries,
-                              pause_base = 0.1, 
-                              pause_cap = 10, 
+                              pause_base = 0.1,
+                              pause_cap = 10,
                               quiet = FALSE)
-      
+
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
       if (response$status_code != 200) {
         if (gui) {
           confirm <- gWidgets::gconfirm(
             "http server seems to be down! Do you want to retry?",
-            icon = "question",
-            handler = function(h, ...) {})
+            icon = "question")
           if (!confirm) stop("You selected to abort processing. Goodbye!")
         } else {
-          warning("[", date(), "] Error: http server seems to be down! ",
+          stop("[", date(), "] Error: http server seems to be down! ",
                   "Switching to ftp!")
-          download_server = "ftp"
-          success <- TRUE
         }
       } else {
         getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
@@ -97,6 +94,7 @@ get_mod_filenames <- function(http,
       } 
     }
   }
+  success <- FALSE
   if (used_server == "ftp") {
     #   ______________________________________________________________________
     #   Retrieve available hdf files in case of ftp download             ####

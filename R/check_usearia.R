@@ -1,3 +1,14 @@
+#' @title check_usearia
+#' @description FUNCTION_DESCRIPTION
+#' @inheritParams MODIStsp_process
+#' @param mess pointer to the message window used to show processing messages
+#'  when gui = TRUE
+#' @return use_aria `logical` Indicating if aria2c should be used to accelerate
+#'  download
+#' @rdname check_usearia
+#' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
+#' @importFrom gWidgets gmessage dispose
+#' 
 check_usearia <- function(use_aria, gui, mess) {
   # Check if "aria2c" requested. If so, verify that the executable is found
   # on the path. If NOT revert to "standard" download using httr::GET
@@ -28,14 +39,4 @@ check_usearia <- function(use_aria, gui, mess) {
     }
   }
   use_aria
-}
-
-process_message <- function(mess_text, gui, mess_lab) {
-  if (gui) {
-    gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
-    Sys.sleep(0.05)
-    message("[", date(), "] ", mess_text)
-  } else {
-    message("[", date(), "] ", mess_text)
-  }
 }

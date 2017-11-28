@@ -13,7 +13,7 @@
 #' @note License: GPL 3.0
 #'
 get_mod_dates <- function(dates, date_dirs) {
-  
+
   tmp_dates     <- as.Date(dates, format = "%Y.%m.%d")
   tmp_date_dirs <- as.Date(date_dirs, format = "%Y.%m.%d")
   if (length(dates) == 1) {
@@ -24,13 +24,13 @@ get_mod_dates <- function(dates, date_dirs) {
                              tmp_date_dirs <= tmp_dates[2]]
   }
   if (length(dates) == 4) {
-    # deals with the case of seasonal download, when yy != start_year &
-    # yy != end_year
+    # deals with the case of seasonal download, when yy != start_year !=
+    # end_year
     date_dirs <- c(
       date_dirs[tmp_date_dirs >= tmp_dates[1] & tmp_date_dirs <= tmp_dates[2]],
       date_dirs[tmp_date_dirs >= tmp_dates[1] & tmp_date_dirs <= tmp_dates[4]]
     )
   }
-  
+
   return(date_dirs)
 }

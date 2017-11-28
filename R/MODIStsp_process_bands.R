@@ -116,13 +116,16 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     mess_text <- paste("Processing", sens_sel,bandname,
                        "files for date:", date_name)
   }
-  if (gui) {
-    gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
-    Sys.sleep(0.05)
-    message("[", date(), "] ", mess_text)
-  } else {
-    message("[", date(), "] ", mess_text)
-  }
+  
+  process_message(mess_text, gui, mess_lab)
+  
+  # if (gui) {
+  #   gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
+  #   Sys.sleep(0.05)
+  #   message("[", date(), "] ", mess_text)
+  # } else {
+  #   message("[", date(), "] ", mess_text)
+  # }
   
   # filename of temporary vrt file
   outfile_vrt <- tempfile(fileext = ".vrt")   

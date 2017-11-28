@@ -246,29 +246,30 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
         switch(
           as.character(catch_err),
           "0" = svalue(notes_lab) <- format(
-            glue::glue("The new Spectral Index was correctly added! \n",
-                       "To use it, click 'DONE', then re-open the 'Select \n",
-                       "Processing Layer' Window."),
+            strwrap("The new Spectral Index was correctly added! \n\n
+                     To use it, click 'DONE', then re-open the 'Select 
+                     Processing Layer' Window.", width = 80),
             justify = "centre"
           ),
-          "1" = svalue(notes_lab) <- glue::glue(
-            "ERROR ! The Formula of the new Index is not computable. ",
-            "Please check it !\n Valid Band Names are: \n",
+          "1" = svalue(notes_lab) <- strwrap(
+            paste("ERROR ! The Formula of the new Index is not computable.
+            Please check it !\n Valid Band Names are: \n\n",
             paste(avail_refbands, collapse = ", "),
-            "."),
-          "2" = svalue(notes_lab) <- glue::glue(
-            "ERROR ! Index full or short name is already present.\n",
-            "Please specify different ones."
+            ".")),
+          "2" = svalue(notes_lab) <- strwrap(
+            "ERROR ! Index full or short name is already present.\n\n
+             Please specify different ones."
           ),
-          "3" = svalue(notes_lab) <- glue::glue(
-            "ERROR ! Please provide valid values for the Index Acronym, ",
-            "its fullname and the Formula."
+          "3" = svalue(notes_lab) <- strwrap(
+            "ERROR ! Please provide valid values for the Index Acronym, 
+             its fullname and the Formula."
           )
         )
         
         ifelse(
           as.character(catch_err) == "0",
-          font(notes_lab) <- list(family = "sans", size = 9, weight = "bold"),
+          font(notes_lab) <- list(family = "sans", size = 9, weight = "bold", 
+                                  color = "darkgreen"),
           font(notes_lab) <- list(family = "sans", size = 9, weight = "bold",
                                   color = "red", style = "italic")
         )
@@ -290,12 +291,12 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
       horizontal = FALSE
     )
     notes_lab <- glabel(
-      text       = glue::glue(
-        "ERROR ! The Formula of the new Index is not computable. Please ",
-        "check it !\n ",
-        "Valid Band Names are: ", paste(avail_refbands, collapse = ", "),
+      text       = strwrap(paste(
+        "ERROR ! The Formula of the new Index is not computable. Please 
+        check it !\n\n 
+        Valid Band Names are: ", paste(avail_refbands, collapse = ", "),
         "."
-      ),
+      )),
       container  = notes_group,
       horizontal = TRUE, editable = FALSE
     )
@@ -309,7 +310,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
       handler   = function(h, ...) {
         dispose(main_win)
         gmessage(
-          message = "ReOpen the 'Select Layers' window to use the new index",
+          message = "ReOpen the 'Select Layers' window to use the new indexes",
           title = "Done!"
         )
         return(TRUE)

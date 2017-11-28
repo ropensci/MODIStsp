@@ -45,7 +45,7 @@ if (!is.null(options_file)) {
 }
 dir.create(log_dir, showWarnings = FALSE)
 # File to store the Log
-outFile <- file.path(log_dir, 
+outFile <- file.path(log_dir,
                      paste0("MODIStsp_", strftime(Sys.time(),
                                                   "%y%m%d_%H%M%S"), ".Rout"))
 

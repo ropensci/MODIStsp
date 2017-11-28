@@ -27,12 +27,12 @@ MODIStest_check_md5 <- function(test) {
     # (hdr files are not checked, since the corresponding dat is checked)
     if (length(grep("\\.vrt$", sel_file)) > 0) {
       vrt_content    <- readLines(sel_file)
-      lines_todelete <- grep(" *<SourceFilename*",vrt_content)
+      lines_todelete <- grep(" *<SourceFilename*", vrt_content)
       writeLines(vrt_content[!c(seq_along(vrt_content)) %in% lines_todelete],
                  sel_file)
     }
 
-    sel_md5 <- exp_md5[i,"md5"]
+    sel_md5 <- exp_md5[i, "md5"]
     if (!file.exists(sel_file)) {
       warning(paste0("Error: file '", sel_file,
                      "' was not created in the current temporary directory."))
@@ -48,7 +48,7 @@ MODIStest_check_md5 <- function(test) {
   if (n_err == 0) {
     message(paste0("Test ", test, " runned succesfully.\n\n"))
   } else {
-    message(paste0("Test ", test, " failed on ", n_err,"/", nrow(exp_md5),
+    message(paste0("Test ", test, " failed on ", n_err, "/", nrow(exp_md5),
                    " files.\n\n"))
   }
 

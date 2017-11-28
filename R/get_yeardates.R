@@ -56,7 +56,7 @@ get_yeardates <- function(download_range,
       
       if (yy == start_year & yy != end_year) {
         dates  <- c(gsub(paste0("^", start_year), yy, start_date),
-                    paste0(as.character(yy),".12.31"))
+                    paste0(as.character(yy), ".12.31"))
       }
       
       if (yy != start_year & yy != end_year) {

@@ -78,6 +78,7 @@ MODIStsp_extract <- function (in_rts, sp_object,
                               out_format = "xts", small    = TRUE,
                               small_method = "centroids", 
                               na.rm      = TRUE, verbose = FALSE) {
+  
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
@@ -113,8 +114,7 @@ MODIStsp_extract <- function (in_rts, sp_object,
     warning("Unknown 'small_method' value - resetting to 'centroids'")
   }
   if (!out_format %in% c("xts", "dframe")) {
-    if (verbose)
-      message("Unknown 'out_format' value - resetting to 'xts'")
+    message("Unknown 'out_format' value - resetting to 'xts'")
     out_format <- "xts"
   }
   if (!class(sp_object) %in% c("SpatialPolygonsDataFrame",
@@ -146,7 +146,7 @@ MODIStsp_extract <- function (in_rts, sp_object,
     sp_object@data$mdxtnq <- seq(1:length(sp_object@data[, 1]))
     shape <- crop(sp_object, extent(in_rts[[1]]))
     if (!isTRUE(all.equal(extent(shape), (extent(sp_object)), scale = 100))) {
-      warning("Some features of the spatial object are outside or partially " ,
+      warning("Some features of the spatial object are outside or partially ",
               "outside\n the extent of the input RasterStack ! Output for ",
               "features outside rasterStack extent\n will be set to NODATA. ",
               "Outputs for features only partially inside will be retrieved\n ",
@@ -249,7 +249,8 @@ MODIStsp_extract <- function (in_rts, sp_object,
       
       if (small & ncols != length(shape@data[, 1])) {
         if (length(id_field) == 1) {
-          miss_feat   <- setdiff(as.character(shape@data[, "mdxtnq"]), names(ts))
+          miss_feat   <- setdiff(as.character(shape@data[, "mdxtnq"]),
+                                 names(ts))
           pos_missing <- which(
             as.character(shape@data[, "mdxtnq"]) %in% miss_feat
             )

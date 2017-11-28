@@ -135,10 +135,10 @@ MODIStsp <- function(gui               = TRUE,
     options_file <- test_files[test]
 
     # If a test with http download was selected, ask credentials.
-    if (test %in% c(4, 5)) {
-      test_username <- readline(prompt = "Enter your USGS username: ")
-      test_password <- readline(prompt = "Enter your password: ")
-    }
+    # if (test %in% c(4, 5)) {
+    #   test_username <- readline(prompt = "Enter your USGS username: ")
+    #   test_password <- readline(prompt = "Enter your password: ")
+    # }
     start <- TRUE
   }
 
@@ -307,6 +307,7 @@ MODIStsp <- function(gui               = TRUE,
     if (exists("welcome_lab")) {
       gWidgets::dispose(welcome_lab)
     }
+    
     start <- MODIStsp_GUI(general_opts,
                          prod_opt_list,
                          MODIStsp_dir = system.file(package = "MODIStsp"),
@@ -436,12 +437,12 @@ MODIStsp <- function(gui               = TRUE,
     if (test != -1) {
       general_opts$out_folder     <- normalizePath(tempdir())
       general_opts$out_folder_mod <- normalizePath(tempdir())
-      if (exists("test_username")) {
-        general_opts$user     <- test_username
-      }
-      if (exists("test_password")) {
-        general_opts$password <- test_password
-      }
+      # if (exists("test_username")) {
+      #   general_opts$user     <- test_username
+      # }
+      # if (exists("test_password")) {
+      #   general_opts$password <- test_password
+      # }
     }
 
     #   ________________________________________________________________________

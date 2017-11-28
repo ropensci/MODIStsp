@@ -26,7 +26,6 @@
 #' @importFrom sp CRS
 #' @importFrom grDevices dev.new
 #' @importFrom utils packageVersion browseURL
-#' @importFrom glue glue
 #' @importFrom gWidgets svalue gconfirm gmessage gbasicdialog ggroup
 #'  getToolkitWidget gframe gdroplist enabled size addSpring glabel
 #'  gcombobox addSpace gbutton gcheckboxgroup dispose visible gradio
@@ -40,10 +39,9 @@ MODIStsp_GUI <- function(general_opts,
                          scroll_window){
 
   #### HELPER FUNCTIONS TO AVOID REPETITIONS AND FACILITATE READING  ####
-  #### Putting these here allows to avoid to explicitly pass a lot of
-  #### arguments!!!
   
-  ## Update the selected tiles with the intersection with the bounding box ----
+  ## Function to update the selected tiles with the intersection with the ----
+  ## bounding box
 
   update_tiles <- function(bbox_out,
                            output_proj4_wid,
@@ -66,7 +64,7 @@ MODIStsp_GUI <- function(general_opts,
     svalue(end_y_wid)   <- max(d_bbox_mod_tiled$V)
   }
 
-  ## Update the labels in the bbox group ----
+  ## Function to update the labels in the bbox group ----
   update_bboxlabels <- function(bbox_out,
                                 units,
                                 output_ul_east_wid,
@@ -85,7 +83,7 @@ MODIStsp_GUI <- function(general_opts,
                                            format = "f")
   }
 
-  ### Get currently selected projection and its measure units ----
+  ### Functions to get currently selected projection and its measure units ----
   get_proj <- function(sel_output_proj) {
     head(strsplit(tail(
       strsplit(sel_output_proj@projargs, "+proj=")[[1]], 1), " +")[[1]], 1)
@@ -105,7 +103,7 @@ MODIStsp_GUI <- function(general_opts,
     units
   }
 
-  ### Save the options to a JSON file ----
+  ### Function to save the processing options to a JSON file ----
   prepare_to_save_options <- function(general_opts,
                                       gui_env,
                                       ...) {
@@ -121,9 +119,7 @@ MODIStsp_GUI <- function(general_opts,
     general_opts$prod_version <-
       prod_opt_list[[general_opts$sel_prod]][[which(vapply(
         prod_opt_list[[general_opts$sel_prod]],
-        function(x){
-          x$v_number
-        }, FUN.VALUE = "") == svalue(vers_wid))]]$v_number
+        function(x){x$v_number}, FUN.VALUE = "") == svalue(vers_wid))]]$v_number
     general_opts$sensor <- svalue(sens_wid)
     #retrieve selected bands
     if (exists("temp_wid_bands", where = gui_env)) {
@@ -188,8 +184,9 @@ MODIStsp_GUI <- function(general_opts,
     # Send warning if HDF deletion selected
     if (general_opts$delete_hdf == "Yes") {
       gui_env$check_save_opts <- gconfirm(
-        glue::glue("Warning! HDF files in Original MODIS folder will be ", 
-        "deleted at the end of processing! \n\nAre you sure? "),
+        strwrap("Warning! HDF files in Original MODIS folder will be 
+                 deleted at the end of processing! \n\n
+                 Are you sure? ", width = 80),
         title = "Warning", icon = "warning"
       )
     }
@@ -259,7 +256,7 @@ MODIStsp_GUI <- function(general_opts,
       }
     }
     # Check if selected tiles are consistent with the bounding box
-    if (general_opts$full_ext == "Resized" & gui_env$check_save_opts == TRUE) {
+    if (general_opts$full_ext == "Resized" & gui_env$check_save_opts) {
       bbox_mod         <- reproj_bbox(general_opts$bbox,
                                       svalue(output_proj4_wid), mod_proj_str,
                                       enlarge = TRUE)
@@ -283,9 +280,10 @@ MODIStsp_GUI <- function(general_opts,
       # asking to automatically retrieve from extent
       if (!any(required_tiles %in% selected_tiles)) {
         gui_env$check_save_opts <- gconfirm(
-          glue::glue("The selected tiles do not intersect the output bounding ",
-                "box. \n\n Do you want to discard your choice and retrieve ",
-                "automatically the required tiles from the bounding box? "),
+          strwrap("The selected tiles do not intersect the output bounding 
+                box. \n\n Do you want to discard your choice and retrieve
+                automatically the required tiles from the bounding box?", 
+                width = 200),
           handler = function(h, ...) {
             selected_tiles       <<- required_tiles
             general_opts$start_x <<- min(d_bbox_mod_tiled$H)
@@ -299,13 +297,13 @@ MODIStsp_GUI <- function(general_opts,
       # If not all the required tiles are selected, ask to select them
       if (!all(required_tiles %in% selected_tiles) & gui_env$check_save_opts) {
         gconfirm(
-          message = glue::glue(
-            "The following tiles not currently selected are required to cover ",
-            "the output bounding box (",
+          message = strwrap(paste(
+            "The following tiles not currently selected are required to cover 
+            the output bounding box (",
               paste(required_tiles[!(required_tiles %in% selected_tiles)],
                     collapse = ", "),
-              "). \n\n Do you want to add them to the processing? Otherwise, ", 
-              " nodata will be produced in the non-covered area."),
+              "). \n\n Do you want to add them to the processing? Otherwise, 
+               nodata will be produced in the non-covered area.")),
           handler = function(h, ...) {
             selected_tiles       <<- required_tiles
             general_opts$start_x <<- min(d_bbox_mod_tiled$H)
@@ -319,12 +317,12 @@ MODIStsp_GUI <- function(general_opts,
       # If some selected tiles are not useful, ask to remove them
       if (!all(selected_tiles %in% required_tiles) & gui_env$check_save_opts) {
         gconfirm(
-          message = glue::glue(
-            "The following tiles are not required to cover the output ", 
-            "bounding box (",
+          message = strwrap(paste(
+            "The following tiles are not required to cover the output  
+            bounding box (",
             paste(selected_tiles[!(selected_tiles %in% required_tiles)],
                 collapse = ", "),
-          "). \n\n Do you want to remove them from processing?"
+          "). \n\n Do you want to remove them from processing?")
         ),
         handler = function(h, ...) {
           selected_tiles       <<- required_tiles
@@ -353,12 +351,12 @@ MODIStsp_GUI <- function(general_opts,
     # Issue Warning on Mode resamling
     if (general_opts$resampling == "mode" & gui_env$check_save_opts) {
       check_mode <- gconfirm(
-        message = glue::glue(
-          "Warning! You selected 'mode' resampling. Be aware that 'mode' ",
-          "resampling can give inconsistent results in areas affected by ", 
-          "mixed high and low quality data, and fail in properly keeping ", 
-          "track of quality indicators! \n\n Do you wish to continue?"
-        ),
+        message = strwrap(
+          "Warning! You selected 'mode' resampling. Be aware that 'mode' 
+          resampling can give inconsistent results in areas affected by  
+          mixed high and low quality data, and fail in properly keeping  
+          track of quality indicators! \n\n Do you wish to continue?",
+          width = 200),
         title   = "Warning"
       )
       if (check_mode == FALSE) {
@@ -372,10 +370,9 @@ MODIStsp_GUI <- function(general_opts,
         gui_env$check_save_opts
     ) {
       gmessage(
-        message = glue::glue("Username and password are mandatory in case of ", 
-                             "`http` download! \n\n Please provide them or ",
-                             "choose 'ftp' download."
-        ),
+        message = strwrap("Username and password are mandatory in case of  
+                          `http` download! \n\n Please provide them or 
+                           choose 'ftp' download.", width = 200),
         title   = "Warning")
       gui_env$check_save_opts <- FALSE
     }
@@ -478,7 +475,7 @@ MODIStsp_GUI <- function(general_opts,
                         horizontal = FALSE,
                         expand     = FALSE)
 
-  if (scroll_window  == TRUE) {
+  if (scroll_window == TRUE) {
     getToolkitWidget(main_win)$maximize()
   }
 
@@ -499,7 +496,7 @@ MODIStsp_GUI <- function(general_opts,
   # set defaults for projection names and corresponding proj4strings
   out_proj_names <- c("Sinusoidal", "UTM 32N", "Latlon WGS84", "Latlon MODIS",
                       "User Defined")
-  out_proj_list  <- hash::hash(
+  out_proj_list  <- list(
     "Sinusoidal"   = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
     "UTM 32N"      = "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0", #nolint
     "Latlon WGS84" = "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0", #nolint
@@ -512,9 +509,9 @@ MODIStsp_GUI <- function(general_opts,
   #   Initialize Widgets for product selection and bands selection          ####
 
   satprod_frame <- gframe(
-    text       = glue::glue("<span foreground='red' size='x-large'>", 
-                         "MODIS Product, Platform and Layers selection", 
-                         "</span>"),
+    text       = strwrap("<span foreground='red' size='x-large'> 
+                         MODIS Product, Platform and Layers selection
+                         </span>"),
     markup     = TRUE,
     horizontal = FALSE,
     container  = main_group,
@@ -733,9 +730,8 @@ MODIStsp_GUI <- function(general_opts,
       cbox_main  <- ggroup(container = selgroup, horizontal = FALSE)
       cbox_total <- ggroup(container = cbox_main, horizontal = TRUE)
       cbox       <- gframe(
-        text       = glue::glue("<span foreground='red' size='large'>", 
-                                "Original MODIS Layers", 
-                                "</span>"),
+        text       = strwrap("<span foreground='red' size='large'>
+                              Original MODIS Layers </span>"),
         markup     = TRUE,
         container  = cbox_total,
         horizontal = FALSE
@@ -751,9 +747,8 @@ MODIStsp_GUI <- function(general_opts,
       if (!is.null(check_names_quality)) {
         check_wid_quality <- gui_env$temp_wid_bands_quality
         cbox_quality <- gframe(
-          text       = glue::glue("<span foreground='red' size='large'>", 
-                               "Quality Indicators", 
-                               "</span>"),
+          text       = strwrap("<span foreground='red' size='large'>
+                               Quality Indicators </span>"),
           markup     = TRUE,
           container  = cbox_total,
           horizontal = FALSE
@@ -778,9 +773,8 @@ MODIStsp_GUI <- function(general_opts,
         # retrieve currently selected indexes layers
         check_wid_indexes <- gui_env$temp_wid_bands_indexes
         cbox_indexes      <- gframe(
-          text       = glue::glue("<span foreground='red' size='large'>",
-                                  "Additional Spectral Indexes",
-                                  "</span>"),
+          text       = strwrap("<span foreground='red' size='large'>
+                                Additional Spectral Indexes</span>"),
           markup     = TRUE,
           container  = cbox_total,
           horizontal = FALSE
@@ -791,7 +785,7 @@ MODIStsp_GUI <- function(general_opts,
           container = cbox_indexes,
           use.table = FALSE
         )
-        band_indexes_space <- glabel(text = "", container = cbox_indexes)
+        glabel(text = "", container = cbox_indexes)
 
         ##  ....................................................................
         ##  Here we create the sub-child widget for creation of custom      ####
@@ -943,11 +937,11 @@ MODIStsp_GUI <- function(general_opts,
                                height     = 40)
 
       help_mess_lab <- glabel(
-        text = glue::glue(
-          "If selected, use aria2c to accelerate download. \n\n",
-          "It is necessary that aria2c is installed and that the binary \n",
-          "executable is in the user system PATH.\n",
-          "(See https://aria2.github.io)"
+        text = strwrap(
+          "If selected, use aria2c to accelerate download. \n\n
+          It is necessary that aria2c is installed and that the binary \n,
+          executable is in the user system PATH.\n,
+          (See https://aria2.github.io)", width = 80
           ), 
         editable  = FALSE,
         container = help_box
@@ -967,9 +961,8 @@ MODIStsp_GUI <- function(general_opts,
   #   Initialize Widgets for Dates selection                                ####
 
   dates_frame <- gframe(
-    text       = glue::glue("<span foreground='red' size='x-large'>",
-                            "Processing Period",
-                            "</span>"),
+    text       = strwrap("<span foreground='red' size='x-large'>
+                         Processing Period </span>"),
     markup     = TRUE,
     container  = main_group,
     horizontal = TRUE,
@@ -1020,14 +1013,14 @@ MODIStsp_GUI <- function(general_opts,
                                width      = 400,
                                height     = 40)
       help_mess_lab <- glabel(
-        text = glue::glue(
-          "- `Full`: all the available images between the starting and the \n",
-          "ending dates will be downloaded;\n\n",
-          "- `Seasonal`: only the images included in the season will be \n",
-          "downloaded (e.g: if the starting date is 2005-12-01 and the \n", 
-          "date is 2010-02-31, the images of December, January and February \n",
-          "from 2005 to 2010 will be processed (excluding 2005-01, 2005-02 \n",
-          "and 2010-12 - )."
+        text = strwrap(
+          "- `Full`: all the available images between the starting and the 
+          ending dates will be downloaded;\n\n
+          - `Seasonal`: only the images included in the season will be 
+          downloaded (e.g: if the starting date is 2005-12-01 and the  
+          date is 2010-02-31, the images of December, January and February 
+          from 2005 to 2010 will be processed (excluding 2005-01, 2005-02 
+          and 2010-12 - ).", width = 80
         ),
         editable  = FALSE,
         container = help_box
@@ -1042,9 +1035,8 @@ MODIStsp_GUI <- function(general_opts,
   #   Initialize Widgets for Tiles selection                                ####
 
   spatial_frame <- gframe(
-    text       = glue::glue("<span foreground='red' size='x-large'>",
-                            "Spatial Extent",
-                            "</span>"),
+    text       = strwrap("<span foreground='red' size='x-large'>
+                          Spatial Extent </span>"),
     markup     = TRUE,
     container  = main_group,
     horizontal = FALSE,
@@ -1330,9 +1322,8 @@ MODIStsp_GUI <- function(general_opts,
   #   Initialize Widgets for Projection, resolution and bbox selection      ####
 
   output_proj_frame <- gframe(
-    text       = glue::glue("<span foreground='red' size='x-large'>",
-                            "Reprojection and Resize Options",
-                            "</span>"),
+    text       = strwrap("<span foreground='red' size='x-large'>
+                         Reprojection and Resize Options </span>"),
     markup     = TRUE,
     container  = main_group,
     horizontal = FALSE,
@@ -1405,9 +1396,8 @@ MODIStsp_GUI <- function(general_opts,
           if (class(sel_output_proj) == "try-error") {
             gmessage(
               message = sel_output_proj,
-              title   = glue::glue(
-                "Proj4 String Not Recognized - Keeping the old output ",
-                "projection")
+              title   = strwrap("Proj4 String Not Recognized - Keeping the old 
+                                output projection")
             )
           } else {
             svalue(output_proj4_wid) <- sel_output_proj
@@ -1592,9 +1582,8 @@ MODIStsp_GUI <- function(general_opts,
   #   Initialize Widgets for Format and reprocess options                   ####
 
   options_frame <- gframe(
-    text       = glue::glue("<span foreground='red' size='x-large'>",
-                            "Processing Options",
-                            "</span>"),
+    text       = strwrap("<span foreground='red' size='x-large'>
+                         Processing Options </span>"),
     markup     = TRUE,
     container  = main_group,
     expand     = TRUE,
@@ -1696,12 +1685,12 @@ MODIStsp_GUI <- function(general_opts,
                                height     = 40)
 
       help_mess_lab <- glabel(
-        text = glue::glue(
-          "`No`: original MODIS nodata values are maintained; \n\n",
-          "`Yes`: nodata values are replaced with default values equal \n",
-          "to the maximum possible value of the data type of the \n",
-          "output (e.g. 255 for unsigned 8-bit integer, 32767 for signed \n ",
-          "16-bit integer)."
+        text = strwrap(
+          "`No`: original MODIS nodata values are maintained; \n\n
+          `Yes`: nodata values are replaced with default values equal 
+          to the maximum possible value of the data type of the 
+          output (e.g. 255 for unsigned 8-bit integer, 32767 for signed 
+          16-bit integer).", width = 80
         ),
         editable  = FALSE,
         container = help_box
@@ -1739,17 +1728,17 @@ MODIStsp_GUI <- function(general_opts,
                                width = 400,
                                height = 40)
       help_mess_lab <- glabel(
-        text = glue::glue(
-          "NASA provides outputs as integer values, indicating a potential \n",
-          "scale factor and/or an offset to apply in order to obtain values \n",
-          "in the indicated measure units. \n\n", 
-          "If `No`: output files are left as provided by NASA, and \n",
-          "spectral indices are produced as integer values with a 10000 \n",
-          "scale factor.\n\n",
-          "If `Yes`, scale factors and offsets are applied, and \n",
-          "spectral indices are computed as floating point values. \n",
-          "(Notice that in this case the size of output products is \n", 
-          "generally larger.)"
+        text = strwrap(
+          "NASA provides outputs as integer values, indicating a potential
+          scale factor and/or an offset to apply in order to obtain values
+          in the indicated measure units. \n\n 
+          If `No`: output files are left as provided by NASA, and
+          spectral indices are produced as integer values with a 10000
+          scale factor.\n\n
+          If `Yes`, scale factors and offsets are applied, and
+          spectral indices are computed as floating point values.
+          (Notice that in this case the size of output products is
+          generally larger.)", width = 80
         ),
         editable = FALSE,
         container = help_box
@@ -1766,9 +1755,8 @@ MODIStsp_GUI <- function(general_opts,
   # HDF output folder ----
 
   outfoldmod_frame <- gframe(
-    text      = glue::glue("<span foreground='red' size='x-large'>",
-                           "Folder for storing original MODIS HDF files",
-                           "</span>"),
+    text      = strwrap("<span foreground='red' size='x-large'>
+                        Folder for storing original MODIS HDF files </span>"),
     markup    = TRUE,
     container = main_group,
     expand    = TRUE,
@@ -1820,9 +1808,8 @@ MODIStsp_GUI <- function(general_opts,
 
   # Main output folder ----
   outfold_frame <- gframe(
-    text = glue::glue("<span foreground='red' size='x-large'>", 
-                      "Folder for storing MODIStsp processed Time Series",
-                      "</span>"),
+    text = strwrap("<span foreground='red' size='x-large'>
+                   Folder for storing MODIStsp processed Time Series </span>"),
     markup    = TRUE,
     container = main_group,
     expand    = TRUE,
@@ -1921,9 +1908,9 @@ MODIStsp_GUI <- function(general_opts,
         } else {
           if (length(grep("\\.json$", choice)) == 0) {
             continue_load <- gconfirm(
-              message = glue::glue("The selected file does not seem to be a ",
-                                   "JSON file. \n\n",
-                                   "Do you want to continue?"),
+              message = strwrap("The selected file does not seem to be a 
+                                JSON file. \n\n
+                                Do you want to continue?"),
               title = "Warning",
               icon  = "warning"
             )
@@ -1960,9 +1947,9 @@ MODIStsp_GUI <- function(general_opts,
       } else {
         if (length(grep("\\.json$", choice)) == 0) {
           continue_save <- gconfirm(
-            message = glue::glue("The selected file does not seem to be a ",
-                                 "JSON file. \n\n",
-                                 "Do you want to continue?"),
+            message = strwrap("The selected file does not seem to be a 
+                               JSON file. \n\n
+                               Do you want to continue?"),
             title = "Warning",
             icon  = "warning"
           )

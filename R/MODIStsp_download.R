@@ -27,9 +27,7 @@
 #'  (only influences where the log messages are sent).
 #' @inheritParams MODIStsp_process
 #' @return The function is called for its side effects
-#' @examples 
 #' @rdname MODIStsp_download
-#' @export 
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @importFrom XML xmlToList xmlParse
@@ -94,7 +92,7 @@ MODIStsp_download <- function(modislist,
              correct ones or try with ftp download.")
         }
         
-        if (size_string$status_code == 200) {  
+        if (size_string$status_code == 200) {
           remote_filesize <- as.integer(
             xml2::as_list(
               httr::content(
@@ -108,8 +106,7 @@ MODIStsp_download <- function(modislist,
             confirm <- gWidgets::gconfirm(
               paste0(download_server,
                      " server seems to be down! Do you want to retry?"),
-              icon = "question",
-              handler = function(h, ...){})
+              icon = "question")
             if (!confirm) {
               stop("You selected to quit! Goodbye!")
             }
@@ -212,7 +209,7 @@ MODIStsp_download <- function(modislist,
             download <- try(httr::GET(remote_filename,
                                       httr::authenticate(user, password),
                                       httr::progress(),
-                            httr::write_disk(local_filename, overwrite = TRUE)))
+                                      httr::write_disk(local_filename, overwrite = TRUE)))
           }
         } else {
           # ftp download - aria
@@ -230,7 +227,7 @@ MODIStsp_download <- function(modislist,
             # ftp download - httr
             download <- try(httr::GET(remote_filename,
                                       httr::progress(),
-                            httr::write_disk(local_filename, overwrite = TRUE)))
+                                      httr::write_disk(local_filename, overwrite = TRUE)))
           }
         }
         
@@ -281,7 +278,7 @@ MODIStsp_download <- function(modislist,
           unlink(local_filename)
           stop("[", date(), "] Error: server seems to be down! Please retry ", 
                "Later!")
-        }  
+        }
       }
     }
   }

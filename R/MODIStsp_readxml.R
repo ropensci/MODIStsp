@@ -66,14 +66,14 @@ MODIStsp_read_xml <- function(prodopts_file,
       ftp_aqua         <- prod_data[["ftp_aqua"]][[1]]
       
       prodopts[[version_name]]$www <- prod_data[["www"]][[1]]
-      prodopts[[version_name]]$file_prefix <- hash::hash(
+      prodopts[[version_name]]$file_prefix <- list(
         "Terra" = file_prefix_terra,
         "Aqua" = file_prefix_aqua
       )
-      prodopts[[version_name]]$http <- hash::hash("Terra" = http_terra,
-                                                  "Aqua" = http_aqua)
-      prodopts[[version_name]]$ftp  <- hash::hash("Terra" = ftp_terra,
-                                                  "Aqua" = ftp_aqua)
+      prodopts[[version_name]]$http <- list("Terra" = http_terra,
+                                            "Aqua" = http_aqua)
+      prodopts[[version_name]]$ftp  <- list("Terra" = ftp_terra,
+                                            "Aqua" = ftp_aqua)
       
       # Band info
       nbands       <- length(prod_data[["bands"]]) 
