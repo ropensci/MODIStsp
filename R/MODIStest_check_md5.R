@@ -2,7 +2,6 @@
 #' @description internal function which tests if the output of a test is corresponds to the expected one.
 #' @details When running in test mode, MODIStsp is expected to produce the same files
 #' @param test integer number of the performed test
-#' @export
 #' @return NULL
 #'
 #' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}

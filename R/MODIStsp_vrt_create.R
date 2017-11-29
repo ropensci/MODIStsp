@@ -39,7 +39,7 @@ MODIStsp_vrt_create <- function(sensor,
                                 sens_sel,  ts_format, nodata_value,
                                 out_format, rts) {
 
-  if (sensor == "Both") {
+  if (sensor[1] == "Both") {
     senslist <- c("Terra", "Aqua", "Mixed")
   } else {
     senslist <- sensor
@@ -69,7 +69,7 @@ MODIStsp_vrt_create <- function(sensor,
     for (meta_band in meta_bands) {
 
       message("[", date(), "] Creating Virtual Files and R time series for ",
-                   "layer ", meta_band)
+              "layer ", meta_band)
 
       #- --------------------------------------------------------#
       # retrieve files list of the time series (ENVI format) ####
@@ -104,22 +104,23 @@ MODIStsp_vrt_create <- function(sensor,
       }
 
       # Set a flag to 1 if "Mixed" time series are being processed but either no
-      # AQUA or no TERRA files are available, so that in that case the creation of
-      # META files for the mixed case is skipped !
+      # AQUA or no TERRA files are available, so that in that case the creation
+      # of META files for the mixed case is skipped !
 
       skip_flag <- 0
       if ((sens_sel == "Mixed") &
-          ((length(grep(file_prefixes[["Aqua"]], out_meta_files)) == 0) |
-           (length(grep(file_prefixes[["Terra"]], out_meta_files)) == 0))) {
+           ((length(grep(file_prefixes[["Aqua"]], out_meta_files)) == 0) |
+             (length(grep(file_prefixes[["Terra"]], out_meta_files)) == 0))) {
         skip_flag <- 1
       }
-      # If skip_flag == 1 (mixed TS, but data from TERRA or AQUA missing) do nothing
+      # If skip_flag == 1 (mixed TS, but data from TERRA or AQUA missing) do
+      # nothing
       if (skip_flag != 1) {
         # If no files available, skip metadata creation
         if (length(out_meta_files) > 0) {
 
-          #   ______________________________________________________________________
-          #   check/reset order of acquisition dates and files                  ####
+          #   __________________________________________________________________
+          #   check/reset order of acquisition dates and files              ####
           #
 
           # retrieve the doys and years from filenames
@@ -134,7 +135,8 @@ MODIStsp_vrt_create <- function(sensor,
           #  Reorder Files  according to acquisition date (useful to have a META
           #  file with bands in the correct order
           out_meta_files <- out_meta_files[acq_order]
-          temp_dates     <- as.Date(strptime(paste(years, doys), format = "%Y %j"))
+          temp_dates     <- as.Date(strptime(paste(years, doys),
+                                             format = "%Y %j"))
           doy_min        <- min(doys[which(years == min(years))])
           year_min       <- min(years)
           doy_max        <- max(doys[which(years == max(years))])
@@ -183,21 +185,23 @@ MODIStsp_vrt_create <- function(sensor,
             close(fileConn_meta)
 
             # Compute the "wavelengths" - DOYS elapsed from 01/01/2000
-            temp_dates <- as.Date(strptime(paste(years, doys), format = "%Y %j"))
-            elapsed <- signif(difftime(temp_dates,
-                                       strptime(paste(2000, 001), format = "%Y %j"),
-                                       units = "days"), 5)
+            #
+            temp_dates <- as.Date(strptime(paste(years, doys),
+                                           format = "%Y %j"))
+            elapsed <- signif(difftime(
+              temp_dates, strptime(paste(2000, 001), format = "%Y %j"),
+              units = "days"), 5)
 
             # Write the hdr file for the meta file
             fileConn_meta_hdr <- file(
-              paste0(tools::file_path_sans_ext(meta_filename),".hdr"), "w"
+              paste0(tools::file_path_sans_ext(meta_filename), ".hdr"), "w"
             )
             # Write first line
             writeLines(c("ENVI"), fileConn_meta_hdr)
             writeLines(c("Description = {ENVI META FILE}"), fileConn_meta_hdr)
-            writeLines(paste0("samples = ", nsamp), fileConn_meta_hdr)			#nsamp
+            writeLines(paste0("samples = ", nsamp), fileConn_meta_hdr)	#nsamp
             writeLines(paste0("lines = ", nrow), fileConn_meta_hdr)			#lines
-            writeLines(paste0("bands = ", length(out_meta_files)),    #nbands
+            writeLines(paste0("bands = ", length(out_meta_files)),     #nbands
                        fileConn_meta_hdr)
             writeLines(paste("header offset = 0"), fileConn_meta_hdr)
             # File type - fundamental
@@ -213,18 +217,20 @@ MODIStsp_vrt_create <- function(sensor,
             writeLines(c("wavelength = {",
                          paste(as.numeric(elapsed), collapse = ","), "}"),
                        fileConn_meta_hdr)
-            writeLines(c("data ignore value = ", nodata_value ), # Data Ignore Value
+            # Data Ignore Value
+            writeLines(c("data ignore value = ", nodata_value ),
                        fileConn_meta_hdr, sep = " ")
             writeLines("", fileConn_meta_hdr)		# Dummy
             close(fileConn_meta_hdr)
 
           }
-          #   ____________________________________________________________________
-          #   # Write the GDAL vrt file if needed                              ####
+          #   __________________________________________________________________
+          #   # Write the GDAL vrt file if needed                           ####
           #
           if (ts_format == "GDAL vrt Files" | ts_format == "ENVI and GDAL") {
 
-            meta_dir <- file.path(out_prod_folder, "Time_Series", "GDAL", sens_sel,
+            meta_dir <- file.path(out_prod_folder, "Time_Series", "GDAL",
+                                  sens_sel,
                                   meta_band)
             dir.create(meta_dir, showWarnings = FALSE, recursive = TRUE)
 
@@ -234,14 +240,15 @@ MODIStsp_vrt_create <- function(sensor,
                                                        "GDAL.vrt",
                                                        sep = "_"))
 
-            gdalUtils::gdalbuildvrt(out_meta_files, meta_filename, separate = TRUE,
+            gdalUtils::gdalbuildvrt(out_meta_files, meta_filename,
+                                    separate = TRUE,
                                     srcnodata = nodata_value,
                                     vrtnodata = nodata_value)
 
           } # end If on necessity to build GDAL vrt files
 
-          #   ____________________________________________________________________
-          #   Create RasterStacks if needed                              ####
+          #   __________________________________________________________________
+          #   Create RasterStacks if needed                                 ####
           #
           if (rts == "Yes") {
 

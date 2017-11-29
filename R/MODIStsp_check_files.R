@@ -57,7 +57,7 @@ MODIStsp_check_files <- function(out_prod_folder,
     )
     # check
     if (file.exists(outcheck_file) == FALSE) {
-      check <- F
+      check <- FALSE
     }
   }
 

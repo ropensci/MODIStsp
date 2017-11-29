@@ -1,14 +1,14 @@
 #' @title MODIStsp_download
-#' @description Internal function dealing with download of MODIS hdfs from 
+#' @description Internal function dealing with download of MODIS hdfs from
 #'  http or ftp remote servers for a given date.
-#' @param modislist `character array` List of MODIS images to be downloaded for 
+#' @param modislist `character array` List of MODIS images to be downloaded for
 #'  the selected date (as returned from `get_mod_filenames`). Can be a single
-#'  image, or a list of images in case different tiles are needed! 
+#'  image, or a list of images in case different tiles are needed!
 #' @param out_folder_mod `character` Folder where the hdfs are to be stored
 #' @param download_server `character ["http" | "ftp"]` Server to be used.
 #' @param http `character` Address of the http server for the selected product.
 #' @param ftp `character` Address of the http server for the selected product.
-#' @param n_retries `numeric` Max number of retry attempts on download. If 
+#' @param n_retries `numeric` Max number of retry attempts on download. If
 #'  download fails more that n_retries times consecutively, abort
 #' @param date_dir `character array` Sub-folder where the different images
 #'  can be found (element of the list returned from `get_mod_dirs`, used in case
@@ -35,25 +35,25 @@
 #' @importFrom gWidgets gconfirm
 
 MODIStsp_download <- function(modislist,
-                              out_folder_mod, 
-                              download_server, 
-                              http, 
+                              out_folder_mod,
+                              download_server,
+                              http,
                               ftp,
                               n_retries,
                               use_aria,
                               date_dir,
-                              year, 
+                              year,
                               DOY,
                               user,
-                              password, 
-                              sens_sel, 
-                              date_name, 
+                              password,
+                              sens_sel,
+                              date_name,
                               gui) {
-  
+
   # Cycle on the different files to download for the current date
   for (file in seq_along(modislist)) {
     modisname <- modislist[file]
-    
+
     #   ________________________________________________________________________
     # Try to retrieve the file size of the remote HDF so that if a local    ####
     # file exists but size is different it can be redownloaded
@@ -64,7 +64,7 @@ MODIStsp_download <- function(modislist,
     } else {
       local_filesize <- 0
     }
-    
+
     if (download_server == "http") {
       remote_filename <- paste0(http, date_dir, "/", modisname)
     }
@@ -82,16 +82,16 @@ MODIStsp_download <- function(modislist,
                                    paste0(remote_filename, ".xml"),
                                    httr::authenticate(user, password),
                                    times = n_retries,
-                                   pause_base = 0.1, 
-                                   pause_cap = 10, 
+                                   pause_base = 0.1,
+                                   pause_cap = 10,
                                    quiet = FALSE)
-        
+
         # if user/password are not valid, notify
         if (size_string["status_code"] == 401) {
           stop("Username and/or password are not valid. Please retry with the
              correct ones or try with ftp download.")
         }
-        
+
         if (size_string$status_code == 200) {
           remote_filesize <- as.integer(
             xml2::as_list(
@@ -100,7 +100,7 @@ MODIStsp_download <- function(modislist,
           )
           success <- TRUE
         } else {
-          # If the remote xml file was not accessible, n_retries times, 
+          # If the remote xml file was not accessible, n_retries times,
           # retry or abort
           if (gui) {
             confirm <- gWidgets::gconfirm(
@@ -113,13 +113,13 @@ MODIStsp_download <- function(modislist,
           } else {
             stop("[", date(), "] Error: server seems to be down! Please retry ",
                  "Later!")
-          }  
+          }
         }
       }
     } else {
       if (download_server == "ftp") {
         # On ftp download, use getURL to find out the remote file size ----
-        attempt <- 0 
+        attempt <- 0
         while (attempt < n_retries) {
           size_string <- try(RCurl::getURL(
             remote_filename,
@@ -128,24 +128,23 @@ MODIStsp_download <- function(modislist,
             .opts = list(timeout = 240, maxredirs = 5, verbose = FALSE))
           )
           if (class(size_string) != "try-error") {
-            remote_filesize <- as.integer(gsub("[^:]+: ([0-9]+)\\r.*", "\\1", 
+            remote_filesize <- as.integer(gsub("[^:]+: ([0-9]+)\\r.*", "\\1",
                                                size_string))
             # on success, set a high value to attempt so to end the while loop
-            attempt <- n_retries + 1 
+            attempt <- n_retries + 1
           } else {
             # wait one second before trying again!
             Sys.sleep(1)
             attempt <- attempt + 1
           }
-          # If the remote xml file was not accessible n_retries times, 
+          # If the remote xml file was not accessible n_retries times,
           # retry or abort
           if (attempt == n_retries) {
             if (gui) {
               confirm <- gWidgets::gconfirm(
                 paste0(download_server,
                        " server seems to be down! Do you want to retry?"),
-                icon = "question",
-                handler = function(h, ...){})
+                icon = "question")
               if (confirm) {
                 attempt <- 0
               } else {
@@ -154,7 +153,7 @@ MODIStsp_download <- function(modislist,
             } else {
               stop("[", date(), "] Error: server seems to be down! Please retry ", #nolint
                    "later!")
-            }  
+            }
           }
         }
       } else {
@@ -162,14 +161,14 @@ MODIStsp_download <- function(modislist,
         remote_filesize <- local_filesize
       }
     }
-    
+
     #   ________________________________________________________________________
     #   Download required HDF images                                        ####
     #   (If HDF not existing locally, or existing with different size)
-    #   
-    
+    #
+
     if (!file.exists(local_filename) | local_filesize != remote_filesize) {
-      
+
       # update messages
       mess_text <- paste("Downloading", sens_sel, "Files for date",
                          date_name, ":", which(modislist == modisname),
@@ -182,13 +181,13 @@ MODIStsp_download <- function(modislist,
       } else {
         message("[", date(), "] ", mess_text)
       }
-      
+
       success <- FALSE
       attempt <- 0
       #  _______________________________________________________________________
       #  while loop: try to download n_retries times  ####
       while (attempt < n_retries) {
-        
+
         if (download_server == "http") {
           # http download - aria
           if (use_aria == TRUE) {
@@ -198,9 +197,9 @@ MODIStsp_download <- function(modislist,
               " -o ", basename(remote_filename),
               " ", remote_filename,
               " --allow-overwrite --file-allocation=none --retry-wait=2",
-              " --http-user=", user, 
+              " --http-user=", user,
               " --http-passwd=", password)
-            
+
             # intern=TRUE for Windows, FALSE for Unix
             download <- try(system(aria_string,
                                    intern = Sys.info()["sysname"] == "Windows"))
@@ -209,7 +208,8 @@ MODIStsp_download <- function(modislist,
             download <- try(httr::GET(remote_filename,
                                       httr::authenticate(user, password),
                                       httr::progress(),
-                                      httr::write_disk(local_filename, overwrite = TRUE)))
+                                      httr::write_disk(local_filename,
+                                                       overwrite = TRUE)))
           }
         } else {
           # ftp download - aria
@@ -227,10 +227,11 @@ MODIStsp_download <- function(modislist,
             # ftp download - httr
             download <- try(httr::GET(remote_filename,
                                       httr::progress(),
-                                      httr::write_disk(local_filename, overwrite = TRUE)))
+                                      httr::write_disk(local_filename,
+                                                       overwrite = TRUE)))
           }
         }
-        
+
         # Check for errors on download try
         if (class(download) == "try-error" |
             !is.null(attr(download, "status"))) {
@@ -240,14 +241,14 @@ MODIStsp_download <- function(modislist,
           Sys.sleep(1)    # sleep for a while....
         } else {
           if (download_server == "http" & use_aria == FALSE) {
-            
+
             if (download$status_code != 200 &
                 length(content(download, "text", encoding = "UTF-8")) == 1) {
               # on error, delete last HDF file (to be sure no incomplete
               # files are left behind and send message)
               message("[", date(), "] Download Error - Retrying...")
               unlink(local_filename)
-            } 
+            }
           }
         }
         # final check on local file size: Only exit if local file size equals
@@ -266,8 +267,7 @@ MODIStsp_download <- function(modislist,
           confirm <- gWidgets::gconfirm(
             paste0(download_server,
                    " server seems to be down! Do you want to retry?"),
-            icon = "question",
-            handler = function(h, ...){})
+            icon = "question")
           if (confirm) {
             attempt <- 0
           } else {
@@ -276,7 +276,7 @@ MODIStsp_download <- function(modislist,
           }
         } else {
           unlink(local_filename)
-          stop("[", date(), "] Error: server seems to be down! Please retry ", 
+          stop("[", date(), "] Error: server seems to be down! Please retry ",
                "Later!")
         }
       }

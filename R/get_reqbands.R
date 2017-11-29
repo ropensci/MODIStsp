@@ -11,30 +11,25 @@
 #' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
 get_reqbands <- function(bands_indexes_matrix,
                          indexes_bandsel,
-                         indexes_bandnames, 
-                         quality_bandsel, 
+                         indexes_bandnames,
+                         quality_bandsel,
                          quality_bandnames,
-                         out_prod_folder, 
-                         file_prefix, 
-                         yy, DOY, 
-                         out_format, 
+                         out_prod_folder,
+                         file_prefix,
+                         yy, DOY,
+                         out_format,
                          reprocess) {
   # do a check to see if the product has at least one Quality Layer
   # or Possible Index
   req_bands_indexes <- bands_indexes_matrix
-  req_bands_indexes[, ] <- 0 
-  
+  req_bands_indexes[, ] <- 0
+
   if (length(indexes_bandnames) != 0 |
       length(quality_bandnames) != 0 ) {
     # build matrix similar to band_indexes, but specific for this
     # year-doy process
-    # 
-    
-    
-    # for (i in seq_along(req_bands_indexes)) {
-    #   req_bands_indexes[i] <- 0
-    # }
-    
+    #
+
     for (band in which(indexes_bandsel == 1)) {
       indexes_band <- indexes_bandnames[band]
       out_filename <- file.path(
@@ -49,7 +44,7 @@ get_reqbands <- function(bands_indexes_matrix,
         req_bands_indexes[, band] <- bands_indexes_matrix[, band]
       }
     }
-    
+
     for (band in which(quality_bandsel == 1)) {
       quality_band <- quality_bandnames[band]
       out_filename <- file.path(
@@ -57,7 +52,7 @@ get_reqbands <- function(bands_indexes_matrix,
         paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY,
                ifelse(out_format == "GTiff", ".tif", ".dat"))
       )
-      
+
       # if the QI does not exists then find out the original
       # bands required for it
       if (file.exists(out_filename) == FALSE | reprocess == "Yes") {

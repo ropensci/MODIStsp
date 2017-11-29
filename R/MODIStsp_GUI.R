@@ -39,9 +39,9 @@ MODIStsp_GUI <- function(general_opts,
                          scroll_window){
 
   #### HELPER FUNCTIONS TO AVOID REPETITIONS AND FACILITATE READING  ####
-  
-  ## Function to update the selected tiles with the intersection with the ----
-  ## bounding box
+
+  # Helper function to update the selected tiles with the intersection with ####
+  # the bounding box
 
   update_tiles <- function(bbox_out,
                            output_proj4_wid,
@@ -64,7 +64,7 @@ MODIStsp_GUI <- function(general_opts,
     svalue(end_y_wid)   <- max(d_bbox_mod_tiled$V)
   }
 
-  ## Function to update the labels in the bbox group ----
+  # Helper function to update the labels in the bbox group ----
   update_bboxlabels <- function(bbox_out,
                                 units,
                                 output_ul_east_wid,
@@ -83,7 +83,8 @@ MODIStsp_GUI <- function(general_opts,
                                            format = "f")
   }
 
-  ### Functions to get currently selected projection and its measure units ----
+  # Helper functions to get currently selected projection and its measure ----
+  # units
   get_proj <- function(sel_output_proj) {
     head(strsplit(tail(
       strsplit(sel_output_proj@projargs, "+proj=")[[1]], 1), " +")[[1]], 1)
@@ -103,7 +104,7 @@ MODIStsp_GUI <- function(general_opts,
     units
   }
 
-  ### Function to save the processing options to a JSON file ----
+  # Helper function to save the processing options to a JSON file ----
   prepare_to_save_options <- function(general_opts,
                                       gui_env,
                                       ...) {
@@ -119,7 +120,10 @@ MODIStsp_GUI <- function(general_opts,
     general_opts$prod_version <-
       prod_opt_list[[general_opts$sel_prod]][[which(vapply(
         prod_opt_list[[general_opts$sel_prod]],
-        function(x){x$v_number}, FUN.VALUE = "") == svalue(vers_wid))]]$v_number
+        function(x){
+          x$v_number
+        }
+        , FUN.VALUE = "") == svalue(vers_wid))]]$v_number
     general_opts$sensor <- svalue(sens_wid)
     #retrieve selected bands
     if (exists("temp_wid_bands", where = gui_env)) {
@@ -184,7 +188,7 @@ MODIStsp_GUI <- function(general_opts,
     # Send warning if HDF deletion selected
     if (general_opts$delete_hdf == "Yes") {
       gui_env$check_save_opts <- gconfirm(
-        strwrap("Warning! HDF files in Original MODIS folder will be 
+        strwrap("Warning! HDF files in Original MODIS folder will be
                  deleted at the end of processing! \n\n
                  Are you sure? ", width = 80),
         title = "Warning", icon = "warning"
@@ -280,17 +284,18 @@ MODIStsp_GUI <- function(general_opts,
       # asking to automatically retrieve from extent
       if (!any(required_tiles %in% selected_tiles)) {
         gui_env$check_save_opts <- gconfirm(
-          strwrap("The selected tiles do not intersect the output bounding 
+          strwrap("The selected tiles do not intersect the output bounding
                 box. \n\n Do you want to discard your choice and retrieve
-                automatically the required tiles from the bounding box?", 
-                width = 200),
+                automatically the required tiles from the bounding box?",
+                  width = 200),
           handler = function(h, ...) {
             selected_tiles       <<- required_tiles
             general_opts$start_x <<- min(d_bbox_mod_tiled$H)
             general_opts$end_x   <<- max(d_bbox_mod_tiled$H)
             general_opts$start_y <<- min(d_bbox_mod_tiled$V)
             general_opts$end_y   <<- max(d_bbox_mod_tiled$V)
-          }, title = "Warning"
+          }
+          , title = "Warning"
         )
       }
 
@@ -298,11 +303,11 @@ MODIStsp_GUI <- function(general_opts,
       if (!all(required_tiles %in% selected_tiles) & gui_env$check_save_opts) {
         gconfirm(
           message = strwrap(paste(
-            "The following tiles not currently selected are required to cover 
+            "The following tiles not currently selected are required to cover
             the output bounding box (",
-              paste(required_tiles[!(required_tiles %in% selected_tiles)],
-                    collapse = ", "),
-              "). \n\n Do you want to add them to the processing? Otherwise, 
+            paste(required_tiles[!(required_tiles %in% selected_tiles)],
+                  collapse = ", "),
+            "). \n\n Do you want to add them to the processing? Otherwise,
                nodata will be produced in the non-covered area.")),
           handler = function(h, ...) {
             selected_tiles       <<- required_tiles
@@ -310,7 +315,8 @@ MODIStsp_GUI <- function(general_opts,
             general_opts$end_x   <<- max(d_bbox_mod_tiled$H)
             general_opts$start_y <<- min(d_bbox_mod_tiled$V)
             general_opts$end_y   <<- max(d_bbox_mod_tiled$V)
-          }, title = "question"
+          }
+          , title = "question"
         )
       }
 
@@ -318,19 +324,20 @@ MODIStsp_GUI <- function(general_opts,
       if (!all(selected_tiles %in% required_tiles) & gui_env$check_save_opts) {
         gconfirm(
           message = strwrap(paste(
-            "The following tiles are not required to cover the output  
+            "The following tiles are not required to cover the output
             bounding box (",
             paste(selected_tiles[!(selected_tiles %in% required_tiles)],
-                collapse = ", "),
-          "). \n\n Do you want to remove them from processing?")
-        ),
-        handler = function(h, ...) {
-          selected_tiles       <<- required_tiles
-          general_opts$start_x <<- min(d_bbox_mod_tiled$H)
-          general_opts$end_x   <<- max(d_bbox_mod_tiled$H)
-          general_opts$start_y <<- min(d_bbox_mod_tiled$V)
-          general_opts$end_y   <<- max(d_bbox_mod_tiled$V)
-        }, title = "Warning"
+                  collapse = ", "),
+            "). \n\n Do you want to remove them from processing?")
+          ),
+          handler = function(h, ...) {
+            selected_tiles       <<- required_tiles
+            general_opts$start_x <<- min(d_bbox_mod_tiled$H)
+            general_opts$end_x   <<- max(d_bbox_mod_tiled$H)
+            general_opts$start_y <<- min(d_bbox_mod_tiled$V)
+            general_opts$end_y   <<- max(d_bbox_mod_tiled$V)
+          }
+          , title = "Warning"
         )
       }
     }
@@ -352,9 +359,9 @@ MODIStsp_GUI <- function(general_opts,
     if (general_opts$resampling == "mode" & gui_env$check_save_opts) {
       check_mode <- gconfirm(
         message = strwrap(
-          "Warning! You selected 'mode' resampling. Be aware that 'mode' 
-          resampling can give inconsistent results in areas affected by  
-          mixed high and low quality data, and fail in properly keeping  
+          "Warning! You selected 'mode' resampling. Be aware that 'mode'
+          resampling can give inconsistent results in areas affected by
+          mixed high and low quality data, and fail in properly keeping
           track of quality indicators! \n\n Do you wish to continue?",
           width = 200),
         title   = "Warning"
@@ -370,17 +377,19 @@ MODIStsp_GUI <- function(general_opts,
         gui_env$check_save_opts
     ) {
       gmessage(
-        message = strwrap("Username and password are mandatory in case of  
-                          `http` download! \n\n Please provide them or 
+        message = strwrap("Username and password are mandatory in case of
+                          `http` download! \n\n Please provide them or
                            choose 'ftp' download.", width = 200),
         title   = "Warning")
       gui_env$check_save_opts <- FALSE
     }
 
     return(general_opts)
-  } # END save options function
+  }
+  # END save options function
 
-  ## load options from JSON and set values of the GUI accordingly ----
+
+  # load options from JSON and set values of the GUI accordingly ----
   load_options <- function(choice) {
     # load file and reset all widgets to values found in the loaded file
     general_opts     <- RJSONIO::fromJSON(choice)
@@ -482,7 +491,8 @@ MODIStsp_GUI <- function(general_opts,
   mod_prod_cat <- as.data.frame(
     t(vapply(prod_opt_list, function(x){
       c(x[[1]]$cat01, x[[1]]$cat02)
-    }, FUN.VALUE = character(2)))
+    }
+    , FUN.VALUE = character(2)))
   )
   names(mod_prod_cat) <- c("cat01", "cat02")
   mod_prod_cat$cat    <- apply(mod_prod_cat, 1, paste, collapse = " - ")
@@ -509,7 +519,7 @@ MODIStsp_GUI <- function(general_opts,
   #   Initialize Widgets for product selection and bands selection          ####
 
   satprod_frame <- gframe(
-    text       = strwrap("<span foreground='red' size='x-large'> 
+    text       = strwrap("<span foreground='red' size='x-large'>
                          MODIS Product, Platform and Layers selection
                          </span>"),
     markup     = TRUE,
@@ -636,7 +646,7 @@ MODIStsp_GUI <- function(general_opts,
   sens_wid         <- gcombobox(items     = c("Terra"),
                                 container = satprod2_group,
                                 text      = "Select Platform", selected = 1)
-  
+
   if (sel_prodopts[[general_opts$prod_version]]$combined == 1) {
     enabled(sens_wid) <- FALSE
   } else {
@@ -653,7 +663,8 @@ MODIStsp_GUI <- function(general_opts,
   vers_wid   <- gcombobox(
     items     = vapply(sel_prodopts, function(x){
       x[["v_number"]]
-    }, FUN.VALUE = ""),
+    }
+    , FUN.VALUE = ""),
     container = satprod2_group, text = "Select Version",
     selected  = match(general_opts$prod_version, names(sel_prodopts)),
     handler   = function(h, ...) {
@@ -787,8 +798,8 @@ MODIStsp_GUI <- function(general_opts,
         )
         glabel(text = "", container = cbox_indexes)
 
-        ##  ....................................................................
-        ##  Here we create the sub-child widget for creation of custom      ####
+        ##  .................................................................. #
+        ##  Here we create the sub child widget for creation of custom      ####
         ##  indexes. The `MODIStsp_addindex` function is used to spawn a modal
         ##  widget for indexes creation
 
@@ -942,7 +953,7 @@ MODIStsp_GUI <- function(general_opts,
           It is necessary that aria2c is installed and that the binary \n,
           executable is in the user system PATH.\n,
           (See https://aria2.github.io)", width = 80
-          ), 
+        ),
         editable  = FALSE,
         container = help_box
       )
@@ -1014,12 +1025,12 @@ MODIStsp_GUI <- function(general_opts,
                                height     = 40)
       help_mess_lab <- glabel(
         text = strwrap(
-          "- `Full`: all the available images between the starting and the 
+          "- `Full`: all the available images between the starting and the
           ending dates will be downloaded;\n\n
-          - `Seasonal`: only the images included in the season will be 
-          downloaded (e.g: if the starting date is 2005-12-01 and the  
-          date is 2010-02-31, the images of December, January and February 
-          from 2005 to 2010 will be processed (excluding 2005-01, 2005-02 
+          - `Seasonal`: only the images included in the season will be
+          downloaded (e.g: if the starting date is 2005-12-01 and the
+          date is 2010-02-31, the images of December, January and February
+          from 2005 to 2010 will be processed (excluding 2005-01, 2005-02
           and 2010-12 - ).", width = 80
         ),
         editable  = FALSE,
@@ -1180,7 +1191,8 @@ MODIStsp_GUI <- function(general_opts,
         message("[", date(), "]", " Retrieving Extent, please wait... DONE!")
         dispose(wait_window)
       }
-    }, container = output_ext_group
+    }
+    , container = output_ext_group
   )
 
   if (svalue(output_ext_wid) != "Full Tiles Extent") {
@@ -1226,7 +1238,7 @@ MODIStsp_GUI <- function(general_opts,
     handler = function(h, ...) {
       grDevices::dev.new(width = 8, height = 4.8, noRStudioGD = TRUE)
       raster::plot(raster::raster(file.path(MODIStsp_dir,
-                                            "/ExtData/MODIS_Tiles.gif")))
+                                            "ExtData/MODIS_Tiles.gif")))
     },
     container = x_group
   )
@@ -1345,7 +1357,6 @@ MODIStsp_GUI <- function(general_opts,
     handler   = function(h, ...) {
       current_sel       <- svalue(proj_wid)
       gui_env$old_proj4 <- svalue(output_proj4_wid)
-
       if (current_sel != "User Defined") {
         enabled(output_proj4_wid) <- FALSE
         enabled(change_proj_but)  <- FALSE
@@ -1396,7 +1407,7 @@ MODIStsp_GUI <- function(general_opts,
           if (class(sel_output_proj) == "try-error") {
             gmessage(
               message = sel_output_proj,
-              title   = strwrap("Proj4 String Not Recognized - Keeping the old 
+              title   = strwrap("Proj4 String Not Recognized - Keeping the old
                                 output projection")
             )
           } else {
@@ -1687,9 +1698,9 @@ MODIStsp_GUI <- function(general_opts,
       help_mess_lab <- glabel(
         text = strwrap(
           "`No`: original MODIS nodata values are maintained; \n\n
-          `Yes`: nodata values are replaced with default values equal 
-          to the maximum possible value of the data type of the 
-          output (e.g. 255 for unsigned 8-bit integer, 32767 for signed 
+          `Yes`: nodata values are replaced with default values equal
+          to the maximum possible value of the data type of the
+          output (e.g. 255 for unsigned 8-bit integer, 32767 for signed
           16-bit integer).", width = 80
         ),
         editable  = FALSE,
@@ -1731,7 +1742,7 @@ MODIStsp_GUI <- function(general_opts,
         text = strwrap(
           "NASA provides outputs as integer values, indicating a potential
           scale factor and/or an offset to apply in order to obtain values
-          in the indicated measure units. \n\n 
+          in the indicated measure units. \n\n
           If `No`: output files are left as provided by NASA, and
           spectral indices are produced as integer values with a 10000
           scale factor.\n\n
@@ -1883,7 +1894,7 @@ MODIStsp_GUI <- function(general_opts,
     handler    = function(h, ...) {
       gui_env$start <- FALSE
       dispose(main_win)
-      
+
     }
   )
   addSpring(but_group)
@@ -1908,7 +1919,7 @@ MODIStsp_GUI <- function(general_opts,
         } else {
           if (length(grep("\\.json$", choice)) == 0) {
             continue_load <- gconfirm(
-              message = strwrap("The selected file does not seem to be a 
+              message = strwrap("The selected file does not seem to be a
                                 JSON file. \n\n
                                 Do you want to continue?"),
               title = "Warning",
@@ -1947,7 +1958,7 @@ MODIStsp_GUI <- function(general_opts,
       } else {
         if (length(grep("\\.json$", choice)) == 0) {
           continue_save <- gconfirm(
-            message = strwrap("The selected file does not seem to be a 
+            message = strwrap("The selected file does not seem to be a
                                JSON file. \n\n
                                Do you want to continue?"),
             title = "Warning",
@@ -1977,7 +1988,7 @@ MODIStsp_GUI <- function(general_opts,
 
   ## show the selection GUI
   visible(main_win, set = TRUE)
-  
+
   return(gui_env$start)
 
 }  # END OF MAIN FUNCTION
