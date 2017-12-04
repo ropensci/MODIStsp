@@ -14,13 +14,16 @@ If "seasonal", only the images included in the season are downloaded
 the images of December, January and February from 2005 to 2010 - excluding
 2005-01, 2005-02 and 2010-12 - are downloaded).}
 
-\item{yy}{year for which the processing dates need to be identified}
+\item{yy}{\code{numeric} year for which the processing dates need to be identified}
 
-\item{start_date}{\code{character} Start date for images download and preprocessing
-(yyyy.mm.dd).}
+\item{start_year}{\code{numeric} start year of current \code{MODIStsp_process} run}
 
-\item{end_date}{\code{character} End date for images download and preprocessing
-(yyyy.mm.dd).}
+\item{end_year}{\code{numeric} end year of current \code{MODIStsp_process} run.}
+
+\item{start_date}{\code{character`` Start date for images download and preprocessing (yyyy.mm.dd) of current}MODIStsp_process` run.}
+
+\item{end_date}{\code{character} Start date for images download and preprocessing
+(yyyy.mm.dd) of current \code{MODIStsp_process} run.}
 }
 \value{
 OUTPUT_DESCRIPTION
@@ -29,9 +32,6 @@ OUTPUT_DESCRIPTION
 helper function needed to identify the ranges of dates to
 be processed for a given year as a function of \code{download_range} selection
 and starting/ending dates and years
-}
-\details{
-DETAILS
 }
 \author{
 Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}

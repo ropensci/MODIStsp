@@ -48,15 +48,17 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
                                       desktop_shortcut = TRUE,
                                       sudo             = FALSE) {
 
+  #nocov start (no coverage test since this requires interactive execution)
+  
   MODIStsp_dir <- system.file(package = "MODIStsp")
   running_os   <- Sys.info()[["sysname"]]
 
   if (running_os == "Linux") {
     if (is.na(bin_dir)) {
-      bin_dir <- "/usr/bin/MODIStsp"
+      bin_dir <- "usr/bin/MODIStsp"
     }
     if (is.na(desktop_dir)) {
-      desktop_dir <- "/usr/share/applications"
+      desktop_dir <- "usr/share/applications"
     }
     # Create symbolic link to a directory in the path
     if (sudo) {
@@ -101,7 +103,7 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
         "AppData/Roaming/Microsoft/Windows/Start Menu/Programs/MODIStsp"
       )
     }
-    if (!file.exists(file.path(bin_dir, "/MODIStsp.lnk"))) {
+    if (!file.exists(file.path(bin_dir, "MODIStsp.lnk"))) {
       dir.create(bin_dir, recursive = TRUE, showWarnings = FALSE)
       shell("set create_script=\"%TEMP%\\create_MODIStsp_shortcut.vbs\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")#nolint
       shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")#nolint
@@ -120,7 +122,7 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
 
     # Create desktop shortcut
     if (desktop_shortcut) {
-      if (!file.exists(file.path(desktop_dir, "/MODIStsp"))) {
+      if (!file.exists(file.path(desktop_dir, "MODIStsp"))) {
         if (is.na(desktop_dir)) {
           desktop_dir <- file.path(Sys.getenv("USERPROFILE"), "Desktop")
         }
@@ -140,4 +142,5 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
       } else warning("Desktop shortcut already exists!")
     }
   }
-}
+  #nocov end
+} 

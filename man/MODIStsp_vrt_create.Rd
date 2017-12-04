@@ -4,34 +4,54 @@
 \alias{MODIStsp_vrt_create}
 \title{Create MODIStsp virtual files}
 \usage{
-MODIStsp_vrt_create(sensor, out_prod_folder, bandnames, indexes_bandnames,
-  quality_bandnames, bandsel, indexes_bandsel, quality_bandsel, file_prefixes,
-  sens_sel, ts_format, nodata_value, out_format, rts)
+MODIStsp_vrt_create(sensor, out_prod_folder, bandnames, bandsel, nodata_out,
+  indexes_bandnames, indexes_bandsel, indexes_nodata_out, quality_bandnames,
+  quality_bandsel, quality_nodata_out, file_prefixes, ts_format, out_format,
+  rts)
 }
 \arguments{
+\item{sensor}{\code{character ["Terra"| "Aqua" | "Both"]} MODIS platform to be considered.
+(Ignored for MCD* products).}
+
 \item{out_prod_folder}{\code{character} Main output folder.}
+
+\item{bandnames}{\code{character array} Abbreviated Names of original layers of the
+selected product (used to build output file names).}
+
+\item{bandsel}{\code{integer 0/1 array} of length equal to number of original
+layers of the selected product set to 1 for bands to be processed.}
+
+\item{nodata_out}{\code{numeric array} Target NoData values of MODIS original layers
+(Ignored if nodata_change == FALSE).}
+
+\item{indexes_bandnames}{\code{character array} Abbreviated Names of SIs available
+for the selected product (used to build output file names of SIs).}
+
+\item{indexes_bandsel}{\code{integer 0/1 array} array of length equal to the number
+of Spectral Indexes available for the product (standard + user-provided),
+set to  1 for indexes to be processed.}
+
+\item{indexes_nodata_out}{\code{numeric array} NoData values to be used for SIs}
+
+\item{quality_bandnames}{\code{character array} Abbreviated Names of Quality
+Indicators available for the selected product (used to build output file
+names of QIs).}
+
+\item{quality_bandsel}{\code{integer 0|1 array} array of length equal to number
+of available QIs, set to  1 for indexes to be processed.}
+
+\item{quality_nodata_out}{\code{integer} Always set to 255.}
 
 \item{file_prefixes}{\code{character array (2)} file_prefixes for TERRA and AQUA -
 used to identify the files corresponding to each sensor}
 
-\item{sens_sel}{\code{character ["Aqua", "Terra", "Mixed"]} Sensor for which the
-virtual files are to be created. If "Mixed" and both TERRA and AQUA
-images are available, a "mixed" virtual file comprising data from both sensors
-ordered on DOY base is also created.}
-
 \item{ts_format}{\code{character ["ENVI" | "GDAL" | "Both"]} Required output format
 for virtual file.}
-
-\item{nodata_value}{\code{character} NoData value to be used for vrt files
-(equal to NoData value of inputs)}
 
 \item{out_format}{\code{character ["ENVI" | "GTiff"]} Format of images used as
 "input" for the vrt and contained in out_prod_folder/band folders.}
 
 \item{rts}{\code{character ["Yes" | "No"]} If Yes, create "R" RasterStacks time series}
-
-\item{meta_band}{\code{character} Name of the band (or SI, or QI) for which the
-virtual file has to be created.}
 }
 \value{
 NULL -

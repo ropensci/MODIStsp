@@ -6,21 +6,14 @@
 #'  it was a single physical file.
 #'  Created virtual files are stored in the "Time Series" subfolder of `out_prod_folder``
 #' @param out_prod_folder `character` Main output folder.
-#' @param meta_band `character` Name of the band (or SI, or QI) for which the
-#'  virtual file has to be created.
 #' @param file_prefixes `character array (2)` file_prefixes for TERRA and AQUA -
 #'  used to identify the files corresponding to each sensor
-#' @param sens_sel `character ["Aqua", "Terra", "Mixed"]` Sensor for which the
-#'  virtual files are to be created. If "Mixed" and both TERRA and AQUA
-#' images are available, a "mixed" virtual file comprising data from both sensors
-#' ordered on DOY base is also created.
 #' @param ts_format `character ["ENVI" | "GDAL" | "Both"]` Required output format
 #'  for virtual file.
-#' @param nodata_value `character` NoData value to be used for vrt files
-#'  (equal to NoData value of inputs)
 #' @param out_format `character ["ENVI" | "GTiff"]` Format of images used as
 #'  "input" for the vrt and contained in out_prod_folder/band folders.
 #' @param rts `character ["Yes" | "No"]` If Yes, create "R" RasterStacks time series
+#' @inheritParams MODIStsp_process
 #' @return NULL -
 #'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -31,18 +24,17 @@
 #' @importFrom stringr str_sub
 #' @importFrom gdalUtils gdalbuildvrt
 #'
-MODIStsp_vrt_create <- function(sensor,
-                                out_prod_folder,
-                                bandnames, indexes_bandnames, quality_bandnames,
-                                bandsel, indexes_bandsel, quality_bandsel,
-                                file_prefixes,
-                                sens_sel,  ts_format, nodata_value,
-                                out_format, rts) {
-
-  if (sensor[1] == "Both") {
+MODIStsp_vrt_create <- function(
+  sensor,
+  out_prod_folder,
+  bandnames, bandsel, nodata_out, 
+  indexes_bandnames, indexes_bandsel, indexes_nodata_out,
+  quality_bandnames, quality_bandsel, quality_nodata_out,
+  file_prefixes,
+  ts_format, out_format, rts) {
+  
+  if (length(sensor) == 2) {
     senslist <- c("Terra", "Aqua", "Mixed")
-  } else {
-    senslist <- sensor
   }
 
   for (sens_sel in senslist) {
@@ -65,9 +57,15 @@ MODIStsp_vrt_create <- function(sensor,
     meta_bands <- c(bandnames[which(bandsel == 1)],
                     indexes_bandnames[which(indexes_bandsel == 1)],
                     quality_bandnames[which(quality_bandsel == 1)])
+    
+    nodata_vals <- c(nodata_out[which(bandsel == 1)], 
+                     indexes_nodata_out[which(indexes_bandsel == 1)], 
+                     quality_nodata_out[which(quality_bandsel == 1)])
 
-    for (meta_band in meta_bands) {
+    for (mb in seq_along(meta_bands)) {
 
+      meta_band    <- meta_bands[mb]
+      nodata_value <- nodata_vals[mb]
       message("[", date(), "] Creating Virtual Files and R time series for ",
               "layer ", meta_band)
 
@@ -108,8 +106,8 @@ MODIStsp_vrt_create <- function(sensor,
       # of META files for the mixed case is skipped !
 
       skip_flag <- 0
-      if ((sens_sel == "Mixed") &
-           ((length(grep(file_prefixes[["Aqua"]], out_meta_files)) == 0) |
+      if ( (sens_sel == "Mixed") &
+           ( (length(grep(file_prefixes[["Aqua"]], out_meta_files)) == 0) |
              (length(grep(file_prefixes[["Terra"]], out_meta_files)) == 0))) {
         skip_flag <- 1
       }
@@ -218,7 +216,7 @@ MODIStsp_vrt_create <- function(sensor,
                          paste(as.numeric(elapsed), collapse = ","), "}"),
                        fileConn_meta_hdr)
             # Data Ignore Value
-            writeLines(c("data ignore value = ", nodata_value ),
+            writeLines(c("data ignore value = ", nodata_value),
                        fileConn_meta_hdr, sep = " ")
             writeLines("", fileConn_meta_hdr)		# Dummy
             close(fileConn_meta_hdr)

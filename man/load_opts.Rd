@@ -4,13 +4,11 @@
 \alias{load_opts}
 \title{Load MODIStsp processing options}
 \usage{
-load_opts(previous_jsfile, mod_proj_str)
+load_opts(opts_jsfile)
 }
 \arguments{
-\item{previous_jsfile}{Expected file name of the JSON file containing
+\item{opts_jsfile}{Expected file name of the JSON file containing
 processing options}
-
-\item{mod_proj_str}{proj4 string defining MODIS standard sinusoidal projection}
 }
 \value{
 \code{data frame} general_opts, containing the processing options
@@ -18,9 +16,9 @@ retrieved from the JSON file (or the defaults set at first execution).
 See also \code{MODIStsp_GUI} and \code{MODIStsp_process}
 }
 \description{
-Load MODIStsp processing option from \code{previous_jsfile} if
+Load MODIStsp processing option from \code{opts_jsfile} if
 it already exist, otherwise initialise processing options to default and
-save them to \code{previous_jsfile}. Send warnings if options file is from an
+save them to \code{opts_jsfile}. Send warnings if options file is from an
 old version
 }
 \note{

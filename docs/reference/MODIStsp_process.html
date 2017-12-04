@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp_process — MODIStsp_process • MODIStsp</title>
+<title>MODIStsp_process � MODIStsp_process • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -452,7 +452,8 @@ computation);</p></li>
 <li><p>Creates virtual files of the processed time series.</p></li>
 </ol>
     <p>Reprojection and resize is dealt with by accessing gdal routines through the
-<code>gdaUtils</code> package.
+<a href='https://cran.r-project.org/web/packages/gdalUtils/index.html'>gdalUtils</a>
+package.
 Extraction of bitfields from Quality layers is done though bitwise computation
 Checks are done in order to not re-download already existing HDF images, and not
 reprocess already processed dates (if the user did not specify that)</p>
@@ -461,8 +462,7 @@ reprocess already processed dates (if the user did not specify that)</p>
 
     <p>Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
 development of this function (<a href='http://r-gis.net/?q=ModisDownload'>ModisDownload</a>;
-Download_and_resampling_of_MODIS_images
-(http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))</p>
+<a href='http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images'>Download_and_resampling_of_MODIS_images</a>)</p>
 <p>License: GPL 3.0</p>
     
 

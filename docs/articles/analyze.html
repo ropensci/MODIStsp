@@ -127,7 +127,7 @@
 <p>Any single-date image can be accessed by simply opening it with a <code>raster</code> command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
 modistsp_file &lt;-<span class="st"> "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"</span>
-my_raster &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(modistsp_file)</code></pre></div>
+my_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
 <p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_path/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
 indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))</code></pre></div>

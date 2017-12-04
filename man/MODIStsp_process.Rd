@@ -200,7 +200,8 @@ computation);
 }
 
 Reprojection and resize is dealt with by accessing gdal routines through the
-\code{\link{gdaUtils}} package.
+\href{https://cran.r-project.org/web/packages/gdalUtils/index.html}{gdalUtils}
+package.
 Extraction of bitfields from Quality layers is done though bitwise computation
 Checks are done in order to not re-download already existing HDF images, and not
 reprocess already processed dates (if the user did not specify that)
@@ -208,8 +209,7 @@ reprocess already processed dates (if the user did not specify that)
 \note{
 Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
 development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
-\link{Download_and_resampling_of_MODIS_images}
-(http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
+\href{http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
 
 License: GPL 3.0
 }

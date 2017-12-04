@@ -9,7 +9,7 @@ get_reqbands(bands_indexes_matrix, indexes_bandsel, indexes_bandnames,
   out_format, reprocess)
 }
 \arguments{
-\item{bands_indexes_matrix}{PARAM_DESCRIPTION}
+\item{bands_indexes_matrix}{\code{matrix} built by \code{set_bandind_matrix}}
 
 \item{indexes_bandsel}{\code{integer 0/1 array} array of length equal to the number
 of Spectral Indexes available for the product (standard + user-provided),
@@ -25,13 +25,17 @@ of available QIs, set to  1 for indexes to be processed.}
 Indicators available for the selected product (used to build output file
 names of QIs).}
 
-\item{out_prod_folder}{PARAM_DESCRIPTION}
+\item{out_prod_folder}{\code{character} Main folder where the MODIStsp processed
+raster will be stored. Used to check if a given processed image already exists.}
 
-\item{file_prefix}{PARAM_DESCRIPTION}
+\item{file_prefix}{File prefix corresponding to the MODIS product being
+processed. Used to check if a given processed image already exists.}
 
-\item{yy}{PARAM_DESCRIPTION}
+\item{yy}{Year corresponding to the image being processed. Used to check if
+a given processed image already exists.}
 
-\item{DOY}{PARAM_DESCRIPTION}
+\item{DOY}{DOY corresponding to the image being processed. Used to check if
+a given processed image already exists.. Used to check if a given processed image already exists.}
 
 \item{out_format}{\code{character ["ENVI" | "GTiff"]} Desired output format.}
 
@@ -42,7 +46,11 @@ existing dates.}
 req_bands_indexes
 }
 \description{
-FUNCTION_DESCRIPTION
+Helper function used in MODIStsp_process to identify which
+MODIS hdf layers are required for the process at end. The required layers
+include all MODIS original layers selected by the user, plus all those
+required to compute the Spectral Indexes and Quality Indicators selected
+by the user
 }
 \author{
 Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}

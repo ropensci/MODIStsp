@@ -12,11 +12,12 @@
 check_usearia <- function(use_aria, gui, mess) {
   # Check if "aria2c" requested. If so, verify that the executable is found
   # on the path. If NOT revert to "standard" download using httr::GET
-
+  
   if (use_aria) {
     test_aria <- Sys.which("aria2c")
     if (test_aria == "") {
       if (gui) {
+        #nocov start
         noaria <- gconfirm(
           strwrap("aria2c was not found! It is either not installed or not
                     found on your path! \n Do you want to proceed with standard
@@ -32,6 +33,7 @@ check_usearia <- function(use_aria, gui, mess) {
           stop("aria2c was not found! Ensure that aria2c is installed and in ",
                "your path!\n (See http://aria2.github.io).\n Aborting!")
         }
+        #nocov end
       } else {
         message("aria2c was not found! It is either not installed or not on ",
                 "your path! \nContinuing with normal download... ")

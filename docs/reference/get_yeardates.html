@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>identify dates to be processed for a year — get_yeardates • MODIStsp</title>
+<title>identify dates to be processed for a year � get_yeardates • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -163,27 +163,30 @@ the images of December, January and February from 2005 to 2010 - excluding
     </tr>
     <tr>
       <th>yy</th>
-      <td><p>year for which the processing dates need to be identified</p></td>
+      <td><p><code>numeric</code> year for which the processing dates need to be identified</p></td>
+    </tr>
+    <tr>
+      <th>start_year</th>
+      <td><p><code>numeric</code> start year of current <code>MODIStsp_process</code> run</p></td>
+    </tr>
+    <tr>
+      <th>end_year</th>
+      <td><p><code>numeric</code> end year of current <code>MODIStsp_process</code> run.</p></td>
     </tr>
     <tr>
       <th>start_date</th>
-      <td><p><code>character</code> Start date for images download and preprocessing
-(yyyy.mm.dd).</p></td>
+      <td><p><code>character`` Start date for images download and preprocessing (yyyy.mm.dd) of current</code>MODIStsp_process` run.</p></td>
     </tr>
     <tr>
       <th>end_date</th>
-      <td><p><code>character</code> End date for images download and preprocessing
-(yyyy.mm.dd).</p></td>
+      <td><p><code>character</code> Start date for images download and preprocessing
+(yyyy.mm.dd) of current <code>MODIStsp_process</code> run.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>OUTPUT_DESCRIPTION</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>DETAILS</p>
     
 
   </div>
@@ -193,8 +196,6 @@ the images of December, January and February from 2005 to 2010 - excluding
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
           </ul>
 
     <h2>Author</h2>

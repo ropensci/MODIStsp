@@ -1,4 +1,28 @@
-context("Test 1: basic processing of bands and quality indicators")
+context("MODIStsp Test 0: Problems on inputs")
+testthat::test_that(
+  "Tests on MODIStsp", {
+    
+    library(testthat)
+    
+    # skip("Skip tests - since they rely on download they are only run locally")
+    # skip_on_cran()
+    # skip_on_travis()
+    # 
+
+    # no options file
+    expect_error(MODIStsp(gui = FALSE))
+    # wrong path or non-existing options_file
+    expect_error(MODIStsp(options_file = "", gui = FALSE))
+    # provided options file is not a MODIStsp json options file
+    expect_error(MODIStsp(
+      options_file = system.file("ExtData", "MODIS_Tiles.gif",
+                                 package = "MODIStsp"),
+      gui = FALSE))
+  })
+
+
+context("MODIStsp Test 1: Basic processing on bands and quality 
+        indicators")
 testthat::test_that(
   "Tests on MODIStsp", {
 
@@ -39,13 +63,13 @@ testthat::test_that(
 #   The test works on the same local product of test 1, performing geometric
 #   operations (clipping on the extent of Avalon peninsula and resampling
 #   resolution to 1000m). Output files are in ENVI format.
-context("Test 2: geometric operations")
+context("MODIStsp Test 2: Geometric operations")
 testthat::test_that(
   "Tests on MODIStsp", {
 
     MODIStsp(test = 2)
     out_files_dat  <- list.files(file.path(
-      tempdir(),"Surf_Temp_8Days_GridSin_v6"),
+      tempdir(), "Surf_Temp_8Days_GridSin_v6"),
       pattern = ".dat$", recursive = TRUE, full.names = TRUE)
 
     # same checks as before on file size and raster stats
@@ -65,7 +89,7 @@ testthat::test_that(
       sp::proj4string(r),
       "+proj=utm +zone=22 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0" #nolint
     )
-    expect_equal(raster::res(r), c(1000,1000))
+    expect_equal(raster::res(r), c(1000, 1000))
   })
 
 ### Test 3: test of the creation of spectral indices and time series. ####
@@ -76,8 +100,8 @@ testthat::test_that(
 #   mode), and processing options for time series creation are applied.
 #   Output files are in GeoTiff compressed format, with vrt and ENVI
 #   virtual time series.
-context("Test 3: Computation of spectral indices and creation of time
-            series")
+context("MODIStsp Test 3: Computation of spectral indices and 
+            creation of time series")
 testthat::test_that(
   "Tests on MODIStsp", {
 
@@ -97,7 +121,7 @@ testthat::test_that(
                           197.0045406))
 
     out_files_vrt <- list.files(
-      file.path(tempdir(),"Surf_Ref_8Days_500m_v6"),
+      file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
       pattern = ".vrt$", recursive = TRUE, full.names = TRUE)
     file_sizes_vrt <- file.info(out_files_vrt)$size
     expect_equal(length(out_files_vrt), 5)
@@ -121,12 +145,12 @@ testthat::test_that(
 
 # if (interactive()) {
 
-  context("Test 4: HTTP download from NSIDC and seasonal download")
+  context("MODIStsp Test 4: HTTP download from NSIDC (seasonal)")
   testthat::test_that(
     "Tests on MODIStsp", {
       MODIStsp(test = 4)
       out_files_dat <- list.files(
-        file.path(tempdir(),"Snow_cov_mnt_005dg_v6"),
+        file.path(tempdir(), "Snow_cov_mnt_005dg_v6"),
         pattern = "[0-9].dat$", recursive = TRUE, full.names = TRUE)
       file_sizes_dat <- file.info(out_files_dat)$size
       # checking only the .dat because depending on file system the
@@ -142,7 +166,7 @@ testthat::test_that(
                    tolerance = 0.000001)
 
       out_files_rts <- list.files(
-        file.path(tempdir(),"Surf_Ref_8Days_500m_v6"),
+        file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
         pattern = ".RData$", recursive = TRUE, full.names = TRUE)
 
       #check that rts files are properly created
@@ -154,7 +178,7 @@ testthat::test_that(
       expect_equal(names(r), "MOD09A1_GVMI_2017_193")
 
       # check correct resampling and reprojection
-      expect_equal(raster::res(r), c(250,250))
+      expect_equal(raster::res(r), c(250, 250))
       expect_equal(
         sp::proj4string(r),
         "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"#nolint
@@ -173,11 +197,11 @@ testthat::test_that(
 #   `R CMD check` and must be run manually or using `devtools::test()`
 
 # if (interactive()) {
-  context("Test 5: HTTP download from USGS, resize and reproject")
+  context("MODIStsp Test 5: HTTP download from USGS, resize and reproject")
   testthat::test_that(
     "Tests on MODIStsp", {
       MODIStsp(test = 5)
-      out_files_tif <- list.files(file.path(tempdir(),"Albedo_Daily_500m_v6"),
+      out_files_tif <- list.files(file.path(tempdir(), "Albedo_Daily_500m_v6"),
                                   pattern = "tif$", recursive = TRUE,
                                   full.names = TRUE)
       file_sizes_tif <- file.info(out_files_tif)$size
@@ -194,21 +218,21 @@ testthat::test_that(
 #   message("(skipped)\n")
 # }
 
-### Test 6: test of FTP download and union of MODIS tiles               ####
-#   This test downloads four MCD LAI products (MCD15A2H) from FTP and mosaic
+### Test 6: test of FTP download and mosaicing of MODIS tiles               ####
+#   This test downloads four MCD LAI products (MCD15A2H) from FTP and mosaics
 #   them and crop to the ouput extent (Minorca island).
 #   After reprojection in geographic coordinates, output files are exported
 #   as GeoTiff (scaling output values) and vrt time series are created.
 
-context("Test 6: FTP download and union of MODIS tiles")
+context("MODIStsp Test 6: FTP download and mosaicing of MODIS tiles")
 testthat::test_that(
   "Tests on MODIStsp", {
     expect_warning(MODIStsp(test = 6))
-    out_files_dat <- list.files(file.path(tempdir(),"LAI_8Days_500m_v6"),
+    out_files_dat <- list.files(file.path(tempdir(), "LAI_8Days_500m_v6"),
                                 pattern = ".tif$", recursive = TRUE,
                                 full.names = TRUE)
     file_sizes_dat <- file.info(out_files_dat)$size
-    expect_equal(file_sizes_dat, c(1911, 1894, 840, 840))
+    expect_equal(file_sizes_dat, c(1633, 1611, 801, 801))
     means <- unlist(
       lapply(out_files_dat,
              FUN = function(x) {
@@ -222,5 +246,9 @@ testthat::test_that(
       "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
     )
     expect_equal(raster::res(r), c(0.01, 0.01))
+    # re-run with same parameterization. Since Reprocess = "No", the 
+    # auto-skipping of already processed dates kicks-in in this case, leading
+    # the process to be very quick (Only MODIStso_vrt_create need to run. )
+    expect_warning(MODIStsp(test = 6))
   }
 )

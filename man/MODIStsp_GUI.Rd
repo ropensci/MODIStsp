@@ -4,7 +4,7 @@
 \alias{MODIStsp_GUI}
 \title{build and manage the MODIStsp GUI}
 \usage{
-MODIStsp_GUI(general_opts, prod_opt_list, MODIStsp_dir, previous_jsfile,
+MODIStsp_GUI(general_opts, prod_opt_list, MODIStsp_dir, opt_jsfile,
   prodopts_file, scroll_window)
 }
 \arguments{
@@ -16,8 +16,9 @@ MODIStsp_ProdOpts.xml file)}
 
 \item{MODIStsp_dir}{main folder of the package}
 
-\item{previous_jsfile}{json parameters file containing data of the last
-execution}
+\item{opt_jsfile}{json parameters file containing data of the last
+execution, or the ones contained in the \code{options_file} eventully passed to
+\code{MODIStsp}}
 
 \item{prodopts_file}{rdata file containing info about MODIS products}
 

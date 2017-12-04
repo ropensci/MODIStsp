@@ -72,10 +72,12 @@ get_mod_filenames <- function(http,
       # retry
       if (response$status_code != 200) {
         if (gui) {
+          #nocov start
           confirm <- gWidgets::gconfirm(
             "http server seems to be down! Do you want to retry?",
             icon = "question")
           if (!confirm) stop("You selected to abort processing. Goodbye!")
+          #nocov end
         } else {
           stop("[", date(), "] Error: http server seems to be down! ",
                   "Switching to ftp!")
@@ -116,10 +118,12 @@ get_mod_filenames <- function(http,
       # retry
       if (response$status_code != 226) {
         if (gui) {
+          #nocov start
           confirm <- gWidgets::gconfirm(
             "ftp server seems to be down! Do you want to retry?",
             icon = "question")
           if (!confirm) stop("You selected to abort processing. Goodbye!")
+          #nocov end
         } else {
           stop("[", date(), "] Error: ftp server seems to be down! ",
                "Aborting! Please try again later!")

@@ -25,14 +25,17 @@
 #' @param date_name `character` Date of acquisition of the images to be downloaded.
 #' @param gui `logical` Indicates if on an interactive or non-interactive execution
 #'  (only influences where the log messages are sent).
+#' @param mess_lab pointer to the gwidget used to issue processing messages in 
+#'  when gui = TRUE.
 #' @inheritParams MODIStsp_process
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_download
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
-#' @importFrom XML xmlToList xmlParse
-#' @importFrom httr content GET authenticate progress timeout
+#' @importFrom httr RETRY authenticate content GET progress write_disk
+#' @importFrom xml2 as_list
 #' @importFrom gWidgets gconfirm
+#' @importFrom RCurl getURL
 
 MODIStsp_download <- function(modislist,
                               out_folder_mod,
@@ -48,7 +51,8 @@ MODIStsp_download <- function(modislist,
                               password,
                               sens_sel,
                               date_name,
-                              gui) {
+                              gui, 
+                              mess_lab) {
 
   # Cycle on the different files to download for the current date
   for (file in seq_along(modislist)) {
@@ -102,7 +106,8 @@ MODIStsp_download <- function(modislist,
         } else {
           # If the remote xml file was not accessible, n_retries times,
           # retry or abort
-          if (gui) {
+          if (gui) { 
+            #nocov start
             confirm <- gWidgets::gconfirm(
               paste0(download_server,
                      " server seems to be down! Do you want to retry?"),
@@ -110,6 +115,7 @@ MODIStsp_download <- function(modislist,
             if (!confirm) {
               stop("You selected to quit! Goodbye!")
             }
+            #nocov end
           } else {
             stop("[", date(), "] Error: server seems to be down! Please retry ",
                  "Later!")
@@ -140,7 +146,8 @@ MODIStsp_download <- function(modislist,
           # If the remote xml file was not accessible n_retries times,
           # retry or abort
           if (attempt == n_retries) {
-            if (gui) {
+            if (gui) { 
+              #nocov start
               confirm <- gWidgets::gconfirm(
                 paste0(download_server,
                        " server seems to be down! Do you want to retry?"),
@@ -150,6 +157,7 @@ MODIStsp_download <- function(modislist,
               } else {
                 stop("You selected to quit! Goodbye!")
               }
+              #nocov end
             } else {
               stop("[", date(), "] Error: server seems to be down! Please retry ", #nolint
                    "later!")
@@ -170,18 +178,11 @@ MODIStsp_download <- function(modislist,
     if (!file.exists(local_filename) | local_filesize != remote_filesize) {
 
       # update messages
-      mess_text <- paste("Downloading", sens_sel, "Files for date",
+      mess_text <- paste("Downloading", sens_sel, "Files for date:",
                          date_name, ":", which(modislist == modisname),
-                         "of", length(modislist))
+                         "of: ", length(modislist))
       # Update progress window
-      if (gui) {
-        svalue(mess_lab) <- paste("---", mess_text, "---")
-        Sys.sleep(0.05)
-        message("[", date(), "] ", mess_text)
-      } else {
-        message("[", date(), "] ", mess_text)
-      }
-
+      process_message(mess_text, gui, mess_lab)
       success <- FALSE
       attempt <- 0
       #  _______________________________________________________________________
@@ -243,7 +244,9 @@ MODIStsp_download <- function(modislist,
           if (download_server == "http" & use_aria == FALSE) {
 
             if (download$status_code != 200 &
-                length(content(download, "text", encoding = "UTF-8")) == 1) {
+                length(httr::content(download, 
+                                     "text",
+                                     encoding = "UTF-8")) == 1) {
               # on error, delete last HDF file (to be sure no incomplete
               # files are left behind and send message)
               message("[", date(), "] Download Error - Retrying...")
@@ -264,6 +267,7 @@ MODIStsp_download <- function(modislist,
       }
       if (attempt == n_retries & success == FALSE) {
         if (gui) {
+          #nocov start
           confirm <- gWidgets::gconfirm(
             paste0(download_server,
                    " server seems to be down! Do you want to retry?"),
@@ -274,6 +278,7 @@ MODIStsp_download <- function(modislist,
             unlink(local_filename)
             stop("You selected to quit! Goodbye!")
           }
+          #nocov end
         } else {
           unlink(local_filename)
           stop("[", date(), "] Error: server seems to be down! Please retry ",

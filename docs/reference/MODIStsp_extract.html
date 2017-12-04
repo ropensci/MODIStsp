@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp_extract — MODIStsp_extract • MODIStsp</title>
+<title>MODIStsp_extract � MODIStsp_extract • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -143,8 +143,8 @@
 
     
     <p>function used to extract time series data from rts files created by MODIStsp
-on spatial locations provided in the form of "R" spatial objects (spatialPoints,
-spatialPolygons, etc.)</p>
+on spatial locations provided in the form of "R" spatial objects (SpatialPoints,
+SpatialPolygons, etc.)</p>
     
 
     <pre class="usage"><span class='fu'>MODIStsp_extract</span>(<span class='no'>in_rts</span>, <span class='no'>sp_object</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -156,79 +156,108 @@ spatialPolygons, etc.)</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>in_rts</th>
-      <td><p>input "rasterStack" or "rasterBrick" object created by MODIStsp (it MUST contain acquisition dates in the "Z" attribute " )</p></td>
+      <td><p>A <code>RasterStack</code> bject created by MODIStsp
+(it MUST contain acquisition dates in the "Z" attribute)</p></td>
     </tr>
     <tr>
       <th>sp_object</th>
-      <td><p>"sp" object OR name of an ESRI shapefile specifying the "positions" from which data has to be extracted
-If sp_object represents lines, the output object contains one column for each polygon, containing values obtained applying the function
-specified as the FUN argument over all pixels touched by the line, and one line for each date.
-If sp_object represents points, the output object contains one column for each point, containing values of the cells corresponding to the pint,
-and one line for each date.
-If sp_object represents polygons, the output object contains one column for each polygon, containing values obtained applying the function
-specified as the FUN argument over all pixels belonging to the polygon, and one line for each date</p></td>
+      <td><p>"sp" object OR name of an ESRI shapefile specifying the
+"positions" from which data has to be extracted.</p><ul>
+<li><p>If <code>sp_object</code> represents lines, the output object contains one column for
+each line, containing values obtained applying the function specified
+as the FUN argument over all pixels touched by the line, and one line for
+each date.</p></li>
+<li><p>If <code>sp_object</code> represents points, the output object contains one column
+for each point, containing values of the cells corresponding to the point,
+and one line for each date.</p></li>
+<li><p>If <code>sp_object</code> represents polygons, the output object contains one column
+for each polygon, containing values obtained applying the function
+specified as the FUN argument over all pixels belonging to the polygon,
+and one line for each date</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>start_date</th>
-      <td><p>"Date", "POSIXct" or "POSIXlt" starting date of the period to be considered for data extraction OR character string coercible to
-Date class (format = "yyyy-mm-dd"). If not provided, the starting date of the rasterStack is used.</p></td>
+      <td><p>object of class <code>Date</code>, <code>POSIXct</code> or <code>POSIXlt</code> OR <code>character</code>
+coercible to Date class (format = "yyyy-mm-dd")Starting date of the period
+to be considered for data extraction . If not provided, the first date of
+the RasterStack is used.</p></td>
     </tr>
     <tr>
       <th>end_date</th>
-      <td><p>"Date", "POSIXct" or "POSIXlt" ending date of the period to be considered for data extraction OR character string coercible to
-Date class (format = "yyyy-mm-dd").If not provided, the ending date of the rasterStack is used.</p></td>
+      <td><p>object of class <code>Date</code>, <code>POSIXct</code> or <code>POSIXlt</code> OR <code>character</code>
+coercible to Date class (format = "yyyy-mm-dd"). Ending date of the period
+to be considered for data extraction . If not provided, the last date of
+the RasterStack is used.</p></td>
     </tr>
     <tr>
       <th>id_field</th>
-      <td><p>character name of the column of the input sp object or shapefile to be used in the data extraction. Values contained in the column MUST be unique
-The names of the columns of the output are taken from this column. If not provided, or an invalid value is provided, then the names of the columns of the output
-reflect the number of the feature in the original sp object or shapefile.</p></td>
+      <td><p><code>character</code> name of the column of the input sp object or
+shapefile to be used in the data extraction. Values contained in the column
+MUST be unique. The names of the columns of the output are taken from this
+column. If not provided, or an invalid value is provided, then the names
+of the columns of the output reflect the number of the feature in
+<code>sp_object</code>.</p></td>
     </tr>
     <tr>
       <th>FUN</th>
-      <td><p>function to summarize the values (e.g. mean) on polygon data frames. The function should take a single numeric vector as argument and return a
-single value (e.g. mean, min or max), and accept a na.rm argument. Thus, standard R functions not including an na.rm argument must
-be wrapped as in this example: fun=function(x,...)length(x). Defaults to "mean"</p></td>
+      <td><p>function to summarize the values (e.g. mean) on polygon data frames.
+The function should take a single numeric vector as argument and return a
+single value (e.g. mean, min or max), and accept a na.rm argument. Thus,
+standard R functions not including an na.rm argument must  be wrapped as in
+this example: fun=function(x,...)length(x). Defaults to "mean"</p></td>
     </tr>
     <tr>
       <th>out_format</th>
-      <td><p>character "xts" or "dframe". default to 'xts'. If dframe, the output is a data frame with dates in the first column and extracted data in the others</p></td>
+      <td><p><code>character ["xts" | "dframe"]</code> If dframe, the output is a
+data frame with dates in the first column and extracted data in the others,
+otherwise it is a <code>xts</code> object, Default: "xts2</p></td>
     </tr>
     <tr>
       <th>small</th>
-      <td><p>logical If set to TRUE, and input is polygons, then values are returned also for polygons not covering at least one raster cell. "Included"
+      <td><p><code>logical</code> If TRUE, and input is polygons, then values are
+returned also for polygons not covering at least one raster cell. "Included"
 cells in this case depend on the values of the "small_method" parameter.</p></td>
     </tr>
     <tr>
       <th>small_method</th>
-      <td><p>string 'centroids' or 'full'. if small == T and input is polygons, controls which cells are "extracted" for small polygons. If set to
-centroids (default), then only the cells corresponding to polygon centroid are considered (faster, may have problems on strangely shaped polygons). If set to
-"full", then all cells intersected by the small polygon are extracted and used in calculation.</p></td>
+      <td><p><code>character ["centroids" | "full"]</code> If small == TRUE and
+input is polygons, controls which cells are "extracted" for small polygons.
+If set to "centroids" (default), then only the cells corresponding to polygon
+centroid are considered (faster, may have problems on strangely shaped
+polygons). If set to "full", then all cells intersected by the small polygon
+are extracted and used in calculations, Default: "centroids"</p></td>
     </tr>
     <tr>
       <th>na.rm</th>
-      <td><p>Logical If TRUE, and sp_object is a polygon, then na.rm = T is used when applying the function
-to the different pixels of the polygon. Default = T.</p></td>
+      <td><p><code>logical</code> If TRUE, and sp_object is a polygon, then na.rm = TRUE
+is used when applying FUN to the different pixels of the polygon, Default = TRUE.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Logical If TRUE, messages on extraction completion are sent out. Default = T.</p></td>
+      <td><p><code>logical</code> If TRUE, messages on processing status are sent
+to the console. Default = TRUE.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data.frame or xts object. Each column of data corresponds to one point or one polygon</p>
+    <p>data.frame or xts object. Each column of data corresponds to one
+point or one polygon, each row to a date.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function takes as input a rasterStack object containing time information in the "z" attribute (set by "raster" function "SetZ"),
-a starting and ending date  and a standard "R" spatial object, and returns the time series for the spatial locations
-specified in the spatial object in the form of a "R" xts object OR a plain data.frame with a "date" column in first position.
-If the input spatial object is a "point" or "line" one, the  output object contains one column for each specified point, or for each cell
-intersecting the line, and one line for each date. If the input spatial object is a "polygon" one, the output object contains one column
-for each polygon, containing values obtained applying the function specified as the FUN
-argument over all pixels belonging to the polygon, and one line for each date.</p>
+    <p>The function takes as input a RasterStack object containing time information
+in the "z" attribute (set by <code><a href='http://www.rdocumentation.org/packages/raster/topics/zvalues'>raster::setZ</a></code>), a starting and ending date
+and a standard "R" spatial object, and returns the time series for the spatial locations
+specified in the spatial object in the form of a "R" xts object OR a plain data.frame
+with a "date" column in first position.
+If the input spatial object is a "point" or "line" one, the  output object
+contains one column for each specified point, or for each cell intersecting
+the line, and one line for each date. If the input spatial object is a "polygon"
+one, the output object contains one column for each polygon, containing values
+obtained applying the function specified as the FUN argument over all pixels
+belonging to the polygon, and one line for each date.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -236,8 +265,9 @@ argument over all pixels belonging to the polygon, and one line for each date.</
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># Extract average and standard deviation values from a rts object created by MODIStsp
-# for each polygon of a shapefile, for each date in the period between 2001-01-01 and 2014-12-31
+    <pre class="examples"><div class='input'># Extract average and standard deviation values from a rts object created by
+# MODIStsp for each polygon of a shapefile, for each date in the period 
+# between 2001-01-01 and 2014-12-31
 </div><span class='co'># NOT RUN {</span>
 <span class='co'>#Set the inputs</span>
 <span class='no'>infile</span> <span class='kw'>&lt;-</span> <span class='st'>"in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span>  <span class='co'># Input rts file</span>
@@ -247,8 +277,10 @@ argument over all pixels belonging to the polygon, and one line for each date.</
 <span class='co'>#Load Data</span>
 <span class='no'>inrts</span> <span class='kw'>&lt;-</span> <span class='fu'>get</span>(<span class='fu'>load</span>(<span class='no'>infile</span>))          <span class='co'># Load the rts file</span>
 <span class='co'># Compute average and St.dev</span>
-<span class='no'>dataavg</span> <span class='kw'>&lt;-</span> <span class='fu'>MODIStsp_extract</span>(<span class='no'>inrts</span>,<span class='no'>shpname</span>, <span class='no'>startdate</span>, <span class='no'>enddate</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>'mean'</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='no'>T</span>)
-<span class='no'>datasd</span> <span class='kw'>&lt;-</span> <span class='fu'>MODIStsp_extract</span>(<span class='no'>inrts</span>,<span class='no'>shpname</span>,  <span class='no'>startdate</span>,  <span class='no'>enddate</span>,  <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>'sd'</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='no'>T</span>)
+<span class='no'>dataavg</span> <span class='kw'>&lt;-</span> <span class='fu'>MODIStsp_extract</span>(<span class='no'>inrts</span>,<span class='no'>shpname</span>, <span class='no'>startdate</span>, <span class='no'>enddate</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>'mean'</span>,
+                            <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='no'>T</span>)
+<span class='no'>datasd</span> <span class='kw'>&lt;-</span> <span class='fu'>MODIStsp_extract</span>(<span class='no'>inrts</span>,<span class='no'>shpname</span>,  <span class='no'>startdate</span>,  <span class='no'>enddate</span>,  <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>'sd'</span>,
+                           <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='no'>T</span>)
 <span class='fu'>plot</span>(<span class='no'>dataavg</span>)
 <span class='co'># }</span></pre>
   </div>

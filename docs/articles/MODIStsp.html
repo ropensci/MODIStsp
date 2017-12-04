@@ -116,7 +116,7 @@
       <h1>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.3</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2017-11-27</h4>
+            <h4 class="date">2017-12-02</h4>
           </div>
 
     
@@ -146,7 +146,7 @@
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>gWidgetsRGtk2</code> library beforehand:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>)
 <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
@@ -179,14 +179,14 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 </div>
 <div id="on-mac-os" class="section level2">
 <h2 class="hasAnchor">
 <a href="#on-mac-os" class="anchor"></a>On Mac OS</h2>
 <p><strong>NOTE: The following installation notes were kindly provided by a MODIStsp user and should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. Since we are not working on Mac we were not able yet to check this, but we hope it may be useful at least to put you in the right direction if you have installation problems)</strong></p>
 <p>Installing MODIStsp requires many dependencies:</p>
-<p>For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by <strong>tobybot11</strong> (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>), Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version “OS X Mavericks binaries” and not “Package source” - You have to be sure that gdal is installed with HDF4 support.</p>
+<p>For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by <strong>tobybot11</strong> (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>), RGtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version “OS X Mavericks binaries” and not “Package source” - You have to be sure that gdal is installed with HDF4 support.</p>
 <p>1 - Update to a recent R version if needed, then update all packages</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># update packages</span>
 <span class="kw">update.packages</span>()
@@ -206,7 +206,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="bu">export</span> <span class="va">PKG_CONFIG_PATH=</span>
 
 <span class="ex">/usr/local/lib</span>/pkgconfig:<span class="ex">/usr/local/lib/pkgconfig</span>/gtk+-2.0.pc:<span class="ex">/opt/X11/lib/pkgconfig</span></code></pre></div>
-<p>3 - next, install <code>RGtk2</code>. Since install.packages(“Rgtk2”) is not going to work, go <a href="https://cran.r-project.org/web/packages/RGtk2/index.html">here</a>, download RGtk2_2.20.33.tar.gz and, from a terminal run:</p>
+<p>3 - next, install <code>RGtk2</code>. Since install.packages(“RGtk2”) is not going to work, go <a href="https://cran.r-project.org/web/packages/RGtk2/index.html">here</a>, download RGtk2_2.20.33.tar.gz and, from a terminal run:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">R</span> CMD INSTALL RGtk2_2.20.33.tar.gz</code></pre></div>
 <p>Now, open R and run:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RGtk2)</code></pre></div>
@@ -242,7 +242,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>OR</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools) 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>Good luck!</p>
 </div>
@@ -410,7 +410,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <li><p><strong>Output Files Format</strong>: Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among “None”, “PACKBITS”, “LZW” and “DEFLATE”.</p></li>
 <li><p><strong>Create Virtual Rasters</strong>: Specify if virtual multitemporal files should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are ENVI meta-files and GDAL “vrt” files.</p></li>
 <li><p><strong>Create RasterStack</strong>: Specify if the output time series should be also saved as as “R” <em>rasterStack</em> objects (with temporal information added through the “setZ” method of the <em>raster</em> package). This may be useful in order to easily access the preprocessed MODIS data within “R” scripts.</p></li>
-<li><p><strong>Change NoData values</strong>: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the “MODIStsp_Products_Opts” XML file. By selecting “Yes” in the “Change Original NODATA values” check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them.</p></li>
+<li><p><strong>Change NoData values</strong>: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the “MODIStsp_Products_Opts” XML file. By selecting “Yes” in the “Change Original NoData values” check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them.</p></li>
 <li><p><strong>Scale output values</strong>: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true “measure units” of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etc.).</p></li>
 </ul>
 </div>
@@ -574,7 +574,7 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
 <p>Any single-date image can be accessed by simply opening it with a <code>raster</code> command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
 modistsp_file &lt;-<span class="st"> "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"</span>
-my_raster     &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(modistsp_file)</code></pre></div>
+my_raster     &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
 <p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
 indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))</code></pre></div>

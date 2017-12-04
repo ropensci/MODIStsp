@@ -18,9 +18,9 @@
 #'   the user to add the new index.
 #' @param option_jsfile `character` full path of a JSON file
 #'  containing the processing options in which the new indexes has to be saved
-#'  (default: MODIStsp_Previous.JSON in subdir Previous).
+#'  (default: MODIStsp_Previous.JSON in subfolder Previous).
 #' @param prodopts_file `character`: full path of the RData file containing.
-#'   if NULL, use MODIStsp_ProdOpts.RData in subdir Previous, Default: NULL
+#'   if NULL, use MODIStsp_ProdOpts.RData in subfolder Previous, Default: NULL
 #' @param selprod `character` Name of the product to which the new index should
 #'   be added (Note: the index will be added to all other products allowing its
 #'   computation !). If NULL, as in non-interactive execution, no
@@ -50,8 +50,8 @@
 #'   Default: retrieved from package installation folder
 #' @importFrom gWidgets gbasicdialog ggroup glabel gedit size gbutton svalue
 #' @importFrom pacman p_load p_exists
-#' @importFrom XML xmlParse xmlRoot xmlSize xmlToList
 #' @importFrom stringr str_detect
+#' @importFrom jsonlite fromJSON write_json
 #' @return NULL - the MODIStsp_Previous.RData file is modified so to allow
 #'   computation of the additional index
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
@@ -77,19 +77,21 @@
 #'
 #'
 
-MODIStsp_addindex <- function(option_jsfile       = NULL,
-                              prodopts_file       = NULL,
-                              selprod             = NULL,
-                              selvers             = NULL,
-                              gui                 = TRUE,
-                              new_indexbandname   = "",
-                              new_indexfullname   = "",
-                              new_indexformula    = "",
-                              new_indexnodata_out = "32767",
-                              MODIStsp_dir = system.file(package = "MODIStsp")) { #nolint
+MODIStsp_addindex <- function(
+  option_jsfile       = NULL,
+  prodopts_file       = NULL,
+  selprod             = NULL,
+  selvers             = NULL,
+  gui                 = TRUE,
+  new_indexbandname   = "",
+  new_indexfullname   = "",
+  new_indexformula    = "",
+  new_indexnodata_out = "32767",
+  MODIStsp_dir = system.file(package = "MODIStsp")) { #nolint
   
   # Initialization and retrieval of parameters ----
-  if (gui) {
+  if (gui) { 
+    #nocov start
     if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
       message("Library 'gWidgetsRgtk2' is required to run MODIStsp_addindex ",
               "in interactive mode but it is not installed! \n\n",
@@ -104,9 +106,9 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
       }
       
     }
-    
     options("guiToolkit" = "RGtk2")
-  }
+    #nocov end
+  } 
   
   previous_dir    <- file.path(MODIStsp_dir, "Previous")
   previous_jsfile <- ifelse(is.null(option_jsfile),
@@ -115,7 +117,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
   prodopts_file   <- ifelse(is.null(prodopts_file),
                             file.path(previous_dir, "MODIStsp_ProdOpts.RData"),
                             prodopts_file)
-  general_opts    <- RJSONIO::fromJSON(previous_jsfile)
+  general_opts    <- jsonlite::fromJSON(previous_jsfile)
   
   # Restore MODIS products if existing, otherwise retrieve  from xml file ----
   prod_opt_list <- get(load(prodopts_file))
@@ -130,16 +132,19 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
   if (is.null(selprod) | is.null(selvers)) {
     avail_refbands <- refbands_names
   } else {
+    #nocov start
     # Names of bands available for selected product
     avail_prodbands <- prod_opt_list[[selprod]][[selvers]]$bandnames
     
     # reflectence bands available for selected product
     match_refbands <- avail_prodbands[match(refbands_names, avail_prodbands)]
-    avail_refbands <- match_refbands[!is.na(match_refbands)]
+    avail_refbands <- match_refbands[!is.na(match_refbands)] 
+    #nocov end
   }
   
   # GUI Initialization -----
   if (gui) {
+    #nocov start
     main_win <- gbasicdialog(
       title = "Insert the new Spectral Index information and formula",
       parent = NULL,
@@ -237,7 +242,7 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
                        general_opts = if (exists("general_opts")) {
                          general_opts
                        } else {
-                         NULL
+                         NULL #nocov
                        },
                        prod_opt_list,
                        previous_jsfile)
@@ -319,7 +324,9 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
     font(finish_but) <- list(family = "sans",  weight = "bold")
     visible(main_win, set = TRUE)
     
+    
     # end of gui actions ----
+    #nocov end
   } else {
     
     #   ________________________________________________________________________
@@ -347,14 +354,14 @@ MODIStsp_addindex <- function(option_jsfile       = NULL,
                    general_opts = if (exists("general_opts")) {
                      general_opts
                    } else {
-                     NULL
+                     NULL #nocov
                    },
                    prod_opt_list,
                    previous_jsfile)
       message("The new Index was correctly added!\n It will be available at\n",
               "the next execution of MODIStsp().")
     } else if (catch_err == 1) {
-      stop("The formula of the new index is not computable for this product. ",
+      stop("The formula of the new index is wrong or not computable for this product. ", #nolint
            "Please check it.\n",
            "(Valid band names are: ", paste(avail_refbands, collapse = ", "),
            ".")
@@ -413,22 +420,24 @@ check_formula_errors <- function(new_indexbandname,
   # to them, and then verify if formula is computable by evaluate/parse and
   # check for errors
   
-  if (req_bands[1] == TRUE) b1_Red   <- 5
-  if (req_bands[2] == TRUE) b2_NIR   <- 6
-  if (req_bands[3] == TRUE) b3_Blue  <- 7
-  if (req_bands[4] == TRUE) b4_Green <- 8
-  if (req_bands[5] == TRUE) b5_SWIR  <- 9
-  if (req_bands[6] == TRUE) b6_SWIR  <- 15
-  if (req_bands[7] == TRUE) b7_SWIR  <- 25
+  if (req_bands[1]) b1_Red   <- 5
+  if (req_bands[2]) b2_NIR   <- 6
+  if (req_bands[3]) b3_Blue  <- 7
+  if (req_bands[4]) b4_Green <- 8
+  if (req_bands[5]) b5_SWIR  <- 9
+  if (req_bands[6]) b6_SWIR  <- 15
+  if (req_bands[7]) b7_SWIR  <- 25
   
-  if (max(req_bands == 1)) {
+  if (any(req_bands)) {
     try_parse <- try(eval(parse(text = new_indexformula)), silent = TRUE)
     if (class(try_parse) == "try-error") {
+      # error 1: error in the formula: expression not computable
       catch_err <- 1
     }
   } else {
+    # error 1: error in the formula: no valid bands provided
     catch_err <- 1
-  } # error 1: error in the formula
+  } 
   
   ## generate the list of all the index names
   all_indexes_bandnames <- all_indexes_fullnames <- NA
@@ -465,7 +474,7 @@ check_formula_errors <- function(new_indexbandname,
     if (is.na(max(match(refbands_names[req_bands], avail_refbands)))) {
       # error 1 again: index is ok, but not computable for the currently
       # selected product so we don't save it !
-      catch_err <- 1
+      catch_err <- 1 #nocov (only possible on interactive exec.)
     }
   }
   
@@ -494,6 +503,7 @@ save_formula <- function(refbands_names,
   
   # initialise list of custom indexes, if it does not exist yet
   if (is.null(general_opts$custom_indexes)) {
+    #nocov start
     general_opts$custom_indexes <- list()
     
     for (prod in names(prod_opt_list)) {
@@ -508,6 +518,7 @@ save_formula <- function(refbands_names,
         )
       }
     }
+    #nocov end
   }
   # cycle on available products to add the new index to all products
   # allowing its computation
@@ -558,7 +569,8 @@ save_formula <- function(refbands_names,
   
   # Save the products list and the chars of the products (including
   # custom indexes) in previous file.
-  write(RJSONIO::toJSON(general_opts), previous_jsfile)
+  jsonlite::write_json(general_opts, previous_jsfile, pretty = TRUE,
+                       auto_unbox = TRUE)
   
   return(general_opts)
   

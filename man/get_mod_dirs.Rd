@@ -13,9 +13,17 @@ product}
 
 \item{ftp}{\code{character} ftp site corresponding to the selected MODIS product}
 
+\item{download_server}{\code{character ["http" | "ftp" | "offline"]} download service
+to be used; if NA, the script tries to download with http, using ftp if the
+download fails (Used in non-interactive execution to allow trying to use
+ftp if http fails)}
+
 \item{user}{\code{character} username for earthdata http server}
 
 \item{password}{\code{character} password for earthdata http server}
+
+\item{yy}{\code{character} Year for which the folder containing HDF images are to
+be identified}
 
 \item{n_retries}{\code{numeric} number of times the access to the http/ftp server
 should be retried in case of error before quitting, Default: 20}
@@ -27,11 +35,6 @@ instead than to the console/GTK progress windows.}
 \item{out_folder_mod}{\code{character} output folder for MODIS HDF storage}
 
 \item{.Platform}{\code{character} os platform (from call to .Platform)}
-
-\item{downlad_server}{\code{character ["http" | "ftp" | "offline"]} download service
-to be used; if NA, the script tries to download with http, using ftp if the
-download fails (Used in non-interactive execution to allow trying to use
-ftp if http fails)}
 }
 \value{
 \code{character arraty} listing all available folders (a.k.a. dates) for

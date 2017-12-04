@@ -1,4 +1,4 @@
-#' @title Main MODIStsp function
+#' @title MODIStsp
 #' @description Main function for the MODIS Time Series Processing Tool
 #'   (MODIStsp)
 #' @details The function is used to:
@@ -14,7 +14,7 @@
 #' @param options_file `character` full path to a JSON file
 #'  containing MODIStsp processing options saved from the GUI. If NULL,
 #'  parameters of the last successful run are retrieved from file
-#'  "MODIStsp_Previous.json" in subdir Previous), Default: NULL
+#'  "MODIStsp_Previous.json" in subfolder "Previous"), Default: NULL
 #' @param spatial_file_path `character` (optional) full path of a spatial file
 #'  to use to derive the processing extent. If not NULL, the processing options
 #'  which define the extent, the selected tiles and the "Full Tile / Resized"
@@ -43,12 +43,12 @@
 #'  [MODIStsp_GUI()], [MODIStsp_process()]
 #' @rdname MODIStsp
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
-#' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose
+#' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose font
 #' @importFrom pacman p_exists p_load
 #' @importFrom raster rasterOptions crop extent
 #' @importFrom rgdal getGDALVersionInfo
 #' @importFrom stringr str_pad
-#' @importFrom RJSONIO fromJSON toJSON
+#' @importFrom jsonlite fromJSON write_json
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils packageVersion
 #' @importFrom utils unzip
@@ -146,6 +146,7 @@ MODIStsp <- function(gui               = TRUE,
   #   On interactive execution, ensure that gWidgetsRGtk2 is avauilable     ####
 
   if (gui) {
+    #nocov start
     if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
 
       message(strwrap("Library 'gWidgetsRGtk2' is not installed. It is required
@@ -161,7 +162,8 @@ MODIStsp <- function(gui               = TRUE,
 
     }
     options("guiToolkit" = "RGtk2")
-  }
+    #nocov end
+  } 
 
   # Check GDAL version ----
   if (is.null(getOption("gdalUtils_gdalPath"))) {
@@ -170,17 +172,20 @@ MODIStsp <- function(gui               = TRUE,
                             valid GDAL installation - please wait! (this will
                             happen only once)", width = 60)
     if (gui) {
+      #nocov start
       welcome_win       <- gWidgets::gwindow(title  = "Welcome", width = 400,
                                              height = 100)
 
       welcome_lab       <- gWidgets::glabel(text      = welcome_text,
                                             container = welcome_win,
                                             editable  = FALSE)
-      font(welcome_lab) <- list(family = "sans", style = "italic", size = 10)
+      gWidgets::font(welcome_lab) <- list(family = "sans",
+                                          style = "italic", size = 10)
       Sys.sleep(0.05)
-      message("[", date(), "]", welcome_text)
+      message("[", date(), "] ", welcome_text)
+      #nocov end
     } else {
-      message("[", date(), "]", welcome_text)
+      message("[", date(), "] ", welcome_text)
     }
     gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE)
   }
@@ -249,8 +254,7 @@ MODIStsp <- function(gui               = TRUE,
   # default projection string for MODIS gridded data
   mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
 
-  general_opts <- load_opts(previous_jsfile, mod_proj_str)
-
+  general_opts <- load_opts(previous_jsfile)
 
   #   __________________________________________________________________________
   #   Load characteristics of the different MODIS products from `prodopts_file`
@@ -274,7 +278,8 @@ MODIStsp <- function(gui               = TRUE,
   if (reload_prodlist) {
     mess_text <- "Reading the MODIS products' characteristics from XML. Please wait!" #nolint
     message(mess_text)
-    if (gui) {
+    if (gui) { 
+      #nocov start
       mess     <- gWidgets::gwindow(title  = "Please wait...",
                                     width  = 400,
                                     height = 40)
@@ -283,18 +288,21 @@ MODIStsp <- function(gui               = TRUE,
                                    editable  = FALSE,
                                    container = mess)
       Sys.sleep(0.05)
-    }
+      #nocov end
+    } 
 
     MODIStsp_read_xml(prodopts_file = prodopts_file,
                       xml_file      = xml_file)
     load(prodopts_file)
 
     if (gui) {
+      #nocov start
       # dispose message window
       gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
         return(FALSE)
       })
       gWidgets::dispose(mess_lab)
+      #nocov end
     }
   } # End IF on load prodopts
 
@@ -304,6 +312,8 @@ MODIStsp <- function(gui               = TRUE,
   #   options contained in the provided `options_file`
 
   if (gui) {
+    #nocov start
+    
     if (exists("welcome_lab")) {
       gWidgets::dispose(welcome_lab)
     }
@@ -314,7 +324,7 @@ MODIStsp <- function(gui               = TRUE,
                          previous_jsfile,
                          prodopts_file,
                          scroll_window)
-    
+    #nocov end  
   } else {
     start <- TRUE
     gui   <- FALSE
@@ -327,7 +337,7 @@ MODIStsp <- function(gui               = TRUE,
 #   from `prodopts_file`
 
     if (file.exists(previous_jsfile)) {
-      general_opts <- RJSONIO::fromJSON(previous_jsfile)
+      general_opts <- jsonlite::fromJSON(previous_jsfile)
     } else {
       message("[", date(), "] Processing Options file not found! Aborting!")
       stop()
@@ -389,6 +399,7 @@ MODIStsp <- function(gui               = TRUE,
 
       # Check if the input file is a valid spatial file and redefine the
       # bounding box
+      
       external_bbox <- try(bbox_from_file(spatial_file_path,
                                           general_opts$user_proj4),
                            silent = TRUE)
@@ -514,10 +525,11 @@ MODIStsp <- function(gui               = TRUE,
     # At end of successful execution, save the options used in the main output
     # folder as a JSON file with name containing the date of processing.
     # Also update "MODIStsp_previous.json.
-    optfilename  <- file.path(general_opts$out_folder,
+    opts_jsfile  <- file.path(general_opts$out_folder,
                               paste0("MODIStsp_", Sys.Date(), ".json"))
-    general_opts <- RJSONIO::fromJSON(previous_jsfile)
-    write(RJSONIO::toJSON(general_opts), optfilename)
+    general_opts <- jsonlite::fromJSON(previous_jsfile)
+    jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
+                         auto_unbox = TRUE)
 
     # If running in test mode, check the outputs created against MD5 of
     # "correct" outputs to verify that all went well

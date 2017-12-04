@@ -36,6 +36,7 @@
 #' @importFrom tools file_path_sans_ext
 #' @importFrom parallel detectCores
 #' @importFrom gWidgets svalue
+#' @importFrom stats na.omit
 #'
 MODIStsp_process_bands <- function(out_folder_mod, modislist,
                                    outproj_str, mod_proj_str, sens_sel,
@@ -84,13 +85,13 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     gdalinfo_hdf_raw
   }
   gdalinfo_bbox <- cbind(
-    na.omit(as.numeric(unlist(strsplit(gsub(
+    stats::na.omit(as.numeric(unlist(strsplit(gsub(
       "[^0-9.\\-]+",
       " ",
-      gdalinfo_raw[grep("^Lower Left", gdalinfo_raw)])," ")
+      gdalinfo_raw[grep("^Lower Left", gdalinfo_raw)]), " ")
     )))[1:2],
 
-    na.omit(as.numeric(unlist(strsplit(gsub(
+    stats::na.omit(as.numeric(unlist(strsplit(gsub(
       "[^0-9.\\-]+", " ",
       gdalinfo_raw[grep("^Upper Right", gdalinfo_raw)]),
       " "))))[1:2]
@@ -113,7 +114,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                        sens_sel, bandname,
                        "files for date:", date_name)
   } else {
-    mess_text <- paste("Processing", sens_sel,bandname,
+    mess_text <- paste("Processing", sens_sel, bandname,
                        "files for date:", date_name)
   }
 
@@ -136,7 +137,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # then use those to build the vrt, instead than directly
   # buildibng the vrt from HDFS
 
-  if (datatype== "UInt32") {
+  if (datatype == "UInt32") {
     files_out   <- NULL
     for (file in seq_along(files_in)) {
       file_out <- tempfile(fileext = ".tif")
@@ -149,7 +150,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
       files_in[file] <- file_out
     }
 
-    outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1,-5),
+    outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),
                           ".tif")
     gdalUtils::gdalwarp(files_in,
                         outfile_vrt,
@@ -191,7 +192,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     outfile_vrt_cont[outfile_vrt_linegeom] <- paste(
       "<GeoTransform>",
       paste(outfile_vrt_geom_corr,
-            collapse = ", "),"</GeoTransform>"
+            collapse = ", "), "</GeoTransform>"
     )
 
     write(outfile_vrt_cont, outfile_vrt)

@@ -13,10 +13,10 @@ MODIStsp_addindex(option_jsfile = NULL, prodopts_file = NULL,
 \arguments{
 \item{option_jsfile}{\code{character} full path of a JSON file
 containing the processing options in which the new indexes has to be saved
-(default: MODIStsp_Previous.JSON in subdir Previous).}
+(default: MODIStsp_Previous.JSON in subfolder Previous).}
 
 \item{prodopts_file}{\code{character}: full path of the RData file containing.
-if NULL, use MODIStsp_ProdOpts.RData in subdir Previous, Default: NULL}
+if NULL, use MODIStsp_ProdOpts.RData in subfolder Previous, Default: NULL}
 
 \item{selprod}{\code{character} Name of the product to which the new index should
 be added (Note: the index will be added to all other products allowing its

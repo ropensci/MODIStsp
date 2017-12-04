@@ -124,7 +124,7 @@ Installing MODIStsp requires many dependencies:
 
 For installation on MAC OSX sierra, there are three main issues:
 - As outlined here in the comment by **tobybot11** (https://gist.github.com/sebkopf/9405675), 
-Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not
+RGtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not
 work with the quartz libraries/headers which now are the default for GTK
 - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you
 need to choose the version "OS X Mavericks binaries" and not "Package source"
@@ -165,7 +165,7 @@ export PKG_CONFIG_PATH=
 /usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
 ```
 
-3 - next, install `RGtk2`. Since install.packages("Rgtk2") is not going to work, go [here](https://cran.r-project.org/web/packages/RGtk2/index.html), download 
+3 - next, install `RGtk2`. Since install.packages("RGtk2") is not going to work, go [here](https://cran.r-project.org/web/packages/RGtk2/index.html), download 
 RGtk2_2.20.33.tar.gz and, from a terminal run:
 ```bash
 R CMD INSTALL RGtk2_2.20.33.tar.gz
@@ -366,7 +366,7 @@ Several processing options can be set using check-boxes:
 
 - **Create RasterStack**: Specify if the output time series should be also saved as as "R" _rasterStack_ objects (with temporal information added through the "setZ" method of the _raster_ package). This may be useful in order to easily access the preprocessed MODIS data within "R" scripts.
 
-- **Change NoData values**: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts" XML file. By selecting "Yes" in the "Change Original NODATA values" check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. 
+- **Change NoData values**: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts" XML file. By selecting "Yes" in the "Change Original NoData values" check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. 
 
 - **Scale output values**: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true "measure units" of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etc.). 
 
@@ -640,7 +640,7 @@ If you want to manually add the support for HDF4 in case ```gdal-hdf4``` is out-
 
 Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter ```--with-hdf4``` to the ```configure``` instruction).
 
-[^1^]: If you encounter problems installing the gWidgetsRgtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you!
+[^1^]: If you encounter problems installing the gWidgetsRGtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you!
 
 [^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: i) ensure that GDAL is properly installed in your system; ii) (on Windows) if it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)); iii) if nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help!
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp_download — MODIStsp_download • MODIStsp</title>
+<title>MODIStsp_download � MODIStsp_download • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -148,7 +148,7 @@ http or ftp remote servers for a given date.</p>
 
     <pre class="usage"><span class='fu'>MODIStsp_download</span>(<span class='no'>modislist</span>, <span class='no'>out_folder_mod</span>, <span class='no'>download_server</span>, <span class='no'>http</span>, <span class='no'>ftp</span>,
   <span class='no'>n_retries</span>, <span class='no'>use_aria</span>, <span class='no'>date_dir</span>, <span class='no'>year</span>, <span class='no'>DOY</span>, <span class='no'>user</span>, <span class='no'>password</span>, <span class='no'>sens_sel</span>, <span class='no'>date_name</span>,
-  <span class='no'>gui</span>)</pre>
+  <span class='no'>gui</span>, <span class='no'>mess_lab</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -223,6 +223,11 @@ download).</p></td>
       <th>gui</th>
       <td><p><code>logical</code> Indicates if on an interactive or non-interactive execution
 (only influences where the log messages are sent).</p></td>
+    </tr>
+    <tr>
+      <th>mess_lab</th>
+      <td><p>pointer to the gwidget used to issue processing messages in
+when gui = TRUE.</p></td>
     </tr>
     </table>
     

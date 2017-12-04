@@ -5,12 +5,14 @@
 #' @param http `character` http site on lpdaac corresponding to the selected MODIS
 #'   product
 #' @param ftp `character` ftp site corresponding to the selected MODIS product
-#' @param downlad_server `character ["http" | "ftp" | "offline"]` download service
+#' @param download_server `character ["http" | "ftp" | "offline"]` download service
 #'   to be used; if NA, the script tries to download with http, using ftp if the
 #'   download fails (Used in non-interactive execution to allow trying to use
 #'   ftp if http fails)
 #' @param user `character` username for earthdata http server
 #' @param password `character` password for earthdata http server
+#' @param yy `character` Year for which the folder containing HDF images are to 
+#'  be identified
 #' @param n_retries `numeric` number of times the access to the http/ftp server
 #'   should be retried in case of error before quitting, Default: 20
 #' @param gui `logical`` indicates if processing was called from the GUI
@@ -63,11 +65,13 @@ get_mod_dirs <- function(http, ftp, download_server,
       # retry
 
       if (response$status_code != 200) {
-        if (gui) {
+        if (gui) { 
+          #nocov start
           confirm <- gWidgets::gconfirm(
             "http server seems to be down! Do you want to retry?",
             icon = "question")
           if (!confirm) stop("You selected to abort processing. Goodbye!")
+          #nocov end
         } else {
           message("[", date(), "] Error: http server seems to be down! ",
                   "Switching to ftp!")
@@ -108,10 +112,12 @@ get_mod_dirs <- function(http, ftp, download_server,
       # retry
       if (response$status_code != 226) {
         if (gui) {
+          #nocov start
           confirm <- gWidgets::gconfirm(
             "ftp server seems to be down! Do you want to retry?",
             icon = "question")
           if (!confirm) stop("You selected to abort processing. Goodbye!")
+          #nocov end
         } else {
           # break on failure
           stop("[",

@@ -7,14 +7,16 @@
 process_message(mess_text, gui, mess_lab)
 }
 \arguments{
-\item{mess_text}{PARAM_DESCRIPTION}
+\item{mess_text}{\code{character} text to be shown in the processing windows
+and/or the console}
 
-\item{gui}{PARAM_DESCRIPTION}
+\item{gui}{\code{logical} indicating if the message should be passed to the
+status window or only to the console.}
 
-\item{mess_lab}{PARAM_DESCRIPTION}
+\item{mess_lab}{pointer to the gwindow used to shoe messages when gui == TRUE}
 }
 \value{
-OUTPUT_DESCRIPTION
+The function is called for its side effects
 }
 \description{
 helper function to provide processing messages

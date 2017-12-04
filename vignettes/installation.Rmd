@@ -97,7 +97,7 @@ Installing MODIStsp requires many dependencies:
 
 For installation on MAC OSX sierra, there are three main issues:
 - As outlined here in the comment by **tobybot11** (https://gist.github.com/sebkopf/9405675), 
-Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not
+RGtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not
 work with the quartz libraries/headers which now are the default for GTK
 - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you
 need to choose the version "OS X Mavericks binaries" and not "Package source"
@@ -146,7 +146,7 @@ Now, open R and run:
 ```{r eval = FALSE}
 library(RGtk2)
 ```
-hopefully, `RGTk2` will load without errors !
+hopefully, `RGtk2` will load without errors !
 
 4 - Install packages `gWidgetsRGtk2` and `cairoDevice`
 

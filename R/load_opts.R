@@ -1,11 +1,10 @@
 #' @title Load MODIStsp processing options
-#' @description Load MODIStsp processing option from `previous_jsfile` if
+#' @description Load MODIStsp processing option from `opts_jsfile` if
 #'  it already exist, otherwise initialise processing options to default and
-#'  save them to `previous_jsfile`. Send warnings if options file is from an
+#'  save them to `opts_jsfile`. Send warnings if options file is from an
 #'  old version
-#' @param previous_jsfile Expected file name of the JSON file containing
+#' @param opts_jsfile Expected file name of the JSON file containing
 #'  processing options
-#' @param mod_proj_str proj4 string defining MODIS standard sinusoidal projection
 #' @return `data frame` general_opts, containing the processing options
 #'   retrieved from the JSON file (or the defaults set at first execution).
 #'   See also `MODIStsp_GUI` and `MODIStsp_process`
@@ -14,13 +13,22 @@
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom RJSONIO fromJSON toJSON
+#' @importFrom jsonlite fromJSON write_json
 #' @importFrom utils packageVersion
-load_opts <- function(previous_jsfile, mod_proj_str) {
-  if (file.exists(previous_jsfile)) {
-    general_opts <- RJSONIO::fromJSON(previous_jsfile)
+load_opts <- function(opts_jsfile) {
+  
+  if (file.exists(opts_jsfile)) {
+    
+    general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
+    
+    # stop on error
+    if (class(general_opts) == "try-error") {
+      stop("Unable to read the provided JSON options file. Please check your ", 
+           "inputs!")
+    }
+    
     if (is.null(general_opts$MODIStspVersion)) {
-      stop("The option file in use (", previous_jsfile, ") was created with a ",
+      stop("The option file in use (", opts_jsfile, ") was created with a ",
            "too old MODIStsp version (<=1.2.2).\n It can not be used with the ",
            "current version.\n",
            " Please delete it or specify a different value for the ",
@@ -28,7 +36,7 @@ load_opts <- function(previous_jsfile, mod_proj_str) {
     } else {
       if (general_opts$MODIStspVersion < utils::packageVersion("MODIStsp")) {
         message(
-          "The option file in use (", previous_jsfile, ") was created ",
+          "The option file in use (", opts_jsfile, ") was created ",
           "with an old MODIStsp version (", general_opts$MODIStspVersion, ")",
           "\n Although this should still work, please consider reopening ",
           "the JSON file from the GUI\n and resaving it."
@@ -40,6 +48,8 @@ load_opts <- function(previous_jsfile, mod_proj_str) {
     # "general_opts" structure used to  communicate with the GUI, set default
     # values and save it as a JSON file
 
+    
+    #nocov start (this is only executed at first ever execution)
     general_opts <- list(
       sel_prod        = "Surf_Ref_8Days_500m (M*D09A1)",
       sensor          = "Terra",
@@ -61,7 +71,7 @@ load_opts <- function(previous_jsfile, mod_proj_str) {
       download_server = "http",
       download_range  = "full",
       proj            = "Sinusoidal",
-      user_proj4      = mod_proj_str,
+      user_proj4      = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
       out_res_sel     = "Native",
       out_res         = "",
       full_ext        = "Full Tiles Extent",
@@ -80,7 +90,9 @@ load_opts <- function(previous_jsfile, mod_proj_str) {
       MODIStspVersion = as.character(utils::packageVersion("MODIStsp")),
       custom_indexes  = list()
     )
-    write(RJSONIO::toJSON(general_opts), previous_jsfile)
+    jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
+                         auto_unbox = TRUE)
+    #nocov end (this is only executed at first ever execution)
   }
   return(general_opts)
 }

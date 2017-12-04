@@ -58,7 +58,7 @@ MODIStsp_process_indexes <- function(out_filename,
   fun_string <- "index <- function("
 
   # initialize the "stack_string" for the overlay function --> at the end, it
-  # contains a parsable string for creating a rasterStack containing
+  # contains a parsable string for creating a RasterStack containing
   # the bands required to compute the index
   stack_string <- "tmp_stack <- raster::stack("
 
@@ -94,7 +94,8 @@ MODIStsp_process_indexes <- function(out_filename,
     fun_string <- paste0(fun_string, "...)", "{", formula, "}")
     dt  <- "FLT4S"
   } else {
-    # otherwise, they are written as integer -10000 - 10000
+    # otherwise, they are written as integer, with a scale factor of 10000
+    # and INT2s datatype
     fun_string <- paste0(fun_string, "...)", "{round(10000*(", formula, "))}")
     dt  <- "INT2S"
   }

@@ -2,7 +2,7 @@
 #' @description
 #'  Ancillary function used to reproject bounding boxes; setting the parameter
 #'  'enlarge' allows to choose if the new one would be the one which completely
-#'  includes the original extent in the ooutput projection, or if is simply the
+#'  includes the original extent in the output projection, or if is simply the
 #'  one obtained by reprojecting the upper-left and the lower-right corners.
 #' @param bbox The input bounding box (it can be a matrix in the bbox format or a 
 #'  vector in the format (xmin, ymin, xmax, ymax)).

@@ -2,10 +2,15 @@
 #' @description helper function needed to identify the ranges of dates to
 #'   be processed for a given year as a function of `download_range` selection
 #'   and starting/ending dates and years
-#' @param yy year for which the processing dates need to be identified
+#' @param yy `numeric` year for which the processing dates need to be identified
+#' @param start_year `numeric` start year of current `MODIStsp_process` run
+#' @param end_year `numeric` end year of current `MODIStsp_process` run.
+#' @param start_date `character`` Start date for images download and preprocessing
+#'   (yyyy.mm.dd) of current `MODIStsp_process` run.
+#' @param end_date `character` Start date for images download and preprocessing
+#'   (yyyy.mm.dd) of current `MODIStsp_process` run.
 #' @inheritParams MODIStsp_process
 #' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
 #' @rdname get_yeardates
 #' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
 get_yeardates <- function(download_range,

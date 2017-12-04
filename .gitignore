@@ -48,3 +48,5 @@ inst/Test_files/test5_LB\.json
 vignettes/Thumbs\.db
 
 tests/testthat/test-modistsp_LB\.R
+
+inst/Test_files/VI_16Days_1Km_v6/NDVI/

@@ -6,7 +6,7 @@
 \usage{
 MODIStsp_download(modislist, out_folder_mod, download_server, http, ftp,
   n_retries, use_aria, date_dir, year, DOY, user, password, sens_sel, date_name,
-  gui)
+  gui, mess_lab)
 }
 \arguments{
 \item{modislist}{\code{character array} List of MODIS images to be downloaded for
@@ -49,6 +49,9 @@ download).}
 
 \item{gui}{\code{logical} Indicates if on an interactive or non-interactive execution
 (only influences where the log messages are sent).}
+
+\item{mess_lab}{pointer to the gwidget used to issue processing messages in
+when gui = TRUE.}
 }
 \value{
 The function is called for its side effects
