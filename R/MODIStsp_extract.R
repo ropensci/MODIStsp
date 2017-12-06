@@ -4,63 +4,63 @@
 #' on spatial locations provided in the form of "R" spatial objects (SpatialPoints,
 #' SpatialPolygons, etc.)
 #' @details
-#' The function takes as input a RasterStack object containing time information 
-#' in the "z" attribute (set by `raster::setZ`), a starting and ending date  
+#' The function takes as input a RasterStack object containing time information
+#' in the "z" attribute (set by `raster::setZ`), a starting and ending date
 #' and a standard "R" spatial object, and returns the time series for the spatial locations
-#' specified in the spatial object in the form of a "R" xts object OR a plain data.frame 
+#' specified in the spatial object in the form of a "R" xts object OR a plain data.frame
 #' with a "date" column in first position.
 #' If the input spatial object is a "point" or "line" one, the  output object
-#' contains one column for each specified point, or for each cell intersecting 
-#' the line, and one line for each date. If the input spatial object is a "polygon" 
-#' one, the output object contains one column for each polygon, containing values 
-#' obtained applying the function specified as the FUN argument over all pixels 
+#' contains one column for each specified point, or for each cell intersecting
+#' the line, and one line for each date. If the input spatial object is a "polygon"
+#' one, the output object contains one column for each polygon, containing values
+#' obtained applying the function specified as the FUN argument over all pixels
 #' belonging to the polygon, and one line for each date.
 #'
-#' @param in_rts A `RasterStack` bject created by MODIStsp 
+#' @param in_rts A `RasterStack` bject created by MODIStsp
 #'  (it MUST contain acquisition dates in the "Z" attribute)
 #' @param sp_object "sp" object OR name of an ESRI shapefile specifying the
-#'  "positions" from which data has to be extracted.	
+#'  "positions" from which data has to be extracted.
 #'  - If `sp_object` represents lines, the output object contains one column for
 #'    each line, containing values obtained applying the function specified
 #'    as the FUN argument over all pixels touched by the line, and one line for
 #'     each date.
-#'  - If `sp_object` represents points, the output object contains one column 
+#'  - If `sp_object` represents points, the output object contains one column
 #'    for each point, containing values of the cells corresponding to the point,
 #'    and one line for each date.
 #'  - If `sp_object` represents polygons, the output object contains one column
 #'    for each polygon, containing values obtained applying the function
 #'    specified as the FUN argument over all pixels belonging to the polygon,
 #'    and one line for each date
-#' @param start_date object of class `Date`, `POSIXct` or `POSIXlt` OR `character` 
+#' @param start_date object of class `Date`, `POSIXct` or `POSIXlt` OR `character`
 #'   coercible to Date class (format = "yyyy-mm-dd")Starting date of the period
 #'   to be considered for data extraction . If not provided, the first date of
 #'   the RasterStack is used.
-#' @param end_date object of class `Date`, `POSIXct` or `POSIXlt` OR `character` 
+#' @param end_date object of class `Date`, `POSIXct` or `POSIXlt` OR `character`
 #'   coercible to Date class (format = "yyyy-mm-dd"). Ending date of the period
 #'   to be considered for data extraction . If not provided, the last date of
 #'   the RasterStack is used.
-#' @param id_field `character` name of the column of the input sp object or 
+#' @param id_field `character` name of the column of the input sp object or
 #'   shapefile to be used in the data extraction. Values contained in the column
-#'   MUST be unique. The names of the columns of the output are taken from this 
-#'   column. If not provided, or an invalid value is provided, then the names 
-#'   of the columns of the output reflect the number of the feature in 
+#'   MUST be unique. The names of the columns of the output are taken from this
+#'   column. If not provided, or an invalid value is provided, then the names
+#'   of the columns of the output reflect the number of the feature in
 #'   `sp_object`.
 #' @param FUN function to summarize the values (e.g. mean) on polygon data frames.
 #'  The function should take a single numeric vector as argument and return a
-#'  single value (e.g. mean, min or max), and accept a na.rm argument. Thus, 
+#'  single value (e.g. mean, min or max), and accept a na.rm argument. Thus,
 #'  standard R functions not including an na.rm argument must  be wrapped as in
 #'  this example: fun=function(x,...)length(x). Defaults to "mean"
 #' @param out_format `character ["xts" | "dframe"]` If dframe, the output is a
-#'  data frame with dates in the first column and extracted data in the others, 
+#'  data frame with dates in the first column and extracted data in the others,
 #'  otherwise it is a `xts` object, Default: "xts2
 #' @param small `logical` If TRUE, and input is polygons, then values are
 #'  returned also for polygons not covering at least one raster cell. "Included"
 #' cells in this case depend on the values of the "small_method" parameter.
 #' @param small_method `character ["centroids" | "full"]` If small == TRUE and
-#'  input is polygons, controls which cells are "extracted" for small polygons. 
+#'  input is polygons, controls which cells are "extracted" for small polygons.
 #'  If set to "centroids" (default), then only the cells corresponding to polygon
-#'  centroid are considered (faster, may have problems on strangely shaped 
-#'  polygons). If set to "full", then all cells intersected by the small polygon 
+#'  centroid are considered (faster, may have problems on strangely shaped
+#'  polygons). If set to "full", then all cells intersected by the small polygon
 #'  are extracted and used in calculations, Default: "centroids"
 #' @param na.rm	`logical` If TRUE, and sp_object is a polygon, then na.rm = TRUE
 #'  is used when applying FUN to the different pixels of the polygon, Default = TRUE.
@@ -77,14 +77,13 @@
 #' @importFrom rgdal readOGR writeOGR
 #' @importFrom xts as.xts
 #' @importFrom data.table data.table setkey
-#' @importFrom raster getValues crop extent getZ extract rasterize
+#' @importFrom raster getValues crop extent getZ extract rasterize res
 #' @importFrom sp coordinates CRS proj4string spTransform
 #' @importFrom tools file_path_sans_ext
 #' @importFrom gdalUtils gdal_rasterize
-#' @importFrom raster res
 #' @examples
 #' # Extract average and standard deviation values from a rts object created by
-#' # MODIStsp for each polygon of a shapefile, for each date in the period 
+#' # MODIStsp for each polygon of a shapefile, for each date in the period
 #' # between 2001-01-01 and 2014-12-31
 #' \dontrun{
 #' #Set the inputs
@@ -112,18 +111,18 @@ MODIStsp_extract <- function(in_rts, sp_object,
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
-  if (!class(getZ(in_rts)) == "Date") {
+  if (!class(raster::getZ(in_rts)) == "Date") {
     stop("Input does not contain valid dates in its 'Z' attribute !")
   }
   if (length(start_date) == 0) {
-    start_date <- min(getZ(in_rts))
+    start_date <- min(raster::getZ(in_rts))
     if (verbose)
-      message("Starting date not provided - Using the first date in the stack")
+      message("Starting date not provided - Using the first date in the stack") #nocov #nolint
   }
   if (length(end_date) == 0) {
-    end_date <- max(getZ(in_rts))
+    end_date <- max(raster::getZ(in_rts))
     if (verbose)
-      message("Ending date not provided - Using the last date in the stack")
+      message("Ending date not provided - Using the last date in the stack") #nocov #nolint
   }
   if (!class(start_date) %in% c("Date", "POSIXct", "POSIXlt")) {
     start_date <- try(as.Date(start_date), silent = TRUE)
@@ -166,14 +165,14 @@ MODIStsp_extract <- function(in_rts, sp_object,
       id_field <- NULL
     }
   }
-  dates     <- getZ(in_rts)
+  dates     <- raster::getZ(in_rts)
   sel_dates <- which(dates >= start_date & dates <= end_date)
 
   if (length(sel_dates) > 0) {
     if (proj4string(sp_object) != proj4string(in_rts)) {
       sp_object <- spTransform(sp_object, CRS(proj4string(in_rts[[1]])))
     }
-    sp_object@data$mdxtnq <- seq(seq_len(sp_object@data[, 1]))
+    sp_object@data$mdxtnq <- seq_along(sp_object@data[, 1])
     shape <- crop(sp_object, extent(in_rts[[1]]))
     if (!isTRUE(all.equal(extent(shape), (extent(sp_object)), scale = 100))) {
       warning("Some features of the spatial object are outside or partially ",
@@ -190,10 +189,9 @@ MODIStsp_extract <- function(in_rts, sp_object,
                             "SpatialLines", "SpatialLinesDataFrame")) {
 
       ts <- matrix(nrow = length(sel_dates), ncol = length(shape[, 1]))
-      for (f in seq_len(sel_dates)) {
+      for (f in seq_along(sel_dates)) {
         if (verbose == TRUE) {
-          print(paste0("Extracting data from date: ",
-                       dates[sel_dates[f]]))
+          print(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov
         }
         ts[f, ] <- extract(in_rts[[sel_dates[f]]], shape,
                            fun = FUN)
@@ -211,18 +209,15 @@ MODIStsp_extract <- function(in_rts, sp_object,
       }
     # On polygons, extract by rasterization !
     } else {
-      if (verbose)
-        (message("Rasterizing shape"))
-      if (verbose) {
-        message("Writing temporary shapefile")
-      }
+      if (verbose) message("Rasterizing shape") #nocov
+
       tempshape <- tempfile(tmpdir = tempdir(), fileext = ".shp")
       writeOGR(shape, dsn = dirname(tempshape),
                layer = basename(file_path_sans_ext(tempshape)),
                driver = "ESRI Shapefile", overwrite_layer = TRUE,
                verbose = FALSE)
       if (verbose) {
-        message("Writing temporary rasterized shapefile")
+        message("Writing temporary rasterized shapefile") #nocov
       }
       tempraster <- tempfile(tmpdir = tempdir(), fileext = ".tiff")
       ext_conv <- function(x) {
@@ -248,9 +243,9 @@ MODIStsp_extract <- function(in_rts, sp_object,
       ncols <- length(unique(zones))
       ts <- matrix(nrow = length(sel_dates), ncol = ncols)
 
-      for (f in seq_len(sel_dates)) {
-        if (verbose == TRUE) {
-          message(paste0("Extracting data from date: ", dates[sel_dates[f]]))
+      for (f in seq_along(sel_dates)) {
+        if (verbose) {
+          message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov
 
         }
 
@@ -278,6 +273,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
       }
 
       if (small & ncols != length(shape@data[, 1])) {
+
         if (length(id_field) == 1) {
           miss_feat   <- setdiff(as.character(shape@data[, "mdxtnq"]),
                                  names(ts))
@@ -291,9 +287,9 @@ MODIStsp_extract <- function(in_rts, sp_object,
 
         shpsub <- shape[pos_missing, ]
         ts_mis <- matrix(nrow = length(sel_dates), ncol = length(pos_missing))
-        for (f in seq_len(sel_dates)) {
-          if (verbose == TRUE) {
-            print(paste0("Extracting data from date: ", dates[sel_dates[f]]))
+        for (f in seq_along(sel_dates)) {
+          if (verbose) {
+            print(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov
 
           }
           if (small_method == "centroids") {
@@ -301,6 +297,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
                                    fun = mean)
 
           } else {
+            browser()
             ts_mis[f, ] <- extract(in_rts[[sel_dates[f]]], shpsub, fun = mean)
 
           }

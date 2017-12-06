@@ -30,6 +30,7 @@ Imports:
     gWidgets (>= 0.0-54),
     gWidgetsRGtk2 (>= 0.0-83),
     hash (>= 2.2.6),
+    methods,
     httr (>= 1.1.0),
     pacman, 
     raster (>= 2.5-2),

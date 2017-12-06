@@ -27,14 +27,16 @@
 MODIStsp_vrt_create <- function(
   sensor,
   out_prod_folder,
-  bandnames, bandsel, nodata_out, 
+  bandnames, bandsel, nodata_out,
   indexes_bandnames, indexes_bandsel, indexes_nodata_out,
   quality_bandnames, quality_bandsel, quality_nodata_out,
   file_prefixes,
   ts_format, out_format, rts) {
-  
+
   if (length(sensor) == 2) {
     senslist <- c("Terra", "Aqua", "Mixed")
+  } else {
+    senslist <- sensor
   }
 
   for (sens_sel in senslist) {
@@ -57,9 +59,9 @@ MODIStsp_vrt_create <- function(
     meta_bands <- c(bandnames[which(bandsel == 1)],
                     indexes_bandnames[which(indexes_bandsel == 1)],
                     quality_bandnames[which(quality_bandsel == 1)])
-    
-    nodata_vals <- c(nodata_out[which(bandsel == 1)], 
-                     indexes_nodata_out[which(indexes_bandsel == 1)], 
+
+    nodata_vals <- c(nodata_out[which(bandsel == 1)],
+                     indexes_nodata_out[which(indexes_bandsel == 1)],
                      quality_nodata_out[which(quality_bandsel == 1)])
 
     for (mb in seq_along(meta_bands)) {

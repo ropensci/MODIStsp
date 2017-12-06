@@ -99,7 +99,7 @@ License: GPL 3.0
 }
 \examples{
 # Extract average and standard deviation values from a rts object created by
-# MODIStsp for each polygon of a shapefile, for each date in the period 
+# MODIStsp for each polygon of a shapefile, for each date in the period
 # between 2001-01-01 and 2014-12-31
 \dontrun{
 #Set the inputs
