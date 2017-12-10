@@ -86,7 +86,6 @@ MODIStsp <- function(gui               = TRUE,
                      n_retries         = 20) {
 
   options("guiToolkit" = "RGtk2")
-
   # Make so that "raster" functions does not automatically add extensions on
   # output files. This is automatically reset to TRUE at the end of the session
   raster::rasterOptions(setfileext = FALSE)
@@ -150,7 +149,8 @@ MODIStsp <- function(gui               = TRUE,
     if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
 
       message(strwrap("Library 'gWidgetsRGtk2' is not installed. It is required
-                      to run MODIStsp!\n\n", "Do you want to install it now?"),
+                      to run MODIStsp in interactive mode!\n\n",
+                      "Do you want to install it now?"),
               type = " y / n")
       inst_gw <- readline()
       if (inst_gw == "y") {
@@ -161,7 +161,7 @@ MODIStsp <- function(gui               = TRUE,
       }
 
     }
-    options("guiToolkit" = "RGtk2")
+    options("guiToolkit" = "Qt")
     #nocov end
   } 
 

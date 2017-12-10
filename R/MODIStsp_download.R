@@ -25,7 +25,7 @@
 #' @param date_name `character` Date of acquisition of the images to be downloaded.
 #' @param gui `logical` Indicates if on an interactive or non-interactive execution
 #'  (only influences where the log messages are sent).
-#' @param mess_lab pointer to the gwidget used to issue processing messages in 
+#' @param mess_lab pointer to the gWidget used to issue processing messages in 
 #'  when gui = TRUE.
 #' @inheritParams MODIStsp_process
 #' @return The function is called for its side effects

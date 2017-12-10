@@ -7,8 +7,8 @@
 reproj_bbox(bbox, in_proj, out_proj, enlarge = TRUE, N_dens = 1000)
 }
 \arguments{
-\item{bbox}{The input bounding box (it can be a matrix in the bbox format or a
-vector in the format (xmin, ymin, xmax, ymax)).}
+\item{bbox}{The input bounding box (it can be a matrix obtained from \code{sp::bbox()},
+or a numeric vector in the format (xmin, ymin, xmax, ymax)).}
 
 \item{in_proj}{\code{character} The input projection (proj4 format).}
 
@@ -21,7 +21,7 @@ one obtained by reprojecting the upper-left and the lower-right corners.}
 \item{N_dens}{Densification ratio used in the case enlarge is TRUE.}
 }
 \description{
-Ancillary function used to reproject bounding boxes; setting the parameter
+Helper function used to reproject bounding boxes; setting the parameter
 'enlarge' allows to choose if the new one would be the one which completely
 includes the original extent in the output projection, or if is simply the
 one obtained by reprojecting the upper-left and the lower-right corners.

@@ -43,3 +43,4 @@ inst/Test_files/VI_16Days_500m_v6/Time_Series
 WIP
 img
 ^appveyor\.yml$
+inst/Test_files/hdfs

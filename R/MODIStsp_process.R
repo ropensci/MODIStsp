@@ -351,17 +351,17 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
           # check if all foreseen output rasters already exist. If so, skip the
           # date. Otherwise start processing
           check_files <- FALSE
-          check_files <- MODIStsp_check_files(out_prod_folder,
-                                              file_prefix,
-                                              yy,
-                                              DOY,
-                                              bandnames,
-                                              bandsel_orig_choice,
-                                              indexes_bandnames,
-                                              indexes_bandsel,
-                                              quality_bandnames,
-                                              quality_bandsel,
-                                              out_format)
+          check_files <- check_files_existence(out_prod_folder,
+                                               file_prefix,
+                                               yy,
+                                               DOY,
+                                               bandnames,
+                                               bandsel_orig_choice,
+                                               indexes_bandnames,
+                                               indexes_bandsel,
+                                               quality_bandnames,
+                                               quality_bandsel,
+                                               out_format)
 
           # If not all output files are already present or reprocess = "Yes",
           # start downloading hdfs

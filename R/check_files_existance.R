@@ -1,4 +1,4 @@
-#' @title MODIStsp_check_files
+#' @title check_files_existence
 #' @description Accessory function used to see if all expected out files for the
 #'   selected date are already present in the output folder. If all expected out
 #'   files are already present, check_files is set to TRUE, and the date is
@@ -21,14 +21,12 @@
 #' @param quality_bandsel `numeric 0/1 array` Indicates which Quality Indicators
 #'   were selected
 #' @param out_format `character` GTiff or ENVI
-#' @export
 #' @return check - logical = 1 if all expected output files are already existing
-#'
 #' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 
-MODIStsp_check_files <- function(out_prod_folder,
+check_files_existence <- function(out_prod_folder,
                                  file_prefix,
                                  yy,
                                  DOY,

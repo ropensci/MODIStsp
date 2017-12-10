@@ -50,7 +50,7 @@ download).}
 \item{gui}{\code{logical} Indicates if on an interactive or non-interactive execution
 (only influences where the log messages are sent).}
 
-\item{mess_lab}{pointer to the gwidget used to issue processing messages in
+\item{mess_lab}{pointer to the gWidget used to issue processing messages in
 when gui = TRUE.}
 }
 \value{

@@ -209,7 +209,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # for resizing BEFORE reprojecting
     bbox_mod <- reproj_bbox(bbox, outproj_str, mod_proj_str,
                             enlarge = TRUE)
-    # Create a resized and eventually mosaiced GDAL vrt file
+    # Create a resized and (if needed) mosaiced GDAL vrt file
 
     if (datatype == "UInt32") {
       # fix to avoid bug on gdalbuildvrt for UInt32 datasets;

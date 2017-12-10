@@ -107,7 +107,10 @@ MODIStsp_extract <- function(in_rts, sp_object,
                               out_format = "xts", small    = TRUE,
                               small_method = "centroids",
                               na.rm      = TRUE, verbose = FALSE) {
-
+  
+  .SD            <- NULL # Workaround to avoid note on package check
+  
+  
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
@@ -151,8 +154,8 @@ MODIStsp_extract <- function(in_rts, sp_object,
                                "SpatialPoints",
                                "SpatialLines", "SpatialLinesDataFrame")) {
     if (class(sp_object) == "character") {
-      sp_object <- try(readOGR(dirname(sp_object),
-                               basename(file_path_sans_ext(sp_object))))
+      sp_object <- try(rgdal::readOGR(dirname(sp_object),
+                               basename(tools::file_path_sans_ext(sp_object))))
       if (class(sp_object) == "try-error") {
         stop("sp_object is not a valid Spatial object or Shapefile")
       }
@@ -169,15 +172,17 @@ MODIStsp_extract <- function(in_rts, sp_object,
   sel_dates <- which(dates >= start_date & dates <= end_date)
 
   if (length(sel_dates) > 0) {
-    if (proj4string(sp_object) != proj4string(in_rts)) {
-      sp_object <- spTransform(sp_object, CRS(proj4string(in_rts[[1]])))
+    if (sp::proj4string(sp_object) != sp::proj4string(in_rts)) {
+      sp_object <- sp::spTransform(sp_object, 
+                                   sp::CRS(sp::proj4string(in_rts[[1]])))
     }
     sp_object@data$mdxtnq <- seq_along(sp_object@data[, 1])
-    shape <- crop(sp_object, extent(in_rts[[1]]))
-    if (!isTRUE(all.equal(extent(shape), (extent(sp_object)), scale = 100))) {
+    shape <- raster::crop(sp_object, raster::extent(in_rts[[1]]))
+    if (!isTRUE(all.equal(raster::extent(shape),
+                          (raster::extent(sp_object)), scale = 100))) {
       warning("Some features of the spatial object are outside or partially ",
               "outside\n the extent of the input RasterStack ! Output for ",
-              "features outside RasterStack extent\n will be set to NA ",
+              "features outside RasterStack extent\n will be set to NA. ",
               "Outputs for features only partially inside will be retrieved\n ",
               "using only the available pixels !")
       if (!setequal(sp_object$mdxtnq, shape$mdxtnq)){
@@ -191,9 +196,9 @@ MODIStsp_extract <- function(in_rts, sp_object,
       ts <- matrix(nrow = length(sel_dates), ncol = length(shape[, 1]))
       for (f in seq_along(sel_dates)) {
         if (verbose == TRUE) {
-          print(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov
+          print(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov #nolint
         }
-        ts[f, ] <- extract(in_rts[[sel_dates[f]]], shape,
+        ts[f, ] <- raster::extract(in_rts[[sel_dates[f]]], shape,
                            fun = FUN)
       }
       ts <- as.data.frame(ts)
@@ -201,7 +206,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
         feat_names <- as.character(shape@data[, eval(id_field)])
         names(ts) <- c(feat_names)
       } else {
-        names(ts) <- seq_len(shape[, 1])
+        names(ts) <- seq_along(shape[, 1])
       }
 
       if (out_format == "dframe") {
@@ -212,8 +217,8 @@ MODIStsp_extract <- function(in_rts, sp_object,
       if (verbose) message("Rasterizing shape") #nocov
 
       tempshape <- tempfile(tmpdir = tempdir(), fileext = ".shp")
-      writeOGR(shape, dsn = dirname(tempshape),
-               layer = basename(file_path_sans_ext(tempshape)),
+      rgdal::writeOGR(shape, dsn = dirname(tempshape),
+               layer = basename(tools::file_path_sans_ext(tempshape)),
                driver = "ESRI Shapefile", overwrite_layer = TRUE,
                verbose = FALSE)
       if (verbose) {
@@ -221,38 +226,37 @@ MODIStsp_extract <- function(in_rts, sp_object,
       }
       tempraster <- tempfile(tmpdir = tempdir(), fileext = ".tiff")
       ext_conv <- function(x) {
-        ext <- extent(x)
+        ext <- raster::extent(x)
         c(ext[1], ext[3], ext[2], ext[4])
       }
       if (max(shape@data$mdxtnq) <= 255) {
         ot <- "Byte"
       }       else {
-        if (max(shape@data$mdxtnq) <= 65536) {
-          ot <- "Int16"
+        if (max(shape@data$mdxtnq) <= 65536) { #nocov start
+          ot <- "Int16" 
         }
         else {
           ot <- "Int32"
+          #nocov end
         }
       }
-      gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts),
+      gdalUtils::gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts),
                      te = ext_conv(in_rts[[1]]), a = "mdxtnq", ot = ot)
-      zone_raster <- raster(tempraster)
-      zones <- getValues(zone_raster)
-      ok_zones <- which(is.finite(zones) & zones != 0)
-      zones <- zones[ok_zones]
-      ncols <- length(unique(zones))
-      ts <- matrix(nrow = length(sel_dates), ncol = ncols)
+      zone_raster <- raster::raster(tempraster)
+      zones       <- raster::getValues(zone_raster)
+      ok_zones    <- which(is.finite(zones) & zones != 0)
+      zones       <- zones[ok_zones]
+      ncols       <- length(unique(zones))
+      ts          <- matrix(nrow = length(sel_dates), ncol = ncols)
 
       for (f in seq_along(sel_dates)) {
         if (verbose) {
-          message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov
-
+          message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov #nolint
         }
 
-        value <- getValues(in_rts[[sel_dates[f]]])[ok_zones]
-        rDT <- data.table(value, zones)
-        setkey(rDT, zones)
-        .SD <- NULL # Workaround to avoid note on package check
+        value <- raster::getValues(in_rts[[sel_dates[f]]])[ok_zones]
+        rDT   <- data.table::data.table(value, zones)
+        data.table::setkey(rDT, zones)
         ts[f, 1:ncols] <- rDT[, lapply(.SD, match.fun(FUN), na.rm = na.rm),
                               by = zones]$value
 
@@ -289,16 +293,18 @@ MODIStsp_extract <- function(in_rts, sp_object,
         ts_mis <- matrix(nrow = length(sel_dates), ncol = length(pos_missing))
         for (f in seq_along(sel_dates)) {
           if (verbose) {
-            print(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov
+            print(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov #nolint
 
           }
           if (small_method == "centroids") {
-            ts_mis[f, ] <- extract(in_rts[[sel_dates[f]]], coordinates(shpsub),
+            ts_mis[f, ] <- raster::extract(in_rts[[sel_dates[f]]],
+                                           sp::coordinates(shpsub),
                                    fun = mean)
 
           } else {
-            browser()
-            ts_mis[f, ] <- extract(in_rts[[sel_dates[f]]], shpsub, fun = mean)
+            
+            ts_mis[f, ] <- raster::extract(in_rts[[sel_dates[f]]],
+                                           shpsub, fun = mean)
 
           }
 
@@ -309,7 +315,6 @@ MODIStsp_extract <- function(in_rts, sp_object,
       file.remove(tempraster)
       file.remove(tempshape)
     }
-
 
     if (exists("outside_feat")) {
       if (length(id_field) == 1) {
@@ -328,14 +333,17 @@ MODIStsp_extract <- function(in_rts, sp_object,
       names(ts_outside) <- feat_names_outside
       ts <- cbind(ts, ts_outside)
       if (length(id_field) == 1) {
-        sortindex <- match(sp_object@data[, eval(id_field)], names(ts))
+        # browser()
+        sortindex <- which(!is.na(match(sp_object@data[, eval(id_field)],
+                                        names(ts))))
       } else {
-        sortindex <- match(sp_object@data[, "mdxtnq"], names(ts))
+        sortindex <- which(!is.na(match(sp_object@data[,  "mdxtnq"], names(ts))))
       }
-      ts <- ts[, c(1, sortindex)]
+      
+      ts <- ts[, sortindex]
     }
     if (out_format == "xts") {
-      ts <- as.xts(ts, order.by = dates[sel_dates])
+      ts <- xts::as.xts(ts, order.by = dates[sel_dates])
     }
     return(ts)
   } else {

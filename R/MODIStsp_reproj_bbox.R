@@ -1,11 +1,11 @@
-#' reproj_bbox
+#' @title reproj_bbox
 #' @description
-#'  Ancillary function used to reproject bounding boxes; setting the parameter
+#'  Helper function used to reproject bounding boxes; setting the parameter
 #'  'enlarge' allows to choose if the new one would be the one which completely
 #'  includes the original extent in the output projection, or if is simply the
 #'  one obtained by reprojecting the upper-left and the lower-right corners.
-#' @param bbox The input bounding box (it can be a matrix in the bbox format or a 
-#'  vector in the format (xmin, ymin, xmax, ymax)).
+#' @param bbox The input bounding box (it can be a matrix obtained from `sp::bbox()`, 
+#'  or a numeric vector in the format (xmin, ymin, xmax, ymax)).
 #' @param in_proj `character` The input projection (proj4 format).
 #' @param out_proj `character` The output projection (proj4 format).
 #' @param enlarge `logical`` if TRUE, the reprojected bounding box is the 
@@ -13,6 +13,7 @@
 #'  one obtained by reprojecting the upper-left and the lower-right corners.
 #' @param N_dens Densification ratio used in the case enlarge is TRUE.
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @export
 #' @note License: GPL 3.0
 #' @importFrom sp bbox CRS Polygon Polygons proj4string SpatialPoints
 #'  SpatialPolygons spTransform

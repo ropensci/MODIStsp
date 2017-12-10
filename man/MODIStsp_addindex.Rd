@@ -54,8 +54,9 @@ containing the new index}
 Default: retrieved from package installation folder}
 }
 \value{
-NULL - the MODIStsp_Previous.RData file is modified so to allow
-computation of the additional index
+The function is called for its side effects. On success, the
+MODIStsp_Previous.RData file is modified so to allow computation of the
+additional indexes.
 }
 \description{
 Function used to add a user-defined Spectral Index to the
