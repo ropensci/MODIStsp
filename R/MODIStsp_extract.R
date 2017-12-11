@@ -107,10 +107,10 @@ MODIStsp_extract <- function(in_rts, sp_object,
                               out_format = "xts", small    = TRUE,
                               small_method = "centroids",
                               na.rm      = TRUE, verbose = FALSE) {
-  
+
   .SD            <- NULL # Workaround to avoid note on package check
-  
-  
+
+
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
@@ -173,7 +173,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
 
   if (length(sel_dates) > 0) {
     if (sp::proj4string(sp_object) != sp::proj4string(in_rts)) {
-      sp_object <- sp::spTransform(sp_object, 
+      sp_object <- sp::spTransform(sp_object,
                                    sp::CRS(sp::proj4string(in_rts[[1]])))
     }
     sp_object@data$mdxtnq <- seq_along(sp_object@data[, 1])
@@ -233,7 +233,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
         ot <- "Byte"
       }       else {
         if (max(shape@data$mdxtnq) <= 65536) { #nocov start
-          ot <- "Int16" 
+          ot <- "Int16"
         }
         else {
           ot <- "Int32"
@@ -279,10 +279,10 @@ MODIStsp_extract <- function(in_rts, sp_object,
       if (small & ncols != length(shape@data[, 1])) {
 
         if (length(id_field) == 1) {
-          miss_feat   <- setdiff(as.character(shape@data[, "mdxtnq"]),
+          miss_feat   <- setdiff(as.character(shape@data[, eval(id_field)]),
                                  names(ts))
           pos_missing <- which(
-            as.character(shape@data[, "mdxtnq"]) %in% miss_feat
+            as.character(shape@data[, eval(id_field)]) %in% miss_feat
             )
         } else {
           pos_missing <- miss_feat <- which(as.character(
@@ -302,7 +302,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
                                    fun = mean)
 
           } else {
-            
+
             ts_mis[f, ] <- raster::extract(in_rts[[sel_dates[f]]],
                                            shpsub, fun = mean)
 
@@ -333,13 +333,13 @@ MODIStsp_extract <- function(in_rts, sp_object,
       names(ts_outside) <- feat_names_outside
       ts <- cbind(ts, ts_outside)
       if (length(id_field) == 1) {
-        # browser()
+
         sortindex <- which(!is.na(match(sp_object@data[, eval(id_field)],
                                         names(ts))))
       } else {
         sortindex <- which(!is.na(match(sp_object@data[,  "mdxtnq"], names(ts))))
       }
-      
+
       ts <- ts[, sortindex]
     }
     if (out_format == "xts") {
