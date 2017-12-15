@@ -32,8 +32,8 @@
 #'  completion.
 #' @param sensor `character ["Terra"| "Aqua" | "Both"]` MODIS platform to be considered.
 #'   (Ignored for MCD* products).
-#' @param https `hash table` http addresses for download of HDF of selected product.
-#' @param ftps `hash table` ftp addresses for download of HDF of selected product.
+#' @param https `list` http addresses for download of HDF of selected product.
+#' @param ftps `list` ftp addresses for download of HDF of selected product.
 #' @param download_server `character ["http" | "ftp" | "offline"]` service to be used for
 #'  download.
 #' @param user `character` Username for NASA http server.

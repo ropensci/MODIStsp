@@ -30,8 +30,8 @@
 #'  user's machines, and to implement unit testing. The number indicates which
 #'  tests to execute (six are available). If == 0, the test is selected
 #'  randomly. If == -1, MODIStsp is executed in normal mode. Default: -1
-#' @param n_retries `numeric` maximum number of retries on download functions. 
-#'   In case any download function fails more than `n_retries` times consecutively, 
+#' @param n_retries `numeric` maximum number of retries on download functions.
+#'   In case any download function fails more than `n_retries` times consecutively,
 #'   MODIStsp_process will abort, Default: 20
 #' @return NULL
 #'
@@ -82,7 +82,7 @@ MODIStsp <- function(gui               = TRUE,
                      options_file      = NULL,
                      spatial_file_path = NULL,
                      scroll_window     = FALSE,
-                     test              = -1, 
+                     test              = -1,
                      n_retries         = 20) {
 
   options("guiToolkit" = "RGtk2")
@@ -161,9 +161,9 @@ MODIStsp <- function(gui               = TRUE,
       }
 
     }
-    options("guiToolkit" = "Qt")
+    options("guiToolkit" = "RGtk2")
     #nocov end
-  } 
+  }
 
   # Check GDAL version ----
   if (is.null(getOption("gdalUtils_gdalPath"))) {
@@ -278,7 +278,7 @@ MODIStsp <- function(gui               = TRUE,
   if (reload_prodlist) {
     mess_text <- "Reading the MODIS products' characteristics from XML. Please wait!" #nolint
     message(mess_text)
-    if (gui) { 
+    if (gui) {
       #nocov start
       mess     <- gWidgets::gwindow(title  = "Please wait...",
                                     width  = 400,
@@ -289,7 +289,7 @@ MODIStsp <- function(gui               = TRUE,
                                    container = mess)
       Sys.sleep(0.05)
       #nocov end
-    } 
+    }
 
     MODIStsp_read_xml(prodopts_file = prodopts_file,
                       xml_file      = xml_file)
@@ -313,18 +313,18 @@ MODIStsp <- function(gui               = TRUE,
 
   if (gui) {
     #nocov start
-    
+
     if (exists("welcome_lab")) {
       gWidgets::dispose(welcome_lab)
     }
-    
+
     start <- MODIStsp_GUI(general_opts,
                          prod_opt_list,
                          MODIStsp_dir = system.file(package = "MODIStsp"),
                          previous_jsfile,
                          prodopts_file,
                          scroll_window)
-    #nocov end  
+    #nocov end
   } else {
     start <- TRUE
     gui   <- FALSE
@@ -399,7 +399,7 @@ MODIStsp <- function(gui               = TRUE,
 
       # Check if the input file is a valid spatial file and redefine the
       # bounding box
-      
+
       external_bbox <- try(bbox_from_file(spatial_file_path,
                                           general_opts$user_proj4),
                            silent = TRUE)
@@ -519,7 +519,7 @@ MODIStsp <- function(gui               = TRUE,
       main_out_folder    = prod_opts$main_out_folder,
       gui                = gui,
       use_aria           = general_opts$use_aria,
-      download_range     = general_opts$download_range, 
+      download_range     = general_opts$download_range,
       n_retries          = n_retries)
 
     # At end of successful execution, save the options used in the main output

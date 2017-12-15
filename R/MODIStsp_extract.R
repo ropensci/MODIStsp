@@ -337,7 +337,8 @@ MODIStsp_extract <- function(in_rts, sp_object,
         sortindex <- which(!is.na(match(sp_object@data[, eval(id_field)],
                                         names(ts))))
       } else {
-        sortindex <- which(!is.na(match(sp_object@data[,  "mdxtnq"], names(ts))))
+        sortindex <- which(!is.na(match(sp_object@data[,  "mdxtnq"],
+                                        names(ts))))
       }
 
       ts <- ts[, sortindex]

@@ -46,9 +46,9 @@ download.}
 \item{password}{\code{character} Password for NASA http server
 (\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home}).}
 
-\item{https}{\code{hash table} http addresses for download of HDF of selected product.}
+\item{https}{\code{list} http addresses for download of HDF of selected product.}
 
-\item{ftps}{\code{hash table} ftp addresses for download of HDF of selected product.}
+\item{ftps}{\code{list} ftp addresses for download of HDF of selected product.}
 
 \item{start_x}{\code{integer [0-35]} Start horizontal tile.}
 
