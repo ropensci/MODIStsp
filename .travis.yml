@@ -36,5 +36,3 @@ matrix:
       r_binary_packages:
         - cairoDevice
         - RGtk2
-        - rgdal
-        - rgeos
