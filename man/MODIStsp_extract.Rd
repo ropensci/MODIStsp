@@ -117,7 +117,8 @@ options$out_folder <- system.file("testdata/", package = "MODIStsp")
 jsonlite::write_json(options, opts_file, auto_unbox = TRUE, pretty = TRUE)
 suppressMessages(MODIStsp(options_file = opts_file, gui = FALSE))
 stack_file  <- system.file(
-  "testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData",
+  "testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI", 
+  "MOD13A1_NDVI_1_2016_353_2016_RData.RData",
   package = "MODIStsp")
 basename(stack_file)
  

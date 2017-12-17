@@ -187,7 +187,9 @@ MODIStsp <- function(gui               = TRUE,
     } else {
       message("[", date(), "] ", welcome_text)
     }
-    gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE)
+    gdalpath <- Sys.which("gdalinfo")
+    gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE, 
+                                    search_path = dirname(gdalpath))
   }
   gdal_version <- package_version(
     gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*", "\\1",
