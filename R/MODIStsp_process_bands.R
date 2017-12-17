@@ -120,14 +120,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
   process_message(mess_text, gui, mess_lab)
 
-  # if (gui) {
-  #   gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
-  #   Sys.sleep(0.05)
-  #   message("[", date(), "] ", mess_text)
-  # } else {
-  #   message("[", date(), "] ", mess_text)
-  # }
-
   # filename of temporary vrt file
   outfile_vrt <- tempfile(fileext = ".vrt")
 
@@ -234,14 +226,14 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                               outfile_vrt,
                               te        = c(bbox_mod),
                               tap       = TRUE,
-                              tr        = res(raster(outfile_vrt_or)),
+                              tr        = raster::res(raster::raster(outfile_vrt_or)), #nolint
                               srcnodata = nodata_in,
                               vrtnodata = nodata_out,
                               sd        = band,
                               overwrite = TRUE)
     }
   }
-
+  
   # If scale_factor="Yes", add a "step" before creating final
   # files (a temporary file is created in tempdir, then
   # later the scale and offset are applied to it and result

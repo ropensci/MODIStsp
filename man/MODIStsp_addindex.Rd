@@ -84,7 +84,7 @@ the user to add the new index.
 License: GPL 3.0
 }
 \examples{
-# Run the GUI to interactively define the function
+# Run the GUI to interactively define a new index
  \dontrun{
  MODIStsp_addindex()}
 
@@ -94,12 +94,10 @@ MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")}
 
 # Define the new index in non-interactive execution
 \dontrun{
-MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSsava4",
-  new_indexfullname = "Simple Stupid vasvasavs",
+MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSI",
+  new_indexfullname = "Simple Useless Index",
   new_indexformula = "b2_NIR+b1_Red")
-  }
-
-
+}
 }
 \author{
 Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}

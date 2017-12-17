@@ -1,7 +1,7 @@
 #### HELPER FUNCTIONS FOR MODIStsp_GUI TO AVOID REPETITIONS AND FACILITATE  ####
-#### READING
+#### MAINTENANCE
 
-#' @title gui_update_tiles
+#' @title gui_update_bboxlabels
 #' @description Helper function to update the labels of the gui showing the
 #'  bounding box coordinates when a spatial file is selected or a projection
 #'  change is issued.
@@ -11,30 +11,24 @@
 #'
 gui_update_bboxlabels <- function(bbox_out,
                                   units,
-                                  output_ul_east_wid,
-                                  output_ul_north_wid,
-                                  output_lr_east_wid,
-                                  output_lr_north_wid) {
+                                  wids) {
   #nocov start
-
+  
   digits <- ifelse(units == "dec. degrees", 4, 1)
-  gWidgets::svalue(output_ul_east_wid)  <- formatC(bbox_out[1, 1],
-                                                   digits = digits,
-                                                   format = "f")
-  gWidgets::svalue(output_ul_north_wid) <- formatC(bbox_out[2, 2],
-                                                   digits = digits,
-                                                   format = "f")
-  gWidgets::svalue(output_lr_east_wid)  <- formatC(bbox_out[1, 2],
-                                                   digits = digits,
-                                                   format = "f")
-  gWidgets::svalue(output_lr_north_wid) <- formatC(bbox_out[2, 1],
-                                                   digits = digits,
-                                                   format = "f")
+  gWidgets::svalue(wids$output_ul_east)  <- formatC(bbox_out[1, 1],
+                                                    digits = digits,
+                                                    format = "f")
+  gWidgets::svalue(wids$output_ul_north) <- formatC(bbox_out[2, 2],
+                                                    digits = digits,
+                                                    format = "f")
+  gWidgets::svalue(wids$output_lr_east)  <- formatC(bbox_out[1, 2],
+                                                    digits = digits,
+                                                    format = "f")
+  gWidgets::svalue(wids$output_lr_north) <- formatC(bbox_out[2, 1],
+                                                    digits = digits,
+                                                    format = "f")
   #nocov end
 }
-
-# Helper function to update the selected tiles with the intersection with ####
-# the bounding box
 
 #' @title gui_update_tiles
 #' @description Helper function to update the selected tiles with the
@@ -44,25 +38,21 @@ gui_update_bboxlabels <- function(bbox_out,
 #' @noRd
 #'
 gui_update_tiles <- function(bbox_out,
-                             output_proj4_wid,
                              mod_proj_str,
                              modis_grid,
-                             start_x_wid,
-                             end_x_wid,
-                             start_y_wid,
-                             end_y_wid) {
+                             wids) {
   #nocov start
-
+  
   bbox_mod  <- reproj_bbox(bbox_out,
-                           gWidgets::svalue(output_proj4_wid),
+                           gWidgets::svalue(wids$output_proj4),
                            mod_proj_str,
                            enlarge = TRUE)
-
+  
   d_bbox_mod_tiled    <- raster::crop(modis_grid, raster::extent(bbox_mod))
-  gWidgets::svalue(start_x_wid) <- min(d_bbox_mod_tiled$H)
-  gWidgets::svalue(end_x_wid)   <- max(d_bbox_mod_tiled$H)
-  gWidgets::svalue(start_y_wid) <- min(d_bbox_mod_tiled$V)
-  gWidgets::svalue(end_y_wid)   <- max(d_bbox_mod_tiled$V)
+  gWidgets::svalue(wids$start_x) <- min(d_bbox_mod_tiled$H)
+  gWidgets::svalue(wids$end_x)   <- max(d_bbox_mod_tiled$H)
+  gWidgets::svalue(wids$start_y) <- min(d_bbox_mod_tiled$V)
+  gWidgets::svalue(wids$end_y)   <- max(d_bbox_mod_tiled$V)
   #nocov end
 }
 
@@ -84,7 +74,8 @@ gui_get_proj <- function(sel_output_proj) {
 #' @importFrom utils head tail
 #' @noRd
 #'
-gui_get_units <- function(sel_output_proj, proj) {
+gui_get_units <- function(sel_output_proj,
+                          proj) {
   #nocov start
   if (proj == "longlat") {
     units <- "dec.degrees"
@@ -108,70 +99,73 @@ gui_get_units <- function(sel_output_proj, proj) {
 #' @importFrom raster crop extent
 #' @noRd
 #'
-gui_load_options <- function(js_file) {
-
+gui_load_options <- function(js_file,
+                             wids,
+                             prod_opt_list) {
   #nocov start
-
+  
   # load file and reset all widgets to values found in the loaded file
   general_opts     <- jsonlite::fromJSON(js_file)
-  svalue(cat_wid)  <- with(
-    prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]],
-    paste(cat01, cat02, sep = " - ")
+  
+  gWidgets::svalue(wids$cat) <- paste(
+    prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$cat01,
+    prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$cat02,
+    sep = " - "
   )
-  svalue(prod_wid) <- general_opts$sel_prod
-  svalue(vers_wid) <- general_opts$prod_version
-  svalue(sens_wid) <- general_opts$sensor
-
+  gWidgets::svalue(wids$prod) <- general_opts$sel_prod
+  gWidgets::svalue(wids$vers) <- general_opts$prod_version
+  gWidgets::svalue(wids$sens) <- general_opts$sensor
+  
   # set dummy variables holding the initial values of selected bands
   gui_env$temp_wid_bands         <- general_opts$bandsel
   gui_env$temp_wid_bands_indexes <- general_opts$indexes_bandsel
   gui_env$temp_wid_bands_quality <- general_opts$quality_bandsel
-
-  svalue(server_wid)   <- general_opts$download_server
-  svalue(user_wid)     <- general_opts$user
-  svalue(password_wid) <- general_opts$password
-  svalue(aria_wid)     <- general_opts$use_aria
-  svalue(seas_wid)     <- general_opts$download_range
-
+  
+  gWidgets::svalue(wids$server)   <- general_opts$download_server
+  gWidgets::svalue(wids$user)     <- general_opts$user
+  gWidgets::svalue(wids$password) <- general_opts$password
+  gWidgets::svalue(wids$aria)     <- general_opts$use_aria
+  gWidgets::svalue(wids$seas)     <- general_opts$download_range
+  
   # Dates options
-  svalue(start_date_wid) <- general_opts$start_date
-  svalue(end_date_wid)   <- general_opts$end_date
-
+  gWidgets::svalue(wids$start_date) <- general_opts$start_date
+  gWidgets::svalue(wids$end_date)   <- general_opts$end_date
+  
   # Tiles options
-  svalue(start_x_wid) <- general_opts$start_x
-  svalue(end_x_wid)   <- general_opts$end_x
-  svalue(start_y_wid) <- general_opts$start_y
-  svalue(end_y_wid)   <- general_opts$end_y
-
+  gWidgets::svalue(wids$start_x) <- general_opts$start_x
+  gWidgets::svalue(wids$end_x)   <- general_opts$end_x
+  gWidgets::svalue(wids$start_y) <- general_opts$start_y
+  gWidgets::svalue(wids$end_y)   <- general_opts$end_y
+  
   # Proj and extent options
-  svalue(proj_wid)            <- general_opts$proj
-  svalue(output_proj4_wid)    <- general_opts$user_proj4
-  svalue(output_res_sel_wid)  <- general_opts$out_res_sel
-  svalue(output_res_wid)      <- general_opts$out_res
-  svalue(output_resmeth_wid)  <- general_opts$resampling
-  svalue(output_ext_wid)      <- general_opts$full_ext
-  svalue(output_ul_east_wid)  <- general_opts$bbox[1]
-  svalue(output_lr_east_wid)  <- general_opts$bbox[3]
-  svalue(output_lr_north_wid) <- general_opts$bbox[2]
-  svalue(output_ul_north_wid) <- general_opts$bbox[4]
-  svalue(reprocess_wid)       <- general_opts$reprocess
-  svalue(delete_wid)          <- general_opts$delete_hdf
-  svalue(nodata_wid)          <- general_opts$nodata_change
-  svalue(scale_wid)           <- general_opts$scale_val
-
-  svalue(format_wid)     <- general_opts$out_format
-  svalue(timeseries_wid) <- general_opts$ts_format
-
-  svalue(compress_wid)   <- names(general_opts$compress)
-
+  gWidgets::svalue(wids$proj)            <- general_opts$proj
+  gWidgets::svalue(wids$output_proj4)    <- general_opts$user_proj4
+  gWidgets::svalue(wids$output_res_sel)  <- general_opts$out_res_sel
+  gWidgets::svalue(wids$output_res)      <- general_opts$out_res
+  gWidgets::svalue(wids$output_resmeth)  <- general_opts$resampling
+  gWidgets::svalue(wids$output_ext)      <- general_opts$full_ext
+  gWidgets::svalue(wids$output_ul_east)  <- general_opts$bbox[1]
+  gWidgets::svalue(wids$output_lr_east)  <- general_opts$bbox[3]
+  gWidgets::svalue(wids$output_lr_north) <- general_opts$bbox[2]
+  gWidgets::svalue(wids$output_ul_north) <- general_opts$bbox[4]
+  gWidgets::svalue(wids$reprocess)       <- general_opts$reprocess
+  gWidgets::svalue(wids$delete)          <- general_opts$delete_hdf
+  gWidgets::svalue(wids$nodata)          <- general_opts$nodata_change
+  gWidgets::svalue(wids$scale)           <- general_opts$scale_val
+  
+  gWidgets::svalue(wids$format)     <- general_opts$out_format
+  gWidgets::svalue(wids$timeseries) <- general_opts$ts_format
+  
+  gWidgets::svalue(wids$compress)   <- names(general_opts$compress)
+  
   # Folder options
-  svalue(outfold_wid)    <- general_opts$out_folder
-  svalue(outfoldmod_wid) <- general_opts$out_folder_mod
+  gWidgets::svalue(wids$outfold)    <- general_opts$out_folder
+  gWidgets::svalue(wids$outfoldmod) <- general_opts$out_folder_mod
   #nocov end
 }
 
 
-#' @title gui_prepare_to_save_options
+#' @title gui_save_options
 #' @description Helper function to check consistency of the selected processing
 #'  options before saving to a json file or starting MODIStsp processing
 #' @noRd
@@ -179,19 +173,25 @@ gui_load_options <- function(js_file) {
 #' @importFrom jsonlite fromJSON
 #' @importFrom raster crop extent
 #' @noRd
-gui_prepare_to_save_options <- function(general_opts,
-                                        gui_env,
-                                        ...) {
+gui_save_options <- function(general_opts,
+                             gui_env,
+                             opt_jsfile,
+                             mod_prod_list,
+                             mod_proj_str,
+                             modis_grid,
+                             prod_opt_list,
+                             compress_dict,
+                             wids) {
   #nocov start
-  svalue <- gWidgets::svalue
+  
   # workaround to retrieve custom index, since it was already saved to the
   # JSON but it is not available in current variables
-
+  
   general_opts$custom_indexes <-
     jsonlite::fromJSON(opt_jsfile)$custom_indexes
   # retrieve product options
   general_opts$sel_prod <- mod_prod_list[
-    which(mod_prod_list == svalue(prod_wid))
+    which(mod_prod_list == gWidgets::svalue(wids$prod))
     ]
   general_opts$prod_version <-
     prod_opt_list[[general_opts$sel_prod]][[which(vapply(
@@ -199,8 +199,8 @@ gui_prepare_to_save_options <- function(general_opts,
       function(x){
         x$v_number
       }
-      , FUN.VALUE = "") == svalue(vers_wid))]]$v_number
-  general_opts$sensor <- svalue(sens_wid)
+      , FUN.VALUE = "") == gWidgets::svalue(wids$vers))]]$v_number
+  general_opts$sensor <- gWidgets::svalue(wids$sens)
   #retrieve selected bands
   if (exists("temp_wid_bands", where = gui_env)) {
     general_opts$bandsel <- gui_env$temp_wid_bands
@@ -213,53 +213,53 @@ gui_prepare_to_save_options <- function(general_opts,
   if (exists("temp_wid_bands_indexes", where = gui_env)) {
     general_opts$quality_bandsel <- gui_env$temp_wid_bands_quality
   }
-
+  
   # Retrieve download method and authentication
-  general_opts$user            <- svalue(user_wid)
-  general_opts$password        <- svalue(password_wid)
-  general_opts$download_server <- svalue(server_wid)
-  general_opts$use_aria        <- svalue(aria_wid)
-  general_opts$download_range  <- svalue(seas_wid)
-
+  general_opts$user            <- gWidgets::svalue(wids$user)
+  general_opts$password        <- gWidgets::svalue(wids$password)
+  general_opts$download_server <- gWidgets::svalue(wids$server)
+  general_opts$use_aria        <- gWidgets::svalue(wids$aria)
+  general_opts$download_range  <- gWidgets::svalue(wids$seas)
+  
   # Retrieve dates
-  general_opts$start_date <- svalue(start_date_wid)
-  general_opts$end_date   <- svalue(end_date_wid)
-
+  general_opts$start_date <- gWidgets::svalue(wids$start_date)
+  general_opts$end_date   <- gWidgets::svalue(wids$end_date)
+  
   # Retrieve Tiles options
-  general_opts$start_x <- svalue(start_x_wid)
-  general_opts$end_x   <- svalue(end_x_wid)
-  general_opts$start_y <- svalue(start_y_wid)
-  general_opts$end_y   <- svalue(end_y_wid)
-
+  general_opts$start_x <- gWidgets::svalue(wids$start_x)
+  general_opts$end_x   <- gWidgets::svalue(wids$end_x)
+  general_opts$start_y <- gWidgets::svalue(wids$start_y)
+  general_opts$end_y   <- gWidgets::svalue(wids$end_y)
+  
   # Retrieve Proj and extent options
-  general_opts$proj        <- svalue(proj_wid)
-  general_opts$user_proj4  <- svalue(output_proj4_wid)
-  general_opts$out_res_sel <- svalue(output_res_sel_wid)
-  general_opts$out_res     <- svalue(output_res_wid)
-  general_opts$resampling  <- svalue(output_resmeth_wid)
-  general_opts$full_ext    <- svalue(output_ext_wid)
-  general_opts$bbox        <- c(svalue(output_ul_east_wid),
-                                svalue(output_lr_north_wid),
-                                svalue(output_lr_east_wid),
-                                svalue(output_ul_north_wid))
-
+  general_opts$proj        <- gWidgets::svalue(wids$proj)
+  general_opts$user_proj4  <- gWidgets::svalue(wids$output_proj4)
+  general_opts$out_res_sel <- gWidgets::svalue(wids$output_res_sel)
+  general_opts$out_res     <- gWidgets::svalue(wids$output_res)
+  general_opts$resampling  <- gWidgets::svalue(wids$output_resmeth)
+  general_opts$full_ext    <- gWidgets::svalue(wids$output_ext)
+  general_opts$bbox        <- c(gWidgets::svalue(wids$output_ul_east),
+                                gWidgets::svalue(wids$output_lr_north),
+                                gWidgets::svalue(wids$output_lr_east),
+                                gWidgets::svalue(wids$output_ul_north))
+  
   # Retrieve reprocess, delete and nodata
-  general_opts$reprocess  <- svalue(reprocess_wid)
-  general_opts$delete_hdf <- svalue(delete_wid)
-
-  general_opts$nodata_change <- svalue(nodata_wid)
-  general_opts$scale_val     <- svalue(scale_wid)
-  general_opts$rts           <- svalue(rts_wid)
-
+  general_opts$reprocess  <- gWidgets::svalue(wids$reprocess)
+  general_opts$delete_hdf <- gWidgets::svalue(wids$delete)
+  
+  general_opts$nodata_change <- gWidgets::svalue(wids$nodata)
+  general_opts$scale_val     <- gWidgets::svalue(wids$scale)
+  general_opts$rts           <- gWidgets::svalue(wids$rts)
+  
   # Retrieve format, virtual and compression
-  general_opts$out_format <- svalue(format_wid)
-  general_opts$ts_format  <- svalue(timeseries_wid)
-  general_opts$compress   <- compress_dict[svalue(compress_wid)]
-
+  general_opts$out_format <- gWidgets::svalue(wids$format)
+  general_opts$ts_format  <- gWidgets::svalue(wids$timeseries)
+  general_opts$compress   <- compress_dict[gWidgets::svalue(wids$compress)]
+  
   # Retrieve Folder options
-  general_opts$out_folder     <- svalue(outfold_wid)
-  general_opts$out_folder_mod <- svalue(outfoldmod_wid)
-
+  general_opts$out_folder     <- gWidgets::svalue(wids$outfold)
+  general_opts$out_folder_mod <- gWidgets::svalue(wids$outfoldmod)
+  
   gui_env$check_save_opts <- TRUE
   # Send warning if HDF deletion selected
   if (general_opts$delete_hdf == "Yes") {
@@ -270,11 +270,11 @@ gui_prepare_to_save_options <- function(general_opts,
       title = "Warning", icon = "warning"
     )
   }
-
+  
   #- Perform checks on options consistency ---------------
-
+  
   # Check if at least 1 layer selected
-
+  
   if (max(general_opts$bandsel) +
       ifelse(length(general_opts$indexes_bandsel) > 0,
              max(general_opts$indexes_bandsel),
@@ -285,7 +285,7 @@ gui_prepare_to_save_options <- function(general_opts,
     )
     gui_env$check_save_opts <- FALSE
   }
-
+  
   # Check if dates, processing extent and tiles selection make sense
   if (as.Date(general_opts$start_date) > as.Date(general_opts$end_date)) {
     gWidgets::gmessage(
@@ -294,7 +294,7 @@ gui_prepare_to_save_options <- function(general_opts,
     )
     gui_env$check_save_opts <- FALSE
   }
-
+  
   if (
     class(try(as.Date(general_opts$start_date),
               silent = TRUE)) == "try-error" |
@@ -307,14 +307,14 @@ gui_prepare_to_save_options <- function(general_opts,
     )
     gui_env$check_save_opts <- FALSE
   }
-
+  
   if (general_opts$start_x > general_opts$end_x |
       general_opts$start_y > general_opts$end_y) {
     gWidgets::gmessage(message = "Error in Selected Tiles! Please correct!",
                        title   = "Warning")
     gui_env$check_save_opts <- FALSE
   }
-
+  
   # Check if bbox is consistent
   suppressWarnings(general_opts$bbox <- as.numeric(general_opts$bbox))
   general_opts$bbox <- as.numeric(general_opts$bbox)
@@ -340,7 +340,7 @@ gui_prepare_to_save_options <- function(general_opts,
   if (general_opts$full_ext == "Resized" & gui_env$check_save_opts) {
     bbox_mod         <- reproj_bbox(
       general_opts$bbox,
-      svalue(output_proj4_wid), mod_proj_str,
+      gWidgets::svalue(wids$output_proj4), mod_proj_str,
       enlarge = TRUE
     )
     d_bbox_mod_tiled <- raster::crop(modis_grid, raster::extent(bbox_mod))
@@ -350,15 +350,15 @@ gui_prepare_to_save_options <- function(general_opts,
                         "V" = min(d_bbox_mod_tiled$V):max(d_bbox_mod_tiled$V)
       ), 1, paste, collapse = "_V")
     )
-
+    
     selected_tiles <- paste0(
       "H",
       apply(expand.grid(
-        "H" = svalue(start_x_wid):svalue(end_x_wid),
-        "V" = svalue(start_y_wid):svalue(end_y_wid)),
+        "H" = gWidgets::svalue(wids$start_x):gWidgets::svalue(wids$end_x),
+        "V" = gWidgets::svalue(wids$start_y):gWidgets::svalue(wids$end_y)),
         1, paste, collapse = "_V")
     )
-
+    
     # If the bounding box does not intersect with the tiles, return a warning
     # asking to automatically retrieve from extent
     if (!any(required_tiles %in% selected_tiles)) {
@@ -377,7 +377,7 @@ gui_prepare_to_save_options <- function(general_opts,
         , title = "Warning"
       )
     }
-
+    
     # If not all the required tiles are selected, ask to select them
     if (!all(required_tiles %in% selected_tiles) & gui_env$check_save_opts) {
       gWidgets::gconfirm(
@@ -398,7 +398,7 @@ gui_prepare_to_save_options <- function(general_opts,
         , title = "question"
       )
     }
-
+    
     # If some selected tiles are not useful, ask to remove them
     if (!all(selected_tiles %in% required_tiles) & gui_env$check_save_opts) {
       gWidgets::gconfirm(
@@ -420,22 +420,22 @@ gui_prepare_to_save_options <- function(general_opts,
       )
     }
   }
-
+  
   # check if folders are defined
   if (general_opts$out_folder == "" & gui_env$check_save_opts) {
     gWidgets::gmessage(
-      message = "Please Select an output folder MODIStsp outputs!",
+      message = "Please select an output folder MODIStsp outputs!",
       title   = "Warning"
     )
     gui_env$check_save_opts <- FALSE
   }
   if (general_opts$out_folder_mod == "" & gui_env$check_save_opts) {
     gWidgets::gmessage(
-      message = "Select an output folder for storage of original HDFs!",
+      message = "Please select an output folder for storage of original HDFs!",
       title   = "Warning")
     gui_env$check_save_opts <- FALSE
   }
-
+  
   # Issue Warning on Mode resamling
   if (general_opts$resampling == "mode" & gui_env$check_save_opts) {
     check_mode <- gWidgets::gconfirm(
@@ -451,7 +451,7 @@ gui_prepare_to_save_options <- function(general_opts,
       gui_env$check_save_opts <- FALSE
     }
   }
-
+  
   # check that user/password were provided in case of html download
   if (general_opts$download_server == "http" &
       (general_opts$user == "" | general_opts$password == "") &
@@ -464,7 +464,15 @@ gui_prepare_to_save_options <- function(general_opts,
       title   = "Warning")
     gui_env$check_save_opts <- FALSE
   }
-
+  
+  
+  #   __________________________________________________________________________
+  #   # If all checks passed, save options file and return                  ####
+  
+  if (gui_env$check_save_opts) {
+    jsonlite::write_json(general_opts, opt_jsfile, pretty = TRUE,
+                         auto_unbox = TRUE)
+  }
   return(general_opts)
   #nocov end
 }

@@ -14,7 +14,7 @@ MODIStest_check_md5 <- function(test) {
 
   # charge expected values
   exp_md5 <- as.data.frame(
-    fromJSON(system.file("Test_files", "tests_md5.json", package = "MODIStsp")),
+    fromJSON(system.file("testdata", "tests_md5.json", package = "MODIStsp")),
     stringsAsFactors = FALSE)
   exp_md5 <- exp_md5[exp_md5$test == test, ]
 

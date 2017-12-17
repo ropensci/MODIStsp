@@ -222,8 +222,9 @@ Default: retrieved from package installation folder</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>NULL - the MODIStsp_Previous.RData file is modified so to allow
-computation of the additional index</p>
+    <p>The function is called for its side effects. On success, the
+MODIStsp_Previous.RData file is modified so to allow computation of the
+additional indexes.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -249,7 +250,7 @@ the user to add the new index.</p></li>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># Run the GUI to interactively define the function
+    <pre class="examples"><div class='input'># Run the GUI to interactively define a new index
  </div><span class='co'># NOT RUN {</span>
  <span class='fu'>MODIStsp_addindex</span>()
 <span class='co'># }</span><div class='input'>
@@ -259,13 +260,10 @@ the user to add the new index.</p></li>
 <span class='co'># }</span><div class='input'>
 # Define the new index in non-interactive execution
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSsava4"</span>,
-  <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='st'>"Simple Stupid vasvasavs"</span>,
+<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
+  <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='st'>"Simple Useless Index"</span>,
   <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)
-
-<span class='co'># }</span><div class='input'>
-
-</div></pre>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

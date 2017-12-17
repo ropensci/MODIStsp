@@ -142,7 +142,7 @@
     </div>
 
     
-    <p>Ancillary function used to reproject bounding boxes; setting the parameter
+    <p>Helper function used to reproject bounding boxes; setting the parameter
 'enlarge' allows to choose if the new one would be the one which completely
 includes the original extent in the output projection, or if is simply the
 one obtained by reprojecting the upper-left and the lower-right corners.</p>
@@ -155,8 +155,8 @@ one obtained by reprojecting the upper-left and the lower-right corners.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>bbox</th>
-      <td><p>The input bounding box (it can be a matrix in the bbox format or a
-vector in the format (xmin, ymin, xmax, ymax)).</p></td>
+      <td><p>The input bounding box (it can be a matrix obtained from <code><a href='http://www.rdocumentation.org/packages/sp/topics/bbox'>sp::bbox()</a></code>,
+or a numeric vector in the format (xmin, ymin, xmax, ymax)).</p></td>
     </tr>
     <tr>
       <th>in_proj</th>

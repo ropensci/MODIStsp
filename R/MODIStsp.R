@@ -102,7 +102,7 @@ MODIStsp <- function(gui               = TRUE,
     message("MODIStsp is running in test mode.")
     # read names of available json test files
     test_files <- sort(list.files(
-      path       = system.file("Test_files", package = "MODIStsp"),
+      path       = system.file("testdata", package = "MODIStsp"),
       pattern    = "^test[0-9]{2}\\.json$",
       full.names = TRUE))
     # if test=0, select the test randomly
@@ -117,7 +117,7 @@ MODIStsp <- function(gui               = TRUE,
     }
     # check that the offline HDF files were unzipped - unzip them if not
     tests_hdf_zipped <- list.files(
-      path       = system.file("Test_files", package = "MODIStsp"),
+      path       = system.file("testdata", package = "MODIStsp"),
       pattern    = "\\.hdf\\.zip$",
       full.names = TRUE
     )
@@ -226,11 +226,11 @@ MODIStsp <- function(gui               = TRUE,
   # Folders in which the JSON/RData files (previous settings and product
   # descriptions) are saved
   if (is.null(options_file)) {
-    previous_dir <- system.file("Previous", package = "MODIStsp")
+    previous_dir <- system.file("ExtData/Previous", package = "MODIStsp")
   } else {
     previous_dir <- dirname(options_file)
   }
-  prodopts_dir <- system.file("Previous", package = "MODIStsp")
+  prodopts_dir <- system.file("ExtData/Previous", package = "MODIStsp")
   dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE)
   dir.create(prodopts_dir, showWarnings = FALSE, recursive = TRUE)
 
@@ -394,7 +394,7 @@ MODIStsp <- function(gui               = TRUE,
     #   ________________________________________________________________________
     #   If `spatial_file_path` is passed, values of the bounding boxe derived
     #   from `previous_jsfile` for the bbox are overwritten
-
+    
     if (!is.null(spatial_file_path)) {
 
       # Check if the input file is a valid spatial file and redefine the
@@ -404,7 +404,7 @@ MODIStsp <- function(gui               = TRUE,
                                           general_opts$user_proj4),
                            silent = TRUE)
       if (class(external_bbox) == "try-error") {
-        stop("Failure in retrieving processing extent from ",
+        stop("Failed in retrieving processing extent from ",
              spatial_file_path,
              " . Please check your inputs! Aborting."
         )
@@ -440,20 +440,13 @@ MODIStsp <- function(gui               = TRUE,
     }
 
     #   ________________________________________________________________________
-    #   If running a test, redefine set output folders to use `R` temporary
-    #   folder to store results and the Test_Files subfolder of MODIStsp
-    #   to look for example files. Also, ask to set the username and
-    #   password in case of tests based on http download
+    #   If running a test, redefine  output folders to use `R` temporary
+    #   folder to store results and the testdata subfolder of MODIStsp
+    #   to look for example files.
 
     if (test != -1) {
       general_opts$out_folder     <- normalizePath(tempdir())
       general_opts$out_folder_mod <- normalizePath(tempdir())
-      # if (exists("test_username")) {
-      #   general_opts$user     <- test_username
-      # }
-      # if (exists("test_password")) {
-      #   general_opts$password <- test_password
-      # }
     }
 
     #   ________________________________________________________________________

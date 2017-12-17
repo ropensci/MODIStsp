@@ -61,7 +61,7 @@
 #' @export
 #'
 #' @examples
-#' # Run the GUI to interactively define the function
+#' # Run the GUI to interactively define a new index
 #'  \dontrun{
 #'  MODIStsp_addindex()}
 #'
@@ -71,12 +71,10 @@
 #'
 #' # Define the new index in non-interactive execution
 #' \dontrun{
-#' MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSsava4",
-#'   new_indexfullname = "Simple Stupid vasvasavs",
+#' MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSI",
+#'   new_indexfullname = "Simple Useless Index",
 #'   new_indexformula = "b2_NIR+b1_Red")
-#'   }
-#'
-#'
+#' }
 
 MODIStsp_addindex <- function(
   option_jsfile       = NULL,
@@ -111,12 +109,15 @@ MODIStsp_addindex <- function(
     #nocov end
   } 
   
-  previous_dir    <- file.path(MODIStsp_dir, "Previous")
   previous_jsfile <- ifelse(is.null(option_jsfile),
-                            file.path(previous_dir, "MODIStsp_Previous.json"),
+                            system.file("ExtData/Previous", 
+                                        "MODIStsp_Previous.json",
+                                        package = "MODIStsp"),
                             option_jsfile)
   prodopts_file   <- ifelse(is.null(prodopts_file),
-                            file.path(previous_dir, "MODIStsp_ProdOpts.RData"),
+                            system.file("ExtData/Previous",
+                                        "MODIStsp_ProdOpts.RData", 
+                                        package = "MODIStsp"),
                             prodopts_file)
   general_opts    <- jsonlite::fromJSON(previous_jsfile)
   
@@ -159,20 +160,24 @@ MODIStsp_addindex <- function(
     main_group <- gWidgets::ggroup(container  = main_win, horizontal = FALSE,
                                    expand = TRUE)
     
-    indexbandname_group <- gWidgets::ggroup(container  = main_group, horizontal = TRUE,
+    indexbandname_group <- gWidgets::ggroup(container  = main_group,
+                                            horizontal = TRUE,
                                             expand     = TRUE)
-    indexbandname_label <- gWidgets::glabel(text = "Spectral Index Acronym (e.g., SR)",
-                                            markup    = TRUE,
-                                            container = indexbandname_group)
+    indexbandname_label <- gWidgets::glabel(
+      text = "Spectral Index Acronym (e.g., SR)",
+      markup    = TRUE,
+      container = indexbandname_group
+    )
     gWidgets::size(indexbandname_label) <- c(500, 20)
     gWidgets::font(indexbandname_label) <- list(family = "sans", size = 10,
                                                 weight = "bold")
     
-    sel_indexbandname <- gWidgets::gedit(text       = new_indexbandname,
-                                         label      = "Please Insert a valid Proj4 string        ", #nolint
-                                         container  = indexbandname_group,
-                                         size       = 800,
-                                         horizontal = TRUE
+    sel_indexbandname <- gWidgets::gedit(
+      text       = new_indexbandname,
+      label      = "Please Insert a valid Proj4 string        ",
+      container  = indexbandname_group,
+      size       = 800,
+      horizontal = TRUE
     )
     
     indexbandfullname_group <- gWidgets::ggroup(container  = main_group,
@@ -188,14 +193,17 @@ MODIStsp_addindex <- function(
     gWidgets::font(indexbandfullname_label) <- list(family = "sans", size = 10,
                                           weight = "bold")
     
-    sel_indexbandfullname <- gWidgets::gedit(text       = new_indexfullname,
-                                             container  = indexbandfullname_group,
-                                             size       = 800,
-                                             horizontal = TRUE)
+    sel_indexbandfullname <- gWidgets::gedit(
+      text       = new_indexfullname,
+      container  = indexbandfullname_group,
+      size       = 800,
+      horizontal = TRUE
+    )
     
     indexformula_group <- gWidgets::ggroup(container  = main_group,
                                            horizontal = TRUE,
                                            expand     = TRUE)
+    
     indexformula_label <- gWidgets::glabel(
       text      = "Spectral Index Formula (e.g., (b2_NIR/b1_Red) )",
       markup    = TRUE,

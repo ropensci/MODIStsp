@@ -149,7 +149,7 @@ the GUI to its last state. Otherwise, the previous options file is created
 by launching the MODIStsp_read_xml function</p>
     
 
-    <pre class="usage"><span class='fu'>MODIStsp_GUI</span>(<span class='no'>general_opts</span>, <span class='no'>prod_opt_list</span>, <span class='no'>MODIStsp_dir</span>, <span class='no'>previous_jsfile</span>,
+    <pre class="usage"><span class='fu'>MODIStsp_GUI</span>(<span class='no'>general_opts</span>, <span class='no'>prod_opt_list</span>, <span class='no'>MODIStsp_dir</span>, <span class='no'>opt_jsfile</span>,
   <span class='no'>prodopts_file</span>, <span class='no'>scroll_window</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -170,9 +170,10 @@ MODIStsp_ProdOpts.xml file)</p></td>
       <td><p>main folder of the package</p></td>
     </tr>
     <tr>
-      <th>previous_jsfile</th>
+      <th>opt_jsfile</th>
       <td><p>json parameters file containing data of the last
-execution</p></td>
+execution, or the ones contained in the <code>options_file</code> eventually passed to
+<code>MODIStsp</code></p></td>
     </tr>
     <tr>
       <th>prodopts_file</th>

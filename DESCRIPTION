@@ -28,28 +28,27 @@ Imports:
     data.table (>= 1.9.6),
     gdalUtils (>= 2.0.1.7),
     gWidgets (>= 0.0-54),
-    gWidgetstcltk,
-    hash (>= 2.2.6),
+    gWidgetsRGtk2,
     methods,
     httr (>= 1.1.0),
-    pacman, 
+    jsonlite,
+    pacman,
+    parallel,
     raster (>= 2.5-2),
     RCurl (>= 1.95-4.8),
     rgdal (>= 1.0-3),
     rgeos (>= 0.3-8),
-    jsonlite,
     sp (>= 1.2-2),
     stringr (>= 1.0.0),
     xts (>= 0.9-7),
-    xml2, 
-    parallel
+    xml2
 Suggests:
     spelling,
     knitr,
     rmarkdown,
     png,
     grid,
-    testthat,
+    httptest,
     covr
 SystemRequirements: Cairo >= 1.0.0, ATK (>= 1.10.0), Pango (>= 1.10.0), GTK+ (>=
     2.8.0), GLib (>= 2.8.0), Curl, GDAL (>= 1.6.3), PROJ.4 (>= 4.4.9)

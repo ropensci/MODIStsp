@@ -126,10 +126,10 @@
 <p>Preprocessed MODIS data can be retrieved within <code>R</code> either by accessing the single-date raster files, or by loading the saved <em>RasterStack</em> objects.</p>
 <p>Any single-date image can be accessed by simply opening it with a <code>raster</code> command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
-modistsp_file &lt;-<span class="st"> "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"</span>
+modistsp_file &lt;-<span class="st"> "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"</span>
 my_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
-<p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_path/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
+<p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series/RData” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
 indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))</code></pre></div>
 <p>This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <code>raster</code> or <code>rasterVis</code> packages.</p>
 <hr>
@@ -141,7 +141,7 @@ indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span 
 <p>If the input is of class <em>SpatialPoints</em>, the output object contains one column for each point specified, and one row for each date. If it is of class <em>SpatialPolygons</em> (or <em>SpatialLines</em>), it contains one column for each polygon (or each line), with values obtained applying the function specified as the “FUN” argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.</p>
 <p>As an example the following code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co">#Set the input paths to raster and shape file</span>
-  infile    &lt;-<span class="st"> 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'</span>  
+  infile    &lt;-<span class="st"> 'myoutfolder/Time_Series/RData/Mixed/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'</span>  
   shpname   &lt;-<span class="st"> 'path_to_file/rois.shp'</span>  
   <span class="co">#Set the start/end dates for extraction</span>
   startdate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">"2010-01-01"</span>)  

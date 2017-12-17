@@ -142,25 +142,21 @@
     </div>
 
     
-    <p>Load MODIStsp processing option from <code>previous_jsfile</code> if
+    <p>Load MODIStsp processing option from <code>opts_jsfile</code> if
 it already exist, otherwise initialise processing options to default and
-save them to <code>previous_jsfile</code>. Send warnings if options file is from an
+save them to <code>opts_jsfile</code>. Send warnings if options file is from an
 old version</p>
     
 
-    <pre class="usage"><span class='fu'>load_opts</span>(<span class='no'>previous_jsfile</span>, <span class='no'>mod_proj_str</span>)</pre>
+    <pre class="usage"><span class='fu'>load_opts</span>(<span class='no'>opts_jsfile</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>previous_jsfile</th>
+      <th>opts_jsfile</th>
       <td><p>Expected file name of the JSON file containing
 processing options</p></td>
-    </tr>
-    <tr>
-      <th>mod_proj_str</th>
-      <td><p>proj4 string defining MODIS standard sinusoidal projection</p></td>
     </tr>
     </table>
     

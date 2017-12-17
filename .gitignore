@@ -2,7 +2,7 @@
 .Rhistory
 .RData
 .Rprofile
-inst/Previous/
+inst/Previous/MODIStsp_ProdOpts.RData
 MODIStsp.Rproj
 old_and_various/
 Rplot\.pdf
@@ -19,40 +19,40 @@ tests/testthat/test_modistsp_LB\.R
 
 tests/testthat/test_modistspGUI\.R
 
-inst/Test_files/MYD10CM\.A2016214\.006\.2016246092743\.hdf
+inst/testdatas/MYD10CM\.A2016214\.006\.2016246092743\.hdf
 
-inst/Test_files/MYD10CM\.A2015213\.006\.2016180125140\.hdf
+inst/testdatas/MYD10CM\.A2015213\.006\.2016180125140\.hdf
 
-inst/Test_files/MOD11B2\.A2017001\.h14v04\.006\.2017013155631\.hdf
+inst/testdatas/MOD11B2\.A2017001\.h14v04\.006\.2017013155631\.hdf
 
-inst/Test_files/MOD10CM\.A2016214\.006\.2016246091807\.hdf
+inst/testdatas/MOD10CM\.A2016214\.006\.2016246091807\.hdf
 
-inst/Test_files/MOD10CM\.A2015213\.006\.2016181105051\.hdf
+inst/testdatas/MOD10CM\.A2015213\.006\.2016181105051\.hdf
 
-inst/Test_files/MOD09A1\.A2017193\.h18v04\.006\.2017202035302\.hdf
+inst/testdatas/MOD09A1\.A2017193\.h18v04\.006\.2017202035302\.hdf
 
-inst/Test_files/MCD43A3\.A2017200\.h15v07\.006\.2017209032506\.hdf
+inst/testdatas/MCD43A3\.A2017200\.h15v07\.006\.2017209032506\.hdf
 
-inst/Test_files/MCD15A2H\.A2016209\.h18v01\.006\.2016223063818\.hdf
+inst/testdatas/MCD15A2H\.A2016209\.h18v01\.006\.2016223063818\.hdf
 
-inst/Test_files/MCD15A2H\.A2016209\.h18v00\.006\.2016223064633\.hdf
+inst/testdatas/MCD15A2H\.A2016209\.h18v00\.006\.2016223064633\.hdf
 
-inst/Test_files/MCD15A2H\.A2016201\.h18v01\.006\.2016215124642\.hdf
+inst/testdatas/MCD15A2H\.A2016201\.h18v01\.006\.2016215124642\.hdf
 
-inst/Test_files/MCD15A2H\.A2016201\.h18v00\.006\.2016215124644\.hdf
+inst/testdatas/MCD15A2H\.A2016201\.h18v00\.006\.2016215124644\.hdf
 
-inst/Test_files/test04_LB\.json
-inst/Test_files/test05_LB\.json
-inst/Test_files/test5_LB\.json
+inst/testdatas/test04_LB\.json
+inst/testdatas/test05_LB\.json
+inst/testdatas/test5_LB\.json
 
 vignettes/Thumbs\.db
 
 tests/testthat/test-modistsp_LB\.R
 
-inst/Test_files/VI_16Days_1Km_v6/NDVI/
+inst/testdatas/VI_16Days_1Km_v6/NDVI/
 
-inst/Test_files/VI_16Days_500m_v6/Time_Series/
+inst/testdatas/VI_16Days_500m_v6/Time_Series/
 
-inst/Test_files/VI_16Days_500m_v6/MODIStsp_2017-12-05\.json
+inst/testdatas/VI_16Days_500m_v6/MODIStsp_2017-12-05\.json
 
-inst/Test_files/MODIStsp_2017-12-07\.json
+inst/testdatas/MODIStsp_2017-12-07\.json

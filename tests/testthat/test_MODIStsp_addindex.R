@@ -39,7 +39,6 @@ test_that("MODIStsp_addindex works as expected", {
   expect_message(
     MODIStsp_addindex(gui = FALSE, new_indexbandname = sample(10000, 1),
                       new_indexformula = "b1_Red - b2_NIR",
-                      new_indexfullname = sample(10000, 1)),
-    option_jsfile = tempfile(fileext = ".json")
+                      new_indexfullname = sample(10000, 1))
   )
 })

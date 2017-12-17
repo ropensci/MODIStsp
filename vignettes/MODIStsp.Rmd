@@ -485,17 +485,19 @@ Output raster files are saved in specific subfolders of the main output folder.
 In particular, **a separate subfolder** is created for each processed original MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image for each processed date, created according to the following naming conventions: 
 
 ```
-"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
+myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
 ```
 
-<font size="2"> _(e.g.,MOD13Q1\_NDVI\_2000\_065.dat)_ </font size="2">
+<font size="2"> _(e.g., myoutfolder/NDVI/MOD13Q1\_NDVI\_2000\_065.dat)_ </font size="2">
 
 , where: 
 
-  - **_ProdCode_** is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
+  - **_ProdCode_** is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);
   - **_YYYY_** and **_DOY_** correspond to the year and DOY (Day of the Year) of acquisition of the original MODIS image;
   - **_ext_** is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs). 
+
+____________________________________________________________________________________
 
 ## Virtual multi-band outputs
 
@@ -504,17 +506,19 @@ ENVI and/or GDAL virtual time series files and _RasterStack_ RData objects are i
 Naming convention for these files is as follow:
 
 ```
-"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" 
+myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" 
 ```
-<font size="2"> _(e.g., MOD13Q1\_NDVI\_49\_2000\_17\_2015\_RData.dat)_ </font size="2"> 
+<font size="2"> _(e.g., myoutfolder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData)_ </font size="2"> 
              
 , where: 
-
-  - **_ProdCode_** is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);
+  - **_vrt_type_** indicates the type of virtual file ("RData", "GDAL" or "ENVI_META");
+  - **_Sensor_** indicates to which MODIS sensor the time series belongs ("Terra", "Aqua", "Mixed" or "Combined" (for MCD* products));
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
+  - **_ProdCode_** is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);
   - **_StartDOY_**, **_StartYear_**, **_EndDOY_** and **_EndYear_** indicate the temporal extent of the time serie created; 
   - **_suffix_** indicates the type of virtual file (ENVI, GDAL or RData);
   - **_ext_** is the file extension (".vrt" for gdal virtual files, "META" for ENVI meta files or "Rdata" for `R` raster stacks). 
+
 
 # Accessing the processed time series from R
 
@@ -522,20 +526,21 @@ Preprocessed MODIS data can be retrieved within `R`  either by accessing the sin
 
 Any single-date image can be accessed by simply opening it with a `raster` command: 
 
-```{R eval=FALSE}
+```{R eval=FALSE, tidy=TRUE, highlight=TRUE}
 library(raster)
-modistsp_file <- "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"
+modistsp_file <- "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"
 my_raster     <- raster(modistsp_file)
 ```
 
-`rasterStack` time series containing all the processed data for a given parameter (saved in the "Time Series" subfolder - see [here](output.html) for details) can be opened by: 
+`rasterStack` time series containing all the processed data for a given parameter (saved in the "Time Series/RData" subfolder - see [here](output.html) for details) can be opened by: 
 
 ```{r eval=FALSE}
-in_virtual_file <- "/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData" 
+in_virtual_file <- "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData" 
 indata          <- get(load(in_virtual_file))
 ```
 
 This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the ```raster``` or   ```rasterVis``` packages.
+
 
 ## Extracting Time Series Data on Areas of Interest
 
@@ -547,7 +552,7 @@ As an example the following code:
 
 ```{r, eval=FALSE}
   #Set the input paths to raster and shape file
-  infile    <- 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'  
+  infile    <- 'myoutfolder/Time_Series/RData/Mixed/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'  
   shpname   <- 'path_to_file/rois.shp'  
   #Set the start/end dates for extraction
   startdate <- as.Date("2010-01-01")  

@@ -11,6 +11,8 @@ reference:
       - '`MODIStsp`'
       - '`MODIStsp_extract`'
       - '`MODIStsp_addindex`'
+      - '`bbox_from_file`'
+      - '`reproj_bbox`'
       - '`install_MODIStsp_launcher`'
   - title: Internals
     desc: ~
@@ -23,10 +25,8 @@ reference:
       - '`get_mod_dirs`'
       - '`get_mod_dates`'
       - '`get_mod_filenames`'
-      - '`MODIStsp_check_files`'
+      - '`check_files_existence`'
       - '`MODIStsp_vrt_create`'
-      - '`bbox_from_file`'
-      - '`reproj_bbox`'
 navbar:
   type: inverse
   left:

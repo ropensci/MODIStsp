@@ -17,14 +17,14 @@ Any single-date image can be accessed by simply opening it with a `raster` comma
 
 ```{R eval=FALSE, tidy=TRUE, highlight=TRUE}
 library(raster)
-modistsp_file <- "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"
+modistsp_file <- "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"
 my_raster     <- raster(modistsp_file)
 ```
 
-`rasterStack` time series containing all the processed data for a given parameter (saved in the "Time Series" subfolder - see [here](output.html) for details) can be opened by: 
+`rasterStack` time series containing all the processed data for a given parameter (saved in the "Time Series/RData" subfolder - see [here](output.html) for details) can be opened by: 
 
 ```{r eval=FALSE}
-in_virtual_file <- "/my_path/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData" 
+in_virtual_file <- "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData" 
 indata          <- get(load(in_virtual_file))
 ```
 
@@ -42,7 +42,7 @@ As an example the following code:
 
 ```{r, eval=FALSE}
   #Set the input paths to raster and shape file
-  infile    <- 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'  
+  infile    <- 'myoutfolder/Time_Series/RData/Mixed/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'  
   shpname   <- 'path_to_file/rois.shp'  
   #Set the start/end dates for extraction
   startdate <- as.Date("2010-01-01")  
