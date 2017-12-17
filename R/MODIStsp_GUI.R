@@ -148,14 +148,14 @@ MODIStsp_GUI <- function(general_opts,
     selected   = match(sel_cat, unique(mod_prod_cat$cat)),
     handler    = function(h, ...) {
       # Identify only products of this category
-      sel_prod   <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)][1] #nolint
+      sel_prod    <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)][1] #nolint
       wids$prod[] <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)]
       gWidgets::svalue(wids$prod) <- sel_prod
       sel_prodopts <- prod_opt_list[[sel_prod]]
       # Select the last version (it assumes that versions in xml file are in
       # increasing order)
       
-      wids$vers[]       <- names(sel_prodopts)
+      wids$vers[] <- names(sel_prodopts)
       gWidgets::svalue(wids$vers) <- sel_prodopts[[length(sel_prodopts)]]$v_number #nolint
       # Disable sensor choice for combined datasets
       if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$combined == 1) {
@@ -961,7 +961,7 @@ MODIStsp_GUI <- function(general_opts,
         gWidgets::enabled(wids$output_proj4) <- FALSE
         gWidgets::enabled(change_proj_but) <- FALSE
         gWidgets::svalue(wids$output_proj4) <- out_proj_list[[gWidgets::svalue(wids$proj)]] #nolint
-        sel_output_proj           <- sp::CRS(gWidgets::svalue(wids$output_proj4))
+        sel_output_proj <- sp::CRS(gWidgets::svalue(wids$output_proj4))
         # Get the units and kind of proj
         proj  <- gui_get_proj(sel_output_proj)
         units <- gui_get_units(sel_output_proj, proj)
@@ -1156,11 +1156,13 @@ MODIStsp_GUI <- function(general_opts,
   
   # Initial set-up of the output projection on the basis of current
   # values in widgets
-  sel_output_proj <- sp::CRS(if (gWidgets::svalue(wids$proj) == "User Defined") {
-    gWidgets::svalue(wids$output_proj4)
-  } else {
-    out_proj_list[[gWidgets::svalue(wids$proj)]]
-  })
+  sel_output_proj <- sp::CRS(
+    if (gWidgets::svalue(wids$proj) == "User Defined") {
+      gWidgets::svalue(wids$output_proj4)
+    } else {
+      out_proj_list[[gWidgets::svalue(wids$proj)]]
+    }
+  )
   proj  <- gui_get_proj(sel_output_proj)
   units <- gui_get_units(sel_output_proj, proj)
   pixsize2_lab <- glabel(text = units, container = output_res_group)
