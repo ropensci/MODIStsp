@@ -35,8 +35,8 @@
 #'   MODIStsp_process will abort, Default: 20
 #' @return NULL
 #'
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
-#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{busetto.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @export
 #' @seealso

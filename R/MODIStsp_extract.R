@@ -81,7 +81,7 @@
 #' @importFrom sp coordinates CRS proj4string spTransform
 #' @importFrom tools file_path_sans_ext
 #' @importFrom gdalUtils gdal_rasterize
-#' @examples
+#' @examples \notrun{
 #' # Extract average and standard deviation values from a rts object created by
 #' # MODIStsp for each polygon of a shapefile, for each date in the period
 #' # between 2001-01-01 and 2014-12-31
@@ -130,7 +130,8 @@
 #' 
 #' out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type", 
 #'                               FUN = "sd", small = FALSE)
-#' head(out_datasd)                              
+#' head(out_datasd)     
+#' }                         
 
 MODIStsp_extract <- function(in_rts, sp_object,
                               start_date = NULL,  end_date = NULL,

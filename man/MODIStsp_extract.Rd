@@ -98,6 +98,7 @@ belonging to the polygon, and one line for each date.
 License: GPL 3.0
 }
 \examples{
+\\notrun{
 # Extract average and standard deviation values from a rts object created by
 # MODIStsp for each polygon of a shapefile, for each date in the period
 # between 2001-01-01 and 2014-12-31
@@ -145,7 +146,8 @@ plot(out_dataavg, legend.loc = "topleft")
 
 out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type", 
                               FUN = "sd", small = FALSE)
-head(out_datasd)                              
+head(out_datasd)     
+}                         
 }
 \author{
 Lorenzo Busetto, phD (2015 - 2017)
