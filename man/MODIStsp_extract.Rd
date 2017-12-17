@@ -98,7 +98,7 @@ belonging to the polygon, and one line for each date.
 License: GPL 3.0
 }
 \examples{
-\\notrun{
+\dontrun{
 # Extract average and standard deviation values from a rts object created by
 # MODIStsp for each polygon of a shapefile, for each date in the period
 # between 2001-01-01 and 2014-12-31

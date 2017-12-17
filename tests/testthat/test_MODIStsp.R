@@ -24,7 +24,7 @@ testthat::test_that(
     
     # skip("Skip tests - since they rely on download they are only run locally")
     # skip_on_cran()
-    # skip_on_travis()
+    skip_on_travis()
     
     ### Test 1: test of the basic operations of MODIStsp.                   ####
     #   The test process two bands and extracts one quality indicator from a
@@ -63,6 +63,8 @@ testthat::test_that(
 context("MODIStsp Test 2: Geometric operations")
 testthat::test_that(
   "Tests on MODIStsp", {
+    # skip_on_cran()
+    skip_on_travis()
     
     MODIStsp(test = 2)
     out_files_dat  <- list.files(file.path(
@@ -103,6 +105,8 @@ context("MODIStsp Test 3: Computation of spectral indices and
             creation of time series")
 testthat::test_that(
   "Tests on MODIStsp", {
+    # skip_on_cran()
+    skip_on_travis()
     
     MODIStsp(test = 3)
     out_files_tif <- list.files(
