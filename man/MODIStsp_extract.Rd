@@ -98,19 +98,18 @@ belonging to the polygon, and one line for each date.
 License: GPL 3.0
 }
 \examples{
-\dontrun{
 # Extract average and standard deviation values from a rts object created by
 # MODIStsp for each polygon of a shapefile, for each date in the period
 # between 2001-01-01 and 2014-12-31
 
 # The example uses tif files in testdata/VI_16Days_500m_v6 to build
 # a MODIStsp rasterStack corresponding to the 2016 time series of the NDVI index
-# over the Como Lake (Italy). It then extracts data on polygons corresponding 
+# over the Como Lake (Italy). It then extracts data on polygons corresponding
 # to different land cover classes saved in testdata/extract_polys.shp
 # __NOTE__ on normal execution this is not needed! just load a MODIStsp rasterStack
 # using get(load(_path_to_stack_file_)) (MODIStsp rasterStack files are always
 # saved in the "Time_Series/RData" subfolder of your main output folder - see
-# http://lbusett.github.io/MODIStsp/articles/output.html) 
+# http://lbusett.github.io/MODIStsp/articles/output.html)
 
 opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
 options   <- jsonlite::read_json(opts_file)
@@ -118,12 +117,12 @@ options$out_folder <- system.file("testdata/", package = "MODIStsp")
 jsonlite::write_json(options, opts_file, auto_unbox = TRUE, pretty = TRUE)
 suppressMessages(MODIStsp(options_file = opts_file, gui = FALSE))
 stack_file  <- system.file(
-  "testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI", 
+  "testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
   "MOD13A1_NDVI_1_2016_353_2016_RData.RData",
   package = "MODIStsp")
 basename(stack_file)
- 
-# load the MODIStsp stack: This is a MODIS NDVI time series ranging between 
+
+# load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 # 2016-01-01 and 2016-12-18
 
 ts_data <- get(load(stack_file))
@@ -131,23 +130,22 @@ ts_data
 
 # load a shapefile containing polygons
 
-polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp", package = "MODIStsp"), 
+polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp", package = "MODIStsp"),
                            verbose = FALSE)
 polygons
 # Extract the average values for each polygon and date and plot the results
 
-out_dataavg <- suppressMessages(MODIStsp_extract(ts_data, polygons, id_field = "lc_type", 
+out_dataavg <- suppressMessages(MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
                              small = FALSE))
-head(out_dataavg)                              
+head(out_dataavg)
 
 plot(out_dataavg, legend.loc = "topleft")
 
 # use a different summarization function
 
-out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type", 
+out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
                               FUN = "sd", small = FALSE)
-head(out_datasd)     
-}                         
+head(out_datasd)
 }
 \author{
 Lorenzo Busetto, phD (2015 - 2017)
