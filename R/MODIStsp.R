@@ -187,9 +187,8 @@ MODIStsp <- function(gui               = TRUE,
     } else {
       message("[", date(), "] ", welcome_text)
     }
-    gdalpath <- Sys.which("gdalinfo")
-    gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE, 
-                                    search_path = dirname(gdalpath))
+
+    gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE)
   }
   gdal_version <- package_version(
     gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*", "\\1",
@@ -396,7 +395,7 @@ MODIStsp <- function(gui               = TRUE,
     #   ________________________________________________________________________
     #   If `spatial_file_path` is passed, values of the bounding boxe derived
     #   from `previous_jsfile` for the bbox are overwritten
-    
+
     if (!is.null(spatial_file_path)) {
 
       # Check if the input file is a valid spatial file and redefine the
