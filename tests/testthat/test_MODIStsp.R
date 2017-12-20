@@ -155,7 +155,7 @@ testthat::test_that("Tests on MODIStsp", {
   
   # skip("Skip tests - since they rely on download they are only run locally")
   # skip_on_cran()
-  skip_on_travis()
+  # skip_on_travis()
   
   MODIStsp(test = 4)
   out_files_dat <- list.files(
@@ -210,7 +210,7 @@ context("MODIStsp Test 5: HTTP download from USGS, resize and reproject")
 testthat::test_that(
   "Tests on MODIStsp", {
     # skip_on_cran()
-    skip_on_travis()
+    # skip_on_travis()
     
     MODIStsp(test = 5)
     out_files_tif <- list.files(file.path(tempdir(), "Albedo_Daily_500m_v6"),
@@ -241,7 +241,7 @@ context("MODIStsp Test 6: FTP download and mosaicing of MODIS tiles")
 testthat::test_that(
   "Tests on MODIStsp", {
     # skip_on_cran()
-    skip_on_travis()
+    # skip_on_travis()
     
     expect_warning(MODIStsp(test = 6))
     out_files_dat <- list.files(file.path(tempdir(), "LAI_8Days_500m_v6"),
