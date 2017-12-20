@@ -7,7 +7,7 @@ test_that("MODIStsp_extract works as expected", {
       # skip("Skip tests - since they rely on download they are only run
       # locally")
       # skip_on_cran()
-      skip_on_travis()
+      # skip_on_travis()
 
       ### Test 1: test of extraction on polygons                ####
       #   The test uses tif files in testdata/VI_16Days_500m_v6 to build
