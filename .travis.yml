@@ -38,7 +38,6 @@ matrix:
       r_binary_packages:
         - cairoDevice
         - RGtk2
-      r_packages: 
-   	    - covr
+
 after_success:
 	- Rscript -e 'covr::codecov()'
