@@ -43,4 +43,4 @@ matrix:
         - covr
   
 after_success:
-  - Rscript -e 'library(covr);coveralls()'
+  - Rscript -e 'library(covr);coveralls();codecov()'
