@@ -166,7 +166,7 @@ testthat::test_that(
       pattern = ".dat$", recursive = TRUE, full.names = TRUE)
     file_sizes_dat <- file.info(out_files_dat)$size
     expect_equal(length(out_files_dat), 10)
-    expect_equal(file_sizes_dat[1:5], c(14976, 14976, 3744, 14976, 7488), 
+    expect_equal(file_sizes_dat[1:5], c(7488, 7488, 3744, 7488, 7488), 
                  tolerance = 0.001, scale = 1)
     
   })

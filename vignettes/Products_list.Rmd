@@ -78,9 +78,7 @@ tab <- cat_products %>%
 
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -104,9 +102,7 @@ tab <- cat_products %>%
 
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -135,9 +131,7 @@ tab <- cat_products %>%
 # print(tab, type = "html")
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -167,9 +161,7 @@ tab <- cat_products %>%
   as_data_frame()
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -192,9 +184,7 @@ tab <- cat_products %>%
   as_data_frame()
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -217,9 +207,7 @@ tab <- cat_products %>%
   as_data_frame()
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -242,9 +230,7 @@ tab <- cat_products %>%
   as_data_frame()
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -267,9 +253,7 @@ tab <- cat_products %>%
   as_data_frame()
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -292,9 +276,7 @@ tab <- cat_products %>%
   as_data_frame()
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -324,9 +306,7 @@ tab <- cat_products %>%
   as_data_frame()
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip"), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
@@ -349,10 +329,7 @@ tab <- cat_products %>%
   as_data_frame()
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
-              escape = -5, options = list(pageLength = 10, searching = TRUE,
-                                          dom = "tip",
-                                          autoHideNavigation = TRUE), 
-              autoHideNavigation = TRUE)
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
 ________________________________________________________________________________
