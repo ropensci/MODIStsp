@@ -13,7 +13,6 @@
 #'  one obtained by reprojecting the upper-left and the lower-right corners.
 #' @param N_dens Densification ratio used in the case enlarge is TRUE.
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
-#' @export
 #' @note License: GPL 3.0
 #' @importFrom sp bbox CRS Polygon Polygons proj4string SpatialPoints
 #'  SpatialPolygons spTransform

@@ -65,9 +65,11 @@
 #'  \dontrun{
 #'  MODIStsp_addindex()}
 #'
-#' # Run the GUI and save the new index in a custom json file
+#' # Open the GUI to define a new index and save it in index in a custom json
+#'   options file.
 #' \dontrun{
-#' MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")}
+#' MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")
+#' }
 #'
 #' # Define the new index in non-interactive execution
 #' \dontrun{
@@ -119,6 +121,7 @@ MODIStsp_addindex <- function(
                                         "MODIStsp_ProdOpts.RData", 
                                         package = "MODIStsp"),
                             prodopts_file)
+  
   general_opts    <- jsonlite::fromJSON(previous_jsfile)
   
   # Restore MODIS products if existing, otherwise retrieve  from xml file ----
@@ -191,7 +194,7 @@ MODIStsp_addindex <- function(
     )
     gWidgets::size(indexbandfullname_label) <- c(500, 20)
     gWidgets::font(indexbandfullname_label) <- list(family = "sans", size = 10,
-                                          weight = "bold")
+                                                    weight = "bold")
     
     sel_indexbandfullname <- gWidgets::gedit(
       text       = new_indexfullname,

@@ -200,6 +200,8 @@ gui_save_options <- function(general_opts,
         x$v_number
       }
       , FUN.VALUE = "") == gWidgets::svalue(wids$vers))]]$v_number
+  
+
   general_opts$sensor <- gWidgets::svalue(wids$sens)
   #retrieve selected bands
   if (exists("temp_wid_bands", where = gui_env)) {
@@ -465,6 +467,45 @@ gui_save_options <- function(general_opts,
     gui_env$check_save_opts <- FALSE
   }
   
+  # check that the select product is available on the selected server
+  # 
+  http <- prod_opt_list[[general_opts$sel_prod]][[which(vapply(
+    prod_opt_list[[general_opts$sel_prod]],
+    function(x){
+      x$v_number
+    }
+    , FUN.VALUE = "") == gWidgets::svalue(wids$vers))]]$http
+  
+  ftp <- prod_opt_list[[general_opts$sel_prod]][[which(vapply(
+    prod_opt_list[[general_opts$sel_prod]],
+    function(x){
+      x$v_number
+    }
+    , FUN.VALUE = "") == gWidgets::svalue(wids$vers))]]$ftp
+  
+  if (general_opts$sensor == "Both") {
+    http <- c(http["Terra"][[1]], http["Aqua"][[1]])
+    ftp  <- c(ftp["Terra"][[1]], ftp["Aqua"][[1]])
+  } else {
+    http <- http[general_opts$sensor][[1]]
+    ftp  <- ftp[general_opts$sensor][[1]]
+  }
+  
+  if (general_opts$download_server == "ftp" & unique(ftp) == "Not Available") {
+    gWidgets::gmessage(
+      message = strwrap("The selected product/version is not available over 
+         ftp.\n\n Please try switching to http download!", width = 300),
+      title   = "Warning")
+    gui_env$check_save_opts <- FALSE
+  }
+  
+  if (general_opts$download_server == "http" & unique(http) == "Not Available") { #nolint
+    gWidgets::gmessage(
+      message = strwrap("The selected product/version is only available for the 
+                        Terra sensor.\n\n Please switch sensor!", width = 300),
+      title   = "Warning")
+    gui_env$check_save_opts <- FALSE
+  }
   
   #   __________________________________________________________________________
   #   # If all checks passed, save options file and return                  ####
@@ -473,6 +514,7 @@ gui_save_options <- function(general_opts,
     jsonlite::write_json(general_opts, opt_jsfile, pretty = TRUE,
                          auto_unbox = TRUE)
   }
+  
   return(general_opts)
   #nocov end
 }

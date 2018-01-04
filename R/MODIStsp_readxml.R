@@ -38,9 +38,10 @@ MODIStsp_read_xml <- function(prodopts_file,
       # General info
       version_name <- prod_data[["v_number"]][[1]]
       prodopts[[version_name]] <- list()	# one element per version
-
+      
       prodopts[[version_name]]$v_number <- version_name
-
+      
+      prodopts[[version_name]]$prod_fullname <- prod_data[["prod_fullname"]][[1]] #nolint
       prodopts[[version_name]]$main_out_folder <-
         prod_data[["main_out_folder"]][[1]]
 

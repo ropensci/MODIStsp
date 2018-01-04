@@ -16,7 +16,7 @@ save_formula <- function(refbands_names,
                          prod_opt_list,
                          previous_jsfile) {
   
-  # initialise list of custom indexes, if it does not exist yet
+  # initialize list of custom indexes, if it does not exist yet
   if (is.null(general_opts$custom_indexes)) {
     #nocov start
     general_opts$custom_indexes <- list()

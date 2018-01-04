@@ -41,7 +41,7 @@ get_mod_dirs <- function(http, ftp, download_server,
                          gui,
                          out_folder_mod,
                          .Platform) {
-
+  
   # make sure that the http address terminates with a "/" (i.e., it is a
   # folder, not a file)
   if (stringr::str_sub(http, -1) != "/") {
@@ -50,67 +50,71 @@ get_mod_dirs <- function(http, ftp, download_server,
   success <- FALSE
   #   __________________________________________________________________________
   #   retrieve list of folders in case of http download                    ####
-
+  
   if (download_server == "http") {
-    while (!success) {
-      # send request to server
-      response <- try(httr::RETRY("GET",
-                              http,
-                              httr::authenticate(user, password),
-                              times = n_retries,
-                              pause_base = 0.1,
-                              pause_cap = 3,
-                              quiet = FALSE))
-      # On interactive execution, after n_retries attempt ask if quit or ----
-      # retry
-
-      if (class(response) == "try-error") {
-        if (gui) { 
-          #nocov start
-          confirm <- gWidgets::gconfirm(
-            "http server seems to be down! Do you want to retry?",
-            icon = "question")
-          if (!confirm) stop("You selected to abort processing. Goodbye!")
-          #nocov end
+    # send request to server
+    response <- try(httr::RETRY("GET",
+                                http,
+                                httr::authenticate(user, password),
+                                times = n_retries,
+                                pause_base = 0.1,
+                                pause_cap = 3,
+                                quiet = FALSE))
+    # On interactive execution, after n_retries attempt ask if quit or ----
+    # retry
+    
+    if (class(response) == "try-error") {
+      if (gui) { 
+        #nocov start
+        switch <- gWidgets::gconfirm(
+          "http server seems to be down! Do you want to switch to ftp?",
+          icon = "question")
+        if (!switch) {
+          stop("You selected to abort processing. Goodbye!")
         } else {
-          message("[", date(), "] Error: http server seems to be down! ",
-                  "Switching to ftp!")
-          if (ftp == "Not Available") {
-            stop("The product is not available on ftp. Aborting!")
-          }
           download_server <- "ftp"
           success <- TRUE
         }
+        #nocov end
       } else {
-        # On httr success get the directory names (available dates) ----
-        items <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
-                          "\r*\n")[[1]]
-        date_dirs <- gsub(
-          ".*>(20[0-9][0-9]\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
-        )
-        date_dirs <- date_dirs[grep(paste0(yy, "\\.[01][0-9]\\.[0-3][0-9]"),
-                                    date_dirs)]
-        attr(date_dirs, "server") <- "http"
+        message("[", date(), "] Error: http server seems to be down! ",
+                "Switching to ftp!")
+        if (ftp == "Not Available") {
+          stop("The product is not available on ftp. Aborting!")
+        }
+        download_server <- "ftp"
         success <- TRUE
       }
+    } else {
+      # On httr success get the directory names (available dates) ----
+      items <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
+                        "\r*\n")[[1]]
+      date_dirs <- gsub(
+        ".*>(20[0-9][0-9]\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
+      )
+      date_dirs <- date_dirs[grep(paste0(yy, "\\.[01][0-9]\\.[0-3][0-9]"),
+                                  date_dirs)]
+      attr(date_dirs, "server") <- "http"
+      success <- TRUE
     }
+    
   }
   success <- FALSE
   # retrieve processign dates in case of "ftp" download ----
   if (download_server == "ftp") {
-
+    
     while (!success) {
       # send request to server
       year_ftp <- paste0(ftp, yy, "/")
       response <- try(httr::RETRY("GET",
-                              year_ftp,
-                              times = n_retries,
-                              pause_base = 0.1,
-                              pause_cap = 3,
-                              quiet = FALSE))
+                                  year_ftp,
+                                  times = n_retries,
+                                  pause_base = 0.1,
+                                  pause_cap = 3,
+                                  quiet = FALSE))
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
-      if (class(response) == "try-error") { #$status_code != 226) {
+      if (class(response) == "try-error") {
         if (gui) {
           #nocov start
           confirm <- gWidgets::gconfirm(
@@ -139,13 +143,13 @@ get_mod_dirs <- function(http, ftp, download_server,
       }
     }
   }
-
+  
   #   __________________________________________________________________________
   #   In offline mode, retrieve the dates of acquisition of hdfs already
   #   available in `out_folder_mod`
-
+  
   if (download_server == "offline") {
-
+    
     # Retrieve the list of hdf files matching the product / version
     items <- list.files(out_folder_mod, "\\.hdf$")
     sel_prod_vers <- unlist(stringr::str_split(gsub(
@@ -154,14 +158,14 @@ get_mod_dirs <- function(http, ftp, download_server,
     items <- items[grep(paste0(
       sel_prod_vers[1], "\\.A20[0-9][0-9][0-3][0-9][0-9]\\.h[0-9][0-9]v[0-9][0-9]\\.",  #nolint
       sel_prod_vers[2], "\\.[0-9]+\\.hdf$"), items)]
-
+    
     # Extract dates
     date_dirs <- strftime(as.Date(gsub(
       paste0(sel_prod_vers[1], "\\.A(20[0-9][0-9][0-3][0-9][0-9])\\..*"),"\\1", #nolint
       items), format = "%Y%j"), "%Y.%m.%d")
     attr(date_dirs, "server") <- "offline"
   }
-
+  
   return(date_dirs)
-
+  
 }

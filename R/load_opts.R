@@ -1,6 +1,6 @@
 #' @title Load MODIStsp processing options
 #' @description Load MODIStsp processing option from `opts_jsfile` if
-#'  it already exist, otherwise initialise processing options to default and
+#'  it already exist, otherwise initialize processing options to default and
 #'  save them to `opts_jsfile`. Send warnings if options file is from an
 #'  old version
 #' @param opts_jsfile Expected file name of the JSON file containing

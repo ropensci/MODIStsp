@@ -56,7 +56,7 @@ MODIStsp_GUI <- function(general_opts,
   #   Start Building the GUI                                                ####
   wids <- list()
   # workaround to avoid NOTE
-  compress_dict <- mod_proj_str <- modis_grid <- NULL
+  compress_dict <- mod_proj_str <- NULL
   
   main_win <- gbasicdialog(
     title      = paste0("MODIStsp - v. ", utils::packageVersion("MODIStsp")),
@@ -64,17 +64,19 @@ MODIStsp_GUI <- function(general_opts,
     do.buttons = FALSE
   )
   
+  # size(main_win) <- c(850,700)
   # frame1 and 2 with expand=FALSE grant that widgets are not "too much
   # expanded", neither horizontally nor vertically
   
   main_frame1 <- ggroup(container  = main_win,
                         horizontal = TRUE,
-                        expand     = FALSE,
+                        expand     = TRUE,
                         use.scroll_window = scroll_window)
   
   main_frame2 <- ggroup(container  = main_frame1,
                         horizontal = FALSE,
-                        expand     = FALSE)
+                        expand     = TRUE, 
+                        use.scroll_window = scroll_window)
   
   #   __________________________________________________________________________
   #   Initialize Main container: holds all widgets                          ####
@@ -149,7 +151,7 @@ MODIStsp_GUI <- function(general_opts,
     handler    = function(h, ...) {
       # Identify only products of this category
       sel_prod    <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)][1] #nolint
-      wids$prod[] <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)]
+      wids$prod[] <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)] #nolint
       gWidgets::svalue(wids$prod) <- sel_prod
       sel_prodopts <- prod_opt_list[[sel_prod]]
       # Select the last version (it assumes that versions in xml file are in
@@ -420,7 +422,7 @@ MODIStsp_GUI <- function(general_opts,
             # disposed to allow addition of the index, here we check and save
             # which layers and indexes are currently selected
             general_opts  <- jsonlite::fromJSON(opt_jsfile)
-            wids$pos       <- which(check_names %in% gWidgets::svalue(wids$bands))
+            wids$pos <- which(check_names %in% gWidgets::svalue(wids$bands))
             tmp_arr_bands <- array(data = 0, dim = length(check_names))
             tmp_arr_bands[wids$pos] <- 1
             gui_env$temp_wid_bands <- tmp_arr_bands
@@ -459,7 +461,7 @@ MODIStsp_GUI <- function(general_opts,
                       curr_prod,
                       " vers. ", curr_vers, ")"),
         container = bands_group,
-        handler   = function(button, ...) {
+        handler   = function(h, ...) {
           utils::browseURL(curr_opts[[curr_vers]]$www)
         }
       )
@@ -568,7 +570,9 @@ MODIStsp_GUI <- function(general_opts,
   )
   check_aria <- Sys.which("aria2c")
   if (!check_aria == "") {
-    gWidgets::enabled(wids$aria) <- ifelse(current_sel != "offline", TRUE, FALSE)
+    gWidgets::enabled(wids$aria) <- ifelse(current_sel != "offline",
+                                           TRUE,
+                                           FALSE)
     gWidgets::svalue(wids$aria)  <- FALSE
   } else {
     gWidgets::enabled(wids$aria)  <- FALSE
@@ -670,8 +674,7 @@ MODIStsp_GUI <- function(general_opts,
                              container = output_ext_group)
   
   gWidgets::font(output_ext_lab) <- list(family = "sans", weight = "bold")
-  
-  wids$output_ext <- gcombobox(
+  wids$output_ext <- gdroplist(
     items     = c("Full Tiles Extent", "Resized"),
     container = output_ext_group,
     selected = match(general_opts$full_ext, c("Full Tiles Extent", "Resized")),
@@ -868,7 +871,8 @@ MODIStsp_GUI <- function(general_opts,
   gWidgets::enabled(tiles_group) <- ifelse(
     prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$tiled == 0, #nolint
     FALSE,
-    TRUE)
+    TRUE
+  )
   
   # Text labels showing Extent ----
   addSpace(tiles_group, 1)
@@ -1051,6 +1055,7 @@ MODIStsp_GUI <- function(general_opts,
                                    height    = 30,
                                    editable  = FALSE,
                                    expand    = TRUE)
+  
   gWidgets::svalue(wids$output_proj4) <- out_proj_list[[gWidgets::svalue(wids$proj)]] #nolint
   
   # Button to change the user defined projection ----
@@ -1476,22 +1481,25 @@ MODIStsp_GUI <- function(general_opts,
                                        prod_opt_list,
                                        compress_dict,
                                        wids)
+      
       # If check passed, save previous file and return
       if (gui_env$check_save_opts) {
+        
         gui_env$start <- TRUE
         dispose(main_win)
+        return(gui_env$start)
       }
     }
   )
   
-  # If "quit", set "quit to T and exit
+  # If "quit", set "start" to FALSE and exit
   quit_but <- gbutton(
     text       = "Quit Program",
     container  = but_group,
     handler    = function(h, ...) {
       gui_env$start <- FALSE
       dispose(main_win)
-      
+      return(gui_env$start)
     }
   )
   addSpring(but_group)

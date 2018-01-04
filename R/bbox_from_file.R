@@ -5,7 +5,6 @@
 #' @param file_path `string` path of a spatial file.
 #' @param crs_out `string` proj4string of the desired output projection.
 #' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
-#' @export
 #' @importFrom gdalUtils gdalsrsinfo gdalinfo
 #' @importFrom rgdal GDALinfo ogrInfo
 #' @importFrom methods is
