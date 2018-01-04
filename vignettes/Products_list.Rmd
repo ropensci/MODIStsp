@@ -1,0 +1,358 @@
+---
+title: "List of supported MODIS products"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(data.table)
+library(dplyr)
+library(knitr)
+prodopts_file <- system.file("ExtData/Previous", "MODIStsp_ProdOpts.RData", 
+                             package = "MODIStsp")
+load(prodopts_file)
+out_list = list()
+ind <- 1 
+for (prod in seq_along(prod_opt_list)) {
+  prod_data <- prod_opt_list[[prod]]
+  for (ver in seq_along(prod_data)) {
+    prod_verdata <- prod_data[[ver]]
+    out_list[[ind]] <- data.frame(cat01 = prod_verdata[["cat01"]], 
+                                  cat02 = prod_verdata[["cat02"]],
+                                  Version   = prod_verdata[["v_number"]],
+                                  Name = prod_verdata[["prod_fullname"]], 
+                                  Resolution= prod_verdata[["native_res"]],
+                                  Info  = prod_verdata[["www"]])
+    ind <- ind + 1
+  }
+}
+prod_df <- data.table::rbindlist(out_list)
+```
+
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Radiation Budget Variables__
+
+```{r cat1, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+cat_products <- subset(prod_df, cat01 == "Radiation Budget Variables")
+```
+
+<br>
+
+## _Land Surface Reflectance_
+
+
+```{r tab1, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Land Surface Reflectance") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
+```
+
+________________________________________________________________________________
+
+<br>
+
+##  _Snow Cover_
+
+```{r tab2, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Snow Cover") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution =  as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+<br>
+
+##  _Land Surface Temperature/Emissivity_
+
+```{r tab3, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Land Surface Temperature/Emissivity") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>% 
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution =  as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+<br>
+
+## _BRDF and Albedo_
+
+```{r tab4, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "BRDF and Albedo") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>% 
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution =  as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>%
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+# dplyr::select(Name, Version, Resolution, Info)
+# knitr::kable(cat2_products)
+# tab <- knitr::kable(tab, digits = 1, align = c("l","l","c","c","l"),
+#                     col.names = c("Product Code", "Product Name", "Version",
+#                                   "Native Resolution", "Info"))
+# print(tab, type = "html")
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Ecosystem Variables__
+
+```{r cat2, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+cat_products <- subset(prod_df, cat01 == "Ecosystem Variables")
+```
+
+<br>
+
+## _Vegetation Indices_
+
+```{r tab5, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Vegetation Indices") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+<br>
+
+## _LAI/FPAR_
+
+```{r tab6, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "LAI/FPAR") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+<br>
+
+## _Evapotranspiration_
+
+```{r tab7, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Evapotranspiration") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+<br>
+
+## _Gross Primary Productivity_ 
+
+```{r tab8, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Gross Primary Productivity") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+<br>
+
+## _Net Primary Productivity_ 
+
+```{r tab9, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Net Primary Productivity") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+<br>
+
+## _Vegetation Continuous Cover/Fields_ 
+
+```{r tab10, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Vegetation Continuous Cover/Fields") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Land Cover Characteristics__
+
+```{r cat3, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+cat_products <- subset(prod_df, cat01 == "Land Cover Characteristics")
+```
+
+<br>
+
+## _Thermal Anomalies and Fire_
+
+```{r tab11, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Thermal Anomalies and Fire") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip"), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
+
+<br>
+
+## _Land Cover_
+
+```{r tab12, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Land Cover") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>%
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>% 
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
+  as_data_frame()
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE,
+                                          dom = "tip",
+                                          autoHideNavigation = TRUE), 
+              autoHideNavigation = TRUE)
+```
+
+________________________________________________________________________________
