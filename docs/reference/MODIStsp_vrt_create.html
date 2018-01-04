@@ -69,9 +69,14 @@
      
   </a>
 </li>
-<li class="dropdown">
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -94,12 +99,12 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
      
@@ -143,65 +148,99 @@
 
     
     <p>Function used to create virtual files from time series of single-band
-files corresponding to different acquisition dates</p>
+files corresponding to different acquisition dates. The function takes as input
+the folder in which the single-band files are stored, and creates a ENVI Meta
+file and/or a GDAL vrt file that allows access to the full time series as if
+it was a single physical file.
+Created virtual files are stored in the "Time Series" subfolder of `out_prod_folder``</p>
     
 
-    <pre class="usage"><span class='fu'>MODIStsp_vrt_create</span>(<span class='no'>out_prod_folder</span>, <span class='no'>meta_band</span>, <span class='no'>file_prefixes</span>, <span class='no'>sens_sel</span>,
-  <span class='no'>ts_format</span>, <span class='no'>nodata_value</span>, <span class='no'>out_format</span>, <span class='no'>rts</span>)</pre>
+    <pre class="usage"><span class='fu'>MODIStsp_vrt_create</span>(<span class='no'>sensor</span>, <span class='no'>out_prod_folder</span>, <span class='no'>bandnames</span>, <span class='no'>bandsel</span>, <span class='no'>nodata_out</span>,
+  <span class='no'>indexes_bandnames</span>, <span class='no'>indexes_bandsel</span>, <span class='no'>indexes_nodata_out</span>, <span class='no'>quality_bandnames</span>,
+  <span class='no'>quality_bandsel</span>, <span class='no'>quality_nodata_out</span>, <span class='no'>file_prefixes</span>, <span class='no'>ts_format</span>, <span class='no'>out_format</span>,
+  <span class='no'>rts</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>out_prod_folder</th>
-      <td><p>string main output folder</p></td>
+      <th>sensor</th>
+      <td><p><code>character ["Terra"| "Aqua" | "Both"]</code> MODIS platform to be considered.
+(Ignored for MCD* products).</p></td>
     </tr>
     <tr>
-      <th>meta_band</th>
-      <td><p>string "name" of the band (or SI, or QI) for which the
-virtual file is to be created</p></td>
+      <th>out_prod_folder</th>
+      <td><p><code>character</code> Main output folder.</p></td>
+    </tr>
+    <tr>
+      <th>bandnames</th>
+      <td><p><code>character array</code> Abbreviated Names of original layers of the
+selected product (used to build output file names).</p></td>
+    </tr>
+    <tr>
+      <th>bandsel</th>
+      <td><p><code>integer 0/1 array</code> of length equal to number of original
+layers of the selected product set to 1 for bands to be processed.</p></td>
+    </tr>
+    <tr>
+      <th>nodata_out</th>
+      <td><p><code>numeric array</code> Target NoData values of MODIS original layers
+(Ignored if nodata_change == FALSE).</p></td>
+    </tr>
+    <tr>
+      <th>indexes_bandnames</th>
+      <td><p><code>character array</code> Abbreviated Names of SIs available
+for the selected product (used to build output file names of SIs).</p></td>
+    </tr>
+    <tr>
+      <th>indexes_bandsel</th>
+      <td><p><code>integer 0/1 array</code> array of length equal to the number
+of Spectral Indexes available for the product (standard + user-provided),
+set to  1 for indexes to be processed.</p></td>
+    </tr>
+    <tr>
+      <th>indexes_nodata_out</th>
+      <td><p><code>numeric array</code> NoData values to be used for SIs</p></td>
+    </tr>
+    <tr>
+      <th>quality_bandnames</th>
+      <td><p><code>character array</code> Abbreviated Names of Quality
+Indicators available for the selected product (used to build output file
+names of QIs).</p></td>
+    </tr>
+    <tr>
+      <th>quality_bandsel</th>
+      <td><p><code>integer 0|1 array</code> array of length equal to number
+of available QIs, set to  1 for indexes to be processed.</p></td>
+    </tr>
+    <tr>
+      <th>quality_nodata_out</th>
+      <td><p><code>integer</code> Always set to 255.</p></td>
     </tr>
     <tr>
       <th>file_prefixes</th>
-      <td><p>string file_prefixes for TERRA and AQUA - used to identify
-the files corresponding to each sensor</p></td>
-    </tr>
-    <tr>
-      <th>sens_sel</th>
-      <td><p>string name of the sensor for which the time series has to be
-created (Aqua, Terra, Mixed) If "Mixed" and both TERRA and AQUA
-images are available, a "mixed" virtual file comprising data from both sensors
-ordered on DOY base is created</p></td>
+      <td><p><code>character array (2)</code> file_prefixes for TERRA and AQUA -
+used to identify the files corresponding to each sensor</p></td>
     </tr>
     <tr>
       <th>ts_format</th>
-      <td><p>string required output format for virtual file (ENVI, GDAL, Both)</p></td>
-    </tr>
-    <tr>
-      <th>nodata_value</th>
-      <td><p>string NoData value to be used for vrt files
-(equal to NoData value of inputs)</p></td>
+      <td><p><code>character ["ENVI" | "GDAL" | "Both"]</code> Required output format
+for virtual file.</p></td>
     </tr>
     <tr>
       <th>out_format</th>
-      <td><p>format of images used as "input" for the vrt and contained
-in out_prod_folder/band folders (ENVI or GTiff)</p></td>
+      <td><p><code>character ["ENVI" | "GTiff"]</code> Format of images used as
+"input" for the vrt and contained in out_prod_folder/band folders.</p></td>
     </tr>
     <tr>
       <th>rts</th>
-      <td><p>string ("Yes"/"No") If Yes, create rts time series</p></td>
+      <td><p><code>character ["Yes" | "No"]</code> If Yes, create "R" RasterStacks time series</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>NULL - virtual files are stored in the "Time Series" subfolder of out_prod_folder</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The function takes as input the folder in which the single-band files are
-stored, and creates a ENVI Meta file and/or a GDAL vrt file that allows access to
-the full time series as if it was a single physical file</p>
+    <p>NULL -</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -215,8 +254,6 @@ the full time series as if it was a single physical file</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#note">Note</a></li>
           </ul>

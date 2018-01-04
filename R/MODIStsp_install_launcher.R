@@ -1,6 +1,6 @@
 #'  install_MODIStsp_launcher
 #' @description Function which allows to use MODIStsp in batch mode by creating links
-#' @details MODIStsp tool can be used also as a standalone tool my launching a bash/batch
+#' @details MODIStsp tool can be used also as a stand-alone tool my launching a bash/batch
 #'   script, which is stored in the function files. In order to simply retrieve it, this
 #'   function will create a desktop entry and a symbolic link to the bash script (in Linux)
 #'  or a link in the Start Menu to the batch script (in Windows).
@@ -48,36 +48,49 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
                                       desktop_shortcut = TRUE,
                                       sudo             = FALSE) {
 
+  #nocov start (no coverage test since this requires interactive execution)
+  
   MODIStsp_dir <- system.file(package = "MODIStsp")
   running_os   <- Sys.info()[["sysname"]]
 
   if (running_os == "Linux") {
     if (is.na(bin_dir)) {
-      bin_dir <- "/usr/bin/MODIStsp"
+      bin_dir <- "usr/bin/MODIStsp"
     }
     if (is.na(desktop_dir)) {
-      desktop_dir <- "/usr/share/applications"
+      desktop_dir <- "usr/share/applications"
     }
     # Create symbolic link to a directory in the path
     if (sudo) {
-      system(paste("sudo -S ln -fs", file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.sh"), bin_dir),
+      system(paste("sudo -S ln -fs",
+                   file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.sh"),
+                   bin_dir),
              input = readline("Enter your password: "))
     } else {
-      file.symlink(from = file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.sh"), to = bin_dir)
+      file.symlink(from = file.path(MODIStsp_dir,
+                                    "ExtData/Launcher/Bash/MODIStsp.sh"),
+                   to = bin_dir)
     }
     # Create desktop entry
-    desktopEntry <- paste0("[Desktop Entry]\nName=MODIStsp\nComment=Download and preprocessing of MODIS data\nExec=",
-                           MODIStsp_dir,
-                           "/ExtData/Launcher/Bash/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")
-    fileConn <- file(file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.desktop"))
+    desktopEntry <- paste0(
+      "[Desktop Entry]\nName=MODIStsp\nComment=Download and preprocessing of MODIS data\nExec=",#nolint
+      MODIStsp_dir,
+      "/ExtData/Launcher/Bash/MODIStsp.sh\nTerminal=true\nType=Application\nCategories=Science;Geography;\nStartupNotify=true")#nolint
+    fileConn <- file(file.path(MODIStsp_dir,
+                               "ExtData/Launcher/Bash/MODIStsp.desktop"))
     writeLines(desktopEntry, fileConn)
     close(fileConn)
     if (sudo) {
-      system(paste("sudo -S cp -f", file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.desktop"),
-                   file.path(desktop_dir, "MODIStsp.desktop")), input = readline("Enter your password: "))
+      system(paste("sudo -S cp -f",
+                   file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.desktop"),#nolint
+                   file.path(desktop_dir, "MODIStsp.desktop")),
+             input = readline("Enter your password: "))
     } else {
-      file.copy(from = file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.desktop"),
-                to = file.path(desktop_dir, "MODIStsp.desktop"), overwrite = TRUE)
+      file.copy(
+        from = file.path(MODIStsp_dir, "ExtData/Launcher/Bash/MODIStsp.desktop"), #nolint
+        to = file.path(desktop_dir, "MODIStsp.desktop"),
+        overwrite = TRUE
+      )
     }
   }
 
@@ -85,16 +98,23 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
 
     # Create entry in the start menu
     if (is.na(bin_dir)) {
-      bin_dir <- file.path(Sys.getenv("USERPROFILE"), "AppData/Roaming/Microsoft/Windows/Start Menu/Programs/MODIStsp")
+      bin_dir <- file.path(
+        Sys.getenv("USERPROFILE"),
+        "AppData/Roaming/Microsoft/Windows/Start Menu/Programs/MODIStsp"
+      )
     }
-    if (!file.exists(file.path(bin_dir, "/MODIStsp.lnk"))) {
+    if (!file.exists(file.path(bin_dir, "MODIStsp.lnk"))) {
       dir.create(bin_dir, recursive = TRUE, showWarnings = FALSE)
-      shell("set create_script=\"%TEMP%\\create_MODIStsp_shortcut.vbs\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
-      shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
-      shell(paste0("echo Set oLink = oWS.CreateShortcut(\"", bin_dir,
-                   "\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
-      shell(paste0("echo oLink.TargetPath = \"",
-                   MODIStsp_dir, "\\ExtData\\Launcher\\Batch\\MODIStsp.bat\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
+      shell("set create_script=\"%TEMP%\\create_MODIStsp_shortcut.vbs\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")#nolint
+      shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")#nolint
+      shell(paste0(
+        "echo Set oLink = oWS.CreateShortcut(\"", bin_dir,
+        "\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+      )
+      shell(paste0(
+        "echo oLink.TargetPath = \"",
+        MODIStsp_dir, "\\ExtData\\Launcher\\Batch\\MODIStsp.bat\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")#nolint
+      )
       shell("echo oLink.Save >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
       shell("cscript /nologo \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
       shell("del \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
@@ -102,20 +122,25 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
 
     # Create desktop shortcut
     if (desktop_shortcut) {
-      if (!file.exists(file.path(desktop_dir, "/MODIStsp"))) {
+      if (!file.exists(file.path(desktop_dir, "MODIStsp"))) {
         if (is.na(desktop_dir)) {
           desktop_dir <- file.path(Sys.getenv("USERPROFILE"), "Desktop")
         }
-        shell("set create_script=\"%TEMP%\\create_MODIStsp_shortcut.vbs\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
-        shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
-        shell(paste0("echo Set oLink = oWS.CreateShortcut(\"", desktop_dir,
-                     "\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
-        shell(paste0("echo oLink.TargetPath = \"", MODIStsp_dir,
-                     "\\ExtData\\Launcher\\Batch\\MODIStsp.bat\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\""))
+        shell("set create_script=\"%TEMP%\\create_MODIStsp_shortcut.vbs\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")#nolint
+        shell("echo Set oWS = WScript.CreateObject(\"WScript.Shell\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")#nolint
+        shell(paste0(
+          "echo Set oLink = oWS.CreateShortcut(\"", desktop_dir,
+          "\\MODIStsp.lnk\") >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
+        )
+        shell(paste0(
+          "echo oLink.TargetPath = \"", MODIStsp_dir,
+          "\\ExtData\\Launcher\\Batch\\MODIStsp.bat\" >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")#nolint
+        )
         shell("echo oLink.Save >> \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
         shell("cscript /nologo \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
         shell("del \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
       } else warning("Desktop shortcut already exists!")
     }
   }
-}
+  #nocov end
+} 

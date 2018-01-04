@@ -9,14 +9,14 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Here you can find possible **solutions for common `MODIStsp` problems**. We will add to this page as soon as additional problems are reported. If these solutions doesn't work for you, or you have a different problem, signal it at: https://github.com/lbusett/MODIStsp/issues
+Here you can find possible **solutions for common `MODIStsp` problems**. We will add to this page as soon as additional problems are reported. If these solutions does not work for you, or you have a different problem, signal it at: https://github.com/lbusett/MODIStsp/issues
 
 <a name="Installation Problems"></a>
 
 ## Installation Problems
     
 -   [On Linux, installation fails due to some packages missing](#Missing-packages)
--   [On Windows, the program hangs at first interactive execution, while attemping to install `gWisgets2RGtk2`](#gWidgets-error)
+-   [On Windows, the program hangs at first interactive execution, while attempting to install `gWisgets2RGtk2`](#gWidgets-error)
 -   [`MODIStsp` hangs at first execution, while looking for `gdal` installation](#gdal-error)
 -   [Installing from github fails due to missing dependencies](#github-error)
 
@@ -25,7 +25,7 @@ Here you can find possible **solutions for common `MODIStsp` problems**. We will
 
 <a name="gWidgets-error"></a>
 
-#### - On Windows, `MODIStsp` fails to install, signalling problems in installation of either `gwidgetsRGtk2` or `RGtk2` 
+#### - On Windows, `MODIStsp` fails to install, signaling problems in installation of either `gwidgetsRGtk2` or `RGtk2` 
 
  Please try to install package `gwidgetsRGtk2` beforehand using: 
   
@@ -37,7 +37,7 @@ You will probably get some errors/problems during installation: please see instr
 
 #### - On Windows, `MODIStsp` hangs at first interactive execution, while attempting to install `gWisgetsRGtk2`
 
- At first interactive execution (i.e., with "gui = TRUE) of `MODIStsp`, an error window may appear, signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library "GTK+"" is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select *"Install GTK+"* and then *"OK"*. Windows will download and install the GTK+ library. When it finishes, the R Session should be restarted and next `MODIStsp` should go well ! In case RStudio doesn't automatically restart after installing GTK+, simply kill it form "Task Manager" and reload RStudio.
+ At first interactive execution (i.e., with "gui = TRUE) of `MODIStsp`, an error window may appear, signaling that  _libatk-1.0-0.dll_ is missing from your system. This is due to the fact that library "GTK+"" is not yet installed on your system and needs to be installed. To do so, press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select *"Install GTK+"* and then *"OK"*. Windows will download and install the GTK+ library. When it finishes, the R Session should be restarted and next `MODIStsp` should go well ! In case RStudio does not automatically restart after installing GTK+, simply kill it form "Task Manager" and reload RStudio.
  
  If you still have problems, try to install the GTK+ library independently, following instructions reported here:
 
@@ -64,7 +64,7 @@ On **rpm-based systems**, to install packages open a terminal and type;
    sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
    glib2-devel libcurl4-devel gdal-devel proj-devel
 ```
-On **others distros**: we didn't test installation on other distros yet - if you experience problems please contact us.
+On **others distros**: we did not test installation on other distros yet - if you experience problems please contact us.
 
 <a name="gdal-error"></a>
 
@@ -118,7 +118,7 @@ ________________________________________________________________________________
 
 1. Visit your [earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
 2. Verify that the **username and password** you provided are correct (Those can be obtained by **registering an account** at: https://urs.earthdata.nasa.gov/profile.);
-3. _Is it wednesday ???_ If so, NASA http server may be down for maintenance. **Try switching to "ftp" download**;
+3. _Is it Wednesday ???_ If so, NASA http server may be down for maintenance. **Try switching to "ftp" download**;
 3. In some cases, access to the http server seems to be not allowed (we don't know why - maybe firewalling). **Try switching to ftp download**.
 
 #### - Files are not getting downloaded on either "http" or "ftp", and you get continuous 'timeout' problems

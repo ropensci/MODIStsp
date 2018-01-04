@@ -4,7 +4,7 @@
 \alias{MODIStsp_read_xml}
 \title{MODIStsp_read_xml}
 \usage{
-MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file)
+MODIStsp_read_xml(prodopts_file, xml_file)
 }
 \arguments{
 \item{prodopts_file}{string filename of the RData in which to store the data

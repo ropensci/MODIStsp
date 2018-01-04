@@ -69,9 +69,14 @@
      
   </a>
 </li>
-<li class="dropdown">
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -94,12 +99,12 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
      
@@ -147,18 +152,18 @@ recognized by GDAL or OGG: the function reads the extent using gdalinfo or ogrin
 converting it to a specified CRS.</p>
     
 
-    <pre class="usage"><span class='fu'>bbox_from_file</span>(<span class='no'>file_path</span>, <span class='no'>out_crs</span>)</pre>
+    <pre class="usage"><span class='fu'>bbox_from_file</span>(<span class='no'>file_path</span>, <span class='no'>crs_out</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file_path</th>
-      <td><p>The path of the spatial file.</p></td>
+      <td><p><code>string</code> path of a spatial file.</p></td>
     </tr>
     <tr>
-      <th>out_crs</th>
-      <td><p>The output projection (string format).</p></td>
+      <th>crs_out</th>
+      <td><p><code>string</code> proj4string of the desired output projection.</p></td>
     </tr>
     </table>
     
@@ -178,7 +183,7 @@ converting it to a specified CRS.</p>
 
     <h2>Author</h2>
     
-Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
+Luigi Ranghetti, phD (2015-2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 
   </div>
 </div>

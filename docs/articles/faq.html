@@ -44,9 +44,13 @@
      
   </a>
 </li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -69,10 +73,11 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
@@ -120,22 +125,22 @@
     
     
 <div class="contents">
-<p>Here you can find possible <strong>solutions for common <code>MODIStsp</code> problems</strong>. We will add to this page as soon as additional problems are reported. If these solutions doesn’t work for you, or you have a different problem, signal it at: <a href="https://github.com/lbusett/MODIStsp/issues" class="uri">https://github.com/lbusett/MODIStsp/issues</a></p>
+<p>Here you can find possible <strong>solutions for common <code>MODIStsp</code> problems</strong>. We will add to this page as soon as additional problems are reported. If these solutions does not work for you, or you have a different problem, signal it at: <a href="https://github.com/lbusett/MODIStsp/issues" class="uri">https://github.com/lbusett/MODIStsp/issues</a></p>
 <p><a name="Installation%20Problems"></a></p>
 <div id="installation-problems" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation-problems" class="anchor"></a>Installation Problems</h2>
 <ul>
 <li><a href="#Missing-packages">On Linux, installation fails due to some packages missing</a></li>
-<li><a href="#gWidgets-error">On Windows, the program hangs at first interactive execution, while attemping to install <code>gWisgets2RGtk2</code></a></li>
+<li><a href="#gWidgets-error">On Windows, the program hangs at first interactive execution, while attempting to install <code>gWisgets2RGtk2</code></a></li>
 <li><a href="#gdal-error"><code>MODIStsp</code> hangs at first execution, while looking for <code>gdal</code> installation</a></li>
 <li><a href="#github-error">Installing from github fails due to missing dependencies</a></li>
 </ul>
 <p><a name="Missing-packages"></a></p>
 <p><a name="gWidgets-error"></a></p>
-<div id="on-windows-modistsp-fails-to-install-signalling-problems-in-installation-of-either-gwidgetsrgtk2-or-rgtk2" class="section level4">
+<div id="on-windows-modistsp-fails-to-install-signaling-problems-in-installation-of-either-gwidgetsrgtk2-or-rgtk2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#on-windows-modistsp-fails-to-install-signalling-problems-in-installation-of-either-gwidgetsrgtk2-or-rgtk2" class="anchor"></a>- On Windows, <code>MODIStsp</code> fails to install, signalling problems in installation of either <code>gwidgetsRGtk2</code> or <code>RGtk2</code>
+<a href="#on-windows-modistsp-fails-to-install-signaling-problems-in-installation-of-either-gwidgetsrgtk2-or-rgtk2" class="anchor"></a>- On Windows, <code>MODIStsp</code> fails to install, signaling problems in installation of either <code>gwidgetsRGtk2</code> or <code>RGtk2</code>
 </h4>
 <p>Please try to install package <code>gwidgetsRGtk2</code> beforehand using:</p>
 <pre><code>install.packages("gwidgetsRGtk2")</code></pre>
@@ -145,7 +150,7 @@
 <h4 class="hasAnchor">
 <a href="#on-windows-modistsp-hangs-at-first-interactive-execution-while-attempting-to-install-gwisgetsrgtk2" class="anchor"></a>- On Windows, <code>MODIStsp</code> hangs at first interactive execution, while attempting to install <code>gWisgetsRGtk2</code>
 </h4>
-<p>At first interactive execution (i.e., with “gui = TRUE) of <code>MODIStsp</code>, an error window may appear, signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library”GTK+“” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select <em>“Install GTK+”</em> and then <em>“OK”</em>. Windows will download and install the GTK+ library. When it finishes, the R Session should be restarted and next <code>MODIStsp</code> should go well ! In case RStudio doesn’t automatically restart after installing GTK+, simply kill it form “Task Manager” and reload RStudio.</p>
+<p>At first interactive execution (i.e., with “gui = TRUE) of <code>MODIStsp</code>, an error window may appear, signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library”GTK+“” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select <em>“Install GTK+”</em> and then <em>“OK”</em>. Windows will download and install the GTK+ library. When it finishes, the R Session should be restarted and next <code>MODIStsp</code> should go well ! In case RStudio does not automatically restart after installing GTK+, simply kill it form “Task Manager” and reload RStudio.</p>
 <p>If you still have problems, try to install the GTK+ library independently, following instructions reported here:</p>
 <p><a href="https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2">https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2</a></p>
 <p>, starting from “Download the GTK+ all-in-one bundle. I downloaded version 2.22 for Windows 64-bit.”. Then try to install <code>gWisgetsRGtk2</code> before <code>MODIStsp</code> as explained in the point above.</p>
@@ -160,7 +165,7 @@
 <p>On <strong>rpm-based systems</strong>, to install packages open a terminal and type;</p>
 <pre><code>   sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
    glib2-devel libcurl4-devel gdal-devel proj-devel</code></pre>
-<p>On <strong>others distros</strong>: we didn’t test installation on other distros yet - if you experience problems please contact us.</p>
+<p>On <strong>others distros</strong>: we did not test installation on other distros yet - if you experience problems please contact us.</p>
 <p><a name="gdal-error"></a></p>
 </div>
 <div id="modistsp-hangs-at-first-execution-while-looking-for-gdal-installation" class="section level4">
@@ -205,7 +210,7 @@
 <li>Visit your <a href="https://urs.earthdata.nasa.gov/profile">earthdata “profile” page</a>, click on “My Applications” and <em>ensure that “LP DAAC Data Pool” is authorized</em>. If not, click on “Approve More Applications”, search for it in the list and approve it.</li>
 <li>Verify that the <strong>username and password</strong> you provided are correct (Those can be obtained by <strong>registering an account</strong> at: <a href="https://urs.earthdata.nasa.gov/profile" class="uri">https://urs.earthdata.nasa.gov/profile</a>.);</li>
 <li>
-<em>Is it wednesday ???</em> If so, NASA http server may be down for maintenance. <strong>Try switching to “ftp” download</strong>;</li>
+<em>Is it Wednesday ???</em> If so, NASA http server may be down for maintenance. <strong>Try switching to “ftp” download</strong>;</li>
 <li>In some cases, access to the http server seems to be not allowed (we don’t know why - maybe firewalling). <strong>Try switching to ftp download</strong>.</li>
 </ol>
 </div>

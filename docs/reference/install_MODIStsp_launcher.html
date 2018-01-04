@@ -69,9 +69,14 @@
      
   </a>
 </li>
-<li class="dropdown">
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -94,12 +99,12 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
      
@@ -181,7 +186,7 @@ launch the script in a root session of R)!</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>MODIStsp tool can be used also as a standalone tool my launching a bash/batch
+    <p>MODIStsp tool can be used also as a stand-alone tool my launching a bash/batch
 script, which is stored in the function files. In order to simply retrieve it, this
 function will create a desktop entry and a symbolic link to the bash script (in Linux)
 or a link in the Start Menu to the batch script (in Windows).
@@ -198,21 +203,15 @@ otherwise the links would continue to point to the old package version!</p>
     <pre class="examples"><div class='input'># Linux: common installation (script in /usr/bin,
 # desktop entry in /usr/share/applications)
 # (requires administrator permissions)
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-  <span class='co'># the administrator password is asked interactively</span>
-<span class='co'># }</span><div class='input'>
+</div><div class='input'><span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Link in Start Menu already exists!</span></div><div class='input'>  # the administrator password is asked interactively</div><div class='input'>
 # Linux: installation in a directory which does
 # not require administrator permissions
-</div># NOT RUN {
-install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"
-# }
-<div class='input'>
+</div><div class='input'>install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:1:45: unexpected ','</span>
+#&gt; <span class='error'>1: install_MODIStsp_launcher(bin_dir = "~/bin"),</span>
+#&gt; <span class='error'>                                                ^</span></div><div class='input'>
 # Windows: common installation
 # (script in the Start Menu and shortcut on the desktop)
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>install_MODIStsp_launcher</span>()
-<span class='co'># }</span></pre>
+</div><div class='input'><span class='fu'>install_MODIStsp_launcher</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: Link in Start Menu already exists!</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

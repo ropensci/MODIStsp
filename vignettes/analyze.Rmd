@@ -7,54 +7,171 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 library(raster)
 library(base)
+library(rgdal)
+library(MODIStsp)
+library(dplyr)
 ```
 
 ## Accessing the processed time series from R
 
-Preprocessed MODIS data can be retrieved within `R`  either by accessing the single-date raster files, or by loading the saved _RasterStack_ objects. 
+Preprocessed MODIS data can be retrieved within `R`  either by accessing the 
+single-date raster files, or by loading the saved `RasterStack` objects (see 
+[HERE](articles/output.html) for a description of `MODIStsp` output folder
+structure and naming conventions).
+
+To test this functionality, you can run the following example: 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval = FALSE}
+library(MODIStsp)
+opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
+MODIStsp(options_file = opts_file, gui = TRUE)
+```
+
+, specifying a folder on your PC to store the outputs from the GUI. 
+
+This will download a yearly time series of MODIS NDVI data and subset it over the
+region of the Como Lake in Italy.
+
+After the download and processing finishes (it will take a while), the MODIS time 
+series will be placed in `youroutfolder/VI_16Days_500m_v6/`. (In this case, I have them in 
+"`D:/Temp/VI_16Days_500m_v6/`").
 
 Any single-date image can be accessed by simply opening it with a `raster` command: 
 
-```{R eval=FALSE, tidy=TRUE, highlight=TRUE}
-library(raster)
-modistsp_file <- "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"
+```{R echo=TRUE, message=FALSE, warning=FALSE, highlight=TRUE, tidy=TRUE}
+modistsp_file <- "D:/Temp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"
 my_raster     <- raster(modistsp_file)
+plot(my_raster)
 ```
 
-`rasterStack` time series containing all the processed data for a given parameter (saved in the "Time Series" subfolder - see [here](output.html) for details) can be opened by: 
+`RasterStack` (or GDAL vrt) time series containing all the processed data for a
+given parameter are saved in the "Time Series/RData" subfolder, and can be accessed
+by: 
 
-```{r eval=FALSE}
-in_virtual_file <- "/my_path/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData" 
-indata          <- get(load(in_virtual_file))
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+# Load the NDVI time series
+ts_folder <- "D:/Temp/VI_16Days_500m_v6/Time_Series/"
+in_virtual_file <- file.path(ts_folder, "RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData")
+ts_data          <- get(load(in_virtual_file))
+ts_data
 ```
 
-This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the ```raster``` or   ```rasterVis``` packages.
+, which gives us a 23-band `RasterStack` in the `ts_data` variable.
 
-____________________________________________________________________________________
+This `RasterStack` can be analyzed using the functionalities for raster/raster 
+time series analysis, extraction and plotting provided for example by the 
+```raster``` or   ```rasterVis``` packages: 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+# plot some dates
+plot(ts_data[[c(1,5,10,15,20)]])
+```
+
+________________________________________________________________________________
 
 ## Extracting Time Series Data on Areas of Interest
 
-`MODIStsp` provides an efficient function (`MODIStsp\_extract`) for extracting time series data at specific locations. The function takes as input a _RasterStack_ virtual object created by `MODIStsp` (see above), the starting and ending dates for the extraction and a standard _Sp*_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a `xts` object or `data.frame` containing time series data for those locations. 
+`MODIStsp` provides an efficient function (`MODIStsp_extract`) for extracting 
+time series data at specific locations. The function takes as input a `RasterStack` 
+virtual object created by `MODIStsp` (see above), the starting and ending dates 
+for the extraction and a standard `sp` object (or an ESRI shapefile name) 
+specifying the locations (points, lines or polygons) of interest, and provides 
+as output a `xts` object or `data.frame` containing time series data for those
+locations. 
 
-If the input is of class _SpatialPoints_, the output object contains one column for each point specified, and one row for each date. If it is of class _SpatialPolygons_ (or _SpatialLines_), it contains one column for each polygon (or each line), with values obtained applying the function specified as the "FUN" argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date. 
+If the input is of class _SpatialPoints_, the output object contains one column 
+for each point specified, and one row for each date. If it is of class
+_SpatialPolygons_ (or _SpatialLines_), it contains one column for each polygon 
+(or each line), with values obtained applying the function specified as the "FUN" 
+argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon
+(or touched by the line), and one row for each date. 
 
-As an example the following code:
+To test `MODIStsp_extract` we can start by loading the NDVI `RasterStack`
+time series created in the previous example:
 
-```{r, eval=FALSE}
-  #Set the input paths to raster and shape file
-  infile    <- 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'  
-  shpname   <- 'path_to_file/rois.shp'  
-  #Set the start/end dates for extraction
-  startdate <- as.Date("2010-01-01")  
-  enddate   <- as.Date("2014-12-31")    
-  #Load the RasterStack
-  inrts     <- get(load(infile)) 
-  # Compute average and St.dev
-  dataavg   <- MODIStsp_extract(inrts, shpname, startdate, enddate, FUN = 'mean', na.rm = T)
-  datasd    <- MODIStsp_extract (inrts, shpname, startdate, enddate, FUN = 'sd', na.rm = T)
-  # Plot average time series for the polygons
-  plot.xts(dataavg) 
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+ts_folder <- "D:/Temp/VI_16Days_500m_v6/Time_Series/"
+in_virtual_file <- file.path(ts_folder, "RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData")
+ts_data          <- get(load(in_virtual_file))
+ts_data
+
 ```
 
-  loads a _RasterStack_ object containing 8-days 250 m resolution time series for the 2000-2015 period and extracts time series of average and standard deviation values over the different polygons of a user's selected shapefile on the 2010-2014 period.
-  
+, which again gives us the 23-band `RasterStack` in the `ts_data` variable. 
+
+To extract the NDVI data over selected areas, we can then use the `MODIStsp_extract`
+function as follows: 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+# load a shapefile containing polygons --> Here we use a test shapefile in 
+# the testdata folder of MODIStsp.
+
+polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp",
+                                       package = "MODIStsp"),
+                           verbose = FALSE)
+polygons
+
+# Now extract the average values for each polygon and date and plot the results
+
+out_dataavg <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type", 
+                                small = FALSE)
+head(out_dataavg)
+
+# Other summarization functions can be used, by specifying the "FUN" argument. 
+# Compute the Standard Deviation over each polygon: 
+out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
+FUN = "sd", small = FALSE)
+
+```
+
+The output is a `xts` object, with one column for each polygon of the input 
+shapefile, and one row for each date. We can easily plot the computed averages 
+using: 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(xts)
+plot(out_dataavg, legend.loc = "topleft")
+```
+
+We can also transform the output dataset to a long format and use `ggplot2` for
+plotting and other tidyverse-friendly functions for analysis:
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+out_dataavg_df <- data.frame(date = index(out_dataavg), coredata(out_dataavg)) %>% 
+  tidyr::gather(Polygon, Value, -date)
+
+ggplot2::ggplot(out_dataavg_df, aes(x = date, y = Value, color = Polygon)) + 
+  geom_line() + theme_light()
+
+```
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+library(tibbletime)
+library(dplyr)
+
+# Compute monthly averages using tibbletime: 
+ 
+out_dataavg_tt <- tibbletime::as_tbl_time(out_dataavg_df, index = date) 
+
+month_avg <- out_dataavg_tt %>% 
+  dplyr::group_by(Polygon) %>% 
+  tibbletime::as_period(period = "monthly")
+
+ggplot2::ggplot(month_avg, aes(x = date, y = Value, color = Polygon)) + 
+  geom_line() + theme_light()
+
+```
+
+**IMPORTANT NOTES - 1** `MODIStsp_extract` is usually much faster than the 
+standard `raster::extract` function, but does not deal with overlapping polygons.
+If your polygons are overlapping, please use `raster::extract` instead. 
+
+**IMPORTANT NOTES - 2** A more powerful extraction function can be also found 
+in the `sprawl` package, currently under development on github
+(https://lbusett.github.io/sprawl/). In particular, `sprawl::extract_rast` deals
+much better with large rasters and long time series. 
+

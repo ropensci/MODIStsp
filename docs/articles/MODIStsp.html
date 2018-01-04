@@ -44,9 +44,13 @@
      
   </a>
 </li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -69,10 +73,11 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
@@ -116,7 +121,7 @@
       <h1>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.3</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2017-08-18</h4>
+            <h4 class="date">2018-01-04</h4>
           </div>
 
     
@@ -128,7 +133,7 @@
 <p>MODIStsp is a novel “R” package allowing to automatize the creation of time series of rasters derived from MODIS Land Products data. It allows to perform several preprocessing steps on MODIS data available within a given time period.</p>
 <p>Development of MODIStsp started from modifications of the ModisDownload “R” script by Thomas Hengl <span class="citation">[-@Hengl2010]</span>, and successive adaptations by Babak Naimi <span class="citation">[-@Naimi2014]</span>. The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of:</p>
 <ul>
-<li>developing a standalone application allowing to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on all available MODIS land products by exploiting a powerful and user-friendly GUI front-end;</li>
+<li>developing a stand-alone application allowing to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on all available MODIS land products by exploiting a powerful and user-friendly GUI front-end;</li>
 <li>allowing the creation of time series of both MODIS original layers and additional Quality Indicators (e.g., data acquisition quality, cloud/snow presence, algorithm used for data production, etc. ) extracted from the aggregated bit-field QA layers;</li>
 <li>allowing the automatic calculation and creation of time series of several additional Spectral Indexes starting form MODIS surface reflectance products.</li>
 </ul>
@@ -150,8 +155,8 @@
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>gWidgetsRGtk2</code> library beforehand:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>)
 <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
-<p>Upon loading <code>gWidgetsRGtk2</code> , an error window will probably appear. This signals that library “GTK+” is not yet installed on your system or is not on your PATH. To install itpress “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK” and then “OK” . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !<sup name="a1"></sup></p>
-<p>In case RStudio doesn’t automatically restart or continuously asks to install GTK+ again, kill it form “Task Manager” (or restart the R session from RStudio “Session” menu), reload RStudio and the try to reload <code>gWidgetsRGtk2</code>. If it loads correctly, you should be ready to go.</p>
+<p>Upon loading <code>gWidgetsRGtk2</code> , an error window will probably appear. This signals that library “GTK+” is not yet installed on your system or is not on your PATH. To install it press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK” and then “OK” . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !<sup name="a1"></sup></p>
+<p>In case RStudio does not automatically restart or continuously asks to install GTK+ again, kill it form “Task Manager” (or restart the R session from RStudio “Session” menu), reload RStudio and the try to reload <code>gWidgetsRGtk2</code>. If it loads correctly, you should be ready to go.</p>
 <p>If it still fails, try downloading the GTK+ bundle from:</p>
 <p><a href="http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip" class="uri">http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip</a> (OR <a href="http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip" class="uri">http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip</a> if on Win32)</p>
 <p>, unzip the archive on a folder of your choice (e.g., <code>C:\\Program Files\\GTK+</code>), then add the path to its “bin” subfolder (e.g., <code>C:\\Program Files\\GTK+\\bin\\</code> to your system PATH environment variable.</p>
@@ -186,7 +191,7 @@
 <a href="#on-mac-os" class="anchor"></a>On Mac OS</h2>
 <p><strong>NOTE: The following installation notes were kindly provided by a MODIStsp user and should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. Since we are not working on Mac we were not able yet to check this, but we hope it may be useful at least to put you in the right direction if you have installation problems)</strong></p>
 <p>Installing MODIStsp requires many dependencies:</p>
-<p>For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by <strong>tobybot11</strong> (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>), Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and doesn’t work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version “OS X Mavericks binaries” and not “Package source” - You have to be sure that gdal is installed with HDF4 support.</p>
+<p>For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by <strong>tobybot11</strong> (<a href="https://gist.github.com/sebkopf/9405675" class="uri">https://gist.github.com/sebkopf/9405675</a>), RGtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version “OS X Mavericks binaries” and not “Package source” - You have to be sure that gdal is installed with HDF4 support.</p>
 <p>1 - Update to a recent R version if needed, then update all packages</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># update packages</span>
 <span class="kw">update.packages</span>()
@@ -206,7 +211,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="bu">export</span> <span class="va">PKG_CONFIG_PATH=</span>
 
 <span class="ex">/usr/local/lib</span>/pkgconfig:<span class="ex">/usr/local/lib/pkgconfig</span>/gtk+-2.0.pc:<span class="ex">/opt/X11/lib/pkgconfig</span></code></pre></div>
-<p>3 - next, install <code>RGtk2</code>. Since install.packages(“Rgtk2”) is not going to work, go <a href="https://cran.r-project.org/web/packages/RGtk2/index.html">here</a>, download RGtk2_2.20.33.tar.gz and, from a terminal run:</p>
+<p>3 - next, install <code>RGtk2</code>. Since install.packages(“RGtk2”) is not going to work, go <a href="https://cran.r-project.org/web/packages/RGtk2/index.html">here</a>, download RGtk2_2.20.33.tar.gz and, from a terminal run:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">R</span> CMD INSTALL RGtk2_2.20.33.tar.gz</code></pre></div>
 <p>Now, open R and run:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RGtk2)</code></pre></div>
@@ -223,7 +228,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <p>Check that gdal is installed with hdf4 support. From a terminal:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&gt;</span> <span class="ex">gdal-config</span> --formats </code></pre></div>
 <p>if gdal is installed, check what drivers are installed: the list should include hdf4.</p>
-<p>If gdal is not yet installed or hdf4 is not supproted, install/reinstall it following these <a href="http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html">notes</a></p>
+<p>If gdal is not yet installed or hdf4 is not supported, install/reinstall it following these <a href="http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html">notes</a></p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&gt;</span> <span class="ex">brew</span> install hdf4 
 <span class="co"># prefer hdf4 links over NetCDF </span>
 <span class="op">&gt;</span> <span class="ex">brew</span> link --overwrite hdf4 
@@ -410,7 +415,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <li><p><strong>Output Files Format</strong>: Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among “None”, “PACKBITS”, “LZW” and “DEFLATE”.</p></li>
 <li><p><strong>Create Virtual Rasters</strong>: Specify if virtual multitemporal files should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are ENVI meta-files and GDAL “vrt” files.</p></li>
 <li><p><strong>Create RasterStack</strong>: Specify if the output time series should be also saved as as “R” <em>rasterStack</em> objects (with temporal information added through the “setZ” method of the <em>raster</em> package). This may be useful in order to easily access the preprocessed MODIS data within “R” scripts.</p></li>
-<li><p><strong>Change NoData values</strong>: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the “MODIStsp_Products_Opts” XML file. By selecting “Yes” in the “Change Original NODATA values” check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them.</p></li>
+<li><p><strong>Change NoData values</strong>: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the “MODIStsp_Products_Opts” XML file. By selecting “Yes” in the “Change Original NoData values” check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them.</p></li>
 <li><p><strong>Scale output values</strong>: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true “measure units” of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etc.).</p></li>
 </ul>
 </div>
@@ -435,7 +440,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 </h2>
 <p>Specified processing parameters can be saved to a JSON file for later use by clicking on the <em><strong>Save Options</strong></em> button.</p>
 <p>Previously saved options can be restored clicking on the <em><strong>Load Options</strong></em> button and navigating to the previously saved JSON file.</p>
-<p><font size="2"> (Note that at launch, <strong><code>MODIStsp</code> <em>always reloads automatically the processing options used for its last succesfull run</em></strong> </font>.</p>
+<p><font size="2"> (Note that at launch, <strong><code>MODIStsp</code> <em>always reloads automatically the processing options used for its last successful run</em></strong> </font>.</p>
 </div>
 <div id="starting-the-processing" class="section level2">
 <h2 class="hasAnchor">
@@ -478,14 +483,14 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
 }</code></pre></div>
 </div>
 </div>
-<div id="standalone-execution-and-scheduled-processing" class="section level1">
+<div id="stand-alone-execution-and-scheduled-processing" class="section level1">
 <h1 class="hasAnchor">
-<a href="#standalone-execution-and-scheduled-processing" class="anchor"></a>Standalone execution and scheduled processing</h1>
-<div id="standalone-execution" class="section level2">
+<a href="#stand-alone-execution-and-scheduled-processing" class="anchor"></a>Stand-alone execution and scheduled processing</h1>
+<div id="stand-alone-execution" class="section level2">
 <h2 class="hasAnchor">
-<a href="#standalone-execution" class="anchor"></a>Standalone execution</h2>
+<a href="#stand-alone-execution" class="anchor"></a>Stand-alone execution</h2>
 <ul>
-<li>MODIStsp can be also executed as a “standalone” application(i.e., without having to open R/RStudio); to do this, from R launch the function <code>MODIStsp_install_launcher()</code>.</li>
+<li>MODIStsp can be also executed as a “stand-alone” application(i.e., without having to open R/RStudio); to do this, from R launch the function <code>MODIStsp_install_launcher()</code>.</li>
 </ul>
 <p>In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections “Science” and “Geography”) and a symbolic link in a known path (default: /usr/bin/MODIStsp). In Windows, a link in the Start Menu and optionally a desktop shortcut are created. See <code><a href="../reference/install_MODIStsp_launcher.html">?install_MODIStsp_launcher</a></code> for details and path customization.</p>
 <p>Double-clicking those files or launching them from a shell without parameters will launch <code>MODIStsp</code> in interactive mode. Non-interactive mode is triggered by adding the “-g” argument to the call, and specifying the path to a valid Options File as “-s” argument:</p>
@@ -498,7 +503,7 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
 <div id="scheduled-processing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#scheduled-processing" class="anchor"></a>Scheduled Processing</h2>
-<p>Standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:</p>
+<p>Stand-alone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:</p>
 <ol style="list-style-type: decimal">
 <li><p>Open the <code>MODIStsp</code> GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options. Then quit the program.</p></li>
 <li><p>Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory “MODIStsp/ExtData/Launcher” of your library path) as windows scheduled task (or linux “cron” job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument:</p></li>
@@ -531,40 +536,29 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
 <h2 class="hasAnchor">
 <a href="#single-band-outputs" class="anchor"></a>Single-band outputs</h2>
 <p>Output raster files are saved in specific subfolders of the main output folder. In particular, <strong>a separate subfolder</strong> is created for each processed original MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image for each processed date, created according to the following naming conventions:</p>
-<pre><code>"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"</code></pre>
-<p><font size="2"> <em>(e.g.,MOD13Q1_NDVI_2000_065.dat)</em> </font></p>
+<pre><code>myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"</code></pre>
+<p><font size="2"> <em>(e.g., myoutfolder/NDVI/MOD13Q1_NDVI_2000_065.dat)</em> </font></p>
 <p>, where:</p>
 <ul>
 <li>
-<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
-<li>
 <strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
+<li>
+<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
 <li>
 <strong><em>YYYY</em></strong> and <strong><em>DOY</em></strong> correspond to the year and DOY (Day of the Year) of acquisition of the original MODIS image;</li>
 <li>
 <strong><em>ext</em></strong> is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs).</li>
 </ul>
+<hr>
 </div>
 <div id="virtual-multi-band-outputs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#virtual-multi-band-outputs" class="anchor"></a>Virtual multi-band outputs</h2>
 <p>ENVI and/or GDAL virtual time series files and <em>RasterStack</em> RData objects are instead stored <strong>in the “Time_Series” subfolder</strong> if required.</p>
 <p>Naming convention for these files is as follow:</p>
-<pre><code>"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" </code></pre>
-<p><font size="2"> <em>(e.g., MOD13Q1_NDVI_49_2000_17_2015_RData.dat)</em> </font></p>
-<p>, where:</p>
-<ul>
-<li>
-<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
-<li>
-<strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
-<li>
-<strong><em>StartDOY</em></strong>, <strong><em>StartYear</em></strong>, <strong><em>EndDOY</em></strong> and <strong><em>EndYear</em></strong> indicate the temporal extent of the time serie created;</li>
-<li>
-<strong><em>suffix</em></strong> indicates the type of virtual file (ENVI, GDAL or RData);</li>
-<li>
-<strong><em>ext</em></strong> is the file extension (“.vrt” for gdal virtual files, “META” for ENVI meta files or “Rdata” for <code>R</code> raster stacks).</li>
-</ul>
+<pre><code>myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" </code></pre>
+<p><font size="2"> <em>(e.g., myoutfolder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData)</em> </font></p>
+<p>, where: - <strong><em>vrt_type</em></strong> indicates the type of virtual file (“RData”, “GDAL” or “ENVI_META”); - <strong><em>Sensor</em></strong> indicates to which MODIS sensor the time series belongs (“Terra”, “Aqua”, “Mixed” or “Combined” (for MCD* products)); - <strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI); - <strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1); - <strong><em>StartDOY</em></strong>, <strong><em>StartYear</em></strong>, <strong><em>EndDOY</em></strong> and <strong><em>EndYear</em></strong> indicate the temporal extent of the time serie created; - <strong><em>suffix</em></strong> indicates the type of virtual file (ENVI, GDAL or RData); - <strong><em>ext</em></strong> is the file extension (“.vrt” for gdal virtual files, “META” for ENVI meta files or “Rdata” for <code>R</code> raster stacks).</p>
 </div>
 </div>
 <div id="accessing-the-processed-time-series-from-r" class="section level1">
@@ -573,10 +567,10 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
 <p>Preprocessed MODIS data can be retrieved within <code>R</code> either by accessing the single-date raster files, or by loading the saved <em>RasterStack</em> objects.</p>
 <p>Any single-date image can be accessed by simply opening it with a <code>raster</code> command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
-modistsp_file &lt;-<span class="st"> "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"</span>
-my_raster     &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
-<p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
+modistsp_file &lt;-<span class="st"> "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"</span>
+my_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
+<p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series/RData” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
 indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))</code></pre></div>
 <p>This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <code>raster</code> or <code>rasterVis</code> packages.</p>
 <div id="extracting-time-series-data-on-areas-of-interest" class="section level2">
@@ -586,7 +580,7 @@ indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span 
 <p>If the input is of class <em>SpatialPoints</em>, the output object contains one column for each point specified, and one row for each date. If it is of class <em>SpatialPolygons</em> (or <em>SpatialLines</em>), it contains one column for each polygon (or each line), with values obtained applying the function specified as the “FUN” argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.</p>
 <p>As an example the following code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co">#Set the input paths to raster and shape file</span>
-  infile    &lt;-<span class="st"> 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'</span>  
+  infile    &lt;-<span class="st"> 'myoutfolder/Time_Series/RData/Mixed/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'</span>  
   shpname   &lt;-<span class="st"> 'path_to_file/rois.shp'</span>  
   <span class="co">#Set the start/end dates for extraction</span>
   startdate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">"2010-01-01"</span>)  
@@ -721,8 +715,8 @@ indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span 
       </ul>
 </li>
       <li>
-<a href="#standalone-execution-and-scheduled-processing">Standalone execution and scheduled processing</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#standalone-execution">Standalone execution</a></li>
+<a href="#stand-alone-execution-and-scheduled-processing">Stand-alone execution and scheduled processing</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#stand-alone-execution">Stand-alone execution</a></li>
       <li><a href="#scheduled-processing">Scheduled Processing</a></li>
       </ul>
 </li>

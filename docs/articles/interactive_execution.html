@@ -44,9 +44,13 @@
      
   </a>
 </li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -69,10 +73,11 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
@@ -154,7 +159,7 @@
 </ul>
 <p><br></p>
 <!-- html table generated in R 3.4.1 by xtable 1.8-2 package -->
-<!-- Fri Aug 18 13:09:12 2017 -->
+<!-- Thu Jan 04 23:09:31 2018 -->
 <table border="1" class="table">
 <tr>
 <th>
@@ -387,7 +392,7 @@ Green-Red ratio Vegetation Index <span class="citation">[@Tucker1979]</span>
 <li><p><strong>Output Files Format</strong>: Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among “None”, “PACKBITS”, “LZW” and “DEFLATE”.</p></li>
 <li><p><strong>Create Virtual Rasters</strong>: Specify if virtual multitemporal files should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are ENVI meta-files and GDAL “vrt” files.</p></li>
 <li><p><strong>Create RasterStack</strong>: Specify if the output time series should be also saved as as “R” <em>rasterStack</em> objects (with temporal information added through the “setZ” method of the <em>raster</em> package). This may be useful in order to easily access the preprocessed MODIS data within “R” scripts.</p></li>
-<li><p><strong>Change NoData values</strong>: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the “MODIStsp_Products_Opts” XML file. By selecting “Yes” in the “Change Original NODATA values” check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them.</p></li>
+<li><p><strong>Change NoData values</strong>: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the “MODIStsp_Products_Opts” XML file. By selecting “Yes” in the “Change Original NoData values” check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them.</p></li>
 <li><p><strong>Scale output values</strong>: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true “measure units” of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etc.).</p></li>
 </ul>
 </div>
@@ -413,7 +418,7 @@ Green-Red ratio Vegetation Index <span class="citation">[@Tucker1979]</span>
 </h2>
 <p>Specified processing parameters can be saved to a JSON file for later use by clicking on the <em><strong>Save Options</strong></em> button.</p>
 <p>Previously saved options can be restored clicking on the <em><strong>Load Options</strong></em> button and navigating to the previously saved JSON file.</p>
-<p><font size="2"> (Note that at launch, <strong><code>MODIStsp</code> <em>always reloads automatically the processing options used for its last succesfull run</em></strong> </font>.</p>
+<p><font size="2"> (Note that at launch, <strong><code>MODIStsp</code> <em>always reloads automatically the processing options used for its last successful run</em></strong> </font>.</p>
 <hr>
 </div>
 <div id="starting-the-processing" class="section level2">
