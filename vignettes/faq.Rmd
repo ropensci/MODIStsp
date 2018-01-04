@@ -25,7 +25,7 @@ Here you can find possible **solutions for common `MODIStsp` problems**. We will
 
 <a name="gWidgets-error"></a>
 
-#### - On Windows, `MODIStsp` fails to install, signalling problems in installation of either `gwidgetsRGtk2` or `RGtk2` 
+#### - On Windows, `MODIStsp` fails to install, signaling problems in installation of either `gwidgetsRGtk2` or `RGtk2` 
 
  Please try to install package `gwidgetsRGtk2` beforehand using: 
   

@@ -17,7 +17,7 @@ See also \code{MODIStsp_GUI} and \code{MODIStsp_process}
 }
 \description{
 Load MODIStsp processing option from \code{opts_jsfile} if
-it already exist, otherwise initialise processing options to default and
+it already exist, otherwise initialize processing options to default and
 save them to \code{opts_jsfile}. Send warnings if options file is from an
 old version
 }

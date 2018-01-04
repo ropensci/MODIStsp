@@ -50,12 +50,14 @@ ________________________________________________________________________________
 
 ## <i class="fa fa-cog" aria-hidden="true"></i> Getting Started
 
-- To install `MODIStsp`, please follow instructions reported [here](articles/installation.html),
+- __To install `MODIStsp`__, please follow instructions reported [here](articles/installation.html),
 both for [<i class="fa fa-windows" aria-hidden="true"></i>](articles/installation.html#installing-on-windows) , [<i class="fa fa-linux" aria-hidden="true"></i>](articles/installation.html#installing-on-linux-systems) and [<i class="fa fa-apple" aria-hidden="true"></i>](articles/installation.html#installing-on-mac)
 
 - `MODIStsp` can be used either in [interactive mode](articles/interactive_execution.html) 
 exploiting its user-friendly GUI, or in [non-interactive mode](articles/noninteractive_execution.html) 
 from within `R` scripts
+
+- The list of __currently supported MODIS products and versions__ can be found [here](articles/Products_list.html) 
 
 - [Scheduled Processing](articles/noninteractive_execution.html#scheduled-processing) allows 
 automatic updating of MODIS time series through scheduled jobs, both on [<i class="fa fa-windows" aria-hidden="true"></i>](articles/standalone_execution.html#on-windows) and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/standalone_execution.html#on-linux)

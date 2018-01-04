@@ -10,7 +10,6 @@ LICENSE.md
 logo.png
 _pkgdown.yaml
 ^Log/
-^Previous/
 ^old_and_various/
 ^inst/Previous/MODIStsp_ProdOpts.RData
 ^sketched_routines/
@@ -30,6 +29,7 @@ vignettes/interactive_execution.Rmd
 vignettes/noninteractive_execution.Rmd
 vignettes/standalone_execution.Rmd
 vignettes/output.Rmd
+vignettes/Products_list.Rmd
 inst/ExtData/Diff_Prodopts.xml
 inst/ExtData/Diff_Prodopts_132_132.xml
 inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml

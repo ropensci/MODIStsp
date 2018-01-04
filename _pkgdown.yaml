@@ -11,12 +11,12 @@ reference:
       - '`MODIStsp`'
       - '`MODIStsp_extract`'
       - '`MODIStsp_addindex`'
-      - '`bbox_from_file`'
-      - '`reproj_bbox`'
       - '`install_MODIStsp_launcher`'
   - title: Internals
     desc: ~
     contents:
+      - '`bbox_from_file`'
+      - '`reproj_bbox`'
       - '`MODIStsp_GUI`'
       - '`MODIStsp_process`'
       - '`MODIStsp_process_indexes`'
@@ -32,7 +32,9 @@ navbar:
   left:
     - icon: fa-home
       href: index.html
-    - text: "How To"
+  right:
+    - text: "Articles"
+      icon: fas fa-book
       menu: 
       -  text: Installation
          href: articles/installation.html
@@ -46,9 +48,8 @@ navbar:
          href: articles/output.html
       -  text: Accessing and Analyzing Processed Data from R
          href: articles/analyze.html
-#    - text: "Examples of Use"
-#      href: articles/examples.html
-  right:
+      -  text: Supported MODIS Products
+         href: articles/Products_list.html
     - text: "faq"
       icon: fa-question-circle-o
       href: articles/faq.html

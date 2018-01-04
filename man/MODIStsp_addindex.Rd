@@ -88,9 +88,11 @@ License: GPL 3.0
  \dontrun{
  MODIStsp_addindex()}
 
-# Run the GUI and save the new index in a custom json file
+# Open the GUI to define a new index and save it in index in a custom json
+  options file.
 \dontrun{
-MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")}
+MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")
+}
 
 # Define the new index in non-interactive execution
 \dontrun{
