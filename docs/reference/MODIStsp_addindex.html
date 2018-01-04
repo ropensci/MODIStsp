@@ -69,9 +69,14 @@
      
   </a>
 </li>
-<li class="dropdown">
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -94,12 +99,12 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
      
@@ -251,19 +256,18 @@ the user to add the new index.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'># Run the GUI to interactively define a new index
- </div><span class='co'># NOT RUN {</span>
- <span class='fu'>MODIStsp_addindex</span>()
-<span class='co'># }</span><div class='input'>
-# Run the GUI and save the new index in a custom json file
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>option_jsfile</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
-<span class='co'># }</span><div class='input'>
+ </div><div class='input'> <span class='fu'>MODIStsp_addindex</span>()</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+# Open the GUI to define a new index and save it in index in a custom json
+# options file.
+</div><div class='input'><span class='fu'>MODIStsp_addindex</span>(<span class='kw'>option_jsfile</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)</div><div class='output co'>#&gt; <span class='error'>Error: lexical error: invalid char in json text.</span>
+#&gt; <span class='error'>                                       X:/yourpath/youroptions.json</span>
+#&gt; <span class='error'>                     (right here) ------^</span></div><div class='input'>
 # Define the new index in non-interactive execution
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
+</div><div class='input'><span class='fu'>MODIStsp_addindex</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
   <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='st'>"Simple Useless Index"</span>,
-  <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)
-<span class='co'># }</span></pre>
+  <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)</div><div class='output co'>#&gt; <span class='message'>The new Index was correctly added!</span>
+#&gt; <span class='message'> It will be available at</span>
+#&gt; <span class='message'>the next execution of MODIStsp().</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

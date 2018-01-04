@@ -69,9 +69,14 @@
      
   </a>
 </li>
-<li class="dropdown">
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -94,12 +99,12 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
      
@@ -269,25 +274,26 @@ belonging to the polygon, and one line for each date.</p>
 <span class='co'># MODIStsp for each polygon of a shapefile, for each date in the period</span>
 <span class='co'># between 2001-01-01 and 2014-12-31</span>
 
-<span class='co'># The example uses tif files in Test_files/VI_16Days_500m_v6 to build</span>
+<span class='co'># The example uses tif files in testdata/VI_16Days_500m_v6 to build</span>
 <span class='co'># a MODIStsp rasterStack corresponding to the 2016 time series of the NDVI index</span>
-<span class='co'># over the Como Lake (Italy). It then extracts data on polygons corresponding </span>
-<span class='co'># to different land cover classes saved in Test_files/extract_polys.shp</span>
+<span class='co'># over the Como Lake (Italy). It then extracts data on polygons corresponding</span>
+<span class='co'># to different land cover classes saved in testdata/extract_polys.shp</span>
 <span class='co'># __NOTE__ on normal execution this is not needed! just load a MODIStsp rasterStack</span>
 <span class='co'># using get(load(_path_to_stack_file_)) (MODIStsp rasterStack files are always</span>
 <span class='co'># saved in the "Time_Series/RData" subfolder of your main output folder - see</span>
-<span class='co'># http://lbusett.github.io/MODIStsp/articles/output.html) </span>
+<span class='co'># http://lbusett.github.io/MODIStsp/articles/output.html)</span>
 
-<span class='no'>opts_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"Test_files/test_extract.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='no'>opts_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/test_extract.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
 <span class='no'>options</span>   <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/read_json'>read_json</a></span>(<span class='no'>opts_file</span>)
-<span class='no'>options</span>$<span class='no'>out_folder</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"Test_files/"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='no'>options</span>$<span class='no'>out_folder</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
 <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/read_json'>write_json</a></span>(<span class='no'>options</span>, <span class='no'>opts_file</span>, <span class='kw'>auto_unbox</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pretty</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'>suppressMessages</span>(<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
 <span class='no'>stack_file</span>  <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(
-  <span class='st'>"Test_files/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>,
+  <span class='st'>"testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI"</span>,
+  <span class='st'>"MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>,
   <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
 <span class='fu'>basename</span>(<span class='no'>stack_file</span>)</div><div class='output co'>#&gt; [1] "MOD13A1_NDVI_1_2016_353_2016_RData.RData"</div><div class='input'>
-<span class='co'># load the MODIStsp stack: This is a MODIS NDVI time series ranging between </span>
+<span class='co'># load the MODIStsp stack: This is a MODIS NDVI time series ranging between</span>
 <span class='co'># 2016-01-01 and 2016-12-18</span>
 
 <span class='no'>ts_data</span> <span class='kw'>&lt;-</span> <span class='fu'>get</span>(<span class='fu'>load</span>(<span class='no'>stack_file</span>))
@@ -301,7 +307,7 @@ belonging to the polygon, and one line for each date.</p>
 #&gt; </div><div class='input'>
 <span class='co'># load a shapefile containing polygons</span>
 
-<span class='no'>polygons</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rgdal</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rgdal/topics/readOGR'>readOGR</a></span>(<span class='fu'>system.file</span>(<span class='st'>"Test_files/extract_polys.shp"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>),
+<span class='no'>polygons</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rgdal</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/rgdal/topics/readOGR'>readOGR</a></span>(<span class='fu'>system.file</span>(<span class='st'>"testdata/extract_polys.shp"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>),
                            <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='no'>polygons</span></div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
 #&gt; features    : 10 
@@ -310,48 +316,47 @@ belonging to the polygon, and one line for each date.</p>
 #&gt; variables   : 2
 #&gt; names       : id,  lc_type 
 #&gt; min values  :  1, Cropland 
-#&gt; max values  :  9,  water_2 </div><div class='input'>
-<span class='co'># Extract the average values for each polygon and date and plot the results</span>
+#&gt; max values  :  9,  water_2 </div><div class='input'><span class='co'># Extract the average values for each polygon and date and plot the results</span>
 
 <span class='no'>out_dataavg</span> <span class='kw'>&lt;-</span> <span class='fu'>suppressMessages</span>(<span class='fu'>MODIStsp_extract</span>(<span class='no'>ts_data</span>, <span class='no'>polygons</span>, <span class='kw'>id_field</span> <span class='kw'>=</span> <span class='st'>"lc_type"</span>,
                              <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: Some features of the spatial object are outside or partially outside</span>
 #&gt; <span class='warning'> the extent of the input RasterStack ! Output for features outside RasterStack extent</span>
 #&gt; <span class='warning'> will be set to NA. Outputs for features only partially inside will be retrieved</span>
-#&gt; <span class='warning'> using only the available pixels !</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>out_dataavg</span>)</div><div class='output co'>#&gt;                   Water    Forest Urban_1   Urban_2   Grassland  Cropland
-#&gt; 2016-01-01  0.128599999 0.5205000  0.4249 0.3645444  0.41186667 0.5810769
-#&gt; 2016-01-17  0.486333327 0.5264333  0.4636 0.3279889  0.33051666 0.5104769
-#&gt; 2016-02-02 -0.140799999 0.5773667  0.4458 0.3276111  0.20375000 0.4964385
-#&gt; 2016-02-18  0.006967999 0.5532667  0.3795 0.3705333 -0.04094000 0.6325692
-#&gt; 2016-03-05  0.117600001 0.5070000  0.3972 0.3759333 -0.03746667 0.6402231
-#&gt; 2016-03-21  0.119114286 0.6197334  0.4506 0.4226889  0.28410000 0.7483077
-#&gt;             Forest_2    water_2 outside_poly
-#&gt; 2016-01-01 0.3617222 0.16372500           NA
-#&gt; 2016-01-17 0.2183111 0.06245714           NA
-#&gt; 2016-02-02 0.2849444 0.02075714           NA
-#&gt; 2016-02-18 0.3286222 0.21131000           NA
-#&gt; 2016-03-05 0.3586556 0.21950000           NA
-#&gt; 2016-03-21 0.5281000 0.03832857           NA</div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)</div><div class='img'><img src='MODIStsp_extract-4.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+#&gt; <span class='warning'> using only the available pixels !</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>out_dataavg</span>)</div><div class='output co'>#&gt;                Water   Forest Urban_1  Urban_2 Grassland Cropland Forest_2
+#&gt; 2016-01-01  1286.000 5205.000    4249 3645.444 4118.6667 5810.769 3617.222
+#&gt; 2016-01-17  4863.333 5264.333    4636 3279.889 3305.1667 5104.769 2183.111
+#&gt; 2016-02-02 -1408.000 5773.667    4458 3276.111 2037.5000 4964.385 2849.444
+#&gt; 2016-02-18    69.680 5532.667    3795 3705.333 -409.4000 6325.692 3286.222
+#&gt; 2016-03-05  1176.000 5070.000    3972 3759.333 -374.6667 6402.231 3586.556
+#&gt; 2016-03-21  1191.143 6197.333    4506 4226.889 2841.0000 7483.077 5281.000
+#&gt;              water_2 outside_poly
+#&gt; 2016-01-01 1637.2500           NA
+#&gt; 2016-01-17  624.5714           NA
+#&gt; 2016-02-02  207.5714           NA
+#&gt; 2016-02-18 2113.1000           NA
+#&gt; 2016-03-05 2195.0000           NA
+#&gt; 2016-03-21  383.2857           NA</div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)</div><div class='img'><img src='MODIStsp_extract-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># use a different summarization function</span>
 
 <span class='no'>out_datasd</span> <span class='kw'>&lt;-</span> <span class='fu'>MODIStsp_extract</span>(<span class='no'>ts_data</span>, <span class='no'>polygons</span>, <span class='kw'>id_field</span> <span class='kw'>=</span> <span class='st'>"lc_type"</span>,
                               <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>"sd"</span>, <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Some features of the spatial object are outside or partially outside</span>
 #&gt; <span class='warning'> the extent of the input RasterStack ! Output for features outside RasterStack extent</span>
 #&gt; <span class='warning'> will be set to NA. Outputs for features only partially inside will be retrieved</span>
-#&gt; <span class='warning'> using only the available pixels !</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>out_datasd</span>)</div><div class='output co'>#&gt;                Water     Forest Urban_1    Urban_2   Grassland   Cropland
-#&gt; 2016-01-01 0.1527253 0.02840563      NA 0.08282035 0.028784350 0.07211268
-#&gt; 2016-01-17 0.3596167 0.01664584      NA 0.05074922 0.083290083 0.03987688
-#&gt; 2016-02-02        NA 0.04032004      NA 0.05889145 0.143827709 0.04085905
-#&gt; 2016-02-18 0.0772163 0.04517593      NA 0.10314414 0.003609432 0.04181476
-#&gt; 2016-03-05        NA 0.03152332      NA 0.08005959 0.014725850 0.06062157
-#&gt; 2016-03-21 0.1804779 0.04664990      NA 0.10256862 0.101645125 0.05843800
-#&gt;             Forest_2   water_2 outside_poly
-#&gt; 2016-01-01 0.2916850 0.3695234           NA
-#&gt; 2016-01-17 0.2065297 0.1178930           NA
-#&gt; 2016-02-02 0.1726775 0.1634258           NA
-#&gt; 2016-02-18 0.2281668 0.2669741           NA
-#&gt; 2016-03-05 0.2668058 0.3230628           NA
-#&gt; 2016-03-21 0.2834513 0.1533839           NA</div></pre>
+#&gt; <span class='warning'> using only the available pixels !</span></div><div class='input'><span class='fu'>head</span>(<span class='no'>out_datasd</span>)</div><div class='output co'>#&gt;               Water   Forest Urban_1   Urban_2  Grassland Cropland Forest_2
+#&gt; 2016-01-01 1527.253 284.0563      NA  828.2035  287.84348 721.1267 2916.850
+#&gt; 2016-01-17 3596.167 166.4582      NA  507.4922  832.90081 398.7688 2065.297
+#&gt; 2016-02-02       NA 403.2001      NA  588.9146 1438.27713 408.5904 1726.775
+#&gt; 2016-02-18  772.163 451.7592      NA 1031.4413   36.09432 418.1476 2281.668
+#&gt; 2016-03-05       NA 315.2332      NA  800.5960  147.25850 606.2157 2668.058
+#&gt; 2016-03-21 1804.779 466.4990      NA 1025.6862 1016.45128 584.3801 2834.513
+#&gt;             water_2 outside_poly
+#&gt; 2016-01-01 3695.234           NA
+#&gt; 2016-01-17 1178.930           NA
+#&gt; 2016-02-02 1634.258           NA
+#&gt; 2016-02-18 2669.741           NA
+#&gt; 2016-03-05 3230.628           NA
+#&gt; 2016-03-21 1533.839           NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -369,7 +374,7 @@ belonging to the polygon, and one line for each date.</p>
 
     <h2>Author</h2>
     
-Lorenzo Busetto, phD (2015)
+Lorenzo Busetto, phD (2015 - 2017)
 email: busetto.l@irea.cnr.it
 
   </div>
