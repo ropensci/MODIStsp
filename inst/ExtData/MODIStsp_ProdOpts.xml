@@ -17353,11 +17353,11 @@
             </versions>
         </MOD16A2>
         <MOD16A3>
-            <name>Net_ET_Yearly_500m (M*D16A2)</name>
+            <name>Net_ET_Yearly_500m (M*D16A3)</name>
             <cat_01>Ecosystem Variables</cat_01>
             <cat_02>Evapotranspiration</cat_02>
-            <file_prefix_terra>MOD16A2</file_prefix_terra>
-            <file_prefix_aqua>MYD16A2</file_prefix_aqua>
+            <file_prefix_terra>MOD16A3</file_prefix_terra>
+            <file_prefix_aqua>MYD16A3</file_prefix_aqua>
             <versions>
                 <version>
                     <v_number>6</v_number>
@@ -17790,8 +17790,8 @@
             <name>Veg_Cont_Fields_Yearly_250m (MOD44B)</name>
             <cat_01>Ecosystem Variables</cat_01>
             <cat_02>Vegetation Continuous Cover/Fields</cat_02>
-            <file_prefix_terra>MOD16A2</file_prefix_terra>
-            <file_prefix_aqua>MYD16A2</file_prefix_aqua>
+            <file_prefix_terra>MOD44B</file_prefix_terra>
+            <file_prefix_aqua>MYD44B</file_prefix_aqua>
             <versions>
                 <version>
                     <v_number>5</v_number>
