@@ -4,14 +4,36 @@ testthat::test_that(
     
     library(testthat)
     # no options file
-    expect_error(MODIStsp(gui = FALSE))
+    expect_error(MODIStsp(gui = FALSE), 
+                 "Please provide a valid")
     # wrong path or non-existing options_file
-    expect_error(expect_warning(MODIStsp(options_file = "", gui = FALSE)))
+    expect_error(expect_warning(MODIStsp(options_file = "", gui = FALSE), 
+                                "Processing Options file not found"))
     # provided options file is not a MODIStsp json options file
     expect_error(MODIStsp(
       options_file = system.file("ExtData", "MODIS_Tiles.gif",
                                  package = "MODIStsp"),
-      gui = FALSE))
+      gui = FALSE), "Unable to read the provided JSON")
+    
+    expect_error(MODIStsp(
+      options_file = system.file("ExtData", "MODIS_Tiles.gif",
+                                 package = "MODIStsp"),
+      gui = FALSE), "Unable to read the provided JSON")
+    
+    # Credentials for earthdata login for http download are wrong
+    expect_error(MODIStsp(
+      options_file = system.file("testdata/test05_wrong_pwd.json", 
+                                 package = "MODIStsp"),
+      gui = FALSE, n_retries = 2), "Username and/or password are not valid")
+    
+    # Try to access via ftp a product only available over http fails
+    # gracefully
+    expect_error(MODIStsp(
+      options_file = system.file("testdata/test04_ftp.json", 
+                                 package = "MODIStsp"),
+      gui = FALSE, n_retries = 2), "Please switch to http download")
+    
+    
   })
 
 
@@ -135,6 +157,18 @@ testthat::test_that(
     mean <- mean(raster::getValues(vrt_1), na.rm = T)
     expect_equal(mean,  0.5400184, tolerance = .00001, scale = 1)
     unlink(out_files_tif)
+    
+    # same execution with ENVI output and no scaling on indexes
+    
+    MODIStsp(test = 8)
+    out_files_dat <- list.files(
+      file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
+      pattern = ".dat$", recursive = TRUE, full.names = TRUE)
+    file_sizes_dat <- file.info(out_files_dat)$size
+    expect_equal(length(out_files_dat), 10)
+    expect_equal(file_sizes_dat[1:5], c(14976, 14976, 3744, 14976, 7488), 
+                 tolerance = 0.001, scale = 1)
+    
   })
 
 ### Test 4: test of HTTP download (from NSIDC) with seasonal period. ####
@@ -289,10 +323,10 @@ testthat::test_that(
     outrast <- raster::raster(outpath)
     ext_mstpout <- sp::bbox(outrast)
     
-    ext_spin <- sp::bbox(rgdal::readOGR(system.file("testdata/spatial_file.shp", 
+    ext_spin <- sp::bbox(rgdal::readOGR(system.file("testdata/spatial_file.shp",
                                                     package = "MODIStsp"), 
                                         verbose = FALSE))
-    # Is input and outut extent equaal (allow for difference equal to raster
+    # Is input and output extent equal (allow for difference equal to raster
     # resolution to account for the fact that to include boundaries of the 
     # polygon a padding of one pixel is always made)
     expect_equal(as.numeric(ext_mstpout), as.numeric(ext_spin),
@@ -309,7 +343,10 @@ testthat::test_that(
 context("MODIStsp Test 8: Fail gracefully on missing connection")
 testthat::test_that(
   "Tests on MODIStsp", {
-    expect_error(without_internet(MODIStsp(test = 5, n_retries = 2)))
-    expect_error(without_internet(MODIStsp(test = 6, n_retries = 2)))
+    library(httptest)
+    expect_error(httptest::without_internet(MODIStsp(test = 5, n_retries = 2)), 
+                 "Error: ftp server seems to be down! Please Retry Later!")
+    expect_error(httptest::without_internet(MODIStsp(test = 6, n_retries = 2)), 
+                 "Error: ftp server seems to be down! Please Retry Later!")
   }
 )

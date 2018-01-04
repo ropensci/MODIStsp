@@ -37,8 +37,9 @@ test_that("MODIStsp_addindex works as expected", {
   
   # All parameters ok: just a message is given
   expect_message(
-    MODIStsp_addindex(gui = FALSE, new_indexbandname = sample(10000, 1),
+    MODIStsp_addindex(gui = FALSE,
+                      new_indexbandname = as.character(sample(10000, 1)),
                       new_indexformula = "b1_Red - b2_NIR",
-                      new_indexfullname = sample(10000, 1))
+                      new_indexfullname = as.character(sample(10000, 1)))
   )
 })

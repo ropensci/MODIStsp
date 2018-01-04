@@ -46,8 +46,10 @@ test_that("MODIStsp_extract works as expected", {
 
       #chack that results are equal to raster::extract
       expect_warning(out_rastextract <- raster::extract(ts_data,
-                                                        polygons, fun = mean,
-                                                        na.rm = TRUE, df = TRUE, 
+                                                        polygons,
+                                                        fun = mean,
+                                                        na.rm = TRUE, 
+                                                        df = TRUE,
                                                         small = TRUE))
       expect_equal(as.numeric(out_rastextract[2,2:24]),
                    as.numeric(out_data[,2]))
