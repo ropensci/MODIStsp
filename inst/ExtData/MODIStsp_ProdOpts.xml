@@ -9,15 +9,15 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Surface Reflectance 8-Day L3 Global 500m</prod_fullname>
+                    <prod_fullname>M*D09A1: Surface Reflectance 8-Day L3 Global 500m</prod_fullname>
                     <main_out_folder>Surf_Ref_8Days_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09A1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD09A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD09A1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09a1</www>
                     <bands>
                         <band>
@@ -673,13 +673,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Surface Reflectance Daily L3 Global 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>M*D09CMG: Surface Reflectance Daily L3 Global 0.05Deg CMG</prod_fullname>
                     <main_out_folder>Surf_Ref_Daily_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09CMG.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09CMG.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD09CMG/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD09CMG/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09cmg</www>
@@ -1564,13 +1564,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname></prod_fullname>
+                    <prod_fullname>M*D09GA: MODIS/Terra/Aqua Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V005</prod_fullname>
                     <main_out_folder>Surf_Ref_Daily_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD09GA/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD09GA/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09ga</www>
@@ -2410,13 +2410,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Surface Reflectance Daily L2G Global 250m</prod_fullname>
+                    <prod_fullname>M*D09GQ: Surface Reflectance Daily L2G Global 250m</prod_fullname>
                     <main_out_folder>Surf_Ref_Daily_250m_v5</main_out_folder>
                     <native_res>231.656358</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD09GQ/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD09GQ/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09gq</www>
@@ -2680,13 +2680,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Surface Reflectance 8-Day L3 Global 250m</prod_fullname>
+                    <prod_fullname>M*D09Q1: Surface Reflectance 8-Day L3 Global 250m</prod_fullname>
                     <main_out_folder>Surf_Ref_8Days_250m_v5</main_out_folder>
                     <native_res>231.656358</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09Q1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD09Q1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD09Q1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09q1</www>
@@ -2960,7 +2960,7 @@
             </versions>
         </MOD09Q1>
         <MODOCGA>
-            <name>Oc_Ref_Daily_1Km (M*DOCGA)</name>
+            <name>Ocean_Ref_Daily_1Km (M*DOCGA)</name>
             <cat_01>Radiation Budget Variables</cat_01>
             <cat_02>Land Surface Reflectance</cat_02>
             <file_prefix_terra>MODOCGA</file_prefix_terra>
@@ -3166,7 +3166,7 @@
             </versions>
         </MODOCGA>
         <MODTBGA>
-            <name>Therm_Daily_1Km (M*D09Q1)</name>
+            <name>Therm_Daily_1Km (M*DTBGA)</name>
             <cat_01>Radiation Budget Variables</cat_01>
             <cat_02>Land Surface Reflectance</cat_02>
             <file_prefix_terra>MODTBGA</file_prefix_terra>
@@ -3177,7 +3177,7 @@
                     <prod_fullname>M*DTBGA: MODIS/Terra/Aqua Thermal Bands Daily L2G Global 1 km SIN Grid V006</prod_fullname>
                     <main_out_folder>Therm_Daily_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MODTBGA.006006/</http_terra>
+                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MODTBGA.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYDTBGA.006/</http_aqua>
                     <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MODTBGA/</ftp_terra>
                     <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYDTBGA/</ftp_aqua>
@@ -3261,7 +3261,7 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS Snow Cover Daily L3 Global 500m Grid</prod_fullname>
+                    <prod_fullname>M*D10_A1: MODIS Snow Cover Daily L3 Global 500m Grid</prod_fullname>
                     <main_out_folder>Snow_Cov_Daily_500m_v5</main_out_folder>
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.005/</http_terra>
@@ -3312,7 +3312,7 @@
                 </version>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MODIS/Terra/Aqua Snow Cover Daily L3 Global 500m Grid</prod_fullname>
+                    <prod_fullname>M*D10_A1: MODIS/Terra/Aqua Snow Cover Daily L3 Global 500m Grid</prod_fullname>
                     <main_out_folder>Snow_Cov_Daily_500m_v5</main_out_folder>
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.006/</http_terra>
@@ -3437,7 +3437,7 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS Snow Cover 8-Day L3 Global 500m Grid</prod_fullname>
+                    <prod_fullname>M*D10_A2: MODIS Snow Cover 8-Day L3 Global 500m Grid</prod_fullname>
                     <main_out_folder>Snow_Cov_8-Day_500m_v5</main_out_folder>
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A2.005/</http_terra>
@@ -3470,7 +3470,7 @@
                 </version>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MODIS Snow Cover 8-Day L3 Global 500m Grid</prod_fullname>
+                    <prod_fullname>M*D10_A2: MODIS Snow Cover 8-Day L3 Global 500m Grid</prod_fullname>
                     <main_out_folder>Snow_Cov_8-Day_500m_v6</main_out_folder>
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A2.006/</http_terra>
@@ -3562,7 +3562,7 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS Terra/Aqua Snow Cover Daily L3 Global 0.05Deg CMG V006</prod_fullname>
+                    <prod_fullname>M*D10C1: MODIS Terra/Aqua Snow Cover Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Snow_cov_daily_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C1.005/</http_terra>
@@ -3613,7 +3613,7 @@
                 </version>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MODIS Terra/Aqua Snow Cover Daily L3 Global 0.05Deg CMG V006</prod_fullname>
+                    <prod_fullname>M*D10C1: MODIS Terra/Aqua Snow Cover Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Snow_cov_daily_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C1.006/</http_terra>
@@ -3673,7 +3673,7 @@
             <versions>
                <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS Terra/Aqua Snow Cover 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
+                    <prod_fullname>M*D10C2: MODIS Terra/Aqua Snow Cover 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Snow_cov_daily_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C2.005/</http_terra>
@@ -3724,7 +3724,7 @@
                 </version>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MODIS Terra/Aqua Snow Cover 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
+                    <prod_fullname>M*D10C2: MODIS Terra/Aqua Snow Cover 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Snow_cov_daily_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C2.006/</http_terra>
@@ -3784,7 +3784,7 @@
             <versions>
                <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS Terra/Aqua Snow Cover Monthly L3 Global 0.05Deg CMG CMG V005</prod_fullname>
+                    <prod_fullname>M*D10CM: MODIS Terra/Aqua Snow Cover Monthly L3 Global 0.05Deg CMG CMG V005</prod_fullname>
                     <main_out_folder>Snow_cov_mnt_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10CM.005/</http_terra>
@@ -3817,7 +3817,7 @@
                 </version>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MODIS Terra/Aqua Snow Cover Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
+                    <prod_fullname>M*D10CM: MODIS Terra/Aqua Snow Cover Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Snow_cov_mnt_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10CM.006/</http_terra>
@@ -3859,13 +3859,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>M*D11C1: MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG</prod_fullname>
                     <main_out_folder>Surf_Temp_Daily_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11C1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1</www>
@@ -4283,13 +4283,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Land Surface Temperature/Emissivity Daily L3 Global 1 km Grid SIN</prod_fullname>
+                    <prod_fullname>M*D11A1: Land Surface Temperature/Emissivity Daily L3 Global 1 km Grid SIN</prod_fullname>
                     <main_out_folder>Surf_Temp_Daily_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11A1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a1</www>
@@ -4614,13 +4614,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Land Surface Temperature/Emissivity 8-Day L3 Global 1km</prod_fullname>
+                    <prod_fullname>M*D11A2: Land Surface Temperature/Emissivity 8-Day L3 Global 1km</prod_fullname>
                     <main_out_folder>Surf_Temp_8Days_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11A2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a2</www>
@@ -4969,13 +4969,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global Grid SIN</prod_fullname>
+                    <prod_fullname>M*D11B1: MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global Grid SIN</prod_fullname>
                     <main_out_folder>Surf_Temp_Daily_GridSin_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11B1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11B1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b1</www>
@@ -5970,13 +5970,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>M*D11C1: MODIS/Terra Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG</prod_fullname>
                     <main_out_folder>Surf_Temp_Daily_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11C1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1</www>
@@ -6422,13 +6422,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>M*D11C2: MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 0.05Deg CMG</prod_fullname>
                     <main_out_folder>Surf_Temp_8Days_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11C2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11C2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c2</www>
@@ -6874,13 +6874,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>MODIS/Terra Land Surface Temperature/Emissivity Monthly L3 Global 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>M*D11C3: MODIS/Terra Land Surface Temperature/Emissivity Monthly L3 Global 0.05Deg CMG</prod_fullname>
                     <main_out_folder>Surf_Temp_Monthly_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD11C3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD11C3/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c3</www>
@@ -7316,13 +7316,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>BRDF-Albedo Model Parameters 16-Day L3 Global 500m</prod_fullname>
+                    <prod_fullname>MCD43A1: BRDF-Albedo Model Parameters 16-Day L3 Global 500m</prod_fullname>
                     <main_out_folder>BRDF_Albedo_ModelPar_Daily_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43A1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a1</www>
@@ -7634,13 +7634,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>BRDF-Albedo Quality 16-Day L3 Global 500m</prod_fullname>
+                    <prod_fullname>MCD43A2: BRDF-Albedo Quality 16-Day L3 Global 500m</prod_fullname>
                     <main_out_folder>BRDF_Albedo_Quality_Daily_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43A2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a2</www>
@@ -7936,13 +7936,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Albedo 16-Day L3 Global 500m</prod_fullname>
+                    <prod_fullname>MCD43A3: MODIS/Terra and Aqua Albedo Daily L3 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>Albedo_Daily_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43A3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43A3/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a3</www>
@@ -8425,13 +8425,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Nadir BRDF-Adjusted Reflectance 16-Day L3 Global 500m</prod_fullname>
+                    <prod_fullname>MCD43A4: MODIS/Terra and Aqua Nadir BRDF-Adjusted Reflectance Daily L3 Global 500 m SIN Grid V005</prod_fullname>
                     <main_out_folder>BRDF_Adj_Refl_Daily_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43A4/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43A4/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a4</www>
@@ -8787,13 +8787,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>BRDF-Albedo Model Parameters 16-Day L3 Global 1km</prod_fullname>
+                    <prod_fullname>MCD43B1: BRDF-Albedo Model Parameters 16-Day L3 Global 1km</prod_fullname>
                     <main_out_folder>BRDF_Albedo_ModelPar_Daily_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43B1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43B1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43b1</www>
@@ -8910,13 +8910,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>BRDF-Albedo Quality 16-Day L3 Global 1km</prod_fullname>
+                    <prod_fullname>MCD43B2: BRDF-Albedo Quality 16-Day L3 Global 1km</prod_fullname>
                     <main_out_folder>BRDF_Albedo_Quality_Daily_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43B2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43B2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43b2</www>
@@ -9026,13 +9026,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Albedo 16-Day L3 Global 1km</prod_fullname>
+                    <prod_fullname>MCD43B3: Albedo 16-Day L3 Global 1km</prod_fullname>
                     <main_out_folder>Albedo_Daily_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B3.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43B3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43B3/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43b3</www>
@@ -9230,13 +9230,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Nadir BRDF-Adjusted Reflectance Reflectance 16-Day L3 Global 1km</prod_fullname>
+                    <prod_fullname>MCD43B4: Nadir BRDF-Adjusted Reflectance Reflectance 16-Day L3 Global 1km</prod_fullname>
                     <main_out_folder>BRDF_Adj_Refl_Daily_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43B4.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43B4/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43B4/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43b4</www>
@@ -9384,13 +9384,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>BRDF-Albedo Model Parameters 16-Day L3 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>MCD43C1: BRDF-Albedo Model Parameters 16-Day L3 0.05Deg CMG</prod_fullname>
                     <main_out_folder>BRDF_Albedo_ModelPar_Daily_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43C1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c1</www>
@@ -10044,13 +10044,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>BRDF-Albedo Snow-Free Quality 16-Day L3 Global 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>MCD43C2: BRDF-Albedo Snow-Free Quality 16-Day L3 Global 0.05Deg CMG</prod_fullname>
                     <main_out_folder>BRDF_Albedo_Quality_Daily_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43C2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43C2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c2</www>
@@ -10742,13 +10742,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Albedo 16-Day L3 Global 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>MCD43C3: Albedo 16-Day L3 Global 0.05Deg CMG</prod_fullname>
                     <main_out_folder>Albedo_Daily_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43C3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43C3/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c3</www>
@@ -11222,13 +11222,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Nadir BRDF-Adjusted Reflectance 16-Day L3 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>MCD43C4: Nadir BRDF-Adjusted Reflectance 16-Day L3 0.05Deg CMG</prod_fullname>
                     <main_out_folder>BRDF_Adj_Refl_16Day_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43C4/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD43C4/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c4</www>
@@ -11403,7 +11403,7 @@
                 </version>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>Nadir BRDF-Adjusted Reflectance 16-Day L3 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>MCD43C4: MODIS/Terra and Aqua Nadir BRDF-Adjusted Reflectance Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Adj_Refl_16Day_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.006/</http_terra>
@@ -13846,13 +13846,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Vegetation Indices 16-Day L3 Global 500m</prod_fullname>
+                    <prod_fullname>M*D13A1: Vegetation Indices 16-Day L3 Global 500m</prod_fullname>
                     <main_out_folder>VI_16Days_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD13A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD13A1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a1</www>
@@ -14265,13 +14265,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Vegetation Indices 16-Day L3 Global 1km</prod_fullname>
+                    <prod_fullname>M*D13A2: Vegetation Indices 16-Day L3 Global 1km</prod_fullname>
                     <main_out_folder>VI_16Days_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD13A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD13A2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a2</www>
@@ -14684,13 +14684,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Vegetation Indices Monthly L3 Global 1km</prod_fullname>
+                    <prod_fullname>M*D13A3: Vegetation Indices Monthly L3 Global 1km</prod_fullname>
                     <main_out_folder>VI_Monthly_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A3.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD13A3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD13A3/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a3</www>
@@ -15094,13 +15094,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Vegetation Indices 16-Day L3 Global 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>M*D13C1: Vegetation Indices 16-Day L3 Global 0.05Deg CMG</prod_fullname>
                     <main_out_folder>VI_16Days_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD13C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD13C1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c1</www>
@@ -15507,13 +15507,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Vegetation Indices Monthly L3 Global 0.05Deg CMG</prod_fullname>
+                    <prod_fullname>M*D13C2: Vegetation Indices Monthly L3 Global 0.05Deg CMG</prod_fullname>
                     <main_out_folder>VI_Monthly_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD13C2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD13C2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c2</www>
@@ -15929,13 +15929,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Vegetation Indices 16-Day L3 Global 250m</prod_fullname>
+                    <prod_fullname>M*D13Q1: Vegetation Indices 16-Day L3 Global 250m</prod_fullname>
                     <main_out_folder>VI_16Days_250m_v5</main_out_folder>
                     <native_res>231.656358</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD13Q1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD13Q1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13q1</www>
@@ -16348,13 +16348,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Leaf Area Index - Fraction of Photosynthetically Active Radiation 8-Day L4 Global 1km</prod_fullname>
+                    <prod_fullname>MCD15A2: Leaf Area Index - Fraction of Photosynthetically Active Radiation 8-Day L4 Global 1km</prod_fullname>
                     <main_out_folder>LAI_8Days_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD15A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD15A2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a2</www>
@@ -16652,13 +16652,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Leaf Area Index - Fraction of Photosynthetically Active Radiation 4-Day L4 Global 1km</prod_fullname>
+                    <prod_fullname>MCD15A3: Leaf Area Index - Fraction of Photosynthetically Active Radiation 4-Day L4 Global 1km</prod_fullname>
                     <main_out_folder>LAI_4Days_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD15A3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD15A3/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a3</www>
@@ -16956,13 +16956,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Leaf Area Index - Fraction of Photosynthetically Active Radiation 8-Day L4 Global 1km</prod_fullname>
+                    <prod_fullname>M*D15A2: Leaf Area Index - Fraction of Photosynthetically Active Radiation 8-Day L4 Global 1km</prod_fullname>
                     <main_out_folder>LAI_8Days_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD15A2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD15A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD15A2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod15a2</www>
                     <combined>0</combined>
                     <tiled>1</tiled>
@@ -17251,6 +17251,176 @@
                 </version>
             </versions>
         </MOD15A2H>
+        <MOD16A2>
+            <name>Net_ET_8Day_500m (M*D16A2)</name>
+            <cat_01>Ecosystem Variables</cat_01>
+            <cat_02>Evapotranspiration</cat_02>
+            <file_prefix_terra>MOD16A2</file_prefix_terra>
+            <file_prefix_aqua>MYD16A2</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MOD16A2: MODIS/Terra Net Evapotranspiration 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
+                    <main_out_folder>Net_ET_8Day_500m_v6</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD16A2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD16A2.006/</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>0</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod16a2_v006</www>
+                    <bands>
+                        <band>
+                            <bandname>ET_500m</bandname>
+                            <fullname>Total Evapotranspiration</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LE_500m</bandname>
+                            <fullname>Average Latent Heat Flux</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>10000</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>PET_500m</bandname>
+                            <fullname>Total Potential Evapotranspiration</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>PLE_500m</bandname>
+                            <fullname>Average Potential Latent Heat Flux</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>10000</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>ET_QC_500m</bandname>
+                            <fullname>Evapotranspiration Quality Control flags</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                    <quality_indicators>
+                        <quality>
+                            <quality_bandname>QC_bits</quality_bandname>
+                            <quality_fullname>MODLAND_QC bits</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>0</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_sensor</quality_bandname>
+                            <quality_fullname>Sensor</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_DeadDet</quality_bandname>
+                            <quality_fullname>DeadDetector</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>2</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_cld</quality_bandname>
+                            <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>3-4</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_SCF</quality_bandname>
+                            <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>5-7</quality_bitN>
+                        </quality>
+                    </quality_indicators>
+                </version>
+            </versions>
+        </MOD16A2>
+        <MOD16A3>
+            <name>Net_ET_Yearly_500m (M*D16A2)</name>
+            <cat_01>Ecosystem Variables</cat_01>
+            <cat_02>Evapotranspiration</cat_02>
+            <file_prefix_terra>MOD16A2</file_prefix_terra>
+            <file_prefix_aqua>MYD16A2</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MOD16A3: MODIS/Terra Net Evapotranspiration Yearly L4 Global 500 m SIN Grid V006</prod_fullname>
+                    <main_out_folder>Net_ET_Yearly_500m_v6</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD16A3.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD16A3.006/</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>0</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod16a3_v006</www>
+                    <bands>
+                        <band>
+                            <bandname>ET_500m</bandname>
+                            <fullname>Total Evapotranspiration</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LE_500m</bandname>
+                            <fullname>Average Latent Heat Flux</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>10000</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>PET_500m</bandname>
+                            <fullname>Total Potential Evapotranspiration</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>PLE_500m</bandname>
+                            <fullname>Average Potential Latent Heat Flux</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>10000</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>ET_QC_500m</bandname>
+                            <fullname>Evapotranspiration Quality Assessmen</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                </version>
+            </versions>
+        </MOD16A3>
         <MOD17A2>
             <name>Gross_PP_8Days_1Km (M*D17A2)</name>
             <cat_01>Ecosystem Variables</cat_01>
@@ -17260,13 +17430,87 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Gross Primary Productivity 8-Day L4 Global 1km</prod_fullname>
+                    <prod_fullname>M*D17A2: Gross Primary Productivity 8-Day L4 Global 1km v005</prod_fullname>
                     <main_out_folder>Gross_PP_8Days_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD17A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD17A2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>0</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a2</www>
+                    <bands>
+                        <band>
+                            <bandname>GPP</bandname>
+                            <fullname>Gpp_1km: Gross Primary Production</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>PsnNet</bandname>
+                            <fullname>PsnNet_1km: Net Photosynthesis (GPP - maintenance respiration)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GPP_QA</bandname>
+                            <fullname>PSN_QC_1km: QC for GPP/PSN</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                    <quality_indicators>
+                        <quality>
+                            <quality_bandname>QC</quality_bandname>
+                            <quality_fullname>MODLAND_QC bits</quality_fullname>
+                            <quality_source>GPP_QA</quality_source>
+                            <quality_bitN>0</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Sensor</quality_bandname>
+                            <quality_fullname>Sensor</quality_fullname>
+                            <quality_source>GPP_QA</quality_source>
+                            <quality_bitN>1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>DeadDet</quality_bandname>
+                            <quality_fullname>DeadDetector</quality_fullname>
+                            <quality_source>GPP_QA</quality_source>
+                            <quality_bitN>2</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Adj_Cld</quality_bandname>
+                            <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
+                            <quality_source>GPP_QA</quality_source>
+                            <quality_bitN>3-4</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>SCF_QC</quality_bandname>
+                            <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
+                            <quality_source>GPP_QA</quality_source>
+                            <quality_bitN>5-7</quality_bitN>
+                        </quality>
+                    </quality_indicators>
+                </version>
+                <version>
+                    <v_number>5.5</v_number>
+                    <prod_fullname>M*D17A2: Gross Primary Productivity 8-Day L4 Global 1km v055</prod_fullname>
+                    <main_out_folder>Gross_PP_8Days_1Km_v55</main_out_folder>
+                    <native_res>926.6254</native_res>
+                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2.055/</http_terra>
+                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2.055/</http_aqua>
+                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/55/MOD17A2/</ftp_terra>
+                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/55/MYD17A2/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a2</www>
@@ -17425,14 +17669,14 @@
             <file_prefix_aqua>MYD17A3</file_prefix_aqua>
             <versions>
                 <version>
-                    <v_number>5</v_number>
-                    <prod_fullname>Terra/MODIS Net Primary Production Yearly L4 Global 1km</prod_fullname>
-                    <main_out_folder>Net_PP_Yearly_1Km_v5</main_out_folder>
+                    <v_number>5.5</v_number>
+                    <prod_fullname>M*D17A3: Terra/MODIS Net Primary Production Yearly L4 Global 1km v055</prod_fullname>
+                    <main_out_folder>Net_PP_Yearly_1Km_v55</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A3.055/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A3.055/</http_aqua>
+                    <http_aqua>Not Available</http_aqua>
                     <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/55/MOD17A3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/55/MYD17A3/</ftp_aqua>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a3</www>
@@ -17542,6 +17786,340 @@
                 </version>
             </versions>
         </MOD17A3H>
+        <MOD44B>
+            <name>Veg_Cont_Fields_Yearly_250m (MOD44B)</name>
+            <cat_01>Ecosystem Variables</cat_01>
+            <cat_02>Vegetation Continuous Cover/Fields</cat_02>
+            <file_prefix_terra>MOD16A2</file_prefix_terra>
+            <file_prefix_aqua>MYD16A2</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>5</v_number>
+                    <prod_fullname>MOD44B: Vegetation Continuous Fields Yearly L3 Global 250m V005</prod_fullname>
+                    <main_out_folder>Veg_Cont_Fields_Yearly_250m_v5</main_out_folder>
+                    <native_res>231.6564</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD44B.005/</http_terra>
+                    <http_aqua>Not Available</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>0</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod44b</www>
+                    <bands>
+                        <band>
+                            <bandname>Perc_TreeCov</bandname>
+                            <fullname>Percent Tree Cover</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>200-253</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Quality</bandname>
+                            <fullname>Quality</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Perc_TreeCov_sd</bandname>
+                            <fullname>Percent Tree Cover SD</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-100</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>100</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Cloud</bandname>
+                            <fullname>Cloud</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                    <quality_indicators>
+                        <quality>
+                            <quality_bandname>QC_065_097</quality_bandname>
+                            <quality_fullname>Quality_065_097</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>0</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_113_145</quality_bandname>
+                            <quality_fullname>Quality_113_145</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_161_193</quality_bandname>
+                            <quality_fullname>Quality_161_193</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>2</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_209_241</quality_bandname>
+                            <quality_fullname>Quality_209_241</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>3</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_257_289</quality_bandname>
+                            <quality_fullname>Quality_257_289</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>4</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_305_337</quality_bandname>
+                            <quality_fullname>Quality_305_337</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>5</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_353_017</quality_bandname>
+                            <quality_fullname>Quality_353_017</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>6</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_033_045</quality_bandname>
+                            <quality_fullname>Quality_033_045</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>7</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_065_097</quality_bandname>
+                            <quality_fullname>Cloud_065_097</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>0</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_113_145</quality_bandname>
+                            <quality_fullname>Cloud_113_145</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_161_193</quality_bandname>
+                            <quality_fullname>Cloud_161_193</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>2</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_209_241</quality_bandname>
+                            <quality_fullname>Cloud_209_241</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>3</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_257_289</quality_bandname>
+                            <quality_fullname>Cloud_257_289</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>4</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_305_337</quality_bandname>
+                            <quality_fullname>Cloud_305_337</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>5</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_353_017</quality_bandname>
+                            <quality_fullname>Cloud_353_017</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>6</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_033_045</quality_bandname>
+                            <quality_fullname>Cloud_033_045</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>7</quality_bitN>
+                        </quality>
+                    </quality_indicators>
+                </version>
+                <version>
+                    <v_number>5.1</v_number>
+                    <prod_fullname>MOD44B: Vegetation Continuous Fields Yearly L3 Global 250m V051</prod_fullname>
+                    <main_out_folder>Veg_Cont_Fields_Yearly_250m_v5</main_out_folder>
+                    <native_res>231.6564</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD44B.051/</http_terra>
+                    <http_aqua>Not Available</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>0</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod44b</www>
+                    <bands>
+                        <band>
+                            <bandname>Perc_TreeCov</bandname>
+                            <fullname>Percent Tree Cover</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>200-253</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Perc_NonTree</bandname>
+                            <fullname>Percent Non Tree Vegetation</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>200-253</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Perc_NonVeg</bandname>
+                            <fullname>Percent Non Vegetated</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>200-253</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Quality</bandname>
+                            <fullname>Quality</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Perc_TreeCov_sd</bandname>
+                            <fullname>Percent Tree Cover SD</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-100</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>100</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Perc_NonVeg_sd</bandname>
+                            <fullname>Percent Non Vegetated SD</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-100</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>100</scale_factor>
+                            <offset>0</offset>
+                        </band>                        
+                        <band>
+                            <bandname>Cloud</bandname>
+                            <fullname>Cloud</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                    <quality_indicators>
+                        <quality>
+                            <quality_bandname>QC_065_097</quality_bandname>
+                            <quality_fullname>Quality_065_097</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>0</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_113_145</quality_bandname>
+                            <quality_fullname>Quality_113_145</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_161_193</quality_bandname>
+                            <quality_fullname>Quality_161_193</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>2</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_209_241</quality_bandname>
+                            <quality_fullname>Quality_209_241</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>3</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_257_289</quality_bandname>
+                            <quality_fullname>Quality_257_289</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>4</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_305_337</quality_bandname>
+                            <quality_fullname>Quality_305_337</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>5</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_353_017</quality_bandname>
+                            <quality_fullname>Quality_353_017</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>6</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_033_045</quality_bandname>
+                            <quality_fullname>Quality_033_045</quality_fullname>
+                            <quality_source>Quality</quality_source>
+                            <quality_bitN>7</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_065_097</quality_bandname>
+                            <quality_fullname>Cloud_065_097</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>0</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_113_145</quality_bandname>
+                            <quality_fullname>Cloud_113_145</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_161_193</quality_bandname>
+                            <quality_fullname>Cloud_161_193</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>2</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_209_241</quality_bandname>
+                            <quality_fullname>Cloud_209_241</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>3</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_257_289</quality_bandname>
+                            <quality_fullname>Cloud_257_289</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>4</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_305_337</quality_bandname>
+                            <quality_fullname>Cloud_305_337</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>5</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_353_017</quality_bandname>
+                            <quality_fullname>Cloud_353_017</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>6</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>Cld_033_045</quality_bandname>
+                            <quality_fullname>Cloud_033_045</quality_fullname>
+                            <quality_source>Cloud</quality_source>
+                            <quality_bitN>7</quality_bitN>
+                        </quality>
+                    </quality_indicators>
+                </version>
+            </versions>
+        </MOD44B>
         <MCD45A1>
             <name>Burned_Monthly_500m (MCD45A1)</name>
             <cat_01>Land Cover Characteristics</cat_01>
@@ -17551,7 +18129,7 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Burned Area Monthly L3 Global 500m</prod_fullname>
+                    <prod_fullname>MCD45A1: Burned Area Monthly L3 Global 500m v005</prod_fullname>
                     <main_out_folder>Burned_Monthly_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.005/</http_terra>
@@ -17637,8 +18215,8 @@
                     </bands>
                 </version>
                 <version>
-                    <v_number>51</v_number>
-                    <prod_fullname>Burned Area Monthly L3 Global 500m</prod_fullname>
+                    <v_number>5.1</v_number>
+                    <prod_fullname>MCD45A1: Burned Area Monthly L3 Global 500m v051</prod_fullname>
                     <main_out_folder>Burned_Monthly_500m_v51</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD45A1.051/</http_terra>
@@ -17734,7 +18312,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>Burned Area Monthly L3 Global 500m</prod_fullname>
+                    <prod_fullname>MCD64A1: Burned Area Monthly L3 Global 500m</prod_fullname>
                     <main_out_folder>Burned_Monthly_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD64A1.006/</http_terra>
@@ -17835,13 +18413,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Thermal Anomalies and Fire Daily L3 Global 1km</prod_fullname>
+                    <prod_fullname>M*D14A1: Thermal Anomalies and Fire Daily L3 Global 1km</prod_fullname>
                     <main_out_folder>ThermalAn_Fire_Daily_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD14A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD14A1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a1</www>
@@ -17887,7 +18465,7 @@
                 </version>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MOD14A1: MODIS/Terra Thermal Anomalies and Fire Daily L3 Global 1km V006</prod_fullname>
+                    <prod_fullname>M*D14A1: MODIS/Terra Thermal Anomalies and Fire Daily L3 Global 1km V006</prod_fullname>
                     <main_out_folder>ThermalAn_Fire_Daily_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.006/</http_terra>
@@ -17961,13 +18539,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Thermal Anomalies and Fire 8-Day L3 Global 1km</prod_fullname>
+                    <prod_fullname>M*D14A2: Thermal Anomalies and Fire 8-Day L3 Global 1km</prod_fullname>
                     <main_out_folder>ThermalAn_Fire_8Days_1Km_v5</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MOD14A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MYD14A2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a2</www>
@@ -18049,14 +18627,14 @@
             <file_prefix_aqua>MCD12C1</file_prefix_aqua>
             <versions>
                 <version>
-                    <v_number>5</v_number>
-                    <prod_fullname>Land Cover Type Yearly L3 Global 0.05Deg CMG</prod_fullname>
+                    <v_number>5.1</v_number>
+                    <prod_fullname>MCD12C1: Land Cover Type Yearly L3 Global 0.05Deg CMG v051</prod_fullname>
                     <main_out_folder>LandCover_Type_Yearly_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD12C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD12C1/</ftp_aqua>
+                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/51/MCD12C1/</ftp_terra>
+                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/51/MCD12C1/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12c1</www>
@@ -18171,14 +18749,14 @@
             <file_prefix_aqua>MCD12Q1</file_prefix_aqua>
             <versions>
                 <version>
-                    <v_number>5</v_number>
-                    <prod_fullname>Land Cover Type Yearly L3 Global 500 m SIN Grid</prod_fullname>
+                    <v_number>5.1</v_number>
+                    <prod_fullname>MCD12Q1: Land Cover Type Yearly L3 Global 500 m SIN Grid v051</prod_fullname>
                     <main_out_folder>LandCover_Type_Yearly_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD12Q1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD12Q1/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q1</www>
@@ -18360,13 +18938,13 @@
             <versions>
                 <version>
                     <v_number>5</v_number>
-                    <prod_fullname>Land Cover Dynamics Yearly L3 Global 500 m SIN Grid</prod_fullname>
+                    <prod_fullname>MCD12Q2: Land Cover Dynamics Yearly L3 Global 500 m SIN Grid</prod_fullname>
                     <main_out_folder>LandCover_Dynamics_Yearly_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.005/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD12Q2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/5/MCD12Q2/</ftp_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q2</www>
