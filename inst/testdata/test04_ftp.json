@@ -14,7 +14,7 @@
 "user": "mstp_test",
 "password": "MSTP_test_01",
 "use_aria": true,
-"download_server": "http",
+"download_server": "ftp",
 "download_range": "seasonal",
 "proj": "Latlon MODIS",
 "user_proj4": "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0",
