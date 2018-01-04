@@ -1,72 +1,72 @@
 context("MODIStsp Test 0: Problems on inputs")
 testthat::test_that(
   "Tests on MODIStsp", {
-    
+
     library(testthat)
     # no options file
-    expect_error(MODIStsp(gui = FALSE), 
+    expect_error(MODIStsp(gui = FALSE),
                  "Please provide a valid")
     # wrong path or non-existing options_file
-    expect_error(expect_warning(MODIStsp(options_file = "", gui = FALSE), 
+    expect_error(expect_warning(MODIStsp(options_file = "", gui = FALSE),
                                 "Processing Options file not found"))
     # provided options file is not a MODIStsp json options file
     expect_error(MODIStsp(
       options_file = system.file("ExtData", "MODIS_Tiles.gif",
                                  package = "MODIStsp"),
       gui = FALSE), "Unable to read the provided JSON")
-    
+
     expect_error(MODIStsp(
       options_file = system.file("ExtData", "MODIS_Tiles.gif",
                                  package = "MODIStsp"),
       gui = FALSE), "Unable to read the provided JSON")
-    
+
     # Credentials for earthdata login for http download are wrong
     expect_error(MODIStsp(
-      options_file = system.file("testdata/test05_wrong_pwd.json", 
+      options_file = system.file("testdata/test05_wrong_pwd.json",
                                  package = "MODIStsp"),
       gui = FALSE, n_retries = 2), "Username and/or password are not valid")
-    
+
     # Try to access via ftp a product only available over http fails
     # gracefully
     expect_error(MODIStsp(
-      options_file = system.file("testdata/test04_ftp.json", 
+      options_file = system.file("testdata/test04_ftp.json",
                                  package = "MODIStsp"),
       gui = FALSE, n_retries = 2), "Please switch to http download")
-    
-    
+
+
   })
 
 
-context("MODIStsp Test 1: Basic processing on bands and quality 
+context("MODIStsp Test 1: Basic processing on bands and quality
         indicators")
 testthat::test_that(
   "Tests on MODIStsp", {
-    
+
     library(testthat)
-    
+
     # skip("Skip tests - since they rely on download they are only run locally")
     # skip_on_cran()
     # skip_on_travis()
-    
+
     ### Test 1: test of the basic operations of MODIStsp.                   ####
     #   The test process two bands and extracts one quality indicator from a
     #   single local hdf file for MOD11A2 product  without any
     #   additional preprocessing operations. Output files are in GeoTiff format.
-    
+
     MODIStsp(test = 1)
     out_files  <- list.files(file.path(tempdir(),
                                        "Surf_Temp_8Days_GridSin_v6"),
                              pattern = ".tif$",
                              recursive = TRUE, full.names = TRUE)
     file_sizes <- file.info(out_files)$size
-    
+
     # check that size of files file resulting from test run are equal to those
     #  obtained with a "working" MODIStsp version
     expect_equal(file_sizes, c(80670, 80670, 40916, 40916))
-    
+
     # check that median value of files file resulting from test run are
     # equal to those obtained with a "working" MODIStsp version
-    
+
     means <- unlist(
       lapply(out_files,
              FUN = function(x) {
@@ -87,12 +87,12 @@ testthat::test_that(
   "Tests on MODIStsp", {
     # skip_on_cran()
     # skip_on_travis()
-    
+
     MODIStsp(test = 2)
     out_files_dat  <- list.files(file.path(
       tempdir(), "Surf_Temp_8Days_GridSin_v6"),
       pattern = ".dat$", recursive = TRUE, full.names = TRUE)
-    
+
     # same checks as before on file size and raster stats
     file_sizes_dat <- file.info(out_files_dat)$size
     expect_equal(file_sizes_dat, c(52000, 26000))
@@ -102,9 +102,9 @@ testthat::test_that(
                mean(raster::getValues(raster::raster(x)), na.rm = T)
              })
     )
-    expect_equal(means, c(13447.650685, 1.757238), 
+    expect_equal(means, c(13447.650685, 1.757238),
                  tolerance = 0.001, scale = 1)
-    
+
     # additional checks on output projection and resolution
     r <- raster::raster(out_files_dat[1])
     expect_equal(
@@ -123,20 +123,20 @@ testthat::test_that(
 #   mode), and processing options for time series creation are applied.
 #   Output files are in GeoTiff compressed format, with vrt and ENVI
 #   virtual time series.
-context("MODIStsp Test 3: Computation of spectral indices and 
+context("MODIStsp Test 3: Computation of spectral indices and
             creation of time series")
 testthat::test_that(
   "Tests on MODIStsp", {
     # skip_on_cran()
     # skip_on_travis()
-    
+
     MODIStsp(test = 3)
     out_files_tif <- list.files(
       file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
       pattern = ".tif$", recursive = TRUE, full.names = TRUE)
-    
+
     file_sizes_tif <- file.info(out_files_tif)$size
-    expect_equal(file_sizes_tif, c(10583, 10642, 752, 10706, 1409), 
+    expect_equal(file_sizes_tif, c(10583, 10642, 752, 10706, 1409),
                  tolerance = 0.001, scale = 1)
     means <- unlist(lapply(out_files_tif,
                            FUN = function(x) {
@@ -145,30 +145,30 @@ testthat::test_that(
                            }))
     expect_equal(means, c(0.5400184, 0.6436071, 0.0000000, 0.3753549,
                           197.0045406), tolerance = 0.001, scale = 1)
-    
+
     out_files_vrt <- list.files(
       file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
       pattern = ".vrt$", recursive = TRUE, full.names = TRUE)
     file_sizes_vrt <- file.info(out_files_vrt)$size
     expect_equal(length(out_files_vrt), 5)
-    
+
     vrt_1 <- raster::raster(out_files_vrt[1])
     expect_is(vrt_1, "RasterLayer")
     mean <- mean(raster::getValues(vrt_1), na.rm = T)
     expect_equal(mean,  0.5400184, tolerance = .00001, scale = 1)
     unlink(out_files_tif)
-    
+
     # same execution with ENVI output and no scaling on indexes
-    
+
     MODIStsp(test = 8)
     out_files_dat <- list.files(
       file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
       pattern = ".dat$", recursive = TRUE, full.names = TRUE)
     file_sizes_dat <- file.info(out_files_dat)$size
     expect_equal(length(out_files_dat), 10)
-    expect_equal(file_sizes_dat[1:5], c(7488, 7488, 3744, 7488, 7488), 
+    expect_equal(file_sizes_dat[1:5], c(7488, 7488, 3744, 7488, 7488),
                  tolerance = 0.001, scale = 1)
-    
+
   })
 
 ### Test 4: test of HTTP download (from NSIDC) with seasonal period. ####
@@ -182,7 +182,6 @@ testthat::test_that(
 #   interactive mode. For this reason the test is excluded when running
 #   `R CMD check` and must be run manually or using `devtools::test()`
 
-# if (interactive()) {
 
 context("MODIStsp Test 4: HTTP download from NSIDC (seasonal)")
 testthat::test_that("Tests on MODIStsp", {
@@ -207,25 +206,26 @@ testthat::test_that("Tests on MODIStsp", {
            })
   )
   expect_equal(means, c(203.7691, 202.8263, 206.5492, 205.2043),
-               tolerance = 0.001, scale = 1)
+               tolerance = 0.1, scale = 1)
   
   out_files_rts <- list.files(
-    file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
+    file.path(tempdir(), "Snow_cov_mnt_005dg_v6"),
     pattern = ".RData$", recursive = TRUE, full.names = TRUE)
   
   #check that rts files are properly created
-  expect_equal(length(out_files_rts), 5)
+  expect_equal(length(out_files_rts), 3)
   
   # loading an rdata utput yields a RasterStack
   r <- get(load(out_files_rts[1]))
   expect_is(r, "RasterStack")
-  expect_equal(names(r), "MOD09A1_GVMI_2017_193")
+  expect_equal(names(r)[1], "MYD10CM_SN_COV_MNT_2015_213")
   
   # check correct resampling and reprojection
-  expect_equal(raster::res(r), c(250, 250))
+  expect_equal(raster::res(r), c(1553.030, 1551.724), 
+               tolerance = 0.01, scale = 1)
   expect_equal(
     sp::proj4string(r),
-    "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"#nolint
+    "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"#nolint
   )
   unlink(out_files_dat)
   unlink(out_files_rts)
@@ -239,13 +239,13 @@ testthat::test_that("Tests on MODIStsp", {
 #   interactive mode. For this reason the test is excluded when running
 #   `R CMD check` and must be run manually or using `devtools::test()`
 
-# if (interactive()) {
+
 context("MODIStsp Test 5: HTTP download from USGS, resize and reproject")
 testthat::test_that(
   "Tests on MODIStsp", {
     # skip_on_cran()
     # skip_on_travis()
-    
+
     MODIStsp(test = 5)
     out_files_tif <- list.files(file.path(tempdir(), "Albedo_Daily_500m_v6"),
                                 pattern = "tif$", recursive = TRUE,
@@ -261,10 +261,8 @@ testthat::test_that(
     expect_equal(means, c(0.8962911), tolerance = 0.001, scale = 1)
     unlink(out_files_tif)
   })
-# } else {
-#   message("(skipped)\n")
-# }
 
+#
 ### Test 6: test of FTP download and mosaicing of MODIS tiles               ####
 #   This test downloads four MCD LAI products (MCD15A2H) from FTP and mosaics
 #   them and crop to the ouput extent (Minorca island).
@@ -276,7 +274,7 @@ testthat::test_that(
   "Tests on MODIStsp", {
     # skip_on_cran()
     # skip_on_travis()
-    
+
     expect_warning(MODIStsp(test = 6))
     out_files_dat <- list.files(file.path(tempdir(), "LAI_8Days_500m_v6"),
                                 pattern = ".tif$", recursive = TRUE,
@@ -296,7 +294,7 @@ testthat::test_that(
       "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
     )
     expect_equal(raster::res(r), c(0.01, 0.01), tolerance = 0.001, scale = 1)
-    # re-run with same parameterization. Since Reprocess = "No", the 
+    # re-run with same parameterization. Since Reprocess = "No", the
     # auto-skipping of already processed dates kicks-in in this case, leading
     # the process to be very quick (Only MODIStso_vrt_create need to run. )
     expect_warning(MODIStsp(test = 6))
@@ -312,9 +310,9 @@ testthat::test_that(
   "Tests on MODIStsp", {
     # skip_on_cran()
     # skip_on_travis()
-    
-    MODIStsp(test = 7, 
-             spatial_file_path = system.file("testdata/spatial_file.shp", 
+
+    MODIStsp(test = 7,
+             spatial_file_path = system.file("testdata/spatial_file.shp",
                                              package = "MODIStsp"))
     outpath <- file.path(
       tempdir(),
@@ -322,31 +320,31 @@ testthat::test_that(
     )
     outrast <- raster::raster(outpath)
     ext_mstpout <- sp::bbox(outrast)
-    
+
     ext_spin <- sp::bbox(rgdal::readOGR(system.file("testdata/spatial_file.shp",
-                                                    package = "MODIStsp"), 
+                                                    package = "MODIStsp"),
                                         verbose = FALSE))
     # Is input and output extent equal (allow for difference equal to raster
-    # resolution to account for the fact that to include boundaries of the 
+    # resolution to account for the fact that to include boundaries of the
     # polygon a padding of one pixel is always made)
     expect_equal(as.numeric(ext_mstpout), as.numeric(ext_spin),
                  tolerance = raster::res(outrast), scale = 1)
     unlink(outpath)
-    
+
   }
 )
 
 
 ### Test 8: Fail gracefully on no connection               ####
 #   If internet connection is down, retry n_retries times, try switching
-#   switching from http to ftp. After n_retries, abort gracefully. 
+#   switching from http to ftp. After n_retries, abort gracefully.
 context("MODIStsp Test 8: Fail gracefully on missing connection")
 testthat::test_that(
   "Tests on MODIStsp", {
     library(httptest)
-    expect_error(httptest::without_internet(MODIStsp(test = 5, n_retries = 2)), 
+    expect_error(httptest::without_internet(MODIStsp(test = 5, n_retries = 1)),
                  "Error: ftp server seems to be down! Please Retry Later!")
-    expect_error(httptest::without_internet(MODIStsp(test = 6, n_retries = 2)), 
+    expect_error(httptest::without_internet(MODIStsp(test = 6, n_retries = 1)),
                  "Error: ftp server seems to be down! Please Retry Later!")
   }
 )

@@ -1,5 +1,4 @@
-context("MODIStsp_extract")
-
+context("MODIStsp_extract works as expected")
 
 test_that("MODIStsp_extract works as expected", {
       library(testthat)
@@ -38,7 +37,7 @@ test_that("MODIStsp_extract works as expected", {
                                                   id_field = "lc_type",
                                                   small = FALSE))
       expect_is(out_data, "xts")
-      expect_equal(mean(out_data, na.rm = TRUE), 0.477034, tolerance = 0.001, 
+      expect_equal(mean(out_data, na.rm = TRUE), 4431.833, tolerance = 0.001, 
                    scale = 1)
       
       #all data for polys outside extent of raster are NaN
@@ -91,13 +90,11 @@ test_that("MODIStsp_extract works as expected", {
       expect_warning(out_data <- MODIStsp_extract(ts_data, 
                                                   points,
                                                   id_field = "lc_type"))
-      expect_equal(mean(out_data, na.rm = T), 0.507399, tolerance = 0.001, 
+      expect_equal(mean(out_data, na.rm = T), 4757.042, tolerance = 0.001, 
                    scale = 1)
 
       # redo without specifying a column for extraction, and compare wrt
       # raster::extract
-      expect_equal(mean(out_data, na.rm = T), 0.507399, tolerance = 0.001, 
-                   scale = 1)
 
       #subset on dates
       expect_warning(out_data <- MODIStsp_extract(ts_data, points, 
@@ -105,7 +102,8 @@ test_that("MODIStsp_extract works as expected", {
                                    end_date = "2016-08-01", 
                                    out_format = "dframe"))
       expect_equal(length(out_data[,1]), 2)
-      expect_equal(mean(out_data[,2], na.rm = T), 0.0858)
+      expect_equal(mean(out_data[,2], na.rm = T), 858, tolerance = 0.001, 
+                   scale = 1)
       #compare again with raster::extract
       expect_warning(out_rastextract <- raster::extract(ts_data[[13:14]],
                                                         points, fun = mean,

@@ -34,7 +34,7 @@
 "reprocess": "Yes",
 "bbox": [  2e+05, -1.42e+06, 6.1e+05, -8.8e+05 ],
 "out_folder": "$tempdir",
-"out_folder_mod": "$tempdir",
+"out_folder_mod": "$modistest",
 "MODIStspVersion": "1.3.3.9000",
 "custom_indexes": []
 }
