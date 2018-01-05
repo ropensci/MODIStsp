@@ -23,7 +23,7 @@
 "full_ext": "Resized",
 "resampling": "mode",
 "out_format": "ENVI",
-"ts_format": "ENVI and GDAL",
+"ts_format": "GDAL vrt files",
 "rts": "Yes",
 "compress": {
  "Medium (LZW)": "LZW" 

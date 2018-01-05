@@ -151,19 +151,46 @@
     <div id="modistsp-1-3-3-9000" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-3-9000" class="anchor"></a>MODIStsp 1.3.3.9000</h2>
-<div id="minor-changes" class="section level3">
+<div id="main-changes" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes" class="anchor"></a>Minor changes</h3>
-<p>Addedd support for both V005 and V051 of MCD45A1 and for the new new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97">#97</a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p>
+<a href="#main-changes" class="anchor"></a>Main changes</h3>
+<p>Improvements in download functions</p>
+<ul>
+<li>Use of httr::RETRY to improve behavior while navigating the servers to retrieve available files and while downloading hdf file (when use_aria == FALSE)</li>
+</ul>
+<p>Extensive code refactoring for submission to ropensci.</p>
+<ul>
+<li>Long functions were simplified/split into smaller functions to allow for easier maintenance</li>
+<li>Extensive code linting to abide to ropensci standards</li>
+<li>Switch to rjsonio/xml2 to abide to ropensci standards</li>
+<li>Removal of some dependencies (e.g., hash)</li>
+</ul>
+<p>Improvements in documentation and website</p>
+<ul>
+<li>More detailed documentation for the main functions</li>
+<li>Improvements in pkgdown articles to include some “worked examples” (e.g., MODIStsp_Extract)</li>
+<li>New article in pkgdown showing a list of supported products</li>
+</ul>
+<p>Improvements in test coverage</p>
+<ul>
+<li>Several new tests added, bringing coverage above 90%</li>
+</ul>
+<p>Updates in supported products</p>
+<ul>
+<li><p>Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97">#97</a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p></li>
+<li>Added support for Evapotraspiration products (MOD12A2 and MOD12A3)</li>
+<li>Added support for Vegetation Continuous Fields product (MOD44B)</li>
+<li><p>Checked availability of products over ftp and set not available products to “Not Available” to allow graceful fail.</p></li>
+</ul>
 </div>
 </div>
     <div id="modistsp-1-3-3-1-release-notes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-3-1-release-notes" class="anchor"></a>MODIStsp 1.3.3.1 Release Notes</h2>
 <p>This was mostly a maintenance release - fixing a bug in 1.3.3 submission related to a missing import in NAMESPACE</p>
-<div id="minor-changes-1" class="section level3">
+<div id="minor-changes" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-1" class="anchor"></a>Minor Changes</h3>
+<a href="#minor-changes" class="anchor"></a>Minor Changes</h3>
 <p>Improved organization of Virtual Raster files and RData files in the “Time_Series” output subfolder. Now virtual files and RData files are organized by sensor and layer to facilitate access.</p>
 <hr>
 </div>
@@ -178,12 +205,12 @@
 <ul>
 <li><p>Improved speed in computation of spectral indexes, quality indicators and in computation of scaled variables by usind <code><a href="http://www.rdocumentation.org/packages/raster/topics/calc">raster::calc()</a></code> and <code><a href="http://www.rdocumentation.org/packages/raster/topics/overlay">raster::overlay</a></code> (commits <a href="https://github.com/lbusett/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e">0f5d76d</a>, <a href="https://github.com/lbusett/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e">0f5d76d</a>, <a href="https://github.com/lbusett/MODIStsp/commit/e462721a06a079185ec5a84270ea0c8bd8edf54d">e462721</a>)</p></li>
 <li><p>Added functionality for unit testing using <code>testthat</code> and codecov integration. (commit <a href="https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a">0c00fc6</a> and others)</p></li>
-<li><p>Added “testing mode” to allow users to test proper functioning. Now, runnning <code><a href="../reference/MODIStsp.html">MODIStsp(test = X)</a></code> (with X in (0,6)) runs the processing using default processing parameters (commit <a href="https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a">0c00fc6</a> and others)</p></li>
+<li><p>Added “testing mode” to allow users to test proper functioning. Now, running <code><a href="../reference/MODIStsp.html">MODIStsp(test = X)</a></code> (with X in (0,6)) runs the processing using default processing parameters (commit <a href="https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a">0c00fc6</a> and others)</p></li>
 </ul>
 </div>
-<div id="minor-changes-2" class="section level3">
+<div id="minor-changes-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-2" class="anchor"></a>Minor Changes</h3>
+<a href="#minor-changes-1" class="anchor"></a>Minor Changes</h3>
 <ul>
 <li>Suppression of verbose messages and (useless) warning messages while parsing the NASA servers and downloading data using “ftp” ( <a href="https://github.com/lbusett/MODIStsp/commit/3775d6099bc359925d3dcbd96c2ffe8455502648">3775d60</a>);</li>
 </ul>
@@ -192,7 +219,7 @@
 <h3 class="hasAnchor">
 <a href="#bug-fixing" class="anchor"></a>Bug fixing</h3>
 <ul>
-<li><p>Fxed a bug preventing the “last” choice (or that present in the json file) from correctly showing in the GUI upon launch/restore of a saved json file (commit <a href="https://github.com/lbusett/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3">633c2dd</a>)</p></li>
+<li><p>Fixed a bug preventing the “last” choice (or that present in the json file) from correctly showing in the GUI upon launch/restore of a saved json file (commit <a href="https://github.com/lbusett/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3">633c2dd</a>)</p></li>
 <li>
 <p>Fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in <code>gdalbuildvrt</code>, causing sometimes an incorrect translation from HDF to output formats (<a href="https://github.com/lbusett/MODIStsp/issues/72">#72</a>).</p>
 <p><strong>M*D09A1</strong> - 500m Reflectance Band Quality (V005 and V006); <strong>M*DO9CMG</strong> - Coarse Resolution QA (V005 and V006); <strong>M*D09CMG</strong> - Coarse Resolution Number Mapping (V006); <strong>M*D09GA</strong> - 500m Reflectance Band Quality (V005 and V006); <strong>M*DOCGA</strong> - Band quality for MODIS bands 8-15 (V006); <strong>M*D11C3</strong> - Days with clear-sky conditions and validated LSTs; Nights with clear-sky conditions and validated LSTs (V005 and V006); <strong>MCD43A2</strong> - BRDF_Albedo_Band_Quality (V005 and V006).</p>
@@ -221,7 +248,7 @@
 <h3 class="hasAnchor">
 <a href="#major-changes-1" class="anchor"></a>Major Changes:</h3>
 <ul>
-<li>Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.</li>
+<li>Added functionality to apply scale and offset coefficients on MODIS original values according with the specifications of single MODIS products.</li>
 </ul>
 <div id="details" class="section level4">
 <h4 class="hasAnchor">
@@ -238,9 +265,9 @@
 </ul>
 </div>
 </div>
-<div id="minor-changes-3" class="section level3">
+<div id="minor-changes-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-3" class="anchor"></a>Minor Changes:</h3>
+<a href="#minor-changes-2" class="anchor"></a>Minor Changes:</h3>
 <ul>
 <li>
 <p>Some product names and output layer names were modified to reduce the length of output file names, homogenize the names of the outputs and correct some errors. <strong>For compatibility with already created output files</strong> (versions up to 1.3.1), the old “XML” file specifying output files format is still available in <code>inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml</code>. To use the old file naming conventions, users have to:</p>
@@ -285,7 +312,7 @@
 <h3 class="hasAnchor">
 <a href="#bug-fixing-2" class="anchor"></a>Bug fixing</h3>
 <ul>
-<li><p>Fixed bug on download with aria, throwing an error on partial download on http downlaod with aria (<a href="https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78">6fbc875</a>)</p></li>
+<li><p>Fixed bug on download with aria, throwing an error on partial download on http download with aria (<a href="https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78">6fbc875</a>)</p></li>
 <li><p>Fixed bug on M*D15A2 processing (Issue <a href="https://github.com/lbusett/MODIStsp/issues/60">#60</a>) on devel/master</p></li>
 <li><p>Fixed bug on MCD12Q1 processing (Issue <a href="https://github.com/lbusett/MODIStsp/issues/58">#58</a>) on devel/master</p></li>
 <li><p>Fixed bug on MOD13C2 processing (Issue <a href="https://github.com/lbusett/MODIStsp/issues/52">#52</a>) on devel/master</p></li>
@@ -305,15 +332,15 @@
 <ul>
 <li><p>Added functionality for downloading and preprocessing MODIS collection 006 datasets. For products with both 005 and 006 collections, the user can select the version using a new droplist in the GUI.</p></li>
 <li><p>Added functionality for off-line processing. This allows both to <em>i)</em> reprocessing already downloaded data (for example, to create time series for an additional layer) without the need to connect to NASA servers, and <em>ii)</em> process HDF files downloaded outside <em>MODIStsp</em> (e.g., directly from NASA ftp) and stored on the user’s PC, without the need of an active internet connection.</p></li>
-<li><p>Improved the way in which options are saved. Much more readable .JSON files are now used instead than .RData. User options are no longer saved alongside products characteristics. This will allow to re-use an “old” options file even if changes are made on the XML file descriving the products.</p></li>
-<li><p>Improved the GUI inteface for specifying additional Spectral Indexes. Hints are now showed to the user, and multiple indexes can be added in the same session.</p></li>
+<li><p>Improved the way in which options are saved. Much more readable .JSON files are now used instead than .RData. User options are no longer saved alongside products characteristics. This will allow to re-use an “old” options file even if changes are made on the XML file describing the products.</p></li>
+<li><p>Improved the GUI interface for specifying additional Spectral Indexes. Hints are now showed to the user, and multiple indexes can be added in the same session.</p></li>
 </ul>
 </div>
-<div id="minor-changes-4" class="section level3">
+<div id="minor-changes-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-4" class="anchor"></a>Minor Changes</h3>
+<a href="#minor-changes-3" class="anchor"></a>Minor Changes</h3>
 <ul>
-<li><p>General improvements in the GUI inteface. Products are now grouped by categories, to allow easier identification and selection.</p></li>
+<li><p>General improvements in the GUI interface. Products are now grouped by categories, to allow easier identification and selection.</p></li>
 <li><p>Improvements in the README file and vignettes, providing more instructions on package use.</p></li>
 <li><p>Improved functionality for checking for “complete” download, by comparing the size of the downloaded files with that of files on the server.</p></li>
 <li><p>Added “configure” file for Linux installation.</p></li>
@@ -334,26 +361,26 @@
 <li><p>Modified format of “R” output time series from <em>rts</em> objects to <em>RasterStack</em> objects with temporal information added in the “z” attribute via setZ()</p></li>
 <li>Major changes/improvements in <em>MODIStsp_extract</em> function:
 <ul>
-<li>Use of plain rasterstack with “z” attribute instead than rasterstackts</li>
+<li>Use of plain RasterStack with “z” attribute instead than rasterstackts</li>
 <li>Use of gdal_rasterize (<em>gdalUtils</em>) instead of rasterize (<em>rgdal</em>) to improve speed. Temporary shapes and rasters necessay are saved in “R” temporary folder and removed automatically</li>
 <li>Fixed bugs on functionality for point/lines shapefiles, according to what specified by the “small” and “small_method” parameters</li>
 <li>Added functionality for retrieving data for small polygons</li>
 <li>Added out_format selection - xts or plain data.frame</li>
 <li>Added possibility to use a shp filename as input directly</li>
 <li>Added conformity checks on inputs</li>
-<li>Added functionaluity to run without specifying start and end dates</li>
+<li>Added functionality to run without specifying start and end dates</li>
 <li>Added id_field parameter for choosing which column of the input SP object should be used for “naming” the columns of the output</li>
 </ul>
 </li>
 <li><p>Removed possibility to use “complex” resampling methods when reprojecting (e.g., bilinear, cubic, etc.) to avoid incorrect resampling on categorical variables and “contamination” of good pixels data.</p></li>
 </ol>
 </div>
-<div id="minor-changes-5" class="section level3">
+<div id="minor-changes-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#minor-changes-5" class="anchor"></a>Minor Changes</h3>
+<a href="#minor-changes-4" class="anchor"></a>Minor Changes</h3>
 <ul>
 <li>Changed the input method for starting and ending dates selection in the GUI. Now a text field is used</li>
-<li>Added functionaluty for writing data ignore value on ENVI files</li>
+<li>Added functionality for writing data ignore value on ENVI files</li>
 <li>Removed automatic deletion of XML files created by writeRaster to keep metadata information</li>
 <li>Changed names of products in the GUI for products with both TERRA and AQUA dataset to M*D09A1, M*D13Q1, etc…</li>
 <li>Modified code syntax to satisfy R code styling guidelines</li>

@@ -32,15 +32,15 @@ MODIStsp_vrt_create <- function(
   quality_bandnames, quality_bandsel, quality_nodata_out,
   file_prefixes,
   ts_format, out_format, rts) {
-
+  
   if (length(sensor) == 2) {
     senslist <- c("Terra", "Aqua", "Mixed")
   } else {
     senslist <- sensor
   }
-
+  
   for (sens_sel in senslist) {
-
+    
     if (sens_sel == "Terra") {
       file_prefix <- file_prefixes[["Terra"]]
     }
@@ -51,26 +51,26 @@ MODIStsp_vrt_create <- function(
       file_prefix <- paste(file_prefixes[["Terra"]], file_prefixes[["Aqua"]],
                            sep = "_")
     }
-
+    
     if (sens_sel == "Combined") {
       file_prefix <- file_prefixes[["Terra"]]
     }
-
+    
     meta_bands <- c(bandnames[which(bandsel == 1)],
                     indexes_bandnames[which(indexes_bandsel == 1)],
                     quality_bandnames[which(quality_bandsel == 1)])
-
+    
     nodata_vals <- c(nodata_out[which(bandsel == 1)],
                      indexes_nodata_out[which(indexes_bandsel == 1)],
                      quality_nodata_out[which(quality_bandsel == 1)])
-
+    
     for (mb in seq_along(meta_bands)) {
-
+      
       meta_band    <- meta_bands[mb]
       nodata_value <- nodata_vals[mb]
       message("[", date(), "] Creating Virtual Files and R time series for ",
               "layer ", meta_band)
-
+      
       #- --------------------------------------------------------#
       # retrieve files list of the time series (ENVI format) ####
       # (both .dat and .hdr)
@@ -82,7 +82,7 @@ MODIStsp_vrt_create <- function(
         if (sens_sel != "Mixed")  {
           out_meta_files <- out_meta_files[grep(file_prefix, out_meta_files)]
         }
-
+        
         out_meta_files_hdr <- list.files(file.path(out_prod_folder, meta_band),
                                          pattern = "\\.hdr$", full.names = TRUE)
         if (sens_sel != "Mixed")  {
@@ -90,7 +90,7 @@ MODIStsp_vrt_create <- function(
                                                         out_meta_files_hdr)]
         }
       }
-
+      
       #- --------------------------------------------------------#
       # retrieve files list of the time series (GTiff format) ####
       #
@@ -102,11 +102,11 @@ MODIStsp_vrt_create <- function(
           out_meta_files <- out_meta_files[grep(file_prefix, out_meta_files)]
         }
       }
-
+      
       # Set a flag to 1 if "Mixed" time series are being processed but either no
       # AQUA or no TERRA files are available, so that in that case the creation
       # of META files for the mixed case is skipped !
-
+      
       skip_flag <- 0
       if ( (sens_sel == "Mixed") &
            ( (length(grep(file_prefixes[["Aqua"]], out_meta_files)) == 0) |
@@ -227,7 +227,7 @@ MODIStsp_vrt_create <- function(
           #   __________________________________________________________________
           #   # Write the GDAL vrt file if needed                           ####
           #
-          if (ts_format == "GDAL vrt Files" | ts_format == "ENVI and GDAL") {
+          if (ts_format == "GDAL vrt files" | ts_format == "ENVI and GDAL") {
 
             meta_dir <- file.path(out_prod_folder, "Time_Series", "GDAL",
                                   sens_sel,

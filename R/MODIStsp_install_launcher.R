@@ -1,27 +1,32 @@
-#'  install_MODIStsp_launcher
+#' @title install_MODIStsp_launcher
 #' @description Function which allows to use MODIStsp in batch mode by creating links
-#' @details MODIStsp tool can be used also as a stand-alone tool my launching a bash/batch
-#'   script, which is stored in the function files. In order to simply retrieve it, this
-#'   function will create a desktop entry and a symbolic link to the bash script (in Linux)
-#'  or a link in the Start Menu to the batch script (in Windows).
-#'  Note that, if the packages MODIStsp is installed in a version-dependent directory
+#' @details MODIStsp can be used also as a stand-alone tool (i.e., without opening RStudio
+#'  or RGUI) by launching a bash/batch script, which is stored in the installation
+#'  folder (/ExtData/Launcher)
+#'  To allow to easily find it, this function creates a desktop entry and a symbolic link 
+#'  to the bash script (on Linux) or a link in the Start Menu to the batch script and a 
+#'  shortcut on the desktop (on Windows).
+#'  __Note that__, if the packages MODIStsp is installed in a version-dependent directory
 #'  (as the default one is), this function should be re-executed after an R upgrade,
 #'  otherwise the links would continue to point to the old package version!
-#' @param bin_dir in Linux, directory in which the link to the bash script should be
-#'   placed (default: /usr/bin; a path included in the PATH environment variable is
-#'   suggested); in Windows, directory where to place the menu entry in the Start Menu
-#'    (default: Start Menu -> Programs -> MODIStsp).
-#' @param desktop_shortcut logical value which indicates if the desktop entry or the
-#' desktop shortcut should be created (default: TRUE).
-#' @param desktop_dir if desktop_shortcut=TRUE: in Linux, directory in which the desktop
-#'   entry should be placed (default: /usr/share/applications); in Windows, directory where
-#'   to place the desktop entry (default: Desktop).
-#' @param sudo (Linux only) logical value which indicates if administrator rights have to
-#'   be used to write within bin_dir and desktop_dir (default: FALSE);
-#'  in this case, the root password is requested when launching the function. Note that
-#'  default values of bin_dir and desktop_dir requires to set this option to TRUE (or to
-#'  launch the script in a root session of R)!
-#' @return NULL
+#' @param bin_dir 
+#'  - on Linux, directory in which the link to the bash script should be
+#'    placed, Default: /usr/bin - use of a path included in the PATH environment variable is
+#'    suggested;
+#'  - on Windows, directory where to place the menu entry in the Start Menu, 
+#'    Default: Start Menu -> Programs -> MODIStsp.
+#' @param desktop_shortcut `logical` indicates if the desktop entry or the
+#'  desktop shortcut should be created, Default: TRUE.
+#' @param desktop_dir `character` 
+#'   - on Linux, directory in which the desktop entry should be placed, Default: /usr/share/applications;
+#'   - on Windows, directory where to place the desktop entry, Default: "Desktop"
+#'   (Ignored if desktop_shortcut = FALSE).
+#' @param sudo (Linux only) `logical`  indicates if administrator rights have to
+#'  be used to write within bin_dir and desktop_dir, If FALSE the root password is requested
+#'  when launching the function. Note that using default values of bin_dir and desktop_dir
+#'  requires to set this option to TRUE (or to launch the script in a root session of R),
+#'  Default: FALSE
+#' @return The function is called for its side effects.
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @export
@@ -33,8 +38,8 @@
 #' install_MODIStsp_launcher(sudo = TRUE)
 #'   # the administrator password is asked interactively}
 #'
-#' # Linux: installation in a directory which does
-#' # not require administrator permissions
+#' # Linux: installation in a directory which does not require administrator 
+#' # permissions
 #' \dontrun{
 #' install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"}
 #'

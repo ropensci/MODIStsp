@@ -207,8 +207,7 @@ MODIStsp_process will abort, Default: 20</p></td>
     <p>The function is used to:</p><ul>
 <li><p>initialize the processing (folder names, packages, etc.);</p></li>
 <li><p>launch the GUI (<code><a href='MODIStsp_GUI.html'>MODIStsp_GUI()</a></code>) and receive its outputs on interactive
-execution;</p></li>
-<li><p>load the options file on non-interactive execution;</p></li>
+execution, or load an options file on non-interactive execution;</p></li>
 <li><p>launch the routines for downloading and processing the requested datasets.
 (<code><a href='MODIStsp_process.html'>MODIStsp_process()</a></code>)</p></li>
 </ul>
@@ -225,21 +224,38 @@ execution;</p></li>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'># Running the tool without any option will start the GUI with the default or
 # last used settings
-</div><div class='input'><span class='fu'>MODIStsp</span>()</div><div class='output co'>#&gt; <span class='message'>GDAL version in use: 2.2.0</span></div><div class='output co'>#&gt; <span class='message'>[Thu Jan 04 23:07:49 2018]  You Selected to quit! Goodbye!</span></div><div class='input'>
-# Run the tool using the settings previously saved in a specific options file
-</div><div class='input'><span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)</div><div class='output co'>#&gt; <span class='message'>GDAL version in use: 2.2.0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open file 'X:/yourpath/youroptions.json': No such file or directory</span></div><div class='output co'>#&gt; <span class='error'>Error in file(con, "w"): cannot open the connection</span></div><div class='input'>
-# Run the tool using the settings previously saved in a specific option file
-# and specifying the extent from a spatial file
-</div><div class='input'><span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
-  <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/yourspatialfile.shp"</span> )</div><div class='output co'>#&gt; <span class='message'>GDAL version in use: 2.2.0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open file 'X:/yourpath/youroptions.json': No such file or directory</span></div><div class='output co'>#&gt; <span class='error'>Error in file(con, "w"): cannot open the connection</span></div><div class='input'>
-# Run the tool in batch mode, using the settings previously saved in a
-# specific options file and specifying each time the extent from a different
-# spatial file (e.g., to perform the same processing on different extents)
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>MODIStsp</span>()
+<span class='co'># }</span><div class='input'>
+# Running the tool using the settings previously saved in a specific options
+# file
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
+<span class='co'># }</span><div class='input'>
+# Running the tool using the settings previously saved in a specific option file
+# and specifying the extent from a spatial file allows to re-use the same 
+# processing settings to perform download and reprocessing on a different area
 
-</div><div class='input'><span class='no'>extent_list</span> <span class='kw'>=</span> <span class='fu'>list.files</span>(<span class='st'>"X:/path/containing/some/shapefiles/"</span>, <span class='st'>"\\.shp$"</span>)
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
+  <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/yourspatialfile.shp"</span> )
+<span class='co'># }</span><div class='input'>
+# Runnig the tool using the settings previously saved in a
+# specific options file and specifying each time the extent from a different
+# spatial file (e.g., to perform the same processing on several extents)
+
+</div><span class='co'># NOT RUN {</span>
+<span class='no'>extent_list</span> <span class='kw'>=</span> <span class='fu'>list.files</span>(<span class='st'>"X:/path/containing/some/shapefiles/"</span>, <span class='st'>"\\.shp$"</span>)
 <span class='kw'>for</span> (<span class='no'>single_shape</span> <span class='kw'>in</span> <span class='no'>extent_list</span>)
   <span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
-    <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>single_shape</span> )</div></pre>
+    <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>single_shape</span> )
+<span class='co'># }</span><div class='input'>    
+(See http://lbusett.github.io/MODIStsp/articles for additional details and 
+examples)
+</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:2:6: unexpected symbol</span>
+#&gt; <span class='error'>1:     </span>
+#&gt; <span class='error'>2: (See http</span>
+#&gt; <span class='error'>        ^</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

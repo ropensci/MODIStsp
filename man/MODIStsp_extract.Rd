@@ -106,34 +106,36 @@ License: GPL 3.0
 # a MODIStsp rasterStack corresponding to the 2016 time series of the NDVI index
 # over the Como Lake (Italy). It then extracts data on polygons corresponding
 # to different land cover classes saved in testdata/extract_polys.shp
-# __NOTE__ on normal execution this is not needed! just load a MODIStsp rasterStack
-# using get(load(_path_to_stack_file_)) (MODIStsp rasterStack files are always
-# saved in the "Time_Series/RData" subfolder of your main output folder - see
-# http://lbusett.github.io/MODIStsp/articles/output.html)
+
+# first, prepare aa test dataset.
 
 opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
 options   <- jsonlite::read_json(opts_file)
 options$out_folder <- system.file("testdata/", package = "MODIStsp")
 jsonlite::write_json(options, opts_file, auto_unbox = TRUE, pretty = TRUE)
-suppressMessages(MODIStsp(options_file = opts_file, gui = FALSE))
-stack_file  <- system.file(
-  "testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
-  "MOD13A1_NDVI_1_2016_353_2016_RData.RData",
-  package = "MODIStsp")
-basename(stack_file)
+MODIStsp(options_file = opts_file, gui = FALSE)
 
-# load the MODIStsp stack: This is a MODIS NDVI time series ranging between
+# Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 # 2016-01-01 and 2016-12-18
+# __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData" 
+# subfolder of your main output folder - see http://lbusett.github.io/MODIStsp/articles/output.html)
+
+# specify the filename of the RData RasterStack of interest
+stack_file  <- system.file("testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
+  "MOD13A1_NDVI_1_2016_353_2016_RData.RData", package = "MODIStsp")
+basename(stack_file)
 
 ts_data <- get(load(stack_file))
 ts_data
 
-# load a shapefile containing polygons
+# Now load a shapefile containing polygons from which we want to extract data
 
 polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp", package = "MODIStsp"),
                            verbose = FALSE)
 polygons
-# Extract the average values for each polygon and date and plot the results
+
+# Finally, extract the average values for each polygon and date and plot the
+# results
 
 out_dataavg <- suppressMessages(MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
                              small = FALSE))
@@ -146,6 +148,9 @@ plot(out_dataavg, legend.loc = "topleft")
 out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
                               FUN = "sd", small = FALSE)
 head(out_datasd)
+
+(See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a 
+worked-out example)
 }
 \author{
 Lorenzo Busetto, phD (2015 - 2017)

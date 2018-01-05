@@ -23,7 +23,7 @@
 "full_ext": "Resized",
 "resampling": "near",
 "out_format": "GTiff",
-"ts_format": "GDAL vrt Files",
+"ts_format": "ENVI and GDAL",
 "rts": "Yes",
 "compress": {
  "High (DEFLATE)": "DEFLATE"

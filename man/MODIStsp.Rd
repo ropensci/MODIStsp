@@ -48,8 +48,7 @@ The function is used to:
 \itemize{
 \item initialize the processing (folder names, packages, etc.);
 \item launch the GUI (\code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}) and receive its outputs on interactive
-execution;
-\item load the options file on non-interactive execution;
+execution, or load an options file on non-interactive execution;
 \item launch the routines for downloading and processing the requested datasets.
 (\code{\link[=MODIStsp_process]{MODIStsp_process()}})
 }
@@ -63,25 +62,31 @@ License: GPL 3.0
 \dontrun{
 MODIStsp()}
 
-# Run the tool using the settings previously saved in a specific options file
+# Running the tool using the settings previously saved in a specific options
+# file
 \dontrun{
 MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json")}
 
-# Run the tool using the settings previously saved in a specific option file
-# and specifying the extent from a spatial file
+# Running the tool using the settings previously saved in a specific option file
+# and specifying the extent from a spatial file allows to re-use the same 
+# processing settings to perform download and reprocessing on a different area
+
 \dontrun{
 MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
   spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
 
-# Run the tool in batch mode, using the settings previously saved in a
+# Runnig the tool using the settings previously saved in a
 # specific options file and specifying each time the extent from a different
-# spatial file (e.g., to perform the same processing on different extents)
+# spatial file (e.g., to perform the same processing on several extents)
 
 \dontrun{
 extent_list = list.files("X:/path/containing/some/shapefiles/", "\\\\.shp$")
 for (single_shape in extent_list)
   MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
     spatial_file_path = single_shape )}
+    
+(See http://lbusett.github.io/MODIStsp/articles for additional details and 
+examples)
 }
 \seealso{
 \code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}, \code{\link[=MODIStsp_process]{MODIStsp_process()}}

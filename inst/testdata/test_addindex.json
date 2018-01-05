@@ -39,156 +39,156 @@
   "custom_indexes": {
     "Surf_Ref_8Days_500m (M*D09A1)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Surf_Ref_Daily_005dg (M*D09CMG)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Surf_Ref_Daily_500m (M*D09GA)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Surf_Ref_Daily_250m (M*D09GQ)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Surf_Ref_8Days_250m (M*D09Q1)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Vegetation_Indexes_16Days_500m (M*D13A1)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Vegetation_Indexes_16Days_1Km (M*D13A2)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Vegetation_Indexes_Monthly_1Km (M*D13A3)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Vegetation_Indexes_16Days_005dg (M*D13C1)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Vegetation_Indexes_Monthly_005dg (M*D13C2)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     },
     "Vegetation Indexes_16Days_250m (M*D13Q1)": {
       "5": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       },
       "6": {
-        "indexes_bandnames": ["5655", "1950", "8496"],
-        "indexes_fullnames": ["2405", "9832", "5112"],
-        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
-        "indexes_nodata_out": ["32767", "32767", "32767"]
+        "indexes_bandnames": ["5655", "1950", "8496", "7492", "1480"],
+        "indexes_fullnames": ["2405", "9832", "5112", "104", "8125"],
+        "indexes_formulas": ["b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR", "b1_Red - b2_NIR"],
+        "indexes_nodata_out": ["32767", "32767", "32767", "32767", "32767"]
       }
     }
   }

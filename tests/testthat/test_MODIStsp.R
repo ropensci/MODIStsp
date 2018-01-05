@@ -165,10 +165,10 @@ testthat::test_that(
       file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
       pattern = ".dat$", recursive = TRUE, full.names = TRUE)
     file_sizes_dat <- file.info(out_files_dat)$size
-    expect_equal(length(out_files_dat), 10)
+    expect_equal(length(out_files_dat), 5)
     expect_equal(file_sizes_dat[1:5], c(7488, 7488, 3744, 7488, 7488),
                  tolerance = 0.001, scale = 1)
-
+    unlink(out_files_dat)
   })
 
 ### Test 4: test of HTTP download (from NSIDC) with seasonal period. ####

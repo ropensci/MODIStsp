@@ -158,39 +158,50 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>bin_dir</th>
-      <td><p>in Linux, directory in which the link to the bash script should be
-placed (default: /usr/bin; a path included in the PATH environment variable is
-suggested); in Windows, directory where to place the menu entry in the Start Menu
-(default: Start Menu -&gt; Programs -&gt; MODIStsp).</p></td>
+      <td><ul>
+<li><p>on Linux, directory in which the link to the bash script should be
+placed, Default: /usr/bin - use of a path included in the PATH environment variable is
+suggested;</p></li>
+<li><p>on Windows, directory where to place the menu entry in the Start Menu,
+Default: Start Menu -&gt; Programs -&gt; MODIStsp.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>desktop_dir</th>
-      <td><p>if desktop_shortcut=TRUE: in Linux, directory in which the desktop
-entry should be placed (default: /usr/share/applications); in Windows, directory where
-to place the desktop entry (default: Desktop).</p></td>
+      <td><p><code>character</code></p><ul>
+<li><p>on Linux, directory in which the desktop entry should be placed, Default: /usr/share/applications;</p></li>
+<li><p>on Windows, directory where to place the desktop entry, Default: "Desktop"
+(Ignored if desktop_shortcut = FALSE).</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>desktop_shortcut</th>
-      <td><p>logical value which indicates if the desktop entry or the
-desktop shortcut should be created (default: TRUE).</p></td>
+      <td><p><code>logical</code> indicates if the desktop entry or the
+desktop shortcut should be created, Default: TRUE.</p></td>
     </tr>
     <tr>
       <th>sudo</th>
-      <td><p>(Linux only) logical value which indicates if administrator rights have to
-be used to write within bin_dir and desktop_dir (default: FALSE);
-in this case, the root password is requested when launching the function. Note that
-default values of bin_dir and desktop_dir requires to set this option to TRUE (or to
-launch the script in a root session of R)!</p></td>
+      <td><p>(Linux only) <code>logical</code>  indicates if administrator rights have to
+be used to write within bin_dir and desktop_dir, If FALSE the root password is requested
+when launching the function. Note that using default values of bin_dir and desktop_dir
+requires to set this option to TRUE (or to launch the script in a root session of R),
+Default: FALSE</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The function is called for its side effects.</p>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>MODIStsp tool can be used also as a stand-alone tool my launching a bash/batch
-script, which is stored in the function files. In order to simply retrieve it, this
-function will create a desktop entry and a symbolic link to the bash script (in Linux)
-or a link in the Start Menu to the batch script (in Windows).
-Note that, if the packages MODIStsp is installed in a version-dependent directory
+    <p>MODIStsp can be used also as a stand-alone tool (i.e., without opening RStudio
+or RGUI) by launching a bash/batch script, which is stored in the installation
+folder (/ExtData/Launcher)
+To allow to easily find it, this function creates a desktop entry and a symbolic link
+to the bash script (on Linux) or a link in the Start Menu to the batch script and a
+shortcut on the desktop (on Windows).
+<strong>Note that</strong>, if the packages MODIStsp is installed in a version-dependent directory
 (as the default one is), this function should be re-executed after an R upgrade,
 otherwise the links would continue to point to the old package version!</p>
     
@@ -203,21 +214,29 @@ otherwise the links would continue to point to the old package version!</p>
     <pre class="examples"><div class='input'># Linux: common installation (script in /usr/bin,
 # desktop entry in /usr/share/applications)
 # (requires administrator permissions)
-</div><div class='input'><span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Link in Start Menu already exists!</span></div><div class='input'>  # the administrator password is asked interactively</div><div class='input'>
-# Linux: installation in a directory which does
-# not require administrator permissions
-</div><div class='input'>install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:1:45: unexpected ','</span>
-#&gt; <span class='error'>1: install_MODIStsp_launcher(bin_dir = "~/bin"),</span>
-#&gt; <span class='error'>                                                ^</span></div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='co'># the administrator password is asked interactively</span>
+<span class='co'># }</span><div class='input'>
+# Linux: installation in a directory which does not require administrator 
+# permissions
+</div># NOT RUN {
+install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"
+# }
+<div class='input'>
 # Windows: common installation
 # (script in the Start Menu and shortcut on the desktop)
-</div><div class='input'><span class='fu'>install_MODIStsp_launcher</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: Link in Start Menu already exists!</span></div></pre>
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>install_MODIStsp_launcher</span>()
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#details">Details</a></li>
 
       <li><a href="#note">Note</a></li>

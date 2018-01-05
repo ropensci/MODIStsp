@@ -184,7 +184,7 @@ added to all products supporting it, Default: NULL</p></td>
       <th>selvers</th>
       <td><p><code>character</code> Version of the product to which the new index
 should be added (Note: the index will be added to all other products
-allowing its computation !). If NULL, as in non-interactive execution, no
+allowing its computation !). If NULL, as in non-interactive execution, the
 check on available band names is skipped and the index (if valid) is
 added to all products supporting it, Default: NULL</p></td>
     </tr>
@@ -215,7 +215,7 @@ Default: NULL</p></td>
     </tr>
     <tr>
       <th>new_indexnodata_out</th>
-      <td><p><code>character</code> nodata value to assign to the rasters
+      <td><p><code>character</code> nodata value to use for rasters
 containing the new index</p></td>
     </tr>
     <tr>
@@ -237,16 +237,18 @@ additional indexes.</p>
 <li><p>The function asks the user to provide the info related to the new desired
 Spectral Index using a GUI interface, checks for correctness of provided
 information (e.g., correct bandnames, computable formula, etc...).
-If the index is legit, it modifies the MODIStsp_Previous.RData file so to
-allow computation of the additional index within MODIStsp.</p></li>
+If the index is legit, it modifies the MODIStsp_Previous.json (or of the
+json file provided by the user)so to allow computation of the additional
+index within MODIStsp.</p></li>
 <li><p>To remove all custom-added spectral indexes, simply delete the
-MODIStsp_Previous.RData file within the /Previous subfolder of the folder
+MODIStsp_Previous.json file within the /Previous subfolder of the folder
 in which the package was installed, or the alternative JSON specified by
 the parameter "option_jsfile".</p></li>
 <li><p>The function can be run either from within the main MODIStsp GUI,
-or a stand-alone script. In the latter case, it modifies either the
-MODIStsp_Previous.RData options file, or the options_file specified by
-the user to add the new index.</p></li>
+or within a stand-alone script (using GUI = FALSE). In the latter case, it
+modifies either the MODIStsp_Previous.RData options file, or the
+options_file specified by the user to add the new index, without user
+interaction.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -256,18 +258,22 @@ the user to add the new index.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'># Run the GUI to interactively define a new index
- </div><div class='input'> <span class='fu'>MODIStsp_addindex</span>()</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+ </div><span class='co'># NOT RUN {</span>
+ <span class='fu'>MODIStsp_addindex</span>()
+<span class='co'># }</span><div class='input'>
 # Open the GUI to define a new index and save it in index in a custom json
 # options file.
-</div><div class='input'><span class='fu'>MODIStsp_addindex</span>(<span class='kw'>option_jsfile</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)</div><div class='output co'>#&gt; <span class='error'>Error: lexical error: invalid char in json text.</span>
-#&gt; <span class='error'>                                       X:/yourpath/youroptions.json</span>
-#&gt; <span class='error'>                     (right here) ------^</span></div><div class='input'>
-# Define the new index in non-interactive execution
-</div><div class='input'><span class='fu'>MODIStsp_addindex</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>option_jsfile</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
+<span class='co'># }</span><div class='input'>
+# Define the new index in non-interactive execution, without specifying an 
+# options file (thus modifying MODIStsp_previous.json)
+
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
   <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='st'>"Simple Useless Index"</span>,
-  <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)</div><div class='output co'>#&gt; <span class='message'>The new Index was correctly added!</span>
-#&gt; <span class='message'> It will be available at</span>
-#&gt; <span class='message'>the next execution of MODIStsp().</span></div></pre>
+  <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

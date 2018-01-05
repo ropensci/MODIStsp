@@ -1,10 +1,41 @@
 ## MODIStsp 1.3.3.9000 
 
+### Main changes
 
-### Minor changes
+Improvements in download functions
 
-Addedd support for both V005 and V051 of MCD45A1 and for the new new MCD64A1 product.
+- Use of httr::RETRY to improve behavior while navigating the servers to retrieve 
+  available files and while downloading hdf file (when use_aria == FALSE)
+
+Extensive code refactoring for submission to ropensci. 
+
+- Long functions were simplified/split into smaller functions to allow for 
+  easier maintenance
+- Extensive code linting to abide to ropensci standards
+- Switch to rjsonio/xml2 to abide to ropensci standards
+- Removal of some dependencies (e.g., hash)
+
+Improvements in documentation and website
+
+- More detailed documentation for the main functions
+- Improvements in pkgdown articles to include some "worked examples" (e.g., 
+  MODIStsp_Extract)
+- New article in pkgdown showing a list of supported products
+
+Improvements in test coverage
+
+- Several new tests added, bringing coverage above 90%
+
+Updates in supported products
+
+- Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product.
 ([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
+
+- Added support for Evapotraspiration products (MOD12A2 and MOD12A3)
+- Added support for Vegetation Continuous Fields product (MOD44B)
+- Checked availability of products over ftp and set not available products to 
+  "Not Available" to allow graceful fail.
+
 
 ## MODIStsp 1.3.3.1 Release Notes
 
@@ -33,7 +64,7 @@ v1.3.3 was released on 10/08/2017
    (commit [0c00fc6](https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a)
    and others)
    
--  Added "testing mode" to allow users to test proper functioning. Now, runnning 
+-  Added "testing mode" to allow users to test proper functioning. Now, running 
    `MODIStsp(test = X)` (with X in (0,6)) runs the processing using default processing
    parameters  (commit [0c00fc6](https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a) and others)
 
@@ -44,7 +75,7 @@ servers and downloading data using "ftp" ( [3775d60](https://github.com/lbusett/
 
 ### Bug fixing
 
--   Fxed a bug preventing the "last" choice (or that present in the json file) from 
+-   Fixed a bug preventing the "last" choice (or that present in the json file) from 
     correctly showing in the GUI upon launch/restore of a saved json file (commit
     [633c2dd](https://github.com/lbusett/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3))
 
@@ -79,7 +110,7 @@ v1.3.2 was released on 22/03/2017
 
 ### Major Changes:
 
-- Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.
+- Added functionality to apply scale and offset coefficients on MODIS original values according with the specifications of single MODIS products.
 
 #### Details:
 
@@ -127,7 +158,7 @@ v1.3.1 was released on 13/02/2017
 
 ### Bug fixing
 
-- Fixed bug on download with aria, throwing an error on partial download on http downlaod with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
+- Fixed bug on download with aria, throwing an error on partial download on http download with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
 
 - Fixed bug on M*D15A2 processing (Issue [#60](https://github.com/lbusett/MODIStsp/issues/60)) on devel/master
 
@@ -151,13 +182,13 @@ v1.3.0 was released on 11/05/2016
 
 - Added functionality for off-line processing. This allows both to _i)_ reprocessing already downloaded data (for example, to create time series for an additional layer) without the need to connect to NASA servers, and _ii)_ process HDF files downloaded outside _MODIStsp_ (e.g., directly from NASA ftp) and stored on the user's PC, without the need of an active internet connection. 
 
-- Improved the way in which options are saved. Much more readable .JSON files are now used instead than .RData. User options are no longer saved alongside products characteristics. This will allow to re-use an "old" options file even if changes are made on the XML file descriving the products.
+- Improved the way in which options are saved. Much more readable .JSON files are now used instead than .RData. User options are no longer saved alongside products characteristics. This will allow to re-use an "old" options file even if changes are made on the XML file describing the products.
 
-- Improved the GUI inteface for specifying additional Spectral Indexes. Hints are now showed to the user, and multiple indexes can be added in the same session.
+- Improved the GUI interface for specifying additional Spectral Indexes. Hints are now showed to the user, and multiple indexes can be added in the same session.
 
 ### Minor Changes
 
-- General improvements in the GUI inteface. Products are now grouped by categories, to allow easier identification and selection.
+- General improvements in the GUI interface. Products are now grouped by categories, to allow easier identification and selection.
 
 - Improvements in the README file and vignettes, providing more instructions on package use.
 
@@ -181,14 +212,14 @@ v1.2.1 was released on 11/05/2016
 1. Modified format of "R" output time series from _rts_ objects to _RasterStack_ objects with temporal information added in the "z" attribute via setZ()
 
 2. Major changes/improvements in _MODIStsp\_extract_ function:
-    * Use of plain rasterstack with "z" attribute instead than rasterstackts
+    * Use of plain RasterStack with "z" attribute instead than rasterstackts
     * Use of gdal\_rasterize (_gdalUtils_) instead of rasterize (_rgdal_) to improve speed. Temporary shapes and rasters necessay are saved in "R" temporary folder and removed automatically
     * Fixed bugs on functionality for point/lines shapefiles, according to what specified by the "small" and "small_method" parameters
     * Added functionality for retrieving data for small polygons
     * Added out_format selection - xts or plain data.frame
     * Added possibility to use a shp filename as input directly
     * Added conformity checks on inputs
-    * Added functionaluity to run without specifying start and end dates
+    * Added functionality to run without specifying start and end dates
     * Added id_field parameter for choosing which column of the input SP object should be used for "naming" the columns of the output
   
 3. Removed possibility to use "complex" resampling methods when reprojecting (e.g., bilinear, cubic, etc.) to avoid incorrect resampling on categorical variables and "contamination" of good pixels data. 
@@ -196,7 +227,7 @@ v1.2.1 was released on 11/05/2016
 ### Minor Changes
 
 * Changed the input method for starting and ending dates selection in the GUI. Now a text field is used 
-* Added functionaluty for writing data ignore value on ENVI files
+* Added functionality for writing data ignore value on ENVI files
 * Removed automatic deletion of XML files created by writeRaster to keep metadata information
 * Changed names of products in the GUI for products with both TERRA and AQUA dataset to M\*D09A1, M\*D13Q1, etc...
 * Modified code syntax to satisfy R code styling guidelines

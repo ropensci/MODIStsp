@@ -4,8 +4,7 @@
 #' @details The function is used to:
 #'  - initialize the processing (folder names, packages, etc.);
 #'  - launch the GUI ([MODIStsp_GUI()]) and receive its outputs on interactive
-#'    execution;
-#'  - load the options file on non-interactive execution;
+#'    execution, or load an options file on non-interactive execution;
 #'  - launch the routines for downloading and processing the requested datasets.
 #'    ([MODIStsp_process()])
 #' @param gui `logical` if TRUE: the GUI is opened before processing. If FALSE:
@@ -58,25 +57,31 @@
 #' \dontrun{
 #' MODIStsp()}
 #'
-#' # Run the tool using the settings previously saved in a specific options file
+#' # Running the tool using the settings previously saved in a specific options
+#' # file
 #' \dontrun{
 #' MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json")}
 #'
-#' # Run the tool using the settings previously saved in a specific option file
-#' # and specifying the extent from a spatial file
+#' # Running the tool using the settings previously saved in a specific option file
+#' # and specifying the extent from a spatial file allows to re-use the same 
+#' # processing settings to perform download and reprocessing on a different area
+#' 
 #' \dontrun{
 #' MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
 #'   spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
 #'
-#' # Run the tool in batch mode, using the settings previously saved in a
+#' # Running the tool using the settings previously saved in a
 #' # specific options file and specifying each time the extent from a different
-#' # spatial file (e.g., to perform the same processing on different extents)
+#' # spatial file (e.g., to perform the same processing on several extents)
 #'
 #' \dontrun{
 #' extent_list = list.files("X:/path/containing/some/shapefiles/", "\\.shp$")
 #' for (single_shape in extent_list)
 #'   MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
 #'     spatial_file_path = single_shape )}
+#'     
+#' (See http://lbusett.github.io/MODIStsp/articles for additional details and 
+#' examples)
 
 MODIStsp <- function(gui               = TRUE,
                      options_file      = NULL,

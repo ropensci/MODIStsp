@@ -6,16 +6,18 @@
 #' - The function asks the user to provide the info related to the new desired
 #'   Spectral Index using a GUI interface, checks for correctness of provided
 #'   information (e.g., correct bandnames, computable formula, etc...).
-#'   If the index is legit, it modifies the MODIStsp_Previous.RData file so to
-#'   allow computation of the additional index within MODIStsp.
+#'   If the index is legit, it modifies the MODIStsp_Previous.json (or of the
+#'   json file provided by the user)so to allow computation of the additional
+#'   index within MODIStsp.
 #' - To remove all custom-added spectral indexes, simply delete the
-#'   MODIStsp_Previous.RData file within the /Previous subfolder of the folder
+#'   MODIStsp_Previous.json file within the /Previous subfolder of the folder
 #'   in which the package was installed, or the alternative JSON specified by
 #'   the parameter "option_jsfile".
 #' - The function can be run either from within the main MODIStsp GUI,
-#'   or a stand-alone script. In the latter case, it modifies either the
-#'   MODIStsp_Previous.RData options file, or the options_file specified by
-#'   the user to add the new index.
+#'   or within a stand-alone script (using GUI = FALSE). In the latter case, it 
+#'   modifies either the MODIStsp_Previous.RData options file, or the
+#'   options_file specified by the user to add the new index, without user
+#'   interaction.
 #' @param option_jsfile `character` full path of a JSON file
 #'  containing the processing options in which the new indexes has to be saved
 #'  (default: MODIStsp_Previous.JSON in subfolder Previous).
@@ -28,7 +30,7 @@
 #'   added to all products supporting it, Default: NULL
 #' @param selvers `character` Version of the product to which the new index
 #'   should be added (Note: the index will be added to all other products
-#'   allowing its computation !). If NULL, as in non-interactive execution, no
+#'   allowing its computation !). If NULL, as in non-interactive execution, the
 #'   check on available band names is skipped and the index (if valid) is
 #'   added to all products supporting it, Default: NULL
 #' @param gui `logical` if TRUE, a GUI is opened to define the new
@@ -44,7 +46,7 @@
 #'   the formula are the names of the bands:
 #'   b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR and b7_SWIR.
 #'   Default: NULL
-#' @param new_indexnodata_out `character` nodata value to assign to the rasters
+#' @param new_indexnodata_out `character` nodata value to use for rasters
 #'   containing the new index
 #' @param MODIStsp_dir `character` main folder containing MODIStsp R files,
 #'   Default: retrieved from package installation folder
@@ -71,7 +73,9 @@
 #' MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")
 #' }
 #'
-#' # Define the new index in non-interactive execution
+#' # Define the new index in non-interactive execution, without specifying an 
+#' # options file (thus modifying MODIStsp_previous.json)
+#' 
 #' \dontrun{
 #' MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSI",
 #'   new_indexfullname = "Simple Useless Index",
