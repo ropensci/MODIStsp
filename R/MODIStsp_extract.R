@@ -133,8 +133,8 @@
 #'                               FUN = "sd", small = FALSE)
 #' head(out_datasd)
 #' 
-#' (See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a 
-#' worked-out example)
+#' # (See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a 
+#' # worked-out example)
 
 
 MODIStsp_extract <- function(in_rts, sp_object,

@@ -75,7 +75,7 @@ MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json")}
 MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
   spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
 
-# Runnig the tool using the settings previously saved in a
+# Running the tool using the settings previously saved in a
 # specific options file and specifying each time the extent from a different
 # spatial file (e.g., to perform the same processing on several extents)
 
@@ -85,8 +85,8 @@ for (single_shape in extent_list)
   MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
     spatial_file_path = single_shape )}
     
-(See http://lbusett.github.io/MODIStsp/articles for additional details and 
-examples)
+# (See http://lbusett.github.io/MODIStsp/articles for additional details and 
+# examples)
 }
 \seealso{
 \code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}, \code{\link[=MODIStsp_process]{MODIStsp_process()}}

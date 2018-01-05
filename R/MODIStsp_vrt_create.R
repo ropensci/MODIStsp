@@ -118,11 +118,11 @@ MODIStsp_vrt_create <- function(
       if (skip_flag != 1) {
         # If no files available, skip metadata creation
         if (length(out_meta_files) > 0) {
-
+          
           #   __________________________________________________________________
           #   check/reset order of acquisition dates and files              ####
           #
-
+          
           # retrieve the doys and years from filenames
           doys      <- stringr::str_sub(basename(out_meta_files), -7, -5)
           years     <- stringr::str_sub(basename(out_meta_files), -12, -9)

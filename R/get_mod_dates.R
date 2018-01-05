@@ -31,6 +31,6 @@ get_mod_dates <- function(dates, date_dirs) {
       date_dirs[tmp_date_dirs >= tmp_dates[1] & tmp_date_dirs <= tmp_dates[4]]
     )
   }
-
+  
   return(date_dirs)
 }

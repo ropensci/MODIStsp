@@ -12,7 +12,7 @@ Extensive code refactoring for submission to ropensci.
 - Long functions were simplified/split into smaller functions to allow for 
   easier maintenance
 - Extensive code linting to abide to ropensci standards
-- Switch to rjsonio/xml2 to abide to ropensci standards
+- Switch to jsonlite/xml2 to abide to ropensci standards
 - Removal of some dependencies (e.g., hash)
 
 Improvements in documentation and website

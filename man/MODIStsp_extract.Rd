@@ -149,8 +149,8 @@ out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
                               FUN = "sd", small = FALSE)
 head(out_datasd)
 
-(See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a 
-worked-out example)
+# (See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a 
+# worked-out example)
 }
 \author{
 Lorenzo Busetto, phD (2015 - 2017)

@@ -44,3 +44,4 @@ WIP
 img
 ^appveyor\.yml$
 inst/testdata/hdfs
+^CONDUCT\.md$

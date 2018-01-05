@@ -52,12 +52,12 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
                                       desktop_dir      = NA,
                                       desktop_shortcut = TRUE,
                                       sudo             = FALSE) {
-
+  
   #nocov start (no coverage test since this requires interactive execution)
   
   MODIStsp_dir <- system.file(package = "MODIStsp")
   running_os   <- Sys.info()[["sysname"]]
-
+  
   if (running_os == "Linux") {
     if (is.na(bin_dir)) {
       bin_dir <- "usr/bin/MODIStsp"

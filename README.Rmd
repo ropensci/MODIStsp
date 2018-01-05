@@ -26,7 +26,17 @@ MODIStsp is a "R" package devoted to automatizing the creation of time series of
 
 _MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy (CNR-IREA)_
 
-## Important News ! MODIStsp content migrated to our new website !
+## Citation
+  
+To cite MODIStsp please use:
+
+
+L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS
+  Land Products time series, Computers & Geosciences, Volume 97, Pages
+  40-48, ISSN 0098-3004, http://dx.doi.org/10.1016/j.cageo.2016.08.020, URL: https://github.com/lbusett/MODIStsp. 
+  
+
+## Important News ! 
 
 - 11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes
 (thanks to all the users that signalled problems !). Check the [Release Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.3) for further details !
@@ -44,6 +54,8 @@ _MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Ins
 `MODIStsp` requires [R](https://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 __with support for HDF4 raster format__ to be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](http://lbusett.github.io/MODIStsp/articles/installation.html#installing-r-and-gdal).
 
 ____________________________________________________________________________________
+
+# Installation Instructions
 
 ## <i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows
 
@@ -231,3 +243,34 @@ library(devtools)
 install_github("lbusett/MODIStsp", ref = "master")
 MODIStsp()
 ```
+
+## Usage
+
+The easiest way to use `MODIStsp` is to use its powerful GUI (Graphical User Interface) for 
+selection of processing options, and then run the processing. 
+
+To open the GUI, load the package and launch the MODIStsp function, with no parameters:
+```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, caption=FALSE}
+library(MODIStsp)
+MODIStsp()
+```
+This **opens a GUI** from which processing options can be specified (and eventually saved or loaded). After specifying all required parameters, clicking on "Start" will start
+the processing (see [HERE](http://lbusett.github.io/MODIStsp/articles/interactive_execution.html) for more detailed instructions).
+
+`MODIStsp` can also be launched in non-interactive mode within an `R` session or script by setting the optional `GUI` parameter to FALSE, and the `Options_File` parameter to the path of a previously saved JSON Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
+
+```{r, eval=FALSE}
+library(MODIStsp) 
+# --> Specify the path to a valid options file saved in advance from MODIStsp GUI 
+options_file <- "X:/yourpath/youroptions.json" 
+  
+# --> Launch the processing
+MODIStsp(gui = FALSE, options_file = options_file)
+```
+(see [HERE](http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html) for more detailed instructions and examples).
+
+
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
+By participating in this project you agree to abide by its terms.
