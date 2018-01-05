@@ -251,7 +251,7 @@ MODIStsp()
 
 This **opens a GUI** from which processing options can be specified (and eventually saved or loaded). After specifying all required parameters, clicking on "Start" will start the processing (see [HERE](http://lbusett.github.io/MODIStsp/articles/interactive_execution.html) for more detailed instructions).
 
-`MODIStsp` can also be launched in non-interactive mode within an `R` session or script by setting the optional `GUI` parameter to FALSE, and the `Options_File` parameter to the path of a previously saved JSON Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
+`MODIStsp` can also be launched in non-interactive mode within an `R` session or script by setting the optional `GUI` parameter to FALSE, and the `options_file` parameter to the path of a previously saved JSON Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
 
 ``` r
 library(MODIStsp) 
