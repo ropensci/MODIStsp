@@ -80,8 +80,8 @@
 #'   MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
 #'     spatial_file_path = single_shape )}
 #'     
-#' (See http://lbusett.github.io/MODIStsp/articles for additional details and 
-#' examples)
+#' # (See http://lbusett.github.io/MODIStsp/articles for additional details and 
+#' # examples)
 
 MODIStsp <- function(gui               = TRUE,
                      options_file      = NULL,
