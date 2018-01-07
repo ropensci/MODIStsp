@@ -8,8 +8,8 @@
     -   [<i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows](#installing-on-windows)
     -   [<i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems](#installing-on-linux-systems)
     -   [<i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac](#installing-on-mac)
-    -   [Usage](#usage)
-    -   [Code of Conduct](#code-of-conduct)
+-   [Usage](#usage)
+-   [Code of Conduct](#code-of-conduct)
 
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/package=MODIStsp) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lbusett/MODIStsp?branch=master&svg=true)](https://ci.appveyor.com/project/lbusett/MODIStsp) [![DOI](http://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](http://doi.org/10.5281/zenodo.290683) [![Coverage Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
 
@@ -238,7 +238,7 @@ MODIStsp()
 ```
 
 Usage
------
+=====
 
 The easiest way to use `MODIStsp` is to use its powerful GUI (Graphical User Interface) for selection of processing options, and then run the processing.
 
@@ -265,6 +265,6 @@ MODIStsp(gui = FALSE, options_file = options_file)
 (see [HERE](http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html) for more detailed instructions and examples).
 
 Code of Conduct
----------------
+===============
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
