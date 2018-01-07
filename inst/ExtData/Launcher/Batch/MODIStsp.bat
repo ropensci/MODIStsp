@@ -1,7 +1,7 @@
 @echo off
 
 :: Path of R installation: you can modify this value to save it permanently or specify it as parameter
-SET Rscript_dir="C:\Progra~1\R\R-3.4.0\bin\x64"
+SET Rscript_dir="C:\Progra~1\R\R-3.4.1\bin\x64"
 :: Do not modify below here!
 
 setlocal EnableDelayedExpansion

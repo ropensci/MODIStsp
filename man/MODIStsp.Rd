@@ -2,80 +2,100 @@
 % Please edit documentation in R/MODIStsp.R
 \name{MODIStsp}
 \alias{MODIStsp}
-\title{MODIStsp}
+\title{MODIStsp main function}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  scrollWindow = FALSE, test = -1)
+  scroll_window = FALSE, test = -1, n_retries = 20, verbose = TRUE)
 }
 \arguments{
-\item{gui}{logical parameter (TRUE: the GUI is opened before processing; FALSE: the
-saved parameters are retrieved from "options_file")}
+\item{gui}{\code{logical} if TRUE: the GUI is opened before processing. If FALSE:
+processing parameters are retrieved from the provided \code{options_file}
+argument), Default: TRUE}
 
-\item{options_file}{settings (optional): full path of the JSON file containing the
-processing options (default: MODIStsp_Previous.json in subfolder Previous);}
+\item{options_file}{\code{character} full path to a JSON file
+containing MODIStsp processing options saved from the GUI. If NULL,
+parameters of the last successful run are retrieved from file
+"MODIStsp_Previous.json" in subfolder "Previous"), Default: NULL}
 
-\item{spatial_file_path}{(optional): full path of a spatial file to use as extent
-(default=NULL): if defined, the processing options which define the extent, the
-selected tiles and the "Full Tile / Resized" options are not considered; instead, new
-files are created on the extent of the provided spatial file.}
+\item{spatial_file_path}{\code{character} (optional) full path of a spatial file
+to use to derive the processing extent. If not NULL, the processing options
+which define the extent, the selected tiles and the "Full Tile / Resized"
+in the JSON options file are overwritten and new files are created on the
+extent of the provided spatial file, Default: NULL}
 
-\item{scrollWindow}{(optional) logical parameter: if TRUE, the GUI window is opened
-fullscreen with scrollbars (this is useful on devices with small display). If using a
-device with a display resolution >= 1024x768, leaving this parameter to FALSE is
-suggested.}
+\item{scroll_window}{\code{logical} if TRUE, the GUI window is opened
+fullscreen with scrollbars (this is useful on devices with small displays).
+If using a device with a display resolution >= 1024x768, leaving this
+parameter to FALSE is suggested, Default: FALSE}
 
-\item{test}{(optional) integer: if set, the tool is run in test mode, using a
-preset Option File instead than opening the GUI or accepting the option_file parameter.
-The number indicates which preset file to be used (five files are available).
-If test=0, the files sis selected randomly. Default value (-1) indicates that the
-tool is executed normally (not in test mode).
-This modality is useful to test the tool in case of errors.}
+\item{test}{\code{integer} if set, MODIStsp is executed in "test mode", using a
+preset Options File instead than opening the GUI or accepting the
+\code{options_file} parameter. This allows both to check correct installation on
+user's machines, and to implement unit testing. The number indicates which
+tests to execute (six are available). If == 0, the test is selected
+randomly. If == -1, MODIStsp is executed in normal mode. Default: -1}
+
+\item{n_retries}{\code{numeric} maximum number of retries on download functions.
+In case any download function fails more than \code{n_retries} times consecutively,
+MODIStsp_process will abort, Default: 20}
+
+\item{verbose}{\code{logical} If FALSE, suppress processing messages,
+Default: TRUE}
 }
 \description{
-Main function for the MODIS Time Series Processing Tool (MODIStsp)
+Main function for the MODIS Time Series Processing Tool
+(MODIStsp)
 }
 \details{
-The function is used to initialize the processing (folder names, packages,
-etc.), to launch the GUI (MODIStsp_GUI) and receive its outputs, and to launch the
-required routines for downloading and processing the requested datasets.
+The function is used to:
+\itemize{
+\item initialize the processing (folder names, packages, etc.);
+\item launch the GUI (\code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}) and receive its outputs on interactive
+execution, or load an options file on non-interactive execution;
+\item launch the routines for downloading and processing the requested datasets.
+(\code{\link[=MODIStsp_process]{MODIStsp_process()}})
+}
 }
 \note{
 License: GPL 3.0
 }
 \examples{
-# Running the tool without any option will start the GUI with the default or last used
-# settings
+# Running the tool without any option will start the GUI with the default or
+# last used settings
 \dontrun{
 MODIStsp()}
 
-# Run the tool using the settings previously saved in a specific option file
+# Running the tool using the settings previously saved in a specific options
+# file
 \dontrun{
 MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json")}
 
-# Run the tool using a previously saved options file,
-# but editing it with the GUI before starting the processing
-\dontrun{
-MODIStsp(options_file = "X:/yourpath/youroptions.json")}
+# Running the tool using the settings previously saved in a specific option file
+# and specifying the extent from a spatial file allows to re-use the same 
+# processing settings to perform download and reprocessing on a different area
 
-# Run the tool using the settings previously saved in a specific option file
-# and specifying the extent from a spatial file
 \dontrun{
 MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
   spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
 
-# Run the tool in a batch mode, using the settings previously saved in a specific
-# option file and specifying each time the extent from a different spatial file
+# Running the tool using the settings previously saved in a
+# specific options file and specifying each time the extent from a different
+# spatial file (e.g., to perform the same processing on several extents)
+
 \dontrun{
 extent_list = list.files("X:/path/containing/some/shapefiles/", "\\\\.shp$")
 for (single_shape in extent_list)
   MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
     spatial_file_path = single_shape )}
+    
+# (See http://lbusett.github.io/MODIStsp/articles for additional details and 
+# examples)
 }
 \seealso{
-\code{\link[MODIStsp]{MODIStsp_GUI}},\code{\link[MODIStsp]{MODIStsp_process}}
+\code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}, \code{\link[=MODIStsp_process]{MODIStsp_process()}}
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
-Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@irea.cnr.it}
 }

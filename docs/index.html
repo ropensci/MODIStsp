@@ -45,9 +45,13 @@
      
   </a>
 </li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -70,10 +74,11 @@
     <li>
       <a href="articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
   <a href="articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
@@ -120,9 +125,10 @@
 <div class="contents">
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<div id="modistsp-a-r-package-for-preprocessing-modis-time-series" class="section level1">
+<div id="modistsp" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#modistsp-a-r-package-for-preprocessing-modis-time-series" class="anchor"></a><i class="fa fa-globe" aria-hidden="true"></i> MODIStsp: a “R” package for preprocessing MODIS time series</h1></div>
+<a href="#modistsp" class="anchor"></a><i class="fa fa-globe" aria-hidden="true"></i> MODIStsp <img src="logo.png" width="100" height="100" align="right">
+</h1></div>
 <p><strong>MODIStsp</strong> is a “R” package devoted to <strong>automatizing the creation of time series of raster images derived from MODIS Land Products data</strong>.</p>
 <p><strong>MODIStsp</strong> allows to perform several preprocessing steps <em>(e.g., download, mosaicing, reprojection, resize, data extraction)</em> on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional <strong>Quality Indicators</strong> should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which <strong>Spectral Indexes</strong> should be computed from the original reflectance bands.</p>
 <p>All processing parameters can be easily selected with a <strong>powerful and user-friendly GUI</strong>, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an “R” environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.</p>
@@ -133,8 +139,9 @@
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a><i class="fa fa-cog" aria-hidden="true"></i> Getting Started</h2>
 <ul>
-<li><p>To install <code>MODIStsp</code>, please follow instructions reported <a href="articles/installation.html">here</a>, both for <a href="articles/installation.html#installing-on-windows"><i class="fa fa-windows" aria-hidden="true"></i></a> , <a href="articles/installation.html#installing-on-linux-systems"><i class="fa fa-linux" aria-hidden="true"></i></a> and <a href="articles/installation.html#installing-on-mac"><i class="fa fa-apple" aria-hidden="true"></i></a></p></li>
+<li><p><strong>To install <code>MODIStsp</code></strong>, please follow instructions reported <a href="articles/installation.html">here</a>, both for <a href="articles/installation.html#installing-on-windows"><i class="fa fa-windows" aria-hidden="true"></i></a> , <a href="articles/installation.html#installing-on-linux-systems"><i class="fa fa-linux" aria-hidden="true"></i></a> and <a href="articles/installation.html#installing-on-mac"><i class="fa fa-apple" aria-hidden="true"></i></a></p></li>
 <li><p><code>MODIStsp</code> can be used either in <a href="articles/interactive_execution.html">interactive mode</a> exploiting its user-friendly GUI, or in <a href="articles/noninteractive_execution.html">non-interactive mode</a> from within <code>R</code> scripts</p></li>
+<li><p>The list of <strong>currently supported MODIS products and versions</strong> can be found <a href="articles/Products_list.html">here</a></p></li>
 <li><p><a href="articles/noninteractive_execution.html#scheduled-processing">Scheduled Processing</a> allows automatic updating of MODIS time series through scheduled jobs, both on <a href="articles/standalone_execution.html#on-windows"><i class="fa fa-windows" aria-hidden="true"></i></a> and <a href="articles/standalone_execution.html#on-linux"><i class="fa fa-linux" aria-hidden="true"></i></a></p></li>
 <li><p>Solutions to common <strong>installation, data download and processing problems</strong> can be found in our <a href="articles/faq.html"><i class="fa fa-question-circle-o aria-hidden=" true></i> faq</a></p></li>
 <li><p>Please <strong>report any issues</strong> you may encounter in our <a href="https://github.com/lbusett/MODIStsp/issues">issues page on github <i class="fa fa-github-square" aria-hidden="true"></i></a> .</p></li>
@@ -191,7 +198,8 @@
 </ul>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Lorenzo Busetto <br><small class="roles"> Author, maintainer </small> </li>
+<li>Lorenzo Busetto <br><small class="roles"> Author, maintainer </small> <br><small>(0000-0001-9634-6038)</small>
+</li>
 <li>Luigi Ranghetti <br><small class="roles"> Author </small> </li>
 </ul>
 <h2>Dev status</h2>

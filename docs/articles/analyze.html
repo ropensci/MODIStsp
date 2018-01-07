@@ -44,9 +44,13 @@
      
   </a>
 </li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -69,10 +73,11 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
@@ -120,40 +125,171 @@
     
     
 <div class="contents">
-<div id="accessing-the-processed-time-series-from-r" class="section level2">
-<h2 class="hasAnchor">
-<a href="#accessing-the-processed-time-series-from-r" class="anchor"></a>Accessing the processed time series from R</h2>
-<p>Preprocessed MODIS data can be retrieved within <code>R</code> either by accessing the single-date raster files, or by loading the saved <em>RasterStack</em> objects.</p>
+<div id="accessing-the-raster-time-series" class="section level1">
+<h1 class="hasAnchor">
+<a href="#accessing-the-raster-time-series" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Accessing the raster time series</strong>
+</h1>
+<p>Preprocessed MODIS data can be retrieved within <code>R</code> either by accessing the single-date raster files, or by loading the saved <code>RasterStack</code> objects (see <a href="articles/output.html">HERE</a> for a description of <code>MODIStsp</code> output folder structure and naming conventions).</p>
+<p>To test this functionality, you can run the following example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MODIStsp)
+opts_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"testdata/test_extract.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
+<span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">options_file =</span> opts_file, <span class="dt">gui =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>, specifying a folder on your PC to store the outputs from the GUI.</p>
+<p>This will download a yearly time series of MODIS NDVI data and subset it over the region of the Como Lake in Italy.</p>
+<p>After the download and processing finishes (it will take a while), the MODIS time series will be placed in <code>youroutfolder/VI_16Days_500m_v6/</code>. (In this case, I have them in “<code>D:/Temp/VI_16Days_500m_v6/</code>”).</p>
 <p>Any single-date image can be accessed by simply opening it with a <code>raster</code> command:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
-modistsp_file &lt;-<span class="st"> "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"</span>
-my_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
-<p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_path/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
-indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))</code></pre></div>
-<p>This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <code>raster</code> or <code>rasterVis</code> packages.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modistsp_file &lt;-<span class="st"> "D:/Temp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</span>
+my_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)
+<span class="kw">plot</span>(my_raster)</code></pre></div>
+<p><img src="analyze_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
+<p><code>RasterStack</code> (or GDAL vrt) time series containing all the processed data for a given parameter are saved in the “Time Series/RData” subfolder, and can be accessed by:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the NDVI time series</span>
+ts_folder &lt;-<span class="st"> "D:/Temp/VI_16Days_500m_v6/Time_Series/"</span>
+in_virtual_file &lt;-<span class="st"> </span><span class="kw">file.path</span>(ts_folder, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>)
+ts_data          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))
+ts_data</code></pre></div>
+<pre><code>## class       : RasterStack 
+## dimensions  : 122, 65, 7930, 23  (nrow, ncol, ncell, nlayers)
+## resolution  : 463.3127, 463.3127  (x, y)
+## extent      : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
+## names       : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, ... 
+## time        : 2016-01-01 - 2016-12-18 (range)</code></pre>
+<p>, which gives us a 23-band <code>RasterStack</code> in the <code>ts_data</code> variable.</p>
+<p>This <code>RasterStack</code> can be analyzed using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <code>raster</code> or <code>rasterVis</code> packages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot some dates</span>
+<span class="kw">plot</span>(ts_data[[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>,<span class="dv">20</span>)]], <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">horizontal =</span> T)</code></pre></div>
+<p><img src="analyze_files/figure-html/unnamed-chunk-4-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract one date from the stack</span>
+
+mydate   &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">"2016-01-01"</span>)
+substack &lt;-<span class="st"> </span><span class="kw">subset</span>(ts_data, <span class="kw">which</span>(<span class="kw">getZ</span>(ts_data) <span class="op">==</span><span class="st"> </span>mydate)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">setZ</span>(mydate)
+substack  </code></pre></div>
+<pre><code>## class       : RasterLayer 
+## dimensions  : 122, 65, 7930  (nrow, ncol, ncell)
+## resolution  : 463.3127, 463.3127  (x, y)
+## extent      : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
+## data source : D:/Temp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
+## names       : MOD13A1_NDVI_2016_001 
+## time        : 2016-01-01</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract multiple dates from the stack</span>
+
+mindate   &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">"2016-01-01"</span>)
+maxdate   &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">"2016-04-01"</span>)
+substack  &lt;-<span class="st"> </span><span class="kw">subset</span>(ts_data, 
+                    <span class="kw">which</span>(<span class="kw">getZ</span>(ts_data) <span class="op">&gt;=</span><span class="st"> </span>mindate <span class="op">&amp;</span><span class="st"> </span><span class="kw">getZ</span>(ts_data) <span class="op">&lt;=</span><span class="st"> </span>maxdate))
+substack  </code></pre></div>
+<pre><code>## class       : RasterStack 
+## dimensions  : 122, 65, 7930, 6  (nrow, ncol, ncell, nlayers)
+## resolution  : 463.3127, 463.3127  (x, y)
+## extent      : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
+## names       : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081 
+## time        : 2016-01-01, 2016-01-17, 2016-02-02, 2016-02-18, 2016-03-05, 2016-03-21</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compute monthly averages</span>
+
+month_avg &lt;-<span class="st"> </span><span class="kw">stackApply</span>(ts_data, <span class="kw">months</span>(<span class="kw">getZ</span>(ts_data)), <span class="dt">fun =</span> mean)
+month_avg</code></pre></div>
+<pre><code>## class       : RasterBrick 
+## dimensions  : 122, 65, 7930, 12  (nrow, ncol, ncell, nlayers)
+## resolution  : 463.3127, 463.3127  (x, y)
+## extent      : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
+## data source : in memory
+## names       : index_January, index_February, index_March, index_April, index_May, index_June, index_July, index_August, index_September, index_October, index_November, index_December 
+## min values  :       -1891.0,        -1770.0,     -2000.0,     -1780.0,    -510.0,     -202.5,    -1347.0,       -275.0,         -1158.0,       -1944.0,        -2000.0,        -2000.0 
+## max values  :        9130.0,         8888.0,      8577.0,      8699.5,    9231.5,     9284.5,     9229.5,       9110.5,          9187.0,        9173.0,         9824.0,         9352.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(month_avg, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">horizontal =</span> T)</code></pre></div>
+<p><img src="analyze_files/figure-html/unnamed-chunk-4-2.png" width="672"></p>
 <hr>
 </div>
-<div id="extracting-time-series-data-on-areas-of-interest" class="section level2">
-<h2 class="hasAnchor">
-<a href="#extracting-time-series-data-on-areas-of-interest" class="anchor"></a>Extracting Time Series Data on Areas of Interest</h2>
-<p><code>MODIStsp</code> provides an efficient function (<code>MODIStsp\_extract</code>) for extracting time series data at specific locations. The function takes as input a <em>RasterStack</em> virtual object created by <code>MODIStsp</code> (see above), the starting and ending dates for the extraction and a standard _Sp*_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a <code>xts</code> object or <code>data.frame</code> containing time series data for those locations.</p>
+<div id="extracting-time-series-data-on-areas-of-interest" class="section level1">
+<h1 class="hasAnchor">
+<a href="#extracting-time-series-data-on-areas-of-interest" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Extracting Time Series Data on Areas of Interest</strong>
+</h1>
+<p><code>MODIStsp</code> provides an efficient function (<code>MODIStsp_extract</code>) for extracting time series data at specific locations. The function takes as input a <code>RasterStack</code> virtual object created by <code>MODIStsp</code> (see above), the starting and ending dates for the extraction and a standard <code>sp</code> object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a <code>xts</code> object or <code>data.frame</code> containing time series data for those locations.</p>
 <p>If the input is of class <em>SpatialPoints</em>, the output object contains one column for each point specified, and one row for each date. If it is of class <em>SpatialPolygons</em> (or <em>SpatialLines</em>), it contains one column for each polygon (or each line), with values obtained applying the function specified as the “FUN” argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.</p>
-<p>As an example the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co">#Set the input paths to raster and shape file</span>
-  infile    &lt;-<span class="st"> 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'</span>  
-  shpname   &lt;-<span class="st"> 'path_to_file/rois.shp'</span>  
-  <span class="co">#Set the start/end dates for extraction</span>
-  startdate &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">"2010-01-01"</span>)  
-  enddate   &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">"2014-12-31"</span>)    
-  <span class="co">#Load the RasterStack</span>
-  inrts     &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(infile)) 
-  <span class="co"># Compute average and St.dev</span>
-  dataavg   &lt;-<span class="st"> </span><span class="kw"><a href="../reference/MODIStsp_extract.html">MODIStsp_extract</a></span>(inrts, shpname, startdate, enddate, <span class="dt">FUN =</span> <span class="st">'mean'</span>, <span class="dt">na.rm =</span> T)
-  datasd    &lt;-<span class="st"> </span><span class="kw"><a href="../reference/MODIStsp_extract.html">MODIStsp_extract</a></span> (inrts, shpname, startdate, enddate, <span class="dt">FUN =</span> <span class="st">'sd'</span>, <span class="dt">na.rm =</span> T)
-  <span class="co"># Plot average time series for the polygons</span>
-  <span class="kw">plot.xts</span>(dataavg) </code></pre></div>
-<p>loads a <em>RasterStack</em> object containing 8-days 250 m resolution time series for the 2000-2015 period and extracts time series of average and standard deviation values over the different polygons of a user’s selected shapefile on the 2010-2014 period.</p>
+<p>To test <code>MODIStsp_extract</code> we can start by loading the NDVI <code>RasterStack</code> time series created in the previous example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ts_folder &lt;-<span class="st"> "D:/Temp/VI_16Days_500m_v6/Time_Series/"</span>
+in_virtual_file &lt;-<span class="st"> </span><span class="kw">file.path</span>(ts_folder, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>)
+ts_data          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))
+ts_data</code></pre></div>
+<pre><code>## class       : RasterStack 
+## dimensions  : 122, 65, 7930, 23  (nrow, ncol, ncell, nlayers)
+## resolution  : 463.3127, 463.3127  (x, y)
+## extent      : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
+## names       : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, ... 
+## time        : 2016-01-01 - 2016-12-18 (range)</code></pre>
+<p>, which again gives us the 23-band <code>RasterStack</code> in the <code>ts_data</code> variable.</p>
+<p>To extract the NDVI data over selected areas, we can then use the <code>MODIStsp_extract</code> function as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load a shapefile containing polygons --&gt; Here we use a test shapefile in </span>
+<span class="co"># the testdata folder of MODIStsp.</span>
+
+polygons &lt;-<span class="st"> </span>rgdal<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rgdal/topics/readOGR">readOGR</a></span>(<span class="kw">system.file</span>(<span class="st">"testdata/extract_polys.shp"</span>,
+                                       <span class="dt">package =</span> <span class="st">"MODIStsp"</span>),
+                           <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+polygons</code></pre></div>
+<pre><code>## class       : SpatialPolygonsDataFrame 
+## features    : 10 
+## extent      : 9.248174, 9.526815, 45.91182, 46.18547  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## variables   : 2
+## names       : id,  lc_type 
+## min values  :  1, Cropland 
+## max values  :  9,  water_2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now extract the average values for each polygon and date and plot the results</span>
+
+out_dataavg &lt;-<span class="st"> </span><span class="kw"><a href="../reference/MODIStsp_extract.html">MODIStsp_extract</a></span>(ts_data, polygons, <span class="dt">id_field =</span> <span class="st">"lc_type"</span>, 
+                                <span class="dt">small =</span> <span class="ot">FALSE</span>)
+<span class="kw">head</span>(out_dataavg)</code></pre></div>
+<pre><code>##                Water   Forest Urban_1  Urban_2 Grassland Cropland Forest_2
+## 2016-01-01  1286.000 5205.000    4249 3645.444 4118.6667 5810.769 3617.222
+## 2016-01-17  4863.333 5264.333    4636 3279.889 3305.1667 5104.769 2183.111
+## 2016-02-02 -1408.000 5773.667    4458 3276.111 2037.5000 4964.385 2849.444
+## 2016-02-18    69.680 5532.667    3795 3705.333 -409.4000 6325.692 3286.222
+## 2016-03-05  1176.000 5070.000    3972 3759.333 -374.6667 6402.231 3586.556
+## 2016-03-21  1191.143 6197.333    4506 4226.889 2841.0000 7483.077 5281.000
+##              water_2 outside_poly
+## 2016-01-01 1637.2500           NA
+## 2016-01-17  624.5714           NA
+## 2016-02-02  207.5714           NA
+## 2016-02-18 2113.1000           NA
+## 2016-03-05 2195.0000           NA
+## 2016-03-21  383.2857           NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Other summarization functions can be used, by specifying the "FUN" argument. </span>
+<span class="co"># Compute the Standard Deviation over each polygon: </span>
+out_datasd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/MODIStsp_extract.html">MODIStsp_extract</a></span>(ts_data, polygons, <span class="dt">id_field =</span> <span class="st">"lc_type"</span>,
+<span class="dt">FUN =</span> <span class="st">"sd"</span>, <span class="dt">small =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>The output is a <code>xts</code> object, with one column for each polygon of the input shapefile, and one row for each date. We can easily plot the computed averages using:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xts)
+<span class="kw">plot</span>(out_dataavg, <span class="dt">legend.loc =</span> <span class="st">"topleft"</span>)</code></pre></div>
+<p><img src="analyze_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
+<p>We can also transform the output dataset to a long format and use <code>ggplot2</code> for plotting and other tidyverse-friendly functions for analysis:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+out_dataavg_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">date =</span> <span class="kw">index</span>(out_dataavg), <span class="kw">coredata</span>(out_dataavg)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/gather">gather</a></span>(Polygon, Value, <span class="op">-</span>date)
+
+ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(out_dataavg_df, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> Value, <span class="dt">color =</span> Polygon)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</code></pre></div>
+<p><img src="analyze_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tibbletime)
+<span class="kw">library</span>(dplyr)
+
+<span class="co"># Compute monthly averages using tibbletime: </span>
+ 
+out_dataavg_tt &lt;-<span class="st"> </span>tibbletime<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tibbletime/topics/tbl_time">as_tbl_time</a></span>(out_dataavg_df, <span class="dt">index =</span> date) 
+
+month_avg &lt;-<span class="st"> </span>out_dataavg_tt <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Polygon) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tibbletime<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tibbletime/topics/as_period">as_period</a></span>(<span class="dt">period =</span> <span class="st">"monthly"</span>)
+
+ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(month_avg, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> Value, <span class="dt">color =</span> Polygon)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</code></pre></div>
+<p><img src="analyze_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
+<p><strong>IMPORTANT NOTES - 1</strong> <code>MODIStsp_extract</code> is usually much faster than the standard <code><a href="http://www.rdocumentation.org/packages/raster/topics/extract">raster::extract</a></code> function, but does not deal with overlapping polygons. If your polygons are overlapping, please use <code><a href="http://www.rdocumentation.org/packages/raster/topics/extract">raster::extract</a></code> instead.</p>
+<p><strong>IMPORTANT NOTES - 2</strong> A more powerful extraction function can be also found in the <code>sprawl</code> package, currently under development on github (<a href="https://lbusett.github.io/sprawl/" class="uri">https://lbusett.github.io/sprawl/</a>). In particular, <code><a href="http://www.rdocumentation.org/packages/sprawl/topics/extract_rast">sprawl::extract_rast</a></code> deals much better with large rasters and long time series.</p>
 </div>
 </div>
   </div>
@@ -163,8 +299,8 @@ indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span 
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#accessing-the-processed-time-series-from-r">Accessing the processed time series from R</a></li>
-      <li><a href="#extracting-time-series-data-on-areas-of-interest">Extracting Time Series Data on Areas of Interest</a></li>
+<li><a href="#accessing-the-raster-time-series"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Accessing the raster time series</strong></a></li>
+      <li><a href="#extracting-time-series-data-on-areas-of-interest"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Extracting Time Series Data on Areas of Interest</strong></a></li>
       </ul>
 </div>
       </div>
