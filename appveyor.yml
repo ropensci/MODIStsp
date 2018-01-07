@@ -22,8 +22,6 @@ install:
     - "SET GDAL_DATA=%systemdrive%\\OSGeo4w\\share\\gdal"
     #- "SET PATH=C:\\gdal;C:\\gdal\\bin;C:\\gdal\\data;C:\\gdal\\bin\\gdal\\apps;%PATH%"
     #- "SET GDAL_DATA=C:\\gdal\\bin\\gdal-data"
-
-%systemdrive%\OSGeo4w
     #- ECHO "Filesystem C:/GDAL:"
     #- ps: "ls \"C:/GDAL\""
 
