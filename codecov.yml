@@ -1,1 +1,2 @@
-comment: false
+comment:
+  layout: "header, diff, changes, sunburst, suggestions, tree"
