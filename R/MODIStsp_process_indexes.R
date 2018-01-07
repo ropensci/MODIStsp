@@ -1,4 +1,4 @@
-#' @title MODIStsp helper for cimputing spectral indexes
+#' @title MODIStsp helper for computing spectral indexes
 #' @description function used to compute spectral indexes, given the index formula
 #' @details the function parses the index formula to identify the required bands. On the basis
 #'   of identified bands, it retrieves the reflectance bands required, gets the data into R raster

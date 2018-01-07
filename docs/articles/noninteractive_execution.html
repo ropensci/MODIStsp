@@ -125,9 +125,9 @@
     
     
 <div class="contents">
-<div id="specifying-a-saved-options-file" class="section level1">
+<div id="launching-modistsp-using-a-saved-options-file" class="section level1">
 <h1 class="hasAnchor">
-<a href="#specifying-a-saved-options-file" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Specifying a saved “Options file”</strong>
+<a href="#launching-modistsp-using-a-saved-options-file" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Launching MODIStsp using a saved “Options file”</strong>
 </h1>
 <p><code>MODIStsp</code> can be launched in non-interactive mode within an <code>R</code> session by setting the optional <code>GUI</code> parameter to FALSE, and the <code>Options_File</code> parameter to the path of a previously saved JSON Options file. This allows to exploit <code>MODIStsp</code> functionalities within generic “R” processing scripts</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MODIStsp) 
@@ -139,9 +139,23 @@ options_file &lt;-<span class="st"> "X:/yourpath/youroptions.json"</span>
 <hr>
 <p><br></p>
 </div>
-<div id="looping-on-different-spatial-extents" class="section level1">
+<div id="looping-over-different-options-files" class="section level1">
 <h1 class="hasAnchor">
-<a href="#looping-on-different-spatial-extents" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Looping on different spatial extents</strong>
+<a href="#looping-over-different-options-files" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Looping over different Options files</strong>
+</h1>
+<p>If you need to process different MODIS products, you can prepare beforehand different MODIStsp options files by using the GUI, and then loop over them like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opts_files &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"X:/yourpath/youroptions_MOD13Q1.json"</span>,
+                <span class="st">"X:/yourpath/youroptions_MOD10A1.json"</span>)
+
+<span class="cf">for</span> (opts_file <span class="cf">in</span> opts_files) {
+  <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> opts_file)
+}</code></pre></div>
+<hr>
+<p><br></p>
+</div>
+<div id="looping-over-different-spatial-extents" class="section level1">
+<h1 class="hasAnchor">
+<a href="#looping-over-different-spatial-extents" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Looping over different spatial extents</strong>
 </h1>
 <p>Specifying also the <code>spatial_file_path_</code> parameter overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MODIStsp) 
@@ -151,7 +165,9 @@ options_file &lt;-<span class="st"> "X:/yourpath/youroptions.json"</span>
 <span class="co"># --&gt; Create a character array containing a list of shapefiles (or other spatial files)</span>
 extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">"X:/path/containing/some/shapefiles/"</span>, <span class="st">"</span><span class="ch">\\</span><span class="st">.shp$"</span>)  
 
-<span class="co"># --&gt; Loop on the list of spatial files and run MODIStsp using each of them to automatically define the output extent (A separate output folder is created for each input spatial file).</span>
+<span class="co"># --&gt; Loop on the list of spatial files and run MODIStsp using each of them to </span>
+<span class="co"># automatically define the output extent (A separate output folder is created for</span>
+<span class="co"># each input spatial file).</span>
 
 <span class="cf">for</span> (single_shape <span class="cf">in</span> extent_list) {
   <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, 
@@ -166,8 +182,9 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#specifying-a-saved-options-file"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Specifying a saved “Options file”</strong></a></li>
-      <li><a href="#looping-on-different-spatial-extents"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Looping on different spatial extents</strong></a></li>
+<li><a href="#launching-modistsp-using-a-saved-options-file"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Launching MODIStsp using a saved “Options file”</strong></a></li>
+      <li><a href="#looping-over-different-options-files"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Looping over different Options files</strong></a></li>
+      <li><a href="#looping-over-different-spatial-extents"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Looping over different spatial extents</strong></a></li>
       </ul>
 </div>
       </div>

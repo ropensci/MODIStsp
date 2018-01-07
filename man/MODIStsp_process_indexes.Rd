@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_process_indexes.R
 \name{MODIStsp_process_indexes}
 \alias{MODIStsp_process_indexes}
-\title{MODIStsp helper for cimputing spectral indexes}
+\title{MODIStsp helper for computing spectral indexes}
 \usage{
 MODIStsp_process_indexes(out_filename, out_prod_folder, formula, bandnames,
   nodata_out, indexes_nodata_out, file_prefix, compress, yy, out_format, DOY,
