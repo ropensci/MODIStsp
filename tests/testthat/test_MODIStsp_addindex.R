@@ -4,7 +4,7 @@ test_that("MODIStsp_addindex works as expected", {
   # error in formula leads to aborting
   expect_error(
     MODIStsp_addindex(
-      option_jsfile = system.file("testdata/test_addindex.json", 
+      opts_jsfile = system.file("testdata/test_addindex.json", 
                                   package = "MODIStsp"),
       gui = FALSE, new_indexbandname = "myindex",
       new_indexformula = "b2_dsadsa",
@@ -14,7 +14,7 @@ test_that("MODIStsp_addindex works as expected", {
   
   expect_error(
     MODIStsp_addindex(
-      option_jsfile = system.file("testdata/test_addindex.json", 
+      opts_jsfile = system.file("testdata/test_addindex.json", 
                                   package = "MODIStsp"),
       gui = FALSE, new_indexbandname = "myindex",
       new_indexformula = "b1_Red - bg",
@@ -24,7 +24,7 @@ test_that("MODIStsp_addindex works as expected", {
   # Duplicated index name leads to aborting
   expect_error(
     MODIStsp_addindex(
-      option_jsfile = system.file("testdata/test_addindex.json", 
+      opts_jsfile = system.file("testdata/test_addindex.json", 
                                   package = "MODIStsp"),
       gui = FALSE, new_indexbandname = "SR",
       new_indexformula = "b1_Red - b2_NIR",
@@ -40,7 +40,7 @@ test_that("MODIStsp_addindex works as expected", {
   # error in formula leads to aborting
   expect_error(
     MODIStsp_addindex(
-      option_jsfile = system.file("testdata/test_addindex.json", 
+      opts_jsfile = system.file("testdata/test_addindex.json", 
                                   package = "MODIStsp"),
       gui = FALSE, 
       new_indexformula = "b1_Red",
@@ -51,7 +51,7 @@ test_that("MODIStsp_addindex works as expected", {
   # All parameters ok: just a message is given
   expect_message(
     MODIStsp_addindex(
-      option_jsfile = system.file("testdata/test_addindex.json", 
+      opts_jsfile = system.file("testdata/test_addindex.json", 
                                   package = "MODIStsp"),
       gui = FALSE,
       new_indexbandname = paste0("Index_", as.character(sample(10000, 1))),
