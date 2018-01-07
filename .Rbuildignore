@@ -4,6 +4,7 @@
 ^\.Rprofile$
 .travis.yml
 .config.yml
+appveyor.yml
 index.md
 index.Rmd
 LICENSE.md
