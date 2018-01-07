@@ -2,7 +2,7 @@
 % Please edit documentation in R/reproj_bbox.R
 \name{reproj_bbox}
 \alias{reproj_bbox}
-\title{reproj_bbox}
+\title{Reproject a bounding box}
 \usage{
 reproj_bbox(bbox, in_proj, out_proj, enlarge = TRUE, N_dens = 1000)
 }

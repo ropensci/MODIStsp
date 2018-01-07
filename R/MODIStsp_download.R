@@ -1,4 +1,4 @@
-#' @title MODIStsp_download
+#' @title MODIStsp download function
 #' @description Internal function dealing with download of MODIS hdfs from
 #'  http or ftp remote servers for a given date.
 #' @param modislist `character array` List of MODIS images to be downloaded for
@@ -27,10 +27,11 @@
 #'  (only influences where the log messages are sent).
 #' @param mess_lab pointer to the gWidget used to issue processing messages in 
 #'  when gui = TRUE.
+#' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @inheritParams MODIStsp_process
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_download
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @importFrom httr RETRY authenticate content GET progress write_disk
 #' @importFrom xml2 as_list
@@ -52,7 +53,8 @@ MODIStsp_download <- function(modislist,
                               sens_sel,
                               date_name,
                               gui, 
-                              mess_lab) {
+                              mess_lab, 
+                              verbose) {
 
   # Cycle on the different files to download for the current date
   for (file in seq_along(modislist)) {
@@ -106,7 +108,7 @@ MODIStsp_download <- function(modislist,
         } else {
           # If the remote xml file was not accessible, n_retries times,
           # retry or abort
-          if (gui) { 
+          if (gui) {
             #nocov start
             confirm <- gWidgets::gconfirm(
               paste0(download_server,
@@ -146,7 +148,7 @@ MODIStsp_download <- function(modislist,
           # If the remote xml file was not accessible n_retries times,
           # retry or abort
           if (attempt == n_retries) {
-            if (gui) { 
+            if (gui) {
               #nocov start
               confirm <- gWidgets::gconfirm(
                 paste0(download_server,
@@ -182,7 +184,7 @@ MODIStsp_download <- function(modislist,
                          date_name, ":", which(modislist == modisname),
                          "of: ", length(modislist))
       # Update progress window
-      process_message(mess_text, gui, mess_lab)
+      if (verbose) process_message(mess_text, gui, mess_lab, verbose)
       success <- FALSE
       attempt <- 0
       #  _______________________________________________________________________
@@ -237,7 +239,7 @@ MODIStsp_download <- function(modislist,
         if (class(download) == "try-error" |
             !is.null(attr(download, "status"))) {
           attempt <- attempt + 1
-          message("[", date(), "] Download Error - Retrying...")
+          if (verbose) message("[", date(), "] Download Error - Retrying...")
           unlink(local_filename)  # On download error, delete incomplete files
           Sys.sleep(1)    # sleep for a while....
         } else {
@@ -249,7 +251,9 @@ MODIStsp_download <- function(modislist,
                                      encoding = "UTF-8")) == 1) {
               # on error, delete last HDF file (to be sure no incomplete
               # files are left behind and send message)
-              message("[", date(), "] Download Error - Retrying...")
+              if (verbose) {
+                message("[", date(), "] Download Error - Retrying...")
+              }
               unlink(local_filename)
             }
           }

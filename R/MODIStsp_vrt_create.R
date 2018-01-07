@@ -13,10 +13,11 @@
 #' @param out_format `character ["ENVI" | "GTiff"]` Format of images used as
 #'  "input" for the vrt and contained in out_prod_folder/band folders.
 #' @param rts `character ["Yes" | "No"]` If Yes, create "R" RasterStacks time series
+#' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @inheritParams MODIStsp_process
 #' @return NULL -
 #'
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @importFrom raster setZ stack
@@ -31,7 +32,8 @@ MODIStsp_vrt_create <- function(
   indexes_bandnames, indexes_bandsel, indexes_nodata_out,
   quality_bandnames, quality_bandsel, quality_nodata_out,
   file_prefixes,
-  ts_format, out_format, rts) {
+  ts_format, out_format, rts, 
+  verbose) {
   
   if (length(sensor) == 2) {
     senslist <- c("Terra", "Aqua", "Mixed")
@@ -68,8 +70,10 @@ MODIStsp_vrt_create <- function(
       
       meta_band    <- meta_bands[mb]
       nodata_value <- nodata_vals[mb]
-      message("[", date(), "] Creating Virtual Files and R time series for ",
-              "layer ", meta_band)
+      if (verbose) {
+        message("[", date(), "] Creating Virtual Files and R time series for ",
+                "layer ", meta_band)
+      }
       
       #- --------------------------------------------------------#
       # retrieve files list of the time series (ENVI format) ####
@@ -128,7 +132,7 @@ MODIStsp_vrt_create <- function(
           years     <- stringr::str_sub(basename(out_meta_files), -12, -9)
           # find the files order (by acq.date)
           acq_order <- order(as.numeric(paste0(years, doys)))
-
+          
           # reorder doys and years
           doys           <- as.numeric(doys[acq_order])
           years          <- as.numeric(years[acq_order])
@@ -141,14 +145,14 @@ MODIStsp_vrt_create <- function(
           year_min       <- min(years)
           doy_max        <- max(doys[which(years == max(years))])
           year_max       <- max(years)
-
+          
           # ____________________________________________________________________
           # Write the ENVI meta file if needed                            ####
           #
           if (ts_format == "ENVI Meta Files" | ts_format == "ENVI and GDAL") {
-
+            
             if (out_format == "ENVI") {
-
+              
               # retrieve nsamp and nrow from first hdr file
               head_file   <- paste0(out_meta_files_hdr[1])
               fileConn_hd <- file(head_file)
@@ -156,17 +160,17 @@ MODIStsp_vrt_create <- function(
               nrow        <- strsplit(readLines(fileConn_hd)[5], "=")[[1]][2]
               close(fileConn_hd)
             }
-
+            
             if (out_format == "GTiff") {
               # retrieve nsamp and nrow from first tif file
               nsamp <- raster::raster(out_meta_files[1])@ncols
               nrow  <- raster::raster(out_meta_files[1])@nrows
             }
-
+            
             meta_dir <- file.path(out_prod_folder, "Time_Series", "ENVI_META",
                                   sens_sel, meta_band)
             dir.create(meta_dir, showWarnings = FALSE, recursive = TRUE)
-
+            
             # define fileneame for meta file
             meta_filename <- file.path(meta_dir, paste(file_prefix, meta_band,
                                                        doy_min, year_min,
@@ -183,7 +187,7 @@ MODIStsp_vrt_create <- function(
                          fileConn_meta)
             }
             close(fileConn_meta)
-
+            
             # Compute the "wavelengths" - DOYS elapsed from 01/01/2000
             #
             temp_dates <- as.Date(strptime(paste(years, doys),
@@ -191,7 +195,7 @@ MODIStsp_vrt_create <- function(
             elapsed <- signif(difftime(
               temp_dates, strptime(paste(2000, 001), format = "%Y %j"),
               units = "days"), 5)
-
+            
             # Write the hdr file for the meta file
             fileConn_meta_hdr <- file(
               paste0(tools::file_path_sans_ext(meta_filename), ".hdr"), "w"
@@ -222,40 +226,40 @@ MODIStsp_vrt_create <- function(
                        fileConn_meta_hdr, sep = " ")
             writeLines("", fileConn_meta_hdr)		# Dummy
             close(fileConn_meta_hdr)
-
+            
           }
           #   __________________________________________________________________
           #   # Write the GDAL vrt file if needed                           ####
           #
           if (ts_format == "GDAL vrt files" | ts_format == "ENVI and GDAL") {
-
+            
             meta_dir <- file.path(out_prod_folder, "Time_Series", "GDAL",
                                   sens_sel,
                                   meta_band)
             dir.create(meta_dir, showWarnings = FALSE, recursive = TRUE)
-
+            
             meta_filename <- file.path(meta_dir, paste(file_prefix, meta_band,
                                                        doy_min, year_min,
                                                        doy_max, year_max,
                                                        "GDAL.vrt",
                                                        sep = "_"))
-
+            
             gdalUtils::gdalbuildvrt(out_meta_files, meta_filename,
                                     separate = TRUE,
                                     srcnodata = nodata_value,
                                     vrtnodata = nodata_value)
-
+            
           } # end If on necessity to build GDAL vrt files
-
+          
           #   __________________________________________________________________
           #   Create RasterStacks if needed                                 ####
           #
           if (rts == "Yes") {
-
+            
             meta_dir <- file.path(out_prod_folder, "Time_Series", "RData",
                                   sens_sel, meta_band)
             dir.create(meta_dir, showWarnings = FALSE, recursive = TRUE)
-
+            
             # create stack. Use "quick" since already sure about alignment !
             raster_ts <- raster::stack(out_meta_files, quick = TRUE)
             # Add the "time" dimension to the rasterstack
@@ -266,7 +270,7 @@ MODIStsp_vrt_create <- function(
                                                         "RData.RData",
                                                         sep = "_"))
             save(raster_ts, file = RData_filename)
-
+            
           } # end If on necessity to build R Stack files
         }
       }

@@ -1,10 +1,5 @@
-
-# ------------------------------ ----------------------------------------------#
-# Accessory function to find the image names corresponding to the selected dates
-# and tiles
-# ------------------------------ ----------------------------------------------#
-
-#' @title get_mod_filenames
+#' @title Find the names of MODIS images corresponding to the selected dates
+#   and tiles
 #' @description Accessory function to find the names of HDF images corresponding
 #' to a given date and interval of spatial tiles within the lpdaac archive.
 #' @param http `character` url of http site on lpdaac corresponding to a given MODIS
@@ -34,7 +29,7 @@
 #' \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
 #' modified to adapt it to MODIStsp scheme and to http archive (instead than old
 #'  FTP) by:
-#' @author Lorenzo Busetto, phD (2014-2016) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2016) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @importFrom gWidgets gconfirm

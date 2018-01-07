@@ -1,24 +1,24 @@
-#' @title add custom spectral indexes
+#' @title Add custom spectral indexes
 #' @description Function used to add a user-defined Spectral Index to the
 #'   default list of computable spectral indexes. Execution without the GUI
-#'   (i.e., to add a new index from a script) is also possible (see examples)
+#'   (i.e., to add a new index from a script) is also possible (see examples). 
 #' @details
 #' - The function asks the user to provide the info related to the new desired
 #'   Spectral Index using a GUI interface, checks for correctness of provided
 #'   information (e.g., correct bandnames, computable formula, etc...).
 #'   If the index is legit, it modifies the MODIStsp_Previous.json (or of the
-#'   json file provided by the user)so to allow computation of the additional
+#'   json file provided by the user) so to allow computation of the additional
 #'   index within MODIStsp.
 #' - To remove all custom-added spectral indexes, simply delete the
 #'   MODIStsp_Previous.json file within the /Previous subfolder of the folder
 #'   in which the package was installed, or the alternative JSON specified by
-#'   the parameter "option_jsfile".
+#'   the parameter "opts_jsfile".
 #' - The function can be run either from within the main MODIStsp GUI,
 #'   or within a stand-alone script (using GUI = FALSE). In the latter case, it 
 #'   modifies either the MODIStsp_Previous.RData options file, or the
 #'   options_file specified by the user to add the new index, without user
 #'   interaction.
-#' @param option_jsfile `character` full path of a JSON file
+#' @param opts_jsfile `character` full path of a JSON file
 #'  containing the processing options in which the new indexes has to be saved
 #'  (default: MODIStsp_Previous.JSON in subfolder Previous).
 #' @param prodopts_file `character`: full path of the RData file containing.
@@ -53,13 +53,13 @@
 #' @importFrom gWidgets gbasicdialog ggroup glabel size font gedit gbutton
 #'  svalue addSpace gframe addSpring gmessage visible
 #' @importFrom pacman p_load p_exists
-#' @importFrom jsonlite fromJSON
 #' @return The function is called for its side effects. On success, the
 #'  MODIStsp_Previous.RData file is modified so to allow computation of the 
 #'  additional indexes.
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
+#' @seealso [MODIStsp_resetindexes]
 #' @export
 #'
 #' @examples
@@ -70,7 +70,7 @@
 #' # Open the GUI to define a new index and save it in index in a custom json
 #' # options file.
 #' \dontrun{
-#' MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")
+#' MODIStsp_addindex(opts_jsfile = "X:/yourpath/youroptions.json")
 #' }
 #'
 #' # Define the new index in non-interactive execution, without specifying an 
@@ -83,7 +83,7 @@
 #' }
 
 MODIStsp_addindex <- function(
-  option_jsfile       = NULL,
+  opts_jsfile       = NULL,
   prodopts_file       = NULL,
   selprod             = NULL,
   selvers             = NULL,
@@ -95,7 +95,7 @@ MODIStsp_addindex <- function(
   MODIStsp_dir = system.file(package = "MODIStsp")) { #nolint
   
   # Initialization and retrieval of parameters ----
-  if (gui) { 
+  if (gui) {
     #nocov start
     if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
       message("Library 'gWidgetsRgtk2' is required to run MODIStsp_addindex ",
@@ -115,18 +115,18 @@ MODIStsp_addindex <- function(
     #nocov end
   } 
   
-  previous_jsfile <- ifelse(is.null(option_jsfile),
+  previous_jsfile <- ifelse(is.null(opts_jsfile),
                             system.file("ExtData/Previous", 
                                         "MODIStsp_Previous.json",
                                         package = "MODIStsp"),
-                            option_jsfile)
+                            opts_jsfile)
   prodopts_file   <- ifelse(is.null(prodopts_file),
                             system.file("ExtData/Previous",
                                         "MODIStsp_ProdOpts.RData", 
                                         package = "MODIStsp"),
                             prodopts_file)
   
-  general_opts    <- jsonlite::fromJSON(previous_jsfile)
+  general_opts    <- load_opts(previous_jsfile)
   
   # Restore MODIS products if existing, otherwise retrieve  from xml file ----
   prod_opt_list <- get(load(prodopts_file))
@@ -377,7 +377,7 @@ MODIStsp_addindex <- function(
                    },
                    prod_opt_list,
                    previous_jsfile)
-      message("The new Index was correctly added!\n It will be available at\n",
+      message("The new Index was correctly added!\n It will be available at",
               "the next execution of MODIStsp().")
     } else if (catch_err == 1) {
       stop("The formula of the new index is wrong or not computable for this product. ", #nolint
@@ -393,5 +393,98 @@ MODIStsp_addindex <- function(
     }
     
   } # end of non-gui actions
+  
+}
+
+#' @title save_formula
+#' @description Function called from `MODIStsp_addindex`to add the formula of a new 
+#'  index to the json options file if no errors are detected in `check_formula_errors.
+#' @inheritParams MODIStsp_addindex
+#' @return The function is used for its side effects. It updates the
+#'  previous_jsfile with the info on the new indexes
+#' @noRd
+#' @importFrom jsonlite write_json
+save_formula <- function(refbands_names,
+                         req_bands,
+                         new_indexbandname,
+                         new_indexfullname,
+                         new_indexformula,
+                         new_indexnodata_out,
+                         general_opts,
+                         prod_opt_list,
+                         previous_jsfile) {
+  
+  # initialize list of custom indexes, if it does not exist yet
+  if (is.null(general_opts$custom_indexes)) {
+    #nocov start
+    general_opts$custom_indexes <- list()
+    
+    for (prod in names(prod_opt_list)) {
+      general_opts$custom_indexes[[prod]] <- list()
+      
+      for (vers in names(prod_opt_list[[prod]])) {
+        general_opts$custom_indexes[[prod]][[vers]] <- list(
+          "indexes_bandnames"  = character(0),
+          "indexes_fullnames"  = character(0),
+          "indexes_formulas"   = character(0),
+          "indexes_nodata_out" = character(0)
+        )
+      }
+    }
+    #nocov end
+  }
+  # cycle on available products to add the new index to all products
+  # allowing its computation
+  
+  for (prod in names(prod_opt_list)) {
+    # cycle on available product versions
+    for (vers in names(prod_opt_list[[prod]])) {
+      # check if bands required for index computation are available for the
+      # product
+      check <- 0
+      current_custindexes <- as.list(general_opts$custom_indexes[[prod]][[vers]]) #nolint
+      for (reqband in refbands_names[req_bands]) {
+        if (reqband %in% prod_opt_list[[prod]][[vers]]$bandnames) {
+          check <- check + 1
+        }
+      } #End Cycle on reqband
+      
+      # if all required bands are available in product, add the new index to
+      # the indexes list for the product in the previous_opts file.
+      # In this way, at next execution, the new index should be available.
+      # Moreover, loading and use of old RData options files won't be broken
+      # if an index is added later than their creation.
+      
+      n_req_bands <- sum(req_bands)
+      if (n_req_bands == check) {
+        tmp_indexes_bandnames <- c(current_custindexes$indexes_bandnames,
+                                   new_indexbandname)
+        tmp_indexes_fullnames <- c(current_custindexes$indexes_fullnames,
+                                   new_indexfullname)
+        tmp_indexes_formulas <- c(current_custindexes$indexes_formulas,
+                                  new_indexformula)
+        tmp_indexes_nodata_out <- c(current_custindexes$indexes_nodata_out,
+                                    new_indexnodata_out)
+        
+        general_opts$custom_indexes[[prod]][[vers]] <- list(
+          "indexes_bandnames"  = tmp_indexes_bandnames,
+          "indexes_fullnames"  = tmp_indexes_fullnames,
+          "indexes_formulas"   = tmp_indexes_formulas,
+          "indexes_nodata_out" = tmp_indexes_nodata_out
+        )
+        rm(tmp_indexes_bandnames,
+           tmp_indexes_fullnames,
+           tmp_indexes_formulas,
+           tmp_indexes_nodata_out)
+      }
+    }
+  }  #End Cycle on products
+  
+  # Save the products list and the chars of the products (including
+  # custom indexes) in previous file.
+  jsonlite::write_json(general_opts, previous_jsfile, pretty = TRUE,
+                       auto_unbox = TRUE)
+  
+  return(general_opts)
   
 }

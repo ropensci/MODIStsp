@@ -2,9 +2,9 @@
 % Please edit documentation in R/process_message.R
 \name{process_message}
 \alias{process_message}
-\title{process_message}
+\title{Spawn processing update messages}
 \usage{
-process_message(mess_text, gui, mess_lab)
+process_message(mess_text, gui, mess_lab, verbose = TRUE)
 }
 \arguments{
 \item{mess_text}{\code{character} text to be shown in the processing windows
@@ -14,6 +14,8 @@ and/or the console}
 status window or only to the console.}
 
 \item{mess_lab}{pointer to the gwindow used to shoe messages when gui == TRUE}
+
+\item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
 }
 \value{
 The function is called for its side effects

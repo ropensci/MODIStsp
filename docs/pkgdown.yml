@@ -3,7 +3,6 @@ urls:
   article: http://lbusett.github.io/MODIStsp/articles
 articles:
   analyze: analyze.html
-  examples: examples.html
   faq: faq.html
   installation: installation.html
   interactive_execution: interactive_execution.html

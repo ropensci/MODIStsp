@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_bandind_matrix.R
 \name{set_bandind_matrix}
 \alias{set_bandind_matrix}
-\title{FUNCTION_TITLE}
+\title{Helper function to determine the bands needed to compute SIs and QIs}
 \usage{
 set_bandind_matrix(bandnames, bandsel, indexes_bandnames, indexes_bandsel,
   indexes_formula, quality_bandnames, quality_bandsel, quality_source)
@@ -36,11 +36,12 @@ original MODIS layer (multiple QIs share the same "source", since they are
 derived from different bits of the bit-encoded layer).}
 }
 \value{
-OUTPUT_DESCRIPTION
+\code{matrix} containing info on which bands are needed for computing
+each available QI or SI
 }
 \description{
 FUNCTION_DESCRIPTION
 }
 \author{
-Lorenzo Busetto, phD (2017) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2017) \email{lbusett@gmail.com}
 }

@@ -1,4 +1,4 @@
-#' @title compute Quality Indicators from HDF bit-field layers
+#' @title MODIStsp helper function to compute Quality Indicators from HDF bit-field layers
 #' @description function used to extract quality indicator from MODIS aggregated
 #'  quality layers
 #' @details On the basis of the name of the image containing the aggregated quality information
@@ -20,7 +20,7 @@
 #' @param nodata_qa_out `character` out NoData for quality bands ("255")
 #' @param compress `character` compression option for GTiff files
 #' @return NULL
-#' @author Lorenzo Busetto, phD (2017) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #'  Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)

@@ -1,4 +1,4 @@
-#' MODIStsp_read_xml
+#' @title Read MODIS products characteristics from XML
 #' @description function used to parse the XML file used to store the characteristics of
 #' MODIS Land Products and store them in the "prod_opts" data frame
 #' @details The function parses the XML file product by product, stores data in a data frame
@@ -9,7 +9,7 @@
 #' characteristics
 #' @return NULL - retrieved data are stored in the specified RData file
 #'
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @importFrom xml2 as_list read_xml

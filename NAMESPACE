@@ -3,6 +3,7 @@
 export(MODIStsp)
 export(MODIStsp_addindex)
 export(MODIStsp_extract)
+export(MODIStsp_resetindexes)
 export(install_MODIStsp_launcher)
 importFrom(RCurl,getURL)
 importFrom(bitops,bitAnd)

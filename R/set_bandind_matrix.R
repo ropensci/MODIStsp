@@ -1,9 +1,10 @@
-#' @title FUNCTION_TITLE
+#' @title Helper function to determine the bands needed to compute SIs and QIs
 #' @description FUNCTION_DESCRIPTION
 #' @inheritParams MODIStsp_process
-#' @return OUTPUT_DESCRIPTION
+#' @return `matrix` containing info on which bands are needed for computing
+#'  each available QI or SI
 #' @rdname set_bandind_matrix
-#' @author Lorenzo Busetto, phD (2017) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
 set_bandind_matrix <- function(bandnames, 
                                bandsel,
                                indexes_bandnames,

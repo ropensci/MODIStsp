@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_files_existance.R
 \name{check_files_existence}
 \alias{check_files_existence}
-\title{check_files_existence}
+\title{Check if all files required for a given date already exist}
 \usage{
 check_files_existence(out_prod_folder, file_prefix, yy, DOY, bandnames,
   bandsel_orig_choice, indexes_bandnames, indexes_bandsel, quality_bandnames,
@@ -51,7 +51,7 @@ skipped in MODIStsp_process.
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }

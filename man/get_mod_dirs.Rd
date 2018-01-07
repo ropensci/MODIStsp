@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_mod_dirs.R
 \name{get_mod_dirs}
 \alias{get_mod_dirs}
-\title{get list of MODIS data folders from http/ftp server}
+\title{Get list of MODIS data folders from http/ftp server}
 \usage{
 get_mod_dirs(http, ftp, download_server, user, password, yy, n_retries, gui,
   out_folder_mod, .Platform)
@@ -57,5 +57,5 @@ FTP) by:
 
 Lorenzo Busetto, phD (2014-2017) \email{busetto.l@irea.cnr.it}
 
-Luigi Ranghetti, phD (2016-2017) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2016-2017) \email{lbusett@gmail.com}
 }

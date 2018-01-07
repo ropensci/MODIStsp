@@ -1,7 +1,7 @@
 #' @title check_formula_errors
 #' @description Function to check for errors in formula within `MODIStsp_addindex`.
-#'  It is called from the GUI when "Add" button is chosen, or when function starts in
-#'   non-interactive mode
+#'  It is called from the GUI when "Add" button is chosen, or when the function starts
+#'  in non-interactive mode.
 #' @inheritParams MODIStsp_addindex
 #' @importFrom pacman p_exists p_load
 #' @importFrom stringr str_detect

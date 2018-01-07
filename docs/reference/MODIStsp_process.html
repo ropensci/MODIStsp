@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp_process — MODIStsp_process â€¢ MODIStsp</title>
+<title>MODIStsp main processing function — MODIStsp_process â€¢ MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -143,7 +143,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>MODIStsp_process</h1>
+    <h1>MODIStsp main processing function</h1>
     </div>
 
     
@@ -162,7 +162,7 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
   <span class='no'>indexes_formula</span>, <span class='no'>indexes_nodata_out</span>, <span class='no'>quality_bandnames</span>, <span class='no'>quality_bandsel</span>,
   <span class='no'>quality_bitN</span>, <span class='no'>quality_source</span>, <span class='no'>quality_nodata_in</span>, <span class='no'>quality_nodata_out</span>,
   <span class='no'>file_prefixes</span>, <span class='no'>main_out_folder</span>, <span class='no'>resampling</span>, <span class='no'>ts_format</span>, <span class='kw'>use_aria</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>download_range</span> <span class='kw'>=</span> <span class='st'>"full"</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>n_retries</span>)</pre>
+  <span class='kw'>download_range</span> <span class='kw'>=</span> <span class='st'>"full"</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>n_retries</span>, <span class='no'>verbose</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -439,6 +439,10 @@ log file instead than to the console, and gWidgets messages are suppressed</p></
 In case any download function fails more than <code>n_retries</code> times consecutively,
 MODIStsp_process will abort, Default: 20</p></td>
     </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p><code>logical</code> If FALSE, suppress processing messages, Default: TRUE</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -486,7 +490,7 @@ development of this function (<a href='http://r-gis.net/?q=ModisDownload'>ModisD
 
     <h2>Author</h2>
     
-Lorenzo Busetto, phD (2014-2015) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a>
+Lorenzo Busetto, phD (2014-2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com</a>
 
 Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 

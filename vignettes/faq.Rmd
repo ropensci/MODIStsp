@@ -13,7 +13,7 @@ Here you can find possible **solutions for common `MODIStsp` problems**. We will
 
 <a name="Installation Problems"></a>
 
-## Installation Problems
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Installation Problems__
     
 -   [On Linux, installation fails due to some packages missing](#Missing-packages)
 -   [On Windows, the program hangs at first interactive execution, while attempting to install `gWisgets2RGtk2`](#gWidgets-error)
@@ -108,7 +108,7 @@ ________________________________________________________________________________
 
 <a name="Data download Problems"></a>
 
-# Data download Problems 
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Data download Problems__ 
 
 -   [On 'http' download, files are not getting downloaded, OR you get 'timeout' problems](#timeout-error)
 
@@ -143,7 +143,7 @@ ________________________________________________________________________________
 
 <a name="processing-errors"></a>
 
-# Processing Problems
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Processing Problems__
 
 -   [`MODIStsp` fails while processing product **MxDyyy**](#product-error)
 -   [I can't find the processed files](#whereare-error)
@@ -189,6 +189,6 @@ ________________________________________________________________________________
 
 <a name="other-errors"></a>
 
-# Other Problems
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Other Problems__
 
 Please report any other issues at https://github.com/lbusett/MODIStsp/issues

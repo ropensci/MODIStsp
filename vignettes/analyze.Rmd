@@ -12,7 +12,7 @@ library(MODIStsp)
 library(dplyr)
 ```
 
-## Accessing the processed time series from R
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Accessing the raster time series__
 
 Preprocessed MODIS data can be retrieved within `R`  either by accessing the 
 single-date raster files, or by loading the saved `RasterStack` objects (see 
@@ -64,12 +64,33 @@ time series analysis, extraction and plotting provided for example by the
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 # plot some dates
-plot(ts_data[[c(1,5,10,15,20)]])
+plot(ts_data[[c(1,5,10,15,20)]], axes = FALSE, horizontal = T)
+
+# Extract one date from the stack
+
+mydate   <- as.Date("2016-01-01")
+substack <- subset(ts_data, which(getZ(ts_data) == mydate)) %>% setZ(mydate)
+substack  
+
+# Extract multiple dates from the stack
+
+mindate   <- as.Date("2016-01-01")
+maxdate   <- as.Date("2016-04-01")
+substack  <- subset(ts_data, 
+                    which(getZ(ts_data) >= mindate & getZ(ts_data) <= maxdate))
+substack  
+
+# Compute monthly averages
+
+month_avg <- stackApply(ts_data, months(getZ(ts_data)), fun = mean)
+month_avg
+
+plot(month_avg, axes = FALSE, horizontal = T)
 ```
 
 ________________________________________________________________________________
 
-## Extracting Time Series Data on Areas of Interest
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Extracting Time Series Data on Areas of Interest__
 
 `MODIStsp` provides an efficient function (`MODIStsp_extract`) for extracting 
 time series data at specific locations. The function takes as input a `RasterStack` 

@@ -2,12 +2,12 @@
 % Please edit documentation in R/MODIStsp_process_bands.R
 \name{MODIStsp_process_bands}
 \alias{MODIStsp_process_bands}
-\title{MODIStsp_process_bands}
+\title{MODIStsp helper for processing original HDF layers}
 \usage{
 MODIStsp_process_bands(out_folder_mod, modislist, outproj_str, mod_proj_str,
   sens_sel, band, bandname, date_name, datatype, nodata_in, nodata_out,
   full_ext, bbox, scale_val, scale_factor, offset, out_format, outrep_file,
-  compress, out_res_sel, out_res, resampling, gui, mess_lab)
+  compress, out_res_sel, out_res, resampling, gui, mess_lab, verbose)
 }
 \arguments{
 \item{out_folder_mod}{\code{character} Output folder for original HDF storage.}
@@ -79,6 +79,8 @@ log file instead than to the console, and gWidgets messages are suppressed}
 
 \item{mess_lab}{Pointer to the gWidget used to visualize processing messages
 in interactive execution.}
+
+\item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
 }
 \value{
 The function is called for its side effects
@@ -90,7 +92,7 @@ mosaicing, computation of scaling factors). The function is based on the
 use of \code{gdal} routines.
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }

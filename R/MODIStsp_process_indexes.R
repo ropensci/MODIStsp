@@ -1,4 +1,4 @@
-#'  MODIStsp_process_indexes
+#' @title MODIStsp helper for cimputing spectral indexes
 #' @description function used to compute spectral indexes, given the index formula
 #' @details the function parses the index formula to identify the required bands. On the basis
 #'   of identified bands, it retrieves the reflectance bands required, gets the data into R raster
@@ -25,7 +25,7 @@
 #' otherwise integer -10000 - 10000
 #' @return NULL - new raster file saved in out_filename
 #'
-#' @author Lorenzo Busetto, phD (2017) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @importFrom raster stack NAvalue overlay

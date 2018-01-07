@@ -7,7 +7,7 @@
 MODIStsp_vrt_create(sensor, out_prod_folder, bandnames, bandsel, nodata_out,
   indexes_bandnames, indexes_bandsel, indexes_nodata_out, quality_bandnames,
   quality_bandsel, quality_nodata_out, file_prefixes, ts_format, out_format,
-  rts)
+  rts, verbose)
 }
 \arguments{
 \item{sensor}{\code{character ["Terra"| "Aqua" | "Both"]} MODIS platform to be considered.
@@ -52,6 +52,8 @@ for virtual file.}
 "input" for the vrt and contained in out_prod_folder/band folders.}
 
 \item{rts}{\code{character ["Yes" | "No"]} If Yes, create "R" RasterStacks time series}
+
+\item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
 }
 \value{
 NULL -
@@ -68,7 +70,7 @@ Created virtual files are stored in the "Time Series" subfolder of `out_prod_fol
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }

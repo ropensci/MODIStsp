@@ -2,9 +2,9 @@
 % Please edit documentation in R/MODIStsp_GUI.R
 \name{MODIStsp_GUI}
 \alias{MODIStsp_GUI}
-\title{build and manage the MODIStsp GUI}
+\title{Build and manage the MODIStsp GUI}
 \usage{
-MODIStsp_GUI(general_opts, prod_opt_list, MODIStsp_dir, opt_jsfile,
+MODIStsp_GUI(general_opts, prod_opt_list, MODIStsp_dir, opts_jsfile,
   prodopts_file, scroll_window)
 }
 \arguments{
@@ -16,7 +16,7 @@ MODIStsp_ProdOpts.xml file)}
 
 \item{MODIStsp_dir}{main folder of the package}
 
-\item{opt_jsfile}{json parameters file containing data of the last
+\item{opts_jsfile}{json parameters file containing data of the last
 execution, or the ones contained in the \code{options_file} eventually passed to
 \code{MODIStsp}}
 
@@ -40,7 +40,7 @@ by launching the MODIStsp_read_xml function
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }

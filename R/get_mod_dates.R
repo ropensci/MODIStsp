@@ -1,5 +1,4 @@
-
-#' @title get_mod_dates
+#' @title Find MODIS dates included in selected processing period
 #' @description Accessory function to find the folders corresponding to the requested
 #' dates period within the full list retrieved by get_moddirs
 #' @param dates 2- element string array specifying start/end dates (yyyy.mm.dd)
@@ -9,7 +8,7 @@
 #' @return array of folder names containing data for the MODIS product acquired in
 #' the period specified by "dates"
 #' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
-#' @author Lorenzo Busetto, phD (2017) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
 #' @note License: GPL 3.0
 #'
 get_mod_dates <- function(dates, date_dirs) {

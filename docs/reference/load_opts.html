@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load MODIStsp processing options — load_opts â€¢ MODIStsp</title>
+<title>Load MODIStsp processing options from a JSON file — load_opts â€¢ MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -143,14 +143,15 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load MODIStsp processing options</h1>
+    <h1>Load MODIStsp processing options from a JSON file</h1>
     </div>
 
     
     <p>Load MODIStsp processing option from <code>opts_jsfile</code> if
 it already exist, otherwise initialize processing options to default and
-save them to <code>opts_jsfile</code>. Send warnings if options file is from an
-old version</p>
+save them to <code>opts_jsfile</code> (typically done at first execution, or if the
+MODIStsp_previous.json is deleted). Sends warnings if options file is from an
+old version. Aborts if the json file is not a valid MODIStsp options file</p>
     
 
     <pre class="usage"><span class='fu'>load_opts</span>(<span class='no'>opts_jsfile</span>)</pre>
@@ -189,7 +190,7 @@ See also <code>MODIStsp_GUI</code> and <code>MODIStsp_process</code></p>
 
     <h2>Author</h2>
     
-Lorenzo Busetto, phD (2014-2015) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a>
+Lorenzo Busetto, phD (2014-2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com</a>
 
 Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 

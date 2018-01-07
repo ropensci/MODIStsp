@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_process.R
 \name{MODIStsp_process}
 \alias{MODIStsp_process}
-\title{MODIStsp_process}
+\title{MODIStsp main processing function}
 \usage{
 MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   reprocess = "Yes", delete_hdf = "No", sensor, download_server, user,
@@ -13,7 +13,7 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel,
   quality_bitN, quality_source, quality_nodata_in, quality_nodata_out,
   file_prefixes, main_out_folder, resampling, ts_format, use_aria = TRUE,
-  download_range = "full", gui = TRUE, n_retries)
+  download_range = "full", gui = TRUE, n_retries, verbose)
 }
 \arguments{
 \item{sel_prod}{\code{character} Name of selected MODIS product.}
@@ -177,6 +177,8 @@ log file instead than to the console, and gWidgets messages are suppressed}
 \item{n_retries}{\code{numeric} maximum number of retries on download functions.
 In case any download function fails more than \code{n_retries} times consecutively,
 MODIStsp_process will abort, Default: 20}
+
+\item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
 }
 \value{
 The function is called for its side effects.
@@ -214,7 +216,7 @@ development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDown
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }

@@ -1,4 +1,4 @@
-#' @title MODIStsp
+#' @title MODIStsp main function
 #' @description Main function for the MODIS Time Series Processing Tool
 #'   (MODIStsp)
 #' @details The function is used to:
@@ -32,14 +32,15 @@
 #' @param n_retries `numeric` maximum number of retries on download functions.
 #'   In case any download function fails more than `n_retries` times consecutively,
 #'   MODIStsp_process will abort, Default: 20
+#' @param verbose `logical` If FALSE, suppress processing messages,
+#'  Default: TRUE
 #' @return NULL
 #'
-#' @author Lorenzo Busetto, phD (2014-2017) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @export
-#' @seealso
-#'  [MODIStsp_GUI()], [MODIStsp_process()]
+#' @seealso [MODIStsp_GUI()], [MODIStsp_process()]
 #' @rdname MODIStsp
 #' @importFrom gdalUtils gdal_setInstallation gdalinfo
 #' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose font
@@ -88,7 +89,8 @@ MODIStsp <- function(gui               = TRUE,
                      spatial_file_path = NULL,
                      scroll_window     = FALSE,
                      test              = -1,
-                     n_retries         = 20) {
+                     n_retries         = 20, 
+                     verbose           = TRUE) {
   
   options("guiToolkit" = "RGtk2")
   # Make so that "raster" functions does not automatically add extensions on
@@ -133,12 +135,6 @@ MODIStsp <- function(gui               = TRUE,
     
     # Assign the selected test Option File
     options_file <- test_files[test]
-    
-    # If a test with http download was selected, ask credentials.
-    # if (test %in% c(4, 5)) {
-    #   test_username <- readline(prompt = "Enter your USGS username: ")
-    #   test_password <- readline(prompt = "Enter your password: ")
-    # }
     start <- TRUE
   }
   
@@ -214,7 +210,7 @@ MODIStsp <- function(gui               = TRUE,
       installing-r-and-gdal", width = 200))
   }
   
-  message("GDAL version in use: ", as.character(gdal_version))
+  if (verbose) message("GDAL version in use: ", as.character(gdal_version))
   
   
   # ____________________________________________________________________________
@@ -339,7 +335,14 @@ MODIStsp <- function(gui               = TRUE,
     #   info from `prodopts_file`
     
     if (file.exists(previous_jsfile)) {
-      general_opts <- jsonlite::fromJSON(previous_jsfile)
+      general_opts <- try(jsonlite::fromJSON(previous_jsfile))
+      # stop on error
+      if (class(general_opts) == "try-error") {
+        stop(
+          "Unable to read the provided JSON options file. Please check your ", 
+          "inputs!"
+        )
+      }
     } else {
       message("[", date(), "] Processing Options file not found! Aborting!")
       stop()
@@ -515,10 +518,11 @@ MODIStsp <- function(gui               = TRUE,
                      gui                = gui,
                      use_aria           = general_opts$use_aria,
                      download_range     = general_opts$download_range,
-                     n_retries          = n_retries)
+                     n_retries          = n_retries, 
+                     verbose            = verbose)
     
-    # At end of successful execution, save the options used in the main output
-    # folder as a JSON file with name containing the date of processing.
+    # At the end of a successful execution, save the options used in the main 
+    # output folder as a JSON file with name containing the date of processing.
     # Also update "MODIStsp_previous.json.
     opts_jsfile  <- file.path(general_opts$out_folder,
                               paste0("MODIStsp_", Sys.Date(), ".json"))
@@ -526,10 +530,10 @@ MODIStsp <- function(gui               = TRUE,
     jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
                          auto_unbox = TRUE)
     
-    # Clean up at end of processing ----
+    # Clean up at the end of processing ----
     end_time   <- Sys.time()
     time_taken <- end_time - start_time
-    message(time_taken)
+    if (verbose) message("Total Processing Time: ", time_taken)
   } else {
     # If "quit" passed from the GUI, all of the above is skipped and program
     # terminates

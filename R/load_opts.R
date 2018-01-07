@@ -1,15 +1,16 @@
-#' @title Load MODIStsp processing options
+#' @title Load MODIStsp processing options from a JSON file
 #' @description Load MODIStsp processing option from `opts_jsfile` if
 #'  it already exist, otherwise initialize processing options to default and
-#'  save them to `opts_jsfile`. Send warnings if options file is from an
-#'  old version
+#'  save them to `opts_jsfile` (typically done at first execution, or if the
+#'  MODIStsp_previous.json is deleted). Sends warnings if options file is from an
+#'  old version. Aborts if the json file is not a valid MODIStsp options file
 #' @param opts_jsfile Expected file name of the JSON file containing
 #'  processing options
 #' @return `data frame` general_opts, containing the processing options
 #'   retrieved from the JSON file (or the defaults set at first execution).
 #'   See also `MODIStsp_GUI` and `MODIStsp_process`
 #' @rdname load_opts
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @importFrom jsonlite fromJSON write_json
@@ -20,10 +21,17 @@ load_opts <- function(opts_jsfile) {
     
     general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
     
-    # stop on error
-    if (class(general_opts) == "try-error") {
-      stop("Unable to read the provided JSON options file. Please check your ", 
-           "inputs!")
+    # stop on errors
+    if (class(general_opts) == "try-error" ) {
+      stop(strwrap("Unable to read the provided JSON options file. Please check
+                   your inputs!"))
+    }
+    
+    if (!("MODIStspVersion" %in% names(general_opts))) {
+      stop(
+        strwrap("The specified json file does not appear to be a valid MODIStsp
+           options file. Please check your inputs!")
+      )
     }
     
     if (is.null(general_opts$MODIStspVersion)) {

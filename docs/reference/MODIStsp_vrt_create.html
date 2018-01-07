@@ -158,7 +158,7 @@ Created virtual files are stored in the "Time Series" subfolder of `out_prod_fol
     <pre class="usage"><span class='fu'>MODIStsp_vrt_create</span>(<span class='no'>sensor</span>, <span class='no'>out_prod_folder</span>, <span class='no'>bandnames</span>, <span class='no'>bandsel</span>, <span class='no'>nodata_out</span>,
   <span class='no'>indexes_bandnames</span>, <span class='no'>indexes_bandsel</span>, <span class='no'>indexes_nodata_out</span>, <span class='no'>quality_bandnames</span>,
   <span class='no'>quality_bandsel</span>, <span class='no'>quality_nodata_out</span>, <span class='no'>file_prefixes</span>, <span class='no'>ts_format</span>, <span class='no'>out_format</span>,
-  <span class='no'>rts</span>)</pre>
+  <span class='no'>rts</span>, <span class='no'>verbose</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -236,6 +236,10 @@ for virtual file.</p></td>
       <th>rts</th>
       <td><p><code>character ["Yes" | "No"]</code> If Yes, create "R" RasterStacks time series</p></td>
     </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p><code>logical</code> If FALSE, suppress processing messages, Default: TRUE</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -260,7 +264,7 @@ for virtual file.</p></td>
 
     <h2>Author</h2>
     
-Lorenzo Busetto, phD (2014-2015) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a>
+Lorenzo Busetto, phD (2014-2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com</a>
 
 Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 

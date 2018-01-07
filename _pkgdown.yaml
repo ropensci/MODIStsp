@@ -9,24 +9,32 @@ reference:
     desc: ~
     contents:
       - '`MODIStsp`'
-      - '`MODIStsp_extract`'
       - '`MODIStsp_addindex`'
+      - '`MODIStsp_resetindexes`'
+      - '`MODIStsp_extract`'
       - '`install_MODIStsp_launcher`'
   - title: Internals
     desc: ~
     contents:
-      - '`bbox_from_file`'
-      - '`reproj_bbox`'
       - '`MODIStsp_GUI`'
       - '`MODIStsp_process`'
+      - '`MODIStsp_download`'
+      - '`MODIStsp_process_bands`'
       - '`MODIStsp_process_indexes`'
       - '`MODIStsp_process_QA_bits`'
       - '`MODIStsp_read_xml`'
+      - '`MODIStsp_vrt_create`'
+      - '`bbox_from_file`'
+      - '`reproj_bbox`'
+      - '`load_opts`'
       - '`get_mod_dirs`'
       - '`get_mod_dates`'
+      - '`get_yeardates`'
       - '`get_mod_filenames`'
+      - '`get_reqbands`'
+      - '`set_bandind_matrix`'
+      - '`process_message`'
       - '`check_files_existence`'
-      - '`MODIStsp_vrt_create`'
 navbar:
   type: inverse
   left:

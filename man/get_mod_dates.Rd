@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_mod_dates.R
 \name{get_mod_dates}
 \alias{get_mod_dates}
-\title{get_mod_dates}
+\title{Find MODIS dates included in selected processing period}
 \usage{
 get_mod_dates(dates, date_dirs)
 }
@@ -27,5 +27,5 @@ License: GPL 3.0
 \author{
 Luigi Ranghetti, phD (2016) \email{ranghetti.l@irea.cnr.it}
 
-Lorenzo Busetto, phD (2017) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2017) \email{lbusett@gmail.com}
 }

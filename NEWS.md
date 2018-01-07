@@ -2,31 +2,31 @@
 
 ### Main changes
 
-Improvements in download functions
+#### Improvements in download functions
 
-- Use of httr::RETRY to improve behavior while navigating the servers to retrieve 
+- Use of `httr::RETRY` to improve behavior while navigating the servers to retrieve 
   available files and while downloading hdf file (when use_aria == FALSE)
 
-Extensive code refactoring for submission to ropensci. 
+#### Extensive code refactoring for submission to ropensci. 
 
 - Long functions were simplified/split into smaller functions to allow for 
   easier maintenance
 - Extensive code linting to abide to ropensci standards
 - Switch to jsonlite/xml2 to abide to ropensci standards
-- Removal of some dependencies (e.g., hash)
+- Removal of some less-used dependencies (e.g., hash)
 
-Improvements in documentation and website
+#### Improvements in documentation and website
 
 - More detailed documentation for the main functions
 - Improvements in pkgdown articles to include some "worked examples" (e.g., 
   MODIStsp_Extract)
 - New article in pkgdown showing a list of supported products
 
-Improvements in test coverage
+#### Improvements in test coverage
 
 - Several new tests added, bringing coverage above 90%
 
-Updates in supported products
+#### Updates in supported products
 
 - Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product.
 ([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
@@ -36,7 +36,11 @@ Updates in supported products
 - Checked availability of products over ftp and set not available products to 
   "Not Available" to allow graceful fail.
 
+#### New functions
 
+- Added `MODIStsp_resetindexes` to remove all custom indexes from a MODIStsp 
+  json options file
+  
 ## MODIStsp 1.3.3.1 Release Notes
 
 This was mostly a maintenance release - fixing a bug in 1.3.3 submission related to a missing import

@@ -1,8 +1,5 @@
 ---
 title: Installation
-output: 
-  github_document:
-    toc_depth: 1
 ---
 
 ```{r setup, include=FALSE}

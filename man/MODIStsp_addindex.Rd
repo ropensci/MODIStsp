@@ -2,16 +2,16 @@
 % Please edit documentation in R/MODIStsp_addindex.R
 \name{MODIStsp_addindex}
 \alias{MODIStsp_addindex}
-\title{add custom spectral indexes}
+\title{Add custom spectral indexes}
 \usage{
-MODIStsp_addindex(option_jsfile = NULL, prodopts_file = NULL,
+MODIStsp_addindex(opts_jsfile = NULL, prodopts_file = NULL,
   selprod = NULL, selvers = NULL, gui = TRUE, new_indexbandname = "",
   new_indexfullname = "", new_indexformula = "",
   new_indexnodata_out = "32767", MODIStsp_dir = system.file(package =
   "MODIStsp"))
 }
 \arguments{
-\item{option_jsfile}{\code{character} full path of a JSON file
+\item{opts_jsfile}{\code{character} full path of a JSON file
 containing the processing options in which the new indexes has to be saved
 (default: MODIStsp_Previous.JSON in subfolder Previous).}
 
@@ -61,7 +61,7 @@ additional indexes.
 \description{
 Function used to add a user-defined Spectral Index to the
 default list of computable spectral indexes. Execution without the GUI
-(i.e., to add a new index from a script) is also possible (see examples)
+(i.e., to add a new index from a script) is also possible (see examples).
 }
 \details{
 \itemize{
@@ -69,12 +69,12 @@ default list of computable spectral indexes. Execution without the GUI
 Spectral Index using a GUI interface, checks for correctness of provided
 information (e.g., correct bandnames, computable formula, etc...).
 If the index is legit, it modifies the MODIStsp_Previous.json (or of the
-json file provided by the user)so to allow computation of the additional
+json file provided by the user) so to allow computation of the additional
 index within MODIStsp.
 \item To remove all custom-added spectral indexes, simply delete the
 MODIStsp_Previous.json file within the /Previous subfolder of the folder
 in which the package was installed, or the alternative JSON specified by
-the parameter "option_jsfile".
+the parameter "opts_jsfile".
 \item The function can be run either from within the main MODIStsp GUI,
 or within a stand-alone script (using GUI = FALSE). In the latter case, it
 modifies either the MODIStsp_Previous.RData options file, or the
@@ -93,7 +93,7 @@ License: GPL 3.0
 # Open the GUI to define a new index and save it in index in a custom json
 # options file.
 \dontrun{
-MODIStsp_addindex(option_jsfile = "X:/yourpath/youroptions.json")
+MODIStsp_addindex(opts_jsfile = "X:/yourpath/youroptions.json")
 }
 
 # Define the new index in non-interactive execution, without specifying an 
@@ -105,8 +105,11 @@ MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSI",
   new_indexformula = "b2_NIR+b1_Red")
 }
 }
+\seealso{
+\link{MODIStsp_resetindexes}
+}
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }

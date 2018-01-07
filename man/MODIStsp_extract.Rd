@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_extract.R
 \name{MODIStsp_extract}
 \alias{MODIStsp_extract}
-\title{MODIStsp_extract}
+\title{Extract data from MODIStsp time series}
 \usage{
 MODIStsp_extract(in_rts, sp_object, start_date = NULL, end_date = NULL,
   id_field = NULL, FUN = "mean", out_format = "xts", small = TRUE,
@@ -113,7 +113,7 @@ opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
 options   <- jsonlite::read_json(opts_file)
 options$out_folder <- system.file("testdata/", package = "MODIStsp")
 jsonlite::write_json(options, opts_file, auto_unbox = TRUE, pretty = TRUE)
-MODIStsp(options_file = opts_file, gui = FALSE)
+MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
 
 # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 # 2016-01-01 and 2016-12-18

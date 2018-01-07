@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp — MODIStsp â€¢ MODIStsp</title>
+<title>MODIStsp main function — MODIStsp â€¢ MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -143,7 +143,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>MODIStsp</h1>
+    <h1>MODIStsp main function</h1>
     </div>
 
     
@@ -152,7 +152,7 @@
     
 
     <pre class="usage"><span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scroll_window</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>test</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>n_retries</span> <span class='kw'>=</span> <span class='fl'>20</span>)</pre>
+  <span class='kw'>scroll_window</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>test</span> <span class='kw'>=</span> -<span class='fl'>1</span>, <span class='kw'>n_retries</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -200,6 +200,11 @@ randomly. If == -1, MODIStsp is executed in normal mode. Default: -1</p></td>
 In case any download function fails more than <code>n_retries</code> times consecutively,
 MODIStsp_process will abort, Default: 20</p></td>
     </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p><code>logical</code> If FALSE, suppress processing messages,
+Default: TRUE</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -240,7 +245,7 @@ execution, or load an options file on non-interactive execution;</p></li>
 <span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
   <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/yourspatialfile.shp"</span> )
 <span class='co'># }</span><div class='input'>
-# Runnig the tool using the settings previously saved in a
+# Running the tool using the settings previously saved in a
 # specific options file and specifying each time the extent from a different
 # spatial file (e.g., to perform the same processing on several extents)
 
@@ -250,12 +255,9 @@ execution, or load an options file on non-interactive execution;</p></li>
   <span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
     <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>single_shape</span> )
 <span class='co'># }</span><div class='input'>    
-(See http://lbusett.github.io/MODIStsp/articles for additional details and 
-examples)
-</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:2:6: unexpected symbol</span>
-#&gt; <span class='error'>1:     </span>
-#&gt; <span class='error'>2: (See http</span>
-#&gt; <span class='error'>        ^</span></div></pre>
+# (See http://lbusett.github.io/MODIStsp/articles for additional details and 
+# examples)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -273,7 +275,7 @@ examples)
 
     <h2>Author</h2>
     
-Lorenzo Busetto, phD (2014-2017) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a>
+Lorenzo Busetto, phD (2014-2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com</a>
 
 Luigi Ranghetti, phD (2015-2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 

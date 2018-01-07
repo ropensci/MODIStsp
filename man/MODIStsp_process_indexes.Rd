@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_process_indexes.R
 \name{MODIStsp_process_indexes}
 \alias{MODIStsp_process_indexes}
-\title{MODIStsp_process_indexes}
+\title{MODIStsp helper for cimputing spectral indexes}
 \usage{
 MODIStsp_process_indexes(out_filename, out_prod_folder, formula, bandnames,
   nodata_out, indexes_nodata_out, file_prefix, compress, yy, out_format, DOY,
@@ -56,7 +56,7 @@ objects, performs the computation and stores results in a GeoTiff or ENVI raster
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2017) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2017) \email{ranghetti.l@irea.cnr.it}
 }

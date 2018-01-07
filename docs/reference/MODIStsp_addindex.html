@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>add custom spectral indexes — MODIStsp_addindex â€¢ MODIStsp</title>
+<title>Add custom spectral indexes — MODIStsp_addindex â€¢ MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -143,16 +143,16 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>add custom spectral indexes</h1>
+    <h1>Add custom spectral indexes</h1>
     </div>
 
     
     <p>Function used to add a user-defined Spectral Index to the
 default list of computable spectral indexes. Execution without the GUI
-(i.e., to add a new index from a script) is also possible (see examples)</p>
+(i.e., to add a new index from a script) is also possible (see examples).</p>
     
 
-    <pre class="usage"><span class='fu'>MODIStsp_addindex</span>(<span class='kw'>option_jsfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prodopts_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>MODIStsp_addindex</span>(<span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prodopts_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>selprod</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>selvers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>new_indexnodata_out</span> <span class='kw'>=</span> <span class='st'>"32767"</span>, <span class='kw'>MODIStsp_dir</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='kw'>package</span> <span class='kw'>=</span>
@@ -162,7 +162,7 @@ default list of computable spectral indexes. Execution without the GUI
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>option_jsfile</th>
+      <th>opts_jsfile</th>
       <td><p><code>character</code> full path of a JSON file
 containing the processing options in which the new indexes has to be saved
 (default: MODIStsp_Previous.JSON in subfolder Previous).</p></td>
@@ -238,12 +238,12 @@ additional indexes.</p>
 Spectral Index using a GUI interface, checks for correctness of provided
 information (e.g., correct bandnames, computable formula, etc...).
 If the index is legit, it modifies the MODIStsp_Previous.json (or of the
-json file provided by the user)so to allow computation of the additional
+json file provided by the user) so to allow computation of the additional
 index within MODIStsp.</p></li>
 <li><p>To remove all custom-added spectral indexes, simply delete the
 MODIStsp_Previous.json file within the /Previous subfolder of the folder
 in which the package was installed, or the alternative JSON specified by
-the parameter "option_jsfile".</p></li>
+the parameter "opts_jsfile".</p></li>
 <li><p>The function can be run either from within the main MODIStsp GUI,
 or within a stand-alone script (using GUI = FALSE). In the latter case, it
 modifies either the MODIStsp_Previous.RData options file, or the
@@ -255,6 +255,10 @@ interaction.</p></li>
 
     <p>License: GPL 3.0</p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><a href='MODIStsp_resetindexes.html'>MODIStsp_resetindexes</a></p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'># Run the GUI to interactively define a new index
@@ -264,7 +268,7 @@ interaction.</p></li>
 # Open the GUI to define a new index and save it in index in a custom json
 # options file.
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>option_jsfile</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
+<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
 <span class='co'># }</span><div class='input'>
 # Define the new index in non-interactive execution, without specifying an 
 # options file (thus modifying MODIStsp_previous.json)
@@ -285,13 +289,15 @@ interaction.</p></li>
       <li><a href="#details">Details</a></li>
 
       <li><a href="#note">Note</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
 
     <h2>Author</h2>
     
-Lorenzo Busetto, phD (2014-2015) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a>
+Lorenzo Busetto, phD (2014-2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com</a>
 
 Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 

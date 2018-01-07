@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_reqbands.R
 \name{get_reqbands}
 \alias{get_reqbands}
-\title{get_reqbands}
+\title{Identify the MODIS original bands needed for a given processing run}
 \usage{
 get_reqbands(bands_indexes_matrix, indexes_bandsel, indexes_bandnames,
   quality_bandsel, quality_bandnames, out_prod_folder, file_prefix, yy, DOY,
@@ -47,7 +47,7 @@ req_bands_indexes
 }
 \description{
 Helper function used in MODIStsp_process to identify which
-MODIS hdf layers are required for the process at end. The required layers
+MODIS hdf layers are required for the current process. The required layers
 include all MODIS original layers selected by the user, plus all those
 required to compute the Spectral Indexes and Quality Indicators selected
 by the user

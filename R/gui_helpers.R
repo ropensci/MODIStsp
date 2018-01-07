@@ -99,13 +99,19 @@ gui_get_units <- function(sel_output_proj,
 #' @importFrom raster crop extent
 #' @noRd
 #'
-gui_load_options <- function(js_file,
+gui_load_options <- function(opts_jsfile,
                              wids,
                              prod_opt_list) {
   #nocov start
   
   # load file and reset all widgets to values found in the loaded file
-  general_opts     <- jsonlite::fromJSON(js_file)
+  general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
+ 
+  # stop on error
+  if (class(general_opts) == "try-error") {
+    stop("Unable to read the provided JSON options file. Please check your ", 
+         "inputs!")
+  }
   
   gWidgets::svalue(wids$cat) <- paste(
     prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$cat01,
@@ -175,7 +181,7 @@ gui_load_options <- function(js_file,
 #' @noRd
 gui_save_options <- function(general_opts,
                              gui_env,
-                             opt_jsfile,
+                             opts_jsfile,
                              mod_prod_list,
                              mod_proj_str,
                              modis_grid,
@@ -188,7 +194,7 @@ gui_save_options <- function(general_opts,
   # JSON but it is not available in current variables
   
   general_opts$custom_indexes <-
-    jsonlite::fromJSON(opt_jsfile)$custom_indexes
+    jsonlite::fromJSON(opts_jsfile)$custom_indexes
   # retrieve product options
   general_opts$sel_prod <- mod_prod_list[
     which(mod_prod_list == gWidgets::svalue(wids$prod))
@@ -511,7 +517,7 @@ gui_save_options <- function(general_opts,
   #   # If all checks passed, save options file and return                  ####
   
   if (gui_env$check_save_opts) {
-    jsonlite::write_json(general_opts, opt_jsfile, pretty = TRUE,
+    jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
                          auto_unbox = TRUE)
   }
   

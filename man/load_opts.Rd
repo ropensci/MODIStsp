@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_opts.R
 \name{load_opts}
 \alias{load_opts}
-\title{Load MODIStsp processing options}
+\title{Load MODIStsp processing options from a JSON file}
 \usage{
 load_opts(opts_jsfile)
 }
@@ -18,14 +18,15 @@ See also \code{MODIStsp_GUI} and \code{MODIStsp_process}
 \description{
 Load MODIStsp processing option from \code{opts_jsfile} if
 it already exist, otherwise initialize processing options to default and
-save them to \code{opts_jsfile}. Send warnings if options file is from an
-old version
+save them to \code{opts_jsfile} (typically done at first execution, or if the
+MODIStsp_previous.json is deleted). Sends warnings if options file is from an
+old version. Aborts if the json file is not a valid MODIStsp options file
 }
 \note{
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }

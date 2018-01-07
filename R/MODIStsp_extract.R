@@ -1,4 +1,4 @@
-#' MODIStsp_extract
+#' @title Extract data from MODIStsp time series
 #' @description
 #' function used to extract time series data from rts files created by MODIStsp
 #' on spatial locations provided in the form of "R" spatial objects (SpatialPoints,
@@ -74,6 +74,7 @@
 #'
 #' @note License: GPL 3.0
 #' @export
+#' @rdname MODIStsp_extract
 #' @importFrom rgdal readOGR writeOGR
 #' @importFrom xts as.xts
 #' @importFrom data.table data.table setkey
@@ -97,7 +98,7 @@
 #' options   <- jsonlite::read_json(opts_file)
 #' options$out_folder <- system.file("testdata/", package = "MODIStsp")
 #' jsonlite::write_json(options, opts_file, auto_unbox = TRUE, pretty = TRUE)
-#' MODIStsp(options_file = opts_file, gui = FALSE)
+#' MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
 #'
 #' # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 #' # 2016-01-01 and 2016-12-18
@@ -138,15 +139,15 @@
 
 
 MODIStsp_extract <- function(in_rts, sp_object,
-                              start_date = NULL,  end_date = NULL,
-                              id_field   = NULL,  FUN      = "mean",
-                              out_format = "xts", small    = TRUE,
-                              small_method = "centroids",
-                              na.rm      = TRUE, verbose = FALSE) {
-
+                             start_date = NULL,  end_date = NULL,
+                             id_field   = NULL,  FUN      = "mean",
+                             out_format = "xts", small    = TRUE,
+                             small_method = "centroids",
+                             na.rm      = TRUE, verbose = FALSE) {
+  
   .SD            <- NULL # Workaround to avoid note on package check
-
-
+  
+  
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
@@ -268,7 +269,8 @@ MODIStsp_extract <- function(in_rts, sp_object,
       if (max(shape@data$mdxtnq) <= 255) {
         ot <- "Byte"
       }       else {
-        if (max(shape@data$mdxtnq) <= 65536) { #nocov start
+        if (max(shape@data$mdxtnq) <= 65536) {
+          #nocov start
           ot <- "Int16"
         }
         else {

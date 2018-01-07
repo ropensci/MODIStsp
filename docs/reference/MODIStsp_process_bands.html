@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp_process_bands — MODIStsp_process_bands â€¢ MODIStsp</title>
+<title>MODIStsp helper for processing original HDF layers — MODIStsp_process_bands â€¢ MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -143,7 +143,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>MODIStsp_process_bands</h1>
+    <h1>MODIStsp helper for processing original HDF layers</h1>
     </div>
 
     
@@ -156,7 +156,7 @@ use of <code>gdal</code> routines.</p>
     <pre class="usage"><span class='fu'>MODIStsp_process_bands</span>(<span class='no'>out_folder_mod</span>, <span class='no'>modislist</span>, <span class='no'>outproj_str</span>, <span class='no'>mod_proj_str</span>,
   <span class='no'>sens_sel</span>, <span class='no'>band</span>, <span class='no'>bandname</span>, <span class='no'>date_name</span>, <span class='no'>datatype</span>, <span class='no'>nodata_in</span>, <span class='no'>nodata_out</span>,
   <span class='no'>full_ext</span>, <span class='no'>bbox</span>, <span class='no'>scale_val</span>, <span class='no'>scale_factor</span>, <span class='no'>offset</span>, <span class='no'>out_format</span>, <span class='no'>outrep_file</span>,
-  <span class='no'>compress</span>, <span class='no'>out_res_sel</span>, <span class='no'>out_res</span>, <span class='no'>resampling</span>, <span class='no'>gui</span>, <span class='no'>mess_lab</span>)</pre>
+  <span class='no'>compress</span>, <span class='no'>out_res_sel</span>, <span class='no'>out_res</span>, <span class='no'>resampling</span>, <span class='no'>gui</span>, <span class='no'>mess_lab</span>, <span class='no'>verbose</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -279,6 +279,10 @@ log file instead than to the console, and gWidgets messages are suppressed</p></
       <td><p>Pointer to the gWidget used to visualize processing messages
 in interactive execution.</p></td>
     </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p><code>logical</code> If FALSE, suppress processing messages, Default: TRUE</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -297,7 +301,7 @@ in interactive execution.</p></td>
 
     <h2>Author</h2>
     
-Lorenzo Busetto, phD (2014-2015) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a>
+Lorenzo Busetto, phD (2014-2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com</a>
 
 Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 

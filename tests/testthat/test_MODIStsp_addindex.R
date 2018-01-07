@@ -54,8 +54,15 @@ test_that("MODIStsp_addindex works as expected", {
       option_jsfile = system.file("testdata/test_addindex.json", 
                                   package = "MODIStsp"),
       gui = FALSE,
-      new_indexbandname = as.character(sample(10000, 1)),
+      new_indexbandname = paste0("Index_", as.character(sample(10000, 1))),
       new_indexformula = "b1_Red - b2_NIR",
-      new_indexfullname = as.character(sample(10000, 1)))
+      new_indexfullname = paste0("Index_", as.character(sample(10000, 1))))
   )
+  # check that the index was added
+  opts <- load_opts(system.file("testdata/test_addindex.json", 
+                                package = "MODIStsp"))
+  expect_equal(length(opts$custom_indexes), 11)
+  # remove the index not to clutter the test file
+  MODIStsp_resetindexes(system.file("testdata/test_addindex.json", 
+                                    package = "MODIStsp"))
 })

@@ -1,11 +1,11 @@
-context("MODIStsp Test 0: Problems on inputs")
+context("MODIStsp Test 0: Gracefully fail on input problems")
 testthat::test_that(
   "Tests on MODIStsp", {
 
     library(testthat)
     # no options file
     expect_error(MODIStsp(gui = FALSE),
-                 "Please provide a valid")
+                 "Please provide a valid \"options_file\"")
     # wrong path or non-existing options_file
     expect_error(expect_warning(MODIStsp(options_file = "", gui = FALSE),
                                 "Processing Options file not found"))
@@ -32,8 +32,8 @@ testthat::test_that(
       options_file = system.file("testdata/test04_ftp.json",
                                  package = "MODIStsp"),
       gui = FALSE, n_retries = 2), "Please switch to http download")
-
-
+    
+    
   })
 
 
@@ -41,18 +41,18 @@ context("MODIStsp Test 1: Basic processing on bands and quality
         indicators")
 testthat::test_that(
   "Tests on MODIStsp", {
-
+    
     library(testthat)
-
+    
     # skip("Skip tests - since they rely on download they are only run locally")
     # skip_on_cran()
     # skip_on_travis()
-
+    
     ### Test 1: test of the basic operations of MODIStsp.                   ####
     #   The test process two bands and extracts one quality indicator from a
     #   single local hdf file for MOD11A2 product  without any
     #   additional preprocessing operations. Output files are in GeoTiff format.
-
+    
     MODIStsp(test = 1)
     out_files  <- list.files(file.path(tempdir(),
                                        "Surf_Temp_8Days_GridSin_v6"),
@@ -341,6 +341,7 @@ testthat::test_that(
 context("MODIStsp Test 8: Fail gracefully on missing connection")
 testthat::test_that(
   "Tests on MODIStsp", {
+    # skip_on_cran()
     library(httptest)
     expect_error(httptest::without_internet(MODIStsp(test = 5, n_retries = 1)),
                  "Error: ftp server seems to be down! Please Retry Later!")

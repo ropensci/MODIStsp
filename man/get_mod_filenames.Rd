@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_mod_filenames.R
 \name{get_mod_filenames}
 \alias{get_mod_filenames}
-\title{get_mod_filenames}
+\title{Find the names of MODIS images corresponding to the selected dates}
 \usage{
 get_mod_filenames(http, ftp, used_server, user, password, n_retries, date_dir,
   v, h, tiled, out_folder_mod, gui)
@@ -58,7 +58,7 @@ Original code by Babak Naimi (\code{.getModisList}, in
 modified to adapt it to MODIStsp scheme and to http archive (instead than old
 FTP) by:
 
-Lorenzo Busetto, phD (2014-2016) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2016) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2016) \email{ranghetti.l@irea.cnr.it}
 }

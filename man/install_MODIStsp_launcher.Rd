@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_install_launcher.R
 \name{install_MODIStsp_launcher}
 \alias{install_MODIStsp_launcher}
-\title{install_MODIStsp_launcher}
+\title{Install a launcher for MODIStsp}
 \usage{
 install_MODIStsp_launcher(bin_dir = NA, desktop_dir = NA,
   desktop_shortcut = TRUE, sudo = FALSE)
@@ -40,7 +40,7 @@ Function which allows to use MODIStsp in batch mode by creating links
 }
 \details{
 MODIStsp can be used also as a stand-alone tool (i.e., without opening RStudio
-or RGUI) by launching a bash/batch script, which is stored in the installation
+or R-GUI) by launching a bash/batch script, which is stored in the installation
 folder (/ExtData/Launcher)
 To allow to easily find it, this function creates a desktop entry and a symbolic link
 to the bash script (on Linux) or a link in the Start Menu to the batch script and a

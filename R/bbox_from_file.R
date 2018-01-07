@@ -1,4 +1,4 @@
-#' @title bbox_from_file
+#' @title Retrieve bbox from a spatial file
 #' @description Helper function used to retrieve the bounding box of a specified spatial file
 #'   recognized by GDAL or OGG: the function reads the extent using gdalinfo or ogrinfo,
 #'   converting it to a specified CRS.
@@ -11,7 +11,7 @@
 #' @note License: GPL 3.0
 
 bbox_from_file <- function(file_path, crs_out) {
-  
+
   # Retrieve CRS using gdal: if fails, then the file is not a valid spatial file
   in_gdalinfo <- suppressWarnings(try(rgdal::GDALinfo(file_path),
                                              silent = TRUE))

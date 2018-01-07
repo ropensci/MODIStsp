@@ -1,4 +1,4 @@
-#' @title get list of MODIS data folders from http/ftp server
+#' @title Get list of MODIS data folders from http/ftp server
 #' @description Accessory function to get the full list of directories on the
 #'  lpdaac http site containing data included in the time range selected for
 #'  processing (modified after Barry Rowlingson function):
@@ -28,7 +28,7 @@
 #' modified to adapt it to MODIStsp scheme and to http archive (instead than old
 #' FTP) by:
 #' @author Lorenzo Busetto, phD (2014-2017) \email{busetto.l@@irea.cnr.it}
-#' @author Luigi Ranghetti, phD (2016-2017) \email{ranghetti.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2016-2017) \email{lbusett@@gmail.com}
 #' @note License: GPL 3.0
 #' @importFrom gWidgets gconfirm
 #' @importFrom httr GET authenticate timeout content

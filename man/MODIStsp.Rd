@@ -2,10 +2,10 @@
 % Please edit documentation in R/MODIStsp.R
 \name{MODIStsp}
 \alias{MODIStsp}
-\title{MODIStsp}
+\title{MODIStsp main function}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  scroll_window = FALSE, test = -1, n_retries = 20)
+  scroll_window = FALSE, test = -1, n_retries = 20, verbose = TRUE)
 }
 \arguments{
 \item{gui}{\code{logical} if TRUE: the GUI is opened before processing. If FALSE:
@@ -38,6 +38,9 @@ randomly. If == -1, MODIStsp is executed in normal mode. Default: -1}
 \item{n_retries}{\code{numeric} maximum number of retries on download functions.
 In case any download function fails more than \code{n_retries} times consecutively,
 MODIStsp_process will abort, Default: 20}
+
+\item{verbose}{\code{logical} If FALSE, suppress processing messages,
+Default: TRUE}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool
@@ -92,7 +95,7 @@ for (single_shape in extent_list)
 \code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}, \code{\link[=MODIStsp_process]{MODIStsp_process()}}
 }
 \author{
-Lorenzo Busetto, phD (2014-2017) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@irea.cnr.it}
 }

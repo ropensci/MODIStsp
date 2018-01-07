@@ -1,4 +1,4 @@
-#' @title check_files_existence
+#' @title Check if all files required for a given date already exist
 #' @description Accessory function used to see if all expected out files for the
 #'   selected date are already present in the output folder. If all expected out
 #'   files are already present, check_files is set to TRUE, and the date is
@@ -22,7 +22,7 @@
 #'   were selected
 #' @param out_format `character` GTiff or ENVI
 #' @return check - logical = 1 if all expected output files are already existing
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 

@@ -1,4 +1,4 @@
-#' @title reproj_bbox
+#' @title Reproject a bounding box
 #' @description
 #'  Helper function used to reproject bounding boxes; setting the parameter
 #'  'enlarge' allows to choose if the new one would be the one which completely

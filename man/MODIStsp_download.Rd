@@ -2,11 +2,11 @@
 % Please edit documentation in R/MODIStsp_download.R
 \name{MODIStsp_download}
 \alias{MODIStsp_download}
-\title{MODIStsp_download}
+\title{MODIStsp download function}
 \usage{
 MODIStsp_download(modislist, out_folder_mod, download_server, http, ftp,
   n_retries, use_aria, date_dir, year, DOY, user, password, sens_sel, date_name,
-  gui, mess_lab)
+  gui, mess_lab, verbose)
 }
 \arguments{
 \item{modislist}{\code{character array} List of MODIS images to be downloaded for
@@ -52,6 +52,8 @@ download).}
 
 \item{mess_lab}{pointer to the gWidget used to issue processing messages in
 when gui = TRUE.}
+
+\item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
 }
 \value{
 The function is called for its side effects
@@ -61,7 +63,7 @@ Internal function dealing with download of MODIS hdfs from
 http or ftp remote servers for a given date.
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }

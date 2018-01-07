@@ -2,7 +2,7 @@
 % Please edit documentation in R/MODIStsp_process_QA_bits.R
 \name{MODIStsp_process_QA_bits}
 \alias{MODIStsp_process_QA_bits}
-\title{compute Quality Indicators from HDF bit-field layers}
+\title{MODIStsp helper function to compute Quality Indicators from HDF bit-field layers}
 \usage{
 MODIStsp_process_QA_bits(out_filename, in_source_file, bitN, out_format,
   nodata_source, nodata_qa_in, nodata_qa_out, compress)
@@ -45,7 +45,7 @@ Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
 license GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2017) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2017) \email{ranghetti.l@irea.cnr.it}
 }

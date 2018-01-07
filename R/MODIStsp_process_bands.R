@@ -1,4 +1,4 @@
-#' @title MODIStsp_process_bands
+#' @title MODIStsp helper for processing original HDF layers
 #' @description Internal function used to performed the required spatial
 #'  processing on MODIS original hdf layers (reprojection, resizing, resampling,
 #'  mosaicing, computation of scaling factors). The function is based on the
@@ -26,9 +26,10 @@
 #'  processing are to be stored (created in `MODIStsp_process`)
 #' @param mess_lab Pointer to the gWidget used to visualize processing messages
 #'  in interactive execution.
+#' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_process_bands
-#' @author Lorenzo Busetto, phD (2014-2015) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @importFrom gdalUtils gdal_translate gdalbuildvrt gdalwarp gdalinfo
 #' @importFrom stringr str_sub
@@ -46,7 +47,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                                    scale_val, scale_factor, offset,
                                    out_format, outrep_file, compress,
                                    out_res_sel, out_res, resampling,
-                                   gui, mess_lab) {
+                                   gui, mess_lab, verbose) {
 
   files_in <- file.path(out_folder_mod, modislist)
 
@@ -118,7 +119,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                        "files for date:", date_name)
   }
 
-  process_message(mess_text, gui, mess_lab)
+  process_message(mess_text, gui, mess_lab, verbose)
 
   # filename of temporary vrt file
   outfile_vrt <- tempfile(fileext = ".vrt")

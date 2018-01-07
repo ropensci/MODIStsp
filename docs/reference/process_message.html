@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>process_message — process_message â€¢ MODIStsp</title>
+<title>Spawn processing update messages — process_message â€¢ MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -143,14 +143,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>process_message</h1>
+    <h1>Spawn processing update messages</h1>
     </div>
 
     
     <p>helper function to provide processing messages</p>
     
 
-    <pre class="usage"><span class='fu'>process_message</span>(<span class='no'>mess_text</span>, <span class='no'>gui</span>, <span class='no'>mess_lab</span>)</pre>
+    <pre class="usage"><span class='fu'>process_message</span>(<span class='no'>mess_text</span>, <span class='no'>gui</span>, <span class='no'>mess_lab</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -168,6 +168,10 @@ status window or only to the console.</p></td>
     <tr>
       <th>mess_lab</th>
       <td><p>pointer to the gwindow used to shoe messages when gui == TRUE</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p><code>logical</code> If FALSE, suppress processing messages, Default: TRUE</p></td>
     </tr>
     </table>
     

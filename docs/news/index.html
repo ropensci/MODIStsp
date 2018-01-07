@@ -154,34 +154,56 @@
 <div id="main-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#main-changes" class="anchor"></a>Main changes</h3>
-<p>Improvements in download functions</p>
+<div id="improvements-in-download-functions" class="section level4">
+<h4 class="hasAnchor">
+<a href="#improvements-in-download-functions" class="anchor"></a>Improvements in download functions</h4>
 <ul>
-<li>Use of httr::RETRY to improve behavior while navigating the servers to retrieve available files and while downloading hdf file (when use_aria == FALSE)</li>
+<li>Use of <code><a href="http://www.rdocumentation.org/packages/httr/topics/RETRY">httr::RETRY</a></code> to improve behavior while navigating the servers to retrieve available files and while downloading hdf file (when use_aria == FALSE)</li>
 </ul>
-<p>Extensive code refactoring for submission to ropensci.</p>
+</div>
+<div id="extensive-code-refactoring-for-submission-to-ropensci-" class="section level4">
+<h4 class="hasAnchor">
+<a href="#extensive-code-refactoring-for-submission-to-ropensci-" class="anchor"></a>Extensive code refactoring for submission to ropensci.</h4>
 <ul>
 <li>Long functions were simplified/split into smaller functions to allow for easier maintenance</li>
 <li>Extensive code linting to abide to ropensci standards</li>
-<li>Switch to rjsonio/xml2 to abide to ropensci standards</li>
-<li>Removal of some dependencies (e.g., hash)</li>
+<li>Switch to jsonlite/xml2 to abide to ropensci standards</li>
+<li>Removal of some less-used dependencies (e.g., hash)</li>
 </ul>
-<p>Improvements in documentation and website</p>
+</div>
+<div id="improvements-in-documentation-and-website" class="section level4">
+<h4 class="hasAnchor">
+<a href="#improvements-in-documentation-and-website" class="anchor"></a>Improvements in documentation and website</h4>
 <ul>
 <li>More detailed documentation for the main functions</li>
 <li>Improvements in pkgdown articles to include some “worked examples” (e.g., MODIStsp_Extract)</li>
 <li>New article in pkgdown showing a list of supported products</li>
 </ul>
-<p>Improvements in test coverage</p>
+</div>
+<div id="improvements-in-test-coverage" class="section level4">
+<h4 class="hasAnchor">
+<a href="#improvements-in-test-coverage" class="anchor"></a>Improvements in test coverage</h4>
 <ul>
 <li>Several new tests added, bringing coverage above 90%</li>
 </ul>
-<p>Updates in supported products</p>
+</div>
+<div id="updates-in-supported-products" class="section level4">
+<h4 class="hasAnchor">
+<a href="#updates-in-supported-products" class="anchor"></a>Updates in supported products</h4>
 <ul>
 <li><p>Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97">#97</a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p></li>
 <li>Added support for Evapotraspiration products (MOD12A2 and MOD12A3)</li>
 <li>Added support for Vegetation Continuous Fields product (MOD44B)</li>
 <li><p>Checked availability of products over ftp and set not available products to “Not Available” to allow graceful fail.</p></li>
 </ul>
+</div>
+<div id="new-functions" class="section level4">
+<h4 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New functions</h4>
+<ul>
+<li>Added <code>MODIStsp_resetindexes</code> to remove all custom indexes from a MODIStsp json options file</li>
+</ul>
+</div>
 </div>
 </div>
     <div id="modistsp-1-3-3-1-release-notes" class="section level2">

@@ -2,7 +2,7 @@
 % Please edit documentation in R/bbox_from_file.R
 \name{bbox_from_file}
 \alias{bbox_from_file}
-\title{bbox_from_file}
+\title{Retrieve bbox from a spatial file}
 \usage{
 bbox_from_file(file_path, crs_out)
 }

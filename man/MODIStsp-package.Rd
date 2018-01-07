@@ -28,7 +28,7 @@ related to a MODIS product whenever a new image is available.
 \url{https://github.com/lbusett/MODIStsp}
 }
 \author{
-Lorenzo Busetto, phD (2014-2017) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@irea.cnr.it}
 }
