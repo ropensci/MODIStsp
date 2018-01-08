@@ -1,13 +1,17 @@
 ---
 title: "Non-Interactive Execution from within R"
-output: github_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-## Specifying a saved "Options file"
-`MODIStsp` can be launched in non-interactive mode within an `R` session by setting the optional `GUI` parameter to FALSE, and the `Options_File` parameter to the path of a previously saved JSON Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
+
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Launching MODIStsp using a saved "Options file"__
+
+`MODIStsp` can be launched in non-interactive mode within an `R` session by setting 
+the optional `GUI` parameter to FALSE, and the `Options_File` parameter to the path 
+of a previously saved JSON Options file. 
+This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
 
 ```{r, eval=FALSE}
 library(MODIStsp) 
@@ -17,10 +21,34 @@ options_file <- "X:/yourpath/youroptions.json"
 # --> Launch the processing
 MODIStsp(gui = FALSE, options_file = options_file)
 ```
+________________________________________________________________________________
 
-## Looping on different spatial extents
+<br>
 
-Specifying also the `spatial_file_path_` parameter overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents. For example:
+#<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Looping over different Options files__
+
+If you need to process different MODIS products, you can prepare beforehand different
+MODIStsp options files by using the GUI, and then loop over them like this:
+
+```{r, eval=FALSE}
+
+opts_files <- c("X:/yourpath/youroptions_MOD13Q1.json",
+                "X:/yourpath/youroptions_MOD10A1.json")
+
+for (opts_file in opts_files) {
+  MODIStsp(gui = FALSE, options_file = opts_file)
+}
+```
+________________________________________________________________________________
+
+<br>
+
+#<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Looping over different spatial extents__
+
+Specifying also the `spatial_file_path_` parameter overrides for example the output 
+extent of the selected Options File. This allows to perform the same preprocessing 
+on different extents using a single Options File, by looping on an array of spatial 
+files representing the desired output extents. For example:
 
 ```{r eval=FALSE}
 library(MODIStsp) 
@@ -30,8 +58,9 @@ options_file <- "X:/yourpath/youroptions.json"
 # --> Create a character array containing a list of shapefiles (or other spatial files)
 extent_list <- list.files("X:/path/containing/some/shapefiles/", "\\.shp$")  
 
-# --> Loop on the list of spatial files and run MODIStsp using each of them to automatically 
-# define the output extent (A separate output folder is created for each input spatial file).
+# --> Loop on the list of spatial files and run MODIStsp using each of them to 
+# automatically define the output extent (A separate output folder is created for
+# each input spatial file).
 
 for (single_shape in extent_list) {
   MODIStsp(gui = FALSE, options_file = options_file, 

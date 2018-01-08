@@ -1,7 +1,53 @@
+## MODIStsp 1.3.3.9000 
+
+### Main changes
+
+#### Improvements in download functions
+
+- Use of `httr::RETRY` to improve behavior while navigating the servers to retrieve 
+  available files and while downloading hdf file (when use_aria == FALSE)
+
+#### Extensive code refactoring for submission to ropensci. 
+
+- Long functions were simplified/split into smaller functions to allow for 
+  easier maintenance
+- Extensive code linting to abide to ropensci standards
+- Switch to jsonlite/xml2 to abide to ropensci standards
+- Removal of some less-used dependencies (e.g., hash)
+
+#### Improvements in documentation and website
+
+- More detailed documentation for the main functions
+- Improvements in pkgdown articles to include some "worked examples" (e.g., 
+  MODIStsp_Extract)
+- New article in pkgdown showing a list of supported products
+
+#### Improvements in test coverage
+
+- Several new tests added, bringing coverage above 90%
+
+#### Updates in supported products
+
+- Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product.
+([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
+
+- Added support for Evapotraspiration products (MOD12A2 and MOD12A3)
+- Added support for Vegetation Continuous Fields product (MOD44B)
+- Checked availability of products over ftp and set not available products to 
+  "Not Available" to allow graceful fail.
+
+#### New functions
+
+- Added `MODIStsp_resetindexes` to remove all custom indexes from a MODIStsp 
+  json options file
+  
+________________________________________________________________________________
+
+  
 ## MODIStsp 1.3.3.1 Release Notes
 
-This is mostly a maintenance release - fixing a bug in 1.3.3 submission related to a missing import
-in NAMESPACE
+This was mostly a maintenance release - fixing a bug in 1.3.3 submission related
+to a missing import in NAMESPACE
 
 ### Minor Changes
 
@@ -25,7 +71,7 @@ v1.3.3 was released on 10/08/2017
    (commit [0c00fc6](https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a)
    and others)
    
--  Added "testing mode" to allow users to test proper functioning. Now, runnning 
+-  Added "testing mode" to allow users to test proper functioning. Now, running 
    `MODIStsp(test = X)` (with X in (0,6)) runs the processing using default processing
    parameters  (commit [0c00fc6](https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a) and others)
 
@@ -36,19 +82,32 @@ servers and downloading data using "ftp" ( [3775d60](https://github.com/lbusett/
 
 ### Bug fixing
 
--   Fxed a bug preventing the "last" choice (or that present in the json file) from 
+-   Fixed a bug preventing the "last" choice (or that present in the json file) from 
     correctly showing in the GUI upon launch/restore of a saved json file (commit
     [633c2dd](https://github.com/lbusett/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3))
 
--   Fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in `gdalbuildvrt`, causing sometimes an incorrect translation from HDF to output formats ([#72](https://github.com/lbusett/MODIStsp/issues/72)).
+-   Fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks
+    to Rob Critchlow for signaling this). The bug was due to improper handling of 
+    UInt32 data in `gdalbuildvrt`, causing sometimes an incorrect translation from 
+    HDF to output formats ([#72](https://github.com/lbusett/MODIStsp/issues/72)).
 
-     **M\*D09A1** - 500m Reflectance Band Quality (V005 and V006); **M\*DO9CMG** - Coarse Resolution QA (V005 and V006); **M\*D09CMG** - Coarse Resolution Number Mapping (V006); **M\*D09GA** - 500m Reflectance Band Quality (V005 and V006); **M\*DOCGA** - Band quality for MODIS bands 8-15 (V006); **M\*D11C3** - Days with clear-sky conditions and validated LSTs; Nights with clear-sky conditions and validated LSTs (V005 and V006); **MCD43A2** - BRDF\_Albedo\_Band\_Quality (V005 and V006).
+     **M\*D09A1** - 500m Reflectance Band Quality (V005 and V006); 
+     **M\*DO9CMG** - Coarse Resolution QA (V005 and V006);
+     **M\*D09CMG** - Coarse Resolution Number Mapping (V006); 
+     **M\*D09GA** - 500m Reflectance Band Quality (V005 and V006);
+     **M\*DOCGA** - Band quality for MODIS bands 8-15 (V006);
+     **M\*D11C3** - Days with clear-sky conditions and validated LSTs;
+                    Nights with clear-sky conditions and validated LSTs (V005 and V006); 
+     **MCD43A2** - BRDF\_Albedo\_Band\_Quality (V005 and V006).
 
-- Fixed a bug affecting creation of time series files (RData and virtual rasters) on all MCD products ([#77](https://github.com/lbusett/MODIStsp/issues/77))
+- Fixed a bug affecting creation of time series files (RData and virtual rasters) 
+  on all MCD products ([#77](https://github.com/lbusett/MODIStsp/issues/77))
 
-- Fixed a bug a error on creation of "burn_date" layers for MCD45A1 product ([#77](https://github.com/lbusett/MODIStsp/issues/77))
+- Fixed a bug a error on creation of "burn_date" layers for MCD45A1 product 
+  ([#77](https://github.com/lbusett/MODIStsp/issues/77))
 
-- Fixed bugs on specifying spatial extent files on non-interactive execution ([#75](https://github.com/lbusett/MODIStsp/issues/75))
+- Fixed bugs on specifying spatial extent files on non-interactive execution
+  ([#75](https://github.com/lbusett/MODIStsp/issues/75))
 
 ____________________________________________________________________________________
 
@@ -71,33 +130,50 @@ v1.3.2 was released on 22/03/2017
 
 ### Major Changes:
 
-- Added functionality to apply scale and offset coeeficients on MODIS original values according with the specifications of single MODIS products.
+- Added functionality to apply scale and offset coefficients on MODIS original values
+  according with the specifications of single MODIS products.
 
 #### Details:
 
-- MODIS hdf datasets are always stored as integer values, with scales factor and/or offsets to apply in order to convert to the indicated measure units reported in the products' documentation.
+- MODIS hdf datasets are always stored as integer values, with scales factor and/or
+  offsets to apply in order to convert to the indicated measure units reported in
+  the products' documentation.
 
 - Starting from v1.3.2: 
 
-    - Leaving the "Scale output values" option to "No", output files are left as provided by NASA, and additional indices are produced as integer values with a 10000 factor scale; 
-    - Setting the "Scale output values" option to "Yes", scale factor and offsets are applied if existing (for example, in this case Land Surface Temperature values in the output raster will be in °K), and  spectral indices are floating point values (for example, NDVI is between -1 and 1, etcetera).
+    - Leaving the "Scale output values" option to "No", output files are left as
+      provided by NASA, and additional indices are produced as integer values with
+      a 10000 factor scale; 
+    - Setting the "Scale output values" option to "Yes", scale factor and offsets 
+      are applied if existing (for example, in this case Land Surface Temperature
+      values in the output raster will be in °K), and  spectral indices are floating
+      point values (for example, NDVI is between -1 and 1, etcetera).
 
 ### Minor Changes:
 
-- Some product names and output layer names were modified to reduce the length of output file names, homogenize the names of the outputs and correct some errors.
-__For compatibility with already created output files__ (versions up to 1.3.1), the old "XML" file specifying output files format is still available in `inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml`. To use the old file naming conventions, users have to:
+- Some product names and output layer names were modified to reduce the length of
+  output file names, homogenize the names of the outputs and correct some errors.
+__For compatibility with already created output files__ (versions up to 1.3.1),
+  the old "XML" file specifying output files format is still available in
+  `inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml`. To use the old file naming
+  conventions, users have to:
 
-    1. delete `inst/ExtData/MODIStsp_ProdOpts.xml` and rename `MODIStsp_ProdOpts_old_v1.3.1.xml` to `MODIStsp_ProdOpts.xml`.
-    2. delete `MODIStsp_ProdOpts.RData` from the `Previous` folder within `your_R-library_path/MODIStsp/Previous`
+    1. delete `inst/ExtData/MODIStsp_ProdOpts.xml` and rename `MODIStsp_ProdOpts_old_v1.3.1.xml`
+       to `MODIStsp_ProdOpts.xml`.
+    2. delete `MODIStsp_ProdOpts.RData` from the `Previous` folder within 
+       `your_R-library_path/MODIStsp/Previous`
     3. Restart `MODIStsp`  
     
     <br>
-- Timeouts of httr/ftp requests were increased to prevent problems on download on slow connections
+    
+- Timeouts of httr/ftp requests were increased to prevent problems on download on
+  slow connections
 
 ### Bug fixing:
 
 - Fixed bug on FTP download speed (Issue [#65](https://github.com/lbusett/MODIStsp/issues/65)) 
-- Fixed bug on download of tile 0, preventing download of images with DOY 001 and of all "yearly based" products (e.g., MOD17)(Issue [#64](https://github.com/lbusett/MODIStsp/issues/64)) 
+- Fixed bug on download of tile 0, preventing download of images with DOY 001 and
+  of all "yearly based" products (e.g., MOD17)(Issue [#64](https://github.com/lbusett/MODIStsp/issues/64)) 
 - Fixed other bugs affecting FTP download (https://github.com/lbusett/MODIStsp/commit/efbf1b469e7518ffc8a7ec6d9922242d6a5c228f, https://github.com/lbusett/MODIStsp/commit/1dc53a5ff5b355965acec86678a3104bd2d27fd9, https://github.com/lbusett/MODIStsp/commit/fa6c7b42eadce516a2f781604c9db28418120f36)
 
 ____________________________________________________________________________________
@@ -108,28 +184,39 @@ v1.3.1 was released on 13/02/2017
 
 ### Major Changes
 
-- Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue
+- Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, 
+  MOD10C1, MOD10C2, MOD10CM (Issue
 [#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
 
-- Added functionality for downloading "partial" years(Issue [#54](https://github.com/lbusett/MODIStsp/issues/54)) on devel
+- Added functionality for downloading "partial" years (Issue
+  [#54](https://github.com/lbusett/MODIStsp/issues/54)) on devel
 
-- Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [#59](https://github.com/lbusett/MODIStsp/issues/59)) on master/devel
+- Added functionality for computing vegetation indexes on MCD43A4 (v5-v6),
+  MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [#59](https://github.com/lbusett/MODIStsp/issues/59))
+  on master/devel
 
-- Added functionality for accelerating download using aria2c (Issue [#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+- Added functionality for accelerating download using aria2c (Issue 
+  [#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
 
 ### Bug fixing
 
-- Fixed bug on download with aria, throwing an error on partial download on http downlaod with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
+- Fixed bug on download with aria, throwing an error on partial download on http
+  download with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
 
-- Fixed bug on M*D15A2 processing (Issue [#60](https://github.com/lbusett/MODIStsp/issues/60)) on devel/master
+- Fixed bug on M*D15A2 processing (Issue [#60](https://github.com/lbusett/MODIStsp/issues/60))
+  on devel/master
 
-- Fixed bug on MCD12Q1 processing (Issue [#58](https://github.com/lbusett/MODIStsp/issues/58)) on devel/master
+- Fixed bug on MCD12Q1 processing (Issue [#58](https://github.com/lbusett/MODIStsp/issues/58))
+  on devel/master
 
-- Fixed bug on MOD13C2 processing (Issue [#52](https://github.com/lbusett/MODIStsp/issues/52)) on devel/master
+- Fixed bug on MOD13C2 processing (Issue [#52](https://github.com/lbusett/MODIStsp/issues/52))
+  on devel/master
 
-- Fixed bug on insertion of custom projection (Issue [#57](https://github.com/lbusett/MODIStsp/issues/57)) on devel/master
+- Fixed bug on insertion of custom projection (Issue [#57](https://github.com/lbusett/MODIStsp/issues/57))
+  on devel/master
 
-- Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53)) on devel/master
+- Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53))
+  on devel/master
 
 ____________________________________________________________________________________
 
@@ -139,25 +226,39 @@ v1.3.0 was released on 11/05/2016
 
 ### Major Changes
 
-- Added functionality for downloading and preprocessing MODIS collection 006 datasets. For products with both 005 and 006 collections, the user can select the version using a new droplist in the GUI.
+- Added functionality for downloading and preprocessing MODIS collection 006 datasets.
+  For products with both 005 and 006 collections, the user can select the version
+  using a new droplist in the GUI.
 
-- Added functionality for off-line processing. This allows both to _i)_ reprocessing already downloaded data (for example, to create time series for an additional layer) without the need to connect to NASA servers, and _ii)_ process HDF files downloaded outside _MODIStsp_ (e.g., directly from NASA ftp) and stored on the user's PC, without the need of an active internet connection. 
+- Added functionality for off-line processing. This allows both to _i)_ reprocessing
+  already downloaded data (for example, to create time series for an additional
+  layer) without the need to connect to NASA servers, and _ii)_ process HDF files 
+  downloaded outside _MODIStsp_ (e.g., directly from NASA ftp) and stored on the
+  user's PC, without the need of an active internet connection. 
 
-- Improved the way in which options are saved. Much more readable .JSON files are now used instead than .RData. User options are no longer saved alongside products characteristics. This will allow to re-use an "old" options file even if changes are made on the XML file descriving the products.
+- Improved the way in which options are saved. Much more readable. JSON files are
+  now used instead than .RData. User options are no longer saved alongside products
+  characteristics. This will allow to re-use an "old" options file even if changes 
+  are made on the XML file describing the products.
 
-- Improved the GUI inteface for specifying additional Spectral Indexes. Hints are now showed to the user, and multiple indexes can be added in the same session.
+- Improved the GUI interface for specifying additional Spectral Indexes. Hints are 
+  now showed to the user, and multiple indexes can be added in the same session.
 
 ### Minor Changes
 
-- General improvements in the GUI inteface. Products are now grouped by categories, to allow easier identification and selection.
+- General improvements in the GUI interface. Products are now grouped by categories,
+  to allow easier identification and selection.
 
-- Improvements in the README file and vignettes, providing more instructions on package use.
+- Improvements in the README file and vignettes, providing more instructions on package
+  use.
 
-- Improved functionality for checking for "complete" download, by comparing the size of the downloaded files with that of files on the server. 
+- Improved functionality for checking for "complete" download, by comparing the 
+  size of the downloaded files with that of files on the server. 
 
 - Added "configure" file for Linux installation.
 
-- Temporary files necessary for processing (e.g., vrt files) are now created (and destroyed) within the "R" temporary folder.
+- Temporary files necessary for processing (e.g., vrt files) are now created (and
+  destroyed) within the "R" temporary folder.
 
 - Miscellaneous bug-fixing
 
@@ -170,41 +271,54 @@ v1.2.1 was released on 11/05/2016
  
 ### Major Changes
 
-1. Modified format of "R" output time series from _rts_ objects to _RasterStack_ objects with temporal information added in the "z" attribute via setZ()
+1. Modified format of "R" output time series from _rts_ objects to _RasterStack_ 
+   objects with temporal information added in the "z" attribute via setZ()
 
 2. Major changes/improvements in _MODIStsp\_extract_ function:
-    * Use of plain rasterstack with "z" attribute instead than rasterstackts
-    * Use of gdal\_rasterize (_gdalUtils_) instead of rasterize (_rgdal_) to improve speed. Temporary shapes and rasters necessay are saved in "R" temporary folder and removed automatically
-    * Fixed bugs on functionality for point/lines shapefiles, according to what specified by the "small" and "small_method" parameters
+    * Use of plain RasterStack with "z" attribute instead than rasterstackts
+    * Use of gdal\_rasterize (_gdalUtils_) instead of rasterize (_rgdal_) to improve 
+      speed. Temporary shapes and rasters necessay are saved in "R" temporary folder
+      and removed automatically
+    * Fixed bugs on functionality for point/lines shapefiles, according to what 
+      specified by the "small" and "small_method" parameters
     * Added functionality for retrieving data for small polygons
     * Added out_format selection - xts or plain data.frame
     * Added possibility to use a shp filename as input directly
     * Added conformity checks on inputs
-    * Added functionaluity to run without specifying start and end dates
-    * Added id_field parameter for choosing which column of the input SP object should be used for "naming" the columns of the output
+    * Added functionality to run without specifying start and end dates
+    * Added id_field parameter for choosing which column of the input SP object
+      should be used for "naming" the columns of the output
   
-3. Removed possibility to use "complex" resampling methods when reprojecting (e.g., bilinear, cubic, etc.) to avoid incorrect resampling on categorical variables and "contamination" of good pixels data. 
+3. Removed possibility to use "complex" resampling methods when reprojecting (e.g.,
+   bilinear, cubic, etc.) to avoid incorrect resampling on categorical variables
+   and "contamination" of good pixels data. 
 
 ### Minor Changes
 
-* Changed the input method for starting and ending dates selection in the GUI. Now a text field is used 
-* Added functionaluty for writing data ignore value on ENVI files
-* Removed automatic deletion of XML files created by writeRaster to keep metadata information
-* Changed names of products in the GUI for products with both TERRA and AQUA dataset to M\*D09A1, M\*D13Q1, etc...
+* Changed the input method for starting and ending dates selection in the GUI.
+  Now a text field is used 
+* Added functionality for writing data ignore value on ENVI files
+* Removed automatic deletion of XML files created by writeRaster to keep metadata
+  information
+* Changed names of products in the GUI for products with both TERRA and AQUA
+  dataset to M\*D09A1, M\*D13Q1, etc...
 * Modified code syntax to satisfy R code styling guidelines
-* Modified roxygen parameters so that only required functions are imported from dependent packages
+* Modified roxygen parameters so that only required functions are imported from 
+  dependent packages
 * Updated and corrected the list of dependencies
-* Updated required "R" version to 3.2, and minimum versions for dependent packages to current versions.
+* Updated required "R" version to 3.2, and minimum versions for dependent packages 
+  to current versions.
 * Added Welcome message
 * Updated links to LPDAAC product description pages
-* Changed all "print" and "cat" calls to show messages/warnings to "message" or "warning" to allow easy disabling MODIStsp verbose messages
+* Changed all "print" and "cat" calls to show messages/warnings to "message" or
+  "warning" to allow easy disabling MODIStsp verbose messages
 * Using "R" tempfile/tempdir to save vrt files
 
 ### Bug Fixes
 
 * Corrected a bug that threw an error in case incorrect bounding box specified
 
-____________________________________________________________________________________
+________________________________________________________________________________
 
 
 ## MODIStsp 1.2.0 Release Notes

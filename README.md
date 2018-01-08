@@ -1,23 +1,34 @@
 
--   [MODIStsp](#modistsp)
-    -   [Important News ! MODIStsp content migrated to our new website !](#important-news-modistsp-content-migrated-to-our-new-website)
+-   [MODIStsp <img src="docs/logo.png" width="147" height="170" align="right" />](#modistsp)
+    -   [Citation](#citation)
+    -   [Important News !](#important-news)
     -   [Problems and Issues](#problems-and-issues)
     -   [<i class="fa fa-desktop" aria-hidden="true"></i> System Requirements](#system-requirements)
+-   [Installation Instructions](#installation-instructions)
     -   [<i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows](#installing-on-windows)
     -   [<i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems](#installing-on-linux-systems)
     -   [<i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac](#installing-on-mac)
+-   [Usage](#usage)
+-   [Code of Conduct](#code-of-conduct)
 
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/package=MODIStsp) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lbusett/MODIStsp?branch=master&svg=true)](https://ci.appveyor.com/project/lbusett/MODIStsp) [![DOI](http://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](http://doi.org/10.5281/zenodo.290683) [![Coverage Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
 
-MODIStsp
-========
+MODIStsp <img src="docs/logo.png" width="147" height="170" align="right" />
+===========================================================================
 
 MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.
 
 *MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the Institute of Remote Sensing of Environment - National Research Council - Italy (CNR-IREA)*
 
-Important News ! MODIStsp content migrated to our new website !
----------------------------------------------------------------
+Citation
+--------
+
+To cite MODIStsp please use:
+
+L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series, Computers & Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004, <http://dx.doi.org/10.1016/j.cageo.2016.08.020>, URL: <https://github.com/lbusett/MODIStsp>.
+
+Important News !
+----------------
 
 -   11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes (thanks to all the users that signalled problems !). Check the [Release Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.3) for further details !
 
@@ -36,6 +47,9 @@ Problems and Issues
 `MODIStsp` requires [R](https://cran.r-project.org) v &gt;= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v &gt;= 1.11.1 **with support for HDF4 raster format** to be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](http://lbusett.github.io/MODIStsp/articles/installation.html#installing-r-and-gdal).
 
 ------------------------------------------------------------------------
+
+Installation Instructions
+=========================
 
 <i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows
 ----------------------------------------------------------------------
@@ -58,9 +72,9 @@ install.packages("gWidgetsRGtk2")
 library(gWidgetsRGtk2)
 ```
 
-Upon loading `gWidgetsRGtk2`, an error window will probably appear. This signals that library "GTK+" is not yet installed on your system or is not on your PATH. To install itpress "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !
+Upon loading `gWidgetsRGtk2`, an error window will probably appear. This signals that library "GTK+" is not yet installed on your system or is not on your PATH. To install it press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !
 
-In case RStudio doesn't automatically restart or continuously asks to install GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go.
+In case RStudio does not automatically restart or continuously asks to install GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go.
 
 If it still fails, try downloading the GTK+ bundle from:
 
@@ -113,7 +127,7 @@ install_github("lbusett/MODIStsp")
 
 Installing MODIStsp requires many dependencies:
 
-For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by **tobybot11** (<https://gist.github.com/sebkopf/9405675>), Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and doesn't work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version "OS X Mavericks binaries" and not "Package source" - You have to be sure that gdal is installed with HDF4 support.
+For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by **tobybot11** (<https://gist.github.com/sebkopf/9405675>), Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version "OS X Mavericks binaries" and not "Package source" - You have to be sure that gdal is installed with HDF4 support.
 
 1 - Update to R &gt; 3.4 if needed, then update all packages
 
@@ -125,7 +139,7 @@ install.packages(c("devtools"))
 devtools::install_github("hadley/devtools")
 ```
 
-2 - Now, install RGtk2 using Homebrew (<https://gist.github.com/sebkopf/9405675>). First, ensure you have cairo installed with "--with-x11". Open a terminal and run:
+2 - Now, install RGtk2 using Homebrew (<https://gist.github.com/sebkopf/9405675>). First, ensure you have Cairo installed with "--with-x11". Open a terminal and run:
 
 ``` bash
 brew uninstall cairo --ignore-dependencies
@@ -185,7 +199,7 @@ Check that gdal is installed with hdf4 support. From a terminal:
 
 if gdal is installed, check what drivers are installed: the list should include hdf4.
 
-If gdal is not yet installed or hdf4 is not supproted, install/reinstall it following these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html)
+If gdal is not yet installed or hdf4 is not supported, install/reinstall it following these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html)
 
 ``` bash
 > brew install hdf4 
@@ -222,3 +236,35 @@ library(devtools)
 install_github("lbusett/MODIStsp", ref = "master")
 MODIStsp()
 ```
+
+Usage
+=====
+
+The easiest way to use `MODIStsp` is to use its powerful GUI (Graphical User Interface) for selection of processing options, and then run the processing.
+
+To open the GUI, load the package and launch the MODIStsp function, with no parameters:
+
+``` r
+library(MODIStsp)
+MODIStsp()
+```
+
+This **opens a GUI** from which processing options can be specified (and eventually saved or loaded). After specifying all required parameters, clicking on "Start" will start the processing (see [HERE](http://lbusett.github.io/MODIStsp/articles/interactive_execution.html) for more detailed instructions).
+
+`MODIStsp` can also be launched in non-interactive mode within an `R` session or script by setting the optional `GUI` parameter to FALSE, and the `options_file` parameter to the path of a previously saved JSON Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
+
+``` r
+library(MODIStsp) 
+# --> Specify the path to a valid options file saved in advance from MODIStsp GUI 
+options_file <- "X:/yourpath/youroptions.json" 
+  
+# --> Launch the processing
+MODIStsp(gui = FALSE, options_file = options_file)
+```
+
+(see [HERE](http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html) for more detailed instructions and examples).
+
+Code of Conduct
+===============
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

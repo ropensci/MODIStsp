@@ -1,4 +1,3 @@
 Sys.setenv("R_TESTS" = "")
-library(testthat)
-# library(sprawl)
+library(httptest)
 test_check("MODIStsp")
