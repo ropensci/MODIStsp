@@ -10,8 +10,8 @@
 #'   here!)
 #' @param gui logical parameter (TRUE: the GUI is opened before processing; FALSE: the 
 #'   saved parameters are directly passed)
-#' @param options_file settings (optional): full path of the RData file containing the
-#'   processing options (default: Previous.RData in subdir Previous);
+#' @param options_file settings (optional): full path of the JSON file containing the
+#'   processing options (default: Previous.json in subdir Previous);
 #' @return NULL
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
@@ -19,6 +19,7 @@
 Args <- commandArgs(TRUE)
 
 require(MODIStsp)
+require(jsonlite)
 
 MODIStsp_dir <- system.file(package = "MODIStsp")
 
@@ -38,16 +39,17 @@ options_file <- if (length(Args) >= 2) {
 }
 
 if (!is.null(options_file)) {
-  load(options_file)
+  general_opts <- jsonlite::fromJSON(
+    gsub("\\\\", "/", readLines(options_file))
+  )
   log_dir <- file.path(general_opts$out_folder, "Log" )
 } else {
   log_dir <- file.path(MODIStsp_dir, "Log")
 }
 dir.create(log_dir, showWarnings = FALSE)
 # File to store the Log
-outFile <- file.path(log_dir,
-                     paste0("MODIStsp_", strftime(Sys.time(),
-                                                  "%y%m%d_%H%M%S"), ".Rout"))
+outFile <- file.path(log_dir, 
+                     paste0("MODIStsp_", strftime(Sys.time(), "%y%m%d_%H%M%S"), ".Rout"))
 
 sink(outFile, split = TRUE, type = c("output"))
 output <- MODIStsp(gui = gui, options_file = options_file)
