@@ -244,7 +244,7 @@ install_github("lbusett/MODIStsp", ref = "master")
 MODIStsp()
 ```
 
-## Usage
+# Usage
 
 The easiest way to use `MODIStsp` is to use its powerful GUI (Graphical User Interface) for 
 selection of processing options, and then run the processing. 
@@ -270,7 +270,7 @@ MODIStsp(gui = FALSE, options_file = options_file)
 (see [HERE](http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html) for more detailed instructions and examples).
 
 
-## Code of Conduct
+# Code of Conduct
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
 By participating in this project you agree to abide by its terms.
