@@ -16,7 +16,7 @@
 #'  - on Windows, directory where to place the menu entry in the Start Menu, 
 #'    Default: Start Menu -> Programs -> MODIStsp.
 #' @param rscript_dir 'character' in Windows only, the path of the directory in which
-#'  Rscript is installed (default is "C:\Progra~1\R\R-<version>\bin\<arch>"). 
+#'  Rscript is installed (default is "C:/Progra~1/R/R-<version>/bin/<arch>"). 
 #'  Edit this parameter if R is installed in a custom directory.
 #' @param desktop_shortcut `logical` indicates if the desktop entry or the
 #'  desktop shortcut should be created, Default: TRUE.
