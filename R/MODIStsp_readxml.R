@@ -19,8 +19,7 @@ MODIStsp_read_xml <- function(prodopts_file,
 
   prod_opt_list <- list()
 
-  xmldata <- xml2::as_list(xml2::read_xml(xml_file) )
-
+  xmldata <- xml2::as_list(xml2::read_xml(xml_file))[["products"]]
   # names of the single products
   names_products <- names(xmldata)
   names_products <- names_products[names_products != "comment"]

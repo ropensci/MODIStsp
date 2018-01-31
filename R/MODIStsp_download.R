@@ -102,7 +102,7 @@ MODIStsp_download <- function(modislist,
           remote_filesize <- as.integer(
             xml2::as_list(
               httr::content(
-                size_string, encoding = "UTF-8"))[["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]] #nolint
+                size_string, encoding = "UTF-8"))[["GranuleMetaDataFile"]][["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]] #nolint
           )
           success <- TRUE
         } else {
