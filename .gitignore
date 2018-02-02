@@ -66,3 +66,7 @@ inst/Test_files/VI_16Days_500m_v6/MODIStsp_2017-12-05\.json
 WIP/
 
 inst/testdata/MODIStsp_2018-01-04\.json
+
+libs/
+
+_main\.Rmd

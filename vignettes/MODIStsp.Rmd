@@ -443,10 +443,10 @@ See `?install_MODIStsp_launcher` for details and path customization.
 
 Double-clicking those files or launching them from a shell without parameters will launch `MODIStsp` in interactive mode. Non-interactive mode is triggered by adding the "-g"  argument to the call, and specifying the path to a valid Options File as "-s" argument:
 
-  - Linux: `MODIStsp -g -s "/yourpath/youroptions.RData"`
+  - Linux: `MODIStsp -g -s "/yourpath/youroptions.json"`
   (see `MODIStsp -h` for details).
   
-  - Windows:`your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.RData"`
+  - Windows:`your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.json"`
   (see `C:\Users\you\Desktop\MODIStsp -h` for details).
 
 If you do not want to install any link, launchers can be found in the subdirectory "MODIStsp/ExtData/Launcher" of your library path.
@@ -470,12 +470,12 @@ Stand-alone non-interactive execution can be used to periodically and automatica
 - add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:
         
 ```bash
-  0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
+  0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.json"
 ```
       
 #### On Windows
 
-- create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specifying  `-g -s "X:/yourpath/youroptions.RData"` as argument.
+- create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specifying  `-g -s "X:/yourpath/youroptions.json"` as argument.
 
 # Outputs Format and Naming Conventions
 

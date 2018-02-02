@@ -81,10 +81,10 @@ get_mod_filenames <- function(http,
         getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
                             "\r*\n")[[1]]
         getlist <- getlist[grep(
-          ".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
+          ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
           getlist)]
         getlist <- gsub(
-          ".*>([A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
+          ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
           getlist)
         success <- TRUE
 
@@ -129,7 +129,7 @@ get_mod_filenames <- function(http,
                             "\r*\n")[[1]]
         getlist <- stringr::str_extract(
           getlist,
-          "[A-Z0-9]+\\.A[0-9]+\\.?[hv0-9]*\\.[0-9]+\\.[0-9]+\\.hdf")
+          "[A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf")
         success <- TRUE
       }
     }
@@ -151,7 +151,7 @@ get_mod_filenames <- function(http,
                                    strftime(as.Date(
                                      date_dir,
                                      format = "%Y.%m.%d"
-                                   ), "%Y%j"), "\\.h[0-9][0-9]v[0-9][0-9]\\.",
+                                   ), "%Y%j"), "(?:\\.h[0-9]{2}v[0-9]{2})?\\.",
                                    sel_prod_vers[2],
                                    "\\.[0-9]+\\.hdf$"),
                             getlist)]

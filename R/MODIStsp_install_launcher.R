@@ -15,6 +15,9 @@
 #'    suggested;
 #'  - on Windows, directory where to place the menu entry in the Start Menu, 
 #'    Default: Start Menu -> Programs -> MODIStsp.
+#' @param rscript_dir 'character' in Windows only, the path of the directory in which
+#'  Rscript is installed (default is "C:/Progra~1/R/R-<version>/bin/<arch>"). 
+#'  Edit this parameter if R is installed in a custom directory.
 #' @param desktop_shortcut `logical` indicates if the desktop entry or the
 #'  desktop shortcut should be created, Default: TRUE.
 #' @param desktop_dir `character` 
@@ -50,6 +53,7 @@
 #' install_MODIStsp_launcher()}
 
 install_MODIStsp_launcher <- function(bin_dir          = NA,
+                                      rscript_dir      = NA,
                                       desktop_dir      = NA,
                                       desktop_shortcut = TRUE,
                                       sudo             = FALSE) {
@@ -101,6 +105,28 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
   }
 
   if (running_os == "Windows") {
+    
+    # Edit the R version in the bat launcher
+    rscript_path <- if (!is.na(rscript_dir)) {
+      rscript_dir
+    } else {
+      paste0(
+        "C:\\Progra~1\\R\\",
+        "R-",R.version["major"],".",R.version["minor"],"\\",
+        "bin\\",
+        if(R.version["arch"]=="x86_64") {"x64"} else {"i386"}
+      )
+    }
+    if (!file.exists(file.path(rscript_path,"Rscript.exe"))) {
+      warning(paste0(
+        "Rscript.exe was not found, so the launcher will not work properly. ",
+        "Please specify it using the argument \"rscript_dir\"."
+      ))
+    }
+    bat_launcher_path <- file(paste0(MODIStsp_dir,"\\ExtData\\Launcher\\Batch\\MODIStsp.bat"))
+    bat_launcher <- readLines(bat_launcher_path)
+    bat_launcher[ grep("^SET Rscript_dir=", bat_launcher)] <- paste0("SET Rscript_dir=\"", rscript_path, "\"")
+    writeLines(bat_launcher, bat_launcher_path)
 
     # Create entry in the start menu
     if (is.na(bin_dir)) {

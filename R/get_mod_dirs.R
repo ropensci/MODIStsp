@@ -90,7 +90,7 @@ get_mod_dirs <- function(http, ftp, download_server,
       items <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
                         "\r*\n")[[1]]
       date_dirs <- gsub(
-        ".*>(20[0-9][0-9]\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
+        ".*>(20[0-9]{2}\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
       )
       date_dirs <- date_dirs[grep(paste0(yy, "\\.[01][0-9]\\.[0-3][0-9]"),
                                   date_dirs)]
@@ -134,7 +134,7 @@ get_mod_dirs <- function(http, ftp, download_server,
                                             "text", encoding = "UTF-8"),
                               "\r*\n")[[1]]
         doys      <- as.numeric(
-          stringr::str_split_fixed(items, "[0-9][0-9]:[0-9][0-9]\\s", 2)[, 2]
+          stringr::str_split_fixed(items, "[0-9]{2}:[0-9]{2}\\s", 2)[, 2]
         )
         date_dirs <- format(as.Date(doys - 1, origin = paste0(yy, "-01-01")),
                             format = "%Y.%m.%d")
@@ -156,12 +156,12 @@ get_mod_dirs <- function(http, ftp, download_server,
       "http:\\/\\/[A-Za-z0-9\\.]+\\/[A-Z]+\\/([A-Z0-9]+)\\.([0-9]+)\\/", "\\1 \\2", #nolint
       http), " "))
     items <- items[grep(paste0(
-      sel_prod_vers[1], "\\.A20[0-9][0-9][0-3][0-9][0-9]\\.h[0-9][0-9]v[0-9][0-9]\\.",  #nolint
+      sel_prod_vers[1], "\\.A20[0-9]{5}\\.(?:.h[0-9]{2}v[0-9]{2}\\.)?",  #nolint
       sel_prod_vers[2], "\\.[0-9]+\\.hdf$"), items)]
     
     # Extract dates
     date_dirs <- strftime(as.Date(gsub(
-      paste0(sel_prod_vers[1], "\\.A(20[0-9][0-9][0-3][0-9][0-9])\\..*"),"\\1", #nolint
+      paste0(sel_prod_vers[1], "\\.A(20[0-9]{5})\\..*"),"\\1", #nolint
       items), format = "%Y%j"), "%Y.%m.%d")
     attr(date_dirs, "server") <- "offline"
   }
