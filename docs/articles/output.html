@@ -44,9 +44,13 @@
      
   </a>
 </li>
+      </ul>
+<ul class="nav navbar-nav navbar-right">
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -69,10 +73,11 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
@@ -120,18 +125,19 @@
     
     
 <div class="contents">
-<div id="single-band-outputs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#single-band-outputs" class="anchor"></a>Single-band outputs</h2>
+<div id="single-band-outputs" class="section level1">
+<h1 class="hasAnchor">
+<a href="#single-band-outputs" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Single-band outputs</strong>
+</h1>
 <p>Output raster files are saved in specific subfolders of the main output folder. In particular, <strong>a separate subfolder</strong> is created for each processed original MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image for each processed date, created according to the following naming conventions:</p>
-<pre><code>"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"</code></pre>
-<p><font size="2"> <em>(e.g.,MOD13Q1_NDVI_2000_065.dat)</em> </font></p>
+<pre><code>myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"</code></pre>
+<p><font size="2"> <em>(e.g., myoutfolder/NDVI/MOD13Q1_NDVI_2000_065.dat)</em> </font></p>
 <p>, where:</p>
 <ul>
 <li>
-<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
-<li>
 <strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
+<li>
+<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
 <li>
 <strong><em>YYYY</em></strong> and <strong><em>DOY</em></strong> correspond to the year and DOY (Day of the Year) of acquisition of the original MODIS image;</li>
 <li>
@@ -139,19 +145,24 @@
 </ul>
 <hr>
 </div>
-<div id="virtual-multi-band-outputs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#virtual-multi-band-outputs" class="anchor"></a>Virtual multi-band outputs</h2>
+<div id="virtual-multi-band-outputs" class="section level1">
+<h1 class="hasAnchor">
+<a href="#virtual-multi-band-outputs" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Virtual multi-band outputs</strong>
+</h1>
 <p>ENVI and/or GDAL virtual time series files and <em>RasterStack</em> RData objects are instead stored <strong>in the “Time_Series” subfolder</strong> if required.</p>
 <p>Naming convention for these files is as follow:</p>
-<pre><code>"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" </code></pre>
-<p><font size="2"> <em>(e.g., MOD13Q1_NDVI_49_2000_17_2015_RData.dat)</em> </font></p>
+<pre><code>myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" </code></pre>
+<p><font size="2"> <em>(e.g., myoutfolder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData)</em> </font></p>
 <p>, where:</p>
 <ul>
 <li>
-<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
+<strong><em>vrt_type</em></strong> indicates the type of virtual file (“RData”, “GDAL” or “ENVI_META”);</li>
+<li>
+<strong><em>Sensor</em></strong> indicates to which MODIS sensor the time series belongs (“Terra”, “Aqua”, “Mixed” or “Combined” (for MCD* products));</li>
 <li>
 <strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
+<li>
+<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
 <li>
 <strong><em>StartDOY</em></strong>, <strong><em>StartYear</em></strong>, <strong><em>EndDOY</em></strong> and <strong><em>EndYear</em></strong> indicate the temporal extent of the time serie created;</li>
 <li>
@@ -168,8 +179,8 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#single-band-outputs">Single-band outputs</a></li>
-      <li><a href="#virtual-multi-band-outputs">Virtual multi-band outputs</a></li>
+<li><a href="#single-band-outputs"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Single-band outputs</strong></a></li>
+      <li><a href="#virtual-multi-band-outputs"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Virtual multi-band outputs</strong></a></li>
       </ul>
 </div>
       </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp_process_indexes — MODIStsp_process_indexes â€¢ MODIStsp</title>
+<title>MODIStsp helper for computing spectral indexes — MODIStsp_process_indexes â€¢ MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -69,9 +69,14 @@
      
   </a>
 </li>
-<li class="dropdown">
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    How To
+    <span class="fas fa fas fa-book"></span>
+     
+    Articles
      
     <span class="caret"></span>
   </a>
@@ -94,12 +99,12 @@
     <li>
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
+    <li>
+      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+    </li>
   </ul>
 </li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="../articles/faq.html">
     <span class="fa fa-question-circle-o"></span>
      
@@ -138,16 +143,16 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>MODIStsp_process_indexes</h1>
+    <h1>MODIStsp helper for computing spectral indexes</h1>
     </div>
 
     
     <p>function used to compute spectral indexes, given the index formula</p>
     
 
-    <pre class="usage"><span class='fu'>MODIStsp_process_indexes</span>(<span class='no'>out_filename</span>, <span class='no'>formula</span>, <span class='no'>bandnames</span>, <span class='no'>nodata_out</span>,
-  <span class='no'>out_prod_folder</span>, <span class='no'>indexes_nodata_out</span>, <span class='no'>file_prefix</span>, <span class='no'>compress</span>, <span class='no'>yy</span>, <span class='no'>DOY</span>,
-  <span class='no'>out_format</span>, <span class='no'>scale_val</span>)</pre>
+    <pre class="usage"><span class='fu'>MODIStsp_process_indexes</span>(<span class='no'>out_filename</span>, <span class='no'>out_prod_folder</span>, <span class='no'>formula</span>, <span class='no'>bandnames</span>,
+  <span class='no'>nodata_out</span>, <span class='no'>indexes_nodata_out</span>, <span class='no'>file_prefix</span>, <span class='no'>compress</span>, <span class='no'>yy</span>, <span class='no'>out_format</span>, <span class='no'>DOY</span>,
+  <span class='no'>scale_val</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -155,6 +160,11 @@
     <tr>
       <th>out_filename</th>
       <td><p><code>character</code> basename of the file in to which save results</p></td>
+    </tr>
+    <tr>
+      <th>out_prod_folder</th>
+      <td><p><code>character</code> output folder for the product used to retrieve filenames
+of rasters of original bands to be used in computations</p></td>
     </tr>
     <tr>
       <th>formula</th>
@@ -169,11 +179,6 @@ bands required for index computation</p></td>
     <tr>
       <th>nodata_out</th>
       <td><p><code>character</code> array of NoData values of reflectance bands</p></td>
-    </tr>
-    <tr>
-      <th>out_prod_folder</th>
-      <td><p><code>character</code> output folder for the product used to retrieve filenames
-of rasters of original bands to be used in computations</p></td>
     </tr>
     <tr>
       <th>indexes_nodata_out</th>
@@ -194,14 +199,14 @@ to be used in computations</p></td>
 to be used in computations</p></td>
     </tr>
     <tr>
-      <th>DOY</th>
-      <td><p><code>character</code> doy string used to retrieve filenames of rasters of original bands to be
-used in computations</p></td>
-    </tr>
-    <tr>
       <th>out_format</th>
       <td><p><code>character</code> string used to retrieve filenames of rasters of original bands
 to be used in computations</p></td>
+    </tr>
+    <tr>
+      <th>DOY</th>
+      <td><p><code>character</code> doy string used to retrieve filenames of rasters of original bands to be
+used in computations</p></td>
     </tr>
     <tr>
       <th>scale_val</th>
@@ -240,7 +245,7 @@ objects, performs the computation and stores results in a GeoTiff or ENVI raster
 
     <h2>Author</h2>
     
-Lorenzo Busetto, phD (2017) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a>
+Lorenzo Busetto, phD (2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com</a>
 
 Luigi Ranghetti, phD (2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a>
 

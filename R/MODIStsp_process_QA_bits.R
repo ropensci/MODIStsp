@@ -1,4 +1,4 @@
-#' @title compute Quality Indicators from HDF bit-field layers
+#' @title MODIStsp helper function to compute Quality Indicators from HDF bit-field layers
 #' @description function used to extract quality indicator from MODIS aggregated
 #'  quality layers
 #' @details On the basis of the name of the image containing the aggregated quality information
@@ -20,7 +20,7 @@
 #' @param nodata_qa_out `character` out NoData for quality bands ("255")
 #' @param compress `character` compression option for GTiff files
 #' @return NULL
-#' @author Lorenzo Busetto, phD (2017) \email{busetto.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #'  Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
@@ -28,44 +28,44 @@
 #' @importFrom bitops bitAnd bitShiftR
 #' @importFrom raster raster NAvalue calc
 #' @importFrom tools file_path_sans_ext
-MODIStsp_process_QA_bits <- function(out_filename, 
+MODIStsp_process_QA_bits <- function(out_filename,
                                      in_source_file,
                                      bitN,
                                      out_format,
                                      nodata_source,
                                      nodata_qa_in,
-                                     nodata_qa_out, 
+                                     nodata_qa_out,
                                      compress) {
-  
+
   dir.create(dirname(out_filename), showWarnings = FALSE, recursive = TRUE)
   # Open input file
-  in_raster <- raster::raster(in_source_file, format = out_format)				
+  in_raster <- raster::raster(in_source_file, format = out_format)
   # reassign NoData to be sure
-  raster::NAvalue(in_raster) <- as.numeric(nodata_source)					
-  # what bits do we need ? 
+  raster::NAvalue(in_raster) <- as.numeric(nodata_source)
+  # what bits do we need ?
   bits <- as.numeric(unlist(strsplit(bitN, "-")))
-  
-  # define the processing function on the basis of position of 
+
+  # define the processing function on the basis of position of
   # required bit-fields
   bitfield_comp <- function(r, ...) {
     bit1 <-  bits[1]
-    bit2 <- ifelse(length(bits) > 1, 
-                   2^(bits[2] - bits[1] + 1) - 1, 
-                   2^(1) - 1)
+    bit2 <- ifelse(length(bits) > 1,
+                   2 ^ (bits[2] - bits[1] + 1) - 1,
+                   2 ^ (1) - 1)
     bitops::bitAnd(bitops::bitShiftR(r, bit1), bit2)
   }
-  
-  raster::calc(in_raster, 
-               fun       = bitfield_comp, 
+
+  raster::calc(in_raster,
+               fun       = bitfield_comp,
                filename  = out_filename,
                format    = out_format,
-               datatype  = "INT1U", 
+               datatype  = "INT1U",
                options   = ifelse(out_format == "GTiff",
                                   paste0("COMPRESS=", compress),
-                                  ""),                     
+                                  ""),
                NAflag    = as.numeric(nodata_qa_out),
                overwrite = TRUE)
-  
+
   if (out_format == "ENVI") {
     # If output format is ENVI, add data ignore value to the header file
     fileConn_meta_hdr <- file(paste0(tools::file_path_sans_ext(out_filename),
@@ -75,6 +75,4 @@ MODIStsp_process_QA_bits <- function(out_filename,
     writeLines("", fileConn_meta_hdr)
     close(fileConn_meta_hdr)
   }
-  # xml_file <- paste(out_filename, ".aux.xml", sep = "")		# Delete xml files created by writeRaster
-  # unlink(xml_file)
 } #END

@@ -2,9 +2,9 @@
 % Please edit documentation in R/MODIStsp_readxml.R
 \name{MODIStsp_read_xml}
 \alias{MODIStsp_read_xml}
-\title{MODIStsp_read_xml}
+\title{Read MODIS products characteristics from XML}
 \usage{
-MODIStsp_read_xml(prodopts_file = prodopts_file, xml_file = xml_file)
+MODIStsp_read_xml(prodopts_file, xml_file)
 }
 \arguments{
 \item{prodopts_file}{string filename of the RData in which to store the data
@@ -28,7 +28,7 @@ and saves the data frame within the "MODIStsp_previous" RData file as a list of 
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }

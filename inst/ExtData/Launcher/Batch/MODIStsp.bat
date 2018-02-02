@@ -1,7 +1,7 @@
 @echo off
 
 :: Path of R installation: you can modify this value to save it permanently or specify it as parameter
-SET Rscript_dir="C:\Progra~1\R\R-3.4.0\bin\x64"
+SET Rscript_dir="C:\Progra~1\R\R-3.4.1\bin\x64"
 :: Do not modify below here!
 
 setlocal EnableDelayedExpansion
@@ -34,7 +34,7 @@ OPTIONS:^
  SET spatial_file_path="NULL"
 if /I "%1" == "" goto Run
  if /I %1 == -h goto Help
- if /I %1 == -g set gui="FALSE"
+ if /I %1 == -g set gui="FALSE"& shift
  if /I %1 == -s set options_file=%2& shift
  if /I %1 == -e set spatial_file_path=%2& shift
  if /I %1 == -r set Rscript_dir=%2& shift

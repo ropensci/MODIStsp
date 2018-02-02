@@ -1,50 +1,53 @@
 ---
-title: "Standalone execution and scheduled processing "
-output: github_document
+title: "Stand-alone execution and scheduled processing "
 ---
 
-## Standalone execution 
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Stand-alone execution__ 
+MODIStsp can be also executed as a "stand-alone" application (i.e., without having to open R/RStudio). 
 
-- MODIStsp can be also executed as a "standalone" application(i.e., without having to open R/RStudio) ; to do it, from R launch the function `MODIStsp_install_launcher()`.
+To be able to do that, from R launch the function `install_MODIStsp_launcher()`.
 
-In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp).
-In Windows, a link in the Start Menu and optionally a desktop shortcut are created.
+- In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp).
+- In Windows, a link in the Start Menu and optionally a desktop shortcut are created.
 See `?install_MODIStsp_launcher` for details and path customization.
 
-Double-clicking those files or launching them from a shell without parameters will launch `MODIStsp` in interactive mode. Non-interactive mode is triggered by adding the "-g"  argument to the call, and specifying the path to a valid Options File as "-s" argument:
+Double-clicking these files or launching them from a shell without parameters will launch `MODIStsp` in interactive mode, by opening the GUI. Non-interactive mode can be triggered by adding the "-g"  argument to the call, and specifying the path to a valid Options File as "-s" argument:
 
-  - Linux: `MODIStsp -g -s "/yourpath/youroptions.RData"`
+  - Linux: `MODIStsp -g -s "/yourpath/youroptions.json"`
   (see `MODIStsp -h` for details).
   
-  - Windows:`your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.RData"`
+  - Windows:`your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.json"`
   (see `C:\Users\you\Desktop\MODIStsp -h` for details).
 
 If you do not want to install any link, launchers can be found in the subdirectory "MODIStsp/ExtData/Launcher" of your library path.
 
 ____________________________________________________________________________________
 
-## Scheduled Processing
+<br>
 
-Standalone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Scheduled Processing__
+
+Stand-alone non-interactive execution can be exploited to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:
 
 1.	Open the `MODIStsp` GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options. Then quit the program.
  
-2. Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path) as windows scheduled task (or linux "cron" job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument:
+2. Schedule non-interactive execution of the MODIStsp launcher script installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your R library path) as a windows scheduled task or linux "cron" job according to a specified time schedule, specifying the path of a previously saved Options file as additional argument:
 
-#### On Linux
+## _On Linux_
 
-- edit your crontab by opening a terminal and type:
+- edit your crontab by opening a terminal and typing:
 
 ```bash
   crontab -e
 ```
  
-- add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:
+- add an entry for execution of MODIStsp launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:
         
 ```bash
-  0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.RData"
+  0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.json"
 ```
       
-#### On Windows
+## _On Windows_
 
-- create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specifying  `-g -s "X:/yourpath/youroptions.RData"` as argument.
+- create a Task following [this instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx)
+- add the path of the MODIStsp.bat launcher as Action (point 6), specifying  `-g -s "X:/yourpath/youroptions.json"` as argument.

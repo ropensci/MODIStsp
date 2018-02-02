@@ -2,39 +2,54 @@
 % Please edit documentation in R/MODIStsp_install_launcher.R
 \name{install_MODIStsp_launcher}
 \alias{install_MODIStsp_launcher}
-\title{install_MODIStsp_launcher}
+\title{Install a launcher for MODIStsp}
 \usage{
-install_MODIStsp_launcher(bin_dir = NA, desktop_dir = NA,
-  desktop_shortcut = TRUE, sudo = FALSE)
+install_MODIStsp_launcher(bin_dir = NA, rscript_dir = NA,
+  desktop_dir = NA, desktop_shortcut = TRUE, sudo = FALSE)
 }
 \arguments{
-\item{bin_dir}{in Linux, directory in which the link to the bash script should be
-placed (default: /usr/bin; a path included in the PATH environment variable is
-suggested); in Windows, directory where to place the menu entry in the Start Menu
-(default: Start Menu -> Programs -> MODIStsp).}
+\item{bin_dir}{\itemize{
+\item on Linux, directory in which the link to the bash script should be
+placed, Default: /usr/bin - use of a path included in the PATH environment variable is
+suggested;
+\item on Windows, directory where to place the menu entry in the Start Menu,
+Default: Start Menu -> Programs -> MODIStsp.
+}}
 
-\item{desktop_dir}{if desktop_shortcut=TRUE: in Linux, directory in which the desktop
-entry should be placed (default: /usr/share/applications); in Windows, directory where
-to place the desktop entry (default: Desktop).}
+\item{rscript_dir}{'character' in Windows only, the path of the directory in which
+Rscript is installed (default is "C:/Progra~1/R/R-<version>/bin/<arch>").
+Edit this parameter if R is installed in a custom directory.}
 
-\item{desktop_shortcut}{logical value which indicates if the desktop entry or the
-desktop shortcut should be created (default: TRUE).}
+\item{desktop_dir}{\code{character}
+\itemize{
+\item on Linux, directory in which the desktop entry should be placed, Default: /usr/share/applications;
+\item on Windows, directory where to place the desktop entry, Default: "Desktop"
+(Ignored if desktop_shortcut = FALSE).
+}}
 
-\item{sudo}{(Linux only) logical value which indicates if administrator rights have to
-be used to write within bin_dir and desktop_dir (default: FALSE);
-in this case, the root password is requested when launching the function. Note that
-default values of bin_dir and desktop_dir requires to set this option to TRUE (or to
-launch the script in a root session of R)!}
+\item{desktop_shortcut}{\code{logical} indicates if the desktop entry or the
+desktop shortcut should be created, Default: TRUE.}
+
+\item{sudo}{(Linux only) \code{logical}  indicates if administrator rights have to
+be used to write within bin_dir and desktop_dir, If FALSE the root password is requested
+when launching the function. Note that using default values of bin_dir and desktop_dir
+requires to set this option to TRUE (or to launch the script in a root session of R),
+Default: FALSE}
+}
+\value{
+The function is called for its side effects.
 }
 \description{
 Function which allows to use MODIStsp in batch mode by creating links
 }
 \details{
-MODIStsp tool can be used also as a standalone tool my launching a bash/batch
-script, which is stored in the function files. In order to simply retrieve it, this
-function will create a desktop entry and a symbolic link to the bash script (in Linux)
-or a link in the Start Menu to the batch script (in Windows).
-Note that, if the packages MODIStsp is installed in a version-dependent directory
+MODIStsp can be used also as a stand-alone tool (i.e., without opening RStudio
+or R-GUI) by launching a bash/batch script, which is stored in the installation
+folder (/ExtData/Launcher)
+To allow to easily find it, this function creates a desktop entry and a symbolic link
+to the bash script (on Linux) or a link in the Start Menu to the batch script and a
+shortcut on the desktop (on Windows).
+\strong{Note that}, if the packages MODIStsp is installed in a version-dependent directory
 (as the default one is), this function should be re-executed after an R upgrade,
 otherwise the links would continue to point to the old package version!
 }
@@ -49,8 +64,8 @@ License: GPL 3.0
 install_MODIStsp_launcher(sudo = TRUE)
   # the administrator password is asked interactively}
 
-# Linux: installation in a directory which does
-# not require administrator permissions
+# Linux: installation in a directory which does not require administrator 
+# permissions
 \dontrun{
 install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"}
 

@@ -2,39 +2,45 @@
 % Please edit documentation in R/MODIStsp_GUI.R
 \name{MODIStsp_GUI}
 \alias{MODIStsp_GUI}
-\title{MODIStsp_GUI}
+\title{Build and manage the MODIStsp GUI}
 \usage{
-MODIStsp_GUI(general_opts, prod_opt_list, scrollWindow, MODIStsp_dir,
-  previous_jsfile, prodopts_file)
+MODIStsp_GUI(general_opts, prod_opt_list, MODIStsp_dir, opts_jsfile,
+  prodopts_file, scroll_window)
 }
 \arguments{
-\item{general_opts}{data.frame containing general processing options passed by MODIStsp}
+\item{general_opts}{data.frame containing general processing options passed
+by MODIStsp}
 
-\item{prod_opt_list}{List of MODIS products specifications (read from MODIStsp_ProdOpts.xml file)}
-
-\item{scrollWindow}{logical parameter passed by MODIStsp main function.}
+\item{prod_opt_list}{List of MODIS products specifications (read from
+MODIStsp_ProdOpts.xml file)}
 
 \item{MODIStsp_dir}{main folder of the package}
 
-\item{previous_jsfile}{json parameters file containing data of the last execution}
+\item{opts_jsfile}{json parameters file containing data of the last
+execution, or the ones contained in the \code{options_file} eventually passed to
+\code{MODIStsp}}
 
-\item{prodopts_file}{\code{character} name of RData file containing info about MODIS products}
+\item{prodopts_file}{rdata file containing info about MODIS products}
+
+\item{scroll_window}{logical parameter passed by MODIStsp main function.}
 }
 \value{
-Quit - Logical - tells the main if running processing or exiting (also, Processing
-options are saved in "previous" file and (if "Save options" is pressed) in user's selected file)
+start - Logical - tells the main if running processing or exiting
+(also, Processing options are saved in "previous" file and (if
+"Save options" is pressed) in user's selected file)
 }
 \description{
-Function used to generate and handle the GUI used to allow selection of MODIStsp
-processing parameters. If the "previous options" file (MODIStsp_Previous.json)
-already exists, it is loaded and used to reinstate the GUI to its last state.
-Otherwise, the previous options file is created by launching the MODIStsp_read_xml function
+Function used to generate and handle the GUI used to allow selection of
+MODIStsp processing parameters. If the "previous options" file
+(MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
+the GUI to its last state. Otherwise, the previous options file is created
+by launching the MODIStsp_read_xml function
 }
 \note{
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2015) \email{busetto.l@irea.cnr.it}
+Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
 
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
 }
