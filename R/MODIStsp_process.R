@@ -566,7 +566,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               
             } else {
               mess_text <- paste0("[", date(),
-                                  "] No images available for selected area",
+                                  "] No images available for selected area ",
                                   "in date ", date_dirs[date])
               process_message(mess_text, gui, mess_lab, verbose)
             }
