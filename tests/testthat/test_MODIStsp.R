@@ -11,12 +11,7 @@ testthat::test_that(
                                 "Processing Options file not found"))
     # provided options file is not a MODIStsp json options file
     expect_error(MODIStsp(
-      options_file = system.file("ExtData", "MODIS_Tiles.gif",
-                                 package = "MODIStsp"),
-      gui = FALSE), "Unable to read the provided JSON")
-
-    expect_error(MODIStsp(
-      options_file = system.file("ExtData", "MODIS_Tiles.gif",
+      options_file = system.file("ExtData", "MODIStsp_ProdOpts.xml",
                                  package = "MODIStsp"),
       gui = FALSE), "Unable to read the provided JSON")
 
@@ -32,8 +27,8 @@ testthat::test_that(
       options_file = system.file("testdata/test04_ftp.json",
                                  package = "MODIStsp"),
       gui = FALSE, n_retries = 2), "Please switch to http download")
-    
-    
+
+
   })
 
 
@@ -41,18 +36,18 @@ context("MODIStsp Test 1: Basic processing on bands and quality
         indicators")
 testthat::test_that(
   "Tests on MODIStsp", {
-    
+
     library(testthat)
-    
+
     # skip("Skip tests - since they rely on download they are only run locally")
     # skip_on_cran()
     # skip_on_travis()
-    
+
     ### Test 1: test of the basic operations of MODIStsp.                   ####
     #   The test process two bands and extracts one quality indicator from a
     #   single local hdf file for MOD11A2 product  without any
     #   additional preprocessing operations. Output files are in GeoTiff format.
-    
+
     MODIStsp(test = 1)
     out_files  <- list.files(file.path(tempdir(),
                                        "Surf_Temp_8Days_GridSin_v6"),
@@ -185,11 +180,11 @@ testthat::test_that(
 
 context("MODIStsp Test 4: HTTP download from NSIDC (seasonal)")
 testthat::test_that("Tests on MODIStsp", {
-  
+
   # skip("Skip tests - since they rely on download they are only run locally")
   # skip_on_cran()
   # skip_on_travis()
-  
+
   MODIStsp(test = 4)
   out_files_dat <- list.files(
     file.path(tempdir(), "Snow_cov_mnt_005dg_v6"),
@@ -207,21 +202,21 @@ testthat::test_that("Tests on MODIStsp", {
   )
   expect_equal(means, c(203.7691, 202.8263, 206.5492, 205.2043),
                tolerance = 0.1, scale = 1)
-  
+
   out_files_rts <- list.files(
     file.path(tempdir(), "Snow_cov_mnt_005dg_v6"),
     pattern = ".RData$", recursive = TRUE, full.names = TRUE)
-  
+
   #check that rts files are properly created
   expect_equal(length(out_files_rts), 3)
-  
+
   # loading an rdata utput yields a RasterStack
   r <- get(load(out_files_rts[1]))
   expect_is(r, "RasterStack")
   expect_equal(names(r)[1], "MYD10CM_SN_COV_MNT_2015_213")
-  
+
   # check correct resampling and reprojection
-  expect_equal(raster::res(r), c(1553.030, 1551.724), 
+  expect_equal(raster::res(r), c(1553.030, 1551.724),
                tolerance = 0.01, scale = 1)
   expect_equal(
     sp::proj4string(r),
