@@ -13,7 +13,9 @@ test_that("MODIStsp_extract works as expected", {
       #   a MODIStsp rasterStack, end extract data on polygons saved in
       #   testdata/extract_polys.shp
 
-      # update the output folder in test_extract.json
+      # update the output folder in test_extract.json. This allows to
+      # use the test data already contained in that folder to run the test.
+      # No data is written to that folder, though.
       opts_file <- system.file("testdata/test_extract.json",
                                package = "MODIStsp")
       options   <- jsonlite::read_json(opts_file)

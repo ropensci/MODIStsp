@@ -91,7 +91,7 @@
 #' # a MODIStsp rasterStack corresponding to the 2016 time series of the NDVI index
 #' # over the Como Lake (Italy). It then extracts data on polygons corresponding
 #' # to different land cover classes saved in testdata/extract_polys.shp
-#' 
+#'
 #' # first, prepare aa test dataset.
 #'
 #' opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
@@ -102,9 +102,9 @@
 #'
 #' # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 #' # 2016-01-01 and 2016-12-18
-#' # __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData" 
+#' # __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"
 #' # subfolder of your main output folder - see http://lbusett.github.io/MODIStsp/articles/output.html)
-#' 
+#'
 #' # specify the filename of the RData RasterStack of interest
 #' stack_file  <- system.file("testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
 #'   "MOD13A1_NDVI_1_2016_353_2016_RData.RData", package = "MODIStsp")
@@ -118,7 +118,7 @@
 #' polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp", package = "MODIStsp"),
 #'                            verbose = FALSE)
 #' polygons
-#' 
+#'
 #' # Finally, extract the average values for each polygon and date and plot the
 #' # results
 #'
@@ -133,8 +133,8 @@
 #' out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
 #'                               FUN = "sd", small = FALSE)
 #' head(out_datasd)
-#' 
-#' # (See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a 
+#'
+#' # (See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a
 #' # worked-out example)
 
 
@@ -144,10 +144,10 @@ MODIStsp_extract <- function(in_rts, sp_object,
                              out_format = "xts", small    = TRUE,
                              small_method = "centroids",
                              na.rm      = TRUE, verbose = FALSE) {
-  
+
   .SD            <- NULL # Workaround to avoid note on package check
-  
-  
+
+
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
@@ -157,12 +157,12 @@ MODIStsp_extract <- function(in_rts, sp_object,
   if (length(start_date) == 0) {
     start_date <- min(raster::getZ(in_rts))
     if (verbose)
-      message("Starting date not provided - Using the first date in the stack") #nocov #nolint
+      message("Starting date not provided - Using the first date in the stack") #nocov
   }
   if (length(end_date) == 0) {
     end_date <- max(raster::getZ(in_rts))
     if (verbose)
-      message("Ending date not provided - Using the last date in the stack") #nocov #nolint
+      message("Ending date not provided - Using the last date in the stack") #nocov
   }
   if (!class(start_date) %in% c("Date", "POSIXct", "POSIXlt")) {
     start_date <- try(as.Date(start_date), silent = TRUE)
@@ -233,7 +233,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
       ts <- matrix(nrow = length(sel_dates), ncol = length(shape[, 1]))
       for (f in seq_along(sel_dates)) {
         if (verbose == TRUE) {
-          print(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov #nolint
+          meassage("Extracting data from date: ", dates[sel_dates[f]]) #nocov
         }
         ts[f, ] <- raster::extract(in_rts[[sel_dates[f]]], shape,
                            fun = FUN)
@@ -289,7 +289,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
 
       for (f in seq_along(sel_dates)) {
         if (verbose) {
-          message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov #nolint
+          message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov
         }
 
         value <- raster::getValues(in_rts[[sel_dates[f]]])[ok_zones]
@@ -331,7 +331,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
         ts_mis <- matrix(nrow = length(sel_dates), ncol = length(pos_missing))
         for (f in seq_along(sel_dates)) {
           if (verbose) {
-            print(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov #nolint
+            message("Extracting data from date: ", dates[sel_dates[f]]) #nocov
 
           }
           if (small_method == "centroids") {
