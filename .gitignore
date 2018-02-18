@@ -70,3 +70,9 @@ inst/testdata/MODIStsp_2018-01-04\.json
 libs/
 
 _main\.Rmd
+
+inst/ExtData/Previous/MODIStsp_Previous\.json
+
+inst/testdata/MODIStsp_2018-02-18\.json
+
+inst/testdata/MODIStsp_Previous\.json

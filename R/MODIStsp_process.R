@@ -383,7 +383,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               
               #- ------------------------------------------------------------ -#
               #  STEP 1: Download images (If HDF file already in            ####
-              #  out_mod_folder, it is not redownloaded !!!!
+              #  out_folder_mod, it is not redownloaded !!!!
               
               MODIStsp_download(modislist, out_folder_mod,
                                 download_server, http, ftp, n_retries, use_aria,

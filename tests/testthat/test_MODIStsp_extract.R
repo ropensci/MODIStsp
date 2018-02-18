@@ -13,20 +13,26 @@ test_that("MODIStsp_extract works as expected", {
       #   a MODIStsp rasterStack, end extract data on polygons saved in
       #   testdata/extract_polys.shp
 
-      # update the output folder in test_extract.json. This allows to
-      # use the test data already contained in that folder to run the test.
-      # No data is written to that folder, though.
+      # copy files in "inst/testdata/VI_16Days_500m_v6" to tempdir to avoid
+      # creating files outside tempdir while running the test
+      # 
+      test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI",
+                                  package = "MODIStsp")
+      dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"), 
+                 showWarnings = FALSE, recursive = TRUE)
+      file.copy(list.files(test_folder, full.names = TRUE),
+                file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"), 
+                recursive = T)
+  
+      # build and load the MODIStsp stack
+      
       opts_file <- system.file("testdata/test_extract.json",
                                package = "MODIStsp")
-      options   <- jsonlite::read_json(opts_file)
-      options$out_folder <- system.file("testdata/", package = "MODIStsp")
-      jsonlite::write_json(options, opts_file, auto_unbox = TRUE, pretty = TRUE)
-
-      # build and load the MODIStsp stack
       MODIStsp(options_file = opts_file, gui = FALSE)
       stack_file  <- list.files(
-        system.file("testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/", #nolint
-                                            package = "MODIStsp"),
+        file.path(tempdir(),
+                  "MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/"
+                  ),
         full.names = TRUE)
       ts_data <- get(load(stack_file))
 

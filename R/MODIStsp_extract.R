@@ -92,12 +92,18 @@
 #' # over the Como Lake (Italy). It then extracts data on polygons corresponding
 #' # to different land cover classes saved in testdata/extract_polys.shp
 #'
-#' # first, prepare aa test dataset.
+#' # First, prepare the test dataset. 
+#' # __NOTE__ To avoid redownloading, here we copy some test data from MODIStsp 
+#' # installation folder to tempdir and use it to create a test time series. 
+#' 
+#' test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI", 
+#'                             package = "MODIStsp")
+#' dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"), 
+#'            showWarnings = FALSE, recursive = TRUE)
+#' file.copy(list.files(test_folder, full.names = TRUE),
+#'           file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"))
 #'
 #' opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
-#' options   <- jsonlite::read_json(opts_file)
-#' options$out_folder <- system.file("testdata/", package = "MODIStsp")
-#' jsonlite::write_json(options, opts_file, auto_unbox = TRUE, pretty = TRUE)
 #' MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
 #'
 #' # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
@@ -105,9 +111,10 @@
 #' # __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"
 #' # subfolder of your main output folder - see http://lbusett.github.io/MODIStsp/articles/output.html)
 #'
-#' # specify the filename of the RData RasterStack of interest
-#' stack_file  <- system.file("testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
-#'   "MOD13A1_NDVI_1_2016_353_2016_RData.RData", package = "MODIStsp")
+#' # Specify the filename of the RData RasterStack of interest
+#' stack_file  <- file.path(tempdir(),
+#'  "MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
+#'   "MOD13A1_NDVI_1_2016_353_2016_RData.RData")
 #' basename(stack_file)
 #'
 #' ts_data <- get(load(stack_file))
@@ -233,7 +240,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
       ts <- matrix(nrow = length(sel_dates), ncol = length(shape[, 1]))
       for (f in seq_along(sel_dates)) {
         if (verbose == TRUE) {
-          meassage("Extracting data from date: ", dates[sel_dates[f]]) #nocov
+          message("Extracting data from date: ", dates[sel_dates[f]]) #nocov
         }
         ts[f, ] <- raster::extract(in_rts[[sel_dates[f]]], shape,
                            fun = FUN)

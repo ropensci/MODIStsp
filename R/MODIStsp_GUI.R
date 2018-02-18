@@ -37,7 +37,6 @@ MODIStsp_GUI <- function(general_opts,
                          opts_jsfile,
                          prodopts_file,
                          scroll_window){
-
   #   __________________________________________________________________________
   #   NOTE: The function is excluded from coverage reports since it must be ####
   #   used interactively

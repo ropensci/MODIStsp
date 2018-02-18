@@ -67,10 +67,11 @@
 #'  \dontrun{
 #'  MODIStsp_addindex()}
 #'
-#' # Open the GUI to define a new index and save it in index in a custom json
+#' # Open the GUI to define a new index and save it in a custom json
 #' # options file.
 #' \dontrun{
-#' MODIStsp_addindex(opts_jsfile = "X:/yourpath/youroptions.json")
+#' opts_jsfile = system.file("testdata/test_addindex.json", package = "MODIStsp")
+#' MODIStsp_addindex(opts_jsfile = opts_jsfile)
 #' }
 #'
 #' # Define the new index in non-interactive execution, without specifying an 

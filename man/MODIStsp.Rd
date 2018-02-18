@@ -61,35 +61,57 @@ License: GPL 3.0
 }
 \examples{
 # Running the tool without any option will start the GUI with the default or
-# last used settings
+# last used settings, in interactive mode (i.e., with gui = TRUE).
+
 \dontrun{
 MODIStsp()}
 
 # Running the tool using the settings previously saved in a specific options
 # file
+
+# **NOTE** Output files of examples will be saved to file.path(tempdir(), "MODIStsp").
+# You can run the example with `gui = TRUE` to set a different output folder!
+
 \dontrun{
-MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json")}
+
+# Here we use a test json file saved in MODIStsp installation folder - 
+# Downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
+# and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
+ 
+options_file <- system.file("testdata/MOD13A2.json", package = "MODIStsp")
+MODIStsp(gui = FALSE, options_file = options_file)}
 
 # Running the tool using the settings previously saved in a specific option file
-# and specifying the extent from a spatial file allows to re-use the same 
+# and specifying the extent from a spatial file allows to re-use the same
 # processing settings to perform download and reprocessing on a different area
 
 \dontrun{
-MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
-  spatial_file_path = "X:/yourpath/yourspatialfile.shp" )}
+options_file <- system.file("testdata/MOD13A2.json", package = "MODIStsp")
+spatial_file <- system.file("testdata/gardalake.shp")
+MODIStsp(gui = FALSE, options_file = options_file,
+  spatial_file_path = spatial_file)}
 
 # Running the tool using the settings previously saved in a
 # specific options file and specifying each time the extent from a different
 # spatial file (e.g., to perform the same processing on several extents)
 
 \dontrun{
-extent_list = list.files("X:/path/containing/some/shapefiles/", "\\\\.shp$")
-for (single_shape in extent_list)
-  MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
-    spatial_file_path = single_shape )}
-    
-# (See http://lbusett.github.io/MODIStsp/articles for additional details and 
-# examples)
+extent_list  <- c(system.file("testdata/gardalake.shp", package = "MODIStsp"), 
+                  system.file("testdata/iseolake.shp", package = "MODIStsp"))
+
+# Note that you can also put all your extent files in a specific folder and 
+# create the extent list using 
+# extent_list = list.files("X:/path/containing/some/shapefiles/", "\\\\.shp$")
+
+options_file <- system.file("testdata/MOD13A2.json", package = "MODIStsp")
+for (single_shape in extent_list) {
+  MODIStsp(gui = FALSE, options_file = options_file,
+           spatial_file_path = single_shape )
+}
+
+}
+
+# See also http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html)
 }
 \seealso{
 \code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}, \code{\link[=MODIStsp_process]{MODIStsp_process()}}
