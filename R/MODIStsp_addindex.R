@@ -126,7 +126,7 @@ MODIStsp_addindex <- function(
                                         "MODIStsp_ProdOpts.RData", 
                                         package = "MODIStsp"),
                             prodopts_file)
-  
+
   general_opts    <- load_opts(previous_jsfile)
   
   # Restore MODIS products if existing, otherwise retrieve  from xml file ----

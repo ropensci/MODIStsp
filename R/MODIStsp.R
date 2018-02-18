@@ -150,7 +150,7 @@ MODIStsp <- function(gui               = TRUE,
       if (!file.exists(test_hdf)) {
         unzip(zipfile = paste0(test_hdf, ".zip"),
               files   = basename(test_hdf),
-              exdir   = tempdir(),
+              exdir   = file.path(tempdir(), "MODIStsp/HDFs"),
               unzip   = "internal")
       }
     }
@@ -252,7 +252,7 @@ MODIStsp <- function(gui               = TRUE,
   } else {
     permission <- FALSE 
   }
-  permission = FALSE
+
   # Folders in which the JSON/RData files (previous settings and product
   # descriptions) are saved
   previous_dir <- ifelse(
@@ -439,7 +439,6 @@ MODIStsp <- function(gui               = TRUE,
       general_opts$end_x   <- max(d_bbox_mod_tiled$H)
       general_opts$start_y <- min(d_bbox_mod_tiled$V)
       general_opts$end_y   <- max(d_bbox_mod_tiled$V)
-      
     }
     
     #   ________________________________________________________________________

@@ -185,7 +185,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   } else {
     mess_lab <- NULL
   }
-  
+
   process_message(mess_text, gui, mess_lab, verbose)
   
   #   __________________________________________________________________________

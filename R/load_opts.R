@@ -97,6 +97,7 @@ load_opts <- function(opts_jsfile) {
       MODIStspVersion = as.character(utils::packageVersion("MODIStsp")),
       custom_indexes  = list()
     )
+
     jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
                          auto_unbox = TRUE)
     #nocov end (this is only executed at first ever execution)
