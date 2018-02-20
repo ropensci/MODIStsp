@@ -36,7 +36,6 @@ Imports:
     pacman,
     parallel,
     raster (>= 2.5-2),
-    RCurl (>= 1.95-4.8),
     rgdal (>= 1.0-3),
     rgeos (>= 0.3-8),
     sp (>= 1.2-2),

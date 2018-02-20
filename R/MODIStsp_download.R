@@ -25,7 +25,7 @@
 #' @param date_name `character` Date of acquisition of the images to be downloaded.
 #' @param gui `logical` Indicates if on an interactive or non-interactive execution
 #'  (only influences where the log messages are sent).
-#' @param mess_lab pointer to the gWidget used to issue processing messages in 
+#' @param mess_lab pointer to the gWidget used to issue processing messages in
 #'  when gui = TRUE.
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @inheritParams MODIStsp_process
@@ -33,10 +33,9 @@
 #' @rdname MODIStsp_download
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
-#' @importFrom httr RETRY authenticate content GET progress write_disk
+#' @importFrom httr RETRY authenticate content GET progress write_disk HEAD config
 #' @importFrom xml2 as_list
 #' @importFrom gWidgets gconfirm
-#' @importFrom RCurl getURL
 
 MODIStsp_download <- function(modislist,
                               out_folder_mod,
@@ -52,8 +51,8 @@ MODIStsp_download <- function(modislist,
                               password,
                               sens_sel,
                               date_name,
-                              gui, 
-                              mess_lab, 
+                              gui,
+                              mess_lab,
                               verbose) {
 
   # Cycle on the different files to download for the current date
@@ -129,15 +128,12 @@ MODIStsp_download <- function(modislist,
         # On ftp download, use getURL to find out the remote file size ----
         attempt <- 0
         while (attempt < n_retries) {
-          size_string <- try(RCurl::getURL(
-            remote_filename,
-            nobody = 1L, header = 1L,
-            # keep a long timeout, since traversing ftp folders can be slow!
-            .opts = list(timeout = 240, maxredirs = 5, verbose = FALSE))
-          )
+
+          size_string <- try(suppressWarnings(httr::HEAD(remote_filename, quiet = TRUE,
+                                                         httr::config(nobody = TRUE))),
+                             silent = TRUE)
           if (class(size_string) != "try-error") {
-            remote_filesize <- as.integer(gsub("[^:]+: ([0-9]+)\\r.*", "\\1",
-                                               size_string))
+            remote_filesize <- as.integer(size_string[["headers"]][["content-length"]])
             # on success, set a high value to attempt so to end the while loop
             attempt <- n_retries + 1
           } else {
@@ -228,10 +224,10 @@ MODIStsp_download <- function(modislist,
                                    intern = Sys.info()["sysname"] == "Windows"))
           } else {
             # ftp download - httr
-            download <- try(httr::GET(remote_filename,
-                                      httr::progress(),
-                                      httr::write_disk(local_filename,
-                                                       overwrite = TRUE)))
+            download <- try(suppressWarnings(httr::GET(remote_filename,
+                                                       httr::progress(),
+                                                       httr::write_disk(local_filename,
+                                                                        overwrite = TRUE))))
           }
         }
 
@@ -246,7 +242,7 @@ MODIStsp_download <- function(modislist,
           if (download_server == "http" & use_aria == FALSE) {
 
             if (download$status_code != 200 &
-                length(httr::content(download, 
+                length(httr::content(download,
                                      "text",
                                      encoding = "UTF-8")) == 1) {
               # on error, delete last HDF file (to be sure no incomplete

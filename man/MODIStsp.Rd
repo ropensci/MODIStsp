@@ -74,10 +74,10 @@ MODIStsp()}
 
 \dontrun{
 
-# Here we use a test json file saved in MODIStsp installation folder - 
+# Here we use a test json file saved in MODIStsp installation folder -
 # Downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
 # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
- 
+
 options_file <- system.file("testdata/MOD13A2.json", package = "MODIStsp")
 MODIStsp(gui = FALSE, options_file = options_file)}
 
@@ -96,11 +96,11 @@ MODIStsp(gui = FALSE, options_file = options_file,
 # spatial file (e.g., to perform the same processing on several extents)
 
 \dontrun{
-extent_list  <- c(system.file("testdata/gardalake.shp", package = "MODIStsp"), 
+extent_list  <- c(system.file("testdata/gardalake.shp", package = "MODIStsp"),
                   system.file("testdata/iseolake.shp", package = "MODIStsp"))
 
-# Note that you can also put all your extent files in a specific folder and 
-# create the extent list using 
+# Note that you can also put all your extent files in a specific folder and
+# create the extent list using
 # extent_list = list.files("X:/path/containing/some/shapefiles/", "\\\\.shp$")
 
 options_file <- system.file("testdata/MOD13A2.json", package = "MODIStsp")

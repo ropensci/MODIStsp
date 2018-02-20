@@ -1,4 +1,3 @@
-Â
 Albedo
 ArchLinux
 ATK
@@ -149,6 +148,7 @@ preprocesses
 priori
 ProdCode
 ProdOpts
+Progra
 proj
 Proj
 PROJ
@@ -168,14 +168,13 @@ Rdata
 RData
 reflectance
 Reflectance
-reproj
 reproject
+Reproject
 reprojected
 reprojecting
 reprojection
 Reprojection
 req
-reqbands
 rescaled
 rescaling
 rgdal
@@ -184,6 +183,7 @@ Rgtk
 RGtk
 rmarkdown
 Rowlingson
+Rscript
 RSession
 RStudio
 rts

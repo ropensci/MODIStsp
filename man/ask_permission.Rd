@@ -7,7 +7,7 @@
 ask_permission()
 }
 \value{
-'logical' if TRUE, the user authorized saving in extData/Previous
+'logical' if TRUE, the user authorized saving in ExtData/Previous
 }
 \description{
 Ask users for permission to write the previous options file.

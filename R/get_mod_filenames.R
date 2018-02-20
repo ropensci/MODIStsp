@@ -75,7 +75,7 @@ get_mod_filenames <- function(http,
           #nocov end
         } else {
           stop("[", date(), "] Error: http server seems to be down! ",
-                  "Switching to ftp!")
+               "Switching to ftp!")
         }
       } else {
         getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
@@ -102,13 +102,14 @@ get_mod_filenames <- function(http,
     date_doy  <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
 
     while (!success) {
-      response <- httr::RETRY("GET",
-                              paste0(ftp, date_year, "/", date_doy, "/"),
-                              # httr::authenticate(user, password),
-                              times = n_retries,
-                              pause_base = 0.1,
-                              pause_cap = 10,
-                              quiet = FALSE)
+      response <- suppressWarnings(
+        httr::RETRY("GET",
+                    paste0(ftp, date_year, "/", date_doy, "/"),
+                    # httr::authenticate(user, password),
+                    times = n_retries,
+                    pause_base = 0.1,
+                    pause_cap = 10,
+                    quiet = FALSE))
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
       if (response$status_code != 226) {
