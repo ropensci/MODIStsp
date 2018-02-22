@@ -260,7 +260,6 @@ MODIStsp <- function(gui               = TRUE,
     system.file("ExtData/Previous", package = "MODIStsp"),
     file.path(tempdir(), "MODIStsp/Previous"))
   dir.create(previous_dir, showWarnings = FALSE, recursive = TRUE)
-
   if (is.null(options_file)) {
     previous_jsfile <- file.path(previous_dir, "MODIStsp_Previous.json")
    } else {
@@ -272,9 +271,6 @@ MODIStsp <- function(gui               = TRUE,
   prod_opt_list <- load_prodopts(gui)
   prodopts_file <- system.file("ExtData/Previous", "MODIStsp_ProdOpts.RData",
                                package = "MODIStsp")
-
-  # default projection string for MODIS gridded data
-  mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
 
   # Load the processing options from the user provided "options_file", or from
   # `previous_jsfile`
@@ -388,6 +384,9 @@ MODIStsp <- function(gui               = TRUE,
       prod_opts$native_res <- format(
         as.numeric(prod_opts$native_res) * (0.05 / 5600)
       )
+    } else {
+      # default projection string for MODIS gridded data
+      mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
     }
     # get native resolution if out_res empty
     if (general_opts$out_res == "" | general_opts$out_res_sel == "Native") {

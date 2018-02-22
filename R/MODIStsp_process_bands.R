@@ -157,6 +157,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     )
 
   } else {
+
     # Create a GDAL vrt file corresponding to the original
     # hdf4
     gdalUtils::gdalbuildvrt(files_in,
@@ -234,7 +235,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                               overwrite = TRUE)
     }
   }
-  
+
   # If scale_factor="Yes", add a "step" before creating final
   # files (a temporary file is created in tempdir, then
   # later the scale and offset are applied to it and result

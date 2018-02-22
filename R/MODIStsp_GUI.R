@@ -60,8 +60,8 @@ MODIStsp_GUI <- function(general_opts,
   main_win <- gbasicdialog(
     title      = paste0("MODIStsp - v. ", utils::packageVersion("MODIStsp")),
     parent     = NULL,
-    do.buttons = FALSE
-  )
+    do.buttons = FALSE,
+    use.scroll_window = scroll_window)
 
   # frame1 and 2 with expand=FALSE grant that widgets are not "too much
   # expanded", neither horizontally nor vertically
@@ -73,7 +73,7 @@ MODIStsp_GUI <- function(general_opts,
 
   main_frame2 <- ggroup(container  = main_frame1,
                         horizontal = FALSE,
-                        expand     = TRUE,
+                        expand     = FALSE,
                         use.scroll_window = scroll_window)
 
   #   __________________________________________________________________________
@@ -81,7 +81,7 @@ MODIStsp_GUI <- function(general_opts,
 
   main_group  <- ggroup(container  = main_frame2,
                         horizontal = FALSE,
-                        expand     = TRUE)
+                        expand     = FALSE)
 
   if (scroll_window) {
     getToolkitWidget(main_win)$maximize()
@@ -103,13 +103,18 @@ MODIStsp_GUI <- function(general_opts,
   sel_cat       <- mod_prod_cat$cat[match(sel_prod, mod_prod_list)]
   sel_prodopts  <- prod_opt_list[[sel_prod]]
   # set defaults for projection names and corresponding proj4strings
-  out_proj_names <- c("Sinusoidal", "UTM 32N", "Latlon WGS84", "Latlon MODIS",
+  out_proj_names <- c("Native",
                       "User Defined")
+  # browser()
   out_proj_list  <- list(
-    "Sinusoidal"   = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
-    "UTM 32N"      = "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0", #nolint
-    "Latlon WGS84" = "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0", #nolint
-    "Latlon MODIS" = "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs",
+    "Native"   = ifelse(
+      prod_opt_list[[sel_prod]][[general_opts$prod_version]][["tiled"]] == "1",
+      "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
+      "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"),
+    # #nolint
+    # "UTM 32N"      = "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0", #nolint
+    # "Latlon WGS84" = "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0", #nolint
+    # "Latlon MODIS" = "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs",
     "User Defined" = ""
   )
   mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
@@ -135,14 +140,14 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for category selection                             ####
 
-  satprod1_group <- ggroup(horizontal = TRUE, container = satprod_frame)
+  satprod0_group <- ggroup(horizontal = TRUE, container = satprod_frame)
   cat_label      <- glabel(text      = "Category:",
-                           container = satprod1_group,
+                           container = satprod0_group,
                            editable  = FALSE)
 
   wids$cat <- gdroplist(
     items      = unique(mod_prod_cat$cat),
-    container  = satprod1_group,
+    container  = satprod0_group,
     horizontal = TRUE,
     selected   = match(sel_cat, unique(mod_prod_cat$cat)),
     handler    = function(h, ...) {
@@ -182,11 +187,12 @@ MODIStsp_GUI <- function(general_opts,
       gui_env$temp_wid_bands_quality <- 0
     }
   )
-
+  # size(wids$cat) <- list(width = 300)
   #   __________________________________________________________________________
   #   Initialize Widgets for Product selection                              ####
 
-  addSpring(satprod1_group)
+  # addSpring(satprod1_group)
+  satprod1_group <- ggroup(horizontal = TRUE, container = satprod_frame)
   prod_label <- glabel(text = "Product:", container = satprod1_group)
 
   wids$prod <- gdroplist(
@@ -239,10 +245,10 @@ MODIStsp_GUI <- function(general_opts,
 
   satprod2_group <- ggroup(horizontal = TRUE, container = satprod_frame)
 
-  sens_label       <- glabel(text = " Platform:", container = satprod2_group)
+  sens_label       <- glabel(text = " Platform:", container = satprod1_group)
 
   wids$sens         <- gcombobox(items     = c("Terra"),
-                                 container = satprod2_group,
+                                 container = satprod1_group,
                                  text      = "Select Platform", selected = 1)
 
   if (sel_prodopts[[general_opts$prod_version]]$combined == 1) {
@@ -252,18 +258,18 @@ MODIStsp_GUI <- function(general_opts,
     gWidgets::svalue(wids$sens) <- general_opts$sensor
   }
 
-  addSpace(satprod2_group, 5)
+  addSpace(satprod1_group, 5)
 
   #   __________________________________________________________________________
   #   Initialize widgets for Version selection                              ####
 
-  vers_label <- glabel(text = " Version:", container = satprod2_group)
+  vers_label <- glabel(text = " Version:", container = satprod1_group)
   wids$vers   <- gcombobox(
     items     = vapply(sel_prodopts, function(x){
       x[["v_number"]]
     }
     , FUN.VALUE = ""),
-    container = satprod2_group, text = "Select Version",
+    container = satprod1_group, text = "Select Version",
     selected  = match(general_opts$prod_version, names(sel_prodopts)),
     handler   = function(h, ...) {
       # reset dummy variables for band selection to 0 on product change
@@ -273,21 +279,184 @@ MODIStsp_GUI <- function(general_opts,
     }
   )
 
-  addSpace(satprod2_group, 1)
-  addSpring(satprod2_group)
+  www_but <- gbutton(
+    text = paste0("Product Info (www)"),
+    container = satprod1_group,
+    handler   = function(h, ...) {
+      utils::browseURL(sel_prodopts[[svalue(wids$vers)]][["www"]])
+    }
+  )
+  gWidgets::font(www_but) <- list(family = "sans", weight = "bold", color = "red")
+  addSpace(satprod1_group, 1)
+  addSpring(satprod1_group)
 
   #   __________________________________________________________________________
   #   Initialize Widgets for Processing Layers selection                    ####
 
-  band_label <- glabel(text = "Processing Layers:", container = satprod2_group)
+  layers_frame <- gframe(
+    text       = "<span foreground='red' size='x-large'>Layers to be processed</span>",
+    markup     = TRUE,
+    container  = main_group,
+    horizontal = FALSE,
+    expand     = TRUE
+  )
 
+  layer_group     <- ggroup(horizontal = TRUE, container = layers_frame)
+  band_label      <- glabel(text = "Original MODIS bands:",
+                            container = layer_group)
+  cur_prodopts <- sel_prodopts[[svalue(wids$vers)]]
+
+  # Original Bands
+  curr_sel_layers <- paste(
+    cur_prodopts[["band_fullnames"]][which(general_opts[["bandsel"]] == 1)],
+    collapse = "; ")
+  wids$sel_layers <- gtext(text = curr_sel_layers,
+                           container = layer_group,
+                           width     = 250,
+                           height    = 28,
+                           editable  = FALSE,
+                           expand    = TRUE)
+  gWidgets::enabled(wids$sel_layers) <- FALSE
+  orband_help <- gbutton(
+    text    = " ? ",
+    handler = function(h, ...) {
+      help_box <- gbasicdialog(title      = "Help",
+                               parent     = NULL,
+                               do.buttons = FALSE,
+                               horizontal = FALSE,
+                               width      = 50,
+                               height     = 28)
+
+      help_mess_lab <- glabel(
+        text = strwrap(
+          "These are the original bands of MODIS HDF images that will be
+           processed.
+           A separate image will be saved for each band and date.\n\n
+          Click on `Modify Selection` to change the selected layers",
+          width = 60
+        ),
+        editable  = FALSE,
+        container = help_box
+      )
+
+      gWidgets::visible(help_box) <- TRUE
+    },
+    container = layer_group,
+    expand = FALSE
+  )
+  # Quality Indicators
+  curr_sel_qual <- paste(
+    cur_prodopts[["quality_fullnames"]][which(general_opts[["quality_bandsel"]] == 1)],
+    collapse = "; ")
+  qual_group      <- ggroup(horizontal = TRUE, container = layers_frame)
+  qa_label        <- glabel(text = "Quality Indicators:",
+                            container = qual_group)
+  addSpace(qual_group, 27)
+  wids$sel_qi   <- gtext(text = curr_sel_qual,
+                           container = qual_group,
+                           width     = 250,
+                           height    = 28,
+                           editable  = FALSE,
+                           expand    = TRUE)
+  gWidgets::enabled(wids$sel_qi) <- FALSE
+  QI_help <- gbutton(
+    text    = " ? ",
+    handler = function(h, ...) {
+      help_box <- gbasicdialog(title      = "Help",
+                               parent     = NULL,
+                               do.buttons = FALSE,
+                               horizontal = FALSE,
+                               width      = 50,
+                               height     = 28)
+
+      help_mess_lab <- glabel(
+        text = strwrap(
+          "These are the Quality Indicators that will be processed.
+           Quality Indicators are computed from the original MODIS Quality bands
+           by extracting the required bits from bit-field values (see
+           https://goo.gl/MrVyfF).\n
+           A separate image will be saved for each QI and date.\n\n
+          Click on `Modify Selection` to change the selected layers",
+          width = 60
+        ),
+        editable  = FALSE,
+        container = help_box
+      )
+      moreinfo <- gbutton(
+        text = paste0("More Info"),
+        container = help_box,
+        handler   = function(h, ...) {
+          utils::browseURL("https://goo.gl/MrVyfF")
+        }
+      )
+      gWidgets::visible(help_box) <- TRUE
+    },
+    container = qual_group,
+    expand = FALSE
+  )
+
+  # Spectral Indexes
+  check_names_indexes <- c(
+    cur_prodopts[["indexes_fullnames"]],
+    as.list(general_opts$custom_indexes[[sel_prod]]
+            [[svalue(wids$vers)]])$indexes_fullnames
+  )
+  curr_sel_si <- paste(
+    check_names_indexes[which(general_opts[["indexes_bandsel"]] == 1)],
+    collapse = "; ")
+  si_group    <- ggroup(horizontal = TRUE, container = layers_frame)
+  si_label    <- glabel(text = "Spectral Indexes:",
+                        container = si_group)
+  addSpace(si_group, 32)
+  wids$sel_si  <- gtext(text = curr_sel_si,
+                           container = si_group,
+                           width     = 250,
+                           height    = 28,
+                           editable  = FALSE,
+                           expand    = TRUE)
+  gWidgets::enabled(wids$sel_si) <- FALSE
+  si_help <- gbutton(
+    text    = " ? ",
+    handler = function(h, ...) {
+      help_box <- gbasicdialog(title      = "Help",
+                               parent     = NULL,
+                               do.buttons = FALSE,
+                               horizontal = FALSE,
+                               width      = 50,
+                               height     = 28)
+
+      help_mess_lab <- glabel(
+        text = strwrap(
+          "These are the Spectral Indexes that will be processed.
+           Spectral Indexes are computed from the original MODIS Surface Reflectance bands.\n
+
+           A separate image will be saved for each QI and date.\n\n
+          Click on `Modify Selection` to change the selected layers",
+          width = 60
+        ),
+        editable  = FALSE,
+        container = help_box
+      )
+      moreinfo <- gbutton(
+        text = paste0("More Info"),
+        container = help_box,
+        handler   = function(h, ...) {
+          utils::browseURL("https://goo.gl/MrVyfF")
+        }
+      )
+      gWidgets::visible(help_box) <- TRUE
+    },
+    container = qual_group,
+    expand = FALSE
+  )
+  # size(wids$sel_layers) <- list(width = 500)
   ##  ..........................................................................
   ##  Upon click on the button we create a Child widget for selection of
   ##  processing layers (could try to separate a function for this, but it would
   ##  be a hassle) and deal with all events
 
   wids$band   <- gbutton(
-    text    = "   Click To Select   ",
+    text    = "   Modify Selection   ",
     handler = function(h, ...) {
 
       prod_opt_list <- get(load(prodopts_file))
@@ -317,6 +486,13 @@ MODIStsp_GUI <- function(general_opts,
           tmp_arr_bands <- array(data = 0, dim = length(check_names))
           tmp_arr_bands[wids$pos] <- 1
           gui_env$temp_wid_bands <- tmp_arr_bands
+          # update the selected layers widget lable
+          cur_prodopts <- sel_prodopts[[svalue(wids$vers)]]
+          curr_sel_layers <- paste(
+            cur_prodopts[["band_fullnames"]][which(tmp_arr_bands != 0)],
+            collapse = "; ")
+          svalue(wids$sel_layers) <- curr_sel_layers
+
           # Find which indexes selected and store in
           # gui_env$temp_wid_bands_indexes
           if (length(which(check_names_indexes != "") > 0)) {
@@ -326,7 +502,15 @@ MODIStsp_GUI <- function(general_opts,
             tmp_arr_ind <- array(data = 0, dim = length(check_names_indexes))
             tmp_arr_ind[wids$pos] <- 1
             gui_env$temp_wid_bands_indexes <- tmp_arr_ind
+
+           # update the selected layers widget lable
+           curr_sel_si <- paste(
+             check_names_indexes[which(tmp_arr_ind != 0)],
+              collapse = "; ")
+           svalue(wids$sel_si) <- curr_sel_si
+
           }
+
           # Find which QI selected and store in gui_env$temp_wid_bands_quality
           if (length(which(check_names_quality != "") > 0)) {
             wids$pos <- which(
@@ -335,6 +519,11 @@ MODIStsp_GUI <- function(general_opts,
             tmp_arr_qual <- array(data = 0, dim = length(check_names_quality))
             tmp_arr_qual[wids$pos] <- 1
             gui_env$temp_wid_bands_quality <- tmp_arr_qual
+            # update the selected layers widget lable
+            curr_sel_qual <- paste(
+              cur_prodopts[["quality_fullnames"]][which(tmp_arr_qual != 0)],
+              collapse = "; ")
+            svalue(wids$sel_qi) <- curr_sel_qual
           }
         }
       )
@@ -465,13 +654,14 @@ MODIStsp_GUI <- function(general_opts,
       gWidgets::visible(selgroup, set = TRUE)
     },
     # here finishes the initialization of the layer selection widget group
-    container = satprod2_group,
-    expand    = FALSE
+    container = layers_frame,
+    expand    = TRUE
   )
 
   gWidgets::font(vers_label) <- list(family = "sans", weight = "bold")
-  gWidgets::font(sens_label) <- gWidgets::font(band_label) <- list(
-    family = "sans", weight = "bold")
+  gWidgets::font(sens_label) <- gWidgets::font(band_label) <-
+    gWidgets::font(qa_label) <-  gWidgets::font(si_label) <- list(
+      family = "sans", weight = "bold")
 
   #   __________________________________________________________________________
   #   Initialize Widgets for download mode selection and authentication     ####
@@ -834,7 +1024,7 @@ MODIStsp_GUI <- function(general_opts,
   show_map <- gbutton(
     text    = "Show Tiles Map",
     handler = function(h, ...) {
-      grDevices::dev.new(width = 8, height = 4.8, noRStudioGD = TRUE)
+      grDevices::dev.new("X11")
       raster::plot(raster::raster(file.path(MODIStsp_dir,
                                             "ExtData/MODIS_Tiles.gif")))
     },
@@ -947,10 +1137,12 @@ MODIStsp_GUI <- function(general_opts,
   gWidgets::font(output_proj_lab) <- list(family = "sans", weight = "bold")
 
   wids$proj <- gcombobox(
+
     items     = out_proj_names,
     container = output_proj_group,
     selected  = match(general_opts$proj, out_proj_names),
     handler   = function(h, ...) {
+      # browser()
       current_sel       <- gWidgets::svalue(wids$proj)
       gui_env$old_proj4 <- gWidgets::svalue(wids$output_proj4)
       if (current_sel != "User Defined") {
@@ -980,71 +1172,73 @@ MODIStsp_GUI <- function(general_opts,
       } else {
         # If user chooses "user defined" projection, open a GUI for inputting
         # a proj4 string
-        old_sel_projwid <- out_proj_list[gui_env$old_proj4]
-        gWidgets::enabled(wids$output_proj4) <- FALSE
-        gWidgets::enabled(change_proj_but)  <- TRUE
-        selproj <- ginput("Please Insert a valid Proj4 string	!			",
-                          parent     = NULL,
-                          do.buttons = TRUE,
-                          size       = 800,
-                          horizontal = TRUE)
+        old_sel_projwid <- gui_env$old_proj4
+        if (general_opts["user_proj4"] == "") {
+          gWidgets::enabled(wids$output_proj4) <- FALSE
+          gWidgets::enabled(change_proj_but)  <- TRUE
+          selproj <- ginput("Please Insert a valid Proj4 string	!			",
+                            parent     = NULL,
+                            do.buttons = TRUE,
+                            size       = 800,
+                            horizontal = TRUE)
 
-        # verify the inputted string. Revert to previous on error, or modify
-        # projstring and update the bounding box by converting coordinates to
-        # new out proj
+          # verify the inputted string. Revert to previous on error, or modify
+          # projstring and update the bounding box by converting coordinates to
+          # new out proj
 
-        if (length(selproj) != 0 && selproj != "" && !is.na(selproj)) {
-          sel_output_proj <- try(sp::CRS(selproj), silent = TRUE)
-          # On error, send out a message and reset wids$proj and proj4 wid to
-          # previous values
-          if (class(sel_output_proj) == "try-error") {
-            gmessage(
-              message = sel_output_proj,
-              title   = strwrap("Proj4 String Not Recognized - Keeping the old
+          if (length(selproj) != 0 && selproj != "" && !is.na(selproj)) {
+            sel_output_proj <- try(sp::CRS(selproj), silent = TRUE)
+            # On error, send out a message and reset wids$proj and proj4 wid to
+            # previous values
+            if (class(sel_output_proj) == "try-error") {
+              gmessage(
+                message = sel_output_proj,
+                title   = strwrap("Proj4 String Not Recognized - Keeping the old
                                 output projection")
-            )
-          } else {
-            gWidgets::svalue(wids$output_proj4) <- sel_output_proj
+              )
+            } else {
+              gWidgets::svalue(wids$output_proj4) <- sel_output_proj
 
-            # If valid proj4string, and output is a bounding box, recompute
-            # the bounding box in output proj coordinates
+              # If valid proj4string, and output is a bounding box, recompute
+              # the bounding box in output proj coordinates
 
-            if (!svalue(wids$output_ext) == "Full Tiles Extent") {
+              if (!svalue(wids$output_ext) == "Full Tiles Extent") {
 
-              bbox_in  <- as.numeric(c(gWidgets::svalue(wids$output_ul_east),
-                                       gWidgets::svalue(wids$output_lr_north),
-                                       gWidgets::svalue(wids$output_lr_east),
-                                       gWidgets::svalue(wids$output_ul_north)))
+                bbox_in  <- as.numeric(c(gWidgets::svalue(wids$output_ul_east),
+                                         gWidgets::svalue(wids$output_lr_north),
+                                         gWidgets::svalue(wids$output_lr_east),
+                                         gWidgets::svalue(wids$output_ul_north)))
 
-              if (!any(is.na(bbox_in))) {
+                if (!any(is.na(bbox_in))) {
 
-                bbox_out <- reproj_bbox(bbox_in,
-                                        gui_env$old_proj4,
-                                        sel_output_proj@projargs,
-                                        enlarge = FALSE)
+                  bbox_out <- reproj_bbox(bbox_in,
+                                          gui_env$old_proj4,
+                                          sel_output_proj@projargs,
+                                          enlarge = FALSE)
 
-                # Get the units and kind of proj
+                  # Get the units and kind of proj
 
-                proj  <- gui_get_proj(sel_output_proj)
-                units <- gui_get_units(sel_output_proj, proj)
-                gWidgets::svalue(pixsize2_lab) <- units
-              } else {
-                bbox_out <- c(NA,NA,NA,NA)
+                  proj  <- gui_get_proj(sel_output_proj)
+                  units <- gui_get_units(sel_output_proj, proj)
+                  gWidgets::svalue(pixsize2_lab) <- units
+                } else {
+                  bbox_out <- c(NA,NA,NA,NA)
+                }
+                gui_update_bboxlabels(bbox_out,
+                                      units,
+                                      wids)
+
               }
-              gui_update_bboxlabels(bbox_out,
-                                    units,
-                                    wids)
-
             }
+          } else {
+
+            # on error, reset to previous values
+            gWidgets::svalue(wids$output_proj4) <- gui_env$old_proj4
+            gWidgets::svalue(wids$proj)         <- names(
+              out_proj_list[which(out_proj_list == gui_env$old_proj4)]
+            )
+
           }
-        } else {
-
-          # on error, reset to previous values
-          gWidgets::svalue(wids$output_proj4) <- gui_env$old_proj4
-          gWidgets::svalue(wids$proj)         <- names(
-            out_proj_list[which(out_proj_list == gui_env$old_proj4)]
-          )
-
         }
       }
     }
