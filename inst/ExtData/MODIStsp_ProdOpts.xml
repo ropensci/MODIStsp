@@ -183,7 +183,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (b4_Green-b6_SWIR)/(b4_Green+-b6_SWIR)</indexes_fullname>
+                            <indexes_fullname>NDSI (b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_fullname>
                             <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>
@@ -511,7 +511,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
+                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
                             <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>
@@ -1288,7 +1288,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
+                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
                             <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>
@@ -2218,7 +2218,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
+                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
                             <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>
@@ -11568,7 +11568,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (Nad_Refl_b4_Green-Nad_Refl_b6_SWIR)/(Nad_Refl_b4_Green+-Nad_Refl_b6_SWIR)</indexes_fullname>
+                            <indexes_fullname>NDSI (Nad_Refl_b4_Green-Nad_Refl_b6_SWIR)/(Nad_Refl_b4_Green+Nad_Refl_b6_SWIR)</indexes_fullname>
                             <indexes_formula>(Nad_Refl_b4_Green-Nad_Refl_b6_SWIR)/(Nad_Refl_b4_Green+Nad_Refl_b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>

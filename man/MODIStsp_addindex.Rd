@@ -97,7 +97,7 @@ opts_jsfile = system.file("testdata/test_addindex.json", package = "MODIStsp")
 MODIStsp_addindex(opts_jsfile = opts_jsfile)
 }
 
-# Define the new index in non-interactive execution, without specifying an 
+# Define the new index in non-interactive execution, without specifying an
 # options file (thus modifying MODIStsp_previous.json)
 
 \dontrun{

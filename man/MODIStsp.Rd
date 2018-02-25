@@ -19,7 +19,7 @@ parameters of the last successful run are retrieved from file
 
 \item{spatial_file_path}{\code{character} (optional) full path of a spatial file
 to use to derive the processing extent. If not NULL, the processing options
-which define the extent, the selected tiles and the "Full Tile / Resized"
+which define the extent, the selected tiles and the "Full Tile / Custom"
 in the JSON options file are overwritten and new files are created on the
 extent of the provided spatial file, Default: NULL}
 

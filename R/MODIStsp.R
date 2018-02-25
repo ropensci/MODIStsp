@@ -16,7 +16,7 @@
 #'  "MODIStsp_Previous.json" in subfolder "Previous"), Default: NULL
 #' @param spatial_file_path `character` (optional) full path of a spatial file
 #'  to use to derive the processing extent. If not NULL, the processing options
-#'  which define the extent, the selected tiles and the "Full Tile / Resized"
+#'  which define the extent, the selected tiles and the "Full Tile / Custom"
 #'  in the JSON options file are overwritten and new files are created on the
 #'  extent of the provided spatial file, Default: NULL
 #' @param scroll_window `logical` if TRUE, the GUI window is opened
@@ -423,7 +423,7 @@ MODIStsp <- function(gui               = TRUE,
 
       # Overwrite the full_ext option (avoids that, if the options_file
       # specifies a full processing, the incorrect parameter is passed)
-      general_opts$full_ext <- "Resized"
+      general_opts$full_ext <- "Define Custom Area"
 
       # Automatically retrieve the tiles required to cover the extent
       modis_grid  <- get(load(system.file("ExtData", "MODIS_Tiles.RData",

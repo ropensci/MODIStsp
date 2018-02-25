@@ -44,7 +44,7 @@
 #' @param start_y `integer [0-17]` Start vertical tile.
 #' @param end_x `integer [0-35]` End horizontal tile.
 #' @param end_y `integer [0-17]` End vertical tile.
-#' @param full_ext `characrter ["Full_Ext" | "Resized"]` If \"Full_Ext\", process
+#' @param full_ext `characrter ["Full_Ext" | "Custom  Area"]` If \"Full_Ext\", process
 #'   the entire extent of the selected tiles. Otherwise, crop the output to
 #'   output bbox.
 #' @param bbox `numeric(4)` Output bounding box (xmin, ymin, xmax, ymax) in
@@ -271,7 +271,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
   for (sens_sel in sensor) {
 
-
     http        <- https[[sens_sel]]
     ftp         <- ftps[[sens_sel]]
     file_prefix <- file_prefixes[[sens_sel]]
@@ -283,7 +282,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
       stop("Product ", sel_prod, " is not available over ftp.\n",
            "Please switch to http download! Aborting!")
     }
-
 
     # __________________________________________________________________________
     # Start Cycle on required years - needed since in case of "sesonal"     ####

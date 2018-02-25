@@ -107,13 +107,13 @@ License: GPL 3.0
 # over the Como Lake (Italy). It then extracts data on polygons corresponding
 # to different land cover classes saved in testdata/extract_polys.shp
 
-# First, prepare the test dataset. 
-# __NOTE__ To avoid redownloading, here we copy some test data from MODIStsp 
-# installation folder to tempdir and use it to create a test time series. 
+# First, prepare the test dataset.
+# __NOTE__ To avoid redownloading, here we copy some test data from MODIStsp
+# installation folder to tempdir and use it to create a test time series.
 
-test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI", 
+test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI",
                             package = "MODIStsp")
-dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"), 
+dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"),
            showWarnings = FALSE, recursive = TRUE)
 file.copy(list.files(test_folder, full.names = TRUE),
           file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"))

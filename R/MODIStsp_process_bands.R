@@ -196,7 +196,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # to modis_srs, to get the correct extent, then build a new
   # vrt file subsetting the previous vrt file
 
-  if (full_ext == "Resized") {
+  if (full_ext == "Define Custom Area") {
     outfile_vrt_or <- outfile_vrt
     # filename of new temporary vrt file
     outfile_vrt    <- tempfile(fileext = ".vrt")
@@ -265,23 +265,23 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
   } else if (out_res_sel == "Native"     &
              outproj_str != mod_proj_str &
-             full_ext    == "Full Tiles Extent") {
+             full_ext    == "Select MODIS Tiles") {
     "Resample0_Resize0" #Change of projection
 
   } else if (out_res_sel == "Native"     &
              outproj_str != mod_proj_str &
-             full_ext    == "Resized") {
+             full_ext    == "Define Custom Area") {
     "Resample0_Resize1" #Change of projection and extent
 
   } else if (out_res_sel == "Resampled"  &
              outproj_str != mod_proj_str &
-             full_ext    == "Full Tiles Extent") {
+             full_ext    == "Select MODIS Tiles") {
     "Resample1_Resize0" #Change of resolution and
     #projection
 
   } else if (out_res_sel == "Resampled"  &
              outproj_str != mod_proj_str &
-             full_ext    == "Resized") {
+             full_ext    == "Define Custom Area") {
     "Resample1_Resize1"  #Change of resolution,
     #projection and extent
   } else {

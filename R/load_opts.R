@@ -34,9 +34,10 @@ load_opts <- function(opts_jsfile) {
       )
     }
     
-    if (is.null(general_opts$MODIStspVersion)) {
+    if (is.null(general_opts$MODIStspVersion) |
+        general_opts$MODIStspVersion < "1.3.3.9000") {
       stop("The option file in use (", opts_jsfile, ") was created with a ",
-           "too old MODIStsp version (<=1.2.2).\n It can not be used with the ",
+           "too old MODIStsp version (<=1.3.3.9000).\n It can not be used with the ",
            "current version.\n",
            " Please delete it or specify a different value for the ",
            "`options_file` argument.")
@@ -77,14 +78,14 @@ load_opts <- function(opts_jsfile) {
       use_aria        = FALSE,
       download_server = "http",
       download_range  = "full",
-      proj            = "Sinusoidal",
+      proj            = "Native",
       user_proj4      = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
       out_res_sel     = "Native",
       out_res         = "",
-      full_ext        = "Full Tiles Extent",
+      full_ext        = "Select MODIS Tiles",
       resampling      = "near",
-      out_format      = "ENVI",
-      ts_format       = "ENVI Meta Files",
+      out_format      = "GTiff",
+      ts_format       = "rasterStack",
       rts             = "Yes",
       compress        = "None",
       nodata_change   = "No",

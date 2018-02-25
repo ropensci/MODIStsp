@@ -58,11 +58,11 @@ download.}
 
 \item{end_y}{\code{integer [0-17]} End vertical tile.}
 
-\item{full_ext}{\code{characrter ["Full_Ext" | "Resized"]} If "Full_Ext", process
+\item{full_ext}{\code{characrter ["Full_Ext" | "Custom Area"]} If "Full_Ext", process
 the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.}
 
-\item{bbox}{\code{numeric(4)} Output bounding box (xmin, xmax, ymin, ymax) in
+\item{bbox}{\code{numeric(4)} Output bounding box (xmin, ymin, xmax, ymax) in
 out_proj coordinate system.}
 
 \item{out_format}{\code{character ["ENVI" | "GTiff"]} Desired output format.}
