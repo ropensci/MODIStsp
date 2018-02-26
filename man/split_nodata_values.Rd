@@ -68,8 +68,8 @@ Notice that the last NODATA value is the only one which is considered if
 "Change NoData values" was set to "No".
 }
 \examples{
-split_nodata_values(c("255","255,101:254"))
-split_nodata_values(c("255","255,101:254"), take_all = FALSE)
+MODIStsp:::split_nodata_values(c("255","250,254:255"))
+MODIStsp:::split_nodata_values(c("255","250,254:255"), take_all = FALSE)
 create_nodata_rcl(c("255","255,101:254"), c("255","255"))
 }
 \author{

@@ -44,8 +44,8 @@
 #'  "Change NoData values" was set to "No". 
 #' @author Luigi Ranghetti, phD (2018) \email{ranghetti.l@@irea.cnr.it}
 #' @examples 
-#' split_nodata_values(c("255","255,101:254"))
-#' split_nodata_values(c("255","255,101:254"), take_all = FALSE)
+#' MODIStsp:::split_nodata_values(c("255","250,254:255"))
+#' MODIStsp:::split_nodata_values(c("255","250,254:255"), take_all = FALSE)
 
 split_nodata_values <- function(nodata_in, take_all = TRUE) {
  
