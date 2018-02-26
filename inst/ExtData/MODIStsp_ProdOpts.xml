@@ -3313,7 +3313,7 @@
                 <version>
                     <v_number>6</v_number>
                     <prod_fullname>M*D10_A1: MODIS/Terra/Aqua Snow Cover Daily L3 Global 500m Grid</prod_fullname>
-                    <main_out_folder>Snow_Cov_Daily_500m_v5</main_out_folder>
+                    <main_out_folder>Snow_Cov_Daily_500m_v6</main_out_folder>
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A1.006/</http_aqua>
@@ -3327,7 +3327,7 @@
                             <bandname>SC</bandname>
                             <fullname>NDSI Snow Cover</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>255,101:254</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3363,7 +3363,7 @@
                             <bandname>SNW_ALB</bandname>
                             <fullname>Snow Albedo Daily Tile</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>250</nodata_in>
+                            <nodata_in>255,101:254</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3479,7 +3479,7 @@
                     <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://nsidc.org/data/mod10a1</www>
+                    <www>https://nsidc.org/data/mod10a2</www>
                     <bands>
                         <band>
                             <bandname>MAX_SNW</bandname>
@@ -3577,7 +3577,7 @@
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3622,13 +3622,13 @@
                     <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://nsidc.org/data/MOD10C1</www>
+                    <www>https://nsidc.org/data/mod10c1</www>
                     <bands>
                         <band>
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>255,101:254</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3637,7 +3637,7 @@
                             <bandname>CLD_OBS</bandname>
                             <fullname>Percentage of input cells obscured by clouds plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>255,101:254</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3646,7 +3646,7 @@
                             <bandname>CLEAR_IND</bandname>
                             <fullname>Percentage of non-cloud input cells plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>255,101:254</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3688,7 +3688,7 @@
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3733,13 +3733,13 @@
                     <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://nsidc.org/data/MOD10C2</www>
+                    <www>https://nsidc.org/data/mod10c2</www>
                     <bands>
                         <band>
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>255,101:254</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3748,7 +3748,7 @@
                             <bandname>CLD_OBS</bandname>
                             <fullname>Percentage of input cells obscured by clouds plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>255,101:254</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3757,7 +3757,7 @@
                             <bandname>CLEAR_IND</bandname>
                             <fullname>Percentage of non-cloud input cells plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>255,101:254</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3799,7 +3799,7 @@
                             <bandname>SN_COV_MNT</bandname>
                             <fullname>PMonthly average snow cover percentage plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3826,13 +3826,13 @@
                     <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://nsidc.org/data/MOD10CM</www>
+                    <www>https://nsidc.org/data/mod10cm</www>
                     <bands>
                         <band>
                             <bandname>SN_COV_MNT</bandname>
-                            <fullname>PMonthly average snow cover percentage plus other results</fullname>
+                            <fullname>Monthly average snow cover percentage plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>255,101:254</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
