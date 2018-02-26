@@ -1,5 +1,5 @@
 #' @title MODIStsp helper for processing original HDF layers
-#' @description Internal function used to performed the required spatial
+#' @description Internal function used to perform the required spatial
 #'  processing on MODIS original hdf layers (reprojection, resizing, resampling,
 #'  mosaicing, computation of scaling factors). The function is based on the
 #'  use of `gdal` routines.
@@ -137,8 +137,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
       gdalUtils::gdal_translate(files_in[file],
                                 file_out,
                                 sd_index  = band,
-                                srcnodata = nodata_in,
-                                vrtnodata = nodata_out,
                                 overwrite = TRUE)
       files_in[file] <- file_out
     }
@@ -148,8 +146,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     gdalUtils::gdalwarp(files_in,
                         outfile_vrt,
                         sd        = band,
-                        srcnodata = nodata_in,
-                        vrtnodata = nodata_out,
                         multi     = TRUE,
                         wo        = paste0("NUM_THREADS=", ncores),
                         nomd      = TRUE,
@@ -161,14 +157,15 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # hdf4
     gdalUtils::gdalbuildvrt(files_in,
                             outfile_vrt,
-                            sd = band,
-                            srcnodata = nodata_in,
-                            vrtnodata = nodata_out)
+                            sd = band#,
+                            )
   }
 
   # apply the patch if an error in the original hdf4 file at
-  # step 0 was detected
-  if (correct_hdf) {
+  # step 0 was detected (and only if outfile_vrt is still a vrt)
+  # TODO check if input file with geographic coordinates and type "UInt32"
+  # are correctly generated.
+  if (correct_hdf & gsub("^.+\\.(.+)$", "\\1", outfile_vrt) == "vrt") {
     outfile_vrt_or        <- outfile_vrt
     # filename of new temporary vrt file
     outfile_vrt           <- tempfile(fileext = ".vrt")
@@ -190,7 +187,51 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
     write(outfile_vrt_cont, outfile_vrt)
   }
+  
+  # if there are more than one nodata_in values,
+  # reclassify the input raster to use only one value
+  if (length(split_nodata_values(nodata_in)[[1]])>1) {
+    
+    outfile_vrt_prev <- outfile_vrt
+    outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),"_recl.tif")
+    
+    # if full_ext == "Resized", clip before reclassifying (to speed up)
+    if (full_ext == "Resized") {
+      outfile_vrt_prev2 <- outfile_vrt_prev
+      outfile_vrt_prev <- paste0(stringr::str_sub(outfile_vrt, 1, -5),".vrt")
+      outfile_prev_bbox <- do.call(
+        function(x,y) {
+          c(max(x[1],y[1]), max(x[2],y[2]), min(x[3],y[3]), min(x[4],y[4]))
+        }, 
+        list(
+          reproj_bbox(bbox, outproj_str, mod_proj_str, enlarge=TRUE), 
+          bbox(raster::raster(outfile_vrt_prev2))
+        )
+      )
+      gdalUtils::gdalbuildvrt(
+        outfile_vrt_prev2,
+        outfile_vrt_prev,
+        te = outfile_prev_bbox,
+        tap = TRUE,
+        tr = raster::res(raster::raster(outfile_vrt_prev2)), #nolint
+        overwrite = TRUE
+      )
+    }
 
+    recl_in <- stack(outfile_vrt_prev)
+    recl_out <- raster::reclassify(
+      recl_in, 
+      rcl = create_nodata_rcl(nodata_in, nodata_out)[[1]], 
+      filename = outfile_vrt,
+      right = NA,
+      NAflag = as.numeric(nodata_out)
+    )
+    nodata_in <- nodata_out # this because nodata value has already been changed;
+    # in this way, next gdal commands with srcnodata and dstnodata do not 
+    # change it again (providing error, since nodata_in is a string)
+
+  }
+  
   # If resize required,  convert bbox coordinates from t_srs
   # to modis_srs, to get the correct extent, then build a new
   # vrt file subsetting the previous vrt file

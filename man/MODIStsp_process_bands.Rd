@@ -86,7 +86,7 @@ in interactive execution.}
 The function is called for its side effects
 }
 \description{
-Internal function used to performed the required spatial
+Internal function used to perform the required spatial
 processing on MODIS original hdf layers (reprojection, resizing, resampling,
 mosaicing, computation of scaling factors). The function is based on the
 use of \code{gdal} routines.
