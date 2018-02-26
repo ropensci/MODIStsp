@@ -65,7 +65,7 @@ MODIS products, since NODATA values are always integer values).
 This function interprets these strings and convert them in vectors with
 single values.
 Notice that the last NODATA value is the only one which is considered if
-"Change NoData values" was set to "No".
+'Change NoData values' was set to 'No'.
 }
 \examples{
 MODIStsp:::split_nodata_values(c("255","250,254:255"))
