@@ -49,10 +49,9 @@ testthat::test_that(
     #   additional preprocessing operations. Output files are in GeoTiff format.
 
     MODIStsp(test = 1)
-    out_files  <- list.files(file.path(tempdir(),
-                                       "Surf_Temp_8Days_GridSin_v6"),
-                             pattern = ".tif$",
-                             recursive = TRUE, full.names = TRUE)
+    out_files  <- list.files(
+      file.path(tempdir(), "Surf_Temp_8Days_GridSin_v6"),
+      pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
     file_sizes <- file.info(out_files)$size
 
     # check that size of files file resulting from test run are equal to those
@@ -84,9 +83,9 @@ testthat::test_that(
     # skip_on_travis()
 
     MODIStsp(test = 2)
-    out_files_dat  <- list.files(file.path(
-      tempdir(), "Surf_Temp_8Days_GridSin_v6"),
-      pattern = ".dat$", recursive = TRUE, full.names = TRUE)
+    out_files_dat  <- list.files(
+      file.path(tempdir(), "Surf_Temp_8Days_GridSin_v6"),
+      pattern = "\\.dat$", recursive = TRUE, full.names = TRUE)
 
     # same checks as before on file size and raster stats
     file_sizes_dat <- file.info(out_files_dat)$size
@@ -128,7 +127,7 @@ testthat::test_that(
     MODIStsp(test = 3)
     out_files_tif <- list.files(
       file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
-      pattern = ".tif$", recursive = TRUE, full.names = TRUE)
+      pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
 
     file_sizes_tif <- file.info(out_files_tif)$size
     expect_equal(file_sizes_tif, c(10583, 10642, 752, 10706, 1409),
@@ -143,7 +142,7 @@ testthat::test_that(
 
     out_files_vrt <- list.files(
       file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
-      pattern = ".vrt$", recursive = TRUE, full.names = TRUE)
+      pattern = "\\.vrt$", recursive = TRUE, full.names = TRUE)
     file_sizes_vrt <- file.info(out_files_vrt)$size
     expect_equal(length(out_files_vrt), 5)
 
@@ -158,7 +157,7 @@ testthat::test_that(
     MODIStsp(test = 8)
     out_files_dat <- list.files(
       file.path(tempdir(), "Surf_Ref_8Days_500m_v6"),
-      pattern = ".dat$", recursive = TRUE, full.names = TRUE)
+      pattern = "\\.dat$", recursive = TRUE, full.names = TRUE)
     file_sizes_dat <- file.info(out_files_dat)$size
     expect_equal(length(out_files_dat), 5)
     expect_equal(file_sizes_dat[1:5], c(7488, 7488, 3744, 7488, 7488),
@@ -188,7 +187,7 @@ testthat::test_that("Tests on MODIStsp", {
   MODIStsp(test = 4)
   out_files_dat <- list.files(
     file.path(tempdir(), "Snow_cov_mnt_005dg_v6"),
-    pattern = "[0-9].dat$", recursive = TRUE, full.names = TRUE)
+    pattern = "[0-9]\\.dat$", recursive = TRUE, full.names = TRUE)
   file_sizes_dat <- file.info(out_files_dat)$size
   # checking only the .dat because depending on file system the
   # ENVI hdr files may have slightly different file sizes !
@@ -205,7 +204,7 @@ testthat::test_that("Tests on MODIStsp", {
 
   out_files_rts <- list.files(
     file.path(tempdir(), "Snow_cov_mnt_005dg_v6"),
-    pattern = ".RData$", recursive = TRUE, full.names = TRUE)
+    pattern = "\\.RData$", recursive = TRUE, full.names = TRUE)
 
   #check that rts files are properly created
   expect_equal(length(out_files_rts), 3)
@@ -242,9 +241,9 @@ testthat::test_that(
     # skip_on_travis()
 
     MODIStsp(test = 5)
-    out_files_tif <- list.files(file.path(tempdir(), "Albedo_Daily_500m_v6"),
-                                pattern = "tif$", recursive = TRUE,
-                                full.names = TRUE)
+    out_files_tif <- list.files(
+      file.path(tempdir(), "Albedo_Daily_500m_v6"),
+      pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
     file_sizes_tif <- file.info(out_files_tif)$size
     expect_equal(file_sizes_tif, c(8196))
     means <- unlist(
@@ -271,9 +270,9 @@ testthat::test_that(
     # skip_on_travis()
 
     expect_warning(MODIStsp(test = 6))
-    out_files_dat <- list.files(file.path(tempdir(), "LAI_8Days_500m_v6"),
-                                pattern = ".tif$", recursive = TRUE,
-                                full.names = TRUE)
+    out_files_dat <- list.files(
+      file.path(tempdir(), "LAI_8Days_500m_v6"),
+      pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
     file_sizes_dat <- file.info(out_files_dat)$size
     expect_equal(file_sizes_dat, c(1633, 1611))
     means <- unlist(
@@ -306,9 +305,10 @@ testthat::test_that(
     # skip_on_cran()
     # skip_on_travis()
 
-    MODIStsp(test = 7,
-             spatial_file_path = system.file("testdata/spatial_file.shp",
-                                             package = "MODIStsp"))
+    MODIStsp(
+      test = 7,
+      spatial_file_path = system.file("testdata/spatial_file.shp", package = "MODIStsp")
+    )
     outpath <- file.path(
       tempdir(),
       "/Surf_Temp_8Days_GridSin_v6/LST_Day_6km/MOD11B2_LST_Day_6km_2017_001.tif"
