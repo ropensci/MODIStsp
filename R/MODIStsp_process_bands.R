@@ -33,7 +33,7 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @importFrom gdalUtils gdal_translate gdalbuildvrt gdalwarp gdalinfo
 #' @importFrom stringr str_sub
-#' @importFrom raster res raster calc
+#' @importFrom raster res raster calc reclassify
 #' @importFrom tools file_path_sans_ext
 #' @importFrom parallel detectCores
 #' @importFrom gWidgets svalue

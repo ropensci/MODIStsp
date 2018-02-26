@@ -28,7 +28,7 @@
 "compress": {
  "None": "None"
 },
-"nodata_change": "No",
+"nodata_change": "Yes",
 "scale_val": "No",
 "delete_hdf": "Yes",
 "reprocess": "Yes",

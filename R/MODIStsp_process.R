@@ -207,7 +207,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   }
   
   # if NoData change set to no, set out_nodata to nodata_in
-  # and take only the first values listed for each band
+  # and take only the last values listed for each band
   if (nodata_change == "No") {
     nodata_in <- unlist(split_nodata_values(nodata_in, take_all=FALSE))
     nodata_out <- nodata_in
