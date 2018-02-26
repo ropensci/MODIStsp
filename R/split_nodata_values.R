@@ -10,7 +10,7 @@
 #' @param nodata_out Character vector corresponding to output NODATA values 
 #'  as saved in the xml product file (one single value per band).
 #' @param take_all Logical: if TRUE (default), all the NODATA values are considered;
-#'  if FALSE, only the first one is taken. 
+#'  if FALSE, only the last one is taken. 
 #'  See "details" for the meaning of this parameter.
 #' @return [split_nodata_values]  returns a list with the same length 
 #'  of `nodata_in` vector, in which each element 
@@ -40,7 +40,7 @@
 #'  
 #'  This function interprets these strings and convert them in vectors with 
 #'  single values.
-#'  Notice that the first NODATA value is the only one which is considered if 
+#'  Notice that the last NODATA value is the only one which is considered if 
 #'  "Change NoData values" was set to "No". 
 #' @author Luigi Ranghetti, phD (2018) \email{ranghetti.l@@irea.cnr.it}
 #' @examples 
@@ -62,7 +62,7 @@ split_nodata_values <- function(nodata_in, take_all = TRUE) {
   if (take_all) {
     nodata_split3
   } else {
-    lapply(nodata_split3, function(x){x[1]})
+    lapply(nodata_split3, function(x){x[length(x)]})
   }
   
 }

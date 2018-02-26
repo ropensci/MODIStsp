@@ -14,7 +14,7 @@ create_nodata_rcl(nodata_in, nodata_out)
 as saved in the xml product file (one or more values per band).}
 
 \item{take_all}{Logical: if TRUE (default), all the NODATA values are considered;
-if FALSE, only the first one is taken.
+if FALSE, only the last one is taken.
 See "details" for the meaning of this parameter.}
 
 \item{nodata_out}{Character vector corresponding to output NODATA values
@@ -64,7 +64,7 @@ MODIS products, since NODATA values are always integer values).
 
 This function interprets these strings and convert them in vectors with
 single values.
-Notice that the first NODATA value is the only one which is considered if
+Notice that the last NODATA value is the only one which is considered if
 "Change NoData values" was set to "No".
 }
 \examples{

@@ -3327,7 +3327,7 @@
                             <bandname>SC</bandname>
                             <fullname>NDSI Snow Cover</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255,101:254</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3363,7 +3363,7 @@
                             <bandname>SNW_ALB</bandname>
                             <fullname>Snow Albedo Daily Tile</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255,101:254</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3628,7 +3628,7 @@
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255,101:254</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3637,7 +3637,7 @@
                             <bandname>CLD_OBS</bandname>
                             <fullname>Percentage of input cells obscured by clouds plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255,101:254</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3646,7 +3646,7 @@
                             <bandname>CLEAR_IND</bandname>
                             <fullname>Percentage of non-cloud input cells plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255,101:254</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3739,7 +3739,7 @@
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255,101:254</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3748,7 +3748,7 @@
                             <bandname>CLD_OBS</bandname>
                             <fullname>Percentage of input cells obscured by clouds plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255,101:254</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3757,7 +3757,7 @@
                             <bandname>CLEAR_IND</bandname>
                             <fullname>Percentage of non-cloud input cells plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255,101:254</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3832,7 +3832,7 @@
                             <bandname>SN_COV_MNT</bandname>
                             <fullname>Monthly average snow cover percentage plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255,101:254</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
