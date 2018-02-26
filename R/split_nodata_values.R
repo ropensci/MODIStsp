@@ -74,7 +74,7 @@ split_nodata_values <- function(nodata_in, take_all = TRUE) {
 #'  The parameter `right` is intended to be used as `right = NA`.
 #' @rdname split_nodata_values
 #' @examples 
-#' create_nodata_rcl(c("255","255,101:254"), c("255","255"))
+#' MODIStsp:::create_nodata_rcl(c("255","250,254:255"), c("255","255"))
 
 create_nodata_rcl <- function(nodata_in, nodata_out) {
   
