@@ -233,7 +233,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
       ts <- matrix(nrow = length(sel_dates), ncol = length(shape[, 1]))
       for (f in seq_along(sel_dates)) {
         if (verbose == TRUE) {
-          meassage("Extracting data from date: ", dates[sel_dates[f]]) #nocov
+          message("Extracting data from date: ", dates[sel_dates[f]]) #nocov
         }
         ts[f, ] <- raster::extract(in_rts[[sel_dates[f]]], shape,
                            fun = FUN)

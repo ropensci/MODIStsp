@@ -201,15 +201,15 @@ testthat::test_that("Tests on MODIStsp", {
   )
   expect_equal(means, c(68.31894, 65.17218, 70.06092, 67.14750),
                tolerance = 0.1, scale = 1)
-  # check that all nodata_in values were coherced to nodata_out
+  # check that all nodata_in values were coerced to nodata_out
   na_values <- lapply(
     out_files_dat,
     FUN = function(x) {
-      tab <- table(raster::getValues(raster::raster(x)), useNA="ifany")
-      tab[as.numeric(names(tab))>100]
+      tab <- table(raster::getValues(raster::raster(x)), useNA = "ifany")
+      tab[as.numeric(names(tab)) > 100]
     }
   )
-  expect_equal(unlist(lapply(na_values,names)), rep(as.character(NA),4))
+  expect_equal(unlist(lapply(na_values,names)), rep(as.character(NA), 4))
 
   out_files_rts <- list.files(
     file.path(tempdir(), "Snow_cov_mnt_005dg_v6"),

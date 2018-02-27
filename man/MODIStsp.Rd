@@ -71,7 +71,7 @@ MODIStsp()}
 MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json")}
 
 # Running the tool using the settings previously saved in a specific option file
-# and specifying the extent from a spatial file allows to re-use the same 
+# and specifying the extent from a spatial file allows to re-use the same
 # processing settings to perform download and reprocessing on a different area
 
 \dontrun{
@@ -87,8 +87,8 @@ extent_list = list.files("X:/path/containing/some/shapefiles/", "\\\\.shp$")
 for (single_shape in extent_list)
   MODIStsp(gui = FALSE, options_file = "X:/yourpath/youroptions.json",
     spatial_file_path = single_shape )}
-    
-# (See http://lbusett.github.io/MODIStsp/articles for additional details and 
+
+# (See http://lbusett.github.io/MODIStsp/articles for additional details and
 # examples)
 }
 \seealso{

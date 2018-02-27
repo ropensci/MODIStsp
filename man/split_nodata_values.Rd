@@ -26,7 +26,7 @@ of \code{nodata_in} vector, in which each element
 is a vector with all the NODATA values.
 
 \link{create_nodata_rcl} returns a list of matrices in the format
-specified for parameter \code{rcl} in \link[raster:reclassification]{raster::reclassification}.
+specified for parameter \code{rcl} in \link[raster:reclassify]{raster::reclassify}.
 The parameter \code{right} is intended to be used as \code{right = NA}.
 }
 \description{
@@ -41,7 +41,7 @@ MODIS products can have more than one NODATA values (sometimes
 with different meanings, e.g. 255 = "fill" and 254 = "detector saturated"
 in \href{https://nsidc.org/data/mod10a1}{MOD09A1} product). By setting
 "Change NoData values" to "Yes" in the GUI, all the NODATA values are
-coherced to one single new NODATA value; conversely, setting it to "No"
+coerced to one single new NODATA value; conversely, setting it to "No"
 only one value is assumed to be NODATA.
 The parameter \code{take_all} is assumed to be used in this way, by using this
 function with \code{take_all = TRUE} with "Change NoData values" = "Yes" and
