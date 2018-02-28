@@ -193,8 +193,10 @@ gui_save_options <- function(general_opts,
   # workaround to retrieve custom index, since it was already saved to the
   # JSON but it is not available in current variables
   
+  if(file.exists(opts_jsfile)) {
   general_opts$custom_indexes <-
     jsonlite::fromJSON(opts_jsfile)$custom_indexes
+  }
   # retrieve product options
   general_opts$sel_prod <- mod_prod_list[
     which(mod_prod_list == gWidgets::svalue(wids$prod))
