@@ -41,16 +41,16 @@ Imports:
     sp (>= 1.2-2),
     stringr (>= 1.0.0),
     xts (>= 0.9-7),
-    xml2 (>= 1.2.0)
+    xml2 (>= 1.2.0),
+    mapedit
 Suggests:
     spelling,
     knitr,
     rmarkdown,
     png,
     grid,
-    httptest,
-    covr, 
-    mapedit
+    httptest
+   
 SystemRequirements: Cairo >= 1.0.0, ATK (>= 1.10.0), Pango (>= 1.10.0), GTK+ (>=
     2.8.0), GLib (>= 2.8.0), Curl, GDAL (>= 1.6.3), PROJ.4 (>= 4.4.9)
 URL: https://github.com/lbusett/MODIStsp
