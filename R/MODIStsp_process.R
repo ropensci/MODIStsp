@@ -189,23 +189,29 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
   #   __________________________________________________________________________
   #   Intialize processing variables                                        ####
-
-  # as.integer(NoData) cause NoData ranges (e.g. 249-255) to be
-  # suppressed. So, in this cases NoData values will not be recognised. This
-  # problem will be solved in future with a cycle on NoData ranges.
-  #
-  # Fix for products with multiple NoData values
-  if (any(is.na(as.numeric(nodata_in)))) {
-    nodata_in[is.na(as.numeric(nodata_in))] <- "None"
+  
+  # Set unrecognised values to None.
+  # Recognised values are numerics, integer ranges (separate by ":")
+  # and integer vectors (separate by ",").
+  nodata_in_unrecognised <- !grepl("^[0-9\\,\\:\\-]+$",nodata_in) & 
+    is.na(suppressWarnings(as.numeric(nodata_in)))
+  if (any(nodata_in_unrecognised)) {
+    nodata_in[nodata_in_unrecognised] <- "None"
   }
-
-  if (any(is.na(as.numeric(quality_nodata_in)))) {
-    quality_nodata_in[is.na(as.numeric(quality_nodata_in))] <- "None"
+  
+  quality_nodata_in_unrecognised <- !grepl("^[0-9\\,\\:\\-]+$",quality_nodata_in) & 
+    is.na(suppressWarnings(as.numeric(quality_nodata_in)))
+  if (any(quality_nodata_in_unrecognised)) {
+    quality_nodata_in[quality_nodata_in_unrecognised] <- "None"
   }
 
   # if NoData change set to no, set out_nodata to nodata_in
+  # and take only the last values listed for each band
   if (nodata_change == "No") {
+    nodata_in <- unlist(split_nodata_values(nodata_in, take_all=FALSE))
     nodata_out <- nodata_in
+    # quality_nodata_in and quality_nodata_out are not changed,
+    # since they are always 255
   }
 
   # set-up processing folders ----

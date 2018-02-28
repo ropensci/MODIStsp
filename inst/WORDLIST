@@ -132,6 +132,7 @@ Neighbour
 NIR
 nodata
 NoData
+NODATA
 OGG
 OGR
 ogrinfo
@@ -197,6 +198,7 @@ sp
 SpatialLines
 SpatialPoints
 SpatialPolygons
+splitted
 StartDOY
 StartYear
 subfolder
