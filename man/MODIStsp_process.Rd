@@ -9,7 +9,7 @@ MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   password, https, ftps, start_x, start_y, end_x, end_y, full_ext, bbox,
   out_format, compress, out_res_sel, out_res, native_res, tiled, mod_proj_str,
   outproj_str, nodata_in, nodata_out, nodata_change, scale_val, scale_factor,
-  offset, rts, datatype, bandsel, bandnames, indexes_bandsel, indexes_bandnames,
+  offset, datatype, bandsel, bandnames, indexes_bandsel, indexes_bandnames,
   indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel,
   quality_bitN, quality_source, quality_nodata_in, quality_nodata_out,
   file_prefixes, main_out_folder, resampling, ts_format, use_aria = TRUE,
@@ -58,7 +58,7 @@ download.}
 
 \item{end_y}{\code{integer [0-17]} End vertical tile.}
 
-\item{full_ext}{\code{characrter ["Full_Ext" | "Custom Area"]} If "Full_Ext", process
+\item{full_ext}{\code{characrter ["FullTiles" | "Resized"]} If "Full_Ext", process
 the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.}
 
@@ -106,8 +106,6 @@ original layer to convert it to "correct" measure units.}
 \item{offset}{\code{numeric array} of length equal to the number of original
 layers of the selected product, containing offsets to be applied to each
 original layer to convert it to "correct" measure units.}
-
-\item{rts}{\code{character ["Yes" | "No"]} If "Yes", create RasterStack time series}
 
 \item{datatype}{\code{character array} datatypes of original MODIS bands
 (e.g., "INT2S").}

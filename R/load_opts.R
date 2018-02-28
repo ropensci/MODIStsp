@@ -86,7 +86,6 @@ load_opts <- function(opts_jsfile) {
       resampling      = "near",
       out_format      = "GTiff",
       ts_format       = "rasterStack",
-      rts             = "Yes",
       compress        = "None",
       nodata_change   = "No",
       scale_val       = "No",

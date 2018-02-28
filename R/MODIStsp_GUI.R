@@ -967,7 +967,7 @@ MODIStsp_GUI <- function(general_opts,
       current_sel <- gWidgets::svalue(wids$output_res_sel)
       if (current_sel == "Native") {
         gWidgets::enabled(wids$output_res) <- FALSE
-        gWidgets::svalue(wids$output_res)  <- paste("native")
+        gWidgets::svalue(wids$output_res)  <- "Native"
       } else {
         gWidgets::enabled(wids$output_res) <- TRUE
         gWidgets::svalue(wids$output_res)  <- ""
@@ -985,7 +985,7 @@ MODIStsp_GUI <- function(general_opts,
                            width     = 10)
   
   if (gWidgets::svalue(wids$output_res_sel) == "Native") {
-    gWidgets::svalue(wids$output_res)  <- paste("native")
+    gWidgets::svalue(wids$output_res)  <- "Native"
     gWidgets::enabled(wids$output_res) <- FALSE
   } else {
     gWidgets::svalue(wids$output_res)  <- general_opts$out_res
@@ -1098,7 +1098,7 @@ MODIStsp_GUI <- function(general_opts,
                            container = other_group)
   gWidgets::font(timeseries_lab) <- list(family = "sans", weight = "bold")
   
-  list_virt <- c("rasterStack", "ENVI Meta Files", "GDAL vrt Files")
+  list_virt <- c("R rasterStack", "ENVI Meta", "GDAL vrt")
   
   curr_checked <- c(FALSE, FALSE, FALSE)
   curr_checked[match(general_opts$ts_format, list_virt)] <- TRUE
