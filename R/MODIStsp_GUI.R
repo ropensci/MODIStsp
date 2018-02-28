@@ -794,7 +794,7 @@ MODIStsp_GUI <- function(general_opts,
         sel_output_proj <- NA
         selproj <- ginput(
           paste("Please insert a valid proj4string,",
-                "an EPSG code or an UTM grid zone number:"),
+                "an EPSG code or an UTM grid zone (e.g. 32N):"),
           parent     = NULL,
           do.buttons = TRUE,
           size       = 800,
@@ -891,7 +891,7 @@ MODIStsp_GUI <- function(general_opts,
     handler   = function(h, ...) {
       selproj <- ginput(
         paste("Please insert a valid proj4string,",
-              "an EPSG code or an UTM grid zone number:"),
+              "an EPSG code or an UTM grid zone (e.g. 32N):"),
         parent     = NULL,
         do.buttons = TRUE,
         size       = 800,

@@ -23,10 +23,10 @@ check_proj4string(projection, abort = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{projection}{\code{character} or \code{integer} corresponding to the
-proj4string to be checked, the EPSG code or a numeric UTM zone; alternatively,
-a \link{CRS} object is accepted.}
+proj4string to be checked, the EPSG code or a UTM zone (e.g. "32N");
+alternatively, a \link{CRS} object is accepted.}
 
-\item{abort}{\code{logical} if TRUE, the function aborts in case an invalid
+\item{abort}{\code{logical} if TRUE, the function aborts in case an invalid invalid
 projection is passed. Otherwise, the function returns "NA", Default: TRUE}
 }
 \value{

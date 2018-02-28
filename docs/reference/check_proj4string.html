@@ -175,12 +175,12 @@ is a valid string or CRS.</p>
     <tr>
       <th>projection</th>
       <td><p><code>character</code> or <code>integer</code> corresponding to the
-proj4string to be checked, the EPSG code or a numeric UTM zone; alternatively,
-a CRS object is accepted.</p></td>
+proj4string to be checked, the EPSG code or a UTM zone (e.g. "32N");
+alternatively, a CRS object is accepted.</p></td>
     </tr>
     <tr>
       <th>abort</th>
-      <td><p><code>logical</code> if TRUE, the function aborts in case an invalid
+      <td><p><code>logical</code> if TRUE, the function aborts in case an invalid invalid
 projection is passed. Otherwise, the function returns "NA", Default: TRUE</p></td>
     </tr>
     </table>
@@ -199,7 +199,7 @@ projection is passed. Otherwise, the function returns "NA", Default: TRUE</p></t
 <span class='fu'>check_proj4string</span>(<span class='st'>"+init=epsg:32632"</span>)</div><div class='output co'>#&gt; [1] "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</div><div class='input'>
 <span class='fu'>check_proj4string</span>(<span class='st'>"32631"</span>)</div><div class='output co'>#&gt; [1] "+init=epsg:32631 +proj=utm +zone=31 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</div><div class='input'>
 <span class='fu'>check_proj4string</span>(<span class='fl'>32633</span>)</div><div class='output co'>#&gt; [1] "+init=epsg:32633 +proj=utm +zone=33 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</div><div class='input'>
-<span class='fu'>check_proj4string</span>(<span class='fl'>30</span>)</div><div class='output co'>#&gt; [1] "+proj=utm +zone=30 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</div><div class='input'>
+<span class='fu'>check_proj4string</span>(<span class='fl'>30</span>)</div><div class='output co'>#&gt; [1] "+init=epsg:32630 +proj=utm +zone=30 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</div><div class='input'>
 <span class='fu'>check_proj4string</span>(<span class='st'>"example of invalid string"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: check_proj4string --&gt; Invalid projection detected,</span>
 #&gt; <span class='warning'>                           returning `NA`!</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'>
 <span class='fu'>library</span>(<span class='no'>sp</span>)

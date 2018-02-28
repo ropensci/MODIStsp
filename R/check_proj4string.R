@@ -3,9 +3,9 @@
 #'  (passed as UTM zone, EPSG code, PROJ4 string or [CRS] object)
 #'  is a valid string or CRS.
 #' @param projection `character` or `integer` corresponding to the
-#'  proj4string to be checked, the EPSG code or a numeric UTM zone; alternatively,
-#'  a [CRS] object is accepted.
-#' @param abort `logical` if TRUE, the function aborts in case an invalid
+#'  proj4string to be checked, the EPSG code or a UTM zone (e.g. "32N");
+#'  alternatively, a [CRS] object is accepted.
+#' @param abort `logical` if TRUE, the function aborts in case an invalid invalid
 #'  projection is passed. Otherwise, the function returns "NA", Default: TRUE
 #' @return `character` proj4string of the object or file
 #' @note This function was forked from package `sprawl`, version 0.3.0.
@@ -76,12 +76,9 @@ check_proj4string.numeric  <- function(projection,
                                        abort = FALSE,
                                        verbose = TRUE) {
   
-  # if it is 0<proj4string<=60, interpret as UTM zone
+  # if it is 0<proj4string<=60, interpret as UTM north zone
   if (projection > 0 & projection <= 60) {
-    proj4string <- paste0("+proj=utm ",
-                          "+zone=",projection," ",
-                          "+datum=WGS84 +units=m +no_defs ",
-                          "+ellps=WGS84 +towgs84=0,0,0")
+    proj4string <- paste0("+init=epsg:326", projection)
     return(rgdal::checkCRSArgs(proj4string)[[2]])
   }
   
@@ -115,6 +112,16 @@ check_proj4string.character  <- function(projection,
   if (suppressWarnings(!is.na(as.numeric(projection)))) {
     return(check_proj4string.numeric(as.integer(projection),
                                      abort = abort))
+  }
+  
+  # check if it is a UTM zone
+  if (grepl("^[0-9]+[NnSs]$",projection)) {
+    utm_zone <- gsub("[NnSs]$","",projection)
+    utm_ns <- toupper(gsub("?[0-9]+","",projection))
+    proj4string <- paste0("+init=epsg:32",
+                          if (utm_ns=="N") {"6"} else {"7"},
+                          utm_zone)
+    return(rgdal::checkCRSArgs(proj4string)[[2]])
   }
   
   if (rgdal::checkCRSArgs(projection)[[1]] == FALSE) {
