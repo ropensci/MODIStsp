@@ -196,7 +196,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # to modis_srs, to get the correct extent, then build a new
   # vrt file subsetting the previous vrt file
 
-  if (full_ext == "Define Custom Area") {
+  if (full_ext == "Resized") {
     outfile_vrt_or <- outfile_vrt
     # filename of new temporary vrt file
     outfile_vrt    <- tempfile(fileext = ".vrt")
@@ -265,23 +265,23 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
   } else if (out_res_sel == "Native"     &
              outproj_str != mod_proj_str &
-             full_ext    == "Select MODIS Tiles") {
+             full_ext    == "FullTiles") {
     "Resample0_Resize0" #Change of projection
 
   } else if (out_res_sel == "Native"     &
              outproj_str != mod_proj_str &
-             full_ext    == "Define Custom Area") {
+             full_ext    == "Resized") {
     "Resample0_Resize1" #Change of projection and extent
 
   } else if (out_res_sel == "Resampled"  &
              outproj_str != mod_proj_str &
-             full_ext    == "Select MODIS Tiles") {
+             full_ext    == "FullTiles") {
     "Resample1_Resize0" #Change of resolution and
     #projection
 
   } else if (out_res_sel == "Resampled"  &
              outproj_str != mod_proj_str &
-             full_ext    == "Define Custom Area") {
+             full_ext    == "Resized") {
     "Resample1_Resize1"  #Change of resolution,
     #projection and extent
   } else {
@@ -366,6 +366,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # on ENVI format, processing is identical, save for
     # not providing the "COMPRESSION" option to avoid
     # warnings
+    
     switch(reproj_type,
            GdalTranslate = gdalUtils::gdal_translate(
              outfile_vrt,

@@ -44,7 +44,7 @@
 #' @param start_y `integer [0-17]` Start vertical tile.
 #' @param end_x `integer [0-35]` End horizontal tile.
 #' @param end_y `integer [0-17]` End vertical tile.
-#' @param full_ext `characrter ["Full_Ext" | "Custom  Area"]` If \"Full_Ext\", process
+#' @param full_ext `characrter ["FullTiles" | "Resized"]` If \"Full_Ext\", process
 #'   the entire extent of the selected tiles. Otherwise, crop the output to
 #'   output bbox.
 #' @param bbox `numeric(4)` Output bounding box (xmin, ymin, xmax, ymax) in
@@ -71,7 +71,6 @@
 #'  original MODIS layers, and Spectral Indexes are saved as floating point. If
 #'  == "No", no rescaling is done and Spectral Indexes are saved as integer, with a
 #'  10000 scaling factor.
-#' @param rts `character ["Yes" | "No"]` If "Yes", create RasterStack time series
 #' @param datatype `character array` datatypes of original MODIS bands
 #'  (e.g., "INT2S").
 #' @param bandsel `integer 0/1 array` of length equal to number of original
@@ -154,7 +153,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              mod_proj_str, outproj_str,
                              nodata_in, nodata_out, nodata_change,
                              scale_val, scale_factor, offset,
-                             rts, datatype,
+                             datatype,
                              bandsel, bandnames,
                              indexes_bandsel, indexes_bandnames,
                              indexes_formula, indexes_nodata_out,
@@ -603,7 +602,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       indexes_bandnames, indexes_bandsel, indexes_nodata_out,
                       quality_bandnames, quality_bandsel, quality_nodata_out,
                       file_prefixes,
-                      ts_format, out_format, rts,
+                      ts_format, out_format,
                       verbose = verbose)
 
   # ____________________________________________________________________________
