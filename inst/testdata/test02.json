@@ -16,7 +16,7 @@
 "use_aria": false,
 "download_server": "offline",
 "download_range": "full",
-"proj": "Sinusoidal",
+"proj": "User Defined",
 "user_proj4": "+proj=utm +zone=22 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0",
 "out_res_sel": "Resampled",
 "out_res": "1000",

@@ -16,7 +16,7 @@
 "use_aria": false,
 "download_server": "offline",
 "download_range": "full",
-"proj": "UTM 32N",
+"proj": "User Defined",
 "user_proj4": "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0",
 "out_res_sel": "Resampled",
 "out_res": "250",

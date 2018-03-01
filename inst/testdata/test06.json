@@ -16,7 +16,7 @@
 "use_aria": true,
 "download_server": "ftp",
 "download_range": "seasonal",
-"proj": "Latlon WGS84",
+"proj": "Native",
 "user_proj4": "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0",
 "out_res_sel": "Resampled",
 "out_res": "0.01",

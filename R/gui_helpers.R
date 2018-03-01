@@ -14,19 +14,24 @@ gui_update_bboxlabels <- function(bbox_out,
                                   wids) {
   #nocov start
 
-  digits <- ifelse(units == "dec. degrees", 4, 1)
-  gWidgets::svalue(wids$output_ul_east)  <- formatC(bbox_out[1, 1],
+  digits <- ifelse(units == "dec.degrees", 4, 1)
+  
+  gWidgets::svalue(wids$output_xmin)  <- formatC(bbox_out[1, 1],
                                                     digits = digits,
                                                     format = "f")
-  gWidgets::svalue(wids$output_ul_north) <- formatC(bbox_out[2, 2],
+  
+  gWidgets::svalue(wids$output_ymin) <- formatC(bbox_out[2, 1],
+                                                digits = digits,
+                                                format = "f")
+  gWidgets::svalue(wids$output_xmax)  <- formatC(bbox_out[1, 2],
+                                                 digits = digits,
+                                                 format = "f")
+  
+  gWidgets::svalue(wids$output_ymax) <- formatC(bbox_out[2, 2],
                                                     digits = digits,
                                                     format = "f")
-  gWidgets::svalue(wids$output_lr_east)  <- formatC(bbox_out[1, 2],
-                                                    digits = digits,
-                                                    format = "f")
-  gWidgets::svalue(wids$output_lr_north) <- formatC(bbox_out[2, 1],
-                                                    digits = digits,
-                                                    format = "f")
+
+
   #nocov end
 }
 
@@ -177,10 +182,10 @@ gui_load_options <- function(opts_jsfile,
   gWidgets::svalue(wids$output_res)      <- general_opts$out_res
   gWidgets::svalue(wids$output_resmeth)  <- general_opts$resampling
   gWidgets::svalue(wids$output_ext)      <- general_opts$full_ext
-  gWidgets::svalue(wids$output_ul_east)  <- general_opts$bbox[1]
-  gWidgets::svalue(wids$output_lr_east)  <- general_opts$bbox[3]
-  gWidgets::svalue(wids$output_lr_north) <- general_opts$bbox[2]
-  gWidgets::svalue(wids$output_ul_north) <- general_opts$bbox[4]
+  gWidgets::svalue(wids$output_xmin)  <- general_opts$bbox[1]
+  gWidgets::svalue(wids$output_xmax)  <- general_opts$bbox[3]
+  gWidgets::svalue(wids$output_ymin) <- general_opts$bbox[2]
+  gWidgets::svalue(wids$output_ymax) <- general_opts$bbox[4]
   gWidgets::svalue(wids$reprocess)       <- general_opts$reprocess
   gWidgets::svalue(wids$delete)          <- general_opts$delete_hdf
   gWidgets::svalue(wids$nodata)          <- general_opts$nodata_change
@@ -277,10 +282,10 @@ gui_save_options <- function(general_opts,
   general_opts$out_res     <- gWidgets::svalue(wids$output_res)
   general_opts$resampling  <- gWidgets::svalue(wids$output_resmeth)
   general_opts$full_ext    <- gWidgets::svalue(wids$output_ext)
-  general_opts$bbox        <- c(gWidgets::svalue(wids$output_ul_east),
-                                gWidgets::svalue(wids$output_lr_north),
-                                gWidgets::svalue(wids$output_lr_east),
-                                gWidgets::svalue(wids$output_ul_north))
+  general_opts$bbox        <- c(gWidgets::svalue(wids$output_xmin),
+                                gWidgets::svalue(wids$output_ymin),
+                                gWidgets::svalue(wids$output_xmax),
+                                gWidgets::svalue(wids$output_ymax))
 
   # Retrieve reprocess, delete and nodata
   general_opts$reprocess  <- gWidgets::svalue(wids$reprocess)
@@ -890,7 +895,7 @@ gh_selectmap <- function(h, ext_type, ...) {
         sel_bbox <- sf::st_bbox(sel[["finished"]])
 
         crs_out <- ifelse(gWidgets::svalue(wids$proj) != "User Defined",
-                          out_proj_list[[gWidgets::svalue(wids$proj)]],
+                          svalue(wids$output_proj4),
                           general_opts$user_proj4)
 
         bbox_out <- reproj_bbox(sel_bbox,
@@ -998,19 +1003,35 @@ gh_view_extent <- function(h, ext_type, ...) {
         viewer = shiny::browserViewer(browser = getOption("browser"))
       )
     } else {
+# browser()
+      bbox <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
+                           gWidgets::svalue(wids$output_ymin),
+                           gWidgets::svalue(wids$output_xmax),
+                           gWidgets::svalue(wids$output_ymax)))
 
-      bbox <- as.numeric(c(gWidgets::svalue(wids$output_ul_east),
-                           gWidgets::svalue(wids$output_lr_north),
-                           gWidgets::svalue(wids$output_lr_east),
-                           gWidgets::svalue(wids$output_ul_north)))
-
-      bbox_sf <- sf::st_as_sfc(
-        sf::st_bbox(
-          c(xmin = bbox[1], xmax = bbox[3], ymax = bbox[4], ymin = bbox[2]),
-          crs = sf::st_crs(svalue(wids$output_proj4)))
-      )
-
-      bbox_sf  <- sf::st_transform(bbox_sf, 4326)
+      print(svalue(wids$output_proj4))
+      print(general_opts$user_proj4)
+      
+    # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
+    #                         "+init=epsg:4326",
+    #                         enlarge = TRUE)
+    # 
+      bbox_out <- sf::st_bbox(
+          c(xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]),
+          crs = gWidgets::svalue(wids$output_proj4))
+#    
+  
+      bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
+                              "+init=epsg:4326",
+                              enlarge = TRUE)
+      bbox_out <- sf::st_bbox(
+        c(xmin = bbox_out[1], xmax = bbox_out[3], ymax = bbox_out[4], ymin = bbox_out[2]),
+        crs = sf::st_crs(svalue(wids$output_proj4)))
+    
+       browser()
+      bbox_sf <- sf::st_as_sfc(bbox_out)
+      bbox_sf <- sf::st_transform(bbox_sf, 4326)
+      # browser()
       mm <- leaflet::leaflet(bbox_sf)
       mm <- leaflet::addPolygons(mm)
       mm <- leaflet::addTiles(mm)
@@ -1038,10 +1059,10 @@ gh_view_extent <- function(h, ext_type, ...) {
 
 # gh_tiles_from_bbox ----
 gh_tiles_from_bbox <- function(h, ...) {
-  bbox <- as.numeric(c(gWidgets::svalue(wids$output_ul_east),
-                       gWidgets::svalue(wids$output_lr_north),
-                       gWidgets::svalue(wids$output_lr_east),
-                       gWidgets::svalue(wids$output_ul_north)))
+  bbox <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
+                       gWidgets::svalue(wids$output_ymin),
+                       gWidgets::svalue(wids$output_xmax),
+                       gWidgets::svalue(wids$output_ymax)))
   # Check if bbox is consistent
 
   n_bbox_compiled <- length(which(is.finite(bbox)))

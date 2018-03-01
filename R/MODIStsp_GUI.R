@@ -652,15 +652,15 @@ MODIStsp_GUI <- function(general_opts,
   lat_w_group <- ggroup(horizontal = TRUE,  container = min_group)
   addSpring(lat_w_group)
   
-  output_ul_east_lab  <- glabel("Left East", container = lat_w_group)
-  wids$output_ul_east <- gedit(text      = general_opts$bbox[1],
-                               container = lat_w_group,
-                               width     = 9)
+  output_xmin_lab  <- glabel("x-min", container = lat_w_group)
+  wids$output_xmin <- gedit(text = general_opts$bbox[1],
+                            container = lat_w_group,
+                            width     = 9)
   long_s_group <- ggroup(horizontal = TRUE, container = min_group)
   addSpring(long_s_group)
   
-  output_lr_north_lab  <- glabel("Low. North", container = long_s_group)
-  wids$output_lr_north <- gedit(text      = general_opts$bbox[2],
+  output_ymin_lab  <- glabel("y-min", container = long_s_group)
+  wids$output_ymin <- gedit(text      = general_opts$bbox[2],
                                 container = long_s_group,
                                 width     = 9)
   addSpace(bbox_group, 2)
@@ -669,21 +669,21 @@ MODIStsp_GUI <- function(general_opts,
   lat_e_group <- ggroup(horizontal = TRUE,  container = max_group)
   addSpring(lat_e_group)
   
-  output_lr_east_lab  <- glabel("Right East", container = lat_e_group)
-  wids$output_lr_east <- gedit(text      = general_opts$bbox[3],
-                               container = lat_e_group,
-                               width     = 9)
+  output_xmax_lab  <- glabel("x-max", container = lat_e_group)
+  wids$output_xmax <- gedit(text = general_opts$bbox[3],
+                            container = lat_e_group,
+                            width     = 9)
   long_n_group <- ggroup(horizontal = TRUE, container = max_group)
   addSpring(long_n_group)
   
-  output_ul_north_lab  <- glabel("Upp. North", container = long_n_group)
-  wids$output_ul_north <- gedit(text      = general_opts$bbox[4],
-                                container = long_n_group,
-                                width     = 9)
+  output_ymax_lab  <- glabel("y-max", container = long_n_group)
+  wids$output_ymax <- gedit(text = general_opts$bbox[4],
+                            container = long_n_group,
+                            width     = 9)
   
-  gWidgets::font(output_ul_east_lab) <- gWidgets::font(output_ul_north_lab) <-
+  gWidgets::font(output_xmin_lab) <- gWidgets::font(output_ymax_lab) <-
     list(family = "sans")
-  gWidgets::font(output_lr_east_lab) <- gWidgets::font(output_lr_north_lab) <-
+  gWidgets::font(output_xmax_lab) <- gWidgets::font(output_ymin_lab) <-
     list(family = "sans")
   
   # Button to load extent from SHP or KML file ----
@@ -773,14 +773,16 @@ MODIStsp_GUI <- function(general_opts,
         # If valid proj4string, and output is a bounding box, recompute bounding
         # box to output proj coordinates, then update values in the text labels
         if (gWidgets::svalue(wids$output_ext) != "Select MODIS Tiles") {
-          bbox_in  <- as.numeric(c(gWidgets::svalue(wids$output_ul_east),
-                                   gWidgets::svalue(wids$output_lr_north),
-                                   gWidgets::svalue(wids$output_lr_east),
-                                   gWidgets::svalue(wids$output_ul_north)))
+          bbox_in  <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
+                                   gWidgets::svalue(wids$output_ymin),
+                                   gWidgets::svalue(wids$output_xmax),
+                                   gWidgets::svalue(wids$output_ymax)))
+          
           bbox_out <- reproj_bbox(bbox_in,
                                   gui_env$old_proj4,
                                   sel_output_proj@projargs,
-                                  enlarge = FALSE)
+                                  enlarge = TRUE)
+
           gui_update_bboxlabels(bbox_out,
                                 units,
                                 wids)
@@ -828,13 +830,13 @@ MODIStsp_GUI <- function(general_opts,
             
             if (!svalue(wids$output_ext) == "Select MODIS Tiles") {
               
-              bbox_in  <- as.numeric(c(gWidgets::svalue(wids$output_ul_east),
-                                       gWidgets::svalue(wids$output_lr_north),
-                                       gWidgets::svalue(wids$output_lr_east),
-                                       gWidgets::svalue(wids$output_ul_north)))
+              bbox_in  <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
+                                       gWidgets::svalue(wids$output_ymin),
+                                       gWidgets::svalue(wids$output_xmax),
+                                       gWidgets::svalue(wids$output_ymax)))
               
               if (!any(is.na(bbox_in))) {
-                
+                # browser()
                 bbox_out <- reproj_bbox(bbox_in,
                                         gui_env$old_proj4,
                                         sel_output_proj@projargs,
@@ -922,15 +924,15 @@ MODIStsp_GUI <- function(general_opts,
           # bounding box in output proj coordinates
           if (gWidgets::svalue(wids$output_ext) != "Select MODIS Tiles") {
             
-            bbox_in  <- as.numeric(c(gWidgets::svalue(wids$output_ul_east),
-                                     gWidgets::svalue(wids$output_lr_north),
-                                     gWidgets::svalue(wids$output_lr_east),
-                                     gWidgets::svalue(wids$output_ul_north)))
+            bbox_in  <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
+                                     gWidgets::svalue(wids$output_ymin),
+                                     gWidgets::svalue(wids$output_xmax),
+                                     gWidgets::svalue(wids$output_ymax)))
             
             bbox_out <- reproj_bbox(bbox_in,
                                     gui_env$old_proj4,
                                     sel_output_proj@projargs,
-                                    enlarge = FALSE)
+                                    enlarge = TRUE)
             
             gui_update_bboxlabels(bbox_out,
                                   units,
@@ -995,6 +997,7 @@ MODIStsp_GUI <- function(general_opts,
   
   # Initial set-up of the output projection on the basis of current
   # values in widgets
+  
   sel_output_proj <- sp::CRS(
     if (gWidgets::svalue(wids$proj) == "User Defined") {
       gWidgets::svalue(wids$output_proj4)
@@ -1053,6 +1056,7 @@ MODIStsp_GUI <- function(general_opts,
       )
     }
   )
+  
   gWidgets::size(wids$format) <- c(70, 30)
   addSpace(opt_group, 10)
   # Compression ----
