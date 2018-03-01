@@ -43,9 +43,9 @@ matrix:
         - covr
         - shiny
         - leaflet
+        - sf
         - mapview
         - mapedit
-        - sf
 
 after_success:
   - Rscript -e 'library(covr);coveralls();codecov()'
