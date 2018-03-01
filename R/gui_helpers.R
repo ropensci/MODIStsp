@@ -832,7 +832,8 @@ gh_selectmap <- function(h, ext_type, ...) {
         tilemap,
         viewer = shiny::browserViewer(browser = getOption("browser"))
       )
-      if (!is.null(sel[["finished"]])) {
+
+      if (inherits(sel, "data.frame")) {
 
         seltiles <- lapply(sel[["Name"]], FUN = function(x){
           h <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[2])
@@ -1002,11 +1003,13 @@ gh_view_extent <- function(h, ext_type, ...) {
                            gWidgets::svalue(wids$output_lr_north),
                            gWidgets::svalue(wids$output_lr_east),
                            gWidgets::svalue(wids$output_ul_north)))
+
       bbox_sf <- sf::st_as_sfc(
         sf::st_bbox(
           c(xmin = bbox[1], xmax = bbox[3], ymax = bbox[4], ymin = bbox[2]),
-          crs = sf::st_crs(mod_proj_str))
+          crs = sf::st_crs(svalue(wids$output_proj4)))
       )
+
       bbox_sf  <- sf::st_transform(bbox_sf, 4326)
       mm <- leaflet::leaflet(bbox_sf)
       mm <- leaflet::addPolygons(mm)
@@ -1027,7 +1030,7 @@ gh_view_extent <- function(h, ext_type, ...) {
   }
 }
 
-# gh_view_extent ----
+# gh_tiles_from_bbox ----
 gh_tiles_from_bbox <- function(h, ...) {
   bbox <- as.numeric(c(gWidgets::svalue(wids$output_ul_east),
                        gWidgets::svalue(wids$output_lr_north),
