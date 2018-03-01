@@ -28,6 +28,8 @@ alternatively, a \link{CRS} object is accepted.}
 
 \item{abort}{\code{logical} if TRUE, the function aborts in case an invalid invalid
 projection is passed. Otherwise, the function returns "NA", Default: TRUE}
+
+\item{verbose}{\code{logical} if TRUE, return messages}
 }
 \value{
 \code{character} proj4string of the object or file
@@ -42,6 +44,7 @@ This function was forked from package \code{sprawl}, version 0.3.0.
 }
 \examples{
 
+\dontrun{
 check_proj4string("+init=epsg:32632")
 
 check_proj4string("32631")
@@ -54,12 +57,7 @@ check_proj4string("example of invalid string")
 
 library(sp)
 check_proj4string(CRS("+init=epsg:32632"))
-
-library(raster)
- in_rast <- read_rast(system.file("extdata/OLI_test",
-  "oli_multi_1000_b2.tif", package = "sprawl.data"))
-check_proj4string(in_rast@crs)
-
+}
 }
 \author{
 Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}

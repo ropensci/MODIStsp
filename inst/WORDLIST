@@ -42,6 +42,7 @@ Emissivity
 EndDOY
 EndYear
 ENVI
+EPSG
 Evapotranspiration
 EVI
 ExtData
@@ -163,7 +164,6 @@ rasters
 Rasters
 rasterStack
 RasterStack
-RasterStacks
 rdata
 Rdata
 RData

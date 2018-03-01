@@ -330,8 +330,10 @@ MODIStsp_extract <- function(in_rts, sp_object,
             as.character(shape@data[, eval(id_field)]) %in% miss_feat
             )
         } else {
-          pos_missing <- miss_feat <- which(as.character(
-            shape@data[, "mdxtnq"]) %in% miss_feat)
+          miss_feat <- setdiff(as.character(shape@data[, "mdxtnq"]), names(ts))
+          pos_missing <- which(
+            as.character(shape@data[, "mdxtnq"]) %in% miss_feat
+          )
         }
 
         shpsub <- shape[pos_missing, ]

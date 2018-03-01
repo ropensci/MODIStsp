@@ -278,7 +278,7 @@ testthat::test_that(
     # skip_on_cran()
     # skip_on_travis()
 
-    expect_warning(MODIStsp(test = 6))
+    MODIStsp(test = 6)
     out_files_dat <- list.files(
       file.path(tempdir(), "MODIStsp/LAI_8Days_500m_v6"),
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
