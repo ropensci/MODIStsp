@@ -20,11 +20,10 @@
 "user_proj4": "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0",
 "out_res_sel": "Resampled",
 "out_res": "0.01",
-"full_ext": "Resized",
+"full_ext": "Define Custom Area",
 "resampling": "near",
 "out_format": "GTiff",
-"ts_format": "ENVI and GDAL",
-"rts": "Yes",
+"ts_format": ["ENVI Meta", "GDAL vrt"],
 "compress": {
  "High (DEFLATE)": "DEFLATE"
 },

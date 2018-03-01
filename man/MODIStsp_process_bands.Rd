@@ -38,7 +38,7 @@ processed.}
 \item{nodata_out}{\code{numeric} Output nodata value to the HDF layer to be
 processed.}
 
-\item{full_ext}{\code{characrter ["Full_Ext" | "Custom Area"]} If "Full_Ext", process
+\item{full_ext}{\code{characrter ["FullTiles" | "Resized"]} If "Full_Ext", process
 the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.}
 

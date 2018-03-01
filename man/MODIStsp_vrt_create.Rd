@@ -7,7 +7,7 @@
 MODIStsp_vrt_create(sensor, out_prod_folder, bandnames, bandsel, nodata_out,
   indexes_bandnames, indexes_bandsel, indexes_nodata_out, quality_bandnames,
   quality_bandsel, quality_nodata_out, file_prefixes, ts_format, out_format,
-  rts, verbose)
+  verbose)
 }
 \arguments{
 \item{sensor}{\code{character ["Terra"| "Aqua" | "Both"]} MODIS platform to be considered.
@@ -50,8 +50,6 @@ for virtual file.}
 
 \item{out_format}{\code{character ["ENVI" | "GTiff"]} Format of images used as
 "input" for the vrt and contained in out_prod_folder/band folders.}
-
-\item{rts}{\code{character ["Yes" | "No"]} If Yes, create "R" RasterStacks time series}
 
 \item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
 }
