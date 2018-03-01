@@ -40,6 +40,8 @@ matrix:
         - cairoDevice
         - RGtk2
       r_packages:
+        - units
+        - udunits
         - covr
         - shiny
         - leaflet
