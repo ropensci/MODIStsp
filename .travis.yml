@@ -39,8 +39,6 @@ matrix:
       r_binary_packages:
         - cairoDevice
         - RGtk2
-        - mapedit
-        - sf
         - shiny
         - mapview
         - leaflet
