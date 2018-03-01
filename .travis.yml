@@ -39,11 +39,13 @@ matrix:
       r_binary_packages:
         - cairoDevice
         - RGtk2
-        - shiny
-        - mapview
-        - leaflet
       r_packages:
         - covr
+        - shiny
+        - leaflet
+        - mapview
+        - mapedit
+        - sf
 
 after_success:
   - Rscript -e 'library(covr);coveralls();codecov()'
