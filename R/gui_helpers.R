@@ -1014,6 +1014,12 @@ gh_view_extent <- function(h, ext_type, ...) {
       mm <- leaflet::leaflet(bbox_sf)
       mm <- leaflet::addPolygons(mm)
       mm <- leaflet::addTiles(mm)
+      providers <- c("OpenStreetMap", "Esri.WorldImagery")
+      mm <- leaflet::addProviderTiles(mm, "OpenStreetMap", group = "OpenStreetMap")
+      mm <- leaflet::addProviderTiles(mm, "Esri.WorldImagery", group = "Esri.WorldImagery")
+      mm <- leaflet::addLayersControl(mm,
+        baseGroups = providers,
+        options = leaflet::layersControlOptions(collapsed = FALSE))
       mapedit::selectMap(
         mm,
         viewer = shiny::browserViewer(browser = getOption("browser"))
