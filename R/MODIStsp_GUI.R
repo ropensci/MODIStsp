@@ -889,6 +889,7 @@ MODIStsp_GUI <- function(general_opts,
     text      = "Change",
     container = output_proj_group,
     handler   = function(h, ...) {
+      gui_env$old_proj4 <- gWidgets::svalue(wids$output_proj4)
       selproj <- ginput(
         paste("Please insert a valid proj4string,",
               "an EPSG code or an UTM grid zone (e.g. 32N):"),
