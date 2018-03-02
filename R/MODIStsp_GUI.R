@@ -786,7 +786,7 @@ MODIStsp_GUI <- function(general_opts,
           bbox_out <- reproj_bbox(bbox_in,
                                   old_proj,
                                   sp::CRS(newproj)@projargs,
-                                  enlarge = FALSE)
+                                  enlarge = TRUE)
 
           gui_update_bboxlabels(bbox_out,
                                 units,
@@ -845,7 +845,7 @@ MODIStsp_GUI <- function(general_opts,
                 bbox_out <- reproj_bbox(bbox_in,
                                         old_proj,
                                         sp::CRS(new_proj)@projargs,
-                                        enlarge = FALSE)
+                                        enlarge = TRUE)
 
                 # Get the units and kind of proj
 

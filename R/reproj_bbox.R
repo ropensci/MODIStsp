@@ -19,6 +19,7 @@
 
 reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE, N_dens=1000) {
   # densify the original bounding box
+  
   if (enlarge) {
     d_bbox_in <- data.frame(
       lon = c(bbox[1] + diff(bbox[c(1, 3)]) * (0:N_dens) / N_dens,

@@ -1,6 +1,106 @@
 #### HELPER FUNCTIONS FOR MODIStsp_GUI TO AVOID REPETITIONS AND FACILITATE  ####
 #### MAINTENANCE
 
+# gh_selcat ----
+gh_selcat <- function(h, ...) {
+  # Identify only products of this category
+  sel_prod    <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)][1] #nolint
+  wids$prod[] <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)] #nolint
+  gWidgets::svalue(wids$prod) <- sel_prod
+  sel_prodopts <- prod_opt_list[[sel_prod]]
+  # Select the last version (it assumes that versions in xml file are in
+  # increasing order)
+  
+  wids$vers[] <- names(sel_prodopts)
+  gWidgets::svalue(wids$vers) <- sel_prodopts[[length(sel_prodopts)]]$v_number #nolint
+  # Disable sensor choice for combined datasets
+  if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$combined == 1) {
+    gWidgets::enabled(wids$sens) <- FALSE
+    wids$sens[] <- "Combined"
+    gWidgets::svalue(wids$sens)  <- "Combined"
+  } else {
+    gWidgets::enabled(wids$sens) <- TRUE
+    wids$sens[] <- c("Terra", "Aqua", "Both")
+    gWidgets::svalue(wids$sens)  <- general_opts$sensor
+  }
+  # On product change, automatically modify the default projection - latlon
+  # for tiled, Sinu for nontiled
+  if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$tiled == 0) {
+    gWidgets::enabled(tiles_group) <- FALSE
+    gWidgets::svalue(wids$proj_choice)    <- "Native"
+    gWidgets::svalue(wids$output_proj4) <-
+      "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
+  } else {
+    gWidgets::enabled(tiles_group) <- TRUE
+    gWidgets::svalue(wids$proj_choice)    <- "Native"
+    gWidgets::svalue(wids$output_proj4) <-
+      "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+  }
+  
+  # reset dummy variables for band selection to 0 on product change
+  gui_env$temp_wid_bands         <- 0
+  gui_env$temp_wid_bands_indexes <- 0
+  gui_env$temp_wid_bands_quality <- 0
+}
+
+# gh_selprod ----
+
+gh_selprod <- function(h, ...) {
+  sel_prod   <- ifelse(!is.null(gWidgets::svalue(wids$prod)),
+                       gWidgets::svalue(wids$prod),
+                       sel_prod)
+  
+  sel_prodopts <- prod_opt_list[[sel_prod]]
+  # Select the last version (it assumes that versions in xml file are in
+  # increasing order)
+  wids$vers[]       <- names(sel_prodopts)
+  gWidgets::svalue(wids$vers) <- sel_prodopts[[length(sel_prodopts)]]$v_number #nolint
+  # Disable sensor choice for combined datasets
+  if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$combined == 1) {
+    gWidgets::enabled(wids$sens) <- FALSE
+    wids$sens[]        <- "Combined"
+    gWidgets::svalue(wids$sens)  <- "Combined"
+  } else {
+    gWidgets::enabled(wids$sens) <- TRUE
+    wids$sens[]        <- c("Terra", "Aqua", "Both")
+    gWidgets::svalue(wids$sens)  <- general_opts$sensor
+  }
+  # On product change, automatically modify the default projection - latlon
+  # for tiled, Sinu for nontiled
+  
+  if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$tiled == 0) {
+    gWidgets::enabled(tiles_group) <- FALSE
+    gWidgets::svalue(wids$proj_choice)    <- "Native"
+    gWidgets::svalue(wids$output_proj4) <-
+      "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
+  } else {
+    gWidgets::enabled(tiles_group) <- TRUE
+    gWidgets::svalue(wids$proj_choice)    <- "Native"
+    gWidgets::svalue(wids$output_proj4) <-
+      "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+  }
+  # reset dummy variables for band selection to 0 on product change
+  gui_env$temp_wid_bands         <- 0
+  gui_env$temp_wid_bands_indexes <- 0
+  gui_env$temp_wid_bands_quality <- 0
+  
+  cur_prodopts <- sel_prodopts[[svalue(wids$vers)]]
+  
+  # Original Bands ----
+  
+  svalue(wids$sel_layers) <- "- None selected -"
+  svalue(wids$sel_qi)     <- ifelse(
+    length(cur_prodopts[["quality_bandnames"]]) == 0,
+    "- No Quality Indicators are available for this product - ",
+    " - None selected - "
+  )
+  svalue(wids$sel_si)     <- ifelse(
+    length(cur_prodopts[["indexes_bandnames"]]) == 0,
+    "- Spectral Indexes can not be computed on this product - ",
+    " - None selected - "
+  )
+}
+
 #' @title gui_update_bboxlabels
 #' @description Helper function to update the labels of the gui showing the
 #'  bounding box coordinates when a spatial file is selected or a projection
@@ -823,113 +923,6 @@ gh_help <- function(h, sel_help, help_messages, info_addr = NULL, ...) {
   # size(help_mess_lab) <- list(width = 80)
 }
 
-# Handler for buttons for interactive extent selection ----
-gh_selectmap <- function(h, ext_type, ...) {
-
-  if (requireNamespace("mapedit")) {
-    if (ext_type == "Select MODIS Tiles") {
-      # On MODIS tiles selection, use editFeatures to allow selection
-      # from the Tiles Map
-
-      tilemap <- get(load(system.file("ExtData" ,"MODIS_Tiles_latlon.RData",
-                                      package = "MODIStsp")))
-      sel <- mapedit::selectFeatures(
-        tilemap,
-        viewer = shiny::browserViewer(browser = getOption("browser"))
-      )
-
-      if (inherits(sel, "data.frame")) {
-
-        seltiles <- lapply(sel[["Name"]], FUN = function(x){
-          h <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[2])
-          v <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[3])
-          data.frame(h = h, v = v)})
-        seltiles <- data.table::rbindlist(seltiles)
-        error_sel <- FALSE
-        if (length(unique(sel[["h"]])) == 1) {
-          min_h <- max_h <- sel[["h"]]
-        } else {
-          if (max(diff(sort(sel[["h"]]))) <= 1) {
-            min_h <- min(sel[["h"]])
-            max_h <- max(sel[["h"]])
-          } else {
-            error_sel <- TRUE
-          }
-        }
-
-        if (length(unique(sel[["v"]])) == 1) {
-          min_v <- max_v <- sel[["v"]]
-        } else {
-          if (max(diff(sort(sel[["v"]]))) <= 1) {
-            min_v <- min(sel[["v"]])
-            max_v <- max(sel[["v"]])
-          } else {
-            error_sel <- TRUE
-          }
-        }
-
-        if (error_sel) {
-          gmessage(strwrap(
-            "Your selection contains non-contiguous tiles!\n
-      MODIStsp only allows processing for contigous tiles selections!\n\n
-      Please select again!"), icon = "warning")
-        } else {
-          # on proper selection, update the tiles sliders
-          gWidgets::svalue(wids$start_x) <- min_h
-          gWidgets::svalue(wids$end_x)   <- max_h
-          gWidgets::svalue(wids$start_y) <- min_v
-          gWidgets::svalue(wids$end_y)   <- max_v
-        }
-      }
-    } else {
-
-      # On Custom Area selection, use editMap to allow drawing a custom area
-      tilemap <- get(load(system.file("ExtData/MODIS_Tiles_latlon.RData",
-                                      package = "MODIStsp")))
-      mm <-  mapview::mapview(tilemap, alpha.regions = 0.1, color = "grey75")
-      sel <- mapedit::editMap(
-        mm,
-        viewer = shiny::browserViewer(browser = getOption("browser")))
-
-      if (!is.null(sel[["finished"]])) {
-        sel_bbox <- sf::st_bbox(sel[["finished"]])
-
-        # crs_out <- ifelse(gWidgets::svalue(wids$proj_choice) != "User Defined",
-        #                   svalue(wids$output_proj4),
-        #                   general_opts$output_proj4)
-
-        curr_proj <- svalue(wids$output_proj4)
-
-        bbox_out <- reproj_bbox(sel_bbox,
-                                CRS("+init=epsg:4326"),
-                                curr_proj,
-                                enlarge = FALSE)
-
-        proj  <- gui_get_proj(CRS(curr_proj))
-        units <- gui_get_units(CRS(curr_proj), proj)
-        gWidgets::svalue(pixsize2_lab) <- units
-
-        # re-set bbox in the GUI according coordinates retrieved from file
-        gui_update_bboxlabels(bbox_out,
-                              units,
-                              wids)
-
-        # Set tiles according with the bounding box
-        gui_update_tiles(bbox_out,
-                         curr_proj,
-                         mod_proj_str,
-                         modis_grid,
-                         wids)
-      }
-    }
-  } else {
-    gmessage(strwrap(
-      "You need to install package `mapedit` to be able to
-    use this functionality!\n\n
-    You can install it using `install.packages(mapedit)`"),
-      icon = "warning")
-  }
-}
 
 # Handler for load extent from file button
 
@@ -988,84 +981,7 @@ gh_load_extent <- function(h, ...) {
   }
 }
 
-# gh_view_extent ----
-gh_view_extent <- function(h, ext_type, ...) {
 
-  if (requireNamespace("mapedit")) {
-    if (ext_type == "Select MODIS Tiles") {
-      min_h <- gWidgets::svalue(wids$start_x)
-      max_h <- gWidgets::svalue(wids$end_x)
-      min_v <- gWidgets::svalue(wids$start_y)
-      max_v <- gWidgets::svalue(wids$end_y)
-
-      tilemap <- get(load(system.file("ExtData/MODIS_Tiles_latlon.RData",
-                                      package = "MODIStsp")))
-      cursel <- subset(tilemap,
-                       h >= min_h & h <= max_h & v >= min_v & v <= max_v)
-      mm <- leaflet::leaflet(cursel)
-      mm <- leaflet::addPolygons(mm)
-      mm <- leaflet::addTiles(mm)
-      mapedit::selectMap(
-        mm,
-        viewer = shiny::browserViewer(browser = getOption("browser"))
-      )
-    } else {
-      # browser()
-      bbox <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
-                           gWidgets::svalue(wids$output_ymin),
-                           gWidgets::svalue(wids$output_xmax),
-                           gWidgets::svalue(wids$output_ymax)))
-
-      print(svalue(wids$output_proj4))
-      print(general_opts$output_proj4)
-
-      # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
-      #                         "+init=epsg:4326",
-      #                         enlarge = TRUE)
-      #
-      if (!(any(is.na(bbox)))) {
-        bbox_out <- sf::st_bbox(
-          c(xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]),
-          crs = gWidgets::svalue(wids$output_proj4))
-
-        # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
-        #                         "+init=epsg:4326",
-        #                         enlarge = TRUE)
-        # bbox_out <- sf::st_bbox(
-        #   c(xmin = bbox_out[1], xmax = bbox_out[3], ymax = bbox_out[4], ymin = bbox_out[2]),
-        #   crs = sf::st_crs(svalue(wids$output_proj4)))
-
-        # browser()
-        bbox_sf <- sf::st_as_sfc(bbox_out)
-        bbox_sf <- sf::st_transform(bbox_sf, 4326)
-        # browser()
-        mm <- leaflet::leaflet(bbox_sf)
-        mm <- leaflet::addPolygons(mm)
-        mm <- leaflet::addTiles(mm)
-        providers <- c("OpenStreetMap", "Esri.WorldImagery")
-        mm <- leaflet::addProviderTiles(mm, "OpenStreetMap", group = "OpenStreetMap")
-        mm <- leaflet::addProviderTiles(mm, "Esri.WorldImagery", group = "Esri.WorldImagery")
-        mm <- leaflet::addLayersControl(mm,
-                                        baseGroups = providers,
-                                        options = leaflet::layersControlOptions(collapsed = FALSE))
-        mapedit::selectMap(
-          mm,
-          viewer = shiny::browserViewer(browser = getOption("browser"))
-        )
-
-      } else {
-        gmessage(strwrap("Current Output extent is not valid!\n\n
-                       Please specify a bounding box or load it from a file!"))
-      }
-    }
-  } else {
-    gmessage(strwrap(
-      "You need to install package `mapedit` to be able to
-    use this functionality!\n\n
-    You can install it using `install.packages(mapedit)`"),
-      icon = "warning")
-  }
-}
 
 # gh_tiles_from_bbox ----
 gh_tiles_from_bbox <- function(h, ...) {
@@ -1095,102 +1011,199 @@ gh_tiles_from_bbox <- function(h, ...) {
   }
 }
 
-# gh_selcat ----
-gh_selcat <- function(h, ...) {
-  # Identify only products of this category
-  sel_prod    <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)][1] #nolint
-  wids$prod[] <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)] #nolint
-  gWidgets::svalue(wids$prod) <- sel_prod
-  sel_prodopts <- prod_opt_list[[sel_prod]]
-  # Select the last version (it assumes that versions in xml file are in
-  # increasing order)
 
-  wids$vers[] <- names(sel_prodopts)
-  gWidgets::svalue(wids$vers) <- sel_prodopts[[length(sel_prodopts)]]$v_number #nolint
-  # Disable sensor choice for combined datasets
-  if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$combined == 1) {
-    gWidgets::enabled(wids$sens) <- FALSE
-    wids$sens[] <- "Combined"
-    gWidgets::svalue(wids$sens)  <- "Combined"
-  } else {
-    gWidgets::enabled(wids$sens) <- TRUE
-    wids$sens[] <- c("Terra", "Aqua", "Both")
-    gWidgets::svalue(wids$sens)  <- general_opts$sensor
-  }
-  # On product change, automatically modify the default projection - latlon
-  # for tiled, Sinu for nontiled
-  if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$tiled == 0) {
-    gWidgets::enabled(tiles_group) <- FALSE
-    gWidgets::svalue(wids$proj_choice)    <- "Native"
-    gWidgets::svalue(wids$output_proj4) <-
-      "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
-  } else {
-    gWidgets::enabled(tiles_group) <- TRUE
-    gWidgets::svalue(wids$proj_choice)    <- "Native"
-    gWidgets::svalue(wids$output_proj4) <-
-      "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
-  }
+# Handler for buttons for interactive extent selection ----
+# 
 
-  # reset dummy variables for band selection to 0 on product change
-  gui_env$temp_wid_bands         <- 0
-  gui_env$temp_wid_bands_indexes <- 0
-  gui_env$temp_wid_bands_quality <- 0
+# gh_view_extent ----
+gh_view_extent <- function(h, ext_type, ...) {
+  
+  if (requireNamespace("mapedit")) {
+    if (ext_type == "Select MODIS Tiles") {
+      min_h <- gWidgets::svalue(wids$start_x)
+      max_h <- gWidgets::svalue(wids$end_x)
+      min_v <- gWidgets::svalue(wids$start_y)
+      max_v <- gWidgets::svalue(wids$end_y)
+      
+      tilemap <- get(load(system.file("ExtData/MODIS_Tiles_latlon.RData",
+                                      package = "MODIStsp")))
+      cursel <- subset(tilemap,
+                       h >= min_h & h <= max_h & v >= min_v & v <= max_v)
+      
+      # print(mapview::mapview(cursel))
+      mm <- leaflet::leaflet(cursel)
+      mm <- leaflet::addPolygons(mm)
+      mm <- leaflet::addTiles(mm)
+      mapedit::selectMap(
+        mm,
+        viewer = shiny::browserViewer(browser = getOption("browser"))
+      )
+    } else {
+      # browser()
+      bbox <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
+                           gWidgets::svalue(wids$output_ymin),
+                           gWidgets::svalue(wids$output_xmax),
+                           gWidgets::svalue(wids$output_ymax)))
+      
+      print(svalue(wids$output_proj4))
+      print(general_opts$output_proj4)
+      
+      # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
+      #                         "+init=epsg:4326",
+      #                         enlarge = TRUE)
+      #
+      if (!(any(is.na(bbox)))) {
+        bbox_out <- sf::st_bbox(
+          c(xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]),
+          crs = gWidgets::svalue(wids$output_proj4))
+        
+        
+        # print(mapview::mapview(bbox_out))
+        
+        
+        # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
+        #                         "+init=epsg:4326",
+        #                         enlarge = TRUE)
+        # bbox_out <- sf::st_bbox(
+        #   c(xmin = bbox_out[1], xmax = bbox_out[3], ymax = bbox_out[4], ymin = bbox_out[2]),
+        #   crs = sf::st_crs(svalue(wids$output_proj4)))
+        
+        # browser()
+        bbox_sf <- sf::st_as_sfc(bbox_out)
+        bbox_sf <- sf::st_transform(bbox_sf, 4326)
+        # browser()
+        mm <- leaflet::leaflet(bbox_sf)
+        mm <- leaflet::addPolygons(mm)
+        mm <- leaflet::addTiles(mm)
+        providers <- c("OpenStreetMap", "Esri.WorldImagery")
+        mm <- leaflet::addProviderTiles(mm, "OpenStreetMap", group = "OpenStreetMap")
+        mm <- leaflet::addProviderTiles(mm, "Esri.WorldImagery", group = "Esri.WorldImagery")
+        mm <- leaflet::addLayersControl(mm,
+                                        baseGroups = providers,
+                                        options = leaflet::layersControlOptions(collapsed = FALSE))
+        mapedit::selectMap(
+          mm,
+          viewer = shiny::browserViewer(browser = getOption("browser"))
+        )
+        
+      } else {
+        gmessage(strwrap("Current Output extent is not valid!\n\n
+                         Please specify a bounding box or load it from a file!"))
+      }
+      }
+    } else {
+      gmessage(strwrap(
+        "You need to install package `mapedit` to be able to
+        use this functionality!\n\n
+        You can install it using `install.packages(mapedit)`"),
+        icon = "warning")
+  }
 }
 
-# gh_selprod ----
-
-gh_selprod <- function(h, ...) {
-  sel_prod   <- ifelse(!is.null(gWidgets::svalue(wids$prod)),
-                       gWidgets::svalue(wids$prod),
-                       sel_prod)
-
-  sel_prodopts <- prod_opt_list[[sel_prod]]
-  # Select the last version (it assumes that versions in xml file are in
-  # increasing order)
-  wids$vers[]       <- names(sel_prodopts)
-  gWidgets::svalue(wids$vers) <- sel_prodopts[[length(sel_prodopts)]]$v_number #nolint
-  # Disable sensor choice for combined datasets
-  if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$combined == 1) {
-    gWidgets::enabled(wids$sens) <- FALSE
-    wids$sens[]        <- "Combined"
-    gWidgets::svalue(wids$sens)  <- "Combined"
+# Select Output extent ----
+gh_selectmap <- function(h, ext_type, ...) {
+  
+  if (requireNamespace("mapedit")) {
+    if (ext_type == "Select MODIS Tiles") {
+      # On MODIS tiles selection, use editFeatures to allow selection
+      # from the Tiles Map
+      
+      tilemap <- get(load(system.file("ExtData" ,"MODIS_Tiles_latlon.RData",
+                                      package = "MODIStsp")))
+      sel <- mapedit::selectFeatures(
+        tilemap,
+        viewer = shiny::browserViewer(browser = getOption("browser"))
+      )
+      
+      if (inherits(sel, "data.frame")) {
+        
+        seltiles <- lapply(sel[["Name"]], FUN = function(x){
+          h <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[2])
+          v <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[3])
+          data.frame(h = h, v = v)})
+        seltiles <- data.table::rbindlist(seltiles)
+        error_sel <- FALSE
+        if (length(unique(sel[["h"]])) == 1) {
+          min_h <- max_h <- sel[["h"]]
+        } else {
+          if (max(diff(sort(sel[["h"]]))) <= 1) {
+            min_h <- min(sel[["h"]])
+            max_h <- max(sel[["h"]])
+          } else {
+            error_sel <- TRUE
+          }
+        }
+        
+        if (length(unique(sel[["v"]])) == 1) {
+          min_v <- max_v <- sel[["v"]]
+        } else {
+          if (max(diff(sort(sel[["v"]]))) <= 1) {
+            min_v <- min(sel[["v"]])
+            max_v <- max(sel[["v"]])
+          } else {
+            error_sel <- TRUE
+          }
+        }
+        
+        if (error_sel) {
+          gmessage(strwrap(
+            "Your selection contains non-contiguous tiles!\n
+            MODIStsp only allows processing for contigous tiles selections!\n\n
+            Please select again!"), icon = "warning")
+        } else {
+          # on proper selection, update the tiles sliders
+          gWidgets::svalue(wids$start_x) <- min_h
+          gWidgets::svalue(wids$end_x)   <- max_h
+          gWidgets::svalue(wids$start_y) <- min_v
+          gWidgets::svalue(wids$end_y)   <- max_v
+        }
+      }
+    } else {
+      
+      # On Custom Area selection, use editMap to allow drawing a custom area
+      tilemap <- get(load(system.file("ExtData/MODIS_Tiles_latlon.RData",
+                                      package = "MODIStsp")))
+      mm <-  mapview::mapview(tilemap, alpha.regions = 0.1, color = "grey75")
+      sel <- mapedit::editMap(
+        mm,
+        viewer = shiny::browserViewer(browser = getOption("browser")))
+      
+      if (!is.null(sel[["finished"]])) {
+        sel_bbox    <- sf::st_bbox(sel[["finished"]])
+        # sel_area_rep <- sf::st_transform(curr_proj)
+        # crs_out <- ifelse(gWidgets::svalue(wids$proj_choice) != "User Defined",
+        #                   svalue(wids$output_proj4),
+        #                   general_opts$output_proj4)
+        
+        curr_proj <- svalue(wids$output_proj4)
+        
+        bbox_out <- reproj_bbox(sel_bbox,
+                                CRS("+init=epsg:3857"),
+                                curr_proj,
+                                enlarge = FALSE)
+        
+        proj  <- gui_get_proj(CRS(curr_proj))
+        units <- gui_get_units(CRS(curr_proj), proj)
+        gWidgets::svalue(pixsize2_lab) <- units
+        
+        # re-set bbox in the GUI according coordinates retrieved from file
+        gui_update_bboxlabels(bbox_out,
+                              units,
+                              wids)
+        
+        # Set tiles according with the bounding box
+        gui_update_tiles(bbox_out,
+                         curr_proj,
+                         mod_proj_str,
+                         modis_grid,
+                         wids)
+      }
+    }
   } else {
-    gWidgets::enabled(wids$sens) <- TRUE
-    wids$sens[]        <- c("Terra", "Aqua", "Both")
-    gWidgets::svalue(wids$sens)  <- general_opts$sensor
+    gmessage(strwrap(
+      "You need to install package `mapedit` to be able to
+      use this functionality!\n\n
+      You can install it using `install.packages(mapedit)`"),
+      icon = "warning")
   }
-  # On product change, automatically modify the default projection - latlon
-  # for tiled, Sinu for nontiled
-
-  if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$tiled == 0) {
-    gWidgets::enabled(tiles_group) <- FALSE
-    gWidgets::svalue(wids$proj_choice)    <- "Native"
-    gWidgets::svalue(wids$output_proj4) <-
-      "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
-  } else {
-    gWidgets::enabled(tiles_group) <- TRUE
-    gWidgets::svalue(wids$proj_choice)    <- "Native"
-    gWidgets::svalue(wids$output_proj4) <-
-      "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
-  }
-  # reset dummy variables for band selection to 0 on product change
-  gui_env$temp_wid_bands         <- 0
-  gui_env$temp_wid_bands_indexes <- 0
-  gui_env$temp_wid_bands_quality <- 0
-
-  cur_prodopts <- sel_prodopts[[svalue(wids$vers)]]
-
-  # Original Bands ----
-
-  svalue(wids$sel_layers) <- "- None selected -"
-  svalue(wids$sel_qi)     <- ifelse(
-    length(cur_prodopts[["quality_bandnames"]]) == 0,
-    "- No Quality Indicators are available for this product - ",
-    " - None selected - "
-  )
-  svalue(wids$sel_si)     <- ifelse(
-    length(cur_prodopts[["indexes_bandnames"]]) == 0,
-    "- Spectral Indexes can not be computed on this product - ",
-    " - None selected - "
-  )
 }
