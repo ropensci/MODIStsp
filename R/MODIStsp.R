@@ -403,7 +403,7 @@ MODIStsp <- function(gui               = TRUE,
       # bounding box
 
       external_bbox <- try(bbox_from_file(spatial_file_path,
-                                          general_opts$user_proj4),
+                                          general_opts$output_proj4),
                            silent = TRUE)
       if (class(external_bbox) == "try-error") {
         stop("Failed in retrieving processing extent from ",
@@ -429,7 +429,7 @@ MODIStsp <- function(gui               = TRUE,
       modis_grid  <- get(load(system.file("ExtData", "MODIS_Tiles.RData",
                                           package = "MODIStsp")))
       external_bbox_mod    <- reproj_bbox(external_bbox,
-                                          general_opts$user_proj4,
+                                          general_opts$output_proj4,
                                           mod_proj_str,
                                           enlarge = TRUE)
       d_bbox_mod_tiled     <- raster::crop(modis_grid,
@@ -475,7 +475,7 @@ MODIStsp <- function(gui               = TRUE,
                      end_x              = general_opts$end_x,
                      end_y              = general_opts$end_y,
                      full_ext           = ifelse(
-                       general_opts$full_ext == "Select MODIS Tiles", 
+                       general_opts$full_ext == "Select MODIS Tiles",
                        "FullTiles", "Resized"),
                      bbox               = general_opts$bbox,
                      out_format         = general_opts$out_format,
@@ -487,7 +487,7 @@ MODIStsp <- function(gui               = TRUE,
                      ts_format          = general_opts$ts_format,
                      compress           = general_opts$compress,
                      mod_proj_str       = mod_proj_str,
-                     outproj_str        = general_opts$user_proj4,
+                     outproj_str        = general_opts$output_proj4,
                      nodata_in          = prod_opts$nodata_in,
                      nodata_out         = prod_opts$nodata_out,
                      nodata_change      = general_opts$nodata_change,

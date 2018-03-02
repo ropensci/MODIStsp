@@ -14,22 +14,22 @@ gui_update_bboxlabels <- function(bbox_out,
                                   wids) {
   #nocov start
 
-  digits <- ifelse(units == "dec.degrees", 4, 1)
-  
+  digits <- ifelse(units == "dec.degrees", 5, 1)
+
   gWidgets::svalue(wids$output_xmin)  <- formatC(bbox_out[1, 1],
-                                                    digits = digits,
-                                                    format = "f")
-  
+                                                 digits = digits,
+                                                 format = "f")
+
   gWidgets::svalue(wids$output_ymin) <- formatC(bbox_out[2, 1],
                                                 digits = digits,
                                                 format = "f")
   gWidgets::svalue(wids$output_xmax)  <- formatC(bbox_out[1, 2],
                                                  digits = digits,
                                                  format = "f")
-  
+
   gWidgets::svalue(wids$output_ymax) <- formatC(bbox_out[2, 2],
-                                                    digits = digits,
-                                                    format = "f")
+                                                digits = digits,
+                                                format = "f")
 
 
   #nocov end
@@ -42,14 +42,14 @@ gui_update_bboxlabels <- function(bbox_out,
 #' @importFrom gWidgets svalue
 #' @noRd
 #'
-gui_update_tiles <- function(bbox_out,
+gui_update_tiles <- function(bbox_out, curr_proj,
                              mod_proj_str,
                              modis_grid,
                              wids) {
   #nocov start
 
   bbox_mod  <- reproj_bbox(bbox_out,
-                           gWidgets::svalue(wids$output_proj4),
+                           curr_proj,
                            mod_proj_str,
                            enlarge = TRUE)
 
@@ -66,10 +66,10 @@ gui_update_tiles <- function(bbox_out,
 #' @importFrom utils head tail
 #' @noRd
 #'
-gui_get_proj <- function(sel_output_proj) {
+gui_get_proj <- function(curr_proj) {
   #nocov start
   utils::head(strsplit(utils::tail(
-    strsplit(sel_output_proj@projargs, "+proj=")[[1]], 1), " +")[[1]], 1)
+    strsplit(curr_proj@projargs, "+proj=")[[1]], 1), " +")[[1]], 1)
   #nocov end
 }
 
@@ -79,16 +79,16 @@ gui_get_proj <- function(sel_output_proj) {
 #' @importFrom utils head tail
 #' @noRd
 #'
-gui_get_units <- function(sel_output_proj,
+gui_get_units <- function(curr_proj,
                           proj) {
   #nocov start
   if (proj == "longlat") {
     units <- "dec.degrees"
   } else {
     units <- ifelse(
-      length(strsplit(sel_output_proj@projargs, "+units=")[[1]]) > 1,
+      length(strsplit(curr_proj@projargs, "+units=")[[1]]) > 1,
       utils::head(strsplit(utils::tail(strsplit(
-        sel_output_proj@projargs, "+units=")[[1]], 1), " +")[[1]], 1),
+        curr_proj@projargs, "+units=")[[1]], 1), " +")[[1]], 1),
       "Unknown"
     )
   }
@@ -120,7 +120,7 @@ gui_load_options <- function(opts_jsfile,
 
   sel_prod      <- general_opts$sel_prod
   sel_prodopts  <- prod_opt_list[[sel_prod]]
-  cur_prodopts <- sel_prodopts[[general_opts$prod_version]]
+  cur_prodopts  <- sel_prodopts[[general_opts$prod_version]]
 
   gWidgets::svalue(wids$cat) <- paste(
     prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$cat01,
@@ -176,16 +176,16 @@ gui_load_options <- function(opts_jsfile,
 
   # Proj and extent options
 
-  gWidgets::svalue(wids$output_proj4)    <- general_opts$user_proj4
-  gWidgets::svalue(wids$proj)            <- general_opts$proj
+  gWidgets::svalue(wids$output_proj4)    <- general_opts$output_proj4
+  gWidgets::svalue(wids$proj_choice)     <- general_opts$proj
   gWidgets::svalue(wids$output_res_sel)  <- general_opts$out_res_sel
   gWidgets::svalue(wids$output_res)      <- general_opts$out_res
   gWidgets::svalue(wids$output_resmeth)  <- general_opts$resampling
   gWidgets::svalue(wids$output_ext)      <- general_opts$full_ext
-  gWidgets::svalue(wids$output_xmin)  <- general_opts$bbox[1]
-  gWidgets::svalue(wids$output_xmax)  <- general_opts$bbox[3]
-  gWidgets::svalue(wids$output_ymin) <- general_opts$bbox[2]
-  gWidgets::svalue(wids$output_ymax) <- general_opts$bbox[4]
+  gWidgets::svalue(wids$output_xmin)     <- general_opts$bbox[1]
+  gWidgets::svalue(wids$output_xmax)     <- general_opts$bbox[3]
+  gWidgets::svalue(wids$output_ymin)     <- general_opts$bbox[2]
+  gWidgets::svalue(wids$output_ymax)     <- general_opts$bbox[4]
   gWidgets::svalue(wids$reprocess)       <- general_opts$reprocess
   gWidgets::svalue(wids$delete)          <- general_opts$delete_hdf
   gWidgets::svalue(wids$nodata)          <- general_opts$nodata_change
@@ -276,8 +276,8 @@ gui_save_options <- function(general_opts,
   general_opts$end_y   <- gWidgets::svalue(wids$end_y)
 
   # Retrieve Proj and extent options
-  general_opts$proj        <- gWidgets::svalue(wids$proj)
-  general_opts$user_proj4  <- gWidgets::svalue(wids$output_proj4)
+  general_opts$proj        <- gWidgets::svalue(wids$proj_choice)
+  general_opts$output_proj4  <- gWidgets::svalue(wids$output_proj4)
   general_opts$out_res_sel <- gWidgets::svalue(wids$output_res_sel)
   general_opts$out_res     <- gWidgets::svalue(wids$output_res)
   general_opts$resampling  <- gWidgets::svalue(wids$output_resmeth)
@@ -894,14 +894,20 @@ gh_selectmap <- function(h, ext_type, ...) {
       if (!is.null(sel[["finished"]])) {
         sel_bbox <- sf::st_bbox(sel[["finished"]])
 
-        crs_out <- ifelse(gWidgets::svalue(wids$proj) != "User Defined",
-                          svalue(wids$output_proj4),
-                          general_opts$user_proj4)
+        # crs_out <- ifelse(gWidgets::svalue(wids$proj_choice) != "User Defined",
+        #                   svalue(wids$output_proj4),
+        #                   general_opts$output_proj4)
+
+        curr_proj <- svalue(wids$output_proj4)
 
         bbox_out <- reproj_bbox(sel_bbox,
                                 CRS("+init=epsg:4326"),
-                                crs_out,
-                                enlarge = TRUE)
+                                curr_proj,
+                                enlarge = FALSE)
+
+        proj  <- gui_get_proj(CRS(curr_proj))
+        units <- gui_get_units(CRS(curr_proj), proj)
+        gWidgets::svalue(pixsize2_lab) <- units
 
         # re-set bbox in the GUI according coordinates retrieved from file
         gui_update_bboxlabels(bbox_out,
@@ -910,6 +916,7 @@ gh_selectmap <- function(h, ext_type, ...) {
 
         # Set tiles according with the bounding box
         gui_update_tiles(bbox_out,
+                         curr_proj,
                          mod_proj_str,
                          modis_grid,
                          wids)
@@ -953,9 +960,9 @@ gh_load_extent <- function(h, ...) {
     )
     Sys.sleep(0.05)
     # Convert bbox coordinates to output projection
-    out_proj_crs <- ifelse(gWidgets::svalue(wids$proj) != "User Defined",
-                           out_proj_list[[gWidgets::svalue(wids$proj)]],
-                           general_opts$user_proj4)
+    out_proj_crs <- ifelse(gWidgets::svalue(wids$proj_choice) != "User Defined",
+                           out_proj_list[[gWidgets::svalue(wids$proj_choice)]],
+                           general_opts$output_proj4)
     # Create the bounding box in the chosen projection retrieving it from
     # the specified file
     bbox_out <- try(bbox_from_file(file_path = choice,
@@ -1003,51 +1010,54 @@ gh_view_extent <- function(h, ext_type, ...) {
         viewer = shiny::browserViewer(browser = getOption("browser"))
       )
     } else {
-# browser()
+      # browser()
       bbox <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
                            gWidgets::svalue(wids$output_ymin),
                            gWidgets::svalue(wids$output_xmax),
                            gWidgets::svalue(wids$output_ymax)))
 
       print(svalue(wids$output_proj4))
-      print(general_opts$user_proj4)
-      
-    # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
-    #                         "+init=epsg:4326",
-    #                         enlarge = TRUE)
-    # 
-      bbox_out <- sf::st_bbox(
+      print(general_opts$output_proj4)
+
+      # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
+      #                         "+init=epsg:4326",
+      #                         enlarge = TRUE)
+      #
+      if (!(any(is.na(bbox)))) {
+        bbox_out <- sf::st_bbox(
           c(xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]),
           crs = gWidgets::svalue(wids$output_proj4))
-#    
-  
-      bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
-                              "+init=epsg:4326",
-                              enlarge = TRUE)
-      bbox_out <- sf::st_bbox(
-        c(xmin = bbox_out[1], xmax = bbox_out[3], ymax = bbox_out[4], ymin = bbox_out[2]),
-        crs = sf::st_crs(svalue(wids$output_proj4)))
-    
-       browser()
-      bbox_sf <- sf::st_as_sfc(bbox_out)
-      bbox_sf <- sf::st_transform(bbox_sf, 4326)
-      # browser()
-      mm <- leaflet::leaflet(bbox_sf)
-      mm <- leaflet::addPolygons(mm)
-      mm <- leaflet::addTiles(mm)
-      providers <- c("OpenStreetMap", "Esri.WorldImagery")
-      mm <- leaflet::addProviderTiles(mm, "OpenStreetMap", group = "OpenStreetMap")
-      mm <- leaflet::addProviderTiles(mm, "Esri.WorldImagery", group = "Esri.WorldImagery")
-      mm <- leaflet::addLayersControl(mm,
-        baseGroups = providers,
-        options = leaflet::layersControlOptions(collapsed = FALSE))
-      mapedit::selectMap(
-        mm,
-        viewer = shiny::browserViewer(browser = getOption("browser"))
-      )
 
+        # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
+        #                         "+init=epsg:4326",
+        #                         enlarge = TRUE)
+        # bbox_out <- sf::st_bbox(
+        #   c(xmin = bbox_out[1], xmax = bbox_out[3], ymax = bbox_out[4], ymin = bbox_out[2]),
+        #   crs = sf::st_crs(svalue(wids$output_proj4)))
+
+        # browser()
+        bbox_sf <- sf::st_as_sfc(bbox_out)
+        bbox_sf <- sf::st_transform(bbox_sf, 4326)
+        # browser()
+        mm <- leaflet::leaflet(bbox_sf)
+        mm <- leaflet::addPolygons(mm)
+        mm <- leaflet::addTiles(mm)
+        providers <- c("OpenStreetMap", "Esri.WorldImagery")
+        mm <- leaflet::addProviderTiles(mm, "OpenStreetMap", group = "OpenStreetMap")
+        mm <- leaflet::addProviderTiles(mm, "Esri.WorldImagery", group = "Esri.WorldImagery")
+        mm <- leaflet::addLayersControl(mm,
+                                        baseGroups = providers,
+                                        options = leaflet::layersControlOptions(collapsed = FALSE))
+        mapedit::selectMap(
+          mm,
+          viewer = shiny::browserViewer(browser = getOption("browser"))
+        )
+
+      } else {
+        gmessage(strwrap("Current Output extent is not valid!\n\n
+                       Please specify a bounding box or load it from a file!"))
+      }
     }
-
   } else {
     gmessage(strwrap(
       "You need to install package `mapedit` to be able to
@@ -1069,7 +1079,7 @@ gh_tiles_from_bbox <- function(h, ...) {
   if (gWidgets::svalue(wids$output_ext) != "Select MODIS Tiles" &
       n_bbox_compiled == 0) {
     gmessage("Please specify an output bounding box!", title = "Warning")
-  } else if (gWidgets::svalue(wids$proj) == "User Defined" &
+  } else if (gWidgets::svalue(wids$proj_choice) == "User Defined" &
              nchar(gWidgets::svalue(wids$output_proj4)) == 0) {
     gmessage("Please specify an output projection", title = "Warning")
   } else if (n_bbox_compiled < 4) {
@@ -1111,12 +1121,12 @@ gh_selcat <- function(h, ...) {
   # for tiled, Sinu for nontiled
   if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$tiled == 0) {
     gWidgets::enabled(tiles_group) <- FALSE
-    gWidgets::svalue(wids$proj)    <- "Native"
+    gWidgets::svalue(wids$proj_choice)    <- "Native"
     gWidgets::svalue(wids$output_proj4) <-
       "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
   } else {
     gWidgets::enabled(tiles_group) <- TRUE
-    gWidgets::svalue(wids$proj)    <- "Native"
+    gWidgets::svalue(wids$proj_choice)    <- "Native"
     gWidgets::svalue(wids$output_proj4) <-
       "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
   }
@@ -1154,12 +1164,12 @@ gh_selprod <- function(h, ...) {
 
   if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$tiled == 0) {
     gWidgets::enabled(tiles_group) <- FALSE
-    gWidgets::svalue(wids$proj)    <- "Native"
+    gWidgets::svalue(wids$proj_choice)    <- "Native"
     gWidgets::svalue(wids$output_proj4) <-
       "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
   } else {
     gWidgets::enabled(tiles_group) <- TRUE
-    gWidgets::svalue(wids$proj)    <- "Native"
+    gWidgets::svalue(wids$proj_choice)    <- "Native"
     gWidgets::svalue(wids$output_proj4) <-
       "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
   }
