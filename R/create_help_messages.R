@@ -1,5 +1,5 @@
 create_help_messages <- function() {
-  
+  #nocov start
   help_messages <- NULL
   # Original layers help ----
   help_messages <- rbind(help_messages, data.frame(
@@ -15,8 +15,8 @@ create_help_messages <- function() {
     which_help = "qi_help", 
     text = paste0(
       "MODIS images often use one or more <span weight='bold'>Quality Layers</span> ",#nolint
-      "to store various information concerning pixel data quality.\n\nDifferent ",
-      "<span weight='bold'>Quality Indicators </span> are stored within each \n", 
+      "to store various information concerning pixel data quality.\n\nDifferent ", #nolint
+      "<span weight='bold'>Quality Indicators </span> are stored within each \n",  #nolint
       "Quality Layer using a <span weight='bold'>bit-field representation</span> (see More info).\n\n", #nolint"
       "MODIStsp computes <span weight='bold'>Quality Indicators </span> from ",
       "MODIS Quality Layers by extracting the required information from the \n", #nolint
@@ -120,7 +120,7 @@ create_help_messages <- function() {
       "as integer values with a 10000 scale factor.\n\n",
       "<span weight='bold'>Yes</span>: scale factors and offsets are applied ",
       "Outputs are converted to their true values in the specified measure units",#nolint
-      "(e.g., degrees Kelvin). Spectral Indices are also computed as floating ", 
+      "(e.g., degrees Kelvin). Spectral Indices are also computed as floating ",
       "point values.\n",
       "(Notice that in this case the size on disk of the output images will be ", #nolint
       "larger.)"
@@ -202,7 +202,7 @@ create_help_messages <- function() {
       "MODIS data is organized in tiles of 10 degrees by 10 degrees at the equator. ", #nolint
       "Use this option if you wish to obtain outputs corresponding to one or more  ", #nolint
       "full MODIS tiles. ",
-      "You can use the selector sliders to specify the extent of a (rectangular) ", #nolint
+      "You can use the selector sliders to specify the extent of a rectangular ", #nolint
       "area to be processed, or click on 'Select From Map' ",
       "to interactively select the required tiles\n\n",
       "<span weight = 'bold'>Define Custom Area</span>:\n\n",
@@ -214,9 +214,9 @@ create_help_messages <- function() {
       "to be used to retrieve the extent.\n",
       "* Fill in the boxes to manually set the corners of the bounding box of the ", #nolint
       "desired area\n\n",
-      "<span weight = 'bold'>IMPORTANT NOTE</span>: Since MODIStsp automatically ", 
+      "<span weight = 'bold'>IMPORTANT NOTE</span>: Since MODIStsp automatically ", #nolint
       "mosaics outputs to create single raster output files the selected extent ", #nolint
-      "MUST correspond to contiguous MODIS tiles! So, if you need for example ", 
+      "MUST correspond to contiguous MODIS tiles! So, if you need for example ",
       "to process tile h18 v04 AND tile h20 v05 you will need to perform two ", 
       "separate processings."
     )
@@ -232,7 +232,7 @@ create_help_messages <- function() {
       "(https://e4ftl01.cr.usgs.gov/). You will need to provide you 'earthdata' ",#nolint
       "credentials. You can create an earthdata account at: https://urs.earthdata.nasa.gov/home\n\n", #nolint
       "<span weight = 'bold'>ftp</span>: downloads from NASA ftp server ",
-      "(ftp://ladsweb.nascom.nasa.gov). No credentials are needed, but some products ", 
+      "(ftp://ladsweb.nascom.nasa.gov). No credentials are needed, but some products ", #nolint
       "are not available. \n\n",
       "<span weight = 'bold'>offline</span>: process MODIS HDF files already  ",
       "available on disk (specify the folder where they are stored in the ", 
@@ -240,5 +240,5 @@ create_help_messages <- function() {
     )
   ))
   
-  
+#nocov end
 }

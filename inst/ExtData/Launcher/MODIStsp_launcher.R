@@ -49,7 +49,8 @@ if (!is.null(options_file)) {
 dir.create(log_dir, showWarnings = FALSE)
 # File to store the Log
 outFile <- file.path(log_dir, 
-                     paste0("MODIStsp_", strftime(Sys.time(), "%y%m%d_%H%M%S"), ".Rout"))
+                     paste0("MODIStsp_", strftime(Sys.time(), "%y%m%d_%H%M%S"),
+                            ".Rout"))
 
 sink(outFile, split = TRUE, type = c("output"))
 output <- MODIStsp(gui = gui, options_file = options_file)

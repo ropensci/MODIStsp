@@ -52,11 +52,11 @@ check_proj4string.default  <- function(projection,
                                        verbose = TRUE) {
   call <- match.call()
   if (abort) {
-    stop("check_proj4string --> ", call[[2]], " is not a valid CRS object or ",
+    stop("check_proj4string --> ", call[[2]], " is not a valid CRS object, epsg code or ", #nolint
          "proj4string. Aborting!")
   } else {
-    if(verbose) {
-      warning("check_proj4string --> ", call[[2]], " is not a valid CRS object or ",
+    if (verbose) {
+      warning("check_proj4string --> ", call[[2]], " is not a valid CRS object, epsg code  or ", #nolint
               "proj4string. returning `NA`")
     }
     return(NA)
@@ -64,7 +64,7 @@ check_proj4string.default  <- function(projection,
 }
 
 #   ____________________________________________________________________________
-#   Method for integer - check if it is a valid EPSG code or UTM zone       ####
+#   Method for integer - check if it is a valid EPSG code                   ####
 
 #' @rdname check_proj4string
 #' @method check_proj4string numeric
@@ -73,13 +73,13 @@ check_proj4string.default  <- function(projection,
 check_proj4string.numeric  <- function(projection,
                                        abort = FALSE,
                                        verbose = TRUE) {
-
+  
   # if it is 0<proj4string<=60, interpret as UTM north zone
-  if (projection > 0 & projection <= 60) {
-    proj4string <- paste0("+init=epsg:326", projection)
-    return(rgdal::checkCRSArgs(proj4string)[[2]])
-  }
-
+  # if (projection > 0 & projection <= 60) {
+  #   proj4string <- paste0("+init=epsg:326", projection)
+  #   return(rgdal::checkCRSArgs(proj4string)[[2]])
+  # }
+  
   # else, try to interpret as EPSG code
   proj4string <- paste0("+init=epsg:",projection)
   if (rgdal::checkCRSArgs(proj4string)[[1]] == FALSE) {
@@ -93,7 +93,7 @@ check_proj4string.numeric  <- function(projection,
   } else {
     return(rgdal::checkCRSArgs(proj4string)[[2]])
   }
-  }
+}
 
 #   ____________________________________________________________________________
 #   Method for character - check that it is a valid proj4string             ####
@@ -105,13 +105,13 @@ check_proj4string.numeric  <- function(projection,
 check_proj4string.character  <- function(projection,
                                          abort = FALSE,
                                          verbose = TRUE) {
-
+  
   # if it is a number, use check_proj4string.integer method
   if (suppressWarnings(!is.na(as.numeric(projection)))) {
     return(check_proj4string.numeric(as.integer(projection),
                                      abort = abort))
   }
-
+  
   # check if it is a UTM zone
   if (grepl("^[0-9]+[NnSs]$",projection)) {
     utm_zone <- gsub("[NnSs]$","",projection)
@@ -121,7 +121,7 @@ check_proj4string.character  <- function(projection,
                           utm_zone)
     return(rgdal::checkCRSArgs(proj4string)[[2]])
   }
-
+  
   if (rgdal::checkCRSArgs(projection)[[1]] == FALSE) {
     if (abort == TRUE) {
       stop("check_proj4string --> Invalid projection detected! Aborting!")

@@ -26,18 +26,18 @@ load_opts <- function(opts_jsfile) {
       stop(strwrap("Unable to read the provided JSON options file. Please check
                    your inputs!"))
     }
-
+    
     if (!("MODIStspVersion" %in% names(general_opts))) {
       stop(
         strwrap("The specified json file does not appear to be a valid MODIStsp
            options file. Please check your inputs!")
       )
     }
-
+    
     if (is.null(general_opts$MODIStspVersion) |
         general_opts$MODIStspVersion < "1.3.3.9000") {
       stop("The option file in use (", opts_jsfile, ") was created with a ",
-           "too old MODIStsp version (<=1.3.3.9000).\n It can not be used with the ",
+           "too old MODIStsp version (<=1.3.3.9000).\n It can not be used with the ",#nolint
            "current version.\n",
            " Please delete it or specify a different value for the ",
            "`options_file` argument.")

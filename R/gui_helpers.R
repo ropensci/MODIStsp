@@ -2,7 +2,14 @@
 #### MAINTENANCE
 
 # gh_selcat ----
-gh_selcat <- function(h, ...) {
+#' @title gh_selcat
+#' @description Handler for the actions to be taken when the category of product
+#'  is changed
+#' @importFrom gWidgets svalue enabled
+#' @noRd
+#'
+gh_selcat <- function(h, wids, ...) {
+  #nocov start
   # Identify only products of this category
   sel_prod    <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)][1] #nolint
   wids$prod[] <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)] #nolint
@@ -41,11 +48,18 @@ gh_selcat <- function(h, ...) {
   gui_env$temp_wid_bands         <- 0
   gui_env$temp_wid_bands_indexes <- 0
   gui_env$temp_wid_bands_quality <- 0
+  #nocov end
 }
 
 # gh_selprod ----
-
-gh_selprod <- function(h, ...) {
+#' @title gh_selprod
+#' @description Handler for the actions to be taken when the product
+#'  is changed
+#' @importFrom gWidgets svalue enabled
+#' @noRd
+#'
+gh_selprod <- function(h, wids, ...) {
+  #nocov start
   sel_prod   <- ifelse(!is.null(gWidgets::svalue(wids$prod)),
                        gWidgets::svalue(wids$prod),
                        sel_prod)
@@ -53,16 +67,16 @@ gh_selprod <- function(h, ...) {
   sel_prodopts <- prod_opt_list[[sel_prod]]
   # Select the last version (it assumes that versions in xml file are in
   # increasing order)
-  wids$vers[]       <- names(sel_prodopts)
+  wids$vers[] <- names(sel_prodopts)
   gWidgets::svalue(wids$vers) <- sel_prodopts[[length(sel_prodopts)]]$v_number #nolint
   # Disable sensor choice for combined datasets
   if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$combined == 1) {
     gWidgets::enabled(wids$sens) <- FALSE
-    wids$sens[]        <- "Combined"
+    wids$sens[] <- "Combined"
     gWidgets::svalue(wids$sens)  <- "Combined"
   } else {
     gWidgets::enabled(wids$sens) <- TRUE
-    wids$sens[]        <- c("Terra", "Aqua", "Both")
+    wids$sens[] <- c("Terra", "Aqua", "Both")
     gWidgets::svalue(wids$sens)  <- general_opts$sensor
   }
   # On product change, automatically modify the default projection - latlon
@@ -79,14 +93,13 @@ gh_selprod <- function(h, ...) {
     gWidgets::svalue(wids$output_proj4) <-
       "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
   }
-  # reset dummy variables for band selection to 0 on product change
+  # reset dummy variables for band selection to 0 on product change and 
+  # reset the labels corresponding to selected layers
   gui_env$temp_wid_bands         <- 0
   gui_env$temp_wid_bands_indexes <- 0
   gui_env$temp_wid_bands_quality <- 0
   
   cur_prodopts <- sel_prodopts[[svalue(wids$vers)]]
-  
-  # Original Bands ----
   
   svalue(wids$sel_layers) <- "- None selected -"
   svalue(wids$sel_qi)     <- ifelse(
@@ -99,7 +112,112 @@ gh_selprod <- function(h, ...) {
     "- Spectral Indexes can not be computed on this product - ",
     " - None selected - "
   )
+  #nocov end
 }
+
+#gh_changeproj ----
+#' @title gh_changeproj
+#' @description Handler for the actions to be taken when the projection is 
+#'  changed
+#' @importFrom gWidgets svalue enabled ginput gmessage
+#' @importFrom sp CRS
+#' @noRd
+#'
+gh_changeproj <- function(h, wids, ...) {
+  
+  #nocov start
+  
+  if (gWidgets::svalue(wids$proj_choice) != "User Defined") {
+    choice <- warn_projmess2()
+    if (choice) {
+      
+      gWidgets::enabled(wids$change_proj_but)  <- FALSE
+      old_proj  <- gWidgets::svalue(wids$output_proj4)
+      newproj   <- out_proj_list[[gWidgets::svalue(wids$proj_choice)]]
+      gWidgets::svalue(wids$output_proj4)  <- newproj
+      
+      # Get the units and kind of proj
+      proj  <- gui_get_proj(sp::CRS(newproj))
+      units <- gui_get_units(sp::CRS(newproj), proj)
+      gWidgets::svalue(wids$pixsize2_lab) <- units
+      gui_update_bboxlabels(bbox_out,
+                            units,
+                            wids, 
+                            reset = TRUE)
+    }
+  } else {
+    # If user chooses "user defined" projection, open a GUI for inputting
+    # a proj4 string and reset the bbox labels
+    old_proj  <- gWidgets::svalue(wids$output_proj4)
+    gWidgets::enabled(wids$change_proj_but)  <- TRUE
+    gWidgets::svalue(wids$output_proj4) <- ""
+    new_proj <- NA
+    choice <- warn_projmess1()
+    if (choice) {
+      selproj <- gWidgets::ginput(
+        paste("Please insert a valid proj4string,",
+              "an EPSG code or an UTM grid zone (e.g. 32N):"),
+        parent     = NULL,
+        do.buttons = TRUE,
+        size       = 800,
+        horizontal = TRUE
+      )
+      
+      # verify the inputted string. Revert to previous on error, or modify
+      # projstring and update the bounding box by converting coordinates to
+      # new out proj
+      
+      if (length(selproj) != 0 && selproj != "" && !is.na(selproj)) {
+        new_proj <- check_proj4string(selproj, abort = FALSE, verbose = FALSE)
+        # On error, send out a message and reset wids$proj_choice and proj4 
+        # wid to previous values
+        if (is.na(new_proj)) {
+          gWidgets::gmessage(
+            message = strwrap(paste(
+              "The projection is not recognized,",
+              "so the previous projection will be kept."
+            )),
+            title   = strwrap("Invalid projection")
+          )
+          gWidgets::svalue(wids$output_proj4) <- old_proj
+          gWidgets::svalue(wids$proj_choice)  <- "Native"
+        } else {
+          
+          gWidgets::svalue(wids$output_proj4) <- new_proj
+          
+          # If valid proj4string, and output is a bounding box, recompute
+          # the bounding box in output proj coordinates
+          
+          if (!gWidgets::svalue(wids$output_ext) == "Select MODIS Tiles") {
+            
+            # Get the units and kind of proj
+            
+            proj  <- gui_get_proj(sp::CRS(new_proj))
+            units <- gui_get_units(sp::CRS(new_proj), proj)
+            gWidgets::svalue(wids$pixsize2_lab) <- units
+            gui_update_bboxlabels(bbox_out,
+                                  units,
+                                  wids,
+                                  reset = TRUE)
+            
+          } else {
+            proj  <- gui_get_proj(sp::CRS(new_proj))
+            units <- gui_get_units(sp::CRS(new_proj), proj)
+            gWidgets::svalue(wids$pixsize2_lab) <- units
+          }
+        }
+      } else {
+        
+        # on error, reset to previous values
+        gWidgets::svalue(wids$output_proj4) <- old_proj
+        gWidgets::svalue(wids$proj_choice)  <- old_proj
+      }
+    }
+  }
+  #nocov end
+}
+
+# gui_update_bboxlabels ----
 
 #' @title gui_update_bboxlabels
 #' @description Helper function to update the labels of the gui showing the
@@ -111,30 +229,39 @@ gh_selprod <- function(h, ...) {
 #'
 gui_update_bboxlabels <- function(bbox_out,
                                   units,
-                                  wids) {
+                                  wids, 
+                                  reset = FALSE) {
   #nocov start
-
-  digits <- ifelse(units == "dec.degrees", 5, 1)
-
-  gWidgets::svalue(wids$output_xmin)  <- formatC(bbox_out[1, 1],
-                                                 digits = digits,
-                                                 format = "f")
-
-  gWidgets::svalue(wids$output_ymin) <- formatC(bbox_out[2, 1],
-                                                digits = digits,
-                                                format = "f")
-  gWidgets::svalue(wids$output_xmax)  <- formatC(bbox_out[1, 2],
-                                                 digits = digits,
-                                                 format = "f")
-
-  gWidgets::svalue(wids$output_ymax) <- formatC(bbox_out[2, 2],
-                                                digits = digits,
-                                                format = "f")
-
-
+  
+  if (!reset) {
+    digits <- ifelse(units == "dec.degrees", 5, 1)
+    
+    gWidgets::svalue(wids$output_xmin)  <- formatC(bbox_out[1, 1],
+                                                   digits = digits,
+                                                   format = "f")
+    
+    gWidgets::svalue(wids$output_ymin) <- formatC(bbox_out[2, 1],
+                                                  digits = digits,
+                                                  format = "f")
+    gWidgets::svalue(wids$output_xmax)  <- formatC(bbox_out[1, 2],
+                                                   digits = digits,
+                                                   format = "f")
+    
+    gWidgets::svalue(wids$output_ymax) <- formatC(bbox_out[2, 2],
+                                                  digits = digits,
+                                                  format = "f")
+  } else {
+    # If "reset" passed, set everyting to ""
+    gWidgets::svalue(wids$output_xmin)  <- ""
+    gWidgets::svalue(wids$output_ymin)  <- ""
+    gWidgets::svalue(wids$output_xmax)  <- ""
+    gWidgets::svalue(wids$output_ymax)  <- ""
+  }
+  
   #nocov end
 }
 
+# gui_update_tiles ----
 #' @title gui_update_tiles
 #' @description Helper function to update the selected tiles with the
 #' intersection with the bounding box
@@ -142,17 +269,18 @@ gui_update_bboxlabels <- function(bbox_out,
 #' @importFrom gWidgets svalue
 #' @noRd
 #'
-gui_update_tiles <- function(bbox_out, curr_proj,
+gui_update_tiles <- function(bbox_out,
+                             curr_proj,
                              mod_proj_str,
                              modis_grid,
                              wids) {
   #nocov start
-
+  
   bbox_mod  <- reproj_bbox(bbox_out,
                            curr_proj,
                            mod_proj_str,
                            enlarge = TRUE)
-
+  
   d_bbox_mod_tiled    <- raster::crop(modis_grid, raster::extent(bbox_mod))
   gWidgets::svalue(wids$start_x) <- min(d_bbox_mod_tiled$H)
   gWidgets::svalue(wids$end_x)   <- max(d_bbox_mod_tiled$H)
@@ -161,6 +289,8 @@ gui_update_tiles <- function(bbox_out, curr_proj,
   #nocov end
 }
 
+
+# gui_get_proj ----
 #' @title gui_get_proj
 #' @description GUI Helper functions to get currently selected projection
 #' @importFrom utils head tail
@@ -173,6 +303,7 @@ gui_get_proj <- function(curr_proj) {
   #nocov end
 }
 
+# gui_get_units ----
 #' @title gui_get_units
 #' @description GUI Helper functions to get measure units of currently selected
 #'  projection
@@ -196,6 +327,7 @@ gui_get_units <- function(curr_proj,
   #nocov end
 }
 
+# gui_load_options ----
 #' @title gui_load_options
 #' @description GUI Helper function used to load options from JSON and set
 #'  values of the GUI accordingly
@@ -208,20 +340,20 @@ gui_load_options <- function(opts_jsfile,
                              wids,
                              prod_opt_list) {
   #nocov start
-
+  
   # load file and reset all widgets to values found in the loaded file
   general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
-
+  
   # stop on error
   if (class(general_opts) == "try-error") {
     stop("Unable to read the provided JSON options file. Please check your ",
          "inputs!")
   }
-
+  
   sel_prod      <- general_opts$sel_prod
   sel_prodopts  <- prod_opt_list[[sel_prod]]
   cur_prodopts  <- sel_prodopts[[general_opts$prod_version]]
-
+  
   gWidgets::svalue(wids$cat) <- paste(
     prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$cat01,
     prod_opt_list[[general_opts$sel_prod]][[general_opts$prod_version]]$cat02,
@@ -230,52 +362,52 @@ gui_load_options <- function(opts_jsfile,
   gWidgets::svalue(wids$prod) <- general_opts$sel_prod
   gWidgets::svalue(wids$vers) <- general_opts$prod_version
   gWidgets::svalue(wids$sens) <- general_opts$sensor
-
+  
   # set dummy variables holding the initial values of selected bands
   gui_env$temp_wid_bands         <- general_opts$bandsel
   gui_env$temp_wid_bands_indexes <- general_opts$indexes_bandsel
   gui_env$temp_wid_bands_quality <- general_opts$quality_bandsel
-
-
+  
+  
   curr_sel_layers <- paste(
     cur_prodopts[["band_fullnames"]][which(general_opts[["bandsel"]] == 1)],
     collapse = "; ")
   gWidgets::svalue(wids$sel_layers) <- curr_sel_layers
-
+  
   curr_sel_qual <- paste(
-    cur_prodopts[["quality_fullnames"]][which(general_opts[["quality_bandsel"]] == 1)],
+    cur_prodopts[["quality_fullnames"]][which(general_opts[["quality_bandsel"]] == 1)],#nolint
     collapse = "; ")
   gWidgets::svalue(wids$sel_qi) <- curr_sel_qual
-
+  
   check_names_indexes <- c(
     cur_prodopts[["indexes_fullnames"]],
     as.list(general_opts$custom_indexes[[sel_prod]]
             [[gWidgets::svalue(wids$vers)]])$indexes_fullnames
   )
-
+  
   curr_sel_si <- paste(
     check_names_indexes[which(general_opts[["indexes_bandsel"]] == 1)],
     collapse = "; ")
   gWidgets::svalue(wids$sel_si) <- curr_sel_si
-
+  
   gWidgets::svalue(wids$server)   <- general_opts$download_server
   gWidgets::svalue(wids$user)     <- general_opts$user
   gWidgets::svalue(wids$password) <- general_opts$password
   gWidgets::svalue(wids$aria)     <- general_opts$use_aria
   gWidgets::svalue(wids$seas)     <- general_opts$download_range
-
+  
   # Dates options
   gWidgets::svalue(wids$start_date) <- general_opts$start_date
   gWidgets::svalue(wids$end_date)   <- general_opts$end_date
-
+  
   # Tiles options
   gWidgets::svalue(wids$start_x) <- general_opts$start_x
   gWidgets::svalue(wids$end_x)   <- general_opts$end_x
   gWidgets::svalue(wids$start_y) <- general_opts$start_y
   gWidgets::svalue(wids$end_y)   <- general_opts$end_y
-
+  
   # Proj and extent options
-
+  
   gWidgets::svalue(wids$output_proj4)    <- general_opts$output_proj4
   gWidgets::svalue(wids$proj_choice)     <- general_opts$proj
   gWidgets::svalue(wids$output_res_sel)  <- general_opts$out_res_sel
@@ -290,21 +422,21 @@ gui_load_options <- function(opts_jsfile,
   gWidgets::svalue(wids$delete)          <- general_opts$delete_hdf
   gWidgets::svalue(wids$nodata)          <- general_opts$nodata_change
   gWidgets::svalue(wids$scale)           <- general_opts$scale_val
-
+  
   gWidgets::svalue(wids$format)     <- general_opts$out_format
   gWidgets::svalue(wids$timeseries) <- general_opts$ts_format
-
+  
   gWidgets::svalue(wids$compress)   <- names(
     compress_dict[which(compress_dict == general_opts$compress)]
   )
-
+  
   # Folder options
   gWidgets::svalue(wids$outfold)    <- general_opts$out_folder
   gWidgets::svalue(wids$outfoldmod) <- general_opts$out_folder_mod
   #nocov end
 }
 
-
+# gui_save_options ----
 #' @title gui_save_options
 #' @description Helper function to check consistency of the selected processing
 #'  options before saving to a json file or starting MODIStsp processing
@@ -323,10 +455,10 @@ gui_save_options <- function(general_opts,
                              compress_dict,
                              wids) {
   #nocov start
-
+  
   # workaround to retrieve custom index, since it was already saved to the
   # JSON but it is not available in current variables
-
+  
   if (file.exists(opts_jsfile)) {
     general_opts$custom_indexes <-
       jsonlite::fromJSON(opts_jsfile)$custom_indexes
@@ -342,8 +474,8 @@ gui_save_options <- function(general_opts,
         x$v_number
       }
       , FUN.VALUE = "") == gWidgets::svalue(wids$vers))]]$v_number
-
-
+  
+  
   general_opts$sensor <- gWidgets::svalue(wids$sens)
   #retrieve selected bands
   if (exists("temp_wid_bands", where = gui_env)) {
@@ -357,24 +489,24 @@ gui_save_options <- function(general_opts,
   if (exists("temp_wid_bands_indexes", where = gui_env)) {
     general_opts$quality_bandsel <- gui_env$temp_wid_bands_quality
   }
-
+  
   # Retrieve download method and authentication
   general_opts$user            <- gWidgets::svalue(wids$user)
   general_opts$password        <- gWidgets::svalue(wids$password)
   general_opts$download_server <- gWidgets::svalue(wids$server)
   general_opts$use_aria        <- gWidgets::svalue(wids$aria)
   general_opts$download_range  <- gWidgets::svalue(wids$seas)
-
+  
   # Retrieve dates
   general_opts$start_date <- gWidgets::svalue(wids$start_date)
   general_opts$end_date   <- gWidgets::svalue(wids$end_date)
-
+  
   # Retrieve Tiles options
   general_opts$start_x <- gWidgets::svalue(wids$start_x)
   general_opts$end_x   <- gWidgets::svalue(wids$end_x)
   general_opts$start_y <- gWidgets::svalue(wids$start_y)
   general_opts$end_y   <- gWidgets::svalue(wids$end_y)
-
+  
   # Retrieve Proj and extent options
   general_opts$proj        <- gWidgets::svalue(wids$proj_choice)
   general_opts$output_proj4  <- gWidgets::svalue(wids$output_proj4)
@@ -386,25 +518,25 @@ gui_save_options <- function(general_opts,
                                 gWidgets::svalue(wids$output_ymin),
                                 gWidgets::svalue(wids$output_xmax),
                                 gWidgets::svalue(wids$output_ymax))
-
+  
   # Retrieve reprocess, delete and nodata
   general_opts$reprocess  <- gWidgets::svalue(wids$reprocess)
   general_opts$delete_hdf <- gWidgets::svalue(wids$delete)
-
+  
   general_opts$nodata_change <- gWidgets::svalue(wids$nodata)
   general_opts$scale_val     <- gWidgets::svalue(wids$scale)
-
-
+  
+  
   # Retrieve format, virtual and compression
-
+  
   general_opts$out_format <- gWidgets::svalue(wids$format)
   general_opts$ts_format  <- gWidgets::svalue(wids$timeseries)
   general_opts$compress   <- compress_dict[gWidgets::svalue(wids$compress)]
-
+  
   # Retrieve Folder options
   general_opts$out_folder     <- gWidgets::svalue(wids$outfold)
   general_opts$out_folder_mod <- gWidgets::svalue(wids$outfoldmod)
-
+  
   gui_env$check_save_opts <- TRUE
   # Send warning if HDF deletion selected
   if (general_opts$delete_hdf == "Yes") {
@@ -415,11 +547,11 @@ gui_save_options <- function(general_opts,
       title = "Warning", icon = "warning"
     )
   }
-
+  
   #- Perform checks on options consistency ---------------
-
+  
   # Check if at least 1 layer selected
-
+  
   if (max(general_opts$bandsel) +
       ifelse(length(general_opts$indexes_bandsel) > 0,
              max(general_opts$indexes_bandsel),
@@ -430,7 +562,7 @@ gui_save_options <- function(general_opts,
     )
     gui_env$check_save_opts <- FALSE
   }
-
+  
   # Check if dates, processing extent and tiles selection make sense
   if (as.Date(general_opts$start_date) > as.Date(general_opts$end_date)) {
     gWidgets::gmessage(
@@ -439,7 +571,7 @@ gui_save_options <- function(general_opts,
     )
     gui_env$check_save_opts <- FALSE
   }
-
+  
   if (
     class(try(as.Date(general_opts$start_date),
               silent = TRUE)) == "try-error" |
@@ -452,14 +584,14 @@ gui_save_options <- function(general_opts,
     )
     gui_env$check_save_opts <- FALSE
   }
-
+  
   if (general_opts$start_x > general_opts$end_x |
       general_opts$start_y > general_opts$end_y) {
     gWidgets::gmessage(message = "Error in Selected Tiles! Please correct!",
                        title   = "Warning")
     gui_env$check_save_opts <- FALSE
   }
-
+  
   # Check if bbox is consistent
   suppressWarnings(general_opts$bbox <- as.numeric(general_opts$bbox))
   general_opts$bbox <- as.numeric(general_opts$bbox)
@@ -495,7 +627,7 @@ gui_save_options <- function(general_opts,
                         "V" = min(d_bbox_mod_tiled$V):max(d_bbox_mod_tiled$V)
       ), 1, paste, collapse = "_V")
     )
-
+    
     selected_tiles <- paste0(
       "H",
       apply(expand.grid(
@@ -503,7 +635,7 @@ gui_save_options <- function(general_opts,
         "V" = gWidgets::svalue(wids$start_y):gWidgets::svalue(wids$end_y)),
         1, paste, collapse = "_V")
     )
-
+    
     # If the bounding box does not intersect with the tiles, return a warning
     # asking to automatically retrieve from extent
     if (!any(required_tiles %in% selected_tiles)) {
@@ -522,7 +654,7 @@ gui_save_options <- function(general_opts,
         , title = "Warning"
       )
     }
-
+    
     # If not all the required tiles are selected, ask to select them
     if (!all(required_tiles %in% selected_tiles) & gui_env$check_save_opts) {
       gWidgets::gconfirm(
@@ -543,7 +675,7 @@ gui_save_options <- function(general_opts,
         , title = "question"
       )
     }
-
+    
     # If some selected tiles are not useful, ask to remove them
     if (!all(selected_tiles %in% required_tiles) & gui_env$check_save_opts) {
       gWidgets::gconfirm(
@@ -565,7 +697,7 @@ gui_save_options <- function(general_opts,
       )
     }
   }
-
+  
   # check if folders are defined
   if (general_opts$out_folder == "" & gui_env$check_save_opts) {
     gWidgets::gmessage(
@@ -580,7 +712,7 @@ gui_save_options <- function(general_opts,
       title   = "Warning")
     gui_env$check_save_opts <- FALSE
   }
-
+  
   # Issue Warning on Mode resamling
   if (general_opts$resampling == "mode" & gui_env$check_save_opts) {
     check_mode <- gWidgets::gconfirm(
@@ -596,7 +728,7 @@ gui_save_options <- function(general_opts,
       gui_env$check_save_opts <- FALSE
     }
   }
-
+  
   # check that user/password were provided in case of html download
   if (general_opts$download_server == "http" &
       (general_opts$user == "" | general_opts$password == "") &
@@ -609,7 +741,7 @@ gui_save_options <- function(general_opts,
       title   = "Warning")
     gui_env$check_save_opts <- FALSE
   }
-
+  
   # check that the select product is available on the selected server
   #
   http <- prod_opt_list[[general_opts$sel_prod]][[which(vapply(
@@ -618,14 +750,14 @@ gui_save_options <- function(general_opts,
       x$v_number
     }
     , FUN.VALUE = "") == gWidgets::svalue(wids$vers))]]$http
-
+  
   ftp <- prod_opt_list[[general_opts$sel_prod]][[which(vapply(
     prod_opt_list[[general_opts$sel_prod]],
     function(x){
       x$v_number
     }
     , FUN.VALUE = "") == gWidgets::svalue(wids$vers))]]$ftp
-
+  
   if (general_opts$sensor == "Both") {
     http <- c(http["Terra"][[1]], http["Aqua"][[1]])
     ftp  <- c(ftp["Terra"][[1]], ftp["Aqua"][[1]])
@@ -633,7 +765,7 @@ gui_save_options <- function(general_opts,
     http <- http[general_opts$sensor][[1]]
     ftp  <- ftp[general_opts$sensor][[1]]
   }
-
+  
   if (general_opts$download_server == "ftp" & unique(ftp) == "Not Available") {
     gWidgets::gmessage(
       message = strwrap("The selected product/version is not available over
@@ -641,7 +773,7 @@ gui_save_options <- function(general_opts,
       title   = "Warning")
     gui_env$check_save_opts <- FALSE
   }
-
+  
   if (general_opts$download_server == "http" & unique(http) == "Not Available") { #nolint
     gWidgets::gmessage(
       message = strwrap("The selected product/version is only available for the
@@ -649,25 +781,33 @@ gui_save_options <- function(general_opts,
       title   = "Warning")
     gui_env$check_save_opts <- FALSE
   }
-
+  
   #   __________________________________________________________________________
   #   # If all checks passed, save options file and return                  ####
-
+  
   if (gui_env$check_save_opts) {
     jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
                          auto_unbox = TRUE)
   }
-
+  
   return(general_opts)
   #nocov end
 }
 # END save options function
 
-# GUI handlers ----
-
 # gh_childs ----
+#' @title gh_childs
+#' @description Handler for events that occurr when the "Change selected layers"
+#'  button is clicked
+#' @noRd
+#' @importFrom jsonlite fromJSON
+#' @importFrom gWidgets svalue gbasicdialog ggroup gframe gcheckboxgroup 
+#'  addSpring gbutton font visible
+#' @importFrom utils browseURL
+#' @noRd
 gh_childs <- function(h, ...) {
-
+   #nocov start
+  
   prod_opt_list <- get(load(prodopts_file))
   general_opts  <- jsonlite::fromJSON(opts_jsfile)
   curr_prod     <- gWidgets::svalue(wids$prod)
@@ -676,7 +816,7 @@ gh_childs <- function(h, ...) {
   # retrieve band names available for sel. product
   check_names   <- curr_opts[[curr_vers]]$band_fullnames
   # retrieve currently selected original layers
-  wids$check     <- gui_env$temp_wid_bands
+  wids$check    <- gui_env$temp_wid_bands
   selgroup      <-  gWidgets::gbasicdialog(
     title      = paste0("Select Processing Layers -  ",
                         curr_prod,
@@ -690,22 +830,22 @@ gh_childs <- function(h, ...) {
     #   - if user cancels operation after changing something, we go back to
     #     previous selection
     handler    = function(h, ...) {
-      # onfind which layers selected and store in gui_env$temp_wid_bands
+      # find which layers selected and store in gui_env$temp_wid_bands
       wids$pos      <- which(check_names %in% gWidgets::svalue(wids$bands))
       tmp_arr_bands <- array(data = 0, dim = length(check_names))
       tmp_arr_bands[wids$pos] <- 1
       gui_env$temp_wid_bands <- tmp_arr_bands
       # update the selected layers widget lable
-
+      
       cur_prodopts <- curr_opts[[gWidgets::svalue(wids$vers)]]
       curr_sel_layers <- paste(
         cur_prodopts[["band_fullnames"]][which(tmp_arr_bands != 0)],
         collapse = "; ")
-
+      
       gWidgets::svalue(wids$sel_layers) <- ifelse(curr_sel_layers == "",
                                                   " - None Selected - ",
                                                   curr_sel_layers)
-
+      
       # Find which indexes selected and store in
       # gui_env$temp_wid_bands_indexes
       if (length(which(check_names_indexes != "") > 0)) {
@@ -715,17 +855,17 @@ gh_childs <- function(h, ...) {
         tmp_arr_ind <- array(data = 0, dim = length(check_names_indexes))
         tmp_arr_ind[wids$pos] <- 1
         gui_env$temp_wid_bands_indexes <- tmp_arr_ind
-
+        
         # update the selected layers widget lable
         curr_sel_si <- paste(
           check_names_indexes[which(tmp_arr_ind != 0)],
           collapse = "; ")
-
+        
         gWidgets::svalue(wids$sel_si) <- ifelse(curr_sel_si == "",
                                                 " - None Selected - ",
                                                 curr_sel_si)
       }
-
+      
       # Find which QI selected and store in gui_env$temp_wid_bands_quality
       if (length(which(check_names_quality != "") > 0)) {
         wids$pos <- which(
@@ -744,7 +884,7 @@ gh_childs <- function(h, ...) {
       }
     }
   )
-
+  
   # child widgets for original layers selection ----
   cbox_main  <- gWidgets::ggroup(container = selgroup, horizontal = FALSE)
   cbox_total <- gWidgets::ggroup(container = cbox_main, horizontal = TRUE)
@@ -766,7 +906,7 @@ gh_childs <- function(h, ...) {
     },
     container = cbox,
     expand    = FALSE)
-
+  
   # child widgets for Quailty Indicators selection ----
   # retrieve quality band names (if existing for sel. product)
   check_names_quality <- curr_opts[[curr_vers]]$quality_fullnames
@@ -793,7 +933,7 @@ gh_childs <- function(h, ...) {
       container = cbox_quality,
       expand    = FALSE)
   }
-
+  
   # child widgets for spectral indexes selection  ----
   # retrieve indexes  names (if existing for sel. product)
   check_names_indexes <- c(
@@ -818,12 +958,12 @@ gh_childs <- function(h, ...) {
       use.table = FALSE
     )
     glabel(text = "", container = cbox_indexes)
-
+    
     ##  .................................................................. #
     ##  Here we create the sub child widget for creation of custom      ####
     ##  indexes. The `MODIStsp_addindex` function is used to spawn a modal
     ##  widget for indexes creation
-
+    
     wids$band_newindex  <- gWidgets::gbutton(
       text    = "Add New Indices",
       handler = function(h, ...) {
@@ -832,7 +972,7 @@ gh_childs <- function(h, ...) {
                                     prodopts_file = prodopts_file,
                                     selprod       = curr_prod,
                                     selvers       = curr_vers)
-
+        
         # since upon return the widget for layers selection is automatically
         # disposed to allow addition of the index, here we check and save
         # which layers and indexes are currently selected
@@ -871,10 +1011,10 @@ gh_childs <- function(h, ...) {
     container = cbox_indexes,
     expand    = FALSE)
   }
-
+  
   # Start/Cancel buttons for layers selection child widget ----
   bands_group <- ggroup(container = cbox_main, horizontal = FALSE)
-
+  
   # Widget for "www" button for layers selection child widget ----
   gWidgets::addSpring(bands_group)
   www_but <- gWidgets::gbutton(
@@ -888,22 +1028,30 @@ gh_childs <- function(h, ...) {
   )
   gWidgets::font(www_but) <- list(family = "sans", weight = "bold",
                                   color = "red")
-
+  
   gWidgets::visible(selgroup, set = TRUE)
+  #nocov end
 }
 
 # Help messages ----
-
+# gh_help ----
+#' @title gh_help
+#' @description Helper function used to create an "help button" within the GUI
+#' @noRd
+#' @importFrom gWidgets gbasicdialog glabel gbutton visible
+#' @importFrom utils browseURL
+#' @noRd
 gh_help <- function(h, sel_help, help_messages, info_addr = NULL, ...) {
+  #nocov start
   help_box <- gWidgets::gbasicdialog(title      = "Help",
                                      parent     = NULL,
                                      do.buttons = FALSE,
                                      horizontal = FALSE,
                                      width      = 10,
                                      height     = 10)
-
+  
   helptext <- subset(help_messages, which_help == sel_help)[["text"]]
-
+  
   help_mess_lab <- gWidgets::glabel(
     text = strwrap(helptext, 80),
     editable  = FALSE,
@@ -920,14 +1068,19 @@ gh_help <- function(h, sel_help, help_messages, info_addr = NULL, ...) {
     )
   }
   gWidgets::visible(help_box) <- TRUE
-  # size(help_mess_lab) <- list(width = 80)
+  #nocov end
 }
 
 
-# Handler for load extent from file button
-
-gh_load_extent <- function(h, ...) {
-
+# Handler for load extent from file button ---
+#' @title gh_load_extent
+#' @description Handler used to perform requirted actions if "load extent
+#'  from spatial file" is clicked. 
+#' @noRd
+#' @importFrom gWidgets size svalue
+#' @noRd
+gh_load_extent <- function(h, wids, ...) {
+  #nocov start
   choice <- try(gfile(
     type = "open",
     text = "Select a vector or raster file",
@@ -946,16 +1099,19 @@ gh_load_extent <- function(h, ...) {
     gWidgets::size(wait_window) <- c(100, 8)
     addHandlerUnrealize(wait_window,
                         handler = function(h, ...) return(TRUE))
-    wait_window_lab <- glabel(
+    glabel(
       text      = paste("Retrieving Extent, please wait..."),
       editable  = FALSE,
       container = wait_window
     )
     Sys.sleep(0.05)
     # Convert bbox coordinates to output projection
-    out_proj_crs <- ifelse(gWidgets::svalue(wids$proj_choice) != "User Defined",
-                           out_proj_list[[gWidgets::svalue(wids$proj_choice)]],
-                           general_opts$output_proj4)
+    
+    curr_proj <- 
+      out_proj_crs <- ifelse(
+        gWidgets::svalue(wids$proj_choice) != "User Defined",
+        out_proj_list[[gWidgets::svalue(wids$proj_choice)]],
+        gWidgets::svalue(wids$output_proj4))
     # Create the bounding box in the chosen projection retrieving it from
     # the specified file
     bbox_out <- try(bbox_from_file(file_path = choice,
@@ -964,33 +1120,45 @@ gh_load_extent <- function(h, ...) {
     if (class(bbox_out) == "try-error") {
       gmessage(bbox_out, title = "Error Detected!")
     } else {
+      
+      proj  <- gui_get_proj(CRS(curr_proj))
+      units <- gui_get_units(CRS(curr_proj), proj)
       # re-set bbox in the GUI according coordinates retrieved from file
       gui_update_bboxlabels(bbox_out,
                             units,
                             wids)
-
+      
       # Set tiles according with the bounding box
       gui_update_tiles(bbox_out,
+                       out_proj_crs, 
                        mod_proj_str,
                        modis_grid,
                        wids)
     }
     message("[", date(), "]", " Retrieving Extent, please wait... DONE!")
     dispose(wait_window)
-
+    
   }
+  #nocov end
 }
 
 
 
 # gh_tiles_from_bbox ----
+#' @title gh_tiles_from_bbox
+#' @description Helper function used to retrieve the tiles required to cover
+#'  a given bounding box 
+#' @noRd
+#' @importFrom gWidgets svalue
+#' @noRd
 gh_tiles_from_bbox <- function(h, ...) {
+  #nocov start
   bbox <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
                        gWidgets::svalue(wids$output_ymin),
                        gWidgets::svalue(wids$output_xmax),
                        gWidgets::svalue(wids$output_ymax)))
   # Check if bbox is consistent
-
+  
   n_bbox_compiled <- length(which(is.finite(bbox)))
   if (gWidgets::svalue(wids$output_ext) != "Select MODIS Tiles" &
       n_bbox_compiled == 0) {
@@ -1005,19 +1173,26 @@ gh_tiles_from_bbox <- function(h, ...) {
   } else {
     # If all checks pass, retrieve the tiles and set the widget
     gui_update_tiles(bbox,
+                     gWidgets::svalue(wids$output_proj4),
                      mod_proj_str,
                      modis_grid,
                      wids)
   }
+  #nocov end
 }
 
-
-# Handler for buttons for interactive extent selection ----
-# 
-
 # gh_view_extent ----
-gh_view_extent <- function(h, ext_type, ...) {
-  
+#' @title gh_view_extent
+#' @description Handler used to perform actions required when the "View current
+#'  extent" button is clicked.
+#' @noRd
+#' @importFrom gWidgets svalue
+#' @importFrom leaflet leaflet addPolygons addTiles addProviderTiles addLayersControl layersControlOptions
+#' @importFrom mapedit selectMap
+#' @importFrom shiny browserViewer
+#' @importFrom sf st_bbox st_as_sfc st_transform
+gh_view_extent <- function(h, ext_type, wids, ...) {
+  #nocov start
   if (requireNamespace("mapedit")) {
     if (ext_type == "Select MODIS Tiles") {
       min_h <- gWidgets::svalue(wids$start_x)
@@ -1030,7 +1205,6 @@ gh_view_extent <- function(h, ext_type, ...) {
       cursel <- subset(tilemap,
                        h >= min_h & h <= max_h & v >= min_v & v <= max_v)
       
-      # print(mapview::mapview(cursel))
       mm <- leaflet::leaflet(cursel)
       mm <- leaflet::addPolygons(mm)
       mm <- leaflet::addTiles(mm)
@@ -1039,83 +1213,80 @@ gh_view_extent <- function(h, ext_type, ...) {
         viewer = shiny::browserViewer(browser = getOption("browser"))
       )
     } else {
-      # browser()
+      
       bbox <- as.numeric(c(gWidgets::svalue(wids$output_xmin),
                            gWidgets::svalue(wids$output_ymin),
                            gWidgets::svalue(wids$output_xmax),
                            gWidgets::svalue(wids$output_ymax)))
       
-      print(svalue(wids$output_proj4))
-      print(general_opts$output_proj4)
-      
-      # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
-      #                         "+init=epsg:4326",
-      #                         enlarge = TRUE)
-      #
       if (!(any(is.na(bbox)))) {
         bbox_out <- sf::st_bbox(
           c(xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]),
           crs = gWidgets::svalue(wids$output_proj4))
         
-        
-        # print(mapview::mapview(bbox_out))
-        
-        
-        # bbox_out  <- reproj_bbox(bbox,gWidgets::svalue(wids$output_proj4),
-        #                         "+init=epsg:4326",
-        #                         enlarge = TRUE)
-        # bbox_out <- sf::st_bbox(
-        #   c(xmin = bbox_out[1], xmax = bbox_out[3], ymax = bbox_out[4], ymin = bbox_out[2]),
-        #   crs = sf::st_crs(svalue(wids$output_proj4)))
-        
-        # browser()
         bbox_sf <- sf::st_as_sfc(bbox_out)
         bbox_sf <- sf::st_transform(bbox_sf, 4326)
-        # browser()
         mm <- leaflet::leaflet(bbox_sf)
         mm <- leaflet::addPolygons(mm)
         mm <- leaflet::addTiles(mm)
         providers <- c("OpenStreetMap", "Esri.WorldImagery")
-        mm <- leaflet::addProviderTiles(mm, "OpenStreetMap", group = "OpenStreetMap")
-        mm <- leaflet::addProviderTiles(mm, "Esri.WorldImagery", group = "Esri.WorldImagery")
-        mm <- leaflet::addLayersControl(mm,
-                                        baseGroups = providers,
-                                        options = leaflet::layersControlOptions(collapsed = FALSE))
+        mm <- leaflet::addProviderTiles(mm, "OpenStreetMap", 
+                                        group = "OpenStreetMap")
+        mm <- leaflet::addProviderTiles(mm, "Esri.WorldImagery",
+                                        group = "Esri.WorldImagery")
+        mm <- leaflet::addLayersControl(
+          mm,
+          baseGroups = providers,
+          options = leaflet::layersControlOptions(collapsed = FALSE))
         mapedit::selectMap(
           mm,
           viewer = shiny::browserViewer(browser = getOption("browser"))
         )
         
       } else {
-        gmessage(strwrap("Current Output extent is not valid!\n\n
-                         Please specify a bounding box or load it from a file!"))
+        gmessage(strwrap(
+          "Current Output extent is not valid!\n\n
+           Please specify a bounding box or load it from a file!"))
       }
-      }
-    } else {
-      gmessage(strwrap(
-        "You need to install package `mapedit` to be able to
+    }
+  } else {
+    gmessage(strwrap(
+      "You need to install package `mapedit` to be able to
         use this functionality!\n\n
         You can install it using `install.packages(mapedit)`"),
-        icon = "warning")
+      icon = "warning")
   }
+  #nocov end
 }
 
 # Select Output extent ----
-gh_selectmap <- function(h, ext_type, ...) {
-  
+#' @title gh_selectmap
+#' @description Handler used to perform actions required when the "Select from map"
+#'  button is clicked.
+#' @noRd
+#' @importFrom mapedit selectFeatures editMap
+#' @importFrom shiny browserViewer
+#' @importFrom data.table rbindlist
+#' @importFrom gWidgets svalue
+#' @importFrom mapview mapview
+#' @importFrom sf st_bbox
+gh_selectmap <- function(h, ext_type, wids,...) {
+  #nocov start
   if (requireNamespace("mapedit")) {
     if (ext_type == "Select MODIS Tiles") {
+      
       # On MODIS tiles selection, use editFeatures to allow selection
       # from the Tiles Map
-      
       tilemap <- get(load(system.file("ExtData" ,"MODIS_Tiles_latlon.RData",
                                       package = "MODIStsp")))
       sel <- mapedit::selectFeatures(
         tilemap,
         viewer = shiny::browserViewer(browser = getOption("browser"))
       )
+      # On return, check the selection to see if it correspond to a rectangular 
+      # area. If not, message and abort.
       
-      if (inherits(sel, "data.frame")) {
+      if (inherits(sel, "data.frame") & length(sel$h > 0)) {
         
         seltiles <- lapply(sel[["Name"]], FUN = function(x){
           h <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[2])
@@ -1163,28 +1334,28 @@ gh_selectmap <- function(h, ext_type, ...) {
       # On Custom Area selection, use editMap to allow drawing a custom area
       tilemap <- get(load(system.file("ExtData/MODIS_Tiles_latlon.RData",
                                       package = "MODIStsp")))
-      mm <-  mapview::mapview(tilemap, alpha.regions = 0.1, color = "grey75")
+      mm  <-  mapview::mapview(tilemap, alpha.regions = 0.1, color = "grey75")
       sel <- mapedit::editMap(
         mm,
-        viewer = shiny::browserViewer(browser = getOption("browser")))
+        viewer = shiny::browserViewer(browser = getOption("browser")), 
+        title = "Select the output extent using the tools on the left")
       
       if (!is.null(sel[["finished"]])) {
-        sel_bbox    <- sf::st_bbox(sel[["finished"]])
-        # sel_area_rep <- sf::st_transform(curr_proj)
-        # crs_out <- ifelse(gWidgets::svalue(wids$proj_choice) != "User Defined",
-        #                   svalue(wids$output_proj4),
-        #                   general_opts$output_proj4)
-        
+        sel_bbox  <- sf::st_bbox(sel[["finished"]])
         curr_proj <- svalue(wids$output_proj4)
         
+        #reproject the bbox to get coordinates in ouput projection. Use 
+        #enlarge = TRUE to be sure that all the area in the selected bbox
+        #will be included in the extent in the target projection
+        
         bbox_out <- reproj_bbox(sel_bbox,
-                                CRS("+init=epsg:3857"),
+                                "+init=epsg:4326",
                                 curr_proj,
-                                enlarge = FALSE)
+                                enlarge = TRUE)
         
         proj  <- gui_get_proj(CRS(curr_proj))
         units <- gui_get_units(CRS(curr_proj), proj)
-        gWidgets::svalue(pixsize2_lab) <- units
+        gWidgets::svalue(wids$pixsize2_lab) <- units
         
         # re-set bbox in the GUI according coordinates retrieved from file
         gui_update_bboxlabels(bbox_out,
@@ -1206,4 +1377,30 @@ gh_selectmap <- function(h, ext_type, ...) {
       You can install it using `install.packages(mapedit)`"),
       icon = "warning")
   }
+}
+# warn_projmess ----
+#' @title warn_projmess
+#' @description Helper function used to send out messages when the user tries
+#'  to change projection
+#' @noRd
+#' @importFrom gWidgets gconfirm
+
+warn_projmess1 <- function() {
+  gWidgets::gconfirm(strwrap(
+    "WARNING! Changing projection may introduce positional errors in the output
+     rasters. We suggest you to keep the original MODIS projection unless this
+     is really necessary!\n\n
+     Also note that Any previous selections of Custom Spatial Extent will
+     be removed (i.e., you will have to select again the output extent).
+     Do you wish to continue?\n\n", width = 200) ,
+    icon = "warning")
+}
+
+warn_projmess2 <- function() {
+  gWidgets::gconfirm(strwrap(
+    "WARNING! Any previous selections of Custom Spatial Extent will
+            be removed (i.e., you will have to select again the output extent).
+            Do you wish to continue?\n\n", width = 200) ,
+    icon = "warning")
+  #nocov end
 }
