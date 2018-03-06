@@ -36,10 +36,11 @@ load_prodopts <- function(gui) {
     reload_prodlist <- TRUE
   }
   if (reload_prodlist) {
+    #nocov start
     mess_text <- "Reading the MODIS products' characteristics from XML. Please wait!" #nolint
     message(mess_text)
     if (gui) {
-      #nocov start
+      
       mess     <- gWidgets::gwindow(title  = "Please wait...",
                                     width  = 400,
                                     height = 40)

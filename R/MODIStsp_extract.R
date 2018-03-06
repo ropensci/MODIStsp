@@ -52,7 +52,7 @@
 #'  this example: fun=function(x,...)length(x). Defaults to "mean"
 #' @param out_format `character ["xts" | "dframe"]` If dframe, the output is a
 #'  data frame with dates in the first column and extracted data in the others,
-#'  otherwise it is a `xts` object, Default: "xts2
+#'  otherwise it is a `xts` object, Default: "xts"
 #' @param small `logical` If TRUE, and input is polygons, then values are
 #'  returned also for polygons not covering at least one raster cell. "Included"
 #' cells in this case depend on the values of the "small_method" parameter.
@@ -151,10 +151,10 @@ MODIStsp_extract <- function(in_rts, sp_object,
                              out_format = "xts", small    = TRUE,
                              small_method = "centroids",
                              na.rm      = TRUE, verbose = FALSE) {
-
+  
   .SD <- NULL # Workaround to avoid note on package check
-
-
+  
+  
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
@@ -164,12 +164,12 @@ MODIStsp_extract <- function(in_rts, sp_object,
   if (length(start_date) == 0) {
     start_date <- min(raster::getZ(in_rts))
     if (verbose)
-      message("Starting date not provided - Using the first date in the stack") #nocov
+      message("Starting date not provided - Using the first date in the stack") #nocov #nolint
   }
   if (length(end_date) == 0) {
     end_date <- max(raster::getZ(in_rts))
     if (verbose)
-      message("Ending date not provided - Using the last date in the stack") #nocov
+      message("Ending date not provided - Using the last date in the stack") #nocov #nolint
   }
   if (!class(start_date) %in% c("Date", "POSIXct", "POSIXlt")) {
     start_date <- try(as.Date(start_date), silent = TRUE)
@@ -199,7 +199,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
                                "SpatialLines", "SpatialLinesDataFrame")) {
     if (class(sp_object) == "character") {
       sp_object <- try(rgdal::readOGR(dirname(sp_object),
-                               basename(tools::file_path_sans_ext(sp_object))))
+                                      basename(tools::file_path_sans_ext(sp_object))))
       if (class(sp_object) == "try-error") {
         stop("sp_object is not a valid Spatial object or Shapefile")
       }
@@ -214,7 +214,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
   }
   dates     <- raster::getZ(in_rts)
   sel_dates <- which(dates >= start_date & dates <= end_date)
-
+  
   if (length(sel_dates) > 0) {
     if (sp::proj4string(sp_object) != sp::proj4string(in_rts)) {
       sp_object <- sp::spTransform(sp_object,
@@ -230,20 +230,20 @@ MODIStsp_extract <- function(in_rts, sp_object,
               "Outputs for features only partially inside will be retrieved\n ",
               "using only the available pixels !")
       if (!setequal(sp_object$mdxtnq, shape$mdxtnq)){
-
+        
         outside_feat <- setdiff(sp_object$mdxtnq, shape$mdxtnq)
       }
     }
     if (class(shape) %in% c("SpatialPointsDataFrame", "SpatialPoints",
                             "SpatialLines", "SpatialLinesDataFrame")) {
-
+      
       ts <- matrix(nrow = length(sel_dates), ncol = length(shape[, 1]))
       for (f in seq_along(sel_dates)) {
         if (verbose == TRUE) {
           message("Extracting data from date: ", dates[sel_dates[f]]) #nocov
         }
         ts[f, ] <- raster::extract(in_rts[[sel_dates[f]]], shape,
-                           fun = FUN)
+                                   fun = FUN)
       }
       ts <- as.data.frame(ts)
       if (length(id_field) == 1) {
@@ -252,19 +252,19 @@ MODIStsp_extract <- function(in_rts, sp_object,
       } else {
         names(ts) <- seq_along(shape[, 1])
       }
-
+      
       if (out_format == "dframe") {
         ts <- cbind(date = dates[sel_dates], ts)
       }
-    # On polygons, extract by rasterization !
+      # On polygons, extract by rasterization !
     } else {
       if (verbose) message("Rasterizing shape") #nocov
-
+      
       tempshape <- tempfile(tmpdir = tempdir(), fileext = ".shp")
       rgdal::writeOGR(shape, dsn = dirname(tempshape),
-               layer = basename(tools::file_path_sans_ext(tempshape)),
-               driver = "ESRI Shapefile", overwrite_layer = TRUE,
-               verbose = FALSE)
+                      layer = basename(tools::file_path_sans_ext(tempshape)),
+                      driver = "ESRI Shapefile", overwrite_layer = TRUE,
+                      verbose = FALSE)
       if (verbose) {
         message("Writing temporary rasterized shapefile") #nocov
       }
@@ -286,25 +286,25 @@ MODIStsp_extract <- function(in_rts, sp_object,
         }
       }
       gdalUtils::gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts),
-                     te = ext_conv(in_rts[[1]]), a = "mdxtnq", ot = ot)
+                                te = ext_conv(in_rts[[1]]), a = "mdxtnq", ot = ot)
       zone_raster <- raster::raster(tempraster)
       zones       <- raster::getValues(zone_raster)
       ok_zones    <- which(is.finite(zones) & zones != 0)
       zones       <- zones[ok_zones]
       ncols       <- length(unique(zones))
       ts          <- matrix(nrow = length(sel_dates), ncol = ncols)
-
+      
       for (f in seq_along(sel_dates)) {
         if (verbose) {
-          message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov
+          message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov #nolint
         }
-
+        
         value <- raster::getValues(in_rts[[sel_dates[f]]])[ok_zones]
         rDT   <- data.table::data.table(value, zones)
         data.table::setkey(rDT, zones)
         ts[f, 1:ncols] <- rDT[, lapply(.SD, match.fun(FUN), na.rm = na.rm),
                               by = zones]$value
-
+        
       }
       ts <- as.data.frame(ts)
       if (length(id_field) == 1) {

@@ -16,11 +16,11 @@
 #' @importFrom jsonlite fromJSON write_json
 #' @importFrom utils packageVersion
 load_opts <- function(opts_jsfile) {
-  
+
   if (file.exists(opts_jsfile)) {
-    
+
     general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
-    
+
     # stop on errors
     if (class(general_opts) == "try-error" ) {
       stop(strwrap("Unable to read the provided JSON options file. Please check
@@ -37,7 +37,7 @@ load_opts <- function(opts_jsfile) {
     if (is.null(general_opts$MODIStspVersion) |
         general_opts$MODIStspVersion < "1.3.3.9000") {
       stop("The option file in use (", opts_jsfile, ") was created with a ",
-           "too old MODIStsp version (<=1.3.3.9000).\n It can not be used with the ",
+           "too old MODIStsp version (<=1.3.3.9000).\n It can not be used with the ",#nolint
            "current version.\n",
            " Please delete it or specify a different value for the ",
            "`options_file` argument.")
@@ -56,7 +56,7 @@ load_opts <- function(opts_jsfile) {
     # "general_opts" structure used to  communicate with the GUI, set default
     # values and save it as a JSON file
 
-    
+
     #nocov start (this is only executed at first ever execution)
     general_opts <- list(
       sel_prod        = "Surf_Ref_8Days_500m (M*D09A1)",
@@ -79,7 +79,7 @@ load_opts <- function(opts_jsfile) {
       download_server = "http",
       download_range  = "full",
       proj            = "Native",
-      user_proj4      = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
+      output_proj4    = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
       out_res_sel     = "Native",
       out_res         = "",
       full_ext        = "Select MODIS Tiles",

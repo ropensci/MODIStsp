@@ -167,10 +167,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              gui            = TRUE,
                              n_retries,
                              verbose) {
-
+  
   mess_text <- "MODIStsp --> Starting processing"
   # initialize processing messages in case of interactive execution ----
-
+  
   if (gui) {
     #nocov start
     mess     <- gWidgets::gwindow(title = "Processing Status",
@@ -184,9 +184,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   } else {
     mess_lab <- NULL
   }
-
+  
   process_message(mess_text, gui, mess_lab, verbose)
-
+  
   #   __________________________________________________________________________
   #   Intialize processing variables                                        ####
   
@@ -199,12 +199,12 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     nodata_in[nodata_in_unrecognised] <- "None"
   }
   
-  quality_nodata_in_unrecognised <- !grepl("^[0-9\\,\\:\\-]+$",quality_nodata_in) & 
+  quality_nodata_in_unrecognised <- !grepl("^[0-9\\,\\:\\-]+$",quality_nodata_in) & #nolint
     is.na(suppressWarnings(as.numeric(quality_nodata_in)))
   if (any(quality_nodata_in_unrecognised)) {
     quality_nodata_in[quality_nodata_in_unrecognised] <- "None"
   }
-
+  
   # if NoData change set to no, set out_nodata to nodata_in
   # and take only the last values listed for each band
   if (nodata_change == "No") {
