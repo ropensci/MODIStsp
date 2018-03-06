@@ -42,7 +42,7 @@ Imports:
     stringr (>= 1.0.0),
     xts (>= 0.9-7),
     xml2 (>= 1.2.0),
-    sf(>= 0.6-1),
+    sf(>= 0.6),
     leaflet,
     shiny, 
     mapview (>= 2.3.0), 
