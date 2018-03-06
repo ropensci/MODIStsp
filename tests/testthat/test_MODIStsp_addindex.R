@@ -32,7 +32,10 @@ test_that("MODIStsp_addindex works as expected", {
   )
   # Duplicated index full name leads to aborting
   expect_error(
-    MODIStsp_addindex(gui = FALSE, new_indexbandname = "SR2",
+    MODIStsp_addindex(gui = FALSE, 
+                      opts_jsfile = system.file("testdata/test_addindex.json", 
+                                                package = "MODIStsp"),
+                      new_indexbandname = "SR2",
                       new_indexformula = "b1_Red - b2_NIR",
                       new_indexfullname = "Simple Ratio (b2_NIR/b1_Red)")
   )

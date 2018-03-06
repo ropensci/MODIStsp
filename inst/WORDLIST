@@ -1,4 +1,3 @@
-Â
 Albedo
 ArchLinux
 ATK
@@ -43,6 +42,7 @@ Emissivity
 EndDOY
 EndYear
 ENVI
+EPSG
 Evapotranspiration
 EVI
 ExtData
@@ -133,6 +133,7 @@ Neighbour
 NIR
 nodata
 NoData
+NODATA
 OGG
 OGR
 ogrinfo
@@ -149,6 +150,7 @@ preprocesses
 priori
 ProdCode
 ProdOpts
+Progra
 proj
 Proj
 PROJ
@@ -162,20 +164,18 @@ rasters
 Rasters
 rasterStack
 RasterStack
-RasterStacks
 rdata
 Rdata
 RData
 reflectance
 Reflectance
-reproj
 reproject
+Reproject
 reprojected
 reprojecting
 reprojection
 Reprojection
 req
-reqbands
 rescaled
 rescaling
 rgdal
@@ -184,6 +184,7 @@ Rgtk
 RGtk
 rmarkdown
 Rowlingson
+Rscript
 RSession
 RStudio
 rts
@@ -197,6 +198,7 @@ sp
 SpatialLines
 SpatialPoints
 SpatialPolygons
+splitted
 StartDOY
 StartYear
 subfolder

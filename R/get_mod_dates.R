@@ -27,7 +27,7 @@ get_mod_dates <- function(dates, date_dirs) {
     # end_year
     date_dirs <- c(
       date_dirs[tmp_date_dirs >= tmp_dates[1] & tmp_date_dirs <= tmp_dates[2]],
-      date_dirs[tmp_date_dirs >= tmp_dates[1] & tmp_date_dirs <= tmp_dates[4]]
+      date_dirs[tmp_date_dirs >= tmp_dates[3] & tmp_date_dirs <= tmp_dates[4]]
     )
   }
   

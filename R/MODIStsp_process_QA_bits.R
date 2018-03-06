@@ -47,16 +47,17 @@ MODIStsp_process_QA_bits <- function(out_filename,
 
   # define the processing function on the basis of position of
   # required bit-fields
-  bitfield_comp <- function(r, ...) {
-    bit1 <-  bits[1]
-    bit2 <- ifelse(length(bits) > 1,
-                   2 ^ (bits[2] - bits[1] + 1) - 1,
-                   2 ^ (1) - 1)
-    bitops::bitAnd(bitops::bitShiftR(r, bit1), bit2)
-  }
+  bit1 <-  bits[1]
+  bit2 <- ifelse(length(bits) > 1,
+                 2 ^ (bits[2] - bits[1] + 1) - 1,
+                 2 ^ (1) - 1)
 
-  raster::calc(in_raster,
-               fun       = bitfield_comp,
+  out <- raster::calc(x   = in_raster,
+               fun  =  function(x, ...) {
+                 shifted <- bitops::bitShiftR(x, bit1)
+                 out     <-  bitops::bitAnd(shifted, bit2)
+                 return(out)
+               },
                filename  = out_filename,
                format    = out_format,
                datatype  = "INT1U",

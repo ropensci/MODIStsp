@@ -38,11 +38,11 @@ processed.}
 \item{nodata_out}{\code{numeric} Output nodata value to the HDF layer to be
 processed.}
 
-\item{full_ext}{\code{characrter ["Full_Ext" | "Resized"]} If "Full_Ext", process
+\item{full_ext}{\code{characrter ["FullTiles" | "Resized"]} If "Full_Ext", process
 the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.}
 
-\item{bbox}{\code{numeric(4)} Output bounding box (xmin, xmax, ymin, ymax) in
+\item{bbox}{\code{numeric(4)} Output bounding box (xmin, ymin, xmax, ymax) in
 out_proj coordinate system.}
 
 \item{scale_val}{\code{character ["Yes" | "No"]} If == "Yes", scale and offset are applied to
@@ -86,7 +86,7 @@ in interactive execution.}
 The function is called for its side effects
 }
 \description{
-Internal function used to performed the required spatial
+Internal function used to perform the required spatial
 processing on MODIS original hdf layers (reprojection, resizing, resampling,
 mosaicing, computation of scaling factors). The function is based on the
 use of \code{gdal} routines.

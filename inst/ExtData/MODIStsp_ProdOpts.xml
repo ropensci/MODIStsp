@@ -183,7 +183,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (b4_Green-b6_SWIR)/(b4_Green+-b6_SWIR)</indexes_fullname>
+                            <indexes_fullname>NDSI (b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_fullname>
                             <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>
@@ -511,7 +511,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
+                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
                             <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>
@@ -1288,7 +1288,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
+                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
                             <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>
@@ -2218,7 +2218,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+-SWIR1)</indexes_fullname>
+                            <indexes_fullname>NDSI (Green-SWIR1)/(Green+SWIR1)</indexes_fullname>
                             <indexes_formula>(b4_Green-b6_SWIR)/(b4_Green+b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>
@@ -3276,7 +3276,7 @@
                             <bandname>SC_DT</bandname>
                             <fullname>Snow Cover Daily Tile</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3294,7 +3294,7 @@
                             <bandname>SNW_ALB</bandname>
                             <fullname>Snow Albedo Daily Tile</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3313,7 +3313,7 @@
                 <version>
                     <v_number>6</v_number>
                     <prod_fullname>M*D10_A1: MODIS/Terra/Aqua Snow Cover Daily L3 Global 500m Grid</prod_fullname>
-                    <main_out_folder>Snow_Cov_Daily_500m_v5</main_out_folder>
+                    <main_out_folder>Snow_Cov_Daily_500m_v6</main_out_folder>
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A1.006/</http_aqua>
@@ -3327,7 +3327,7 @@
                             <bandname>SC</bandname>
                             <fullname>NDSI Snow Cover</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3363,7 +3363,7 @@
                             <bandname>SNW_ALB</bandname>
                             <fullname>Snow Albedo Daily Tile</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>250</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3479,7 +3479,7 @@
                     <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://nsidc.org/data/mod10a1</www>
+                    <www>https://nsidc.org/data/mod10a2</www>
                     <bands>
                         <band>
                             <bandname>MAX_SNW</bandname>
@@ -3577,7 +3577,7 @@
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3622,13 +3622,13 @@
                     <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://nsidc.org/data/MOD10C1</www>
+                    <www>https://nsidc.org/data/mod10c1</www>
                     <bands>
                         <band>
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3637,7 +3637,7 @@
                             <bandname>CLD_OBS</bandname>
                             <fullname>Percentage of input cells obscured by clouds plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3646,7 +3646,7 @@
                             <bandname>CLEAR_IND</bandname>
                             <fullname>Percentage of non-cloud input cells plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3688,7 +3688,7 @@
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3733,13 +3733,13 @@
                     <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://nsidc.org/data/MOD10C2</www>
+                    <www>https://nsidc.org/data/mod10c2</www>
                     <bands>
                         <band>
                             <bandname>SN_COV</bandname>
                             <fullname>Percentage of snow cover observations plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3748,7 +3748,7 @@
                             <bandname>CLD_OBS</bandname>
                             <fullname>Percentage of input cells obscured by clouds plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3757,7 +3757,7 @@
                             <bandname>CLEAR_IND</bandname>
                             <fullname>Percentage of non-cloud input cells plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3797,9 +3797,9 @@
                     <bands>
                         <band>
                             <bandname>SN_COV_MNT</bandname>
-                            <fullname>PMonthly average snow cover percentage plus other results</fullname>
+                            <fullname>Monthly average snow cover percentage plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -3826,13 +3826,13 @@
                     <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://nsidc.org/data/MOD10CM</www>
+                    <www>https://nsidc.org/data/mod10cm</www>
                     <bands>
                         <band>
                             <bandname>SN_COV_MNT</bandname>
-                            <fullname>PMonthly average snow cover percentage plus other results</fullname>
+                            <fullname>Monthly average snow cover percentage plus other results</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in> 255</nodata_in>
+                            <nodata_in>101:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -11568,7 +11568,7 @@
                         </index>
                         <index>
                             <indexes_bandname>NDSI</indexes_bandname>
-                            <indexes_fullname>NDSI (Nad_Refl_b4_Green-Nad_Refl_b6_SWIR)/(Nad_Refl_b4_Green+-Nad_Refl_b6_SWIR)</indexes_fullname>
+                            <indexes_fullname>NDSI (Nad_Refl_b4_Green-Nad_Refl_b6_SWIR)/(Nad_Refl_b4_Green+Nad_Refl_b6_SWIR)</indexes_fullname>
                             <indexes_formula>(Nad_Refl_b4_Green-Nad_Refl_b6_SWIR)/(Nad_Refl_b4_Green+Nad_Refl_b6_SWIR)</indexes_formula>
                             <indexes_nodata_out>32767</indexes_nodata_out>
                         </index>
@@ -16363,7 +16363,7 @@
                             <bandname>FPAR</bandname>
                             <fullname>Fpar_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>249-255</nodata_in>
+                            <nodata_in>249:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
@@ -16372,7 +16372,7 @@
                             <bandname>LAI</bandname>
                             <fullname>Lai_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>249-255</nodata_in>
+                            <nodata_in>249:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -16399,7 +16399,7 @@
                             <bandname>FPAR_std</bandname>
                             <fullname>FparStdDev_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>248-255</nodata_in>
+                            <nodata_in>248:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
@@ -16408,7 +16408,7 @@
                             <bandname>LAI_std</bandname>
                             <fullname>LaiStdDev_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>248-255</nodata_in>
+                            <nodata_in>248:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -16667,7 +16667,7 @@
                             <bandname>FPAR</bandname>
                             <fullname>Fpar_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>249-255</nodata_in>
+                            <nodata_in>249:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
@@ -16676,7 +16676,7 @@
                             <bandname>LAI</bandname>
                             <fullname>Lai_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>249-255</nodata_in>
+                            <nodata_in>249:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -16703,7 +16703,7 @@
                             <bandname>FPAR_std</bandname>
                             <fullname>FparStdDev_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>248-255</nodata_in>
+                            <nodata_in>248:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
@@ -16712,7 +16712,7 @@
                             <bandname>LAI_std</bandname>
                             <fullname>LaiStdDev_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>248-255</nodata_in>
+                            <nodata_in>248:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -16971,7 +16971,7 @@
                             <bandname>FPAR</bandname>
                             <fullname>Fpar_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>249-255</nodata_in>
+                            <nodata_in>249:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
@@ -16980,7 +16980,7 @@
                             <bandname>LAI</bandname>
                             <fullname>Lai_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>249-255</nodata_in>
+                            <nodata_in>249:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -17007,7 +17007,7 @@
                             <bandname>FPAR_std</bandname>
                             <fullname>FparStdDev_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>248-255</nodata_in>
+                            <nodata_in>248:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
@@ -17016,7 +17016,7 @@
                             <bandname>LAI_std</bandname>
                             <fullname>LaiStdDev_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>248-255</nodata_in>
+                            <nodata_in>248:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -17275,7 +17275,7 @@
                             <bandname>ET_500m</bandname>
                             <fullname>Total Evapotranspiration</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -17284,7 +17284,7 @@
                             <bandname>LE_500m</bandname>
                             <fullname>Average Latent Heat Flux</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>10000</scale_factor>
                             <offset>0</offset>
@@ -17293,7 +17293,7 @@
                             <bandname>PET_500m</bandname>
                             <fullname>Total Potential Evapotranspiration</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -17302,7 +17302,7 @@
                             <bandname>PLE_500m</bandname>
                             <fullname>Average Potential Latent Heat Flux</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>10000</scale_factor>
                             <offset>0</offset>
@@ -17376,7 +17376,7 @@
                             <bandname>ET_500m</bandname>
                             <fullname>Total Evapotranspiration</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -17385,7 +17385,7 @@
                             <bandname>LE_500m</bandname>
                             <fullname>Average Latent Heat Flux</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>10000</scale_factor>
                             <offset>0</offset>
@@ -17394,7 +17394,7 @@
                             <bandname>PET_500m</bandname>
                             <fullname>Total Potential Evapotranspiration</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -17403,7 +17403,7 @@
                             <bandname>PLE_500m</bandname>
                             <fullname>Average Potential Latent Heat Flux</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>10000</scale_factor>
                             <offset>0</offset>
@@ -17445,7 +17445,7 @@
                             <bandname>GPP</bandname>
                             <fullname>Gpp_1km: Gross Primary Production</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>0.0001</scale_factor>
                             <offset>0</offset>
@@ -17454,7 +17454,7 @@
                             <bandname>PsnNet</bandname>
                             <fullname>PsnNet_1km: Net Photosynthesis (GPP - maintenance respiration)</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>0.0001</scale_factor>
                             <offset>0</offset>
@@ -17519,7 +17519,7 @@
                             <bandname>GPP</bandname>
                             <fullname>Gpp_1km: Gross Primary Production</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>0.0001</scale_factor>
                             <offset>0</offset>
@@ -17528,7 +17528,7 @@
                             <bandname>PsnNet</bandname>
                             <fullname>PsnNet_1km: Net Photosynthesis (GPP - maintenance respiration)</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>32761-32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>32767</nodata_out>
                             <scale_factor>0.0001</scale_factor>
                             <offset>0</offset>
@@ -17685,7 +17685,7 @@
                             <bandname>GPP</bandname>
                             <fullname>Gridded 1 Km Annual Gross Primary Productivity</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>0 - 65500</nodata_in>
+                            <nodata_in>65530:65535</nodata_in>
                             <nodata_out>65535</nodata_out>
                             <scale_factor>0.0001</scale_factor>
                             <offset>0</offset>
@@ -17694,7 +17694,7 @@
                             <bandname>PsnNet</bandname>
                             <fullname>Gridded 1 Km Annual Net Primary Productivity</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>65530-65535</nodata_in>
+                            <nodata_in>65530:65535</nodata_in>
                             <nodata_out>65535</nodata_out>
                             <scale_factor>0.0001</scale_factor>
                             <offset>0</offset>
@@ -17703,7 +17703,7 @@
                             <bandname>QC_Perc</bandname>
                             <fullname>Gpp_Npp_QC_1km</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255-250</nodata_in>
+                            <nodata_in>250:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -17810,7 +17810,7 @@
                             <bandname>Perc_TreeCov</bandname>
                             <fullname>Percent Tree Cover</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>200-253</nodata_in>
+                            <nodata_in>200:253</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -17959,7 +17959,7 @@
                             <bandname>Perc_TreeCov</bandname>
                             <fullname>Percent Tree Cover</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>200-253</nodata_in>
+                            <nodata_in>200:253</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -17968,7 +17968,7 @@
                             <bandname>Perc_NonTree</bandname>
                             <fullname>Percent Non Tree Vegetation</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>200-253</nodata_in>
+                            <nodata_in>200:253</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -17977,7 +17977,7 @@
                             <bandname>Perc_NonVeg</bandname>
                             <fullname>Percent Non Vegetated</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>200-253</nodata_in>
+                            <nodata_in>200:253</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>

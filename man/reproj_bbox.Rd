@@ -4,7 +4,7 @@
 \alias{reproj_bbox}
 \title{Reproject a bounding box}
 \usage{
-reproj_bbox(bbox, in_proj, out_proj, enlarge = TRUE, N_dens = 1000)
+reproj_bbox(bbox, in_proj, out_proj, enlarge = TRUE)
 }
 \arguments{
 \item{bbox}{The input bounding box (it can be a matrix obtained from \code{sp::bbox()},
@@ -17,8 +17,6 @@ or a numeric vector in the format (xmin, ymin, xmax, ymax)).}
 \item{enlarge}{`logical`` if TRUE, the reprojected bounding box is the
 one which completely include the original one; if FALSE, it is simply the
 one obtained by reprojecting the upper-left and the lower-right corners.}
-
-\item{N_dens}{Densification ratio used in the case enlarge is TRUE.}
 }
 \description{
 Helper function used to reproject bounding boxes; setting the parameter
