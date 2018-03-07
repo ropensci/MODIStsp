@@ -7,7 +7,7 @@ MODIStsp can be also executed as a "stand-alone" application (i.e., without havi
 
 To be able to do that, from R launch the function `install_MODIStsp_launcher()`.
 
-- In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp).
+- In a Linux operating system this function creates a desktop entry (accessible from thea menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp).
 - In Windows, a link in the Start Menu and optionally a desktop shortcut are created.
 See `?install_MODIStsp_launcher` for details and path customization.
 

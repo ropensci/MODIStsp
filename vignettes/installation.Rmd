@@ -25,10 +25,10 @@ library(devtools)
 install_github("lbusett/MODIStsp")
 ```
 
-Note that **if the `GTK+` library is not already installed on your system, installation may fail**. In that case, please install and load the `gWidgetsRGtk2` library beforehand:
+Note that **if the `GTK+` library is not already installed on your system, installation may fail**. In that case, please install and load the `RGtk2` library beforehand:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-install.packages("gWidgetsRGtk2")
+install.packages("RGtk2")
 library(gWidgetsRGtk2)
 ```
     
@@ -43,7 +43,7 @@ __If it still fails__, try downloading the GTK+ bundle from:
 
 , unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), then add the path of its "bin" subfolder (e.g., `C:\\Program Files\\GTK+\\bin\\` to your system PATH environment variable.
 
-Restart your system and try loading again `gWidgetsRGtk2`: if it loads ok, you should be ready to install `MODIStsp`
+Restart your system and try loading again `RGtk2`: if it loads ok, you should be ready to install `MODIStsp`
 
 ____________________________________________________________________________________
 
@@ -84,13 +84,90 @@ ________________________________________________________________________________
 
 ## <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
 
-**NOTE: The following  installation notes were kindly provided by a MODIStsp user
-and should be valid for MODIStsp installation on R 3.4.0 and above with 
-Mac OSX Sierra. Since we are not working on Mac we were not able yet to
-check this, but we hope it may be useful at least to put you in the right 
-direction if you have installation problems)**
+**NOTE: The following  installation notes should be valid for MODIStsp installation 
+on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied...) from: https://zhiyzuo.github.io/installation-rattle/**. Thanks to Zhiya Zuo for providing this!
 
-Installing MODIStsp requires many dependencies: 
+To properly install `MODIStsp` you will need to first install package `RGTk2`. This
+is a somehow difficult operation. The following instructions should help:
+
+1) Check your Mac OS X version and update if necessary: 
+
+ - Enter the following command in terminal to check your macOS version. Expected
+    output is as below the dashed line ---.
+    
+```
+~$ sw_vers  
+------------------------  
+ProductName:	Mac OS X  
+ProductVersion:	10.12.6  
+BuildVersion:	16G29  
+```
+
+If your system is above 10.11, continue. Otherwise, upgrade it to Sierra.
+
+Install homebrew if you do not have it already installd. homebrew  is a very
+convenient package manager for macOS. To do so, open a terminal, copy the following
+command in it and hit Enter:
+
+```
+~$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Follow the instructions to get brew ready. When inputing your password, nothing 
+will show up for security reasons. Just hit Enter when you’re finished.
+
+4. When brew is finished, copy the following command in terminal and hit Enter:
+
+```
+~$ touch ~/.bash_profile
+~$ echo "export PATH=/usr/local/bin:$PATH
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" >> ~/.bash_profile
+~$ source ~/.bash_profile
+```
+
+5. Now install the `cairo` library with x11 support. To do so, you first have to 
+change the way homebrew wants to install gtk+. In an editor, write: 
+
+```
+~$ brew edit gtk+
+```
+
+A text editor will open. Look in the file, and find a section that begins with
+"def install". Substitute the current `args` with the following text: 
+
+```
+def install
+ args = [
+         "--disable-dependency-tracking",
+         "--disable-silent-rules",
+         "--prefix=#{prefix}",
+         "--disable-glibtest",
+         "--enable-introspection=yes",
+         # "--disable-visibility",
+         # "--with-gdktarget=quartz",
+         "--with-gdktarget=x11",
+         "--enable-x11-backend"
+        ]
+```     
+
+Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs.
+
+6. Now we can at last install `gtk+` by:
+
+```
+~$ brew install --build-from-source --verbose gtk+
+```
+
+7. After installation succeeds, update your path so `gtk+` is recognized, using:
+
+```
+~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
+
+
+```
+
+5. Now install the `gtk+` library with x11 support. To do so, you first have to 
+.
 
 For installation on MAC OSX sierra, there are three main issues:
 - As outlined here in the comment by **tobybot11** (https://gist.github.com/sebkopf/9405675), 

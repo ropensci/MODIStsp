@@ -2,6 +2,7 @@
 title: 'MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.3'
 author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:lbusett@gmail.com)), Luigi
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
+bibliography: MODIStsp.bib
 date: '`r Sys.Date()`'
 output:
   rmarkdown::pdf_document:
@@ -260,7 +261,7 @@ The  GUI allows selecting all processing options required for the creation of th
   library(png)
   library(grid)
   library(knitr)
-  img <- readPNG("Figure_1_Vignette.png")
+  img <- readPNG("MAIN_GUI.png")
   grid.raster(img)
 ```
 
@@ -278,7 +279,7 @@ After selecting the product and version, clicking the **"Click to Select Desired
 ```{r proc_layers, echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('Figure_3.png')
+  img <- readPNG('SELECT_GUI.png')
   grid.raster(img)
 ```
 
@@ -307,7 +308,7 @@ You can however **specify other SIs to be computed without modifying MODIStsp so
 ```{r indexfig, echo=FALSE, fig.height=2.3, fig.width=6, message=FALSE, warning=FALSE, fig.align="center"}
   library(png)
   library(grid)
-  img <- readPNG('figure_4.png')
+  img <- readPNG('NEWIND_GUI.png')
   grid.raster(img)
 ```
 
@@ -341,14 +342,25 @@ The **Period** drop-down menu allows to choose between two options:
 
 Allows to define the area of interest for the processing. Two main options are possible: 
 
-1.  **Full Tiles Extent**: specify which MODIS tiles need to be processed using the "Start" and "End" horizontal and vertical sliders in the _Required MODIS Tiles_ frame.  During processing, data from the different tiles is mosaiced, and a single file covering the total area is produced for each acquisition date (Note:  pressing the "show map" button, a representation of the MODIS tiles grid is shown to facilitate the selection).
+1.  **Select MODIS Tiles**: specify which MODIS tiles need to be processed either by: 
 
-2.  **Resized**: specify a custom spatial extent for the desired outputs either by: 
+    a. Using the "Start" and "End" horizontal and vertical sliders in the _Required MODIS Tiles_ frame.  
+    b. pressing the __"Select on Map"__ button. A map will open in a browser window, allowing interactive selection of the required tiles
+    
+During processing, data from the different tiles is mosaiced, and a single file covering the total area is produced for each acquisition date
+
+2.  **Define Custom Area**: specify a custom spatial extent for the desired outputs either by: 
     
     a. Manually inserting the coordinates of the Upper Left and Lower Right corners of the area of interest in the __Bounding Box__ frame. _Coordinates of the corners must be provided in the coordinate system of the selected  output projection_; 
     
     b. pressing the __"Load Extent from a Spatial File" and selecting a raster or vector spatial file__. In this case, the bounding box of the selected file is retrieved, converted in the selected output projection, and shown in the "Bounding Box" frame. Required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
     
+    c. pressing the __"Select on Map"__ button. A map will open in a browser window, allowing interactive selection of the spatial extent using the tools on the left
+    
+    
+**Note: ** pressing the "show current extent" will open a browser window highlighting
+the currently selected spatial extent.
+ 
 ### **_Reprojection and Resize:_**
 Specify the options to be used for reprojecting and resizing the MODIS images. 
 
@@ -356,27 +368,26 @@ Specify the options to be used for reprojecting and resizing the MODIS images.
 
 - **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"**: specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. Resampling method can  be chosen among "Nearest Neighbour" and "Mode" (Useful for down-sampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleaning would risk to contaminate the values of high-quality observations with those of low-quality ones.
 
-### **_Processing Options:_**
+### _Output Options_
 
 Several processing options can be set using check-boxes:
 
 - **Output Files Format**: Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among "None", "PACKBITS", "LZW" and "DEFLATE".
 
-- **Create Virtual Rasters**: Specify if virtual multitemporal files  should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are ENVI meta-files and GDAL "vrt" files.
+- **Save Time Series as**: Specify if virtual multitemporal files  should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are "R" rasterStacks, ENVI meta-files and GDAL "vrt" files. In particular, "R" rasterStacks may be useful in order to easily access the preprocessed MODIS data within "R" scripts (see also http://lbusett.github.io/MODIStsp/articles/output.html).
 
-- **Create RasterStack**: Specify if the output time series should be also saved as as "R" _rasterStack_ objects (with temporal information added through the "setZ" method of the _raster_ package). This may be useful in order to easily access the preprocessed MODIS data within "R" scripts.
 
-- **Change NoData values**: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts" XML file. By selecting "Yes" in the "Change Original NoData values" check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. 
+- **Modify No Data**: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts" XML file. By selecting "Yes" in the "Change Original NoData values" check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. 
 
-- **Scale output values**: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true "measure units" of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etc.). 
+- **Apply Scale/Offset**: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true "measure units" of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etc.). 
 
-### **_Main Output Folder for Time Series Storage:_**
+### **_Main MODIStsp Output Folder_**
 
-Select the main folder where the pre-processed time series data will be stored. All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see XXX for details on `MODIStsp` naming conventions)-.
+Select the main folder where the pre-processed time series data will be stored. All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see http://lbusett.github.io/MODIStsp/articles/output.html for details on `MODIStsp` naming conventions)-.
 
 The **"Reprocess Existing Data"** check-box allows to decide if images already available should be reprocessed if a new run of MODIStsp is launched with the same output folder. If set to "No", MODIStsp skips dates for which output files following the MODIStsp naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates. 
 
-### **_Output Folder for Original HDF Storage:_**
+### **_Folder for permanent storage of original MODIS HDF images_**
 
 Select the folder where downloaded **original MODIS HDF files** downloaded from NASA servers will be stored. 
 
@@ -650,3 +661,5 @@ Install the packaged binary of GDAL included in your specific distribution; if t
 [^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: i) ensure that GDAL is properly installed in your system; ii) (on Windows) if it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)); iii) if nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help!
 
 [^3^]: The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
+
+# References

@@ -53,7 +53,7 @@ this example: fun=function(x,...)length(x). Defaults to "mean"}
 
 \item{out_format}{\code{character ["xts" | "dframe"]} If dframe, the output is a
 data frame with dates in the first column and extracted data in the others,
-otherwise it is a \code{xts} object, Default: "xts2}
+otherwise it is a \code{xts} object, Default: "xts"}
 
 \item{small}{\code{logical} If TRUE, and input is polygons, then values are
 returned also for polygons not covering at least one raster cell. "Included"
