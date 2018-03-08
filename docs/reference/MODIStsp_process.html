@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp main processing function � MODIStsp_process • MODIStsp</title>
+<title>MODIStsp main processing function — MODIStsp_process • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,24 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  <link href="../extra.css" rel="stylesheet">
   
+  
+<meta property="og:title" content="MODIStsp main processing function — MODIStsp_process" />
+
+<meta property="og:description" content="Main processing function of MODIStsp. Takes as input processing
+parameters specified by the user using MODIStsp_GUI and saved in
+MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
+(non-interactive mode) and performs all required processing." />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -158,7 +169,7 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
   <span class='no'>password</span>, <span class='no'>https</span>, <span class='no'>ftps</span>, <span class='no'>start_x</span>, <span class='no'>start_y</span>, <span class='no'>end_x</span>, <span class='no'>end_y</span>, <span class='no'>full_ext</span>, <span class='no'>bbox</span>,
   <span class='no'>out_format</span>, <span class='no'>compress</span>, <span class='no'>out_res_sel</span>, <span class='no'>out_res</span>, <span class='no'>native_res</span>, <span class='no'>tiled</span>, <span class='no'>mod_proj_str</span>,
   <span class='no'>outproj_str</span>, <span class='no'>nodata_in</span>, <span class='no'>nodata_out</span>, <span class='no'>nodata_change</span>, <span class='no'>scale_val</span>, <span class='no'>scale_factor</span>,
-  <span class='no'>offset</span>, <span class='no'>rts</span>, <span class='no'>datatype</span>, <span class='no'>bandsel</span>, <span class='no'>bandnames</span>, <span class='no'>indexes_bandsel</span>, <span class='no'>indexes_bandnames</span>,
+  <span class='no'>offset</span>, <span class='no'>datatype</span>, <span class='no'>bandsel</span>, <span class='no'>bandnames</span>, <span class='no'>indexes_bandsel</span>, <span class='no'>indexes_bandnames</span>,
   <span class='no'>indexes_formula</span>, <span class='no'>indexes_nodata_out</span>, <span class='no'>quality_bandnames</span>, <span class='no'>quality_bandsel</span>,
   <span class='no'>quality_bitN</span>, <span class='no'>quality_source</span>, <span class='no'>quality_nodata_in</span>, <span class='no'>quality_nodata_out</span>,
   <span class='no'>file_prefixes</span>, <span class='no'>main_out_folder</span>, <span class='no'>resampling</span>, <span class='no'>ts_format</span>, <span class='kw'>use_aria</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -245,13 +256,13 @@ download.</p></td>
     </tr>
     <tr>
       <th>full_ext</th>
-      <td><p><code>characrter ["Full_Ext" | "Resized"]</code> If "Full_Ext", process
+      <td><p><code>characrter ["FullTiles" | "Resized"]</code> If "Full_Ext", process
 the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.</p></td>
     </tr>
     <tr>
       <th>bbox</th>
-      <td><p><code>numeric(4)</code> Output bounding box (xmin, xmax, ymin, ymax) in
+      <td><p><code>numeric(4)</code> Output bounding box (xmin, ymin, xmax, ymax) in
 out_proj coordinate system.</p></td>
     </tr>
     <tr>
@@ -323,10 +334,6 @@ original layer to convert it to "correct" measure units.</p></td>
       <td><p><code>numeric array</code> of length equal to the number of original
 layers of the selected product, containing offsets to be applied to each
 original layer to convert it to "correct" measure units.</p></td>
-    </tr>
-    <tr>
-      <th>rts</th>
-      <td><p><code>character ["Yes" | "No"]</code> If "Yes", create RasterStack time series</p></td>
     </tr>
     <tr>
       <th>datatype</th>
@@ -503,7 +510,7 @@ Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -511,3 +518,4 @@ Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 
   </body>
 </html>
+

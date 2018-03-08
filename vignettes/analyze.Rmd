@@ -5,6 +5,8 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(rmarkdown)
+library(knitr)
 library(raster)
 library(base)
 library(rgdal)
@@ -21,25 +23,27 @@ structure and naming conventions).
 
 To test this functionality, you can run the following example: 
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, eval = FALSE}
+```{r eval=TRUE, echo=TRUE, message=TRUE, warning=TRUE, paged.print=FALSE}
 library(MODIStsp)
 opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
-MODIStsp(options_file = opts_file, gui = TRUE)
+MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
 ```
-
-, specifying a folder on your PC to store the outputs from the GUI. 
 
 This will download a yearly time series of MODIS NDVI data and subset it over the
 region of the Como Lake in Italy.
 
-After the download and processing finishes (it will take a while), the MODIS time 
-series will be placed in `youroutfolder/VI_16Days_500m_v6/`. (In this case, I have them in 
-"`D:/Temp/VI_16Days_500m_v6/`").
+After the download and processing finishes (it will take a while, depending on your
+network speed), the MODIS time series will be placed in subfolder `MODIStsp/VI_16Days_500m_v6` 
+of `R` tempdir(). (In this case, I have them in "`file.path(tempdir(), "VI_16Days_500m_v6"`". 
+If you want to save them elsewhere, run `MODIStsp(options_file = opts_file, gui = TRUE)`
+and select a different ouput folder).
 
-Any single-date image can be accessed by simply opening it with a `raster` command: 
+Single-date processed rasters can be accessed by simply opening them  with a
+`raster` command: 
 
 ```{R echo=TRUE, message=FALSE, warning=FALSE, highlight=TRUE, tidy=TRUE}
-modistsp_file <- "D:/Temp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"
+modistsp_file <- file.path(tempdir(),"MODIStsp/VI_16Days_500m_v6/NDVI",
+                           "MOD13A1_NDVI_2016_177.tif")
 my_raster     <- raster(modistsp_file)
 plot(my_raster)
 ```
@@ -50,9 +54,9 @@ by:
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 # Load the NDVI time series
-ts_folder <- "D:/Temp/VI_16Days_500m_v6/Time_Series/"
+ts_folder <- file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/Time_Series")
 in_virtual_file <- file.path(ts_folder, "RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData")
-ts_data          <- get(load(in_virtual_file))
+ts_data   <- get(load(in_virtual_file))
 ts_data
 ```
 
@@ -112,11 +116,10 @@ time series created in the previous example:
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 
-ts_folder <- "D:/Temp/VI_16Days_500m_v6/Time_Series/"
+ts_folder <- file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/Time_Series")
 in_virtual_file <- file.path(ts_folder, "RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData")
-ts_data          <- get(load(in_virtual_file))
+ts_data   <- get(load(in_virtual_file))
 ts_data
-
 ```
 
 , which again gives us the 23-band `RasterStack` in the `ts_data` variable. 
@@ -171,8 +174,8 @@ ggplot2::ggplot(out_dataavg_df, aes(x = date, y = Value, color = Polygon)) +
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 
-library(tibbletime)
-library(dplyr)
+require(tibbletime)
+require(dplyr)
 
 # Compute monthly averages using tibbletime: 
  

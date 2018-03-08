@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract data from MODIStsp time series � MODIStsp_extract • MODIStsp</title>
+<title>Extract data from MODIStsp time series — MODIStsp_extract • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,23 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  <link href="../extra.css" rel="stylesheet">
   
+  
+<meta property="og:title" content="Extract data from MODIStsp time series — MODIStsp_extract" />
+
+<meta property="og:description" content="function used to extract time series data from rts files created by MODIStsp
+on spatial locations provided in the form of "R" spatial objects (SpatialPoints,
+SpatialPolygons, etc.)" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -216,7 +226,7 @@ this example: fun=function(x,...)length(x). Defaults to "mean"</p></td>
       <th>out_format</th>
       <td><p><code>character ["xts" | "dframe"]</code> If dframe, the output is a
 data frame with dates in the first column and extracted data in the others,
-otherwise it is a <code>xts</code> object, Default: "xts2</p></td>
+otherwise it is a <code>xts</code> object, Default: "xts"</p></td>
     </tr>
     <tr>
       <th>small</th>
@@ -279,22 +289,29 @@ belonging to the polygon, and one line for each date.</p>
 <span class='co'># over the Como Lake (Italy). It then extracts data on polygons corresponding</span>
 <span class='co'># to different land cover classes saved in testdata/extract_polys.shp</span>
 
-<span class='co'># first, prepare aa test dataset.</span>
+<span class='co'># First, prepare the test dataset.</span>
+<span class='co'># __NOTE__ To avoid redownloading, here we copy some test data from MODIStsp</span>
+<span class='co'># installation folder to tempdir and use it to create a test time series.</span>
 
+<span class='no'>test_folder</span> <span class='kw'>&lt;-</span>  <span class='fu'>system.file</span>(<span class='st'>"testdata/VI_16Days_500m_v6/NDVI"</span>,
+                            <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='fu'>dir.create</span>(<span class='fu'>file.path</span>(<span class='fu'>tempdir</span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>),
+           <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>file.copy</span>(<span class='fu'>list.files</span>(<span class='no'>test_folder</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
+          <span class='fu'>file.path</span>(<span class='fu'>tempdir</span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>))</div><div class='output co'>#&gt;  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+#&gt; [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</div><div class='input'>
 <span class='no'>opts_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/test_extract.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='no'>options</span>   <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/read_json'>read_json</a></span>(<span class='no'>opts_file</span>)
-<span class='no'>options</span>$<span class='no'>out_folder</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/read_json'>write_json</a></span>(<span class='no'>options</span>, <span class='no'>opts_file</span>, <span class='kw'>auto_unbox</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pretty</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between</span>
 <span class='co'># 2016-01-01 and 2016-12-18</span>
-<span class='co'># __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData" </span>
+<span class='co'># __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"</span>
 <span class='co'># subfolder of your main output folder - see http://lbusett.github.io/MODIStsp/articles/output.html)</span>
 
-<span class='co'># specify the filename of the RData RasterStack of interest</span>
-<span class='no'>stack_file</span>  <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI"</span>,
-  <span class='st'>"MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='co'># Specify the filename of the RData RasterStack of interest</span>
+<span class='no'>stack_file</span>  <span class='kw'>&lt;-</span> <span class='fu'>file.path</span>(<span class='fu'>tempdir</span>(),
+ <span class='st'>"MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI"</span>,
+  <span class='st'>"MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>)
 <span class='fu'>basename</span>(<span class='no'>stack_file</span>)</div><div class='output co'>#&gt; [1] "MOD13A1_NDVI_1_2016_353_2016_RData.RData"</div><div class='input'>
 <span class='no'>ts_data</span> <span class='kw'>&lt;-</span> <span class='fu'>get</span>(<span class='fu'>load</span>(<span class='no'>stack_file</span>))
 <span class='no'>ts_data</span></div><div class='output co'>#&gt; class       : RasterStack 
@@ -338,7 +355,7 @@ belonging to the polygon, and one line for each date.</p>
 #&gt; 2016-02-18 2113.1000           NA
 #&gt; 2016-03-05 2195.0000           NA
 #&gt; 2016-03-21  383.2857           NA</div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)</div><div class='img'><img src='MODIStsp_extract-2.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)</div><div class='img'><img src='MODIStsp_extract-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># use a different summarization function</span>
 
 <span class='no'>out_datasd</span> <span class='kw'>&lt;-</span> <span class='fu'>MODIStsp_extract</span>(<span class='no'>ts_data</span>, <span class='no'>polygons</span>, <span class='kw'>id_field</span> <span class='kw'>=</span> <span class='st'>"lc_type"</span>,
@@ -359,7 +376,7 @@ belonging to the polygon, and one line for each date.</p>
 #&gt; 2016-02-18 2669.741           NA
 #&gt; 2016-03-05 3230.628           NA
 #&gt; 2016-03-21 1533.839           NA</div><div class='input'>
-# (See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a 
+# (See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a
 # worked-out example)
 </div></pre>
   </div>
@@ -391,7 +408,7 @@ email: busetto.l@irea.cnr.it
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -399,3 +416,4 @@ email: busetto.l@irea.cnr.it
 
   </body>
 </html>
+

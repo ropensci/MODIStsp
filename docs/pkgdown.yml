@@ -1,14 +1,27 @@
+pandoc: 1.19.2.1
+pkgdown: 0.1.0.9000
+pkgdown_sha: 17f683717d0a1547f13a08a259b34c58927452d6
+articles:
+  Figure_1_Vignette.png: Figure_1_Vignette.png
+  Figure_2_new.png: Figure_2_new.png
+  Figure_3.png: Figure_3.png
+  MAIN_GUI.png: MAIN_GUI.png
+  MODIStsp: MODIStsp.html
+  MODIStsp.bib: MODIStsp.bib
+  MODIStsp.html: MODIStsp.html
+  MODIStsp.pdf: MODIStsp.pdf
+  NEWIND_GUI.png: NEWIND_GUI.png
+  Products_list: Products_list.html
+  SELECT_GUI.png: SELECT_GUI.png
+  analyze: analyze.html
+  faq: faq.html
+  figure_4.png: figure_4.png
+  installation: installation.html
+  interactive_execution: interactive_execution.html
+  noninteractive_execution: noninteractive_execution.html
+  output: output.html
+  standalone_execution: standalone_execution.html
 urls:
   reference: http://lbusett.github.io/MODIStsp/reference
   article: http://lbusett.github.io/MODIStsp/articles
-articles:
-  analyze: analyze.html
-  faq: faq.html
-  installation: installation.html
-  interactive_execution: interactive_execution.html
-  MODIStsp: MODIStsp.html
-  noninteractive_execution: noninteractive_execution.html
-  output: output.html
-  Products_list: Products_list.html
-  standalone_execution: standalone_execution.html
 

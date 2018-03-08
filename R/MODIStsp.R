@@ -113,20 +113,20 @@ MODIStsp <- function(gui               = TRUE,
                      test              = -1,
                      n_retries         = 20,
                      verbose           = TRUE) {
-  
+# browser()
   options("guiToolkit" = "RGtk2")
   # Make so that "raster" functions does not automatically add extensions on
   # output files. This is automatically reset to TRUE at the end of the session
   raster::rasterOptions(setfileext = FALSE)
-  
+
   #   __________________________________________________________________________
   #   Initialize processing                                                 ####
-  
+
   #   __________________________________________________________________________
   #   If test mode is selected, select the options file for testing         ####
   #   and set other parameters
   if (test > -1) {
-    
+
     gui <- FALSE
     message("MODIStsp is running in test mode.")
     # read names of available json test files
@@ -154,19 +154,19 @@ MODIStsp <- function(gui               = TRUE,
               unzip   = "internal")
       }
     }
-    
+
     # Assign the selected test Option File
     options_file <- test_files[test]
     start <- TRUE
   }
-  
+
   #   __________________________________________________________________________
   #   On interactive execution, ensure that gWidgetsRGtk2 is avauilable     ####
-  
+
   if (gui) {
     #nocov start
     if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
-      
+
       message(strwrap("Library 'gWidgetsRGtk2' is not installed. It is required
                       to run MODIStsp in interactive mode!\n\n",
                       "Do you want to install it now?"),
@@ -178,15 +178,15 @@ MODIStsp <- function(gui               = TRUE,
         stop(strwrap("MODIStsp can not work in Interactive mode without
                      gWidgetsRGtk2! Aborting!"))
       }
-      
+
     }
     options("guiToolkit" = "RGtk2")
     #nocov end
   }
-  
+
   # Check GDAL version ----
   if (is.null(getOption("gdalUtils_gdalPath"))) {
-    
+
     welcome_text <- strwrap("Welcome to MODIStsp!\n\nWe will now search for a
                             valid GDAL installation - please wait! (this will
                             happen only once)", width = 60)
@@ -194,7 +194,7 @@ MODIStsp <- function(gui               = TRUE,
       #nocov start
       welcome_win       <- gWidgets::gwindow(title  = "Welcome", width = 400,
                                              height = 100)
-      
+
       welcome_lab       <- gWidgets::glabel(text      = welcome_text,
                                             container = welcome_win,
                                             editable  = FALSE)
@@ -206,53 +206,61 @@ MODIStsp <- function(gui               = TRUE,
     } else {
       message("[", date(), "] ", welcome_text)
     }
-    
+
     gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE)
   }
   gdal_version <- package_version(
     gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*", "\\1",
          rgdal::getGDALVersionInfo(str = "--version"))
   )
-  
+
   # GDAL version used as minimum required version
   gdal_minversion  <- package_version("1.11.1")
   gdal_hdf_support <- length(grep("HDF4",
                                   gdalUtils::gdalinfo(formats = TRUE))) > 0
-  
+
   if (gdal_version < gdal_minversion) {
     stop(paste0("GDAL version must be at least ",
                 gdal_minversion,
                 ". Please update it."))
   }
-  
+
   if (!gdal_hdf_support) {
     stop("Your local GDAL installation does not support HDF4 format.\n",
          "Please install HDF4 support and recompile GDAL. See:\n",
          strwrap("http://lbusett.github.io/MODIStsp/articles/installation.html#
       installing-r-and-gdal", width = 200))
   }
-  
+
   if (verbose) message("GDAL version in use: ", as.character(gdal_version))
-  
+
   # ____________________________________________________________________________
   # Files/Folder Initialization and set-up of default parameters            ####
-  
+
   if (is.null(options_file) & gui == FALSE) {
     stop("You need to provide a valid `.json` options file to run MODIStsp",
          " in non-interactive mode. \n",
          "Please provide a valid \"options_file\" path or run ",
          "with gui=TRUE to create and save one.")
   }
-  
+
+  if (!is.null(options_file)) {
+    if (!file.exists(options_file))
+    stop("The specified `.json` options file was not found. \n",
+         "Please provide a valid \"options_file\" path or run ",
+         "without specifying one to create and save one.")
+  }
+
+
   # On first execution (or if the file is not found), ask the user permission
   # for saving a options file in "your-R-library/MODIStsp/ExtData/Previous"
-  
+
   if (interactive()) {
     permission <- ask_permission()
   } else {
     permission <- FALSE
   }
-  
+
   # Folders in which the JSON/RData files (previous settings and product
   # descriptions) are saved
   previous_dir <- ifelse(
@@ -266,30 +274,30 @@ MODIStsp <- function(gui               = TRUE,
     # If `options_file passed, re-set `previous_jsfile` to `options_file`
     previous_jsfile <- options_file
   }
-  
+
   # Load the products options from "/ExtData/Previous/MODIStsp_ProdOpts.RData"
   prod_opt_list <- load_prodopts(gui)
   prodopts_file <- system.file("ExtData/Previous", "MODIStsp_ProdOpts.RData",
                                package = "MODIStsp")
-  
+
   # Load the processing options from the user provided "options_file", or from
   # `previous_jsfile`
   #
-  
+
   general_opts <- load_opts(previous_jsfile)
-  
+
   #   __________________________________________________________________________
   #   On interactive execution, launch the GUI and wait for user selection. ####
   #   On non-interactive immediately start processing using the processing
   #   options contained in the provided `options_file`
-  
+
   if (gui) {
     #nocov start
-    
+
     if (exists("welcome_lab")) {
       gWidgets::dispose(welcome_lab)
     }
-    
+    # browser()
     start <- MODIStsp_GUI(general_opts,
                           prod_opt_list,
                           MODIStsp_dir = system.file(package = "MODIStsp"),
@@ -302,12 +310,12 @@ MODIStsp <- function(gui               = TRUE,
     gui   <- FALSE
   }
   start_time <- Sys.time()
-  
+
   if (start) {
     #   ________________________________________________________________________
     #   on start, load options from `previous_jsfile` and MODIS products    ####
     #   info from `prodopts_file`
-    
+
     if (file.exists(previous_jsfile)) {
       general_opts <- try(jsonlite::fromJSON(previous_jsfile))
       # stop on error
@@ -321,27 +329,27 @@ MODIStsp <- function(gui               = TRUE,
       message("[", date(), "] Processing Options file not found! Aborting!")
       stop()
     }
-    
+
     #Redefine output folder if $tempdir or $testdata is found
-    
+
     if (general_opts$out_folder == "$tempdir") {
       general_opts$out_folder <- file.path(tempdir(), "MODIStsp")
     }
-    
+
     if (general_opts$out_folder == "$modistest") {
       general_opts$out_folder <- system.file("testdata/",
                                              package = "MODIStsp")
     }
-    
+
     if (general_opts$out_folder_mod == "$tempdir") {
       general_opts$out_folder_mod <- file.path(tempdir(), "MODIStsp/HDFs")
     }
-    
+
     if (general_opts$out_folder_mod == "$modistest") {
-      general_opts$out_folder_mod <- system.file("testdata/", 
+      general_opts$out_folder_mod <- system.file("testdata/",
                                                  package = "MODIStsp")
     }
-    
+
     if (file.exists(prodopts_file)) {
       prod_opt_list <- get(load(prodopts_file))
     } else {
@@ -350,14 +358,14 @@ MODIStsp <- function(gui               = TRUE,
     }
     # retrieve options relative to the selected product and version from the
     # "prod_opt_list" data frame
-    
+
     sel_prod   <- general_opts$sel_prod
     sel_ver    <- general_opts$prod_version
     prod_opts  <- prod_opt_list[[sel_prod]][[sel_ver]]
-    
+
     # Load also the custom indexes saved by the user
     custom_idx <- general_opts$custom_indexes[[sel_prod]][[sel_ver]]
-    
+
     # Workaround to avoid error if only one custom index exists
     if (class(custom_idx) == "character") {
       custom_idx <- data.frame(
@@ -368,16 +376,16 @@ MODIStsp <- function(gui               = TRUE,
         stringsAsFactors   = FALSE
       )
     }
-    
+
     # Create variables needed to launch the processing
-    
+
     general_opts$start_date <- as.character(
       format(as.Date(general_opts$start_date), "%Y.%m.%d")
     )
     general_opts$end_date  <- as.character(
       format(as.Date(general_opts$end_date), "%Y.%m.%d")
     )
-    
+
     # If the product is NOT tiled, set or_proj to WGS84 and or_res from
     # metres to degrees
     if (prod_opts$tiled == 0) {
@@ -393,16 +401,16 @@ MODIStsp <- function(gui               = TRUE,
     if (general_opts$out_res == "" | general_opts$out_res_sel == "Native") {
       general_opts$out_res <- prod_opts$native_res
     }
-    
+
     #   ________________________________________________________________________
     #   If `spatial_file_path` is passed, values of the bounding boxe derived
     #   from `previous_jsfile` for the bbox are overwritten
-    
+
     if (!is.null(spatial_file_path)) {
-      
+
       # Check if the input file is a valid spatial file and redefine the
       # bounding box
-      
+
       external_bbox <- try(bbox_from_file(spatial_file_path,
                                           general_opts$output_proj4),
                            silent = TRUE)
@@ -413,7 +421,7 @@ MODIStsp <- function(gui               = TRUE,
         )
       }
       general_opts$bbox <- external_bbox
-      
+
       # Redefine the out_folder to include "spatial_file_path" as subfolder
       # (this to avoid that, running in a loop on multiple spatial files,
       # outputs are overwritten every time)
@@ -421,11 +429,11 @@ MODIStsp <- function(gui               = TRUE,
         general_opts$out_folder,
         tools::file_path_sans_ext(basename(spatial_file_path))
       )
-      
+
       # Overwrite the full_ext option (avoids that, if the options_file
       # specifies a full processing, the incorrect parameter is passed)
       general_opts$full_ext <- "Define Custom Area"
-      
+
       # Automatically retrieve the tiles required to cover the extent
       modis_grid  <- get(load(system.file("ExtData", "MODIS_Tiles.RData",
                                           package = "MODIStsp")))
@@ -440,24 +448,24 @@ MODIStsp <- function(gui               = TRUE,
       general_opts$start_y <- min(d_bbox_mod_tiled$V)
       general_opts$end_y   <- max(d_bbox_mod_tiled$V)
     }
-    
+
     #   ________________________________________________________________________
     #   If running a test, redefine  output folders to use `R` temporary
     #   folder to store results and the testdata subfolder of MODIStsp
     #   to look for example files.
-    
+
     # if (test != -1) {
     #   general_opts$out_folder     <- normalizePath(tempdir())
     #   general_opts$out_folder_mod <- normalizePath(tempdir())
     # }
-    
+
     #   ________________________________________________________________________
     #   launch MODIStsp_process to Download and preprocess the selected     ####
     #   images. To do so, retrieve all processing parameters from either
     #   gemeral_opts (processing options), or prod_opts (characteristics of
     #   the selected product - band names, available indexes, etcetera.) and
     #   put them in the `p_opts` list. Then launch `MODIStsp_process`
-    
+
     MODIStsp_process(sel_prod = general_opts$sel_prod,
                      start_date         = general_opts$start_date,
                      end_date           = general_opts$end_date,
@@ -518,7 +526,7 @@ MODIStsp <- function(gui               = TRUE,
                      download_range     = general_opts$download_range,
                      n_retries          = n_retries,
                      verbose            = verbose)
-    
+
     # End-of-processing messages and clean-up ----
     end_time   <- Sys.time()
     time_taken <- end_time - start_time
@@ -530,24 +538,24 @@ MODIStsp <- function(gui               = TRUE,
     if (verbose) message("[", date(), "] ",
                          "Original downloaded MODIS HDF files are in: `",
                          general_opts$out_folder_mod, "`")
-    
+
     # Save previous options ----
-    
+
     # At the end of a successful execution, save the options used in the main
     # output folder as a JSON file with name containing the date of processing.
     # Also update "MODIStsp_previous.json.
     opts_jsfile  <- file.path(general_opts$out_folder,
                               paste0("MODIStsp_", Sys.Date(), ".json"))
-    
+
     general_opts <- jsonlite::fromJSON(previous_jsfile)
     previous_jsfile_tosave <- file.path(previous_dir, "MODIStsp_Previous.json")
     jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
                          auto_unbox = TRUE)
     jsonlite::write_json(general_opts, previous_jsfile_tosave, pretty = TRUE,
                          auto_unbox = TRUE)
-    
-    
-    
+
+
+
   } else {
     # If "quit" passed from the GUI, all of the above is skipped and program
     # terminates

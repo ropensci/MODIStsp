@@ -84,16 +84,16 @@ ________________________________________________________________________________
 
 ## <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
 
-**NOTE: The following  installation notes should be valid for MODIStsp installation 
+**NOTE**: The following  installation notes should be valid for MODIStsp installation 
 on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied...) from: https://zhiyzuo.github.io/installation-rattle/**. Thanks to Zhiya Zuo for providing this!
 
 To properly install `MODIStsp` you will need to first install package `RGTk2`. This
 is a somehow difficult operation. The following instructions should help:
 
-1) Check your Mac OS X version and update if necessary: 
+__1. Check your Mac OS X version and update if necessary: __
 
- - Enter the following command in terminal to check your macOS version. Expected
-    output is as below the dashed line ---.
+Enter the following command in terminal to check your macOS version. Expected
+output is as below the dashed line ---.
     
 ```
 ~$ sw_vers  
@@ -116,7 +116,7 @@ command in it and hit Enter:
 Follow the instructions to get brew ready. When inputing your password, nothing 
 will show up for security reasons. Just hit Enter when you’re finished.
 
-4. When brew is finished, copy the following command in terminal and hit Enter:
+When brew is finished, copy the following command in terminal and hit Enter:
 
 ```
 ~$ touch ~/.bash_profile
@@ -125,7 +125,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 ~$ source ~/.bash_profile
 ```
 
-5. Now install the `cairo` library with x11 support. To do so, you first have to 
+2. __Install the `cairo` library with x11 support__. To do so, you first have to 
 change the way homebrew wants to install gtk+. In an editor, write: 
 
 ```
@@ -152,31 +152,33 @@ def install
 
 Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs.
 
-6. Now we can at last install `gtk+` by:
+3. __Install `gtk+`__ by issuing this command:
 
 ```
 ~$ brew install --build-from-source --verbose gtk+
 ```
 
-7. After installation succeeds, update your path so `gtk+` is recognized, using:
+4. __Update your path__ so that `gtk+` is recognized, using:
 
 ```
 ~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
 ```
 
-8. Download the newest source file for RGtk2 from https://cran.r-project.org/web/packages/RGtk2/index.html.
+5. __Install `RGtk2` from source__:
 
-9. Assuming that the path to this file is ~/Downloads. Run the following in
-terminal (change the path if you did not download in ~/Downloads):
+- __Download the newest source file for RGtk2__ from https://cran.r-project.org/web/packages/RGtk2/index.html.
+
+- Assuming that the path to this file is ~/Downloads. Run the following in terminal 
+(change the path if you did not download in ~/Downloads):
 
 ```
 ~$ cd ~/Downloads
 ~/Downloads$ R CMD INSTALL RGtk2_2.20.33.tar.gz
 ```
-Note that versions may vary depending on when you download the source file. 
-Use the exact filename that sits in the directory (Tip: use tab to help autocomplete).
+(Note that the name of the tar.gz file may vary depending on when you downloaded the file). 
 
-Now, open R and run: 
+
+6. __Open R and run__: 
 
 ```{r eval = FALSE}
 library(RGtk2)
@@ -184,7 +186,7 @@ library(RGtk2)
 hopefully, `RGtk2` will load without errors! If so, you should be ready to go, 
 and you can:
 
-7. install MODIStsp from CRAN:
+7. __Install MODIStsp__ from CRAN:
 
 ```{r eval = FALSE}
 install.packages("MODIStsp")
@@ -198,27 +200,8 @@ MODIStsp()
 ```
 Good luck!
 
-5 - Install GDAL with HDF4 support
-
-Check that gdal is installed with hdf4 support. From a terminal: 
-```bash
-> gdal-config --formats 
-```
-if gdal is installed, check what drivers are installed: the list should include
-hdf4. 
-
-If gdal is not yet installed or hdf4 is not supported, install/reinstall it following 
-these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html)
-
-```
-~$ brew install hdf4 
-~$ brew link --overwrite hdf4 
-~$ brew install gdal --complete --enable-unsupported --with-hdf4 
-# check what drivers are installed, list should now include hdf4: 
-~$ gdal-config --formats 
-```
-Good luck!
 ________________________________________________________________________________
+
 
 # Installing R and GDAL
 
@@ -276,3 +259,28 @@ If you want to manually add the support for HDF4 in case ```gdal-hdf4``` is out-
 Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter ```--with-hdf4``` to the ```configure``` instruction).
 
 #### MacOs
+
+1. Check if gdal is already installed and has hdf4 support. In a terminal, type: 
+
+```
+~$ gdal-config --formats 
+```
+- if gdal is installed, the command will list which drivers are installed. If the 
+list includes "hdf4" you should be good to go. 
+
+- if gdal is not yet installed or hdf4 is not already supported, you can install/reinstall 
+it following these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html). In short: open a terminal and run:
+
+```
+~$ brew install hdf4 
+~$ brew link --overwrite hdf4 
+~$ brew install gdal --complete --enable-unsupported --with-hdf4 
+```
+
+then, check again to see if hdf4 is supporterd. The list should now include hdf4: 
+
+```
+~$ gdal-config --formats 
+```
+
+Good luck!
