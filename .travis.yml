@@ -36,12 +36,13 @@ matrix:
             - libgtk2.0-dev
             - libglib2.0-dev
             - libcurl4-openssl-dev
+            - libudunits2-0
       r_binary_packages:
         - cairoDevice
         - RGtk2
       r_packages:
+        - udunits2
         - units
-        - udunits
         - covr
         - sf
         - shiny
