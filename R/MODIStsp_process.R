@@ -13,7 +13,7 @@
 #'   3. Creates virtual files of the processed time series.
 #'
 #' Reprojection and resize is dealt with by accessing gdal routines through the
-#' [`gdalUtils`](https://cran.r-project.org/web/packages/gdalUtils/index.html)
+#' [`gdalUtils`](https://CRAN.R-project.org/package=gdalUtils)
 #' package.
 #' Extraction of bitfields from Quality layers is done though bitwise computation
 #' Checks are done in order to not re-download already existing HDF images, and not
