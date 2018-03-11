@@ -289,6 +289,10 @@ MODIStsp_download <- function(modislist,
                "Later!")
         }
       }
+    } else {
+      mess_text <- paste("HDF File:", modisname, 
+                         "already exists on your system. Skipping download!")
+      if (verbose) process_message(mess_text, gui, mess_lab, verbose)
     }
   }
 }
