@@ -12,6 +12,13 @@ library(base)
 library(rgdal)
 library(MODIStsp)
 library(dplyr)
+test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI",
+                            package = "MODIStsp")
+dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"), 
+           showWarnings = FALSE, recursive = TRUE)
+file.copy(list.files(test_folder, full.names = TRUE),
+          file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"), 
+          recursive = T)
 ```
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Accessing the raster time series__
@@ -23,7 +30,7 @@ structure and naming conventions).
 
 To test this functionality, you can run the following example: 
 
-```{r eval=TRUE, echo=TRUE, message=TRUE, warning=TRUE, paged.print=FALSE}
+```{r eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(MODIStsp)
 opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
 MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
@@ -36,7 +43,7 @@ After the download and processing finishes (it will take a while, depending on y
 network speed), the MODIS time series will be placed in subfolder `MODIStsp/VI_16Days_500m_v6` 
 of `R` tempdir(). (In this case, I have them in "`file.path(tempdir(), "VI_16Days_500m_v6"`". 
 If you want to save them elsewhere, run `MODIStsp(options_file = opts_file, gui = TRUE)`
-and select a different ouput folder).
+and select a different output folder).
 
 Single-date processed rasters can be accessed by simply opening them  with a
 `raster` command: 
@@ -146,7 +153,7 @@ head(out_dataavg)
 # Other summarization functions can be used, by specifying the "FUN" argument. 
 # Compute the Standard Deviation over each polygon: 
 out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
-FUN = "sd", small = FALSE)
+                               FUN = "sd", small = FALSE)
 
 ```
 
@@ -178,7 +185,7 @@ require(tibbletime)
 require(dplyr)
 
 # Compute monthly averages using tibbletime: 
- 
+
 out_dataavg_tt <- tibbletime::as_tbl_time(out_dataavg_df, index = date) 
 
 month_avg <- out_dataavg_tt %>% 

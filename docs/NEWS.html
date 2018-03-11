@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>/home/lb/Source/MODIStsp/NEWS.md • MODIStsp</title>
+<title>D:/Documents/Source/git/MODIStsp/NEWS.md • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,10 +27,7 @@
 <script src="pkgdown.js"></script>
   
   
-<meta property="og:title" content="/home/lb/Source/MODIStsp/NEWS.md" />
-
-<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="D:/Documents/Source/git/MODIStsp/NEWS.md" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -149,7 +146,7 @@
       <div class="row">
   <div class="contents col-md-12">
     <div class="page-header">
-      <h1>/home/lb/Source/MODIStsp/NEWS.md</h1>
+      <h1>D:/Documents/Source/git/MODIStsp/NEWS.md</h1>
     </div>
 
 
@@ -159,11 +156,29 @@
 <div id="main-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#main-changes" class="anchor"></a>Main changes</h3>
+<div id="breaking-changes" class="section level4">
+<h4 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h4>
+<ul>
+<li>Due to improvements and changes in the GUI (see below), <code>MODIStsp</code> .json options files saved with older versions are no longer supported. Users will be informed of this if trying to use an obsolete json file.</li>
+</ul>
+</div>
+<div id="updates-in-supported-products" class="section level4">
+<h4 class="hasAnchor">
+<a href="#updates-in-supported-products" class="anchor"></a>Updates in supported products</h4>
+<ul>
+<li><p>Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97">#97</a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p></li>
+<li>Added support for Evapotraspiration products (MOD12A2 and MOD12A3)</li>
+<li>Added support for Vegetation Continuous Fields product (MOD44B)</li>
+<li><p>Checked availability of products over ftp and set not available products to “Not Available” to allow graceful fail.</p></li>
+</ul>
+</div>
 <div id="improvements-in-download-functions" class="section level4">
 <h4 class="hasAnchor">
 <a href="#improvements-in-download-functions" class="anchor"></a>Improvements in download functions</h4>
 <ul>
-<li>Use of <code><a href="http://www.rdocumentation.org/packages/httr/topics/RETRY">httr::RETRY</a></code> to improve behavior while navigating the servers to retrieve available files and while downloading hdf file (when use_aria == FALSE)</li>
+<li><p>Improvements in GUI. It is now possible to set the processing extent interactively using the “Select on Map” button. This opens a browser window allowing to select and extent.</p></li>
+<li><p>Use of <code><a href="http://www.rdocumentation.org/packages/httr/topics/RETRY">httr::RETRY</a></code> to improve behavior while navigating the servers to retrieve available files and while downloading hdf file (when use_aria == FALSE), thus removing dependency to RCurl.</p></li>
 </ul>
 </div>
 <div id="extensive-code-refactoring-for-submission-to-ropensci-" class="section level4">
@@ -171,6 +186,7 @@
 <a href="#extensive-code-refactoring-for-submission-to-ropensci-" class="anchor"></a>Extensive code refactoring for submission to ropensci.</h4>
 <ul>
 <li>Long functions were simplified/split into smaller functions to allow for easier maintenance</li>
+<li>GUI event handlers were moved into dedicated “R” files</li>
 <li>Extensive code linting to abide to ropensci standards</li>
 <li>Switch to jsonlite/xml2 to abide to ropensci standards</li>
 <li>Removal of some less-used dependencies (e.g., hash)</li>
@@ -192,21 +208,11 @@
 <li>Several new tests added, bringing coverage above 90%</li>
 </ul>
 </div>
-<div id="updates-in-supported-products" class="section level4">
-<h4 class="hasAnchor">
-<a href="#updates-in-supported-products" class="anchor"></a>Updates in supported products</h4>
-<ul>
-<li><p>Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97">#97</a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p></li>
-<li>Added support for Evapotraspiration products (MOD12A2 and MOD12A3)</li>
-<li>Added support for Vegetation Continuous Fields product (MOD44B)</li>
-<li><p>Checked availability of products over ftp and set not available products to “Not Available” to allow graceful fail.</p></li>
-</ul>
-</div>
 <div id="new-functions" class="section level4">
 <h4 class="hasAnchor">
 <a href="#new-functions" class="anchor"></a>New functions</h4>
 <ul>
-<li>Added <code>MODIStsp_resetindexes</code> to remove all custom indexes from a MODIStsp json options file</li>
+<li>Added <code>MODIStsp_resetindexes</code> to remove all custom indexes from a MODIStsp json options file and <code>MODIStsp_reset_options</code> to reset MODIStsp options to default.</li>
 </ul>
 <hr>
 </div>

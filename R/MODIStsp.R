@@ -68,7 +68,7 @@
 #' \dontrun{
 #'
 #' # Here we use a test json file saved in MODIStsp installation folder which
-#' # Downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
+#' # downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
 #' # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
 #'
 #' options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
@@ -108,8 +108,6 @@
 #'            spatial_file_path = single_shape, verbose = FALSE )
 #' }
 #'
-#' }
-#'
 #' # output files are places in separate folders: 
 #' outfiles_garda <- list.files(file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"),
 #'            full.names = TRUE)
@@ -121,6 +119,7 @@
 #' plot(raster(outfiles_iseo[1]))
 #'
 #' # See also http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html)
+#' }
 
 MODIStsp <- function(gui               = TRUE,
                      options_file      = NULL,

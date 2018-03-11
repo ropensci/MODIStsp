@@ -272,7 +272,7 @@ testthat::test_that(
 #
 ### Test 6: test of FTP download and mosaicing of MODIS tiles               ####
 #   This test downloads four MCD LAI products (MCD15A2H) from FTP and mosaics
-#   them and crop to the ouput extent (Minorca island).
+#   them and crop to the output extent (Minorca island).
 #   After reprojection in geographic coordinates, output files are exported
 #   as GeoTiff (scaling output values) and vrt time series are created.
 
@@ -330,9 +330,9 @@ testthat::test_that(
     outrast     <- raster::raster(outpath)
     ext_mstpout <- sp::bbox(outrast)
 
-    ext_spin <- sp::bbox(rgdal::readOGR(system.file("testdata/spatial_file.shp",
-                                                    package = "MODIStsp"),
-                                        verbose = FALSE))
+    ext_spin <- sp::bbox(rgdal::readOGR(
+      system.file("testdata/spatial_file.shp", package = "MODIStsp"),
+      verbose = FALSE))
     # Is input and output extent equal (allow for difference equal to raster
     # resolution to account for the fact that to include boundaries of the
     # polygon a padding of one pixel is always made)

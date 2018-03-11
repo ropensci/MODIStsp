@@ -8,7 +8,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## <i class="fa fa-desktop" aria-hidden="true"></i> System Requirements 
 
-`MODIStsp` requires [R](https://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 __with support for HDF4 raster format__ to be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#installing-r-and-gdal).
+`MODIStsp` requires [R](https://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 __with support for HDF4 raster format__ to be installed in
+your system. Brief instructions for installing R and GDAL can be found [HERE](#installing-r-and-gdal).
 
 ____________________________________________________________________________________
 
@@ -25,31 +26,44 @@ library(devtools)
 install_github("lbusett/MODIStsp")
 ```
 
-Note that **if the `GTK+` library is not already installed on your system, installation may fail**. In that case, please install and load the `RGtk2` library beforehand:
+Note that **if the `GTK+` library is not already installed on your system, installation 
+may fail**. In that case, please install and load the `RGtk2` library beforehand:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("RGtk2")
 library(gWidgetsRGtk2)
 ```
     
- __Upon loading `gWidgetsRGtk2`, an error window will probably appear__. This signals that library "GTK+" is not yet installed on your system or is not on your PATH. To install it press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !<sup name="a1">
+ __Upon loading `gWidgetsRGtk2`, an error window will probably appear__. This
+ signals that library "GTK+" is not yet installed on your system or is not on your 
+ PATH. To install it press "OK". A new window dialog window will appear, asking
+ if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will 
+ download and install the GTK+ library. When it finishes, the RSession should be
+ restarted and you should be ready to go !<sup name="a1">
  
- __In case RStudio does not automatically restart__ or continuously asks to install GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go. 
+ __In case RStudio does not automatically restart__ or continuously asks to install
+ GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio
+ "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads
+ correctly, you should be ready to go. 
 
 __If it still fails__, try downloading the GTK+ bundle from:
 
 <http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip> 
 (OR <http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip> if on Win32)
 
-, unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), then add the path of its "bin" subfolder (e.g., `C:\\Program Files\\GTK+\\bin\\` to your system PATH environment variable.
+, unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), 
+then add the path of its "bin" subfolder (e.g., `C:\\Program Files\\GTK+\\bin\\`
+to your system PATH environment variable.
 
-Restart your system and try loading again `RGtk2`: if it loads ok, you should be ready to install `MODIStsp`
+Restart your system and try loading again `RGtk2`: if it loads ok, you should be 
+ready to install `MODIStsp`
 
 ____________________________________________________________________________________
 
 ## <i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems
 
-To install `MODIStsp` on Linux, you have to first install the following required dependencies: 
+To install `MODIStsp` on Linux, you have to first install the following required 
+dependencies: 
 
   * `Cairo` >= 1.0.0, `ATK` >= 1.10.0, `Pango` >= 1.10.0, `GTK+` >= 2.8.0, `GLib` >= 2.8.0 (required by package ```RGtk2```)
   * `Curl` (required by package ```curl```)
@@ -89,6 +103,7 @@ on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantl
 
 To properly install `MODIStsp` you will need to first install package `RGTk2`. This
 is a somehow difficult operation. The following instructions should help:
+<br>
 
 __1. Check your Mac OS X version and update if necessary: __
 
@@ -105,7 +120,7 @@ BuildVersion:	16G29
 
 If your system is above 10.11, continue. Otherwise, upgrade it to Sierra.
 
-Install homebrew if you do not have it already installd. homebrew  is a very
+Install homebrew if you do not have it already installed. homebrew  is a very
 convenient package manager for macOS. To do so, open a terminal, copy the following
 command in it and hit Enter:
 
@@ -113,8 +128,8 @@ command in it and hit Enter:
 ~$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-Follow the instructions to get brew ready. When inputing your password, nothing 
-will show up for security reasons. Just hit Enter when you’re finished.
+Follow the instructions to get brew ready. When inserting your password, nothing 
+will show up for security reasons. Just hit Enter when you are finished.
 
 When brew is finished, copy the following command in terminal and hit Enter:
 
@@ -124,8 +139,9 @@ When brew is finished, copy the following command in terminal and hit Enter:
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" >> ~/.bash_profile
 ~$ source ~/.bash_profile
 ```
+<br>
 
-2. __Install the `cairo` library with x11 support__. To do so, you first have to 
+__2. Install the `cairo` library with x11 support__. To do so, you first have to 
 change the way homebrew wants to install gtk+. In an editor, write: 
 
 ```
@@ -151,22 +167,25 @@ def install
 ```     
 
 Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs.
+<br>
 
-3. __Install `gtk+`__ by issuing this command:
+__3. Install the `gtk+` library__ by issuing this command:
 
 ```
 ~$ brew install --build-from-source --verbose gtk+
 ```
+<br>
 
-4. __Update your path__ so that `gtk+` is recognized, using:
+__4. Update your path__ so that `gtk+` is recognized, using:
 
 ```
 ~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
 ```
+<br>
 
-5. __Install `RGtk2` from source__:
+__5. Install `RGtk2` from source__:
 
-- __Download the newest source file for RGtk2__ from https://cran.r-project.org/web/packages/RGtk2/index.html.
+- __Download the newest source file for RGtk2__ from https://CRAN.R-project.org/package=gWidgetsRGtk2.
 
 - Assuming that the path to this file is ~/Downloads. Run the following in terminal 
 (change the path if you did not download in ~/Downloads):
@@ -176,9 +195,9 @@ Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs.
 ~/Downloads$ R CMD INSTALL RGtk2_2.20.33.tar.gz
 ```
 (Note that the name of the tar.gz file may vary depending on when you downloaded the file). 
+<br>
 
-
-6. __Open R and run__: 
+__6. Open R and run__: 
 
 ```{r eval = FALSE}
 library(RGtk2)
@@ -186,7 +205,7 @@ library(RGtk2)
 hopefully, `RGtk2` will load without errors! If so, you should be ready to go, 
 and you can:
 
-7. __Install MODIStsp__ from CRAN:
+__7. Install MODIStsp__ from CRAN:
 
 ```{r eval = FALSE}
 install.packages("MODIStsp")
@@ -277,7 +296,7 @@ it following these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL
 ~$ brew install gdal --complete --enable-unsupported --with-hdf4 
 ```
 
-then, check again to see if hdf4 is supporterd. The list should now include hdf4: 
+then, check again to see if hdf4 is supported. The list should now include hdf4: 
 
 ```
 ~$ gdal-config --formats 

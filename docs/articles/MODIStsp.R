@@ -14,28 +14,7 @@
 #  install_github("lbusett/MODIStsp")
 
 ## ----eval = FALSE--------------------------------------------------------
-#  # update packages
-#  update.packages()
-#  # install the development version of devtools:
-#  install.packages(c("devtools"))
-#  devtools::install_github("hadley/devtools")
-
-## ----eval = FALSE--------------------------------------------------------
 #  library(RGtk2)
-
-## ----eval = FALSE--------------------------------------------------------
-#  install.packages("gWidgetsRGtk2",
-#  
-#  lib="~/Library/Frameworks/R.framework/Versions/3.4/Resources/library/gWidgetsRGtk2")
-#  library(gWidgetsRGtk2)
-#  library(cairoDevice)
-
-## ----eval = FALSE--------------------------------------------------------
-#  install.packages('rgdal',
-#                   type = "source",configure.args = c(
-#                     '--with-proj-include=/usr/local/include',
-#                     '--with-proj-lib=/usr/local/lib')
-#                   )
 
 ## ----eval = FALSE--------------------------------------------------------
 #  install.packages("MODIStsp")
@@ -54,19 +33,19 @@
   library(png)
   library(grid)
   library(knitr)
-  img <- readPNG("Figure_1_Vignette.png")
+  img <- readPNG("MAIN_GUI.png")
   grid.raster(img)
 
 ## ----proc_layers, echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE----
   library(png)
   library(grid)
-  img <- readPNG('Figure_3.png')
+  img <- readPNG('SELECT_GUI.png')
   grid.raster(img)
 
 ## ----indexfig, echo=FALSE, fig.height=2.3, fig.width=6, message=FALSE, warning=FALSE, fig.align="center"----
   library(png)
   library(grid)
-  img <- readPNG('figure_4.png')
+  img <- readPNG('NEWIND_GUI.png')
   grid.raster(img)
 
 ## ---- eval=FALSE---------------------------------------------------------
@@ -93,18 +72,18 @@
 #  }
 #  
 
-## ----eval=FALSE----------------------------------------------------------
+## ----eval=FALSE, tidy=TRUE, highlight=TRUE-------------------------------
 #  library(raster)
-#  modistsp_file <- "/my_path/my_moditsp_folder/MOD13Q1_2005_137_EVI.tif"
+#  modistsp_file <- "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"
 #  my_raster     <- raster(modistsp_file)
 
 ## ----eval=FALSE----------------------------------------------------------
-#  in_virtual_file <- "/my_moditsp_folder/Time_Series/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"
+#  in_virtual_file <- "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"
 #  indata          <- get(load(in_virtual_file))
 
 ## ---- eval=FALSE---------------------------------------------------------
 #    #Set the input paths to raster and shape file
-#    infile    <- 'in_path/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'
+#    infile    <- 'myoutfolder/Time_Series/RData/Mixed/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'
 #    shpname   <- 'path_to_file/rois.shp'
 #    #Set the start/end dates for extraction
 #    startdate <- as.Date("2010-01-01")

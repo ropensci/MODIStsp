@@ -1,0 +1,1409 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+            pdftitle={MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.3},
+            pdfauthor={Lorenzo Busetto (busetto.l@irea.cnr.it), Luigi Ranghetti (ranghetti.l@irea.cnr.it)},
+            colorlinks=true,
+            linkcolor=blue,
+            citecolor=Blue,
+            urlcolor=blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series -
+v1.3.3}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Lorenzo Busetto
+(\href{mailto:lbusett@gmail.com}{busetto.l@irea.cnr.it}), Luigi
+Ranghetti
+(\href{mailto:ranghetti.l@irea.cnr.it}{\nolinkurl{ranghetti.l@irea.cnr.it}})}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{2018-03-11}
+
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Introduction}\label{introduction}
+
+MODIStsp is a novel ``R'' package allowing to automatize the creation of
+time series of rasters derived from MODIS Land Products data. It allows
+to perform several preprocessing steps on MODIS data available within a
+given time period.
+
+Development of MODIStsp started from modifications of the ModisDownload
+``R'' script by Thomas Hengl (2010), and successive adaptations by Babak
+Naimi (2014). The basic functionalities for download and preprocessing
+of MODIS datasets provided by these scripts were gradually incremented
+with the aim of:
+
+\begin{itemize}
+\tightlist
+\item
+  developing a stand-alone application allowing to perform several
+  preprocessing steps (e.g., download, mosaicing, reprojection and
+  resize) on all available MODIS land products by exploiting a powerful
+  and user-friendly GUI front-end;
+\item
+  allowing the creation of time series of both MODIS original layers and
+  additional Quality Indicators (e.g., data acquisition quality,
+  cloud/snow presence, algorithm used for data production, etc. )
+  extracted from the aggregated bit-field QA layers;
+\item
+  allowing the automatic calculation and creation of time series of
+  several additional Spectral Indexes starting form MODIS surface
+  reflectance products.
+\end{itemize}
+
+All processing parameters can be easily set with a user-friendly GUI,
+although non-interactive execution exploiting a previously created
+Options File is possible. Stand-alone execution outside an ``R''
+environment is also possible, allowing to use scheduled execution of
+MODIStsp to automatically update time series related to a MODIS product
+and extent whenever a new image is available.
+
+Required MODIS HDF files are automatically downloaded from NASA servers
+and resized, reprojected, resampled and processed according to user's
+choices. For each desired output layer, outputs are saved as single-band
+rasters corresponding to each acquisition date available for the
+selected MODIS product within the specified time period. ``R''
+\emph{RasterStack} objects with temporal information as well as Virtual
+raster files (GDAL vrt and ENVI META files) facilitating access to the
+entire time series can be also created.
+
+\section{Installation}\label{installation}
+
+\texttt{MODIStsp} requires \href{https://cran.r-project.org}{R} v
+\textgreater{}= 3.2.1 and \href{http://www.gdal.org}{GDAL} (Geospatial
+Data Abstraction Library) v \textgreater{}= 1.11.1 \textbf{with support
+for HDF4 raster format} to be installed in your system. Brief
+instructions for installing R and GDAL can be found
+\protect\hyperlink{installing-r-and-gdal}{HERE}.
+
+\subsection{On Windows}\label{on-windows}
+
+You can install the stable version of \texttt{MODIStsp}, from CRAN:
+
+\texttt{install.packages("MODIStsp")}
+
+, or the development version (containing the latest improvements and bug
+fixes):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"lbusett/MODIStsp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Note that \textbf{if the \texttt{GTK+} library is not already installed
+on your system, installation may fail}. In that case, please install and
+load the \texttt{gWidgetsRGtk2} library beforehand:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"gWidgetsRGtk2"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(gWidgetsRGtk2)}
+\end{Highlighting}
+\end{Shaded}
+
+Upon loading \texttt{gWidgetsRGtk2} , an error window will probably
+appear. This signals that library ``GTK+'' is not yet installed on your
+system or is not on your PATH. To install it press ``OK''. A new window
+dialog window will appear, asking if you want to install ``GTK+''.
+Select ``Install GTK'' and then ``OK'' . Windows will download and
+install the GTK+ library. When it finishes, the RSession should be
+restarted and you should be ready to go !
+
+In case RStudio does not automatically restart or continuously asks to
+install GTK+ again, kill it form ``Task Manager'' (or restart the R
+session from RStudio ``Session'' menu), reload RStudio and the try to
+reload \texttt{gWidgetsRGtk2}. If it loads correctly, you should be
+ready to go.
+
+If it still fails, try downloading the GTK+ bundle from:
+
+\url{http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip}
+(OR
+\url{http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip}
+if on Win32)
+
+, unzip the archive on a folder of your choice (e.g.,
+\texttt{C:\textbackslash{}\textbackslash{}Program\ Files\textbackslash{}\textbackslash{}GTK+}),
+then add the path to its ``bin'' subfolder (e.g.,
+\texttt{C:\textbackslash{}\textbackslash{}Program\ Files\textbackslash{}\textbackslash{}GTK+\textbackslash{}\textbackslash{}bin\textbackslash{}\textbackslash{}}
+to your system PATH environment variable.
+
+Restart your system and try loading again \texttt{gWidgetsRGtk2}: if it
+loads ok, you should be ready to install \texttt{MODIStsp}
+
+\subsection{On Linux systems}\label{on-linux-systems}
+
+To install \texttt{MODIStsp} on Linux, you have to first install the
+following required dependencies:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Cairo} \textgreater{}= 1.0.0, \texttt{ATK} \textgreater{}=
+  1.10.0, \texttt{Pango} \textgreater{}= 1.10.0, \texttt{GTK+}
+  \textgreater{}= 2.8.0, \texttt{GLib} \textgreater{}= 2.8.0 (required
+  by package \texttt{RGtk2})
+\item
+  \texttt{Curl} (required by package \texttt{curl})
+\item
+  \texttt{GDAL} \textgreater{}= 1.6.3, \texttt{PROJ.4} \textgreater{}=
+  4.4.9 (required by package \texttt{rgdal})
+\end{itemize}
+
+On \emph{Debian and Ubuntu-based} systems, to install those packages
+open a terminal and type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev }
+\ExtensionTok{libgtk2.0-dev}\NormalTok{ libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev}
+\end{Highlighting}
+\end{Shaded}
+
+On \emph{rpm-base systems}, to install packages open a terminal and
+type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel }
+\ExtensionTok{glib2-devel}\NormalTok{ libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad}
+\end{Highlighting}
+\end{Shaded}
+
+Then, you can install the stable version of MODIStsp from CRAN:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"MODIStsp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+, or the development version (containing the latest improvements and bug
+fixes) from github;
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"lbusett/MODIStsp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{On Mac OS}\label{on-mac-os}
+
+\textbf{NOTE}: The following installation notes should be valid for
+MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. They
+were mainly taken (i.e., blatantly copied\ldots{}) from:
+\url{https://zhiyzuo.github.io/installation-rattle/**}. Thanks to Zhiya
+Zuo for providing this!
+
+To properly install \texttt{MODIStsp} you will need to first install
+package \texttt{RGTk2}. This is a somehow difficult operation. The
+following instructions should help:
+
+\textbf{1. Check your Mac OS X version and update if necessary: }
+
+Enter the following command in terminal to check your macOS version.
+Expected output is as below the dashed line ---.
+
+\begin{verbatim}
+~$ sw_vers  
+------------------------  
+ProductName:    Mac OS X  
+ProductVersion: 10.12.6  
+BuildVersion:   16G29  
+\end{verbatim}
+
+If your system is above 10.11, continue. Otherwise, upgrade it to
+Sierra.
+
+Install homebrew if you do not have it already installed. homebrew is a
+very convenient package manager for macOS. To do so, open a terminal,
+copy the following command in it and hit Enter:
+
+\begin{verbatim}
+~$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+\end{verbatim}
+
+Follow the instructions to get brew ready. When inserting your password,
+nothing will show up for security reasons. Just hit Enter when you are
+finished.
+
+When brew is finished, copy the following command in terminal and hit
+Enter:
+
+\begin{verbatim}
+~$ touch ~/.bash_profile
+~$ echo "export PATH=/usr/local/bin:$PATH
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" >> ~/.bash_profile
+~$ source ~/.bash_profile
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Install the \texttt{cairo} library with x11 support}. To do
+  so, you first have to change the way homebrew wants to install gtk+.
+  In an editor, write:
+\end{enumerate}
+
+\begin{verbatim}
+~$ brew edit gtk+
+\end{verbatim}
+
+A text editor will open. Look in the file, and find a section that
+begins with ``def install''. Substitute the current \texttt{args} with
+the following text:
+
+\begin{verbatim}
+def install
+ args = [
+         "--disable-dependency-tracking",
+         "--disable-silent-rules",
+         "--prefix=#{prefix}",
+         "--disable-glibtest",
+         "--enable-introspection=yes",
+         # "--disable-visibility",
+         # "--with-gdktarget=quartz",
+         "--with-gdktarget=x11",
+         "--enable-x11-backend"
+        ]
+\end{verbatim}
+
+Save the modified file using \texttt{ctrl+x\ ctrl+c}, followed by
+\texttt{y} to quit emacs.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Install \texttt{gtk+}} by issuing this command:
+\end{enumerate}
+
+\begin{verbatim}
+~$ brew install --build-from-source --verbose gtk+
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  \textbf{Update your path} so that \texttt{gtk+} is recognized, using:
+\end{enumerate}
+
+\begin{verbatim}
+~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  \textbf{Install \texttt{RGtk2} from source}:
+\end{enumerate}
+
+\begin{itemize}
+\item
+  \textbf{Download the newest source file for RGtk2} from
+  \url{https://cran.r-project.org/web/packages/RGtk2/index.html}.
+\item
+  Assuming that the path to this file is \textasciitilde{}/Downloads.
+  Run the following in terminal (change the path if you did not download
+  in \textasciitilde{}/Downloads):
+\end{itemize}
+
+\begin{verbatim}
+~$ cd ~/Downloads
+~/Downloads$ R CMD INSTALL RGtk2_2.20.33.tar.gz
+\end{verbatim}
+
+(Note that the name of the tar.gz file may vary depending on when you
+downloaded the file).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  \textbf{Open R and run}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(RGtk2)}
+\end{Highlighting}
+\end{Shaded}
+
+hopefully, \texttt{RGtk2} will load without errors! If so, you should be
+ready to go, and you can:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  \textbf{Install MODIStsp} from CRAN:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"MODIStsp"}\NormalTok{)}
+\KeywordTok{MODIStsp}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+or the development version from GitHub:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(devtools) }
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"lbusett/MODIStsp"}\NormalTok{, }\DataTypeTok{ref =} \StringTok{"master"}\NormalTok{)}
+\KeywordTok{MODIStsp}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Good luck!
+
+\section{Running the tool in Interactive Mode: the MODIStsp
+GUI}\label{running-the-tool-in-interactive-mode-the-modistsp-gui}
+
+The easiest way to use \texttt{MODIStsp} is to use its powerful GUI
+(Graphical User Interface) for selection of processing options, and then
+run the processing.
+
+To open the GUI, load the package and launch the MODIStsp function, with
+no parameters:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MODIStsp)}
+\KeywordTok{MODIStsp}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+This \textbf{opens a GUI} from which processing options can be specified
+and eventually saved (or loaded) (Note 1: PCs with a small screen can
+fail to visualize the whole GUI; in this case, the user can add scroll
+bars with \texttt{MODIStsp(scrollWindow=TRUE)}); Note 2: At the first
+execution of \texttt{MODIStsp}, a Welcome screen will appear, signaling
+that \texttt{MODIStsp} is searching for a valid GDAL installation. Press
+``OK'' and wait for GDAL to be found. If nothing happens for a long time
+(e.g., several minutes), \texttt{MODIStsp} (and in particular the
+gdalUtils package on which it relies) is not finding a valid GDAL
+installation in the more common locations. To solve the problem: 1.
+Ensure that GDAL is properly installed in your system 2. (On Windows) If
+it is installed, verify that GDAL is in your system PATH. and that the
+\emph{GDAL\_DATA} environment variable is correctly set (You can find
+simple instructions
+\href{http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/}{HERE})
+3. If nothing works, signal it in the
+\href{https://github.com/lbusett/MODIStsp/issues}{issues} GitHub page of
+\texttt{MODIStsp} and we'll try to help!
+
+The GUI allows selecting all processing options required for the
+creation of the desired MODIS time series. The main available processing
+options are described in detail in the following.
+
+\begin{center}\includegraphics{MODIStsp_files/figure-latex/GUIfig-1} \end{center}
+
+\subsection{\texorpdfstring{\textbf{Selecting Processing
+Parameters}}{Selecting Processing Parameters}}\label{selecting-processing-parameters}
+
+\subsubsection{\texorpdfstring{\textbf{\emph{MODIS Product, Platform and
+Layers:}}}{MODIS Product, Platform and Layers:}}\label{modis-product-platform-and-layers}
+
+The top-most menus allow to specify details of the desired output time
+series:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{``Category''} and \textbf{``Product''}: Selects the MODIS
+  product of interest;
+\item
+  \textbf{MODIS platform(s)}: Selects if only TERRA, only AQUA or Both
+  MODIS platforms should be considered for download and creation of the
+  time series;
+\item
+  \textbf{version}: Selects whether processing version 5 or 6 (when
+  available) of MODIS products has to be processed
+\end{enumerate}
+
+After selecting the product and version, clicking the \textbf{``Change
+Selection''} button opens the \emph{\emph{Select Processing Layers}} GUI
+panel, from which the user \textbf{must} select which MODIS original
+layers and/or derived Quality Indexes (QI) and Spectral Indexes (SI)
+layers should be processed:
+
+\begin{center}\includegraphics{MODIStsp_files/figure-latex/proc_layers-1} \end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  The left-hand frame allows to select which \emph{original MODIS
+  layers} should be processed.
+\item
+  The central frame allows to select which \emph{Quality Indicators
+  should be extracted} from the original MODIS Quality Assurance layers.
+\item
+  For MODIS products containing surface reflectance data, the right-hand
+  frame allows to select which additional \emph{Spectral Indexes should
+  be computed}. The following commonly used Spectral Indexes are
+  available for computation by default:
+\end{itemize}
+
+\textbf{Table II: List of default Spectral Indexes available in
+MODIStsp}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Index Acronym & Index name and reference\tabularnewline
+\midrule
+\endhead
+NDVI & Normalized Difference Vegetation Index (Rouse et al.
+1973)\tabularnewline
+EVI & Enhanced Vegetation Index (A. Huete et al. 2002)\tabularnewline
+SR & Simple Ratio (Tucker 1979)\tabularnewline
+NDFI & Normalized Difference Flood Index (Boschetti et al.
+2014)\tabularnewline
+NDII7 (NDWI) & Normalized Difference Infrared Index - Band 7 (Hunt and
+Rock 1989)\tabularnewline
+SAVI & Soil Adjusted Vegetation Index (A.R Huete 1988)\tabularnewline
+NDSI & Normalized Difference Snow Index (Hall et al.
+2002)\tabularnewline
+NDII6 & Normalized Difference Infrared Index - band 6 (Hunt and Rock
+1989)\tabularnewline
+GNDVI & Green Normalized Difference Vegetation Index (Gitelson and
+Merzlyak 1998)\tabularnewline
+RGRI & Red Green Ratio Index (Gamon and Surfus 1999)\tabularnewline
+GRVI & Green-Red ratio Vegetation Index (Tucker 1979)\tabularnewline
+\bottomrule
+\end{longtable}
+
+You can however \textbf{specify other SIs to be computed without
+modifying MODIStsp source code} by clicking on the \emph{\textbf{``Add
+Custom Index''}} button, which allow to provide info related to the new
+desired SI using a simple GUI interface.
+
+\begin{center}\includegraphics{MODIStsp_files/figure-latex/indexfig-1} \end{center}
+
+Provided information (e.g., correct band-names, computable formula,
+etc\ldots{}) is automatically checked upon clicking ``Set New Index''.
+On success, the new index is added in the list of available ones for all
+products allowing its computation. Clicking ``Done !'' returns to the
+main.
+
+\textbf{NOTE} All custom defined indexes can be removed by using the
+\texttt{MODIStsp\_resetindexes()} function
+
+\subsubsection{\texorpdfstring{\textbf{\emph{Download
+Method:}}}{Download Method:}}\label{download-method}
+
+Select the method to be used for download. Available choices are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{http}: download through ftp from NASA lpdaac http archive
+  (\url{http://e4ftl01.cr.usgs.gov}). This requires providing a user
+  name and password, which can be obtained by registering an account at
+  the address \url{https://urs.earthdata.nasa.gov/profile};
+\item
+  \textbf{ftp}: download from NASA ftp archive
+  (\url{ftp://ladsweb.nascom.nasa.gov/});
+\item
+  \textbf{offline}: this option allows to process/reprocess HDF files
+  already available on the user's PC without downloading from NASA --
+  useful if the user already has an archive of HDF images, or to
+  reprocess data already downloaded via MODIStsp to create time series
+  for an additional layer (\emph{It is fundamental that the HDFs are
+  those directly downloaded from NASA servers} ! (See
+  \href{faq.html\#working-with-already-downloaded-hdf-files}{here} for
+  additional details).
+\end{enumerate}
+
+Checking the \textbf{use\_aria2c} option allows to accelerate the
+download from NASA archives. This requires however that that the
+``aria2c'' software is installed in your system. To download and install
+it, see: \href{aria2.github.io/}{https://aria2.github.io/}
+
+ \emph{NOTE: The best performances are usually achieved using
+\emph{http}, though that may vary depending on network infrastructure.}
+
+\subsubsection{\texorpdfstring{\textbf{\emph{Processing
+Period:}}}{Processing Period:}}\label{processing-period}
+
+Specify the starting and ending dates to be considered for the creation
+of the time in the series corresponding fields. Dates \textbf{must} be
+provided in the \emph{yyyy--mm--dd} format (e.g., 2015-01-31)
+
+The \textbf{Period} drop-down menu allows to choose between two options:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{full}: all available images between the starting and ending
+  dates are downloaded and processed;
+\item
+  \textbf{seasonal}: data is downloaded only for one part of the year,
+  but for multiple years. For example, if the starting date is
+  2005-03-01 and the ending is 2010-06-01, only the images of March,
+  April and May for the years between 2005 and 2010 will be downloaded.
+  This allows to easily process data concerning a particular season of
+  interest.
+\end{enumerate}
+
+\subsubsection{\texorpdfstring{\textbf{\emph{Spatial
+Extent:}}}{Spatial Extent:}}\label{spatial-extent}
+
+Allows to define the area of interest for the processing. Two main
+options are possible:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Select MODIS Tiles}: specify which MODIS tiles need to be
+  processed either by:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Using the ``Start'' and ``End'' horizontal and vertical sliders in
+    the \emph{Required MODIS Tiles} frame.\\
+  \item
+    pressing the \textbf{``Select on Map''} button. A map will open in a
+    browser window, allowing interactive selection of the required tiles
+  \end{enumerate}
+\end{enumerate}
+
+During processing, data from the different tiles is mosaiced, and a
+single file covering the total area is produced for each acquisition
+date
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  \textbf{Define Custom Area}: specify a custom spatial extent for the
+  desired outputs either by:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    Manually inserting the coordinates of the Upper Left and Lower Right
+    corners of the area of interest in the \textbf{Bounding Box} frame.
+    \emph{Coordinates of the corners must be provided in the coordinate
+    system of the selected output projection};
+  \item
+    pressing the \textbf{``Load Extent from a Spatial File'' and
+    selecting a raster or vector spatial file}. In this case, the
+    bounding box of the selected file is retrieved, converted in the
+    selected output projection, and shown in the ``Bounding Box'' frame.
+    Required input MODIS tiles are also automatically retrieved from the
+    output extent, and the tiles selection sliders modified accordingly.
+  \item
+    pressing the \textbf{``Select on Map''} button. A map will open in a
+    browser window, allowing interactive selection of the spatial extent
+    using the tools on the left.
+  \end{enumerate}
+\end{enumerate}
+
+\textbf{Note: } pressing the ``show current extent'' will open a browser
+window highlighting the currently selected spatial extent.
+
+\subsubsection{\texorpdfstring{\emph{Reprojection and
+Resize}}{Reprojection and Resize}}\label{reprojection-and-resize}
+
+Specify the options to be used for reprojecting and resizing the MODIS
+images.
+
+\begin{itemize}
+\item
+  \textbf{``Output Projection''}: select either the Native MODIS
+  projection (Default) or specify a user-defined one. To specify a user
+  selected projection, select ``User Defined'' and then insert a valid
+  ``Proj4'' string in the pop-up window. Validity of the Proj4 string is
+  automatically checked, and error messages issued if the check fails;
+\item
+  \textbf{``Output Resolution''}, \textbf{``Pixel Size''} and
+  \textbf{``Reprojection Method''}: specify whether output images should
+  inherit their spatial resolution from the original MODIS files, or be
+  resampled to a user-defined resolution. In the latter case, output
+  spatial resolution must be specified in the measure units of the
+  selected output projection. Resampling method can be chosen among
+  ``Nearest Neighbour'' and ``Mode'' (Useful for down-sampling
+  purposes). Other resampling methods (e.g., bilinear, cubic) are not
+  currently supported since i) they cannot be used for resampling of
+  categorical variables such as the QA and QI layers, and ii) using them
+  on continuous variable (e.g., reflectance, VI values) without
+  performing an a-priori data cleaning would risk to contaminate the
+  values of high-quality observations with those of low-quality ones.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\emph{Output
+Options}}{Output Options}}\label{output-options}
+
+Several processing options can be set using check-boxes:
+
+\begin{itemize}
+\item
+  \textbf{Output Files Format}: Two of the most commonly formats used in
+  remote sensing applications are available at the moment: ENVI binary
+  and GeoTiff. If GeoTiff is selected, the type of file compression can
+  be also specified among ``None'', ``PACKBITS'', ``LZW'' and
+  ``DEFLATE''.
+\item
+  \textbf{Save Time Series as}: Specify if virtual multitemporal files
+  should be created. These virtual files allow access to the entire time
+  series of images as a single file without the need of creating large
+  multitemporal raster images. Available virtual files formats are ``R''
+  rasterStacks, ENVI meta-files and GDAL ``vrt'' files. In particular,
+  ``R'' rasterStacks may be useful in order to easily access the
+  preprocessed MODIS data within ``R'' scripts (see also
+  \url{http://lbusett.github.io/MODIStsp/articles/output.html}).
+\item
+  \textbf{Modify No Data}: Specify if NoData values of MODIS layers
+  should be kept at their original values, or changed to those specified
+  within the ``MODIStsp\_Products\_Opts'' XML file. By selecting ``Yes''
+  in the ``Change Original NoData values'' check-box, NoData of outputs
+  are set to the largest integer value possible for the data type of the
+  processed layer (e.g., for 8-bit unsigned integer layers, NoData is
+  set always to 255, for 16-bit signed integer layers to 32767, and for
+  16-bit unsigned integer layers to 65535). Information about the new
+  NoData values is stored both in the output rasters, and in the XML
+  files associated with them. \textbf{NOTE:} Some MODIS layers have
+  multiple NoData (a.k.a. \emph{fill}) values. if \emph{Modify No Data}
+  is set to ``Yes'', \texttt{MODIStsp} will convert all \emph{fill}
+  values to a common output NoData value!
+\item
+  \textbf{Apply Scale/Offset}: Specify if scale and offset values of the
+  different MODIS layers should be applied. If selected, outputs are
+  appropriately rescaled on the fly, and saved in the true ``measure
+  units'' of the selected parameter (e.g., spectral indexes are saved as
+  floating point values; Land Surface Temperature is saved in degrees
+  Kelvin, etc.).
+\end{itemize}
+
+\subsubsection{\texorpdfstring{\textbf{Main MODIStsp Output
+Folder}}{Main MODIStsp Output Folder}}\label{main-modistsp-output-folder}
+
+Select the main folder where the pre-processed time series data will be
+stored. All \texttt{MODIStsp} outputs \textbf{will be placed in specific
+sub-folders of this main folder} (see
+\url{http://lbusett.github.io/MODIStsp/articles/output.html} for details
+on \texttt{MODIStsp} naming conventions)-.
+
+The \textbf{``Reprocess Existing Data''} check-box allows to decide if
+images already available should be reprocessed if a new run of MODIStsp
+is launched with the same output folder. If set to ``No'', MODIStsp
+skips dates for which output files following the MODIStsp naming
+conventions are already present in the output folder. This allows to
+incrementally extend MODIS time series without reprocessing already
+available dates.
+
+\subsubsection{\texorpdfstring{\emph{Folder for permanent storage of
+original MODIS HDF
+images}}{Folder for permanent storage of original MODIS HDF images}}\label{folder-for-permanent-storage-of-original-modis-hdf-images}
+
+Select the folder where downloaded \textbf{original MODIS HDF files}
+downloaded from NASA servers will be stored.
+
+The \textbf{``delete original HDF files''} check-box allows also to
+decide if the downloaded images should be deleted from the file system
+at the end of the processing. To avoid accidental file deletion, this is
+always set to ``No'' by default, and a warning is issued before
+execution whenever the selection is changed to ``Yes''.
+
+\subsection{\texorpdfstring{\textbf{Saving and Loading Processing
+Options}}{Saving and Loading Processing Options}}\label{saving-and-loading-processing-options}
+
+Specified processing parameters can be saved to a JSON file for later
+use by clicking on the \emph{\textbf{Save Options}} button.
+
+Previously saved options can be restored clicking on the
+\emph{\textbf{Load Options}} button and navigating to the previously
+saved JSON file.
+
+ (Note that at launch, \textbf{\texttt{MODIStsp} \emph{always reloads
+automatically the processing options used for its last successful run}}
+.
+
+\subsection{\texorpdfstring{\textbf{Starting the
+processing}}{Starting the processing}}\label{starting-the-processing}
+
+Once you are happy with your choices, click on \textbf{Start
+Processing}. \texttt{MODIStsp} will start accessing NASA servers to
+download and process the MODIS data corresponding to your choices.
+
+For each date of the specified time period, \texttt{MODIStp} downloads
+and preprocesses all hdf images required to cover the desired spatial
+extent. Informative messages concerning the status of the processing are
+provided on the console, as well as on a self-updating progress window.
+
+The processed time series are saved in specific subfolders of the main
+selected output folder, as explained in detail
+\href{articles/output.html}{HERE}.
+
+\section{Non-Interactive Execution from within
+R}\label{non-interactive-execution-from-within-r}
+
+\subsection{\texorpdfstring{Specifying a saved ``Options
+file''}{Specifying a saved Options file}}\label{specifying-a-saved-options-file}
+
+\texttt{MODIStsp} can be launched in non-interactive mode within an
+\texttt{R} session by setting the optional \texttt{GUI} parameter to
+FALSE, and the \texttt{Options\_File} parameter to the path of a
+previously saved JSON Options file. This allows to exploit
+\texttt{MODIStsp} functionalities within generic ``R'' processing
+scripts
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MODIStsp) }
+\CommentTok{# --> Specify the path to a valid options file saved in advance from MODIStsp GUI }
+\NormalTok{options_file <-}\StringTok{ "X:/yourpath/youroptions.json"} 
+  
+\CommentTok{# --> Launch the processing}
+\KeywordTok{MODIStsp}\NormalTok{(}\DataTypeTok{gui =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{options_file =}\NormalTok{ options_file)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Looping on different spatial
+extents}\label{looping-on-different-spatial-extents}
+
+Specifying also the \texttt{spatial\_file\_path\_} parameter overrides
+for example the output extent of the selected Options File. This allows
+to perform the same preprocessing on different extents using a single
+Options File, by looping on an array of spatial files representing the
+desired output extents. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MODIStsp) }
+\CommentTok{# --> Specify the path to a valid options file saved in advance from MODIStsp GUI }
+\NormalTok{options_file <-}\StringTok{ "X:/yourpath/youroptions.json"} 
+
+\CommentTok{# --> Create a character array containing a list of shapefiles (or other spatial files)}
+\NormalTok{extent_list <-}\StringTok{ }\KeywordTok{list.files}\NormalTok{(}\StringTok{"X:/path/containing/some/shapefiles/"}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{.shp$"}\NormalTok{)  }
+
+\CommentTok{# --> Loop on the list of spatial files and run MODIStsp using each of them to automatically }
+\CommentTok{# define the output extent (A separate output folder is created for each input spatial file).}
+
+\ControlFlowTok{for}\NormalTok{ (single_shape }\ControlFlowTok{in}\NormalTok{ extent_list) \{}
+  \KeywordTok{MODIStsp}\NormalTok{(}\DataTypeTok{gui =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{options_file =}\NormalTok{ options_file, }\DataTypeTok{spatial_file_path =}\NormalTok{ single_shape )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Stand-alone execution and scheduled
+processing}\label{stand-alone-execution-and-scheduled-processing}
+
+\subsection{Stand-alone execution}\label{stand-alone-execution}
+
+\begin{itemize}
+\tightlist
+\item
+  MODIStsp can be also executed as a ``stand-alone'' application(i.e.,
+  without having to open R/RStudio); to do this, from R launch the
+  function \texttt{MODIStsp\_install\_launcher()}.
+\end{itemize}
+
+In a Linux operating system this function creates a desktop entry
+(accessible from the menu in the sections ``Science'' and ``Geography'')
+and a symbolic link in a known path (default: /usr/bin/MODIStsp). In
+Windows, a link in the Start Menu and optionally a desktop shortcut are
+created. See \texttt{?install\_MODIStsp\_launcher} for details and path
+customization.
+
+Double-clicking those files or launching them from a shell without
+parameters will launch \texttt{MODIStsp} in interactive mode.
+Non-interactive mode is triggered by adding the ``-g'' argument to the
+call, and specifying the path to a valid Options File as ``-s''
+argument:
+
+\begin{itemize}
+\item
+  Linux: \texttt{MODIStsp\ -g\ -s\ "/yourpath/youroptions.json"} (see
+  \texttt{MODIStsp\ -h} for details).
+\item
+  Windows:\texttt{your\_r\_library\textbackslash{}MODIStsp\textbackslash{}ExtData\textbackslash{}Launcher\textbackslash{}MODIStsp.bat\ -g\ -s\ "yourpath/youroptions.json"}
+  (see
+  \texttt{C:\textbackslash{}Users\textbackslash{}you\textbackslash{}Desktop\textbackslash{}MODIStsp\ -h}
+  for details).
+\end{itemize}
+
+If you do not want to install any link, launchers can be found in the
+subdirectory ``MODIStsp/ExtData/Launcher'' of your library path.
+
+\subsection{Scheduled Processing}\label{scheduled-processing}
+
+Stand-alone non-interactive execution can be used to periodically and
+automatically update the time series of a selected product over a given
+study area. To do that, you should simply:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Open the \texttt{MODIStsp} GUI, define the parameters of the
+  processing specifying a date in the future as the ``Ending Date'' and
+  save the processing options. Then quit the program.
+\item
+  Schedule non-interactive execution of the launcher installed as seen
+  before (or located in the subdirectory ``MODIStsp/ExtData/Launcher''
+  of your library path) as windows scheduled task (or linux ``cron''
+  job) according to a specified time schedule, specifying the path of a
+  previously saved Options file as additional argument:
+\end{enumerate}
+
+\paragraph{On Linux}\label{on-linux}
+
+\begin{itemize}
+\tightlist
+\item
+  edit your crontab by opening a terminal and type:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \ExtensionTok{crontab}\NormalTok{ -e}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  add an entry for the launcher. For example, if you have installed it
+  in /usr/bin and you want to run the tool every day at 23.00, add the
+  following row:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \ExtensionTok{0}\NormalTok{ 23 * * * /bin/bash /usr/bin/MODIStsp -g -s }\StringTok{"/yourpath/youroptions.json"}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{On Windows}\label{on-windows-1}
+
+\begin{itemize}
+\tightlist
+\item
+  create a Task following
+  \href{https://technet.microsoft.com/en-us/library/cc748993.aspx}{these
+  instructions}; add the path of the MODIStsp.bat launcher as Action
+  (point 6), and specifying
+  \texttt{-g\ -s\ "X:/yourpath/youroptions.json"} as argument.
+\end{itemize}
+
+\section{Outputs Format and Naming
+Conventions}\label{outputs-format-and-naming-conventions}
+
+\subsection{Single-band outputs}\label{single-band-outputs}
+
+Output raster files are saved in specific subfolders of the main output
+folder. In particular, \textbf{a separate subfolder} is created for each
+processed original MODIS layer, Quality Indicator or Spectral Index.
+Each subfolder contains one image for each processed date, created
+according to the following naming conventions:
+
+\begin{verbatim}
+myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
+\end{verbatim}
+
+ \emph{(e.g., myoutfolder/NDVI/MOD13Q1\_NDVI\_2000\_065.dat)}
+
+, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\emph{Layer}} is a short name describing the dataset (e.g.,
+  b1\_Red, NDII, UI);
+\item
+  \textbf{\emph{ProdCode}} is the code name of the MODIS product from
+  which the image was derived (e.g., MOD13Q1);
+\item
+  \textbf{\emph{YYYY}} and \textbf{\emph{DOY}} correspond to the year
+  and DOY (Day of the Year) of acquisition of the original MODIS image;
+\item
+  \textbf{\emph{ext}} is the file extension (.tif for GTiff outputs, or
+  .dat for ENVI outputs).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Virtual multi-band
+outputs}\label{virtual-multi-band-outputs}
+
+ENVI and/or GDAL virtual time series files and \emph{RasterStack} RData
+objects are instead stored \textbf{in the ``Time\_Series'' subfolder} if
+required.
+
+Naming convention for these files is as follow:
+
+\begin{verbatim}
+myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" 
+\end{verbatim}
+
+ \emph{(e.g.,
+myoutfolder/Time\_Series/RData/Terra/NDVI/MOD13Q1\_MYD13Q1\_NDVI\_49\_2000\_353\_2015\_RData.RData)}
+
+, where:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\emph{vrt\_type}} indicates the type of virtual file
+  (``RData'', ``GDAL'' or ``ENVI\_META'');
+\item
+  \textbf{\emph{Sensor}} indicates to which MODIS sensor the time series
+  belongs (``Terra'', ``Aqua'', ``Mixed'' or ``Combined'' (for MCD*
+  products));
+\item
+  \textbf{\emph{Layer}} is a short name describing the dataset (e.g.,
+  b1\_Red, NDII, UI);
+\item
+  \textbf{\emph{ProdCode}} is the code name of the MODIS product from
+  which the image was derived (e.g., MOD13Q1);
+\item
+  \textbf{\emph{StartDOY}}, \textbf{\emph{StartYear}},
+  \textbf{\emph{EndDOY}} and \textbf{\emph{EndYear}} indicate the
+  temporal extent of the time serie created;
+\item
+  \textbf{\emph{suffix}} indicates the type of virtual file (ENVI, GDAL
+  or RData);
+\item
+  \textbf{\emph{ext}} is the file extension (``.vrt'' for gdal virtual
+  files, ``META'' for ENVI meta files or ``RData'' for \texttt{R} raster
+  stacks).
+\end{itemize}
+
+\section{Accessing the processed time series from
+R}\label{accessing-the-processed-time-series-from-r}
+
+Preprocessed MODIS data can be retrieved within \texttt{R} either by
+accessing the single-date raster files, or by loading the saved
+\emph{RasterStack} objects.
+
+Any single-date image can be accessed by simply opening it with a
+\texttt{raster} command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(raster)}
+\NormalTok{modistsp_file <-}\StringTok{ "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"}
+\NormalTok{my_raster <-}\StringTok{ }\KeywordTok{raster}\NormalTok{(modistsp_file)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{rasterStack} time series containing all the processed data for a
+given parameter (saved in the ``Time Series/RData'' subfolder - see
+\href{output.html}{here} for details) can be opened by:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{in_virtual_file <-}\StringTok{ "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"} 
+\NormalTok{indata          <-}\StringTok{ }\KeywordTok{get}\NormalTok{(}\KeywordTok{load}\NormalTok{(in_virtual_file))}
+\end{Highlighting}
+\end{Shaded}
+
+This second option allows accessing the complete data stack and
+analyzing it using the functionalities for raster/raster time series
+analysis, extraction and plotting provided for example by the
+\texttt{raster} or \texttt{rasterVis} packages.
+
+\subsection{Extracting Time Series Data on Areas of
+Interest}\label{extracting-time-series-data-on-areas-of-interest}
+
+\texttt{MODIStsp} provides an efficient function
+(\texttt{MODIStsp\textbackslash{}\_extract}) for extracting time series
+data at specific locations. The function takes as input a
+\emph{RasterStack} virtual object created by \texttt{MODIStsp} (see
+above), the starting and ending dates for the extraction and a standard
+\_Sp*\_ object (or an ESRI shapefile name) specifying the locations
+(points, lines or polygons) of interest, and provides as output a
+\texttt{xts} object or \texttt{data.frame} containing time series data
+for those locations.
+
+If the input is of class \emph{SpatialPoints}, the output object
+contains one column for each point specified, and one row for each date.
+If it is of class \emph{SpatialPolygons} (or \emph{SpatialLines}), it
+contains one column for each polygon (or each line), with values
+obtained applying the function specified as the ``FUN'' argument (e.g.,
+mean, standard deviation, etc.) on pixels belonging to the polygon (or
+touched by the line), and one row for each date.
+
+As an example the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{#Set the input paths to raster and shape file}
+\NormalTok{  infile    <-}\StringTok{ 'myoutfolder/Time_Series/RData/Mixed/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData'}  
+\NormalTok{  shpname   <-}\StringTok{ 'path_to_file/rois.shp'}  
+  \CommentTok{#Set the start/end dates for extraction}
+\NormalTok{  startdate <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2010-01-01"}\NormalTok{)  }
+\NormalTok{  enddate   <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2014-12-31"}\NormalTok{)    }
+  \CommentTok{#Load the RasterStack}
+\NormalTok{  inrts     <-}\StringTok{ }\KeywordTok{get}\NormalTok{(}\KeywordTok{load}\NormalTok{(infile)) }
+  \CommentTok{# Compute average and St.dev}
+\NormalTok{  dataavg   <-}\StringTok{ }\KeywordTok{MODIStsp_extract}\NormalTok{(inrts, shpname, startdate, enddate, }\DataTypeTok{FUN =} \StringTok{'mean'}\NormalTok{, }\DataTypeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{  datasd    <-}\StringTok{ }\KeywordTok{MODIStsp_extract}\NormalTok{ (inrts, shpname, startdate, enddate, }\DataTypeTok{FUN =} \StringTok{'sd'}\NormalTok{, }\DataTypeTok{na.rm =}\NormalTok{ T)}
+  \CommentTok{# Plot average time series for the polygons}
+  \KeywordTok{plot.xts}\NormalTok{(dataavg) }
+\end{Highlighting}
+\end{Shaded}
+
+loads a \emph{RasterStack} object containing 8-days 250 m resolution
+time series for the 2000-2015 period and extracts time series of average
+and standard deviation values over the different polygons of a user's
+selected shapefile on the 2010-2014 period.
+
+\section{Problems and Issues}\label{problems-and-issues}
+
+Solutions to some common \textbf{installation and processing problems}
+can be found in MODIStsp FAQ:
+
+\url{http://lbusett.github.io/MODIStsp/articles/faq.html}
+
+\begin{itemize}
+\tightlist
+\item
+  Please \textbf{report any issues} you may encounter in our issues page
+  on GitHub:
+\end{itemize}
+
+\url{https://github.com/lbusett/MODIStsp/issues}
+
+\section{Citation}\label{citation}
+
+To cite MODIStsp please use:
+
+L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic
+preprocessing of MODIS Land Products time series, Computers \&
+Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
+\url{http://dx.doi.org/10.1016/j.cageo.2016.08.020}, URL:
+\url{https://github.com/lbusett/MODIStsp}.
+
+\hypertarget{installing-r-and-gdal}{\section{Installing R and
+GDAL}\label{installing-r-and-gdal}}
+
+\subsection{Installing R}\label{installing-r}
+
+\subsubsection{Windows}\label{windows}
+
+Download and install the latest version of R which can be found
+\href{https://cran.r-project.org/bin/windows/base}{here}.
+
+\subsubsection{Linux}\label{linux}
+
+Please refer to the documentation which can be found
+\href{https://cran.r-project.org/bin/linux}{here}, opening the directory
+relative to your Linux distribution. The documentation provides
+instruction to add CRAN repositories and to install the latest R
+version. With Ubuntu 15.10 Wily (and newer) this step is not mandatory
+(although recommended), since packaged version of R is \textgreater{}=
+3.2.1 (although not the latest); in this case, user can install R by
+simply typing in a terminal
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt-get install r-base}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Installing GDAL \textgreater{}=
+1.11.1}\label{installing-gdal-1.11.1}
+
+\subsubsection{Windows}\label{windows-1}
+
+The easiest way to install GDAL on Windows is from the
+\href{https://trac.osgeo.org/osgeo4w/}{OSGeo4W Website}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open the \href{https://trac.osgeo.org/osgeo4w/}{OSGeo4W Website}
+\item
+  In the \textbf{Quick Start for OSGeo4W Users} section, select the
+  download of 32bit or 64bit of OSGeo4W network installer
+\item
+  Run the installer
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Easiest Option}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Select \textbf{Express Desktop Install}, then proceed with the
+    installation. This will install GDAL and also other useful Spatial
+    Processing software like \href{http://www.qgis.org/}{QGIS} and
+    \href{https://grass.osgeo.org/}{GRASS GIS}
+  \end{itemize}
+\item
+  \emph{Advanced Option}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Select \textbf{Advanced Install}, then click on ``Next'' a few times
+    until you reach the ``Select Packages'' screen.
+  \item
+    Click on ``Commandline\_Utilities\_'', and on the list look for
+    ``\_gdal: The GDAL/OGR library\ldots{}" entry
+  \item
+    Click on ``Skip'': the word ``skip'' will be replaced by the current
+    GDAL version number
+  \item
+    Click on ``Next'' a few times to install GDAL
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Debian and Ubuntu-based
+systems}\label{debian-and-ubuntu-based-systems}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Ensure that your repositories contain a version of \texttt{gdal-bin}
+  \textgreater{}= 1.11.1. In particular, official repositories of Ubuntu
+  15.04 Vivid (or older) and Debian Jessie (or older) provide older
+  versions of GDAL, so it is necessary to add UbuntuGIS-unstable
+  repository before installing. To do this, follow instructions
+  \href{https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable}{here}).
+  With Ubuntu 15.10 Wily (and newer) this step is not mandatory,
+  although recommended in order to have updated version of GDAL
+  installed.
+\item
+  To install GDAL, open a terminal and type
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt-get install gdal-bin}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\subsubsection{ArchLinux}\label{archlinux}
+
+GDAL is maintained updated to the latest version as binary package
+within the community repository; although that, the support for HDF4
+format is not included. To bypass this problem, ArchLinux users can
+install \texttt{gdal-hdf4} package from AUR (see
+\href{https://wiki.archlinux.org/index.php/Arch_User_Repository\#Installing_packages}{here}
+or \href{https://archlinux.fr/yaourt-en}{here} for the package
+installation from AUR). This package is updated manually after each
+release of \texttt{gdal} on the community repository, so a temporal
+shift between a new \texttt{gdal} release and the update of
+\texttt{gdal-hdf4} could happen. If you want to manually add the support
+for HDF4 in case \texttt{gdal-hdf4} is out-of-date, you can do it
+following \href{https://notehub.org/fctdn}{these instructions}.
+
+\subsubsection{Other Linux systems}\label{other-linux-systems}
+
+Install the packaged binary of GDAL included in your specific
+distribution; if the version is older than 1.11.1, or if the support for
+HDF4 format is not included, you can manually install the HDF4 library
+and compile the source code by adding the parameter
+\texttt{-\/-with-hdf4} to the \texttt{configure} instruction).
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\hypertarget{ref-Boschetti2014}{}
+Boschetti, M., F. Nutini, G. Manfron, P. A. Brivio, and A. Nelson. 2014.
+``Comparative analysis of normalised difference spectral indices derived
+from MODIS for detecting surface water in flooded rice cropping
+systems.'' \emph{PLoS ONE} 9 (2).
+doi:\href{https://doi.org/10.1371/journal.pone.0088741}{10.1371/journal.pone.0088741}.
+
+\hypertarget{ref-Gamon1999}{}
+Gamon, J.A., and J.S. Surfus. 1999. ``Assessing leaf pigment content and
+activity with a reflectometer.'' \emph{New Phytologis} 143 (1): 105--17.
+
+\hypertarget{ref-Gitelson1998}{}
+Gitelson, A.A., and M.N. Merzlyak. 1998. ``Remote sensing of chlorophyll
+concentration in higher plant leaves.'' \emph{Advances in Space
+Research} 22 (5): 689--92.
+doi:\href{https://doi.org/10.1016/S0273-1177(97)01133-2}{10.1016/S0273-1177(97)01133-2}.
+
+\hypertarget{ref-Hall2002}{}
+Hall, Dorothy K, George A Riggs, Vincent V Salomonson, Nicolo E
+DiGirolamo, and Klaus J Bayr. 2002. ``MODIS snow-cover products.''
+\emph{Remote Sensing of Environment} 83 (1-2): 181--94.
+doi:\href{https://doi.org/10.1016/S0034-4257(02)00095-0}{10.1016/S0034-4257(02)00095-0}.
+
+\hypertarget{ref-Hengl2010}{}
+Hengl, T. 2010. ``Download and resampling of MODIS images.''
+\url{http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images}.
+
+\hypertarget{ref-Huete2002}{}
+Huete, A., K. Didan, T. Miura, E.P. Rodriguez, X. Gao, and L.G.
+Ferreira. 2002. ``Overview of the radiometric and biophysical
+performance of the MODIS vegetation indices.'' \emph{Remote Sensing of
+Environment} 83 (1-2): 195--213.
+doi:\href{https://doi.org/10.1016/S0034-4257(02)00096-2}{10.1016/S0034-4257(02)00096-2}.
+
+\hypertarget{ref-Huete1988}{}
+Huete, A.R. 1988. ``A soil-adjusted vegetation index (SAVI).''
+\emph{Remote Sensing of Environment} 25 (3): 295--309.
+doi:\href{https://doi.org/10.1016/0034-4257(88)90106-X}{10.1016/0034-4257(88)90106-X}.
+
+\hypertarget{ref-HUNTJR1989}{}
+Hunt, J.R., and B. Rock. 1989. ``Detection of changes in leaf water
+content using Near- and Middle-Infrared reflectances.'' \emph{Remote
+Sensing of Environment} 30 (1): 43--54.
+doi:\href{https://doi.org/10.1016/0034-4257(89)90046-1}{10.1016/0034-4257(89)90046-1}.
+
+\hypertarget{ref-Naimi2014}{}
+Naimi, B. 2014. ``ModisDownload: an R function to download, mosaic, and
+reproject the MODIS images.'' \url{http://r-gis.net/?q=ModisDownload}.
+
+\hypertarget{ref-Rouse1973}{}
+Rouse, J.W.J., R.H. Haas, J.A. Schell, and D.W. Deering. 1973.
+``Monitoring vegetation systems in the Great Plains with ERTS. Third
+ERTS Symposium, NASA SP-351. U.S. Gov. Printing office.'' Edited by S.C.
+Freden, E.P. Mercanti, and M.A. Becker. NASA.
+
+\hypertarget{ref-Tucker1979}{}
+Tucker, C.J. 1979. ``Red and photographic infrared linear combinations
+for monitoring vegetation.'' \emph{Remote Sensing of Environment} 8 (2):
+127--50.
+doi:\href{https://doi.org/10.1016/0034-4257(79)90013-0}{10.1016/0034-4257(79)90013-0}.
+
+
+\end{document}

@@ -43,9 +43,9 @@ matrix:
         - units
         - udunits
         - covr
+        - sf
         - shiny
         - leaflet
-        - sf
         - mapview
         - mapedit
 

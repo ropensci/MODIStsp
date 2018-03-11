@@ -137,8 +137,8 @@ ts_data
 
 # Now load a shapefile containing polygons from which we want to extract data
 
-polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp", package = "MODIStsp"),
-                           verbose = FALSE)
+polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp",
+                           package = "MODIStsp"), verbose = FALSE)
 polygons
 
 # Finally, extract the average values for each polygon and date and plot the

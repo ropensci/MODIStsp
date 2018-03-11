@@ -200,7 +200,7 @@ computation);
 }
 
 Reprojection and resize is dealt with by accessing gdal routines through the
-\href{https://cran.r-project.org/web/packages/gdalUtils/index.html}{gdalUtils}
+\href{https://CRAN.R-project.org/package=gdalUtils}{gdalUtils}
 package.
 Extraction of bitfields from Quality layers is done though bitwise computation
 Checks are done in order to not re-download already existing HDF images, and not
