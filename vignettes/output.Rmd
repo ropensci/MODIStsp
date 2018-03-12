@@ -13,8 +13,6 @@ for each processed date, created according to the following naming conventions:
 myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
 ```
 
-<font size="2"> _(e.g., myoutfolder/NDVI/MOD13Q1\_NDVI\_2000\_065.dat)_ </font size="2">
-
 , where: 
 
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
@@ -23,6 +21,19 @@ myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
   - **_YYYY_** and **_DOY_** correspond to the year and DOY (Day of the Year) of 
   acquisition of the original MODIS image;
   - **_ext_** is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs). 
+  
+so, for example, if you process layers "NDVI" and "EVI" for MODIS product MOD13A2 
+you will find the resulting GTiff of ENVI output single-date rasters in:
+
+```
+/your_out_folder/VI_16Days_1Km_v6/NDVI/
+```
+
+and
+
+```
+/your_out_folder/VI_16Days_1Km_v6/EVI/
+```
 
 ____________________________________________________________________________________
 
@@ -31,13 +42,12 @@ ________________________________________________________________________________
 ENVI and/or GDAL virtual time series files and _RasterStack_ RData objects are 
 instead stored **in the "Time\_Series" subfolder** if required.
 
-Naming convention for these files is as follow:
+Naming conventions for these files is as follow:
 
 ```
 myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" 
 ```
-<font size="2"> _(e.g., myoutfolder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData)_ </font size="2"> 
-             
+
 , where: 
 
   - **_vrt_type_** indicates the type of virtual file ("RData", "GDAL" or "ENVI_META");
@@ -51,3 +61,16 @@ myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY
   - **_suffix_** indicates the type of virtual file (ENVI, GDAL or RData);
   - **_ext_** is the file extension (".vrt" for gdal virtual files, "META" for 
   ENVI meta files or "RData" for `R` raster stacks). 
+
+so, for example, if you process layer "NDVI" for MODIS product MOD13A2 and platform 
+"Terra", and ask to create "R rasterStack" and "GdAL vrt" time series you will find the resulting GTiff virtual files in:
+
+```
+/your_out_folder/VI_16Days_1Km_v6/Time_Series/RData/Terra/NDVI
+```
+
+and 
+
+```
+/your_out_folder/VI_16Days_1Km_v6/Time_Series/GDAL/Terra/NDVI
+```

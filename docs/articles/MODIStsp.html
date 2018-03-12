@@ -153,7 +153,7 @@
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>gWidgetsRGtk2</code> library beforehand:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>)
 <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
@@ -186,7 +186,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 </div>
 <div id="on-mac-os" class="section level2">
 <h2 class="hasAnchor">
@@ -263,7 +263,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>or the development version from GitHub:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools) 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>Good luck!</p>
 </div>
@@ -484,31 +484,100 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <div id="specifying-a-saved-options-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#specifying-a-saved-options-file" class="anchor"></a>Specifying a saved “Options file”</h2>
-<p><code>MODIStsp</code> can be launched in non-interactive mode within an <code>R</code> session by setting the optional <code>GUI</code> parameter to FALSE, and the <code>Options_File</code> parameter to the path of a previously saved JSON Options file. This allows to exploit <code>MODIStsp</code> functionalities within generic “R” processing scripts</p>
+<p><code>MODIStsp</code> can be launched in non-interactive mode within an <code>R</code> session by setting the optional <code>GUI</code> parameter to FALSE, and the <code>Options_File</code> parameter to the path of a previously saved JSON Options file. This allows to exploit <code>MODIStsp</code> functionalities within generic “R” processing scripts:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MODIStsp) 
+
+<span class="co"># **</span><span class="al">NOTE</span><span class="co">** Output files of examples are saved to file.path(tempdir(), "MODIStsp").</span>
+<span class="co"># You can run the examples with `gui = TRUE` to set a different output folder!</span>
+
 <span class="co"># --&gt; Specify the path to a valid options file saved in advance from MODIStsp GUI </span>
-options_file &lt;-<span class="st"> "X:/yourpath/youroptions.json"</span> 
-  
+<span class="co"># Here we use a test json file saved in MODIStsp installation folder which</span>
+<span class="co"># downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)</span>
+<span class="co"># and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.</span>
+
+options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
+
 <span class="co"># --&gt; Launch the processing</span>
-<span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file)</code></pre></div>
+<span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
+
+<span class="co"># Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of `base::tempdir()`: </span>
+
+out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"MODIStsp/VI_16Days_1Km_v6"</span>) 
+<span class="kw">list.files</span>(out_fold)
+<span class="co">#&gt; [1] "EVI"         "NDVI"        "QA_usef"     "Time_Series"</span>
+
+<span class="kw">list.files</span>(<span class="kw">file.path</span>(out_fold ,<span class="st">"EVI"</span>))
+<span class="co">#&gt; [1] "MOD13A2_EVI_2016_161.tif" "MOD13A2_EVI_2016_177.tif"</span></code></pre></div>
+</div>
+<div id="looping-over-different-options-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#looping-over-different-options-files" class="anchor"></a>Looping over different Options files</h2>
+<p>If you need to process different MODIS products, you can prepare beforehand different MODIStsp options files by using the GUI, and then loop over them like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opts_files &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">system.file</span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), 
+                <span class="kw">system.file</span>(<span class="st">"testdata/test_MOD10A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>))
+
+<span class="cf">for</span> (opts_file <span class="cf">in</span> opts_files) {
+  <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> opts_file)
+}
+
+<span class="co"># MOD13A2 ouputs</span>
+out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"MODIStsp/VI_16Days_1Km_v6"</span>) 
+<span class="kw">list.files</span>(out_fold)
+<span class="co">#&gt; [1] "EVI"         "NDVI"        "QA_usef"     "Time_Series"</span>
+<span class="kw">list.files</span>(<span class="kw">file.path</span>(out_fold ,<span class="st">"EVI"</span>))
+<span class="co">#&gt; [1] "MOD13A2_EVI_2016_161.tif" "MOD13A2_EVI_2016_177.tif"</span>
+
+<span class="co"># MOD10A2 ouputs</span>
+out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"MODIStsp/Surf_Temp_8Days_1Km_v6"</span>) 
+<span class="kw">list.files</span>(out_fold)
+<span class="co">#&gt; [1] "Days_Clear"    "LST_Day_1km"   "LST_Night_1km" "Time_Series"  </span>
+
+<span class="kw">list.files</span>(<span class="kw">file.path</span>(out_fold ,<span class="st">"LST_Night_1km"</span>))
+<span class="co">#&gt; [1] "MOD11A2_LST_Night_1km_2016_153.tif" "MOD11A2_LST_Night_1km_2016_161.tif"</span>
+<span class="co">#&gt; [3] "MOD11A2_LST_Night_1km_2016_169.tif" "MOD11A2_LST_Night_1km_2016_177.tif"</span></code></pre></div>
 </div>
 <div id="looping-on-different-spatial-extents" class="section level2">
 <h2 class="hasAnchor">
 <a href="#looping-on-different-spatial-extents" class="anchor"></a>Looping on different spatial extents</h2>
-<p>Specifying also the <code>spatial_file_path_</code> parameter overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MODIStsp) 
-<span class="co"># --&gt; Specify the path to a valid options file saved in advance from MODIStsp GUI </span>
-options_file &lt;-<span class="st"> "X:/yourpath/youroptions.json"</span> 
+<p>Specifying also the <code>spatial_file_path_</code> parameter overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Run the tool using the settings previously saved in a specific option file</span>
+<span class="co"># and specifying the extent from a spatial file allows to re-use the same</span>
+<span class="co"># processing settings to perform download and reprocessing on a different area</span>
+<span class="kw">library</span>(MODIStsp) 
+options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
+spatial_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"testdata/lakeshapes/garda_lake.shp"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
+<span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file,
+         <span class="dt">spatial_file_path =</span> spatial_file, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
 
 <span class="co"># --&gt; Create a character array containing a list of shapefiles (or other spatial files)</span>
-extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">"X:/path/containing/some/shapefiles/"</span>, <span class="st">"</span><span class="ch">\\</span><span class="st">.shp$"</span>)  
+extent_list =<span class="st"> </span><span class="kw">list.files</span>(<span class="kw">system.file</span>(<span class="st">"testdata/lakeshapes/"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), 
+                         <span class="dt">full.names =</span> <span class="ot">TRUE</span>, <span class="st">"</span><span class="ch">\\</span><span class="st">.shp$"</span>)  
+extent_list
 
-<span class="co"># --&gt; Loop on the list of spatial files and run MODIStsp using each of them to automatically </span>
-<span class="co"># define the output extent (A separate output folder is created for each input spatial file).</span>
+<span class="co">#&gt; [1] "D:/Documents/Source/git/MODIStsp/inst/testdata/lakeshapes/garda_lake.shp"</span>
+<span class="co">#&gt; [2] "D:/Documents/Source/git/MODIStsp/inst/testdata/lakeshapes/iseo_lake.shp"</span>
+
+<span class="co"># --&gt; Loop on the list of spatial files and run MODIStsp using each of them to </span>
+<span class="co"># automatically define the output extent (A separate output folder is created for</span>
+<span class="co"># each input spatial file).</span>
 
 <span class="cf">for</span> (single_shape <span class="cf">in</span> extent_list) {
-  <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, <span class="dt">spatial_file_path =</span> single_shape )
-}</code></pre></div>
+  <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, 
+           <span class="dt">spatial_file_path =</span> single_shape )
+}
+
+<span class="co"># output files are placed in separate folders. For example here you can see how to </span>
+<span class="co"># access a list of produced files and plot one of them: </span>
+outfiles_garda &lt;-<span class="st"> </span><span class="kw">list.files</span>(
+  <span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span>),
+  <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+<span class="kw">library</span>(raster)       
+<span class="kw">plot</span>(<span class="kw">raster</span>(outfiles_garda[<span class="dv">1</span>]))
+
+outfiles_iseo &lt;-<span class="st"> </span><span class="kw">list.files</span>(
+  <span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span>),
+  <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+<span class="kw">plot</span>(<span class="kw">raster</span>(outfiles_iseo[<span class="dv">1</span>]))</code></pre></div>
 </div>
 </div>
 <div id="stand-alone-execution-and-scheduled-processing" class="section level1">
@@ -612,7 +681,7 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
 <p>Any single-date image can be accessed by simply opening it with a <code>raster</code> command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
 modistsp_file &lt;-<span class="st"> "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"</span>
-my_raster &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(modistsp_file)</code></pre></div>
+my_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
 <p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series/RData” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
 indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))</code></pre></div>
@@ -812,6 +881,7 @@ indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span 
       <li>
 <a href="#non-interactive-execution-from-within-r">Non-Interactive Execution from within R</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#specifying-a-saved-options-file">Specifying a saved “Options file”</a></li>
+      <li><a href="#looping-over-different-options-files">Looping over different Options files</a></li>
       <li><a href="#looping-on-different-spatial-extents">Looping on different spatial extents</a></li>
       </ul>
 </li>

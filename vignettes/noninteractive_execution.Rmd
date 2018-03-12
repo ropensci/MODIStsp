@@ -30,7 +30,8 @@ options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 # --> Launch the processing
 MODIStsp(gui = FALSE, options_file = options_file, verbose = FALSE)
 
-# Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of `base::tempdir()`: 
+# Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of 
+# `base::tempdir()`: 
 
 out_fold <- file.path(tempdir(), "MODIStsp/VI_16Days_1Km_v6") 
 list.files(out_fold)

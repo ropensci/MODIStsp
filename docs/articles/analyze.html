@@ -171,7 +171,7 @@ substack  </code></pre></div>
 ## resolution  : 463.3127, 463.3127  (x, y)
 ## extent      : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
-## data source : /tmp/RtmpktwNrK/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
+## data source : C:\Users\LB_laptop\AppData\Local\Temp\Rtmp2JTFHQ/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
 ## names       : MOD13A1_NDVI_2016_001 
 ## time        : 2016-01-01</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract multiple dates from the stack</span>
@@ -272,8 +272,8 @@ out_datasd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/
 out_dataavg_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">date =</span> <span class="kw">index</span>(out_dataavg), <span class="kw">coredata</span>(out_dataavg)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>tidyr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/gather">gather</a></span>(Polygon, Value, <span class="op">-</span>date)
 
-ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(out_dataavg_df, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> date, <span class="dt">y =</span> Value, <span class="dt">color =</span> Polygon)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_light</a></span>()</code></pre></div>
+ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(out_dataavg_df, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> Value, <span class="dt">color =</span> Polygon)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</code></pre></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-8-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(tibbletime)
 <span class="kw">require</span>(dplyr)
@@ -286,8 +286,8 @@ month_avg &lt;-<span class="st"> </span>out_dataavg_tt <span class="op">%&gt;%</
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Polygon) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>tibbletime<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tibbletime/topics/as_period">as_period</a></span>(<span class="dt">period =</span> <span class="st">"monthly"</span>)
 
-ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(month_avg, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> date, <span class="dt">y =</span> Value, <span class="dt">color =</span> Polygon)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_light</a></span>()</code></pre></div>
+ggplot2<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(month_avg, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> Value, <span class="dt">color =</span> Polygon)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_light</span>()</code></pre></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-9-1.png" width="672"></p>
 <p><strong>IMPORTANT NOTES - 1</strong> <code>MODIStsp_extract</code> is usually much faster than the standard <code><a href="http://www.rdocumentation.org/packages/raster/topics/extract">raster::extract</a></code> function, but does not deal with overlapping polygons. If your polygons are overlapping, please use <code><a href="http://www.rdocumentation.org/packages/raster/topics/extract">raster::extract</a></code> instead.</p>
 <p><strong>IMPORTANT NOTES - 2</strong> A more powerful extraction function can be also found in the <code>sprawl</code> package, currently under development on github (<a href="https://lbusett.github.io/sprawl/" class="uri">https://lbusett.github.io/sprawl/</a>). In particular, <code><a href="http://www.rdocumentation.org/packages/sprawl/topics/extract_rast">sprawl::extract_rast</a></code> deals much better with large rasters and long time series.</p>

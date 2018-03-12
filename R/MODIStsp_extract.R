@@ -198,8 +198,9 @@ MODIStsp_extract <- function(in_rts, sp_object,
                                "SpatialPoints",
                                "SpatialLines", "SpatialLinesDataFrame")) {
     if (class(sp_object) == "character") {
-      sp_object <- try(rgdal::readOGR(dirname(sp_object),
-                                      basename(tools::file_path_sans_ext(sp_object))))
+      sp_object <- try(
+        rgdal::readOGR(dirname(sp_object),
+                       basename(tools::file_path_sans_ext(sp_object))))
       if (class(sp_object) == "try-error") {
         stop("sp_object is not a valid Spatial object or Shapefile")
       }
@@ -287,7 +288,8 @@ MODIStsp_extract <- function(in_rts, sp_object,
         #nocov end
       }
       gdalUtils::gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts),
-                                te = ext_conv(in_rts[[1]]), a = "mdxtnq", ot = ot)
+                                te = ext_conv(in_rts[[1]]), a = "mdxtnq",
+                                ot = ot)
       zone_raster <- raster::raster(tempraster)
       zones       <- raster::getValues(zone_raster)
       ok_zones    <- which(is.finite(zones) & zones != 0)

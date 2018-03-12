@@ -41,7 +41,9 @@ gh_changeproj <- function(wids, out_proj_list, bbox_out) {
     # gWidgets::svalue(wids$output_proj4) <- ""
     new_proj <- NA
 
-    if (deparse(sys.calls()[[sys.nframe() - 10]])[1] == "gui_load_options(choice, wids, prod_opt_list, compress_dict)" ){
+    if (
+      deparse(sys.calls()[[sys.nframe() - 10]])[1] == 
+      "gui_load_options(choice, wids, prod_opt_list, compress_dict)" ) {
       choice <- TRUE
     } else {
       choice <- warn_projmess1()
