@@ -183,7 +183,7 @@ __1. Check your Mac OS X version and update if necessary: __
 Enter the following command in terminal to check your macOS version. Expected
 output is as below the dashed line ---.
     
-```bash
+```
 ~$ sw_vers  
 ------------------------  
 ProductName:	Mac OS X  
@@ -212,18 +212,28 @@ When brew is finished, copy the following command in terminal and hit Enter:
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" >> ~/.bash_profile
 ~$ source ~/.bash_profile
 ```
+<br>
 
-
-__2. Install the `cairo` library with x11 support__. To do so, you first have to 
-change the way homebrew wants to install gtk+. In an editor, write: 
-
+__2. Install the `cairo` library with x11 support__. Enter the following into your terminal:
+ 
+```bash
+~$ brew uninstall --force cairo --ignore-dependencies
+~$ brew cask install xquartz
+~$ brew install --with-x11 cairo
+```
+<br>
+ 
+__3. Install the `gtk+` library__:
+ 
+To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write: 
+ 
 ```bash
 ~$ brew edit gtk+
 ```
-
+ 
 A text editor will open. Look in the file, and find a section that begins with
-"def install". Substitute the current `args` with the following text: 
-
+"def install". Substitute the current `args` section with the following text: 
+ 
 ```bash
 def install
  args = [
@@ -238,22 +248,21 @@ def install
          "--enable-x11-backend"
         ]
 ```     
-
+ 
 Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs.
-<br>
-
-__3. Install the `gtk+` library__ by issuing this command:
-
+Now install the library using: 
+ 
 ```bash
 ~$ brew install --build-from-source --verbose gtk+
 ```
-
+<br>
 
 __4. Update your path__ so that `gtk+` is recognized, using:
 
 ```bash
 ~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
 ```
+<br>
 
 __5. Install `RGtk2` from source__:
 

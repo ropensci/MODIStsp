@@ -131,13 +131,11 @@ To properly install `MODIStsp` you will need to first install package `RGTk2`. T
 
 Enter the following command in terminal to check your macOS version. Expected output is as below the dashed line ---.
 
-``` bash
-~$ sw_vers  
-------------------------  
-ProductName:    Mac OS X  
-ProductVersion: 10.12.6  
-BuildVersion:   16G29  
-```
+    ~$ sw_vers  
+    ------------------------  
+    ProductName:    Mac OS X  
+    ProductVersion: 10.12.6  
+    BuildVersion:   16G29  
 
 If your system is above 10.11, continue. Otherwise, upgrade it to Sierra.
 
@@ -158,13 +156,27 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 ~$ source ~/.bash_profile
 ```
 
-**2. Install the `cairo` library with x11 support**. To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:
+<br>
+
+**2. Install the `cairo` library with x11 support**. Enter the following into your terminal:
+
+``` bash
+~$ brew uninstall --force cairo --ignore-dependencies
+~$ brew cask install xquartz
+~$ brew install --with-x11 cairo
+```
+
+<br>
+
+**3. Install the `gtk+` library**:
+
+To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:
 
 ``` bash
 ~$ brew edit gtk+
 ```
 
-A text editor will open. Look in the file, and find a section that begins with "def install". Substitute the current `args` with the following text:
+A text editor will open. Look in the file, and find a section that begins with "def install". Substitute the current `args` section with the following text:
 
 ``` bash
 def install
@@ -181,13 +193,13 @@ def install
         ]
 ```
 
-Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs. <br>
-
-**3. Install the `gtk+` library** by issuing this command:
+Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs. Now install the library using:
 
 ``` bash
 ~$ brew install --build-from-source --verbose gtk+
 ```
+
+<br>
 
 **4. Update your path** so that `gtk+` is recognized, using:
 
@@ -195,9 +207,11 @@ Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs. <br
 ~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
 ```
 
+<br>
+
 **5. Install `RGtk2` from source**:
 
--   **Download the newest source file for RGtk2** from <https://cran.r-project.org/web/packages/RGtk2/index.html>.
+-   **Download the newest source file for RGtk2** from <https://CRAN.R-project.org/package=gWidgetsRGtk2>.
 
 -   Assuming that the path to this file is ~/Downloads. Run the following in terminal (change the path if you did not download in ~/Downloads):
 

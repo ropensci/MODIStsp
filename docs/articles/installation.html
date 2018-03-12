@@ -199,9 +199,15 @@ BuildVersion:   16G29  </code></pre>
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" &gt;&gt; ~/.bash_profile
 ~$ source ~/.bash_profile</code></pre>
 <p><br></p>
-<p><strong>2. Install the <code>cairo</code> library with x11 support</strong>. To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:</p>
+<p><strong>2. Install the <code>cairo</code> library with x11 support</strong>. Enter the following into your terminal:</p>
+<pre><code>~$ brew uninstall --force cairo --ignore-dependencies
+~$ brew cask install xquartz
+~$ brew install --with-x11 cairo</code></pre>
+<p><br></p>
+<p><strong>3. Install the <code>gtk+</code> library</strong>:</p>
+<p>To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:</p>
 <pre><code>~$ brew edit gtk+</code></pre>
-<p>A text editor will open. Look in the file, and find a section that begins with “def install”. Substitute the current <code>args</code> with the following text:</p>
+<p>A text editor will open. Look in the file, and find a section that begins with “def install”. Substitute the current <code>args</code> section with the following text:</p>
 <pre><code>def install
  args = [
          "--disable-dependency-tracking",
@@ -214,8 +220,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
          "--with-gdktarget=x11",
          "--enable-x11-backend"
         ]</code></pre>
-<p>Save the modified file using <code>ctrl+x ctrl+c</code>, followed by <code>y</code> to quit emacs. <br></p>
-<p><strong>3. Install the <code>gtk+</code> library</strong> by issuing this command:</p>
+<p>Save the modified file using <code>ctrl+x ctrl+c</code>, followed by <code>y</code> to quit emacs. Now install the library using:</p>
 <pre><code>~$ brew install --build-from-source --verbose gtk+</code></pre>
 <p><br></p>
 <p><strong>4. Update your path</strong> so that <code>gtk+</code> is recognized, using:</p>

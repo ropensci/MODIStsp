@@ -123,7 +123,7 @@
       <h1>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.3</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2018-03-12</h4>
+            <h4 class="date">2018-03-13</h4>
           </div>
 
     
@@ -209,12 +209,14 @@ BuildVersion:   16G29  </code></pre>
 ~$ echo "export PATH=/usr/local/bin:$PATH
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" &gt;&gt; ~/.bash_profile
 ~$ source ~/.bash_profile</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>
-<strong>Install the <code>cairo</code> library with x11 support</strong>. To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:</li>
-</ol>
+<p><strong>2. Install the <code>cairo</code> library with x11 support</strong>. Enter the following into your terminal:</p>
+<pre><code>~$ brew uninstall --force cairo --ignore-dependencies
+~$ brew cask install xquartz
+~$ brew install --with-x11 cairo</code></pre>
+<p><strong>3. Install the <code>gtk+</code> library</strong>:</p>
+<p>To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:</p>
 <pre><code>~$ brew edit gtk+</code></pre>
-<p>A text editor will open. Look in the file, and find a section that begins with “def install”. Substitute the current <code>args</code> with the following text:</p>
+<p>A text editor will open. Look in the file, and find a section that begins with “def install”. Substitute the current <code>args</code> section with the following text:</p>
 <pre><code>def install
  args = [
          "--disable-dependency-tracking",
@@ -227,16 +229,9 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
          "--with-gdktarget=x11",
          "--enable-x11-backend"
         ]</code></pre>
-<p>Save the modified file using <code>ctrl+x ctrl+c</code>, followed by <code>y</code> to quit emacs.</p>
-<ol start="3" style="list-style-type: decimal">
-<li>
-<strong>Install <code>gtk+</code></strong> by issuing this command:</li>
-</ol>
+<p>Save the modified file using <code>ctrl+x ctrl+c</code>, followed by <code>y</code> to quit emacs. Now install the library using:</p>
 <pre><code>~$ brew install --build-from-source --verbose gtk+</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>
-<strong>Update your path</strong> so that <code>gtk+</code> is recognized, using:</li>
-</ol>
+<p><strong>4. Update your path</strong> so that <code>gtk+</code> is recognized, using:</p>
 <pre><code>~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>
