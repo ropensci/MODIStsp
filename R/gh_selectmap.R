@@ -8,7 +8,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
   #nocov start
   if (requireNamespace("mapedit")) {
     if (ext_type == "Select MODIS Tiles") {
-      
+
       # On MODIS tiles selection, use editFeatures to allow selection
       # from the Tiles Map
       tilemap <- get(load(system.file("ExtData" ,"MODIS_Tiles_latlon.RData",
@@ -19,9 +19,9 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
       )
       # On return, check the selection to see if it correspond to a rectangular
       # area. If not, message and abort.
-      
+
       if (inherits(sel, "data.frame") & length(sel$h > 0)) {
-        
+
         seltiles <- lapply(sel[["Name"]], FUN = function(x){
           h <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[2])
           v <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[3])
@@ -38,7 +38,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
             error_sel <- TRUE
           }
         }
-        
+
         if (length(unique(sel[["v"]])) == 1) {
           min_v <- max_v <- sel[["v"]]
         } else {
@@ -49,7 +49,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
             error_sel <- TRUE
           }
         }
-        
+
         if (error_sel) {
           gmessage(strwrap(
             "Your selection contains non-contiguous tiles!\n
@@ -64,7 +64,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
         }
       }
     } else {
-      
+
       # On Custom Area selection, use editMap to allow drawing a custom area
       tilemap <- get(load(system.file("ExtData/MODIS_Tiles_latlon.RData",
                                       package = "MODIStsp")))
@@ -73,29 +73,29 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
         mm,
         viewer = shiny::browserViewer(browser = getOption("browser")),
         title = "Select the output extent using the tools on the left")
-      
+
       if (!is.null(sel[["finished"]])) {
         sel_bbox  <- sf::st_bbox(sel[["finished"]])
         curr_proj <- svalue(wids$output_proj4)
-        
+
         #reproject the bbox to get coordinates in output projection. Use
         #enlarge = TRUE to be sure that all the area in the selected bbox
         #will be included in the extent in the target projection
-        
+
         bbox_out <- reproj_bbox(sel_bbox,
                                 "+init=epsg:4326",
                                 curr_proj,
                                 enlarge = TRUE)
-        
+
         proj  <- gui_get_proj(CRS(curr_proj))
         units <- gui_get_units(CRS(curr_proj), proj)
         gWidgets::svalue(wids$pixsize2_lab) <- units
-        
+
         # re-set bbox in the GUI according coordinates retrieved from file
         gui_update_bboxlabels(bbox_out,
                               units,
                               wids)
-        
+
         # Set tiles according with the bounding box
         gui_update_tiles(bbox_out,
                          curr_proj,
@@ -111,4 +111,5 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
       You can install it using `install.packages(mapedit)`"),
       icon = "warning")
   }
+  #nocov end
 }

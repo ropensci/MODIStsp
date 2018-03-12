@@ -122,7 +122,7 @@ gui_get_units <- function(curr_proj,
 #'
 gui_load_options <- function(opts_jsfile,
                              wids,
-                             prod_opt_list, 
+                             prod_opt_list,
                              compress_dict) {
   #nocov start
 
@@ -587,6 +587,7 @@ gui_save_options <- function(general_opts,
 #' @importFrom gWidgets gconfirm
 
 warn_projmess1 <- function() {
+  #nocov start
   gWidgets::gconfirm(strwrap(
     "WARNING! Changing projection may introduce positional errors in the output
      rasters. We suggest you to keep the original MODIS projection unless this

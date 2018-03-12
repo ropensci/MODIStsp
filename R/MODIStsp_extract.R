@@ -151,10 +151,10 @@ MODIStsp_extract <- function(in_rts, sp_object,
                              out_format = "xts", small    = TRUE,
                              small_method = "centroids",
                              na.rm      = TRUE, verbose = FALSE) {
-  
+
   .SD <- NULL # Workaround to avoid note on package check
-  
-  
+
+
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
@@ -214,7 +214,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
   }
   dates     <- raster::getZ(in_rts)
   sel_dates <- which(dates >= start_date & dates <= end_date)
-  
+
   if (length(sel_dates) > 0) {
     if (sp::proj4string(sp_object) != sp::proj4string(in_rts)) {
       sp_object <- sp::spTransform(sp_object,
@@ -230,13 +230,13 @@ MODIStsp_extract <- function(in_rts, sp_object,
               "Outputs for features only partially inside will be retrieved\n ",
               "using only the available pixels !")
       if (!setequal(sp_object$mdxtnq, shape$mdxtnq)){
-        
+
         outside_feat <- setdiff(sp_object$mdxtnq, shape$mdxtnq)
       }
     }
     if (class(shape) %in% c("SpatialPointsDataFrame", "SpatialPoints",
                             "SpatialLines", "SpatialLinesDataFrame")) {
-      
+
       ts <- matrix(nrow = length(sel_dates), ncol = length(shape[, 1]))
       for (f in seq_along(sel_dates)) {
         if (verbose == TRUE) {
@@ -252,14 +252,14 @@ MODIStsp_extract <- function(in_rts, sp_object,
       } else {
         names(ts) <- seq_along(shape[, 1])
       }
-      
+
       if (out_format == "dframe") {
         ts <- cbind(date = dates[sel_dates], ts)
       }
       # On polygons, extract by rasterization !
     } else {
       if (verbose) message("Rasterizing shape") #nocov
-      
+
       tempshape <- tempfile(tmpdir = tempdir(), fileext = ".shp")
       rgdal::writeOGR(shape, dsn = dirname(tempshape),
                       layer = basename(tools::file_path_sans_ext(tempshape)),
@@ -275,15 +275,16 @@ MODIStsp_extract <- function(in_rts, sp_object,
       }
       if (max(shape@data$mdxtnq) <= 255) {
         ot <- "Byte"
-      }       else {
+      } else {
+        #nocov start
         if (max(shape@data$mdxtnq) <= 65536) {
-          #nocov start
+
           ot <- "Int16"
         }
         else {
           ot <- "Int32"
-          #nocov end
         }
+        #nocov end
       }
       gdalUtils::gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts),
                                 te = ext_conv(in_rts[[1]]), a = "mdxtnq", ot = ot)
@@ -293,18 +294,18 @@ MODIStsp_extract <- function(in_rts, sp_object,
       zones       <- zones[ok_zones]
       ncols       <- length(unique(zones))
       ts          <- matrix(nrow = length(sel_dates), ncol = ncols)
-      
+
       for (f in seq_along(sel_dates)) {
         if (verbose) {
           message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov #nolint
         }
-        
+
         value <- raster::getValues(in_rts[[sel_dates[f]]])[ok_zones]
         rDT   <- data.table::data.table(value, zones)
         data.table::setkey(rDT, zones)
         ts[f, 1:ncols] <- rDT[, lapply(.SD, match.fun(FUN), na.rm = na.rm),
                               by = zones]$value
-        
+
       }
       ts <- as.data.frame(ts)
       if (length(id_field) == 1) {
@@ -328,7 +329,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
                                  names(ts))
           pos_missing <- which(
             as.character(shape@data[, eval(id_field)]) %in% miss_feat
-            )
+          )
         } else {
           miss_feat <- setdiff(as.character(shape@data[, "mdxtnq"]), names(ts))
           pos_missing <- which(
@@ -346,7 +347,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
           if (small_method == "centroids") {
             ts_mis[f, ] <- raster::extract(in_rts[[sel_dates[f]]],
                                            sp::coordinates(shpsub),
-                                   fun = mean)
+                                           fun = mean)
 
           } else {
 

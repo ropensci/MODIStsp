@@ -40,7 +40,7 @@ load_prodopts <- function(gui) {
     mess_text <- "Reading the MODIS products' characteristics from XML. Please wait!" #nolint
     message(mess_text)
     if (gui) {
-      
+
       mess     <- gWidgets::gwindow(title  = "Please wait...",
                                     width  = 400,
                                     height = 40)
@@ -49,7 +49,7 @@ load_prodopts <- function(gui) {
                                    editable  = FALSE,
                                    container = mess)
       Sys.sleep(0.05)
-      #nocov end
+
     }
 
     MODIStsp_read_xml(prodopts_file = prodopts_file,
@@ -67,4 +67,5 @@ load_prodopts <- function(gui) {
     }
   } # End IF on load prodopts
   prod_opt_list
+  #nocov end
 }

@@ -123,7 +123,7 @@
       <h1>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.3</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2018-03-11</h4>
+            <h4 class="date">2018-03-12</h4>
           </div>
 
     
@@ -153,7 +153,7 @@
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>gWidgetsRGtk2</code> library beforehand:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>)
 <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
@@ -186,7 +186,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 </div>
 <div id="on-mac-os" class="section level2">
 <h2 class="hasAnchor">
@@ -263,7 +263,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>or the development version from GitHub:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools) 
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>Good luck!</p>
 </div>
@@ -612,7 +612,7 @@ extent_list &lt;-<span class="st"> </span><span class="kw">list.files</span>(<sp
 <p>Any single-date image can be accessed by simply opening it with a <code>raster</code> command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
 modistsp_file &lt;-<span class="st"> "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"</span>
-my_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
+my_raster &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(modistsp_file)</code></pre></div>
 <p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series/RData” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
 indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))</code></pre></div>

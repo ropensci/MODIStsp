@@ -32,8 +32,6 @@
 <meta property="og:description" content="function used to extract time series data from rts files created by MODIStsp
 on spatial locations provided in the form of "R" spatial objects (SpatialPoints,
 SpatialPolygons, etc.)" />
-
-<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -301,7 +299,8 @@ belonging to the polygon, and one line for each date.</p>
           <span class='fu'>file.path</span>(<span class='fu'>tempdir</span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>))</div><div class='output co'>#&gt;  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
 #&gt; [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</div><div class='input'>
 <span class='no'>opts_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/test_extract.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>[Sun Mar 11 21:52:22 2018] Welcome to MODIStsp!We will now search for a valid GDAL installation - pleasewait! (this will happen only once)</span></div><div class='input'>
+<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
 <span class='co'># Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between</span>
 <span class='co'># 2016-01-01 and 2016-12-18</span>
 <span class='co'># __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"</span>
