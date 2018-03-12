@@ -25,6 +25,7 @@ to the default ones.
 License: GPL 3.0
 }
 \examples{
+\dontrun{
 # Remove all custom-defined spectral indexes from an options file
 
 # Add a custom index for testing purposes
@@ -46,6 +47,7 @@ opts_jsfile = system.file("testdata/test_addindex.json",
  MODIStsp_resetindexes(opts_jsfile)
  opts <- jsonlite::fromJSON(opts_jsfile)
  opts$custom_indexes[1]
+ }
  
 }
 \seealso{

@@ -2,18 +2,19 @@
 title: 'MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.3'
 author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:lbusett@gmail.com)), Luigi
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
+bibliography: MODIStsp.bib
 date: '`r Sys.Date()`'
 output:
-  rmarkdown::pdf_document:
-    fig_caption: yes
-    number_sections: yes
-    toc: yes
-    toc_depth: 2
   rmarkdown::html_document:
     fig_caption: yes
     number_section: yes
     toc: no
     toc_depth: 1
+  rmarkdown::pdf_document:
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 2
   rmarkdown::html_vignette:
     fig_caption: yes
     number_section: yes
@@ -29,21 +30,42 @@ vignette: >
 
 # Introduction
 
-MODIStsp is a novel "R" package allowing to automatize the creation of time series of rasters derived from MODIS Land Products data. It allows to perform several preprocessing steps on MODIS data available within a given time period. 
+MODIStsp is a novel "R" package allowing to automatize the creation of time series
+of rasters derived from MODIS Land Products data. It allows to perform several 
+preprocessing steps on MODIS data available within a given time period. 
 
-Development of MODIStsp started from modifications of the ModisDownload "R" script by Thomas Hengl [-@Hengl2010], and successive adaptations by Babak Naimi [-@Naimi2014]. The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of: 
+Development of MODIStsp started from modifications of the ModisDownload "R" script
+by Thomas Hengl [-@Hengl2010], and successive adaptations by Babak Naimi [-@Naimi2014]. 
+The basic functionalities for download and preprocessing of MODIS datasets provided 
+by these scripts were gradually incremented with the aim of: 
 
-* developing a stand-alone application allowing to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on all available MODIS land products by exploiting  a powerful and user-friendly GUI front-end;
-* allowing the creation of time series of both MODIS original layers and additional Quality Indicators (e.g., data acquisition quality, cloud/snow presence, algorithm used for data production, etc. ) extracted from the aggregated bit-field QA layers;
-* allowing the automatic calculation and creation of time series of several additional Spectral Indexes starting form MODIS surface reflectance products.
+* developing a stand-alone application allowing to perform several preprocessing
+steps (e.g., download, mosaicing, reprojection and resize) on all available MODIS 
+land products by exploiting  a powerful and user-friendly GUI front-end;
+* allowing the creation of time series of both MODIS original layers and additional 
+Quality Indicators (e.g., data acquisition quality, cloud/snow presence, algorithm 
+used for data production, etc. ) extracted from the aggregated bit-field QA layers;
+* allowing the automatic calculation and creation of time series of several additional
+Spectral Indexes starting form MODIS surface reflectance products.
 
-All processing parameters can be easily set with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available. 
+All processing parameters can be easily set with a user-friendly GUI, although
+non-interactive execution exploiting a previously created Options File is possible. 
+Stand-alone execution outside an "R" environment is also possible, allowing to use
+scheduled execution of MODIStsp to automatically update time series related to a 
+MODIS product and extent whenever a new image is available. 
 
-Required MODIS HDF files are automatically downloaded from NASA servers and resized, reprojected, resampled and processed according to user's choices. For each desired output layer, outputs are saved as single-band rasters corresponding to each acquisition date available for the selected MODIS product within the specified time period. "R" _RasterStack_ objects with temporal information as well as Virtual raster files (GDAL vrt and ENVI META files) facilitating access to the entire time series can be also created.
+Required MODIS HDF files are automatically downloaded from NASA servers and resized,
+reprojected, resampled and processed according to user's choices. For each desired 
+output layer, outputs are saved as single-band rasters corresponding to each acquisition 
+date available for the selected MODIS product within the specified time period. 
+"R" _RasterStack_ objects with temporal information as well as Virtual raster files
+(GDAL vrt and ENVI META files) facilitating access to the entire time series can
+be also created.
 
 # Installation
 
-`MODIStsp` requires [R](https://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 __with support for HDF4 raster format__ to be installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#installing-r-and-gdal).
+`MODIStsp` requires [R](https://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 __with support for HDF4 raster format__ to be
+installed in your system. Brief instructions for installing R and GDAL can be found [HERE](#installing-r-and-gdal).
 
 ## On Windows
 
@@ -58,16 +80,25 @@ library(devtools)
 install_github("lbusett/MODIStsp")
 ```
 
-Note that **if the `GTK+` library is not already installed on your system, installation may fail**. In that case, please install and load the `gWidgetsRGtk2` library beforehand:
+Note that **if the `GTK+` library is not already installed on your system, installation may fail**.
+In that case, please install and load the `gWidgetsRGtk2` library beforehand:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("gWidgetsRGtk2")
 library(gWidgetsRGtk2)
 ```
     
- Upon loading `gWidgetsRGtk2` , an error window will probably appear. This signals that library "GTK+" is not yet installed on your system or is not on your PATH. To install it press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !<sup name="a1">
+ Upon loading `gWidgetsRGtk2` , an error window will probably appear. This signals
+ that library "GTK+" is not yet installed on your system or is not on your PATH.
+ To install it press "OK". A new window dialog window will appear, asking if you 
+ want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download
+ and install the GTK+ library. When it finishes, the RSession should be restarted
+ and you should be ready to go !<sup name="a1">
  
- In case RStudio does not automatically restart or continuously asks to install GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go. 
+ In case RStudio does not automatically restart or continuously asks to install
+ GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio
+ "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it
+ loads correctly, you should be ready to go. 
 
 If it still fails, try downloading the GTK+ bundle from:
 
@@ -114,123 +145,114 @@ install_github("lbusett/MODIStsp")
 ```
 ## On Mac OS
 
-**NOTE: The following  installation notes were kindly provided by a MODIStsp user
-and should be valid for MODIStsp installation on R 3.4.0 and above with 
-Mac OSX Sierra. Since we are not working on Mac we were not able yet to
-check this, but we hope it may be useful at least to put you in the right 
-direction if you have installation problems)**
+**NOTE**: The following  installation notes should be valid for MODIStsp installation 
+on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied...) from: https://zhiyzuo.github.io/installation-rattle/**. Thanks to Zhiya Zuo for providing this!
 
-Installing MODIStsp requires many dependencies: 
+To properly install `MODIStsp` you will need to first install package `RGTk2`. This
+is a somehow difficult operation. The following instructions should help:
 
-For installation on MAC OSX sierra, there are three main issues:
-- As outlined here in the comment by **tobybot11** (https://gist.github.com/sebkopf/9405675), 
-RGtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not
-work with the quartz libraries/headers which now are the default for GTK
-- When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you
-need to choose the version "OS X Mavericks binaries" and not "Package source"
-- You have to be sure that gdal is installed with HDF4 support.
+__1. Check your Mac OS X version and update if necessary: __
 
-1 - Update to a recent R version if needed, then update all packages
+Enter the following command in terminal to check your macOS version. Expected
+output is as below the dashed line ---.
+    
+```
+~$ sw_vers  
+------------------------  
+ProductName:	Mac OS X  
+ProductVersion:	10.12.6  
+BuildVersion:	16G29  
+```
+If your system is above 10.11, continue. Otherwise, upgrade it to Sierra.
 
-```{r eval = FALSE}
-# update packages
-update.packages()
-# install the development version of devtools:
-install.packages(c("devtools"))
-devtools::install_github("hadley/devtools")
+Install homebrew if you do not have it already installed. homebrew  is a very
+convenient package manager for macOS. To do so, open a terminal, copy the following
+command in it and hit Enter:
+
+```
+~$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-2 - Now, install RGtk2 using Homebrew (https://gist.github.com/sebkopf/9405675).
-First, ensure you have cairo installed with "--with-x11". Open a terminal and 
-run:
+Follow the instructions to get brew ready. When inserting your password, nothing 
+will show up for security reasons. Just hit Enter when you are finished.
 
-```bash
-brew uninstall cairo --ignore-dependencies
-brew install --with-x11 cairo 
-```
-next, edit the configure options for GTK to require x11 rather than Quartz:
-```bash
-brew edit gtk+
-```
-in the def install section, remove the reference to quartz and switch to: 
-```
---with-gdktarget=x11,
---enable-x11-backend
-```
-Now install: 
-```bash
-brew install --build-from-source --verbose gtk+
-export PKG_CONFIG_PATH=
+When brew is finished, copy the following command in terminal and hit Enter:
 
-/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
+```
+~$ touch ~/.bash_profile
+~$ echo "export PATH=/usr/local/bin:$PATH
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" >> ~/.bash_profile
+~$ source ~/.bash_profile
 ```
 
-3 - next, install `RGtk2`. Since install.packages("RGtk2") is not going to work, go [here](https://cran.r-project.org/web/packages/RGtk2/index.html), download 
-RGtk2_2.20.33.tar.gz and, from a terminal run:
-```bash
-R CMD INSTALL RGtk2_2.20.33.tar.gz
+2. __Install the `cairo` library with x11 support__. To do so, you first have to 
+change the way homebrew wants to install gtk+. In an editor, write: 
+
 ```
-Now, open R and run: 
+~$ brew edit gtk+
+```
+
+A text editor will open. Look in the file, and find a section that begins with
+"def install". Substitute the current `args` with the following text: 
+
+```
+def install
+ args = [
+         "--disable-dependency-tracking",
+         "--disable-silent-rules",
+         "--prefix=#{prefix}",
+         "--disable-glibtest",
+         "--enable-introspection=yes",
+         # "--disable-visibility",
+         # "--with-gdktarget=quartz",
+         "--with-gdktarget=x11",
+         "--enable-x11-backend"
+        ]
+```     
+
+Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs.
+
+3. __Install `gtk+`__ by issuing this command:
+
+```
+~$ brew install --build-from-source --verbose gtk+
+```
+
+4. __Update your path__ so that `gtk+` is recognized, using:
+
+```
+~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
+```
+
+5. __Install `RGtk2` from source__:
+
+- __Download the newest source file for RGtk2__ from https://CRAN.R-project.org/package=gWidgetsRGtk2.
+
+- Assuming that the path to this file is ~/Downloads. Run the following in terminal 
+(change the path if you did not download in ~/Downloads):
+
+```
+~$ cd ~/Downloads
+~/Downloads$ R CMD INSTALL RGtk2_2.20.33.tar.gz
+```
+(Note that the name of the tar.gz file may vary depending on when you downloaded the file). 
+
+
+6. __Open R and run__: 
 
 ```{r eval = FALSE}
 library(RGtk2)
 ```
-hopefully, `RGTk2` will load without errors !
+hopefully, `RGtk2` will load without errors! If so, you should be ready to go, 
+and you can:
 
-4 - Install packages `gWidgetsRGtk2` and `cairoDevice`
-
-**Very important !!!!** from CRAN, download the **"OS X Mavericks binaries"** for 
-[gWidgetsRGtk2](https://cran.r-project.org/web/packages/gWidgetsRGtk2/index.html) and [cairoDevice](https://cran.r-project.org/web/packages/cairoDevice/index.html)(
-not "Package source"). Save both to Frameworks/R.framework/3.4..., open R and
-run the code below (This will also install cairoDevice) 
-
-```{r eval = FALSE}
-install.packages("gWidgetsRGtk2",
-
-lib="~/Library/Frameworks/R.framework/Versions/3.4/Resources/library/gWidgetsRGtk2")
-library(gWidgetsRGtk2)
-library(cairoDevice)
-```
-_(This will work for R version 3.4, mac OS X Sierra)_
-
-5 - Install GDAL with HDF4 support
-
-Check that gdal is installed with hdf4 support. From a terminal: 
-```bash
-> gdal-config --formats 
-```
-if gdal is installed, check what drivers are installed: the list should include
-hdf4. 
-
-If gdal is not yet installed or hdf4 is not supported, install/reinstall it following 
-these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html)
-```bash
-> brew install hdf4 
-# prefer hdf4 links over NetCDF 
-> brew link --overwrite hdf4 
-> brew install gdal --complete --enable-unsupported --with-hdf4 
-# check what drivers are installed, list should now include hdf4: 
-> gdal-config --formats 
-```
-6 - Install rgdal
-
-since rgdal is not usually looking in "/usr/local/lib"" you must include that with
-`install.packages()`: 
-
-```{r eval = FALSE}
-install.packages('rgdal',
-                 type = "source",configure.args = c(
-                   '--with-proj-include=/usr/local/include',
-                   '--with-proj-lib=/usr/local/lib')
-                 )
-```
-7 - Finally, install MODIStsp from CRAN or GitHub:
+7. __Install MODIStsp__ from CRAN:
 
 ```{r eval = FALSE}
 install.packages("MODIStsp")
 MODIStsp()
 ```
-OR
+or the development version from GitHub:
 ```{r eval = FALSE}
 library(devtools) 
 install_github("lbusett/MODIStsp", ref = "master")
@@ -240,27 +262,38 @@ Good luck!
 
 # Running the tool in Interactive Mode: the MODIStsp GUI
 
-The easiest way to use `MODIStsp` is to use its powerful GUI (Graphical User Interface) for 
-selection of processing options, and then run the processing. 
+The easiest way to use `MODIStsp` is to use its powerful GUI (Graphical User 
+Interface) for selection of processing options, and then run the processing. 
 
 To open the GUI, load the package and launch the MODIStsp function, with no parameters:
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, caption=FALSE}
 library(MODIStsp)
 MODIStsp()
 ```
-This **opens a GUI** from which processing options can be specified and eventually saved (or loaded) 
-<font size="2"> (Note 1: PCs with a small screen can fail to visualize the whole GUI; in this case, the user can add scroll bars with ```MODIStsp(scrollWindow=TRUE)```); Note 2: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
+This **opens a GUI** from which processing options can be specified and eventually
+saved (or loaded) 
+<font size="2"> (Note 1: PCs with a small screen can fail to visualize the whole GUI; 
+in this case, the user can add scroll bars with ```MODIStsp(scrollWindow=TRUE)```); 
+Note 2: At the first execution of `MODIStsp`, a Welcome screen will appear, signaling
+that `MODIStsp` is searching for a valid GDAL installation. Press "OK" and wait 
+for GDAL to be found. If nothing happens for a long time (e.g., several minutes),
+`MODIStsp` (and in particular the gdalUtils package on which it relies) is not
+finding a valid GDAL installation in the more common locations. To solve the problem:
 1. Ensure that GDAL is properly installed in your system
-2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/))
-3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!  </font size="2">
+2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and 
+that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/))
+3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues)
+GitHub page of `MODIStsp` and we'll try to help!  </font size="2">
 
-The  GUI allows selecting all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.
+The  GUI allows selecting all processing options required for the creation of the
+desired MODIS time series. The main available processing options are described in
+detail in the following.
 
 ```{r GUIfig, echo=FALSE, fig.align="center", fig.heigth=7.5, message=FALSE, warning=FALSE}
   library(png)
   library(grid)
   library(knitr)
-  img <- readPNG("Figure_1_Vignette.png")
+  img <- readPNG("MAIN_GUI.png")
   grid.raster(img)
 ```
 
@@ -270,21 +303,31 @@ The  GUI allows selecting all processing options required for the creation of th
 
 The top-most menus allow to specify details of the desired output time series:
 
-1. **"Category"** and **"Product"**: Selects the MODIS product of interest  
-2. **MODIS platform(s)**: Selects if only TERRA, only AQUA or Both MODIS platforms should be considered for download and creation of the time series
-3. **version**: Selects whether processing version 5 or 6 (when available) of MODIS products has to be processed
+1. **"Category"** and **"Product"**: Selects the MODIS product of interest;
+2. **MODIS platform(s)**: Selects if only TERRA, only AQUA or Both MODIS platforms 
+should be considered for download and creation of the time series;
+3. **version**: Selects whether processing version 5 or 6 (when available) of MODIS
+products has to be processed
 
-After selecting the product and version, clicking the **"Click to Select Desired Layers"** button opens the *_Select Processing Layers_* GUI panel, from which the user **must** select which MODIS original layers and/or derived Quality Indexes (QI) and Spectral Indexes (SI) layers should be processed: 
+After selecting the product and version, clicking the **"Change Selection"** 
+button opens the *_Select Processing Layers_* GUI panel, from which the user **must** 
+select which MODIS original layers and/or derived Quality Indexes (QI) and Spectral
+Indexes (SI) layers should be processed: 
+
 ```{r proc_layers, echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('Figure_3.png')
+  img <- readPNG('SELECT_GUI.png')
   grid.raster(img)
 ```
 
-- The left-hand frame allows to select which _original MODIS layers_ should be processed.
-- The central frame allows to select which _Quality Indicators should be extracted_ from the original MODIS Quality Assurance layers. 
-- For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional _Spectral Indexes should be computed_. The following commonly used Spectral Indexes are available for computation by default: 
+- The left-hand frame allows to select which _original MODIS layers_ 
+should be processed.
+- The central frame allows to select which _Quality Indicators should be extracted_ 
+from the original MODIS Quality Assurance layers. 
+- For MODIS products containing surface reflectance data, the right-hand frame 
+allows to select which additional _Spectral Indexes should be computed_. The 
+following commonly used Spectral Indexes are available for computation by default:
 
 <center>**Table II: List of default Spectral Indexes available in MODIStsp**</center>
 
@@ -302,104 +345,213 @@ After selecting the product and version, clicking the **"Click to Select Desired
 | RGRI            | Red Green Ratio Index [@Gamon1999]                        |
 | GRVI            | Green-Red ratio Vegetation Index [@Tucker1979]             |
 
-You can however **specify other SIs to be computed without modifying MODIStsp source code** by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related to the new desired SI using a simple GUI interface. 
 
+You can however **specify other SIs to be computed without modifying MODIStsp source code** 
+by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related 
+to the new desired SI using a simple GUI interface. 
 ```{r indexfig, echo=FALSE, fig.height=2.3, fig.width=6, message=FALSE, warning=FALSE, fig.align="center"}
   library(png)
   library(grid)
-  img <- readPNG('figure_4.png')
+  img <- readPNG('NEWIND_GUI.png')
   grid.raster(img)
 ```
 
-Provided information (e.g., correct band-names, computable formula, etc...) is automatically checked upon clicking "Set New Index". On success, the new index is added in the list of available ones for all products allowing its computation. Clicking "Done !" returns to the main. 
+Provided information (e.g., correct band-names, computable formula, etc...) is 
+automatically checked upon clicking "Set New Index". On success, the new index 
+is added in the list of available ones for all products allowing its computation. 
+Clicking "Done !" returns to the main.
+
+__NOTE__ All custom defined indexes can be removed by using the `MODIStsp_resetindexes()` 
+function
 
 ### **_Download Method:_**
 
 Select the method to be used for download. Available choices are: 
 
-1.  **http**: download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). This requires providing a user name and password, which can be obtained by registering an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
+1.  **http**: download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). 
+This requires providing a user name and password, which can be obtained by registering 
+an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
 
 2.  **ftp**: download from NASA ftp archive ([ftp://ladsweb.nascom.nasa.gov/](ftp://ladsweb.nascom.nasa.gov/));
 
-3.  **offline**: this option allows to process/reprocess HDF files already available on the user's PC without downloading from NASA -- useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp to create time series for an additional layer (_It is fundamental that the HDFs are those directly downloaded from NASA servers_ ! (See [here](faq.html#working-with-already-downloaded-hdf-files) for additional details). 
+3.  **offline**: this option allows to process/reprocess HDF files already available 
+on the user's PC without downloading from NASA -- useful if the user already has an
+archive of HDF images, or to reprocess data already downloaded via MODIStsp to create
+time series for an additional layer (_It is fundamental that the HDFs are those 
+directly downloaded from NASA servers_ ! (See [here](faq.html#working-with-already-downloaded-hdf-files) 
+for additional details). 
 
-Checking the **use_aria2c** option allows to accelerate the download from NASA archives. This requires however that that the "aria2c" software is installed in your system. To download and install it, see: [https://aria2.github.io/](aria2.github.io/)
+Checking the **use_aria2c** option allows to accelerate the download from NASA
+archives. This requires however that that the "aria2c" software is installed in 
+your system. To download and install it, see: [https://aria2.github.io/](aria2.github.io/)
 
-<font size="2"> _NOTE: The best performances are usually achieved using *http*, though that may vary depending on network infrastructure._ </font size="2"> 
+<font size="2"> _NOTE: The best performances are usually achieved using *http*, 
+though that may vary depending on network infrastructure._ </font size="2">
 
 ### **_Processing Period:_**
 
-Specify the starting and ending dates to be considered for the creation of the time in the series corresponding fields. Dates **must** be provided in the _yyyy--mm--dd_ format (e.g., 2015-01-31)
+Specify the starting and ending dates to be considered for the creation of the 
+time in the series corresponding fields. Dates **must** be provided in the _yyyy--mm--dd_ 
+format (e.g., 2015-01-31)
 
 The **Period** drop-down menu allows to choose between two options:
 
-1.  **full**: all available images between the starting and ending dates are downloaded and processed;
+1.  **full**: all available images between the starting and ending dates are 
+downloaded and processed;
 
-2.  **seasonal**: data is downloaded only for one part of the year, but for multiple years. For example, if the starting date is 2005-03-01 and the ending is 2010-06-01, only the images of March, April and May for the years between 2005 and 2010 will be downloaded. This allows to easily process data concerning a particular season of interest.
+2.  **seasonal**: data is downloaded only for one part of the year, but for 
+multiple years. For example, if the starting date is 2005-03-01 and the ending is
+2010-06-01, only the images of March, April and May for the years between 2005
+and 2010 will be downloaded. This allows to easily process data concerning a 
+particular season of interest.
 
 ### **_Spatial Extent:_**
 
 Allows to define the area of interest for the processing. Two main options are possible: 
 
-1.  **Full Tiles Extent**: specify which MODIS tiles need to be processed using the "Start" and "End" horizontal and vertical sliders in the _Required MODIS Tiles_ frame.  During processing, data from the different tiles is mosaiced, and a single file covering the total area is produced for each acquisition date (Note:  pressing the "show map" button, a representation of the MODIS tiles grid is shown to facilitate the selection).
+1.  **Select MODIS Tiles**: specify which MODIS tiles need to be processed either by: 
 
-2.  **Resized**: specify a custom spatial extent for the desired outputs either by: 
+    a. Using the "Start" and "End" horizontal and vertical sliders in the
+    _Required MODIS Tiles_ frame.  
+    b. pressing the __"Select on Map"__ button. A map will open in a browser window,
+    allowing interactive selection of the required tiles
     
-    a. Manually inserting the coordinates of the Upper Left and Lower Right corners of the area of interest in the __Bounding Box__ frame. _Coordinates of the corners must be provided in the coordinate system of the selected  output projection_; 
+During processing, data from the different tiles is mosaiced, and a single file 
+covering the total area is produced for each acquisition date
+
+2.  **Define Custom Area**: specify a custom spatial extent for the desired outputs 
+either by: 
     
-    b. pressing the __"Load Extent from a Spatial File" and selecting a raster or vector spatial file__. In this case, the bounding box of the selected file is retrieved, converted in the selected output projection, and shown in the "Bounding Box" frame. Required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
+    a. Manually inserting the coordinates of the Upper Left and Lower Right corners 
+    of the area of interest in the __Bounding Box__ frame. _Coordinates of the corners
+    must be provided in the coordinate system of the selected  output projection_; 
     
-### **_Reprojection and Resize:_**
+    b. pressing the __"Load Extent from a Spatial File" and selecting a raster or 
+    vector spatial file__. In this case, the bounding box of the selected file is
+    retrieved, converted in the selected output projection, and shown in the
+    "Bounding Box" frame. Required input MODIS tiles are also automatically retrieved 
+    from the output extent, and the tiles selection sliders modified accordingly.
+    
+    c. pressing the __"Select on Map"__ button. A map will open in a browser window,
+    allowing interactive selection of the spatial extent using the tools on the left.
+    
+    
+**Note: ** pressing the "show current extent" will open a browser window highlighting
+the currently selected spatial extent.
+ 
+### _Reprojection and Resize_
+
 Specify the options to be used for reprojecting and resizing the MODIS images. 
 
-- **"Output Projection"**: select one of the predefined output projections or specify a user-defined one. To specify a user selected projection, select "User Defined" and then insert a valid "Proj4" string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails; 
+- **"Output Projection"**: select either the Native MODIS projection (Default) 
+or specify a user-defined one. To specify a user selected projection, select 
+"User Defined" and then insert a valid "Proj4" string in the pop-up window. 
+Validity of the Proj4 string is automatically checked, and error messages issued 
+if the check fails; 
 
-- **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"**: specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. Resampling method can  be chosen among "Nearest Neighbour" and "Mode" (Useful for down-sampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleaning would risk to contaminate the values of high-quality observations with those of low-quality ones.
+- **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"**: specify 
+whether output images should inherit their spatial resolution from the original
+MODIS files, or be resampled to a user-defined resolution. In the latter case, 
+output spatial resolution must be specified in the measure units of the selected
+output projection. Resampling method can  be chosen among "Nearest Neighbour" and 
+"Mode" (Useful for down-sampling purposes). Other resampling methods (e.g., 
+bilinear, cubic) are not currently supported since i) they cannot be used for
+resampling of categorical variables such as the QA and QI layers, and ii) using 
+them on continuous variable (e.g., reflectance, VI values) without performing an 
+a-priori data cleaning would risk to contaminate the values of high-quality
+observations with those of low-quality ones.
 
-### **_Processing Options:_**
+### _Output Options_
 
 Several processing options can be set using check-boxes:
 
-- **Output Files Format**: Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among "None", "PACKBITS", "LZW" and "DEFLATE".
+- **Output Files Format**: Two of the most commonly formats used in remote
+sensing applications are available at the moment: ENVI binary and GeoTiff. If
+GeoTiff is selected, the type of file compression can be also specified among
+"None", "PACKBITS", "LZW" and "DEFLATE".
 
-- **Create Virtual Rasters**: Specify if virtual multitemporal files  should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are ENVI meta-files and GDAL "vrt" files.
+- **Save Time Series as**: Specify if virtual multitemporal files  should be 
+created. These virtual files allow access to the entire time series of images as 
+a single file without the need of creating large multitemporal raster images.
+Available virtual files formats are "R" rasterStacks, ENVI meta-files and GDAL 
+"vrt" files. In particular, "R" rasterStacks may be useful in order to easily 
+access the preprocessed MODIS data within "R" scripts 
+(see also http://lbusett.github.io/MODIStsp/articles/output.html).
 
-- **Create RasterStack**: Specify if the output time series should be also saved as as "R" _rasterStack_ objects (with temporal information added through the "setZ" method of the _raster_ package). This may be useful in order to easily access the preprocessed MODIS data within "R" scripts.
 
-- **Change NoData values**: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts" XML file. By selecting "Yes" in the "Change Original NoData values" check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. 
+- **Modify No Data**: Specify if NoData values of MODIS layers should be kept
+at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts"
+XML file. By selecting "Yes" in the "Change Original NoData values" check-box, 
+NoData of outputs are set to the largest integer value possible for the data type 
+of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set 
+always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned
+integer layers to 65535). Information about the new NoData values is stored both 
+in the output rasters, and in the XML files associated with them. __NOTE:__ Some 
+MODIS layers have multiple NoData (a.k.a. _fill_) values. if _Modify No Data_ is 
+set to "Yes", `MODIStsp` will convert all _fill_ values to a common output NoData
+value!
 
-- **Scale output values**: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true "measure units" of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etc.). 
+- **Apply Scale/Offset**: Specify if scale and offset values of the different 
+MODIS layers should be applied. If selected, outputs are appropriately rescaled
+on the fly, and saved in the true "measure units" of the selected parameter (e.g., 
+spectral indexes are saved as floating point values; Land Surface Temperature is 
+saved in degrees Kelvin, etc.). 
 
-### **_Main Output Folder for Time Series Storage:_**
+### __Main MODIStsp Output Folder__
 
-Select the main folder where the pre-processed time series data will be stored. All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see XXX for details on `MODIStsp` naming conventions)-.
+Select the main folder where the pre-processed time series data will be stored. 
+All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see http://lbusett.github.io/MODIStsp/articles/output.html for details on `MODIStsp` 
+naming conventions)-.
 
-The **"Reprocess Existing Data"** check-box allows to decide if images already available should be reprocessed if a new run of MODIStsp is launched with the same output folder. If set to "No", MODIStsp skips dates for which output files following the MODIStsp naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates. 
+The **"Reprocess Existing Data"** check-box allows to decide if images already 
+available should be reprocessed if a new run of MODIStsp is launched with the same 
+output folder. If set to "No", MODIStsp skips dates for which output files following
+the MODIStsp naming conventions are already present in the output folder. This
+allows to incrementally extend MODIS time series without reprocessing already available
+dates. 
 
-### **_Output Folder for Original HDF Storage:_**
+### _Folder for permanent storage of original MODIS HDF images_
 
-Select the folder where downloaded **original MODIS HDF files** downloaded from NASA servers will be stored. 
+Select the folder where downloaded **original MODIS HDF files** downloaded from 
+NASA servers will be stored. 
 
-The **"delete original HDF files"** check-box allows also to decide if the downloaded images should be deleted from the file system at the end of the processing. To avoid accidental file deletion, this is always set to "No" by default, and a warning is issued before execution whenever the selection is changed to "Yes".
+The **"delete original HDF files"** check-box allows also to decide if the
+downloaded images should be deleted from the file system at the end of the 
+processing. To avoid accidental file deletion, this is always set to "No" by default, 
+and a warning is issued before execution whenever the selection is changed to "Yes".
 
 ## **Saving and Loading Processing Options**
 
-Specified processing parameters can be saved to a JSON file for later use by clicking on the _**Save Options**_ button.
+Specified processing parameters can be saved to a JSON file for later use by clicking
+on the _**Save Options**_ button.
 
-Previously saved options can be restored clicking on the _**Load Options**_ button and navigating to the previously saved JSON file.
+Previously saved options can be restored clicking on the _**Load Options**_ button
+and navigating to the previously saved JSON file.
 
-<font size="2"> (Note that at launch, **`MODIStsp` _always reloads automatically the processing options used for its last successful run_** </font size="2">.
+<font size="2"> (Note that at launch, **`MODIStsp` _always reloads automatically
+the processing options used for its last successful run_** </font size="2">.
 
 ## **Starting the processing**
 
-Once you are happy with your choices, click on **Start Processing**. `MODIStsp` will start accessing NASA servers to download and process the MODIS data corresponding to your choices.
+Once you are happy with your choices, click on **Start Processing**. `MODIStsp` 
+will start accessing NASA servers to download and process the MODIS data corresponding 
+to your choices.
 
-For each date of the specified time period, `MODIStp` downloads and preprocesses all hdf images required to cover the desired spatial extent. Informative messages concerning the status of the processing are provided on the console, as well as on a self-updating progress window. 
+For each date of the specified time period, `MODIStp` downloads and preprocesses
+all hdf images required to cover the desired spatial extent. Informative messages
+concerning the status of the processing are provided on the console, as well as on
+a self-updating progress window. 
+
+The processed time series are saved in specific subfolders of the main selected
+output folder, as explained in detail [HERE](articles/output.html).
 
 # Non-Interactive Execution from within R
 
 ## Specifying a saved "Options file"
-`MODIStsp` can be launched in non-interactive mode within an `R` session by setting the optional `GUI` parameter to FALSE, and the `Options_File` parameter to the path of a previously saved JSON Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
+`MODIStsp` can be launched in non-interactive mode within an `R` session by
+setting the optional `GUI` parameter to FALSE, and the `Options_File` parameter
+to the path of a previously saved JSON Options file. This allows to exploit
+`MODIStsp` functionalities within generic "R" processing scripts
 
 ```{r, eval=FALSE}
 library(MODIStsp) 
@@ -412,7 +564,10 @@ MODIStsp(gui = FALSE, options_file = options_file)
 
 ## Looping on different spatial extents
 
-Specifying also the `spatial_file_path_` parameter overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File, by looping on an array of spatial files representing the desired output extents. For example:
+Specifying also the `spatial_file_path_` parameter overrides for example the output
+extent of the selected Options File. This allows to perform the same preprocessing 
+on different extents using a single Options File, by looping on an array of spatial
+files representing the desired output extents. For example:
 
 ```{r eval=FALSE}
 library(MODIStsp) 
@@ -435,13 +590,18 @@ for (single_shape in extent_list) {
 
 ## Stand-alone execution 
 
-- MODIStsp can be also executed as a "stand-alone" application(i.e., without having to open R/RStudio); to do this, from R launch the function `MODIStsp_install_launcher()`.
+- MODIStsp can be also executed as a "stand-alone" application(i.e., without having
+to open R/RStudio); to do this, from R launch the function `MODIStsp_install_launcher()`.
 
-In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp).
+In a Linux operating system this function creates a desktop entry (accessible from
+the menu in the sections "Science" and "Geography") and a symbolic link in a known path (default: /usr/bin/MODIStsp).
 In Windows, a link in the Start Menu and optionally a desktop shortcut are created.
 See `?install_MODIStsp_launcher` for details and path customization.
 
-Double-clicking those files or launching them from a shell without parameters will launch `MODIStsp` in interactive mode. Non-interactive mode is triggered by adding the "-g"  argument to the call, and specifying the path to a valid Options File as "-s" argument:
+Double-clicking those files or launching them from a shell without parameters
+will launch `MODIStsp` in interactive mode. Non-interactive mode is triggered
+by adding the "-g"  argument to the call, and specifying the path to a valid 
+Options File as "-s" argument:
 
   - Linux: `MODIStsp -g -s "/yourpath/youroptions.json"`
   (see `MODIStsp -h` for details).
@@ -449,15 +609,24 @@ Double-clicking those files or launching them from a shell without parameters wi
   - Windows:`your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.json"`
   (see `C:\Users\you\Desktop\MODIStsp -h` for details).
 
-If you do not want to install any link, launchers can be found in the subdirectory "MODIStsp/ExtData/Launcher" of your library path.
+If you do not want to install any link, launchers can be found in the subdirectory
+"MODIStsp/ExtData/Launcher" of your library path.
 
 ## Scheduled Processing
 
-Stand-alone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:
+Stand-alone non-interactive execution can be used to periodically and automatically 
+update the time series of a selected product over a given study area. To do that, 
+you should simply:
 
-1.	Open the `MODIStsp` GUI, define the parameters of the processing specifying a date in the future as the "Ending Date" and save the processing options. Then quit the program.
+1.	Open the `MODIStsp` GUI, define the parameters of the processing specifying 
+a date in the future as the "Ending Date" and save the processing options. Then
+quit the program.
  
-2. Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path) as windows scheduled task (or linux "cron" job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument:
+2. Schedule non-interactive execution of the launcher installed as seen before
+(or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path)
+as windows scheduled task (or linux "cron" job) according to a specified time 
+schedule, specifying the path of a previously saved Options file as additional
+argument:
 
 #### On Linux
 
@@ -467,7 +636,8 @@ Stand-alone non-interactive execution can be used to periodically and automatica
   crontab -e
 ```
  
-- add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:
+- add an entry for the launcher. For example, if you have installed it in 
+/usr/bin and you want to run the tool every day at 23.00, add the following row:
         
 ```bash
   0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.json"
@@ -482,7 +652,9 @@ Stand-alone non-interactive execution can be used to periodically and automatica
 ## Single-band outputs
 
 Output raster files are saved in specific subfolders of the main output folder. 
-In particular, **a separate subfolder** is created for each processed original MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image for each processed date, created according to the following naming conventions: 
+In particular, **a separate subfolder** is created for each processed original 
+MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image
+for each processed date, created according to the following naming conventions: 
 
 ```
 myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
@@ -493,15 +665,18 @@ myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
 , where: 
 
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
-  - **_ProdCode_** is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);
-  - **_YYYY_** and **_DOY_** correspond to the year and DOY (Day of the Year) of acquisition of the original MODIS image;
+  - **_ProdCode_** is the code name of the MODIS product from which the image was
+  derived (e.g., MOD13Q1);
+  - **_YYYY_** and **_DOY_** correspond to the year and DOY (Day of the Year) of 
+  acquisition of the original MODIS image;
   - **_ext_** is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs). 
 
 ____________________________________________________________________________________
 
 ## Virtual multi-band outputs
 
-ENVI and/or GDAL virtual time series files and _RasterStack_ RData objects are instead stored **in the "Time\_Series" subfolder** if required.
+ENVI and/or GDAL virtual time series files and _RasterStack_ RData objects are 
+instead stored **in the "Time\_Series" subfolder** if required.
 
 Naming convention for these files is as follow:
 
@@ -511,13 +686,18 @@ myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY
 <font size="2"> _(e.g., myoutfolder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData)_ </font size="2"> 
              
 , where: 
+
   - **_vrt_type_** indicates the type of virtual file ("RData", "GDAL" or "ENVI_META");
-  - **_Sensor_** indicates to which MODIS sensor the time series belongs ("Terra", "Aqua", "Mixed" or "Combined" (for MCD* products));
+  - **_Sensor_** indicates to which MODIS sensor the time series belongs ("Terra",
+  "Aqua", "Mixed" or "Combined" (for MCD* products));
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
-  - **_ProdCode_** is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);
-  - **_StartDOY_**, **_StartYear_**, **_EndDOY_** and **_EndYear_** indicate the temporal extent of the time serie created; 
+  - **_ProdCode_** is the code name of the MODIS product from which the image was 
+  derived (e.g., MOD13Q1);
+  - **_StartDOY_**, **_StartYear_**, **_EndDOY_** and **_EndYear_** indicate the 
+  temporal extent of the time serie created; 
   - **_suffix_** indicates the type of virtual file (ENVI, GDAL or RData);
-  - **_ext_** is the file extension (".vrt" for gdal virtual files, "META" for ENVI meta files or "Rdata" for `R` raster stacks). 
+  - **_ext_** is the file extension (".vrt" for gdal virtual files, "META" for 
+  ENVI meta files or "RData" for `R` raster stacks). 
 
 
 # Accessing the processed time series from R
@@ -645,8 +825,37 @@ If you want to manually add the support for HDF4 in case ```gdal-hdf4``` is out-
 
 Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter ```--with-hdf4``` to the ```configure``` instruction).
 
+#### MacOs
+
+1. Check if gdal is already installed and has hdf4 support. In a terminal, type: 
+
+```
+~$ gdal-config --formats 
+```
+- if gdal is installed, the command will list which drivers are installed. If the 
+list includes "hdf4" you should be good to go. 
+
+- if gdal is not yet installed or hdf4 is not already supported, you can install/reinstall 
+it following these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html). In short: open a terminal and run:
+
+```
+~$ brew install hdf4 
+~$ brew link --overwrite hdf4 
+~$ brew install gdal --complete --enable-unsupported --with-hdf4 
+```
+
+then, check again to see if hdf4 is supported. The list should now include hdf4: 
+
+```
+~$ gdal-config --formats 
+```
+
+Good luck!
+
 [^1^]: If you encounter problems installing the gWidgetsRGtk2 library, please signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you!
 
 [^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: i) ensure that GDAL is properly installed in your system; ii) (on Windows) if it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)); iii) if nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help!
 
 [^3^]: The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
+
+# References

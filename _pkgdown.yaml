@@ -9,10 +9,12 @@ reference:
     desc: ~
     contents:
       - '`MODIStsp`'
+      - '`MODIStsp_extract`'
       - '`MODIStsp_addindex`'
       - '`MODIStsp_resetindexes`'
-      - '`MODIStsp_extract`'
+      - '`MODIStsp_reset_options`'
       - '`install_MODIStsp_launcher`'
+      - '`MODIStsp-package`'
   - title: Internals
     desc: ~
     contents:
@@ -35,6 +37,10 @@ reference:
       - '`set_bandind_matrix`'
       - '`process_message`'
       - '`check_files_existence`'
+      - '`ask_permission`'
+      - '`check_proj4string`'
+      - '`load_prodopts`' 
+      - '`split_nodata_values`'
 navbar:
   type: inverse
   left:

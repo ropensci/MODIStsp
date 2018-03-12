@@ -29,7 +29,6 @@ CRS
 DAAC
 dat
 datatypes
-Densification
 dframe
 dir
 distros
@@ -38,6 +37,7 @@ doy
 DOY
 doys
 earthdata
+emacs
 Emissivity
 EndDOY
 EndYear
@@ -81,6 +81,7 @@ HDF
 hdfs
 HDFs
 Hengl
+homebrew
 Homebrew
 http
 https
@@ -106,6 +107,7 @@ linkcolor
 linux
 lpdaac
 LZW
+macOS
 MacOs
 moddirs
 modis
@@ -161,9 +163,8 @@ QIs
 ranghetti
 Ranghetti
 rasters
-Rasters
-rasterStack
 RasterStack
+rasterStacks
 rdata
 Rdata
 RData
@@ -180,7 +181,6 @@ rescaled
 rescaling
 rgdal
 RGRI
-Rgtk
 RGtk
 rmarkdown
 Rowlingson
@@ -192,7 +192,6 @@ SAVI
 scrollbars
 sel
 serie
-setZ
 SIs
 sp
 SpatialLines
@@ -204,6 +203,7 @@ StartYear
 subfolder
 subfolders
 SWIR
+tempdir
 tidyverse
 tif
 tobybot
@@ -227,3 +227,5 @@ ymax
 ymin
 yyyy
 YYYY
+Zhiya
+Zuo

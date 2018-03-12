@@ -18,13 +18,19 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  <link href="../extra.css" rel="stylesheet">
   
+  
+<meta property="og:title" content="Function reference" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -173,6 +179,12 @@
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="MODIStsp_extract.html">MODIStsp_extract</a></code> </p>
+          </td>
+          <td><p>Extract data from MODIStsp time series</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
             <p><code><a href="MODIStsp_addindex.html">MODIStsp_addindex</a></code> </p>
           </td>
           <td><p>Add custom spectral indexes</p></td>
@@ -185,15 +197,22 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="MODIStsp_extract.html">MODIStsp_extract</a></code> </p>
+            <p><code><a href="MODIStsp_reset_options.html">MODIStsp_reset_options</a></code> </p>
           </td>
-          <td><p>Extract data from MODIStsp time series</p></td>
+          <td><p>MODIStsp_reset_options</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="install_MODIStsp_launcher.html">install_MODIStsp_launcher</a></code> </p>
           </td>
           <td><p>Install a launcher for MODIStsp</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="MODIStsp-package.html">MODIStsp-package</a></code> </p>
+          </td>
+          <td><p>MODIStsp: a package to automatize the creation of time series of raster
+images derived from MODIS Land Products</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -316,6 +335,30 @@
             <p><code><a href="check_files_existence.html">check_files_existence</a></code> </p>
           </td>
           <td><p>Check if all files required for a given date already exist</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ask_permission.html">ask_permission</a></code> </p>
+          </td>
+          <td><p>ask_permission</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="check_proj4string.html">check_proj4string</a></code> </p>
+          </td>
+          <td><p>Check the validity of the input projection</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="load_prodopts.html">load_prodopts</a></code> </p>
+          </td>
+          <td><p>Load characteristics of the different MODIS products</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="split_nodata_values.html">split_nodata_values</a></code> <code><a href="split_nodata_values.html">create_nodata_rcl</a></code> </p>
+          </td>
+          <td><p>Split NODATA values or create matrix for reclassification</p></td>
         </tr>
       </tbody>
       </table>
@@ -337,7 +380,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -345,3 +388,4 @@
 
   </body>
 </html>
+

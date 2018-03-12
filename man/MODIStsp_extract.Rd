@@ -53,7 +53,7 @@ this example: fun=function(x,...)length(x). Defaults to "mean"}
 
 \item{out_format}{\code{character ["xts" | "dframe"]} If dframe, the output is a
 data frame with dates in the first column and extracted data in the others,
-otherwise it is a \code{xts} object, Default: "xts2}
+otherwise it is a \code{xts} object, Default: "xts"}
 
 \item{small}{\code{logical} If TRUE, and input is polygons, then values are
 returned also for polygons not covering at least one raster cell. "Included"
@@ -137,8 +137,8 @@ ts_data
 
 # Now load a shapefile containing polygons from which we want to extract data
 
-polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp", package = "MODIStsp"),
-                           verbose = FALSE)
+polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp",
+                           package = "MODIStsp"), verbose = FALSE)
 polygons
 
 # Finally, extract the average values for each polygon and date and plot the

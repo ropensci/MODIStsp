@@ -5,7 +5,9 @@ title: "Outputs Format and Naming Conventions"
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Single-band outputs__
 
 Output raster files are saved in specific subfolders of the main output folder. 
-In particular, **a separate subfolder** is created for each processed original MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image for each processed date, created according to the following naming conventions: 
+In particular, **a separate subfolder** is created for each processed original 
+MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image
+for each processed date, created according to the following naming conventions: 
 
 ```
 myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
@@ -16,15 +18,18 @@ myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
 , where: 
 
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
-  - **_ProdCode_** is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);
-  - **_YYYY_** and **_DOY_** correspond to the year and DOY (Day of the Year) of acquisition of the original MODIS image;
+  - **_ProdCode_** is the code name of the MODIS product from which the image was
+  derived (e.g., MOD13Q1);
+  - **_YYYY_** and **_DOY_** correspond to the year and DOY (Day of the Year) of 
+  acquisition of the original MODIS image;
   - **_ext_** is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs). 
 
 ____________________________________________________________________________________
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Virtual multi-band outputs__
 
-ENVI and/or GDAL virtual time series files and _RasterStack_ RData objects are instead stored **in the "Time\_Series" subfolder** if required.
+ENVI and/or GDAL virtual time series files and _RasterStack_ RData objects are 
+instead stored **in the "Time\_Series" subfolder** if required.
 
 Naming convention for these files is as follow:
 
@@ -36,9 +41,13 @@ myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY
 , where: 
 
   - **_vrt_type_** indicates the type of virtual file ("RData", "GDAL" or "ENVI_META");
-  - **_Sensor_** indicates to which MODIS sensor the time series belongs ("Terra", "Aqua", "Mixed" or "Combined" (for MCD* products));
+  - **_Sensor_** indicates to which MODIS sensor the time series belongs ("Terra",
+  "Aqua", "Mixed" or "Combined" (for MCD* products));
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
-  - **_ProdCode_** is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);
-  - **_StartDOY_**, **_StartYear_**, **_EndDOY_** and **_EndYear_** indicate the temporal extent of the time serie created; 
+  - **_ProdCode_** is the code name of the MODIS product from which the image was 
+  derived (e.g., MOD13Q1);
+  - **_StartDOY_**, **_StartYear_**, **_EndDOY_** and **_EndYear_** indicate the 
+  temporal extent of the time serie created; 
   - **_suffix_** indicates the type of virtual file (ENVI, GDAL or RData);
-  - **_ext_** is the file extension (".vrt" for gdal virtual files, "META" for ENVI meta files or "Rdata" for `R` raster stacks). 
+  - **_ext_** is the file extension (".vrt" for gdal virtual files, "META" for 
+  ENVI meta files or "RData" for `R` raster stacks). 

@@ -57,54 +57,69 @@
 #' # last used settings, in interactive mode (i.e., with gui = TRUE).
 #'
 #' \dontrun{
-#' MODIStsp()}
-#'
+#' MODIStsp()
+#' }
 #' # Running the tool using the settings previously saved in a specific options
 #' # file
 #'
-#' # **NOTE** Output files of examples will be saved to file.path(tempdir(), "MODIStsp").
-#' # You can run the example with `gui = TRUE` to set a different output folder!
+#' # **NOTE** Output files of examples are saved to file.path(tempdir(), "MODIStsp").
+#' # You can run the examples with `gui = TRUE` to set a different output folder!
 #'
 #' \dontrun{
 #'
-#' # Here we use a test json file saved in MODIStsp installation folder -
-#' # Downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
+#' # Here we use a test json file saved in MODIStsp installation folder which
+#' # downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
 #' # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
 #'
-#' options_file <- system.file("testdata/MOD13A2.json", package = "MODIStsp")
-#' MODIStsp(gui = FALSE, options_file = options_file)}
+#' options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+#' MODIStsp(gui = FALSE, options_file = options_file, verbose = FALSE)
+#' }
 #'
+#' \dontrun{
 #' # Running the tool using the settings previously saved in a specific option file
 #' # and specifying the extent from a spatial file allows to re-use the same
 #' # processing settings to perform download and reprocessing on a different area
+#'  
+#' options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+#' spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
+#' MODIStsp(gui = FALSE, options_file = options_file,
+#'   spatial_file_path = spatial_file, verbose = FALSE)
+#' }
 #'
 #' \dontrun{
-#' options_file <- system.file("testdata/MOD13A2.json", package = "MODIStsp")
-#' spatial_file <- system.file("testdata/gardalake.shp")
-#' MODIStsp(gui = FALSE, options_file = options_file,
-#'   spatial_file_path = spatial_file)}
-#'
 #' # Running the tool using the settings previously saved in a
 #' # specific options file and specifying each time the extent from a different
 #' # spatial file (e.g., to perform the same processing on several extents)
 #'
-#' \dontrun{
-#' extent_list  <- c(system.file("testdata/gardalake.shp", package = "MODIStsp"),
-#'                   system.file("testdata/iseolake.shp", package = "MODIStsp"))
-#'
+#' extent_list  <- c(system.file("testdata/lakeshapes/garda_lake.shp", 
+#'                               package = "MODIStsp"),
+#'                   system.file("testdata/lakeshapes/iseo_lake.shp", 
+#'                               package = "MODIStsp"))
+#' extent_list
+#' 
 #' # Note that you can also put all your extent files in a specific folder and
-#' # create the extent list using
-#' # extent_list = list.files("X:/path/containing/some/shapefiles/", "\\.shp$")
+#' # create the extent list using for example.
+#' # extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"), 
+#' #                          full.names = TRUE, "\\.shp$")
 #'
-#' options_file <- system.file("testdata/MOD13A2.json", package = "MODIStsp")
+#' options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 #' for (single_shape in extent_list) {
 #'   MODIStsp(gui = FALSE, options_file = options_file,
-#'            spatial_file_path = single_shape )
+#'            spatial_file_path = single_shape, verbose = FALSE )
 #' }
 #'
-#' }
+#' # output files are places in separate folders: 
+#' outfiles_garda <- list.files(file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"),
+#'            full.names = TRUE)
+#' library(raster)            
+#' plot(raster(outfiles_garda[1]))
+#' 
+#' outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"),
+#'            full.names = TRUE)
+#' plot(raster(outfiles_iseo[1]))
 #'
 #' # See also http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html)
+#' }
 
 MODIStsp <- function(gui               = TRUE,
                      options_file      = NULL,
@@ -113,7 +128,6 @@ MODIStsp <- function(gui               = TRUE,
                      test              = -1,
                      n_retries         = 20,
                      verbose           = TRUE) {
-  
   options("guiToolkit" = "RGtk2")
   # Make so that "raster" functions does not automatically add extensions on
   # output files. This is automatically reset to TRUE at the end of the session
@@ -244,6 +258,14 @@ MODIStsp <- function(gui               = TRUE,
          "with gui=TRUE to create and save one.")
   }
   
+  if (!is.null(options_file)) {
+    if (!file.exists(options_file))
+      stop("The specified `.json` options file was not found. \n",
+           "Please provide a valid \"options_file\" path or run ",
+           "without specifying one to create and save one.")
+  }
+  
+  
   # On first execution (or if the file is not found), ask the user permission
   # for saving a options file in "your-R-library/MODIStsp/ExtData/Previous"
   
@@ -289,7 +311,6 @@ MODIStsp <- function(gui               = TRUE,
     if (exists("welcome_lab")) {
       gWidgets::dispose(welcome_lab)
     }
-    
     start <- MODIStsp_GUI(general_opts,
                           prod_opt_list,
                           MODIStsp_dir = system.file(package = "MODIStsp"),
@@ -338,7 +359,7 @@ MODIStsp <- function(gui               = TRUE,
     }
     
     if (general_opts$out_folder_mod == "$modistest") {
-      general_opts$out_folder_mod <- system.file("testdata/", 
+      general_opts$out_folder_mod <- system.file("testdata/",
                                                  package = "MODIStsp")
     }
     
@@ -440,16 +461,6 @@ MODIStsp <- function(gui               = TRUE,
       general_opts$start_y <- min(d_bbox_mod_tiled$V)
       general_opts$end_y   <- max(d_bbox_mod_tiled$V)
     }
-    
-    #   ________________________________________________________________________
-    #   If running a test, redefine  output folders to use `R` temporary
-    #   folder to store results and the testdata subfolder of MODIStsp
-    #   to look for example files.
-    
-    # if (test != -1) {
-    #   general_opts$out_folder     <- normalizePath(tempdir())
-    #   general_opts$out_folder_mod <- normalizePath(tempdir())
-    # }
     
     #   ________________________________________________________________________
     #   launch MODIStsp_process to Download and preprocess the selected     ####

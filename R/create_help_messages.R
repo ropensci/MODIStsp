@@ -196,7 +196,7 @@ create_help_messages <- function() {
   help_messages <- rbind(help_messages, data.frame(
     which_help = "extent_help", 
     text = paste0(
-      "This frame allows specifying the spatial extent of MODIStsp ouputs. ", 
+      "This frame allows specifying the spatial extent of MODIStsp outputs. ", 
       "There are two main options: \n\n",
       "<span weight = 'bold'>Select MODIS Tiles</span>:\n\n",
       "MODIS data is organized in tiles of 10 degrees by 10 degrees at the equator. ", #nolint
@@ -208,11 +208,11 @@ create_help_messages <- function() {
       "<span weight = 'bold'>Define Custom Area</span>:\n\n",
       "Use this option if you wish to obtain outputs resized to cover only a specific  ",#nolint
       "area (i.e., you do not need a full tile(s).\n  ",
-      "* Click on 'Select From Map' to interactively draw the desired output extent. ", #nolint
-      "* Click on 'Load Extent from Spatial File'",
+      "*** Click on 'Select From Map' to interactively draw the desired output extent. ", #nolint
+      "*** Click on 'Load Extent from Spatial File'",
       "to specify a valid spatial file (e.g., a shapefile or a raster file) ", 
       "to be used to retrieve the extent.\n",
-      "* Fill in the boxes to manually set the corners of the bounding box of the ", #nolint
+      "*** Fill in the boxes to manually set the corners of the bounding box of the ", #nolint
       "desired area\n\n",
       "<span weight = 'bold'>IMPORTANT NOTE</span>: Since MODIStsp automatically ", #nolint
       "mosaics outputs to create single raster output files the selected extent ", #nolint

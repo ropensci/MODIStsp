@@ -32,7 +32,7 @@ Important News !
 
 -   11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes (thanks to all the users that signalled problems !). Check the [Release Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.3) for further details !
 
--   25/07/2017 - As of today, **most of the content related to MODIStsp has been moved to our new website at [lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/)**, which provides a much better user interface and ease of access to MODIStsp-related information. From now on, please **consult the new website for detailed and updated information on the package**.
+-   25/07/2017 - As of today, **most of the content related to MODIStsp has been moved to our new website at [lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/) **, which provides a much better user interface and ease of access to MODIStsp-related information. From now on, please **consult the new website for detailed and updated information on the package**.
 
 -   Also our previous FAQ page on github containing info for solving common installation, downloading and processing problems and issues was discontinued and **migrated at [lbusett.github.io/MODIStsp/articles/faq.html](http://lbusett.github.io/MODIStsp/articles/faq.html)**.
 
@@ -72,7 +72,7 @@ install.packages("gWidgetsRGtk2")
 library(gWidgetsRGtk2)
 ```
 
-Upon loading `gWidgetsRGtk2`, an error window will probably appear. This signals that library "GTK+" is not yet installed on your system or is not on your PATH. To install it press "OK". A new window dialog window will appear, asking if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !
+Upon loading `gWidgetsRGtk2`, an error window will probably appear. This signals that library "GTK+" is not yet installed on your system or is not on your PATH. To install it press "OK". A new window dialog window will appear, asking if you. want to install "GTK+". Select "Install GTK" and then "OK" . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !
 
 In case RStudio does not automatically restart or continuously asks to install GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to go.
 
@@ -123,119 +123,115 @@ install_github("lbusett/MODIStsp")
 <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
 ----------------------------------------------------------------
 
-**NOTE: The following installation notes were kindly provided by a MODIStsp user and should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. Since we are not working on Mac we were not able yet to check this, but we hope it may be useful at least to put you in the right direction if you have installation problems)**
+**NOTE**: The following installation notes should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied...) from: <https://zhiyzuo.github.io/installation-rattle/**>. Thanks to Zhiya Zuo for providing this!
 
-Installing MODIStsp requires many dependencies:
+To properly install `MODIStsp` you will need to first install package `RGTk2`. This is a somehow difficult operation. The following instructions should help: <br>
 
-For installation on MAC OSX sierra, there are three main issues: - As outlined here in the comment by **tobybot11** (<https://gist.github.com/sebkopf/9405675>), Rgtk requires the x11 libraries/headers (gdk/gdkx.h specifically) and does not work with the quartz libraries/headers which now are the default for GTK - When installing the dependencies gWidgetsRGtk2 and cairoDevice from CRAN you need to choose the version "OS X Mavericks binaries" and not "Package source" - You have to be sure that gdal is installed with HDF4 support.
+**1. Check your Mac OS X version and update if necessary: **
 
-1 - Update to R &gt; 3.4 if needed, then update all packages
-
-``` r
-# update packages
-update.packages()
-# install the development version of devtools:
-install.packages(c("devtools"))
-devtools::install_github("hadley/devtools")
-```
-
-2 - Now, install RGtk2 using Homebrew (<https://gist.github.com/sebkopf/9405675>). First, ensure you have Cairo installed with "--with-x11". Open a terminal and run:
+Enter the following command in terminal to check your macOS version. Expected output is as below the dashed line ---.
 
 ``` bash
-brew uninstall cairo --ignore-dependencies
-brew install --with-x11 cairo 
+~$ sw_vers  
+------------------------  
+ProductName:    Mac OS X  
+ProductVersion: 10.12.6  
+BuildVersion:   16G29  
 ```
 
-next, edit the configure options for GTK to require x11 rather than Quartz:
+If your system is above 10.11, continue. Otherwise, upgrade it to Sierra.
+
+Install homebrew if you do not have it already installed. homebrew is a very convenient package manager for macOS. To do so, open a terminal, copy the following command in it and hit Enter:
 
 ``` bash
-brew edit gtk+
+~$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-in the def install section, remove the reference to quartz and switch to:
+Follow the instructions to get brew ready. When inserting your password, nothing will show up for security reasons. Just hit Enter when you are finished.
 
-    --with-gdktarget=x11,
-    --enable-x11-backend
-
-Now install:
+When brew is finished, copy the following command in terminal and hit Enter:
 
 ``` bash
-brew install --build-from-source --verbose gtk+ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
+~$ touch ~/.bash_profile
+~$ echo "export PATH=/usr/local/bin:$PATH
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" >> ~/.bash_profile
+~$ source ~/.bash_profile
 ```
 
-3 - next, install `RGtk2`. Since install.packages("Rgtk2") is not going to work, go [here](https://cran.r-project.org/package=RGtk2), download RGtk2\_2.20.33.tar.gz and, from a terminal run:
+**2. Install the `cairo` library with x11 support**. To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:
 
 ``` bash
-R CMD INSTALL RGtk2_2.20.33.tar.gz
+~$ brew edit gtk+
 ```
 
-Now, open R and run:
+A text editor will open. Look in the file, and find a section that begins with "def install". Substitute the current `args` with the following text:
+
+``` bash
+def install
+ args = [
+         "--disable-dependency-tracking",
+         "--disable-silent-rules",
+         "--prefix=#{prefix}",
+         "--disable-glibtest",
+         "--enable-introspection=yes",
+         # "--disable-visibility",
+         # "--with-gdktarget=quartz",
+         "--with-gdktarget=x11",
+         "--enable-x11-backend"
+        ]
+```
+
+Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs. <br>
+
+**3. Install the `gtk+` library** by issuing this command:
+
+``` bash
+~$ brew install --build-from-source --verbose gtk+
+```
+
+**4. Update your path** so that `gtk+` is recognized, using:
+
+``` bash
+~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
+```
+
+**5. Install `RGtk2` from source**:
+
+-   **Download the newest source file for RGtk2** from <https://cran.r-project.org/web/packages/RGtk2/index.html>.
+
+-   Assuming that the path to this file is ~/Downloads. Run the following in terminal (change the path if you did not download in ~/Downloads):
+
+``` bash
+~$ cd ~/Downloads
+~/Downloads$ R CMD INSTALL RGtk2_2.20.33.tar.gz
+```
+
+(Note that the name of the tar.gz file may vary depending on when you downloaded the file).
+
+**6. Open R and run**:
 
 ``` r
 library(RGtk2)
 ```
 
-hopefully, `RGTk2` will load without errors !
+hopefully, `RGtk2` will load without errors! If so, you should be ready to go, and you can:
 
-4 - Install packages `gWidgetsRGtk2` and `cairoDevice`
-
-**Very important !!!!** from CRAN, download the **"OS X Mavericks binaries"** for [gWidgetsRGtk2](https://cran.r-project.org/package=gWidgetsRGtk2) and [cairoDevice](https://cran.r-project.org/package=cairoDevice)( not "Package source"). Save both to Frameworks/R.framework/3.4..., open R and run the code below (This will also install cairoDevice)
-
-``` r
-install.packages("gWidgetsRGtk2", lib="~/Library/Frameworks/R.framework/Versions/3.4/Resources/library/gWidgetsRGtk2")
-library(gWidgetsRGtk2)
-library(cairoDevice)
-```
-
-*(This will work for R version 3.4, mac OS X Sierra)*
-
-5 - Install GDAL with HDF4 support
-
-Check that gdal is installed with hdf4 support. From a terminal:
-
-``` bash
-> gdal-config --formats 
-```
-
-if gdal is installed, check what drivers are installed: the list should include hdf4.
-
-If gdal is not yet installed or hdf4 is not supported, install/reinstall it following these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html)
-
-``` bash
-> brew install hdf4 
-# prefer hdf4 links over NetCDF 
-> brew link --overwrite hdf4 
-> brew install gdal --complete --enable-unsupported --with-hdf4 
-# check what drivers are installed, list should now include hdf4: 
-> gdal-config --formats 
-```
-
-6 - Install rgdal
-
-since rgdal is not usually looking in "/usr/local/lib"" you must include that with `install.packages()`:
-
-``` r
-install.packages('rgdal',
-                 type = "source",configure.args = c(
-                   '--with-proj-include=/usr/local/include',
-                   '--with-proj-lib=/usr/local/lib')
-                 )
-```
-
-7 - Finally, install MODIStsp from CRAN or GitHub:
+**7. Install MODIStsp** from CRAN:
 
 ``` r
 install.packages("MODIStsp")
 MODIStsp()
 ```
 
-OR
+or the development version from GitHub:
 
 ``` r
 library(devtools) 
 install_github("lbusett/MODIStsp", ref = "master")
 MODIStsp()
 ```
+
+Good luck!
 
 Usage
 =====
@@ -251,7 +247,7 @@ MODIStsp()
 
 This **opens a GUI** from which processing options can be specified (and eventually saved or loaded). After specifying all required parameters, clicking on "Start" will start the processing (see [HERE](http://lbusett.github.io/MODIStsp/articles/interactive_execution.html) for more detailed instructions).
 
-`MODIStsp` can also be launched in non-interactive mode within an `R` session or script by setting the optional `GUI` parameter to FALSE, and the `options_file` parameter to the path of a previously saved JSON Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts
+`MODIStsp` can also be launched in non-interactive mode within an `R` session or script by setting the optional `GUI` parameter to FALSE, and the `options_file` parameter to the path of a previously saved JSON Options file. This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts.
 
 ``` r
 library(MODIStsp) 

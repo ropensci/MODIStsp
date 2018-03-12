@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add custom spectral indexes � MODIStsp_addindex • MODIStsp</title>
+<title>Add custom spectral indexes — MODIStsp_addindex • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,23 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  <link href="../extra.css" rel="stylesheet">
   
+  
+<meta property="og:title" content="Add custom spectral indexes — MODIStsp_addindex" />
+
+<meta property="og:description" content="Function used to add a user-defined Spectral Index to the
+default list of computable spectral indexes. Execution without the GUI
+(i.e., to add a new index from a script) is also possible (see examples)." />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -265,12 +275,13 @@ interaction.</p></li>
  </div><span class='co'># NOT RUN {</span>
  <span class='fu'>MODIStsp_addindex</span>()
 <span class='co'># }</span><div class='input'>
-# Open the GUI to define a new index and save it in index in a custom json
+# Open the GUI to define a new index and save it in a custom json
 # options file.
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
+<span class='no'>opts_jsfile</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/test_addindex.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='no'>opts_jsfile</span>)
 <span class='co'># }</span><div class='input'>
-# Define the new index in non-interactive execution, without specifying an 
+# Define the new index in non-interactive execution, without specifying an
 # options file (thus modifying MODIStsp_previous.json)
 
 </div><span class='co'># NOT RUN {</span>
@@ -310,7 +321,7 @@ Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -318,3 +329,4 @@ Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 
   </body>
 </html>
+

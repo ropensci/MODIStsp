@@ -34,25 +34,6 @@ reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE) {
   d_bbox_in <- sp::SpatialPolygons(
     list(sp::Polygons(list(sp::Polygon(d_bbox_in)), 1))
   )
-  # } else {
-  #   N_dens <- 1
-  #   d_bbox_in <- data.frame(
-  #     lon = c(bbox[1] + diff(bbox[c(1, 3)]) * (0:N_dens) / N_dens,
-  #             rep(bbox[3], N_dens - 1),
-  #             bbox[1] + diff(bbox[c(1, 3)]) * (N_dens:0) / N_dens,
-  #             rep(bbox[1], N_dens - 1)),
-  #     lat = c(rep(bbox[2], N_dens),
-  #             bbox[2] + diff(bbox[c(2, 4)]) * (0:N_dens) / N_dens, 
-  #             rep(bbox[4], N_dens - 1),
-  #             bbox[2] + diff(bbox[c(2, 4)]) * (N_dens:1) / N_dens)
-  #   )
-  #   # browser()
-  #   # d_bbox_in <- SpatialPoints(d_bbox_in) # convert in a SpatialPoints
-  #   d_bbox_in <- sp::SpatialPolygons(
-  #     list(sp::Polygons(list(sp::Polygon(d_bbox_in)), 1))
-  #   )
-  # }
-  
   sp::proj4string(d_bbox_in) <- in_proj # assign the projection
   # reproject the bbox in a polygon
   d_bbox_out <- sp::spTransform(d_bbox_in, sp::CRS(out_proj)) 
