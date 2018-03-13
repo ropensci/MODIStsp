@@ -1,5 +1,6 @@
 ---
 title: "Running the tool in Interactive Mode: the MODIStsp GUI"
+bibliography: MODIStsp.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -7,23 +8,26 @@ knitr::opts_chunk$set(echo = TRUE)
 library(DT)
 ```
 
-The easiest way to use `MODIStsp` is to use its powerful GUI (Graphical User Interface) for 
-selection of processing options, and then run the processing. 
+The easiest way to use `MODIStsp` is to use its powerful GUI (Graphical User Interface) 
+for selection of processing options, and then run the processing. 
 
 To open the GUI, load the package and launch the MODIStsp function, with no parameters:
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, caption=FALSE}
 library(MODIStsp)
 MODIStsp()
 ```
-This **opens a GUI** from which processing options can be specified and eventually saved (or loaded) (Notes: [1](#note-1), [2](#note-2)). 
+This **opens a GUI** from which processing options can be specified and eventually 
+saved (or loaded) (Notes: [1](#note-1), [2](#note-2)). 
 
-The  GUI allows selecting all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.
+The  GUI allows selecting all processing options required for the creation of the 
+desired MODIS time series. The main available processing options are described in 
+detail in the following.
 
 ```{r GUIfig, echo=FALSE, fig.align="center", fig.heigth=7.5, message=FALSE, warning=FALSE}
   library(png)
   library(grid)
   library(knitr)
-  img <- readPNG("Figure_1_Vignette.png")
+  img <- readPNG("MAIN_GUI.png")
   grid.raster(img)
 ```
 
@@ -38,21 +42,30 @@ ________________________________________________________________________________
 
 The top-most menus allow to specify details of the desired output time series:
 
-1. **"Category"** and **"Product"**: Selects the MODIS product of interest  
-2. **MODIS platform(s)**: Selects if only TERRA, only AQUA or Both MODIS platforms should be considered for download and creation of the time series
-3. **version**: Selects whether processing version 5 or 6 (when available) of MODIS products has to be processed
+1. **"Category"** and **"Product"**: Selects the MODIS product of interest;
+2. **MODIS platform(s)**: Selects if only TERRA, only AQUA or Both MODIS platforms 
+should be considered for download and creation of the time series;
+3. **version**: Selects whether processing version 5 or 6 (when available) of MODIS
+products has to be processed
 
-After selecting the product and version, clicking the **"Click to Select Desired Layers"** button opens the *_Select Processing Layers_* GUI panel, from which the user **must** select which MODIS original layers and/or derived Quality Indexes (QI) and Spectral Indexes (SI) layers should be processed: 
+After selecting the product and version, clicking the **"Change Selection"** 
+button opens the *_Select Processing Layers_* GUI panel, from which the user **must** 
+select which MODIS original layers and/or derived Quality Indexes (QI) and Spectral
+Indexes (SI) layers should be processed: 
 ```{r proc_layers, echo=FALSE, fig.align="center", message=FALSE, warning=FALSE, paged.print=FALSE}
   library(png)
   library(grid)
-  img <- readPNG('Figure_3.png')
+  img <- readPNG('SELECT_GUI.png')
   grid.raster(img)
 ```
 
-- The left-hand frame allows to select which _original MODIS layers_ should be processed.
-- The central frame allows to select which _Quality Indicators should be extracted_ from the original MODIS Quality Assurance layers. 
-- For MODIS products containing surface reflectance data, the right-hand frame allows to select which additional _Spectral Indexes should be computed_. The following commonly used Spectral Indexes are available for computation by default: 
+- The left-hand frame allows to select which _original MODIS layers_ 
+should be processed.
+- The central frame allows to select which _Quality Indicators should be extracted_ 
+from the original MODIS Quality Assurance layers. 
+- For MODIS products containing surface reflectance data, the right-hand frame 
+allows to select which additional _Spectral Indexes should be computed_. The 
+following commonly used Spectral Indexes are available for computation by default: 
 
 <br>
 
@@ -60,105 +73,201 @@ After selecting the product and version, clicking the **"Click to Select Desired
 # library(xtable)
 tab <- tibble::tribble(
  ~"Acronym"     ,~"Index Name and reference", ~"Index Formula",                     
- "NDVI"         , "Normalized Difference Vegetation Index [@Rouse1973]"          , "(NIR - RED)/(NIR + RED)",        
- "EVI"          , "Enhanced Vegetation Index [@Huete2002]"                       , "2.5 * (NIR - RED)/(NIR + 6 * RED - 7.5 * BLUE + 1",
+ "NDVI"         , "Normalized Difference Vegetation Index (Rouse, 1973)"          , "(NIR - RED)/(NIR + RED)",        
+ "EVI"          , "Enhanced Vegetation Index (Huete, 2002)"                       , "2.5 * (NIR - RED)/(NIR + 6 * RED - 7.5 * BLUE + 1",
  "SR"           , "Simple Ratio[@Tucker1979]"                                    , "NIR / RED",
- "NDFI"         , "Normalized Difference Flood Index [@Boschetti2014]"           , "(NIR - SWIR1) / (NIR + SWIR1)", 
- "NDII6 (NDWI6)" , "Normalized Difference Infrared Index - Band 6 [@HUNTJR1989]" , "(NIR - SWIR1) / (NIR + SWIR1)",
- "NDII7 (NDWI7)" , "Normalized Difference Infrared Index - Band 7 [@HUNTJR1989]" , "(NIR - SWIR2) / (NIR + SWIR2)",
- "SAVI"         , "Soil Adjusted Vegetation Index  [@Huete1988]"                 , "((NIR - RED) / (NIR + RED + 0.5)) * (1 + 0.5)",
- "NDSI"         , "Normalized Difference Snow Index [@Hall2002]"                 , "(GREEN - SWIR1) / GREEN + SWIR1)",
- "GNDVI"        , "Green Normalized Difference Vegetation Index [@Gitelson1998]" ,  "(NIR - GREEN)/(NIR + GREEN)",       
- "RGRI"         , "Red Green Ratio Index  [@Gamon1999]"                          , "RED / GREEN",
- "GRVI"         , "Green-Red ratio Vegetation Index  [@Tucker1979]"              , "(RED - GREEN) / (RED + GREEN)"       
+ "NDFI"         , "Normalized Difference Flood Index (Boschetti, 2014)"           , "(NIR - SWIR1) / (NIR + SWIR1)", 
+ "NDII6 (NDWI6)" , "Normalized Difference Infrared Index - Band 6 (Hunt, 1989)" , "(NIR - SWIR1) / (NIR + SWIR1)",
+ "NDII7 (NDWI7)" , "Normalized Difference Infrared Index - Band 7 (Hunt, 1989)" , "(NIR - SWIR2) / (NIR + SWIR2)",
+ "SAVI"         , "Soil Adjusted Vegetation Index  (Huete, 1988)"                 , "((NIR - RED) / (NIR + RED + 0.5)) * (1 + 0.5)",
+ "NDSI"         , "Normalized Difference Snow Index (Hall, 2002)"                 , "(GREEN - SWIR1) / GREEN + SWIR1)",
+ "GNDVI"        , "Green Normalized Difference Vegetation Index (Gitelson, 1998)" ,  "(NIR - GREEN)/(NIR + GREEN)",       
+ "RGRI"         , "Red Green Ratio Index (Gamon, 1999)"                          , "RED / GREEN",
+ "GRVI"         , "Green-Red ratio Vegetation Index  (Tucker, 1979)"              , "(RED - GREEN) / (RED + GREEN)"       
 )
 
 DT::datatable(tab, rownames = FALSE, style = "bootstrap", 
               options = list(dom = 'tip', pageLength = 11))
 ```
 
-You can however **specify other SIs to be computed without modifying MODIStsp source code** by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related to the new desired SI using a simple GUI interface. 
+You can however **specify other SIs to be computed without modifying MODIStsp source code** 
+by clicking on the _**"Add Custom Index"**_ button, which allow to provide info related 
+to the new desired SI using a simple GUI interface. 
 
 ```{r indexfig, echo=FALSE, fig.height=2.3, fig.width=6, message=FALSE, warning=FALSE, fig.align="center"}
   library(png)
   library(grid)
-  img <- readPNG('figure_4.png')
+  img <- readPNG('NEWIND_GUI.png')
   grid.raster(img)
 ```
 
-Provided information (e.g., correct band-names, computable formula, etc...) is automatically checked upon clicking "Set New Index". On success, the new index is added in the list of available ones for all products allowing its computation. Clicking "Done !" returns to the main.
+Provided information (e.g., correct band-names, computable formula, etc...) is 
+automatically checked upon clicking "Set New Index". On success, the new index 
+is added in the list of available ones for all products allowing its computation. 
+Clicking "Done !" returns to the main.
 
-__NOTE__ All custom defined indexes can be removed by using the `MODIStsp_resetindexes` function
+__NOTE__ All custom defined indexes can be removed by using the `MODIStsp_resetindexes()` 
+function
 
 ## _Download Method_
 
 Select the method to be used for download. Available choices are: 
 
-1.  **http**: download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). This requires providing a user name and password, which can be obtained by registering an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
+1.  **http**: download through ftp from NASA lpdaac http archive (http://e4ftl01.cr.usgs.gov). 
+This requires providing a user name and password, which can be obtained by registering 
+an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
 
 2.  **ftp**: download from NASA ftp archive ([ftp://ladsweb.nascom.nasa.gov/](ftp://ladsweb.nascom.nasa.gov/));
 
-3.  **offline**: this option allows to process/reprocess HDF files already available on the user's PC without downloading from NASA -- useful if the user already has an archive of HDF images, or to reprocess data already downloaded via MODIStsp to create time series for an additional layer (_It is fundamental that the HDFs are those directly downloaded from NASA servers_ ! (See [here](faq.html#working-with-already-downloaded-hdf-files) for additional details). 
+3.  **offline**: this option allows to process/reprocess HDF files already available 
+on the user's PC without downloading from NASA -- useful if the user already has an
+archive of HDF images, or to reprocess data already downloaded via MODIStsp to create
+time series for an additional layer (_It is fundamental that the HDFs are those 
+directly downloaded from NASA servers_ ! (See [here](faq.html#working-with-already-downloaded-hdf-files) 
+for additional details). 
 
-Checking the **use_aria2c** option allows to accelerate the download from NASA archives. This requires however that that the "aria2c" software is installed in your system. To download and install it, see: [https://aria2.github.io/](aria2.github.io/)
+Checking the **use_aria2c** option allows to accelerate the download from NASA
+archives. This requires however that that the "aria2c" software is installed in 
+your system. To download and install it, see: [https://aria2.github.io/](aria2.github.io/)
 
-<font size="2"> _NOTE: The best performances are usually achieved using *http*, though that may vary depending on network infrastructure._ </font size="2"> 
+<font size="2"> _NOTE: The best performances are usually achieved using *http*, 
+though that may vary depending on network infrastructure._ </font size="2"> 
 
 ## _Processing Period_
 
-Specify the starting and ending dates to be considered for the creation of the time in the series corresponding fields. Dates **must** be provided in the _yyyy--mm--dd_ format (e.g., 2015-01-31)
+Specify the starting and ending dates to be considered for the creation of the 
+time in the series corresponding fields. Dates **must** be provided in the _yyyy--mm--dd_ 
+format (e.g., 2015-01-31)
 
 The **Period** drop-down menu allows to choose between two options:
 
-1.  **full**: all available images between the starting and ending dates are downloaded and processed;
+1.  **full**: all available images between the starting and ending dates are 
+downloaded and processed;
 
-2.  **seasonal**: data is downloaded only for one part of the year, but for multiple years. For example, if the starting date is 2005-03-01 and the ending is 2010-06-01, only the images of March, April and May for the years between 2005 and 2010 will be downloaded. This allows to easily process data concerning a particular season of interest.
+2.  **seasonal**: data is downloaded only for one part of the year, but for 
+multiple years. For example, if the starting date is 2005-03-01 and the ending is
+2010-06-01, only the images of March, April and May for the years between 2005
+and 2010 will be downloaded. This allows to easily process data concerning a 
+particular season of interest.
 
 ## _Spatial Extent_
 
-Allows to define the area of interest for the processing. Two main options are possible: 
+Allows to define the area of interest for the processing. Two main options are
+possible: 
 
-1.  **Full Tiles Extent**: specify which MODIS tiles need to be processed using the "Start" and "End" horizontal and vertical sliders in the _Required MODIS Tiles_ frame.  During processing, data from the different tiles is mosaiced, and a single file covering the total area is produced for each acquisition date (Note:  pressing the "show map" button, a representation of the MODIS tiles grid is shown to facilitate the selection).
+1.  **Select MODIS Tiles**: specify which MODIS tiles need to be processed either 
+by: 
 
-2.  **Resized**: specify a custom spatial extent for the desired outputs either by: 
+    a. Using the "Start" and "End" horizontal and vertical sliders in the 
+    _Required MODIS Tiles_ frame.  
+    b. pressing the __"Select on Map"__ button. A map will open in a browser window, 
+    allowing interactive selection of the required tiles
     
-    a. Manually inserting the coordinates of the Upper Left and Lower Right corners of the area of interest in the __Bounding Box__ frame. _Coordinates of the corners must be provided in the coordinate system of the selected  output projection_; 
+During processing, data from the different tiles is mosaiced, and a single file 
+covering the total area is produced for each acquisition date
+
+2.  **Define Custom Area**: specify a custom spatial extent for the desired outputs 
+either by: 
     
-    b. pressing the __"Load Extent from a Spatial File" and selecting a raster or vector spatial file__. In this case, the bounding box of the selected file is retrieved, converted in the selected output projection, and shown in the "Bounding Box" frame. Required input MODIS tiles are also automatically retrieved from the output extent, and the tiles selection sliders modified accordingly.
+    a. Manually inserting the coordinates of the Upper Left and Lower Right corners
+    of the area of interest in the __Bounding Box__ frame. _Coordinates of the corners 
+    must be provided in the coordinate system of the selected  output projection_; 
+    
+    b. pressing the __"Load Extent from a Spatial File" and selecting a raster or 
+    vector spatial file__. In this case, the bounding box of the selected file is
+    retrieved, converted in the selected output projection, and shown in the 
+    "Bounding Box" frame. Required input MODIS tiles are also automatically 
+    retrieved from the output extent, and the tiles selection sliders modified
+    accordingly.
+    
+    c. pressing the __"Select on Map"__ button. A map will open in a browser 
+    window, allowing interactive selection of the spatial extent using the tools
+    on the left.
+    
+    
+**Note: ** pressing the "show current extent" will open a browser window highlighting
+the currently selected spatial extent.
     
 ## _Reprojection and Resize_
 
 Specify the options to be used for reprojecting and resizing the MODIS images. 
 
-- **"Output Projection"**: select one of the predefined output projections or specify a user-defined one. To specify a user selected projection, select "User Defined" and then insert a valid "Proj4" string in the pop-up window. Validity of the Proj4 string is automatically checked, and error messages issued if the check fails; 
+- **"Output Projection"**: select either the Native MODIS projection (Default) 
+or specify a user-defined one. To specify a user selected projection, select 
+"User Defined" and then insert a valid "Proj4" string in the pop-up window. 
+Validity of the Proj4 string is automatically checked, and error messages issued 
+if the check fails; 
 
-- **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"**: specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. Resampling method can  be chosen among "Nearest Neighbour" and "Mode" (Useful for down-sampling purposes). Other resampling methods (e.g., bilinear, cubic) are not currently supported since i) they cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleaning would risk to contaminate the values of high-quality observations with those of low-quality ones.
+- **"Output Resolution"**, **"Pixel Size"** and **"Reprojection Method"**: specify 
+whether output images should inherit their spatial resolution from the original
+MODIS files, or be resampled to a user-defined resolution. In the latter case, 
+output spatial resolution must be specified in the measure units of the selected
+output projection. Resampling method can  be chosen among "Nearest Neighbour" and 
+"Mode" (Useful for down-sampling purposes). Other resampling methods (e.g., 
+bilinear, cubic) are not currently supported since i) they cannot be used for
+resampling of categorical variables such as the QA and QI layers, and ii) using 
+them on continuous variable (e.g., reflectance, VI values) without performing an 
+a-priori data cleaning would risk to contaminate the values of high-quality
+observations with those of low-quality ones.
 
-## _Processing Options_
+## _Output Options_
 
 Several processing options can be set using check-boxes:
 
-- **Output Files Format**: Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among "None", "PACKBITS", "LZW" and "DEFLATE".
+- **Output Files Format**: Two of the most commonly formats used in remote
+sensing applications are available at the moment: ENVI binary and GeoTiff. If
+GeoTiff is selected, the type of file compression can be also specified among
+"None", "PACKBITS", "LZW" and "DEFLATE".
 
-- **Create Virtual Rasters**: Specify if virtual multitemporal files  should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are ENVI meta-files and GDAL "vrt" files.
+- **Save Time Series as**: Specify if virtual multitemporal files  should be 
+created. These virtual files allow access to the entire time series of images as 
+a single file without the need of creating large multitemporal raster images.
+Available virtual files formats are "R" rasterStacks, ENVI meta-files and GDAL 
+"vrt" files. In particular, "R" rasterStacks may be useful in order to easily 
+access the preprocessed MODIS data within "R" scripts 
+(see also http://lbusett.github.io/MODIStsp/articles/output.html).
 
-- **Create RasterStack**: Specify if the output time series should be also saved as as "R" _rasterStack_ objects (with temporal information added through the "setZ" method of the _raster_ package). This may be useful in order to easily access the preprocessed MODIS data within "R" scripts.
 
-- **Change NoData values**: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts" XML file. By selecting "Yes" in the "Change Original NoData values" check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. 
+- **Modify No Data**: Specify if NoData values of MODIS layers should be kept
+at their original values, or changed to those specified within the "MODIStsp\_Products\_Opts"
+XML file. By selecting "Yes" in the "Change Original NoData values" check-box, 
+NoData of outputs are set to the largest integer value possible for the data type 
+of the processed layer (e.g., for 8-bit  unsigned integer layers, NoData is set 
+always to 255, for 16-bit signed  integer layers to 32767, and  for 16-bit unsigned
+integer layers to 65535). Information about the new NoData values is stored both 
+in the output rasters, and in the XML files associated with them. __NOTE:__ Some 
+MODIS layers have multiple NoData (a.k.a. _fill_) values. if _Modify No Data_ is 
+set to "Yes", `MODIStsp` will convert all _fill_ values to a common output NoData
+value!
 
-- **Scale output values**: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true "measure units" of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in °K, etc.). 
+- **Apply Scale/Offset**: Specify if scale and offset values of the different 
+MODIS layers should be applied. If selected, outputs are appropriately rescaled
+on the fly, and saved in the true "measure units" of the selected parameter (e.g., 
+spectral indexes are saved as floating point values; Land Surface Temperature is 
+saved in degrees Kelvin, etc.). 
 
-## _Main Output Folder for Time Series Storage_
+## _Main MODIStsp Output Folder_
 
-Select the main folder where the pre-processed time series data will be stored. All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see XXX for details on `MODIStsp` naming conventions)-.
+Select the main folder where the pre-processed time series data will be stored. 
+All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see http://lbusett.github.io/MODIStsp/articles/output.html for details on `MODIStsp` 
+naming conventions)-.
 
-The **"Reprocess Existing Data"** check-box allows to decide if images already available should be reprocessed if a new run of MODIStsp is launched with the same output folder. If set to "No", MODIStsp skips dates for which output files following the MODIStsp naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates. 
+The **"Reprocess Existing Data"** check-box allows to decide if images already 
+available should be reprocessed if a new run of MODIStsp is launched with the same 
+output folder. If set to "No", MODIStsp skips dates for which output files following
+the MODIStsp naming conventions are already present in the output folder. This
+allows to incrementally extend MODIS time series without reprocessing already available
+dates. 
 
-## _Output Folder for Original HDF Storage_
+## _Folder for permanent storage of original MODIS HDF images_
 
-Select the folder where downloaded **original MODIS HDF files** downloaded from NASA servers will be stored. 
+Select the folder where downloaded **original MODIS HDF files** downloaded from 
+NASA servers will be stored. 
 
-The **"delete original HDF files"** check-box allows also to decide if the downloaded images should be deleted from the file system at the end of the processing. To avoid accidental file deletion, this is always set to "No" by default, and a warning is issued before execution whenever the selection is changed to "Yes".
+The **"delete original HDF files"** check-box allows also to decide if the
+downloaded images should be deleted from the file system at the end of the 
+processing. To avoid accidental file deletion, this is always set to "No" by default, 
+and a warning is issued before execution whenever the selection is changed to "Yes".
 
 
 ____________________________________________________________________________________
@@ -167,11 +276,14 @@ ________________________________________________________________________________
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Saving and Loading Processing Options__
 
-Specified processing parameters can be saved to a JSON file for later use by clicking on the _**Save Options**_ button.
+Specified processing parameters can be saved to a JSON file for later use by clicking
+on the _**Save Options**_ button.
 
-Previously saved options can be restored clicking on the _**Load Options**_ button and navigating to the previously saved JSON file.
+Previously saved options can be restored clicking on the _**Load Options**_ button
+and navigating to the previously saved JSON file.
 
-<font size="2"> (Note that at launch, **`MODIStsp` _always reloads automatically the processing options used for its last successful run_** </font size="2">.
+<font size="2"> (Note that at launch, **`MODIStsp` _always reloads automatically 
+the processing options used for its last successful run_** </font size="2">.
 
 ____________________________________________________________________________________
 
@@ -180,9 +292,14 @@ ________________________________________________________________________________
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Starting the processing__
 
-Once you are happy with your choices, click on **Start Processing**. `MODIStsp` will start accessing NASA servers to download and process the MODIS data corresponding to your choices.
+Once you are happy with your choices, click on **Start Processing**. `MODIStsp` 
+will start accessing NASA servers to download and process the MODIS data corresponding 
+to your choices.
 
-For each date of the specified time period, `MODIStp` downloads and preprocesses all hdf images required to cover the desired spatial extent. Informative messages concerning the status of the processing are provided on the console, as well as on a self-updating progress window. 
+For each date of the specified time period, `MODIStp` downloads and preprocesses
+all hdf images required to cover the desired spatial extent. Informative messages
+concerning the status of the processing are provided on the console, as well as on
+a self-updating progress window. 
 
 The processed time series are saved in specific subfolders of the main selected
 output folder, as explained in detail [HERE](articles/output.html).
@@ -190,11 +307,17 @@ output folder, as explained in detail [HERE](articles/output.html).
 ________________________________________________________________________________
 
 __Note 1__
-<font size="2"> PCs with a small screen can fail to visualize the whole GUI; in this case, the user can add scroll bars with ```MODIStsp(scrollWindow=TRUE)```) </font size="2">
+<font size="2"> PCs with a small screen can fail to visualize the whole GUI; in
+this case, the user can add scroll bars with ```MODIStsp(scrollWindow=TRUE)```) </font size="2">
 
 __Note 2__
 
-<font size="2"> At the first execution of `MODIStsp`, a Welcome screen will appear, signaling that `MODIStsp` is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem:
+<font size="2"> At the first execution of `MODIStsp`, a Welcome screen will appear,
+signaling that `MODIStsp` is searching for a valid GDAL installation. Press "OK" 
+and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), 
+`MODIStsp` (and in particular the gdalUtils package on which it relies) is not 
+finding a valid GDAL installation in the more common locations. To solve the problem:
 1. Ensure that GDAL is properly installed in your system
-2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/))
+2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and 
+that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/))
 3. If nothing works, signal it in the [issues](https://github.com/lbusett/MODIStsp/issues) GitHub page of `MODIStsp` and we'll try to help!

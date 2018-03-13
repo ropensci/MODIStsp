@@ -12,7 +12,6 @@
 #'  for virtual file.
 #' @param out_format `character ["ENVI" | "GTiff"]` Format of images used as
 #'  "input" for the vrt and contained in out_prod_folder/band folders.
-#' @param rts `character ["Yes" | "No"]` If Yes, create "R" RasterStacks time series
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @inheritParams MODIStsp_process
 #' @return NULL -
@@ -22,7 +21,7 @@
 #' @note License: GPL 3.0
 #' @importFrom raster setZ stack
 #' @importFrom tools file_path_sans_ext
-#' @importFrom stringr str_sub
+#' @importFrom stringr str_sub str_detect
 #' @importFrom gdalUtils gdalbuildvrt
 #'
 MODIStsp_vrt_create <- function(
@@ -32,7 +31,7 @@ MODIStsp_vrt_create <- function(
   indexes_bandnames, indexes_bandsel, indexes_nodata_out,
   quality_bandnames, quality_bandsel, quality_nodata_out,
   file_prefixes,
-  ts_format, out_format, rts, 
+  ts_format, out_format, 
   verbose) {
   
   if (length(sensor) == 2) {
@@ -149,7 +148,7 @@ MODIStsp_vrt_create <- function(
           # ____________________________________________________________________
           # Write the ENVI meta file if needed                            ####
           #
-          if (ts_format == "ENVI Meta Files" | ts_format == "ENVI and GDAL") {
+          if (any(stringr::str_detect(ts_format, "ENVI Meta"))) {
             
             if (out_format == "ENVI") {
               
@@ -231,7 +230,7 @@ MODIStsp_vrt_create <- function(
           #   __________________________________________________________________
           #   # Write the GDAL vrt file if needed                           ####
           #
-          if (ts_format == "GDAL vrt files" | ts_format == "ENVI and GDAL") {
+          if (any(stringr::str_detect(ts_format, "GDAL vrt"))) {
             
             meta_dir <- file.path(out_prod_folder, "Time_Series", "GDAL",
                                   sens_sel,
@@ -254,7 +253,7 @@ MODIStsp_vrt_create <- function(
           #   __________________________________________________________________
           #   Create RasterStacks if needed                                 ####
           #
-          if (rts == "Yes") {
+          if (any(stringr::str_detect(ts_format, "R rasterStack"))) {
             
             meta_dir <- file.path(out_prod_folder, "Time_Series", "RData",
                                   sens_sel, meta_band)

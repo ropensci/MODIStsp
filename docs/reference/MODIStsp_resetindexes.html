@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remove custom spectral indexes � MODIStsp_resetindexes • MODIStsp</title>
+<title>Remove custom spectral indexes — MODIStsp_resetindexes • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,21 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  <link href="../extra.css" rel="stylesheet">
   
+  
+<meta property="og:title" content="Remove custom spectral indexes — MODIStsp_resetindexes" />
+
+<meta property="og:description" content="Function used to remove all user-defined Spectral Indexes from
+a MODIStsp json options file, thus resetting the list of available indexes
+to the default ones." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -181,7 +189,8 @@ remove all previously custom-specified Spectral Indexes.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Remove all custom-defined spectral indexes from an options file</span>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Remove all custom-defined spectral indexes from an options file</span>
 
 <span class='co'># Add a custom index for testing purposes</span>
 <span class='fu'>library</span>(<span class='no'>jsonlite</span>)
@@ -193,44 +202,17 @@ remove all previously custom-specified Spectral Indexes.</p>
    <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='st'>"Index_"</span>, <span class='fu'>as.character</span>(<span class='fu'>sample</span>(<span class='fl'>10000</span>, <span class='fl'>1</span>))),
    <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b1_Red - b2_NIR"</span>,
    <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='st'>"Index_"</span>, <span class='fu'>as.character</span>(<span class='fu'>sample</span>(<span class='fl'>10000</span>, <span class='fl'>1</span>)))
-   )</div><div class='output co'>#&gt; <span class='message'>The new Index was correctly added!</span>
-#&gt; <span class='message'> It will be available atthe next execution of MODIStsp().</span></div><div class='input'>
+   )
+
  <span class='no'>opts</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='no'>opts_jsfile</span>)
- <span class='no'>opts</span>$<span class='no'>custom_indexes</span>[<span class='fl'>1</span>]</div><div class='output co'>#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`5`
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`5`$indexes_bandnames
-#&gt; [1] "Index_808"
-#&gt; 
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`5`$indexes_fullnames
-#&gt; [1] "Index_8344"
-#&gt; 
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`5`$indexes_formulas
-#&gt; [1] "b1_Red - b2_NIR"
-#&gt; 
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`5`$indexes_nodata_out
-#&gt; [1] "32767"
-#&gt; 
-#&gt; 
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`6`
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`6`$indexes_bandnames
-#&gt; [1] "Index_808"
-#&gt; 
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`6`$indexes_fullnames
-#&gt; [1] "Index_8344"
-#&gt; 
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`6`$indexes_formulas
-#&gt; [1] "b1_Red - b2_NIR"
-#&gt; 
-#&gt; $`Surf_Ref_8Days_500m (M*D09A1)`$`6`$indexes_nodata_out
-#&gt; [1] "32767"
-#&gt; 
-#&gt; 
-#&gt; </div><div class='input'>
+ <span class='no'>opts</span>$<span class='no'>custom_indexes</span>[<span class='fl'>1</span>]
+
  <span class='co'># Now remove all custom indexes</span>
- <span class='fu'>MODIStsp_resetindexes</span>(<span class='no'>opts_jsfile</span>)</div><div class='output co'>#&gt; <span class='message'>Removing all custom Spectral Indexes from test_addindex.json</span></div><div class='input'> <span class='no'>opts</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='no'>opts_jsfile</span>)
- <span class='no'>opts</span>$<span class='no'>custom_indexes</span>[<span class='fl'>1</span>]</div><div class='output co'>#&gt; [[1]]
-#&gt; NULL
-#&gt; </div><div class='input'> 
+ <span class='fu'>MODIStsp_resetindexes</span>(<span class='no'>opts_jsfile</span>)
+ <span class='no'>opts</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON'>fromJSON</a></span>(<span class='no'>opts_jsfile</span>)
+ <span class='no'>opts</span>$<span class='no'>custom_indexes</span>[<span class='fl'>1</span>]
+
+<span class='co'># }</span><div class='input'> 
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -260,7 +242,7 @@ Lorenzo Busetto, phD (2014-2017) <a href='mailto:busetto.l@irea.cnr.it'>busetto.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -268,3 +250,4 @@ Lorenzo Busetto, phD (2014-2017) <a href='mailto:busetto.l@irea.cnr.it'>busetto.
 
   </body>
 </html>
+

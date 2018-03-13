@@ -2,15 +2,37 @@
 
 ### Main changes
 
+#### Breaking changes
+
+- Due to improvements and changes in the GUI (see below), `MODIStsp` .json options 
+  files saved with older versions are no longer supported. Users will be informed of 
+  this if trying to use an obsolete json file.
+
+#### Updates in supported products
+
+- Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product.
+([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
+
+- Added support for Evapotraspiration products (MOD12A2 and MOD12A3)
+- Added support for Vegetation Continuous Fields product (MOD44B)
+- Checked availability of products over ftp and set not available products to 
+  "Not Available" to allow graceful fail.
+
 #### Improvements in download functions
 
-- Use of `httr::RETRY` to improve behavior while navigating the servers to retrieve 
-  available files and while downloading hdf file (when use_aria == FALSE)
+- Improvements in GUI. It is now possible to set the processing extent interactively
+  using the "Select on Map" button. This opens a browser window allowing to select
+  and extent. 
+
+- Use of `httr::RETRY` to improve behavior while navigating the servers to
+  retrieve available files and while downloading hdf file (when use_aria == FALSE), 
+  thus removing dependency to RCurl. 
 
 #### Extensive code refactoring for submission to ropensci. 
 
 - Long functions were simplified/split into smaller functions to allow for 
   easier maintenance
+- GUI event handlers were moved into dedicated "R" files
 - Extensive code linting to abide to ropensci standards
 - Switch to jsonlite/xml2 to abide to ropensci standards
 - Removal of some less-used dependencies (e.g., hash)
@@ -26,20 +48,11 @@
 
 - Several new tests added, bringing coverage above 90%
 
-#### Updates in supported products
-
-- Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product.
-([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
-
-- Added support for Evapotraspiration products (MOD12A2 and MOD12A3)
-- Added support for Vegetation Continuous Fields product (MOD44B)
-- Checked availability of products over ftp and set not available products to 
-  "Not Available" to allow graceful fail.
-
 #### New functions
 
 - Added `MODIStsp_resetindexes` to remove all custom indexes from a MODIStsp 
-  json options file
+  json options file and `MODIStsp_reset_options` to reset MODIStsp options to 
+  default.
   
 ________________________________________________________________________________
 

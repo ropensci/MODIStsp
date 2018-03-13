@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>MODIStsp: a package to automatize the creation of time series of raster
-images derived from MODIS Land Products � MODIStsp-package • MODIStsp</title>
+images derived from MODIS Land Products — MODIStsp-package • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -19,13 +19,34 @@ images derived from MODIS Land Products � MODIStsp-package • MODIStsp</title>
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  <link href="../extra.css" rel="stylesheet">
   
+  
+<meta property="og:title" content="MODIStsp: a package to automatize the creation of time series of raster
+images derived from MODIS Land Products — MODIStsp-package" />
+
+<meta property="og:description" content="MODIStsp allows automating the creation of time series of rasters derived
+from MODIS Satellite Land Products data. It performs several typical
+preprocessing steps such as download, mosaicking, reprojection and resize
+of data acquired on a specified time period. All processing parameters
+can be set using a user-friendly GUI. Users can select which layers of
+the original MODIS HDF files they want to process, which additional
+Quality Indicators should be extracted from aggregated MODIS Quality
+Assurance layers and, in the case of Surface Reflectance products
+, which Spectral Indexes should be computed from the original reflectance
+bands. For each output layer, outputs are saved as single-band raster
+files corresponding to each available acquisition date. Virtual files
+allowing access to the entire time series as a single file are also created.
+Command-line execution exploiting a previously saved processing options
+file is also possible, allowing to automatically update time series
+related to a MODIS product whenever a new image is available." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -196,7 +217,7 @@ Luigi Ranghetti, phD (2015-2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghe
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -204,3 +225,4 @@ Luigi Ranghetti, phD (2015-2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghe
 
   </body>
 </html>
+

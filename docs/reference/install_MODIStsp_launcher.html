@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Install a launcher for MODIStsp � install_MODIStsp_launcher • MODIStsp</title>
+<title>Install a launcher for MODIStsp — install_MODIStsp_launcher • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,19 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  <link href="../extra.css" rel="stylesheet">
   
+  
+<meta property="og:title" content="Install a launcher for MODIStsp — install_MODIStsp_launcher" />
+
+<meta property="og:description" content="Function which allows to use MODIStsp in batch mode by creating links" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -150,8 +156,8 @@
     <p>Function which allows to use MODIStsp in batch mode by creating links</p>
     
 
-    <pre class="usage"><span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>bin_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>desktop_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>desktop_shortcut</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>bin_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>rscript_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>desktop_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>desktop_shortcut</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -165,6 +171,12 @@ suggested;</p></li>
 <li><p>on Windows, directory where to place the menu entry in the Start Menu,
 Default: Start Menu -&gt; Programs -&gt; MODIStsp.</p></li>
 </ul></td>
+    </tr>
+    <tr>
+      <th>rscript_dir</th>
+      <td><p>'character' in Windows only, the path of the directory in which
+Rscript is installed (default is "C:/Progra~1/R/R-&lt;version&gt;/bin/&lt;arch&gt;").
+Edit this parameter if R is installed in a custom directory.</p></td>
     </tr>
     <tr>
       <th>desktop_dir</th>
@@ -257,7 +269,7 @@ Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -265,3 +277,4 @@ Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 
   </body>
 </html>
+

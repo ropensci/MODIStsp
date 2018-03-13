@@ -11,13 +11,13 @@
 #'   ftp if http fails)
 #' @param user `character` username for earthdata http server
 #' @param password `character` password for earthdata http server
-#' @param yy `character` Year for which the folder containing HDF images are to 
+#' @param yy `character` Year for which the folder containing HDF images are to
 #'  be identified
 #' @param n_retries `numeric` number of times the access to the http/ftp server
 #'   should be retried in case of error before quitting, Default: 20
 #' @param gui `logical`` indicates if processing was called from the GUI
-#'   environment or not. If not, processing messages are sent to a log file 
-#'   instead than to the console/GTK progress windows. 
+#'   environment or not. If not, processing messages are sent to a log file
+#'   instead than to the console/GTK progress windows.
 #' @param out_folder_mod  `character` output folder for MODIS HDF storage
 #' @param .Platform `character` os platform (from call to .Platform)
 #' @return `character arraty` listing all available folders (a.k.a. dates) for
@@ -41,7 +41,7 @@ get_mod_dirs <- function(http, ftp, download_server,
                          gui,
                          out_folder_mod,
                          .Platform) {
-  
+
   # make sure that the http address terminates with a "/" (i.e., it is a
   # folder, not a file)
   if (stringr::str_sub(http, -1) != "/") {
@@ -50,7 +50,7 @@ get_mod_dirs <- function(http, ftp, download_server,
   success <- FALSE
   #   __________________________________________________________________________
   #   retrieve list of folders in case of http download                    ####
-  
+
   if (download_server == "http") {
     # send request to server
     response <- try(httr::RETRY("GET",
@@ -62,9 +62,9 @@ get_mod_dirs <- function(http, ftp, download_server,
                                 quiet = FALSE))
     # On interactive execution, after n_retries attempt ask if quit or ----
     # retry
-    
+
     if (class(response) == "try-error") {
-      if (gui) { 
+      if (gui) {
         #nocov start
         switch <- gWidgets::gconfirm(
           "http server seems to be down! Do you want to switch to ftp?",
@@ -97,21 +97,21 @@ get_mod_dirs <- function(http, ftp, download_server,
       attr(date_dirs, "server") <- "http"
       success <- TRUE
     }
-    
+
   }
   success <- FALSE
   # retrieve processign dates in case of "ftp" download ----
   if (download_server == "ftp") {
-    
+
     while (!success) {
       # send request to server
       year_ftp <- paste0(ftp, yy, "/")
-      response <- try(httr::RETRY("GET",
+      response <- try(suppressWarnings(httr::RETRY("GET",
                                   year_ftp,
                                   times = n_retries,
                                   pause_base = 0.1,
                                   pause_cap = 3,
-                                  quiet = FALSE))
+                                  quiet = FALSE)))
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
       if (class(response) == "try-error") {
@@ -143,29 +143,30 @@ get_mod_dirs <- function(http, ftp, download_server,
       }
     }
   }
-  
+
   #   __________________________________________________________________________
   #   In offline mode, retrieve the dates of acquisition of hdfs already
   #   available in `out_folder_mod`
-  
+
   if (download_server == "offline") {
-    
+
     # Retrieve the list of hdf files matching the product / version
     items <- list.files(out_folder_mod, "\\.hdf$")
     sel_prod_vers <- unlist(stringr::str_split(gsub(
       "http:\\/\\/[A-Za-z0-9\\.]+\\/[A-Z]+\\/([A-Z0-9]+)\\.([0-9]+)\\/", "\\1 \\2", #nolint
       http), " "))
     items <- items[grep(paste0(
-      sel_prod_vers[1], "\\.A20[0-9]{5}\\.(?:.h[0-9]{2}v[0-9]{2}\\.)?",  #nolint
+      sel_prod_vers[1], "\\.A20[0-9]{5}\\.(?:h[0-9]{2}v[0-9]{2}\\.)?",  #nolint
       sel_prod_vers[2], "\\.[0-9]+\\.hdf$"), items)]
-    
+
     # Extract dates
+
     date_dirs <- strftime(as.Date(gsub(
       paste0(sel_prod_vers[1], "\\.A(20[0-9]{5})\\..*"),"\\1", #nolint
       items), format = "%Y%j"), "%Y.%m.%d")
     attr(date_dirs, "server") <- "offline"
   }
-  
+
   return(date_dirs)
-  
+
 }

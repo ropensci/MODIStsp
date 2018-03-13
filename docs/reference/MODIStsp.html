@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MODIStsp main function � MODIStsp • MODIStsp</title>
+<title>MODIStsp main function — MODIStsp • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,20 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  <link href="../extra.css" rel="stylesheet">
   
+  
+<meta property="og:title" content="MODIStsp main function — MODIStsp" />
+
+<meta property="og:description" content="Main function for the MODIS Time Series Processing Tool
+(MODIStsp)" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -174,7 +181,7 @@ parameters of the last successful run are retrieved from file
       <th>spatial_file_path</th>
       <td><p><code>character</code> (optional) full path of a spatial file
 to use to derive the processing extent. If not NULL, the processing options
-which define the extent, the selected tiles and the "Full Tile / Resized"
+which define the extent, the selected tiles and the "Full Tile / Custom"
 in the JSON options file are overwritten and new files are created on the
 extent of the provided spatial file, Default: NULL</p></td>
     </tr>
@@ -228,36 +235,68 @@ execution, or load an options file on non-interactive execution;</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'># Running the tool without any option will start the GUI with the default or
-# last used settings
+# last used settings, in interactive mode (i.e., with gui = TRUE).
+
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'>MODIStsp</span>()
-<span class='co'># }</span><div class='input'>
-# Running the tool using the settings previously saved in a specific options
+<span class='co'># }</span><div class='input'># Running the tool using the settings previously saved in a specific options
 # file
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>)
-<span class='co'># }</span><div class='input'>
-# Running the tool using the settings previously saved in a specific option file
-# and specifying the extent from a spatial file allows to re-use the same 
-# processing settings to perform download and reprocessing on a different area
+
+# **NOTE** Output files of examples are saved to file.path(tempdir(), "MODIStsp").
+# You can run the examples with `gui = TRUE` to set a different output folder!
 
 </div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
-  <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/yourspatialfile.shp"</span> )
-<span class='co'># }</span><div class='input'>
-# Running the tool using the settings previously saved in a
-# specific options file and specifying each time the extent from a different
-# spatial file (e.g., to perform the same processing on several extents)
+<span class='co'># Here we use a test json file saved in MODIStsp installation folder which</span>
+<span class='co'># downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)</span>
+<span class='co'># and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.</span>
 
+<span class='no'>options_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/test_MOD13A2.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>options_file</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='co'># }</span><div class='input'>
 </div><span class='co'># NOT RUN {</span>
-<span class='no'>extent_list</span> <span class='kw'>=</span> <span class='fu'>list.files</span>(<span class='st'>"X:/path/containing/some/shapefiles/"</span>, <span class='st'>"\\.shp$"</span>)
-<span class='kw'>for</span> (<span class='no'>single_shape</span> <span class='kw'>in</span> <span class='no'>extent_list</span>)
-  <span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='st'>"X:/yourpath/youroptions.json"</span>,
-    <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>single_shape</span> )
-<span class='co'># }</span><div class='input'>    
-# (See http://lbusett.github.io/MODIStsp/articles for additional details and 
-# examples)
-</div></pre>
+<span class='co'># Running the tool using the settings previously saved in a specific option file</span>
+<span class='co'># and specifying the extent from a spatial file allows to re-use the same</span>
+<span class='co'># processing settings to perform download and reprocessing on a different area</span>
+
+<span class='no'>options_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/test_MOD13A2.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='no'>spatial_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/lakeshapes/garda_lake.shp"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>options_file</span>,
+  <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>spatial_file</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='co'># }</span><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='co'># Running the tool using the settings previously saved in a</span>
+<span class='co'># specific options file and specifying each time the extent from a different</span>
+<span class='co'># spatial file (e.g., to perform the same processing on several extents)</span>
+
+<span class='no'>extent_list</span>  <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fu'>system.file</span>(<span class='st'>"testdata/lakeshapes/garda_lake.shp"</span>,
+                              <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>),
+                  <span class='fu'>system.file</span>(<span class='st'>"testdata/lakeshapes/iseo_lake.shp"</span>,
+                              <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>))
+<span class='no'>extent_list</span>
+
+<span class='co'># Note that you can also put all your extent files in a specific folder and</span>
+<span class='co'># create the extent list using for example.</span>
+<span class='co'># extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"), </span>
+<span class='co'>#                          full.names = TRUE, "\\.shp$")</span>
+
+<span class='no'>options_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/test_MOD13A2.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='kw'>for</span> (<span class='no'>single_shape</span> <span class='kw'>in</span> <span class='no'>extent_list</span>) {
+  <span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>options_file</span>,
+           <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>single_shape</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span> )
+}
+
+<span class='co'># output files are places in separate folders: </span>
+<span class='no'>outfiles_garda</span> <span class='kw'>&lt;-</span> <span class='fu'>list.files</span>(<span class='fu'>file.path</span>(<span class='fu'>tempdir</span>(), <span class='st'>"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span>),
+           <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>library</span>(<span class='no'>raster</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></span>(<span class='no'>outfiles_garda</span>[<span class='fl'>1</span>]))
+
+<span class='no'>outfiles_iseo</span> <span class='kw'>&lt;-</span> <span class='fu'>list.files</span>(<span class='fu'>file.path</span>(<span class='fu'>tempdir</span>(), <span class='st'>"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span>),
+           <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></span>(<span class='no'>outfiles_iseo</span>[<span class='fl'>1</span>]))
+
+<span class='co'># See also http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html)</span>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -288,7 +327,7 @@ Luigi Ranghetti, phD (2015-2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghe
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -296,3 +335,4 @@ Luigi Ranghetti, phD (2015-2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghe
 
   </body>
 </html>
+

@@ -70,3 +70,19 @@ inst/testdata/MODIStsp_2018-01-04\.json
 libs/
 
 _main\.Rmd
+
+inst/ExtData/Previous/MODIStsp_Previous\.json
+
+inst/testdata/MODIStsp_2018-02-18\.json
+
+inst/testdata/MODIStsp_Previous\.json
+
+inst/ExtData/modis_sinusoidal_grid_world\.dbf
+
+inst/ExtData/modis_sinusoidal_grid_world\.prj
+
+inst/ExtData/modis_sinusoidal_grid_world\.shp
+
+inst/ExtData/modis_sinusoidal_grid_world\.shx
+
+inst/ExtData/MODIS_TilesPolys\.RData
