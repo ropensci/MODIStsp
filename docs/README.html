@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>D:/Documents/Source/git/MODIStsp/README.md • MODIStsp</title>
+<title>/home/lb/Source/MODIStsp/README.md • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,9 +25,9 @@
 <link href="pkgdown.css" rel="stylesheet">
 <script src="jquery.sticky-kit.min.js"></script>
 <script src="pkgdown.js"></script>
+  <link href="extra.css" rel="stylesheet">
   
-  
-<meta property="og:title" content="D:/Documents/Source/git/MODIStsp/README.md" />
+<meta property="og:title" content="/home/lb/Source/MODIStsp/README.md" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -146,7 +146,7 @@
       <div class="row">
   <div class="contents col-md-12">
     <div class="page-header">
-      <h1>D:/Documents/Source/git/MODIStsp/README.md</h1>
+      <h1>/home/lb/Source/MODIStsp/README.md</h1>
     </div>
 
 
@@ -217,7 +217,7 @@
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes) from github:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>gWidgetsRGtk2</code> library beforehand:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>)
 <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
@@ -250,7 +250,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 </div>
 <div id="installing-on-mac" class="section level2">
 <h2 class="hasAnchor">
@@ -259,11 +259,11 @@
 <p>To properly install <code>MODIStsp</code> you will need to first install package <code>RGTk2</code>. This is a somehow difficult operation. The following instructions should help: <br></p>
 <p><strong>1. Check your Mac OS X version and update if necessary: </strong></p>
 <p>Enter the following command in terminal to check your macOS version. Expected output is as below the dashed line —.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">~</span>$ <span class="ex">sw_vers</span>  
-<span class="ex">------------------------</span>  
-<span class="ex">ProductName</span>:    Mac OS X  
-<span class="ex">ProductVersion</span>: 10.12.6  
-<span class="ex">BuildVersion</span>:   16G29  </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r"><span class="op">~</span><span class="er">$</span><span class="st"> </span>sw_vers  
+<span class="op">------------------------</span><span class="st">  </span>
+ProductName<span class="op">:</span><span class="st">    </span>Mac OS X  
+ProductVersion<span class="op">:</span><span class="st"> </span><span class="fl">10.12</span>.<span class="dv">6</span>  
+BuildVersion<span class="op">:</span><span class="st">   </span>16G29  </code></pre></div>
 <p>If your system is above 10.11, continue. Otherwise, upgrade it to Sierra.</p>
 <p>Install homebrew if you do not have it already installed. homebrew is a very convenient package manager for macOS. To do so, open a terminal, copy the following command in it and hit Enter:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">~</span>$ <span class="ex">/usr/bin/ruby</span> -e <span class="st">"</span><span class="va">$(</span><span class="ex">curl</span> -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="va">)</span><span class="st">"</span></code></pre></div>
@@ -273,9 +273,16 @@
 <span class="ex">~</span>$ <span class="bu">echo</span> <span class="st">"export PATH=/usr/local/bin:</span><span class="va">$PATH</span>
 <span class="st">export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig"</span> <span class="op">&gt;&gt;</span> ~/.bash_profile
 <span class="ex">~</span>$ <span class="bu">source</span> ~/.bash_profile</code></pre></div>
-<p><strong>2. Install the <code>cairo</code> library with x11 support</strong>. To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:</p>
+<p><br></p>
+<p><strong>2. Install the <code>cairo</code> library with x11 support</strong>. Enter the following into your terminal:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">~</span>$ <span class="ex">brew</span> uninstall --force cairo --ignore-dependencies
+<span class="ex">~</span>$ <span class="ex">brew</span> cask install xquartz
+<span class="ex">~</span>$ <span class="ex">brew</span> install --with-x11 cairo</code></pre></div>
+<p><br></p>
+<p><strong>3. Install the <code>gtk+</code> library</strong>:</p>
+<p>To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">~</span>$ <span class="ex">brew</span> edit gtk+</code></pre></div>
-<p>A text editor will open. Look in the file, and find a section that begins with “def install”. Substitute the current <code>args</code> with the following text:</p>
+<p>A text editor will open. Look in the file, and find a section that begins with “def install”. Substitute the current <code>args</code> section with the following text:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">def</span> install
  <span class="ex">args</span> = [
          <span class="st">"--disable-dependency-tracking"</span>,
@@ -288,14 +295,15 @@
          <span class="st">"--with-gdktarget=x11"</span>,
          <span class="st">"--enable-x11-backend"</span>
         ]</code></pre></div>
-<p>Save the modified file using <code>ctrl+x ctrl+c</code>, followed by <code>y</code> to quit emacs. <br></p>
-<p><strong>3. Install the <code>gtk+</code> library</strong> by issuing this command:</p>
+<p>Save the modified file using <code>ctrl+x ctrl+c</code>, followed by <code>y</code> to quit emacs. Now install the library using:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">~</span>$ <span class="ex">brew</span> install --build-from-source --verbose gtk+</code></pre></div>
+<p><br></p>
 <p><strong>4. Update your path</strong> so that <code>gtk+</code> is recognized, using:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">~</span>$ <span class="bu">export</span> <span class="va">PKG_CONFIG_PATH=</span>/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig</code></pre></div>
+<p><br></p>
 <p><strong>5. Install <code>RGtk2</code> from source</strong>:</p>
 <ul>
-<li><p><strong>Download the newest source file for RGtk2</strong> from <a href="https://cran.r-project.org/web/packages/RGtk2/index.html" class="uri">https://cran.r-project.org/web/packages/RGtk2/index.html</a>.</p></li>
+<li><p><strong>Download the newest source file for RGtk2</strong> from <a href="https://CRAN.R-project.org/package=gWidgetsRGtk2" class="uri">https://CRAN.R-project.org/package=gWidgetsRGtk2</a>.</p></li>
 <li><p>Assuming that the path to this file is ~/Downloads. Run the following in terminal (change the path if you did not download in ~/Downloads):</p></li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">~</span>$ <span class="bu">cd</span> ~/Downloads
@@ -309,7 +317,7 @@
 <span class="kw"><a href="reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>or the development version from GitHub:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools) 
-<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
 <span class="kw"><a href="reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>Good luck!</p>
 </div>
