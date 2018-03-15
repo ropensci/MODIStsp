@@ -13,8 +13,6 @@ Boschetti
 BRDF
 busetto
 Busetto
-cairo
-cairoDevice
 centroid
 centroids
 Chemin
@@ -55,8 +53,6 @@ gdal
 GDAL
 gdalinfo
 gdalUtils
-gdk
-gdkx
 Geosciences
 Geospatial
 GeoTiff
@@ -82,7 +78,6 @@ hdfs
 HDFs
 Hengl
 homebrew
-Homebrew
 http
 https
 Huete
@@ -151,6 +146,7 @@ Preprocessed
 preprocesses
 priori
 ProdCode
+ProdName
 ProdOpts
 Progra
 proj
@@ -166,7 +162,6 @@ rasters
 RasterStack
 rasterStacks
 rdata
-Rdata
 RData
 reflectance
 Reflectance
@@ -179,7 +174,6 @@ Reprojection
 req
 rescaled
 rescaling
-rgdal
 RGRI
 RGtk
 rmarkdown
@@ -206,7 +200,6 @@ SWIR
 tempdir
 tidyverse
 tif
-tobybot
 toc
 Tomislav
 UbuntuGIS
