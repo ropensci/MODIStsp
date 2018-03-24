@@ -227,12 +227,14 @@ MODIStsp_GUI <- function(general_opts,
 
   sens_label     <- glabel(text = " Platform:", container = satprod1_group)
 
-  wids$sens      <- gcombobox(items     = c("Terra"),
+  wids$sens      <- gcombobox(items     = c("Terra", "Aqua", "Both"),
                               container = satprod1_group,
                               text      = "Select Platform", selected = 1)
 
   if (sel_prodopts[[general_opts$prod_version]]$combined == 1) {
     gWidgets::enabled(wids$sens) <- FALSE
+    wids$sens[] <- "Combined"
+    gWidgets::svalue(wids$sens)  <- "Combined"
   } else {
     wids$sens[]       <- c("Terra", "Aqua", "Both")
     gWidgets::svalue(wids$sens) <- general_opts$sensor

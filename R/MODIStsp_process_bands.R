@@ -223,7 +223,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # using vrts fails in this case so we have to save a temporary tif
     if (Sys.info()['sysname'] == "Windows") {
       temptif <- tempfile(fileext = ".tif")
-      gdal_translate(outfile_vrt_prev, temptif, verbose = FALSE)
+      gdalUtils::gdal_translate(outfile_vrt_prev, temptif, verbose = FALSE)
       outfile_vrt_prev <- temptif
     }
     recl_in <- stack(outfile_vrt_prev)

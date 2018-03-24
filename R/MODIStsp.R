@@ -462,6 +462,11 @@ MODIStsp <- function(gui               = TRUE,
       general_opts$end_y   <- max(d_bbox_mod_tiled$V)
     }
     
+    # Save options to previous file
+    previous_jsfile_tosave <- file.path(previous_dir, "MODIStsp_Previous.json")
+    jsonlite::write_json(general_opts, previous_jsfile_tosave, pretty = TRUE,
+                         auto_unbox = TRUE)
+    
     #   ________________________________________________________________________
     #   launch MODIStsp_process to Download and preprocess the selected     ####
     #   images. To do so, retrieve all processing parameters from either
@@ -546,15 +551,9 @@ MODIStsp <- function(gui               = TRUE,
     
     # At the end of a successful execution, save the options used in the main
     # output folder as a JSON file with name containing the date of processing.
-    # Also update "MODIStsp_previous.json.
-    opts_jsfile  <- file.path(general_opts$out_folder,
+    opts_jsfile <- file.path(general_opts$out_folder,
                               paste0("MODIStsp_", Sys.Date(), ".json"))
-    
-    general_opts <- jsonlite::fromJSON(previous_jsfile)
-    previous_jsfile_tosave <- file.path(previous_dir, "MODIStsp_Previous.json")
     jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
-                         auto_unbox = TRUE)
-    jsonlite::write_json(general_opts, previous_jsfile_tosave, pretty = TRUE,
                          auto_unbox = TRUE)
     
     

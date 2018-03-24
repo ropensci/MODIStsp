@@ -26,9 +26,7 @@
 "resampling": "near",
 "out_format": "GTiff",
 "ts_format": [],
-"compress": {
- "High (DEFLATE)": "DEFLATE" 
-},
+"compress": "DEFLATE",
 "nodata_change": "No",
 "scale_val": "No",
 "delete_hdf": "Yes",

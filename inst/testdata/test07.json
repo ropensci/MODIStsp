@@ -24,9 +24,7 @@
 "resampling": "near",
 "out_format": "GTiff",
 "ts_format": ["ENVI Meta", "GDAL vrt"],
-"compress": {
- "None": "None" 
-},
+"compress": "None",
 "nodata_change": "No",
 "scale_val": "No",
 "delete_hdf": "Yes",

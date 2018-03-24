@@ -24,9 +24,7 @@
 "resampling": "mode",
 "out_format": "ENVI",
 "ts_format": ["GDAL vrt"],
-"compress": {
- "Medium (LZW)": "LZW" 
-},
+"compress": "LZW",
 "nodata_change": "No",
 "scale_val": "No",
 "delete_hdf": "Yes",

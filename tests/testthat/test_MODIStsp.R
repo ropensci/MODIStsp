@@ -185,7 +185,7 @@ context("MODIStsp Test 4: HTTP download from NSIDC (seasonal)")
 testthat::test_that("Tests on MODIStsp", {
 
   # skip("Skip tests - since they rely on download they are only run locally")
-  # skip_on_cran()
+  skip_on_cran()
   # skip_on_travis()
 
   MODIStsp(test = 4)
@@ -250,7 +250,7 @@ testthat::test_that("Tests on MODIStsp", {
 context("MODIStsp Test 5: HTTP download from USGS, resize and reproject")
 testthat::test_that(
   "Tests on MODIStsp", {
-    # skip_on_cran()
+    skip_on_cran()
     # skip_on_travis()
 
     MODIStsp(test = 5)
@@ -279,7 +279,7 @@ testthat::test_that(
 context("MODIStsp Test 6: FTP download and mosaicing of MODIS tiles")
 testthat::test_that(
   "Tests on MODIStsp", {
-    # skip_on_cran()
+    skip_on_cran()
     # skip_on_travis()
 
     MODIStsp(test = 6)
@@ -315,7 +315,7 @@ testthat::test_that(
 context("MODIStsp Test 7: Passing the extent with a spatial file")
 testthat::test_that(
   "Tests on MODIStsp", {
-    # skip_on_cran()
+    skip_on_cran()
     # skip_on_travis()
 
     MODIStsp(

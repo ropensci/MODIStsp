@@ -24,9 +24,7 @@
 "resampling": "near",
 "out_format": "ENVI",
 "ts_format": ["R rasterStack", "ENVI Meta", "GDAL vrt"],
-"compress": {
- "None": "None"
-},
+"compress": "None",
 "nodata_change": "Yes",
 "scale_val": "No",
 "delete_hdf": "Yes",
