@@ -25,7 +25,7 @@
 #' @param date_name `character` Date of acquisition of the images to be downloaded.
 #' @param gui `logical` Indicates if on an interactive or non-interactive execution
 #'  (only influences where the log messages are sent).
-#' @param mess_lab pointer to the gWidget used to issue processing messages in 
+#' @param mess_lab pointer to the gWidget used to issue processing messages in
 #'  when gui = TRUE.
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @inheritParams MODIStsp_process
@@ -33,10 +33,9 @@
 #' @rdname MODIStsp_download
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
-#' @importFrom httr RETRY authenticate content GET progress write_disk
+#' @importFrom httr RETRY authenticate content GET progress write_disk HEAD config
 #' @importFrom xml2 as_list
 #' @importFrom gWidgets gconfirm
-#' @importFrom RCurl getURL
 
 MODIStsp_download <- function(modislist,
                               out_folder_mod,
@@ -52,14 +51,14 @@ MODIStsp_download <- function(modislist,
                               password,
                               sens_sel,
                               date_name,
-                              gui, 
-                              mess_lab, 
+                              gui,
+                              mess_lab,
                               verbose) {
-
+  
   # Cycle on the different files to download for the current date
   for (file in seq_along(modislist)) {
     modisname <- modislist[file]
-
+    
     #   ________________________________________________________________________
     # Try to retrieve the file size of the remote HDF so that if a local    ####
     # file exists but size is different it can be redownloaded
@@ -70,7 +69,7 @@ MODIStsp_download <- function(modislist,
     } else {
       local_filesize <- 0
     }
-
+    
     if (download_server == "http") {
       remote_filename <- paste0(http, date_dir, "/", modisname)
     }
@@ -91,13 +90,13 @@ MODIStsp_download <- function(modislist,
                                    pause_base = 0.1,
                                    pause_cap = 10,
                                    quiet = FALSE)
-
+        
         # if user/password are not valid, notify
         if (size_string["status_code"] == 401) {
           stop("Username and/or password are not valid. Please retry with the
              correct ones or try with ftp download.")
         }
-
+        
         if (size_string$status_code == 200) {
           remote_filesize <- as.integer(
             xml2::as_list(
@@ -129,15 +128,15 @@ MODIStsp_download <- function(modislist,
         # On ftp download, use getURL to find out the remote file size ----
         attempt <- 0
         while (attempt < n_retries) {
-          size_string <- try(RCurl::getURL(
-            remote_filename,
-            nobody = 1L, header = 1L,
-            # keep a long timeout, since traversing ftp folders can be slow!
-            .opts = list(timeout = 240, maxredirs = 5, verbose = FALSE))
-          )
+          
+          size_string <- try(suppressWarnings(
+            httr::HEAD(remote_filename, quiet = TRUE,
+                       httr::config(nobody = TRUE))),
+            silent = TRUE)
           if (class(size_string) != "try-error") {
-            remote_filesize <- as.integer(gsub("[^:]+: ([0-9]+)\\r.*", "\\1",
-                                               size_string))
+            remote_filesize <- as.integer(
+              size_string[["headers"]][["content-length"]]
+            )
             # on success, set a high value to attempt so to end the while loop
             attempt <- n_retries + 1
           } else {
@@ -171,14 +170,14 @@ MODIStsp_download <- function(modislist,
         remote_filesize <- local_filesize
       }
     }
-
+    
     #   ________________________________________________________________________
     #   Download required HDF images                                        ####
     #   (If HDF not existing locally, or existing with different size)
     #
-
+    
     if (!file.exists(local_filename) | local_filesize != remote_filesize) {
-
+      
       # update messages
       mess_text <- paste("Downloading", sens_sel, "Files for date:",
                          date_name, ":", which(modislist == modisname),
@@ -190,7 +189,7 @@ MODIStsp_download <- function(modislist,
       #  _______________________________________________________________________
       #  while loop: try to download n_retries times  ####
       while (attempt < n_retries) {
-
+        
         if (download_server == "http") {
           # http download - aria
           if (use_aria == TRUE) {
@@ -202,7 +201,7 @@ MODIStsp_download <- function(modislist,
               " --allow-overwrite --file-allocation=none --retry-wait=2",
               " --http-user=", user,
               " --http-passwd=", password)
-
+            
             # intern=TRUE for Windows, FALSE for Unix
             download <- try(system(aria_string,
                                    intern = Sys.info()["sysname"] == "Windows"))
@@ -228,13 +227,14 @@ MODIStsp_download <- function(modislist,
                                    intern = Sys.info()["sysname"] == "Windows"))
           } else {
             # ftp download - httr
-            download <- try(httr::GET(remote_filename,
-                                      httr::progress(),
-                                      httr::write_disk(local_filename,
-                                                       overwrite = TRUE)))
+            download <- try(suppressWarnings(
+              httr::GET(remote_filename,
+                        httr::progress(),
+                        httr::write_disk(local_filename, overwrite = TRUE)))
+            )
           }
         }
-
+        
         # Check for errors on download try
         if (class(download) == "try-error" |
             !is.null(attr(download, "status"))) {
@@ -244,9 +244,9 @@ MODIStsp_download <- function(modislist,
           Sys.sleep(1)    # sleep for a while....
         } else {
           if (download_server == "http" & use_aria == FALSE) {
-
+            
             if (download$status_code != 200 &
-                length(httr::content(download, 
+                length(httr::content(download,
                                      "text",
                                      encoding = "UTF-8")) == 1) {
               # on error, delete last HDF file (to be sure no incomplete
@@ -289,6 +289,10 @@ MODIStsp_download <- function(modislist,
                "Later!")
         }
       }
+    } else {
+      mess_text <- paste("HDF File:", modisname, 
+                         "already exists on your system. Skipping download!")
+      if (verbose) process_message(mess_text, gui, mess_lab, verbose)
     }
   }
 }

@@ -106,12 +106,12 @@ get_mod_dirs <- function(http, ftp, download_server,
     while (!success) {
       # send request to server
       year_ftp <- paste0(ftp, yy, "/")
-      response <- try(httr::RETRY("GET",
+      response <- try(suppressWarnings(httr::RETRY("GET",
                                   year_ftp,
                                   times = n_retries,
                                   pause_base = 0.1,
                                   pause_cap = 3,
-                                  quiet = FALSE))
+                                  quiet = FALSE)))
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
       if (class(response) == "try-error") {

@@ -52,7 +52,7 @@
 #'  this example: fun=function(x,...)length(x). Defaults to "mean"
 #' @param out_format `character ["xts" | "dframe"]` If dframe, the output is a
 #'  data frame with dates in the first column and extracted data in the others,
-#'  otherwise it is a `xts` object, Default: "xts2
+#'  otherwise it is a `xts` object, Default: "xts"
 #' @param small `logical` If TRUE, and input is polygons, then values are
 #'  returned also for polygons not covering at least one raster cell. "Included"
 #' cells in this case depend on the values of the "small_method" parameter.
@@ -92,12 +92,18 @@
 #' # over the Como Lake (Italy). It then extracts data on polygons corresponding
 #' # to different land cover classes saved in testdata/extract_polys.shp
 #'
-#' # first, prepare aa test dataset.
+#' # First, prepare the test dataset.
+#' # __NOTE__ To avoid redownloading, here we copy some test data from MODIStsp
+#' # installation folder to tempdir and use it to create a test time series.
+#'
+#' test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI",
+#'                             package = "MODIStsp")
+#' dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"),
+#'            showWarnings = FALSE, recursive = TRUE)
+#' file.copy(list.files(test_folder, full.names = TRUE),
+#'           file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"))
 #'
 #' opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
-#' options   <- jsonlite::read_json(opts_file)
-#' options$out_folder <- system.file("testdata/", package = "MODIStsp")
-#' jsonlite::write_json(options, opts_file, auto_unbox = TRUE, pretty = TRUE)
 #' MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
 #'
 #' # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
@@ -105,9 +111,10 @@
 #' # __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"
 #' # subfolder of your main output folder - see http://lbusett.github.io/MODIStsp/articles/output.html)
 #'
-#' # specify the filename of the RData RasterStack of interest
-#' stack_file  <- system.file("testdata/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
-#'   "MOD13A1_NDVI_1_2016_353_2016_RData.RData", package = "MODIStsp")
+#' # Specify the filename of the RData RasterStack of interest
+#' stack_file  <- file.path(tempdir(),
+#'  "MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
+#'   "MOD13A1_NDVI_1_2016_353_2016_RData.RData")
 #' basename(stack_file)
 #'
 #' ts_data <- get(load(stack_file))
@@ -115,8 +122,8 @@
 #'
 #' # Now load a shapefile containing polygons from which we want to extract data
 #'
-#' polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp", package = "MODIStsp"),
-#'                            verbose = FALSE)
+#' polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp",
+#'                            package = "MODIStsp"), verbose = FALSE)
 #' polygons
 #'
 #' # Finally, extract the average values for each polygon and date and plot the
@@ -145,7 +152,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
                              small_method = "centroids",
                              na.rm      = TRUE, verbose = FALSE) {
 
-  .SD            <- NULL # Workaround to avoid note on package check
+  .SD <- NULL # Workaround to avoid note on package check
 
 
   if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
@@ -157,12 +164,12 @@ MODIStsp_extract <- function(in_rts, sp_object,
   if (length(start_date) == 0) {
     start_date <- min(raster::getZ(in_rts))
     if (verbose)
-      message("Starting date not provided - Using the first date in the stack") #nocov
+      message("Starting date not provided - Using the first date in the stack") #nocov #nolint
   }
   if (length(end_date) == 0) {
     end_date <- max(raster::getZ(in_rts))
     if (verbose)
-      message("Ending date not provided - Using the last date in the stack") #nocov
+      message("Ending date not provided - Using the last date in the stack") #nocov #nolint
   }
   if (!class(start_date) %in% c("Date", "POSIXct", "POSIXlt")) {
     start_date <- try(as.Date(start_date), silent = TRUE)
@@ -191,8 +198,9 @@ MODIStsp_extract <- function(in_rts, sp_object,
                                "SpatialPoints",
                                "SpatialLines", "SpatialLinesDataFrame")) {
     if (class(sp_object) == "character") {
-      sp_object <- try(rgdal::readOGR(dirname(sp_object),
-                               basename(tools::file_path_sans_ext(sp_object))))
+      sp_object <- try(
+        rgdal::readOGR(dirname(sp_object),
+                       basename(tools::file_path_sans_ext(sp_object))))
       if (class(sp_object) == "try-error") {
         stop("sp_object is not a valid Spatial object or Shapefile")
       }
@@ -233,10 +241,10 @@ MODIStsp_extract <- function(in_rts, sp_object,
       ts <- matrix(nrow = length(sel_dates), ncol = length(shape[, 1]))
       for (f in seq_along(sel_dates)) {
         if (verbose == TRUE) {
-          meassage("Extracting data from date: ", dates[sel_dates[f]]) #nocov
+          message("Extracting data from date: ", dates[sel_dates[f]]) #nocov
         }
         ts[f, ] <- raster::extract(in_rts[[sel_dates[f]]], shape,
-                           fun = FUN)
+                                   fun = FUN)
       }
       ts <- as.data.frame(ts)
       if (length(id_field) == 1) {
@@ -249,15 +257,15 @@ MODIStsp_extract <- function(in_rts, sp_object,
       if (out_format == "dframe") {
         ts <- cbind(date = dates[sel_dates], ts)
       }
-    # On polygons, extract by rasterization !
+      # On polygons, extract by rasterization !
     } else {
       if (verbose) message("Rasterizing shape") #nocov
 
       tempshape <- tempfile(tmpdir = tempdir(), fileext = ".shp")
       rgdal::writeOGR(shape, dsn = dirname(tempshape),
-               layer = basename(tools::file_path_sans_ext(tempshape)),
-               driver = "ESRI Shapefile", overwrite_layer = TRUE,
-               verbose = FALSE)
+                      layer = basename(tools::file_path_sans_ext(tempshape)),
+                      driver = "ESRI Shapefile", overwrite_layer = TRUE,
+                      verbose = FALSE)
       if (verbose) {
         message("Writing temporary rasterized shapefile") #nocov
       }
@@ -268,18 +276,20 @@ MODIStsp_extract <- function(in_rts, sp_object,
       }
       if (max(shape@data$mdxtnq) <= 255) {
         ot <- "Byte"
-      }       else {
+      } else {
+        #nocov start
         if (max(shape@data$mdxtnq) <= 65536) {
-          #nocov start
+
           ot <- "Int16"
         }
         else {
           ot <- "Int32"
-          #nocov end
         }
+        #nocov end
       }
       gdalUtils::gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts),
-                     te = ext_conv(in_rts[[1]]), a = "mdxtnq", ot = ot)
+                                te = ext_conv(in_rts[[1]]), a = "mdxtnq",
+                                ot = ot)
       zone_raster <- raster::raster(tempraster)
       zones       <- raster::getValues(zone_raster)
       ok_zones    <- which(is.finite(zones) & zones != 0)
@@ -289,7 +299,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
 
       for (f in seq_along(sel_dates)) {
         if (verbose) {
-          message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov
+          message(paste0("Extracting data from date: ", dates[sel_dates[f]])) #nocov #nolint
         }
 
         value <- raster::getValues(in_rts[[sel_dates[f]]])[ok_zones]
@@ -321,10 +331,12 @@ MODIStsp_extract <- function(in_rts, sp_object,
                                  names(ts))
           pos_missing <- which(
             as.character(shape@data[, eval(id_field)]) %in% miss_feat
-            )
+          )
         } else {
-          pos_missing <- miss_feat <- which(as.character(
-            shape@data[, "mdxtnq"]) %in% miss_feat)
+          miss_feat <- setdiff(as.character(shape@data[, "mdxtnq"]), names(ts))
+          pos_missing <- which(
+            as.character(shape@data[, "mdxtnq"]) %in% miss_feat
+          )
         }
 
         shpsub <- shape[pos_missing, ]
@@ -337,7 +349,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
           if (small_method == "centroids") {
             ts_mis[f, ] <- raster::extract(in_rts[[sel_dates[f]]],
                                            sp::coordinates(shpsub),
-                                   fun = mean)
+                                           fun = mean)
 
           } else {
 

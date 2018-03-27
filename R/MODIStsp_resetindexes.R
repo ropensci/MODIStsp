@@ -16,6 +16,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Remove all custom-defined spectral indexes from an options file
 #' 
 #' # Add a custom index for testing purposes
@@ -37,6 +38,7 @@
 #'  MODIStsp_resetindexes(opts_jsfile)
 #'  opts <- jsonlite::fromJSON(opts_jsfile)
 #'  opts$custom_indexes[1]
+#'  }
 #'  
 MODIStsp_resetindexes <- function(opts_jsfile = NULL) {
   

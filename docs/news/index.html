@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,7 @@
 <script src="../pkgdown.js"></script>
   <link href="../extra.css" rel="stylesheet">
   
+<meta property="og:title" content="All news" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -154,11 +157,29 @@
 <div id="main-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#main-changes" class="anchor"></a>Main changes</h3>
+<div id="breaking-changes" class="section level4">
+<h4 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h4>
+<ul>
+<li>Due to improvements and changes in the GUI (see below), <code>MODIStsp</code> .json options files saved with older versions are no longer supported. Users will be informed of this if trying to use an obsolete json file.</li>
+</ul>
+</div>
+<div id="updates-in-supported-products" class="section level4">
+<h4 class="hasAnchor">
+<a href="#updates-in-supported-products" class="anchor"></a>Updates in supported products</h4>
+<ul>
+<li><p>Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97"><a href='https://github.com/lbusett/MODIStsp/issues/97'>#97</a></a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p></li>
+<li>Added support for Evapotraspiration products (MOD12A2 and MOD12A3)</li>
+<li>Added support for Vegetation Continuous Fields product (MOD44B)</li>
+<li><p>Checked availability of products over ftp and set not available products to “Not Available” to allow graceful fail.</p></li>
+</ul>
+</div>
 <div id="improvements-in-download-functions" class="section level4">
 <h4 class="hasAnchor">
 <a href="#improvements-in-download-functions" class="anchor"></a>Improvements in download functions</h4>
 <ul>
-<li>Use of <code><a href="http://www.rdocumentation.org/packages/httr/topics/RETRY">httr::RETRY</a></code> to improve behavior while navigating the servers to retrieve available files and while downloading hdf file (when use_aria == FALSE)</li>
+<li><p>Improvements in GUI. It is now possible to set the processing extent interactively using the “Select on Map” button. This opens a browser window allowing to select and extent.</p></li>
+<li><p>Use of <code><a href="http://www.rdocumentation.org/packages/httr/topics/RETRY">httr::RETRY</a></code> to improve behavior while navigating the servers to retrieve available files and while downloading hdf file (when use_aria == FALSE), thus removing dependency to RCurl.</p></li>
 </ul>
 </div>
 <div id="extensive-code-refactoring-for-submission-to-ropensci-" class="section level4">
@@ -166,6 +187,7 @@
 <a href="#extensive-code-refactoring-for-submission-to-ropensci-" class="anchor"></a>Extensive code refactoring for submission to ropensci.</h4>
 <ul>
 <li>Long functions were simplified/split into smaller functions to allow for easier maintenance</li>
+<li>GUI event handlers were moved into dedicated “R” files</li>
 <li>Extensive code linting to abide to ropensci standards</li>
 <li>Switch to jsonlite/xml2 to abide to ropensci standards</li>
 <li>Removal of some less-used dependencies (e.g., hash)</li>
@@ -187,22 +209,13 @@
 <li>Several new tests added, bringing coverage above 90%</li>
 </ul>
 </div>
-<div id="updates-in-supported-products" class="section level4">
-<h4 class="hasAnchor">
-<a href="#updates-in-supported-products" class="anchor"></a>Updates in supported products</h4>
-<ul>
-<li><p>Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97">#97</a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p></li>
-<li>Added support for Evapotraspiration products (MOD12A2 and MOD12A3)</li>
-<li>Added support for Vegetation Continuous Fields product (MOD44B)</li>
-<li><p>Checked availability of products over ftp and set not available products to “Not Available” to allow graceful fail.</p></li>
-</ul>
-</div>
 <div id="new-functions" class="section level4">
 <h4 class="hasAnchor">
 <a href="#new-functions" class="anchor"></a>New functions</h4>
 <ul>
-<li>Added <code>MODIStsp_resetindexes</code> to remove all custom indexes from a MODIStsp json options file</li>
+<li>Added <code>MODIStsp_resetindexes</code> to remove all custom indexes from a MODIStsp json options file and <code>MODIStsp_reset_options</code> to reset MODIStsp options to default.</li>
 </ul>
+<hr>
 </div>
 </div>
 </div>
@@ -243,12 +256,12 @@
 <ul>
 <li><p>Fixed a bug preventing the “last” choice (or that present in the json file) from correctly showing in the GUI upon launch/restore of a saved json file (commit <a href="https://github.com/lbusett/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3">633c2dd</a>)</p></li>
 <li>
-<p>Fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in <code>gdalbuildvrt</code>, causing sometimes an incorrect translation from HDF to output formats (<a href="https://github.com/lbusett/MODIStsp/issues/72">#72</a>).</p>
+<p>Fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks to Rob Critchlow for signaling this). The bug was due to improper handling of UInt32 data in <code>gdalbuildvrt</code>, causing sometimes an incorrect translation from HDF to output formats (<a href="https://github.com/lbusett/MODIStsp/issues/72"><a href='https://github.com/lbusett/MODIStsp/issues/72'>#72</a></a>).</p>
 <p><strong>M*D09A1</strong> - 500m Reflectance Band Quality (V005 and V006); <strong>M*DO9CMG</strong> - Coarse Resolution QA (V005 and V006); <strong>M*D09CMG</strong> - Coarse Resolution Number Mapping (V006); <strong>M*D09GA</strong> - 500m Reflectance Band Quality (V005 and V006); <strong>M*DOCGA</strong> - Band quality for MODIS bands 8-15 (V006); <strong>M*D11C3</strong> - Days with clear-sky conditions and validated LSTs; Nights with clear-sky conditions and validated LSTs (V005 and V006); <strong>MCD43A2</strong> - BRDF_Albedo_Band_Quality (V005 and V006).</p>
 </li>
-<li><p>Fixed a bug affecting creation of time series files (RData and virtual rasters) on all MCD products (<a href="https://github.com/lbusett/MODIStsp/issues/77">#77</a>)</p></li>
-<li><p>Fixed a bug a error on creation of “burn_date” layers for MCD45A1 product (<a href="https://github.com/lbusett/MODIStsp/issues/77">#77</a>)</p></li>
-<li><p>Fixed bugs on specifying spatial extent files on non-interactive execution (<a href="https://github.com/lbusett/MODIStsp/issues/75">#75</a>)</p></li>
+<li><p>Fixed a bug affecting creation of time series files (RData and virtual rasters) on all MCD products (<a href="https://github.com/lbusett/MODIStsp/issues/77"><a href='https://github.com/lbusett/MODIStsp/issues/77'>#77</a></a>)</p></li>
+<li><p>Fixed a bug a error on creation of “burn_date” layers for MCD45A1 product (<a href="https://github.com/lbusett/MODIStsp/issues/77"><a href='https://github.com/lbusett/MODIStsp/issues/77'>#77</a></a>)</p></li>
+<li><p>Fixed bugs on specifying spatial extent files on non-interactive execution (<a href="https://github.com/lbusett/MODIStsp/issues/75"><a href='https://github.com/lbusett/MODIStsp/issues/75'>#75</a></a>)</p></li>
 </ul>
 <hr>
 </div>
@@ -300,7 +313,7 @@
 <li>Restart <code>MODIStsp</code>
 </li>
 </ol>
-<br>
+<p><br></p>
 </li>
 <li><p>Timeouts of httr/ftp requests were increased to prevent problems on download on slow connections</p></li>
 </ul>
@@ -309,8 +322,8 @@
 <h3 class="hasAnchor">
 <a href="#bug-fixing-1" class="anchor"></a>Bug fixing:</h3>
 <ul>
-<li>Fixed bug on FTP download speed (Issue <a href="https://github.com/lbusett/MODIStsp/issues/65">#65</a>)</li>
-<li>Fixed bug on download of tile 0, preventing download of images with DOY 001 and of all “yearly based” products (e.g., MOD17)(Issue <a href="https://github.com/lbusett/MODIStsp/issues/64">#64</a>)</li>
+<li>Fixed bug on FTP download speed (Issue <a href="https://github.com/lbusett/MODIStsp/issues/65"><a href='https://github.com/lbusett/MODIStsp/issues/65'>#65</a></a>)</li>
+<li>Fixed bug on download of tile 0, preventing download of images with DOY 001 and of all “yearly based” products (e.g., MOD17)(Issue <a href="https://github.com/lbusett/MODIStsp/issues/64"><a href='https://github.com/lbusett/MODIStsp/issues/64'>#64</a></a>)</li>
 <li>Fixed other bugs affecting FTP download (<a href="https://github.com/lbusett/MODIStsp/commit/efbf1b469e7518ffc8a7ec6d9922242d6a5c228f" class="uri">https://github.com/lbusett/MODIStsp/commit/efbf1b469e7518ffc8a7ec6d9922242d6a5c228f</a>, <a href="https://github.com/lbusett/MODIStsp/commit/1dc53a5ff5b355965acec86678a3104bd2d27fd9" class="uri">https://github.com/lbusett/MODIStsp/commit/1dc53a5ff5b355965acec86678a3104bd2d27fd9</a>, <a href="https://github.com/lbusett/MODIStsp/commit/fa6c7b42eadce516a2f781604c9db28418120f36" class="uri">https://github.com/lbusett/MODIStsp/commit/fa6c7b42eadce516a2f781604c9db28418120f36</a>)</li>
 </ul>
 <hr>
@@ -324,10 +337,10 @@
 <h3 class="hasAnchor">
 <a href="#major-changes-2" class="anchor"></a>Major Changes</h3>
 <ul>
-<li><p>Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue <a href="https://github.com/lbusett/MODIStsp/issues/55">#55</a>) on devel</p></li>
-<li><p>Added functionality for downloading “partial” years(Issue <a href="https://github.com/lbusett/MODIStsp/issues/54">#54</a>) on devel</p></li>
-<li><p>Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue <a href="https://github.com/lbusett/MODIStsp/issues/59">#59</a>) on master/devel</p></li>
-<li><p>Added functionality for accelerating download using aria2c (Issue <a href="https://github.com/lbusett/MODIStsp/issues/55">#55</a>) on devel</p></li>
+<li><p>Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, MOD10C1, MOD10C2, MOD10CM (Issue <a href="https://github.com/lbusett/MODIStsp/issues/55"><a href='https://github.com/lbusett/MODIStsp/issues/55'>#55</a></a>) on devel</p></li>
+<li><p>Added functionality for downloading “partial” years (Issue <a href="https://github.com/lbusett/MODIStsp/issues/54"><a href='https://github.com/lbusett/MODIStsp/issues/54'>#54</a></a>) on devel</p></li>
+<li><p>Added functionality for computing vegetation indexes on MCD43A4 (v5-v6), MCD43B4 (v5), MCD43C4 (v5-v6) (Issue <a href="https://github.com/lbusett/MODIStsp/issues/59"><a href='https://github.com/lbusett/MODIStsp/issues/59'>#59</a></a>) on master/devel</p></li>
+<li><p>Added functionality for accelerating download using aria2c (Issue <a href="https://github.com/lbusett/MODIStsp/issues/55"><a href='https://github.com/lbusett/MODIStsp/issues/55'>#55</a></a>) on devel</p></li>
 </ul>
 </div>
 <div id="bug-fixing-2" class="section level3">
@@ -335,11 +348,11 @@
 <a href="#bug-fixing-2" class="anchor"></a>Bug fixing</h3>
 <ul>
 <li><p>Fixed bug on download with aria, throwing an error on partial download on http download with aria (<a href="https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78">6fbc875</a>)</p></li>
-<li><p>Fixed bug on M*D15A2 processing (Issue <a href="https://github.com/lbusett/MODIStsp/issues/60">#60</a>) on devel/master</p></li>
-<li><p>Fixed bug on MCD12Q1 processing (Issue <a href="https://github.com/lbusett/MODIStsp/issues/58">#58</a>) on devel/master</p></li>
-<li><p>Fixed bug on MOD13C2 processing (Issue <a href="https://github.com/lbusett/MODIStsp/issues/52">#52</a>) on devel/master</p></li>
-<li><p>Fixed bug on insertion of custom projection (Issue <a href="https://github.com/lbusett/MODIStsp/issues/57">#57</a>) on devel/master</p></li>
-<li><p>Fixed bug on selection of custom index (Issue <a href="https://github.com/lbusett/MODIStsp/issues/53">#53</a>) on devel/master</p></li>
+<li><p>Fixed bug on M*D15A2 processing (Issue <a href="https://github.com/lbusett/MODIStsp/issues/60"><a href='https://github.com/lbusett/MODIStsp/issues/60'>#60</a></a>) on devel/master</p></li>
+<li><p>Fixed bug on MCD12Q1 processing (Issue <a href="https://github.com/lbusett/MODIStsp/issues/58"><a href='https://github.com/lbusett/MODIStsp/issues/58'>#58</a></a>) on devel/master</p></li>
+<li><p>Fixed bug on MOD13C2 processing (Issue <a href="https://github.com/lbusett/MODIStsp/issues/52"><a href='https://github.com/lbusett/MODIStsp/issues/52'>#52</a></a>) on devel/master</p></li>
+<li><p>Fixed bug on insertion of custom projection (Issue <a href="https://github.com/lbusett/MODIStsp/issues/57"><a href='https://github.com/lbusett/MODIStsp/issues/57'>#57</a></a>) on devel/master</p></li>
+<li><p>Fixed bug on selection of custom index (Issue <a href="https://github.com/lbusett/MODIStsp/issues/53"><a href='https://github.com/lbusett/MODIStsp/issues/53'>#53</a></a>) on devel/master</p></li>
 </ul>
 <hr>
 </div>
@@ -354,7 +367,7 @@
 <ul>
 <li><p>Added functionality for downloading and preprocessing MODIS collection 006 datasets. For products with both 005 and 006 collections, the user can select the version using a new droplist in the GUI.</p></li>
 <li><p>Added functionality for off-line processing. This allows both to <em>i)</em> reprocessing already downloaded data (for example, to create time series for an additional layer) without the need to connect to NASA servers, and <em>ii)</em> process HDF files downloaded outside <em>MODIStsp</em> (e.g., directly from NASA ftp) and stored on the user’s PC, without the need of an active internet connection.</p></li>
-<li><p>Improved the way in which options are saved. Much more readable .JSON files are now used instead than .RData. User options are no longer saved alongside products characteristics. This will allow to re-use an “old” options file even if changes are made on the XML file describing the products.</p></li>
+<li><p>Improved the way in which options are saved. Much more readable. JSON files are now used instead than .RData. User options are no longer saved alongside products characteristics. This will allow to re-use an “old” options file even if changes are made on the XML file describing the products.</p></li>
 <li><p>Improved the GUI interface for specifying additional Spectral Indexes. Hints are now showed to the user, and multiple indexes can be added in the same session.</p></li>
 </ul>
 </div>
@@ -461,7 +474,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
@@ -469,3 +482,4 @@
 
   </body>
 </html>
+

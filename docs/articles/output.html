@@ -8,8 +8,11 @@
 <title>Outputs Format and Naming Conventions • MODIStsp</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Outputs Format and Naming Conventions">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -130,19 +133,24 @@
 <a href="#single-band-outputs" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Single-band outputs</strong>
 </h1>
 <p>Output raster files are saved in specific subfolders of the main output folder. In particular, <strong>a separate subfolder</strong> is created for each processed original MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one image for each processed date, created according to the following naming conventions:</p>
-<pre><code>myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"</code></pre>
-<p><font size="2"> <em>(e.g., myoutfolder/NDVI/MOD13Q1_NDVI_2000_065.dat)</em> </font></p>
+<pre><code>myoutfolder/"ProdName"/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"</code></pre>
 <p>, where:</p>
 <ul>
 <li>
+<strong><em>ProdName</em></strong> is a short name describing the MODIS product from which the datasets were derived (e.g., VI_16Days_1Km_v6);</li>
+<li>
 <strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
 <li>
-<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
+<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1 - Note that if you choose to process both “Terra” and “Aqua” data, data coming from either platform will be placed in the same folder and you will have for example both “MOD13Q1…” and “MYD13Q1…” files in the output folder);</li>
 <li>
 <strong><em>YYYY</em></strong> and <strong><em>DOY</em></strong> correspond to the year and DOY (Day of the Year) of acquisition of the original MODIS image;</li>
 <li>
 <strong><em>ext</em></strong> is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs).</li>
 </ul>
+<p>so, for example, if you process layers “NDVI” and “EVI” for MODIS product MOD13A2 you will find the resulting GTiff of ENVI output single-date rasters in:</p>
+<pre><code>/your_out_folder/VI_16Days_1Km_v6/NDVI/</code></pre>
+<p>and</p>
+<pre><code>/your_out_folder/VI_16Days_1Km_v6/EVI/</code></pre>
 <hr>
 </div>
 <div id="virtual-multi-band-outputs" class="section level1">
@@ -150,11 +158,12 @@
 <a href="#virtual-multi-band-outputs" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Virtual multi-band outputs</strong>
 </h1>
 <p>ENVI and/or GDAL virtual time series files and <em>RasterStack</em> RData objects are instead stored <strong>in the “Time_Series” subfolder</strong> if required.</p>
-<p>Naming convention for these files is as follow:</p>
-<pre><code>myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" </code></pre>
-<p><font size="2"> <em>(e.g., myoutfolder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData)</em> </font></p>
+<p>Naming conventions for these files is as follow:</p>
+<pre><code>myoutfolder/"ProdName"/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" </code></pre>
 <p>, where:</p>
 <ul>
+<li>
+<strong><em>ProdName</em></strong> is a short name describing the MODIS product from which the datasets were derived (e.g., VI_16Days_1Km_v6);</li>
 <li>
 <strong><em>vrt_type</em></strong> indicates the type of virtual file (“RData”, “GDAL” or “ENVI_META”);</li>
 <li>
@@ -162,14 +171,18 @@
 <li>
 <strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
 <li>
-<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
+<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1 - Note that in the case of “mixed” Terra and Aqua time series ProdCode would be for example “MOD13Q1_MYD13Q1”);</li>
 <li>
 <strong><em>StartDOY</em></strong>, <strong><em>StartYear</em></strong>, <strong><em>EndDOY</em></strong> and <strong><em>EndYear</em></strong> indicate the temporal extent of the time serie created;</li>
 <li>
 <strong><em>suffix</em></strong> indicates the type of virtual file (ENVI, GDAL or RData);</li>
 <li>
-<strong><em>ext</em></strong> is the file extension (“.vrt” for gdal virtual files, “META” for ENVI meta files or “Rdata” for <code>R</code> raster stacks).</li>
+<strong><em>ext</em></strong> is the file extension (“.vrt” for gdal virtual files, “META” for ENVI meta files or “RData” for <code>R</code> raster stacks).</li>
 </ul>
+<p>so, for example, if you process layer “NDVI” for MODIS product MOD13A2 and platform “Terra”, and ask to create “R rasterStacks” and “GDAL vrt” time series you will find the resulting GTiff virtual files in:</p>
+<pre><code>/your_out_folder/VI_16Days_1Km_v6/Time_Series/RData/Terra/NDVI</code></pre>
+<p>and</p>
+<pre><code>/your_out_folder/VI_16Days_1Km_v6/Time_Series/GDAL/Terra/NDVI</code></pre>
 </div>
 </div>
   </div>
@@ -193,7 +206,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

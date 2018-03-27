@@ -103,7 +103,7 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
       )
     }
   }
-
+  
   if (running_os == "Windows") {
     
     # Edit the R version in the bat launcher
@@ -123,11 +123,14 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
         "Please specify it using the argument \"rscript_dir\"."
       ))
     }
-    bat_launcher_path <- file(paste0(MODIStsp_dir,"\\ExtData\\Launcher\\Batch\\MODIStsp.bat"))
+    bat_launcher_path <- file(
+      paste0(MODIStsp_dir,"\\ExtData\\Launcher\\Batch\\MODIStsp.bat"))
     bat_launcher <- readLines(bat_launcher_path)
-    bat_launcher[ grep("^SET Rscript_dir=", bat_launcher)] <- paste0("SET Rscript_dir=\"", rscript_path, "\"")
+    bat_launcher[grep("^SET Rscript_dir=", bat_launcher)] <- paste0(
+      "SET Rscript_dir=\"", rscript_path, "\""
+    )
     writeLines(bat_launcher, bat_launcher_path)
-
+    
     # Create entry in the start menu
     if (is.na(bin_dir)) {
       bin_dir <- file.path(
@@ -151,7 +154,7 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
       shell("cscript /nologo \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
       shell("del \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
     } else warning("Link in Start Menu already exists!")
-
+    
     # Create desktop shortcut
     if (desktop_shortcut) {
       if (!file.exists(file.path(desktop_dir, "MODIStsp"))) {

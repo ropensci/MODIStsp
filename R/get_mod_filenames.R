@@ -51,10 +51,10 @@ get_mod_filenames <- function(http,
   if (used_server == "http") {
     #   ________________________________________________________________________
     #   Retrieve available hdf files in case of http download               ####
-
+    
     # http folders are organized by date subfolders containing all tiles
     while (!success) {
-
+      
       response <- httr::RETRY("GET",
                               paste0(http, date_dir, "/"),
                               httr::authenticate(user, password),
@@ -62,7 +62,7 @@ get_mod_filenames <- function(http,
                               pause_base = 0.1,
                               pause_cap = 10,
                               quiet = FALSE)
-
+      
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
       if (response$status_code != 200) {
@@ -75,7 +75,7 @@ get_mod_filenames <- function(http,
           #nocov end
         } else {
           stop("[", date(), "] Error: http server seems to be down! ",
-                  "Switching to ftp!")
+               "Switching to ftp!")
         }
       } else {
         getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
@@ -87,7 +87,7 @@ get_mod_filenames <- function(http,
           ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
           getlist)
         success <- TRUE
-
+        
       }
     }
   }
@@ -95,20 +95,21 @@ get_mod_filenames <- function(http,
   if (used_server == "ftp") {
     #   ______________________________________________________________________
     #   Retrieve available hdf files in case of ftp download             ####
-
+    
     # ftp folders are organized by /year/date subfolders, so there is an
     # additional level to be "parsed" wrt http
     date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
     date_doy  <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
-
+    
     while (!success) {
-      response <- httr::RETRY("GET",
-                              paste0(ftp, date_year, "/", date_doy, "/"),
-                              # httr::authenticate(user, password),
-                              times = n_retries,
-                              pause_base = 0.1,
-                              pause_cap = 10,
-                              quiet = FALSE)
+      response <- suppressWarnings(
+        httr::RETRY("GET",
+                    paste0(ftp, date_year, "/", date_doy, "/"),
+                    # httr::authenticate(user, password),
+                    times = n_retries,
+                    pause_base = 0.1,
+                    pause_cap = 10,
+                    quiet = FALSE))
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
       if (response$status_code != 226) {
@@ -124,17 +125,17 @@ get_mod_filenames <- function(http,
                "Aborting! Please try again later!")
         }
       } else {
-
+        
         getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
                             "\r*\n")[[1]]
         getlist <- stringr::str_extract(
           getlist,
-          "[A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf")
+          "[A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf") #nolint
         success <- TRUE
       }
     }
   }
-
+  
   # __________________________________________________________________________
   # Retrieve the list of hdf files matching the product / version / date ####
   # in case of offline mode

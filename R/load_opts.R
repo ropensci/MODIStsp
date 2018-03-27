@@ -16,11 +16,11 @@
 #' @importFrom jsonlite fromJSON write_json
 #' @importFrom utils packageVersion
 load_opts <- function(opts_jsfile) {
-  
+
   if (file.exists(opts_jsfile)) {
-    
+
     general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
-    
+
     # stop on errors
     if (class(general_opts) == "try-error" ) {
       stop(strwrap("Unable to read the provided JSON options file. Please check
@@ -34,9 +34,10 @@ load_opts <- function(opts_jsfile) {
       )
     }
     
-    if (is.null(general_opts$MODIStspVersion)) {
+    if (is.null(general_opts$MODIStspVersion) |
+        general_opts$MODIStspVersion < "1.3.3.9000") {
       stop("The option file in use (", opts_jsfile, ") was created with a ",
-           "too old MODIStsp version (<=1.2.2).\n It can not be used with the ",
+           "too old MODIStsp version (<=1.3.3.9000).\n It can not be used with the ",#nolint
            "current version.\n",
            " Please delete it or specify a different value for the ",
            "`options_file` argument.")
@@ -55,7 +56,7 @@ load_opts <- function(opts_jsfile) {
     # "general_opts" structure used to  communicate with the GUI, set default
     # values and save it as a JSON file
 
-    
+
     #nocov start (this is only executed at first ever execution)
     general_opts <- list(
       sel_prod        = "Surf_Ref_8Days_500m (M*D09A1)",
@@ -77,26 +78,26 @@ load_opts <- function(opts_jsfile) {
       use_aria        = FALSE,
       download_server = "http",
       download_range  = "full",
-      proj            = "Sinusoidal",
-      user_proj4      = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
+      proj            = "Native",
+      output_proj4    = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
       out_res_sel     = "Native",
       out_res         = "",
-      full_ext        = "Full Tiles Extent",
+      full_ext        = "Select MODIS Tiles",
       resampling      = "near",
-      out_format      = "ENVI",
-      ts_format       = "ENVI Meta Files",
-      rts             = "Yes",
+      out_format      = "GTiff",
+      ts_format       = "rasterStack",
       compress        = "None",
       nodata_change   = "No",
       scale_val       = "No",
       delete_hdf      = "No",
       reprocess       = "No",
-      bbox            = c("", "", "", ""),
-      out_folder      = "",
-      out_folder_mod  = "",
+      bbox            = c("[]"),
+      out_folder      = "$tempdir",
+      out_folder_mod  = "$tempdir",
       MODIStspVersion = as.character(utils::packageVersion("MODIStsp")),
       custom_indexes  = list()
     )
+
     jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
                          auto_unbox = TRUE)
     #nocov end (this is only executed at first ever execution)
