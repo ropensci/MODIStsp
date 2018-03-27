@@ -544,18 +544,18 @@ MODIStsp <- function(gui               = TRUE,
     
     # Save previous options ----
     
-    # At the end of a successful execution, save the options used in the main
-    # output folder as a JSON file with name containing the date of processing.
-    # Also update "MODIStsp_previous.json.
-    opts_jsfile  <- file.path(general_opts$out_folder,
-                              paste0("MODIStsp_", Sys.Date(), ".json"))
+    # At the end of a successful execution, save the options used in the main 
+    # output folder as a JSON file with name containing the date of processing. 
+    # Also update "MODIStsp_previous.json. 
     
-    general_opts <- jsonlite::fromJSON(previous_jsfile)
-    previous_jsfile_tosave <- file.path(previous_dir, "MODIStsp_Previous.json")
-    jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE,
-                         auto_unbox = TRUE)
-    jsonlite::write_json(general_opts, previous_jsfile_tosave, pretty = TRUE,
-                         auto_unbox = TRUE)
+    opts_jsfile <- file.path(general_opts$out_folder, 
+                             paste0("MODIStsp_", Sys.Date(), ".json")) 
+    general_opts <- jsonlite::fromJSON(previous_jsfile) 
+    previous_jsfile_tosave <- file.path(previous_dir, "MODIStsp_Previous.json") 
+    jsonlite::write_json(general_opts, opts_jsfile, pretty = TRUE, 
+                         auto_unbox = TRUE) 
+    jsonlite::write_json(general_opts, previous_jsfile_tosave, pretty = TRUE, 
+                         auto_unbox = TRUE) 
     
     
     

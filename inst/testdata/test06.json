@@ -1,6 +1,6 @@
 {
  "sel_prod": "LAI_8Days_500m (MCD15A2H)",
-"sensor": "Terra",
+"sensor": "Combined",
 "prod_version": "6",
 "start_date": "2016-07-16",
 "end_date": "2016-07-31",
@@ -24,9 +24,7 @@
 "resampling": "near",
 "out_format": "GTiff",
 "ts_format": ["ENVI Meta", "GDAL vrt"],
-"compress": {
- "High (DEFLATE)": "DEFLATE"
-},
+"compress": "DEFLATE",
 "nodata_change": "No",
 "scale_val": "Yes",
 "delete_hdf": "No",

@@ -25,7 +25,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
+  <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Extract data from MODIStsp time series — MODIStsp_extract" />
 
@@ -299,8 +299,9 @@ belonging to the polygon, and one line for each date.</p>
           <span class='fu'>file.path</span>(<span class='fu'>tempdir</span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>))</div><div class='output co'>#&gt;  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
 #&gt; [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</div><div class='input'>
 <span class='no'>opts_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/test_extract.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
+<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>[Thu Mar 15 14:13:41 2018] Welcome to MODIStsp!We will now search for a valid GDAL installation - pleasewait! (this will happen only once)</span></div><div class='output co'>#&gt; <span class='message'>Error in curl::curl_fetch_memory(url, handle = handle): Timeout was reached: Resolving timed out after 10000 milliseconds</span>
+#&gt; <span class='message'>Request failed [ERROR]. Retrying in 1 seconds...</span></div><div class='output co'>#&gt; <span class='message'>Error in curl::curl_fetch_memory(url, handle = handle): Timeout was reached: Resolving timed out after 10000 milliseconds</span>
+#&gt; <span class='message'>Request failed [ERROR]. Retrying in 1 seconds...</span></div><div class='input'>
 <span class='co'># Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between</span>
 <span class='co'># 2016-01-01 and 2016-12-18</span>
 <span class='co'># __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"</span>

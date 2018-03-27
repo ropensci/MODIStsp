@@ -91,7 +91,7 @@ load_opts <- function(opts_jsfile) {
       scale_val       = "No",
       delete_hdf      = "No",
       reprocess       = "No",
-      bbox            = c("", "", "", ""),
+      bbox            = c("[]"),
       out_folder      = "$tempdir",
       out_folder_mod  = "$tempdir",
       MODIStspVersion = as.character(utils::packageVersion("MODIStsp")),

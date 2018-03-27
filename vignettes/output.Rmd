@@ -10,14 +10,19 @@ MODIS layer, Quality Indicator or Spectral Index. Each subfolder contains one im
 for each processed date, created according to the following naming conventions: 
 
 ```
-myoutfolder/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
+myoutfolder/"ProdName"/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
 ```
 
 , where: 
 
+  - **_ProdName_** is a short name describing the MODIS product from which the 
+    datasets were derived (e.g., VI_16Days_1Km_v6);
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
   - **_ProdCode_** is the code name of the MODIS product from which the image was
-  derived (e.g., MOD13Q1);
+  derived (e.g., MOD13Q1 - Note that if you choose to process both "Terra" and 
+    "Aqua" data, data coming from either platform will be placed in the same folder
+    and you will have for example both "MOD13Q1..." and "MYD13Q1..." files in the 
+    output folder);
   - **_YYYY_** and **_DOY_** correspond to the year and DOY (Day of the Year) of 
   acquisition of the original MODIS image;
   - **_ext_** is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs). 
@@ -45,17 +50,20 @@ instead stored **in the "Time\_Series" subfolder** if required.
 Naming conventions for these files is as follow:
 
 ```
-myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" 
+myoutfolder/"ProdName"/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" 
 ```
 
 , where: 
 
+  - **_ProdName_** is a short name describing the MODIS product from which the 
+    datasets were derived (e.g., VI_16Days_1Km_v6);
   - **_vrt_type_** indicates the type of virtual file ("RData", "GDAL" or "ENVI_META");
   - **_Sensor_** indicates to which MODIS sensor the time series belongs ("Terra",
   "Aqua", "Mixed" or "Combined" (for MCD* products));
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
   - **_ProdCode_** is the code name of the MODIS product from which the image was 
-  derived (e.g., MOD13Q1);
+  derived (e.g., MOD13Q1 - Note that in the case of "mixed" Terra and Aqua time
+  series ProdCode would be for example "MOD13Q1_MYD13Q1");
   - **_StartDOY_**, **_StartYear_**, **_EndDOY_** and **_EndYear_** indicate the 
   temporal extent of the time serie created; 
   - **_suffix_** indicates the type of virtual file (ENVI, GDAL or RData);
@@ -63,7 +71,7 @@ myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY
   ENVI meta files or "RData" for `R` raster stacks). 
 
 so, for example, if you process layer "NDVI" for MODIS product MOD13A2 and platform 
-"Terra", and ask to create "R rasterStack" and "GdAL vrt" time series you will find the resulting GTiff virtual files in:
+"Terra", and ask to create "R rasterStacks" and "GDAL vrt" time series you will find the resulting GTiff virtual files in:
 
 ```
 /your_out_folder/VI_16Days_1Km_v6/Time_Series/RData/Terra/NDVI
