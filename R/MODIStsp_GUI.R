@@ -82,12 +82,12 @@ MODIStsp_GUI <- function(general_opts,
   main_frame1 <- ggroup(container  = main_win,
                         horizontal = TRUE,
                         expand     = TRUE,
-                        use.scroll_window = scroll_window)
+                        use.scrollwindow = scroll_window)
 
   main_frame2 <- ggroup(container  = main_frame1,
                         horizontal = FALSE,
                         expand     = TRUE,
-                        use.scroll_window = scroll_window)
+                        use.scrollwindow = scroll_window)
 
   #   __________________________________________________________________________
   #   Initialize Main container: holds all widgets                          ####
