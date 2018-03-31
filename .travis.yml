@@ -42,6 +42,8 @@ matrix:
         - RGtk2
         - udunits2
         - units
+        - rgdal
+        - gdalutils
         - covr
         - shiny
         - leaflet
