@@ -41,7 +41,7 @@ Imports:
     sp (>= 1.2-2),
     stringr (>= 1.0.0),
     xts (>= 0.9-7),
-    xml2 (>= 1.2.0),
+    xml2 (>= 1.2.0)
 Suggests:
     spelling,
     knitr,
