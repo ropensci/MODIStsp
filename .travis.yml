@@ -43,10 +43,11 @@ matrix:
         - udunits2
         - units
         - covr
-        - sf
         - shiny
         - leaflet
         - mapview
+      r_packages:
+        - sf
         - mapedit
 after_success:
   - Rscript -e 'library(covr);coveralls();codecov()'
