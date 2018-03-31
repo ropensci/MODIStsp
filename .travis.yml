@@ -37,20 +37,19 @@ matrix:
             - libglib2.0-dev
             - libcurl4-openssl-dev
             - libudunits2-dev
-            - libgdal1h 
       r_binary_packages:
         - cairoDevice
         - RGtk2
         - udunits2
         - units
-        - rgdal
         - gdalutils
         - covr
+      r_packages:
+        - rgdal
+        - sf
+        - mapedit
         - shiny
         - leaflet
         - mapview
-      r_packages:
-        - sf
-        - mapedit
 after_success:
   - Rscript -e 'library(covr);coveralls();codecov()'
