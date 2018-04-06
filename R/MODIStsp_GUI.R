@@ -534,6 +534,7 @@ MODIStsp_GUI <- function(general_opts,
                        c("Select MODIS Tiles", "Define Custom Area")),
     handler  = function(h, ...) {
       current_sel <- gWidgets::svalue(wids$output_ext)
+      # if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$tiled == 1) {
       # On "Select MODIS Tiles" selection, disable the bbox fields
       if (current_sel == "Select MODIS Tiles") {
         gWidgets::enabled(bbox_group)      <- FALSE
@@ -547,6 +548,7 @@ MODIStsp_GUI <- function(general_opts,
         gWidgets::enabled(bbox_from_file)  <- TRUE
         gWidgets::enabled(tiles_group)     <- FALSE
       }
+      # }
     }
   )
 
