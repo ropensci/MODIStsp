@@ -133,6 +133,34 @@ MODIStsp <- function(gui               = TRUE,
   # output files. This is automatically reset to TRUE at the end of the session
   raster::rasterOptions(setfileext = FALSE)
   
+  #   _________________________________________________________________________
+  #   check arguments                                                       ####
+  
+  if (is.null(options_file) & gui == FALSE) {
+    stop("You need to provide a valid `.json` options file to run MODIStsp",
+         " in non-interactive mode. \n",
+         "Please provide a valid \"options_file\" path or run ",
+         "with gui=TRUE to create and save one.")
+  }
+  
+  if (!is.null(options_file)) {
+    if (!file.exists(options_file))
+      stop("The specified `.json` options file was not found. \n",
+           "Please provide a valid \"options_file\" path or run ",
+           "without specifying one to create and save one.")
+  }
+  
+  
+  # On first execution (or if the file is not found), ask the user permission
+  # for saving a options file in "your-R-library/MODIStsp/ExtData/Previous"
+  
+  if (interactive()) {
+    permission <- ask_permission()
+  } else {
+    permission <- FALSE
+  }
+  
+  
   #   __________________________________________________________________________
   #   Initialize processing                                                 ####
   
@@ -250,30 +278,6 @@ MODIStsp <- function(gui               = TRUE,
   
   # ____________________________________________________________________________
   # Files/Folder Initialization and set-up of default parameters            ####
-  
-  if (is.null(options_file) & gui == FALSE) {
-    stop("You need to provide a valid `.json` options file to run MODIStsp",
-         " in non-interactive mode. \n",
-         "Please provide a valid \"options_file\" path or run ",
-         "with gui=TRUE to create and save one.")
-  }
-  
-  if (!is.null(options_file)) {
-    if (!file.exists(options_file))
-      stop("The specified `.json` options file was not found. \n",
-           "Please provide a valid \"options_file\" path or run ",
-           "without specifying one to create and save one.")
-  }
-  
-  
-  # On first execution (or if the file is not found), ask the user permission
-  # for saving a options file in "your-R-library/MODIStsp/ExtData/Previous"
-  
-  if (interactive()) {
-    permission <- ask_permission()
-  } else {
-    permission <- FALSE
-  }
   
   # Folders in which the JSON/RData files (previous settings and product
   # descriptions) are saved
