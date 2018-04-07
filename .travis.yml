@@ -40,16 +40,6 @@ matrix:
       r_binary_packages:
         - cairoDevice
         - RGtk2
-        - udunits2
-        - units
-        - gdalutils
         - covr
-      r_packages:
-        - rgdal
-        - sf
-        - mapedit
-        - shiny
-        - leaflet
-        - mapview
 after_success:
   - Rscript -e 'library(covr);coveralls();codecov()'
