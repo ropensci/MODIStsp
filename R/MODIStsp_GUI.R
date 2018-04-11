@@ -781,7 +781,7 @@ MODIStsp_GUI <- function(general_opts,
     container = output_proj_group,
     selected  = match(general_opts$proj, out_proj_names),
     handler   = function(h, ...) {
-      gh_changeproj(wids, out_proj_list, bbox_out)
+      gh_changeproj(h, wids, out_proj_list, bbox_out)
     }
   )
 

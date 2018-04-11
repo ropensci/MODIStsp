@@ -133,4 +133,5 @@ MODIStsp_process_indexes <- function(out_filename,
     close(fileConn_meta_hdr)
   }
   # Delete xml files created by writeRaster
+
 }
