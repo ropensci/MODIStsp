@@ -27,6 +27,13 @@
 - Use of `httr::RETRY` to improve behavior while navigating the servers to
   retrieve available files and while downloading hdf file (when use_aria == FALSE), 
   thus removing dependency to RCurl. 
+  
+#### Improvements in processing functions
+
+ - improved functionality for dealing with NoData for products with multiple 
+   fill-values. If "Change NoData" is set to "Yes", then in case a layer 
+   has multiple Nodata values all those values are set to NA in the output 
+   (see github.com/lbusett/MODIStsp#113)
 
 #### Extensive code refactoring for submission to ropensci. 
 
@@ -53,6 +60,13 @@
 - Added `MODIStsp_resetindexes` to remove all custom indexes from a MODIStsp 
   json options file and `MODIStsp_reset_options` to reset MODIStsp options to 
   default.
+  
+#### Bug fixing
+
+- Fixed bug affecting extent selection when working with non-tiled (MCD) products
+https://github.com/lbusett/MODIStsp/issues/122
+
+- Fixed bugs affecting the "Seasonal" time series download 
   
 ________________________________________________________________________________
 
