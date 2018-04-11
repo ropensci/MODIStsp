@@ -33,6 +33,8 @@
 lpdaac http site containing data included in the time range selected for
 processing (modified after Barry Rowlingson function):" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -54,6 +56,8 @@ processing (modified after Barry Rowlingson function):" />
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -67,8 +71,12 @@ processing (modified after Barry Rowlingson function):" />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -141,6 +149,7 @@ processing (modified after Barry Rowlingson function):" />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -148,10 +157,12 @@ processing (modified after Barry Rowlingson function):" />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get list of MODIS data folders from http/ftp server</h1>
+    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/get_mod_dirs.R'><code>R/get_mod_dirs.R</code></a></small>
+    <div class="hidden name"><code>get_mod_dirs.Rd</code></div>
     </div>
 
     
@@ -163,7 +174,7 @@ processing (modified after Barry Rowlingson function):</p>
     <pre class="usage"><span class='fu'>get_mod_dirs</span>(<span class='no'>http</span>, <span class='no'>ftp</span>, <span class='no'>download_server</span>, <span class='no'>user</span>, <span class='no'>password</span>, <span class='no'>yy</span>, <span class='no'>n_retries</span>, <span class='no'>gui</span>,
   <span class='no'>out_folder_mod</span>, <span class='no'>.Platform</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -263,6 +274,8 @@ Luigi Ranghetti, phD (2016-2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmai
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

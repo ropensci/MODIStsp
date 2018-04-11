@@ -28,7 +28,7 @@
 </script>
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -37,8 +37,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -119,15 +123,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Non-Interactive Execution from within R</h1>
             
-          </div>
+      
+      <small>Source: <a href="https://github.com/lbusett/MODIStsp/blob/master/vignettes/noninteractive_execution.Rmd"><code>vignettes/noninteractive_execution.Rmd</code></a></small>
+      <div class="hidden name"><code>noninteractive_execution.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <div id="launching-modistsp-using-a-saved-options-file" class="section level1">
 <h1 class="hasAnchor">
 <a href="#launching-modistsp-using-a-saved-options-file" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Launching MODIStsp using a saved “Options file”</strong>
@@ -190,22 +197,6 @@ options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
   |                                                                       
   |=======                                                          |  11%
   |                                                                       
-  |========                                                         |  12%
-  |                                                                       
-  |========                                                         |  13%
-  |                                                                       
-  |=========                                                        |  13%
-  |                                                                       
-  |=========                                                        |  14%
-  |                                                                       
-  |=========                                                        |  15%
-  |                                                                       
-  |==========                                                       |  15%
-  |                                                                       
-  |==========                                                       |  16%
-  |                                                                       
-  |===========                                                      |  16%
-  |                                                                       
   |===========                                                      |  17%
   |                                                                       
   |===========                                                      |  18%
@@ -264,27 +255,17 @@ options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
   |                                                                       
   |======================                                           |  34%
   |                                                                       
-  |======================                                           |  35%
-  |                                                                       
   |=======================                                          |  35%
   |                                                                       
   |=======================                                          |  36%
   |                                                                       
-  |========================                                         |  36%
-  |                                                                       
   |========================                                         |  37%
-  |                                                                       
-  |========================                                         |  38%
-  |                                                                       
-  |=========================                                        |  38%
   |                                                                       
   |=========================                                        |  39%
   |                                                                       
   |==========================                                       |  39%
   |                                                                       
   |==========================                                       |  40%
-  |                                                                       
-  |==========================                                       |  41%
   |                                                                       
   |===========================                                      |  41%
   |                                                                       
@@ -428,8 +409,6 @@ options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
   |                                                                       
   |=======================================================          |  85%
   |                                                                       
-  |========================================================         |  85%
-  |                                                                       
   |========================================================         |  86%
   |                                                                       
   |========================================================         |  87%
@@ -488,8 +467,6 @@ options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
   |                                                                       
   |=                                                                |   2%
   |                                                                       
-  |==                                                               |   2%
-  |                                                                       
   |==                                                               |   3%
   |                                                                       
   |==                                                               |   4%
@@ -497,8 +474,6 @@ options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
   |===                                                              |   4%
   |                                                                       
   |===                                                              |   5%
-  |                                                                       
-  |====                                                             |   5%
   |                                                                       
   |====                                                             |   6%
   |                                                                       
@@ -642,8 +617,6 @@ options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
   |                                                                       
   |================================                                 |  50%
   |                                                                       
-  |=================================                                |  50%
-  |                                                                       
   |=================================                                |  51%
   |                                                                       
   |==================================                               |  52%
@@ -673,8 +646,6 @@ options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
   |=======================================                          |  59%
   |                                                                       
   |=======================================                          |  60%
-  |                                                                       
-  |=======================================                          |  61%
   |                                                                       
   |========================================                         |  61%
   |                                                                       
@@ -724,11 +695,7 @@ options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
   |                                                                       
   |=================================================                |  76%
   |                                                                       
-  |==================================================               |  76%
-  |                                                                       
   |==================================================               |  77%
-  |                                                                       
-  |==================================================               |  78%
   |                                                                       
   |===================================================              |  78%
   |                                                                       
@@ -874,15 +841,9 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |=========                                                        |  15%
   |                                                                       
-  |==========                                                       |  15%
-  |                                                                       
   |==========                                                       |  16%
   |                                                                       
   |===========                                                      |  16%
-  |                                                                       
-  |===========                                                      |  17%
-  |                                                                       
-  |===========                                                      |  18%
   |                                                                       
   |============                                                     |  18%
   |                                                                       
@@ -895,16 +856,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |=============                                                    |  21%
   |                                                                       
   |==============                                                   |  21%
-  |                                                                       
-  |==============                                                   |  22%
-  |                                                                       
-  |===============                                                  |  22%
-  |                                                                       
-  |===============                                                  |  23%
-  |                                                                       
-  |===============                                                  |  24%
-  |                                                                       
-  |================                                                 |  24%
   |                                                                       
   |================                                                 |  25%
   |                                                                       
@@ -986,12 +937,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |=================================                                |  51%
   |                                                                       
-  |==================================                               |  52%
-  |                                                                       
-  |==================================                               |  53%
-  |                                                                       
-  |===================================                              |  53%
-  |                                                                       
   |===================================                              |  54%
   |                                                                       
   |====================================                             |  55%
@@ -999,28 +944,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |====================================                             |  56%
   |                                                                       
   |=====================================                            |  56%
-  |                                                                       
-  |=====================================                            |  57%
-  |                                                                       
-  |=====================================                            |  58%
-  |                                                                       
-  |======================================                           |  58%
-  |                                                                       
-  |======================================                           |  59%
-  |                                                                       
-  |=======================================                          |  59%
-  |                                                                       
-  |=======================================                          |  60%
-  |                                                                       
-  |=======================================                          |  61%
-  |                                                                       
-  |========================================                         |  61%
-  |                                                                       
-  |========================================                         |  62%
-  |                                                                       
-  |=========================================                        |  63%
-  |                                                                       
-  |=========================================                        |  64%
   |                                                                       
   |==========================================                       |  64%
   |                                                                       
@@ -1072,14 +995,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |====================================================             |  80%
   |                                                                       
-  |====================================================             |  81%
-  |                                                                       
-  |=====================================================            |  81%
-  |                                                                       
-  |=====================================================            |  82%
-  |                                                                       
-  |======================================================           |  82%
-  |                                                                       
   |======================================================           |  83%
   |                                                                       
   |======================================================           |  84%
@@ -1098,19 +1013,9 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |==========================================================       |  89%
   |                                                                       
-  |==========================================================       |  90%
-  |                                                                       
-  |===========================================================      |  90%
-  |                                                                       
-  |===========================================================      |  91%
-  |                                                                       
   |============================================================     |  92%
   |                                                                       
   |============================================================     |  93%
-  |                                                                       
-  |=============================================================    |  93%
-  |                                                                       
-  |=============================================================    |  94%
   |                                                                       
   |=============================================================    |  95%
   |                                                                       
@@ -1174,8 +1079,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |=======                                                          |  11%
   |                                                                       
-  |=======                                                          |  12%
-  |                                                                       
   |========                                                         |  12%
   |                                                                       
   |========                                                         |  13%
@@ -1192,14 +1095,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |===========                                                      |  17%
   |                                                                       
-  |===========                                                      |  18%
-  |                                                                       
-  |============                                                     |  18%
-  |                                                                       
-  |============                                                     |  19%
-  |                                                                       
-  |=============                                                    |  19%
-  |                                                                       
   |=============                                                    |  20%
   |                                                                       
   |=============                                                    |  21%
@@ -1213,14 +1108,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |===============                                                  |  23%
   |                                                                       
   |===============                                                  |  24%
-  |                                                                       
-  |================                                                 |  24%
-  |                                                                       
-  |================                                                 |  25%
-  |                                                                       
-  |=================                                                |  26%
-  |                                                                       
-  |=================                                                |  27%
   |                                                                       
   |==================                                               |  27%
   |                                                                       
@@ -1322,29 +1209,13 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |======================================                           |  59%
   |                                                                       
-  |=======================================                          |  59%
-  |                                                                       
   |=======================================                          |  60%
-  |                                                                       
-  |=======================================                          |  61%
   |                                                                       
   |========================================                         |  61%
   |                                                                       
   |========================================                         |  62%
   |                                                                       
-  |=========================================                        |  62%
-  |                                                                       
   |=========================================                        |  63%
-  |                                                                       
-  |=========================================                        |  64%
-  |                                                                       
-  |==========================================                       |  64%
-  |                                                                       
-  |==========================================                       |  65%
-  |                                                                       
-  |===========================================                      |  66%
-  |                                                                       
-  |===========================================                      |  67%
   |                                                                       
   |============================================                     |  67%
   |                                                                       
@@ -1506,12 +1377,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |===========                                                      |  17%
   |                                                                       
-  |============                                                     |  18%
-  |                                                                       
-  |============                                                     |  19%
-  |                                                                       
-  |=============                                                    |  19%
-  |                                                                       
   |=============                                                    |  20%
   |                                                                       
   |=============                                                    |  21%
@@ -1525,28 +1390,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |===============                                                  |  23%
   |                                                                       
   |===============                                                  |  24%
-  |                                                                       
-  |================                                                 |  24%
-  |                                                                       
-  |================                                                 |  25%
-  |                                                                       
-  |=================                                                |  26%
-  |                                                                       
-  |=================                                                |  27%
-  |                                                                       
-  |==================                                               |  27%
-  |                                                                       
-  |==================                                               |  28%
-  |                                                                       
-  |===================                                              |  29%
-  |                                                                       
-  |===================                                              |  30%
-  |                                                                       
-  |====================                                             |  30%
-  |                                                                       
-  |====================                                             |  31%
-  |                                                                       
-  |====================                                             |  32%
   |                                                                       
   |=====================                                            |  32%
   |                                                                       
@@ -1810,33 +1653,13 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |==========                                                       |  16%
   |                                                                       
-  |===========                                                      |  16%
-  |                                                                       
-  |===========                                                      |  17%
-  |                                                                       
   |===========                                                      |  18%
   |                                                                       
   |============                                                     |  18%
   |                                                                       
-  |============                                                     |  19%
-  |                                                                       
-  |=============                                                    |  19%
-  |                                                                       
   |=============                                                    |  20%
   |                                                                       
-  |=============                                                    |  21%
-  |                                                                       
   |==============                                                   |  21%
-  |                                                                       
-  |==============                                                   |  22%
-  |                                                                       
-  |===============                                                  |  22%
-  |                                                                       
-  |===============                                                  |  23%
-  |                                                                       
-  |===============                                                  |  24%
-  |                                                                       
-  |================                                                 |  24%
   |                                                                       
   |================                                                 |  25%
   |                                                                       
@@ -1928,19 +1751,7 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |===================================                              |  54%
   |                                                                       
-  |===================================                              |  55%
-  |                                                                       
   |====================================                             |  55%
-  |                                                                       
-  |====================================                             |  56%
-  |                                                                       
-  |=====================================                            |  56%
-  |                                                                       
-  |=====================================                            |  57%
-  |                                                                       
-  |=====================================                            |  58%
-  |                                                                       
-  |======================================                           |  58%
   |                                                                       
   |======================================                           |  59%
   |                                                                       
@@ -1953,18 +1764,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |========================================                         |  61%
   |                                                                       
   |========================================                         |  62%
-  |                                                                       
-  |=========================================                        |  62%
-  |                                                                       
-  |=========================================                        |  63%
-  |                                                                       
-  |=========================================                        |  64%
-  |                                                                       
-  |==========================================                       |  64%
-  |                                                                       
-  |==========================================                       |  65%
-  |                                                                       
-  |===========================================                      |  65%
   |                                                                       
   |===========================================                      |  66%
   |                                                                       
@@ -2024,14 +1823,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |                                                                       
   |=======================================================          |  85%
   |                                                                       
-  |========================================================         |  85%
-  |                                                                       
-  |========================================================         |  86%
-  |                                                                       
-  |========================================================         |  87%
-  |                                                                       
-  |=========================================================        |  87%
-  |                                                                       
   |=========================================================        |  88%
   |                                                                       
   |==========================================================       |  88%
@@ -2039,10 +1830,6 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
   |==========================================================       |  89%
   |                                                                       
   |==========================================================       |  90%
-  |                                                                       
-  |===========================================================      |  90%
-  |                                                                       
-  |===========================================================      |  91%
   |                                                                       
   |============================================================     |  92%
   |                                                                       
@@ -2103,8 +1890,8 @@ spatial_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 extent_list =<span class="st"> </span><span class="kw">list.files</span>(<span class="kw">system.file</span>(<span class="st">"testdata/lakeshapes/"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), 
                          <span class="dt">full.names =</span> <span class="ot">TRUE</span>, <span class="st">"</span><span class="ch">\\</span><span class="st">.shp$"</span>)  
 extent_list</code></pre></div>
-<pre><code>## [1] "/home/lb/R/x86_64-pc-linux-gnu-library/3.4/MODIStsp/testdata/lakeshapes//garda_lake.shp"
-## [2] "/home/lb/R/x86_64-pc-linux-gnu-library/3.4/MODIStsp/testdata/lakeshapes//iseo_lake.shp"</code></pre>
+<pre><code>## [1] "D:/Documents/R/win-library/3.4/MODIStsp/testdata/lakeshapes/garda_lake.shp"
+## [2] "D:/Documents/R/win-library/3.4/MODIStsp/testdata/lakeshapes/iseo_lake.shp"</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># --&gt; Loop on the list of spatial files and run MODIStsp using each of them to </span>
 <span class="co"># automatically define the output extent (A separate output folder is created for</span>
 <span class="co"># each input spatial file).</span>
@@ -2119,14 +1906,13 @@ outfiles_garda &lt;-<span class="st"> </span><span class="kw">list.files</span>(
   <span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span>),
   <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
 <span class="kw">library</span>(raster)       
-<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(outfiles_garda[<span class="dv">1</span>]))</code></pre></div>
-<p><img src="noninteractive_execution_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<span class="kw">plot</span>(<span class="kw">raster</span>(outfiles_garda[<span class="dv">1</span>]))</code></pre></div>
+<p><img src="noninteractive_execution_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">outfiles_iseo &lt;-<span class="st"> </span><span class="kw">list.files</span>(
   <span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span>),
   <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(outfiles_iseo[<span class="dv">1</span>]))</code></pre></div>
-<p><img src="noninteractive_execution_files/figure-html/unnamed-chunk-3-2.png" width="672"></p>
-</div>
+<span class="kw">plot</span>(<span class="kw">raster</span>(outfiles_iseo[<span class="dv">1</span>]))</code></pre></div>
+<p><img src="noninteractive_execution_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
 </div>
   </div>
 
@@ -2155,6 +1941,8 @@ outfiles_garda &lt;-<span class="st"> </span><span class="kw">list.files</span>(
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

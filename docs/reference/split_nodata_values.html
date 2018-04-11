@@ -35,6 +35,8 @@ in the xml product file to a readable vector of NoData values;
 create_nodata_rcl creates the matrix for the reclassification of NODATA
 values to be used with raster::reclassify function." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -56,6 +58,8 @@ values to be used with raster::reclassify function." />
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -69,8 +73,12 @@ values to be used with raster::reclassify function." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -143,6 +151,7 @@ values to be used with raster::reclassify function." />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -150,10 +159,12 @@ values to be used with raster::reclassify function." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Split NODATA values or create matrix for reclassification</h1>
+    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/split_nodata_values.R'><code>R/split_nodata_values.R</code></a></small>
+    <div class="hidden name"><code>split_nodata_values.Rd</code></div>
     </div>
 
     
@@ -168,7 +179,7 @@ values to be used with <a href='http://www.rdocumentation.org/packages/raster/to
 
 <span class='fu'>create_nodata_rcl</span>(<span class='no'>nodata_in</span>, <span class='no'>nodata_out</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -193,9 +204,8 @@ as saved in the xml product file (one single value per band).</p></td>
 
     <p>split_nodata_values  returns a list with the same length
 of <code>nodata_in</code> vector, in which each element
-is a vector with all the NoData values.
-
-create_nodata_rcl returns a list of matrices in the format
+is a vector with all the NoData values.</p>
+<p>create_nodata_rcl returns a list of matrices in the format
 specified for parameter <code>rcl</code> in <a href='http://www.rdocumentation.org/packages/raster/topics/reclassify'>raster::reclassify</a>.
 The parameter <code>right</code> is intended to be used as <code>right = NA</code>.</p>
     
@@ -279,6 +289,8 @@ Luigi Ranghetti, phD (2018) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

@@ -28,7 +28,7 @@
 </script>
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -37,8 +37,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -119,15 +123,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Installation</h1>
             
-          </div>
+      
+      <small>Source: <a href="https://github.com/lbusett/MODIStsp/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
+      <div class="hidden name"><code>installation.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <div id="system-requirements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#system-requirements" class="anchor"></a><i class="fa fa-desktop" aria-hidden="true"></i> System Requirements</h2>
@@ -141,7 +148,7 @@
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes) from github:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>RGtk2</code> library beforehand:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"RGtk2"</span>)
 <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
@@ -175,7 +182,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <hr>
 </div>
 <div id="installing-on-mac" class="section level2">
@@ -243,7 +250,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>or the development version from GitHub:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools) 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>Good luck!</p>
 <hr>
@@ -339,7 +346,6 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 </div>
 </div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -369,6 +375,8 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

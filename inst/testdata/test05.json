@@ -15,7 +15,7 @@
 "end_y":      7,
 "user": "mstp_test",
 "password": "MSTP_test_01",
-"use_aria": false,
+"use_aria": true,
 "download_server": "http",
 "download_range": "full",
 "proj": "User Defined",
@@ -35,5 +35,5 @@
 "out_folder": "$tempdir",
 "out_folder_mod": "$tempdir",
 "MODIStspVersion": "1.3.3.9000",
-"custom_indexes": [] 
+"custom_indexes": []
 }

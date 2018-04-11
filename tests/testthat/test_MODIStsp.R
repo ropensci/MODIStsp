@@ -23,7 +23,7 @@ testthat::test_that(
     expect_error(MODIStsp(
       options_file = system.file("testdata/test05_wrong_pwd.json",
                                  package = "MODIStsp"),
-      gui = FALSE, n_retries = 2), "Error: ftp server seems to be down!")
+      gui = FALSE, n_retries = 2), "Username and/or password are not valid")
 
     # Try to access via ftp a product only available over http fails
     # gracefully

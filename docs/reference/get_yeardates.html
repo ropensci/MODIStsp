@@ -33,6 +33,8 @@
 be processed for a given year as a function of download_range selection
 and starting/ending dates and years" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -54,6 +56,8 @@ and starting/ending dates and years" />
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -67,8 +71,12 @@ and starting/ending dates and years" />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -141,6 +149,7 @@ and starting/ending dates and years" />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -148,10 +157,12 @@ and starting/ending dates and years" />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>identify dates to be processed for a year</h1>
+    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/get_yeardates.R'><code>R/get_yeardates.R</code></a></small>
+    <div class="hidden name"><code>get_yeardates.Rd</code></div>
     </div>
 
     
@@ -162,7 +173,7 @@ and starting/ending dates and years</p>
 
     <pre class="usage"><span class='fu'>get_yeardates</span>(<span class='no'>download_range</span>, <span class='no'>yy</span>, <span class='no'>start_year</span>, <span class='no'>end_year</span>, <span class='no'>start_date</span>, <span class='no'>end_date</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -229,6 +240,8 @@ Lorenzo Busetto, phD (2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

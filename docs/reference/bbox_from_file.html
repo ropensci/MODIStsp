@@ -33,6 +33,8 @@
 recognized by GDAL or OGG: the function reads the extent using gdalinfo or ogrinfo,
 converting it to a specified CRS." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -54,6 +56,8 @@ converting it to a specified CRS." />
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -67,8 +71,12 @@ converting it to a specified CRS." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -141,6 +149,7 @@ converting it to a specified CRS." />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -148,10 +157,12 @@ converting it to a specified CRS." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Retrieve bbox from a spatial file</h1>
+    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/bbox_from_file.R'><code>R/bbox_from_file.R</code></a></small>
+    <div class="hidden name"><code>bbox_from_file.Rd</code></div>
     </div>
 
     
@@ -162,7 +173,7 @@ converting it to a specified CRS.</p>
 
     <pre class="usage"><span class='fu'>bbox_from_file</span>(<span class='no'>file_path</span>, <span class='no'>crs_out</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -207,6 +218,8 @@ Luigi Ranghetti, phD (2015-2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghe
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

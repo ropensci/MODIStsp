@@ -28,7 +28,7 @@
 </script>
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -37,8 +37,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -119,17 +123,20 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.3</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2018-03-15</h4>
-          </div>
+            <h4 class="date">2018-04-11</h4>
+      
+      <small>Source: <a href="https://github.com/lbusett/MODIStsp/blob/master/vignettes/MODIStsp.Rmd"><code>vignettes/MODIStsp.Rmd</code></a></small>
+      <div class="hidden name"><code>MODIStsp.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
@@ -154,7 +161,7 @@
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>gWidgetsRGtk2</code> library beforehand:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>)
 <span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
@@ -187,7 +194,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
 </div>
 <div id="on-mac-os" class="section level2">
 <h2 class="hasAnchor">
@@ -259,7 +266,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>or the development version from GitHub:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools) 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
+<span class="kw">install_github</span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>Good luck!</p>
 </div>
@@ -273,7 +280,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
 <p>This <strong>opens a GUI</strong> from which processing options can be specified and eventually saved (or loaded) <font size="2"> (Note 1: PCs with a small screen can fail to visualize the whole GUI; in this case, the user can add scroll bars with <code><a href="../reference/MODIStsp.html">MODIStsp(scrollWindow=TRUE)</a></code>); Note 2: At the first execution of <code>MODIStsp</code>, a Welcome screen will appear, signaling that <code>MODIStsp</code> is searching for a valid GDAL installation. Press “OK” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), <code>MODIStsp</code> (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the <em>GDAL_DATA</em> environment variable is correctly set (You can find simple instructions <a href="http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/">HERE</a>) 3. If nothing works, signal it in the <a href="https://github.com/lbusett/MODIStsp/issues">issues</a> GitHub page of <code>MODIStsp</code> and we’ll try to help! </font></p>
 <p>The GUI allows selecting all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.</p>
-<p><img src="MODIStsp_files/figure-html/GUIfig-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="MODIStsp_files/figure-html/GUIfig-1.png" width="700" style="display: block; margin: auto;"></p>
 <div id="selecting-processing-parameters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#selecting-processing-parameters" class="anchor"></a><strong>Selecting Processing Parameters</strong>
@@ -292,7 +299,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <strong>version</strong>: Selects whether processing version 5 or 6 (when available) of MODIS products has to be processed</li>
 </ol>
 <p>After selecting the product and version, clicking the <strong>“Change Selection”</strong> button opens the <em><em>Select Processing Layers</em></em> GUI panel, from which the user <strong>must</strong> select which MODIS original layers and/or derived Quality Indexes (QI) and Spectral Indexes (SI) layers should be processed:</p>
-<p><img src="MODIStsp_files/figure-html/proc_layers-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="MODIStsp_files/figure-html/proc_layers-1.png" width="700" style="display: block; margin: auto;"></p>
 <ul>
 <li>The left-hand frame allows to select which <em>original MODIS layers</em> should be processed.</li>
 <li>The central frame allows to select which <em>Quality Indicators should be extracted</em> from the original MODIS Quality Assurance layers.</li>
@@ -491,7 +498,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <span class="co"># downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)</span>
 <span class="co"># and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.</span>
 
-options_file &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
+options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
 
 <span class="co"># --&gt; Launch the processing</span>
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
@@ -509,8 +516,8 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
 <h2 class="hasAnchor">
 <a href="#looping-over-different-options-files" class="anchor"></a>Looping over different Options files</h2>
 <p>If you need to process different MODIS products, you can prepare beforehand different MODIStsp options files by using the GUI, and then loop over them like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opts_files &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), 
-                <span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"testdata/test_MOD10A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opts_files &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">system.file</span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), 
+                <span class="kw">system.file</span>(<span class="st">"testdata/test_MOD10A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>))
 
 <span class="cf">for</span> (opts_file <span class="cf">in</span> opts_files) {
   <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> opts_file)
@@ -540,13 +547,13 @@ out_fold &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span c
 <span class="co"># and specifying the extent from a spatial file allows to re-use the same</span>
 <span class="co"># processing settings to perform download and reprocessing on a different area</span>
 <span class="kw">library</span>(MODIStsp) 
-options_file &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
-spatial_file &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"testdata/lakeshapes/garda_lake.shp"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
+options_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
+spatial_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"testdata/lakeshapes/garda_lake.shp"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)
 <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file,
          <span class="dt">spatial_file_path =</span> spatial_file, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)
 
 <span class="co"># --&gt; Create a character array containing a list of shapefiles (or other spatial files)</span>
-extent_list =<span class="st"> </span><span class="kw">list.files</span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"testdata/lakeshapes/"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), 
+extent_list =<span class="st"> </span><span class="kw">list.files</span>(<span class="kw">system.file</span>(<span class="st">"testdata/lakeshapes/"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), 
                          <span class="dt">full.names =</span> <span class="ot">TRUE</span>, <span class="st">"</span><span class="ch">\\</span><span class="st">.shp$"</span>)  
 extent_list
 
@@ -568,12 +575,12 @@ outfiles_garda &lt;-<span class="st"> </span><span class="kw">list.files</span>(
   <span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span>),
   <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
 <span class="kw">library</span>(raster)       
-<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(outfiles_garda[<span class="dv">1</span>]))
+<span class="kw">plot</span>(<span class="kw">raster</span>(outfiles_garda[<span class="dv">1</span>]))
 
 outfiles_iseo &lt;-<span class="st"> </span><span class="kw">list.files</span>(
   <span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span>),
   <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(outfiles_iseo[<span class="dv">1</span>]))</code></pre></div>
+<span class="kw">plot</span>(<span class="kw">raster</span>(outfiles_iseo[<span class="dv">1</span>]))</code></pre></div>
 </div>
 </div>
 <div id="stand-alone-execution-and-scheduled-processing" class="section level1">
@@ -677,7 +684,7 @@ outfiles_iseo &lt;-<span class="st"> </span><span class="kw">list.files</span>(
 <p>Any single-date image can be accessed by simply opening it with a <code>raster</code> command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
 modistsp_file &lt;-<span class="st"> "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"</span>
-my_raster &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(modistsp_file)</code></pre></div>
+my_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(modistsp_file)</code></pre></div>
 <p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series/RData” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in_virtual_file &lt;-<span class="st"> "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
 indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span class="kw">load</span>(in_virtual_file))</code></pre></div>
@@ -851,7 +858,6 @@ indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span 
 </div>
 </div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -924,6 +930,8 @@ indata          &lt;-<span class="st"> </span><span class="kw">get</span>(<span 
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

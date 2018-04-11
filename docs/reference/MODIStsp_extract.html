@@ -33,6 +33,8 @@
 on spatial locations provided in the form of "R" spatial objects (SpatialPoints,
 SpatialPolygons, etc.)" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -54,6 +56,8 @@ SpatialPolygons, etc.)" />
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -67,8 +71,12 @@ SpatialPolygons, etc.)" />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -141,6 +149,7 @@ SpatialPolygons, etc.)" />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -148,10 +157,12 @@ SpatialPolygons, etc.)" />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract data from MODIStsp time series</h1>
+    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_extract.R'><code>R/MODIStsp_extract.R</code></a></small>
+    <div class="hidden name"><code>MODIStsp_extract.Rd</code></div>
     </div>
 
     
@@ -164,7 +175,7 @@ SpatialPolygons, etc.)</p>
   <span class='kw'>id_field</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>out_format</span> <span class='kw'>=</span> <span class='st'>"xts"</span>, <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>small_method</span> <span class='kw'>=</span> <span class='st'>"centroids"</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -299,9 +310,8 @@ belonging to the polygon, and one line for each date.</p>
           <span class='fu'>file.path</span>(<span class='fu'>tempdir</span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>))</div><div class='output co'>#&gt;  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
 #&gt; [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</div><div class='input'>
 <span class='no'>opts_file</span> <span class='kw'>&lt;-</span> <span class='fu'>system.file</span>(<span class='st'>"testdata/test_extract.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='message'>[Thu Mar 15 14:13:41 2018] Welcome to MODIStsp!We will now search for a valid GDAL installation - pleasewait! (this will happen only once)</span></div><div class='output co'>#&gt; <span class='message'>Error in curl::curl_fetch_memory(url, handle = handle): Timeout was reached: Resolving timed out after 10000 milliseconds</span>
-#&gt; <span class='message'>Request failed [ERROR]. Retrying in 1 seconds...</span></div><div class='output co'>#&gt; <span class='message'>Error in curl::curl_fetch_memory(url, handle = handle): Timeout was reached: Resolving timed out after 10000 milliseconds</span>
-#&gt; <span class='message'>Request failed [ERROR]. Retrying in 1 seconds...</span></div><div class='input'>
+<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
 <span class='co'># Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between</span>
 <span class='co'># 2016-01-01 and 2016-12-18</span>
 <span class='co'># __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"</span>
@@ -354,7 +364,7 @@ belonging to the polygon, and one line for each date.</p>
 #&gt; 2016-02-18 2113.1000           NA
 #&gt; 2016-03-05 2195.0000           NA
 #&gt; 2016-03-21  383.2857           NA</div><div class='input'>
-<span class='fu'>plot</span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)</div><div class='img'><img src='MODIStsp_extract-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>plot</span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)</div><div class='img'><img src='MODIStsp_extract-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># use a different summarization function</span>
 
 <span class='no'>out_datasd</span> <span class='kw'>&lt;-</span> <span class='fu'>MODIStsp_extract</span>(<span class='no'>ts_data</span>, <span class='no'>polygons</span>, <span class='kw'>id_field</span> <span class='kw'>=</span> <span class='st'>"lc_type"</span>,
@@ -412,6 +422,8 @@ email: busetto.l@irea.cnr.it
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

@@ -32,6 +32,8 @@
 <meta property="og:description" content="Internal function dealing with download of MODIS hdfs from
 http or ftp remote servers for a given date." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -53,6 +55,8 @@ http or ftp remote servers for a given date." />
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -66,8 +70,12 @@ http or ftp remote servers for a given date." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -140,6 +148,7 @@ http or ftp remote servers for a given date." />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -147,10 +156,12 @@ http or ftp remote servers for a given date." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>MODIStsp download function</h1>
+    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_download.R'><code>R/MODIStsp_download.R</code></a></small>
+    <div class="hidden name"><code>MODIStsp_download.Rd</code></div>
     </div>
 
     
@@ -162,7 +173,7 @@ http or ftp remote servers for a given date.</p>
   <span class='no'>n_retries</span>, <span class='no'>use_aria</span>, <span class='no'>date_dir</span>, <span class='no'>year</span>, <span class='no'>DOY</span>, <span class='no'>user</span>, <span class='no'>password</span>, <span class='no'>sens_sel</span>, <span class='no'>date_name</span>,
   <span class='no'>gui</span>, <span class='no'>mess_lab</span>, <span class='no'>verbose</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -281,6 +292,8 @@ Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

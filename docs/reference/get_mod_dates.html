@@ -32,6 +32,8 @@
 <meta property="og:description" content="Accessory function to find the folders corresponding to the requested
 dates period within the full list retrieved by get_moddirs" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -53,6 +55,8 @@ dates period within the full list retrieved by get_moddirs" />
 
 </script>
 
+
+
   </head>
 
   <body>
@@ -66,8 +70,12 @@ dates period within the full list retrieved by get_moddirs" />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -140,6 +148,7 @@ dates period within the full list retrieved by get_moddirs" />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -147,10 +156,12 @@ dates period within the full list retrieved by get_moddirs" />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Find MODIS dates included in selected processing period</h1>
+    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/get_mod_dates.R'><code>R/get_mod_dates.R</code></a></small>
+    <div class="hidden name"><code>get_mod_dates.Rd</code></div>
     </div>
 
     
@@ -160,7 +171,7 @@ dates period within the full list retrieved by get_moddirs</p>
 
     <pre class="usage"><span class='fu'>get_mod_dates</span>(<span class='no'>dates</span>, <span class='no'>date_dirs</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -216,6 +227,8 @@ Lorenzo Busetto, phD (2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

@@ -13,7 +13,7 @@
 "end_y":      5,
 "user": "mstp_test",
 "password": "MSTP_test_01",
-"use_aria": true,
+"use_aria": false,
 "download_server": "http",
 "download_range": "seasonal",
 "proj": "Native",
