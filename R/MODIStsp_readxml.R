@@ -37,9 +37,9 @@ MODIStsp_read_xml <- function(prodopts_file,
       # General info
       version_name <- prod_data[["v_number"]][[1]]
       prodopts[[version_name]] <- list()	# one element per version
-      
+
       prodopts[[version_name]]$v_number <- version_name
-      
+
       prodopts[[version_name]]$prod_fullname <- prod_data[["prod_fullname"]][[1]] #nolint
       prodopts[[version_name]]$main_out_folder <-
         prod_data[["main_out_folder"]][[1]]
@@ -55,11 +55,9 @@ MODIStsp_read_xml <- function(prodopts_file,
 
       file_prefix_terra <- xmldata[[prod]][["file_prefix_terra"]][[1]]
       http_terra        <- prod_data[["http_terra"]][[1]]
-      ftp_terra         <- prod_data[["ftp_terra"]][[1]]
 
       file_prefix_aqua <- xmldata[[prod]][["file_prefix_aqua"]][[1]]
       http_aqua        <- prod_data[["http_aqua"]][[1]]
-      ftp_aqua         <- prod_data[["ftp_aqua"]][[1]]
 
       prodopts[[version_name]]$www <- prod_data[["www"]][[1]]
       prodopts[[version_name]]$file_prefix <- list(
@@ -68,8 +66,6 @@ MODIStsp_read_xml <- function(prodopts_file,
       )
       prodopts[[version_name]]$http <- list("Terra" = http_terra,
                                             "Aqua" = http_aqua)
-      prodopts[[version_name]]$ftp  <- list("Terra" = ftp_terra,
-                                            "Aqua" = ftp_aqua)
 
       # Band info
       nbands       <- length(prod_data[["bands"]])

@@ -4,12 +4,10 @@
 #' to a given date and interval of spatial tiles within the lpdaac archive.
 #' @param http `character` url of http site on lpdaac corresponding to a given MODIS
 #'   product.
-#' @param ftp `character` url of ftp site corresponding to a given MODIS product.
-#' @param used_server `character` can assume values "http" or "ftp" depending on the
-#'  used download server; it cannot be NA.
-#' @param user `character` username for earthdata server (Ignored if used_server = "ftp").
-#' @param password `character` password for earthdata server  (Ignored if used_server = "ftp").
-#' @param n_retries `numeric` number of times the access to the http/ftp server
+#' @param used_server `character` can assume values "http"; it cannot be NA.
+#' @param user `character` username for earthdata server.
+#' @param password `character` password for earthdata server.
+#' @param n_retries `numeric` number of times the access to the http server
 #'   should be retried in case of error before quitting, Default: 20.
 #' @param date_dir `character array` array of folder names corresponding to acquisition
 #'  containing dates where MODIS files to be downloaded are to be identified
@@ -36,7 +34,6 @@
 #' @importFrom httr GET timeout authenticate content
 #' @importFrom stringr str_split str_pad
 get_mod_filenames <- function(http,
-                              ftp,
                               used_server,
                               user,
                               password,
@@ -51,10 +48,10 @@ get_mod_filenames <- function(http,
   if (used_server == "http") {
     #   ________________________________________________________________________
     #   Retrieve available hdf files in case of http download               ####
-    
+
     # http folders are organized by date subfolders containing all tiles
     while (!success) {
-      
+
       response <- httr::RETRY("GET",
                               paste0(http, date_dir, "/"),
                               httr::authenticate(user, password),
@@ -62,7 +59,7 @@ get_mod_filenames <- function(http,
                               pause_base = 0.1,
                               pause_cap = 10,
                               quiet = FALSE)
-      
+
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
       if (response$status_code != 200) {
@@ -73,9 +70,6 @@ get_mod_filenames <- function(http,
             icon = "question")
           if (!confirm) stop("You selected to abort processing. Goodbye!")
           #nocov end
-        } else {
-          stop("[", date(), "] Error: http server seems to be down! ",
-               "Switching to ftp!")
         }
       } else {
         getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
@@ -87,55 +81,11 @@ get_mod_filenames <- function(http,
           ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
           getlist)
         success <- TRUE
-        
+
       }
     }
   }
-  success <- FALSE
-  if (used_server == "ftp") {
-    #   ______________________________________________________________________
-    #   Retrieve available hdf files in case of ftp download             ####
-    
-    # ftp folders are organized by /year/date subfolders, so there is an
-    # additional level to be "parsed" wrt http
-    date_year <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%Y")
-    date_doy  <- strftime(as.Date(date_dir, format = "%Y.%m.%d"), "%j")
-    
-    while (!success) {
-      response <- suppressWarnings(
-        httr::RETRY("GET",
-                    paste0(ftp, date_year, "/", date_doy, "/"),
-                    # httr::authenticate(user, password),
-                    times = n_retries,
-                    pause_base = 0.1,
-                    pause_cap = 10,
-                    quiet = FALSE))
-      # On interactive execution, after n_retries attempt ask if quit or ----
-      # retry
-      if (response$status_code != 226) {
-        if (gui) {
-          #nocov start
-          confirm <- gWidgets::gconfirm(
-            "ftp server seems to be down! Do you want to retry?",
-            icon = "question")
-          if (!confirm) stop("You selected to abort processing. Goodbye!")
-          #nocov end
-        } else {
-          stop("[", date(), "] Error: ftp server seems to be down! ",
-               "Aborting! Please try again later!")
-        }
-      } else {
-        
-        getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
-                            "\r*\n")[[1]]
-        getlist <- stringr::str_extract(
-          getlist,
-          "[A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf") #nolint
-        success <- TRUE
-      }
-    }
-  }
-  
+
   # __________________________________________________________________________
   # Retrieve the list of hdf files matching the product / version / date ####
   # in case of offline mode

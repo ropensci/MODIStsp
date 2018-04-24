@@ -1,26 +1,21 @@
 #' @title MODIStsp download function
 #' @description Internal function dealing with download of MODIS hdfs from
-#'  http or ftp remote servers for a given date.
+#'  http remote server for a given date.
 #' @param modislist `character array` List of MODIS images to be downloaded for
 #'  the selected date (as returned from `get_mod_filenames`). Can be a single
 #'  image, or a list of images in case different tiles are needed!
 #' @param out_folder_mod `character` Folder where the hdfs are to be stored
-#' @param download_server `character ["http" | "ftp"]` Server to be used.
+#' @param download_server `character ["http"]` Server to be used.
 #' @param http `character` Address of the http server for the selected product.
-#' @param ftp `character` Address of the http server for the selected product.
 #' @param n_retries `numeric` Max number of retry attempts on download. If
 #'  download fails more that n_retries times consecutively, abort
 #' @param date_dir `character array` Sub-folder where the different images
 #'  can be found (element of the list returned from `get_mod_dirs`, used in case
 #'  of http download to generate the download addresses).
 #' @param year `character` Acquisition year of the images to be downloaded
-#'  (Used in case of ftp download to generate the download addresses).
 #' @param DOY `character array` Acquisition doys of the images to be downloaded
-#'  (Used in case of ftp download to generate the download addresses).
-#' @param user `character` Username for http download (Ignored in case of ftp
-#'  download).
-#' @param password `character` Password for http download (Ignored in case of ftp
-#'  download).
+#' @param user `character` Username for http download
+#' @param password `character` Password for http download
 #' @param sens_sel `character ["terra" | "aqua"]` Selected sensor.
 #' @param date_name `character` Date of acquisition of the images to be downloaded.
 #' @param gui `logical` Indicates if on an interactive or non-interactive execution
@@ -41,7 +36,6 @@ MODIStsp_download <- function(modislist,
                               out_folder_mod,
                               download_server,
                               http,
-                              ftp,
                               n_retries,
                               use_aria,
                               date_dir,
@@ -73,9 +67,6 @@ MODIStsp_download <- function(modislist,
     if (download_server == "http") {
       remote_filename <- paste0(http, date_dir, "/", modisname)
     }
-    if (download_server == "ftp")  {
-      remote_filename <- paste0(ftp, year, "/", DOY, "/", modisname)
-    }
     if (download_server == "offline") {
       remote_filename <- NA
     }
@@ -93,8 +84,8 @@ MODIStsp_download <- function(modislist,
 
         # if user/password are not valid, notify
         if (size_string["status_code"] == 401) {
-          stop("Username and/or password are not valid. Please retry with the
-             correct ones or try with ftp download.")
+          stop("Username and/or password are not valid. Please provide
+             valid ones!")
         }
 
         if (size_string$status_code == 200) {
@@ -124,51 +115,9 @@ MODIStsp_download <- function(modislist,
         }
       }
     } else {
-      if (download_server == "ftp") {
-        # On ftp download, use getURL to find out the remote file size ----
-        attempt <- 0
-        while (attempt < n_retries) {
 
-          size_string <- try(suppressWarnings(
-            httr::HEAD(remote_filename, quiet = TRUE,
-                       httr::config(nobody = TRUE))),
-            silent = TRUE)
-          if (class(size_string) != "try-error") {
-            remote_filesize <- as.integer(
-              size_string[["headers"]][["content-length"]]
-            )
-            # on success, set a high value to attempt so to end the while loop
-            attempt <- n_retries + 1
-          } else {
-            # wait one second before trying again!
-            Sys.sleep(1)
-            attempt <- attempt + 1
-          }
-          # If the remote xml file was not accessible n_retries times,
-          # retry or abort
-          if (attempt == n_retries) {
-            if (gui) {
-              #nocov start
-              confirm <- gWidgets::gconfirm(
-                paste0(download_server,
-                       "ftp server seems to be down! Do you want to retry?"),
-                icon = "question")
-              if (confirm) {
-                attempt <- 0
-              } else {
-                stop("You selected to quit! Goodbye!")
-              }
-              #nocov end
-            } else {
-              stop("[", date(), "] Error: server seems to be down! Please retry ", #nolint
-                   "later!")
-            }
-          }
-        }
-      } else {
-        # On offline mode, don't perform file size check ----
-        remote_filesize <- local_filesize
-      }
+      # On offline mode, don't perform file size check ----
+      remote_filesize <- local_filesize
     }
 
     #   ________________________________________________________________________
@@ -212,26 +161,6 @@ MODIStsp_download <- function(modislist,
                                       httr::progress(),
                                       httr::write_disk(local_filename,
                                                        overwrite = TRUE)))
-          }
-        } else {
-          # ftp download - aria
-          if (use_aria == TRUE) {
-            aria_string <- paste0(
-              Sys.which("aria2c"), " -x 6 -d ",
-              dirname(local_filename),
-              " -o ", basename(remote_filename),
-              " ", remote_filename,
-              " --allow-overwrite --file-allocation=none --retry-wait=2"
-            )
-            download <- try(system(aria_string,
-                                   intern = Sys.info()["sysname"] == "Windows"))
-          } else {
-            # ftp download - httr
-            download <- try(suppressWarnings(
-              httr::GET(remote_filename,
-                        httr::progress(),
-                        httr::write_disk(local_filename, overwrite = TRUE)))
-            )
           }
         }
 
