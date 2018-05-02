@@ -16,8 +16,7 @@
 #'   environment or not. If not, processing messages are sent to a log file
 #'   instead than to the console/GTK progress windows.
 #' @param out_folder_mod  `character` output folder for MODIS HDF storage
-#' @param .Platform `character` os platform (from call to .Platform)
-#' @return `character arraty` listing all available folders (a.k.a. dates) for
+#' @return `character arraay` listing all available folders (a.k.a. dates) for
 #'   the requested MODIS product on lpdaac http archive, for the years
 #'   included in the time range selected for processing.
 #' @author Original code by Babak Naimi (\code{.getModisList}, in
@@ -37,69 +36,57 @@ get_mod_dirs <- function(http,
                          yy,
                          n_retries,
                          gui,
-                         out_folder_mod,
-                         .Platform) {
+                         out_folder_mod) {
 
   # make sure that the http address terminates with a "/" (i.e., it is a
   # folder, not a file)
   if (stringr::str_sub(http, -1) != "/") {
     http <- paste(http, "/", sep = "")
   }
-  success <- FALSE
+
   #   __________________________________________________________________________
   #   retrieve list of folders in case of http download                    ####
 
   if (download_server == "http") {
-    # send request to server
-    response <- try(httr::RETRY("GET",
-                                http,
-                                httr::authenticate(user, password),
-                                times = n_retries,
-                                pause_base = 0.1,
-                                pause_cap = 3,
-                                quiet = FALSE))
-    # On interactive execution, after n_retries attempt ask if quit or ----
-    # retry
+    response = data.frame(status_code = "")
+    while (response$status_code != 200) {
+      # send request to server
+      response <- httr::RETRY("GET",
+                              http,
+                              httr::authenticate(user, password),
+                              times = n_retries,
+                              pause_base = 0.1,
+                              pause_cap = 3,
+                              quiet = FALSE)
+      # On interactive execution, after n_retries attempt ask if quit or ----
+      # retry
 
-    if (class(response) == "try-error") {
-      if (gui) {
-        #nocov start
-        switch <- gWidgets::gconfirm(
-          "http server seems to be down! Do you want to retry?",
-          icon = "question")
-        if (!switch) {
-          stop("You selected to abort processing. Goodbye!")
+      if (response$status_code != 200) {
+        if (gui) {
+          #nocov start
+          switch <- gWidgets::gconfirm(
+            "http server seems to be down! Do you want to retry?",
+            icon = "question")
+          if (!switch) {
+            stop("You selected to abort processing. Goodbye!", call. = FALSE)
+          }
+          #nocov end
         } else {
-          download_server <- "ftp"
-          success <- TRUE
+          stop("[", date(), "] Error: http server seems to be down! ",
+               "Please try again later. Aborting!", call. = FALSE)
         }
-        #nocov end
-      } else {
-        message("[", date(), "] Error: http server seems to be down! ",
-                "Switching to ftp!")
-        if (ftp == "Not Available") {
-          stop("The product is not available on ftp. Aborting!")
-        }
-        download_server <- "ftp"
-        success <- TRUE
       }
-    } else {
-      # On httr success get the directory names (available dates) ----
-      items <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
-                        "\r*\n")[[1]]
-      date_dirs <- gsub(
-        ".*>(20[0-9]{2}\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
-      )
-      date_dirs <- date_dirs[grep(paste0(yy, "\\.[01][0-9]\\.[0-3][0-9]"),
-                                  date_dirs)]
-      attr(date_dirs, "server") <- "http"
-      success <- TRUE
     }
-
+    # On httr success get the directory names (available dates) ----
+    items <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
+                      "\r*\n")[[1]]
+    date_dirs <- gsub(
+      ".*>(20[0-9]{2}\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
+    )
+    date_dirs <- date_dirs[grep(paste0(yy, "\\.[01][0-9]\\.[0-3][0-9]"),
+                                date_dirs)]
+    attr(date_dirs, "server") <- "http"
   }
-  success <- FALSE
-  # retrieve processign dates in case of "ftp" download ----
-
   #   __________________________________________________________________________
   #   In offline mode, retrieve the dates of acquisition of hdfs already
   #   available in `out_folder_mod`

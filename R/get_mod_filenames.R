@@ -68,8 +68,12 @@ get_mod_filenames <- function(http,
           confirm <- gWidgets::gconfirm(
             "http server seems to be down! Do you want to retry?",
             icon = "question")
-          if (!confirm) stop("You selected to abort processing. Goodbye!")
+          if (!confirm) stop("You selected to abort processing. Goodbye!",
+                             .call = FALSE)
           #nocov end
+        } else {
+          stop("[", date(), "] Error: http server seems to be down! ",
+               "Please try again later. Aborting!", call. = FALSE)
         }
       } else {
         getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),

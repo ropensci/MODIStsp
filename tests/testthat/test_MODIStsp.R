@@ -24,15 +24,6 @@ testthat::test_that(
       options_file = system.file("testdata/test05_wrong_pwd.json",
                                  package = "MODIStsp"),
       gui = FALSE, n_retries = 2), "Username and/or password are not valid")
-
-    # Try to access via ftp a product only available over http fails
-    # gracefully
-    expect_error(MODIStsp(
-      options_file = system.file("testdata/test04_ftp.json",
-                                 package = "MODIStsp"),
-      gui = FALSE, n_retries = 2), "Please switch to http download")
-
-
   })
 
 
@@ -276,7 +267,7 @@ testthat::test_that(
 #   After reprojection in geographic coordinates, output files are exported
 #   as GeoTiff (scaling output values) and vrt time series are created.
 
-context("MODIStsp Test 6: FTP download and mosaicing of MODIS tiles")
+context("MODIStsp Test 6: http download and mosaicing of MODIS tiles")
 testthat::test_that(
   "Tests on MODIStsp", {
     skip_on_cran()

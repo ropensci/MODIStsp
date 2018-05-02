@@ -105,12 +105,12 @@ MODIStsp_download <- function(modislist,
                      "http server seems to be down! Do you want to retry?"),
               icon = "question")
             if (!confirm) {
-              stop("You selected to quit! Goodbye!")
+              stop("You selected to quit! Goodbye!", .call = FALSE)
             }
             #nocov end
           } else {
-            stop("[", date(), "] Error: server seems to be down! Please retry ",
-                 "Later!")
+            stop("[", date(), "] Error: http server seems to be down! Please retry ",
+                 "Later!", .call = FALSE)
           }
         }
       }

@@ -4,7 +4,7 @@
 #'   MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
 #'   (non-interactive mode) and performs all required processing.
 #' @details After retrieving the input processing options, the function
-#'   1. Accesses NASA http or ftp archive to determine the list of files to be
+#'   1. Accesses NASA http archive to determine the list of files to be
 #'      downloaded/processed (or, in case of offline processing, get the list
 #'      of already available hdf files present in `out_mod_folder`);
 #'   2. Performs all required processing steps on each date (download,
@@ -33,8 +33,7 @@
 #' @param sensor `character ["Terra"| "Aqua" | "Both"]` MODIS platform to be considered.
 #'   (Ignored for MCD* products).
 #' @param https `list` http addresses for download of HDF of selected product.
-#' @param ftps `list` ftp addresses for download of HDF of selected product.
-#' @param download_server `character ["http" | "ftp" | "offline"]` service to be used for
+#' @param download_server `character ["http" | "offline"]` service to be used for
 #'  download.
 #' @param user `character` Username for NASA http server.
 #'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home)).
@@ -147,7 +146,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              out_folder_mod, reprocess = "Yes",
                              delete_hdf = "No",
                              sensor, download_server, user, password,
-                             https, ftps, start_x, start_y, end_x, end_y,
+                             https, start_x, start_y, end_x, end_y,
                              full_ext, bbox, out_format, compress,
                              out_res_sel, out_res, native_res, tiled,
                              mod_proj_str, outproj_str,
@@ -167,10 +166,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              gui            = TRUE,
                              n_retries,
                              verbose) {
-  
+
   mess_text <- "MODIStsp --> Starting processing"
   # initialize processing messages in case of interactive execution ----
-  
+
   if (gui) {
     #nocov start
     mess     <- gWidgets::gwindow(title = "Processing Status",
@@ -184,27 +183,27 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   } else {
     mess_lab <- NULL
   }
-  
+
   process_message(mess_text, gui, mess_lab, verbose)
-  
+
   #   __________________________________________________________________________
   #   Intialize processing variables                                        ####
-  
+
   # Set unrecognised values to None.
   # Recognised values are numerics, integer ranges (separate by ":")
   # and integer vectors (separate by ",").
-  nodata_in_unrecognised <- !grepl("^[0-9\\,\\:\\-]+$",nodata_in) & 
+  nodata_in_unrecognised <- !grepl("^[0-9\\,\\:\\-]+$",nodata_in) &
     is.na(suppressWarnings(as.numeric(nodata_in)))
   if (any(nodata_in_unrecognised)) {
     nodata_in[nodata_in_unrecognised] <- "None"
   }
-  
+
   quality_nodata_in_unrecognised <- !grepl("^[0-9\\,\\:\\-]+$",quality_nodata_in) & #nolint
     is.na(suppressWarnings(as.numeric(quality_nodata_in)))
   if (any(quality_nodata_in_unrecognised)) {
     quality_nodata_in[quality_nodata_in_unrecognised] <- "None"
   }
-  
+
   # if NoData change set to no, set out_nodata to nodata_in
   # and take only the last values listed for each band
   if (nodata_change == "No") {
@@ -277,41 +276,35 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   for (sens_sel in sensor) {
 
     http        <- https[[sens_sel]]
-    ftp         <- ftps[[sens_sel]]
     file_prefix <- file_prefixes[[sens_sel]]
-
-    # check if product is available on ftp
-
-    if (download_server == "ftp" & ftp == "Not Available") {
-      if (gui) gWidgets::dispose(mess_lab) #nocov
-      stop("Product ", sel_prod, " is not available over ftp.\n",
-           "Please switch to http download! Aborting!")
-    }
 
     # __________________________________________________________________________
     # Start Cycle on required years - needed since in case of "sesonal"     ####
     # download the dates to be downloaded need to be "tweaked" with respect
     # to start_date/end_date
 
+    # Processing status message
+    mess_text <- paste("Accessing http server at: ", http)
+    process_message(mess_text, gui, mess_lab, verbose)
+
     for (yy in start_year:end_year) {
 
       #   ______________________________________________________________________
       #   Retrieve list of files to be downloaded/processed from NASA       ####
-      #   http/ftp servers
+      #   http server
 
       # First, retrieve acquisition dates of all available MODIS hdfs for the
       # selected product in yy
-      date_dirs_all   <- get_mod_dirs(http, ftp, download_server,
+      date_dirs_all   <- get_mod_dirs(http, download_server,
                                       user, password,
                                       yy,
                                       n_retries,
                                       gui,
-                                      out_folder_mod,
-                                      .Platform)
+                                      out_folder_mod)
 
       # overwrite download_server with the setting used in the end to retrieve
-      # folders. Used in scheduled execution in case http fails and download
-      # switched automatically to ftp
+      # folders.
+
       download_server <- attr(date_dirs_all, "server")
 
       dates <- get_yeardates(download_range,
@@ -370,7 +363,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
             # Create vector of image names required (corresponding to the
             # required tiles for the current date)
-            modislist <- get_mod_filenames(http, ftp,
+            modislist <- get_mod_filenames(http,
                                            used_server = download_server,
                                            user, password, n_retries,
                                            date_dir = date_dirs[date],
@@ -389,7 +382,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               #  out_folder_mod, it is not redownloaded !!!!
 
               MODIStsp_download(modislist, out_folder_mod,
-                                download_server, http, ftp, n_retries, use_aria,
+                                download_server, http, n_retries, use_aria,
                                 date_dirs[date], year,
                                 DOY, user, password, sens_sel,
                                 date_name, gui, mess_lab, verbose)
