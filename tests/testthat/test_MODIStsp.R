@@ -261,8 +261,8 @@ testthat::test_that(
   })
 
 #
-### Test 6: test of FTP download and mosaicing of MODIS tiles               ####
-#   This test downloads four MCD LAI products (MCD15A2H) from FTP and mosaics
+### Test 6: test of http download and mosaicing of MODIS tiles               ####
+#   This test downloads four MCD LAI products (MCD15A2H) from http and mosaics
 #   them and crop to the output extent (Minorca island).
 #   After reprojection in geographic coordinates, output files are exported
 #   as GeoTiff (scaling output values) and vrt time series are created.
@@ -336,16 +336,14 @@ testthat::test_that(
 
 
 ### Test 8: Fail gracefully on no connection               ####
-#   If internet connection is down, retry n_retries times, try switching
-#   switching from http to ftp. After n_retries, abort gracefully.
+#   If internet connection is down, retry n_retries times. After n_retries,
+#   abort gracefully.
 context("MODIStsp Test 8: Fail gracefully on missing connection")
 testthat::test_that(
   "Tests on MODIStsp", {
     # skip_on_cran()
     library(httptest)
     expect_error(httptest::without_internet(MODIStsp(test = 5, n_retries = 1)),
-                 "Error: ftp server seems to be down! Please Retry Later!")
-    expect_error(httptest::without_internet(MODIStsp(test = 6, n_retries = 1)),
-                 "Error: ftp server seems to be down! Please Retry Later!")
+                 "Error: http server seems to be down!")
   }
 )

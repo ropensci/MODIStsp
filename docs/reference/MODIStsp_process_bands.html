@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="MODIStsp helper for processing original HDF layers — MODIStsp_process_bands" />
@@ -45,19 +48,15 @@ use of gdal routines." />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
-
-
 
   </head>
 
@@ -162,16 +161,18 @@ use of gdal routines." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>MODIStsp helper for processing original HDF layers</h1>
-    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_process_bands.R'><code>R/MODIStsp_process_bands.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_process_bands.R'><code>R/MODIStsp_process_bands.R</code></a></small>
     <div class="hidden name"><code>MODIStsp_process_bands.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Internal function used to perform the required spatial
 processing on MODIS original hdf layers (reprojection, resizing, resampling,
 mosaicing, computation of scaling factors). The function is based on the
 use of <code>gdal</code> routines.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>MODIStsp_process_bands</span>(<span class='no'>out_folder_mod</span>, <span class='no'>modislist</span>, <span class='no'>outproj_str</span>, <span class='no'>mod_proj_str</span>,
   <span class='no'>sens_sel</span>, <span class='no'>band</span>, <span class='no'>bandname</span>, <span class='no'>date_name</span>, <span class='no'>datatype</span>, <span class='no'>nodata_in</span>, <span class='no'>nodata_out</span>,

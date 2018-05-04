@@ -51,17 +51,18 @@ get_mod_dirs <- function(http,
     response = data.frame(status_code = "")
     while (response$status_code != 200) {
       # send request to server
-      response <- httr::RETRY("GET",
+      response <- try(httr::RETRY("GET",
                               http,
                               httr::authenticate(user, password),
                               times = n_retries,
                               pause_base = 0.1,
                               pause_cap = 3,
-                              quiet = FALSE)
+                              quiet = FALSE))
+
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
 
-      if (response$status_code != 200) {
+      if (class(response) == "try-error" || response$status_code != 200) {
         if (gui) {
           #nocov start
           switch <- gWidgets::gconfirm(

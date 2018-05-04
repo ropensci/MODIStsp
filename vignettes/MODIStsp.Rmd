@@ -385,8 +385,6 @@ Select the method to be used for download. Available choices are:
 This requires providing a user name and password, which can be obtained by registering 
 an account at the address [https://urs.earthdata.nasa.gov/profile](https://urs.earthdata.nasa.gov/profile);
 
-2.  **ftp**: download from NASA ftp archive ([ftp://ladsweb.nascom.nasa.gov/](ftp://ladsweb.nascom.nasa.gov/));
-
 3.  **offline**: this option allows to process/reprocess HDF files already available 
 on the user's PC without downloading from NASA -- useful if the user already has an
 archive of HDF images, or to reprocess data already downloaded via MODIStsp to create

@@ -6,10 +6,10 @@
 \usage{
 MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
   reprocess = "Yes", delete_hdf = "No", sensor, download_server, user,
-  password, https, ftps, start_x, start_y, end_x, end_y, full_ext, bbox,
-  out_format, compress, out_res_sel, out_res, native_res, tiled, mod_proj_str,
-  outproj_str, nodata_in, nodata_out, nodata_change, scale_val, scale_factor,
-  offset, datatype, bandsel, bandnames, indexes_bandsel, indexes_bandnames,
+  password, https, start_x, start_y, end_x, end_y, full_ext, bbox, out_format,
+  compress, out_res_sel, out_res, native_res, tiled, mod_proj_str, outproj_str,
+  nodata_in, nodata_out, nodata_change, scale_val, scale_factor, offset,
+  datatype, bandsel, bandnames, indexes_bandsel, indexes_bandnames,
   indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel,
   quality_bitN, quality_source, quality_nodata_in, quality_nodata_out,
   file_prefixes, main_out_folder, resampling, ts_format, use_aria = TRUE,
@@ -37,7 +37,7 @@ completion.}
 \item{sensor}{\code{character ["Terra"| "Aqua" | "Both"]} MODIS platform to be considered.
 (Ignored for MCD* products).}
 
-\item{download_server}{\code{character ["http" | "ftp" | "offline"]} service to be used for
+\item{download_server}{\code{character ["http" | "offline"]} service to be used for
 download.}
 
 \item{user}{\code{character} Username for NASA http server.
@@ -47,8 +47,6 @@ download.}
 (\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home}).}
 
 \item{https}{\code{list} http addresses for download of HDF of selected product.}
-
-\item{ftps}{\code{list} ftp addresses for download of HDF of selected product.}
 
 \item{start_x}{\code{integer [0-35]} Start horizontal tile.}
 
@@ -190,7 +188,7 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
 \details{
 After retrieving the input processing options, the function
 \enumerate{
-\item Accesses NASA http or ftp archive to determine the list of files to be
+\item Accesses NASA http archive to determine the list of files to be
 downloaded/processed (or, in case of offline processing, get the list
 of already available hdf files present in \code{out_mod_folder});
 \item Performs all required processing steps on each date (download,
