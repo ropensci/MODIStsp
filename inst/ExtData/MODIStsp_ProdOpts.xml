@@ -904,8 +904,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD09GA/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD09GA/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09ga_v006</www>
@@ -1351,8 +1349,6 @@
                     <native_res>231.656358</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD09GQ/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD09GQ/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09gq_v006</www>
@@ -1505,8 +1501,6 @@
                     <native_res>231.656358</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09Q1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD09Q1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD09Q1/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09q1_v006</www>
@@ -1689,8 +1683,6 @@
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MODOCGA.006006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYDOCGA.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MODOCGA/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYDOCGA/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/modocga_v006</www>
@@ -1895,8 +1887,6 @@
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MODTBGA.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYDTBGA.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MODTBGA/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYDTBGA/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/modtbga_v006</www>
@@ -1982,8 +1972,6 @@
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A1.006/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://nsidc.org/data/mod10a1</www>
@@ -2107,8 +2095,6 @@
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A2.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10A2.006/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://nsidc.org/data/mod10a2</www>
@@ -2199,8 +2185,6 @@
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C1.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C1.006/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://nsidc.org/data/mod10c1</www>
@@ -2259,8 +2243,6 @@
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10C2.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10C2.006/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://nsidc.org/data/mod10c2</www>
@@ -2319,8 +2301,6 @@
                     <native_res>5600</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10CM.006/</http_terra>
                     <http_aqua>https://n5eil01u.ecs.nsidc.org/MOSA/MYD10CM.006/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://nsidc.org/data/mod10cm</www>
@@ -2361,8 +2341,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11C1/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1_v006</www>
@@ -2591,8 +2569,6 @@
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11A1/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a1_v006</www>
@@ -2773,8 +2749,6 @@
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A2.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11A2/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a2_v006</www>
@@ -2955,8 +2929,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11B1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11B1/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b1_v006</www>
@@ -3248,8 +3220,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B2.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B2.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11B2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11B2/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b2_v006</www>
@@ -3505,8 +3475,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B3.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B3.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11B3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11B3/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b3_v006</www>
@@ -3762,8 +3730,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11C1/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1_v006</www>
@@ -3992,8 +3958,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C2.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11C2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11C2/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c2_v006</www>
@@ -4222,8 +4186,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD11C3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD11C3/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c3_v006</www>
@@ -4461,8 +4423,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43A1/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a1_v006</www>
@@ -4665,8 +4625,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43A2/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a2_v006</www>
@@ -4860,8 +4818,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43A3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43A3/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a3_v006</www>
@@ -5154,8 +5110,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43A4/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43A4/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a4_v006</www>
@@ -5371,8 +5325,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43C1/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c1_v006</www>
@@ -5710,8 +5662,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43C2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43C2/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c2_v006</www>
@@ -6040,8 +5990,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43C3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43C3/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c3_v006</www>
@@ -6289,8 +6237,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43C4/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43C4/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c4_v006</www>
@@ -6488,8 +6434,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D01.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D01.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D01/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D01/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d01_v006</www>
@@ -6521,8 +6465,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D02.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D02.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D02/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D02/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d02_v006</www>
@@ -6554,8 +6496,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D03.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D03.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D03/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D03/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d03_v006</www>
@@ -6587,8 +6527,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D04.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D04.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D04/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D04/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d04_v006</www>
@@ -6620,8 +6558,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D05.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D05.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D05/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D05/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d05_v006</www>
@@ -6653,8 +6589,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D06.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D06.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D06/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D06/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d06_v006</www>
@@ -6686,8 +6620,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D07.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D07.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D07/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D07/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d07_v006</www>
@@ -6719,8 +6651,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D08.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D08.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D08/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D08/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d08_v006</www>
@@ -6752,8 +6682,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D09.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D09.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D09/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D09/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d09_v006</www>
@@ -6785,8 +6713,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D10.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D10.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D10/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D10/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d10_v006</www>
@@ -6818,8 +6744,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D11.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D11.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D11/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D11/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d11_v006</www>
@@ -6851,8 +6775,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D12.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D12.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D12/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D12/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d12_v006</www>
@@ -6884,8 +6806,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D13.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D13.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D13/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D13/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d13_v006</www>
@@ -6917,8 +6837,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D14.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D14.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D14/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D14/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d14_v006</www>
@@ -6950,8 +6868,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D15.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D15.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D15/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D15/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d15_v006</www>
@@ -6983,8 +6899,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D16.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D16.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D16/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D16/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d16_v006</www>
@@ -7016,8 +6930,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D17.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D17.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D17/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D17/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d17_v006</www>
@@ -7049,8 +6961,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D18.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D18.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D18/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D18/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d18_v006</www>
@@ -7082,8 +6992,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D19.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D19.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D19/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D19/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d19_v006</www>
@@ -7115,8 +7023,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D20.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D20.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D20/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D20/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d20_v006</www>
@@ -7148,8 +7054,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D21.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D21.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D21/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D21/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d21_v006</www>
@@ -7181,8 +7085,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D22.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D22.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D22/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D22/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d22_v006</www>
@@ -7214,8 +7116,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D23.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D23.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D23/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D23/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d23_v006</www>
@@ -7247,8 +7147,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D24.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D24.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D24/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D24/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d24_v006</www>
@@ -7280,8 +7178,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D25.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D25.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D25/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D25/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d25_v006</www>
@@ -7313,8 +7209,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D26.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D26.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D26/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D26/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d26_v006</www>
@@ -7346,8 +7240,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D27.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D27.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D27/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D27/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d27_v006</www>
@@ -7379,8 +7271,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D28.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D28.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D28/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D28/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d28_v006</www>
@@ -7412,8 +7302,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D29.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D29.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D29/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D29/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d29_v006</www>
@@ -7445,8 +7333,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D30.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D30.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D30/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D30/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d30_v006</www>
@@ -7478,8 +7364,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D31.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D31.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D31/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D31/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d31_v006</www>
@@ -7511,8 +7395,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D32.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D32.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D32/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D32/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d32_v006</www>
@@ -7544,8 +7426,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D33.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D33.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D33/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D33/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d33_v006</www>
@@ -7577,8 +7457,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D34.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D34.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D34/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D34/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d34_v006</www>
@@ -7610,8 +7488,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D35.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D35.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D35/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D35/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d35_v006</www>
@@ -7643,8 +7519,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D36.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D36.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D36/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D36/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d36_v006</www>
@@ -7676,8 +7550,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D37.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D37.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D37/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D37/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d37_v006</www>
@@ -7709,8 +7581,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D38.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D38.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D38/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D38/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d38_v006</www>
@@ -7742,8 +7612,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D39.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D39.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D39/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D39/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d39_v006</www>
@@ -7775,8 +7643,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D40.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D40.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D40/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D40/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d40_v006</www>
@@ -7808,8 +7674,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D41.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D41.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D41/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D41/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d41_v006</www>
@@ -7841,8 +7705,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D42.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D42.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D42/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D42/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d42_v006</www>
@@ -7874,8 +7736,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D43.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D43.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D43/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D43/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d43_v006</www>
@@ -7907,8 +7767,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D44.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D44.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D44/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D44/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d44_v006</www>
@@ -7940,8 +7798,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D45.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D45.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D45/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D45/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d45_v006</www>
@@ -7973,8 +7829,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D46.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D46.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D46/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D46/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d46_v006</www>
@@ -8006,8 +7860,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D47.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D47.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D47/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D47/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d47_v006</www>
@@ -8039,8 +7891,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D48.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D48.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D48/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D48/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d48_v006</www>
@@ -8072,8 +7922,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D49.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D49.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D49/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D49/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d49_v006</www>
@@ -8105,8 +7953,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D50.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D50.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D50/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D50/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d50_v006</www>
@@ -8138,8 +7984,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D51.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D51.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D51/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D51/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d51_v006</www>
@@ -8171,8 +8015,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D52.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D52.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D52/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D52/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d52_v006</www>
@@ -8204,8 +8046,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D53.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D53.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D53/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D53/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d53_v006</www>
@@ -8237,8 +8077,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D54.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D54.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D54/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D54/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d54_v006</www>
@@ -8270,8 +8108,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D55.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D55.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D55/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D55/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d55_v006</www>
@@ -8303,8 +8139,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D56.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D56.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D56/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D56/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d56_v006</www>
@@ -8336,8 +8170,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D57.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D57.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D57/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D57/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d57_v006</www>
@@ -8369,8 +8201,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D58.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D58.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D58/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D58/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d58_v006</www>
@@ -8402,8 +8232,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D59.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D59.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D59/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D59/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d59_v006</www>
@@ -8435,8 +8263,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D60.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D60.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D60/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D60/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d60_v006</www>
@@ -8468,8 +8294,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D61.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D61.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D61/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D61/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d61_v006</www>
@@ -8501,8 +8325,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D62.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D62.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D62/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D62/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d62_v006</www>
@@ -8534,8 +8356,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D63.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D63.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D63/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D63/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d63_v006</www>
@@ -8567,8 +8387,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D64.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D64.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D64/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D64/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d64_v006</www>
@@ -8600,8 +8418,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D65.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D65.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D65/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D65/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d65_v006</www>
@@ -8633,8 +8449,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D66.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D66.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D66/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D66/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d66_v006</www>
@@ -8666,8 +8480,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D67.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D67.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D67/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D67/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d67_v006</www>
@@ -8699,8 +8511,6 @@
                     <native_res>933.3333</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D68.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D68.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D68/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD43D68/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d68_v006</www>
@@ -8732,8 +8542,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD13A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD13A1/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a1_v006</www>
@@ -8946,8 +8754,6 @@
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD13A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD13A2/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a2_v006</www>
@@ -9160,8 +8966,6 @@
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A3.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD13A3/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD13A3/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a3_v006</www>
@@ -9374,8 +9178,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD13C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD13C1/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c1_v006</www>
@@ -9579,8 +9381,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD13C2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD13C2/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c2_v006</www>
@@ -9793,8 +9593,6 @@
                     <native_res>231.656358</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD13Q1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD13Q1/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13q1_v006</www>
@@ -10007,8 +9805,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2H.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2H.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD15A2H/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD15A2H/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a2h_v006</www>
@@ -10159,8 +9955,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3H.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3H.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD15A3H/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD15A3H/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a3h_v006</www>
@@ -10311,8 +10105,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD15A2H.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2H.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD15A2H/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD15A2H/</ftp_aqua>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod15a2h_v006</www>
                     <combined>0</combined>
                     <tiled>1</tiled>
@@ -10463,8 +10255,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD16A2.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD16A2.006/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod16a2_v006</www>
@@ -10564,8 +10354,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD16A3.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD16A3.006/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod16a3_v006</www>
@@ -10633,8 +10421,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2H.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2H.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD17A2H/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD17A2H/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a2h_v006</www>
@@ -10716,8 +10502,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A3H.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A3H.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD17A3H/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD17A3H/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a3h_v006</www>
@@ -10790,8 +10574,6 @@
                     <native_res>231.6564</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD44B.051/</http_terra>
                     <http_aqua>Not Available</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod44b</www>
@@ -10976,8 +10758,6 @@
                     <native_res>231.6564</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD44W.006/</http_terra>
                     <http_aqua>Not Available</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod44w_v006</www>
@@ -11019,8 +10799,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD64A1.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD64A1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD64A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MCD64A1/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd64a1_v006</www>
@@ -11120,8 +10898,6 @@
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD14A1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD14A1/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a1_v006</www>
@@ -11194,8 +10970,6 @@
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.006/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.006/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/6/MOD14A2/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/6/MYD14A2/</ftp_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a2_v006</www>
@@ -11464,8 +11238,6 @@
                     <native_res>463.3127</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q1</www>
@@ -11783,8 +11555,6 @@
                     <native_res>5600</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A1.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A1.006/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd18a1_v006</www>
@@ -11916,8 +11686,6 @@
                     <native_res>5600</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A2.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A2.006/</http_aqua>
-                    <ftp_terra>Not Available</ftp_terra>
-                    <ftp_aqua>Not Available</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd18a2_v006</www>

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![DOI](http://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](http://doi.org/10.5281/zenodo.290683)
 [![Coverage Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
 
-MODIStsp <img src="docs/logo.png" width="147" height="170" align="right" />
+MODIStsp <img src="vignettes/logo.png" width="147" height="170" align="right" />
 =========
 MODIStsp is a "R" package devoted to automatizing the creation of time series of
 rasters derived from MODIS Land Products data. MODIStsp allows to perform several
