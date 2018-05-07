@@ -1,8 +1,7 @@
 context("MODIStsp Test 0: Gracefully fail on input problems")
 testthat::test_that(
   "Tests on MODIStsp", {
-
-    library(testthat)
+    skip_on_cran()
     # no options file
     expect_error(MODIStsp(gui = FALSE),
                  "Please provide a valid \"options_file\"")
@@ -32,10 +31,8 @@ context("MODIStsp Test 1: Basic processing on bands and quality
 testthat::test_that(
   "Tests on MODIStsp", {
 
-    library(testthat)
-
     # skip("Skip tests - since they rely on download they are only run locally")
-    # skip_on_cran()
+    skip_on_cran()
     # skip_on_travis()
 
     ### Test 1: test of the basic operations of MODIStsp.                   ####
@@ -74,7 +71,7 @@ testthat::test_that(
 context("MODIStsp Test 2: Geometric operations")
 testthat::test_that(
   "Tests on MODIStsp", {
-    # skip_on_cran()
+    skip_on_cran()
     # skip_on_travis()
 
     MODIStsp(test = 2)
@@ -116,7 +113,7 @@ context("MODIStsp Test 3: Computation of spectral indices and
             creation of time series")
 testthat::test_that(
   "Tests on MODIStsp", {
-    # skip_on_cran()
+    skip_on_cran()
     # skip_on_travis()
 
     MODIStsp(test = 3)
@@ -341,7 +338,7 @@ testthat::test_that(
 context("MODIStsp Test 8: Fail gracefully on missing connection")
 testthat::test_that(
   "Tests on MODIStsp", {
-    # skip_on_cran()
+    skip_on_cran()
     library(httptest)
     expect_error(httptest::without_internet(MODIStsp(test = 5, n_retries = 1)),
                  "Error: http server seems to be down!")

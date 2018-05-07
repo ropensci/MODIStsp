@@ -10961,6 +10961,50 @@
                 </version>
             </versions>
         </MOD44B>
+
+        <MOD44W>
+            <name>Land_Wat_Mask_Yearly_250m (MOD44W)</name>
+            <cat_01>Ecosystem Variables</cat_01>
+            <cat_02>Vegetation Continuous Cover/Fields</cat_02>
+            <file_prefix_terra>MOD44W</file_prefix_terra>
+            <file_prefix_aqua>MYD44W</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MODIS/Terra Land Water Mask Global 250 m SIN Grid V006</prod_fullname>
+                    <main_out_folder>Land_Wat_Mask_Yearly_250m_v6</main_out_folder>
+                    <native_res>231.6564</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD44W.006/</http_terra>
+                    <http_aqua>Not Available</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>0</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod44w_v006</www>
+                    <bands>
+                        <band>
+                            <bandname>Water_mask</bandname>
+                            <fullname>Land/Water Mask</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>250:253</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Water_mask_QA</bandname>
+                            <fullname>Quality Assurance (QA)</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>10:253</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                </version>
+            </versions>
+        </MOD44W>
+
         <MCD64A1>
             <name>Burned_Monthly_500m (MCD64A1)</name>
             <cat_01>Land Cover Characteristics</cat_01>
@@ -11145,7 +11189,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MOD14A2: MODIS/Terra Thermal Anomalies and Fire 8-Day L3 Global 1km V006</prod_fullname>
+                    <prod_fullname>M*D14A2: MODIS/Terra Thermal Anomalies and Fire 8-Day L3 Global 1km V006</prod_fullname>
                     <main_out_folder>ThermalAn_Fire_8Days_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.006/</http_terra>
@@ -11206,8 +11250,6 @@
                     <native_res>5600</native_res>
                     <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_terra>
                     <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_aqua>
-                    <ftp_terra>ftp://ladsweb.nascom.nasa.gov/allData/51/MCD12C1/</ftp_terra>
-                    <ftp_aqua>ftp://ladsweb.nascom.nasa.gov/allData/51/MCD12C1/</ftp_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12c1</www>
@@ -11222,7 +11264,7 @@
                             <offset>0</offset>
                         </band>
                         <band>
-                            <bandname>LC2_Assessment</bandname>
+                            <bandname>LC1_Assessment</bandname>
                             <fullname>Majority_Land_Cover_Type_1_Assessment</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
@@ -11231,7 +11273,7 @@
                             <offset>0</offset>
                         </band>
                         <band>
-                            <bandname>LC2_Percent</bandname>
+                            <bandname>LC1_Percent</bandname>
                             <fullname>Majority_Land_Cover_Type_1_Percent</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
@@ -11311,6 +11353,100 @@
                             <quality_bitN>1-2</quality_bitN>
                         </quality>
                     </quality_indicators>
+                </version>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MCD12C1: Combined Land Cover Type CMG Yearly Global 0.05 Deg V006</prod_fullname>
+                    <main_out_folder>LandCover_Type_Yearly_005dg_v6</main_out_folder>
+                    <native_res>5600</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.006//</http_aqua>
+                    <combined>1</combined>
+                    <tiled>0</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12c1_v006</www>
+                    <bands>
+                        <band>
+                            <bandname>LC1</bandname>
+                            <fullname>Majority_Land_Cover_Type_1</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC1_Assessment</bandname>
+                            <fullname>Majority_Land_Cover_Type_1_Assessment</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC1_Percent</bandname>
+                            <fullname>Majority_Land_Cover_Type_1_Percent</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC2</bandname>
+                            <fullname>Majority_Land_Cover_Type_2</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC2_Assessment</bandname>
+                            <fullname>Majority_Land_Cover_Type_2_Assessment</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC2_Percent</bandname>
+                            <fullname>Majority_Land_Cover_Type_2_Percent</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC3</bandname>
+                            <fullname>Majority_Land_Cover_Type_3</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC3_Assessment</bandname>
+                            <fullname>Majority_Land_Cover_Type_3_Assessment</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC3_Percent</bandname>
+                            <fullname>Majority_Land_Cover_Type_3_Percent</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
                 </version>
             </versions>
         </MCD12C1>
@@ -11500,6 +11636,403 @@
                         </quality>
                     </quality_indicators>
                 </version>
+                 <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MCD12Q1: Land Cover Type Yearly L3 Global 500 m SIN Grid v051</prod_fullname>
+                    <main_out_folder>LandCover_Type_Yearly_500m_v5</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.006/</http_aqua>
+                    <combined>1</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q1_v006</www>
+                    <bands>
+                        <band>
+                            <bandname>LC1</bandname>
+                            <fullname>Land Cover Type 1 (IGBP)*</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC2</bandname>
+                            <fullname>Land Cover Type 2 (UMD)*</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC3</bandname>
+                            <fullname>Land Cover Type 3 (LAI/fPAR)*</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC4</bandname>
+                            <fullname>Land Cover Type 4 (NPP/BGC)*</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC5</bandname>
+                            <fullname>Land Cover Type 5: Annual Plant Functional Types classification</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC_Prop1</bandname>
+                            <fullname>FAO-Land Cover Classification System 1 (LCCS1) land cover layer</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC_Prop2</bandname>
+                            <fullname>FAO-LCCS2 land use layer</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC_Prop3</bandname>
+                            <fullname>FAO-LCCS3 surface hydrology layer</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC_Prop1_Assessment</bandname>
+                            <fullname>LCCS1 land cover layer confidence</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC_Prop2_Assessment</bandname>
+                            <fullname>LCCS2 land use layer confidence</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC_Prop3_Assessment</bandname>
+                            <fullname>LCCS3 surface hydrology layer confidence</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC_QC</bandname>
+                            <fullname>Land Cover QC</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LC_LW</bandname>
+                            <fullname>Binary land/water mask derived from MOD44W</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                </version>
             </versions>
         </MCD12Q1>
-    </products>
+
+        <MCD18A1>
+            <name>Dwnwrd_Srw_Rad_3h_005dg (MCD18A1)</name>
+            <cat_01>Radiation Budget Variables</cat_01>
+            <cat_02>Radiation</cat_02>
+            <file_prefix_terra>MCD18A1</file_prefix_terra>
+            <file_prefix_aqua>MCD18A1</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MCD18A1: Downward Shortwave Radiation Daily 3-Hourly L3 Global 5 km V006</prod_fullname>
+                    <main_out_folder>Dwnwrd_Srw_Rad_3h_005dd</main_out_folder>
+                    <native_res>5600</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A1.006/</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>1</combined>
+                    <tiled>0</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd18a1_v006</www>
+                    <bands>
+                        <band>
+                            <bandname>DSR</bandname>
+                            <fullname>Instantaneous total DSR at MODIS overpass</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Direct</bandname>
+                            <fullname>Instantaneous direct DSR at MODIS overpass</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+
+                        <band>
+                            <bandname>Diffuse</bandname>
+                            <fullname>Instantaneous diffuse DSR at MODIS overpas</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_0000_DSR</bandname>
+                            <fullname>Total DSR at GMT 00:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_0300_DSR</bandname>
+                            <fullname>Total DSR at GMT 03:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_0600_DSR</bandname>
+                            <fullname>Total DSR at GMT 06:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_0900_DSR</bandname>
+                            <fullname>Total DSR at GMT 09:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_1200_DSR</bandname>
+                            <fullname>Total DSR at GMT 12:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_1500_DSR</bandname>
+                            <fullname>Total DSR at GMT 15:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_1800_DSR</bandname>
+                            <fullname>Total DSR at GMT 18:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_2100_DSR</bandname>
+                            <fullname>Total DSR at GMT 21:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>ViewZenithAngle</bandname>
+                            <fullname>View Zenith Angle of each MODIS overpass</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                </version>
+            </versions>
+        </MCD18A1>
+   <MCD18A2>
+            <name>Dwnwrd_PAR_3h_005dg (MCD18A2)</name>
+            <cat_01>Radiation Budget Variables</cat_01>
+            <cat_02>Radiation</cat_02>
+            <file_prefix_terra>MCD18A2</file_prefix_terra>
+            <file_prefix_aqua>MCD18A2</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MCD18A2: Photosynthetically Active Radiation Daily 3-Hourly L3 Global 5 km V006</prod_fullname>
+                    <main_out_folder>Dwnwrd_PAR_3h_005dg</main_out_folder>
+                    <native_res>5600</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A2.006/</http_aqua>
+                    <ftp_terra>Not Available</ftp_terra>
+                    <ftp_aqua>Not Available</ftp_aqua>
+                    <combined>1</combined>
+                    <tiled>0</tiled>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd18a2_v006</www>
+                    <bands>
+                        <band>
+                            <bandname>PAR</bandname>
+                            <fullname>Instantaneous total PAR at MODIS overpass</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Direct</bandname>
+                            <fullname>Instantaneous direct PAR at MODIS overpass</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+
+                        <band>
+                            <bandname>Diffuse</bandname>
+                            <fullname>Instantaneous diffuse PAR at MODIS overpas</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_0000_PAR</bandname>
+                            <fullname>Total PAR at GMT 00:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_0300_PAR</bandname>
+                            <fullname>Total PAR at GMT 03:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_0600_PAR</bandname>
+                            <fullname>Total PAR at GMT 06:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_0900_PAR</bandname>
+                            <fullname>Total PAR at GMT 09:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_1200_PAR</bandname>
+                            <fullname>Total PAR at GMT 12:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_1500_PAR</bandname>
+                            <fullname>Total PAR at GMT 15:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_1800_PAR</bandname>
+                            <fullname>Total PAR at GMT 18:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>GMT_2100_PAR</bandname>
+                            <fullname>Total PAR at GMT 21:00</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>ViewZenithAngle</bandname>
+                            <fullname>View Zenith Angle of each MODIS overpass</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-1</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                </version>
+            </versions>
+        </MCD18A2>
+</products>
