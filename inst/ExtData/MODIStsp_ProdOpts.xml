@@ -11556,12 +11556,12 @@
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A1.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A1.006/</http_aqua>
                     <combined>1</combined>
-                    <tiled>0</tiled>
+                    <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd18a1_v006</www>
                     <bands>
                         <band>
-                            <bandname>DSR</bandname>
-                            <fullname>Instantaneous total DSR at MODIS overpass</fullname>
+                            <bandname>DSR_tot</bandname>
+                            <fullname>Instantaneous total DSR</fullname>
                             <datatype>32-bit float</datatype>
                             <nodata_in>-1</nodata_in>
                             <nodata_out>-32767</nodata_out>
@@ -11569,8 +11569,8 @@
                             <offset>0</offset>
                         </band>
                         <band>
-                            <bandname>Direct</bandname>
-                            <fullname>Instantaneous direct DSR at MODIS overpass</fullname>
+                            <bandname>DSR_dir</bandname>
+                            <fullname>Instantaneous direct DSR</fullname>
                             <datatype>32-bit float</datatype>
                             <nodata_in>-1</nodata_in>
                             <nodata_out>-32767</nodata_out>
@@ -11579,8 +11579,8 @@
                         </band>
 
                         <band>
-                            <bandname>Diffuse</bandname>
-                            <fullname>Instantaneous diffuse DSR at MODIS overpas</fullname>
+                            <bandname>DSR_diff</bandname>
+                            <fullname>Instantaneous diffuse DSR</fullname>
                             <datatype>32-bit float</datatype>
                             <nodata_in>-1</nodata_in>
                             <nodata_out>-32767</nodata_out>
@@ -11687,7 +11687,7 @@
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A2.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A2.006/</http_aqua>
                     <combined>1</combined>
-                    <tiled>0</tiled>
+                    <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd18a2_v006</www>
                     <bands>
                         <band>

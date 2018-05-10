@@ -101,6 +101,7 @@ MODIStsp_read_xml <- function(prodopts_file,
       levels(datatype)[levels(datatype) == "16-bit unsigned integer"] <- "UInt16" #nolint
       levels(datatype)[levels(datatype) == "32-bit signed integer"]   <- "Int32"
       levels(datatype)[levels(datatype) == "32-bit unsigned integer"] <- "UInt32" #nolint
+      levels(datatype)[levels(datatype) == "32-bit float"]            <- "Float32" #nolint
 
       prodopts[[version_name]]$datatype     <- datatype
       prodopts[[version_name]]$nodata_in    <- nodata_in

@@ -87,6 +87,7 @@ get_mod_dirs <- function(http,
     date_dirs <- date_dirs[grep(paste0(yy, "\\.[01][0-9]\\.[0-3][0-9]"),
                                 date_dirs)]
     attr(date_dirs, "server") <- "http"
+
   }
   #   __________________________________________________________________________
   #   In offline mode, retrieve the dates of acquisition of hdfs already
