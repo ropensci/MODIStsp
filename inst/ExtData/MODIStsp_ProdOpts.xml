@@ -11410,8 +11410,8 @@
                 </version>
                  <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MCD12Q1: Land Cover Type Yearly L3 Global 500 m SIN Grid v051</prod_fullname>
-                    <main_out_folder>LandCover_Type_Yearly_500m_v5</main_out_folder>
+                    <prod_fullname>MCD12Q1: Land Cover Type Yearly L3 Global 500 m SIN Grid v006</prod_fullname>
+                    <main_out_folder>LandCover_Type_Yearly_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.006/</http_aqua>
@@ -11691,7 +11691,7 @@
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd18a2_v006</www>
                     <bands>
                         <band>
-                            <bandname>PAR</bandname>
+                            <bandname>PAR_tot</bandname>
                             <fullname>Instantaneous total PAR at MODIS overpass</fullname>
                             <datatype>32-bit float</datatype>
                             <nodata_in>-1</nodata_in>
@@ -11700,7 +11700,7 @@
                             <offset>0</offset>
                         </band>
                         <band>
-                            <bandname>Direct</bandname>
+                            <bandname>PAR_dir</bandname>
                             <fullname>Instantaneous direct PAR at MODIS overpass</fullname>
                             <datatype>32-bit float</datatype>
                             <nodata_in>-1</nodata_in>
@@ -11710,7 +11710,7 @@
                         </band>
 
                         <band>
-                            <bandname>Diffuse</bandname>
+                            <bandname>PAR_dif</bandname>
                             <fullname>Instantaneous diffuse PAR at MODIS overpas</fullname>
                             <datatype>32-bit float</datatype>
                             <nodata_in>-1</nodata_in>
