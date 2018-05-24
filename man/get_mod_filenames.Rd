@@ -4,23 +4,20 @@
 \alias{get_mod_filenames}
 \title{Find the names of MODIS images corresponding to the selected dates}
 \usage{
-get_mod_filenames(http, ftp, used_server, user, password, n_retries, date_dir,
-  v, h, tiled, out_folder_mod, gui)
+get_mod_filenames(http, used_server, user, password, n_retries, date_dir, v, h,
+  tiled, out_folder_mod, gui)
 }
 \arguments{
 \item{http}{\code{character} url of http site on lpdaac corresponding to a given MODIS
 product.}
 
-\item{ftp}{\code{character} url of ftp site corresponding to a given MODIS product.}
+\item{used_server}{\code{character} can assume values "http"; it cannot be NA.}
 
-\item{used_server}{\code{character} can assume values "http" or "ftp" depending on the
-used download server; it cannot be NA.}
+\item{user}{\code{character} username for earthdata server.}
 
-\item{user}{\code{character} username for earthdata server (Ignored if used_server = "ftp").}
+\item{password}{\code{character} password for earthdata server.}
 
-\item{password}{\code{character} password for earthdata server  (Ignored if used_server = "ftp").}
-
-\item{n_retries}{\code{numeric} number of times the access to the http/ftp server
+\item{n_retries}{\code{numeric} number of times the access to the http server
 should be retried in case of error before quitting, Default: 20.}
 
 \item{date_dir}{\code{character array} array of folder names corresponding to acquisition

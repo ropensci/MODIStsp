@@ -386,11 +386,11 @@ MODIStsp_GUI <- function(general_opts,
   method_lab <- glabel(text = " Download Server:", container = methods_group)
 
   wids$server <- gcombobox(
-    items     = c("http", "ftp", "offline"),
+    items     = c("http", "offline"),
     text      = "Select",
     container = methods_group,
     selected  = match(general_opts$download_server,
-                      c("http", "ftp", "offline")),
+                      c("http", "offline")),
     handler   = function(h, ...) {
       current_sel <- gWidgets::svalue(wids$server)
       gWidgets::enabled(authenticate_group) <- ifelse(

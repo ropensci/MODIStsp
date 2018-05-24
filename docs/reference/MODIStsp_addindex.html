@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Add custom spectral indexes — MODIStsp_addindex" />
@@ -32,6 +35,8 @@
 <meta property="og:description" content="Function used to add a user-defined Spectral Index to the
 default list of computable spectral indexes. Execution without the GUI
 (i.e., to add a new index from a script) is also possible (see examples)." />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -44,19 +49,15 @@ default list of computable spectral indexes. Execution without the GUI
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
-
-
 
   </head>
 
@@ -161,15 +162,17 @@ default list of computable spectral indexes. Execution without the GUI
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add custom spectral indexes</h1>
-    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_addindex.R'><code>R/MODIStsp_addindex.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_addindex.R'><code>R/MODIStsp_addindex.R</code></a></small>
     <div class="hidden name"><code>MODIStsp_addindex.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Function used to add a user-defined Spectral Index to the
 default list of computable spectral indexes. Execution without the GUI
 (i.e., to add a new index from a script) is also possible (see examples).</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>MODIStsp_addindex</span>(<span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prodopts_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>selprod</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>selvers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>""</span>,

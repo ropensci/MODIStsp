@@ -25,12 +25,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Read MODIS products characteristics from XML — MODIStsp_read_xml" />
 
 <meta property="og:description" content="function used to parse the XML file used to store the characteristics of
 MODIS Land Products and store them in the "prod_opts" data frame" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -43,19 +48,15 @@ MODIS Land Products and store them in the "prod_opts" data frame" />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
-
-
 
   </head>
 
@@ -160,14 +161,16 @@ MODIS Land Products and store them in the "prod_opts" data frame" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read MODIS products characteristics from XML</h1>
-    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_readxml.R'><code>R/MODIStsp_readxml.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_readxml.R'><code>R/MODIStsp_readxml.R</code></a></small>
     <div class="hidden name"><code>MODIStsp_read_xml.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>function used to parse the XML file used to store the characteristics of
 MODIS Land Products and store them in the "prod_opts" data frame</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>MODIStsp_read_xml</span>(<span class='no'>prodopts_file</span>, <span class='no'>xml_file</span>)</pre>
     

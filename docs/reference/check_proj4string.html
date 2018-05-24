@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Check the validity of the input projection — check_proj4string" />
@@ -32,6 +35,8 @@
 <meta property="og:description" content="helper function used to check that the input projection
 (passed as UTM zone, EPSG code, PROJ4 string or CRS object)
 is a valid string or CRS." />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -44,19 +49,15 @@ is a valid string or CRS." />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
-
-
 
   </head>
 
@@ -161,15 +162,17 @@ is a valid string or CRS." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Check the validity of the input projection</h1>
-    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/check_proj4string.R'><code>R/check_proj4string.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/check_proj4string.R'><code>R/check_proj4string.R</code></a></small>
     <div class="hidden name"><code>check_proj4string.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>helper function used to check that the input projection
 (passed as UTM zone, EPSG code, PROJ4 string or CRS object)
 is a valid string or CRS.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>check_proj4string</span>(<span class='no'>projection</span>, <span class='kw'>abort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 

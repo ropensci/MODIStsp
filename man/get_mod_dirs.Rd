@@ -2,21 +2,17 @@
 % Please edit documentation in R/get_mod_dirs.R
 \name{get_mod_dirs}
 \alias{get_mod_dirs}
-\title{Get list of MODIS data folders from http/ftp server}
+\title{Get list of MODIS data folders from http server}
 \usage{
-get_mod_dirs(http, ftp, download_server, user, password, yy, n_retries, gui,
-  out_folder_mod, .Platform)
+get_mod_dirs(http, download_server, user, password, yy, n_retries, gui,
+  out_folder_mod)
 }
 \arguments{
 \item{http}{\code{character} http site on lpdaac corresponding to the selected MODIS
 product}
 
-\item{ftp}{\code{character} ftp site corresponding to the selected MODIS product}
-
-\item{download_server}{\code{character ["http" | "ftp" | "offline"]} download service
-to be used; if NA, the script tries to download with http, using ftp if the
-download fails (Used in non-interactive execution to allow trying to use
-ftp if http fails)}
+\item{download_server}{\code{character ["http" | "offline"]} download service
+to be used; if NA, the script tries to download with http.}
 
 \item{user}{\code{character} username for earthdata http server}
 
@@ -25,7 +21,7 @@ ftp if http fails)}
 \item{yy}{\code{character} Year for which the folder containing HDF images are to
 be identified}
 
-\item{n_retries}{\code{numeric} number of times the access to the http/ftp server
+\item{n_retries}{\code{numeric} number of times the access to the http server
 should be retried in case of error before quitting, Default: 20}
 
 \item{gui}{`logical`` indicates if processing was called from the GUI
@@ -33,12 +29,10 @@ environment or not. If not, processing messages are sent to a log file
 instead than to the console/GTK progress windows.}
 
 \item{out_folder_mod}{\code{character} output folder for MODIS HDF storage}
-
-\item{.Platform}{\code{character} os platform (from call to .Platform)}
 }
 \value{
-\code{character arraty} listing all available folders (a.k.a. dates) for
-the requested MODIS product on lpdaac http or ftp archive, for the years
+\code{character arraay} listing all available folders (a.k.a. dates) for
+the requested MODIS product on lpdaac http archive, for the years
 included in the time range selected for processing.
 }
 \description{

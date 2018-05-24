@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Build and manage the MODIStsp GUI — MODIStsp_GUI" />
@@ -34,6 +37,8 @@ MODIStsp processing parameters. If the "previous options" file
 (MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
 the GUI to its last state. Otherwise, the previous options file is created
 by launching the MODIStsp_read_xml function" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -46,19 +51,15 @@ by launching the MODIStsp_read_xml function" />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
-
-
 
   </head>
 
@@ -163,10 +164,11 @@ by launching the MODIStsp_read_xml function" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Build and manage the MODIStsp GUI</h1>
-    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_GUI.R'><code>R/MODIStsp_GUI.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_GUI.R'><code>R/MODIStsp_GUI.R</code></a></small>
     <div class="hidden name"><code>MODIStsp_GUI.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Function used to generate and handle the GUI used to allow selection of
 MODIStsp processing parameters. If the "previous options" file
@@ -174,6 +176,7 @@ MODIStsp processing parameters. If the "previous options" file
 the GUI to its last state. Otherwise, the previous options file is created
 by launching the MODIStsp_read_xml function</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>MODIStsp_GUI</span>(<span class='no'>general_opts</span>, <span class='no'>prod_opt_list</span>, <span class='no'>MODIStsp_dir</span>, <span class='no'>opts_jsfile</span>,
   <span class='no'>prodopts_file</span>, <span class='no'>scroll_window</span>)</pre>

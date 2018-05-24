@@ -4,7 +4,7 @@ title: "List of supported MODIS products"
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE )
 library(data.table)
 library(dplyr)
 library(knitr)

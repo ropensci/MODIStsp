@@ -7,11 +7,20 @@
 - Due to improvements and changes in the GUI (see below), `MODIStsp` .json options 
   files saved with older versions are no longer supported. Users will be informed of 
   this if trying to use an obsolete json file.
+  
+- Removed support for FTP download due to switch-off of NASA servers.
 
 #### Updates in supported products
 
-- Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product.
+- Removed all v005 and earlier products, due to discontinuation of their 
+distribution by NASA servers
+
+- Added support for the new MCD64A1 product.
 ([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
+
+- Added support for the following v006 products: MOD44B; MOD44W; MCD12C1; MCD12Q1; 
+MCD18A1; MCD18A2
+
 
 - Added support for Evapotraspiration products (MOD12A2 and MOD12A3)
 - Added support for Vegetation Continuous Fields product (MOD44B)

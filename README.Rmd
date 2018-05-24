@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![DOI](http://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](http://doi.org/10.5281/zenodo.290683)
 [![Coverage Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
 
-MODIStsp <img src="docs/logo.png" width="147" height="170" align="right" />
+MODIStsp  <img src="man/figures/logo.png" width="147" height="170" align="right" />
 =========
 MODIStsp is a "R" package devoted to automatizing the creation of time series of
 rasters derived from MODIS Land Products data. MODIStsp allows to perform several
@@ -179,7 +179,7 @@ install_github("lbusett/MODIStsp")
 
 **NOTE**: The following  installation notes should be valid for MODIStsp installation 
 on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly
-copied...) from: https://zhiyzuo.github.io/installation-rattle/**. Thanks to Zhiya 
+copied...) from: https://zhiyzuo.github.io/installation-rattle/. Thanks to Zhiya 
 Zuo for providing this!
 
 To properly install `MODIStsp` you will need to first install package `RGTk2`. This

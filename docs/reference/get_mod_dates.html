@@ -25,12 +25,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Find MODIS dates included in selected processing period — get_mod_dates" />
 
 <meta property="og:description" content="Accessory function to find the folders corresponding to the requested
 dates period within the full list retrieved by get_moddirs" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -43,19 +48,15 @@ dates period within the full list retrieved by get_moddirs" />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
-
-
 
   </head>
 
@@ -160,14 +161,16 @@ dates period within the full list retrieved by get_moddirs" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Find MODIS dates included in selected processing period</h1>
-    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/get_mod_dates.R'><code>R/get_mod_dates.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/get_mod_dates.R'><code>R/get_mod_dates.R</code></a></small>
     <div class="hidden name"><code>get_mod_dates.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Accessory function to find the folders corresponding to the requested
 dates period within the full list retrieved by get_moddirs</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>get_mod_dates</span>(<span class='no'>dates</span>, <span class='no'>date_dirs</span>)</pre>
     

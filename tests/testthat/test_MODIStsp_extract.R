@@ -5,7 +5,7 @@ test_that("MODIStsp_extract works as expected", {
 
       # skip("Skip tests - since they rely on download they are only run
       # locally")
-      # skip_on_cran()
+      skip_on_cran()
       # skip_on_travis()
 
       ### Test 1: test of extraction on polygons                ####
@@ -15,17 +15,17 @@ test_that("MODIStsp_extract works as expected", {
 
       # copy files in "inst/testdata/VI_16Days_500m_v6" to tempdir to avoid
       # creating files outside tempdir while running the test
-      # 
+      #
       test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI",
                                   package = "MODIStsp")
-      dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"), 
+      dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"),
                  showWarnings = FALSE, recursive = TRUE)
       file.copy(list.files(test_folder, full.names = TRUE),
-                file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"), 
+                file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"),
                 recursive = T)
-  
+
       # build and load the MODIStsp stack
-      
+
       opts_file <- system.file("testdata/test_extract.json",
                                package = "MODIStsp")
       MODIStsp(options_file = opts_file, gui = FALSE)

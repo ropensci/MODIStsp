@@ -525,8 +525,7 @@ gui_save_options <- function(general_opts,
   ) {
     gWidgets::gmessage(
       message = strwrap("Username and password are mandatory in case of
-                         `http` download! \n\n Please provide them or
-                          choose 'ftp' download.", width = 300),
+                         `http` download!", width = 300),
       title   = "Warning")
     gui_env$check_save_opts <- FALSE
   }
@@ -540,32 +539,14 @@ gui_save_options <- function(general_opts,
     }
     , FUN.VALUE = "") == gWidgets::svalue(wids$vers))]]$http
 
-  ftp <- prod_opt_list[[general_opts$sel_prod]][[which(vapply(
-    prod_opt_list[[general_opts$sel_prod]],
-    function(x){
-      x$v_number
-    }
-    , FUN.VALUE = "") == gWidgets::svalue(wids$vers))]]$ftp
-
   if (general_opts$sensor == "Both") {
     http <- c(http["Terra"][[1]], http["Aqua"][[1]])
-    ftp  <- c(ftp["Terra"][[1]], ftp["Aqua"][[1]])
   } else {
     if (general_opts$sensor == "Combined") {
       http <- http[[1]]
-      ftp  <- ftp[[1]]
     } else {
       http <- http[general_opts$sensor][[1]]
-      ftp  <- ftp[general_opts$sensor][[1]]
     }
-  }
-
-  if (general_opts$download_server == "ftp" & unique(ftp) == "Not Available") {
-    gWidgets::gmessage(
-      message = strwrap("The selected product/version is not available over
-         ftp.\n\n Please try switching to http download!", width = 300),
-      title   = "Warning")
-    gui_env$check_save_opts <- FALSE
   }
 
   if (general_opts$download_server == "http" & unique(http) == "Not Available") { #nolint

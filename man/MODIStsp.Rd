@@ -86,7 +86,7 @@ MODIStsp(gui = FALSE, options_file = options_file, verbose = FALSE)
 # Running the tool using the settings previously saved in a specific option file
 # and specifying the extent from a spatial file allows to re-use the same
 # processing settings to perform download and reprocessing on a different area
- 
+
 options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
 MODIStsp(gui = FALSE, options_file = options_file,
@@ -98,15 +98,15 @@ MODIStsp(gui = FALSE, options_file = options_file,
 # specific options file and specifying each time the extent from a different
 # spatial file (e.g., to perform the same processing on several extents)
 
-extent_list  <- c(system.file("testdata/lakeshapes/garda_lake.shp", 
+extent_list  <- c(system.file("testdata/lakeshapes/garda_lake.shp",
                               package = "MODIStsp"),
-                  system.file("testdata/lakeshapes/iseo_lake.shp", 
+                  system.file("testdata/lakeshapes/iseo_lake.shp",
                               package = "MODIStsp"))
 extent_list
 
 # Note that you can also put all your extent files in a specific folder and
 # create the extent list using for example.
-# extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"), 
+# extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"),
 #                          full.names = TRUE, "\\\\.shp$")
 
 options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
@@ -115,10 +115,10 @@ for (single_shape in extent_list) {
            spatial_file_path = single_shape, verbose = FALSE )
 }
 
-# output files are places in separate folders: 
+# output files are places in separate folders:
 outfiles_garda <- list.files(file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"),
            full.names = TRUE)
-library(raster)            
+library(raster)
 plot(raster(outfiles_garda[1]))
 
 outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"),

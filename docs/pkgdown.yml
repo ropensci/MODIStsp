@@ -1,15 +1,15 @@
-pandoc: 1.19.2.1
-pkgdown: 0.1.0.9000
-pkgdown_sha: a7aa75eeb866e0e0c891785d8d7bc0c0d2294c36
+pandoc: 1.19.2.4
+pkgdown: 1.0.0
+pkgdown_sha: d43ca38c74827d1d6babc3a80d48cd3a8e8fad8c
 articles:
+  MODIStsp: MODIStsp.html
+  Products_list: Products_list.html
   analyze: analyze.html
   faq: faq.html
   installation: installation.html
   interactive_execution: interactive_execution.html
-  MODIStsp: MODIStsp.html
   noninteractive_execution: noninteractive_execution.html
   output: output.html
-  Products_list: Products_list.html
   standalone_execution: standalone_execution.html
 urls:
   reference: http://lbusett.github.io/MODIStsp/reference

@@ -25,12 +25,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="MODIStsp download function — MODIStsp_download" />
 
 <meta property="og:description" content="Internal function dealing with download of MODIS hdfs from
-http or ftp remote servers for a given date." />
+http remote server for a given date." />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -43,19 +48,15 @@ http or ftp remote servers for a given date." />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
-
-
 
   </head>
 
@@ -160,18 +161,20 @@ http or ftp remote servers for a given date." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>MODIStsp download function</h1>
-    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_download.R'><code>R/MODIStsp_download.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_download.R'><code>R/MODIStsp_download.R</code></a></small>
     <div class="hidden name"><code>MODIStsp_download.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Internal function dealing with download of MODIS hdfs from
-http or ftp remote servers for a given date.</p>
+http remote server for a given date.</p>
     
+    </div>
 
-    <pre class="usage"><span class='fu'>MODIStsp_download</span>(<span class='no'>modislist</span>, <span class='no'>out_folder_mod</span>, <span class='no'>download_server</span>, <span class='no'>http</span>, <span class='no'>ftp</span>,
-  <span class='no'>n_retries</span>, <span class='no'>use_aria</span>, <span class='no'>date_dir</span>, <span class='no'>year</span>, <span class='no'>DOY</span>, <span class='no'>user</span>, <span class='no'>password</span>, <span class='no'>sens_sel</span>, <span class='no'>date_name</span>,
-  <span class='no'>gui</span>, <span class='no'>mess_lab</span>, <span class='no'>verbose</span>)</pre>
+    <pre class="usage"><span class='fu'>MODIStsp_download</span>(<span class='no'>modislist</span>, <span class='no'>out_folder_mod</span>, <span class='no'>download_server</span>, <span class='no'>http</span>, <span class='no'>n_retries</span>,
+  <span class='no'>use_aria</span>, <span class='no'>date_dir</span>, <span class='no'>year</span>, <span class='no'>DOY</span>, <span class='no'>user</span>, <span class='no'>password</span>, <span class='no'>sens_sel</span>, <span class='no'>date_name</span>, <span class='no'>gui</span>,
+  <span class='no'>mess_lab</span>, <span class='no'>verbose</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,14 +191,10 @@ image, or a list of images in case different tiles are needed!</p></td>
     </tr>
     <tr>
       <th>download_server</th>
-      <td><p><code>character ["http" | "ftp"]</code> Server to be used.</p></td>
+      <td><p><code>character ["http"]</code> Server to be used.</p></td>
     </tr>
     <tr>
       <th>http</th>
-      <td><p><code>character</code> Address of the http server for the selected product.</p></td>
-    </tr>
-    <tr>
-      <th>ftp</th>
       <td><p><code>character</code> Address of the http server for the selected product.</p></td>
     </tr>
     <tr>
@@ -216,23 +215,19 @@ of http download to generate the download addresses).</p></td>
     </tr>
     <tr>
       <th>year</th>
-      <td><p><code>character</code> Acquisition year of the images to be downloaded
-(Used in case of ftp download to generate the download addresses).</p></td>
+      <td><p><code>character</code> Acquisition year of the images to be downloaded</p></td>
     </tr>
     <tr>
       <th>DOY</th>
-      <td><p><code>character array</code> Acquisition doys of the images to be downloaded
-(Used in case of ftp download to generate the download addresses).</p></td>
+      <td><p><code>character array</code> Acquisition doys of the images to be downloaded</p></td>
     </tr>
     <tr>
       <th>user</th>
-      <td><p><code>character</code> Username for http download (Ignored in case of ftp
-download).</p></td>
+      <td><p><code>character</code> Username for http download</p></td>
     </tr>
     <tr>
       <th>password</th>
-      <td><p><code>character</code> Password for http download (Ignored in case of ftp
-download).</p></td>
+      <td><p><code>character</code> Password for http download</p></td>
     </tr>
     <tr>
       <th>sens_sel</th>

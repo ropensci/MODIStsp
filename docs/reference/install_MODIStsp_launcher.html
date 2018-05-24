@@ -25,11 +25,16 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Install a launcher for MODIStsp — install_MODIStsp_launcher" />
 
 <meta property="og:description" content="Function which allows to use MODIStsp in batch mode by creating links" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -42,19 +47,15 @@
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
-
-
 
   </head>
 
@@ -159,13 +160,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Install a launcher for MODIStsp</h1>
-    <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_install_launcher.R'><code>R/MODIStsp_install_launcher.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_install_launcher.R'><code>R/MODIStsp_install_launcher.R</code></a></small>
     <div class="hidden name"><code>install_MODIStsp_launcher.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Function which allows to use MODIStsp in batch mode by creating links</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>bin_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>rscript_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>desktop_dir</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>desktop_shortcut</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
