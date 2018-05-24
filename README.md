@@ -1,5 +1,5 @@
 
--   [MODIStsp <img src="docs/logo.png" width="147" height="170" align="right" />](#modistsp)
+-   [MODIStsp](#modistsp)
     -   [Citation](#citation)
     -   [Important News !](#important-news)
     -   [Problems and Issues](#problems-and-issues)
@@ -11,10 +11,10 @@
 -   [Usage](#usage)
 -   [Code of Conduct](#code-of-conduct)
 
-[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp) [![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/package=MODIStsp) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lbusett/MODIStsp?branch=master&svg=true)](https://ci.appveyor.com/project/lbusett/MODIStsp) [![DOI](http://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](http://doi.org/10.5281/zenodo.290683) [![Coverage Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp) [![](http://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp) [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lbusett/MODIStsp?branch=master&svg=true)](https://ci.appveyor.com/project/lbusett/MODIStsp) [![DOI](http://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](http://doi.org/10.5281/zenodo.290683) [![Coverage Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
 
-MODIStsp <img src="docs/logo.png" width="147" height="170" align="right" />
-===========================================================================
+MODIStsp
+========
 
 MODIStsp is a "R" package devoted to automatizing the creation of time series of rasters derived from MODIS Land Products data. MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional Quality Indicators should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which Spectral Indexes should be computed from the original reflectance bands. For each output layer, outputs are saved as single-band raster files corresponding to each available acquisition date. Virtual files allowing access to the entire time series as a single file can be also created. All processing parameters can be easily selected with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an "R" environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.
 
@@ -29,6 +29,10 @@ L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessi
 
 Important News !
 ----------------
+
+-   11/04/2018 - Due to new NASA Policies the MODIS FTP servers were shut down starting, April 2, 2018. **FTP download is therefore no longer working** and will be removed in the next MODIStsp version!
+
+-   11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data Products**](https://lpdaac.usgs.gov/about/news_archive/decommissioning_modis_version_5_land_data_products_april_9_2018_second_notice). As per NASA notice above, MODIS v005 products are going to be decommisioned, and will soon be no longer available for download. Support for those products will be removed in the next MODIStsp version!.
 
 -   11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes (thanks to all the users that signalled problems !). Check the [Release Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.3) for further details !
 
@@ -123,7 +127,7 @@ install_github("lbusett/MODIStsp")
 <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
 ----------------------------------------------------------------
 
-**NOTE**: The following installation notes should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied...) from: <https://zhiyzuo.github.io/installation-rattle/**>. Thanks to Zhiya Zuo for providing this!
+**NOTE**: The following installation notes should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied...) from: <https://zhiyzuo.github.io/installation-rattle/>. Thanks to Zhiya Zuo for providing this!
 
 To properly install `MODIStsp` you will need to first install package `RGTk2`. This is a somehow difficult operation. The following instructions should help: <br>
 

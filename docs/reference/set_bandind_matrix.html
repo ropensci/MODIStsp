@@ -25,12 +25,19 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Helper function to determine the bands needed to compute SIs and QIs — set_bandind_matrix" />
 
 <meta property="og:description" content="FUNCTION_DESCRIPTION" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -40,16 +47,14 @@
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
 
   </head>
@@ -65,8 +70,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -139,6 +148,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -146,20 +156,24 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Helper function to determine the bands needed to compute SIs and QIs</h1>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/set_bandind_matrix.R'><code>R/set_bandind_matrix.R</code></a></small>
+    <div class="hidden name"><code>set_bandind_matrix.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>FUNCTION_DESCRIPTION</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>set_bandind_matrix</span>(<span class='no'>bandnames</span>, <span class='no'>bandsel</span>, <span class='no'>indexes_bandnames</span>, <span class='no'>indexes_bandsel</span>,
   <span class='no'>indexes_formula</span>, <span class='no'>quality_bandnames</span>, <span class='no'>quality_bandsel</span>, <span class='no'>quality_source</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -240,6 +254,8 @@ Lorenzo Busetto, phD (2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

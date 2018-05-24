@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get list of MODIS data folders from http/ftp server — get_mod_dirs • MODIStsp</title>
+<title>Get list of MODIS data folders from http server — get_mod_dirs • MODIStsp</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,14 +25,21 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Get list of MODIS data folders from http/ftp server — get_mod_dirs" />
+<meta property="og:title" content="Get list of MODIS data folders from http server — get_mod_dirs" />
 
 <meta property="og:description" content="Accessory function to get the full list of directories on the
 lpdaac http site containing data included in the time range selected for
 processing (modified after Barry Rowlingson function):" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -42,16 +49,14 @@ processing (modified after Barry Rowlingson function):" />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
 
   </head>
@@ -67,8 +72,12 @@ processing (modified after Barry Rowlingson function):" />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -141,6 +150,7 @@ processing (modified after Barry Rowlingson function):" />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -148,22 +158,26 @@ processing (modified after Barry Rowlingson function):" />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get list of MODIS data folders from http/ftp server</h1>
+    <h1>Get list of MODIS data folders from http server</h1>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/get_mod_dirs.R'><code>R/get_mod_dirs.R</code></a></small>
+    <div class="hidden name"><code>get_mod_dirs.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Accessory function to get the full list of directories on the
 lpdaac http site containing data included in the time range selected for
 processing (modified after Barry Rowlingson function):</p>
     
+    </div>
 
-    <pre class="usage"><span class='fu'>get_mod_dirs</span>(<span class='no'>http</span>, <span class='no'>ftp</span>, <span class='no'>download_server</span>, <span class='no'>user</span>, <span class='no'>password</span>, <span class='no'>yy</span>, <span class='no'>n_retries</span>, <span class='no'>gui</span>,
-  <span class='no'>out_folder_mod</span>, <span class='no'>.Platform</span>)</pre>
+    <pre class="usage"><span class='fu'>get_mod_dirs</span>(<span class='no'>http</span>, <span class='no'>download_server</span>, <span class='no'>user</span>, <span class='no'>password</span>, <span class='no'>yy</span>, <span class='no'>n_retries</span>, <span class='no'>gui</span>,
+  <span class='no'>out_folder_mod</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -172,15 +186,9 @@ processing (modified after Barry Rowlingson function):</p>
 product</p></td>
     </tr>
     <tr>
-      <th>ftp</th>
-      <td><p><code>character</code> ftp site corresponding to the selected MODIS product</p></td>
-    </tr>
-    <tr>
       <th>download_server</th>
-      <td><p><code>character ["http" | "ftp" | "offline"]</code> download service
-to be used; if NA, the script tries to download with http, using ftp if the
-download fails (Used in non-interactive execution to allow trying to use
-ftp if http fails)</p></td>
+      <td><p><code>character ["http" | "offline"]</code> download service
+to be used; if NA, the script tries to download with http.</p></td>
     </tr>
     <tr>
       <th>user</th>
@@ -197,7 +205,7 @@ be identified</p></td>
     </tr>
     <tr>
       <th>n_retries</th>
-      <td><p><code>numeric</code> number of times the access to the http/ftp server
+      <td><p><code>numeric</code> number of times the access to the http server
 should be retried in case of error before quitting, Default: 20</p></td>
     </tr>
     <tr>
@@ -210,16 +218,12 @@ instead than to the console/GTK progress windows.</p></td>
       <th>out_folder_mod</th>
       <td><p><code>character</code> output folder for MODIS HDF storage</p></td>
     </tr>
-    <tr>
-      <th>.Platform</th>
-      <td><p><code>character</code> os platform (from call to .Platform)</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>character arraty</code> listing all available folders (a.k.a. dates) for
-the requested MODIS product on lpdaac http or ftp archive, for the years
+    <p><code>character arraay</code> listing all available folders (a.k.a. dates) for
+the requested MODIS product on lpdaac http archive, for the years
 included in the time range selected for processing.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -263,6 +267,8 @@ Luigi Ranghetti, phD (2016-2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmai
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

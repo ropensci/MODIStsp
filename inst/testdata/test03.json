@@ -16,7 +16,7 @@
 "use_aria": false,
 "download_server": "offline",
 "download_range": "full",
-"proj": "User defined",
+"proj": "User Defined",
 "output_proj4": "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0",
 "out_res_sel": "Resampled",
 "out_res": "250",
@@ -39,8 +39,8 @@
  "indexes_bandnames": "GVMI",
 "indexes_fullnames": "Global Vegetation Moisture Index  (((NIR+0.1)−(SWIR+0.02))/((NIR+0.1)+(SWIR+0.02)))",
 "indexes_formulas": " ((b2_NIR+0.1)-(b7_SWIR+0.02))/((b2_NIR+0.1)+(b7_SWIR+0.02))",
-"indexes_nodata_out": "32767" 
-} 
+"indexes_nodata_out": "32767"
+}
 }
 }
 }

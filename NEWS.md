@@ -7,11 +7,20 @@
 - Due to improvements and changes in the GUI (see below), `MODIStsp` .json options 
   files saved with older versions are no longer supported. Users will be informed of 
   this if trying to use an obsolete json file.
+  
+- Removed support for FTP download due to switch-off of NASA servers.
 
 #### Updates in supported products
 
-- Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product.
+- Removed all v005 and earlier products, due to discontinuation of their 
+distribution by NASA servers
+
+- Added support for the new MCD64A1 product.
 ([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
+
+- Added support for the following v006 products: MOD44B; MOD44W; MCD12C1; MCD12Q1; 
+MCD18A1; MCD18A2
+
 
 - Added support for Evapotraspiration products (MOD12A2 and MOD12A3)
 - Added support for Vegetation Continuous Fields product (MOD44B)
@@ -27,6 +36,13 @@
 - Use of `httr::RETRY` to improve behavior while navigating the servers to
   retrieve available files and while downloading hdf file (when use_aria == FALSE), 
   thus removing dependency to RCurl. 
+  
+#### Improvements in processing functions
+
+ - improved functionality for dealing with NoData for products with multiple 
+   fill-values. If "Change NoData" is set to "Yes", then in case a layer 
+   has multiple Nodata values all those values are set to NA in the output 
+   (see github.com/lbusett/MODIStsp#113)
 
 #### Extensive code refactoring for submission to ropensci. 
 
@@ -53,6 +69,13 @@
 - Added `MODIStsp_resetindexes` to remove all custom indexes from a MODIStsp 
   json options file and `MODIStsp_reset_options` to reset MODIStsp options to 
   default.
+  
+#### Bug fixing
+
+- Fixed bug affecting extent selection when working with non-tiled (MCD) products
+https://github.com/lbusett/MODIStsp/issues/122
+
+- Fixed bugs affecting the "Seasonal" time series download 
   
 ________________________________________________________________________________
 

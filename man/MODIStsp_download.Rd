@@ -4,9 +4,9 @@
 \alias{MODIStsp_download}
 \title{MODIStsp download function}
 \usage{
-MODIStsp_download(modislist, out_folder_mod, download_server, http, ftp,
-  n_retries, use_aria, date_dir, year, DOY, user, password, sens_sel, date_name,
-  gui, mess_lab, verbose)
+MODIStsp_download(modislist, out_folder_mod, download_server, http, n_retries,
+  use_aria, date_dir, year, DOY, user, password, sens_sel, date_name, gui,
+  mess_lab, verbose)
 }
 \arguments{
 \item{modislist}{\code{character array} List of MODIS images to be downloaded for
@@ -15,11 +15,9 @@ image, or a list of images in case different tiles are needed!}
 
 \item{out_folder_mod}{\code{character} Folder where the hdfs are to be stored}
 
-\item{download_server}{\code{character ["http" | "ftp"]} Server to be used.}
+\item{download_server}{\code{character ["http"]} Server to be used.}
 
 \item{http}{\code{character} Address of the http server for the selected product.}
-
-\item{ftp}{\code{character} Address of the http server for the selected product.}
 
 \item{n_retries}{\code{numeric} Max number of retry attempts on download. If
 download fails more that n_retries times consecutively, abort}
@@ -31,17 +29,13 @@ download fails more that n_retries times consecutively, abort}
 can be found (element of the list returned from \code{get_mod_dirs}, used in case
 of http download to generate the download addresses).}
 
-\item{year}{\code{character} Acquisition year of the images to be downloaded
-(Used in case of ftp download to generate the download addresses).}
+\item{year}{\code{character} Acquisition year of the images to be downloaded}
 
-\item{DOY}{\code{character array} Acquisition doys of the images to be downloaded
-(Used in case of ftp download to generate the download addresses).}
+\item{DOY}{\code{character array} Acquisition doys of the images to be downloaded}
 
-\item{user}{\code{character} Username for http download (Ignored in case of ftp
-download).}
+\item{user}{\code{character} Username for http download}
 
-\item{password}{\code{character} Password for http download (Ignored in case of ftp
-download).}
+\item{password}{\code{character} Password for http download}
 
 \item{sens_sel}{\code{character ["terra" | "aqua"]} Selected sensor.}
 
@@ -60,7 +54,7 @@ The function is called for its side effects
 }
 \description{
 Internal function dealing with download of MODIS hdfs from
-http or ftp remote servers for a given date.
+http remote server for a given date.
 }
 \author{
 Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}

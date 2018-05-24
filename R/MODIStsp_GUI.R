@@ -386,11 +386,11 @@ MODIStsp_GUI <- function(general_opts,
   method_lab <- glabel(text = " Download Server:", container = methods_group)
 
   wids$server <- gcombobox(
-    items     = c("http", "ftp", "offline"),
+    items     = c("http", "offline"),
     text      = "Select",
     container = methods_group,
     selected  = match(general_opts$download_server,
-                      c("http", "ftp", "offline")),
+                      c("http", "offline")),
     handler   = function(h, ...) {
       current_sel <- gWidgets::svalue(wids$server)
       gWidgets::enabled(authenticate_group) <- ifelse(
@@ -534,18 +534,32 @@ MODIStsp_GUI <- function(general_opts,
                        c("Select MODIS Tiles", "Define Custom Area")),
     handler  = function(h, ...) {
       current_sel <- gWidgets::svalue(wids$output_ext)
-      # On "Select MODIS Tiles" selection, disable the bbox fields
-      if (current_sel == "Select MODIS Tiles") {
-        gWidgets::enabled(bbox_group)      <- FALSE
-        gWidgets::enabled(tiles_from_bbox) <- FALSE
-        gWidgets::enabled(bbox_from_file)  <- FALSE
-        gWidgets::enabled(tiles_group)     <- TRUE
+      sel_prod   <- ifelse(!is.null(gWidgets::svalue(wids$prod)),
+                           gWidgets::svalue(wids$prod),
+                           sel_prod)
+      sel_prodopts <- prod_opt_list[[sel_prod]]
+      if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$tiled == 1) {
+        # On "Select MODIS Tiles" selection, disable the bbox fields
+        if (current_sel == "Select MODIS Tiles") {
+          gWidgets::enabled(bbox_group)      <- FALSE
+          gWidgets::enabled(tiles_from_bbox) <- FALSE
+          gWidgets::enabled(bbox_from_file)  <- FALSE
+          gWidgets::enabled(tiles_group)     <- TRUE
+        } else {
+          # On "Custom  Area" selection, enable the bbox fields
+          gWidgets::enabled(bbox_group)      <- TRUE
+          gWidgets::enabled(tiles_from_bbox) <- TRUE
+          gWidgets::enabled(bbox_from_file)  <- TRUE
+          gWidgets::enabled(tiles_group)     <- FALSE
+        }
       } else {
-        # On "Custom  Area" selection, enable the bbox fields
-        gWidgets::enabled(bbox_group)      <- TRUE
-        gWidgets::enabled(tiles_from_bbox) <- TRUE
-        gWidgets::enabled(bbox_from_file)  <- TRUE
-        gWidgets::enabled(tiles_group)     <- FALSE
+        if (current_sel == "Select MODIS Tiles") {
+          gWidgets::svalue(wids$output_ext)  <- "Define Custom Area"
+          gWidgets::enabled(bbox_group)      <- TRUE
+          gWidgets::enabled(tiles_from_bbox) <- TRUE
+          gWidgets::enabled(bbox_from_file)  <- TRUE
+          gWidgets::enabled(tiles_group)     <- FALSE
+        }
       }
     }
   )
@@ -767,7 +781,7 @@ MODIStsp_GUI <- function(general_opts,
     container = output_proj_group,
     selected  = match(general_opts$proj, out_proj_names),
     handler   = function(h, ...) {
-      gh_changeproj(wids, out_proj_list, bbox_out)
+      gh_changeproj(h, wids, out_proj_list, bbox_out)
     }
   )
 

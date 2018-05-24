@@ -11,10 +11,10 @@
 "end_x":     18,
 "start_y":      4,
 "end_y":      5,
-"user": "",
-"password": "",
-"use_aria": true,
-"download_server": "ftp",
+"user": "mstp_test",
+"password": "MSTP_test_01",
+"use_aria": false,
+"download_server": "http",
 "download_range": "seasonal",
 "proj": "Native",
 "output_proj4": "+init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0",
@@ -33,5 +33,5 @@
 "out_folder": "$tempdir",
 "out_folder_mod": "$tempdir",
 "MODIStspVersion": "1.3.3.9000",
-"custom_indexes": [] 
+"custom_indexes": []
 }

@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="MODIStsp main processing function — MODIStsp_process" />
@@ -33,7 +36,11 @@
 parameters specified by the user using MODIStsp_GUI and saved in
 MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
 (non-interactive mode) and performs all required processing." />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -43,16 +50,14 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
 
   </head>
@@ -68,8 +73,12 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -142,6 +151,7 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -149,31 +159,35 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>MODIStsp main processing function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_process.R'><code>R/MODIStsp_process.R</code></a></small>
+    <div class="hidden name"><code>MODIStsp_process.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Main processing function of MODIStsp. Takes as input processing
 parameters specified by the user using MODIStsp_GUI and saved in
 MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
 (non-interactive mode) and performs all required processing.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>MODIStsp_process</span>(<span class='no'>sel_prod</span>, <span class='no'>start_date</span>, <span class='no'>end_date</span>, <span class='no'>out_folder</span>, <span class='no'>out_folder_mod</span>,
   <span class='kw'>reprocess</span> <span class='kw'>=</span> <span class='st'>"Yes"</span>, <span class='kw'>delete_hdf</span> <span class='kw'>=</span> <span class='st'>"No"</span>, <span class='no'>sensor</span>, <span class='no'>download_server</span>, <span class='no'>user</span>,
-  <span class='no'>password</span>, <span class='no'>https</span>, <span class='no'>ftps</span>, <span class='no'>start_x</span>, <span class='no'>start_y</span>, <span class='no'>end_x</span>, <span class='no'>end_y</span>, <span class='no'>full_ext</span>, <span class='no'>bbox</span>,
-  <span class='no'>out_format</span>, <span class='no'>compress</span>, <span class='no'>out_res_sel</span>, <span class='no'>out_res</span>, <span class='no'>native_res</span>, <span class='no'>tiled</span>, <span class='no'>mod_proj_str</span>,
-  <span class='no'>outproj_str</span>, <span class='no'>nodata_in</span>, <span class='no'>nodata_out</span>, <span class='no'>nodata_change</span>, <span class='no'>scale_val</span>, <span class='no'>scale_factor</span>,
-  <span class='no'>offset</span>, <span class='no'>datatype</span>, <span class='no'>bandsel</span>, <span class='no'>bandnames</span>, <span class='no'>indexes_bandsel</span>, <span class='no'>indexes_bandnames</span>,
+  <span class='no'>password</span>, <span class='no'>https</span>, <span class='no'>start_x</span>, <span class='no'>start_y</span>, <span class='no'>end_x</span>, <span class='no'>end_y</span>, <span class='no'>full_ext</span>, <span class='no'>bbox</span>, <span class='no'>out_format</span>,
+  <span class='no'>compress</span>, <span class='no'>out_res_sel</span>, <span class='no'>out_res</span>, <span class='no'>native_res</span>, <span class='no'>tiled</span>, <span class='no'>mod_proj_str</span>, <span class='no'>outproj_str</span>,
+  <span class='no'>nodata_in</span>, <span class='no'>nodata_out</span>, <span class='no'>nodata_change</span>, <span class='no'>scale_val</span>, <span class='no'>scale_factor</span>, <span class='no'>offset</span>,
+  <span class='no'>datatype</span>, <span class='no'>bandsel</span>, <span class='no'>bandnames</span>, <span class='no'>indexes_bandsel</span>, <span class='no'>indexes_bandnames</span>,
   <span class='no'>indexes_formula</span>, <span class='no'>indexes_nodata_out</span>, <span class='no'>quality_bandnames</span>, <span class='no'>quality_bandsel</span>,
   <span class='no'>quality_bitN</span>, <span class='no'>quality_source</span>, <span class='no'>quality_nodata_in</span>, <span class='no'>quality_nodata_out</span>,
   <span class='no'>file_prefixes</span>, <span class='no'>main_out_folder</span>, <span class='no'>resampling</span>, <span class='no'>ts_format</span>, <span class='kw'>use_aria</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>download_range</span> <span class='kw'>=</span> <span class='st'>"full"</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>n_retries</span>, <span class='no'>verbose</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -215,7 +229,7 @@ completion.</p></td>
     </tr>
     <tr>
       <th>download_server</th>
-      <td><p><code>character ["http" | "ftp" | "offline"]</code> service to be used for
+      <td><p><code>character ["http" | "offline"]</code> service to be used for
 download.</p></td>
     </tr>
     <tr>
@@ -231,10 +245,6 @@ download.</p></td>
     <tr>
       <th>https</th>
       <td><p><code>list</code> http addresses for download of HDF of selected product.</p></td>
-    </tr>
-    <tr>
-      <th>ftps</th>
-      <td><p><code>list</code> ftp addresses for download of HDF of selected product.</p></td>
     </tr>
     <tr>
       <th>start_x</th>
@@ -457,7 +467,7 @@ MODIStsp_process will abort, Default: 20</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>After retrieving the input processing options, the function</p><ol>
-<li><p>Accesses NASA http or ftp archive to determine the list of files to be
+<li><p>Accesses NASA http archive to determine the list of files to be
 downloaded/processed (or, in case of offline processing, get the list
 of already available hdf files present in <code>out_mod_folder</code>);</p></li>
 <li><p>Performs all required processing steps on each date (download,
@@ -513,6 +523,8 @@ Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

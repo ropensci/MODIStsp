@@ -1,19 +1,11 @@
-pandoc: 1.19.2.1
-pkgdown: 0.1.0.9000
-pkgdown_sha: c3d5f0ba6d711185df83757c9281bc41d131e3f2
+pandoc: 1.19.2.4
+pkgdown: 1.0.0
+pkgdown_sha: d43ca38c74827d1d6babc3a80d48cd3a8e8fad8c
 articles:
-  Figure_1_Vignette.png: Figure_1_Vignette.png
-  Figure_2_new.png: Figure_2_new.png
-  Figure_3.png: Figure_3.png
-  MAIN_GUI.png: MAIN_GUI.png
   MODIStsp: MODIStsp.html
-  MODIStsp.bib: MODIStsp.bib
-  NEWIND_GUI.png: NEWIND_GUI.png
   Products_list: Products_list.html
-  SELECT_GUI.png: SELECT_GUI.png
   analyze: analyze.html
   faq: faq.html
-  figure_4.png: figure_4.png
   installation: installation.html
   interactive_execution: interactive_execution.html
   noninteractive_execution: noninteractive_execution.html

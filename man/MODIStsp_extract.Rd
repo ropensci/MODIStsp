@@ -98,6 +98,7 @@ belonging to the polygon, and one line for each date.
 License: GPL 3.0
 }
 \examples{
+\dontrun{
 # Extract average and standard deviation values from a rts object created by
 # MODIStsp for each polygon of a shapefile, for each date in the period
 # between 2001-01-01 and 2014-12-31
@@ -158,6 +159,7 @@ head(out_datasd)
 
 # (See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a
 # worked-out example)
+}
 }
 \author{
 Lorenzo Busetto, phD (2015 - 2017)

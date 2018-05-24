@@ -14,13 +14,13 @@ knitr::opts_chunk$set(
 )
 ```
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/package=MODIStsp)
+[![](http://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lbusett/MODIStsp?branch=master&svg=true)](https://ci.appveyor.com/project/lbusett/MODIStsp)
 [![DOI](http://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](http://doi.org/10.5281/zenodo.290683)
 [![Coverage Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
 
-MODIStsp <img src="docs/logo.png" width="147" height="170" align="right" />
+MODIStsp  <img src="man/figures/logo.png" width="147" height="170" align="right" />
 =========
 MODIStsp is a "R" package devoted to automatizing the creation of time series of
 rasters derived from MODIS Land Products data. MODIStsp allows to perform several
@@ -54,6 +54,14 @@ L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessi
   
 
 ## Important News ! 
+
+- 11/04/2018 - Due to new NASA Policies the MODIS FTP servers were shut down 
+starting, April 2, 2018. **FTP download is therefore no longer working** and will
+be removed in the next MODIStsp version!
+
+- 11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data Products**]( https://lpdaac.usgs.gov/about/news_archive/decommissioning_modis_version_5_land_data_products_april_9_2018_second_notice). As per NASA notice above, MODIS v005 products are going to be 
+decommisioned, and will soon be no longer available for download. Support for those
+products will be removed in the next MODIStsp version!.
 
 - 11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in
 processing speed, as well as the usual bug fixes
@@ -171,7 +179,7 @@ install_github("lbusett/MODIStsp")
 
 **NOTE**: The following  installation notes should be valid for MODIStsp installation 
 on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly
-copied...) from: https://zhiyzuo.github.io/installation-rattle/**. Thanks to Zhiya 
+copied...) from: https://zhiyzuo.github.io/installation-rattle/. Thanks to Zhiya 
 Zuo for providing this!
 
 To properly install `MODIStsp` you will need to first install package `RGTk2`. This

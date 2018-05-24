@@ -25,9 +25,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Function reference" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -37,16 +45,14 @@
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
 
   </head>
@@ -62,8 +68,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -136,6 +146,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -143,223 +154,218 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;1.3.3.9000</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-exported-functions" class="hasAnchor"><a href="#section-exported-functions" class="anchor"></a>Exported Functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp.html">MODIStsp</a></code> </p>
-          </td>
-          <td><p>MODIStsp main function</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_extract.html">MODIStsp_extract</a></code> </p>
-          </td>
-          <td><p>Extract data from MODIStsp time series</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_addindex.html">MODIStsp_addindex</a></code> </p>
-          </td>
-          <td><p>Add custom spectral indexes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_resetindexes.html">MODIStsp_resetindexes</a></code> </p>
-          </td>
-          <td><p>Remove custom spectral indexes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_reset_options.html">MODIStsp_reset_options</a></code> </p>
-          </td>
-          <td><p>MODIStsp_reset_options</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="install_MODIStsp_launcher.html">install_MODIStsp_launcher</a></code> </p>
-          </td>
-          <td><p>Install a launcher for MODIStsp</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp-package.html">MODIStsp-package</a></code> </p>
-          </td>
-          <td><p>MODIStsp: a package to automatize the creation of time series of raster
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-exported-functions" class="hasAnchor"><a href="#section-exported-functions" class="anchor"></a>Exported Functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp.html">MODIStsp()</a></code> </p>
+        </td>
+        <td><p>MODIStsp main function</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_extract.html">MODIStsp_extract()</a></code> </p>
+        </td>
+        <td><p>Extract data from MODIStsp time series</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_addindex.html">MODIStsp_addindex()</a></code> </p>
+        </td>
+        <td><p>Add custom spectral indexes</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_resetindexes.html">MODIStsp_resetindexes()</a></code> </p>
+        </td>
+        <td><p>Remove custom spectral indexes</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_reset_options.html">MODIStsp_reset_options()</a></code> </p>
+        </td>
+        <td><p>MODIStsp_reset_options</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="install_MODIStsp_launcher.html">install_MODIStsp_launcher()</a></code> </p>
+        </td>
+        <td><p>Install a launcher for MODIStsp</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp-package.html">MODIStsp-package</a></code> </p>
+        </td>
+        <td><p>MODIStsp: a package to automatize the creation of time series of raster
 images derived from MODIS Land Products</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-internals" class="hasAnchor"><a href="#section-internals" class="anchor"></a>Internals</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_GUI.html">MODIStsp_GUI</a></code> </p>
-          </td>
-          <td><p>Build and manage the MODIStsp GUI</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_process.html">MODIStsp_process</a></code> </p>
-          </td>
-          <td><p>MODIStsp main processing function</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_download.html">MODIStsp_download</a></code> </p>
-          </td>
-          <td><p>MODIStsp download function</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_process_bands.html">MODIStsp_process_bands</a></code> </p>
-          </td>
-          <td><p>MODIStsp helper for processing original HDF layers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_process_indexes.html">MODIStsp_process_indexes</a></code> </p>
-          </td>
-          <td><p>MODIStsp helper for computing spectral indexes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_process_QA_bits.html">MODIStsp_process_QA_bits</a></code> </p>
-          </td>
-          <td><p>MODIStsp helper function to compute Quality Indicators from HDF bit-field layers</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_read_xml.html">MODIStsp_read_xml</a></code> </p>
-          </td>
-          <td><p>Read MODIS products characteristics from XML</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="MODIStsp_vrt_create.html">MODIStsp_vrt_create</a></code> </p>
-          </td>
-          <td><p>Create MODIStsp virtual files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="bbox_from_file.html">bbox_from_file</a></code> </p>
-          </td>
-          <td><p>Retrieve bbox from a spatial file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="reproj_bbox.html">reproj_bbox</a></code> </p>
-          </td>
-          <td><p>Reproject a bounding box</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="load_opts.html">load_opts</a></code> </p>
-          </td>
-          <td><p>Load MODIStsp processing options from a JSON file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_mod_dirs.html">get_mod_dirs</a></code> </p>
-          </td>
-          <td><p>Get list of MODIS data folders from http/ftp server</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_mod_dates.html">get_mod_dates</a></code> </p>
-          </td>
-          <td><p>Find MODIS dates included in selected processing period</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_yeardates.html">get_yeardates</a></code> </p>
-          </td>
-          <td><p>identify dates to be processed for a year</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_mod_filenames.html">get_mod_filenames</a></code> </p>
-          </td>
-          <td><p>Find the names of MODIS images corresponding to the selected dates</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_reqbands.html">get_reqbands</a></code> </p>
-          </td>
-          <td><p>Identify the MODIS original bands needed for a given processing run</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="set_bandind_matrix.html">set_bandind_matrix</a></code> </p>
-          </td>
-          <td><p>Helper function to determine the bands needed to compute SIs and QIs</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="process_message.html">process_message</a></code> </p>
-          </td>
-          <td><p>Spawn processing update messages</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="check_files_existence.html">check_files_existence</a></code> </p>
-          </td>
-          <td><p>Check if all files required for a given date already exist</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ask_permission.html">ask_permission</a></code> </p>
-          </td>
-          <td><p>ask_permission</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="check_proj4string.html">check_proj4string</a></code> </p>
-          </td>
-          <td><p>Check the validity of the input projection</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="load_prodopts.html">load_prodopts</a></code> </p>
-          </td>
-          <td><p>Load characteristics of the different MODIS products</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="split_nodata_values.html">split_nodata_values</a></code> <code><a href="split_nodata_values.html">create_nodata_rcl</a></code> </p>
-          </td>
-          <td><p>Split NODATA values or create matrix for reclassification</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-internals" class="hasAnchor"><a href="#section-internals" class="anchor"></a>Internals</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_GUI.html">MODIStsp_GUI()</a></code> </p>
+        </td>
+        <td><p>Build and manage the MODIStsp GUI</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_process.html">MODIStsp_process()</a></code> </p>
+        </td>
+        <td><p>MODIStsp main processing function</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_download.html">MODIStsp_download()</a></code> </p>
+        </td>
+        <td><p>MODIStsp download function</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_process_bands.html">MODIStsp_process_bands()</a></code> </p>
+        </td>
+        <td><p>MODIStsp helper for processing original HDF layers</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_process_indexes.html">MODIStsp_process_indexes()</a></code> </p>
+        </td>
+        <td><p>MODIStsp helper for computing spectral indexes</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_process_QA_bits.html">MODIStsp_process_QA_bits()</a></code> </p>
+        </td>
+        <td><p>MODIStsp helper function to compute Quality Indicators from HDF bit-field layers</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_read_xml.html">MODIStsp_read_xml()</a></code> </p>
+        </td>
+        <td><p>Read MODIS products characteristics from XML</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="MODIStsp_vrt_create.html">MODIStsp_vrt_create()</a></code> </p>
+        </td>
+        <td><p>Create MODIStsp virtual files</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="bbox_from_file.html">bbox_from_file()</a></code> </p>
+        </td>
+        <td><p>Retrieve bbox from a spatial file</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="reproj_bbox.html">reproj_bbox()</a></code> </p>
+        </td>
+        <td><p>Reproject a bounding box</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="load_opts.html">load_opts()</a></code> </p>
+        </td>
+        <td><p>Load MODIStsp processing options from a JSON file</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="get_mod_dirs.html">get_mod_dirs()</a></code> </p>
+        </td>
+        <td><p>Get list of MODIS data folders from http server</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="get_mod_dates.html">get_mod_dates()</a></code> </p>
+        </td>
+        <td><p>Find MODIS dates included in selected processing period</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="get_yeardates.html">get_yeardates()</a></code> </p>
+        </td>
+        <td><p>identify dates to be processed for a year</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="get_mod_filenames.html">get_mod_filenames()</a></code> </p>
+        </td>
+        <td><p>Find the names of MODIS images corresponding to the selected dates</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="get_reqbands.html">get_reqbands()</a></code> </p>
+        </td>
+        <td><p>Identify the MODIS original bands needed for a given processing run</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="set_bandind_matrix.html">set_bandind_matrix()</a></code> </p>
+        </td>
+        <td><p>Helper function to determine the bands needed to compute SIs and QIs</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="process_message.html">process_message()</a></code> </p>
+        </td>
+        <td><p>Spawn processing update messages</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="check_files_existence.html">check_files_existence()</a></code> </p>
+        </td>
+        <td><p>Check if all files required for a given date already exist</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="ask_permission.html">ask_permission()</a></code> </p>
+        </td>
+        <td><p>ask_permission</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="check_proj4string.html">check_proj4string()</a></code> </p>
+        </td>
+        <td><p>Check the validity of the input projection</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="load_prodopts.html">load_prodopts()</a></code> </p>
+        </td>
+        <td><p>Load characteristics of the different MODIS products</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="split_nodata_values.html">split_nodata_values()</a></code> <code><a href="split_nodata_values.html">create_nodata_rcl()</a></code> </p>
+        </td>
+        <td><p>Split NODATA values or create matrix for reclassification</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -382,6 +388,8 @@ images derived from MODIS Land Products</p></td>
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>
