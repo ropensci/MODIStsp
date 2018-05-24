@@ -92,7 +92,7 @@ MODIStsp_vrt_create <- function(
             out_meta_files <- out_meta_files[grep(file_prefix, out_meta_files)]
           }
 
-          out_meta_files_hdr <- list.files(file.path(out_prod_folder, meta_band),
+          out_meta_files_hdr <- list.files(file.path(out_prod_folder, meta_band), #nolint
                                            pattern = "\\.hdr$",
                                            full.names = TRUE)
           if (sens_sel != "Mixed")  {
@@ -221,7 +221,7 @@ MODIStsp_vrt_create <- function(
                          fileConn_meta_hdr)
               # Band names
               writeLines(c("band names = {",
-                           paste(basename(out_meta_files), collapse = "," ), "}"),
+                           paste(basename(out_meta_files), collapse = "," ), "}"), #nolint
                          fileConn_meta_hdr)
               writeLines(c("wavelength units = DOY"), fileConn_meta_hdr)
               # Wavelengths == DOY from 01/01/2000

@@ -1,4 +1,4 @@
-## MODIStsp 1.3.3.9000 
+## MODIStsp 1.3.4
 
 ### Main changes
 
@@ -8,28 +8,21 @@
   files saved with older versions are no longer supported. Users will be informed of 
   this if trying to use an obsolete json file.
   
-- Removed support for FTP download due to switch-off of NASA servers.
+- **Removed support for FTP download** due to switch-off of NASA servers.
 
 #### Updates in supported products
 
-- Removed all v005 and earlier products, due to discontinuation of their 
+- **Removed all v005 and earlier products**, due to discontinuation of their 
 distribution by NASA servers
 
-- Added support for the new MCD64A1 product.
-([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
+- **Added support** for the following products:
 
-- Added support for the following v006 products: MOD44B; MOD44W; MCD12C1; MCD12Q1; 
-MCD18A1; MCD18A2
-
-
-- Added support for Evapotraspiration products (MOD12A2 and MOD12A3)
-- Added support for Vegetation Continuous Fields product (MOD44B)
-- Checked availability of products over ftp and set not available products to 
-  "Not Available" to allow graceful fail.
+  MCD64A1; MCD12C1; MCD18A1; MCD18A2; MCD12Q1; MOD44B; MOD44W; MCD12C1; MCD12Q1;
+  MOD12A2; MOD12A3
 
 #### Improvements in download functions
 
-- Improvements in GUI. It is now possible to set the processing extent interactively
+- **Improvements in GUI**. It is now possible to set the processing extent interactively
   using the "Select on Map" button. This opens a browser window allowing to select
   and extent. 
 
@@ -39,7 +32,7 @@ MCD18A1; MCD18A2
   
 #### Improvements in processing functions
 
- - improved functionality for dealing with NoData for products with multiple 
+ - **Improved functionality for dealing with NoData** for products with multiple 
    fill-values. If "Change NoData" is set to "Yes", then in case a layer 
    has multiple Nodata values all those values are set to NA in the output 
    (see github.com/lbusett/MODIStsp#113)

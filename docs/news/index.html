@@ -70,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.3.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.4</span>
       </span>
     </div>
 
@@ -161,9 +161,9 @@
       <small>Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="modistsp-1-3-3-9000" class="section level2">
+    <div id="modistsp-1-3-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#modistsp-1-3-3-9000" class="anchor"></a>MODIStsp 1.3.3.9000</h2>
+<a href="#modistsp-1-3-4" class="anchor"></a>MODIStsp 1.3.4</h2>
 <div id="main-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#main-changes" class="anchor"></a>Main changes</h3>
@@ -172,26 +172,23 @@
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h4>
 <ul>
 <li><p>Due to improvements and changes in the GUI (see below), <code>MODIStsp</code> .json options files saved with older versions are no longer supported. Users will be informed of this if trying to use an obsolete json file.</p></li>
-<li><p>Removed support for FTP download due to switch-off of NASA servers.</p></li>
+<li><p><strong>Removed support for FTP download</strong> due to switch-off of NASA servers.</p></li>
 </ul>
 </div>
 <div id="updates-in-supported-products" class="section level4">
 <h4 class="hasAnchor">
 <a href="#updates-in-supported-products" class="anchor"></a>Updates in supported products</h4>
 <ul>
-<li><p>Removed all v005 and earlier products, due to discontinuation of their distribution by NASA servers</p></li>
-<li><p>Added support for the new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97"><a href='https://github.com/lbusett/MODIStsp/issues/97'>#97</a></a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p></li>
-<li><p>Added support for the following v006 products: MOD44B; MOD44W; MCD12C1; MCD12Q1; MCD18A1; MCD18A2</p></li>
-<li>Added support for Evapotraspiration products (MOD12A2 and MOD12A3)</li>
-<li>Added support for Vegetation Continuous Fields product (MOD44B)</li>
-<li><p>Checked availability of products over ftp and set not available products to “Not Available” to allow graceful fail.</p></li>
+<li><p><strong>Removed all v005 and earlier products</strong>, due to discontinuation of their distribution by NASA servers</p></li>
+<li><p><strong>Added support</strong> for the following products:</p></li>
 </ul>
+<p>MCD64A1; MCD12C1; MCD18A1; MCD18A2; MCD12Q1; MOD44B; MOD44W; MCD12C1; MCD12Q1; MOD12A2; MOD12A3</p>
 </div>
 <div id="improvements-in-download-functions" class="section level4">
 <h4 class="hasAnchor">
 <a href="#improvements-in-download-functions" class="anchor"></a>Improvements in download functions</h4>
 <ul>
-<li><p>Improvements in GUI. It is now possible to set the processing extent interactively using the “Select on Map” button. This opens a browser window allowing to select and extent.</p></li>
+<li><p><strong>Improvements in GUI</strong>. It is now possible to set the processing extent interactively using the “Select on Map” button. This opens a browser window allowing to select and extent.</p></li>
 <li><p>Use of <code><a href="http://www.rdocumentation.org/packages/httr/topics/RETRY">httr::RETRY</a></code> to improve behavior while navigating the servers to retrieve available files and while downloading hdf file (when use_aria == FALSE), thus removing dependency to RCurl.</p></li>
 </ul>
 </div>
@@ -199,7 +196,8 @@
 <h4 class="hasAnchor">
 <a href="#improvements-in-processing-functions" class="anchor"></a>Improvements in processing functions</h4>
 <ul>
-<li>improved functionality for dealing with NoData for products with multiple fill-values. If “Change NoData” is set to “Yes”, then in case a layer has multiple Nodata values all those values are set to NA in the output (see github.com/lbusett/MODIStsp<a href='https://github.com/lbusett/MODIStsp/issues/113'>#113</a>)</li>
+<li>
+<strong>Improved functionality for dealing with NoData</strong> for products with multiple fill-values. If “Change NoData” is set to “Yes”, then in case a layer has multiple Nodata values all those values are set to NA in the output (see github.com/lbusett/MODIStsp<a href='https://github.com/lbusett/MODIStsp/issues/113'>#113</a>)</li>
 </ul>
 </div>
 <div id="extensive-code-refactoring-for-submission-to-ropensci-" class="section level4">
@@ -481,7 +479,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#modistsp-1-3-3-9000">1.3.3.9000</a></li>
+        <li><a href="#modistsp-1-3-4">1.3.4</a></li>
         <li><a href="#modistsp-1-3-3-1-release-notes">1.3.3.1</a></li>
         <li><a href="#modistsp-1-3-3-release-notes">1.3.3</a></li>
         <li><a href="#modistsp-1-3-2-release-notes">1.3.2</a></li>

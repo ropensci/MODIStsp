@@ -109,7 +109,7 @@ MODIStsp_download <- function(modislist,
             }
             #nocov end
           } else {
-            stop("[", date(), "] Error: http server seems to be down! Please retry ",
+            stop("[", date(), "] Error: http server seems to be down! Please retry ", #nolint
                  "Later!", .call = FALSE)
           }
         }

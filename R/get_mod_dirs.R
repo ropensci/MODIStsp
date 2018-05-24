@@ -48,7 +48,7 @@ get_mod_dirs <- function(http,
   #   retrieve list of folders in case of http download                    ####
 
   if (download_server == "http") {
-    response = data.frame(status_code = "")
+    response <- data.frame(status_code = "")
     while (response$status_code != 200) {
       # send request to server
       response <- try(httr::RETRY("GET",
