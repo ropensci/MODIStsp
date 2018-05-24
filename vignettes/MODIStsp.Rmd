@@ -5,16 +5,16 @@ author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:lbusett@gmail.com)), Lu
 bibliography: MODIStsp.bib
 date: '`r Sys.Date()`'
 output:
-  rmarkdown::html_document:
-    fig_caption: yes
-    number_section: yes
-    toc: no
-    toc_depth: 1
   rmarkdown::pdf_document:
     fig_caption: yes
     number_sections: yes
     toc: yes
     toc_depth: 2
+  rmarkdown::html_document:
+    fig_caption: yes
+    number_section: yes
+    toc: no
+    toc_depth: 1
   rmarkdown::html_vignette:
     fig_caption: yes
     number_section: yes
@@ -146,7 +146,7 @@ install_github("lbusett/MODIStsp")
 ## On Mac OS
 
 **NOTE**: The following  installation notes should be valid for MODIStsp installation 
-on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied...) from: https://zhiyzuo.github.io/installation-rattle/**. Thanks to Zhiya Zuo for providing this!
+on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied...) from: https://zhiyzuo.github.io/installation-rattle/. Thanks to Zhiya Zuo for providing this!
 
 To properly install `MODIStsp` you will need to first install package `RGTk2`. This
 is a somehow difficult operation. The following instructions should help:

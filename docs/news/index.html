@@ -32,6 +32,9 @@
   
 <meta property="og:title" content="Changelog" />
 
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
+<meta name="twitter:card" content="summary" />
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -168,14 +171,17 @@
 <h4 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h4>
 <ul>
-<li>Due to improvements and changes in the GUI (see below), <code>MODIStsp</code> .json options files saved with older versions are no longer supported. Users will be informed of this if trying to use an obsolete json file.</li>
+<li><p>Due to improvements and changes in the GUI (see below), <code>MODIStsp</code> .json options files saved with older versions are no longer supported. Users will be informed of this if trying to use an obsolete json file.</p></li>
+<li><p>Removed support for FTP download due to switch-off of NASA servers.</p></li>
 </ul>
 </div>
 <div id="updates-in-supported-products" class="section level4">
 <h4 class="hasAnchor">
 <a href="#updates-in-supported-products" class="anchor"></a>Updates in supported products</h4>
 <ul>
-<li><p>Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97"><a href='https://github.com/lbusett/MODIStsp/issues/97'>#97</a></a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p></li>
+<li><p>Removed all v005 and earlier products, due to discontinuation of their distribution by NASA servers</p></li>
+<li><p>Added support for the new MCD64A1 product. (<a href="https://github.com/lbusett/MODIStsp/issues/97"><a href='https://github.com/lbusett/MODIStsp/issues/97'>#97</a></a> - <a href="https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e">ef13e35</a>)</p></li>
+<li><p>Added support for the following v006 products: MOD44B; MOD44W; MCD12C1; MCD12Q1; MCD18A1; MCD18A2</p></li>
 <li>Added support for Evapotraspiration products (MOD12A2 and MOD12A3)</li>
 <li>Added support for Vegetation Continuous Fields product (MOD44B)</li>
 <li><p>Checked availability of products over ftp and set not available products to “Not Available” to allow graceful fail.</p></li>
