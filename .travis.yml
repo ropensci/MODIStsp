@@ -45,6 +45,7 @@ matrix:
         - gdalutils
         - covr
       r_packages:
+        - covr
         - rgdal
         - sf
         - mapedit
