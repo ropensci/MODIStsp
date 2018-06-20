@@ -8,8 +8,8 @@
 <title>Frequently Asked Questions • MODIStsp</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Frequently Asked Questions">
 <meta property="og:description" content="">
 <meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png">
@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.5</span>
       </span>
     </div>
 
@@ -159,7 +159,7 @@
 <h4 class="hasAnchor">
 <a href="#on-windows-modistsp-hangs-at-first-interactive-execution-while-attempting-to-install-gwisgetsrgtk2" class="anchor"></a>- On Windows, <code>MODIStsp</code> hangs at first interactive execution, while attempting to install <code>gWisgetsRGtk2</code>
 </h4>
-<p>At first interactive execution (i.e., with “gui = TRUE) of <code>MODIStsp</code>, an error window may appear, signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library”GTK+“” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select <em>“Install GTK+”</em> and then <em>“OK”</em>. Windows will download and install the GTK+ library. When it finishes, the R Session should be restarted and next <code>MODIStsp</code> should go well ! In case RStudio does not automatically restart after installing GTK+, simply kill it form “Task Manager” and reload RStudio.</p>
+<p>At first interactive execution (i.e., with “gui = TRUE) of <code>MODIStsp</code>, an error window may appear, signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library”GTK+"" is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select <em>“Install GTK+”</em> and then <em>“OK”</em>. Windows will download and install the GTK+ library. When it finishes, the R Session should be restarted and next <code>MODIStsp</code> should go well ! In case RStudio does not automatically restart after installing GTK+, simply kill it form “Task Manager” and reload RStudio.</p>
 <p>If you still have problems, try to install the GTK+ library independently, following instructions reported here:</p>
 <p><a href="https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2">https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2</a></p>
 <p>, starting from “Download the GTK+ all-in-one bundle. I downloaded version 2.22 for Windows 64-bit.”. Then try to install <code>gWisgetsRGtk2</code> before <code>MODIStsp</code> as explained in the point above.</p>
@@ -192,12 +192,13 @@
 <h4 class="hasAnchor">
 <a href="#installing-from-github-fails-due-to-missing-dependencies" class="anchor"></a>- Installing from github fails due to missing dependencies</h4>
 <p>There are currently some problems in installing <code>MODIStsp</code> <strong>via <code>install_github</code></strong> on R &gt;= 3.3.1 due to not correct installation of dependencies (related to a bug in CRAN version of <code>install_github</code>). Installing the development version of <code>devtools</code> should solve the issue. To do so, on a <strong>clean</strong> R/RStudio session do:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
-  devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"hadley/devtools"</span>)
-  <span class="kw">library</span>(devtools)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">  <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"hadley/devtools"</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="kw">library</span>(devtools)</a></code></pre></div>
 <p>, then continue with standard <code>MODIStsp</code> installation.</p>
 <p>If you have problems in installing the “devel” version of <code>devtools</code>, manually installing all the dependencies should also solve the issue. To do so, please try doing:</p>
-<p><code>install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets", "hash", "plyr", "raster", "RCurl",   "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators", "digest","pacman"))</code></p>
+<pre><code>install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets", "hash", "plyr", "raster", "RCurl",
+"rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators", "digest","pacman"))</code></pre>
 <p>, then continue with standard <code>MODIStsp</code> installation.</p>
 <p>If you still don’t succeed, please contact us !</p>
 <p><a name="download-errors"></a></p>
@@ -282,15 +283,15 @@
 <li>Set the <em><strong>spatial extent</strong></em> to that of your available images. A minimum requirement is to set the Horizontal and Vertical “Required MODIS tiles” so to correspond to your imagery. If you also specify a bounding box for the output, that will be considered while creating the outputs.</li>
 </ul>
 </li>
-<li><p>Set the “download method” to either:</p></li>
-</ol>
+<li>
+<p>Set the “download method” to either:</p>
 <ul>
 <li><p><em><strong>http/ftp</strong></em>: if you want <code>MODIStsp</code> to check if all the images for the selected product and time period are already available on your PC. <code>MODIStsp</code> will take care of downloading any missing image (i.e., if you forgot to download something, or the processing period you provided is larger than that “covered” by the images you already have).</p></li>
 <li><p><em><strong>offline</strong></em>: if you just want to process the images that you have. In that case, <code>MODIStsp</code> will not even connect to NASA servers, and just process all images that it finds in your “hdf folder” <strong><em>and which satisfy the processing parameters you specified</em></strong> (to be clear: if you have a folder with MOD13Q1 images, but the GUI is set as to process MOD09A1 data, nothing will happen. Analogously, if you have imagery from 2003 to 2009, but you set the processing period from 2010 to 2015 nothing will happen)</p></li>
 </ul>
-<ol start="3" style="list-style-type: decimal">
-<li>Set the “Output Folder for Original HDF files download” to the folder containing the hdf images, and the “Main Output Folder for Time Series storage to the folder where you want to store the results of the processing.</li>
-<li>Start the processing.</li>
+</li>
+<li>Set the “Output Folder for Original HDF files download” to the folder containing the hdf images, and the "Main Output Folder for Time Series storage to the folder where you want to store the results of the processing.</li>
+<li><p>Start the processing.</p></li>
 </ol>
 <hr>
 <p><a name="other-errors"></a></p>

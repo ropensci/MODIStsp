@@ -8,8 +8,8 @@
 <title>Installation • MODIStsp</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Installation">
 <meta property="og:description" content="">
 <meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png">
@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.5</span>
       </span>
     </div>
 
@@ -145,11 +145,11 @@
 <p>You can install the stable version of <code>MODIStsp</code>, from CRAN:</p>
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes) from github:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</a></code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>RGtk2</code> library beforehand:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"RGtk2"</span>)
-<span class="kw">library</span>(gWidgetsRGtk2)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"RGtk2"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(gWidgetsRGtk2)</a></code></pre></div>
 <p><strong>Upon loading <code>gWidgetsRGtk2</code>, an error window will probably appear</strong>. This signals that library “GTK+” is not yet installed on your system or is not on your PATH. To install it press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK” and then “OK” . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !<sup name="a1"></sup></p>
 <p><strong>In case RStudio does not automatically restart</strong> or continuously asks to install GTK+ again, kill it form “Task Manager” (or restart the R session from RStudio “Session” menu), reload RStudio and the try to reload <code>gWidgetsRGtk2</code>. If it loads correctly, you should be ready to go.</p>
 <p><strong>If it still fails</strong>, try downloading the GTK+ bundle from:</p>
@@ -171,16 +171,16 @@
 <code>GDAL</code> &gt;= 1.6.3, <code>PROJ.4</code> &gt;= 4.4.9 (required by package <code>rgdal</code>)</li>
 </ul>
 <p>On <em>Debian and Ubuntu-based</em> systems, to install those packages open a terminal and type:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
-<span class="ex">libgtk2.0-dev</span> libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">sudo</span> apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev </a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="ex">libgtk2.0-dev</span> libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev</a></code></pre></div>
 <p>On <em>rpm-base systems</em>, to install packages open a terminal and type:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
-<span class="ex">glib2-devel</span> libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">sudo</span> yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">glib2-devel</span> libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad</a></code></pre></div>
 <p>Then, you can install the stable version of MODIStsp from CRAN:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</a></code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</a></code></pre></div>
 <hr>
 </div>
 <div id="installing-on-mac" class="section level2">
@@ -241,15 +241,15 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 ~/Downloads$ R CMD INSTALL RGtk2_2.20.33.tar.gz</code></pre>
 <p>(Note that the name of the tar.gz file may vary depending on when you downloaded the file). <br></p>
 <p><strong>6. Open R and run</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RGtk2)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">library</span>(RGtk2)</a></code></pre></div>
 <p>hopefully, <code>RGtk2</code> will load without errors! If so, you should be ready to go, and you can:</p>
 <p><strong>7. Install MODIStsp</strong> from CRAN:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)
-<span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</a></code></pre></div>
 <p>or the development version from GitHub:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools) 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)
-<span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">library</span>(devtools) </a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</a></code></pre></div>
 <p>Good luck!</p>
 <hr>
 </div>
@@ -268,7 +268,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <h4 class="hasAnchor">
 <a href="#linux" class="anchor"></a>Linux</h4>
 <p>Please refer to the documentation which can be found <a href="https://cran.r-project.org/bin/linux">here</a>, opening the directory relative to your Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version. With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommended), since packaged version of R is &gt;= 3.2.1 (although not the latest); in this case, user can install R by simply typing in a terminal</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install r-base</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="fu">sudo</span> apt-get install r-base</a></code></pre></div>
 </div>
 </div>
 <div id="installing-gdal-1-11-1" class="section level3">
@@ -296,7 +296,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <em>Advanced Option</em>:
 <ul>
 <li>Select <strong>Advanced Install</strong>, then click on “Next” a few times until you reach the “Select Packages” screen.</li>
-<li>Click on “Commandline_Utilities_”, and on the list look for “_gdal: The GDAL/OGR library…" entry</li>
+<li>Click on “Commandline_Utilities_”, and on the list look for "_gdal: The GDAL/OGR library…" entry</li>
 <li>Click on “Skip”: the word “skip” will be replaced by the current GDAL version number</li>
 <li>Click on “Next” a few times to install GDAL</li>
 </ul>
@@ -308,10 +308,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <a href="#debian-and-ubuntu-based-systems" class="anchor"></a>Debian and Ubuntu-based systems</h4>
 <ol style="list-style-type: decimal">
 <li><p>Ensure that your repositories contain a version of <code>gdal-bin</code> &gt;= 1.11.1. In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions <a href="https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable">here</a>). With Ubuntu 15.10 Wily (and newer) this step is not mandatory, although recommended in order to have updated version of GDAL installed.</p></li>
-<li>
-<p>To install GDAL, open a terminal and type</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">sudo</span> apt-get install gdal-bin</code></pre></div>
-</li>
+<li><p>To install GDAL, open a terminal and type<br><code>bash  sudo apt-get install gdal-bin</code></p></li>
 </ol>
 </div>
 <div id="archlinux" class="section level4">

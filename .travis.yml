@@ -4,7 +4,6 @@ dist: trusty
 cache:
   - packages
   - ccache
-latex: false
 
 r:
   - release
