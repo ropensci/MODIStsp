@@ -1,8 +1,14 @@
 # Sample .travis.yml for R projects
 
 language: r
-cache: packages
+cache:
+  - packages
+  - ccache
 warnings_are_errors: false
+
+r:
+  - release
+  - devel
 
 before_install:
   - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
@@ -50,6 +56,6 @@ matrix:
         - leaflet
         - mapview
         - mapedit
-       
+
 after_success:
   - Rscript -e 'library(covr);coveralls();codecov()'

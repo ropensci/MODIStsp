@@ -31,6 +31,7 @@
 #'  getToolkitWidget gframe gdroplist enabled size addSpring glabel
 #'  gcombobox addSpace gbutton gcheckboxgroup dispose visible gradio
 #'  gedit gcheckbox gfile gspinbutton ginput gtext
+#' @import gWidgetsRGtk2
 
 MODIStsp_GUI <- function(general_opts,
                          prod_opt_list,

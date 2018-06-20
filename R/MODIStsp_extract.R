@@ -82,6 +82,7 @@
 #' @importFrom sp coordinates CRS proj4string spTransform
 #' @importFrom tools file_path_sans_ext
 #' @importFrom gdalUtils gdal_rasterize
+#' @importFrom rgeos gCentroid
 #' @examples
 #' \dontrun{
 #' # Extract average and standard deviation values from a rts object created by
