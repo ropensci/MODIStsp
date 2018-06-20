@@ -43,6 +43,7 @@ Imports:
     xts (>= 0.9-7),
     xml2 (>= 1.2.0)
 Suggests:
+    testthat, 
     spelling,
     knitr,
     rmarkdown,

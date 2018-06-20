@@ -339,7 +339,6 @@ context("MODIStsp Test 8: Fail gracefully on missing connection")
 testthat::test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
-    library(httptest)
     expect_error(httptest::without_internet(MODIStsp(test = 5, n_retries = 1)),
                  "Error: http server seems to be down!")
   }

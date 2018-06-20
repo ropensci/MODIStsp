@@ -1,7 +1,6 @@
 context("MODIStsp_extract works as expected")
 
 test_that("MODIStsp_extract works as expected", {
-      library(testthat)
 
       # skip("Skip tests - since they rely on download they are only run
       # locally")
