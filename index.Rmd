@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![Coverage Status](https://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](https://codecov.io/github/lbusett/MODIStsp?branch=master)
 
 
-# <i class="fa fa-globe" aria-hidden="true"></i> MODIStsp <img src="logo.png" width="100" height="100" align="right"/>
+# <i class="fa fa-globe" aria-hidden="true"></i> MODIStsp <img src="man/figures/logo.png" width="100" height="100" align="right"/>
 
 **MODIStsp** is a "R" package devoted to **automatizing the creation of time series of raster images derived from MODIS Land Products data**. 
 
@@ -42,8 +42,11 @@ each available acquisition date. **Virtual files** allowing access to the entire
 as a single file can be also created. 
 
 
-_The package is developed and maintained by L.Busetto and L.Ranghetti, from the Institute 
-of Remote Sensing of Environment - National Research Council - Italy ([CNR-IREA](http://www.irea.cnr.it/en/))_
+<a href="http://www.irea.cnr.it/en/"> <img src="man/figures/logo_irea.png" height="40" align="left" /></a>
+
+
+___`MODIStsp` is developed and maintained by Lorenzo Busetto and Luigi Ranghetti,
+[Institute of Remote Sensing of Environment](http://www.irea.cnr.it/en/) - National Research Council - Italy (CNR-IREA)___
 
 
 ____________________________________________________________________________________
@@ -70,6 +73,8 @@ in our [<i class="fa fa-question-circle-o aria-hidden="true"></i> faq](articles/
 ____________________________________________________________________________________
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What's New 
+
+- 20/06/2018 - MODIStsp v. 1.3.5 is out. Check out the [Release Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.5) for further details !
 
 - 11/04/2018 - Due to new NASA Policies the MODIS FTP servers were shut down 
 starting, April 2, 2018. **FTP download is therefore no longer working** and will

@@ -1,10 +1,10 @@
-# Sample .travis.yml for R projects
-
 language: r
+sudo: required
+dist: trusty
 cache:
   - packages
   - ccache
-warnings_are_errors: false
+latex: false
 
 r:
   - release
@@ -21,41 +21,35 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
-matrix:
-  include:
-    - os: linux
-      dist: trusty
-      sudo: required
-      env:
-        global:
-          - R_LIBS="http://cran.rstudio.com"
-          - R_BUILD_ARGS="--no-build-vignettes --no-manual"
-          - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
-          - R_CHECK_TIMINGS_="0"
-          - BOOTSTRAP_LATEX="1"
-      apt_packages:
-            - libgdal-dev
-            - libproj-dev
-            - libcairo2-dev
-            - libatk1.0-dev
-            - libpango1.0-dev
-            - libgtk2.0-dev
-            - libglib2.0-dev
-            - libcurl4-openssl-dev
-            - libudunits2-dev
-      r_binary_packages:
-        - cairoDevice
-        - RGtk2
-      r_packages:
-        - udunits2
-        - units
-        - covr
-        - rgdal
-        - sf
-        - shiny
-        - leaflet
-        - mapview
-        - mapedit
+env:
+  global:
+    - R_LIBS="http://cran.rstudio.com"
+    - R_BUILD_ARGS="--no-build-vignettes --no-manual"
+    - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
+    - R_CHECK_TIMINGS_="0"
 
+apt_packages:
+    - libgdal-dev
+    - libproj-dev
+    - libcairo2-dev
+    - libatk1.0-dev
+    - libpango1.0-dev
+    - libgtk2.0-dev
+    - libglib2.0-dev
+    - libcurl4-openssl-dev
+    - libudunits2-dev
+r_binary_packages:
+    - cairoDevice
+    - RGtk2
+r_packages:
+    - udunits2
+    - units
+    - covr
+    - rgdal
+    - sf
+    - shiny
+    - leaflet
+    - mapview
+    - mapedit
 after_success:
   - Rscript -e 'library(covr);coveralls();codecov()'

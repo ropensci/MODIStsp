@@ -2,6 +2,21 @@
 
 ### Main changes
 
+Maintenance release to solve CRAN build errors on debian, due to the test_addindex
+test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
+function was modified to require explicit permission by the user to write on 
+the MODIStsp_previous.json file
+
+#### Bug fixing
+
+- Fixed bug leading to errors in processing extent when switching products with different Native projection (4008 vs sinusoidal), the projection string was not properly updated. [77f5693e9](https://github.com/lbusett/MODIStsp/commit/77f5693e9e1e180f05efaa04fa031567e782ba89)
+
+- Fixed warnings on check for uniqueness in http addresses
+
+## MODIStsp 1.3.4
+
+### Main changes
+
 #### Breaking changes
 
 - Due to improvements and changes in the GUI (see below), `MODIStsp` .json options 

@@ -11,35 +11,41 @@ Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](htt
 
 # MODIStsp <img src="man/figures/logo.png" width="147" height="170" align="right" />
 
-MODIStsp is a “R” package devoted to automatizing the creation of time
-series of rasters derived from MODIS Land Products data. MODIStsp allows
-to perform several preprocessing steps (e.g., download, mosaicing,
-reprojection and resize) on MODIS data available within a given time
-period. Users have the ability to select which specific layers of the
-original MODIS HDF files they want to process. They also can select
-which additional Quality Indicators should be extracted from the
-aggregated MODIS Quality Assurance layers and, in the case of Surface
-Reflectance products, which Spectral Indexes should be computed from the
-original reflectance bands. For each output layer, outputs are saved as
-single-band raster files corresponding to each available acquisition
-date. Virtual files allowing access to the entire time series as a
-single file can be also created. All processing parameters can be easily
-selected with a user-friendly GUI, although non-interactive execution
-exploiting a previously created Options File is possible. Stand-alone
-execution outside an “R” environment is also possible, allowing to use
-scheduled execution of MODIStsp to automatically update time series
-related to a MODIS product and extent whenever a new image is available.
+[MODIStsp](http://lbusett.github.io/MODIStsp/) is a “R” package devoted
+to automatizing the creation of time series of rasters derived from
+MODIS Land Products data. MODIStsp allows to perform several
+preprocessing steps (e.g., download, mosaicing, reprojection and resize)
+on MODIS data available within a given time period. Users have the
+ability to select which specific layers of the original MODIS HDF files
+they want to process. They also can select which additional Quality
+Indicators should be extracted from the aggregated MODIS Quality
+Assurance layers and, in the case of Surface Reflectance products, which
+Spectral Indexes should be computed from the original reflectance bands.
+For each output layer, outputs are saved as single-band raster
+filescorresponding to each available acquisition date. Virtual files
+allowing access to the entire time series as a single file can be also
+created. All processing parameters can be easily selected with a
+user-friendly GUI, although non-interactive execution exploiting a
+previously created Options File is possible. Stand-alone execution
+outside an “R” environment is also possible, allowing to use scheduled
+execution of MODIStsp to automatically update time series related to a
+MODIS product and extent whenever a new image is available.
 
-<img src="man/figures/logo_irea.png" height="60" align="left" />
+**For more information, documentation and examples of use, please see
+MODIStsp website at
+[lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/)**
 
-***MODIStsp is developed and maintained by L.Busetto and L.Ranghetti,
-from the [Institute of Remote Sensing of
+<a href="http://www.irea.cnr.it/en/">
+<img src="man/figures/logo_irea.png" height="40" align="left" /></a>
+
+***`MODIStsp` is developed and maintained by Lorenzo Busetto and Luigi
+Ranghetti, [Institute of Remote Sensing of
 Environment](http://www.irea.cnr.it/en/) - National Research Council -
 Italy (CNR-IREA)***
 
 ## Citation
 
-To cite MODIStsp please use:
+To cite `MODIStsp` please use:
 
 L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic
 preprocessing of MODIS Land Products time series, Computers &
@@ -49,7 +55,7 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 
 ## Important News \!
 
-  - 20/062018 - MODIStsp v. 1.3.5 is out. Check out the [Release
+  - 20/06/2018 - MODIStsp v. 1.3.5 is out. Check out the [Release
     Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.5) for
     further details \!
 
