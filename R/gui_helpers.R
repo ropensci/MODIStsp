@@ -549,7 +549,8 @@ gui_save_options <- function(general_opts,
     }
   }
 
-  if (general_opts$download_server == "http" & unique(http) == "Not Available") { #nolint
+  if (general_opts$download_server == "http" & http["Aqua"] == "Not Available"
+      & general_opts$sensor == "Aqua") { #nolint
     gWidgets::gmessage(
       message = strwrap("The selected product/version is only available for the
                         Terra sensor.\n\n Please switch sensor!", width = 300),
