@@ -4,7 +4,7 @@
 #' @noRd
 #' @importFrom gWidgets size svalue
 #' @noRd
-gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str, 
+gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
                            modis_grid) {
   #nocov start
   choice <- try(gfile(
@@ -32,12 +32,15 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
     )
     Sys.sleep(0.05)
     # Convert bbox coordinates to output projection
-    
-    curr_proj <-
-      out_proj_crs <- ifelse(
-        gWidgets::svalue(wids$proj_choice) != "User Defined",
-        out_proj_list[[gWidgets::svalue(wids$proj_choice)]],
-        gWidgets::svalue(wids$output_proj4))
+
+    # curr_proj <-
+    #   out_proj_crs <- ifelse(
+    #     gWidgets::svalue(wids$proj_choice) != "User Defined",
+    #     out_proj_list[[gWidgets::svalue(wids$proj_choice)]],
+    #     gWidgets::svalue(wids$output_proj4))
+    curr_proj <- out_proj_crs <- gWidgets::svalue(wids$output_proj4)
+
+    print(gWidgets::svalue(wids$proj_choice))
     # Create the bounding box in the chosen projection retrieving it from
     # the specified file
     bbox_out <- try(bbox_from_file(file_path = choice,
@@ -46,14 +49,14 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
     if (class(bbox_out) == "try-error") {
       gmessage(bbox_out, title = "Error Detected!")
     } else {
-      
+
       proj  <- gui_get_proj(CRS(curr_proj))
       units <- gui_get_units(CRS(curr_proj), proj)
       # re-set bbox in the GUI according coordinates retrieved from file
       gui_update_bboxlabels(bbox_out,
                             units,
                             wids)
-      
+
       # Set tiles according with the bounding box
       gui_update_tiles(bbox_out,
                        out_proj_crs,
@@ -63,7 +66,7 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
     }
     message("[", date(), "]", " Retrieving Extent, please wait... DONE!")
     dispose(wait_window)
-    
+
   }
   #nocov end
 }
