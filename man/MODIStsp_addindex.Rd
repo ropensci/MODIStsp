@@ -55,7 +55,7 @@ Default: retrieved from package installation folder}
 }
 \value{
 The function is called for its side effects. On success, the
-MODIStsp_Previous.json or the opts_jfile specified by the user
+MODIStsp_Previous.json or the json options file specified by the user
 is modified so to allow computation of the additional indexes.
 }
 \description{

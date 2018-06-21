@@ -54,7 +54,7 @@
 #'  svalue addSpace gframe addSpring gmessage visible
 #' @importFrom pacman p_load p_exists
 #' @return The function is called for its side effects. On success, the
-#'  MODIStsp_Previous.json or the opts_jfile specified by the user
+#'  MODIStsp_Previous.json or the json options file specified by the user
 #'  is modified so to allow computation of the additional indexes.
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
