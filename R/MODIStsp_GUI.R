@@ -1204,6 +1204,7 @@ MODIStsp_GUI <- function(general_opts,
     text      = "Start Processing",
     container = but_group,
     handler   = function(h, ...) {
+
       general_opts <- gui_save_options(general_opts,
                                        gui_env,
                                        opts_jsfile,
