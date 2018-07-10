@@ -55,6 +55,10 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 
 ## Important News \!
 
+  - 10/07/2018 - MODIStsp v. 1.3.6 is out. Check out the [Release
+    Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.6) for
+    further details \!
+
   - 20/06/2018 - MODIStsp v. 1.3.5 is out. Check out the [Release
     Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.5) for
     further details \!
