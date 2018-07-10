@@ -34,6 +34,6 @@
 "bbox": [      0,      0, 3.2e+05,  3e+05 ],
 "out_folder": "$tempdir",
 "out_folder_mod": "$tempdir",
-"MODIStspVersion": "1.3.3.9000",
-"custom_indexes": [] 
+"MODIStspVersion": "1.3.6",
+"custom_indexes": []
 }
