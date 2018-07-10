@@ -1,4 +1,4 @@
-## MODIStsp 1.3.5
+## MODIStsp 1.3.6
 
 ### Main changes
 
