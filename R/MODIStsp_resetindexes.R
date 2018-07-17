@@ -1,5 +1,5 @@
 #' @title Remove custom spectral indexes
-#' @description Function used to remove all user-defined Spectral Indexes from 
+#' @description Function used to remove all user-defined Spectral Indexes from
 #'  a MODIStsp json options file, thus resetting the list of available indexes
 #'  to the default ones.
 #' @param opts_jsfile `character` full path of a JSON file
@@ -18,10 +18,10 @@
 #' @examples
 #' \dontrun{
 #' # Remove all custom-defined spectral indexes from an options file
-#' 
+#'
 #' # Add a custom index for testing purposes
 #' library(jsonlite)
-#' opts_jsfile = system.file("testdata/test_addindex.json", 
+#' opts_jsfile = system.file("testdata/test_addindex.json",
 #'                              package = "MODIStsp")
 #'  MODIStsp_addindex(
 #'    opts_jsfile = opts_jsfile,
@@ -30,35 +30,44 @@
 #'    new_indexformula = "b1_Red - b2_NIR",
 #'    new_indexfullname = paste0("Index_", as.character(sample(10000, 1)))
 #'    )
-#'  
+#'
 #'  opts <- jsonlite::fromJSON(opts_jsfile)
 #'  opts$custom_indexes[1]
-#'  
+#'
 #'  # Now remove all custom indexes
 #'  MODIStsp_resetindexes(opts_jsfile)
 #'  opts <- jsonlite::fromJSON(opts_jsfile)
 #'  opts$custom_indexes[1]
 #'  }
-#'  
+#'
 MODIStsp_resetindexes <- function(opts_jsfile = NULL) {
-  
-  
+
+  if (is.null(opts_jsfile) &
+      (!file.exists(system.file("ExtData/Previous",
+                                "MODIStsp_Previous.json",
+                                package = "MODIStsp")))) {
+    stop("`opts_jfile` was not specified and we were unable to find the
+         `MODIStsp_Previous.json` file. This probably happened because you did
+         not authorize MODIStsp to store the previous options. Run `MODIStsp()`
+         once and authorize saving if you wish to do so now. Aborting!")
+  }
+
   previous_jsfile <- ifelse(is.null(opts_jsfile),
-                            system.file("ExtData/Previous", 
+                            system.file("ExtData/Previous",
                                         "MODIStsp_Previous.json",
                                         package = "MODIStsp"),
                             opts_jsfile)
-  
+
   general_opts    <- load_opts(previous_jsfile)
-  
+
   message("Removing all custom Spectral Indexes from ",
           basename(previous_jsfile))
   general_opts$custom_indexes <- list()
-  
+
   # Re-save the json file
   jsonlite::write_json(general_opts,
                        previous_jsfile,
                        pretty = TRUE,
                        auto_unbox = TRUE)
-  
-} 
+
+}

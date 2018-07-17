@@ -1,3 +1,16 @@
+## MODIStsp 1.3.6
+
+### Main changes
+
+Maintenance release to solve CRAN build errors on debian, due to the test_resetindexesx
+test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
+function was modified to require explicit permission by the user to write on 
+the MODIStsp_previous.json file
+
+#### Bug fixing
+
+- Fixed a bug leading to errors if only "Aqua" platform was selected for download [#133](https://github.com/lbusett/MODIStsp/issues/133)
+
 ## MODIStsp 1.3.5
 
 ### Main changes
