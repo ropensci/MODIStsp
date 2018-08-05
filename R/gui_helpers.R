@@ -546,16 +546,15 @@ gui_save_options <- function(general_opts,
       http <- http[[1]]
     } else {
       http <- http[general_opts$sensor][[1]]
-    }
-  }
-
-  if (general_opts$download_server == "http" & http["Aqua"] == "Not Available"
-      & general_opts$sensor == "Aqua") { #nolint
-    gWidgets::gmessage(
-      message = strwrap("The selected product/version is only available for the
+      if (general_opts$download_server == "http" & http == "Not Available"
+          & general_opts$sensor == "Aqua") { #nolint
+        gWidgets::gmessage(
+          message = strwrap("The selected product/version is only available for the
                         Terra sensor.\n\n Please switch sensor!", width = 300),
-      title   = "Warning")
-    gui_env$check_save_opts <- FALSE
+          title   = "Warning")
+        gui_env$check_save_opts <- FALSE
+      }
+    }
   }
 
   #   __________________________________________________________________________

@@ -30,7 +30,7 @@ License: GPL 3.0
 
 # Add a custom index for testing purposes
 library(jsonlite)
-opts_jsfile = system.file("testdata/test_addindex.json", 
+opts_jsfile = system.file("testdata/test_addindex.json",
                              package = "MODIStsp")
  MODIStsp_addindex(
    opts_jsfile = opts_jsfile,
@@ -39,16 +39,16 @@ opts_jsfile = system.file("testdata/test_addindex.json",
    new_indexformula = "b1_Red - b2_NIR",
    new_indexfullname = paste0("Index_", as.character(sample(10000, 1)))
    )
- 
+
  opts <- jsonlite::fromJSON(opts_jsfile)
  opts$custom_indexes[1]
- 
+
  # Now remove all custom indexes
  MODIStsp_resetindexes(opts_jsfile)
  opts <- jsonlite::fromJSON(opts_jsfile)
  opts$custom_indexes[1]
  }
- 
+
 }
 \seealso{
 \link{MODIStsp_addindex}

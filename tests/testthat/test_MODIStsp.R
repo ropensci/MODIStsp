@@ -224,6 +224,20 @@ testthat::test_that("Tests on MODIStsp", {
   )
   unlink(out_files_dat)
   unlink(out_files_rts)
+
+  # test proper behaviour if only Aqua selected
+  MODIStsp(
+    options_file = system.file("testdata/test04_aqua.json",
+                               package = "MODIStsp"),
+    gui = FALSE, n_retries = 2, verbose = FALSE)
+
+  out_files_rts <- list.files(
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6/Time_Series/RData/Aqua/SN_COV_MNT"),
+    pattern = "\\.RData$", recursive = TRUE, full.names = TRUE)
+
+  #check that rts files are properly created
+  expect_equal(length(out_files_rts), 1)
+
 })
 
 ### Test 5: test of HTTP download (from USGS).  ####
