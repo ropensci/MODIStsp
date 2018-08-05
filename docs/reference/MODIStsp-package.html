@@ -22,10 +22,15 @@ images derived from MODIS Land Products — MODIStsp-package • MODIStsp</title
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="MODIStsp: a package to automatize the creation of time series of raster
@@ -46,7 +51,12 @@ allowing access to the entire time series as a single file are also created.
 Command-line execution exploiting a previously saved processing options
 file is also possible, allowing to automatically update time series
 related to a MODIS product whenever a new image is available." />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -56,16 +66,14 @@ related to a MODIS product whenever a new image is available." />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
 
   </head>
@@ -81,8 +89,12 @@ related to a MODIS product whenever a new image is available." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.5</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -155,6 +167,7 @@ related to a MODIS product whenever a new image is available." />
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -162,13 +175,16 @@ related to a MODIS product whenever a new image is available." />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>MODIStsp: a package to automatize the creation of time series of raster
 images derived from MODIS Land Products</h1>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp-package.R'><code>R/MODIStsp-package.R</code></a></small>
+    <div class="hidden name"><code>MODIStsp-package.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>MODIStsp allows automating the creation of time series of rasters derived
 from MODIS Satellite Land Products data. It performs several typical
@@ -186,12 +202,13 @@ Command-line execution exploiting a previously saved processing options
 file is also possible, allowing to automatically update time series
 related to a MODIS product whenever a new image is available.</p>
     
+    </div>
 
         
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='http://lbusett.github.io/MODIStsp/'>http://lbusett.github.io/MODIStsp/</a>
-    <a href='https://github.com/lbusett/MODIStsp'>https://github.com/lbusett/MODIStsp</a></p>
+    <div class='dont-index'><p><a href='http://lbusett.github.io/MODIStsp/'>http://lbusett.github.io/MODIStsp/</a></p>
+<p><a href='https://github.com/lbusett/MODIStsp'>https://github.com/lbusett/MODIStsp</a></p></div>
     
 
   </div>
@@ -222,6 +239,8 @@ Luigi Ranghetti, phD (2015-2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghe
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

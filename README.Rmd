@@ -14,38 +14,42 @@ knitr::opts_chunk$set(
 )
 ```
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.r-project.org/package=MODIStsp)
+[![](http://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lbusett/MODIStsp?branch=master&svg=true)](https://ci.appveyor.com/project/lbusett/MODIStsp)
-[![DOI](http://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](http://doi.org/10.5281/zenodo.290683)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1286981.svg)](https://doi.org/10.5281/zenodo.1286981)
 [![Coverage Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
 
-MODIStsp <img src="docs/logo.png" width="147" height="170" align="right" />
+MODIStsp  <img src="man/figures/logo.png" width="147" height="170" align="right" />
 =========
-MODIStsp is a "R" package devoted to automatizing the creation of time series of
-rasters derived from MODIS Land Products data. MODIStsp allows to perform several
-preprocessing steps (e.g., download, mosaicing, reprojection and resize) on MODIS
-data available within a given time period. Users have the ability to select which
-specific layers of the original MODIS HDF files they want to process. They also
-can select which additional Quality Indicators should be extracted from the
-aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance
-products, which Spectral Indexes should be computed from the original reflectance
-bands. For each output layer, outputs are saved as single-band raster files 
-corresponding to each available acquisition date. Virtual files allowing access to 
-the entire time series as a single file can be also created. All processing 
-parameters can be easily selected with a user-friendly GUI, although non-interactive 
-execution exploiting a previously created Options File is possible. Stand-alone
-execution outside an "R" environment is also possible, allowing to use scheduled 
-execution of MODIStsp to automatically update time series related to a MODIS
-product and extent whenever a new image is available. 
+[MODIStsp](http://lbusett.github.io/MODIStsp/) is a "R" package devoted to
+automatizing the creation of time series of rasters derived from MODIS Land Products
+data.
+MODIStsp allows to perform several preprocessing steps (e.g., download, mosaicing,
+reprojection and resize) on MODIS data available within a given time period. 
+Users have the ability to select which specific layers of the original MODIS HDF
+files they want to process. They also can select which additional Quality Indicators 
+should be extracted from the aggregated MODIS Quality Assurance layers and, in the 
+case of Surface Reflectance products, which Spectral Indexes should be computed 
+from the original reflectance bands. For each output layer, outputs are saved as
+single-band raster filescorresponding to each available acquisition date. 
+Virtual files allowing access to the entire time series as a single file can be 
+also created. All processing parameters can be easily selected with a user-friendly
+GUI, although non-interactive execution exploiting a previously created Options 
+File is possible. Stand-alone execution outside an "R" environment is also possible,
+allowing to use scheduled execution of MODIStsp to automatically update time series 
+related to a MODIS product and extent whenever a new image is available. 
 
-_MODIStsp is developed and maintained by L.Busetto and L.Ranghetti, from the
-Institute of Remote Sensing of Environment - National Research Council - Italy 
-(CNR-IREA)_
+__For more information, documentation and examples of use, please see MODIStsp website at [lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/)__ 
+
+<a href="http://www.irea.cnr.it/en/"> <img src="man/figures/logo_irea.png" height="40" align="left" /></a> 
+
+___`MODIStsp` is developed and maintained by Lorenzo Busetto and Luigi Ranghetti, 
+[Institute of Remote Sensing of Environment](http://www.irea.cnr.it/en/) - National Research Council - Italy (CNR-IREA)___
 
 ## Citation
   
-To cite MODIStsp please use:
+To cite `MODIStsp` please use:
 
 
 L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS
@@ -54,6 +58,16 @@ L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessi
   
 
 ## Important News ! 
+
+- 20/06/2018 - MODIStsp v. 1.3.5 is out. Check out the [Release Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.5) for further details !
+
+- 11/04/2018 - Due to new NASA Policies the MODIS FTP servers were shut down 
+starting, April 2, 2018. **FTP download is therefore no longer working** and will
+be removed in the next MODIStsp version!
+
+- 11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data Products**]( https://lpdaac.usgs.gov/about/news_archive/decommissioning_modis_version_5_land_data_products_april_9_2018_second_notice). As per NASA notice above, MODIS v005 products are going to be 
+decommisioned, and will soon be no longer available for download. Support for those
+products will be removed in the next MODIStsp version!.
 
 - 11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in
 processing speed, as well as the usual bug fixes
@@ -171,7 +185,7 @@ install_github("lbusett/MODIStsp")
 
 **NOTE**: The following  installation notes should be valid for MODIStsp installation 
 on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly
-copied...) from: https://zhiyzuo.github.io/installation-rattle/**. Thanks to Zhiya 
+copied...) from: https://zhiyzuo.github.io/installation-rattle/. Thanks to Zhiya 
 Zuo for providing this!
 
 To properly install `MODIStsp` you will need to first install package `RGTk2`. This

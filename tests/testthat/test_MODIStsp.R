@@ -1,8 +1,7 @@
 context("MODIStsp Test 0: Gracefully fail on input problems")
 testthat::test_that(
   "Tests on MODIStsp", {
-
-    library(testthat)
+    skip_on_cran()
     # no options file
     expect_error(MODIStsp(gui = FALSE),
                  "Please provide a valid \"options_file\"")
@@ -24,15 +23,6 @@ testthat::test_that(
       options_file = system.file("testdata/test05_wrong_pwd.json",
                                  package = "MODIStsp"),
       gui = FALSE, n_retries = 2), "Username and/or password are not valid")
-
-    # Try to access via ftp a product only available over http fails
-    # gracefully
-    expect_error(MODIStsp(
-      options_file = system.file("testdata/test04_ftp.json",
-                                 package = "MODIStsp"),
-      gui = FALSE, n_retries = 2), "Please switch to http download")
-
-
   })
 
 
@@ -41,10 +31,8 @@ context("MODIStsp Test 1: Basic processing on bands and quality
 testthat::test_that(
   "Tests on MODIStsp", {
 
-    library(testthat)
-
     # skip("Skip tests - since they rely on download they are only run locally")
-    # skip_on_cran()
+    skip_on_cran()
     # skip_on_travis()
 
     ### Test 1: test of the basic operations of MODIStsp.                   ####
@@ -83,7 +71,7 @@ testthat::test_that(
 context("MODIStsp Test 2: Geometric operations")
 testthat::test_that(
   "Tests on MODIStsp", {
-    # skip_on_cran()
+    skip_on_cran()
     # skip_on_travis()
 
     MODIStsp(test = 2)
@@ -125,7 +113,7 @@ context("MODIStsp Test 3: Computation of spectral indices and
             creation of time series")
 testthat::test_that(
   "Tests on MODIStsp", {
-    # skip_on_cran()
+    skip_on_cran()
     # skip_on_travis()
 
     MODIStsp(test = 3)
@@ -270,13 +258,13 @@ testthat::test_that(
   })
 
 #
-### Test 6: test of FTP download and mosaicing of MODIS tiles               ####
-#   This test downloads four MCD LAI products (MCD15A2H) from FTP and mosaics
+### Test 6: test of http download and mosaicing of MODIS tiles               ####
+#   This test downloads four MCD LAI products (MCD15A2H) from http and mosaics
 #   them and crop to the output extent (Minorca island).
 #   After reprojection in geographic coordinates, output files are exported
 #   as GeoTiff (scaling output values) and vrt time series are created.
 
-context("MODIStsp Test 6: FTP download and mosaicing of MODIS tiles")
+context("MODIStsp Test 6: http download and mosaicing of MODIS tiles")
 testthat::test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
@@ -345,16 +333,13 @@ testthat::test_that(
 
 
 ### Test 8: Fail gracefully on no connection               ####
-#   If internet connection is down, retry n_retries times, try switching
-#   switching from http to ftp. After n_retries, abort gracefully.
+#   If internet connection is down, retry n_retries times. After n_retries,
+#   abort gracefully.
 context("MODIStsp Test 8: Fail gracefully on missing connection")
 testthat::test_that(
   "Tests on MODIStsp", {
-    # skip_on_cran()
-    library(httptest)
+    skip_on_cran()
     expect_error(httptest::without_internet(MODIStsp(test = 5, n_retries = 1)),
-                 "Error: ftp server seems to be down! Please Retry Later!")
-    expect_error(httptest::without_internet(MODIStsp(test = 6, n_retries = 1)),
-                 "Error: ftp server seems to be down! Please Retry Later!")
+                 "Error: http server seems to be down!")
   }
 )

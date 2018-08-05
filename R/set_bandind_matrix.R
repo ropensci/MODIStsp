@@ -5,26 +5,26 @@
 #'  each available QI or SI
 #' @rdname set_bandind_matrix
 #' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
-set_bandind_matrix <- function(bandnames, 
+set_bandind_matrix <- function(bandnames,
                                bandsel,
                                indexes_bandnames,
-                               indexes_bandsel, 
-                               indexes_formula, 
-                               quality_bandnames, 
-                               quality_bandsel, 
+                               indexes_bandsel,
+                               indexes_formula,
+                               quality_bandnames,
+                               quality_bandsel,
                                quality_source) {
-  
+
   # matrix which associates, to each couple of index or quality band (col)
   # - original band (row), info on wether that band is required to build that
   # index
-  
+
   bands_indexes <- matrix(
     0,
     nrow     = length(bandsel),
     ncol     = length(indexes_bandsel) + length(quality_bandsel),
     dimnames = list(bandnames, c(indexes_bandnames, quality_bandnames))
   )
-  
+
   # cycle on selected indexes to force processing of all bands needed to
   # compute the index
   for (band in which(indexes_bandsel == 1)) {
@@ -41,7 +41,7 @@ set_bandind_matrix <- function(bandnames,
       }
     }
   }
-  
+
   # cycle on selected QIs to force processing of all bands needed to
   # compute the Quality indicators
   for (band in which(quality_bandsel == 1)) {

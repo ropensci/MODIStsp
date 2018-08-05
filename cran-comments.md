@@ -1,3 +1,51 @@
+MODIStsp 1.3.5
+================
+
+Maintenance release to solve CRAN build errors on debian, due to the test_addindex
+test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
+function was modified to require explicit permission by the user to write on 
+the MODIStsp_previous.json file
+
+## Test environments
+
+* ubuntu 18.04 on local install, R 3.4.4
+* ubuntu 14.04 on travis-ci (https://travis-ci.org/lbusett/MODIStsp/builds/394612258)
+  (R-devel, R-release)
+* win-builder (R-devel, R-release) (r-release and devel)
+* windows 10 on local install, R 3.5
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs or NOTEs
+
+
+MODIStsp 1.3.4
+================
+## Test environments
+
+* ubuntu 18.04 on local install, R 3.4.4
+* ubuntu 14.04 on travis-ci (https://travis-ci.org/lbusett/MODIStsp/jobs/383285994#L6)
+* win-builder (R-devel, R-release)
+* windows 10 on local install, R 3.5
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs or NOTEs
+
+## Note on installation on macos 
+
+Build on macos currently fails (also for MODIStsp 1.3.3.1) with error
+
+"ERROR Package required but not available: ‘gWidgetsRGtk2’"
+
+due to erroring in build of package "RGtk2". 
+
+Note that MODIStsp can be however installed by installing RGtk2 beforehand, following
+instructions reported here: 
+
+http://lbusett.github.io/MODIStsp/articles/installation.html#installing-on-mac
+
+
 MODIStsp 1.3.3.1
 ================
 

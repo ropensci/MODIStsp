@@ -49,6 +49,9 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                                    out_res_sel, out_res, resampling,
                                    gui, mess_lab, verbose) {
 
+  tmpdir <- file.path(tempdir(), "mstp_temp")
+  dir.create(tmpdir, showWarnings = FALSE)
+
   files_in <- file.path(out_folder_mod, modislist)
 
   #   __________________________________________________________________________
@@ -122,7 +125,8 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   process_message(mess_text, gui, mess_lab, verbose)
 
   # filename of temporary vrt file
-  outfile_vrt <- tempfile(fileext = ".vrt")
+
+  outfile_vrt <- tempfile(fileext = ".vrt", tmpdir = tmpdir)
 
   # workaround to avoid gdalbuildvrt bug in creation of vrt
   # files for UInt32 data type -
@@ -132,7 +136,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
   if (datatype == "UInt32") {
     for (file in seq_along(files_in)) {
-      file_out <- tempfile(fileext = ".tif")
+      file_out <- tempfile(fileext = ".tif", tmpdir = tmpdir)
       gdalUtils::gdal_translate(files_in[file],
                                 file_out,
                                 sd_index  = band,
@@ -168,7 +172,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   if (correct_hdf & gsub("^.+\\.(.+)$", "\\1", outfile_vrt) == "vrt") {
     outfile_vrt_or        <- outfile_vrt
     # filename of new temporary vrt file
-    outfile_vrt           <- tempfile(fileext = ".vrt")
+    outfile_vrt           <- tempfile(fileext = ".vrt", tmpdir = tmpdir)
     outfile_vrt_cont      <- readLines(outfile_vrt_or)
     outfile_vrt_linegeom  <- grep("<GeoTransform>",
                                   outfile_vrt_cont)
@@ -190,7 +194,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
   # if there are more than one nodata_in values,
   # reclassify the input raster to use only one value
-  if (length(split_nodata_values(nodata_in)[[1]])>1) {
+  if (length(split_nodata_values(nodata_in)[[1]]) > 1) {
 
     outfile_vrt_prev <- outfile_vrt
     outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),"_recl.tif")
@@ -221,7 +225,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # Ugly workaround to avoid crash on Windows - I do not understand why, but
     # using vrts fails in this case so we have to save a temporary tif
     if (Sys.info()['sysname'] == "Windows") {
-      temptif <- tempfile(fileext = ".tif")
+      temptif <- tempfile(fileext = ".tif", tmpdir = tmpdir)
       gdalUtils::gdal_translate(outfile_vrt_prev, temptif, verbose = FALSE)
       outfile_vrt_prev <- temptif
     }
@@ -237,7 +241,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # in this way, next gdal commands with srcnodata and dstnodata do not
     # change it again (providing error, since nodata_in is a string)
     nodata_in <- nodata_out
-    unlink(temptif)
   }
 
   # If resize required,  convert bbox coordinates from t_srs
@@ -247,7 +250,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   if (full_ext == "Resized") {
     outfile_vrt_or <- outfile_vrt
     # filename of new temporary vrt file
-    outfile_vrt    <- tempfile(fileext = ".vrt")
+    outfile_vrt    <- tempfile(fileext = ".vrt", tmpdir = tmpdir)
     # for resizing BEFORE reprojecting
     bbox_mod <- reproj_bbox(bbox, outproj_str, mod_proj_str,
                             enlarge = TRUE)
@@ -288,11 +291,11 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # files (a temporary file is created in tempdir, then
   # later the scale and offset are applied to it and result
   # is saved in out_repfile)
-  outrep_file_0 <- if (scale_val            == "Yes" &
+  outrep_file_0 <- if (scale_val      == "Yes" &
                        !(scale_factor == 1     &
                          offset       == 0)) {
     tempfile(fileext = ifelse(out_format == "GTiff",
-                              ".tif", ".dat"))
+                              ".tif", ".dat"), tmpdir = tmpdir)
   } else {
     outrep_file
   }
@@ -512,8 +515,8 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                              NAflag    = na,
                              overwrite = TRUE)
     rm(outrep, outrep_0)
-    unlink(outfile_vrt)
   }
+
 
   # If output format is ENVI, add data ignore value to the
   # header file
@@ -527,5 +530,9 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     close(fileConn_meta_hdr)
   }
 
-  if (datatype == "UInt32") unlink(files_in)
+  # if (datatype == "UInt32") unlink(files_in)
+  # browser()
+  # if (exists(temptif)) unlink(temptif)
+  # unlink(outfile_vrt_prev)
+  unlink(tmpdir, recursive = TRUE)
 }

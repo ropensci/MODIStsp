@@ -21,10 +21,15 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Create MODIStsp virtual files — MODIStsp_vrt_create" />
@@ -34,8 +39,13 @@ files corresponding to different acquisition dates. The function takes as input
 the folder in which the single-band files are stored, and creates a ENVI Meta
 file and/or a GDAL vrt file that allows access to the full time series as if
 it was a single physical file.
-Created virtual files are stored in the "Time Series" subfolder of `out_prod_folder``" />
+Created virtual files are stored in the &quot;Time Series&quot; subfolder of `out_prod_folder``" />
+
+<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -45,16 +55,14 @@ Created virtual files are stored in the "Time Series" subfolder of `out_prod_fol
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-84499524-2', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-84499524-2');
 </script>
 
   </head>
@@ -70,8 +78,12 @@ Created virtual files are stored in the "Time Series" subfolder of `out_prod_fol
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">MODIStsp</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">MODIStsp</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.5</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -144,6 +156,7 @@ Created virtual files are stored in the "Time Series" subfolder of `out_prod_fol
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -151,12 +164,15 @@ Created virtual files are stored in the "Time Series" subfolder of `out_prod_fol
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create MODIStsp virtual files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/lbusett/MODIStsp/blob/master/R/MODIStsp_vrt_create.R'><code>R/MODIStsp_vrt_create.R</code></a></small>
+    <div class="hidden name"><code>MODIStsp_vrt_create.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Function used to create virtual files from time series of single-band
 files corresponding to different acquisition dates. The function takes as input
@@ -165,13 +181,14 @@ file and/or a GDAL vrt file that allows access to the full time series as if
 it was a single physical file.
 Created virtual files are stored in the "Time Series" subfolder of `out_prod_folder``</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>MODIStsp_vrt_create</span>(<span class='no'>sensor</span>, <span class='no'>out_prod_folder</span>, <span class='no'>bandnames</span>, <span class='no'>bandsel</span>, <span class='no'>nodata_out</span>,
   <span class='no'>indexes_bandnames</span>, <span class='no'>indexes_bandsel</span>, <span class='no'>indexes_nodata_out</span>, <span class='no'>quality_bandnames</span>,
   <span class='no'>quality_bandsel</span>, <span class='no'>quality_nodata_out</span>, <span class='no'>file_prefixes</span>, <span class='no'>ts_format</span>, <span class='no'>out_format</span>,
   <span class='no'>verbose</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -289,6 +306,8 @@ Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

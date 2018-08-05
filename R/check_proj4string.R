@@ -74,14 +74,8 @@ check_proj4string.default  <- function(projection,
 check_proj4string.numeric  <- function(projection,
                                        abort = FALSE,
                                        verbose = TRUE) {
-  
-  # if it is 0<proj4string<=60, interpret as UTM north zone
-  # if (projection > 0 & projection <= 60) {
-  #   proj4string <- paste0("+init=epsg:326", str_pad(projection, 2, "left", "0"))
-  #   return(rgdal::checkCRSArgs(proj4string)[[2]])
-  # }
-  
-  # else, try to interpret as EPSG code
+
+  # try to interpret as EPSG code
   proj4string <- paste0("+init=epsg:",projection)
   if (rgdal::checkCRSArgs(proj4string)[[1]] == FALSE) {
     if (abort == TRUE) {
@@ -106,13 +100,13 @@ check_proj4string.numeric  <- function(projection,
 check_proj4string.character  <- function(projection,
                                          abort = FALSE,
                                          verbose = TRUE) {
-  
+
   # if it is a number, use check_proj4string.integer method
   if (suppressWarnings(!is.na(as.numeric(projection)))) {
     return(check_proj4string.numeric(as.integer(projection),
                                      abort = abort))
   }
-  
+
   # check if it is a UTM zone
   if (grepl("^[0-9]+[NnSs]$",projection)) {
     utm_zone <- str_pad(gsub("[NnSs]$","",projection), 2, "left", "0")
@@ -122,7 +116,7 @@ check_proj4string.character  <- function(projection,
                           utm_zone)
     return(rgdal::checkCRSArgs(proj4string)[[2]])
   }
-  
+
   if (rgdal::checkCRSArgs(projection)[[1]] == FALSE) {
     if (abort == TRUE) {
       stop("check_proj4string --> Invalid projection detected! Aborting!")

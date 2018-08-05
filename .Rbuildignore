@@ -8,7 +8,6 @@ appveyor.yml
 index.md
 index.Rmd
 LICENSE.md
-logo.png
 _pkgdown.yaml
 ^Log/
 ^old_and_various/

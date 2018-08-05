@@ -5,7 +5,7 @@
 #' @importFrom sp CRS
 #' @noRd
 #'
-gh_changeproj <- function(wids, out_proj_list, bbox_out) {
+gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
 
   #nocov start
   # check if the change was triggered by a load_opts call
@@ -42,7 +42,7 @@ gh_changeproj <- function(wids, out_proj_list, bbox_out) {
     new_proj <- NA
 
     if (
-      deparse(sys.calls()[[sys.nframe() - 10]])[1] == 
+      deparse(sys.calls()[[sys.nframe() - 10]])[1] ==
       "gui_load_options(choice, wids, prod_opt_list, compress_dict)" ) {
       choice <- TRUE
     } else {

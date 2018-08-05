@@ -31,6 +31,7 @@
 #'  getToolkitWidget gframe gdroplist enabled size addSpring glabel
 #'  gcombobox addSpace gbutton gcheckboxgroup dispose visible gradio
 #'  gedit gcheckbox gfile gspinbutton ginput gtext
+#' @import gWidgetsRGtk2
 
 MODIStsp_GUI <- function(general_opts,
                          prod_opt_list,
@@ -386,11 +387,11 @@ MODIStsp_GUI <- function(general_opts,
   method_lab <- glabel(text = " Download Server:", container = methods_group)
 
   wids$server <- gcombobox(
-    items     = c("http", "ftp", "offline"),
+    items     = c("http", "offline"),
     text      = "Select",
     container = methods_group,
     selected  = match(general_opts$download_server,
-                      c("http", "ftp", "offline")),
+                      c("http", "offline")),
     handler   = function(h, ...) {
       current_sel <- gWidgets::svalue(wids$server)
       gWidgets::enabled(authenticate_group) <- ifelse(
@@ -781,7 +782,7 @@ MODIStsp_GUI <- function(general_opts,
     container = output_proj_group,
     selected  = match(general_opts$proj, out_proj_names),
     handler   = function(h, ...) {
-      gh_changeproj(wids, out_proj_list, bbox_out)
+      gh_changeproj(h, wids, out_proj_list, bbox_out)
     }
   )
 

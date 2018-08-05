@@ -1,4 +1,19 @@
-## MODIStsp 1.3.3.9000 
+## MODIStsp 1.3.5
+
+### Main changes
+
+Maintenance release to solve CRAN build errors on debian, due to the test_addindex
+test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
+function was modified to require explicit permission by the user to write on 
+the MODIStsp_previous.json file
+
+#### Bug fixing
+
+- Fixed bug leading to errors in processing extent when switching products with different Native projection (4008 vs sinusoidal), the projection string was not properly updated. [77f5693e9](https://github.com/lbusett/MODIStsp/commit/77f5693e9e1e180f05efaa04fa031567e782ba89)
+
+- Fixed warnings on check for uniqueness in http addresses
+
+## MODIStsp 1.3.4
 
 ### Main changes
 
@@ -7,26 +22,35 @@
 - Due to improvements and changes in the GUI (see below), `MODIStsp` .json options 
   files saved with older versions are no longer supported. Users will be informed of 
   this if trying to use an obsolete json file.
+  
+- **Removed support for FTP download** due to switch-off of NASA servers.
 
 #### Updates in supported products
 
-- Added support for both V005 and V051 of MCD45A1 and for the new MCD64A1 product.
-([#97](https://github.com/lbusett/MODIStsp/issues/97) - [ef13e35](https://github.com/lbusett/MODIStsp/commit/ef13e35d3aee1acce6981b7429d0d392184a549e))
+- **Removed all v005 and earlier products**, due to discontinuation of their 
+distribution by NASA servers
 
-- Added support for Evapotraspiration products (MOD12A2 and MOD12A3)
-- Added support for Vegetation Continuous Fields product (MOD44B)
-- Checked availability of products over ftp and set not available products to 
-  "Not Available" to allow graceful fail.
+- **Added support** for the following products:
+
+  MCD64A1; MCD12C1; MCD18A1; MCD18A2; MCD12Q1; MOD44B; MOD44W; MCD12C1; MCD12Q1;
+  MOD12A2; MOD12A3
 
 #### Improvements in download functions
 
-- Improvements in GUI. It is now possible to set the processing extent interactively
+- **Improvements in GUI**. It is now possible to set the processing extent interactively
   using the "Select on Map" button. This opens a browser window allowing to select
   and extent. 
 
 - Use of `httr::RETRY` to improve behavior while navigating the servers to
   retrieve available files and while downloading hdf file (when use_aria == FALSE), 
   thus removing dependency to RCurl. 
+  
+#### Improvements in processing functions
+
+ - **Improved functionality for dealing with NoData** for products with multiple 
+   fill-values. If "Change NoData" is set to "Yes", then in case a layer 
+   has multiple Nodata values all those values are set to NA in the output 
+   (see github.com/lbusett/MODIStsp#113)
 
 #### Extensive code refactoring for submission to ropensci. 
 
@@ -53,6 +77,13 @@
 - Added `MODIStsp_resetindexes` to remove all custom indexes from a MODIStsp 
   json options file and `MODIStsp_reset_options` to reset MODIStsp options to 
   default.
+  
+#### Bug fixing
+
+- Fixed bug affecting extent selection when working with non-tiled (MCD) products
+https://github.com/lbusett/MODIStsp/issues/122
+
+- Fixed bugs affecting the "Seasonal" time series download 
   
 ________________________________________________________________________________
 

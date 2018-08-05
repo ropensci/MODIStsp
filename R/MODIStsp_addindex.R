@@ -54,8 +54,8 @@
 #'  svalue addSpace gframe addSpring gmessage visible
 #' @importFrom pacman p_load p_exists
 #' @return The function is called for its side effects. On success, the
-#'  MODIStsp_Previous.RData file is modified so to allow computation of the
-#'  additional indexes.
+#'  MODIStsp_Previous.json or the json options file specified by the user
+#'  is modified so to allow computation of the additional indexes.
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
@@ -116,17 +116,35 @@ MODIStsp_addindex <- function(
     #nocov end
   }
 
+
+  if (is.null(opts_jsfile) &
+      (!file.exists(system.file("ExtData/Previous",
+                                "MODIStsp_Previous.json",
+                                package = "MODIStsp")))) {
+    stop("`opts_jfile` was not specified and we were unable to find the
+         `MODIStsp_Previous.json` file. This probably happened because you did
+         not authorize MODIStsp to store the previous options. Run `MODIStsp()`
+         once and authorize saving if you wish to do so now. Aborting!")
+  }
+
+  # On first execution (or if the file is not found), ask the user permission
+  # for saving a options file in "your-R-library/MODIStsp/ExtData/Previous"
+
   previous_jsfile <- ifelse(is.null(opts_jsfile),
                             system.file("ExtData/Previous",
                                         "MODIStsp_Previous.json",
                                         package = "MODIStsp"),
                             opts_jsfile)
+
   prodopts_file   <- ifelse(is.null(prodopts_file),
                             system.file("ExtData/Previous",
                                         "MODIStsp_ProdOpts.RData",
                                         package = "MODIStsp"),
                             prodopts_file)
 
+  if (!file.exists(previous_jsfile)) {
+    stop("Unable to find the specified `opts_jsfile`. Aborting!")
+  }
   general_opts    <- load_opts(previous_jsfile)
 
   # Restore MODIS products if existing, otherwise retrieve  from xml file ----
@@ -378,7 +396,7 @@ MODIStsp_addindex <- function(
                    },
                    prod_opt_list,
                    previous_jsfile)
-      message("The new Index was correctly added!\n It will be available at",
+      message("The new Index was correctly added!\n It will be available at ",
               "the next execution of MODIStsp().")
     } else if (catch_err == 1) {
       stop("The formula of the new index is wrong or not computable for this product. ", #nolint
