@@ -5,8 +5,8 @@
 \title{MODIStsp helper for computing spectral indexes}
 \usage{
 MODIStsp_process_indexes(out_filename, out_prod_folder, formula, bandnames,
-  nodata_out, indexes_nodata_out, file_prefix, compress, yy, out_format, DOY,
-  scale_val)
+  nodata_out, indexes_nodata_out, file_prefix, compress, yy, out_format,
+  DOY, scale_val)
 }
 \arguments{
 \item{out_filename}{\code{character} basename of the file in to which save results}

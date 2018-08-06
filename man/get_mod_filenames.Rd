@@ -4,8 +4,8 @@
 \alias{get_mod_filenames}
 \title{Find the names of MODIS images corresponding to the selected dates}
 \usage{
-get_mod_filenames(http, used_server, user, password, n_retries, date_dir, v, h,
-  tiled, out_folder_mod, gui)
+get_mod_filenames(http, used_server, user, password, n_retries, date_dir,
+  v, h, tiled, out_folder_mod, gui)
 }
 \arguments{
 \item{http}{\code{character} url of http site on lpdaac corresponding to a given MODIS

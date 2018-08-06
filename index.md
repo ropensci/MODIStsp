@@ -87,6 +87,10 @@ Italy (CNR-IREA)***
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What’s New
 
+  - 10/07/2018 - MODIStsp v. 1.3.6 is out. Check out the [Release
+    Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.5) for
+    further details \!
+
   - 20/06/2018 - MODIStsp v. 1.3.5 is out. Check out the [Release
     Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.5) for
     further details \!
@@ -136,3 +140,5 @@ A BibTeX entry for LaTeX users is:
     url     = {https://github.com/lbusett/MODIStsp},
   }
 ```
+
+[![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![](http://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lbusett/MODIStsp?branch=master&svg=true)](https://ci.appveyor.com/project/lbusett/MODIStsp)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1286981.svg)](https://doi.org/10.5281/zenodo.1286981)
 [![Coverage Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
 
@@ -354,3 +353,5 @@ for more detailed instructions and examples).
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
 By participating in this project you agree to abide by its terms.
+
+[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

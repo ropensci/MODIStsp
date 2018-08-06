@@ -11,7 +11,7 @@ LICENSE.md
 _pkgdown.yaml
 ^Log/
 ^old_and_various/
-^inst/Previous/MODIStsp_ProdOpts.RData
+^inst/Previous/MODIStsp_Previous.json
 ^sketched_routines/
 ^ExtData/
 ^README\.Rmd$
