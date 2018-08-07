@@ -1,6 +1,6 @@
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(devtools)
-#  install_github("lbusett/MODIStsp")
+#  install_github("ropensci/MODIStsp")
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  install.packages("gWidgetsRGtk2")
@@ -11,7 +11,7 @@
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE-------------
 #  library(devtools)
-#  install_github("lbusett/MODIStsp")
+#  install_github("ropensci/MODIStsp")
 
 ## ----eval = FALSE--------------------------------------------------------
 #  library(RGtk2)
@@ -22,7 +22,7 @@
 
 ## ----eval = FALSE--------------------------------------------------------
 #  library(devtools)
-#  install_github("lbusett/MODIStsp", ref = "master")
+#  install_github("ropensci/MODIStsp", ref = "master")
 #  MODIStsp()
 
 ## ---- eval=FALSE, message=FALSE, warning=FALSE, include=TRUE, caption=FALSE----
@@ -52,7 +52,7 @@
 #  library(MODIStsp)
 #  # --> Specify the path to a valid options file saved in advance from MODIStsp GUI
 #  options_file <- "X:/yourpath/youroptions.json"
-#  
+#
 #  # --> Launch the processing
 #  MODIStsp(gui = FALSE, options_file = options_file)
 
@@ -60,17 +60,17 @@
 #  library(MODIStsp)
 #  # --> Specify the path to a valid options file saved in advance from MODIStsp GUI
 #  options_file <- "X:/yourpath/youroptions.json"
-#  
+#
 #  # --> Create a character array containing a list of shapefiles (or other spatial files)
 #  extent_list <- list.files("X:/path/containing/some/shapefiles/", "\\.shp$")
-#  
+#
 #  # --> Loop on the list of spatial files and run MODIStsp using each of them to automatically
 #  # define the output extent (A separate output folder is created for each input spatial file).
-#  
+#
 #  for (single_shape in extent_list) {
 #    MODIStsp(gui = FALSE, options_file = options_file, spatial_file_path = single_shape )
 #  }
-#  
+#
 
 ## ----eval=FALSE, tidy=TRUE, highlight=TRUE-------------------------------
 #  library(raster)
