@@ -125,7 +125,7 @@ outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1
            full.names = TRUE)
 plot(raster(outfiles_iseo[1]))
 
-# See also http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html)
+# See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html)
 }
 }
 \seealso{

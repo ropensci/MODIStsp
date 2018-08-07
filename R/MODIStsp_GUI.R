@@ -1041,7 +1041,7 @@ MODIStsp_GUI <- function(general_opts,
     text = " ? ",
     handler = function(h, ...) {
       gh_help(h, "timeseries_help", help_messages,
-              info_addr = "http://lbusett.github.io/MODIStsp/articles/output.html", #nolint
+              info_addr = "http://ropensci.github.io/MODIStsp/articles/output.html", #nolint
               ...)
     }, container = other_group, expand = FALSE)
 
@@ -1110,7 +1110,7 @@ MODIStsp_GUI <- function(general_opts,
 
   outfold_help <- gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "outfold_help", help_messages,
-            info_addr = "http://lbusett.github.io/MODIStsp/articles/output.html", #nolint
+            info_addr = "http://ropensci.github.io/MODIStsp/articles/output.html", #nolint
             ...)
   }, container = outfold_group, expand = FALSE)
 

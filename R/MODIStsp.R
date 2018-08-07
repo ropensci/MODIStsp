@@ -118,7 +118,7 @@
 #'            full.names = TRUE)
 #' plot(raster(outfiles_iseo[1]))
 #'
-#' # See also http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html)
+#' # See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html)
 #' }
 
 MODIStsp <- function(gui               = TRUE,
@@ -270,7 +270,7 @@ MODIStsp <- function(gui               = TRUE,
   if (!gdal_hdf_support) {
     stop("Your local GDAL installation does not support HDF4 format.\n",
          "Please install HDF4 support and recompile GDAL. See:\n",
-         strwrap("http://lbusett.github.io/MODIStsp/articles/installation.html#
+         strwrap("http://ropensci.github.io/MODIStsp/articles/installation.html#
       installing-r-and-gdal", width = 200))
   }
 

@@ -12,6 +12,6 @@ articles:
   output: output.html
   standalone_execution: standalone_execution.html
 urls:
-  reference: http://lbusett.github.io/MODIStsp/reference
-  article: http://lbusett.github.io/MODIStsp/articles
+  reference: http://ropensci.github.io/MODIStsp/reference
+  article: http://ropensci.github.io/MODIStsp/articles
 

@@ -4,10 +4,10 @@
 \alias{MODIStsp_vrt_create}
 \title{Create MODIStsp virtual files}
 \usage{
-MODIStsp_vrt_create(sensor, out_prod_folder, bandnames, bandsel, nodata_out,
-  indexes_bandnames, indexes_bandsel, indexes_nodata_out, quality_bandnames,
-  quality_bandsel, quality_nodata_out, file_prefixes, ts_format, out_format,
-  verbose)
+MODIStsp_vrt_create(sensor, out_prod_folder, bandnames, bandsel,
+  nodata_out, indexes_bandnames, indexes_bandsel, indexes_nodata_out,
+  quality_bandnames, quality_bandsel, quality_nodata_out, file_prefixes,
+  ts_format, out_format, verbose)
 }
 \arguments{
 \item{sensor}{\code{character ["Terra"| "Aqua" | "Both"]} MODIS platform to be considered.

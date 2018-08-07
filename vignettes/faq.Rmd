@@ -9,7 +9,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Here you can find possible **solutions for common `MODIStsp` problems**. We will add to this page as soon as additional problems are reported. If these solutions does not work for you, or you have a different problem, signal it at: https://github.com/lbusett/MODIStsp/issues
+Here you can find possible **solutions for common `MODIStsp` problems**. We will add to this page as soon as additional problems are reported. If these solutions does not work for you, or you have a different problem, signal it at: https://github.com/ropensci/MODIStsp/issues
 
 <a name="Installation Problems"></a>
 
@@ -75,7 +75,7 @@ At the first execution `MODIStsp` searches for a valid `GDAL` installation. If n
 1. Ensure that `GDAL` is properly installed in your system. See the main `MODIStsp` github page for simple instructions
 2. (On Windows) If it is installed, verify that `GDAL` is in your system PATH, and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)) (If gdal is not correctly installed or the path not set, then opening a windows shell ("cmd") and issuing the "gdalinfo" command will result in an error !)
 
-If nothing works, please report the issue here: https://github.com/lbusett/MODIStsp/issues
+If nothing works, please report the issue here: https://github.com/ropensci/MODIStsp/issues
 
 <a name="github-error"></a>
 
@@ -136,7 +136,7 @@ ________________________________________________________________________________
 
 #### - No luck ! Nothing worked 
 
-If nothing of the above solves your problem, please report the issue here: https://github.com/lbusett/MODIStsp/issues
+If nothing of the above solves your problem, please report the issue here: https://github.com/ropensci/MODIStsp/issues
 
 ____________________________________________________________________________________
 
@@ -153,7 +153,7 @@ ________________________________________________________________________________
 
 #### - MODIStsp fails while processing product **MxDyyy**
 
-Although we tried to test functionality for all products, some bugs may be still present for specific products, due to the complexity and variability of MODIS hdfs structure. In that case, please report the issue here: https://github.com/lbusett/MODIStsp/issues 
+Although we tried to test functionality for all products, some bugs may be still present for specific products, due to the complexity and variability of MODIS hdfs structure. In that case, please report the issue here: https://github.com/ropensci/MODIStsp/issues 
 
 <a name="whereare-error"></a>
 
@@ -191,4 +191,4 @@ ________________________________________________________________________________
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Other Problems__
 
-Please report any other issues at https://github.com/lbusett/MODIStsp/issues
+Please report any other issues at https://github.com/ropensci/MODIStsp/issues

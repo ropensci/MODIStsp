@@ -2,16 +2,14 @@
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![](http://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build
-Status](https://travis-ci.org/lbusett/MODIStsp.svg?branch=master)](https://travis-ci.org/lbusett/MODIStsp)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/lbusett/MODIStsp?branch=master&svg=true)](https://ci.appveyor.com/project/lbusett/MODIStsp)
+Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://travis-ci.org/ropensci/MODIStsp)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1286981.svg)](https://doi.org/10.5281/zenodo.1286981)
 [![Coverage
-Status](http://img.shields.io/codecov/c/github/lbusett/MODIStsp/master.svg)](http://codecov.io/github/lbusett/MODIStsp?branch=master)
+Status](http://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](http://codecov.io/github/ropensci/MODIStsp?branch=master)
 
 # MODIStsp <img src="man/figures/logo.png" width="147" height="170" align="right" />
 
-[MODIStsp](http://lbusett.github.io/MODIStsp/) is a “R” package devoted
+[MODIStsp](http://ropensci.github.io/MODIStsp/) is a “R” package devoted
 to automatizing the creation of time series of rasters derived from
 MODIS Land Products data. MODIStsp allows to perform several
 preprocessing steps (e.g., download, mosaicing, reprojection and resize)
@@ -33,7 +31,7 @@ MODIS product and extent whenever a new image is available.
 
 **For more information, documentation and examples of use, please see
 MODIStsp website at
-[lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/)**
+[ropensci.github.io/MODIStsp](http://ropensci.github.io/MODIStsp/)**
 
 <a href="http://www.irea.cnr.it/en/">
 <img src="man/figures/logo_irea.png" height="40" align="left" /></a>
@@ -51,16 +49,21 @@ L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic
 preprocessing of MODIS Land Products time series, Computers &
 Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 <http://dx.doi.org/10.1016/j.cageo.2016.08.020>, URL:
-<https://github.com/lbusett/MODIStsp>.
+<https://github.com/ropensci/MODIStsp>.
 
 ## Important News \!
 
+  - 07/08/2018 - We are glad to report that MODIStsp is now included in
+    the [rOpenSci](https://ropensci.org/about/) packages’ ecosystem. We
+    thank reviewers Leah Wasser and Jeffrey Hanson for their valuable
+    reviews, which helped us to further improve the package\!
+
   - 10/07/2018 - MODIStsp v. 1.3.6 is out. Check out the [Release
-    Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.6) for
+    Notes](https://github.com/ropensci/MODIStsp/releases/tag/1.3.6) for
     further details \!
 
   - 20/06/2018 - MODIStsp v. 1.3.5 is out. Check out the [Release
-    Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.5) for
+    Notes](https://github.com/ropensci/MODIStsp/releases/tag/v1.3.5) for
     further details \!
 
   - 11/04/2018 - Due to new NASA Policies the MODIS FTP servers were
@@ -78,26 +81,26 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
     improvements in processing speed, as well as the usual bug fixes
     (thanks to all the users that signalled problems \!). Check the
     [Release
-    Notes](https://github.com/lbusett/MODIStsp/releases/tag/v1.3.3) for
+    Notes](https://github.com/ropensci/MODIStsp/releases/tag/v1.3.3) for
     further details \!
 
   - 25/07/2017 - As of today, **most of the content related to MODIStsp
     has been moved to our new website at
-    [lbusett.github.io/MODIStsp](http://lbusett.github.io/MODIStsp/) **,
-    which provides a much better user interface and ease of access to
-    MODIStsp-related information. From now on, please **consult the new
-    website for detailed and updated information on the package**.
+    [ropensci.github.io/MODIStsp](http://ropensci.github.io/MODIStsp/)
+    **, which provides a much better user interface and ease of access
+    to MODIStsp-related information. From now on, please **consult the
+    new website for detailed and updated information on the package**.
 
   - Also our previous FAQ page on github containing info for solving
     common installation, downloading and processing problems and issues
     was discontinued and **migrated at
-    [lbusett.github.io/MODIStsp/articles/faq.html](http://lbusett.github.io/MODIStsp/articles/faq.html)**.
+    [ropensci.github.io/MODIStsp/articles/faq.html](http://ropensci.github.io/MODIStsp/articles/faq.html)**.
 
 ## Problems and Issues
 
   - Please **report any issues** you may encounter in our [issues page
     on github
-    <i class="fa fa-github-square" aria-hidden="true"></i>](https://github.com/lbusett/MODIStsp/issues).
+    <i class="fa fa-github-square" aria-hidden="true"></i>](https://github.com/ropensci/MODIStsp/issues).
 
 ## <i class="fa fa-desktop" aria-hidden="true"></i> System Requirements
 
@@ -105,7 +108,7 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v \>=
 1.11.1 **with support for HDF4 raster format** to be installed in your
 system. Brief instructions for installing R and GDAL can be found
-[HERE](http://lbusett.github.io/MODIStsp/articles/installation.html#installing-r-and-gdal).
+[HERE](http://ropensci.github.io/MODIStsp/articles/installation.html#installing-r-and-gdal).
 
 -----
 
@@ -122,7 +125,7 @@ fixes) from github:
 
 ``` r
 library(devtools)
-install_github("lbusett/MODIStsp")
+install_github("ropensci/MODIStsp")
 ```
 
 Note that **if the `GTK+` library is not already installed on your
@@ -203,7 +206,7 @@ fixes) from github;
 
 ``` r
 library(devtools)
-install_github("lbusett/MODIStsp")
+install_github("ropensci/MODIStsp")
 ```
 
 ## <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
@@ -355,7 +358,7 @@ or the development version from GitHub:
 
 ``` r
 library(devtools) 
-install_github("lbusett/MODIStsp", ref = "master")
+install_github("ropensci/MODIStsp", ref = "master")
 MODIStsp()
 ```
 
@@ -378,7 +381,7 @@ MODIStsp()
 This **opens a GUI** from which processing options can be specified (and
 eventually saved or loaded). After specifying all required parameters,
 clicking on “Start” will start the processing (see
-[HERE](http://lbusett.github.io/MODIStsp/articles/interactive_execution.html)
+[HERE](http://ropensci.github.io/MODIStsp/articles/interactive_execution.html)
 for more detailed instructions).
 
 `MODIStsp` can also be launched in non-interactive mode within an `R`
@@ -397,11 +400,14 @@ MODIStsp(gui = FALSE, options_file = options_file)
 ```
 
 (see
-[HERE](http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html)
+[HERE](http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html)
 for more detailed instructions and examples).
 
 # Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
 Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms.
+abide by its
+terms.
+
+[![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

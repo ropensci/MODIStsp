@@ -41,7 +41,7 @@ ________________________________________________________________________________
 
 <br>
 
-#<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Looping over different Options files__
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Looping over different Options files__
 
 If you need to process different MODIS products, you can prepare beforehand different
 MODIStsp options files by using the GUI, and then loop over them like this:
@@ -69,7 +69,7 @@ ________________________________________________________________________________
 
 <br>
 
-#<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Looping over different spatial extents__
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Looping over different spatial extents__
 
 Specifying also the `spatial_file_path_` parameter overrides for example the output 
 extent of the selected Options File. This allows to perform the same preprocessing 

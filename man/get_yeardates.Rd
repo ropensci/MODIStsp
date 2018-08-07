@@ -4,7 +4,8 @@
 \alias{get_yeardates}
 \title{identify dates to be processed for a year}
 \usage{
-get_yeardates(download_range, yy, start_year, end_year, start_date, end_date)
+get_yeardates(download_range, yy, start_year, end_year, start_date,
+  end_date)
 }
 \arguments{
 \item{download_range}{\code{character ["full" | "seasonal"]} If "full", all the

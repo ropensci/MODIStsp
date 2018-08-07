@@ -12,7 +12,7 @@
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.6">
 <meta property="og:description" content="">
-<meta property="og:image" content="http://lbusett.github.io/MODIStsp/logo.png">
+<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.6</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.6.9000</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
   </a>
 </li>
 <li>
-  <a href="https://github.com/lbusett/MODIStsp/">
+  <a href="https://github.com/ropensci/MODIStsp/">
     <span class="fa fa-github fa-lg"></span>
      
     github
@@ -126,9 +126,9 @@
       <h1>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.6</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2018-07-10</h4>
+            <h4 class="date">2018-08-07</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/lbusett/MODIStsp/blob/master/vignettes/MODIStsp.Rmd"><code>vignettes/MODIStsp.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ropensci/MODIStsp/blob/master/vignettes/MODIStsp.Rmd"><code>vignettes/MODIStsp.Rmd</code></a></small>
       <div class="hidden name"><code>MODIStsp.Rmd</code></div>
 
     </div>
@@ -159,7 +159,7 @@
 <p><code>install.packages("MODIStsp")</code></p>
 <p>, or the development version (containing the latest improvements and bug fixes):</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"ropensci/MODIStsp"</span>)</a></code></pre></div>
 <p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>gWidgetsRGtk2</code> library beforehand:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"gWidgetsRGtk2"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(gWidgetsRGtk2)</a></code></pre></div>
@@ -192,7 +192,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"MODIStsp"</span>)</a></code></pre></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(devtools)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"ropensci/MODIStsp"</span>)</a></code></pre></div>
 </div>
 <div id="on-mac-os" class="section level2">
 <h2 class="hasAnchor">
@@ -264,7 +264,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</a></code></pre></div>
 <p>or the development version from GitHub:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">library</span>(devtools) </a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lbusett/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"ropensci/MODIStsp"</span>, <span class="dt">ref =</span> <span class="st">"master"</span>)</a>
 <a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</a></code></pre></div>
 <p>Good luck!</p>
 </div>
@@ -276,7 +276,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <p>To open the GUI, load the package and launch the MODIStsp function, with no parameters:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">library</span>(MODIStsp)</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</a></code></pre></div>
-<p>This <strong>opens a GUI</strong> from which processing options can be specified and eventually saved (or loaded) <font size="2"> (Note 1: PCs with a small screen can fail to visualize the whole GUI; in this case, the user can add scroll bars with <code><a href="../reference/MODIStsp.html">MODIStsp(scrollWindow=TRUE)</a></code>); Note 2: At the first execution of <code>MODIStsp</code>, a Welcome screen will appear, signaling that <code>MODIStsp</code> is searching for a valid GDAL installation. Press “OK” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), <code>MODIStsp</code> (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the <em>GDAL_DATA</em> environment variable is correctly set (You can find simple instructions <a href="http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/">HERE</a>) 3. If nothing works, signal it in the <a href="https://github.com/lbusett/MODIStsp/issues">issues</a> GitHub page of <code>MODIStsp</code> and we’ll try to help! </font></p>
+<p>This <strong>opens a GUI</strong> from which processing options can be specified and eventually saved (or loaded) <font size="2"> (Note 1: PCs with a small screen can fail to visualize the whole GUI; in this case, the user can add scroll bars with <code><a href="../reference/MODIStsp.html">MODIStsp(scrollWindow=TRUE)</a></code>); Note 2: At the first execution of <code>MODIStsp</code>, a Welcome screen will appear, signaling that <code>MODIStsp</code> is searching for a valid GDAL installation. Press “OK” and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), <code>MODIStsp</code> (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: 1. Ensure that GDAL is properly installed in your system 2. (On Windows) If it is installed, verify that GDAL is in your system PATH. and that the <em>GDAL_DATA</em> environment variable is correctly set (You can find simple instructions <a href="http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/">HERE</a>) 3. If nothing works, signal it in the <a href="https://github.com/ropensci/MODIStsp/issues">issues</a> GitHub page of <code>MODIStsp</code> and we’ll try to help! </font></p>
 <p>The GUI allows selecting all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.</p>
 <p><img src="MODIStsp_files/figure-html/GUIfig-1.png" width="700" style="display: block; margin: auto;"></p>
 <div id="selecting-processing-parameters" class="section level2">
@@ -441,7 +441,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <p>Several processing options can be set using check-boxes:</p>
 <ul>
 <li><p><strong>Output Files Format</strong>: Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among “None”, “PACKBITS”, “LZW” and “DEFLATE”.</p></li>
-<li><p><strong>Save Time Series as</strong>: Specify if virtual multitemporal files should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are “R” rasterStacks, ENVI meta-files and GDAL “vrt” files. In particular, “R” rasterStacks may be useful in order to easily access the preprocessed MODIS data within “R” scripts (see also <a href="http://lbusett.github.io/MODIStsp/articles/output.html" class="uri">http://lbusett.github.io/MODIStsp/articles/output.html</a>).</p></li>
+<li><p><strong>Save Time Series as</strong>: Specify if virtual multitemporal files should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are “R” rasterStacks, ENVI meta-files and GDAL “vrt” files. In particular, “R” rasterStacks may be useful in order to easily access the preprocessed MODIS data within “R” scripts (see also <a href="http://ropensci.github.io/MODIStsp/articles/output.html" class="uri">http://ropensci.github.io/MODIStsp/articles/output.html</a>).</p></li>
 <li><p><strong>Modify No Data</strong>: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the “MODIStsp_Products_Opts” XML file. By selecting “Yes” in the “Change Original NoData values” check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. <strong>NOTE:</strong> Some MODIS layers have multiple NoData (a.k.a. <em>fill</em>) values. if <em>Modify No Data</em> is set to “Yes”, <code>MODIStsp</code> will convert all <em>fill</em> values to a common output NoData value!</p></li>
 <li><p><strong>Apply Scale/Offset</strong>: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true “measure units” of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in degrees Kelvin, etc.).</p></li>
 </ul>
@@ -450,7 +450,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <h3 class="hasAnchor">
 <a href="#main-modistsp-output-folder" class="anchor"></a><strong>Main MODIStsp Output Folder</strong>
 </h3>
-<p>Select the main folder where the pre-processed time series data will be stored. All <code>MODIStsp</code> outputs <strong>will be placed in specific sub-folders of this main folder</strong> (see <a href="http://lbusett.github.io/MODIStsp/articles/output.html" class="uri">http://lbusett.github.io/MODIStsp/articles/output.html</a> for details on <code>MODIStsp</code> naming conventions)-.</p>
+<p>Select the main folder where the pre-processed time series data will be stored. All <code>MODIStsp</code> outputs <strong>will be placed in specific sub-folders of this main folder</strong> (see <a href="http://ropensci.github.io/MODIStsp/articles/output.html" class="uri">http://ropensci.github.io/MODIStsp/articles/output.html</a> for details on <code>MODIStsp</code> naming conventions)-.</p>
 <p>The <strong>“Reprocess Existing Data”</strong> check-box allows to decide if images already available should be reprocessed if a new run of MODIStsp is launched with the same output folder. If set to “No”, MODIStsp skips dates for which output files following the MODIStsp naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates.</p>
 </div>
 <div id="folder-for-permanent-storage-of-original-modis-hdf-images" class="section level3">
@@ -712,17 +712,17 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <h1 class="hasAnchor">
 <a href="#problems-and-issues" class="anchor"></a>Problems and Issues</h1>
 <p>Solutions to some common <strong>installation and processing problems</strong> can be found in MODIStsp FAQ:</p>
-<p><a href="http://lbusett.github.io/MODIStsp/articles/faq.html" class="uri">http://lbusett.github.io/MODIStsp/articles/faq.html</a></p>
+<p><a href="http://ropensci.github.io/MODIStsp/articles/faq.html" class="uri">http://ropensci.github.io/MODIStsp/articles/faq.html</a></p>
 <ul>
 <li>Please <strong>report any issues</strong> you may encounter in our issues page on GitHub:</li>
 </ul>
-<p><a href="https://github.com/lbusett/MODIStsp/issues" class="uri">https://github.com/lbusett/MODIStsp/issues</a></p>
+<p><a href="https://github.com/ropensci/MODIStsp/issues" class="uri">https://github.com/ropensci/MODIStsp/issues</a></p>
 </div>
 <div id="citation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h1>
 <p>To cite MODIStsp please use:</p>
-<p>L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series, Computers &amp; Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004, <a href="http://dx.doi.org/10.1016/j.cageo.2016.08.020" class="uri">http://dx.doi.org/10.1016/j.cageo.2016.08.020</a>, URL: <a href="https://github.com/lbusett/MODIStsp" class="uri">https://github.com/lbusett/MODIStsp</a>.</p>
+<p>L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series, Computers &amp; Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004, <a href="http://dx.doi.org/10.1016/j.cageo.2016.08.020" class="uri">http://dx.doi.org/10.1016/j.cageo.2016.08.020</a>, URL: <a href="https://github.com/ropensci/MODIStsp" class="uri">https://github.com/ropensci/MODIStsp</a>.</p>
 <p><a name="gdal_inst"></a></p>
 </div>
 <div id="installing-r-and-gdal" class="section level1">
