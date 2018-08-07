@@ -1,5 +1,5 @@
 title: MODIStsp
-url: http://lbusett.github.io/MODIStsp
+url: http://ropensci.github.io/MODIStsp
 template:
   params:
     bootswatch: flatly
@@ -39,7 +39,7 @@ reference:
       - '`check_files_existence`'
       - '`ask_permission`'
       - '`check_proj4string`'
-      - '`load_prodopts`' 
+      - '`load_prodopts`'
       - '`split_nodata_values`'
 navbar:
   type: inverse
@@ -49,7 +49,7 @@ navbar:
   right:
     - text: "Articles"
       icon: fas fa-book
-      menu: 
+      menu:
       -  text: Installation
          href: articles/installation.html
       -  text: Interactive Execution - the MODIStsp GUI
@@ -70,9 +70,9 @@ navbar:
     - icon: fa-newspaper-o
       text: "news"
       href: news/index.html
-    - icon: fa-file-code-o 
+    - icon: fa-file-code-o
       text: "functions"
       href: reference/index.html
     - icon: fa-github fa-lg
       text: "github"
-      href: https://github.com/lbusett/MODIStsp/
+      href: https://github.com/ropensci/MODIStsp/
