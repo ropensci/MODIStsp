@@ -4,10 +4,11 @@
 \alias{MODIStsp_process_bands}
 \title{MODIStsp helper for processing original HDF layers}
 \usage{
-MODIStsp_process_bands(out_folder_mod, modislist, outproj_str, mod_proj_str,
-  sens_sel, band, bandname, date_name, datatype, nodata_in, nodata_out,
-  full_ext, bbox, scale_val, scale_factor, offset, out_format, outrep_file,
-  compress, out_res_sel, out_res, resampling, gui, mess_lab, verbose)
+MODIStsp_process_bands(out_folder_mod, modislist, outproj_str,
+  mod_proj_str, sens_sel, band, bandname, date_name, datatype, nodata_in,
+  nodata_out, full_ext, bbox, scale_val, scale_factor, offset, out_format,
+  outrep_file, compress, out_res_sel, out_res, resampling, gui, mess_lab,
+  verbose)
 }
 \arguments{
 \item{out_folder_mod}{\code{character} Output folder for original HDF storage.}

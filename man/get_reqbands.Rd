@@ -5,8 +5,8 @@
 \title{Identify the MODIS original bands needed for a given processing run}
 \usage{
 get_reqbands(bands_indexes_matrix, indexes_bandsel, indexes_bandnames,
-  quality_bandsel, quality_bandnames, out_prod_folder, file_prefix, yy, DOY,
-  out_format, reprocess)
+  quality_bandsel, quality_bandnames, out_prod_folder, file_prefix, yy,
+  DOY, out_format, reprocess)
 }
 \arguments{
 \item{bands_indexes_matrix}{\code{matrix} built by \code{set_bandind_matrix}}

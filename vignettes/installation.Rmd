@@ -23,7 +23,7 @@ You can install the stable version of `MODIStsp`, from CRAN:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
-install_github("lbusett/MODIStsp")
+install_github("ropensci/MODIStsp")
 ```
 
 Note that **if the `GTK+` library is not already installed on your system, installation 
@@ -92,7 +92,7 @@ install.packages("MODIStsp")
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
-install_github("lbusett/MODIStsp")
+install_github("ropensci/MODIStsp")
 ```
 ____________________________________________________________________________________
 
@@ -222,7 +222,7 @@ MODIStsp()
 or the development version from GitHub:
 ```{r eval = FALSE}
 library(devtools) 
-install_github("lbusett/MODIStsp", ref = "master")
+install_github("ropensci/MODIStsp", ref = "master")
 MODIStsp()
 ```
 Good luck!
