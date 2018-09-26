@@ -1110,7 +1110,7 @@ MODIStsp_GUI <- function(general_opts,
 
   outfold_help <- gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "outfold_help", help_messages,
-            info_addr = "http://ropensci.github.io/MODIStsp/articles/output.html", #nolint
+            info_addr = "https://ropensci.github.io/MODIStsp/articles/output.html", #nolint
             ...)
   }, container = outfold_group, expand = FALSE)
 

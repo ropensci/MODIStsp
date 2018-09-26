@@ -1,3 +1,10 @@
+## MODIStsp 1.3.6.9000
+
+#### Bug fixing
+
+- Fixed a bug leading to help messages in the select layers portion of the GUI 
+to not render
+
 ## MODIStsp 1.3.6
 
 ### Main changes

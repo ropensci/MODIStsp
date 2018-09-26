@@ -42,16 +42,16 @@ gh_sellayers <- function(prodopts_file,
       tmp_arr_bands[wids$pos] <- 1
       gui_env$temp_wid_bands <- tmp_arr_bands
       # update the selected layers widget lable
-      
+
       cur_prodopts <- curr_opts[[gWidgets::svalue(wids$vers)]]
       curr_sel_layers <- paste(
         cur_prodopts[["band_fullnames"]][which(tmp_arr_bands != 0)],
         collapse = "; ")
-      
+
       gWidgets::svalue(wids$sel_layers) <- ifelse(curr_sel_layers == "",
                                                   " - None Selected - ",
                                                   curr_sel_layers)
-      
+
       # Find which indexes selected and store in
       # gui_env$temp_wid_bands_indexes
       if (length(which(check_names_indexes != "") > 0)) {
@@ -61,17 +61,17 @@ gh_sellayers <- function(prodopts_file,
         tmp_arr_ind <- array(data = 0, dim = length(check_names_indexes))
         tmp_arr_ind[wids$pos] <- 1
         gui_env$temp_wid_bands_indexes <- tmp_arr_ind
-        
+
         # update the selected layers widget lable
         curr_sel_si <- paste(
           check_names_indexes[which(tmp_arr_ind != 0)],
           collapse = "; ")
-        
+
         gWidgets::svalue(wids$sel_si) <- ifelse(curr_sel_si == "",
                                                 " - None Selected - ",
                                                 curr_sel_si)
       }
-      
+
       # Find which QI selected and store in gui_env$temp_wid_bands_quality
       if (length(which(check_names_quality != "") > 0)) {
         wids$pos <- which(
@@ -90,7 +90,7 @@ gh_sellayers <- function(prodopts_file,
       }
     }
   )
-  
+
   # child widgets for original layers selection ----
   cbox_main  <- gWidgets::ggroup(container = selgroup, horizontal = FALSE)
   cbox_total <- gWidgets::ggroup(container = cbox_main, horizontal = TRUE)
@@ -108,11 +108,11 @@ gh_sellayers <- function(prodopts_file,
   gWidgets::addSpring(cbox)
   layers_help <-  gWidgets::gbutton(
     text    = " ? ", handler = function(h, ...) {
-      gh_help(h, "layers_help", help_messages, NULL, ...)
+      gh_help(h, "layers_help", help_messages, NULL)
     },
     container = cbox,
     expand    = FALSE)
-  
+
   # child widgets for Quailty Indicators selection ----
   # retrieve quality band names (if existing for sel. product)
   check_names_quality <- curr_opts[[curr_vers]]$quality_fullnames
@@ -125,7 +125,7 @@ gh_sellayers <- function(prodopts_file,
       container  = cbox_total,
       horizontal = FALSE
       )
-    
+
     wids$bands_quality <- gWidgets::gcheckboxgroup(
       items     = check_names_quality,
       checked   = as.logical(check_wid_quality),
@@ -135,12 +135,12 @@ gh_sellayers <- function(prodopts_file,
     gWidgets::addSpring(cbox_quality)
     qi_help <- gWidgets::gbutton(
       text    = " ? ", handler = function(h, ...) {
-        gh_help(h, "qi_help", help_messages, NULL, ...)
+        gh_help(h, "qi_help", help_messages, NULL)
       },
       container = cbox_quality,
       expand    = FALSE)
   }
-  
+
   # child widgets for spectral indexes selection  ----
   # retrieve indexes  names (if existing for sel. product)
   check_names_indexes <- c(
@@ -150,7 +150,7 @@ gh_sellayers <- function(prodopts_file,
   )
   if (!is.null(check_names_indexes) & length(check_names_indexes) != 0) {
     # retrieve currently selected indexes layers
-    
+
     check_wid_indexes <- gui_env$temp_wid_bands_indexes
     cbox_indexes      <- gWidgets::gframe(
       text       = strwrap("<span foreground='red' size='large'>
@@ -166,12 +166,12 @@ gh_sellayers <- function(prodopts_file,
       use.table = FALSE
     )
     glabel(text = "", container = cbox_indexes)
-    
+
     ##  .................................................................. #
     ##  Here we create the sub child widget for creation of custom      ####
     ##  indexes. The `MODIStsp_addindex` function is used to spawn a modal
     ##  widget for indexes creation
-    
+
     wids$band_newindex  <- gWidgets::gbutton(
       text    = "Add New Indices",
       handler = function(h, ...) {
@@ -180,7 +180,7 @@ gh_sellayers <- function(prodopts_file,
                                     prodopts_file = prodopts_file,
                                     selprod       = curr_prod,
                                     selvers       = curr_vers)
-        
+
         # since upon return the widget for layers selection is automatically
         # disposed to allow addition of the index, here we check and save
         # which layers and indexes are currently selected
@@ -214,15 +214,15 @@ gh_sellayers <- function(prodopts_file,
     )
     gWidgets::addSpring(cbox_indexes)
     si_help <- gWidgets::gbutton(text    = " ? ", handler = function(h, ...) {
-      gh_help(h, "si_help_addindex", help_messages, NULL, ...)
+      gh_help(h, "si_help_addindex", help_messages, NULL)
     },
     container = cbox_indexes,
     expand    = FALSE)
   }
-  
+
   # Start/Cancel buttons for layers selection child widget ----
   bands_group <- ggroup(container = cbox_main, horizontal = FALSE)
-  
+
   # Widget for "www" button for layers selection child widget ----
   gWidgets::addSpring(bands_group)
   www_but <- gWidgets::gbutton(
@@ -236,7 +236,7 @@ gh_sellayers <- function(prodopts_file,
   )
   gWidgets::font(www_but) <- list(family = "sans", weight = "bold",
                                   color = "red")
-  
+
   gWidgets::visible(selgroup, set = TRUE)
   #nocov end
 }
