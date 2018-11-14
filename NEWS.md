@@ -2,8 +2,13 @@
 
 #### Bug fixing
 
+- Fixed inconsistencies in definition of characteristics of Product M*D13C1, 
+  MOD/MYD13C2/C1 and MOD/MYD13A3 (erroneous layers in xml)
+
 - Fixed a bug leading to help messages in the select layers portion of the GUI 
 to not render
+
+- Updated MOD44B specifications to allow download of v006 version
 
 ## MODIStsp 1.3.6
 

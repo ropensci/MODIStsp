@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.6.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.6.9001</span>
       </span>
     </div>
 
@@ -164,6 +164,19 @@
       <small>Source: <a href='https://github.com/ropensci/MODIStsp/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="modistsp-1-3-6-9000" class="section level2">
+<h2 class="hasAnchor">
+<a href="#modistsp-1-3-6-9000" class="anchor"></a>MODIStsp 1.3.6.9000</h2>
+<div id="bug-fixing" class="section level4">
+<h4 class="hasAnchor">
+<a href="#bug-fixing" class="anchor"></a>Bug fixing</h4>
+<ul>
+<li><p>Fixed inconsistencies in definition of characteristics of Product M*D13C1, MOD/MYD13C2/C1 and MOD/MYD13A3 (erroneous layers in xml)</p></li>
+<li><p>Fixed a bug leading to help messages in the select layers portion of the GUI to not render</p></li>
+<li><p>Updated MOD44B specifications to allow download of v006 version</p></li>
+</ul>
+</div>
+</div>
     <div id="modistsp-1-3-6" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-6" class="anchor"></a>MODIStsp 1.3.6</h2>
@@ -171,9 +184,9 @@
 <h3 class="hasAnchor">
 <a href="#main-changes" class="anchor"></a>Main changes</h3>
 <p>Maintenance release to solve CRAN build errors on debian, due to the test_resetindexesx test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex function was modified to require explicit permission by the user to write on the MODIStsp_previous.json file</p>
-<div id="bug-fixing" class="section level4">
+<div id="bug-fixing-1" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixing" class="anchor"></a>Bug fixing</h4>
+<a href="#bug-fixing-1" class="anchor"></a>Bug fixing</h4>
 <ul>
 <li>Fixed a bug leading to errors if only “Aqua” platform was selected for download <a href="https://github.com/ropensci/MODIStsp/issues/133"><a href='https://github.com/ropensci/MODIStsp/issues/133'>#133</a></a>
 </li>
@@ -188,9 +201,9 @@
 <h3 class="hasAnchor">
 <a href="#main-changes-1" class="anchor"></a>Main changes</h3>
 <p>Maintenance release to solve CRAN build errors on debian, due to the test_addindex test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex function was modified to require explicit permission by the user to write on the MODIStsp_previous.json file</p>
-<div id="bug-fixing-1" class="section level4">
+<div id="bug-fixing-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixing-1" class="anchor"></a>Bug fixing</h4>
+<a href="#bug-fixing-2" class="anchor"></a>Bug fixing</h4>
 <ul>
 <li><p>Fixed bug leading to errors in processing extent when switching products with different Native projection (4008 vs sinusoidal), the projection string was not properly updated. <a href="https://github.com/ropensci/MODIStsp/commit/77f5693e9e1e180f05efaa04fa031567e782ba89">77f5693e9</a></p></li>
 <li><p>Fixed warnings on check for uniqueness in http addresses</p></li>
@@ -273,9 +286,9 @@
 <li>Added <code>MODIStsp_resetindexes</code> to remove all custom indexes from a MODIStsp json options file and <code>MODIStsp_reset_options</code> to reset MODIStsp options to default.</li>
 </ul>
 </div>
-<div id="bug-fixing-2" class="section level4">
+<div id="bug-fixing-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixing-2" class="anchor"></a>Bug fixing</h4>
+<a href="#bug-fixing-3" class="anchor"></a>Bug fixing</h4>
 <ul>
 <li><p>Fixed bug affecting extent selection when working with non-tiled (MCD) products <a href="https://github.com/ropensci/MODIStsp/issues/122" class="uri">https://github.com/ropensci/MODIStsp/issues/122</a></p></li>
 <li><p>Fixed bugs affecting the “Seasonal” time series download</p></li>
@@ -315,9 +328,9 @@
 <li>Suppression of verbose messages and (useless) warning messages while parsing the NASA servers and downloading data using “ftp” ( <a href="https://github.com/ropensci/MODIStsp/commit/3775d6099bc359925d3dcbd96c2ffe8455502648">3775d60</a>);</li>
 </ul>
 </div>
-<div id="bug-fixing-3" class="section level3">
+<div id="bug-fixing-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bug-fixing-3" class="anchor"></a>Bug fixing</h3>
+<a href="#bug-fixing-4" class="anchor"></a>Bug fixing</h3>
 <ul>
 <li><p>Fixed a bug preventing the “last” choice (or that present in the json file) from correctly showing in the GUI upon launch/restore of a saved json file (commit <a href="https://github.com/ropensci/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3">633c2dd</a>)</p></li>
 <li>
@@ -383,9 +396,9 @@
 <li><p>Timeouts of httr/ftp requests were increased to prevent problems on download on slow connections</p></li>
 </ul>
 </div>
-<div id="bug-fixing-4" class="section level3">
+<div id="bug-fixing-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bug-fixing-4" class="anchor"></a>Bug fixing:</h3>
+<a href="#bug-fixing-5" class="anchor"></a>Bug fixing:</h3>
 <ul>
 <li>Fixed bug on FTP download speed (Issue <a href="https://github.com/ropensci/MODIStsp/issues/65"><a href='https://github.com/ropensci/MODIStsp/issues/65'>#65</a></a>)</li>
 <li>Fixed bug on download of tile 0, preventing download of images with DOY 001 and of all “yearly based” products (e.g., MOD17)(Issue <a href="https://github.com/ropensci/MODIStsp/issues/64"><a href='https://github.com/ropensci/MODIStsp/issues/64'>#64</a></a>)</li>
@@ -408,9 +421,9 @@
 <li><p>Added functionality for accelerating download using aria2c (Issue <a href="https://github.com/ropensci/MODIStsp/issues/55"><a href='https://github.com/ropensci/MODIStsp/issues/55'>#55</a></a>) on devel</p></li>
 </ul>
 </div>
-<div id="bug-fixing-5" class="section level3">
+<div id="bug-fixing-6" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bug-fixing-5" class="anchor"></a>Bug fixing</h3>
+<a href="#bug-fixing-6" class="anchor"></a>Bug fixing</h3>
 <ul>
 <li><p>Fixed bug on download with aria, throwing an error on partial download on http download with aria (<a href="https://github.com/ropensci/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78">6fbc875</a>)</p></li>
 <li><p>Fixed bug on M*D15A2 processing (Issue <a href="https://github.com/ropensci/MODIStsp/issues/60"><a href='https://github.com/ropensci/MODIStsp/issues/60'>#60</a></a>) on devel/master</p></li>
@@ -518,6 +531,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#modistsp-1-3-6-9000">1.3.6.9000</a></li>
         <li><a href="#modistsp-1-3-6">1.3.6</a></li>
         <li><a href="#modistsp-1-3-5">1.3.5</a></li>
         <li><a href="#modistsp-1-3-4">1.3.4</a></li>
