@@ -89,13 +89,16 @@ MODIStsp_process_indexes <- function(out_filename,
   }
   # Finalize the fun_string: all the bands are in: now add the formula and
   # close parenthesis.
+
   if (scale_val == "Yes") {
+
     # if scale_val, indices are written as float -1 - 1
     fun_string <- paste0(fun_string, "...)", "{", formula, "}")
     dt  <- "FLT4S"
   } else {
     # otherwise, they are written as integer, with a scale factor of 10000
     # and INT2s datatype
+    formula <-  gsub("b", "0.0001 * b", formula)
     fun_string <- paste0(fun_string, "...)", "{round(10000*(", formula, "))}")
     dt  <- "INT2S"
   }
