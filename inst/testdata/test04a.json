@@ -1,6 +1,6 @@
 {
   "sel_prod": "Snow_Cov_Month_0.05Deg CMG (M*D10CM)",
-  "sensor": "Aqua",
+  "sensor": "Both",
   "prod_version": "6",
   "start_date": "2015-07-31",
   "end_date": "2016-08-02",
@@ -25,7 +25,7 @@
   "out_format": "ENVI",
   "ts_format": ["R rasterStack", "ENVI Meta", "GDAL vrt"],
   "compress": "None",
-  "nodata_change": "Yes",
+  "nodata_change": "No",
   "scale_val": "No",
   "delete_hdf": "No",
   "reprocess": "Yes",
