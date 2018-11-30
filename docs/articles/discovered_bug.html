@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stand-alone execution and scheduled processing • MODIStsp</title>
+<title>Bug discovered in spectral indices computation • MODIStsp</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Stand-alone execution and scheduled processing">
+<meta property="og:title" content="Bug discovered in spectral indices computation">
 <meta property="og:description" content="">
 <meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png">
 <meta name="twitter:card" content="summary">
@@ -124,67 +124,59 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Stand-alone execution and scheduled processing</h1>
+      <h1>Bug discovered in spectral indices computation</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ropensci/MODIStsp/blob/master/vignettes/standalone_execution.Rmd"><code>vignettes/standalone_execution.Rmd</code></a></small>
-      <div class="hidden name"><code>standalone_execution.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/ropensci/MODIStsp/blob/master/vignettes/discovered_bug.Rmd"><code>vignettes/discovered_bug.Rmd</code></a></small>
+      <div class="hidden name"><code>discovered_bug.Rmd</code></div>
 
     </div>
 
     
     
-<div id="stand-alone-execution" class="section level1">
-<h1 class="hasAnchor">
-<a href="#stand-alone-execution" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Stand-alone execution</strong>
-</h1>
-<p>MODIStsp can be also executed as a “stand-alone” application (i.e., without having to open R/RStudio).</p>
-<p>To be able to do that, from R launch the function <code><a href="../reference/install_MODIStsp_launcher.html">install_MODIStsp_launcher()</a></code>.</p>
-<ul>
-<li>In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections “Science” and “Geography”) and a symbolic link in a known path (default: /usr/bin/MODIStsp).</li>
-<li>In Windows, a link in the Start Menu and optionally a desktop shortcut are created. See <code><a href="../reference/install_MODIStsp_launcher.html">?install_MODIStsp_launcher</a></code> for details and path customization.</li>
-</ul>
-<p>Double-clicking these files or launching them from a shell without parameters will launch <code>MODIStsp</code> in interactive mode, by opening the GUI. Non-interactive mode can be triggered by adding the “-g” argument to the call, and specifying the path to a valid Options File as “-s” argument:</p>
-<ul>
-<li><p>Linux: <code>MODIStsp -g -s "/yourpath/youroptions.json"</code> (see <code>MODIStsp -h</code> for details).</p></li>
-<li><p>Windows:<code>your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.json"</code> (see <code>C:\Users\you\Desktop\MODIStsp -h</code> for details).</p></li>
-</ul>
-<p>If you do not want to install any link, launchers can be found in the subdirectory “MODIStsp/ExtData/Launcher” of your library path.</p>
-<hr>
-<p><br></p>
-</div>
-<div id="scheduled-processing" class="section level1">
-<h1 class="hasAnchor">
-<a href="#scheduled-processing" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Scheduled Processing</strong>
-</h1>
-<p>Stand-alone non-interactive execution can be exploited to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:</p>
-<ol style="list-style-type: decimal">
-<li><p>Open the <code>MODIStsp</code> GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options. Then quit the program.</p></li>
-<li><p>Schedule non-interactive execution of the MODIStsp launcher script installed as seen before (or located in the subdirectory “MODIStsp/ExtData/Launcher” of your R library path) as a windows scheduled task or linux “cron” job according to a specified time schedule, specifying the path of a previously saved Options file as additional argument:</p></li>
-</ol>
-<div id="on-linux" class="section level2">
+<p>We are sorry to report that we recently discovered a nasty bug (or rather, a stupid mistake…) in the <a href="https://github.com/ropensci/MODIStsp">MODIStsp</a> package.</p>
+<p>The bug led to improper computation of custom spectral indices in the case that their formula included addition or subtraction operations on reflectance values (e.g., something like <span class="math inline">\(\frac{(\rho_{NIR}+0.1)}{\rho_{Red}}\)</span>, with <span class="math inline">\(\rho\)</span> indicating a reflectance).</p>
+<div id="what-is-affected" class="section level2">
 <h2 class="hasAnchor">
-<a href="#on-linux" class="anchor"></a><em>On Linux</em>
-</h2>
+<a href="#what-is-affected" class="anchor"></a>What is affected</h2>
 <ul>
-<li>edit your crontab by opening a terminal and typing:</li>
+<li>
+<p>Values of the following <em>Additional Spectral Indices</em> selectable using the MODIStsp GUI:</p>
+<ul>
+<li>EVI</li>
+<li>SAVI</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">  <span class="ex">crontab</span> -e</a></code></pre></div>
-<ul>
-<li>add an entry for execution of MODIStsp launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1">  <span class="ex">0</span> 23 * * * /bin/bash /usr/bin/MODIStsp -g -s <span class="st">"/yourpath/youroptions.json"</span></a></code></pre></div>
-</div>
-<div id="on-windows" class="section level2">
-<h2 class="hasAnchor">
-<a href="#on-windows" class="anchor"></a><em>On Windows</em>
-</h2>
-<ul>
-<li>create a Task following <a href="https://technet.microsoft.com/en-us/library/cc748993.aspx">this instructions</a>
+<p>, <em>in the case that the <strong>Apply Scale/Offset</strong> option was set to “No”</em></p>
 </li>
-<li>add the path of the MODIStsp.bat launcher as Action (point 6), specifying <code>-g -s "X:/yourpath/youroptions.json"</code> as argument.</li>
+<li>
+<p>Values of any <em>custom spectral indexes</em> added by the user, in case they included additive or subtractive coefficients.</p>
+<p>, <em>in the case that the <strong>Apply Scale/Offset</strong> option was set to “No”</em></p>
+</li>
 </ul>
 </div>
+<div id="what-is-not-affected" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-is-not-affected" class="anchor"></a>What is NOT affected</h2>
+<ul>
+<li><p>Values of spectral indexes available in MODIS HDF images as original sds layers (e.g., EVI in MOD13Q1)</p></li>
+<li><p>Values of any additional / custom spectral indexes in case they did not include additive or subtractive coefficients, or the <strong>Apply Scale/Offset</strong> option was set to “Yes”</p></li>
+</ul>
+</div>
+<div id="what-to-do-if-you-are-affected" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-to-do-if-you-are-affected" class="anchor"></a>What to do if you are affected</h2>
+<p>The bug is now fixed on the GitHub version. A patched release will be made available on CRAN as soon as possible. Unfortunately, if you have time series processed with the old version falling in the “What is affected” category, there’s nothing you can do, save for reprocessing them.</p>
+<p><strong>We are truly sorry for the problem</strong>, which somehow managed to slip under the radar until now. We hope it will not bring you too much trouble!</p>
+</div>
+<div id="what-exactly-was-the-problem" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-exactly-was-the-problem" class="anchor"></a>What exactly was the problem?</h2>
+<p>This is <strong>so basic that can easily go unnoticed.</strong> So it’s better to document it…</p>
+<p>MODIS reflectances are stored in HDF layers as integers with a 10000 scale factor (e.g., a 0.1 reflectance is stored as 1000). If you need to “manually” compute and index such as SAVI:</p>
+<p><span class="math inline">\(SAVI = \frac{(\rho_{NIR} - \rho_{Red})}{(\rho_{NIR} + \rho_{Red} + 0.5)} * (1 + 0.5)\)</span>).</p>
+<p>starting from MODIS reflectances, you must take care of multiplying the MODIS data by 10E-4 beforehand. Your formula then becomes:</p>
+<p><span class="math inline">\(SAVI = \frac{(0.0001 * b2_{NIR} - 0.0001 * b1_{Red})}{0.0001 * b2_{NIR} + 0.0001 * b1_{Red} + 0.5} * (1 + 0.5)\)</span>).</p>
+<p>, otherwise the additive constants (in this case, the <span class="math inline">\(+ 0.5\)</span> in the denominator) would be made practically irrelevant.</p>
 </div>
   </div>
 
@@ -193,13 +185,10 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#stand-alone-execution"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Stand-alone execution</strong></a></li>
-      <li>
-<a href="#scheduled-processing"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Scheduled Processing</strong></a><ul class="nav nav-pills nav-stacked">
-<li><a href="#on-linux"><em>On Linux</em></a></li>
-      <li><a href="#on-windows"><em>On Windows</em></a></li>
-      </ul>
-</li>
+<li><a href="#what-is-affected">What is affected</a></li>
+      <li><a href="#what-is-not-affected">What is NOT affected</a></li>
+      <li><a href="#what-to-do-if-you-are-affected">What to do if you are affected</a></li>
+      <li><a href="#what-exactly-was-the-problem">What exactly was the problem?</a></li>
       </ul>
 </div>
       </div>

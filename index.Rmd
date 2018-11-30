@@ -48,31 +48,12 @@ as a single file can be also created.
 ___`MODIStsp` is developed and maintained by Lorenzo Busetto and Luigi Ranghetti,
 [Institute of Remote Sensing of Environment](http://www.irea.cnr.it/en/) - National Research Council - Italy (CNR-IREA)___
 
-
-____________________________________________________________________________________
-
-## <i class="fa fa-cog" aria-hidden="true"></i> Getting Started
-
-- __To install `MODIStsp`__, please follow instructions reported [here](articles/installation.html),
-both for [<i class="fa fa-windows" aria-hidden="true"></i>](articles/installation.html#installing-on-windows) , [<i class="fa fa-linux" aria-hidden="true"></i>](articles/installation.html#installing-on-linux-systems) and [<i class="fa fa-apple" aria-hidden="true"></i>](articles/installation.html#installing-on-mac)
-
-- `MODIStsp` can be used either in [interactive mode](articles/interactive_execution.html) 
-exploiting its user-friendly GUI, or in [non-interactive mode](articles/noninteractive_execution.html) 
-from within `R` scripts
-
-- The list of __currently supported MODIS products and versions__ can be found [here](articles/Products_list.html) 
-
-- [Scheduled Processing](articles/noninteractive_execution.html#scheduled-processing) allows 
-automatic updating of MODIS time series through scheduled jobs, both on [<i class="fa fa-windows" aria-hidden="true"></i>](articles/standalone_execution.html#on-windows) and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/standalone_execution.html#on-linux)
-
-- Solutions to common **installation, data download and processing problems** can be found 
-in our [<i class="fa fa-question-circle-o" aria-hidden="true"></i> faq](articles/faq.html)
-
-- Please **report any issues** you may encounter in our [issues page on github <i class="fa fa-github-square" aria-hidden="true"></i>](https://github.com/ropensci/MODIStsp/issues) .
-
 ____________________________________________________________________________________
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What's New 
+
+- 29/11/2018 - We recently discovered a nasty bug in the computation of some custom spectral indices (those including additions / subtractions on reflectance values, such as in $\frac{(b1_{NIR}+0.1)}{b2_{Red}}$ (with $\rho$ being a reflectance). See [here](articles/discovered_bug.html) for further details! The bug is now fixed on the 
+GitHub version. A patched release will be made available on CRAN as soon as possible. 
 
 - 07/08/2018 - We are glad to report that MODIStsp is now included in the 
 [rOpenSci](https://ropensci.org/about/) packages' ecosystem. We thank reviewers
@@ -93,6 +74,26 @@ products will be removed in the next MODIStsp version!.
 
 - 11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes.  See our [<i class="fa fa-newspaper-o aria-hidden="true"></i> news](news/index.html) page for a detailed changelog.
 **We thank to all the users that signalled problems for their feedback for imporoving the package!**
+____________________________________________________________________________________
+
+## <i class="fa fa-cog" aria-hidden="true"></i> Getting Started
+
+- __To install `MODIStsp`__, please follow instructions reported [here](articles/installation.html),
+both for [<i class="fa fa-windows" aria-hidden="true"></i>](articles/installation.html#installing-on-windows) , [<i class="fa fa-linux" aria-hidden="true"></i>](articles/installation.html#installing-on-linux-systems) and [<i class="fa fa-apple" aria-hidden="true"></i>](articles/installation.html#installing-on-mac)
+
+- `MODIStsp` can be used either in [interactive mode](articles/interactive_execution.html) 
+exploiting its user-friendly GUI, or in [non-interactive mode](articles/noninteractive_execution.html) 
+from within `R` scripts
+
+- The list of __currently supported MODIS products and versions__ can be found [here](articles/Products_list.html) 
+
+- [Scheduled Processing](articles/noninteractive_execution.html#scheduled-processing) allows 
+automatic updating of MODIS time series through scheduled jobs, both on [<i class="fa fa-windows" aria-hidden="true"></i>](articles/standalone_execution.html#on-windows) and [<i class="fa fa-linux" aria-hidden="true"></i>](articles/standalone_execution.html#on-linux)
+
+- Solutions to common **installation, data download and processing problems** can be found 
+in our [<i class="fa fa-question-circle-o" aria-hidden="true"></i> faq](articles/faq.html)
+
+- Please **report any issues** you may encounter in our [issues page on github <i class="fa fa-github-square" aria-hidden="true"></i>](https://github.com/ropensci/MODIStsp/issues) .
 
 ____________________________________________________________________________________
 
