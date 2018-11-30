@@ -1,7 +1,7 @@
 ### Test 8: Fail gracefully on no connection               ####
 #   If internet connection is down, retry n_retries times. After n_retries,
 #   abort gracefully.
-context("MODIStsp Test 8: Fail gracefully on missing connection")
+context("MODIStsp Test 8: Fail gracefully on missing internet connection")
 testthat::test_that(
   "Tests on MODIStsp", {
     skip_on_cran()

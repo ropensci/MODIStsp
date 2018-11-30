@@ -1,30 +1,3 @@
-context("MODIStsp Test 0: Gracefully fail on input problems")
-testthat::test_that(
-  "Tests on MODIStsp", {
-    skip_on_cran()
-    # no options file
-    expect_error(MODIStsp(gui = FALSE),
-                 "Please provide a valid \"options_file\"")
-    # wrong path or non-existing options_file
-    expect_error(expect_warning(MODIStsp(options_file = "", gui = FALSE),
-                                "Processing Options file not found"))
-
-    expect_error(expect_warning(MODIStsp(options_file = "", gui = TRUE),
-                                "The specified `.json` options file was not
-                                found"))
-    # provided options file is not a MODIStsp json options file
-    expect_error(MODIStsp(
-      options_file = system.file("ExtData", "MODIStsp_ProdOpts.xml",
-                                 package = "MODIStsp"),
-      gui = FALSE), "Unable to read the provided JSON")
-
-    # Credentials for earthdata login for http download are wrong
-    expect_error(MODIStsp(
-      options_file = system.file("testdata/test05a.json",
-                                 package = "MODIStsp"),
-      gui = FALSE, n_retries = 2), "Username and/or password are not valid")
-  })
-
 ### Test 4: test of HTTP download (from NSIDC) with seasonal period. ####
 #   This test downloads two snow cover products (MYD10CM) of 1st August of
 #   years 2015 and 2016, applying geometric operations (clipping on Svalbard
@@ -98,7 +71,7 @@ testthat::test_that("Tests on MODIStsp", {
 
   # test proper behaviour if only Aqua selected
   MODIStsp(test = "04a")
-
+  context("MODIStsp Test 4: Proper functioning when only AQUA is selected")
   out_files_rts <- list.files(
     file.path(
       tempdir(),

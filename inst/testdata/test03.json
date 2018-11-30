@@ -32,7 +32,7 @@
 "bbox": [ 5.7e+05, 5.095e+06, 5.88e+05, 5.108e+06 ],
 "out_folder": "$tempdir",
 "out_folder_mod": "$tempdir",
-"MODIStspVersion": "1.3.6",
+"MODIStspVersion": "1.3.7",
 "custom_indexes": {
  "Surf_Ref_8Days_500m (M*D09A1)": {
 "6": {

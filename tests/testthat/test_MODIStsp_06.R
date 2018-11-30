@@ -4,7 +4,8 @@
 #   After reprojection in geographic coordinates, output files are exported
 #   as GeoTiff (scaling output values) and vrt time series are created.
 
-context("MODIStsp Test 6: http download and mosaicing of MODIS tiles")
+context("MODIStsp Test 6: http download on \"combined\" datasets and mosaicing of MODIS
+        tiles")
 testthat::test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
@@ -32,7 +33,11 @@ testthat::test_that(
     # re-run with same parameterization. Since Reprocess = "No", the
     # auto-skipping of already processed dates kicks-in in this case, leading
     # the process to be very quick (Only MODIStso_vrt_create needs to run. )
+    context("MODIStsp Test 6: No Reprocessing works as expected")
+    t1 <- Sys.time()
     MODIStsp(test = 6)
+    tt <- Sys.time() - t1
+    expect_true(tt < 5)
     unlink(file_sizes_dat)
   }
 )

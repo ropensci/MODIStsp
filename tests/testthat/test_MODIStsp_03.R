@@ -1,9 +1,3 @@
-
-
-
-
-
-
 ### Test 3: test of the creation of spectral indices and time series. ####
 #   The test works on a SR local product (MOD09A1) clipped on a small region
 #   (Barbellino, Orobie Alps) and computes two standard spectral indices
@@ -53,6 +47,7 @@ testthat::test_that(
     unlink(out_files_tif)
 
     # same execution with ENVI output and no scaling on indexes
+    context("MODIStsp Test 3: Save in ENVI format")
     MODIStsp(test = "03a")
     out_files_dat <- list.files(
       file.path(tempdir(), "MODIStsp/Surf_Ref_8Days_500m_v6"),
@@ -64,8 +59,9 @@ testthat::test_that(
     dat_1 <- raster::raster(out_files_dat[1])
     mean_noscaled <- mean(raster::getValues(dat_1), na.rm = T)
 
-    # Average index value is the same wheter comnputed from scaled or noscaled ----
-    # reflectences also when additive factors are present
+    # Average index value is the same whether it is comnputed from scaled or noscaled ----
+    # reflectances also when additive factors are present
+    context("MODIStsp Test 3: Indexes with additive components are properly computed")
     expect_equal((mean_noscaled / 10000), mean_scaled, tolerance = 1e-5)
 
 

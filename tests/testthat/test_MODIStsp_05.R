@@ -1,4 +1,3 @@
-
 ### Test 5: test of HTTP download (from USGS).  ####
 #   This test downloads an albedo product (MCD43A3), clipping (Cape Verde)
 #   and reprojecting it (Cape Verde National CRS).
