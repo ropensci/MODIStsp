@@ -79,7 +79,7 @@ SpatialPolygons, etc.)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.6.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7.9000</span>
       </span>
     </div>
 
@@ -297,68 +297,70 @@ belonging to the polygon, and one line for each date.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Extract average and standard deviation values from a rts object created by</span>
-<span class='co'># MODIStsp for each polygon of a shapefile, for each date in the period</span>
-<span class='co'># between 2001-01-01 and 2014-12-31</span>
+    <pre class="examples"># NOT RUN {
+# Extract average and standard deviation values from a rts object created by
+# MODIStsp for each polygon of a shapefile, for each date in the period
+# between 2001-01-01 and 2014-12-31
 
-<span class='co'># The example uses tif files in testdata/VI_16Days_500m_v6 to build</span>
-<span class='co'># a MODIStsp rasterStack corresponding to the 2016 time series of the NDVI index</span>
-<span class='co'># over the Como Lake (Italy). It then extracts data on polygons corresponding</span>
-<span class='co'># to different land cover classes saved in testdata/extract_polys.shp</span>
+# The example uses tif files in testdata/VI_16Days_500m_v6 to build
+# a MODIStsp rasterStack corresponding to the 2016 time series of the NDVI index
+# over the Como Lake (Italy). It then extracts data on polygons corresponding
+# to different land cover classes saved in testdata/extract_polys.shp
 
-<span class='co'># First, prepare the test dataset.</span>
-<span class='co'># __NOTE__ To avoid redownloading, here we copy some test data from MODIStsp</span>
-<span class='co'># installation folder to tempdir and use it to create a test time series.</span>
+# First, prepare the test dataset.
+# __NOTE__ To avoid redownloading, here we copy some test data from MODIStsp
+# installation folder to tempdir and use it to create a test time series.
 
-<span class='no'>test_folder</span> <span class='kw'>&lt;-</span>  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/VI_16Days_500m_v6/NDVI"</span>,
-                            <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files2'>dir.create</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>),
-           <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files'>file.copy</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list.files'>list.files</a></span>(<span class='no'>test_folder</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-          <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>))
+test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI",
+                            package = "MODIStsp")
+dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"),
+           showWarnings = FALSE, recursive = TRUE)
+file.copy(list.files(test_folder, full.names = TRUE),
+          file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"))
 
-<span class='no'>opts_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/test_extract.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
+MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
 
-<span class='co'># Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between</span>
-<span class='co'># 2016-01-01 and 2016-12-18</span>
-<span class='co'># __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"</span>
-<span class='co'># subfolder of your main output folder - see http://ropensci.github.io/MODIStsp/articles/output.html)</span>
+# Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
+# 2016-01-01 and 2016-12-18
+# __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"
+# subfolder of your main output folder - see
+http://ropensci.github.io/MODIStsp/articles/output.html)
 
-<span class='co'># Specify the filename of the RData RasterStack of interest</span>
-<span class='no'>stack_file</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>(),
- <span class='st'>"MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI"</span>,
-  <span class='st'>"MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/basename'>basename</a></span>(<span class='no'>stack_file</span>)
+# Specify the filename of the RData RasterStack of interest
+stack_file  <- file.path(tempdir(),
+ "MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
+  "MOD13A1_NDVI_1_2016_353_2016_RData.RData")
+basename(stack_file)
 
-<span class='no'>ts_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/get'>get</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/load'>load</a></span>(<span class='no'>stack_file</span>))
-<span class='no'>ts_data</span>
+ts_data <- get(load(stack_file))
+ts_data
 
-<span class='co'># Now load a shapefile containing polygons from which we want to extract data</span>
+# Now load a shapefile containing polygons from which we want to extract data
 
-<span class='no'>polygons</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rgdal</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/rgdal/topics/readOGR'>readOGR</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/extract_polys.shp"</span>,
-                           <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>polygons</span>
+polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp",
+                           package = "MODIStsp"), verbose = FALSE)
+polygons
 
-<span class='co'># Finally, extract the average values for each polygon and date and plot the</span>
-<span class='co'># results</span>
+# Finally, extract the average values for each polygon and date and plot the
+# results
 
-<span class='no'>out_dataavg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/message'>suppressMessages</a></span>(<span class='fu'>MODIStsp_extract</span>(<span class='no'>ts_data</span>, <span class='no'>polygons</span>, <span class='kw'>id_field</span> <span class='kw'>=</span> <span class='st'>"lc_type"</span>,
-                             <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>out_dataavg</span>)
+out_dataavg <- suppressMessages(MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
+                             small = FALSE))
+head(out_dataavg)
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)
+plot(out_dataavg, legend.loc = "topleft")
 
-<span class='co'># use a different summarization function</span>
+# use a different summarization function
 
-<span class='no'>out_datasd</span> <span class='kw'>&lt;-</span> <span class='fu'>MODIStsp_extract</span>(<span class='no'>ts_data</span>, <span class='no'>polygons</span>, <span class='kw'>id_field</span> <span class='kw'>=</span> <span class='st'>"lc_type"</span>,
-                              <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>"sd"</span>, <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>out_datasd</span>)
+out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
+                              FUN = "sd", small = FALSE)
+head(out_datasd)
 
-<span class='co'># (See also http://ropensci.github.io/MODIStsp/articles/Analyze.html for a</span>
-<span class='co'># worked-out example)</span>
-<span class='co'># }</span></pre>
+# (See also http://ropensci.github.io/MODIStsp/articles/Analyze.html for a
+# worked-out example)
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
