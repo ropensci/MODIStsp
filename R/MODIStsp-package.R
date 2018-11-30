@@ -21,7 +21,7 @@
 #' @name MODIStsp-package
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
-#' @seealso [http://lropensci.github.io/MODIStsp/](http://lropensci.github.io/MODIStsp/)
+#' @seealso [http://ropensci.github.io/MODIStsp/](http://ropensci.github.io/MODIStsp/)
 #' @seealso [https://github.com/ropensci/MODIStsp](https://github.com/ropensci/MODIStsp)
 #'
 NULL

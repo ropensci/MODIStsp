@@ -21,7 +21,7 @@ the images of December, January and February from 2005 to 2010 - excluding
 
 \item{end_year}{\code{numeric} end year of current \code{MODIStsp_process} run.}
 
-\item{start_date}{\code{character`` Start date for images download and preprocessing (yyyy.mm.dd) of current}MODIStsp_process` run.}
+\item{start_date}{\code{character`` Start date for images download and preprocessing (yyyy.mm.dd) of current }MODIStsp_process` run.}
 
 \item{end_date}{\code{character} Start date for images download and preprocessing
 (yyyy.mm.dd) of current \code{MODIStsp_process} run.}
