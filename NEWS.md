@@ -1,6 +1,14 @@
-## MODIStsp 1.3.6.9000
+## MODIStsp 1.3.7
+
+### Main changes
+
+- Fixed a bug leading to incorrect computation of custom spectral indices containing "additive"
+parameters (e.g., (NIR+0.1)/(Red-0.2)) when scale_val == FALSE
 
 #### Bug fixing
+
+- Fixed a bug leading to not properly reassigning NoData values when processing 
+  full tilese and using change_nodata = TRUE
 
 - Fixed inconsistencies in definition of characteristics of Product M*D13C1, 
   MOD/MYD13C2/C1 and MOD/MYD13A3 (erroneous layers in xml)
