@@ -29,5 +29,15 @@ testthat::test_that(
                  tolerance = raster::res(outrast), scale = 1)
     unlink(outpath)
 
+    MODIStsp(test = "07b")
+    context("MODIStsp Test 7: Reassign multiple nodata on tiled processing and
+            Full Tiles")
+    out_files_tif <- list.files(
+      file.path(
+        tempdir(),
+        "MODIStsp/Surf_Temp_8Days_GridSin_v6/LST_Day_6km/"),
+      pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
+    r <- suppressWarnings(rgdal::GDALinfo(out_files_tif[1]))
+    expect_equal(attr(r, "df")$NoDataValue, 65535)
   }
 )

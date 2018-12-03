@@ -40,7 +40,7 @@ testthat::test_that(
 
     unlink(out_files)
 
-    ### Test 1: Nodata values are properly changed on full tiles               ####
+    ### Test 1: Nodata values are properly changed on full tiles           ####
     context("Nodata values are properly changed on full tiles ")
     MODIStsp(test = "01a")
     r <- suppressWarnings(rgdal::GDALinfo(out_files[1]))

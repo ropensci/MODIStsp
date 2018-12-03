@@ -9,7 +9,8 @@ testthat::test_that(
     # skip_on_travis()
 
     MODIStsp(test = 2)
-    context("MODIStsp Test 2: Processing works when changing projection and resolution")
+    context("MODIStsp Test 2: Processing works when changing projection and
+            resolution")
     out_files_dat  <- list.files(
       file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_GridSin_v6"),
       pattern = "\\.dat$", recursive = TRUE, full.names = TRUE)
@@ -27,7 +28,8 @@ testthat::test_that(
                  tolerance = 0.001, scale = 1)
 
     # additional checks on output projection and resolution
-    context("MODIStsp Test 2: Output projection and resolution are properly set")
+    context("MODIStsp Test 2: Output projection and resolution are properly
+            set")
     r <- raster::raster(out_files_dat[1])
     expect_equal(
       sp::proj4string(r),
