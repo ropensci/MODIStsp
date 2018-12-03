@@ -1,3 +1,31 @@
+MODIStsp 1.3.7
+================
+
+## Test environments
+
+* ubuntu 18.04 on local install, R 3.5.0
+* ubuntu 16.04 on travis-ci (https://travis-ci.org/lbusett/MODIStsp/jobs/383285994#L6)
+* win-builder (R-devel, R-release)
+* windows 10 on local install, R 3.5.1
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs or NOTEs
+
+## Note on installation on macos 
+
+Build on macos currently fails (also for MODIStsp 1.3.3.1) with error
+
+"ERROR Package required but not available: ‘gWidgetsRGtk2’"
+
+due to erroring in build of package "RGtk2". 
+
+MODIStsp can be however installed by installing RGtk2 beforehand, following
+instructions reported here: 
+
+http://lbusett.github.io/MODIStsp/articles/installation.html#installing-on-mac
+
+
 MODIStsp 1.3.6
 ================
 

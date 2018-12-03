@@ -81,4 +81,14 @@ testthat::test_that("Tests on MODIStsp", {
   #check that rts files are properly created
   expect_equal(length(out_files_rts), 1)
 
+  MODIStsp(test = "04c")
+  context("MODIStsp Test 4: Reassign multiple nodata on notiled processing")
+  out_files_tif <- list.files(
+    file.path(
+      tempdir(),
+      "MODIStsp/Snow_cov_mnt_005dg_v6/SN_COV_MNT/"),
+    pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
+  r <- suppressWarnings(rgdal::GDALinfo(out_files_tif[1]))
+  expect_equal(attr(r, "df")$NoDataValue, 255)
+
 })

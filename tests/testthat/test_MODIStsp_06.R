@@ -4,8 +4,7 @@
 #   After reprojection in geographic coordinates, output files are exported
 #   as GeoTiff (scaling output values) and vrt time series are created.
 
-context("MODIStsp Test 6: http download on \"combined\" datasets and mosaicing of MODIS
-        tiles")
+context("MODIStsp Test 6: http download on \"combined\" datasets and mosaicing of MODIS tiles") #nolint
 testthat::test_that(
   "Tests on MODIStsp", {
     skip_on_cran()

@@ -158,8 +158,8 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                           vrtnodata = nodata_out
       )
     } else {
-      # If multiple NODATA, do not change the nodata value in the VRT, because it is dealt
-      # with later
+      # If multiple NODATA, do not change the nodata value in the VRT, because
+      # it is dealt with later
       gdalUtils::gdalwarp(files_in,
                           outfile_vrt,
                           sd        = band,
@@ -182,8 +182,8 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                               vrtnodata = nodata_out
       )
     } else {
-      # If multiple NODATA, do not change the nodata value in the VRT, because it is dealt
-      # with later
+      # If multiple NODATA, do not change the nodata value in the VRT, because
+      # it is dealt with later
       gdalUtils::gdalbuildvrt(files_in,
                               outfile_vrt,
                               sd = band
@@ -446,7 +446,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # on ENVI format, processing is identical, save for
     # not providing the "COMPRESSION" option to avoid
     # warnings
-    # browser()
     switch(reproj_type,
            GdalTranslate = gdalUtils::gdal_translate(
              outfile_vrt,
@@ -561,9 +560,5 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     close(fileConn_meta_hdr)
   }
 
-  # if (datatype == "UInt32") unlink(files_in)
-  # browser()
-  # if (exists(temptif)) unlink(temptif)
-  # unlink(outfile_vrt_prev)
   unlink(tmpdir, recursive = TRUE)
 }
