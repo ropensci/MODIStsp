@@ -183,7 +183,7 @@ MODIStsp <- function(gui               = TRUE,
     avail_tests <- basename(test_files)
     #nocov start
     if (!cur_test %in% avail_tests) {
-      stop(paste0("The test is not available. These are the currently available tests: ",
+      stop(paste0("The test is not available. These are the currently available tests: ", #nolint
                   paste(avail_tests, collapse = ", ")))
     }
     #nocov end
