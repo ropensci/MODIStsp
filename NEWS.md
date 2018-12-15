@@ -1,3 +1,51 @@
+## MODIStsp 1.3.7
+
+### Main changes
+
+- Fixed a bug leading to incorrect computation of custom spectral indices containing "additive"
+parameters (e.g., (NIR+0.1)/(Red-0.2)) when scale_val == FALSE
+
+#### Bug fixing
+
+- Fixed a bug leading to not properly reassigning NoData values when processing 
+  full tiles and using change_nodata = TRUE
+
+- Fixed inconsistencies in definition of characteristics of products
+  MOD/MYD13C2/C1 and MOD/MYD13A3 (erroneous layers in xml)
+
+- Fixed a bug leading to help messages in the select layers portion of the GUI 
+to not render
+
+- Updated MOD44B specifications to allow download of v006 version
+
+## MODIStsp 1.3.6
+
+### Main changes
+
+Maintenance release to solve CRAN build errors on debian, due to the test_resetindexesx
+test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
+function was modified to require explicit permission by the user to write on 
+the MODIStsp_previous.json file
+
+#### Bug fixing
+
+- Fixed a bug leading to errors if only "Aqua" platform was selected for download [#133](https://github.com/ropensci/MODIStsp/issues/133)
+
+## MODIStsp 1.3.5
+
+### Main changes
+
+Maintenance release to solve CRAN build errors on debian, due to the test_addindex
+test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
+function was modified to require explicit permission by the user to write on 
+the MODIStsp_previous.json file
+
+#### Bug fixing
+
+- Fixed bug leading to errors in processing extent when switching products with different Native projection (4008 vs sinusoidal), the projection string was not properly updated. [77f5693e9](https://github.com/ropensci/MODIStsp/commit/77f5693e9e1e180f05efaa04fa031567e782ba89)
+
+- Fixed warnings on check for uniqueness in http addresses
+
 ## MODIStsp 1.3.4
 
 ### Main changes
@@ -35,7 +83,7 @@ distribution by NASA servers
  - **Improved functionality for dealing with NoData** for products with multiple 
    fill-values. If "Change NoData" is set to "Yes", then in case a layer 
    has multiple Nodata values all those values are set to NA in the output 
-   (see github.com/lbusett/MODIStsp#113)
+   (see github.com/ropensci/MODIStsp#113)
 
 #### Extensive code refactoring for submission to ropensci. 
 
@@ -66,7 +114,7 @@ distribution by NASA servers
 #### Bug fixing
 
 - Fixed bug affecting extent selection when working with non-tiled (MCD) products
-https://github.com/lbusett/MODIStsp/issues/122
+https://github.com/ropensci/MODIStsp/issues/122
 
 - Fixed bugs affecting the "Seasonal" time series download 
   
@@ -94,31 +142,31 @@ v1.3.3 was released on 10/08/2017
 
 -  Improved speed in computation of spectral indexes, quality indicators and in 
    computation of scaled variables by usind `raster::calc()` and `raster::overlay`
-   (commits [0f5d76d](https://github.com/lbusett/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e),     [0f5d76d](https://github.com/lbusett/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e), [e462721](https://github.com/lbusett/MODIStsp/commit/e462721a06a079185ec5a84270ea0c8bd8edf54d))
+   (commits [0f5d76d](https://github.com/ropensci/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e),     [0f5d76d](https://github.com/ropensci/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e), [e462721](https://github.com/ropensci/MODIStsp/commit/e462721a06a079185ec5a84270ea0c8bd8edf54d))
    
 -  Added functionality for unit testing using `testthat` and codecov integration.
-   (commit [0c00fc6](https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a)
+   (commit [0c00fc6](https://github.com/ropensci/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a)
    and others)
    
 -  Added "testing mode" to allow users to test proper functioning. Now, running 
    `MODIStsp(test = X)` (with X in (0,6)) runs the processing using default processing
-   parameters  (commit [0c00fc6](https://github.com/lbusett/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a) and others)
+   parameters  (commit [0c00fc6](https://github.com/ropensci/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a) and others)
 
 ### Minor Changes
 
 -  Suppression of verbose messages and (useless) warning messages while parsing the NASA
-servers and downloading data using "ftp" ( [3775d60](https://github.com/lbusett/MODIStsp/commit/3775d6099bc359925d3dcbd96c2ffe8455502648));
+servers and downloading data using "ftp" ( [3775d60](https://github.com/ropensci/MODIStsp/commit/3775d6099bc359925d3dcbd96c2ffe8455502648));
 
 ### Bug fixing
 
 -   Fixed a bug preventing the "last" choice (or that present in the json file) from 
     correctly showing in the GUI upon launch/restore of a saved json file (commit
-    [633c2dd](https://github.com/lbusett/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3))
+    [633c2dd](https://github.com/ropensci/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3))
 
 -   Fixed a bug affecting MODIS layers coded as Unsigned Integer - 32 bit (Thanks
     to Rob Critchlow for signaling this). The bug was due to improper handling of 
     UInt32 data in `gdalbuildvrt`, causing sometimes an incorrect translation from 
-    HDF to output formats ([#72](https://github.com/lbusett/MODIStsp/issues/72)).
+    HDF to output formats ([#72](https://github.com/ropensci/MODIStsp/issues/72)).
 
      **M\*D09A1** - 500m Reflectance Band Quality (V005 and V006); 
      **M\*DO9CMG** - Coarse Resolution QA (V005 and V006);
@@ -130,13 +178,13 @@ servers and downloading data using "ftp" ( [3775d60](https://github.com/lbusett/
      **MCD43A2** - BRDF\_Albedo\_Band\_Quality (V005 and V006).
 
 - Fixed a bug affecting creation of time series files (RData and virtual rasters) 
-  on all MCD products ([#77](https://github.com/lbusett/MODIStsp/issues/77))
+  on all MCD products ([#77](https://github.com/ropensci/MODIStsp/issues/77))
 
 - Fixed a bug a error on creation of "burn_date" layers for MCD45A1 product 
-  ([#77](https://github.com/lbusett/MODIStsp/issues/77))
+  ([#77](https://github.com/ropensci/MODIStsp/issues/77))
 
 - Fixed bugs on specifying spatial extent files on non-interactive execution
-  ([#75](https://github.com/lbusett/MODIStsp/issues/75))
+  ([#75](https://github.com/ropensci/MODIStsp/issues/75))
 
 ____________________________________________________________________________________
 
@@ -149,7 +197,7 @@ MODIStsp was recently accepted on CRAN. From now on, you can install it simply u
 You'll however still be able to install the `development` version from github,
 containing the last improvements and bug fixing using:
 
-`install_github("lbusett/MODIStsp", ref = "master")`
+`install_github("ropensci/MODIStsp", ref = "master")`
 
 ____________________________________________________________________________________
 
@@ -200,10 +248,10 @@ __For compatibility with already created output files__ (versions up to 1.3.1),
 
 ### Bug fixing:
 
-- Fixed bug on FTP download speed (Issue [#65](https://github.com/lbusett/MODIStsp/issues/65)) 
+- Fixed bug on FTP download speed (Issue [#65](https://github.com/ropensci/MODIStsp/issues/65)) 
 - Fixed bug on download of tile 0, preventing download of images with DOY 001 and
-  of all "yearly based" products (e.g., MOD17)(Issue [#64](https://github.com/lbusett/MODIStsp/issues/64)) 
-- Fixed other bugs affecting FTP download (https://github.com/lbusett/MODIStsp/commit/efbf1b469e7518ffc8a7ec6d9922242d6a5c228f, https://github.com/lbusett/MODIStsp/commit/1dc53a5ff5b355965acec86678a3104bd2d27fd9, https://github.com/lbusett/MODIStsp/commit/fa6c7b42eadce516a2f781604c9db28418120f36)
+  of all "yearly based" products (e.g., MOD17)(Issue [#64](https://github.com/ropensci/MODIStsp/issues/64)) 
+- Fixed other bugs affecting FTP download (https://github.com/ropensci/MODIStsp/commit/efbf1b469e7518ffc8a7ec6d9922242d6a5c228f, https://github.com/ropensci/MODIStsp/commit/1dc53a5ff5b355965acec86678a3104bd2d27fd9, https://github.com/ropensci/MODIStsp/commit/fa6c7b42eadce516a2f781604c9db28418120f36)
 
 ____________________________________________________________________________________
 
@@ -215,36 +263,36 @@ v1.3.1 was released on 13/02/2017
 
 - Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, 
   MOD10C1, MOD10C2, MOD10CM (Issue
-[#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+[#55](https://github.com/ropensci/MODIStsp/issues/55)) on devel
 
 - Added functionality for downloading "partial" years (Issue
-  [#54](https://github.com/lbusett/MODIStsp/issues/54)) on devel
+  [#54](https://github.com/ropensci/MODIStsp/issues/54)) on devel
 
 - Added functionality for computing vegetation indexes on MCD43A4 (v5-v6),
-  MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [#59](https://github.com/lbusett/MODIStsp/issues/59))
+  MCD43B4 (v5), MCD43C4 (v5-v6) (Issue [#59](https://github.com/ropensci/MODIStsp/issues/59))
   on master/devel
 
 - Added functionality for accelerating download using aria2c (Issue 
-  [#55](https://github.com/lbusett/MODIStsp/issues/55)) on devel
+  [#55](https://github.com/ropensci/MODIStsp/issues/55)) on devel
 
 ### Bug fixing
 
 - Fixed bug on download with aria, throwing an error on partial download on http
-  download with aria ([6fbc875](https://github.com/lbusett/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
+  download with aria ([6fbc875](https://github.com/ropensci/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
 
-- Fixed bug on M*D15A2 processing (Issue [#60](https://github.com/lbusett/MODIStsp/issues/60))
+- Fixed bug on M*D15A2 processing (Issue [#60](https://github.com/ropensci/MODIStsp/issues/60))
   on devel/master
 
-- Fixed bug on MCD12Q1 processing (Issue [#58](https://github.com/lbusett/MODIStsp/issues/58))
+- Fixed bug on MCD12Q1 processing (Issue [#58](https://github.com/ropensci/MODIStsp/issues/58))
   on devel/master
 
-- Fixed bug on MOD13C2 processing (Issue [#52](https://github.com/lbusett/MODIStsp/issues/52))
+- Fixed bug on MOD13C2 processing (Issue [#52](https://github.com/ropensci/MODIStsp/issues/52))
   on devel/master
 
-- Fixed bug on insertion of custom projection (Issue [#57](https://github.com/lbusett/MODIStsp/issues/57))
+- Fixed bug on insertion of custom projection (Issue [#57](https://github.com/ropensci/MODIStsp/issues/57))
   on devel/master
 
-- Fixed bug on selection of custom index (Issue [#53](https://github.com/lbusett/MODIStsp/issues/53))
+- Fixed bug on selection of custom index (Issue [#53](https://github.com/ropensci/MODIStsp/issues/53))
   on devel/master
 
 ____________________________________________________________________________________

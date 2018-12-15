@@ -31,6 +31,7 @@
 #'  getToolkitWidget gframe gdroplist enabled size addSpring glabel
 #'  gcombobox addSpace gbutton gcheckboxgroup dispose visible gradio
 #'  gedit gcheckbox gfile gspinbutton ginput gtext
+#' @import gWidgetsRGtk2
 
 MODIStsp_GUI <- function(general_opts,
                          prod_opt_list,
@@ -165,9 +166,6 @@ MODIStsp_GUI <- function(general_opts,
   )
   gWidgets::size(wids$cat) <- list(width = 442)
 
-
-  # addSpring(satprod0_group)
-
   www_but <- gbutton(
     text = paste0("Product Info (www)"),
     container = satprod0_group,
@@ -177,13 +175,10 @@ MODIStsp_GUI <- function(general_opts,
   )
   gWidgets::font(www_but) <- list(family = "serif", weight = "bold",
                                   color = "red")
-  # addSpace(satprod0_group, 1)
-  # addSpring(satprod0_group)
 
   #   __________________________________________________________________________
   #   Initialize Widgets for Product selection                              ####
 
-  # addSpring(satprod1_group)
   satprod1_group <- ggroup(horizontal = TRUE, container = satprod_frame)
   prod_label <- glabel(text = "Product:", container = satprod1_group)
   addSpace(satprod1_group, 3)
@@ -345,7 +340,7 @@ MODIStsp_GUI <- function(general_opts,
   #  Upon clicking on the button we create a Child widget for selection of
   #  processing layers (could try to separate a function for this, but it would
   #  be a hassle) and deal with all events
-  # addSpring(layers_frame)
+
   wids$band   <- gbutton(
     text    = " Change\nSelection ",
     handler = function(h, ...) {
@@ -652,7 +647,7 @@ MODIStsp_GUI <- function(general_opts,
 
   # Text labels showing Extent ----
   addSpace(tiles_group, 1)
-  # addSpring(spatial_group)
+
   bounding_group <- gframe(
     text       = "<b><i> Output Bounding Box (in output projection!) </i></b>",
     markup     = TRUE,
@@ -1040,7 +1035,7 @@ MODIStsp_GUI <- function(general_opts,
     text = " ? ",
     handler = function(h, ...) {
       gh_help(h, "timeseries_help", help_messages,
-              info_addr = "http://lbusett.github.io/MODIStsp/articles/output.html", #nolint
+              info_addr = "http://ropensci.github.io/MODIStsp/articles/output.html", #nolint
               ...)
     }, container = other_group, expand = FALSE)
 
@@ -1109,7 +1104,7 @@ MODIStsp_GUI <- function(general_opts,
 
   outfold_help <- gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "outfold_help", help_messages,
-            info_addr = "http://lbusett.github.io/MODIStsp/articles/output.html", #nolint
+            info_addr = "https://ropensci.github.io/MODIStsp/articles/output.html", #nolint
             ...)
   }, container = outfold_group, expand = FALSE)
 
@@ -1133,9 +1128,8 @@ MODIStsp_GUI <- function(general_opts,
   # HDF output folder ----
 
   outfoldmod_frame <- gframe(
-    text      = strwrap(
-      "<span foreground='red' size='large'>
-      Folder for permanent storage of original MODIS HDF images </span>"),
+    text = strwrap("<span foreground='red' size='large'>
+                  Folder for permanent storage of MODIS HDF images </span>"),
     markup    = TRUE,
     container = main_group,
     expand    = TRUE,
@@ -1159,7 +1153,7 @@ MODIStsp_GUI <- function(general_opts,
     handler = function(h, ...) {
       choice <- try(gfile(
         type = "selectdir",
-        text = "Select the Output Folder for storage of MODiS original HDFsimages..." #nolint
+        text = "Select the Output Folder for storage of MODiS original HDF images..." #nolint
       ), silent = TRUE)
       if (class(choice) != "try-error") {
         if (length(choice) != 0) {
@@ -1203,6 +1197,7 @@ MODIStsp_GUI <- function(general_opts,
     text      = "Start Processing",
     container = but_group,
     handler   = function(h, ...) {
+
       general_opts <- gui_save_options(general_opts,
                                        gui_env,
                                        opts_jsfile,

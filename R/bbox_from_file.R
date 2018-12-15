@@ -11,19 +11,19 @@
 #' @note License: GPL 3.0
 
 bbox_from_file <- function(file_path, crs_out) {
-  
+
   # Retrieve CRS using gdal: if fails, then the file is not a valid spatial file
   in_gdalinfo <- suppressWarnings(try(rgdal::GDALinfo(file_path),
                                       silent = TRUE))
   in_ogrinfo  <- suppressWarnings(try(rgdal::ogrInfo(file_path),
                                       silent = TRUE))
-  
+
   if (methods::is(in_ogrinfo, "try-error") &
       methods::is(in_gdalinfo, "try-error")) {
     stop(file_path, "is not recognised by GDAL or OGR as a valid spatial",
          "file. Please check your inputs. Aborting!")
   }
-  
+
   # If it does not fail, then retrieve the bounding box
   if (methods::is(in_gdalinfo, "try-error")) {
     bbox_in <- matrix(in_ogrinfo$extent,
@@ -34,13 +34,13 @@ bbox_from_file <- function(file_path, crs_out) {
     bbox_in <- gdalUtils::gdalinfo(file_path, raw_output = FALSE)$bbox
     crs_in  <- attr(in_gdalinfo, "projection")
   }
-  
+
   # Convert the bounding box in the chosen projection (ensuring to include the
   # full area covered in the original bbox by using "enlarge == TRUE")
   bbox_out <- reproj_bbox(bbox_in,
                           crs_in,
                           crs_out,
                           enlarge = TRUE)
-  
+
   return(bbox_out)
 }

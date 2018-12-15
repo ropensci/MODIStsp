@@ -5,10 +5,10 @@
 \title{Add custom spectral indexes}
 \usage{
 MODIStsp_addindex(opts_jsfile = NULL, prodopts_file = NULL,
-  selprod = NULL, selvers = NULL, gui = TRUE, new_indexbandname = "",
-  new_indexfullname = "", new_indexformula = "",
-  new_indexnodata_out = "32767", MODIStsp_dir = system.file(package =
-  "MODIStsp"))
+  selprod = NULL, selvers = NULL, gui = TRUE,
+  new_indexbandname = "", new_indexfullname = "",
+  new_indexformula = "", new_indexnodata_out = "32767",
+  MODIStsp_dir = system.file(package = "MODIStsp"))
 }
 \arguments{
 \item{opts_jsfile}{\code{character} full path of a JSON file
@@ -55,8 +55,8 @@ Default: retrieved from package installation folder}
 }
 \value{
 The function is called for its side effects. On success, the
-MODIStsp_Previous.RData file is modified so to allow computation of the
-additional indexes.
+MODIStsp_Previous.json or the json options file specified by the user
+is modified so to allow computation of the additional indexes.
 }
 \description{
 Function used to add a user-defined Spectral Index to the

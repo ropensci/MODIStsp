@@ -5,8 +5,8 @@
 \title{Check if all files required for a given date already exist}
 \usage{
 check_files_existence(out_prod_folder, file_prefix, yy, DOY, bandnames,
-  bandsel_orig_choice, indexes_bandnames, indexes_bandsel, quality_bandnames,
-  quality_bandsel, out_format)
+  bandsel_orig_choice, indexes_bandnames, indexes_bandsel,
+  quality_bandnames, quality_bandsel, out_format)
 }
 \arguments{
 \item{out_prod_folder}{\code{character} MODIStsp output folder}

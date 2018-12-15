@@ -47,6 +47,7 @@ ExtData
 Fhreo
 firewalling
 FPAR
+frac
 fullscreen
 Gamon
 gdal
@@ -93,7 +94,6 @@ jsfile
 json
 JSON
 knitr
-ladsweb
 LAI
 latlong
 lbusett
@@ -120,7 +120,6 @@ myoutfolder
 na
 Naimi
 nasa
-nascom
 NDFI
 NDII
 NDSI
@@ -134,7 +133,6 @@ NODATA
 OGG
 OGR
 ogrinfo
-os
 OSGeo
 OSX
 PACKBITS
@@ -165,6 +163,7 @@ rdata
 RData
 reflectance
 Reflectance
+reflectances
 reproject
 Reproject
 reprojected
@@ -184,7 +183,9 @@ RStudio
 rts
 SAVI
 scrollbars
+sds
 sel
+selectable
 serie
 SIs
 sp
@@ -196,6 +197,7 @@ StartDOY
 StartYear
 subfolder
 subfolders
+subtractive
 SWIR
 tempdir
 tidyverse

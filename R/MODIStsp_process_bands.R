@@ -146,23 +146,50 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
     outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),
                           ".tif")
-    gdalUtils::gdalwarp(files_in,
-                        outfile_vrt,
-                        sd        = band,
-                        multi     = TRUE,
-                        wo        = paste0("NUM_THREADS=", ncores),
-                        nomd      = TRUE,
-                        overwrite = TRUE
-    )
-
+    if (length(split_nodata_values(nodata_in)[[1]] == 1)) {
+      gdalUtils::gdalwarp(files_in,
+                          outfile_vrt,
+                          sd        = band,
+                          multi     = TRUE,
+                          wo        = paste0("NUM_THREADS=", ncores),
+                          nomd      = TRUE,
+                          overwrite = TRUE,
+                          srcnodata = nodata_in,
+                          vrtnodata = nodata_out
+      )
+    } else {
+      # If multiple NODATA, do not change the nodata value in the VRT, because
+      # it is dealt with later
+      gdalUtils::gdalwarp(files_in,
+                          outfile_vrt,
+                          sd        = band,
+                          multi     = TRUE,
+                          wo        = paste0("NUM_THREADS=", ncores),
+                          nomd      = TRUE,
+                          overwrite = TRUE
+      )
+    }
   } else {
 
     # Create a GDAL vrt file corresponding to the original
     # hdf4
-    gdalUtils::gdalbuildvrt(files_in,
-                            outfile_vrt,
-                            sd = band#,
-    )
+
+    if (length(split_nodata_values(nodata_in)[[1]]) == 1) {
+      gdalUtils::gdalbuildvrt(files_in,
+                              outfile_vrt,
+                              sd = band,
+                              srcnodata = nodata_in,
+                              vrtnodata = nodata_out
+      )
+    } else {
+      # If multiple NODATA, do not change the nodata value in the VRT, because
+      # it is dealt with later
+      gdalUtils::gdalbuildvrt(files_in,
+                              outfile_vrt,
+                              sd = band
+      )
+    }
+
   }
 
   # apply the patch if an error in the original hdf4 file at
@@ -203,6 +230,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     if (full_ext == "Resized") {
       outfile_vrt_prev2 <- outfile_vrt_prev
       outfile_vrt_prev <- paste0(stringr::str_sub(outfile_vrt, 1, -5),".vrt")
+
       outfile_prev_bbox <- do.call(
         function(x,y) {
           c(max(x[1],y[1]), max(x[2],y[2]), min(x[3],y[3]), min(x[4],y[4]))
@@ -340,6 +368,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   }
 
   if (out_format == "GTiff") {
+
     switch(reproj_type,
            GdalTranslate = gdalUtils::gdal_translate(
              outfile_vrt,
@@ -349,7 +378,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              ot       = datatype,
              a_nodata = nodata_out,
              co = paste("COMPRESS", compress, sep = "="),
-             overwrite = TRUE
+             overwrite = TRUE, verbose = T
            ),
            Resample0_Resize0 = gdalUtils::gdalwarp(
              outfile_vrt, outrep_file_0,
@@ -417,7 +446,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # on ENVI format, processing is identical, save for
     # not providing the "COMPRESSION" option to avoid
     # warnings
-
     switch(reproj_type,
            GdalTranslate = gdalUtils::gdal_translate(
              outfile_vrt,
@@ -426,7 +454,9 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              of        = out_format,
              ot        = datatype,
              a_nodata  = nodata_out,
-             overwrite = TRUE
+             overwrite = TRUE,
+             wo        = c("INIT_DEST = NO_DATA",
+                           paste0("NUM_THREADS=", ncores)),
            ),
            Resample0_Resize0 = gdalUtils::gdalwarp(
              outfile_vrt,
@@ -530,9 +560,5 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     close(fileConn_meta_hdr)
   }
 
-  # if (datatype == "UInt32") unlink(files_in)
-  # browser()
-  # if (exists(temptif)) unlink(temptif)
-  # unlink(outfile_vrt_prev)
   unlink(tmpdir, recursive = TRUE)
 }

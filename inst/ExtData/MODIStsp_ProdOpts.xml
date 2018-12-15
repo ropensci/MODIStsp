@@ -9061,15 +9061,6 @@
                             <offset>0</offset>
                         </band>
                         <band>
-                            <bandname>DOY</bandname>
-                            <fullname>Day of year of VI pixel</fullname>
-                            <datatype>16-bit signed integer</datatype>
-                            <nodata_in>-1</nodata_in>
-                            <nodata_out>32767</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
                             <bandname>Rely</bandname>
                             <fullname>Quality reliability of VI pixel</fullname>
                             <datatype>8-bit signed integer</datatype>
@@ -9246,8 +9237,26 @@
                             <offset>0</offset>
                         </band>
                         <band>
+                            <bandname>View_Zen</bandname>
+                            <fullname>View zenith angle of VI pixel</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-10000</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.01</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
                             <bandname>NDVI_std</bandname>
                             <fullname>Standard deviation from input NDVI pixels</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-3000</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>EVI_std</bandname>
+                            <fullname>Standard deviation computed from input EVI pixels</fullname>
                             <datatype>16-bit signed integer</datatype>
                             <nodata_in>-3000</nodata_in>
                             <nodata_out>32767</nodata_out>
@@ -9460,6 +9469,15 @@
                         <band>
                             <bandname>NDVI_std</bandname>
                             <fullname>Standard deviation from input NDVI pixels</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-3000</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>EVI_std</bandname>
+                            <fullname>Standard deviation computed from input EVI pixels</fullname>
                             <datatype>16-bit signed integer</datatype>
                             <nodata_in>-3000</nodata_in>
                             <nodata_out>32767</nodata_out>
@@ -10568,15 +10586,15 @@
             <file_prefix_aqua>MYD44B</file_prefix_aqua>
             <versions>
                 <version>
-                    <v_number>5.1</v_number>
-                    <prod_fullname>MOD44B: Vegetation Continuous Fields Yearly L3 Global 250m V051</prod_fullname>
-                    <main_out_folder>Veg_Cont_Fields_Yearly_250m_v5</main_out_folder>
+                    <v_number>6</v_number>
+                    <prod_fullname>MOD44B: Vegetation Continuous Fields Yearly L3 Global 250m V006</prod_fullname>
+                    <main_out_folder>Veg_Cont_Fields_Yearly_250m_v6</main_out_folder>
                     <native_res>231.6564</native_res>
-                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD44B.051/</http_terra>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD44B.006/</http_terra>
                     <http_aqua>Not Available</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod44b</www>
+                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod44b_v006</www>
                     <bands>
                         <band>
                             <bandname>Perc_TreeCov</bandname>
@@ -10617,19 +10635,19 @@
                         <band>
                             <bandname>Perc_TreeCov_sd</bandname>
                             <fullname>Percent Tree Cover SD</fullname>
-                            <datatype>16-bit signed integer</datatype>
+                            <datatype>16-bit unsigned integer</datatype>
                             <nodata_in>-100</nodata_in>
                             <nodata_out>32767</nodata_out>
-                            <scale_factor>100</scale_factor>
+                            <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
                         </band>
                         <band>
                             <bandname>Perc_NonVeg_sd</bandname>
                             <fullname>Percent Non Vegetated SD</fullname>
-                            <datatype>16-bit signed integer</datatype>
+                            <datatype>16-bit unsigned integer</datatype>
                             <nodata_in>-100</nodata_in>
                             <nodata_out>32767</nodata_out>
-                            <scale_factor>100</scale_factor>
+                            <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
                         </band>
                         <band>

@@ -4,9 +4,9 @@
 \alias{MODIStsp_download}
 \title{MODIStsp download function}
 \usage{
-MODIStsp_download(modislist, out_folder_mod, download_server, http, n_retries,
-  use_aria, date_dir, year, DOY, user, password, sens_sel, date_name, gui,
-  mess_lab, verbose)
+MODIStsp_download(modislist, out_folder_mod, download_server, http,
+  n_retries, use_aria, date_dir, year, DOY, user, password, sens_sel,
+  date_name, gui, mess_lab, verbose)
 }
 \arguments{
 \item{modislist}{\code{character array} List of MODIS images to be downloaded for

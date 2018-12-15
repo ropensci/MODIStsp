@@ -2,7 +2,6 @@ context("check_proj4string tests")
 
 testthat::test_that("check_proj4string works as expected", {
   # skip_on_travis()
-  library(sp)
 
   # valid character
   expect_equal(

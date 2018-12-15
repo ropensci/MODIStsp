@@ -4,16 +4,17 @@
 \alias{MODIStsp_process}
 \title{MODIStsp main processing function}
 \usage{
-MODIStsp_process(sel_prod, start_date, end_date, out_folder, out_folder_mod,
-  reprocess = "Yes", delete_hdf = "No", sensor, download_server, user,
-  password, https, start_x, start_y, end_x, end_y, full_ext, bbox, out_format,
-  compress, out_res_sel, out_res, native_res, tiled, mod_proj_str, outproj_str,
-  nodata_in, nodata_out, nodata_change, scale_val, scale_factor, offset,
-  datatype, bandsel, bandnames, indexes_bandsel, indexes_bandnames,
-  indexes_formula, indexes_nodata_out, quality_bandnames, quality_bandsel,
-  quality_bitN, quality_source, quality_nodata_in, quality_nodata_out,
-  file_prefixes, main_out_folder, resampling, ts_format, use_aria = TRUE,
-  download_range = "full", gui = TRUE, n_retries, verbose)
+MODIStsp_process(sel_prod, start_date, end_date, out_folder,
+  out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor,
+  download_server, user, password, https, start_x, start_y, end_x, end_y,
+  full_ext, bbox, out_format, compress, out_res_sel, out_res, native_res,
+  tiled, mod_proj_str, outproj_str, nodata_in, nodata_out, nodata_change,
+  scale_val, scale_factor, offset, datatype, bandsel, bandnames,
+  indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
+  quality_bandnames, quality_bandsel, quality_bitN, quality_source,
+  quality_nodata_in, quality_nodata_out, file_prefixes, main_out_folder,
+  resampling, ts_format, use_aria = TRUE, download_range = "full",
+  gui = TRUE, n_retries, verbose)
 }
 \arguments{
 \item{sel_prod}{\code{character} Name of selected MODIS product.}

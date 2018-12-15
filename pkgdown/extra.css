@@ -22,7 +22,7 @@ pre .img img {
 }
 
 code a, pre a {
-  color: blue;
+  color: black;
 }
 
 .highlight .lineno { color: #ccc; display:inline-block; padding: 0 5px; border-right:1px solid #ccc; }

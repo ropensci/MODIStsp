@@ -1,6 +1,10 @@
 context("Check proper functioning of MODIStsp_addindex")
 
 test_that("MODIStsp_addindex works as expected", {
+  # skip on cran, because the test needs to write on file system.
+  # (Note that an authorization to do this is asked to the user).
+  #
+  skip_on_cran()
   # error in formula leads to aborting
   expect_error(
     MODIStsp_addindex(
