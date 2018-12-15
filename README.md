@@ -49,7 +49,7 @@ To cite `MODIStsp` please use:
 L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic
 preprocessing of MODIS Land Products time series, Computers &
 Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
-<http://dx.doi.org/10.1016/j.cageo.2016.08.020>, URL:
+<https://doi.org/10.1016/j.cageo.2016.08.020>, URL:
 <https://github.com/ropensci/MODIStsp>.
 
 ## Important News \!
