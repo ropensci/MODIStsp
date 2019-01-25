@@ -4,7 +4,7 @@ MODIStsp 1.3.7
 ## Test environments
 
 * ubuntu 18.04 on local install, R 3.5.0
-* ubuntu 16.04 on travis-ci (https://travis-ci.org/lbusett/MODIStsp/jobs/383285994#L6)
+* ubuntu 14.04 on travis-ci (https://travis-ci.org/lbusett/MODIStsp/jobs/383285994#L6)
 * win-builder (R-devel, R-release)
 * windows 10 on local install, R 3.5.1
 
