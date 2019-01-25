@@ -3,7 +3,7 @@
 [![](http://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build
 Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://travis-ci.org/ropensci/MODIStsp)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1286981.svg)](https://doi.org/10.5281/zenodo.1286981)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
 [![Coverage
 Status](http://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](http://codecov.io/github/ropensci/MODIStsp?branch=master)
 [![](http://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/onboarding/issues/184)
@@ -56,7 +56,7 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 
   - 29/11/2018 - We recently discovered a nasty bug in the computation
     of some custom spectral indices (those including additions /
-    subtractions on reflectance values, such as in b1\_NIR+0.1) /
+    subtractions on reflectance values, such as in (b1\_NIR+0.1) /
     b2\_Red. See [here](articles/discovered_bug.html) for further
     details\! The bug is fixed as of version 1.3.7.
 
