@@ -125,7 +125,8 @@ MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
 # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 # 2016-01-01 and 2016-12-18
 # __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"
-# subfolder of your main output folder - see http://lbusett.github.io/MODIStsp/articles/output.html)
+# subfolder of your main output folder - see
+http://ropensci.github.io/MODIStsp/articles/output.html)
 
 # Specify the filename of the RData RasterStack of interest
 stack_file  <- file.path(tempdir(),
@@ -157,7 +158,7 @@ out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
                               FUN = "sd", small = FALSE)
 head(out_datasd)
 
-# (See also http://lbusett.github.io/MODIStsp/articles/Analyze.html for a
+# (See also http://ropensci.github.io/MODIStsp/articles/Analyze.html for a
 # worked-out example)
 }
 }

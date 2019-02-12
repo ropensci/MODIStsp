@@ -23,12 +23,10 @@
 #'  fullscreen with scrollbars (this is useful on devices with small displays).
 #'  If using a device with a display resolution >= 1024x768, leaving this
 #'  parameter to FALSE is suggested, Default: FALSE
-#' @param test `integer` if set, MODIStsp is executed in "test mode", using a
-#'  preset Options File instead than opening the GUI or accepting the
+#' @param test `integer | character  (e.g., "01a")` if set, MODIStsp is executed in
+#'  "test mode", using a preset Options File instead than opening the GUI or accepting the
 #'  `options_file` parameter. This allows both to check correct installation on
-#'  user's machines, and to implement unit testing. The number indicates which
-#'  tests to execute (six are available). If == 0, the test is selected
-#'  randomly. If == -1, MODIStsp is executed in normal mode. Default: -1
+#'  user's machines, and to implement unit testing.
 #' @param n_retries `numeric` maximum number of retries on download functions.
 #'   In case any download function fails more than `n_retries` times consecutively,
 #'   MODIStsp_process will abort, Default: 20
@@ -118,14 +116,14 @@
 #'            full.names = TRUE)
 #' plot(raster(outfiles_iseo[1]))
 #'
-#' # See also http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html)
+#' # See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html)
 #' }
 
 MODIStsp <- function(gui               = TRUE,
                      options_file      = NULL,
                      spatial_file_path = NULL,
                      scroll_window     = FALSE,
-                     test              = -1,
+                     test              = NULL,
                      n_retries         = 20,
                      verbose           = TRUE) {
   options("guiToolkit" = "RGtk2")
@@ -167,19 +165,26 @@ MODIStsp <- function(gui               = TRUE,
   #   __________________________________________________________________________
   #   If test mode is selected, select the options file for testing         ####
   #   and set other parameters
-  if (test > -1) {
+  if (!is.null(test)) {
 
     gui <- FALSE
     message("MODIStsp is running in test mode.")
     # read names of available json test files
     test_files <- sort(list.files(
       path       = system.file("testdata", package = "MODIStsp"),
-      pattern    = "^test[0-9]{2}\\.json$",
+      pattern    = "^test[0-9]{2}[a-zA-Z]?\\.json$",
       full.names = TRUE))
+
+    if (is.numeric(test)) {
+      test <- sprintf("%02d", test)
+    }
+
+    cur_test  <- paste0("test", test, ".json")
+    avail_tests <- basename(test_files)
     #nocov start
-    if (test > length(test_files)) {
-      stop(paste0("Value of argument 'test' is too high: only ",
-                  length(test_files), " test Option Files are available."))
+    if (!cur_test %in% avail_tests) {
+      stop(paste0("The test is not available. These are the currently available tests: ", #nolint
+                  paste(avail_tests, collapse = ", ")))
     }
     #nocov end
     # check that the offline HDF files were unzipped - unzip them if not
@@ -198,7 +203,11 @@ MODIStsp <- function(gui               = TRUE,
     }
 
     # Assign the selected test Option File
-    options_file <- test_files[test]
+
+    options_file <- list.files(
+      path       = system.file("testdata", package = "MODIStsp"),
+      pattern    = cur_test,
+      full.names = TRUE)
     start <- TRUE
   }
 
@@ -270,7 +279,7 @@ MODIStsp <- function(gui               = TRUE,
   if (!gdal_hdf_support) {
     stop("Your local GDAL installation does not support HDF4 format.\n",
          "Please install HDF4 support and recompile GDAL. See:\n",
-         strwrap("http://lbusett.github.io/MODIStsp/articles/installation.html#
+         strwrap("http://ropensci.github.io/MODIStsp/articles/installation.html#
       installing-r-and-gdal", width = 200))
   }
 

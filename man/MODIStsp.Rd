@@ -5,7 +5,8 @@
 \title{MODIStsp main function}
 \usage{
 MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  scroll_window = FALSE, test = -1, n_retries = 20, verbose = TRUE)
+  scroll_window = FALSE, test = NULL, n_retries = 20,
+  verbose = TRUE)
 }
 \arguments{
 \item{gui}{\code{logical} if TRUE: the GUI is opened before processing. If FALSE:
@@ -28,12 +29,10 @@ fullscreen with scrollbars (this is useful on devices with small displays).
 If using a device with a display resolution >= 1024x768, leaving this
 parameter to FALSE is suggested, Default: FALSE}
 
-\item{test}{\code{integer} if set, MODIStsp is executed in "test mode", using a
-preset Options File instead than opening the GUI or accepting the
+\item{test}{\code{integer | character  (e.g., "01a")} if set, MODIStsp is executed in
+"test mode", using a preset Options File instead than opening the GUI or accepting the
 \code{options_file} parameter. This allows both to check correct installation on
-user's machines, and to implement unit testing. The number indicates which
-tests to execute (six are available). If == 0, the test is selected
-randomly. If == -1, MODIStsp is executed in normal mode. Default: -1}
+user's machines, and to implement unit testing.}
 
 \item{n_retries}{\code{numeric} maximum number of retries on download functions.
 In case any download function fails more than \code{n_retries} times consecutively,
@@ -125,7 +124,7 @@ outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1
            full.names = TRUE)
 plot(raster(outfiles_iseo[1]))
 
-# See also http://lbusett.github.io/MODIStsp/articles/noninteractive_execution.html)
+# See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html)
 }
 }
 \seealso{

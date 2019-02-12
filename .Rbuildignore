@@ -1,3 +1,4 @@
+^CRAN-RELEASE$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^packrat/
@@ -11,7 +12,7 @@ LICENSE.md
 _pkgdown.yaml
 ^Log/
 ^old_and_various/
-^inst/Previous/MODIStsp_ProdOpts.RData
+inst/ExtData/Previous/MODIStsp_Previous.json
 ^sketched_routines/
 ^ExtData/
 ^README\.Rmd$
@@ -30,8 +31,9 @@ vignettes/noninteractive_execution.Rmd
 vignettes/standalone_execution.Rmd
 vignettes/output.Rmd
 vignettes/Products_list.Rmd
+vignettes/discovered_bug.Rmd
 inst/ExtData/Diff_Prodopts.xml
-inst/ExtData/Diff_Prodopts_132_132.xml
+inst/ExtData/Diff_Prodopts_131_132.xml
 inst/ExtData/MODIStsp_ProdOpts_old_v1.3.1.xml
 inst/testdata/MCD43A3.A2017200.h15v07.006.2017209032506.hdf$
 inst/testdata/MOD09A1.A2017193.h18v04.006.2017202035302.hdf$

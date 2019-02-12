@@ -16,12 +16,12 @@
 #' Command-line execution exploiting a previously saved processing options
 #' file is also possible, allowing to automatically update time series
 #' related to a MODIS product whenever a new image is available.
-#' 
+#'
 #' @docType package
 #' @name MODIStsp-package
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
-#' @seealso [http://lbusett.github.io/MODIStsp/](http://lbusett.github.io/MODIStsp/)
-#' @seealso [https://github.com/lbusett/MODIStsp](https://github.com/lbusett/MODIStsp)
-#' 
+#' @seealso [http://ropensci.github.io/MODIStsp/](http://ropensci.github.io/MODIStsp/)
+#' @seealso [https://github.com/ropensci/MODIStsp](https://github.com/ropensci/MODIStsp)
+#'
 NULL

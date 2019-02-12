@@ -1,0 +1,51 @@
+---
+title: "Bug discovered in spectral indices computation"
+output: github_document
+---
+
+We are sorry to report that we recently discovered a nasty bug (or rather, a stupid mistake...) in the [MODIStsp](https://github.com/ropensci/MODIStsp) package.
+
+The bug led to improper computation of custom spectral indices in the case that their formula included addition or subtraction operations on reflectance values (e.g., something like $\frac{(\rho_{NIR}+0.1)}{\rho_{Red}}$, with $\rho$ indicating a reflectance).
+
+## What is affected
+
+* Values of the following *Additional Spectral Indices* selectable using the MODIStsp GUI:
+
+  - EVI
+  - SAVI
+  
+  , *in the case that the **Apply Scale/Offset** option was set to "No"*
+  
+* Values of any *custom spectral indexes* added by the user, in case they included additive or subtractive coefficients. 
+
+  , *in the case that the **Apply Scale/Offset** option was set to "No"*
+
+## What is NOT affected  
+
+* Values of spectral indexes available in MODIS HDF images as original sds layers (e.g., EVI in MOD13Q1)
+  
+* Values of any additional / custom spectral indexes in case they did not include additive or 
+subtractive coefficients, or the **Apply Scale/Offset** option was set to "Yes"
+
+
+## What to do if you are affected 
+
+The bug is now fixed on the GitHub version. A patched release will be made available on CRAN as soon as possible. 
+Unfortunately, if you have time series processed with the old version falling in the "What is affected" category, there's nothing you can do, save for reprocessing them. 
+
+**We are truly sorry for the problem**, which somehow managed to slip under the radar until now. 
+We hope it will not bring you too much trouble!
+
+## What exactly was the problem? 
+
+This is **so basic that can easily go unnoticed.** So it's better to document it...
+
+MODIS reflectances are stored in HDF layers as integers with a 10000 scale factor (e.g., a 0.1 reflectance is stored as 1000). If you need to "manually" compute and index such as SAVI: 
+
+$SAVI = \frac{(\rho_{NIR} - \rho_{Red})}{(\rho_{NIR} + \rho_{Red} + 0.5)} * (1 + 0.5)$).
+
+starting from MODIS reflectances, you must take care of multiplying the MODIS data by 10E-4 beforehand. Your formula then becomes: 
+
+$SAVI = \frac{(0.0001 * b2_{NIR} - 0.0001 * b1_{Red})}{0.0001 * b2_{NIR}  + 0.0001 * b1_{Red} + 0.5} * (1 + 0.5)$).
+
+, otherwise the additive constants (in this case, the $+ 0.5$ in the denominator) would be made practically irrelevant.

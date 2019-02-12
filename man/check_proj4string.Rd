@@ -19,7 +19,8 @@ check_proj4string(projection, abort = FALSE, verbose = TRUE)
 \method{check_proj4string}{character}(projection, abort = FALSE,
   verbose = TRUE)
 
-\method{check_proj4string}{CRS}(projection, abort = FALSE, verbose = TRUE)
+\method{check_proj4string}{CRS}(projection, abort = FALSE,
+  verbose = TRUE)
 }
 \arguments{
 \item{projection}{\code{character} or \code{integer} corresponding to the

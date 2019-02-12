@@ -23,9 +23,9 @@ file is also possible, allowing to automatically update time series
 related to a MODIS product whenever a new image is available.
 }
 \seealso{
-\url{http://lbusett.github.io/MODIStsp/}
+\url{http://ropensci.github.io/MODIStsp/}
 
-\url{https://github.com/lbusett/MODIStsp}
+\url{https://github.com/ropensci/MODIStsp}
 }
 \author{
 Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
