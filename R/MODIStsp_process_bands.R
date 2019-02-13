@@ -328,6 +328,23 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     outrep_file
   }
 
+  # workaround on gdal >= 2.3
+  gdalutils_ver <- getOption("gdalUtils_gdalPath")[[1]]$version[[1]]
+  gdalutils_ver <- as.numeric(substring(gdalutils_ver, 1,3))
+  if (gdalutils_ver >= 2.3 & tools::file_ext(outfile_vrt) == "vrt") {
+    vrt_in      <- readLines(outfile_vrt)
+    scale_line <- grep("Scale", vrt_in)
+    if (length(scale_line) != 0) {
+      vrt_in[[scale_line]] <- "<Scale>1</Scale>"
+    }
+
+    offset_line <- grep("Offset", vrt_in)
+    if (length(offset_line) != 0) {
+      vrt_in[[offset_line]] <- "<Offset>0</Offset>"
+    }
+
+    writeLines(vrt_in, outfile_vrt)
+  }
   # Launch the spatial processing -
   # operations to be done depend on whether resize and/or
   # reprojection and/or resampling are necessary. Operations
