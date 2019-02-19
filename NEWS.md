@@ -1,5 +1,12 @@
 ## MODIStsp 1.3.7.9000
 
+- Fixed an issue causing incorrect application of scale/offest values on GDAL 
+versions > 2.3 (introduced by change of behaviour of gdal_buildvrt - https://trac.osgeo.org/gdal/ticket/3221#comment:5) - see https://github.com/ropensci/MODIStsp/issues/163
+
+- Added support for the following products: MOD21A1D.006 MOD21A1N.006 MOD21A2.006/
+
+## MODIStsp 1.3.7
+
 ### Main changes
 
 - Fixed a bug leading to incorrect computation of custom spectral indices containing "additive"

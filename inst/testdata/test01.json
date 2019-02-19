@@ -27,7 +27,7 @@
 "compress": "None",
 "nodata_change": "No",
 "scale_val": "No",
-"delete_hdf": "Yes",
+"delete_hdf": "No",
 "reprocess": "Yes",
 "bbox": [ 6.1126e+05, 4.9603e+06, 9.155e+05, 5.089e+06 ],
 "out_folder": "$tempdir",

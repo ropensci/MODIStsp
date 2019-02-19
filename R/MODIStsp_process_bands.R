@@ -331,6 +331,9 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # workaround on gdal >= 2.3
   gdalutils_ver <- getOption("gdalUtils_gdalPath")[[1]]$version[[1]]
   gdalutils_ver <- as.numeric(substring(gdalutils_ver, 1,3))
+
+  # Fix needed to avoid that scale and offset are automatically "applied"
+  # when working with GDAL > 2.3.x
   if (gdalutils_ver >= 2.3 & tools::file_ext(outfile_vrt) == "vrt") {
     vrt_in      <- readLines(outfile_vrt)
     scale_line <- grep("Scale", vrt_in)
