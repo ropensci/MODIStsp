@@ -80,7 +80,7 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
   - 11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data
     Products**](https://lpdaac.usgs.gov/about/news_archive/decommissioning_modis_version_5_land_data_products_april_9_2018_second_notice).
     As per NASA notice above, MODIS v005 products are going to be
-    decommisioned, and will soon be no longer available for download.
+    decommissioned, and will soon be no longer available for download.
     Support for those products will be removed in the next MODIStsp
     version\!.
 

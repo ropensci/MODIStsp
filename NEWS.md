@@ -29,7 +29,7 @@ to not render
 
 ### Main changes
 
-Maintenance release to solve CRAN build errors on debian, due to the test_resetindexesx
+Maintenance release to solve CRAN build errors on debian, due to the test_resetindexes
 test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
 function was modified to require explicit permission by the user to write on 
 the MODIStsp_previous.json file
@@ -412,4 +412,4 @@ v1.2.0 was released on 29/07/2015
 ### Major changes
 
 First stable release of advanced implementation of MODIStsp !
-We know it should be 1.0.0, but thats'it !
+We know it should be 1.0.0, but that's it !
