@@ -14,8 +14,8 @@
                     <native_res>463.3127</native_res>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09A1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD09A1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.006/</http_aqua>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09a1_v006</www>
                     <bands>
                         <band>
@@ -346,8 +346,8 @@
                     <prod_fullname>M*D09CMG: MODIS/Terra/Aqua Surface Reflectance Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Surf_Ref_Daily_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09CMG.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09CMG.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD09CMG.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09CMG.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09cmg_v006</www>
@@ -902,8 +902,8 @@
                     <prod_fullname>M*D09GA: MODIS/Terra/Aqua Surface Reflectance Daily L2G Global 1km and 500m SIN Grid V006</prod_fullname>
                     <main_out_folder>Surf_Ref_Daily_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD09GA.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09ga_v006</www>
@@ -1347,8 +1347,8 @@
                     <prod_fullname>M*D09GQ: MODIS/Terra/Aqua Surface Reflectance Daily L2G Global 250m SIN Grid V006</prod_fullname>
                     <main_out_folder>Surf_Ref_Daily_250m_v6</main_out_folder>
                     <native_res>231.656358</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD09GQ.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09gq_v006</www>
@@ -1499,8 +1499,8 @@
                     <prod_fullname>M*D09Q1: MODIS/Terra/Aqua Surface Reflectance 8-Day L3 Global 250m SIN Grid V006</prod_fullname>
                     <main_out_folder>Surf_Ref_8Days_250m_v6</main_out_folder>
                     <native_res>231.656358</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD09Q1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD09Q1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09q1_v006</www>
@@ -1681,8 +1681,8 @@
                     <prod_fullname>M*DOCGA: MODIS/Terra/Aqua Ocean Reflectance Daily L2G-Lite Global 1 km SIN Grid V006</prod_fullname>
                     <main_out_folder>Oc_Ref_Daily_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MODOCGA.006006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYDOCGA.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MODOCGA.006006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYDOCGA.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/modocga_v006</www>
@@ -1885,8 +1885,8 @@
                     <prod_fullname>M*DTBGA: MODIS/Terra/Aqua Thermal Bands Daily L2G Global 1 km SIN Grid V006</prod_fullname>
                     <main_out_folder>Therm_Daily_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MODTBGA.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYDTBGA.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MODTBGA.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYDTBGA.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/modtbga_v006</www>
@@ -2339,8 +2339,8 @@
                     <prod_fullname>M*D11C1: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Surf_Temp_Daily_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1_v006</www>
@@ -2567,8 +2567,8 @@
                     <prod_fullname>M*D11A1: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Daily L3 Global 1 km Grid SIN V006</prod_fullname>
                     <main_out_folder>Surf_Temp_Daily_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD11A1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a1_v006</www>
@@ -2747,8 +2747,8 @@
                     <prod_fullname>M*D11A2: MODIS/Terra/Aqua Land Surface Temperature/Emissivity 8-Day L3 Global 1 km Grid SIN V006</prod_fullname>
                     <main_out_folder>Surf_Temp_8Days_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11A2.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD11A2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11A2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a2_v006</www>
@@ -2927,8 +2927,8 @@
                     <prod_fullname>M*D11B1: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Daily L3 Global 6 km Grid SIN V006</prod_fullname>
                     <main_out_folder>Surf_Temp_Daily_GridSin_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD11B1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11B1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b1_v006</www>
@@ -3218,8 +3218,8 @@
                     <prod_fullname>M*D11B2: MODIS/Terra/Aqua Land Surface Temperature/Emissivity 8-Day L3 Global 6 km Grid SIN V006</prod_fullname>
                     <main_out_folder>Surf_Temp_8Days_GridSin_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B2.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B2.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD11B2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11B2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b2_v006</www>
@@ -3473,8 +3473,8 @@
                     <prod_fullname>M*D11B3: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Monthly L3 Global 6 km Grid SIN V006</prod_fullname>
                     <main_out_folder>Surf_Temp_Monthly_GridSin_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11B3.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11B3.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD11B3.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11B3.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b3_v006</www>
@@ -3728,8 +3728,8 @@
                     <prod_fullname>M*D11C1: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Surf_Temp_Daily_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD11C1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1_v006</www>
@@ -3956,8 +3956,8 @@
                     <prod_fullname>M*D11C2: MODIS/Terra/Aqua Land Surface Temperature/Emissivity 8-Day L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Surf_Temp_8Days_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C2.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD11C2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11C2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c2_v006</www>
@@ -4184,8 +4184,8 @@
                     <prod_fullname>M*D11C3: MODIS/Terra/Aqua Land Surface Temperature/Emissivity Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Surf_Temp_Monthly_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD11C3.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c3_v006</www>
@@ -4862,8 +4862,8 @@
                     <prod_fullname>MCD43A1: MODIS/Terra and Aqua BRDF/Albedo Model Parameters Daily L3 Global 500 m SIN Grid</prod_fullname>
                     <main_out_folder>BRDF_Albedo_ModelPar_Daily_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a1_v006</www>
@@ -5064,8 +5064,8 @@
                     <prod_fullname>MCD43A2: MODIS/Terra and Aqua BRDF/Albedo Quality Daily L3 Global 500 m SIN Grid V006500m</prod_fullname>
                     <main_out_folder>BRDF_Albedo_Quality_Daily_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a2_v006</www>
@@ -5257,8 +5257,8 @@
                     <prod_fullname>MCD43A3: MODIS/Terra and Aqua Albedo Daily L3 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>Albedo_Daily_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a3_v006</www>
@@ -5549,8 +5549,8 @@
                     <prod_fullname>MCD43A4: MODIS/Terra and Aqua Nadir BRDF-Adjusted Reflectance Daily L3 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>BRDF_Adj_Refl_Daily_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a4_v006</www>
@@ -5764,8 +5764,8 @@
                     <prod_fullname>MCD43C1: MODIS/Terra and Aqua BRDF/Albedo Model Parameters Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_ModelPar_Daily_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c1_v006</www>
@@ -6101,8 +6101,8 @@
                     <prod_fullname>MCD43C2: MODIS/Terra and Aqua BRDF/Albedo Snow-free Parameters Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_Quality_Daily_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c2_v006</www>
@@ -6429,8 +6429,8 @@
                     <prod_fullname>MCD43C3: MODIS/Terra and Aqua BRDF/Albedo Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>Albedo_Daily_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c3_v006</www>
@@ -6676,8 +6676,8 @@
                     <prod_fullname>MCD43C4: MODIS/Terra and Aqua Nadir BRDF-Adjusted Reflectance Daily L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Adj_Refl_16Day_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c4_v006</www>
@@ -6873,8 +6873,8 @@
                     <prod_fullname>MCD43D01: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_B1_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D01.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D01.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D01.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D01.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d01_v006</www>
@@ -6904,8 +6904,8 @@
                     <prod_fullname>MCD43D02: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_B1_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D02.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D02.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D02.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D02.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d02_v006</www>
@@ -6935,8 +6935,8 @@
                     <prod_fullname>MCD43D03: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_B1_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D03.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D03.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D03.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D03.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d03_v006</www>
@@ -6966,8 +6966,8 @@
                     <prod_fullname>MCD43D04: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_B2_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D04.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D04.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D04.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D04.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d04_v006</www>
@@ -6997,8 +6997,8 @@
                     <prod_fullname>MCD43D05: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_B2_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D05.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D05.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D05.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D05.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d05_v006</www>
@@ -7028,8 +7028,8 @@
                     <prod_fullname>MCD43D06: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_B2_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D06.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D06.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D06.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D06.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d06_v006</www>
@@ -7059,8 +7059,8 @@
                     <prod_fullname>MCD43D07: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_B3_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D07.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D07.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D07.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D07.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d07_v006</www>
@@ -7090,8 +7090,8 @@
                     <prod_fullname>MCD43D08: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_B3_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D08.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D08.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D08.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D08.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d08_v006</www>
@@ -7121,8 +7121,8 @@
                     <prod_fullname>MCD43D09: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_B3_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D09.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D09.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D09.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D09.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d09_v006</www>
@@ -7152,8 +7152,8 @@
                     <prod_fullname>MCD43D10: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_B4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D10.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D10.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D10.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D10.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d10_v006</www>
@@ -7183,8 +7183,8 @@
                     <prod_fullname>MCD43D11: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_B4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D11.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D11.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D11.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D11.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d11_v006</www>
@@ -7214,8 +7214,8 @@
                     <prod_fullname>MCD43D12: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_B4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D12.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D12.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D12.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D12.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d12_v006</www>
@@ -7245,8 +7245,8 @@
                     <prod_fullname>MCD43D13: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_B4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D13.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D13.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D13.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D13.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d13_v006</www>
@@ -7276,8 +7276,8 @@
                     <prod_fullname>MCD43D14: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_B4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D14.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D14.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D14.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D14.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d14_v006</www>
@@ -7307,8 +7307,8 @@
                     <prod_fullname>MCD43D15: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_B4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D15.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D15.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D15.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D15.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d15_v006</www>
@@ -7338,8 +7338,8 @@
                     <prod_fullname>MCD43D16: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_B5_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D16.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D16.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D16.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D16.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d16_v006</www>
@@ -7369,8 +7369,8 @@
                     <prod_fullname>MCD43D17: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_B5_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D17.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D17.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D17.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D17.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d17_v006</www>
@@ -7400,8 +7400,8 @@
                     <prod_fullname>MCD43D18: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_B5_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D18.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D18.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D18.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D18.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d18_v006</www>
@@ -7431,8 +7431,8 @@
                     <prod_fullname>MCD43D19: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_B6_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D19.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D19.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D19.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D19.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d19_v006</www>
@@ -7462,8 +7462,8 @@
                     <prod_fullname>MCD43D20: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_B6_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D20.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D20.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D20.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D20.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d20_v006</www>
@@ -7493,8 +7493,8 @@
                     <prod_fullname>MCD43D21: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_B6_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D21.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D21.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D21.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D21.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d21_v006</www>
@@ -7524,8 +7524,8 @@
                     <prod_fullname>MCD43D22: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 VIS Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_Vis_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D22.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D22.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D22.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D22.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d22_v006</www>
@@ -7555,8 +7555,8 @@
                     <prod_fullname>MCD43D23: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 VIS Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_Vis_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D23.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D23.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D23.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D23.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d23_v006</www>
@@ -7586,8 +7586,8 @@
                     <prod_fullname>MCD43D24: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 VIS Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_Vis_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D24.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D24.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D24.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D24.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d24_v006</www>
@@ -7617,8 +7617,8 @@
                     <prod_fullname>MCD43D25: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_NIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D25.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D25.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D25.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D25.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d25_v006</www>
@@ -7648,8 +7648,8 @@
                     <prod_fullname>MCD43D26: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_NIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D26.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D26.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D26.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D26.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d26_v006</www>
@@ -7679,8 +7679,8 @@
                     <prod_fullname>MCD43D27: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_NIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D27.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D27.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D27.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D27.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d27_v006</www>
@@ -7710,8 +7710,8 @@
                     <prod_fullname>MCD43D28: MODIS/Terra and Aqua BRDF/Albedo Parameter 1 Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_1_SWIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D28.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D28.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D28.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D28.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d28_v006</www>
@@ -7741,8 +7741,8 @@
                     <prod_fullname>MCD43D29: MODIS/Terra and Aqua BRDF/Albedo Parameter 2 Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_2_SWIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D29.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D29.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D29.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D29.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d29_v006</www>
@@ -7772,8 +7772,8 @@
                     <prod_fullname>MCD43D30: MODIS/Terra and Aqua BRDF/Albedo Parameter 3 Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>AlbPar_3_SWIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D30.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D30.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D30.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D30.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d30_v006</www>
@@ -7803,8 +7803,8 @@
                     <prod_fullname>MCD43D31: MODIS/Terra and Aqua BRDF/Albedo QA BRDF Quality Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_Quality_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D31.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D31.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D31.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D31.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d31_v006</www>
@@ -7834,8 +7834,8 @@
                     <prod_fullname>MCD43D32: MODIS/Terra and Aqua BRDF/Albedo Local Solar Noon Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_SolNoon_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D32.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D32.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D32.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D32.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d32_v006</www>
@@ -7865,8 +7865,8 @@
                     <prod_fullname>MCD43D33: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>Alb_ValObs_B1_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D33.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D33.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D33.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D33.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d33_v006</www>
@@ -7896,8 +7896,8 @@
                     <prod_fullname>MCD43D34: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>Alb_ValObs_B2_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D34.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D34.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D34.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D34.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d34_v006</www>
@@ -7927,8 +7927,8 @@
                     <prod_fullname>MCD43D35: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>Alb_ValObs_B3_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D35.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D35.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D35.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D35.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d35_v006</www>
@@ -7958,8 +7958,8 @@
                     <prod_fullname>MCD43D36: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>Alb_ValObs_B4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D36.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D36.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D36.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D36.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d36_v006</www>
@@ -7989,8 +7989,8 @@
                     <prod_fullname>MCD43D37: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>Alb_ValObs_B5_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D37.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D37.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D37.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D37.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d37_v006</www>
@@ -8020,8 +8020,8 @@
                     <prod_fullname>MCD43D38: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>Alb_ValObs_B6_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D38.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D38.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D38.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D38.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d38_v006</www>
@@ -8051,8 +8051,8 @@
                     <prod_fullname>MCD43D39: MODIS/Terra and Aqua BRDF/Albedo ValidObs Band 7 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>Alb_ValObs_B7_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D39.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D39.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D39.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D39.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d39_v006</www>
@@ -8082,8 +8082,8 @@
                     <prod_fullname>MCD43D40: MODIS/Terra and Aqua BRDF/Albedo QA SnowStatus Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_Snow_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D40.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D40.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D40.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D40.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d40_v006</www>
@@ -8113,8 +8113,8 @@
                     <prod_fullname>MCD43D41: MODIS/Terra and Aqua BRDF/Albedo Uncertainty Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_Unc_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D41.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D41.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D41.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D41.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d41_v006</www>
@@ -8144,8 +8144,8 @@
                     <prod_fullname>MCD43D42: MODIS/Terra and Aqua BRDF/Albedo BSA Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_B1_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D42.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D42.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D42.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D42.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d42_v006</www>
@@ -8175,8 +8175,8 @@
                     <prod_fullname>MCD43D43: MODIS/Terra and Aqua BRDF/Albedo BSA Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_B2_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D43.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D43.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D43.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D43.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d43_v006</www>
@@ -8206,8 +8206,8 @@
                     <prod_fullname>MCD43D44: MODIS/Terra and Aqua BRDF/Albedo BSA Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_B3_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D44.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D44.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D44.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D44.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d44_v006</www>
@@ -8237,8 +8237,8 @@
                     <prod_fullname>MCD43D45: MODIS/Terra and Aqua BRDF/Albedo BSA Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_B4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D45.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D45.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D45.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D45.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d45_v006</www>
@@ -8268,8 +8268,8 @@
                     <prod_fullname>MCD43D46: MODIS/Terra and Aqua BRDF/Albedo BSA Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_B5_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D46.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D46.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D46.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D46.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d46_v006</www>
@@ -8299,8 +8299,8 @@
                     <prod_fullname>MCD43D47: MODIS/Terra and Aqua BRDF/Albedo BSA Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_B6_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D47.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D47.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D47.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D47.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d47_v006</www>
@@ -8330,8 +8330,8 @@
                     <prod_fullname>MCD43D48: MODIS/Terra and Aqua BRDF/Albedo BSA Band 7 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_B7_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D48.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D48.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D48.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D48.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d48_v006</www>
@@ -8361,8 +8361,8 @@
                     <prod_fullname>MCD43D49: MODIS/Terra and Aqua BRDF/Albedo BSA Vis Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_Vis_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D49.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D49.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D49.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D49.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d49_v006</www>
@@ -8392,8 +8392,8 @@
                     <prod_fullname>MCD43D50: MODIS/Terra and Aqua BRDF/Albedo BSA Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_NIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D50.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D50.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D50.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D50.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d50_v006</www>
@@ -8423,8 +8423,8 @@
                     <prod_fullname>MCD43D51: MODIS/Terra and Aqua BRDF/Albedo BSA Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_BSA_SWIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D51.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D51.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D51.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D51.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d51_v006</www>
@@ -8454,8 +8454,8 @@
                     <prod_fullname>MCD43D52: MODIS/Terra and Aqua BRDF/Albedo WSA Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_B1_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D52.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D52.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D52.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D52.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d52_v006</www>
@@ -8485,8 +8485,8 @@
                     <prod_fullname>MCD43D53: MODIS/Terra and Aqua BRDF/Albedo WSA Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_B2_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D53.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D53.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D53.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D53.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d53_v006</www>
@@ -8516,8 +8516,8 @@
                     <prod_fullname>MCD43D54: MODIS/Terra and Aqua BRDF/Albedo WSA Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_B3_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D54.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D54.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D54.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D54.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d54_v006</www>
@@ -8547,8 +8547,8 @@
                     <prod_fullname>MCD43D55: MODIS/Terra and Aqua BRDF/Albedo WSA Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_B4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D55.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D55.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D55.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D55.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d55_v006</www>
@@ -8578,8 +8578,8 @@
                     <prod_fullname>MCD43D56: MODIS/Terra and Aqua BRDF/Albedo WSA Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_B5_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D56.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D56.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D56.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D56.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d56_v006</www>
@@ -8609,8 +8609,8 @@
                     <prod_fullname>MCD43D57: MODIS/Terra and Aqua BRDF/Albedo WSA Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_B6_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D57.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D57.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D57.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D57.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d57_v006</www>
@@ -8640,8 +8640,8 @@
                     <prod_fullname>MCD43D58: MODIS/Terra and Aqua BRDF/Albedo WSA Band 7 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_B7_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D58.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D58.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D58.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D58.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d58_v006</www>
@@ -8671,8 +8671,8 @@
                     <prod_fullname>MCD43D59: MODIS/Terra and Aqua BRDF/Albedo WSA Vis Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_Vis_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D59.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D59.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D59.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D59.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d59_v006</www>
@@ -8702,8 +8702,8 @@
                     <prod_fullname>MCD43D60: MODIS/Terra and Aqua BRDF/Albedo WSA Nir Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_NIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D60.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D60.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D60.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D60.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d60_v006</www>
@@ -8733,8 +8733,8 @@
                     <prod_fullname>MCD43D61: MODIS/Terra and Aqua BRDF/Albedo WSA Shortwave Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Alb_WSA_SWIR_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D61.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D61.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D61.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D61.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d61_v006</www>
@@ -8764,8 +8764,8 @@
                     <prod_fullname>MCD43D62: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 1 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_NBAR_Band1_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D62.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D62.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D62.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D62.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d62_v006</www>
@@ -8795,8 +8795,8 @@
                     <prod_fullname>MCD43D63: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 2 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_NBAR_Band2_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D63.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D63.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D63.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D63.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d63_v006</www>
@@ -8826,8 +8826,8 @@
                     <prod_fullname>MCD43D64: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 3 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_NBAR_Band3_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D64.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D64.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D64.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D64.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d64_v006</www>
@@ -8857,8 +8857,8 @@
                     <prod_fullname>MCD43D65: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 4 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_NBAR_Band4_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D65.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D65.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D65.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D65.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d65_v006</www>
@@ -8888,8 +8888,8 @@
                     <prod_fullname>MCD43D66: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 5 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_NBAR_Band5_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D66.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D66.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D66.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D66.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d66_v006</www>
@@ -8919,8 +8919,8 @@
                     <prod_fullname>MCD43D67: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 6 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_NBAR_Band6_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D67.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D67.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D67.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D67.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d67_v006</www>
@@ -8950,8 +8950,8 @@
                     <prod_fullname>MCD43D68: MODIS/Terra and Aqua BRDF/Albedo NBAR Band 7 Daily L3 Global 30 ArcSec CMG V006</prod_fullname>
                     <main_out_folder>BRDF_Albedo_NBAR_Band7_Daily_30ArcSec_v6</main_out_folder>
                     <native_res>933.3333</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D68.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD43D68.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D68.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D68.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d68_v006</www>
@@ -8981,8 +8981,8 @@
                     <prod_fullname>M*D13A1: MODIS/Terra/Aqua Vegetation Indices 16-Day L3 Global 500m Grid SIN V006</prod_fullname>
                     <main_out_folder>VI_16Days_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD13A1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a1_v006</www>
@@ -9193,8 +9193,8 @@
                     <prod_fullname>M*D13A2: MODIS/Terra/Aqua Vegetation Indices 16-Day L3 Global 1km Grid SIN V006</prod_fullname>
                     <main_out_folder>VI_16Days_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a2_v006</www>
@@ -9405,8 +9405,8 @@
                     <prod_fullname>M*D13A3: MODIS/Terra/Aqua Vegetation Indices Monthly L3 Global 1km Grid SIN V006</prod_fullname>
                     <main_out_folder>VI_Monthly_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13A3.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD13A3.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a3_v006</www>
@@ -9608,8 +9608,8 @@
                     <prod_fullname>M*D13C1: MODIS/Terra/Aqua Vegetation Indices 16-Day L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>VI_16Days_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD13C1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c1_v006</www>
@@ -9829,8 +9829,8 @@
                     <prod_fullname>MOD13C2: MODIS/Terra Vegetation Indices Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>VI_Monthly_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c2_v006</www>
@@ -10050,8 +10050,8 @@
                     <prod_fullname>MOD13Q1: MODIS/Terra Vegetation Indices 16-Day L3 Global 250m Grid SIN V006</prod_fullname>
                     <main_out_folder>VI_16Days_250m_v6</main_out_folder>
                     <native_res>231.656358</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13q1_v006</www>
@@ -10262,8 +10262,8 @@
                     <prod_fullname>MCD15A2H: MODIS/Terra+Aqua Leaf Area Index/FPAR 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>LAI_8Days_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2H.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A2H.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD15A2H.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD15A2H.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a2h_v006</www>
@@ -10412,8 +10412,8 @@
                     <prod_fullname>MCD15A3H: MODIS/Terra+Aqua Leaf Area Index/FPAR 4-Day L4 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>LAI_4Days_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3H.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD15A3H.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD15A3H.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD15A3H.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a3h_v006</www>
@@ -10562,8 +10562,8 @@
                     <prod_fullname>M*D15A2H: MODIS/Terra/Aqua Leaf Area Index/FPAR 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>LAI_8Days_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD15A2H.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD15A2H.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD15A2H.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD15A2H.006/</http_aqua>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod15a2h_v006</www>
                     <combined>0</combined>
                     <tiled>1</tiled>
@@ -10878,8 +10878,8 @@
                     <prod_fullname>M*D17A2H: MODIS/Terra/Aqua Gross Primary Productivity 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>Gross_PP_8Days_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A2H.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A2H.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD17A2H.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD17A2H.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a2h_v006</www>
@@ -10959,8 +10959,8 @@
                     <prod_fullname>M*D17A3H: MODIS/Terra/Aqua Net Primary Production Yearly L4 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>Net_PP_Yearly_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD17A3H.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD17A3H.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD17A3H.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD17A3H.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a3h_v006</www>
@@ -11265,8 +11265,8 @@
                         <band>
                             <bandname>Burn_Date</bandname>
                             <fullname>Burn day of year</fullname>
-                            <datatype>16-bit unsigned integer</datatype>
-                            <nodata_in>-1</nodata_in>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-2:-1</nodata_in>
                             <nodata_out>65535</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -11293,7 +11293,7 @@
                             <bandname>First_Day</bandname>
                             <fullname>First Day</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>-1</nodata_in>
+                            <nodata_in>-2:-1</nodata_in>
                             <nodata_out>65535</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -11302,7 +11302,7 @@
                             <bandname>Last_Day</bandname>
                             <fullname>Last Day</fullname>
                             <datatype>16-bit signed integer</datatype>
-                            <nodata_in>-1</nodata_in>
+                            <nodata_in>-2:-1</nodata_in>
                             <nodata_out>65535</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -11355,8 +11355,8 @@
                     <prod_fullname>M*D14A1: MODIS/Terra Thermal Anomalies and Fire Daily L3 Global 1km V006</prod_fullname>
                     <main_out_folder>ThermalAn_Fire_Daily_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD14A1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a1_v006</www>
@@ -11427,8 +11427,8 @@
                     <prod_fullname>M*D14A2: MODIS/Terra Thermal Anomalies and Fire 8-Day L3 Global 1km V006</prod_fullname>
                     <main_out_folder>ThermalAn_Fire_8Days_1Km_v6</main_out_folder>
                     <native_res>926.6254</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.006/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD14A2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a2_v006</www>
@@ -11481,8 +11481,8 @@
                     <prod_fullname>MCD12C1: Land Cover Type Yearly L3 Global 0.05Deg CMG v051</prod_fullname>
                     <main_out_folder>LandCover_Type_Yearly_005dg_v5</main_out_folder>
                     <native_res>5600</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12c1</www>
@@ -11695,8 +11695,8 @@
                     <prod_fullname>MCD12Q1: Land Cover Type Yearly L3 Global 500 m SIN Grid v051</prod_fullname>
                     <main_out_folder>LandCover_Type_Yearly_500m_v5</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_terra>
-                    <http_aqua>http://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
                     <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q1</www>

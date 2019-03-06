@@ -83,7 +83,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   gdalinfo_raw  <- if (length(gdalinfo_hdf_1stlayer) > 0) {
     # if more than a band is present, take gdalinfo from the first
     # band
-    gdalUtils::gdalinfo(gdalinfo_hdf_1stlayer)
+    gdalUtils::gdalinfo(file.path(out_folder_mod, modislist[1]), sd = 1)
   } else {
     # otherwise, take from the HDF directly
     gdalinfo_hdf_raw

@@ -483,7 +483,7 @@ MODIStsp <- function(gui               = TRUE,
     #   launch MODIStsp_process to Download and preprocess the selected     ####
     #   images. To do so, retrieve all processing parameters from either
     #   gemeral_opts (processing options), or prod_opts (characteristics of
-    #   the selected product - band names, available indexes, etcetera.) and
+    #   the selected product - band names, available indexes, etc.) and
     #   put them in the `p_opts` list. Then launch `MODIStsp_process`
 
     MODIStsp_process(sel_prod = general_opts$sel_prod,
