@@ -44,6 +44,7 @@ get_mod_filenames <- function(http,
                               tiled,
                               out_folder_mod,
                               gui) {
+
   success <- FALSE
   if (used_server == "http") {
     #   ________________________________________________________________________
@@ -98,7 +99,7 @@ get_mod_filenames <- function(http,
     getlist <- list.files(out_folder_mod, "\\.hdf$")
     sel_prod_vers <- unlist(
       stringr::str_split(
-        gsub("http:\\/\\/[A-Za-z0-9\\.]+\\/[A-Z]+\\/([A-Z0-9]+)\\.([0-9]+)\\/", "\\1 \\2", #nolint
+        gsub("https:\\/\\/[A-Za-z0-9\\.]+\\/[A-Z]+\\/([A-Z0-9]+)\\.([0-9]+)\\/", "\\1 \\2", #nolint
              http
         ), " ")
     )

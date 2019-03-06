@@ -20,7 +20,7 @@ testthat::test_that(
 
     # check that size of files file resulting from test run are equal to those
     #  obtained with a "working" MODIStsp version
-    expect_equal(file_sizes, c(80670, 80670, 40916, 40916))
+    expect_equal(file_sizes, c(80662, 80662, 40908, 40908))
 
     # check that median value of files file resulting from test run are
     # equal to those obtained with a "working" MODIStsp version
