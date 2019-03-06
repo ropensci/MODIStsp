@@ -331,6 +331,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
         # Start Cycling on directories containing images to be downloaded and
         # identify the required ones (i.e., the ones corresponding to selected
         # dates)
+
         for (date in seq_along(date_dirs)) {
           #Create the date string
           date_name <- sub(sub(

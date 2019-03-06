@@ -260,10 +260,16 @@ MODIStsp <- function(gui               = TRUE,
 
     gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE)
   }
-  gdal_version <- package_version(
-    gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*", "\\1",
-         rgdal::getGDALVersionInfo(str = "--version"))
-  )
+  # gdal_version <- package_version(
+  #   gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*", "\\1",
+  #        rgdal::getGDALVersionInfo(str = "--version"))
+  # )
+
+  gdal_version <- getOption("gdalUtils_gdalPath")[[1]]$version[[1]]
+
+  if (verbose) message("GDAL version in use: ", as.character(gdal_version))
+
+  gdal_version <- as.numeric(substring(gdal_version, 1,3))
 
   # GDAL version used as minimum required version
   gdal_minversion  <- package_version("1.11.1")
@@ -282,8 +288,6 @@ MODIStsp <- function(gui               = TRUE,
          strwrap("http://ropensci.github.io/MODIStsp/articles/installation.html#
       installing-r-and-gdal", width = 200))
   }
-
-  if (verbose) message("GDAL version in use: ", as.character(gdal_version))
 
   # ____________________________________________________________________________
   # Files/Folder Initialization and set-up of default parameters            ####
@@ -479,7 +483,7 @@ MODIStsp <- function(gui               = TRUE,
     #   launch MODIStsp_process to Download and preprocess the selected     ####
     #   images. To do so, retrieve all processing parameters from either
     #   gemeral_opts (processing options), or prod_opts (characteristics of
-    #   the selected product - band names, available indexes, etcetera.) and
+    #   the selected product - band names, available indexes, etc.) and
     #   put them in the `p_opts` list. Then launch `MODIStsp_process`
 
     MODIStsp_process(sel_prod = general_opts$sel_prod,

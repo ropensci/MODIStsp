@@ -98,7 +98,7 @@ get_mod_dirs <- function(http,
     # Retrieve the list of hdf files matching the product / version
     items <- list.files(out_folder_mod, "\\.hdf$")
     sel_prod_vers <- unlist(stringr::str_split(gsub(
-      "http:\\/\\/[A-Za-z0-9\\.]+\\/[A-Z]+\\/([A-Z0-9]+)\\.([0-9]+)\\/", "\\1 \\2", #nolint
+      "https:\\/\\/[A-Za-z0-9\\.]+\\/[A-Z]+\\/([A-Z0-9]+)\\.([0-9]+)\\/", "\\1 \\2", #nolint
       http), " "))
     items <- items[grep(paste0(
       sel_prod_vers[1], "\\.A20[0-9]{5}\\.(?:h[0-9]{2}v[0-9]{2}\\.)?",  #nolint
@@ -106,9 +106,9 @@ get_mod_dirs <- function(http,
 
     # Extract dates
 
-    date_dirs <- strftime(as.Date(gsub(
+    date_dirs <- unique(strftime(as.Date(gsub(
       paste0(sel_prod_vers[1], "\\.A(20[0-9]{5})\\..*"),"\\1", #nolint
-      items), format = "%Y%j"), "%Y.%m.%d")
+      items), format = "%Y%j"), "%Y.%m.%d"))
     attr(date_dirs, "server") <- "offline"
   }
 

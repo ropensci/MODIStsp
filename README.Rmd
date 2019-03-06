@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![](http://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://travis-ci.org/ropensci/MODIStsp)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1286981.svg)](https://doi.org/10.5281/zenodo.1286981)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
 [![Coverage Status](http://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](http://codecov.io/github/ropensci/MODIStsp?branch=master)
 [![](http://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/onboarding/issues/184)
 
@@ -32,7 +32,7 @@ files they want to process. They also can select which additional Quality Indica
 should be extracted from the aggregated MODIS Quality Assurance layers and, in the 
 case of Surface Reflectance products, which Spectral Indexes should be computed 
 from the original reflectance bands. For each output layer, outputs are saved as
-single-band raster filescorresponding to each available acquisition date. 
+single-band raster files corresponding to each available acquisition date. 
 Virtual files allowing access to the entire time series as a single file can be 
 also created. All processing parameters can be easily selected with a user-friendly
 GUI, although non-interactive execution exploiting a previously created Options 
@@ -59,6 +59,9 @@ L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessi
 
 ## Important News ! 
 
+- 05/03/2019 - MODIStsp 1.3.8 is out. Fixes an issue causing incorrect application of scale/offset values on GDAL versions > 2.3 (https://github.com/ropensci/MODIStsp/issues/163) and adds support for products MOD21A1D.006 MOD21A1N.006 MOD21A2.006
+
+
 - 29/11/2018 - We recently discovered a nasty bug in the computation of some custom spectral indices (those including additions / subtractions on reflectance values, such as in (b1_NIR+0.1) / b2_Red. See [here](articles/discovered_bug.html) for further details! The bug is fixed as of version 1.3.7. 
 
 - 07/08/2018 - We are glad to report that MODIStsp is now included in the 
@@ -75,12 +78,12 @@ starting, April 2, 2018. **FTP download is therefore no longer working** and wil
 be removed in the next MODIStsp version!
 
 - 11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data Products**]( https://lpdaac.usgs.gov/about/news_archive/decommissioning_modis_version_5_land_data_products_april_9_2018_second_notice). As per NASA notice above, MODIS v005 products are going to be 
-decommisioned, and will soon be no longer available for download. Support for those
+decommissioned, and will soon be no longer available for download. Support for those
 products will be removed in the next MODIStsp version!.
 
 - 11/08/2017 - MODIStp 1.3.3 was released today. It provides improvements in
 processing speed, as well as the usual bug fixes
-(thanks to all the users that signalled problems !). Check the [Release Notes](https://github.com/ropensci/MODIStsp/releases/tag/v1.3.3) for further details !
+(thanks to all the users that signaled problems !). Check the [Release Notes](https://github.com/ropensci/MODIStsp/releases/tag/v1.3.3) for further details !
 
 -   25/07/2017 - As of today, **most of the content related to MODIStsp has been
 moved to our new website at [ropensci.github.io/MODIStsp](http://ropensci.github.io/MODIStsp/)

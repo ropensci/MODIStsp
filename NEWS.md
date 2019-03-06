@@ -1,3 +1,18 @@
+## MODIStsp 1.3.7.9000
+
+### Main changes
+
+- Fixed an issue causing incorrect application of scale/offset values on GDAL 
+versions > 2.3 (introduced by change of behaviour of gdal_buildvrt - https://trac.osgeo.org/gdal/ticket/3221#comment:5) - see https://github.com/ropensci/MODIStsp/issues/163
+
+- Added support for the following products: MOD21A1D.006 MOD21A1N.006 MOD21A2.006/
+
+#### Bug fixing
+
+- Fixed an issue preventing correct processing of some products in offline mode (
+https://github.com/ropensci/MODIStsp/issues/142)
+
+
 ## MODIStsp 1.3.7
 
 ### Main changes
@@ -22,7 +37,7 @@ to not render
 
 ### Main changes
 
-Maintenance release to solve CRAN build errors on debian, due to the test_resetindexesx
+Maintenance release to solve CRAN build errors on debian, due to the test_resetindexes
 test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
 function was modified to require explicit permission by the user to write on 
 the MODIStsp_previous.json file
@@ -141,7 +156,7 @@ v1.3.3 was released on 10/08/2017
 ### Major Changes
 
 -  Improved speed in computation of spectral indexes, quality indicators and in 
-   computation of scaled variables by usind `raster::calc()` and `raster::overlay`
+   computation of scaled variables by using `raster::calc()` and `raster::overlay`
    (commits [0f5d76d](https://github.com/ropensci/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e),     [0f5d76d](https://github.com/ropensci/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e), [e462721](https://github.com/ropensci/MODIStsp/commit/e462721a06a079185ec5a84270ea0c8bd8edf54d))
    
 -  Added functionality for unit testing using `testthat` and codecov integration.
@@ -224,7 +239,7 @@ v1.3.2 was released on 22/03/2017
     - Setting the "Scale output values" option to "Yes", scale factor and offsets 
       are applied if existing (for example, in this case Land Surface Temperature
       values in the output raster will be in °K), and  spectral indices are floating
-      point values (for example, NDVI is between -1 and 1, etcetera).
+      point values (for example, NDVI is between -1 and 1, etc.).
 
 ### Minor Changes:
 
@@ -352,9 +367,9 @@ v1.2.1 was released on 11/05/2016
    objects with temporal information added in the "z" attribute via setZ()
 
 2. Major changes/improvements in _MODIStsp\_extract_ function:
-    * Use of plain RasterStack with "z" attribute instead than rasterstackts
+    * Use of plain `RasterStack` with "z" attribute instead than `rasterstackts`
     * Use of gdal\_rasterize (_gdalUtils_) instead of rasterize (_rgdal_) to improve 
-      speed. Temporary shapes and rasters necessay are saved in "R" temporary folder
+      speed. Temporary shapes and rasters necessary are saved in "R" temporary folder
       and removed automatically
     * Fixed bugs on functionality for point/lines shapefiles, according to what 
       specified by the "small" and "small_method" parameters
@@ -405,4 +420,4 @@ v1.2.0 was released on 29/07/2015
 ### Major changes
 
 First stable release of advanced implementation of MODIStsp !
-We know it should be 1.0.0, but thats'it !
+We know it should be 1.0.0, but that's it !

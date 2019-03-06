@@ -169,19 +169,34 @@
     <div id="modistsp-1-3-7-9000" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-7-9000" class="anchor"></a>MODIStsp 1.3.7.9000</h2>
-</div>
-    <div id="modistsp-1-3-7" class="section level2">
-<h2 class="hasAnchor">
-<a href="#modistsp-1-3-7" class="anchor"></a>MODIStsp 1.3.7</h2>
 <div id="main-changes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#main-changes" class="anchor"></a>Main changes</h3>
 <ul>
-<li>Fixed a bug leading to incorrect computation of custom spectral indices containing “additive” parameters (e.g., (NIR+0.1)/(Red-0.2)) when scale_val == FALSE</li>
+<li><p>Fixed an issue causing incorrect application of scale/offset values on GDAL versions &gt; 2.3 (introduced by change of behaviour of gdal_buildvrt - <a href="https://trac.osgeo.org/gdal/ticket/3221#comment:5" class="uri">https://trac.osgeo.org/gdal/ticket/3221#comment:5</a>) - see <a href="https://github.com/ropensci/MODIStsp/issues/163" class="uri">https://github.com/ropensci/MODIStsp/issues/163</a></p></li>
+<li><p>Added support for the following products: MOD21A1D.006 MOD21A1N.006 MOD21A2.006/</p></li>
 </ul>
 <div id="bug-fixing" class="section level4">
 <h4 class="hasAnchor">
 <a href="#bug-fixing" class="anchor"></a>Bug fixing</h4>
+<ul>
+<li>Fixed an issue preventing correct processing of some products in offline mode ( <a href="https://github.com/ropensci/MODIStsp/issues/142" class="uri">https://github.com/ropensci/MODIStsp/issues/142</a>)</li>
+</ul>
+</div>
+</div>
+</div>
+    <div id="modistsp-1-3-7" class="section level2">
+<h2 class="hasAnchor">
+<a href="#modistsp-1-3-7" class="anchor"></a>MODIStsp 1.3.7</h2>
+<div id="main-changes-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#main-changes-1" class="anchor"></a>Main changes</h3>
+<ul>
+<li>Fixed a bug leading to incorrect computation of custom spectral indices containing “additive” parameters (e.g., (NIR+0.1)/(Red-0.2)) when scale_val == FALSE</li>
+</ul>
+<div id="bug-fixing-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#bug-fixing-1" class="anchor"></a>Bug fixing</h4>
 <ul>
 <li><p>Fixed a bug leading to not properly reassigning NoData values when processing full tiles and using change_nodata = TRUE</p></li>
 <li><p>Fixed inconsistencies in definition of characteristics of products MOD/MYD13C2/C1 and MOD/MYD13A3 (erroneous layers in xml)</p></li>
@@ -194,13 +209,13 @@
     <div id="modistsp-1-3-6" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-6" class="anchor"></a>MODIStsp 1.3.6</h2>
-<div id="main-changes-1" class="section level3">
+<div id="main-changes-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#main-changes-1" class="anchor"></a>Main changes</h3>
-<p>Maintenance release to solve CRAN build errors on debian, due to the test_resetindexesx test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex function was modified to require explicit permission by the user to write on the MODIStsp_previous.json file</p>
-<div id="bug-fixing-1" class="section level4">
+<a href="#main-changes-2" class="anchor"></a>Main changes</h3>
+<p>Maintenance release to solve CRAN build errors on debian, due to the test_resetindexes test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex function was modified to require explicit permission by the user to write on the MODIStsp_previous.json file</p>
+<div id="bug-fixing-2" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixing-1" class="anchor"></a>Bug fixing</h4>
+<a href="#bug-fixing-2" class="anchor"></a>Bug fixing</h4>
 <ul>
 <li>Fixed a bug leading to errors if only “Aqua” platform was selected for download <a href="https://github.com/ropensci/MODIStsp/issues/133"><a href='https://github.com/ropensci/MODIStsp/issues/133'>#133</a></a>
 </li>
@@ -211,13 +226,13 @@
     <div id="modistsp-1-3-5" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-5" class="anchor"></a>MODIStsp 1.3.5</h2>
-<div id="main-changes-2" class="section level3">
+<div id="main-changes-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#main-changes-2" class="anchor"></a>Main changes</h3>
+<a href="#main-changes-3" class="anchor"></a>Main changes</h3>
 <p>Maintenance release to solve CRAN build errors on debian, due to the test_addindex test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex function was modified to require explicit permission by the user to write on the MODIStsp_previous.json file</p>
-<div id="bug-fixing-2" class="section level4">
+<div id="bug-fixing-3" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixing-2" class="anchor"></a>Bug fixing</h4>
+<a href="#bug-fixing-3" class="anchor"></a>Bug fixing</h4>
 <ul>
 <li><p>Fixed bug leading to errors in processing extent when switching products with different Native projection (4008 vs sinusoidal), the projection string was not properly updated. <a href="https://github.com/ropensci/MODIStsp/commit/77f5693e9e1e180f05efaa04fa031567e782ba89">77f5693e9</a></p></li>
 <li><p>Fixed warnings on check for uniqueness in http addresses</p></li>
@@ -228,9 +243,9 @@
     <div id="modistsp-1-3-4" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modistsp-1-3-4" class="anchor"></a>MODIStsp 1.3.4</h2>
-<div id="main-changes-3" class="section level3">
+<div id="main-changes-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#main-changes-3" class="anchor"></a>Main changes</h3>
+<a href="#main-changes-4" class="anchor"></a>Main changes</h3>
 <div id="breaking-changes" class="section level4">
 <h4 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h4>
@@ -300,9 +315,9 @@
 <li>Added <code>MODIStsp_resetindexes</code> to remove all custom indexes from a MODIStsp json options file and <code>MODIStsp_reset_options</code> to reset MODIStsp options to default.</li>
 </ul>
 </div>
-<div id="bug-fixing-3" class="section level4">
+<div id="bug-fixing-4" class="section level4">
 <h4 class="hasAnchor">
-<a href="#bug-fixing-3" class="anchor"></a>Bug fixing</h4>
+<a href="#bug-fixing-4" class="anchor"></a>Bug fixing</h4>
 <ul>
 <li><p>Fixed bug affecting extent selection when working with non-tiled (MCD) products <a href="https://github.com/ropensci/MODIStsp/issues/122" class="uri">https://github.com/ropensci/MODIStsp/issues/122</a></p></li>
 <li><p>Fixed bugs affecting the “Seasonal” time series download</p></li>
@@ -330,7 +345,7 @@
 <h3 class="hasAnchor">
 <a href="#major-changes" class="anchor"></a>Major Changes</h3>
 <ul>
-<li><p>Improved speed in computation of spectral indexes, quality indicators and in computation of scaled variables by usind <code><a href="https://www.rdocumentation.org/packages/raster/topics/calc">raster::calc()</a></code> and <code><a href="https://www.rdocumentation.org/packages/raster/topics/overlay">raster::overlay</a></code> (commits <a href="https://github.com/ropensci/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e">0f5d76d</a>, <a href="https://github.com/ropensci/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e">0f5d76d</a>, <a href="https://github.com/ropensci/MODIStsp/commit/e462721a06a079185ec5a84270ea0c8bd8edf54d">e462721</a>)</p></li>
+<li><p>Improved speed in computation of spectral indexes, quality indicators and in computation of scaled variables by using <code><a href="https://www.rdocumentation.org/packages/raster/topics/calc">raster::calc()</a></code> and <code><a href="https://www.rdocumentation.org/packages/raster/topics/overlay">raster::overlay</a></code> (commits <a href="https://github.com/ropensci/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e">0f5d76d</a>, <a href="https://github.com/ropensci/MODIStsp/commit/0f5d76de1661958cd5cbaa79f8115035cb9c348e">0f5d76d</a>, <a href="https://github.com/ropensci/MODIStsp/commit/e462721a06a079185ec5a84270ea0c8bd8edf54d">e462721</a>)</p></li>
 <li><p>Added functionality for unit testing using <code>testthat</code> and codecov integration. (commit <a href="https://github.com/ropensci/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a">0c00fc6</a> and others)</p></li>
 <li><p>Added “testing mode” to allow users to test proper functioning. Now, running <code><a href="../reference/MODIStsp.html">MODIStsp(test = X)</a></code> (with X in (0,6)) runs the processing using default processing parameters (commit <a href="https://github.com/ropensci/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a">0c00fc6</a> and others)</p></li>
 </ul>
@@ -342,9 +357,9 @@
 <li>Suppression of verbose messages and (useless) warning messages while parsing the NASA servers and downloading data using “ftp” ( <a href="https://github.com/ropensci/MODIStsp/commit/3775d6099bc359925d3dcbd96c2ffe8455502648">3775d60</a>);</li>
 </ul>
 </div>
-<div id="bug-fixing-4" class="section level3">
+<div id="bug-fixing-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bug-fixing-4" class="anchor"></a>Bug fixing</h3>
+<a href="#bug-fixing-5" class="anchor"></a>Bug fixing</h3>
 <ul>
 <li><p>Fixed a bug preventing the “last” choice (or that present in the json file) from correctly showing in the GUI upon launch/restore of a saved json file (commit <a href="https://github.com/ropensci/MODIStsp/commit/633c2dddd29d45c618e4ca121112000ceefe91e3">633c2dd</a>)</p></li>
 <li>
@@ -386,7 +401,7 @@
 <p>Starting from v1.3.2:</p>
 <ul>
 <li>Leaving the “Scale output values” option to “No”, output files are left as provided by NASA, and additional indices are produced as integer values with a 10000 factor scale;</li>
-<li>Setting the “Scale output values” option to “Yes”, scale factor and offsets are applied if existing (for example, in this case Land Surface Temperature values in the output raster will be in °K), and spectral indices are floating point values (for example, NDVI is between -1 and 1, etcetera).</li>
+<li>Setting the “Scale output values” option to “Yes”, scale factor and offsets are applied if existing (for example, in this case Land Surface Temperature values in the output raster will be in °K), and spectral indices are floating point values (for example, NDVI is between -1 and 1, etc.).</li>
 </ul>
 </li>
 </ul>
@@ -410,9 +425,9 @@
 <li><p>Timeouts of httr/ftp requests were increased to prevent problems on download on slow connections</p></li>
 </ul>
 </div>
-<div id="bug-fixing-5" class="section level3">
+<div id="bug-fixing-6" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bug-fixing-5" class="anchor"></a>Bug fixing:</h3>
+<a href="#bug-fixing-6" class="anchor"></a>Bug fixing:</h3>
 <ul>
 <li>Fixed bug on FTP download speed (Issue <a href="https://github.com/ropensci/MODIStsp/issues/65"><a href='https://github.com/ropensci/MODIStsp/issues/65'>#65</a></a>)</li>
 <li>Fixed bug on download of tile 0, preventing download of images with DOY 001 and of all “yearly based” products (e.g., MOD17)(Issue <a href="https://github.com/ropensci/MODIStsp/issues/64"><a href='https://github.com/ropensci/MODIStsp/issues/64'>#64</a></a>)</li>
@@ -435,9 +450,9 @@
 <li><p>Added functionality for accelerating download using aria2c (Issue <a href="https://github.com/ropensci/MODIStsp/issues/55"><a href='https://github.com/ropensci/MODIStsp/issues/55'>#55</a></a>) on devel</p></li>
 </ul>
 </div>
-<div id="bug-fixing-6" class="section level3">
+<div id="bug-fixing-7" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bug-fixing-6" class="anchor"></a>Bug fixing</h3>
+<a href="#bug-fixing-7" class="anchor"></a>Bug fixing</h3>
 <ul>
 <li><p>Fixed bug on download with aria, throwing an error on partial download on http download with aria (<a href="https://github.com/ropensci/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78">6fbc875</a>)</p></li>
 <li><p>Fixed bug on M*D15A2 processing (Issue <a href="https://github.com/ropensci/MODIStsp/issues/60"><a href='https://github.com/ropensci/MODIStsp/issues/60'>#60</a></a>) on devel/master</p></li>
@@ -488,8 +503,9 @@
 <li><p>Modified format of “R” output time series from <em>rts</em> objects to <em>RasterStack</em> objects with temporal information added in the “z” attribute via setZ()</p></li>
 <li>Major changes/improvements in <em>MODIStsp_extract</em> function:
 <ul>
-<li>Use of plain RasterStack with “z” attribute instead than rasterstackts</li>
-<li>Use of gdal_rasterize (<em>gdalUtils</em>) instead of rasterize (<em>rgdal</em>) to improve speed. Temporary shapes and rasters necessay are saved in “R” temporary folder and removed automatically</li>
+<li>Use of plain <code>RasterStack</code> with “z” attribute instead than <code>rasterstackts</code>
+</li>
+<li>Use of gdal_rasterize (<em>gdalUtils</em>) instead of rasterize (<em>rgdal</em>) to improve speed. Temporary shapes and rasters necessary are saved in “R” temporary folder and removed automatically</li>
 <li>Fixed bugs on functionality for point/lines shapefiles, according to what specified by the “small” and “small_method” parameters</li>
 <li>Added functionality for retrieving data for small polygons</li>
 <li>Added out_format selection - xts or plain data.frame</li>
@@ -536,7 +552,7 @@
 <div id="major-changes-5" class="section level3">
 <h3 class="hasAnchor">
 <a href="#major-changes-5" class="anchor"></a>Major changes</h3>
-<p>First stable release of advanced implementation of MODIStsp ! We know it should be 1.0.0, but thats’it !</p>
+<p>First stable release of advanced implementation of MODIStsp ! We know it should be 1.0.0, but that’s it !</p>
 </div>
 </div>
   </div>
@@ -569,7 +585,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
    </div>

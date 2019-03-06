@@ -3,7 +3,7 @@
 [![](http://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build
 Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://travis-ci.org/ropensci/MODIStsp)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1286981.svg)](https://doi.org/10.5281/zenodo.1286981)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
 [![Coverage
 Status](http://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](http://codecov.io/github/ropensci/MODIStsp?branch=master)
 [![](http://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/onboarding/issues/184)
@@ -20,15 +20,15 @@ they want to process. They also can select which additional Quality
 Indicators should be extracted from the aggregated MODIS Quality
 Assurance layers and, in the case of Surface Reflectance products, which
 Spectral Indexes should be computed from the original reflectance bands.
-For each output layer, outputs are saved as single-band raster
-filescorresponding to each available acquisition date. Virtual files
-allowing access to the entire time series as a single file can be also
-created. All processing parameters can be easily selected with a
-user-friendly GUI, although non-interactive execution exploiting a
-previously created Options File is possible. Stand-alone execution
-outside an “R” environment is also possible, allowing to use scheduled
-execution of MODIStsp to automatically update time series related to a
-MODIS product and extent whenever a new image is available.
+For each output layer, outputs are saved as single-band raster files
+corresponding to each available acquisition date. Virtual files allowing
+access to the entire time series as a single file can be also created.
+All processing parameters can be easily selected with a user-friendly
+GUI, although non-interactive execution exploiting a previously created
+Options File is possible. Stand-alone execution outside an “R”
+environment is also possible, allowing to use scheduled execution of
+MODIStsp to automatically update time series related to a MODIS product
+and extent whenever a new image is available.
 
 **For more information, documentation and examples of use, please see
 MODIStsp website at
@@ -54,9 +54,14 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 
 ## Important News \!
 
+  - 05/03/2019 - MODIStsp 1.3.8 is out. Fixes an issue causing incorrect
+    application of scale/offset values on GDAL versions \> 2.3
+    (<https://github.com/ropensci/MODIStsp/issues/163>) and adds support
+    for products MOD21A1D.006 MOD21A1N.006 MOD21A2.006
+
   - 29/11/2018 - We recently discovered a nasty bug in the computation
     of some custom spectral indices (those including additions /
-    subtractions on reflectance values, such as in b1\_NIR+0.1) /
+    subtractions on reflectance values, such as in (b1\_NIR+0.1) /
     b2\_Red. See [here](articles/discovered_bug.html) for further
     details\! The bug is fixed as of version 1.3.7.
 
@@ -80,7 +85,7 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
   - 11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data
     Products**](https://lpdaac.usgs.gov/about/news_archive/decommissioning_modis_version_5_land_data_products_april_9_2018_second_notice).
     As per NASA notice above, MODIS v005 products are going to be
-    decommisioned, and will soon be no longer available for download.
+    decommissioned, and will soon be no longer available for download.
     Support for those products will be removed in the next MODIStsp
     version\!.
 

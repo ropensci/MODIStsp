@@ -2,7 +2,7 @@ Package: MODIStsp
 Title: A Tool for Automating Download and Preprocessing of MODIS Land Products
     Data
 Type: Package
-Version: 1.3.7
+Version: 1.3.8
 Authors@R: c(person("Lorenzo", "Busetto", email = "lbusett@gmail.com", role = c("aut", "cre"),
     comment = c(ORCID = '0000-0001-9634-6038')), 
     person("Luigi", "Ranghetti", email = "ranghetti.l@irea.cnr.it", role = c("aut"), 
@@ -69,3 +69,4 @@ LazyData: true
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
+Encoding: UTF-8

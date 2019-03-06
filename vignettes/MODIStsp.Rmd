@@ -1,5 +1,5 @@
 ---
-title: 'MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.6'
+title: 'MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.8'
 author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:lbusett@gmail.com)), Luigi
   Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 bibliography: MODIStsp.bib
@@ -424,7 +424,7 @@ Allows to define the area of interest for the processing. Two main options are p
 
     a. Using the "Start" and "End" horizontal and vertical sliders in the
     _Required MODIS Tiles_ frame.  
-    b. pressing the __"Select on Map"__ button. A map will open in a browser window,
+    b. clicking the __"Select on Map"__ button. A map will open in a browser window,
     allowing interactive selection of the required tiles
     
 During processing, data from the different tiles is mosaiced, and a single file 
@@ -437,17 +437,17 @@ either by:
     of the area of interest in the __Bounding Box__ frame. _Coordinates of the corners
     must be provided in the coordinate system of the selected  output projection_; 
     
-    b. pressing the __"Load Extent from a Spatial File" and selecting a raster or 
+    b. clicking the __"Load Extent from a Spatial File" and selecting a raster or 
     vector spatial file__. In this case, the bounding box of the selected file is
     retrieved, converted in the selected output projection, and shown in the
     "Bounding Box" frame. Required input MODIS tiles are also automatically retrieved 
     from the output extent, and the tiles selection sliders modified accordingly.
     
-    c. pressing the __"Select on Map"__ button. A map will open in a browser window,
+    c. clicking the __"Select on Map"__ button. A map will open in a browser window,
     allowing interactive selection of the spatial extent using the tools on the left.
     
     
-**Note: ** pressing the "show current extent" will open a browser window highlighting
+**Note: ** clicking the "show current extent" will open a browser window highlighting
 the currently selected spatial extent.
  
 ### _Reprojection and Resize_
