@@ -11267,7 +11267,7 @@
                             <fullname>Burn day of year</fullname>
                             <datatype>16-bit signed integer</datatype>
                             <nodata_in>-2:-1</nodata_in>
-                            <nodata_out>65535</nodata_out>
+                            <nodata_out>-32767</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
                         </band>
