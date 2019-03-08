@@ -3,10 +3,10 @@ MODIStsp 1.3.8
 
 ## Test environments
 
-* ubuntu 18.04 on local install, R 3.5.0
+* ubuntu 18.04 on local install, R 3.5.2
 * ubuntu 14.04 on travis-ci
 * win-builder (R-devel, R-release)
-* windows 10 on local install, R 3.5.1
+* windows 10 on local install, R 3.5.2
 
 ## R CMD check results
 

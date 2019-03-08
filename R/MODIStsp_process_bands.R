@@ -567,7 +567,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     rm(outrep, outrep_0)
   }
 
-
   # If output format is ENVI, add data ignore value to the
   # header file
   if (out_format == "ENVI") {
