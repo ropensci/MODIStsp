@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8.9000</span>
       </span>
     </div>
 
@@ -153,7 +153,7 @@
 <a class="sourceLine" id="cb1-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co"># --&gt; Launch the processing</span></a>
 <a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-
+<pre></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of </span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co"># `base::tempdir()`: </span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>
@@ -176,7 +176,7 @@
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="cf">for</span> (opts_file <span class="cf">in</span> opts_files) {</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> opts_file)</a>
 <a class="sourceLine" id="cb7-6" data-line-number="6">}</a></code></pre></div>
-
+<pre></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># MOD13A2 ouputs</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">out_fold &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_1Km_v6"</span>) </a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(out_fold)</a></code></pre></div>
