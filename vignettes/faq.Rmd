@@ -11,9 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Here you can find possible **solutions for common `MODIStsp` problems**. We will add to this page as soon as additional problems are reported. If these solutions does not work for you, or you have a different problem, signal it at: https://github.com/ropensci/MODIStsp/issues
 
-<a name="Installation Problems"></a>
 
-# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Installation Problems__
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <a name="Installation Problems"></a> __Installation Problems__
     
 -   [On Linux, installation fails due to some packages missing](#Missing-packages)
 -   [On Windows, the program hangs at first interactive execution, while attempting to install `gWisgets2RGtk2`](#gWidgets-error)
@@ -21,11 +20,7 @@ Here you can find possible **solutions for common `MODIStsp` problems**. We will
 -   [Installing from github fails due to missing dependencies](#github-error)
 
 
-<a name="Missing-packages"></a>
-
-<a name="gWidgets-error"></a>
-
-#### - On Windows, `MODIStsp` fails to install, signaling problems in installation of either `gwidgetsRGtk2` or `RGtk2` 
+#### - <a name="gWidgets-error"></a> On Windows, `MODIStsp` fails to install, signaling problems in installation of either `gwidgetsRGtk2` or `RGtk2` 
 
  Please try to install package `gwidgetsRGtk2` beforehand using: 
   
@@ -46,7 +41,7 @@ https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2
 , starting from "Download the GTK+ all-in-one bundle. I downloaded version 2.22 for Windows 64-bit.". Then try to install `gWisgetsRGtk2` before `MODIStsp` as explained in the point above.
  
 
-#### - On Linux, installation fails due to some packages missing
+#### - <a name="Missing-packages"></a> On Linux, installation fails due to some packages missing
 
 Please Install the following required dependencies: 
     * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (required by package ```RGtk2```)
@@ -66,9 +61,9 @@ On **rpm-based systems**, to install packages open a terminal and type;
 ```
 On **others distros**: we did not test installation on other distros yet - if you experience problems please contact us.
 
-<a name="gdal-error"></a>
 
-#### - MODIStsp hangs at first execution, while looking for `gdal` installation
+
+#### - <a name="gdal-error"></a> MODIStsp hangs at first execution, while looking for `gdal` installation
 
 At the first execution `MODIStsp` searches for a valid `GDAL` installation. If nothing happens for a long time (e.g., several minutes), `MODIStsp` (and in particular the `gdalUtils` package on which it relies) is not finding a valid `GDAL` installation in the more common locations. To solve the problem:
 
@@ -77,9 +72,9 @@ At the first execution `MODIStsp` searches for a valid `GDAL` installation. If n
 
 If nothing works, please report the issue here: https://github.com/ropensci/MODIStsp/issues
 
-<a name="github-error"></a>
 
-#### - Installing from github fails due to missing dependencies
+
+#### - <a name="github-error"></a> Installing from github fails due to missing dependencies
 
 There are currently some problems in installing `MODIStsp` **via `install_github`** on R >= 3.3.1 due to not correct installation of dependencies (related to a bug in CRAN version of `install_github`). Installing the development version of `devtools` should solve the issue. To do so, on a **clean** R/RStudio session do:
 
@@ -106,15 +101,14 @@ If you still don't succeed, please contact us !
 
 ____________________________________________________________________________________
 
-<a name="Data download Problems"></a>
 
-# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Data download Problems__ 
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <a name="Data download Problems"></a> __Data download Problems__ 
 
 -   [On 'http' download, files are not getting downloaded, OR you get 'timeout' problems](#timeout-error)
 
-<a name="timeout-error"></a>
 
-#### - On 'http' download, files are not getting downloaded, OR you get 'timeout' problems
+
+#### - <a name="timeout-error"></a> On 'http' download, files are not getting downloaded, OR you get 'timeout' problems
 
 1. Visit your [earthdata "profile" page](https://urs.earthdata.nasa.gov/profile), click on "My Applications" and *ensure that "LP DAAC Data Pool" is authorized*. If not, click on "Approve More Applications", search for it in the list and approve it.
 2. Verify that the **username and password** you provided are correct (Those can be obtained by **registering an account** at: https://urs.earthdata.nasa.gov/profile.);
@@ -141,29 +135,26 @@ If nothing of the above solves your problem, please report the issue here: https
 ____________________________________________________________________________________
 
 
-<a name="processing-errors"></a>
-
-# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Processing Problems__
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <a name="processing-errors"></a> __Processing Problems__
 
 -   [`MODIStsp` fails while processing product **MxDyyy**](#product-error)
 -   [I can't find the processed files](#whereare-error)
 -   [Working with already downloaded hdf files](#old-pdfs)
 
-<a name="product-error"></a>
 
-#### - MODIStsp fails while processing product **MxDyyy**
+
+#### - <a name="product-error"></a> MODIStsp fails while processing product **MxDyyy**
 
 Although we tried to test functionality for all products, some bugs may be still present for specific products, due to the complexity and variability of MODIS hdfs structure. In that case, please report the issue here: https://github.com/ropensci/MODIStsp/issues 
 
-<a name="whereare-error"></a>
 
-#### - Where/How can I access the processed data ? 
+
+#### - <a name="whereare-error"></a> Where/How can I access the processed data ? 
 
 Please see [here](output.html)
 
-<a name="old-pdfs"></a>
 
-#### - Working with already downloaded hdf files
+#### - <a name="old-pdfs"></a> Working with already downloaded hdf files
 
 If you wish to use `MODIStsp` to process MODIS hdf images that you already downloaded from NASA servers, you should proceed like this: 
 
@@ -187,8 +178,8 @@ If you wish to use `MODIStsp` to process MODIS hdf images that you already downl
 
 ____________________________________________________________________________________
 
-<a name="other-errors"></a>
 
-# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Other Problems__
+
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <a name="other-errors"></a> __Other Problems__
 
 Please report any other issues at https://github.com/ropensci/MODIStsp/issues
