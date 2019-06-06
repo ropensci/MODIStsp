@@ -336,14 +336,15 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # when working with GDAL > 2.3.x
   if (gdalutils_ver >= 2.3 & tools::file_ext(outfile_vrt) == "vrt") {
     vrt_in      <- readLines(outfile_vrt)
+
     scale_line <- grep("Scale", vrt_in)
     if (length(scale_line) != 0) {
-      vrt_in[[scale_line]] <- "<Scale>1</Scale>"
+      vrt_in[scale_line] <- "<Scale>1</Scale>"
     }
 
     offset_line <- grep("Offset", vrt_in)
     if (length(offset_line) != 0) {
-      vrt_in[[offset_line]] <- "<Offset>0</Offset>"
+      vrt_in[offset_line] <- "<Offset>0</Offset>"
     }
 
     writeLines(vrt_in, outfile_vrt)
