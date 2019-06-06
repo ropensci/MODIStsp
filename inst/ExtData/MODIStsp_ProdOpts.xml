@@ -16,7 +16,7 @@
                     <tiled>1</tiled>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD09A1.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.006/</http_aqua>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09a1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod09a1v006/</www>
                     <bands>
                         <band>
                             <bandname>b1_Red</bandname>
@@ -350,7 +350,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09CMG.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09cmg_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod09cmgv006</www>
                     <bands>
                         <band>
                             <bandname>b1_Red</bandname>
@@ -906,7 +906,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09GA.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09ga_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod09gav006</www>
                     <bands>
                         <band>
                             <bandname>NumObs_1km</bandname>
@@ -1351,7 +1351,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09GQ.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09gq_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod09gqv006</www>
                     <bands>
                         <band>
                             <bandname>NumObs</bandname>
@@ -1503,7 +1503,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD09Q1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09q1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod09q1v006</www>
                     <bands>
                         <band>
                             <bandname>b1_Red</bandname>
@@ -1685,7 +1685,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYDOCGA.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/modocga_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/modocgav006</www>
                     <bands>
                         <band>
                             <bandname>NumObs</bandname>
@@ -1889,7 +1889,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYDTBGA.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/modtbga_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/modtbgav006</www>
                     <bands>
                         <band>
                             <bandname>NumObs</bandname>
@@ -2343,7 +2343,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod11c1v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_CMG</bandname>
@@ -2571,7 +2571,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11A1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod11a1v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_1km</bandname>
@@ -2751,7 +2751,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11A2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11a2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod11a2v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_1km</bandname>
@@ -2931,7 +2931,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11B1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod11b1v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_6km</bandname>
@@ -3222,7 +3222,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11B2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod11b2v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_6km</bandname>
@@ -3477,7 +3477,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11B3.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11b3_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod11b3v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_6km</bandname>
@@ -3732,7 +3732,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11C1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod11c1v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_CMG</bandname>
@@ -3960,7 +3960,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11C2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod11c2v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_CMG</bandname>
@@ -4188,7 +4188,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD11C3.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod11c3_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod11c3v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_CMG</bandname>
@@ -4425,7 +4425,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD21A1D.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod21a1d_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod21a1dv006</www>
                     <bands>
                         <band>
                             <bandname>LST_1KM</bandname>
@@ -4560,7 +4560,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD21A1N.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod21a1n_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod21a1nv006</www>
                     <bands>
                         <band>
                             <bandname>LST_1KM</bandname>
@@ -4695,7 +4695,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD21A2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod21a2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod21a2v006</www>
                     <bands>
                         <band>
                             <bandname>LST_Day_1KM</bandname>
@@ -4866,7 +4866,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A1.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43a1v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_QA_B1</bandname>
@@ -5068,7 +5068,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A2.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43a2v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_Snow</bandname>
@@ -5261,7 +5261,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A3.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a3_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43a3v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_QA_B1</bandname>
@@ -5553,7 +5553,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43A4.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43a4_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43a4v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_QA_B1</bandname>
@@ -5768,7 +5768,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C1.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43c1v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_B1</bandname>
@@ -6105,7 +6105,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C2.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43c2v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_B1</bandname>
@@ -6433,7 +6433,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C3.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c3_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43c3v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_BSA_B1</bandname>
@@ -6680,7 +6680,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43C4.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43c4_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43c4v006</www>
                     <bands>
                         <band>
                             <bandname>Nad_Refl_b1_Red</bandname>
@@ -6877,7 +6877,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D01.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d01_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d01v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_B1</bandname>
@@ -6908,7 +6908,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D02.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d02_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d02v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_B1</bandname>
@@ -6939,7 +6939,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D03.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d03_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d03v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_B1</bandname>
@@ -6970,7 +6970,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D04.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d04_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d04v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_B2</bandname>
@@ -7001,7 +7001,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D05.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d05_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d05v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_B2</bandname>
@@ -7032,7 +7032,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D06.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d06_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d06v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_B2</bandname>
@@ -7063,7 +7063,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D07.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d07_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d07v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_B3</bandname>
@@ -7094,7 +7094,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D08.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d08_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d08v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_B3</bandname>
@@ -7125,7 +7125,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D09.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d09_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d09v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_B3</bandname>
@@ -7156,7 +7156,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D10.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d10_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d10v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_B4</bandname>
@@ -7187,7 +7187,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D11.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d11_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d11v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_B4</bandname>
@@ -7218,7 +7218,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D12.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d12_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d12v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_B4</bandname>
@@ -7249,7 +7249,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D13.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d13_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d13v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_B4</bandname>
@@ -7280,7 +7280,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D14.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d14_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d14v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_B4</bandname>
@@ -7311,7 +7311,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D15.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d15_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d15v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_B4</bandname>
@@ -7342,7 +7342,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D16.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d16_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d16v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_B5</bandname>
@@ -7373,7 +7373,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D17.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d17_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d17v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_B5</bandname>
@@ -7404,7 +7404,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D18.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d18_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d18v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_B5</bandname>
@@ -7435,7 +7435,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D19.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d19_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d19v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_B6</bandname>
@@ -7466,7 +7466,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D20.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d20_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d20v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_B6</bandname>
@@ -7497,7 +7497,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D21.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d21_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d21v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_B6</bandname>
@@ -7528,7 +7528,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D22.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d22_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d22v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_Vis</bandname>
@@ -7559,7 +7559,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D23.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d23_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d23v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_Vis</bandname>
@@ -7590,7 +7590,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D24.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d24_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d24v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_Vis</bandname>
@@ -7621,7 +7621,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D25.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d25_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d25v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_NIR</bandname>
@@ -7652,7 +7652,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D26.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d26_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d26v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_NIR</bandname>
@@ -7683,7 +7683,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D27.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d27_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d27v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_NIR</bandname>
@@ -7714,7 +7714,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D28.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d28_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d28v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_1_SWIR</bandname>
@@ -7745,7 +7745,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D29.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d29_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d29v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_2_SWIR</bandname>
@@ -7776,7 +7776,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D30.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d30_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d30v006</www>
                     <bands>
                         <band>
                             <bandname>AlbPar_3_SWIR</bandname>
@@ -7807,7 +7807,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D31.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d31_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d31v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Quality</bandname>
@@ -7838,7 +7838,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D32.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d32_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d32v006</www>
                     <bands>
                         <band>
                             <bandname>SolNoon</bandname>
@@ -7869,7 +7869,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D33.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d33_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d33v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_ValObs_B1</bandname>
@@ -7900,7 +7900,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D34.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d34_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d34v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_ValObs_B2</bandname>
@@ -7931,7 +7931,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D35.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d35_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d35v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_ValObs_B3</bandname>
@@ -7962,7 +7962,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D36.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d36_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d36v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_ValObs_B4</bandname>
@@ -7993,7 +7993,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D37.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d37_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d37v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_ValObs_B5</bandname>
@@ -8024,7 +8024,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D38.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d38_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d38v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_ValObs_B6</bandname>
@@ -8055,7 +8055,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D39.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d39_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d39v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_ValObs_B7</bandname>
@@ -8086,7 +8086,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D40.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d40_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d40v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_Snow</bandname>
@@ -8117,7 +8117,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D41.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d41_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d41v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_Unc</bandname>
@@ -8148,7 +8148,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D42.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d42_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d42v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_B1</bandname>
@@ -8179,7 +8179,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D43.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d43_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d43v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_B2</bandname>
@@ -8210,7 +8210,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D44.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d44_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d44v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_B3</bandname>
@@ -8241,7 +8241,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D45.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d45_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d45v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_B4</bandname>
@@ -8272,7 +8272,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D46.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d46_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d46v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_B5</bandname>
@@ -8303,7 +8303,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D47.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d47_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d47v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_B6</bandname>
@@ -8334,7 +8334,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D48.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d48_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d48v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_B7</bandname>
@@ -8365,7 +8365,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D49.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d49_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d49v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_Vis</bandname>
@@ -8396,7 +8396,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D50.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d50_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d50v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_NIR</bandname>
@@ -8427,7 +8427,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D51.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d51_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d51v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_BSA_SWIR</bandname>
@@ -8458,7 +8458,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D52.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d52_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d52v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_B1</bandname>
@@ -8489,7 +8489,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D53.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d53_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d53v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_B2</bandname>
@@ -8520,7 +8520,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D54.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d54_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d54v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_B3</bandname>
@@ -8551,7 +8551,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D55.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d55_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d55v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_B4</bandname>
@@ -8582,7 +8582,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D56.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d56_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d56v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_B5</bandname>
@@ -8613,7 +8613,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D57.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d57_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d57v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_B6</bandname>
@@ -8644,7 +8644,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D58.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d58_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d58v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_B7</bandname>
@@ -8675,7 +8675,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D59.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d59_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d59v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_Vis</bandname>
@@ -8706,7 +8706,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D60.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d60_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d60v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_NIR</bandname>
@@ -8737,7 +8737,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D61.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d61_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d61v006</www>
                     <bands>
                         <band>
                             <bandname>BRDF_Alb_WSA_SWIR</bandname>
@@ -8768,7 +8768,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D62.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d62_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d62v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_NBAR_B1</bandname>
@@ -8799,7 +8799,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D63.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d63_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d63v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_NBAR_B2</bandname>
@@ -8830,7 +8830,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D64.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d64_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d64v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_NBAR_B3</bandname>
@@ -8861,7 +8861,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D65.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d65_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d65v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_NBAR_B4</bandname>
@@ -8892,7 +8892,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D66.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d66_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d66v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_NBAR_B5</bandname>
@@ -8923,7 +8923,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D67.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d67_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d67v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_NBAR_B6</bandname>
@@ -8954,7 +8954,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD43D68.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd43d68_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd43d68v006</www>
                     <bands>
                         <band>
                             <bandname>Alb_NBAR_B7</bandname>
@@ -8985,7 +8985,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13A1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod13a1v006</www>
                     <bands>
                         <band>
                             <bandname>NDVI</bandname>
@@ -9197,7 +9197,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13A2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod13a2v006</www>
                     <bands>
                         <band>
                             <bandname>NDVI</bandname>
@@ -9409,7 +9409,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13A3.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13a3_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod13a3v006</www>
                     <bands>
                         <band>
                             <bandname>NDVI</bandname>
@@ -9612,7 +9612,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13C1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod13c1v006</www>
                     <bands>
                         <band>
                             <bandname>NDVI</bandname>
@@ -9833,7 +9833,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13C2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13c2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod13c2v006</www>
                     <bands>
                         <band>
                             <bandname>NDVI</bandname>
@@ -10054,7 +10054,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD13Q1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod13q1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod13q1v006</www>
                     <bands>
                         <band>
                             <bandname>NDVI</bandname>
@@ -10266,7 +10266,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD15A2H.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a2h_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd15a2hv006</www>
                     <bands>
                         <band>
                             <bandname>Fpar</bandname>
@@ -10416,7 +10416,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD15A3H.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd15a3h_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd15a3hv006</www>
                     <bands>
                         <band>
                             <bandname>Fpar</bandname>
@@ -10564,7 +10564,7 @@
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD15A2H.006/</http_terra>
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD15A2H.006/</http_aqua>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod15a2h_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod15a2hv006</www>
                     <combined>0</combined>
                     <tiled>1</tiled>
                     <bands>
@@ -10716,7 +10716,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD16A2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod16a2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod16a2v006</www>
                     <bands>
                         <band>
                             <bandname>ET_500m</bandname>
@@ -10815,7 +10815,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD16A3.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod16a3_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod16a3v006</www>
                     <bands>
                         <band>
                             <bandname>ET_500m</bandname>
@@ -10882,7 +10882,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD17A2H.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a2h_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod17a2hv006</www>
                     <bands>
                         <band>
                             <bandname>GPP</bandname>
@@ -10963,7 +10963,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD17A3H.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod17a3h_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod17a3hv006</www>
                     <bands>
                         <band>
                             <bandname>Npp</bandname>
@@ -11035,7 +11035,7 @@
                     <http_aqua>Not Available</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod44b_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod44bv006</www>
                     <bands>
                         <band>
                             <bandname>Perc_TreeCov</bandname>
@@ -11219,7 +11219,7 @@
                     <http_aqua>Not Available</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod44w_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod44wv006</www>
                     <bands>
                         <band>
                             <bandname>Water_mask</bandname>
@@ -11260,7 +11260,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD64A1.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd64a1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd64a1v006</www>
                     <bands>
                         <band>
                             <bandname>Burn_Date</bandname>
@@ -11359,7 +11359,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD14A1.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod14a1v006</www>
                     <bands>
                         <band>
                             <bandname>Fire_Mask</bandname>
@@ -11431,7 +11431,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD14A2.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod14a2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod14a2v006</www>
                     <bands>
                         <band>
                             <bandname>Fire_Mask</bandname>
@@ -11477,130 +11477,19 @@
             <file_prefix_aqua>MCD12C1</file_prefix_aqua>
             <versions>
                 <version>
-                    <v_number>5.1</v_number>
-                    <prod_fullname>MCD12C1: Land Cover Type Yearly L3 Global 0.05Deg CMG v051</prod_fullname>
-                    <main_out_folder>LandCover_Type_Yearly_005dg_v5</main_out_folder>
-                    <native_res>5600</native_res>
-                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_terra>
-                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.051/</http_aqua>
-                    <combined>1</combined>
-                    <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12c1</www>
-                    <bands>
-                        <band>
-                            <bandname>LC1</bandname>
-                            <fullname>Majority_Land_Cover_Type_1</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC1_Assessment</bandname>
-                            <fullname>Majority_Land_Cover_Type_1_Assessment</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC1_Percent</bandname>
-                            <fullname>Majority_Land_Cover_Type_1_Percent</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC1_QC</bandname>
-                            <fullname>Majority_Land_Cover_Type_1_QC</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC2</bandname>
-                            <fullname>Majority_Land_Cover_Type_2</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC2_Assessment</bandname>
-                            <fullname>Majority_Land_Cover_Type_2_Assessment</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC2_Percent</bandname>
-                            <fullname>Majority_Land_Cover_Type_2_Percent</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC3</bandname>
-                            <fullname>Majority_Land_Cover_Type_3</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC3_Assessment</bandname>
-                            <fullname>Majority_Land_Cover_Type_3_Assessment</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC3_Percent</bandname>
-                            <fullname>Majority_Land_Cover_Type_3_Percent</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                    </bands>
-                    <quality_indicators>
-                        <quality>
-                            <quality_bandname>QC</quality_bandname>
-                            <quality_fullname>MODLAND_QC bits</quality_fullname>
-                            <quality_source>LC1_QC</quality_source>
-                            <quality_bitN>1-2</quality_bitN>
-                        </quality>
-                    </quality_indicators>
-                </version>
-                <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MCD12C1: Combined Land Cover Type CMG Yearly Global 0.05 Deg V006</prod_fullname>
+                    <prod_fullname>MODIS/Terra+Aqua Land Cover Type CMG Yearly L3 Global 0.05 Deg</prod_fullname>
                     <main_out_folder>LandCover_Type_Yearly_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.006/</http_terra>
-                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.006//</http_aqua>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>0</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12c1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd12c1v006/</www>
                     <bands>
                         <band>
                             <bandname>LC1</bandname>
-                            <fullname>Majority_Land_Cover_Type_1</fullname>
+                            <fullname>Most likely IGBP class for each 0.05 degree pixel</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
@@ -11609,7 +11498,7 @@
                         </band>
                         <band>
                             <bandname>LC1_Assessment</bandname>
-                            <fullname>Majority_Land_Cover_Type_1_Assessment</fullname>
+                            <fullname>Majority IGBP class conﬁdence</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
@@ -11618,7 +11507,7 @@
                         </band>
                         <band>
                             <bandname>LC1_Percent</bandname>
-                            <fullname>Majority_Land_Cover_Type_1_Percent</fullname>
+                            <fullname>Percent cover of each IGBP class at each pixel</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
@@ -11627,7 +11516,7 @@
                         </band>
                         <band>
                             <bandname>LC2</bandname>
-                            <fullname>Majority_Land_Cover_Type_2</fullname>
+                            <fullname>Most likely UMD class for each 0.05 degree pixel</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
@@ -11636,7 +11525,7 @@
                         </band>
                         <band>
                             <bandname>LC2_Assessment</bandname>
-                            <fullname>Majority_Land_Cover_Type_2_Assessment</fullname>
+                            <fullname>Majority UMD class conﬁdence (ﬁlled with land/water mask)</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
@@ -11645,7 +11534,7 @@
                         </band>
                         <band>
                             <bandname>LC2_Percent</bandname>
-                            <fullname>Majority_Land_Cover_Type_2_Percent</fullname>
+                            <fullname>Percent cover of each UMD class at each pixel</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
@@ -11654,7 +11543,7 @@
                         </band>
                         <band>
                             <bandname>LC3</bandname>
-                            <fullname>Majority_Land_Cover_Type_3</fullname>
+                            <fullname>Most likely LAI class for each 0.05 degree pixel</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
@@ -11663,7 +11552,7 @@
                         </band>
                         <band>
                             <bandname>LC3_Assessment</bandname>
-                            <fullname>Majority_Land_Cover_Type_3_Assessment</fullname>
+                            <fullname>Majority LAI class conﬁdence (ﬁlled with land/water mask)</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
@@ -11672,7 +11561,7 @@
                         </band>
                         <band>
                             <bandname>LC3_Percent</bandname>
-                            <fullname>Majority_Land_Cover_Type_3_Percent</fullname>
+                            <fullname>Percent cover of each LAI class at each pixel</fullname>
                             <datatype>8-bit unsigned integer</datatype>
                             <nodata_in>255</nodata_in>
                             <nodata_out>255</nodata_out>
@@ -11690,184 +11579,7 @@
             <file_prefix_terra>MCD12Q1</file_prefix_terra>
             <file_prefix_aqua>MCD12Q1</file_prefix_aqua>
             <versions>
-                <version>
-                    <v_number>5.1</v_number>
-                    <prod_fullname>MCD12Q1: Land Cover Type Yearly L3 Global 500 m SIN Grid v051</prod_fullname>
-                    <main_out_folder>LandCover_Type_Yearly_500m_v5</main_out_folder>
-                    <native_res>463.3127</native_res>
-                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_terra>
-                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.051/</http_aqua>
-                    <combined>1</combined>
-                    <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q1</www>
-                    <bands>
-                        <band>
-                            <bandname>LC1</bandname>
-                            <fullname>Land Cover Type 1 (IGBP)*</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC2</bandname>
-                            <fullname>Land Cover Type 2 (UMD)*</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC3</bandname>
-                            <fullname>Land Cover Type 3 (LAI/fPAR)*</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC4</bandname>
-                            <fullname>Land Cover Type 4 (NPP/BGC)*</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC5</bandname>
-                            <fullname>Land Cover Type 5 (PFT)**</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC1_Assessment</bandname>
-                            <fullname>Land Cover Type 1 Assessment</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC2_Assessment</bandname>
-                            <fullname>Land Cover Type 2 Assessment</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC3_Assessment</bandname>
-                            <fullname>Land Cover Type 3 Assessment</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC4_Assessment</bandname>
-                            <fullname>Land Cover Type 4 Assessment</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC5_Assessment</bandname>
-                            <fullname>Land Cover Type 5 Assessment</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC_QC</bandname>
-                            <fullname>Land Cover QC</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC1_2</bandname>
-                            <fullname>Land Cover Type 1 Secondary</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC1_2_Percent</bandname>
-                            <fullname>Land Cover Type 1 Secondary %</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC_Property1</bandname>
-                            <fullname>Land Cover Property 1</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC_Property2</bandname>
-                            <fullname>Land Cover Property 2</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                        <band>
-                            <bandname>LC_Property3</bandname>
-                            <fullname>Land Cover Property 3</fullname>
-                            <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
-                            <nodata_out>255</nodata_out>
-                            <scale_factor>1</scale_factor>
-                            <offset>0</offset>
-                        </band>
-                    </bands>
-                    <quality_indicators>
-                        <quality>
-                            <quality_bandname>Mandatory_QA</quality_bandname>
-                            <quality_fullname>Mandatory QA</quality_fullname>
-                            <quality_source>LC_QC</quality_source>
-                            <quality_bitN>0-1</quality_bitN>
-                        </quality>
-                        <quality>
-                            <quality_bandname>Quart_Up</quality_bandname>
-                            <quality_fullname>Quarters since updated</quality_fullname>
-                            <quality_source>LC_QC</quality_source>
-                            <quality_bitN>2-3</quality_bitN>
-                        </quality>
-                        <quality>
-                            <quality_bandname>LW_Mask</quality_bandname>
-                            <quality_fullname>Land-water mask</quality_fullname>
-                            <quality_source>LC_QC</quality_source>
-                            <quality_bitN>4-7</quality_bitN>
-                        </quality>
-                    </quality_indicators>
-                </version>
-                 <version>
+                  <version>
                     <v_number>6</v_number>
                     <prod_fullname>MCD12Q1: Land Cover Type Yearly L3 Global 500 m SIN Grid v006</prod_fullname>
                     <main_out_folder>LandCover_Type_Yearly_500m_v6</main_out_folder>
@@ -11876,7 +11588,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q1.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd12q1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd12q1v006/</www>
                     <bands>
                         <band>
                             <bandname>LC1</bandname>
@@ -11999,6 +11711,190 @@
                 </version>
             </versions>
         </MCD12Q1>
+        <MCD12Q2>
+            <name>LandCover_Dynamics_Yearly_500m (MCD12Q2)</name>
+            <cat_01>Land Cover Characteristics</cat_01>
+            <cat_02>Land Cover</cat_02>
+            <file_prefix_terra>MCD12Q1</file_prefix_terra>
+            <file_prefix_aqua>MCD12Q1</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MCD12Q2: MODIS/Terra and Aqua Land Cover Dynamics Yearly L3 Global 500m SIN Grid</prod_fullname>
+                    <main_out_folder>LandCover_Dynamics_Yearly_500m_v6</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD12Q2.006/</http_aqua>
+                    <combined>1</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/products/mcd12q2v006/</www>
+                    <bands>
+                        <band>
+                            <bandname>NumCycles</bandname>
+                            <fullname>Total number of valid vegetation cycles with peak in product year</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Greenup</bandname>
+                            <fullname>Date when EVI2 first crossed 15% of the segment EVI2 amplitude</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>MidGreenup</bandname>
+                            <fullname>Date when EVI2 first crossed 50% of the segment EVI2 amplitude</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Peak</bandname>
+                            <fullname>Date when EVI2 reached the segment maximum</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Maturity</bandname>
+                            <fullname>Date when EVI2 first crossed 90% of the segment EVI2 amplitude</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>MidGreendown</bandname>
+                            <fullname>Date when EVI2 last crossed 50% of the segment EVI2 amplitude</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Senescence</bandname>
+                            <fullname>Date when EVI2 last crossed 90% of the segment EVI2 amplitude</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Dormancy</bandname>
+                            <fullname>Date when EVI2 last crossed 15% of the segment EVI2 amplitude</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>EVI_Minimum</bandname>
+                            <fullname>Segment minimum EVI2 value</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>EVI_Amplitude</bandname>
+                            <fullname>Segment maximum - minimum EVI2</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>EVI_Area</bandname>
+                            <fullname>Sum of daily interpolated EVI2 from Greenup to Dormancy</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>QA_Overall</bandname>
+                            <fullname>QA code for entire segment</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>QA_Detailed</bandname>
+                            <fullname>Bit-packed, SDS-specific QA codes</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                    <quality_indicators>
+                        <quality>
+                            <quality_bandname>QA_Greenup</quality_bandname>
+                            <quality_fullname>QA_Greenup</quality_fullname>
+                            <quality_source>QA_Detailed</quality_source>
+                            <quality_bitN>0-1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QA_MidGreenup</quality_bandname>
+                            <quality_fullname>QA_MidGreenup</quality_fullname>
+                            <quality_source>QA_Detailed</quality_source>
+                            <quality_bitN>2-3</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QA_Maturity</quality_bandname>
+                            <quality_fullname>QA_Maturity</quality_fullname>
+                            <quality_source>QA_Detailed</quality_source>
+                            <quality_bitN>4-5</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QA_Peak</quality_bandname>
+                            <quality_fullname>QA_Peak</quality_fullname>
+                            <quality_source>QA_Detailed</quality_source>
+                            <quality_bitN>6-7</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QA_Senescence</quality_bandname>
+                            <quality_fullname>QA_Senescence</quality_fullname>
+                            <quality_source>QA_Detailed</quality_source>
+                            <quality_bitN>8-9</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QA_MidGreendown</quality_bandname>
+                            <quality_fullname>QA_MidGreendown</quality_fullname>
+                            <quality_source>QA_Detailed</quality_source>
+                            <quality_bitN>10-11</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QA_Dormancy</quality_bandname>
+                            <quality_fullname>QA_Dormancy</quality_fullname>
+                            <quality_source>QA_Detailed</quality_source>
+                            <quality_bitN>12-13</quality_bitN>
+                        </quality>
+                    </quality_indicators>
+                </version>
+            </versions>
+        </MCD12Q2>
+
         <MCD18A1>
             <name>Dwnwrd_Srw_Rad_3h_005dg (MCD18A1)</name>
             <cat_01>Radiation Budget Variables</cat_01>
@@ -12015,7 +11911,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A1.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd18a1_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd18a1v006</www>
                     <bands>
                         <band>
                             <bandname>DSR_tot</bandname>
@@ -12146,7 +12042,7 @@
                     <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD18A2.006/</http_aqua>
                     <combined>1</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mcd18a2_v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mcd18a2v006</www>
                     <bands>
                         <band>
                             <bandname>PAR_tot</bandname>
