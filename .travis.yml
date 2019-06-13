@@ -11,7 +11,7 @@ r:
 
 before_install:
   - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
-  - sudo add-apt-repository -y ppa:jeroen/jq --yes
+  - sudo add-apt-repository -y ppa:cran/jq --yes
   - sudo apt-get -qq update
   - sudo apt-get install -y libgdal-dev libproj-dev r-cran-ncdf4 libpoppler-cpp-dev
   - sudo apt-get install -y gdal-bin
