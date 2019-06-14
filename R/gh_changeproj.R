@@ -9,11 +9,11 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
 
   #nocov start
   # check if the change was triggered by a load_opts call
-  is_loadopts <- deparse(sys.calls()[[sys.nframe()-10]])[1] ==
+  is_loadopts <- deparse(sys.calls()[[sys.nframe() - 10]])[1] ==
     "gui_load_options(choice, wids, prod_opt_list, compress_dict)"
 
   if (gWidgets::svalue(wids$proj_choice) != "User Defined") {
-    if (is_loadopts){
+    if (is_loadopts) {
       choice <- TRUE
     } else {
       choice <- warn_projmess2()

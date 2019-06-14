@@ -99,16 +99,21 @@ for (single_shape in extent_list) {
            spatial_file_path = single_shape )
 }
 
-# output files are places in separate folders: 
+# output files are placed in separate folders: 
+
 outfiles_garda <- list.files(
   file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"),
   full.names = TRUE)
+outfiles_garda
+
 library(raster)       
 plot(raster(outfiles_garda[1]))
 
 outfiles_iseo <- list.files(
   file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"),
   full.names = TRUE)
+outfiles_iseo
+
 plot(raster(outfiles_iseo[1]))
 
 ```

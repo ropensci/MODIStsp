@@ -74,13 +74,14 @@ MODIStsp_download <- function(modislist,
     # On http download, try to catch size information from xml file ----
     if (download_server == "http") {
       while (success == FALSE) {
+
         size_string <- httr::RETRY("GET",
                                    paste0(remote_filename, ".xml"),
                                    httr::authenticate(user, password),
                                    times = n_retries,
                                    pause_base = 0.1,
                                    pause_cap = 10,
-                                   quiet = FALSE)
+                                   quiet = verbose)
 
         # if user/password are not valid, notify
         if (size_string["status_code"] == 401) {
@@ -158,7 +159,7 @@ MODIStsp_download <- function(modislist,
             # http download - httr
             download <- try(httr::GET(remote_filename,
                                       httr::authenticate(user, password),
-                                      httr::progress(),
+                                      # httr::progress(),
                                       httr::write_disk(local_filename,
                                                        overwrite = TRUE)))
           }

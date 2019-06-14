@@ -1,5 +1,12 @@
-## MODIStsp 1.3.8.9000
+## MODIStsp 1.3.9
 
+### Main changes
+
+- Fixes a bug causing crashes on MOD14A1 product
+
+- Adds support for product MCD12Q2 and removes support for no longer available version 5 of some products.
+
+- Updates web links to MODIS products description pages
 
 ## MODIStsp 1.3.8
 

@@ -81,7 +81,7 @@ check_proj4string.numeric  <- function(projection,
     if (abort == TRUE) {
       stop("check_proj4string --> Invalid EPSG code detected! Aborting!")
     } else {
-      if(verbose) warning("check_proj4string --> Invalid EPSG code detected,
+      if (verbose) warning("check_proj4string --> Invalid EPSG code detected,
                           returning `NA`!")
       return(NA)
     }
@@ -112,7 +112,7 @@ check_proj4string.character  <- function(projection,
     utm_zone <- str_pad(gsub("[NnSs]$","",projection), 2, "left", "0")
     utm_ns <- toupper(gsub("?[0-9]+","",projection))
     proj4string <- paste0("+init=epsg:32",
-                          if (utm_ns=="N") {"6"} else {"7"},
+                          if (utm_ns == "N") {"6"} else {"7"},
                           utm_zone)
     return(rgdal::checkCRSArgs(proj4string)[[2]])
   }
@@ -121,7 +121,7 @@ check_proj4string.character  <- function(projection,
     if (abort == TRUE) {
       stop("check_proj4string --> Invalid projection detected! Aborting!")
     } else {
-      if(verbose) (warning("check_proj4string --> Invalid projection detected,
+      if (verbose) (warning("check_proj4string --> Invalid projection detected,
                            returning `NA`!"))
       return(NA)
     }

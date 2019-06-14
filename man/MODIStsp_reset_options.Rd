@@ -15,11 +15,6 @@ by removing the MODIStsp_Previous.json file.
 May be useful to get back to a "working" state if the GUI gets somehow
 corrupted due to an invalid MODIStsp_Previous.json file used.
 }
-\examples{
-\dontrun{
-  MODIStsp_reset_options()
-}
-}
 \author{
 Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}
 }

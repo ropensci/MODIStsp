@@ -4,10 +4,6 @@
 #'  May be useful to get back to a "working" state if the GUI gets somehow
 #'  corrupted due to an invalid MODIStsp_Previous.json file used.
 #' @return The function is called for its side effects
-#' @examples
-#' \dontrun{
-#'   MODIStsp_reset_options()
-#' }
 #' @rdname MODIStsp_reset_options
 #' @export
 #' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>

@@ -51,6 +51,8 @@ Single-date processed rasters can be accessed by simply opening them  with a
 ```{R echo=TRUE, message=FALSE, warning=FALSE, highlight=TRUE, tidy=TRUE}
 modistsp_file <- file.path(tempdir(),"MODIStsp/VI_16Days_500m_v6/NDVI",
                            "MOD13A1_NDVI_2016_177.tif")
+modistsp_file
+
 my_raster     <- raster(modistsp_file)
 plot(my_raster)
 ```
@@ -63,6 +65,8 @@ by:
 # Load the NDVI time series
 ts_folder <- file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/Time_Series")
 in_virtual_file <- file.path(ts_folder, "RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData")
+in_virtual_file
+
 ts_data   <- get(load(in_virtual_file))
 ts_data
 ```

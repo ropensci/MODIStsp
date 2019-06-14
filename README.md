@@ -49,10 +49,14 @@ To cite `MODIStsp` please use:
 L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic
 preprocessing of MODIS Land Products time series, Computers &
 Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
-<http://dx.doi.org/10.1016/j.cageo.2016.08.020>, URL:
+<https://doi.org/10.1016/j.cageo.2016.08.020>, URL:
 <https://github.com/ropensci/MODIStsp>.
 
 ## Important News \!
+
+  - 07/06/2019 - MODIStsp 1.3.9 is out. Fixes a bug causing crashes on
+    MOD14A1 product, adds support for product MCD12Q2 and removes
+    support for no longer available version 5 of some products.
 
   - 05/03/2019 - MODIStsp 1.3.8 is out. Fixes an issue causing incorrect
     application of scale/offset values on GDAL versions \> 2.3
@@ -62,8 +66,9 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
   - 29/11/2018 - We recently discovered a nasty bug in the computation
     of some custom spectral indices (those including additions /
     subtractions on reflectance values, such as in (b1\_NIR+0.1) /
-    b2\_Red. See [here](articles/discovered_bug.html) for further
-    details\! The bug is fixed as of version 1.3.7.
+    b2\_Red. See
+    [here](https://ropensci.github.io/MODIStsp/articles/discovered_bug.html)
+    for further details\! The bug is fixed as of version 1.3.7.
 
   - 07/08/2018 - We are glad to report that MODIStsp is now included in
     the [rOpenSci](https://ropensci.org/about/) packages’ ecosystem. We
@@ -83,7 +88,7 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
     longer working** and will be removed in the next MODIStsp version\!
 
   - 11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data
-    Products**](https://lpdaac.usgs.gov/about/news_archive/decommissioning_modis_version_5_land_data_products_april_9_2018_second_notice).
+    Products**](https://lpdaac.usgs.gov/news/decommissioning-modis-version-51-land-cover-type-data-products-january-7-2019/).
     As per NASA notice above, MODIS v005 products are going to be
     decommissioned, and will soon be no longer available for download.
     Support for those products will be removed in the next MODIStsp
@@ -91,7 +96,7 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 
   - 11/08/2017 - MODIStp 1.3.3 was released today. It provides
     improvements in processing speed, as well as the usual bug fixes
-    (thanks to all the users that signalled problems \!). Check the
+    (thanks to all the users that signaled problems \!). Check the
     [Release
     Notes](https://github.com/ropensci/MODIStsp/releases/tag/v1.3.3) for
     further details \!
@@ -418,8 +423,8 @@ for more detailed instructions and examples).
 # Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its
+Conduct](https://github.com/ropensci/MODIStsp/blob/master/CONDUCT.md).
+By participating in this project you agree to abide by its
 terms.
 
 [![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

@@ -807,7 +807,7 @@ MODIStsp_GUI <- function(general_opts,
     handler   = function(h, ...) {
 
       choice <- warn_projmess1()
-      if (choice){
+      if (choice) {
         old_proj <- gWidgets::svalue(wids$output_proj4)
         selproj <- ginput(
           paste("Please insert a valid proj4string,",

@@ -79,7 +79,7 @@ default list of computable spectral indexes. Execution without the GUI
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
       </span>
     </div>
 
@@ -289,23 +289,18 @@ interaction.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'># Run the GUI to interactively define a new index
- </div><span class='co'># NOT RUN {</span>
- <span class='fu'>MODIStsp_addindex</span>()
-<span class='co'># }</span><div class='input'>
+ </div><div class='input'> <span class='fu'>MODIStsp_addindex</span>()</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 # Open the GUI to define a new index and save it in a custom json
 # options file.
-</div><span class='co'># NOT RUN {</span>
-<span class='no'>opts_jsfile</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/test_addindex.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='no'>opts_jsfile</span>)
-<span class='co'># }</span><div class='input'>
+</div><div class='input'><span class='no'>opts_jsfile</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/test_addindex.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='no'>opts_jsfile</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 # Define the new index in non-interactive execution, without specifying an
 # options file (thus modifying MODIStsp_previous.json)
 
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
+</div><div class='input'><span class='fu'>MODIStsp_addindex</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
   <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='st'>"Simple Useless Index"</span>,
-  <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)
-<span class='co'># }</span></pre>
+  <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSI", new_indexfullname = "Simple Useless Index",     new_indexformula = "b2_NIR+b1_Red"): The index acronym and/or full name are already present;</span>
+#&gt; <span class='error'>Please specify different ones.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

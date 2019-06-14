@@ -3,24 +3,24 @@
 #' @details MODIStsp can be used also as a stand-alone tool (i.e., without opening RStudio
 #'  or R-GUI) by launching a bash/batch script, which is stored in the installation
 #'  folder (/ExtData/Launcher)
-#'  To allow to easily find it, this function creates a desktop entry and a symbolic link 
-#'  to the bash script (on Linux) or a link in the Start Menu to the batch script and a 
+#'  To allow to easily find it, this function creates a desktop entry and a symbolic link
+#'  to the bash script (on Linux) or a link in the Start Menu to the batch script and a
 #'  shortcut on the desktop (on Windows).
 #'  __Note that__, if the packages MODIStsp is installed in a version-dependent directory
 #'  (as the default one is), this function should be re-executed after an R upgrade,
 #'  otherwise the links would continue to point to the old package version!
-#' @param bin_dir 
+#' @param bin_dir
 #'  - on Linux, directory in which the link to the bash script should be
 #'    placed, Default: /usr/bin - use of a path included in the PATH environment variable is
 #'    suggested;
-#'  - on Windows, directory where to place the menu entry in the Start Menu, 
+#'  - on Windows, directory where to place the menu entry in the Start Menu,
 #'    Default: Start Menu -> Programs -> MODIStsp.
 #' @param rscript_dir 'character' in Windows only, the path of the directory in which
-#'  Rscript is installed (default is "C:/Progra~1/R/R-<version>/bin/<arch>"). 
+#'  Rscript is installed (default is "C:/Progra~1/R/R-<version>/bin/<arch>").
 #'  Edit this parameter if R is installed in a custom directory.
 #' @param desktop_shortcut `logical` indicates if the desktop entry or the
 #'  desktop shortcut should be created, Default: TRUE.
-#' @param desktop_dir `character` 
+#' @param desktop_dir `character`
 #'   - on Linux, directory in which the desktop entry should be placed, Default: /usr/share/applications;
 #'   - on Windows, directory where to place the desktop entry, Default: "Desktop"
 #'   (Ignored if desktop_shortcut = FALSE).
@@ -42,7 +42,7 @@
 #' install_MODIStsp_launcher(sudo = TRUE)
 #'   # the administrator password is asked interactively}
 #'
-#' # Linux: installation in a directory which does not require administrator 
+#' # Linux: installation in a directory which does not require administrator
 #' # permissions
 #' \dontrun{
 #' install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"}
@@ -57,12 +57,12 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
                                       desktop_dir      = NA,
                                       desktop_shortcut = TRUE,
                                       sudo             = FALSE) {
-  
+
   #nocov start (no coverage test since this requires interactive execution)
-  
+
   MODIStsp_dir <- system.file(package = "MODIStsp")
   running_os   <- Sys.info()[["sysname"]]
-  
+
   if (running_os == "Linux") {
     if (is.na(bin_dir)) {
       bin_dir <- "usr/bin/MODIStsp"
@@ -103,9 +103,9 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
       )
     }
   }
-  
+
   if (running_os == "Windows") {
-    
+
     # Edit the R version in the bat launcher
     rscript_path <- if (!is.na(rscript_dir)) {
       rscript_dir
@@ -114,7 +114,7 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
         "C:\\Progra~1\\R\\",
         "R-",R.version["major"],".",R.version["minor"],"\\",
         "bin\\",
-        if(R.version["arch"]=="x86_64") {"x64"} else {"i386"}
+        if (R.version["arch"] == "x86_64") {"x64"} else {"i386"}
       )
     }
     if (!file.exists(file.path(rscript_path,"Rscript.exe"))) {
@@ -130,7 +130,7 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
       "SET Rscript_dir=\"", rscript_path, "\""
     )
     writeLines(bat_launcher, bat_launcher_path)
-    
+
     # Create entry in the start menu
     if (is.na(bin_dir)) {
       bin_dir <- file.path(
@@ -154,7 +154,7 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
       shell("cscript /nologo \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
       shell("del \"%TEMP%\\create_MODIStsp_shortcut.vbs\"")
     } else warning("Link in Start Menu already exists!")
-    
+
     # Create desktop shortcut
     if (desktop_shortcut) {
       if (!file.exists(file.path(desktop_dir, "MODIStsp"))) {
@@ -178,4 +178,4 @@ install_MODIStsp_launcher <- function(bin_dir          = NA,
     }
   }
   #nocov end
-} 
+}

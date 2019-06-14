@@ -11478,7 +11478,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MODIS/Terra+Aqua Land Cover Type CMG Yearly L3 Global 0.05 Deg</prod_fullname>
+                    <prod_fullname>MCD12C1: MODIS/Terra+Aqua Land Cover Type CMG Yearly L3 Global 0.05 Deg</prod_fullname>
                     <main_out_folder>LandCover_Type_Yearly_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD12C1.006/</http_terra>

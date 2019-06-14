@@ -110,9 +110,9 @@
 #'
 #' # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 #' # 2016-01-01 and 2016-12-18
-#' # __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series/RData"
+#' # __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series\/RData"
 #' # subfolder of your main output folder - see
-#' http://ropensci.github.io/MODIStsp/articles/output.html)
+#' # "http://ropensci.github.io/MODIStsp/articles/output.html")
 #'
 #' # Specify the filename of the RData RasterStack of interest
 #' stack_file  <- file.path(tempdir(),
@@ -234,7 +234,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
               "features outside RasterStack extent\n will be set to NA. ",
               "Outputs for features only partially inside will be retrieved\n ",
               "using only the available pixels !")
-      if (!setequal(sp_object$mdxtnq, shape$mdxtnq)){
+      if (!setequal(sp_object$mdxtnq, shape$mdxtnq)) {
 
         outside_feat <- setdiff(sp_object$mdxtnq, shape$mdxtnq)
       }

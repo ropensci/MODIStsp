@@ -19,6 +19,7 @@ inst/ExtData/Previous/MODIStsp_Previous.json
 configure.win
 cran-comments.md
 CODE_OF_CONDUCT.md
+CONDUCT.md
 ^docs$
 ^pkgdown$
 ^codecov\.yml$

@@ -236,7 +236,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
           c(max(x[1],y[1]), max(x[2],y[2]), min(x[3],y[3]), min(x[4],y[4]))
         },
         list(
-          reproj_bbox(bbox, outproj_str, mod_proj_str, enlarge=TRUE),
+          reproj_bbox(bbox, outproj_str, mod_proj_str, enlarge = TRUE),
           bbox(raster::raster(outfile_vrt_prev2))
         )
       )
@@ -399,7 +399,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              ot       = datatype,
              a_nodata = nodata_out,
              co = paste("COMPRESS", compress, sep = "="),
-             overwrite = TRUE, verbose = T
+             overwrite = TRUE, verbose = FALSE
            ),
            Resample0_Resize0 = gdalUtils::gdalwarp(
              outfile_vrt, outrep_file_0,

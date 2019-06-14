@@ -21,7 +21,7 @@ for (prod in seq_along(prod_opt_list)) {
                                   cat02 = prod_verdata[["cat02"]],
                                   Version   = prod_verdata[["v_number"]],
                                   Name = prod_verdata[["prod_fullname"]], 
-                                  Resolution= prod_verdata[["native_res"]],
+                                  Resolution = prod_verdata[["native_res"]],
                                   Info  = prod_verdata[["www"]])
     ind <- ind + 1
   }
@@ -50,8 +50,7 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>"))
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))
@@ -73,8 +72,7 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution =  as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) 
 
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
@@ -97,8 +95,7 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution =  as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) 
 
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
@@ -121,8 +118,8 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution =  as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>%
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) 
+
 # dplyr::select(Name, Version, Resolution, Info)
 # knitr::kable(cat2_products)
 # tab <- knitr::kable(tab, digits = 1, align = c("l","l","c","c","l"),
@@ -157,8 +154,7 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>"))
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))
@@ -180,8 +176,8 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>"))
+
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))
@@ -203,8 +199,7 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) 
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))
@@ -226,8 +221,8 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) 
+
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))
@@ -249,8 +244,8 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) 
+
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))
@@ -272,8 +267,8 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) 
+
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))
@@ -302,8 +297,7 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>"))
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))
@@ -325,8 +319,7 @@ tab <- cat_products %>%
   dplyr::mutate(Resolution = as.numeric(as.character(Resolution))) %>%  
   dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
                                               nsmall = 1))) %>% 
-  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) %>% 
-  as_data_frame()
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>"))
 library(DT)
 DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))

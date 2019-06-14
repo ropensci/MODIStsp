@@ -64,7 +64,7 @@ License: GPL 3.0
 install_MODIStsp_launcher(sudo = TRUE)
   # the administrator password is asked interactively}
 
-# Linux: installation in a directory which does not require administrator 
+# Linux: installation in a directory which does not require administrator
 # permissions
 \dontrun{
 install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"}

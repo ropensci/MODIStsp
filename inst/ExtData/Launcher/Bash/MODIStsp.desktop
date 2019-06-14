@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=MODIStsp
+Comment=Download and preprocessing of MODIS data
+Exec=/home/lb/Source/git/MODIStsp/inst/ExtData/Launcher/Bash/MODIStsp.sh
+Terminal=true
+Type=Application
+Categories=Science;Geography;
+StartupNotify=true

@@ -59,29 +59,33 @@ execution, or load an options file on non-interactive execution;
 License: GPL 3.0
 }
 \examples{
+
+\dontrun{
+#' # - Running the tool using the GUI
+
 # Running the tool without any option will start the GUI with the default or
 # last used settings, in interactive mode (i.e., with gui = TRUE).
 
-\dontrun{
 MODIStsp()
 }
-# Running the tool using the settings previously saved in a specific options
-# file
+
+\dontrun{
+
+#' # - Running the tool using the settings previously saved in a specific options file
 
 # **NOTE** Output files of examples are saved to file.path(tempdir(), "MODIStsp").
 # You can run the examples with `gui = TRUE` to set a different output folder!
-
-\dontrun{
 
 # Here we use a test json file saved in MODIStsp installation folder which
 # downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
 # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
 
 options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
-MODIStsp(gui = FALSE, options_file = options_file, verbose = FALSE)
+MODIStsp(gui = FALSE, options_file = options_file, verbose = TRUE)
 }
 
 \dontrun{
+
 # Running the tool using the settings previously saved in a specific option file
 # and specifying the extent from a spatial file allows to re-use the same
 # processing settings to perform download and reprocessing on a different area
@@ -89,10 +93,11 @@ MODIStsp(gui = FALSE, options_file = options_file, verbose = FALSE)
 options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
 MODIStsp(gui = FALSE, options_file = options_file,
-  spatial_file_path = spatial_file, verbose = FALSE)
+  spatial_file_path = spatial_file, verbose = TRUE)
 }
 
 \dontrun{
+
 # Running the tool using the settings previously saved in a
 # specific options file and specifying each time the extent from a different
 # spatial file (e.g., to perform the same processing on several extents)
@@ -111,20 +116,24 @@ extent_list
 options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 for (single_shape in extent_list) {
   MODIStsp(gui = FALSE, options_file = options_file,
-           spatial_file_path = single_shape, verbose = FALSE )
+           spatial_file_path = single_shape, verbose = TRUE)
 }
 
-# output files are places in separate folders:
+# output files are placed in separate folders:
 outfiles_garda <- list.files(file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"),
            full.names = TRUE)
+outfiles_garda
+
 library(raster)
-plot(raster(outfiles_garda[1]))
+plot(raster(outfiles_garda[1] ))
 
 outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"),
            full.names = TRUE)
+outfiles_iseo
+
 plot(raster(outfiles_iseo[1]))
 
-# See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html)
+# See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html
 }
 }
 \seealso{
