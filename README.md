@@ -30,10 +30,6 @@ environment is also possible, allowing to use scheduled execution of
 MODIStsp to automatically update time series related to a MODIS product
 and extent whenever a new image is available.
 
-**For more information, documentation and examples of use, please see
-MODIStsp website at
-[ropensci.github.io/MODIStsp](http://ropensci.github.io/MODIStsp/)**
-
 <a href="http://www.irea.cnr.it/en/">
 <img src="man/figures/logo_irea.png" height="40" align="left" /></a>
 
@@ -51,6 +47,12 @@ preprocessing of MODIS Land Products time series, Computers &
 Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 <https://doi.org/10.1016/j.cageo.2016.08.020>, URL:
 <https://github.com/ropensci/MODIStsp>.
+
+## Website
+
+For more information, documentation and examples of use, **see also the
+MODIStsp website at
+[ropensci.github.io/MODIStsp](http://ropensci.github.io/MODIStsp/)**
 
 ## Important News \!
 

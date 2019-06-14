@@ -40,8 +40,6 @@ File is possible. Stand-alone execution outside an "R" environment is also possi
 allowing to use scheduled execution of MODIStsp to automatically update time series 
 related to a MODIS product and extent whenever a new image is available. 
 
-__For more information, documentation and examples of use, please see MODIStsp website at [ropensci.github.io/MODIStsp](http://ropensci.github.io/MODIStsp/)__ 
-
 <a href="http://www.irea.cnr.it/en/"> <img src="man/figures/logo_irea.png" height="40" align="left" /></a> 
 
 ___`MODIStsp` is developed and maintained by Lorenzo Busetto and Luigi Ranghetti, 
@@ -56,6 +54,11 @@ L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessi
   Land Products time series, Computers & Geosciences, Volume 97, Pages
   40-48, ISSN 0098-3004, https://doi.org/10.1016/j.cageo.2016.08.020, URL: https://github.com/ropensci/MODIStsp. 
   
+
+## Website
+
+For more information, documentation and examples of use, __see also the MODIStsp website at [ropensci.github.io/MODIStsp](http://ropensci.github.io/MODIStsp/)__ 
+
 
 ## Important News ! 
 
