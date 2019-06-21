@@ -2,14 +2,15 @@ context("Check proper functioning of bbox_from_file")
 
 
 test_that("bbox_from_file works as expected", {
-
+  skip_on_cran()
   # bbox from a raster file
   r        <- raster::raster(xmn = -10, xmx = 10, ymn = -10, ymx = 10)
   r        <- raster::init(r, "cell")
-  tmpfile  <- tempfile(fileext = ".tif")
+  proj4string(r) <-
+    tmpfile  <- tempfile(fileext = ".tif")
   raster::writeRaster(r, tmpfile)
   rep_bbox <- bbox_from_file(tmpfile,
-                           crs_out = "+init=epsg:3035")
+                             crs_out = "+init=epsg:3035")
   expect_equal(as.numeric(rep_bbox), c(1786548, -3333786,  4321000, -1072611),
                tolerance = 0.000001)
 
@@ -30,7 +31,7 @@ test_that("bbox_from_file works as expected", {
 
   # expect error on a non-spatial file name
   in_file  <- system.file("ExtData", "MODIStsp_ProdOpts.xml",
-                         package = "MODIStsp")
+                          package = "MODIStsp")
   expect_error(bbox_from_file(in_file))
 
 })
