@@ -167,25 +167,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              n_retries,
                              verbose) {
 
-  mess_text <- "MODIStsp --> Starting processing"
-  # initialize processing messages in case of interactive execution ----
-
-  if (gui) {
-    #nocov start
-    mess     <- gWidgets::gwindow(title = "Processing Status",
-                                  width = 400,
-                                  height = 40)
-    mess_lab <- gWidgets::glabel(text = paste("---", mess_text, "---"),
-                                 editable = FALSE,
-                                 container = mess)
-    Sys.sleep(0.05)
-    #nocov end
-  } else {
-    mess_lab <- NULL
-  }
-
-  process_message(mess_text, gui, mess_lab, verbose)
-
   #   __________________________________________________________________________
   #   Intialize processing variables                                        ####
 
@@ -221,7 +202,39 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
   # main output folder --> subfolder of "out_folder" named after the selected
   # MODIS product
   out_prod_folder <- file.path(out_folder, main_out_folder)
+
+  # Preliminary check for MOD19 products: allow processing ONLY if a single tile
+  # is involved.
+
+  if (basename(out_prod_folder) == "MAIA_Land_Surf_BRF_500") {
+    if ((start_x != end_x) | (start_y != end_y)) {
+      warning("Processing for MCD19* products is possible only for one tile at a time! Processing aborted!") #nolint
+      return()
+    }
+  }
+
+
   dir.create(out_prod_folder, showWarnings = FALSE, recursive = TRUE)
+
+  mess_text <- "MODIStsp --> Starting processing"
+  # initialize processing messages in case of interactive execution ----
+
+  if (gui) {
+    #nocov start
+    mess     <- gWidgets::gwindow(title = "Processing Status",
+                                  width = 400,
+                                  height = 40)
+    mess_lab <- gWidgets::glabel(text = paste("---", mess_text, "---"),
+                                 editable = FALSE,
+                                 container = mess)
+    Sys.sleep(0.05)
+    #nocov end
+  } else {
+    mess_lab <- NULL
+  }
+
+  process_message(mess_text, gui, mess_lab, verbose)
+
 
   # get start/end years from start_date/end_date
   start_year <- unlist(strsplit(start_date, "[.]"))[1]

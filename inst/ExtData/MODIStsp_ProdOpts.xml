@@ -12157,4 +12157,332 @@
                 </version>
             </versions>
         </MCD18A2>
+   <MCD19A1>
+            <name>MAIA_Land_Surf_BRF (MCD19A1)</name>
+            <cat_01>Radiation Budget Variables</cat_01>
+            <cat_02>Radiation</cat_02>
+            <file_prefix_terra>MCD19A1</file_prefix_terra>
+            <file_prefix_aqua>MCD19A1</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MODIS/Terra+Aqua MAIAC Land Surface BRF Daily L2G Global 500 m and 1 km SIN Grid</prod_fullname>
+                    <main_out_folder>MAIA_Land_Surf_BRF_500</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD19A1.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD19A1.006/</http_aqua>
+                    <combined>1</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/products/mcd19a1v006/</www>
+                    <bands>
+                        <band>
+                            <bandname>Sur_refl1</bandname>
+                            <fullname>Surface reflectance for band 1 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                         <band>
+                            <bandname>Sur_refl2</bandname>
+                            <fullname>Surface reflectance for band 21 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl3</bandname>
+                            <fullname>Surface reflectance for band 3 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl4</bandname>
+                            <fullname>Surface reflectance for band 4 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl5</bandname>
+                            <fullname>Surface reflectance for band 5 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl6</bandname>
+                            <fullname>Surface reflectance for band 6 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl7</bandname>
+                            <fullname>Surface reflectance for band 7 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl8</bandname>
+                            <fullname>Surface reflectance for band 8 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl9</bandname>
+                            <fullname>Surface reflectance for band 9 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl10</bandname>
+                            <fullname>Surface reflectance for band 10 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl11</bandname>
+                            <fullname>Surface reflectance for band 11 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Sur_refl12</bandname>
+                            <fullname>Surface reflectance for band 12 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Snow_Fraction</bandname>
+                            <fullname>Snow fraction (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Sigma_BRFn1</bandname>
+                            <fullname>BRFn uncertainty over time, for band 1 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Sigma_BRFn2</bandname>
+                            <fullname>BRFn uncertainty over time, for band 2 (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Snow_Grain_Size</bandname>
+                            <fullname>Snow grain diameter (1 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Status_QA</bandname>
+                            <fullname>QA bits (1 km)</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>0</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Snow_Fit</bandname>
+                            <fullname>Land+Snow linear mixture model RMSE in bands 1,5,7 (1 km)</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>0</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Sur_refl_500m1</bandname>
+                            <fullname>Surface reflectance 500 m for band 1 (500 m)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Sur_refl_500m2</bandname>
+                            <fullname>Surface reflectance 500 m for band 2 (500 m)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Sur_refl_500m3</bandname>
+                            <fullname>Surface reflectance 500 m for band 3 (500 m)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Sur_refl_500m4</bandname>
+                            <fullname>Surface reflectance 500 m for band 4 (500 m)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Sur_refl_500m5</bandname>
+                            <fullname>Surface reflectance 500 m for band 5 (500 m)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Sur_refl_500m6</bandname>
+                            <fullname>Surface reflectance 500 m for band 6 (500 m)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Sur_refl_500m7</bandname>
+                            <fullname>Surface reflectance 500 m for band 7 (500 m)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>cosSZA</bandname>
+                            <fullname>Cosine of Solar zenith angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>cosVZA</bandname>
+                            <fullname>Cosine View zenith angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>RelAZ</bandname>
+                            <fullname>Relative azimuth angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.01</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Scattering_Angle</bandname>
+                            <fullname>Scattering Angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.01</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>VAZ</bandname>
+                            <fullname>View Azimuth Angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.01</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>SAZ</bandname>
+                            <fullname>Solar Azimuth Angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.01</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Glint_Angle</bandname>
+                            <fullname>Glint Angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.01</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Fv</bandname>
+                            <fullname>RTLS volumetric kernel (5 km)</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-99999</nodata_in>
+                            <nodata_out>-99999</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Fv</bandname>
+                            <fullname>RTLS volumetric kernel (5 km)</fullname>
+                            <datatype>32-bit float</datatype>
+                            <nodata_in>-99999</nodata_in>
+                            <nodata_out>-99999</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                </version>
+            </versions>
+        </MCD19A1>
 </products>

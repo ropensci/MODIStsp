@@ -65,6 +65,12 @@ MODIStsp_vrt_create <- function(
                      indexes_nodata_out[which(indexes_bandsel == 1)],
                      quality_nodata_out[which(quality_bandsel == 1)])
 
+
+    if (basename(out_prod_folder) == "MAIA_Land_Surf_BRF_500") {
+      warning("Creation of Time Series files for product MAIA_Land_Surf_BRF_500 is currently not possible!")
+      return()
+    }
+
     for (mb in seq_along(meta_bands)) {
 
       # Exclude VRT creation for products for which multiple multiple bands are
@@ -268,8 +274,19 @@ MODIStsp_vrt_create <- function(
               dir.create(meta_dir, showWarnings = FALSE, recursive = TRUE)
 
               # create stack. Use "quick" since already sure about alignment !
+              # raster_ts <- raster::stack(lapply(out_meta_files,
+              #                                   FUN = function(x) {
+              #                                     rst <- raster::stack(x)
+              #
+              #                                     rst}),
+              #                            quick = TRUE)
               raster_ts <- raster::stack(out_meta_files, quick = TRUE)
+              # browser()
               # Add the "time" dimension to the rasterstack
+              if (raster::nlayers(raster_ts) != length(temp_dates)) {
+                temp_dates <- rep(temp_dates,
+                                  each = raster::nlayers(raster_ts) / length(temp_dates))
+              }
               raster_ts <- raster::setZ(raster_ts, temp_dates, name = "time")
               RData_filename <- file.path(meta_dir, paste(file_prefix,
                                                           meta_band,
