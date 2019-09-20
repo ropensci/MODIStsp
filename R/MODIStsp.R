@@ -281,7 +281,7 @@ MODIStsp <- function(gui               = TRUE,
   gdal_version <- as.numeric(substring(gdal_version, 1,3))
 
   # GDAL version used as minimum required version
-  gdal_minversion  <- package_version("1.11.1")
+  gdal_minversion  <- package_version("2.2.3")
   gdal_hdf_support <- length(grep("HDF4",
                                   gdalUtils::gdalinfo(formats = TRUE))) > 0
 

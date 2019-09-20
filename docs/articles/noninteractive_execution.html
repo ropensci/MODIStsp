@@ -6,9 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Non-Interactive Execution from within R • MODIStsp</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Non-Interactive Execution from within R">
 <meta property="og:description" content="">
@@ -38,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
       </span>
     </div>
 
@@ -121,6 +128,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -139,7 +147,7 @@
 <a href="#launching-modistsp-using-a-saved-options-file" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Launching MODIStsp using a saved “Options file”</strong>
 </h1>
 <p><code>MODIStsp</code> can be launched in non-interactive mode within an <code>R</code> session by setting the optional <code>GUI</code> parameter to FALSE, and the <code>Options_File</code> parameter to the path of a previously saved JSON Options file. This allows to exploit <code>MODIStsp</code> functionalities within generic “R” processing scripts:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(MODIStsp) </a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(MODIStsp) </a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># **</span><span class="al">NOTE</span><span class="co">** Output files of examples are saved to file.path(tempdir(), "MODIStsp").</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># You can run the examples with `gui = TRUE` to set a different output folder!</span></a>
@@ -149,7 +157,7 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)</span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co"># and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.</span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">options_file &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">options_file &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)</a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co"># --&gt; Launch the processing</span></a>
 <a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
@@ -157,10 +165,10 @@
 <a class="sourceLine" id="cb1-16" data-line-number="16"><span class="co"># Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of </span></a>
 <a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co"># `base::tempdir()`: </span></a>
 <a class="sourceLine" id="cb1-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">out_fold &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_1Km_v6"</span>) </a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(out_fold)</a></code></pre></div>
+<a class="sourceLine" id="cb1-19" data-line-number="19">out_fold &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_1Km_v6"</span>) </a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(out_fold)</a></code></pre></div>
 <pre><code>## [1] "EVI"         "NDVI"        "QA_usef"     "Time_Series"</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(out_fold ,<span class="st">"EVI"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(out_fold ,<span class="st">"EVI"</span>))</a></code></pre></div>
 <pre><code>## [1] "MOD13A2_EVI_2016_161.tif" "MOD13A2_EVI_2016_177.tif"</code></pre>
 <hr>
 <p><br></p>
@@ -170,24 +178,24 @@
 <a href="#looping-over-different-options-files" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Looping over different Options files</strong>
 </h1>
 <p>If you need to process different MODIS products, you can prepare beforehand different MODIStsp options files by using the GUI, and then loop over them like this:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">opts_files &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), </a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">                <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"testdata/test_MOD10A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>))</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">opts_files &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), </a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">                <span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/test_MOD10A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>))</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="cf">for</span> (opts_file <span class="cf">in</span> opts_files) {</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> opts_file)</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6">}</a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co"># MOD13A2 ouputs</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">out_fold &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_1Km_v6"</span>) </a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(out_fold)</a></code></pre></div>
+<a class="sourceLine" id="cb5-9" data-line-number="9">out_fold &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_1Km_v6"</span>) </a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(out_fold)</a></code></pre></div>
 <pre><code>## [1] "EVI"         "NDVI"        "QA_usef"     "Time_Series"</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(out_fold ,<span class="st">"EVI"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(out_fold ,<span class="st">"EVI"</span>))</a></code></pre></div>
 <pre><code>## [1] "MOD13A2_EVI_2016_161.tif" "MOD13A2_EVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># MOD10A2 ouputs</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">out_fold &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempdir</a></span>(), <span class="st">"MODIStsp/Surf_Temp_8Days_1Km_v6"</span>) </a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(out_fold)</a></code></pre></div>
+<a class="sourceLine" id="cb9-2" data-line-number="2">out_fold &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/Surf_Temp_8Days_1Km_v6"</span>) </a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(out_fold)</a></code></pre></div>
 <pre><code>## [1] "Days_Clear"    "LST_Day_1km"   "LST_Night_1km" "Time_Series"</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(out_fold ,<span class="st">"LST_Night_1km"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(out_fold ,<span class="st">"LST_Night_1km"</span>))</a></code></pre></div>
 <pre><code>## [1] "MOD11A2_LST_Night_1km_2016_153.tif"
 ## [2] "MOD11A2_LST_Night_1km_2016_161.tif"
 ## [3] "MOD11A2_LST_Night_1km_2016_169.tif"
@@ -203,18 +211,18 @@
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Run the tool using the settings previously saved in a specific option file</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co"># and specifying the extent from a spatial file allows to re-use the same</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co"># processing settings to perform download and reprocessing on a different area</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(MODIStsp) </a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">options_file &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">spatial_file &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"testdata/lakeshapes/garda_lake.shp"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(MODIStsp) </a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">options_file &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/test_MOD13A2.json"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">spatial_file &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/lakeshapes/garda_lake.shp"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>)</a>
 <a class="sourceLine" id="cb13-7" data-line-number="7"><span class="kw"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="dt">gui =</span> <span class="ot">FALSE</span>, <span class="dt">options_file =</span> options_file,</a>
 <a class="sourceLine" id="cb13-8" data-line-number="8">         <span class="dt">spatial_file_path =</span> spatial_file, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb13-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co"># --&gt; Create a character array containing a list of shapefiles (or other spatial files)</span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11">extent_list =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"testdata/lakeshapes/"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), </a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">extent_list =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/lakeshapes/"</span>, <span class="dt">package =</span> <span class="st">"MODIStsp"</span>), </a>
 <a class="sourceLine" id="cb13-12" data-line-number="12">                         <span class="dt">full.names =</span> <span class="ot">TRUE</span>, <span class="st">"</span><span class="ch">\\</span><span class="st">.shp$"</span>)  </a>
 <a class="sourceLine" id="cb13-13" data-line-number="13">extent_list</a></code></pre></div>
-<pre><code>## [1] "/home/lb/R/x86_64-pc-linux-gnu-library/3.6/MODIStsp/testdata/lakeshapes//garda_lake.shp"
-## [2] "/home/lb/R/x86_64-pc-linux-gnu-library/3.6/MODIStsp/testdata/lakeshapes//iseo_lake.shp"</code></pre>
+<pre><code>## [1] "/tmp/RtmpNnDiHT/temp_libpath4d214971b32/MODIStsp/testdata/lakeshapes//garda_lake.shp"
+## [2] "/tmp/RtmpNnDiHT/temp_libpath4d214971b32/MODIStsp/testdata/lakeshapes//iseo_lake.shp"</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># --&gt; Loop on the list of spatial files and run MODIStsp using each of them to </span></a>
 <a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co"># automatically define the output extent (A separate output folder is created for</span></a>
 <a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co"># each input spatial file).</span></a>
@@ -226,27 +234,28 @@
 <a class="sourceLine" id="cb15-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co"># output files are placed in separate folders: </span></a>
 <a class="sourceLine" id="cb15-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12">outfiles_garda &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(</a>
-<a class="sourceLine" id="cb15-13" data-line-number="13">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempdir</a></span>(), <span class="st">"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span>),</a>
+<a class="sourceLine" id="cb15-12" data-line-number="12">outfiles_garda &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(</a>
+<a class="sourceLine" id="cb15-13" data-line-number="13">  <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span>),</a>
 <a class="sourceLine" id="cb15-14" data-line-number="14">  <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb15-15" data-line-number="15">outfiles_garda</a></code></pre></div>
-<pre><code>## [1] "/tmp/Rtmp64rTVh/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
-## [2] "/tmp/Rtmp64rTVh/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(raster)       </a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(outfiles_garda[<span class="dv">1</span>]))</a></code></pre></div>
+<pre><code>## [1] "/tmp/Rtmp4jmfW1/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
+## [2] "/tmp/Rtmp4jmfW1/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(raster)       </a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span>(outfiles_garda[<span class="dv">1</span>]))</a></code></pre></div>
 <p><img src="noninteractive_execution_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">outfiles_iseo &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">list.files</a></span>(</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempdir</a></span>(), <span class="st">"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span>),</a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">outfiles_iseo &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="kw"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span>),</a>
 <a class="sourceLine" id="cb18-3" data-line-number="3">  <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb18-4" data-line-number="4">outfiles_iseo</a></code></pre></div>
-<pre><code>## [1] "/tmp/Rtmp64rTVh/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
-## [2] "/tmp/Rtmp64rTVh/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/raster">raster</a></span>(outfiles_iseo[<span class="dv">1</span>]))</a></code></pre></div>
+<pre><code>## [1] "/tmp/Rtmp4jmfW1/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
+## [2] "/tmp/Rtmp4jmfW1/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="kw"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span>(outfiles_iseo[<span class="dv">1</span>]))</a></code></pre></div>
 <p><img src="noninteractive_execution_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -261,17 +270,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Lorenzo Busetto, Luigi Ranghetti.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

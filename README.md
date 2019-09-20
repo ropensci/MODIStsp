@@ -8,7 +8,7 @@ Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://trav
 Status](http://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](http://codecov.io/github/ropensci/MODIStsp?branch=master)
 [![](http://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/onboarding/issues/184)
 
-# MODIStsp <img src="man/figures/logo.png" width="147" height="170" align="right" />
+# MODIStsp <img src='man/figures/logo.png' align="right" height="139" />
 
 [MODIStsp](http://ropensci.github.io/MODIStsp/) is a “R” package devoted
 to automatizing the creation of time series of rasters derived from

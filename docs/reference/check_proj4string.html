@@ -8,21 +8,32 @@
 
 <title>Check the validity of the input projection — check_proj4string • MODIStsp</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,14 +43,14 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Check the validity of the input projection — check_proj4string" />
 
+<meta property="og:title" content="Check the validity of the input projection — check_proj4string" />
 <meta property="og:description" content="helper function used to check that the input projection
 (passed as UTM zone, EPSG code, PROJ4 string or CRS object)
 is a valid string or CRS." />
-
 <meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -63,6 +74,7 @@ is a valid string or CRS." />
   gtag('config', 'UA-84499524-2');
 </script>
 
+
   </head>
 
   <body>
@@ -79,7 +91,7 @@ is a valid string or CRS." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
       </span>
     </div>
 
@@ -92,7 +104,6 @@ is a valid string or CRS." />
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -161,6 +172,7 @@ is a valid string or CRS." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -172,11 +184,9 @@ is a valid string or CRS." />
     </div>
 
     <div class="ref-description">
-    
     <p>helper function used to check that the input projection
 (passed as UTM zone, EPSG code, PROJ4 string or CRS object)
 is a valid string or CRS.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>check_proj4string</span>(<span class='no'>projection</span>, <span class='kw'>abort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
@@ -196,7 +206,7 @@ is a valid string or CRS.</p>
 <span class='co'># S3 method for CRS</span>
 <span class='fu'>check_proj4string</span>(<span class='no'>projection</span>, <span class='kw'>abort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -216,37 +226,37 @@ projection is passed. Otherwise, the function returns "NA", Default: TRUE</p></t
       <td><p><code>logical</code> if TRUE, return messages</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>character</code> proj4string of the object or file</p>
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>This function was forked from package <code>sprawl</code>, version 0.3.0.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-</div><div class='input'><span class='fu'>check_proj4string</span>(<span class='st'>"+init=epsg:32632"</span>)</div><div class='output co'>#&gt; [1] "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</div><div class='input'>
-<span class='fu'>check_proj4string</span>(<span class='st'>"32631"</span>)</div><div class='output co'>#&gt; [1] "+init=epsg:32631 +proj=utm +zone=31 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</div><div class='input'>
-<span class='fu'>check_proj4string</span>(<span class='fl'>32633</span>)</div><div class='output co'>#&gt; [1] "+init=epsg:32633 +proj=utm +zone=33 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</div><div class='input'>
-<span class='fu'>check_proj4string</span>(<span class='fl'>30</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: check_proj4string --&gt; Invalid EPSG code detected,</span>
-#&gt; <span class='warning'>                          returning `NA`!</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'>
-<span class='fu'>check_proj4string</span>(<span class='st'>"example of invalid string"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: check_proj4string --&gt; Invalid projection detected,</span>
-#&gt; <span class='warning'>                           returning `NA`!</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>sp</span>)
-<span class='fu'>check_proj4string</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/sp/topics/CRS-class'>CRS</a></span>(<span class='st'>"+init=epsg:32632"</span>))</div><div class='output co'>#&gt; [1] "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>check_proj4string</span>(<span class='st'>"+init=epsg:32632"</span>)
+
+<span class='fu'>check_proj4string</span>(<span class='st'>"32631"</span>)
+
+<span class='fu'>check_proj4string</span>(<span class='fl'>32633</span>)
+
+<span class='fu'>check_proj4string</span>(<span class='fl'>30</span>)
+
+<span class='fu'>check_proj4string</span>(<span class='st'>"example of invalid string"</span>)
+
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sp</span>)
+<span class='fu'>check_proj4string</span>(<span class='fu'><a href='https://rdrr.io/pkg/sp/man/CRS-class.html'>CRS</a></span>(<span class='st'>"+init=epsg:32632"</span>))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#note">Note</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -256,19 +266,23 @@ projection is passed. Otherwise, the function returns "NA", Default: TRUE</p></t
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Lorenzo Busetto, Luigi Ranghetti.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

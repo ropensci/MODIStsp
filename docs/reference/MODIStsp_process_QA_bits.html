@@ -8,21 +8,32 @@
 
 <title>MODIStsp helper function to compute Quality Indicators from HDF bit-field layers — MODIStsp_process_QA_bits • MODIStsp</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,13 +43,13 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="MODIStsp helper function to compute Quality Indicators from HDF bit-field layers — MODIStsp_process_QA_bits" />
 
+<meta property="og:title" content="MODIStsp helper function to compute Quality Indicators from HDF bit-field layers — MODIStsp_process_QA_bits" />
 <meta property="og:description" content="function used to extract quality indicator from MODIS aggregated
 quality layers" />
-
 <meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -62,6 +73,7 @@ quality layers" />
   gtag('config', 'UA-84499524-2');
 </script>
 
+
   </head>
 
   <body>
@@ -78,7 +90,7 @@ quality layers" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
       </span>
     </div>
 
@@ -91,7 +103,6 @@ quality layers" />
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -160,6 +171,7 @@ quality layers" />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -171,15 +183,13 @@ quality layers" />
     </div>
 
     <div class="ref-description">
-    
     <p>function used to extract quality indicator from MODIS aggregated
 quality layers</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>MODIStsp_process_QA_bits</span>(<span class='no'>out_filename</span>, <span class='no'>in_source_file</span>, <span class='no'>bitN</span>, <span class='no'>out_format</span>,
   <span class='no'>nodata_source</span>, <span class='no'>nodata_qa_in</span>, <span class='no'>nodata_qa_out</span>, <span class='no'>compress</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -222,30 +232,26 @@ be extracted</p></td>
       <td><p><code>character</code> compression option for GTiff files</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>On the basis of the name of the image containing the aggregated quality information
 (<code>in_source_file``) and of the position of the bit fields corresponding to the QI of interest in the bitfield representation (</code>bitN``), the function extracts the correct information exploiting
 bitwise operators, and save the result in a new raster image</p>
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>License: GPL 3.0
 Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
 license GPL 3.0</p>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#note">Note</a></li>
-          </ul>
+    </ul>
 
     <h2>Author</h2>
     <p>Lorenzo Busetto, phD (2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com</a></p>
@@ -253,19 +259,23 @@ license GPL 3.0</p>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Lorenzo Busetto, Luigi Ranghetti.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

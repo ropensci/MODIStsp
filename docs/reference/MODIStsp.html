@@ -8,21 +8,32 @@
 
 <title>MODIStsp main function — MODIStsp • MODIStsp</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,13 +43,13 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="MODIStsp main function — MODIStsp" />
 
+<meta property="og:title" content="MODIStsp main function — MODIStsp" />
 <meta property="og:description" content="Main function for the MODIS Time Series Processing Tool
 (MODIStsp)" />
-
 <meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -62,6 +73,7 @@
   gtag('config', 'UA-84499524-2');
 </script>
 
+
   </head>
 
   <body>
@@ -78,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
       </span>
     </div>
 
@@ -91,7 +103,6 @@
   </a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -160,6 +171,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -171,16 +183,14 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Main function for the MODIS Time Series Processing Tool
 (MODIStsp)</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scroll_window</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>test</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_retries</span> <span class='kw'>=</span> <span class='fl'>20</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -231,7 +241,7 @@ MODIStsp_process will abort, Default: 20</p></td>
 Default: TRUE</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The function is used to:</p><ul>
@@ -241,25 +251,27 @@ execution, or load an options file on non-interactive execution;</p></li>
 <li><p>launch the routines for downloading and processing the requested datasets.
 (<code><a href='MODIStsp_process.html'>MODIStsp_process()</a></code>)</p></li>
 </ul>
-    
+
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>License: GPL 3.0</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='MODIStsp_GUI.html'>MODIStsp_GUI()</a></code>, <code><a href='MODIStsp_process.html'>MODIStsp_process()</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-</div><div class='input'><span class='co'>#' # - Running the tool using the GUI</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>#' # - Running the tool using the GUI</span>
 
 <span class='co'># Running the tool without any option will start the GUI with the default or</span>
 <span class='co'># last used settings, in interactive mode (i.e., with gui = TRUE).</span>
 
-<span class='fu'>MODIStsp</span>()</div><div class='output co'>#&gt; <span class='message'>Loading required package: gWidgetsRGtk2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: RGtk2</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: gWidgets</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: cairoDevice</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:19:05 2019] Welcome to MODIStsp!We will now search for a valid GDAL installation - pleasewait! (this will happen only once)</span></div><div class='output co'>#&gt; <span class='message'>GDAL version in use: 2.4.0</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:19:07 2019]  You Selected to quit! Goodbye!</span></div><div class='input'>
-</div><div class='input'>
+<span class='fu'>MODIStsp</span>()
+}
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+
 <span class='co'>#' # - Running the tool using the settings previously saved in a specific options file</span>
 
 <span class='co'># **NOTE** Output files of examples are saved to file.path(tempdir(), "MODIStsp").</span>
@@ -269,65 +281,69 @@ execution, or load an options file on non-interactive execution;</p></li>
 <span class='co'># downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)</span>
 <span class='co'># and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.</span>
 
-<span class='no'>options_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/test_MOD13A2.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>options_file</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>GDAL version in use: 2.4.0</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:19:08 2019] MODIStsp --&gt; Starting processing</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:19:08 2019] Accessing http server at:  https://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.006/</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:19:12 2019] Retrieving list of available ` Terra ` Files for Year 2016</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:19:22 2019] Downloading Terra Files for date: 2016_06_09 : 1 of:  1</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:20:49 2019] [Mon Jun 10 11:20:49 2019] 1 files for date: 2016.06.09 were successfully downloaded!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:20:50 2019] Processing Terra NDVI files for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:20:52 2019] Processing Terra EVI files for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:20:54 2019] Processing Terra VI_QA files for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:20:55 2019] Computing QA_usef for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:20:58 2019] Downloading Terra Files for date: 2016_06_25 : 1 of:  1</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:07 2019] [Mon Jun 10 11:22:07 2019] 1 files for date: 2016.06.25 were successfully downloaded!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:07 2019] Processing Terra NDVI files for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:09 2019] Processing Terra EVI files for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:11 2019] Processing Terra VI_QA files for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:12 2019] Computing QA_usef for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:12 2019] Creating Virtual Files and R time series for layer NDVI</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:13 2019] Creating Virtual Files and R time series for layer EVI</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:13 2019] Creating Virtual Files and R time series for layer QA_usef</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:13 2019] Total Processing Time: 3.09656823078791</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:13 2019] MODIStsp processed files are in: `/tmp/Rtmp2sr9dB/MODIStsp`</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:13 2019] Original downloaded MODIS HDF files are in: `/tmp/Rtmp2sr9dB/MODIStsp/HDFs`</span></div><div class='input'>
-</div><div class='input'>
+<span class='no'>options_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/test_MOD13A2.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>options_file</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+
 <span class='co'># Running the tool using the settings previously saved in a specific option file</span>
 <span class='co'># and specifying the extent from a spatial file allows to re-use the same</span>
 <span class='co'># processing settings to perform download and reprocessing on a different area</span>
 
-<span class='no'>options_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/test_MOD13A2.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='no'>spatial_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/lakeshapes/garda_lake.shp"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='no'>options_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/test_MOD13A2.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='no'>spatial_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/lakeshapes/garda_lake.shp"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
 <span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>options_file</span>,
-  <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>spatial_file</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>GDAL version in use: 2.4.0</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:14 2019] MODIStsp --&gt; Starting processing</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:14 2019] Accessing http server at:  https://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.006/</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:15 2019] Retrieving list of available ` Terra ` Files for Year 2016</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:23 2019] HDF File: MOD13A2.A2016161.h18v04.006.2016184001910.hdf already exists on your system. Skipping download!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:23 2019] [Mon Jun 10 11:22:23 2019] 1 files for date: 2016.06.09 were successfully downloaded!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:24 2019] Processing Terra NDVI files for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:26 2019] Processing Terra EVI files for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:27 2019] Processing Terra VI_QA files for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:28 2019] Computing QA_usef for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:30 2019] HDF File: MOD13A2.A2016177.h18v04.006.2016200095913.hdf already exists on your system. Skipping download!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:30 2019] [Mon Jun 10 11:22:30 2019] 1 files for date: 2016.06.25 were successfully downloaded!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:31 2019] Processing Terra NDVI files for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:33 2019] Processing Terra EVI files for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:34 2019] Processing Terra VI_QA files for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:35 2019] Computing QA_usef for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:36 2019] Creating Virtual Files and R time series for layer NDVI</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:36 2019] Creating Virtual Files and R time series for layer EVI</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:36 2019] Creating Virtual Files and R time series for layer QA_usef</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:37 2019] Total Processing Time: 22.8619713783264</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:37 2019] MODIStsp processed files are in: `/tmp/Rtmp2sr9dB/MODIStsp/garda_lake`</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:37 2019] Original downloaded MODIS HDF files are in: `/tmp/Rtmp2sr9dB/MODIStsp/HDFs`</span></div><div class='input'>
-</div><div class='input'>
+  <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>spatial_file</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}
+
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+
 <span class='co'># Running the tool using the settings previously saved in a</span>
 <span class='co'># specific options file and specifying each time the extent from a different</span>
 <span class='co'># spatial file (e.g., to perform the same processing on several extents)</span>
 
-<span class='no'>extent_list</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/lakeshapes/garda_lake.shp"</span>,
+<span class='no'>extent_list</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/lakeshapes/garda_lake.shp"</span>,
                               <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>),
-                  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/lakeshapes/iseo_lake.shp"</span>,
+                  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/lakeshapes/iseo_lake.shp"</span>,
                               <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>))
-<span class='no'>extent_list</span></div><div class='output co'>#&gt; [1] "/home/lb/Source/git/MODIStsp/inst/testdata/lakeshapes/garda_lake.shp"
-#&gt; [2] "/home/lb/Source/git/MODIStsp/inst/testdata/lakeshapes/iseo_lake.shp" </div><div class='input'>
+<span class='no'>extent_list</span>
+
 <span class='co'># Note that you can also put all your extent files in a specific folder and</span>
 <span class='co'># create the extent list using for example.</span>
 <span class='co'># extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"),</span>
 <span class='co'>#                          full.names = TRUE, "\\.shp$")</span>
 
-<span class='no'>options_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"testdata/test_MOD13A2.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+<span class='no'>options_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/test_MOD13A2.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
 <span class='kw'>for</span> (<span class='no'>single_shape</span> <span class='kw'>in</span> <span class='no'>extent_list</span>) {
   <span class='fu'>MODIStsp</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>options_file</span>,
            <span class='kw'>spatial_file_path</span> <span class='kw'>=</span> <span class='no'>single_shape</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; <span class='message'>GDAL version in use: 2.4.0</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:37 2019] MODIStsp --&gt; Starting processing</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:37 2019] Accessing http server at:  https://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.006/</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:38 2019] Retrieving list of available ` Terra ` Files for Year 2016</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:38 2019] [Mon Jun 10 11:22:38 2019] All Required output files for date 2016_06_09 are already existing - Doing Nothing!</span>
-#&gt; <span class='message'>Set Reprocess to "Yes" to reprocess existing data!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:38 2019] [Mon Jun 10 11:22:38 2019] All Required output files for date 2016_06_25 are already existing - Doing Nothing!</span>
-#&gt; <span class='message'>Set Reprocess to "Yes" to reprocess existing data!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:38 2019] Creating Virtual Files and R time series for layer NDVI</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:38 2019] Creating Virtual Files and R time series for layer EVI</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:38 2019] Creating Virtual Files and R time series for layer QA_usef</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:39 2019] Total Processing Time: 1.66391634941101</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:39 2019] MODIStsp processed files are in: `/tmp/Rtmp2sr9dB/MODIStsp/garda_lake`</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:39 2019] Original downloaded MODIS HDF files are in: `/tmp/Rtmp2sr9dB/MODIStsp/HDFs`</span></div><div class='output co'>#&gt; <span class='message'>GDAL version in use: 2.4.0</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:39 2019] MODIStsp --&gt; Starting processing</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:39 2019] Accessing http server at:  https://e4ftl01.cr.usgs.gov/MOLT/MOD13A2.006/</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:40 2019] Retrieving list of available ` Terra ` Files for Year 2016</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:45 2019] HDF File: MOD13A2.A2016161.h18v04.006.2016184001910.hdf already exists on your system. Skipping download!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:45 2019] [Mon Jun 10 11:22:45 2019] 1 files for date: 2016.06.09 were successfully downloaded!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:46 2019] Processing Terra NDVI files for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:48 2019] Processing Terra EVI files for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:49 2019] Processing Terra VI_QA files for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:50 2019] Computing QA_usef for date: 2016_06_09</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:52 2019] HDF File: MOD13A2.A2016177.h18v04.006.2016200095913.hdf already exists on your system. Skipping download!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:52 2019] [Mon Jun 10 11:22:52 2019] 1 files for date: 2016.06.25 were successfully downloaded!</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:52 2019] Processing Terra NDVI files for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:54 2019] Processing Terra EVI files for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:56 2019] Processing Terra VI_QA files for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:57 2019] Computing QA_usef for date: 2016_06_25</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:57 2019] Creating Virtual Files and R time series for layer NDVI</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:57 2019] Creating Virtual Files and R time series for layer EVI</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:58 2019] Creating Virtual Files and R time series for layer QA_usef</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:58 2019] Total Processing Time: 19.0665278434753</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:58 2019] MODIStsp processed files are in: `/tmp/Rtmp2sr9dB/MODIStsp/iseo_lake`</span></div><div class='output co'>#&gt; <span class='message'>[Mon Jun 10 11:22:58 2019] Original downloaded MODIS HDF files are in: `/tmp/Rtmp2sr9dB/MODIStsp/HDFs`</span></div><div class='input'>
+}
+
 <span class='co'># output files are placed in separate folders:</span>
-<span class='no'>outfiles_garda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list.files'>list.files</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>(), <span class='st'>"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span>),
+<span class='no'>outfiles_garda</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span>),
            <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>outfiles_garda</span></div><div class='output co'>#&gt; [1] "/tmp/Rtmp2sr9dB/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
-#&gt; [2] "/tmp/Rtmp2sr9dB/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</div><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>raster</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: sp</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></span>(<span class='no'>outfiles_garda</span>[<span class='fl'>1</span>] ))</div><div class='img'><img src='MODIStsp-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>outfiles_iseo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list.files'>list.files</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/file.path'>file.path</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>(), <span class='st'>"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span>),
+<span class='no'>outfiles_garda</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>raster</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span>(<span class='no'>outfiles_garda</span>[<span class='fl'>1</span>] ))
+
+<span class='no'>outfiles_iseo</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span>),
            <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>outfiles_iseo</span></div><div class='output co'>#&gt; [1] "/tmp/Rtmp2sr9dB/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
-#&gt; [2] "/tmp/Rtmp2sr9dB/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</div><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/plot'>plot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/raster/topics/raster'>raster</a></span>(<span class='no'>outfiles_iseo</span>[<span class='fl'>1</span>]))</div><div class='img'><img src='MODIStsp-2.png' alt='' width='700' height='433' /></div><div class='input'>
-# See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html
-</div></pre>
+<span class='no'>outfiles_iseo</span>
+
+<span class='fu'><a href='https://rdrr.io/pkg/raster/man/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span>(<span class='no'>outfiles_iseo</span>[<span class='fl'>1</span>]))
+
+<span class='co'># See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html</span>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#note">Note</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -337,19 +353,23 @@ execution, or load an options file on non-interactive execution;</p></li>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Lorenzo Busetto, Luigi Ranghetti.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
