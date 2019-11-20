@@ -2,7 +2,7 @@ context("Check proper functioning of bbox_from_file")
 
 
 test_that("bbox_from_file works as expected", {
-  skip_on_cran()
+  # skip_on_cran()
   # bbox from a raster file
   r        <- raster::raster(xmn = -10, xmx = 10, ymn = -10, ymx = 10)
   r        <- raster::init(r, "cell")

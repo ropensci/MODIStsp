@@ -137,7 +137,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   if (datatype == "UInt32") {
     for (file in seq_along(files_in)) {
       file_out <- tempfile(fileext = ".tif", tmpdir = tmpdir)
-      gdalUtils::gdal_translate(files_in[file],
+      gdalUtilities::gdal_translate(files_in[file],
                                 file_out,
                                 sd_index  = band,
                                 overwrite = TRUE)
@@ -147,7 +147,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),
                           ".tif")
     if (length(split_nodata_values(nodata_in)[[1]] == 1)) {
-      gdalUtils::gdalwarp(files_in,
+      gdalUtilities::gdalwarp(files_in,
                           outfile_vrt,
                           sd        = band,
                           multi     = TRUE,
@@ -160,7 +160,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     } else {
       # If multiple NODATA, do not change the nodata value in the VRT, because
       # it is dealt with later
-      gdalUtils::gdalwarp(files_in,
+      gdalUtilities::gdalwarp(files_in,
                           outfile_vrt,
                           sd        = band,
                           multi     = TRUE,
@@ -175,7 +175,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # hdf4
 
     if (length(split_nodata_values(nodata_in)[[1]]) == 1) {
-      gdalUtils::gdalbuildvrt(files_in,
+      gdalUtilities::gdalbuildvrt(files_in,
                               outfile_vrt,
                               sd = band,
                               srcnodata = nodata_in,
@@ -184,7 +184,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     } else {
       # If multiple NODATA, do not change the nodata value in the VRT, because
       # it is dealt with later
-      gdalUtils::gdalbuildvrt(files_in,
+      gdalUtilities::gdalbuildvrt(files_in,
                               outfile_vrt,
                               sd = band
       )
@@ -240,7 +240,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
           bbox(raster::raster(outfile_vrt_prev2))
         )
       )
-      gdalUtils::gdalbuildvrt(
+      gdalUtilities::gdalbuildvrt(
         outfile_vrt_prev2,
         outfile_vrt_prev,
         te = outfile_prev_bbox,
@@ -288,7 +288,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
       # fix to avoid bug on gdalbuildvrt for UInt32 datasets;
       # create a tif instead than a vrt
       outfile_vrt <- paste0(str_sub(outfile_vrt, 1, -5), ".tif")
-      gdalUtils::gdalwarp(outfile_vrt_or,
+      gdalUtilities::gdalwarp(outfile_vrt_or,
                           outfile_vrt,
                           te        = c(bbox_mod),
                           tap       = TRUE,
@@ -303,7 +303,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                           nomd      = TRUE,
                           overwrite = TRUE)
     } else {
-      gdalUtils::gdalbuildvrt(outfile_vrt_or,
+      gdalUtilities::gdalbuildvrt(outfile_vrt_or,
                               outfile_vrt,
                               te        = c(bbox_mod),
                               tap       = TRUE,
@@ -391,7 +391,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   if (out_format == "GTiff") {
 
     switch(reproj_type,
-           GdalTranslate = gdalUtils::gdal_translate(
+           GdalTranslate = gdalUtilities::gdal_translate(
              outfile_vrt,
              outrep_file_0,
              a_srs    = mod_proj_str,
@@ -401,7 +401,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              co = paste("COMPRESS", compress, sep = "="),
              overwrite = TRUE, verbose = FALSE
            ),
-           Resample0_Resize0 = gdalUtils::gdalwarp(
+           Resample0_Resize0 = gdalUtilities::gdalwarp(
              outfile_vrt, outrep_file_0,
              s_srs = mod_proj_str,
              t_srs = outproj_str,
@@ -415,7 +415,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              nomd  = TRUE,
              overwrite = TRUE
            ),
-           Resample0_Resize1 = gdalUtils::gdalwarp(
+           Resample0_Resize1 = gdalUtilities::gdalwarp(
              outfile_vrt, outrep_file_0,
              s_srs  = mod_proj_str,
              t_srs  = outproj_str,
@@ -430,7 +430,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              nomd   = TRUE,
              overwrite  = TRUE
            ),
-           Resample1_Resize0 = gdalUtils::gdalwarp(
+           Resample1_Resize0 = gdalUtilities::gdalwarp(
              outfile_vrt, outrep_file_0,
              s_srs  = mod_proj_str,
              t_srs  = outproj_str,
@@ -445,7 +445,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              nomd   = TRUE,
              overwrite = TRUE
            ),
-           Resample1_Resize1 = gdalUtils::gdalwarp(
+           Resample1_Resize1 = gdalUtilities::gdalwarp(
              outfile_vrt, outrep_file_0,
              s_srs     = mod_proj_str, t_srs = outproj_str,
              of        = out_format,
@@ -479,7 +479,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              wo        = c("INIT_DEST = NO_DATA",
                            paste0("NUM_THREADS=", ncores)),
            ),
-           Resample0_Resize0 = gdalUtils::gdalwarp(
+           Resample0_Resize0 = gdalUtilities::gdalwarp(
              outfile_vrt,
              outrep_file_0,
              s_srs     = mod_proj_str,
@@ -493,7 +493,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              nomd      = TRUE,
              overwrite = TRUE
            ),
-           Resample0_Resize1  = gdalUtils::gdalwarp(
+           Resample0_Resize1  = gdalUtilities::gdalwarp(
              outfile_vrt,
              outrep_file_0,
              s_srs     = mod_proj_str,
@@ -508,7 +508,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              nomd      = TRUE,
              overwrite = TRUE
            ),
-           Resample1_Resize0  =  gdalUtils::gdalwarp(
+           Resample1_Resize0  =  gdalUtilities::gdalwarp(
              outfile_vrt,
              outrep_file_0,
              s_srs     = mod_proj_str,
@@ -523,7 +523,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              nomd      = TRUE,
              overwrite = TRUE
            ),
-           Resample1_Resize1  =  gdalUtils::gdalwarp(
+           Resample1_Resize1  =  gdalUtilities::gdalwarp(
              outfile_vrt,
              outrep_file_0,
              s_srs     = mod_proj_str,

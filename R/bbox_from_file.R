@@ -31,7 +31,7 @@ bbox_from_file <- function(file_path, crs_out) {
                       dimnames = list(c("x", "y"), c("min", "max")))
     crs_in <- gdalUtils::gdalsrsinfo(file_path, as.CRS = TRUE)@projargs
   } else if (methods::is(in_ogrinfo, "try-error")) {
-    bbox_in <- gdalUtils::gdalinfo(file_path, raw_output = FALSE)$bbox
+    bbox_in <- gdalUtilities::gdalinfo(file_path, raw_output = FALSE)$bbox
     crs_in  <- attr(in_gdalinfo, "projection")
   }
 

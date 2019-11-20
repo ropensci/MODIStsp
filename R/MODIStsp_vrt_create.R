@@ -257,7 +257,7 @@ MODIStsp_vrt_create <- function(
                                                          "GDAL.vrt",
                                                          sep = "_"))
 
-              gdalUtils::gdalbuildvrt(out_meta_files, meta_filename,
+              gdalUtilities::gdalbuildvrt(out_meta_files, meta_filename,
                                       separate = TRUE,
                                       srcnodata = nodata_value,
                                       vrtnodata = nodata_value)

@@ -291,7 +291,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
         }
         #nocov end
       }
-      gdalUtils::gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts),
+      gdalUtilities::gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts),
                                 te = ext_conv(in_rts[[1]]), a = "mdxtnq",
                                 ot = ot)
       zone_raster <- raster::raster(tempraster)
