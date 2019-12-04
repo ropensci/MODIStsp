@@ -76,3 +76,7 @@ navbar:
     - icon: fa-github fa-lg
       text: "github"
       href: https://github.com/ropensci/MODIStsp/
+
+
+extra_packages:
+  - tidyr
