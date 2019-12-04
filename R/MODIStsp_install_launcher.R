@@ -39,8 +39,9 @@
 #' # desktop entry in /usr/share/applications)
 #' # (requires administrator permissions)
 #' \dontrun{
+#' # the administrator password is asked interactively
 #' install_MODIStsp_launcher(sudo = TRUE)
-#'   # the administrator password is asked interactively}
+#' }
 #'
 #' # Linux: installation in a directory which does not require administrator
 #' # permissions
@@ -51,7 +52,8 @@
 #' # Windows: common installation
 #' # (script in the Start Menu and shortcut on the desktop)
 #' \dontrun{
-#' install_MODIStsp_launcher()}
+#' install_MODIStsp_launcher()
+#' }
 
 install_MODIStsp_launcher <- function(bin_dir          = NA,
                                       rscript_dir      = NA,
