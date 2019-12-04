@@ -79,3 +79,4 @@ navbar:
 
 extra_packages:
   - tidyr
+  - tibbletime
