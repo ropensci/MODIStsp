@@ -45,7 +45,7 @@
 #' # Linux: installation in a directory which does not require administrator
 #' # permissions
 #' \dontrun{
-#' install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"
+#' install_MODIStsp_launcher(bin_dir = "~/bin", desktop_dir = "~/Desktop")
 #' }
 #'
 #' # Windows: common installation
