@@ -23,7 +23,7 @@ file is also possible, allowing to automatically update time series
 related to a MODIS product whenever a new image is available.
 }
 \seealso{
-\url{http://ropensci.github.io/MODIStsp/}
+\url{http://docs.ropensci.org/MODIStsp/}
 
 \url{https://github.com/ropensci/MODIStsp}
 }

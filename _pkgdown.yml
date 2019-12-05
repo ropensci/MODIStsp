@@ -1,5 +1,5 @@
 title: MODIStsp
-url: http://ropensci.github.io/MODIStsp
+url: http://docs.ropensci.org/MODIStsp
 template:
   params:
     bootswatch: flatly

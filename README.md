@@ -10,7 +10,7 @@ Status](http://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](ht
 
 # MODIStsp <img src='man/figures/logo.png' align="right" height="139" />
 
-[MODIStsp](http://ropensci.github.io/MODIStsp/) is a “R” package devoted
+[MODIStsp](http://docs.ropensci.org/MODIStsp/) is a “R” package devoted
 to automatizing the creation of time series of rasters derived from
 MODIS Land Products data. MODIStsp allows to perform several
 preprocessing steps (e.g., download, mosaicing, reprojection and resize)
@@ -52,7 +52,7 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 
 For more information, documentation and examples of use, **see also the
 MODIStsp website at
-[ropensci.github.io/MODIStsp](http://ropensci.github.io/MODIStsp/)**
+[docs.ropensci.org/MODIStsp](http://docs.ropensci.org/MODIStsp/)**
 
 ## Important News \!
 
@@ -69,7 +69,7 @@ MODIStsp website at
     of some custom spectral indices (those including additions /
     subtractions on reflectance values, such as in (b1\_NIR+0.1) /
     b2\_Red. See
-    [here](https://ropensci.github.io/MODIStsp/articles/discovered_bug.html)
+    [here](https://docs.ropensci.org/MODIStsp/articles/discovered_bug.html)
     for further details\! The bug is fixed as of version 1.3.7.
 
   - 07/08/2018 - We are glad to report that MODIStsp is now included in
@@ -105,7 +105,7 @@ MODIStsp website at
 
   - 25/07/2017 - As of today, **most of the content related to MODIStsp
     has been moved to our new website at
-    [ropensci.github.io/MODIStsp](http://ropensci.github.io/MODIStsp/)
+    [docs.ropensci.org/MODIStsp](http://docs.ropensci.org/MODIStsp/)
     **, which provides a much better user interface and ease of access
     to MODIStsp-related information. From now on, please **consult the
     new website for detailed and updated information on the package**.
@@ -113,7 +113,7 @@ MODIStsp website at
   - Also our previous FAQ page on github containing info for solving
     common installation, downloading and processing problems and issues
     was discontinued and **migrated at
-    [ropensci.github.io/MODIStsp/articles/faq.html](http://ropensci.github.io/MODIStsp/articles/faq.html)**.
+    [docs.ropensci.org/MODIStsp/articles/faq.html](http://docs.ropensci.org/MODIStsp/articles/faq.html)**.
 
 ## Problems and Issues
 
@@ -127,7 +127,7 @@ MODIStsp website at
 [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v \>=
 1.11.1 **with support for HDF4 raster format** to be installed in your
 system. Brief instructions for installing R and GDAL can be found
-[HERE](http://ropensci.github.io/MODIStsp/articles/installation.html#installing-r-and-gdal).
+[HERE](http://docs.ropensci.org/MODIStsp/articles/installation.html#installing-r-and-gdal).
 
 -----
 
@@ -400,7 +400,7 @@ MODIStsp()
 This **opens a GUI** from which processing options can be specified (and
 eventually saved or loaded). After specifying all required parameters,
 clicking on “Start” will start the processing (see
-[HERE](http://ropensci.github.io/MODIStsp/articles/interactive_execution.html)
+[HERE](http://docs.ropensci.org/MODIStsp/articles/interactive_execution.html)
 for more detailed instructions).
 
 `MODIStsp` can also be launched in non-interactive mode within an `R`
@@ -419,7 +419,7 @@ MODIStsp(gui = FALSE, options_file = options_file)
 ```
 
 (see
-[HERE](http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html)
+[HERE](http://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html)
 for more detailed instructions and examples).
 
 # Code of Conduct
