@@ -4,10 +4,23 @@
 \alias{MODIStsp_vrt_create}
 \title{Create MODIStsp virtual files}
 \usage{
-MODIStsp_vrt_create(sensor, out_prod_folder, bandnames, bandsel,
-  nodata_out, indexes_bandnames, indexes_bandsel, indexes_nodata_out,
-  quality_bandnames, quality_bandsel, quality_nodata_out, file_prefixes,
-  ts_format, out_format, verbose)
+MODIStsp_vrt_create(
+  sensor,
+  out_prod_folder,
+  bandnames,
+  bandsel,
+  nodata_out,
+  indexes_bandnames,
+  indexes_bandsel,
+  indexes_nodata_out,
+  quality_bandnames,
+  quality_bandsel,
+  quality_nodata_out,
+  file_prefixes,
+  ts_format,
+  out_format,
+  verbose
+)
 }
 \arguments{
 \item{sensor}{\code{character ["Terra"| "Aqua" | "Both"]} MODIS platform to be considered.
@@ -15,34 +28,34 @@ MODIStsp_vrt_create(sensor, out_prod_folder, bandnames, bandsel,
 
 \item{out_prod_folder}{\code{character} Main output folder.}
 
-\item{bandnames}{\code{character array} Abbreviated Names of original layers of the
+\item{bandnames}{\verb{character array} Abbreviated Names of original layers of the
 selected product (used to build output file names).}
 
-\item{bandsel}{\code{integer 0/1 array} of length equal to number of original
+\item{bandsel}{\verb{integer 0/1 array} of length equal to number of original
 layers of the selected product set to 1 for bands to be processed.}
 
-\item{nodata_out}{\code{numeric array} Target NoData values of MODIS original layers
+\item{nodata_out}{\verb{numeric array} Target NoData values of MODIS original layers
 (Ignored if nodata_change == FALSE).}
 
-\item{indexes_bandnames}{\code{character array} Abbreviated Names of SIs available
+\item{indexes_bandnames}{\verb{character array} Abbreviated Names of SIs available
 for the selected product (used to build output file names of SIs).}
 
-\item{indexes_bandsel}{\code{integer 0/1 array} array of length equal to the number
+\item{indexes_bandsel}{\verb{integer 0/1 array} array of length equal to the number
 of Spectral Indexes available for the product (standard + user-provided),
 set to  1 for indexes to be processed.}
 
-\item{indexes_nodata_out}{\code{numeric array} NoData values to be used for SIs}
+\item{indexes_nodata_out}{\verb{numeric array} NoData values to be used for SIs}
 
-\item{quality_bandnames}{\code{character array} Abbreviated Names of Quality
+\item{quality_bandnames}{\verb{character array} Abbreviated Names of Quality
 Indicators available for the selected product (used to build output file
 names of QIs).}
 
-\item{quality_bandsel}{\code{integer 0|1 array} array of length equal to number
+\item{quality_bandsel}{\verb{integer 0|1 array} array of length equal to number
 of available QIs, set to  1 for indexes to be processed.}
 
 \item{quality_nodata_out}{\code{integer} Always set to 255.}
 
-\item{file_prefixes}{\code{character array (2)} file_prefixes for TERRA and AQUA -
+\item{file_prefixes}{\verb{character array (2)} file_prefixes for TERRA and AQUA -
 used to identify the files corresponding to each sensor}
 
 \item{ts_format}{\code{character ["ENVI" | "GDAL" | "Both"]} Required output format

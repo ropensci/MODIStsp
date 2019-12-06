@@ -4,20 +4,25 @@
 \alias{install_MODIStsp_launcher}
 \title{Install a launcher for MODIStsp}
 \usage{
-install_MODIStsp_launcher(bin_dir = NA, rscript_dir = NA,
-  desktop_dir = NA, desktop_shortcut = TRUE, sudo = FALSE)
+install_MODIStsp_launcher(
+  bin_dir = NA,
+  rscript_dir = NA,
+  desktop_dir = NA,
+  desktop_shortcut = TRUE,
+  sudo = FALSE
+)
 }
 \arguments{
 \item{bin_dir}{\itemize{
 \item on Linux, directory in which the link to the bash script should be
-placed, Default: /usr/bin - use of a path included in the PATH environment variable is
+placed, Default: "/usr/bin" - use of a path included in the PATH environment variable is
 suggested;
 \item on Windows, directory where to place the menu entry in the Start Menu,
 Default: Start Menu -> Programs -> MODIStsp.
 }}
 
-\item{rscript_dir}{'character' in Windows only, the path of the directory in which
-Rscript is installed (default is "C:/Progra~1/R/R-<version>/bin/<arch>").
+\item{rscript_dir}{\code{character} in Windows only, the path of the directory in which
+Rscript is installed (usually is \"C:/Progra~1/R/R-\code{version}/bin/\code{x64}").
 Edit this parameter if R is installed in a custom directory.}
 
 \item{desktop_dir}{\code{character}
@@ -67,7 +72,8 @@ install_MODIStsp_launcher(sudo = TRUE)
 # Linux: installation in a directory which does not require administrator
 # permissions
 \dontrun{
-install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop"}
+install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop")
+}
 
 # Windows: common installation
 # (script in the Start Menu and shortcut on the desktop)

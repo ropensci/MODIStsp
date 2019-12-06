@@ -4,24 +4,34 @@
 \alias{get_reqbands}
 \title{Identify the MODIS original bands needed for a given processing run}
 \usage{
-get_reqbands(bands_indexes_matrix, indexes_bandsel, indexes_bandnames,
-  quality_bandsel, quality_bandnames, out_prod_folder, file_prefix, yy,
-  DOY, out_format, reprocess)
+get_reqbands(
+  bands_indexes_matrix,
+  indexes_bandsel,
+  indexes_bandnames,
+  quality_bandsel,
+  quality_bandnames,
+  out_prod_folder,
+  file_prefix,
+  yy,
+  DOY,
+  out_format,
+  reprocess
+)
 }
 \arguments{
 \item{bands_indexes_matrix}{\code{matrix} built by \code{set_bandind_matrix}}
 
-\item{indexes_bandsel}{\code{integer 0/1 array} array of length equal to the number
+\item{indexes_bandsel}{\verb{integer 0/1 array} array of length equal to the number
 of Spectral Indexes available for the product (standard + user-provided),
 set to  1 for indexes to be processed.}
 
-\item{indexes_bandnames}{\code{character array} Abbreviated Names of SIs available
+\item{indexes_bandnames}{\verb{character array} Abbreviated Names of SIs available
 for the selected product (used to build output file names of SIs).}
 
-\item{quality_bandsel}{\code{integer 0|1 array} array of length equal to number
+\item{quality_bandsel}{\verb{integer 0|1 array} array of length equal to number
 of available QIs, set to  1 for indexes to be processed.}
 
-\item{quality_bandnames}{\code{character array} Abbreviated Names of Quality
+\item{quality_bandnames}{\verb{character array} Abbreviated Names of Quality
 Indicators available for the selected product (used to build output file
 names of QIs).}
 

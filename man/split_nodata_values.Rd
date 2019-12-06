@@ -50,9 +50,9 @@ function with \code{take_all = TRUE} with "Change NoData values" = "Yes" and
 In the xml product file, NoData ranges are set as:
 \itemize{
 \item \code{x} for products with single NoData values;
-\item \code{x,y,z} for products with a vector of NoData values;
+\item \verb{x,y,z} for products with a vector of NoData values;
 \item \code{x:y} for products with a range of NoData values;
-\item \code{x:y,z} for a combination of NoData ranges and/or values.
+\item \verb{x:y,z} for a combination of NoData ranges and/or values.
 }
 
 In \link{split_nodata_values} \emph{NoData values are assumed to be integer}:

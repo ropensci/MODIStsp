@@ -4,11 +4,18 @@
 \alias{MODIStsp_addindex}
 \title{Add custom spectral indexes}
 \usage{
-MODIStsp_addindex(opts_jsfile = NULL, prodopts_file = NULL,
-  selprod = NULL, selvers = NULL, gui = TRUE,
-  new_indexbandname = "", new_indexfullname = "",
-  new_indexformula = "", new_indexnodata_out = "32767",
-  MODIStsp_dir = system.file(package = "MODIStsp"))
+MODIStsp_addindex(
+  opts_jsfile = NULL,
+  prodopts_file = NULL,
+  selprod = NULL,
+  selvers = NULL,
+  gui = TRUE,
+  new_indexbandname = "",
+  new_indexfullname = "",
+  new_indexformula = "",
+  new_indexnodata_out = "32767",
+  MODIStsp_dir = system.file(package = "MODIStsp")
+)
 }
 \arguments{
 \item{opts_jsfile}{\code{character} full path of a JSON file

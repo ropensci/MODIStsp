@@ -4,9 +4,15 @@
 \alias{MODIStsp}
 \title{MODIStsp main function}
 \usage{
-MODIStsp(gui = TRUE, options_file = NULL, spatial_file_path = NULL,
-  scroll_window = FALSE, test = NULL, n_retries = 20,
-  verbose = TRUE)
+MODIStsp(
+  gui = TRUE,
+  options_file = NULL,
+  spatial_file_path = NULL,
+  scroll_window = FALSE,
+  test = NULL,
+  n_retries = 20,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{gui}{\code{logical} if TRUE: the GUI is opened before processing. If FALSE:
@@ -111,7 +117,7 @@ extent_list
 # Note that you can also put all your extent files in a specific folder and
 # create the extent list using for example.
 # extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"),
-#                          full.names = TRUE, "\\\\.shp$")
+#                          full.names = TRUE, "\\.shp$")
 
 options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 for (single_shape in extent_list) {

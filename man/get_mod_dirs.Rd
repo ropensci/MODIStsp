@@ -4,8 +4,16 @@
 \alias{get_mod_dirs}
 \title{Get list of MODIS data folders from http server}
 \usage{
-get_mod_dirs(http, download_server, user, password, yy, n_retries, gui,
-  out_folder_mod)
+get_mod_dirs(
+  http,
+  download_server,
+  user,
+  password,
+  yy,
+  n_retries,
+  gui,
+  out_folder_mod
+)
 }
 \arguments{
 \item{http}{\code{character} http site on lpdaac corresponding to the selected MODIS
@@ -31,7 +39,7 @@ instead than to the console/GTK progress windows.}
 \item{out_folder_mod}{\code{character} output folder for MODIS HDF storage}
 }
 \value{
-\code{character arraay} listing all available folders (a.k.a. dates) for
+\verb{character arraay} listing all available folders (a.k.a. dates) for
 the requested MODIS product on lpdaac http archive, for the years
 included in the time range selected for processing.
 }

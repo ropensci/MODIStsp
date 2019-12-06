@@ -81,7 +81,7 @@
 #' @importFrom raster getValues crop extent getZ extract rasterize res
 #' @importFrom sp coordinates CRS proj4string spTransform
 #' @importFrom tools file_path_sans_ext
-#' @importFrom gdalUtils gdal_rasterize
+#' @importFrom gdalUtilities gdal_rasterize
 #' @importFrom rgeos gCentroid
 #' @examples
 #' \dontrun{

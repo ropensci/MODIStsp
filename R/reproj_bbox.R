@@ -41,8 +41,10 @@ reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE) {
   d_bbox_in <- sp::SpatialPolygons(
     list(sp::Polygons(list(sp::Polygon(d_bbox_in)), 1))
   )
+
   sp::proj4string(d_bbox_in) <- in_proj # assign the projection
   # reproject the bbox in a polygon
+
   d_bbox_out <- sp::spTransform(d_bbox_in, sp::CRS(out_proj))
 
   return(sp::bbox(d_bbox_out))

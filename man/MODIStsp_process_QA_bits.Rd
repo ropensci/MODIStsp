@@ -4,8 +4,16 @@
 \alias{MODIStsp_process_QA_bits}
 \title{MODIStsp helper function to compute Quality Indicators from HDF bit-field layers}
 \usage{
-MODIStsp_process_QA_bits(out_filename, in_source_file, bitN, out_format,
-  nodata_source, nodata_qa_in, nodata_qa_out, compress)
+MODIStsp_process_QA_bits(
+  out_filename,
+  in_source_file,
+  bitN,
+  out_format,
+  nodata_source,
+  nodata_qa_in,
+  nodata_qa_out,
+  compress
+)
 }
 \arguments{
 \item{out_filename}{\code{character} file name of the output raster files
@@ -36,7 +44,7 @@ quality layers
 }
 \details{
 On the basis of the name of the image containing the aggregated quality information
-(\code{in_source_file``) and of the position of the bit fields corresponding to the QI of interest in the bitfield representation (}bitN``), the function extracts the correct information exploiting
+(\verb{in_source_file``) and of the position of the bit fields corresponding to the QI of interest in the bitfield representation (}bitN``), the function extracts the correct information exploiting
 bitwise operators, and save the result in a new raster image
 }
 \note{

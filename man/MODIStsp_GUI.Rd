@@ -4,8 +4,14 @@
 \alias{MODIStsp_GUI}
 \title{Build and manage the MODIStsp GUI}
 \usage{
-MODIStsp_GUI(general_opts, prod_opt_list, MODIStsp_dir, opts_jsfile,
-  prodopts_file, scroll_window)
+MODIStsp_GUI(
+  general_opts,
+  prod_opt_list,
+  MODIStsp_dir,
+  opts_jsfile,
+  prodopts_file,
+  scroll_window
+)
 }
 \arguments{
 \item{general_opts}{data.frame containing general processing options passed

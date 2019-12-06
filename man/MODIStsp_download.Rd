@@ -4,12 +4,27 @@
 \alias{MODIStsp_download}
 \title{MODIStsp download function}
 \usage{
-MODIStsp_download(modislist, out_folder_mod, download_server, http,
-  n_retries, use_aria, date_dir, year, DOY, user, password, sens_sel,
-  date_name, gui, mess_lab, verbose)
+MODIStsp_download(
+  modislist,
+  out_folder_mod,
+  download_server,
+  http,
+  n_retries,
+  use_aria,
+  date_dir,
+  year,
+  DOY,
+  user,
+  password,
+  sens_sel,
+  date_name,
+  gui,
+  mess_lab,
+  verbose
+)
 }
 \arguments{
-\item{modislist}{\code{character array} List of MODIS images to be downloaded for
+\item{modislist}{\verb{character array} List of MODIS images to be downloaded for
 the selected date (as returned from \code{get_mod_filenames}). Can be a single
 image, or a list of images in case different tiles are needed!}
 
@@ -25,13 +40,13 @@ download fails more that n_retries times consecutively, abort}
 \item{use_aria}{\code{logical} If TRUE, aria2c is used to accelerate download
 (if available !).}
 
-\item{date_dir}{\code{character array} Sub-folder where the different images
+\item{date_dir}{\verb{character array} Sub-folder where the different images
 can be found (element of the list returned from \code{get_mod_dirs}, used in case
 of http download to generate the download addresses).}
 
 \item{year}{\code{character} Acquisition year of the images to be downloaded}
 
-\item{DOY}{\code{character array} Acquisition doys of the images to be downloaded}
+\item{DOY}{\verb{character array} Acquisition doys of the images to be downloaded}
 
 \item{user}{\code{character} Username for http download}
 

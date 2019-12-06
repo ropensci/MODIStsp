@@ -1,0 +1,203 @@
+---
+title: "Strange behaviour with rgdal / PROJ 3 in transform_ng C method"
+author: "Luigi Ranghetti"
+date: "4/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Summary
+This draft shows an issue occurring in 
+`transform_ng` method (called by `spTransform()` with **rgdal** >= 1.5),
+causing a wrong reprojection from EPSG 4326, probably due to a wrong definition
+of the WKT2 associated to this projection.
+
+### Description
+
+```{r}
+# Load libraries
+library(rgdal)
+library(sf)
+library(mapview)
+```
+
+
+
+```{r}
+pt0_ll <- st_sfc(st_point(c(10,46)), crs = 4326)
+pt1_ll <- as(pt0_ll, "Spatial")
+```
+
+The reprojection using `spTransform()` fails:
+
+```{r}
+mapview(pt1_ll)
+mapview(spTransform(pt1_ll, CRS(SRS_string = "EPSG:32632")))
+```
+
+Debugging **rgdal** code, it resulted that the issue occurred in the 
+`transform_ng` C method (called in file `"R/project.R"`):
+
+```{r}
+pt2_utm32_raw <- .Call(
+  "transform_ng", 
+  comment(slot(pt1_ll, "proj4string")), 
+  comment(CRS(SRS_string = "EPSG:32632")),
+  NULL, as.integer(1),
+  as.double(10), as.double(46), NULL,
+  PACKAGE="rgdal"
+)
+pt2_utm32 <- st_sfc(st_point(c(pt2_utm32_raw[[1]], pt2_utm32_raw[[2]])), crs = 32632)
+mapview(pt2_utm32)
+```
+
+This error occurs also manually specifying the input projection with EPSG code,
+while it does not occur passing the PROJ.4 string:
+
+```{r}
+pt3_utm32_raw <- .Call(
+  "transform_ng", 
+  comment(CRS(SRS_string = "EPSG:4326")),
+  comment(CRS(SRS_string = "EPSG:32632")),
+  NULL, as.integer(1),
+  as.double(10), as.double(46), NULL,
+  PACKAGE="rgdal"
+)
+pt3_utm32 <- st_sfc(st_point(c(pt3_utm32_raw[[1]], pt3_utm32_raw[[2]])), crs = 32632)
+mapview(pt3_utm32)
+```
+
+```{r}
+pt4_utm32_raw <- .Call(
+  "transform_ng", 
+  comment(CRS("+init=epsg:4326")),
+  comment(CRS(SRS_string = "EPSG:32632")),
+  NULL, as.integer(1),
+  as.double(10), as.double(46), NULL,
+  PACKAGE="rgdal"
+)
+pt4_utm32 <- st_sfc(st_point(c(pt4_utm32_raw[[1]], pt4_utm32_raw[[2]])), crs = 32632)
+mapview(pt4_utm32)
+```
+
+```{r}
+pt5_utm32_raw <- .Call(
+  "transform_ng", 
+  comment(CRS("+proj=longlat +datum=WGS84 +no_defs")),
+  comment(CRS(SRS_string = "EPSG:32632")),
+  NULL, as.integer(1),
+  as.double(10), as.double(46), NULL,
+  PACKAGE="rgdal"
+)
+pt5_utm32 <- st_sfc(st_point(c(pt5_utm32_raw[[1]], pt5_utm32_raw[[2]])), crs = 32632)
+mapview(pt5_utm32)
+```
+
+This suggests the problem being in the WKT2 associated with EPSG 4326.
+
+Having a look to the different used WKT2:
+
+```{r}
+cat(comment(slot(pt1_ll, "proj4string")))
+cat(showSRID(comment(CRS(SRS_string = "EPSG:4326")), multiline = "YES"))
+cat(showSRID(comment(CRS("+init=epsg:4326")), multiline = "YES"))
+cat(showSRID(comment(CRS("+proj=longlat +datum=WGS84 +no_defs")), multiline = "YES"))
+```
+
+
+The difference between the four ones is that, in the first two cases
+(which are thje WKT2 associated with the EPSG:4326 CRS, and which causes the 
+reprojection issue), X and Y coordinates are inverted:
+
+```
+        AXIS["geodetic latitude (Lat)",north,
+            ORDER[1],
+            ANGLEUNIT["degree",0.0174532925199433]],
+        AXIS["geodetic longitude (Lon)",east,
+            ORDER[2],
+            ANGLEUNIT["degree",0.0174532925199433]],
+```
+```
+        AXIS["longitude",east,
+            ORDER[1],
+            ANGLEUNIT["degree",0.0174532925199433,
+                ID["EPSG",9122]]],
+        AXIS["latitude",north,
+            ORDER[2],
+            ANGLEUNIT["degree",0.0174532925199433,
+                ID["EPSG",9122]]],
+```
+
+Manually correcting this difference, the error disappears:
+```{r}
+wkt2_4326 <- comment(CRS(SRS_string = "EPSG:4326"))
+cat(showSRID(wkt2_4326, multiline = "YES"))
+wkt2_4326_corr <- paste0(
+  "GEOGCRS[\"WGS 84\",",
+  "    DATUM[\"World Geodetic System 1984\",",
+  "        ELLIPSOID[\"WGS 84\",6378137,298.257223563,",
+  "            LENGTHUNIT[\"metre\",1]]],",
+  "    PRIMEM[\"Greenwich\",0,",
+  "        ANGLEUNIT[\"degree\",0.0174532925199433]],",
+  "    CS[ellipsoidal,2],",
+  "        AXIS[\"geodetic longitude (Lon)\",east,",
+  "            ORDER[1],",
+  "            ANGLEUNIT[\"degree\",0.0174532925199433]],",
+  "        AXIS[\"geodetic latitude (Lat)\",north,",
+  "            ORDER[2],",
+  "            ANGLEUNIT[\"degree\",0.0174532925199433]],",
+  "    USAGE[",
+  "        SCOPE[\"unknown\"],",
+  "        AREA[\"World\"],",
+  "        BBOX[-90,-180,90,180]],",
+  "    ID[\"EPSG\",4326]]"
+)
+cat(showSRID(wkt2_4326_corr, multiline = "YES"))
+pt6_utm32_raw <- .Call(
+  "transform_ng", 
+  comment(CRS(SRS_string = wkt2_4326_corr)),
+  comment(CRS(SRS_string = "EPSG:32632")),
+  NULL, as.integer(1),
+  as.double(10), as.double(46), NULL,
+  PACKAGE="rgdal"
+)
+pt6_utm32 <- st_sfc(st_point(c(pt6_utm32_raw[[1]], pt6_utm32_raw[[2]])), crs = 32632)
+mapview(pt6_utm32)
+
+```
+
+The issue does not occur using standalone GDAL:
+```{r}
+st_write(pt0_ll, pt0_ll_path <- tempfile(fileext=".gpkg"))
+system(paste0("gdalinfo --version"), intern = TRUE)
+```
+```{r}
+system(paste0(
+  "ogr2ogr -t_srs \"",gsub("\\\"", "\\\\\"", wkt2_4326_corr),"\" ",
+  pt7_utm32_path <- tempfile(fileext=".gpkg")," ",
+  pt0_ll_path
+))
+pt7_utm32 <- st_read(pt7_utm32_path)
+mapview(pt7_utm32)
+```
+```{r}
+system(paste0(
+  "ogr2ogr -t_srs EPSG:4326 ",
+  pt8_utm32_path <- tempfile(fileext=".gpkg")," ",
+  pt0_ll_path
+))
+pt8_utm32 <- st_read(pt8_utm32_path)
+mapview(pt8_utm32)
+```
+```{r}
+system(paste0(
+  "ogr2ogr -t_srs \"",gsub("\\\"", "\\\\\"", wkt2_4326),"\" ",
+  pt9_utm32_path <- tempfile(fileext=".gpkg")," ",
+  pt0_ll_path
+))
+pt9_utm32 <- st_read(pt9_utm32_path)
+mapview(pt9_utm32)
+```

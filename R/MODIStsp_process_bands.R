@@ -31,13 +31,14 @@
 #' @rdname MODIStsp_process_bands
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
-#' @importFrom gdalUtils gdal_translate gdalbuildvrt gdalwarp gdalinfo
+#' @importFrom gdalUtilities gdal_translate gdalbuildvrt gdalwarp gdalinfo
 #' @importFrom stringr str_sub
 #' @importFrom raster res raster calc reclassify
 #' @importFrom tools file_path_sans_ext
 #' @importFrom parallel detectCores
 #' @importFrom gWidgets svalue
 #' @importFrom stats na.omit
+#' @importFrom sf sf_extSoftVersion gdal_utils
 #'
 MODIStsp_process_bands <- function(out_folder_mod, modislist,
                                    outproj_str, mod_proj_str, sens_sel,
@@ -65,29 +66,36 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # original layers (e.g. albedo) is needed
 
   # Retrieve information from hdf4 with gdalinfo
-  gdalinfo_hdf_raw <- gdalUtils::gdalinfo(file.path(out_folder_mod,
-                                                    modislist[1]))
+  # gdalinfo_hdf_raw <- sf::gdal_utils("info",
+  #                                    file.path(out_folder_mod,modislist[1]))
 
-  gdalinfo_hdf_1stlayer <- gsub(
-    "^ *SUBDATASET_1_NAME=", "",
-    gdalinfo_hdf_raw[grep("^ *SUBDATASET_1_NAME",
-                          gdalinfo_hdf_raw)]
-  )
+  gdalinfo_raw <- suppressWarnings(suppressMessages(try(
+    sf::gdal_utils("info", file.path(out_folder_mod,modislist[1]), quiet = TRUE) %>%
+      strsplit("\n") %>% unlist() %>% trimws(),
+    silent = TRUE
+  )))
+
+
+  # gdalinfo_hdf_1stlayer <- gsub(
+  #   "^ *SUBDATASET_1_NAME=", "",
+  #   gdalinfo_hdf_raw[grep("^ *SUBDATASET_1_NAME",
+  #                         gdalinfo_hdf_raw)]
+  # )
 
   gdalinfo_hdf_resunit  <- gsub(
     "^ *NADIRDATARESOLUTION=[0-9.]+ ?", "",
-    gdalinfo_hdf_raw[grep("^ *NADIRDATARESOLUTION",
-                          gdalinfo_hdf_raw)]
+    gdalinfo_raw[grep("^ *NADIRDATARESOLUTION",
+                      gdalinfo_raw)]
   )
 
-  gdalinfo_raw  <- if (length(gdalinfo_hdf_1stlayer) > 0) {
-    # if more than a band is present, take gdalinfo from the first
-    # band
-    gdalUtils::gdalinfo(file.path(out_folder_mod, modislist[1]), sd = 1)
-  } else {
-    # otherwise, take from the HDF directly
-    gdalinfo_hdf_raw
-  }
+  # gdalinfo_raw  <- if (length(gdalinfo_hdf_1stlayer) > 0) {
+  #   # if more than a band is present, take gdalinfo from the first
+  #   # band
+  #   gdalUtils::gdalinfo(file.path(out_folder_mod, modislist[1]), sd = 1)
+  # } else {
+  #   # otherwise, take from the HDF directly
+  #   gdalinfo_hdf_raw
+  # }
   gdalinfo_bbox <- cbind(
     stats::na.omit(as.numeric(unlist(strsplit(gsub(
       "[^0-9.\\-]+",
@@ -137,10 +145,8 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   if (datatype == "UInt32") {
     for (file in seq_along(files_in)) {
       file_out <- tempfile(fileext = ".tif", tmpdir = tmpdir)
-      gdalUtilities::gdal_translate(files_in[file],
-                                file_out,
-                                sd_index  = band,
-                                overwrite = TRUE)
+      gdalUtilities::gdal_translate(gdalUtils::get_subdatasets(files_in[file])[band],
+                                file_out)
       files_in[file] <- file_out
     }
 
@@ -149,20 +155,18 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     if (length(split_nodata_values(nodata_in)[[1]] == 1)) {
       gdalUtilities::gdalwarp(files_in,
                           outfile_vrt,
-                          sd        = band,
                           multi     = TRUE,
                           wo        = paste0("NUM_THREADS=", ncores),
                           nomd      = TRUE,
                           overwrite = TRUE,
                           srcnodata = nodata_in,
-                          vrtnodata = nodata_out
+                          dstnodata = nodata_out
       )
     } else {
       # If multiple NODATA, do not change the nodata value in the VRT, because
       # it is dealt with later
       gdalUtilities::gdalwarp(files_in,
                           outfile_vrt,
-                          sd        = band,
                           multi     = TRUE,
                           wo        = paste0("NUM_THREADS=", ncores),
                           nomd      = TRUE,
@@ -293,9 +297,9 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                           te        = c(bbox_mod),
                           tap       = TRUE,
                           tr        = raster::res(raster::raster(outfile_vrt_or)), #nolint
-                          sd        = band,
+                          # sd        = band,
                           srcnodata = nodata_in,
-                          vrtnodata = nodata_out,
+                          dstnodata = nodata_out,
                           ot        = as.character(datatype),
                           multi     = TRUE,
                           wo        = c("INIT_DEST = NO_DATA",
@@ -310,7 +314,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                               tr        = raster::res(raster::raster(outfile_vrt_or)), #nolint
                               srcnodata = nodata_in,
                               vrtnodata = nodata_out,
-                              sd        = band,
+                              # sd        = band,
                               overwrite = TRUE)
     }
   }
@@ -329,12 +333,13 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   }
 
   # workaround on gdal >= 2.3
-  gdalutils_ver <- getOption("gdalUtils_gdalPath")[[1]]$version[[1]]
-  gdalutils_ver <- as.numeric(substring(gdalutils_ver, 1,3))
+
+  gdal_ver <- sf::sf_extSoftVersion()[["GDAL"]]
+  gdal_ver <- as.numeric(substring(gdal_ver, 1,3))
 
   # Fix needed to avoid that scale and offset are automatically "applied"
   # when working with GDAL > 2.3.x
-  if (gdalutils_ver >= 2.3 & tools::file_ext(outfile_vrt) == "vrt") {
+  if (gdal_ver >= 2.3 & tools::file_ext(outfile_vrt) == "vrt") {
     vrt_in      <- readLines(outfile_vrt)
 
     scale_line <- grep("Scale", vrt_in)
@@ -476,7 +481,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              of        = out_format,
              ot        = as.character(datatype),
              a_nodata  = nodata_out,
-             overwrite = TRUE,
              wo        = c("INIT_DEST = NO_DATA",
                            paste0("NUM_THREADS=", ncores)),
            ),

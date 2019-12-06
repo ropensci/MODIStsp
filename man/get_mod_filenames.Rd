@@ -4,8 +4,19 @@
 \alias{get_mod_filenames}
 \title{Find the names of MODIS images corresponding to the selected dates}
 \usage{
-get_mod_filenames(http, used_server, user, password, n_retries, date_dir,
-  v, h, tiled, out_folder_mod, gui)
+get_mod_filenames(
+  http,
+  used_server,
+  user,
+  password,
+  n_retries,
+  date_dir,
+  v,
+  h,
+  tiled,
+  out_folder_mod,
+  gui
+)
 }
 \arguments{
 \item{http}{\code{character} url of http site on lpdaac corresponding to a given MODIS
@@ -20,14 +31,14 @@ product.}
 \item{n_retries}{\code{numeric} number of times the access to the http server
 should be retried in case of error before quitting, Default: 20.}
 
-\item{date_dir}{\code{character array} array of folder names corresponding to acquisition
+\item{date_dir}{\verb{character array} array of folder names corresponding to acquisition
 containing dates where MODIS files to be downloaded are to be identified
 (return array from \code{get_mod_dates}).}
 
-\item{v}{\code{integer array} containing a sequence of the vertical tiles of interest
+\item{v}{\verb{integer array} containing a sequence of the vertical tiles of interest
 (e.g., c(18,19)).}
 
-\item{h}{\code{integer array} containing a sequence of the horizontal tiles of interest
+\item{h}{\verb{integer array} containing a sequence of the horizontal tiles of interest
 (e.g., c(3,4)).}
 
 \item{tiled}{\code{numeric [0/1]} indicates if the product to be downloaded is
@@ -39,7 +50,7 @@ tiled or not tiled. 1 = tiled product; 0 = non-tiled product (resolution 0.05 de
 or not. If not, processing messages are redirected direct to the log file.}
 }
 \value{
-\code{character array} containing names of HDF images corresponding to the
+\verb{character array} containing names of HDF images corresponding to the
 requested tiles available for the product in the selected date
 }
 \description{

@@ -22,7 +22,7 @@
 #' @importFrom raster setZ stack
 #' @importFrom tools file_path_sans_ext
 #' @importFrom stringr str_sub str_detect
-#' @importFrom gdalUtils gdalbuildvrt
+#' @importFrom gdalUtilities gdalbuildvrt
 #'
 MODIStsp_vrt_create <- function(
   sensor,

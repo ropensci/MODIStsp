@@ -4,9 +4,19 @@
 \alias{MODIStsp_extract}
 \title{Extract data from MODIStsp time series}
 \usage{
-MODIStsp_extract(in_rts, sp_object, start_date = NULL, end_date = NULL,
-  id_field = NULL, FUN = "mean", out_format = "xts", small = TRUE,
-  small_method = "centroids", na.rm = TRUE, verbose = FALSE)
+MODIStsp_extract(
+  in_rts,
+  sp_object,
+  start_date = NULL,
+  end_date = NULL,
+  id_field = NULL,
+  FUN = "mean",
+  out_format = "xts",
+  small = TRUE,
+  small_method = "centroids",
+  na.rm = TRUE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{in_rts}{A \code{RasterStack} bject created by MODIStsp
@@ -124,7 +134,7 @@ MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
 
 # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 # 2016-01-01 and 2016-12-18
-# __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series\\/RData"
+# __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series\/RData"
 # subfolder of your main output folder - see
 # "http://ropensci.github.io/MODIStsp/articles/output.html")
 

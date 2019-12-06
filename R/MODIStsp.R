@@ -40,7 +40,7 @@
 #' @export
 #' @seealso [MODIStsp_GUI()], [MODIStsp_process()]
 #' @rdname MODIStsp
-#' @importFrom gdalUtils gdal_setInstallation gdalinfo
+#' @importFrom gdalUtilities gdalinfo
 #' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose font
 #' @importFrom pacman p_exists p_load
 #' @importFrom raster rasterOptions crop extent
@@ -245,58 +245,60 @@ MODIStsp <- function(gui               = TRUE,
   }
 
   # Check GDAL version ----
-  if (is.null(getOption("gdalUtils_gdalPath"))) {
-
-    welcome_text <- strwrap("Welcome to MODIStsp!\n\nWe will now search for a
-                            valid GDAL installation - please wait! (this will
-                            happen only once)", width = 60)
-    if (gui) {
-      #nocov start
-      welcome_win       <- gWidgets::gwindow(title  = "Welcome", width = 400,
-                                             height = 100)
-
-      welcome_lab       <- gWidgets::glabel(text      = welcome_text,
-                                            container = welcome_win,
-                                            editable  = FALSE)
-      gWidgets::font(welcome_lab) <- list(family = "sans",
-                                          style = "italic", size = 10)
-      Sys.sleep(0.05)
-      message("[", date(), "] ", welcome_text)
-      #nocov end
-    } else {
-      message("[", date(), "] ", welcome_text)
-    }
-
-    gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE)
-  }
+  # if (is.null(getOption("gdalUtils_gdalPath"))) {
+  #
+  #   welcome_text <- strwrap("Welcome to MODIStsp!\n\nWe will now search for a
+  #                           valid GDAL installation - please wait! (this will
+  #                           happen only once)", width = 60)
+  #   if (gui) {
+  #     #nocov start
+  #     welcome_win       <- gWidgets::gwindow(title  = "Welcome", width = 400,
+  #                                            height = 100)
+  #
+  #     welcome_lab       <- gWidgets::glabel(text      = welcome_text,
+  #                                           container = welcome_win,
+  #                                           editable  = FALSE)
+  #     gWidgets::font(welcome_lab) <- list(family = "sans",
+  #                                         style = "italic", size = 10)
+  #     Sys.sleep(0.05)
+  #     message("[", date(), "] ", welcome_text)
+  #     #nocov end
+  #   } else {
+  #     message("[", date(), "] ", welcome_text)
+  #   }
+  #
+  #   gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE)
+  # }
   # gdal_version <- package_version(
   #   gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*", "\\1",
   #        rgdal::getGDALVersionInfo(str = "--version"))
   # )
 
-  gdal_version <- getOption("gdalUtils_gdalPath")[[1]]$version[[1]]
+  gdal_version <- sf::sf_extSoftVersion()[["GDAL"]]
+
+    # getOption("gdalUtils_gdalPath")[[1]]$version[[1]]
 
   if (verbose) message("GDAL version in use: ", as.character(gdal_version))
 
-  gdal_version <- as.numeric(substring(gdal_version, 1,3))
+  # gdal_version <- as.numeric(substring(gdal_version, 1,3))
 
   # GDAL version used as minimum required version
-  gdal_minversion  <- package_version("2.2.3")
-  gdal_hdf_support <- length(grep("HDF4",
-                                  gdalUtils::gdalinfo(formats = TRUE))) > 0
+  # gdal_minversion  <- package_version("2.2.3")
+  # gdal_hdf_support <- length(grep("HDF4",
+  #                                 gdalUtils::gdalinfo(formats = TRUE))) > 0
+  #
+  # if (gdal_version < gdal_minversion) {
+  #   stop(paste0("GDAL version must be at least ",
+  #               gdal_minversion,
+  #               ". Please update it."))
+  # }
 
-  if (gdal_version < gdal_minversion) {
-    stop(paste0("GDAL version must be at least ",
-                gdal_minversion,
-                ". Please update it."))
-  }
-
-  if (!gdal_hdf_support) {
-    stop("Your local GDAL installation does not support HDF4 format.\n",
-         "Please install HDF4 support and recompile GDAL. See:\n",
-         strwrap("http://ropensci.github.io/MODIStsp/articles/installation.html#
-      installing-r-and-gdal", width = 200))
-  }
+  # if (!gdal_hdf_support) {
+  #   stop("Your local GDAL installation does not support HDF4 format.\n",
+  #        "Please install HDF4 support and recompile GDAL. See:\n",
+  #        strwrap("http://ropensci.github.io/MODIStsp/articles/installation.html#
+  #     installing-r-and-gdal", width = 200))
+  # }
 
   # ____________________________________________________________________________
   # Files/Folder Initialization and set-up of default parameters            ####
@@ -425,20 +427,40 @@ MODIStsp <- function(gui               = TRUE,
       format(as.Date(general_opts$end_date), "%Y.%m.%d")
     )
 
-    # If the product is NOT tiled, set or_proj to WGS84 and or_res from
+    # If the product is NOT tiled, set or_proj to EPSG:4008 and or_res from
     # metres to degrees
+    # use proj4 if GDAL <3, WKT2 otherwise
     if (prod_opts$tiled == 0) {
-      mod_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
+      if (!rgdal::GDALis3ormore()) {
+        mod_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
+      } else {
+        mod_proj_str <- attr(CRS(SRS_string = "EPSG:4008"), "comment")
+      }
       prod_opts$native_res <- format(
         as.numeric(prod_opts$native_res) * (0.05 / 5600)
       )
     } else {
-      # default projection string for MODIS gridded data
-      mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+      # default projection string for MODIS gridded data - proj4 if GDAL <3, WKT2 otherwise
+      if (!rgdal::GDALis3ormore()) {
+        mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+      } else {
+        mod_proj_str <- attr(CRS(
+          SRS_string = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs"), "comment") #nolint
+      }
     }
+
+    # work on output projection - for the time being, convert to WKT if GDAL >3.
+    # needs to be revised!!!!
+    if (!rgdal::GDALis3ormore()) {
+      general_opts$output_proj4 <- general_opts$output_proj4
+    } else {
+      general_opts$output_proj4 <- attr(CRS(
+        SRS_string = general_opts$output_proj4), "comment") #nolint
+    }
+    browser()
     # get native resolution if out_res empty
     if (general_opts$out_res == "" | general_opts$out_res_sel == "Native") {
-      general_opts$out_res <- prod_opts$native_res
+      general_opts$out_res <-prod_opts$native_res
     }
 
     #   ________________________________________________________________________

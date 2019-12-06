@@ -11,7 +11,7 @@ load_opts(opts_jsfile)
 processing options}
 }
 \value{
-\code{data frame} general_opts, containing the processing options
+\verb{data frame} general_opts, containing the processing options
 retrieved from the JSON file (or the defaults set at first execution).
 See also \code{MODIStsp_GUI} and \code{MODIStsp_process}
 }

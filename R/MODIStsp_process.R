@@ -134,13 +134,7 @@
 #'   [Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
 #' @rdname MODIStsp_process
-#' @importFrom gdalUtils gdalinfo gdal_translate gdalwarp gdalbuildvrt
-#' @importFrom gWidgets gwindow glabel dispose gconfirm svalue addHandlerUnrealize
-#' @importFrom httr content GET authenticate progress timeout
-#' @importFrom raster raster writeRaster
-#' @importFrom tools file_path_sans_ext
-#' @importFrom parallel detectCores
-#' @importFrom stringr str_sub
+#' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose
 
 MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              out_folder_mod, reprocess = "Yes",
