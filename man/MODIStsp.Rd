@@ -133,7 +133,7 @@ outfiles_iseo
 
 plot(raster(outfiles_iseo[1]))
 
-# See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html
+# See also http://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html
 }
 }
 \seealso{
