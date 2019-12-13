@@ -59,9 +59,10 @@ testthat::test_that("Tests on MODIStsp", {
   # check correct resampling and reprojection
   expect_equal(raster::res(r), c(1553.030, 1551.724),
                tolerance = 0.01, scale = 1)
+
   expect_equal(
     sp::proj4string(r),
-    "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"#nolint
+    "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"#nolint
   )
   unlink(out_files_dat)
   unlink(out_files_rts)

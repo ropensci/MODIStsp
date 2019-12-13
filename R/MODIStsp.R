@@ -276,7 +276,7 @@ MODIStsp <- function(gui               = TRUE,
 
   gdal_version <- sf::sf_extSoftVersion()[["GDAL"]]
 
-    # getOption("gdalUtils_gdalPath")[[1]]$version[[1]]
+  # getOption("gdalUtils_gdalPath")[[1]]$version[[1]]
 
   if (verbose) message("GDAL version in use: ", as.character(gdal_version))
 
@@ -325,7 +325,6 @@ MODIStsp <- function(gui               = TRUE,
   # Load the processing options from the user provided "options_file", or from
   # `previous_jsfile`
   #
-
   general_opts <- load_opts(previous_jsfile)
 
   #   __________________________________________________________________________
@@ -429,38 +428,43 @@ MODIStsp <- function(gui               = TRUE,
 
     # If the product is NOT tiled, set or_proj to EPSG:4008 and or_res from
     # metres to degrees
-    # use proj4 if GDAL <3, WKT2 otherwise
+    # Input projection: If the comment on the CRS does not exist (PROJ <6)
+    # use proj4string. Otherwise, use WKT comment.
+    #
     if (prod_opts$tiled == 0) {
-      if (!rgdal::GDALis3ormore()) {
-        mod_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
-      } else {
-        mod_proj_str <- attr(CRS(SRS_string = "EPSG:4008"), "comment")
-      }
+      mod_proj_str <- CRS("+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs") #nolint
+
       prod_opts$native_res <- format(
         as.numeric(prod_opts$native_res) * (0.05 / 5600)
       )
     } else {
       # default projection string for MODIS gridded data - proj4 if GDAL <3, WKT2 otherwise
-      if (!rgdal::GDALis3ormore()) {
-        mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+      mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+    }
+
+    if (is.null(attr(mod_proj_str, "comment"))) {
+      mod_proj_str <- as.character(mod_proj_str)
+    } else {
+      mod_proj_str <- attr(mod_proj_str, "comment")
+    }
+    # work on output projection - for the time being, convert to WKT if GDAL >3.
+    # needs to be revised!!!!
+    if (!gdal_version >= 3) {
+      general_opts$output_proj <- general_opts$output_proj
+    } else {
+      # output projection: If the comment on the CRS does not exist (PROJ <6)
+      # use proj4string. Otherwise, use WKT comment.
+      outproj <- sp::CRS(general_opts$output_proj)
+      if (is.null(attr(outproj, "comment"))) {
+        general_opts$output_proj <- as.character(general_opts$output_proj)
       } else {
-        mod_proj_str <- attr(CRS(
-          SRS_string = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs"), "comment") #nolint
+        general_opts$output_proj <- attr(general_opts$output_proj, "comment")
       }
     }
 
-    # work on output projection - for the time being, convert to WKT if GDAL >3.
-    # needs to be revised!!!!
-    if (!rgdal::GDALis3ormore()) {
-      general_opts$output_proj4 <- general_opts$output_proj4
-    } else {
-      general_opts$output_proj4 <- attr(CRS(
-        SRS_string = general_opts$output_proj4), "comment") #nolint
-    }
-    browser()
     # get native resolution if out_res empty
     if (general_opts$out_res == "" | general_opts$out_res_sel == "Native") {
-      general_opts$out_res <-prod_opts$native_res
+      general_opts$out_res <- prod_opts$native_res
     }
 
     #   ________________________________________________________________________
@@ -473,7 +477,7 @@ MODIStsp <- function(gui               = TRUE,
       # bounding box
 
       external_bbox <- try(bbox_from_file(spatial_file_path,
-                                          general_opts$output_proj4),
+                                          general_opts$output_proj),
                            silent = TRUE)
       if (class(external_bbox) == "try-error") {
         stop("Failed in retrieving processing extent from ",
@@ -499,7 +503,7 @@ MODIStsp <- function(gui               = TRUE,
       modis_grid  <- get(load(system.file("ExtData", "MODIS_Tiles.RData",
                                           package = "MODIStsp")))
       external_bbox_mod    <- reproj_bbox(external_bbox,
-                                          general_opts$output_proj4,
+                                          general_opts$output_proj,
                                           mod_proj_str,
                                           enlarge = TRUE)
       d_bbox_mod_tiled     <- raster::crop(modis_grid,
@@ -546,7 +550,7 @@ MODIStsp <- function(gui               = TRUE,
                      ts_format          = general_opts$ts_format,
                      compress           = general_opts$compress,
                      mod_proj_str       = mod_proj_str,
-                     outproj_str        = general_opts$output_proj4,
+                     outproj_str        = general_opts$output_proj,
                      nodata_in          = prod_opts$nodata_in,
                      nodata_out         = prod_opts$nodata_out,
                      nodata_change      = general_opts$nodata_change,
