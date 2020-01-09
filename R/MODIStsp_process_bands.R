@@ -314,7 +314,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                               tr        = raster::res(raster::raster(outfile_vrt_or)), #nolint
                               srcnodata = nodata_in,
                               vrtnodata = nodata_out,
-                              # sd        = band,
+                              sd        = band,
                               overwrite = TRUE)
     }
   }
