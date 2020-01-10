@@ -454,11 +454,12 @@ MODIStsp <- function(gui               = TRUE,
     } else {
       # output projection: If the comment on the CRS does not exist (PROJ <6)
       # use proj4string. Otherwise, use WKT comment.
-      outproj <- sp::CRS(general_opts$output_proj)
+      outproj <- sp::CRS(check_proj4string(general_opts$output_proj))
+
       if (is.null(attr(outproj, "comment"))) {
-        general_opts$output_proj <- as.character(general_opts$output_proj)
+        general_opts$output_proj <- as.character(outproj)
       } else {
-        general_opts$output_proj <- attr(general_opts$output_proj, "comment")
+        general_opts$output_proj <- attr(outproj, "comment")
       }
     }
 
