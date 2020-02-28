@@ -2,7 +2,6 @@
 #' @description Handler for the actions to be taken when the projection is
 #'  changed
 #' @importFrom gWidgets svalue enabled ginput gmessage
-#' @importFrom sp CRS
 #' @noRd
 #'
 gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
@@ -13,6 +12,7 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
     "gui_load_options(choice, wids, prod_opt_list, compress_dict)"
 
   if (gWidgets::svalue(wids$proj_choice) != "User Defined") {
+
     if (is_loadopts) {
       choice <- TRUE
     } else {
@@ -25,8 +25,8 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
       gWidgets::svalue(wids$output_proj4)  <- newproj
 
       # Get the units and kind of proj
-      proj  <- gui_get_proj(sp::CRS(newproj))
-      units <- gui_get_units(sp::CRS(newproj), proj)
+      proj  <- gui_get_proj(newproj)
+      units <- gui_get_units(newproj, proj)
       gWidgets::svalue(wids$pixsize2_lab) <- units
       gui_update_bboxlabels(bbox_out,
                             units,
@@ -52,8 +52,8 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
 
       if (!is_loadopts) {
       selproj <- gWidgets::ginput(
-        paste("Please insert a valid proj4string,",
-              "an EPSG code or an UTM grid zone (e.g. 32N):"),
+        paste("Please insert a valid EPSG code, an UTM grid zone (e.g. 32N), or
+              projection WKT:"),
         parent     = NULL,
         do.buttons = TRUE,
         size       = 800,
@@ -68,7 +68,9 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
       # new out proj
 
       if (length(selproj) != 0 && selproj != "" && !is.na(selproj)) {
-        new_proj <- check_proj4string(selproj, abort = FALSE, verbose = FALSE)
+
+        new_proj <- check_projection(selproj, abort = FALSE, verbose = FALSE)
+
         # On error, send out a message and reset wids$proj_choice and proj4
         # wid to previous values
         if (is.na(new_proj)) {
@@ -79,6 +81,7 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
             )),
             title   = strwrap("Invalid projection")
           )
+          browser()
           gWidgets::svalue(wids$output_proj4) <- old_proj
           gWidgets::svalue(wids$proj_choice)  <- "Native"
         } else {
@@ -92,8 +95,8 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
 
             # Get the units and kind of proj
 
-            proj  <- gui_get_proj(sp::CRS(new_proj))
-            units <- gui_get_units(sp::CRS(new_proj), proj)
+            proj  <- gui_get_proj(new_proj)
+            units <- gui_get_units(new_proj, proj)
             gWidgets::svalue(wids$pixsize2_lab) <- units
             gui_update_bboxlabels(bbox_out,
                                   units,
@@ -101,8 +104,8 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
                                   reset = TRUE)
 
           } else {
-            proj  <- gui_get_proj(sp::CRS(new_proj))
-            units <- gui_get_units(sp::CRS(new_proj), proj)
+            proj  <- gui_get_proj(new_proj)
+            units <- gui_get_units(new_proj, proj)
             gWidgets::svalue(wids$pixsize2_lab) <- units
           }
         }

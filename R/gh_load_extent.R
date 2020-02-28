@@ -43,15 +43,16 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
     print(gWidgets::svalue(wids$proj_choice))
     # Create the bounding box in the chosen projection retrieving it from
     # the specified file
+
     bbox_out <- try(bbox_from_file(file_path = choice,
-                                   crs_out   = out_proj_crs),
+                                   crs_out   = sf::st_as_text(sf::st_crs(out_proj_crs))),
                     silent = TRUE)
     if (class(bbox_out) == "try-error") {
       gmessage(bbox_out, title = "Error Detected!")
     } else {
 
-      proj  <- gui_get_proj(CRS(curr_proj))
-      units <- gui_get_units(CRS(curr_proj), proj)
+      proj  <- gui_get_proj(sf::st_crs(curr_proj)$proj4string)
+      units <- gui_get_units(sf::st_crs(curr_proj)$proj4string, proj)
       # re-set bbox in the GUI according coordinates retrieved from file
       gui_update_bboxlabels(bbox_out,
                             units,

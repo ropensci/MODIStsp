@@ -37,9 +37,9 @@ test_that("MODIStsp_extract works as expected", {
 
       # extract data - average values over polygons
 
-      polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp",
+      polygons <- sf::st_read(system.file("testdata/extract_polys.shp",
                                              package = "MODIStsp"),
-                                 verbose = FALSE)
+                                 quiet = TRUE)
       expect_warning(out_data <- MODIStsp_extract(ts_data, polygons,
                                                   id_field = "lc_type",
                                                   small = FALSE))
@@ -90,10 +90,7 @@ test_that("MODIStsp_extract works as expected", {
       #   The test uses the same time series as before, and extract data on
       #   centroids of the polygons
 
-      centroids <- rgeos::gCentroid(polygons, byid = TRUE)
-      points <- sp::SpatialPointsDataFrame(centroids,
-        polygons@data, match.ID = FALSE)
-
+      points <- expect_warning(sf::st_centroid(polygons))
       expect_warning(out_data <- MODIStsp_extract(ts_data,
                                                   points,
                                                   id_field = "lc_type"))

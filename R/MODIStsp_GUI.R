@@ -21,12 +21,7 @@
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom raster crop extent raster plot
-#' @importFrom jsonlite fromJSON write_json
-#' @importFrom sp CRS
-#' @importFrom grDevices dev.new
-#' @importFrom data.table rbindlist
-#' @importFrom utils packageVersion browseURL head tail
+#' @importFrom utils packageVersion browseURL
 #' @importFrom gWidgets svalue gconfirm gmessage gbasicdialog ggroup
 #'  getToolkitWidget gframe gdroplist enabled size addSpring glabel
 #'  gcombobox addSpace gbutton gcheckboxgroup dispose visible gradio
@@ -122,8 +117,10 @@ MODIStsp_GUI <- function(general_opts,
   out_proj_list  <- list(
     "Native"   = ifelse(
       prod_opt_list[[sel_prod]][[general_opts$prod_version]][["tiled"]] == "1",
-      "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
-      "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"),
+      "MODIS Sinusoidal", #nolint
+      "EPSG::4008"),
+    # "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6371007.181,0,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Sinusoidal\"],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]", #nolint
+    # "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"),
     "User Defined" = ""
   )
   mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
@@ -784,7 +781,7 @@ MODIStsp_GUI <- function(general_opts,
   )
 
   # Text widget showing the current output proj4string ----
-  outproj_user_lab       <- glabel(text      = "  PROJ4 String:",
+  outproj_user_lab       <- glabel(text      = "  PROJECTION:",
                                    container = output_proj_group)
   gWidgets::font(outproj_user_lab) <- list(family = "sans", weight = "bold")
 
@@ -821,7 +818,7 @@ MODIStsp_GUI <- function(general_opts,
 
       if (length(selproj) != 0 && selproj != "" && !is.na(selproj))  {
 
-        newproj <- check_proj4string(selproj, abort = FALSE, verbose = FALSE)
+        newproj <- check_projection(selproj, abort = FALSE, verbose = FALSE)
 
         # Check if proj4string is valid
         if (is.na(sel_output_proj)) {
@@ -835,8 +832,15 @@ MODIStsp_GUI <- function(general_opts,
         } else {
 
           gWidgets::svalue(wids$output_proj4) <- newproj
-          proj  <- gui_get_proj(sp::CRS(newproj))
-          units <- gui_get_units(sp::CRS(newproj), proj)
+          if (newproj == "MODIS Sinusoidal") {
+            newproj <- "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6371007.181,0,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Sinusoidal\"],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]"
+          }
+          if (newproj == "EPSG:4008") {
+            newproj <- 4008
+          }
+
+          units <- gui_get_units(newproj, gui_get_proj(newproj))
+
           gWidgets::svalue(wids$pixsize2_lab) <- units
           # If valid proj4string, and output is a bounding box, recompute
           # bounding box in output proj coordinates
@@ -919,16 +923,23 @@ MODIStsp_GUI <- function(general_opts,
   # Initial set-up of the output projection on the basis of current
   # values in widgets
 
-  sel_output_proj <- sp::CRS(
+  sel_output_proj <-
     if (gWidgets::svalue(wids$proj_choice) == "User Defined") {
       gWidgets::svalue(wids$output_proj4)
     } else {
       out_proj_list[[gWidgets::svalue(wids$proj_choice)]]
     }
-  )
 
-  proj  <- gui_get_proj(sel_output_proj)
-  units <- gui_get_units(sel_output_proj, proj)
+  if (sel_output_proj == "MODIS Sinusoidal") {
+    sel_output_proj <- "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6371007.181,0,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Sinusoidal\"],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]"
+  }
+  if (sel_output_proj == "EPSG:4008") {
+    sel_output_proj <- 4008
+  }
+
+  # proj  <- gui_get_proj(sel_output_proj)
+  units <- gui_get_units(sel_output_proj, gui_get_proj(sel_output_proj))
+
   wids$pixsize2_lab <- glabel(text = units, container = output_res_group)
 
   # Dropdown menu to select Resampling Method ----

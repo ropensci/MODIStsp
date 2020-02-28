@@ -26,14 +26,14 @@ load_opts <- function(opts_jsfile) {
       stop(strwrap("Unable to read the provided JSON options file. Please check
                    your inputs!"))
     }
-    
+
     if (!("MODIStspVersion" %in% names(general_opts))) {
       stop(
         strwrap("The specified json file does not appear to be a valid MODIStsp
            options file. Please check your inputs!")
       )
     }
-    
+
     if (is.null(general_opts$MODIStspVersion) |
         general_opts$MODIStspVersion < "1.3.3.9000") {
       stop("The option file in use (", opts_jsfile, ") was created with a ",
@@ -79,7 +79,7 @@ load_opts <- function(opts_jsfile) {
       download_server = "http",
       download_range  = "full",
       proj            = "Native",
-      output_proj4    = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
+      output_proj4    = "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6371007.181,0,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Sinusoidal\"],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]", #nolint
       out_res_sel     = "Native",
       out_res         = "",
       full_ext        = "Select MODIS Tiles",

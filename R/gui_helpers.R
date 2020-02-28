@@ -77,13 +77,16 @@ gui_update_tiles <- function(bbox_out,
 # gui_get_proj ----
 #' @title gui_get_proj
 #' @description GUI Helper functions to get currently selected projection
+#' @importFrom sf st_crs
 #' @importFrom utils head tail
 #' @noRd
 #'
-gui_get_proj <- function(curr_proj) {
+gui_get_proj <- function(newproj) {
   #nocov start
+  spcrs <- sf::st_crs(newproj)$proj4string
+
   utils::head(strsplit(utils::tail(
-    strsplit(curr_proj@projargs, "+proj=")[[1]], 1), " +")[[1]], 1)
+    strsplit(spcrs, "+proj=")[[1]], 1), " +")[[1]], 1)
   #nocov end
 }
 
@@ -91,19 +94,22 @@ gui_get_proj <- function(curr_proj) {
 #' @title gui_get_units
 #' @description GUI Helper functions to get measure units of currently selected
 #'  projection
+#' @importFrom sf st_crs
 #' @importFrom utils head tail
 #' @noRd
 #'
-gui_get_units <- function(curr_proj,
-                          proj) {
-  #nocov start
+gui_get_units <- function(newproj, proj) {
+
+  # nocov start
+  spcrs <- sf::st_crs(newproj)$proj4string
+
   if (proj == "longlat") {
     units <- "dec.degrees"
   } else {
     units <- ifelse(
-      length(strsplit(curr_proj@projargs, "+units=")[[1]]) > 1,
+      length(strsplit(spcrs, "+units=")[[1]]) > 1,
       utils::head(strsplit(utils::tail(strsplit(
-        curr_proj@projargs, "+units=")[[1]], 1), " +")[[1]], 1),
+        spcrs, "+units=")[[1]], 1), " +")[[1]], 1),
       "Unknown"
     )
   }
@@ -115,9 +121,8 @@ gui_get_units <- function(curr_proj,
 #' @title gui_load_options
 #' @description GUI Helper function used to load options from JSON and set
 #'  values of the GUI accordingly
-#' @importFrom gWidgets svalue gmessage
 #' @importFrom jsonlite fromJSON
-#' @importFrom raster crop extent
+#' @importFrom gWidgets svalue
 #' @noRd
 #'
 gui_load_options <- function(opts_jsfile,
@@ -224,8 +229,8 @@ gui_load_options <- function(opts_jsfile,
 #' @description Helper function to check consistency of the selected processing
 #'  options before saving to a json file or starting MODIStsp processing
 #' @noRd
-#' @importFrom gWidgets gconfirm gmessage svalue
-#' @importFrom jsonlite fromJSON
+#' @importFrom jsonlite fromJSON write_json
+#' @importFrom gWidgets svalue gconfirm gmessage
 #' @importFrom raster crop extent
 #' @noRd
 gui_save_options <- function(general_opts,

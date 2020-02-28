@@ -120,7 +120,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   #  --------------------------------------------------------#
   # Convert to output projection, extent and format using ####
   # gdalwarp (mosaic if necessary)
-browser()
+# browser()
   if (outproj_str != mod_proj_str) {
     mess_text <- paste("Processing and Reprojecting",
                        sens_sel, bandname,

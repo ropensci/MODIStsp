@@ -7,9 +7,11 @@
 bbox_from_file(file_path, crs_out)
 }
 \arguments{
-\item{file_path}{\code{string} path of a spatial file.}
+\item{file_path}{\code{character} path of a spatial file.}
 
-\item{crs_out}{\code{string} proj4string of the desired output projection.}
+\item{crs_out}{\link[=`crs` | `character`]{\code{crs} | \code{character}} \code{crs} of the desired output projection,
+or string cohercible to it using \code{sf::st_crs()} (e.g., proj4string, WKT or numeric
+EPSG code)}
 }
 \description{
 Helper function used to retrieve the bounding box of a specified spatial file

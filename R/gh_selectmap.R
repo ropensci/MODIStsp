@@ -83,7 +83,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
         #will be included in the extent in the target projection
 
         bbox_out <- reproj_bbox(sel_bbox,
-                                "+init=epsg:4326",
+                                "EPSG::4326",
                                 curr_proj,
                                 enlarge = TRUE)
 

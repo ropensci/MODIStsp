@@ -324,7 +324,7 @@ MODIStsp <- function(gui               = TRUE,
 
   # Load the processing options from the user provided "options_file", or from
   # `previous_jsfile`
-  #
+  # browser()
   general_opts <- load_opts(previous_jsfile)
 
   #   __________________________________________________________________________
@@ -432,36 +432,43 @@ MODIStsp <- function(gui               = TRUE,
     # use proj4string. Otherwise, use WKT comment.
     #
     if (prod_opts$tiled == 0) {
-      mod_proj_str <- CRS("+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs") #nolint
+      # mod_proj_str <- CRS("+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs") #nolint
+
+      # EPSG for proj definition on latlon data (4008)
+      mod_proj_str <- sf::st_as_text(sf::st_crs(4008)) #nolint
 
       prod_opts$native_res <- format(
         as.numeric(prod_opts$native_res) * (0.05 / 5600)
       )
     } else {
-      # default projection string for MODIS gridded data - proj4 if GDAL <3, WKT2 otherwise
-      mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+      # default WKT for MODIS gridded data
+      # mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+      mod_proj_str <- sf::st_as_text(sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs")) #nolint)
     }
 
-    if (is.null(attr(mod_proj_str, "comment"))) {
-      mod_proj_str <- as.character(mod_proj_str)
-    } else {
-      mod_proj_str <- attr(mod_proj_str, "comment")
-    }
+    # if (is.null(attr(mod_proj_str, "comment"))) {
+    #   mod_proj_str <- as.character(mod_proj_str)
+    # } else {
+    #   mod_proj_str <- attr(mod_proj_str, "comment")
+    # }
     # work on output projection - for the time being, convert to WKT if GDAL >3.
     # needs to be revised!!!!
-    if (!gdal_version >= 3) {
-      general_opts$output_proj <- general_opts$output_proj
-    } else {
-      # output projection: If the comment on the CRS does not exist (PROJ <6)
-      # use proj4string. Otherwise, use WKT comment.
-      outproj <- sp::CRS(check_proj4string(general_opts$output_proj))
 
-      if (is.null(attr(outproj, "comment"))) {
-        general_opts$output_proj <- as.character(outproj)
-      } else {
-        general_opts$output_proj <- attr(outproj, "comment")
-      }
-    }
+    outproj <- sf::st_as_text(sf::st_crs(general_opts$output_proj))
+
+    # if (!gdal_version >= 3) {
+    #   general_opts$output_proj <- general_opts$output_proj
+    # } else {
+    #   # output projection: If the comment on the CRS does not exist (PROJ <6)
+    #   # use proj4string. Otherwise, use WKT comment.
+    #   outproj <- sp::CRS(check_proj4string(general_opts$output_proj))
+    #
+    #   if (is.null(attr(outproj, "comment"))) {
+    #     general_opts$output_proj <- as.character(outproj)
+    #   } else {
+    #     general_opts$output_proj <- attr(outproj, "comment")
+    #   }
+    # }
 
     # get native resolution if out_res empty
     if (general_opts$out_res == "" | general_opts$out_res_sel == "Native") {
