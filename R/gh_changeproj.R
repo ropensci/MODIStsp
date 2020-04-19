@@ -25,8 +25,8 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
       gWidgets::svalue(wids$output_proj4)  <- newproj
 
       # Get the units and kind of proj
-      proj  <- gui_get_proj(newproj)
-      units <- gui_get_units(newproj, proj)
+      # proj  <- gui_get_proj(newproj)
+      units <- gui_get_units(newproj)
       gWidgets::svalue(wids$pixsize2_lab) <- units
       gui_update_bboxlabels(bbox_out,
                             units,
@@ -81,7 +81,7 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
             )),
             title   = strwrap("Invalid projection")
           )
-          browser()
+
           gWidgets::svalue(wids$output_proj4) <- old_proj
           gWidgets::svalue(wids$proj_choice)  <- "Native"
         } else {
@@ -95,8 +95,8 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
 
             # Get the units and kind of proj
 
-            proj  <- gui_get_proj(new_proj)
-            units <- gui_get_units(new_proj, proj)
+            # proj  <- gui_get_proj(new_proj)
+            units <- gui_get_units(new_proj)
             gWidgets::svalue(wids$pixsize2_lab) <- units
             gui_update_bboxlabels(bbox_out,
                                   units,
@@ -104,8 +104,8 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
                                   reset = TRUE)
 
           } else {
-            proj  <- gui_get_proj(new_proj)
-            units <- gui_get_units(new_proj, proj)
+            # proj  <- gui_get_proj(new_proj)
+            units <- gui_get_units(new_proj)
             gWidgets::svalue(wids$pixsize2_lab) <- units
           }
         }

@@ -28,15 +28,14 @@ gh_selprod <- function(h, wids, prod_opt_list, general_opts) {
   }
   # On product change, automatically modify the default projection - latlon
   # for non-tiled, Sinu tiled
-
+# ()
   if (sel_prodopts[[gWidgets::svalue(wids$vers)]]$tiled == 0) {
 
     gWidgets::enabled(tiles_group) <- FALSE
     gWidgets::enabled(bbox_group)  <- TRUE
     gWidgets::svalue(wids$output_ext)   <- "Define Custom Area"
     gWidgets::svalue(wids$proj_choice)  <- "Native"
-    gWidgets::svalue(wids$output_proj4) <-
-      "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
+    gWidgets::svalue(wids$output_proj4) <- "4008"
     gWidgets::svalue(wids$output_xmin) <- -180
     gWidgets::svalue(wids$output_xmax) <-  180
     gWidgets::svalue(wids$output_ymin) <- -90
@@ -56,7 +55,7 @@ gh_selprod <- function(h, wids, prod_opt_list, general_opts) {
     }
     gWidgets::svalue(wids$proj_choice)    <- "Native"
     gWidgets::svalue(wids$output_proj4) <-
-      "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6371007.181,0,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Sinusoidal\"],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]" #nolint
+      "MODIS Sinusoidal" #nolint
   }
   # reset dummy variables for band selection to 0 on product change and
   # reset the labels corresponding to selected layers

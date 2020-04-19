@@ -20,7 +20,7 @@
 "output_proj4": "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs",
 "out_res_sel": "Native",
 "out_res": "Native",
-"full_ext": "Define Custom Area",
+"full_ext": false,
 "resampling": "near",
 "out_format": "GTiff",
 "ts_format": "R rasterStack",

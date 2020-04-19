@@ -8,18 +8,18 @@
 #   virtual time series.
 context("MODIStsp Test 3: Computation of spectral indices and
             creation of time series")
-testthat::test_that(
+test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     # skip_on_travis()
 
-    MODIStsp(test = 3)
+    expect_warning(MODIStsp(test = 3))
     out_files_tif <- list.files(
       file.path(tempdir(), "MODIStsp/Surf_Ref_8Days_500m_v6"),
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
 
     file_sizes_tif <- file.info(out_files_tif)$size
-    expect_equal(file_sizes_tif, c(10583, 10642, 752, 10706, 1409),
+    expect_equal(file_sizes_tif, c(10583, 10642, 752, 10706, 1397),
                  tolerance = 0.001, scale = 1)
     means <- unlist(lapply(out_files_tif,
                            FUN = function(x) {
@@ -30,8 +30,9 @@ testthat::test_that(
                           197.0045406), tolerance = 0.001, scale = 1)
 
     # nodatavalue properly changed
-    r <- suppressWarnings(rgdal::GDALinfo(out_files_tif[1]))
-    expect_equal(attr(r, "df")$NoDataValue, 32767)
+    r <- sf::gdal_utils("info", out_files_tif[1], quiet = TRUE)
+    expect_equal(substring(strsplit(r, "NoData Value=")[[1]][2], 1, 5),
+                 "32767")
 
     out_files_vrt <- list.files(
       file.path(tempdir(), "MODIStsp/Surf_Ref_8Days_500m_v6"),
@@ -48,7 +49,7 @@ testthat::test_that(
 
     # same execution with ENVI output and no scaling on indexes
     context("MODIStsp Test 3: Save in ENVI format")
-    MODIStsp(test = "03a")
+    expect_warning(MODIStsp(test = "03a"))
     out_files_dat <- list.files(
       file.path(tempdir(), "MODIStsp/Surf_Ref_8Days_500m_v6"),
       pattern = "\\.dat$", recursive = TRUE, full.names = TRUE)

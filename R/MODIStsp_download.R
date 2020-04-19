@@ -28,7 +28,7 @@
 #' @rdname MODIStsp_download
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
-#' @importFrom httr RETRY authenticate content GET progress write_disk HEAD config
+#' @importFrom httr RETRY authenticate content GET write_disk
 #' @importFrom xml2 as_list
 #' @importFrom gWidgets gconfirm
 

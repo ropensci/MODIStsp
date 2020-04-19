@@ -102,7 +102,7 @@ download.}
 
 \item{end_y}{\code{integer [0-17]} End vertical tile.}
 
-\item{full_ext}{\code{characrter ["FullTiles" | "Resized"]} If \"Full_Ext\", process
+\item{full_ext}{\code{logic} If TRUE, process``
 the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.}
 
@@ -244,7 +244,7 @@ computation);
 }
 
 Reprojection and resize is dealt with by accessing gdal routines through the
-\href{https://CRAN.R-project.org/package=gdalUtils}{\code{gdalUtils}}
+\href{https://CRAN.R-project.org/package=gdalUtilities}{\code{gdalUtilities}}
 package.
 Extraction of bitfields from Quality layers is done though bitwise computation
 Checks are done in order to not re-download already existing HDF images, and not

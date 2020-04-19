@@ -19,24 +19,23 @@
 #' @examples
 #'
 #' \dontrun{
-#' check_projection("+init=epsg:32632")
+#' check_projection("32632")
 #'
 #' check_projection("32631")
 #'
 #' check_projection(32633)
 #'
-#' check_projection(30)
+#' check_projection(30, abort = FALSE)
 #'
-#' check_projection("example of invalid string")
+#' check_projection("example of invalid string", abort = FALSE)
 #'
-#' library(sf)
 #' proj_wkt <- sf::st_as_text(sf::st_crs(32632))
 #' check_projection(proj_wkt)
 #'}
 
 check_projection <- function(projection,
-                              abort = FALSE,
-                              verbose = TRUE) {
+                             abort = FALSE,
+                             verbose = TRUE) {
   UseMethod("check_projection")
 }
 
@@ -47,8 +46,8 @@ check_projection <- function(projection,
 #' @method check_projection default
 #' @export
 check_projection.default  <- function(projection,
-                                       abort = FALSE,
-                                       verbose = TRUE) {
+                                      abort = FALSE,
+                                      verbose = TRUE) {
   call <- match.call()
   if (abort) {
     stop("check_projection --> ", call[[2]], " is not a valid epsg code or ", #nolint
@@ -70,8 +69,8 @@ check_projection.default  <- function(projection,
 #' @export
 #' @importFrom sf st_crs
 check_projection.numeric  <- function(projection,
-                                       abort = FALSE,
-                                       verbose = TRUE) {
+                                      abort = FALSE,
+                                      verbose = TRUE) {
 
   proj <- sf::st_crs(projection)
   if (is.na(proj$epsg)){
@@ -83,7 +82,7 @@ check_projection.numeric  <- function(projection,
       return(NA)
     }
   } else {
-    return(proj$epsg)
+    return(projection)
   }
 }
 
@@ -93,25 +92,26 @@ check_projection.numeric  <- function(projection,
 #' @rdname check_projection
 #' @method check_projection character
 #' @export
-#' @importfrom sf st_crs
+#' @importFrom sf st_crs
+#' @importFrom stringr str_pad
 check_projection.character  <- function(projection,
-                                         abort = FALSE,
-                                         verbose = TRUE) {
+                                        abort = FALSE,
+                                        verbose = TRUE) {
 
   # if it is a number, use check_projection.integer method
   if (suppressWarnings(!is.na(as.numeric(projection)))) {
     return(check_projection.numeric(as.integer(projection),
-                                     abort = abort))
+                                    abort = abort))
   }
 
   # check if it is a UTM zone - return the corresponding EPSG
   if (grepl("^[0-9]+[NnSs]$",projection)) {
-    utm_zone <- str_pad(gsub("[NnSs]$","",projection), 2, "left", "0")
+    utm_zone <- stringr::str_pad(gsub("[NnSs]$","",projection), 2, "left", "0")
     utm_ns <- toupper(gsub("?[0-9]+","",projection))
-    proj4string <- paste0("+init=epsg:32",
-                          if (utm_ns == "N") {"6"} else {"7"},
-                          utm_zone)
-    return(sf::st_crs(proj4string)$epsg)
+    projection <- as.numeric(paste0("32",
+                                    if (utm_ns == "N") {"6"} else {"7"},
+                                    utm_zone))
+    return(projection)
   }
 
   # Finally, see if it is a WKT - return verbatim
@@ -137,11 +137,8 @@ check_projection.character  <- function(projection,
 #' @method check_projection crs
 #' @export
 check_projection.crs <- function(projection,
-                                   abort = FALSE,
-                                   verbose = TRUE) {
-  # # Temporary - until WKT2 can be retrieved from CRS
-  # if (verbose) (warning("check_projection --> Invalid projection detected,
-  #                          returning `NA`!"))
+                                 abort = FALSE,
+                                 verbose = TRUE) {
   return(projection)
-  # return(CRSargs(projection))
+
 }

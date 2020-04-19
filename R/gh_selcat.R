@@ -36,8 +36,7 @@ gh_selcat <- function(h, wids,
     gWidgets::enabled(bbox_group)  <- TRUE
     gWidgets::svalue(wids$output_ext)   <- "Define Custom Area"
     gWidgets::svalue(wids$proj_choice)  <- "Native"
-    gWidgets::svalue(wids$output_proj4) <-
-      "4008"
+    gWidgets::svalue(wids$output_proj4) <- 4008
     gWidgets::svalue(wids$output_xmin) <- -180
     gWidgets::svalue(wids$output_xmax) <-  180
     gWidgets::svalue(wids$output_ymin) <- -90

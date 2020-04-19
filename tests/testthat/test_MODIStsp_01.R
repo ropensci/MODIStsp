@@ -1,6 +1,6 @@
 context("MODIStsp Test 1: Basic processing on bands and quality
         indicators")
-testthat::test_that(
+test_that(
   "Tests on MODIStsp", {
 
     # skip("Skip tests - since they rely on download they are only run locally")
@@ -45,7 +45,7 @@ testthat::test_that(
     ### Test 1: Nodata values are properly changed on full tiles           ####
     context("Nodata values are properly changed on full tiles ")
     MODIStsp(test = "01a")
-    r <- suppressWarnings(rgdal::GDALinfo(out_files[1]))
-    expect_equal(attr(r, "df")$NoDataValue, 65535)
-
+    r <- sf::gdal_utils("info", out_files[1], quiet = TRUE)
+    expect_equal(substring(strsplit(r, "NoData Value=")[[1]][2], 1, 5),
+                 "65535")
   })

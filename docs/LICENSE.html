@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="pkgdown.css" rel="stylesheet">
@@ -46,7 +50,6 @@
 
 <meta property="og:title" content="NA" />
 <meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -74,7 +77,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-title-body">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -179,10 +182,10 @@
     </div>
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">                GNU GENERAL PUBLIC LICENSE</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">                   Version <span class="dv">3</span>, <span class="dv">29</span> June <span class="dv">2007</span></a></code></pre></div>
-<p>Copyright (C) 2007 Free Software Foundation, Inc. <a href="http://fsf.org/" class="uri">http://fsf.org/</a> Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">                        Preamble</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>                GNU GENERAL PUBLIC LICENSE</span>
+<span id="cb1-2"><a href="#cb1-2"></a>                   Version <span class="dv">3</span>, <span class="dv">29</span> June <span class="dv">2007</span></span></code></pre></div>
+<p>Copyright (C) 2007 Free Software Foundation, Inc. <a href="http://fsf.org/" class="uri">http://fsf.org/</a> Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>                        Preamble</span></code></pre></div>
 <p>The GNU General Public License is a free, copyleft license for software and other kinds of works.</p>
 <p>The licenses for most software and other practical works are designed to take away your freedom to share and change the works. By contrast, the GNU General Public License is intended to guarantee your freedom to share and change all versions of a program–to make sure it remains free software for all its users. We, the Free Software Foundation, use the GNU General Public License for most of our software; it applies also to any other work released this way by its authors. You can apply it to your programs, too.</p>
 <p>When we speak of free software, we are referring to freedom, not price. Our General Public Licenses are designed to make sure that you have the freedom to distribute copies of free software (and charge for them if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs, and that you know you can do these things.</p>
@@ -194,7 +197,7 @@
 <p>Some devices are designed to deny users access to install or run modified versions of the software inside them, although the manufacturer can do so. This is fundamentally incompatible with the aim of protecting users’ freedom to change the software. The systematic pattern of such abuse occurs in the area of products for individuals to use, which is precisely where it is most unacceptable. Therefore, we have designed this version of the GPL to prohibit the practice for those products. If such problems arise substantially in other domains, we stand ready to extend this provision to those domains in future versions of the GPL, as needed to protect the freedom of users.</p>
 <p>Finally, every program is threatened constantly by software patents. States should not allow patents to restrict development and use of software on general-purpose computers, but in those that do, we wish to avoid the special danger that patents applied to a free program could make it effectively proprietary. To prevent this, the GPL assures that patents cannot be used to render the program non-free.</p>
 <p>The precise terms and conditions for copying, distribution and modification follow.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">                   TERMS AND CONDITIONS</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>                   TERMS AND CONDITIONS</span></code></pre></div>
 <ol>
 <li>Definitions.</li>
 </ol>
@@ -235,71 +238,71 @@
 <li>Conveying Modified Source Versions.</li>
 </ol>
 <p>You may convey a work based on the Program, or the modifications to produce it from the Program, in the form of source code under the terms of section 4, provided that you also meet all of these conditions:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">a<span class="er">)</span> The work must carry prominent notices stating that you modified</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">it, and giving a relevant date.</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">b<span class="er">)</span> The work must carry prominent notices stating that it is</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">released under this License and any conditions added under section</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="fl">7.</span>  This requirement modifies the requirement <span class="cf">in</span> section <span class="dv">4</span> to</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="st">"keep intact all notices"</span>.</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">c<span class="er">)</span> You must license the entire work, as a whole, under this</a>
-<a class="sourceLine" id="cb4-10" data-line-number="10">License to anyone who comes into possession of a copy.  This</a>
-<a class="sourceLine" id="cb4-11" data-line-number="11">License will therefore apply, along with any applicable section <span class="dv">7</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12">additional terms, to the whole of the work, and all its parts,</a>
-<a class="sourceLine" id="cb4-13" data-line-number="13">regardless of how they are packaged.  This License gives no</a>
-<a class="sourceLine" id="cb4-14" data-line-number="14">permission to license the work <span class="cf">in</span> any other way, but it does not</a>
-<a class="sourceLine" id="cb4-15" data-line-number="15">invalidate such permission <span class="cf">if</span> you have separately received it.</a>
-<a class="sourceLine" id="cb4-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17">d<span class="er">)</span> If the work has interactive user interfaces, each must display</a>
-<a class="sourceLine" id="cb4-18" data-line-number="18">Appropriate Legal Notices; however, <span class="cf">if</span> the Program has interactive</a>
-<a class="sourceLine" id="cb4-19" data-line-number="19">interfaces that do not display Appropriate Legal Notices, your</a>
-<a class="sourceLine" id="cb4-20" data-line-number="20">work need not make them do so.</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>a<span class="er">)</span> The work must carry prominent notices stating that you modified</span>
+<span id="cb4-2"><a href="#cb4-2"></a>it, and giving a relevant date.</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>b<span class="er">)</span> The work must carry prominent notices stating that it is</span>
+<span id="cb4-5"><a href="#cb4-5"></a>released under this License and any conditions added under section</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fl">7.</span>  This requirement modifies the requirement <span class="cf">in</span> section <span class="dv">4</span> to</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="st">"keep intact all notices"</span>.</span>
+<span id="cb4-8"><a href="#cb4-8"></a></span>
+<span id="cb4-9"><a href="#cb4-9"></a>c<span class="er">)</span> You must license the entire work, as a whole, under this</span>
+<span id="cb4-10"><a href="#cb4-10"></a>License to anyone who comes into possession of a copy.  This</span>
+<span id="cb4-11"><a href="#cb4-11"></a>License will therefore apply, along with any applicable section <span class="dv">7</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>additional terms, to the whole of the work, and all its parts,</span>
+<span id="cb4-13"><a href="#cb4-13"></a>regardless of how they are packaged.  This License gives no</span>
+<span id="cb4-14"><a href="#cb4-14"></a>permission to license the work <span class="cf">in</span> any other way, but it does not</span>
+<span id="cb4-15"><a href="#cb4-15"></a>invalidate such permission <span class="cf">if</span> you have separately received it.</span>
+<span id="cb4-16"><a href="#cb4-16"></a></span>
+<span id="cb4-17"><a href="#cb4-17"></a>d<span class="er">)</span> If the work has interactive user interfaces, each must display</span>
+<span id="cb4-18"><a href="#cb4-18"></a>Appropriate Legal Notices; however, <span class="cf">if</span> the Program has interactive</span>
+<span id="cb4-19"><a href="#cb4-19"></a>interfaces that do not display Appropriate Legal Notices, your</span>
+<span id="cb4-20"><a href="#cb4-20"></a>work need not make them do so.</span></code></pre></div>
 <p>A compilation of a covered work with other separate and independent works, which are not by their nature extensions of the covered work, and which are not combined with it such as to form a larger program, in or on a volume of a storage or distribution medium, is called an “aggregate” if the compilation and its resulting copyright are not used to limit the access or legal rights of the compilation’s users beyond what the individual works permit. Inclusion of a covered work in an aggregate does not cause this License to apply to the other parts of the aggregate.</p>
 <ol>
 <li>Conveying Non-Source Forms.</li>
 </ol>
 <p>You may convey a covered work in object code form under the terms of sections 4 and 5, provided that you also convey the machine-readable Corresponding Source under the terms of this License, in one of these ways:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">a<span class="er">)</span> Convey the object code <span class="cf">in</span>, or embodied <span class="cf">in</span>, a physical product</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">(including a physical distribution medium), accompanied by the</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">Corresponding Source fixed on a durable physical medium</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">customarily used <span class="cf">for</span> software interchange.</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">b<span class="er">)</span> Convey the object code <span class="cf">in</span>, or embodied <span class="cf">in</span>, a physical product</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">(including a physical distribution medium), accompanied by a</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">written offer, valid <span class="cf">for</span> at least three years and valid <span class="cf">for</span> as</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">long as you offer spare parts or customer support <span class="cf">for</span> that product</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">model, to give anyone who possesses the object code <span class="kw">either</span> (<span class="dv">1</span>) a</a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">copy of the Corresponding Source <span class="cf">for</span> all the software <span class="cf">in</span> the</a>
-<a class="sourceLine" id="cb5-12" data-line-number="12">product that is covered by this License, on a durable physical</a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">medium customarily used <span class="cf">for</span> software interchange, <span class="cf">for</span> a price no</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">more than your reasonable cost of physically performing this</a>
-<a class="sourceLine" id="cb5-15" data-line-number="15">conveying of source, <span class="kw">or</span> (<span class="dv">2</span>) access to copy the</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">Corresponding Source from a network server at no charge.</a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18">c<span class="er">)</span> Convey individual copies of the object code with a copy of the</a>
-<a class="sourceLine" id="cb5-19" data-line-number="19">written offer to provide the Corresponding Source.  This</a>
-<a class="sourceLine" id="cb5-20" data-line-number="20">alternative is allowed only occasionally and noncommercially, and</a>
-<a class="sourceLine" id="cb5-21" data-line-number="21">only <span class="cf">if</span> you received the object code with such an offer, <span class="cf">in</span> accord</a>
-<a class="sourceLine" id="cb5-22" data-line-number="22">with subsection 6b.</a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb5-24" data-line-number="24">d<span class="er">)</span> Convey the object code by offering access from a designated</a>
-<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="kw">place</span> (gratis or <span class="cf">for</span> a charge), and offer equivalent access to the</a>
-<a class="sourceLine" id="cb5-26" data-line-number="26">Corresponding Source <span class="cf">in</span> the same way through the same place at no</a>
-<a class="sourceLine" id="cb5-27" data-line-number="27">further charge.  You need not require recipients to copy the</a>
-<a class="sourceLine" id="cb5-28" data-line-number="28">Corresponding Source along with the object code.  If the place to</a>
-<a class="sourceLine" id="cb5-29" data-line-number="29">copy the object code is a network server, the Corresponding Source</a>
-<a class="sourceLine" id="cb5-30" data-line-number="30">may be on a different <span class="kw">server</span> (operated by you or a third party)</a>
-<a class="sourceLine" id="cb5-31" data-line-number="31">that supports equivalent copying facilities, provided you maintain</a>
-<a class="sourceLine" id="cb5-32" data-line-number="32">clear directions <span class="cf">next</span> to the object code saying where to find the</a>
-<a class="sourceLine" id="cb5-33" data-line-number="33">Corresponding Source.  Regardless of what server hosts the</a>
-<a class="sourceLine" id="cb5-34" data-line-number="34">Corresponding Source, you remain obligated to ensure that it is</a>
-<a class="sourceLine" id="cb5-35" data-line-number="35">available <span class="cf">for</span> as long as needed to satisfy these requirements.</a>
-<a class="sourceLine" id="cb5-36" data-line-number="36"></a>
-<a class="sourceLine" id="cb5-37" data-line-number="37">e<span class="er">)</span> Convey the object code using peer<span class="op">-</span>to<span class="op">-</span>peer transmission, provided</a>
-<a class="sourceLine" id="cb5-38" data-line-number="38">you inform other peers where the object code and Corresponding</a>
-<a class="sourceLine" id="cb5-39" data-line-number="39">Source of the work are being offered to the general public at no</a>
-<a class="sourceLine" id="cb5-40" data-line-number="40">charge under subsection 6d.</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>a<span class="er">)</span> Convey the object code <span class="cf">in</span>, or embodied <span class="cf">in</span>, a physical product</span>
+<span id="cb5-2"><a href="#cb5-2"></a>(including a physical distribution medium), accompanied by the</span>
+<span id="cb5-3"><a href="#cb5-3"></a>Corresponding Source fixed on a durable physical medium</span>
+<span id="cb5-4"><a href="#cb5-4"></a>customarily used <span class="cf">for</span> software interchange.</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>b<span class="er">)</span> Convey the object code <span class="cf">in</span>, or embodied <span class="cf">in</span>, a physical product</span>
+<span id="cb5-7"><a href="#cb5-7"></a>(including a physical distribution medium), accompanied by a</span>
+<span id="cb5-8"><a href="#cb5-8"></a>written offer, valid <span class="cf">for</span> at least three years and valid <span class="cf">for</span> as</span>
+<span id="cb5-9"><a href="#cb5-9"></a>long as you offer spare parts or customer support <span class="cf">for</span> that product</span>
+<span id="cb5-10"><a href="#cb5-10"></a>model, to give anyone who possesses the object code <span class="kw">either</span> (<span class="dv">1</span>) a</span>
+<span id="cb5-11"><a href="#cb5-11"></a>copy of the Corresponding Source <span class="cf">for</span> all the software <span class="cf">in</span> the</span>
+<span id="cb5-12"><a href="#cb5-12"></a>product that is covered by this License, on a durable physical</span>
+<span id="cb5-13"><a href="#cb5-13"></a>medium customarily used <span class="cf">for</span> software interchange, <span class="cf">for</span> a price no</span>
+<span id="cb5-14"><a href="#cb5-14"></a>more than your reasonable cost of physically performing this</span>
+<span id="cb5-15"><a href="#cb5-15"></a>conveying of source, <span class="kw">or</span> (<span class="dv">2</span>) access to copy the</span>
+<span id="cb5-16"><a href="#cb5-16"></a>Corresponding Source from a network server at no charge.</span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a>c<span class="er">)</span> Convey individual copies of the object code with a copy of the</span>
+<span id="cb5-19"><a href="#cb5-19"></a>written offer to provide the Corresponding Source.  This</span>
+<span id="cb5-20"><a href="#cb5-20"></a>alternative is allowed only occasionally and noncommercially, and</span>
+<span id="cb5-21"><a href="#cb5-21"></a>only <span class="cf">if</span> you received the object code with such an offer, <span class="cf">in</span> accord</span>
+<span id="cb5-22"><a href="#cb5-22"></a>with subsection 6b.</span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a>d<span class="er">)</span> Convey the object code by offering access from a designated</span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="kw">place</span> (gratis or <span class="cf">for</span> a charge), and offer equivalent access to the</span>
+<span id="cb5-26"><a href="#cb5-26"></a>Corresponding Source <span class="cf">in</span> the same way through the same place at no</span>
+<span id="cb5-27"><a href="#cb5-27"></a>further charge.  You need not require recipients to copy the</span>
+<span id="cb5-28"><a href="#cb5-28"></a>Corresponding Source along with the object code.  If the place to</span>
+<span id="cb5-29"><a href="#cb5-29"></a>copy the object code is a network server, the Corresponding Source</span>
+<span id="cb5-30"><a href="#cb5-30"></a>may be on a different <span class="kw">server</span> (operated by you or a third party)</span>
+<span id="cb5-31"><a href="#cb5-31"></a>that supports equivalent copying facilities, provided you maintain</span>
+<span id="cb5-32"><a href="#cb5-32"></a>clear directions <span class="cf">next</span> to the object code saying where to find the</span>
+<span id="cb5-33"><a href="#cb5-33"></a>Corresponding Source.  Regardless of what server hosts the</span>
+<span id="cb5-34"><a href="#cb5-34"></a>Corresponding Source, you remain obligated to ensure that it is</span>
+<span id="cb5-35"><a href="#cb5-35"></a>available <span class="cf">for</span> as long as needed to satisfy these requirements.</span>
+<span id="cb5-36"><a href="#cb5-36"></a></span>
+<span id="cb5-37"><a href="#cb5-37"></a>e<span class="er">)</span> Convey the object code using peer<span class="op">-</span>to<span class="op">-</span>peer transmission, provided</span>
+<span id="cb5-38"><a href="#cb5-38"></a>you inform other peers where the object code and Corresponding</span>
+<span id="cb5-39"><a href="#cb5-39"></a>Source of the work are being offered to the general public at no</span>
+<span id="cb5-40"><a href="#cb5-40"></a>charge under subsection 6d.</span></code></pre></div>
 <p>A separable portion of the object code, whose source code is excluded from the Corresponding Source as a System Library, need not be included in conveying the object code work.</p>
 <p>A “User Product” is either (1) a “consumer product”, which means any tangible personal property which is normally used for personal, family, or household purposes, or (2) anything designed or sold for incorporation into a dwelling. In determining whether a product is a consumer product, doubtful cases shall be resolved in favor of coverage. For a particular product received by a particular user, “normally used” refers to a typical or common use of that class of product, regardless of the status of the particular user or of the way in which the particular user actually uses, or expects or is expected to use, the product. A product is a consumer product regardless of whether the product has substantial commercial, industrial or non-consumer uses, unless such uses represent the only significant mode of use of the product.</p>
 <p>“Installation Information” for a User Product means any methods, procedures, authorization keys, or other information required to install and execute modified versions of a covered work in that User Product from a modified version of its Corresponding Source. The information must suffice to ensure that the continued functioning of the modified object code is in no case prevented or interfered with solely because modification has been made.</p>
@@ -312,28 +315,28 @@
 <p>“Additional permissions” are terms that supplement the terms of this License by making exceptions from one or more of its conditions. Additional permissions that are applicable to the entire Program shall be treated as though they were included in this License, to the extent that they are valid under applicable law. If additional permissions apply only to part of the Program, that part may be used separately under those permissions, but the entire Program remains governed by this License without regard to the additional permissions.</p>
 <p>When you convey a copy of a covered work, you may at your option remove any additional permissions from that copy, or from any part of it. (Additional permissions may be written to require their own removal in certain cases when you modify the work.) You may place additional permissions on material, added by you to a covered work, for which you have or can give appropriate copyright permission.</p>
 <p>Notwithstanding any other provision of this License, for material you add to a covered work, you may (if authorized by the copyright holders of that material) supplement the terms of this License with terms:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">a<span class="er">)</span> Disclaiming warranty or limiting liability differently from the</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">terms of sections <span class="dv">15</span> and <span class="dv">16</span> of this License; or</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">b<span class="er">)</span> Requiring preservation of specified reasonable legal notices or</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">author attributions <span class="cf">in</span> that material or <span class="cf">in</span> the Appropriate Legal</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">Notices displayed by works containing it; or</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">c<span class="er">)</span> Prohibiting misrepresentation of the origin of that material, or</a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">requiring that modified versions of such material be marked <span class="cf">in</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10">reasonable ways as different from the original version; or</a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12">d<span class="er">)</span> Limiting the use <span class="cf">for</span> publicity purposes of names of licensors or</a>
-<a class="sourceLine" id="cb6-13" data-line-number="13">authors of the material; or</a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15">e<span class="er">)</span> Declining to grant rights under trademark law <span class="cf">for</span> use of some</a>
-<a class="sourceLine" id="cb6-16" data-line-number="16">trade names, trademarks, or service marks; or</a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18">f<span class="er">)</span> Requiring indemnification of licensors and authors of that</a>
-<a class="sourceLine" id="cb6-19" data-line-number="19">material by anyone who conveys the <span class="kw">material</span> (or modified versions of</a>
-<a class="sourceLine" id="cb6-20" data-line-number="20">it) with contractual assumptions of liability to the recipient, <span class="cf">for</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21">any liability that these contractual assumptions directly impose on</a>
-<a class="sourceLine" id="cb6-22" data-line-number="22">those licensors and authors.</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>a<span class="er">)</span> Disclaiming warranty or limiting liability differently from the</span>
+<span id="cb6-2"><a href="#cb6-2"></a>terms of sections <span class="dv">15</span> and <span class="dv">16</span> of this License; or</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>b<span class="er">)</span> Requiring preservation of specified reasonable legal notices or</span>
+<span id="cb6-5"><a href="#cb6-5"></a>author attributions <span class="cf">in</span> that material or <span class="cf">in</span> the Appropriate Legal</span>
+<span id="cb6-6"><a href="#cb6-6"></a>Notices displayed by works containing it; or</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a>c<span class="er">)</span> Prohibiting misrepresentation of the origin of that material, or</span>
+<span id="cb6-9"><a href="#cb6-9"></a>requiring that modified versions of such material be marked <span class="cf">in</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>reasonable ways as different from the original version; or</span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a>d<span class="er">)</span> Limiting the use <span class="cf">for</span> publicity purposes of names of licensors or</span>
+<span id="cb6-13"><a href="#cb6-13"></a>authors of the material; or</span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a>e<span class="er">)</span> Declining to grant rights under trademark law <span class="cf">for</span> use of some</span>
+<span id="cb6-16"><a href="#cb6-16"></a>trade names, trademarks, or service marks; or</span>
+<span id="cb6-17"><a href="#cb6-17"></a></span>
+<span id="cb6-18"><a href="#cb6-18"></a>f<span class="er">)</span> Requiring indemnification of licensors and authors of that</span>
+<span id="cb6-19"><a href="#cb6-19"></a>material by anyone who conveys the <span class="kw">material</span> (or modified versions of</span>
+<span id="cb6-20"><a href="#cb6-20"></a>it) with contractual assumptions of liability to the recipient, <span class="cf">for</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a>any liability that these contractual assumptions directly impose on</span>
+<span id="cb6-22"><a href="#cb6-22"></a>those licensors and authors.</span></code></pre></div>
 <p>All other non-permissive additional terms are considered “further restrictions” within the meaning of section 10. If the Program as you received it, or any part of it, contains a notice stating that it is governed by this License along with a term that is a further restriction, you may remove that term. If a license document contains a further restriction but permits relicensing or conveying under this License, you may add to a covered work material governed by the terms of that license document, provided that the further restriction does not survive such relicensing or conveying.</p>
 <p>If you add terms to a covered work in accord with this section, you must place, in the relevant source files, a statement of the additional terms that apply to those files, or a notice indicating where to find the applicable terms.</p>
 <p>Additional terms, permissive or non-permissive, may be stated in the form of a separately written license, or stated as exceptions; the above requirements apply either way.</p>
@@ -392,37 +395,43 @@
 <li>Interpretation of Sections 15 and 16.</li>
 </ol>
 <p>If the disclaimer of warranty and limitation of liability provided above cannot be given local legal effect according to their terms, reviewing courts shall apply local law that most closely approximates an absolute waiver of all civil liability in connection with the Program, unless a warranty or assumption of liability accompanies a copy of the Program in return for a fee.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">                 END OF TERMS AND CONDITIONS</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">        How to Apply These Terms to Your New Programs</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>                 END OF TERMS AND CONDITIONS</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>        How to Apply These Terms to Your New Programs</span></code></pre></div>
 <p>If you develop a new program, and you want it to be of the greatest possible use to the public, the best way to achieve this is to make it free software which everyone can redistribute and change under these terms.</p>
 <p>To do so, attach the following notices to the program. It is safest to attach them to the start of each source file to most effectively state the exclusion of warranty; and each file should have at least the “copyright” line and a pointer to where the full notice is found.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">{one line to give the program<span class="st">'s name and a brief idea of what it does.}</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">Copyright (C) {year}  {name of author}</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">This program is free software: you can redistribute it and/or modify</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">it under the terms of the GNU General Public License as published by</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="st">the Free Software Foundation, either version 3 of the License, or</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="st">(at your option) any later version.</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">This program is distributed in the hope that it will be useful,</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="st">but WITHOUT ANY WARRANTY; without even the implied warranty of</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="st">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="st">GNU General Public License for more details.</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="st">You should have received a copy of the GNU General Public License</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="st">along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>{one line to give the program<span class="st">'s name and a brief idea of what it does.}</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">Copyright (C) {year}  {name of author}</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">This program is free software: you can redistribute it and/or modify</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="st">it under the terms of the GNU General Public License as published by</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="st">the Free Software Foundation, either version 3 of the License, or</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="st">(at your option) any later version.</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="st">This program is distributed in the hope that it will be useful,</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="st">but WITHOUT ANY WARRANTY; without even the implied warranty of</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="st">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="st">GNU General Public License for more details.</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="st">You should have received a copy of the GNU General Public License</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="st">along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></span></code></pre></div>
 <p>Also add information on how to contact you by electronic and paper mail.</p>
 <p>If the program does terminal interaction, make it output a short notice like this when it starts in an interactive mode:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">{project}  <span class="kw">Copyright</span> (C) {year}  {fullname}</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">This program comes with ABSOLUTELY NO WARRANTY; <span class="cf">for</span> details type <span class="st">`</span><span class="dt">show w'.</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="dt">This is free software, and you are welcome to redistribute it</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="dt">under certain conditions; type </span><span class="st">`</span>show c<span class="st">' for details.</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>{project}  <span class="kw">Copyright</span> (C) {year}  {fullname}</span>
+<span id="cb9-2"><a href="#cb9-2"></a>This program comes with ABSOLUTELY NO WARRANTY; <span class="cf">for</span> details type <span class="st">`</span><span class="dt">show w'.</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="dt">This is free software, and you are welcome to redistribute it</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="dt">under certain conditions; type </span><span class="st">`</span>show c<span class="st">' for details.</span></span></code></pre></div>
 <p>The hypothetical commands <code>show w' and</code>show c’ should show the appropriate parts of the General Public License. Of course, your program’s commands might be different; for a GUI interface, you would use an “about box”.</p>
 <p>You should also get your employer (if you work as a programmer) or school, if any, to sign a “copyright disclaimer” for the program, if necessary. For more information on this, and how to apply and follow the GNU GPL, see <a href="http://www.gnu.org/licenses/" class="uri">http://www.gnu.org/licenses/</a>.</p>
 <p>The GNU General Public License does not permit incorporating your program into proprietary programs. If your program is a subroutine library, you may consider it more useful to permit linking proprietary applications with the library. If this is what you want to do, use the GNU Lesser General Public License instead of this License. But first, please read <a href="http://www.gnu.org/philosophy/why-not-lgpl.html" class="uri">http://www.gnu.org/philosophy/why-not-lgpl.html</a>.</p>
 
 
+  </div>
+
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -435,7 +444,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

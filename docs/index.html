@@ -13,10 +13,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="A Tool for Automating Download and Preprocessing of MODIS Land Products
     Data">
@@ -36,7 +37,6 @@
     file is also possible, allowing to automatically update time series
     related to a MODIS product whenever a new image is available.">
 <meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -48,7 +48,7 @@
   gtag('config', 'UA-84499524-2');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -149,9 +149,9 @@
   <div class="contents col-md-9">
 
 
-<div id="modistsp" class="section level1">
+<div id="-modistsp-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#modistsp" class="anchor"></a><i class="fa fa-globe" aria-hidden="true"></i> MODIStsp <img src="reference/figures/logo.png" width="100" height="100" align="right">
+<a href="#-modistsp-" class="anchor"></a><i class="fa fa-globe" aria-hidden="true"></i> MODIStsp <img src="reference/figures/logo.png" width="100" height="100" align="right">
 </h1></div>
 <!-- # MODIStsp <img src='man/figures/logo.png' align="right" height="139" /> -->
 <p><strong>MODIStsp</strong> is a “R” package devoted to <strong>automatizing the creation of time series of raster images derived from MODIS Land Products data</strong>.</p>
@@ -161,13 +161,13 @@
 <p><a href="http://www.irea.cnr.it/en/"> <img src="reference/figures/logo_irea.png" height="40" align="left"></a></p>
 <p><strong><em><code>MODIStsp</code> is developed and maintained by Lorenzo Busetto and Luigi Ranghetti, <a href="http://www.irea.cnr.it/en/">Institute of Remote Sensing of Environment</a> - National Research Council - Italy (CNR-IREA)</em></strong></p>
 <hr>
-<div id="whats-new" class="section level2">
+<div id="-whats-new" class="section level2">
 <h2 class="hasAnchor">
-<a href="#whats-new" class="anchor"></a><i class="fa fa-newspaper-o" aria-hidden="true"></i> What’s New</h2>
+<a href="#-whats-new" class="anchor"></a><i class="fa fa-newspaper-o" aria-hidden="true"></i> What’s New</h2>
 <ul>
 <li><p>07/06/2019 - MODIStsp 1.3.9 is out. Fixes a bug causing crashes on MOD14A1 product, adds support for product MCD12Q2 and removes support for no longer available version 5 of some products.</p></li>
 <li><p>05/03/2019 - MODIStsp 1.3.8 is out. Fixes an issue causing incorrect application of scale/offset values on GDAL versions &gt; 2.3 (<a href="https://github.com/ropensci/MODIStsp/issues/163" class="uri">https://github.com/ropensci/MODIStsp/issues/163</a>) and adds support for products MOD21A1D.006 MOD21A1N.006 MOD21A2.006</p></li>
-<li><p>29/11/2018 - We recently discovered a nasty bug in the computation of some custom spectral indices (those including additions / subtractions on reflectance values, such as in (\frac{(b1_{NIR}+0.1)}{b2_{Red}}) (with (\rho) being a reflectance). See <a href="articles/discovered_bug.html">here</a> for further details! The bug is now fixed on the GitHub version. A patched release will be made available on CRAN as soon as possible.</p></li>
+<li><p>29/11/2018 - We recently discovered a nasty bug in the computation of some custom spectral indices (those including additions / subtractions on reflectance values, such as in <span class="math inline">$\frac{(b1_{NIR}+0.1)}{b2_{Red}}$</span> (with <span class="math inline"><em>ρ</em></span> being a reflectance). See <a href="articles/discovered_bug.html">here</a> for further details! The bug is now fixed on the GitHub version. A patched release will be made available on CRAN as soon as possible.</p></li>
 <li><p>07/08/2018 - We are glad to report that MODIStsp is now included in the <a href="https://ropensci.org/about/">rOpenSci</a> packages’ ecosystem. We thank reviewers Leah Wasser and Jeffrey Hanson for their valuable reviews, which helped us<br>
 further improving the package!</p></li>
 <li><p>10/07/2018 - MODIStsp v. 1.3.6 is out. Check out the <a href="https://github.com/ropensci/MODIStsp/releases/tag/1.3.6">Release Notes</a> for further details !</p></li>
@@ -178,9 +178,9 @@ further improving the package!</p></li>
 </ul>
 <hr>
 </div>
-<div id="getting-started" class="section level2">
+<div id="-getting-started" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a><i class="fa fa-cog" aria-hidden="true"></i> Getting Started</h2>
+<a href="#-getting-started" class="anchor"></a><i class="fa fa-cog" aria-hidden="true"></i> Getting Started</h2>
 <ul>
 <li><p><strong>To install <code>MODIStsp</code></strong>, please follow instructions reported <a href="articles/installation.html">here</a>, both for <a href="articles/installation.html#installing-on-windows"><i class="fa fa-windows" aria-hidden="true"></i></a> , <a href="articles/installation.html#installing-on-linux-systems"><i class="fa fa-linux" aria-hidden="true"></i></a> and <a href="articles/installation.html#installing-on-mac"><i class="fa fa-apple" aria-hidden="true"></i></a></p></li>
 <li><p><code>MODIStsp</code> can be used either in <a href="articles/interactive_execution.html">interactive mode</a> exploiting its user-friendly GUI, or in <a href="articles/noninteractive_execution.html">non-interactive mode</a> from within <code>R</code> scripts</p></li>
@@ -214,13 +214,13 @@ further improving the package!</p></li>
 
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=MODIStsp">https://​cloud.r-project.org/​package=MODIStsp</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/ropensci/MODIStsp">https://​github.com/​ropensci/​MODIStsp</a>
+<li>Browse source code at <br><a href="https://github.com/ropensci/MODIStsp/">https://​github.com/​ropensci/​MODIStsp/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/ropensci/MODIStsp/issues">https://​github.com/​ropensci/​MODIStsp/​issues</a>
 </li>
@@ -242,8 +242,8 @@ further improving the package!</p></li>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Lorenzo Busetto <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9634-6038" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
-<li>Luigi Ranghetti <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6207-5188" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Lorenzo Busetto <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9634-6038" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Luigi Ranghetti <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6207-5188" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
@@ -268,7 +268,7 @@ further improving the package!</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

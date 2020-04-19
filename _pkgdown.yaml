@@ -38,7 +38,7 @@ reference:
       - '`process_message`'
       - '`check_files_existence`'
       - '`ask_permission`'
-      - '`check_proj4string`'
+      - '`check_projection`'
       - '`load_prodopts`'
       - '`split_nodata_values`'
 navbar:

@@ -75,8 +75,8 @@
 #' @note License: GPL 3.0
 #' @export
 #' @rdname MODIStsp_extract
-#' @importFrom raster getZ crop extent extract res raster getValues
-#' @importFrom sf st_as_sf st_read st_crs st_transform st_as_text st_geometry st_write st_coordinates
+#' @importFrom raster getZ extent extract res raster getValues
+#' @importFrom sf st_as_sf st_read st_crs st_transform st_as_text st_crop st_geometry st_write st_coordinates
 #' @importFrom gdalUtilities gdal_rasterize
 #' @importFrom data.table data.table setkey
 #' @importFrom xts as.xts
@@ -222,7 +222,7 @@ MODIStsp_extract <- function(in_rts, sf_object,
   if (length(sel_dates) > 0) {
     if (sf::st_crs(sf_object) != sf::st_crs(in_rts[[1]])) {
       sf_object <- sf::st_transform(sf_object,
-                                    sf::st_as_text(sf::st_crs(in_rts[[1]])))
+                                    sf::st_crs(in_rts[[1]]))
     }
 
     sf_object$mdxtnq <- seq_along(1:dim(sf_object)[1])
@@ -330,7 +330,7 @@ MODIStsp_extract <- function(in_rts, sf_object,
       if (out_format == "dframe") {
         ts <- cbind(date = dates[sel_dates], ts)
       }
-# browser()
+
       if (small & ncols != dim(shape)[1]) {
 
         if (length(id_field) == 1) {

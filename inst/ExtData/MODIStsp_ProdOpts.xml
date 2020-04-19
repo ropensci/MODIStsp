@@ -11384,7 +11384,7 @@
                             <fullname>Maximum Fire Radiative Power</fullname>
                             <datatype>32-bit signed integer</datatype>
                             <nodata_in>0</nodata_in>
-                            <nodata_out>2147483647</nodata_out>
+                            <nodata_out>-2147483647</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
                         </band>
@@ -12485,4 +12485,143 @@
                 </version>
             </versions>
         </MCD19A1>
+        <MCD19A2>
+            <name>MAIA_Land_AOT_daily (MCD19A2)</name>
+            <cat_01>Radiation Budget Variables</cat_01>
+            <cat_02>Radiation</cat_02>
+            <file_prefix_terra>MCD19A2</file_prefix_terra>
+            <file_prefix_aqua>MCD19A2</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>MODIS/Terra and Aqua MAIAC Land Aerosol Optical Depth Daily L2G 1 km SIN Grid.</prod_fullname>
+                    <main_out_folder>MAIA_Land_Surf_BRF_500</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD19A2.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOTA/MCD19A2.006/</http_aqua>
+                    <combined>1</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/products/mcd19a2v006/</www>
+                    <bands>
+                        <band>
+                            <bandname>Optical_Depth_047</bandname>
+                            <fullname>Blue band (0.47 μm) aerosol optical depth over land</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                         <band>
+                            <bandname>Optical_Depth_055</bandname>
+                            <fullname>Green band (0.55 μm) aerosol optical depth over land</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>AOD_Uncertainty</bandname>
+                            <fullname>AOD uncertainty based on blue-band surface brightness (reflectance)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>FineModeFraction</bandname>
+                            <fullname>Fine mode fraction for ocean</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Column_WV</bandname>
+                            <fullname>Column Water Vapor (cm) over land</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Injection_Height</bandname>
+                            <fullname>Smoke injection height (m above ground)</fullname>
+                            <datatype>32-bit signed integer</datatype>
+                            <nodata_in>-99999</nodata_in>
+                            <nodata_out>-2147483647</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>AOD_QA</bandname>
+                            <fullname>AOD QA</fullname>
+                            <datatype>16-bit unsigned integer</datatype>
+                            <nodata_in>0</nodata_in>
+                            <nodata_out>65535</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>AOD_MODEL</bandname>
+                            <fullname>AOD model used in retrieval</fullname>
+                            <datatype>8-bit signed integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>cosSZA</bandname>
+                            <fullname>Cosine of Solar zenith angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>cosVZA</bandname>
+                            <fullname>Cosine View zenith angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>RelAZ</bandname>
+                            <fullname>Relative azimuth angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.01</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                       <band>
+                            <bandname>Scattering_Angle</bandname>
+                            <fullname>Scattering Angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.01</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Glint_Angle</bandname>
+                            <fullname>Glint Angle (5 km)</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>-28672</nodata_in>
+                            <nodata_out>-32767</nodata_out>
+                            <scale_factor>0.01</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                </version>
+            </versions>
+        </MCD19A2>
 </products>

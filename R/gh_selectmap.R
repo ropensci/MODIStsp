@@ -2,8 +2,12 @@
 #' @description Handler used to perform actions required when the "Select from map"
 #'  button is clicked.
 #' @noRd
+#' @importFrom mapedit selectFeatures editMap
+#' @importFrom shiny browserViewer
 #' @importFrom data.table rbindlist
 #' @importFrom gWidgets svalue
+#' @importFrom mapview mapview
+#' @importFrom sf st_bbox
 gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
   #nocov start
   if (requireNamespace("mapedit")) {
@@ -83,12 +87,11 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
         #will be included in the extent in the target projection
 
         bbox_out <- reproj_bbox(sel_bbox,
-                                "EPSG::4326",
+                                4326,
                                 curr_proj,
                                 enlarge = TRUE)
 
-        proj  <- gui_get_proj(CRS(curr_proj))
-        units <- gui_get_units(CRS(curr_proj), proj)
+        units <- gui_get_units(curr_proj)
         gWidgets::svalue(wids$pixsize2_lab) <- units
 
         # re-set bbox in the GUI according coordinates retrieved from file

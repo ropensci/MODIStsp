@@ -109,9 +109,9 @@ MODIStsp_GUI_tcl <- function(general_opts,
   out_proj_list  <- list(
     # "Sinusoidal"   = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs", #nolint
     "Sinusoidal"   = 'PROJCS["Sinusoidal",GEOGCS["GCS_unnamed ellipse",DATUM["D_unknown",SPHEROID["Unknown",6371007.181,0]],PRIMEM["Greenwich",0],UNIT["Degree",0.017453292519943295]],PROJECTION["Sinusoidal"],PARAMETER["central_meridian",0],PARAMETER["false_easting",0],PARAMETER["false_northing",0],UNIT["Meter",1]]'
-    "UTM 32N"      = "32632", #nolint
-    "Latlon WGS84" = "4326", #nolint
-    "Latlon MODIS" = "4008",
+    "UTM 32N"      = 32632, #nolint
+    "Latlon WGS84" = 4326, #nolint
+    "Latlon MODIS" = 4008,
     "User Defined" = ""
   )
   mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
@@ -964,8 +964,8 @@ MODIStsp_GUI_tcl <- function(general_opts,
         gWidgets::svalue(wids$output_proj4) <- out_proj_list[[gWidgets::svalue(wids$proj)]] #nolint
         sel_output_proj <- sp::CRS(gWidgets::svalue(wids$output_proj4))
         # Get the units and kind of proj
-        proj  <- gui_get_proj(sel_output_proj)
-        units <- gui_get_units(sel_output_proj, proj)
+        # proj  <- gui_get_proj(sel_output_proj)
+        units <- gui_get_units(sel_output_proj)
         gWidgets::svalue(pixsize2_lab) <- units
         # If valid proj4string, and output is a bounding box, recompute bounding
         # box to output proj coordinates, then update values in the text labels
@@ -1025,8 +1025,8 @@ MODIStsp_GUI_tcl <- function(general_opts,
 
             # Get the units and kind of proj
 
-            proj  <- gui_get_proj(sel_output_proj)
-            units <- gui_get_units(sel_output_proj, proj)
+            # proj  <- gui_get_proj(sel_output_proj)
+            units <- gui_get_units(sel_output_proj)
             gWidgets::svalue(pixsize2_lab) <- units
             gui_update_bboxlabels(bbox_out,
                                   units,
@@ -1075,8 +1075,8 @@ MODIStsp_GUI_tcl <- function(general_opts,
           gWidgets::svalue(wids$output_proj4) <- ""
         } else {
           gWidgets::svalue(wids$output_proj4) <- sel_output_proj
-          proj  <- gui_get_proj(sel_output_proj)
-          units <- gui_get_units(sel_output_proj, proj)
+          # proj  <- gui_get_proj(sel_output_proj)
+          units <- gui_get_units(sel_output_proj)
           gWidgets::svalue(pixsize2_lab) <- units
           # If valid proj4string, and output is a bounding box, recompute
           # bounding box in output proj coordinates
@@ -1165,8 +1165,8 @@ MODIStsp_GUI_tcl <- function(general_opts,
       out_proj_list[[gWidgets::svalue(wids$proj)]]
     }
   )
-  proj  <- gui_get_proj(sel_output_proj)
-  units <- gui_get_units(sel_output_proj, proj)
+  # proj  <- gui_get_proj(sel_output_proj)
+  units <- gui_get_units(sel_output_proj)
   pixsize2_lab <- glabel(text = units, container = output_res_group)
 
   # Dropdown menu to select Resampling Method ----

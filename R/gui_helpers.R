@@ -77,42 +77,62 @@ gui_update_tiles <- function(bbox_out,
 # gui_get_proj ----
 #' @title gui_get_proj
 #' @description GUI Helper functions to get currently selected projection
-#' @importFrom sf st_crs
+#' @importFrom sf st_crs st_point st_sfc
 #' @importFrom utils head tail
 #' @noRd
 #'
-gui_get_proj <- function(newproj) {
-  #nocov start
-  spcrs <- sf::st_crs(newproj)$proj4string
-
-  utils::head(strsplit(utils::tail(
-    strsplit(spcrs, "+proj=")[[1]], 1), " +")[[1]], 1)
-  #nocov end
-}
+# gui_get_proj <- function(newproj) {
+#   #nocov start
+#
+#   if (!is.na(as.numeric(newproj))) {
+#     newproj = as.numeric(newproj)
+#   } else {
+#     if (general_opts$output_proj == "MODIS Sinusoidal") {
+#       outproj <- sf::st_as_text(sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs")) #nolint)
+#     }
+#   }
+#   spcrs <- sf::st_crs(newproj)
+#   browser()
+#   # utils::head(strsplit(utils::tail(
+#   #   strsplit(spcrs, "+proj=")[[1]], 1), " +")[[1]], 1)
+#   #nocov end
+# }
 
 # gui_get_units ----
 #' @title gui_get_units
 #' @description GUI Helper functions to get measure units of currently selected
 #'  projection
-#' @importFrom sf st_crs
-#' @importFrom utils head tail
+#' @importFrom sf st_crs st_point st_sfc
 #' @noRd
 #'
-gui_get_units <- function(newproj, proj) {
+gui_get_units <- function(newproj) {
 
   # nocov start
-  spcrs <- sf::st_crs(newproj)$proj4string
-
-  if (proj == "longlat") {
-    units <- "dec.degrees"
+  if(suppressWarnings(is.character(newproj) && !is.na(as.numeric(newproj)))) {
+    newproj <- as.numeric(newproj)
   } else {
-    units <- ifelse(
-      length(strsplit(spcrs, "+units=")[[1]]) > 1,
-      utils::head(strsplit(utils::tail(strsplit(
-        spcrs, "+units=")[[1]], 1), " +")[[1]], 1),
-      "Unknown"
-    )
+    if (newproj == "MODIS Sinusoidal") {
+      newproj <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs") #nolint)
+    }
   }
+  # sfcrs <- sf::st_crs(newproj)$proj4string
+
+  # workaround to allow getting units from crs - create a dmmy sf
+  # object
+  pt = sf::st_sfc(sf::st_point(c(0,1)), crs =  sf::st_crs(newproj))
+  pt_crs = sf::st_crs(pt, parameters = TRUE)
+  units <- pt_crs[["units_gdal"]]
+
+  # if (proj == "longlat") {
+  #   units <- "dec.degrees"
+  # } else {
+  #   units <- ifelse(
+  #     length(strsplit(spcrs, "+units=")[[1]]) > 1,
+  #     utils::head(strsplit(utils::tail(strsplit(
+  #       spcrs, "+units=")[[1]], 1), " +")[[1]], 1),
+  #     "Unknown"
+  #   )
+  # }
   units
   #nocov end
 }
@@ -202,7 +222,9 @@ gui_load_options <- function(opts_jsfile,
   gWidgets::svalue(wids$output_res_sel)  <- general_opts$out_res_sel
   gWidgets::svalue(wids$output_res)      <- general_opts$out_res
   gWidgets::svalue(wids$output_resmeth)  <- general_opts$resampling
-  gWidgets::svalue(wids$output_ext)      <- general_opts$full_ext
+  gWidgets::svalue(wids$output_ext)      <- ifelse(general_opts$full_ext == TRUE,
+                                                   "Select MODIS Tiles",
+                                                   "Define Custom Area")
   gWidgets::svalue(wids$output_xmin)     <- general_opts$bbox[1]
   gWidgets::svalue(wids$output_xmax)     <- general_opts$bbox[3]
   gWidgets::svalue(wids$output_ymin)     <- general_opts$bbox[2]
@@ -254,7 +276,7 @@ gui_save_options <- function(general_opts,
   # retrieve product options
   general_opts$sel_prod <- mod_prod_list[
     which(mod_prod_list == gWidgets::svalue(wids$prod))
-    ]
+  ]
   general_opts$prod_version <-
     prod_opt_list[[general_opts$sel_prod]][[which(vapply(
       prod_opt_list[[general_opts$sel_prod]],
@@ -301,7 +323,9 @@ gui_save_options <- function(general_opts,
   general_opts$out_res_sel <- gWidgets::svalue(wids$output_res_sel)
   general_opts$out_res     <- gWidgets::svalue(wids$output_res)
   general_opts$resampling  <- gWidgets::svalue(wids$output_resmeth)
-  general_opts$full_ext    <- gWidgets::svalue(wids$output_ext)
+  general_opts$full_ext    <- ifelse(gWidgets::svalue(wids$output_ext) == "Select MODIS Tiles",
+                                     TRUE,
+                                     FALSE)
   general_opts$bbox        <- c(gWidgets::svalue(wids$output_xmin),
                                 gWidgets::svalue(wids$output_ymin),
                                 gWidgets::svalue(wids$output_xmax),
@@ -386,7 +410,7 @@ gui_save_options <- function(general_opts,
   suppressWarnings(general_opts$bbox <- as.numeric(general_opts$bbox))
   general_opts$bbox <- as.numeric(general_opts$bbox)
   n_bbox_compiled   <- length(which(is.finite(general_opts$bbox)))
-  if (general_opts$full_ext == "Define Custom Area") {
+  if (general_opts$full_ext == FALSE) {
     if (n_bbox_compiled == 4) {
       if (general_opts$bbox[1] > general_opts$bbox[3] |
           general_opts$bbox[2] > general_opts$bbox[4]) {
@@ -406,7 +430,7 @@ gui_save_options <- function(general_opts,
 
   # Check if selected tiles are consistent with the bounding box
   # (only if product is not tiled)
-  if (general_opts$full_ext == "Define Custom Area" &
+  if (general_opts$full_ext == FALSE &
       prod_opt_list[[svalue(wids$prod)]][[svalue(wids$vers)]][["tiled"]] == 1 &
       gui_env$check_save_opts) {
     bbox_mod         <- reproj_bbox(

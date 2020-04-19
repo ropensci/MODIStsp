@@ -50,9 +50,7 @@
 #'   containing the new index
 #' @param MODIStsp_dir `character` main folder containing MODIStsp R files,
 #'   Default: retrieved from package installation folder
-#' @importFrom gWidgets gbasicdialog ggroup glabel size font gedit gbutton
-#'  svalue addSpace gframe addSpring gmessage visible
-#' @importFrom pacman p_load p_exists
+#' @importFrom gWidgets gbasicdialog ggroup glabel size font gedit gbutton svalue addSpace gframe addSpring gmessage visible
 #' @return The function is called for its side effects. On success, the
 #'  MODIStsp_Previous.json or the json options file specified by the user
 #'  is modified so to allow computation of the additional indexes.
@@ -98,20 +96,6 @@ MODIStsp_addindex <- function(
   # Initialization and retrieval of parameters ----
   if (gui) {
     #nocov start
-    if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
-      message("Library 'gWidgetsRgtk2' is required to run MODIStsp_addindex ",
-              "in interactive mode but it is not installed! \n\n",
-              "Do you want to install it now?",
-              type = " y / n")
-      inst_gw <- readline()
-      if (inst_gw == "y") {
-        pacman::p_load("gWidgetsRGtk2")
-      } else {
-        stop("MODIStsp can not work in Interactive mode without gWidgetsRGtk2!",
-             "\n Aborting!")
-      }
-
-    }
     options("guiToolkit" = "RGtk2")
     #nocov end
   }

@@ -25,8 +25,8 @@
 #' @note License: GPL 3.0
 #'  Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
 #'  license GPL 3.0
-#' @importFrom bitops bitAnd bitShiftR
 #' @importFrom raster raster NAvalue calc
+#' @importFrom bitops bitShiftR bitAnd
 #' @importFrom tools file_path_sans_ext
 MODIStsp_process_QA_bits <- function(out_filename,
                                      in_source_file,

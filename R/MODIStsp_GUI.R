@@ -118,7 +118,7 @@ MODIStsp_GUI <- function(general_opts,
     "Native"   = ifelse(
       prod_opt_list[[sel_prod]][[general_opts$prod_version]][["tiled"]] == "1",
       "MODIS Sinusoidal", #nolint
-      "EPSG::4008"),
+      "4008"),
     # "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6371007.181,0,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Sinusoidal\"],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]", #nolint
     # "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"),
     "User Defined" = ""
@@ -190,6 +190,7 @@ MODIStsp_GUI <- function(general_opts,
       mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)]),
     handler   = function(h, ...) {
       gh_selprod(h, wids, prod_opt_list, general_opts)
+
     }
   )
   gWidgets::size(wids$prod) <- list(width = 442)
@@ -526,7 +527,7 @@ MODIStsp_GUI <- function(general_opts,
     horizontal = TRUE,
     container  = sel_group,
     selected   = match(general_opts$full_ext,
-                       c("Select MODIS Tiles", "Define Custom Area")),
+                       c(TRUE, FALSE)),
     handler  = function(h, ...) {
       current_sel <- gWidgets::svalue(wids$output_ext)
       sel_prod   <- ifelse(!is.null(gWidgets::svalue(wids$prod)),
@@ -666,15 +667,20 @@ MODIStsp_GUI <- function(general_opts,
   lat_w_group <- ggroup(horizontal = TRUE,  container = min_group)
   addSpring(lat_w_group)
 
+  if (general_opts$bbox[1] == "[]" | general_opts$bbox[1] == "") {
+    bbox <- c(NA, NA, NA, NA)
+  } else {
+    bbox <- general_opts$bbox
+  }
   output_xmin_lab  <- glabel("x-min", container = lat_w_group, expand = TRUE)
-  wids$output_xmin <- gedit(text = general_opts$bbox[1],
+  wids$output_xmin <- gedit(text = bbox[1],
                             container = lat_w_group,
                             width     = 9)
   long_s_group <- ggroup(horizontal = TRUE, container = min_group)
   addSpring(long_s_group)
 
   output_ymin_lab  <- glabel("y-min", container = long_s_group)
-  wids$output_ymin <- gedit(text      = general_opts$bbox[2],
+  wids$output_ymin <- gedit(text      = bbox[2],
                             container = long_s_group,
                             width     = 9)
   addSpace(bbox_group, 2)
@@ -684,14 +690,14 @@ MODIStsp_GUI <- function(general_opts,
   addSpring(lat_e_group)
 
   output_xmax_lab  <- glabel("x-max", container = lat_e_group)
-  wids$output_xmax <- gedit(text = general_opts$bbox[3],
+  wids$output_xmax <- gedit(text = bbox[3],
                             container = lat_e_group,
                             width     = 9)
   long_n_group <- ggroup(horizontal = TRUE, container = max_group)
   addSpring(long_n_group)
 
   output_ymax_lab  <- glabel("y-max", container = long_n_group)
-  wids$output_ymax <- gedit(text = general_opts$bbox[4],
+  wids$output_ymax <- gedit(text = bbox[4],
                             container = long_n_group,
                             width     = 9)
 
@@ -742,11 +748,11 @@ MODIStsp_GUI <- function(general_opts,
 
   # disable corner labels if "Full Extent" requested ----
   gWidgets::enabled(bbox_group) <- ifelse(
-    general_opts$full_ext == "Select MODIS Tiles", FALSE, TRUE
+    general_opts$full_ext == TRUE, FALSE, TRUE
   )
 
   gWidgets::enabled(tiles_from_bbox) <- ifelse(
-    gWidgets::svalue(wids$output_ext) != "Select MODIS Tiles",
+    gWidgets::svalue(wids$output_ext) == FALSE,
     TRUE,
     FALSE
   )
@@ -832,14 +838,14 @@ MODIStsp_GUI <- function(general_opts,
         } else {
 
           gWidgets::svalue(wids$output_proj4) <- newproj
-          if (newproj == "MODIS Sinusoidal") {
-            newproj <- "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6371007.181,0,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Sinusoidal\"],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]"
-          }
-          if (newproj == "EPSG:4008") {
-            newproj <- 4008
-          }
+          # if (newproj == "MODIS Sinusoidal") {
+          #   newproj <- "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6371007.181,0,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Sinusoidal\"],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]"
+          # }
+          # if (newproj == "EPSG:4008") {
+          #   newproj <- 4008
+          # }
 
-          units <- gui_get_units(newproj, gui_get_proj(newproj))
+          units <- gui_get_units(newproj)
 
           gWidgets::svalue(wids$pixsize2_lab) <- units
           # If valid proj4string, and output is a bounding box, recompute
@@ -931,14 +937,10 @@ MODIStsp_GUI <- function(general_opts,
     }
 
   if (sel_output_proj == "MODIS Sinusoidal") {
-    sel_output_proj <- "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"unknown\",ELLIPSOID[\"unknown\",6371007.181,0,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Sinusoidal\"],PARAMETER[\"Longitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]"
-  }
-  if (sel_output_proj == "EPSG:4008") {
-    sel_output_proj <- 4008
+    sel_output_proj <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs") #nolint)
   }
 
-  # proj  <- gui_get_proj(sel_output_proj)
-  units <- gui_get_units(sel_output_proj, gui_get_proj(sel_output_proj))
+  units <- gui_get_units(sel_output_proj)
 
   wids$pixsize2_lab <- glabel(text = units, container = output_res_group)
 

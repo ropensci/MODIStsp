@@ -1,30 +1,18 @@
 context("check_projection tests")
 
-testthat::test_that("check_projection works as expected", {
+test_that("check_projection works as expected", {
   # skip_on_travis()
 
   # valid character
+  expect_equal(check_projection("32N"), 32632)
+
+  # WKT can be retrieved from CRS
   expect_equal(
-    check_projection("32N"),
-    32632) #nolint
+    check_projection(sf::st_crs(32632))$wkt,
+    "PROJCS[\"WGS 84 / UTM zone 32N\",\n    GEOGCS[\"WGS 84\",\n        DATUM[\"WGS_1984\",\n            SPHEROID[\"WGS 84\",6378137,298.257223563,\n                AUTHORITY[\"EPSG\",\"7030\"]],\n            AUTHORITY[\"EPSG\",\"6326\"]],\n        PRIMEM[\"Greenwich\",0,\n            AUTHORITY[\"EPSG\",\"8901\"]],\n        UNIT[\"degree\",0.0174532925199433,\n            AUTHORITY[\"EPSG\",\"9122\"]],\n        AUTHORITY[\"EPSG\",\"4326\"]],\n    PROJECTION[\"Transverse_Mercator\"],\n    PARAMETER[\"latitude_of_origin\",0],\n    PARAMETER[\"central_meridian\",9],\n    PARAMETER[\"scale_factor\",0.9996],\n    PARAMETER[\"false_easting\",500000],\n    PARAMETER[\"false_northing\",0],\n    UNIT[\"metre\",1,\n        AUTHORITY[\"EPSG\",\"9001\"]],\n    AXIS[\"Easting\",EAST],\n    AXIS[\"Northing\",NORTH],\n    AUTHORITY[\"EPSG\",\"32632\"]]") #nolint
 
-  # expect_equal(
-  #   check_proj4string(sp::CRS("+init=epsg:32632")),
-  #   "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0") #nolint
+  # valid numeric or epsg string
 
-  # temporary - until  WKT can be retrieved from CRS
-  expect_equal(expect_warning(
-    check_projection(sp::CRS("+init=epsg:32632"))),
-    NA)
-
-  # valid numeric
-
-  # expect_true(
-  #   check_projection(3857) %in% c(
-  #     "+init=epsg:3857 +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs", #nolint
-  #     "+init=epsg:3857 +proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +no_defs") #nolint
-  #   )
-  #
   expect_true(
     check_projection(3857) %in% c(
       3857))

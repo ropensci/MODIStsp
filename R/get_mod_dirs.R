@@ -26,9 +26,9 @@
 #' @author Lorenzo Busetto, phD (2014-2017) \email{busetto.l@@irea.cnr.it}
 #' @author Luigi Ranghetti, phD (2016-2017) \email{lbusett@@gmail.com}
 #' @note License: GPL 3.0
+#' @importFrom stringr str_sub str_split
+#' @importFrom httr RETRY authenticate content
 #' @importFrom gWidgets gconfirm
-#' @importFrom httr GET authenticate timeout content
-#' @importFrom stringr str_extract str_split str_split_fixed str_sub
 
 get_mod_dirs <- function(http,
                          download_server,

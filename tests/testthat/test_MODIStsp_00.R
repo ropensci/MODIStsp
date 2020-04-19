@@ -1,5 +1,5 @@
 context("MODIStsp Test 0: Gracefully fail on input problems")
-testthat::test_that(
+test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     # no options file

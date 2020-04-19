@@ -30,8 +30,8 @@
 #' @author Lorenzo Busetto, phD (2014-2016) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
+#' @importFrom httr RETRY authenticate content
 #' @importFrom gWidgets gconfirm
-#' @importFrom httr GET timeout authenticate content
 #' @importFrom stringr str_split str_pad
 get_mod_filenames <- function(http,
                               used_server,

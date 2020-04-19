@@ -31,14 +31,13 @@
 #' @rdname MODIStsp_process_bands
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
-#' @importFrom gdalUtilities gdal_translate gdalbuildvrt gdalwarp gdalinfo
-#' @importFrom stringr str_sub
-#' @importFrom raster res raster calc reclassify
-#' @importFrom tools file_path_sans_ext
 #' @importFrom parallel detectCores
-#' @importFrom gWidgets svalue
+#' @importFrom sf gdal_utils gdal_subdatasets sf_extSoftVersion
 #' @importFrom stats na.omit
-#' @importFrom sf sf_extSoftVersion gdal_utils
+#' @importFrom gdalUtilities gdal_translate gdalwarp gdalbuildvrt
+#' @importFrom stringr str_sub
+#' @importFrom raster raster res reclassify calc
+#' @importFrom tools file_ext file_path_sans_ext
 #'
 MODIStsp_process_bands <- function(out_folder_mod, modislist,
                                    outproj_str, mod_proj_str, sens_sel,
@@ -75,27 +74,12 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     silent = TRUE
   )))
 
-
-  # gdalinfo_hdf_1stlayer <- gsub(
-  #   "^ *SUBDATASET_1_NAME=", "",
-  #   gdalinfo_hdf_raw[grep("^ *SUBDATASET_1_NAME",
-  #                         gdalinfo_hdf_raw)]
-  # )
-
   gdalinfo_hdf_resunit  <- gsub(
     "^ *NADIRDATARESOLUTION=[0-9.]+ ?", "",
     gdalinfo_raw[grep("^ *NADIRDATARESOLUTION",
                       gdalinfo_raw)]
   )
 
-  # gdalinfo_raw  <- if (length(gdalinfo_hdf_1stlayer) > 0) {
-  #   # if more than a band is present, take gdalinfo from the first
-  #   # band
-  #   gdalUtils::gdalinfo(file.path(out_folder_mod, modislist[1]), sd = 1)
-  # } else {
-  #   # otherwise, take from the HDF directly
-  #   gdalinfo_hdf_raw
-  # }
   gdalinfo_bbox <- cbind(
     stats::na.omit(as.numeric(unlist(strsplit(gsub(
       "[^0-9.\\-]+",
@@ -120,7 +104,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   #  --------------------------------------------------------#
   # Convert to output projection, extent and format using ####
   # gdalwarp (mosaic if necessary)
-# browser()
+
   if (outproj_str != mod_proj_str) {
     mess_text <- paste("Processing and Reprojecting",
                        sens_sel, bandname,
@@ -145,32 +129,33 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   if (datatype == "UInt32") {
     for (file in seq_along(files_in)) {
       file_out <- tempfile(fileext = ".tif", tmpdir = tmpdir)
-      gdalUtilities::gdal_translate(gdalUtils::get_subdatasets(files_in[file])[band],
-                                file_out)
+      gdalUtilities::gdal_translate(sf::gdal_subdatasets(files_in[file])[band][[1]],
+                                    file_out)
       files_in[file] <- file_out
     }
 
     outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),
                           ".tif")
     if (length(split_nodata_values(nodata_in)[[1]] == 1)) {
+
       gdalUtilities::gdalwarp(files_in,
-                          outfile_vrt,
-                          multi     = TRUE,
-                          wo        = paste0("NUM_THREADS=", ncores),
-                          nomd      = TRUE,
-                          overwrite = TRUE,
-                          srcnodata = nodata_in,
-                          dstnodata = nodata_out
+                              outfile_vrt,
+                              multi     = TRUE,
+                              wo        = paste0("NUM_THREADS=", ncores),
+                              nomd      = TRUE,
+                              overwrite = TRUE,
+                              srcnodata = nodata_in,
+                              dstnodata = nodata_out
       )
     } else {
       # If multiple NODATA, do not change the nodata value in the VRT, because
       # it is dealt with later
       gdalUtilities::gdalwarp(files_in,
-                          outfile_vrt,
-                          multi     = TRUE,
-                          wo        = paste0("NUM_THREADS=", ncores),
-                          nomd      = TRUE,
-                          overwrite = TRUE
+                              outfile_vrt,
+                              multi     = TRUE,
+                              wo        = paste0("NUM_THREADS=", ncores),
+                              nomd      = TRUE,
+                              overwrite = TRUE
       )
     }
   } else {
@@ -179,18 +164,24 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # hdf4
 
     if (length(split_nodata_values(nodata_in)[[1]]) == 1) {
-          gdalUtilities::gdalbuildvrt(files_in,
-                              outfile_vrt,
-                              sd = band,
-                              srcnodata = nodata_in,
-                              vrtnodata = nodata_out
-      )
+
+      # if (length(files_in) != 1) {
+      #   browser()
+      # } else {
+      #   in_sd <- sf::gdal_subdatasets(files_in)[[band]]
+      # }
+
+      gdalUtilities::gdalbuildvrt(files_in,
+                                  sd = band,
+                                  output.vrt = outfile_vrt,
+                                  srcnodata = nodata_in,
+                                  vrtnodata = nodata_out)
     } else {
       # If multiple NODATA, do not change the nodata value in the VRT, because
       # it is dealt with later
       gdalUtilities::gdalbuildvrt(files_in,
-                              outfile_vrt,
-                              sd = band
+                                  outfile_vrt,
+                                  sd = band
       )
     }
 
@@ -231,7 +222,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),"_recl.tif")
 
     # if full_ext == "Resized", clip before reclassifying (to speed up)
-    if (full_ext == "Resized") {
+    if (full_ext == FALSE) {
       outfile_vrt_prev2 <- outfile_vrt_prev
       outfile_vrt_prev <- paste0(stringr::str_sub(outfile_vrt, 1, -5),".vrt")
 
@@ -241,7 +232,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
         },
         list(
           reproj_bbox(bbox, outproj_str, mod_proj_str, enlarge = TRUE),
-          bbox(raster::raster(outfile_vrt_prev2))
+          raster::bbox(raster::raster(outfile_vrt_prev2))
         )
       )
       gdalUtilities::gdalbuildvrt(
@@ -279,12 +270,14 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # to modis_srs, to get the correct extent, then build a new
   # vrt file subsetting the previous vrt file
 
-  if (full_ext == "Resized") {
+  if (full_ext == FALSE) {
     outfile_vrt_or <- outfile_vrt
     # filename of new temporary vrt file
     outfile_vrt    <- tempfile(fileext = ".vrt", tmpdir = tmpdir)
     # for resizing BEFORE reprojecting
-    bbox_mod <- reproj_bbox(bbox, outproj_str, mod_proj_str,
+    bbox_mod <- reproj_bbox(bbox,
+                            outproj_str,
+                            mod_proj_str,
                             enlarge = TRUE)
     # Create a resized and (if needed) mosaiced GDAL vrt file
 
@@ -293,29 +286,30 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
       # create a tif instead than a vrt
       outfile_vrt <- paste0(str_sub(outfile_vrt, 1, -5), ".tif")
       gdalUtilities::gdalwarp(outfile_vrt_or,
-                          outfile_vrt,
-                          te        = c(bbox_mod),
-                          tap       = TRUE,
-                          tr        = raster::res(raster::raster(outfile_vrt_or)), #nolint
-                          # sd        = band,
-                          srcnodata = nodata_in,
-                          dstnodata = nodata_out,
-                          ot        = as.character(datatype),
-                          multi     = TRUE,
-                          wo        = c("INIT_DEST = NO_DATA",
-                                        paste0("NUM_THREADS=", ncores)),
-                          nomd      = TRUE,
-                          overwrite = TRUE)
-    } else {
-      gdalUtilities::gdalbuildvrt(outfile_vrt_or,
                               outfile_vrt,
                               te        = c(bbox_mod),
                               tap       = TRUE,
                               tr        = raster::res(raster::raster(outfile_vrt_or)), #nolint
+                              # sd        = band,
                               srcnodata = nodata_in,
-                              vrtnodata = nodata_out,
-                              sd        = band,
+                              dstnodata = nodata_out,
+                              ot        = as.character(datatype),
+                              multi     = TRUE,
+                              wo        = c("INIT_DEST = NO_DATA",
+                                            paste0("NUM_THREADS=", ncores)),
+                              nomd      = TRUE,
                               overwrite = TRUE)
+    } else {
+
+      gdalUtilities::gdalbuildvrt(outfile_vrt_or,
+                                  outfile_vrt,
+                                  te        = c(bbox_mod),
+                                  tap       = TRUE,
+                                  tr        = raster::res(raster::raster(outfile_vrt_or)), #nolint
+                                  srcnodata = nodata_in,
+                                  vrtnodata = nodata_out,
+                                  sd        = band,
+                                  overwrite = TRUE)
     }
   }
 
@@ -361,32 +355,32 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
   # Identify which processing is needed
   reproj_type <- if (out_res_sel == "Native" &
-                     outproj_str == mod_proj_str) {
+                     outproj_str$wkt  == mod_proj_str$wkt) {
     "GdalTranslate" #only save to new format and mosaic
 
   } else if (out_res_sel == "Resampled" &
-             outproj_str == mod_proj_str) {
+             outproj_str$wkt == mod_proj_str$wkt) {
     "Resample1_Resize0" #Change of resolution
 
   } else if (out_res_sel == "Native"     &
-             outproj_str != mod_proj_str &
-             full_ext    == "FullTiles") {
+             outproj_str$wkt != mod_proj_str$wkt &
+             full_ext    == TRUE) {
     "Resample0_Resize0" #Change of projection
 
   } else if (out_res_sel == "Native"     &
-             outproj_str != mod_proj_str &
-             full_ext    == "Resized") {
+             outproj_str$wkt != mod_proj_str$wkt &
+             full_ext    == FALSE) {
     "Resample0_Resize1" #Change of projection and extent
 
   } else if (out_res_sel == "Resampled"  &
-             outproj_str != mod_proj_str &
-             full_ext    == "FullTiles") {
+             outproj_str$wkt != mod_proj_str$wkt &
+             full_ext    == TRUE) {
     "Resample1_Resize0" #Change of resolution and
     #projection
 
   } else if (out_res_sel == "Resampled"  &
-             outproj_str != mod_proj_str &
-             full_ext    == "Resized") {
+             outproj_str$wkt != mod_proj_str$wkt &
+             full_ext    == FALSE) {
     "Resample1_Resize1"  #Change of resolution,
     #projection and extent
   } else {
@@ -404,8 +398,8 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              ot       = as.character(datatype),
              a_nodata = nodata_out,
              co = paste("COMPRESS", compress, sep = "=")
-           # ,
-           #   verbose = FALSE
+             # ,
+             #   verbose = FALSE
            ),
            Resample0_Resize0 = gdalUtilities::gdalwarp(
              outfile_vrt, outrep_file_0,
@@ -473,6 +467,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # on ENVI format, processing is identical, save for
     # not providing the "COMPRESSION" option to avoid
     # warnings
+    # browser()
     switch(reproj_type,
            GdalTranslate = gdalUtilities::gdal_translate(
              outfile_vrt,

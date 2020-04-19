@@ -3,7 +3,7 @@
 #'  button is clicked
 #' @importFrom jsonlite fromJSON
 #' @importFrom gWidgets svalue gbasicdialog ggroup gframe gcheckboxgroup
-#'  addSpring gbutton font visible
+#' addSpring gbutton font visible
 #' @importFrom utils browseURL
 #' @noRd
 #' @inheritParams MODIStsp_GUI

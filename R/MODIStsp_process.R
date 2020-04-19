@@ -13,7 +13,7 @@
 #'   3. Creates virtual files of the processed time series.
 #'
 #' Reprojection and resize is dealt with by accessing gdal routines through the
-#' [`gdalUtils`](https://CRAN.R-project.org/package=gdalUtils)
+#' [`gdalUtilities`](https://CRAN.R-project.org/package=gdalUtilities)
 #' package.
 #' Extraction of bitfields from Quality layers is done though bitwise computation
 #' Checks are done in order to not re-download already existing HDF images, and not
@@ -43,7 +43,7 @@
 #' @param start_y `integer [0-17]` Start vertical tile.
 #' @param end_x `integer [0-35]` End horizontal tile.
 #' @param end_y `integer [0-17]` End vertical tile.
-#' @param full_ext `characrter ["FullTiles" | "Resized"]` If \"Full_Ext\", process
+#' @param full_ext `logic` If TRUE, process``
 #'   the entire extent of the selected tiles. Otherwise, crop the output to
 #'   output bbox.
 #' @param bbox `numeric(4)` Output bounding box (xmin, ymin, xmax, ymax) in
@@ -161,6 +161,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              n_retries,
                              verbose) {
 
+
+  # outproj_str <- sf::st_as_text(sf::st_crs(check_projection(outproj_str)))
   #   __________________________________________________________________________
   #   Intialize processing variables                                        ####
 
@@ -277,7 +279,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     sensor   <- c("Terra")
     combined <- TRUE
   }
-
   #  If both platforms selected, do a cycle. Process first Terra then Aqua.
 
   for (sens_sel in sensor) {

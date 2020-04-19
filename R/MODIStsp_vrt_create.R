@@ -19,9 +19,9 @@
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom raster setZ stack
-#' @importFrom tools file_path_sans_ext
 #' @importFrom stringr str_sub str_detect
+#' @importFrom raster raster stack nlayers setZ
+#' @importFrom tools file_path_sans_ext
 #' @importFrom gdalUtilities gdalbuildvrt
 #'
 MODIStsp_vrt_create <- function(
@@ -281,7 +281,7 @@ MODIStsp_vrt_create <- function(
               #                                     rst}),
               #                            quick = TRUE)
               raster_ts <- raster::stack(out_meta_files, quick = TRUE)
-              # browser()
+
               # Add the "time" dimension to the rasterstack
               if (raster::nlayers(raster_ts) != length(temp_dates)) {
                 temp_dates <- rep(temp_dates,

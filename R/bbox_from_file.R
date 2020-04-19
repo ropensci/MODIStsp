@@ -1,12 +1,12 @@
 #' @title Retrieve bbox from a spatial file
 #' @description Helper function used to retrieve the bounding box of a specified spatial file
-#'   recognized by GDAL or OGG: the function reads the extent using gdalinfo or ogrinfo,
-#'   converting it to a specified crs
+#'   recognized by  `sf` or `raster`: the function reads the extent using `sf::st_bbox()`
 #' @param file_path `character` path of a spatial file.
-#' @param crs_out [`crs` | `character`] `crs` of the desired output projection,
-#'  or string cohercible to it using `sf::st_crs()` (e.g., WKT or numeric
-#'  EPSG code)
-#' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
+#' @param crs_out  (`crs` | `character`) crs of the desired output projection,
+#' or string cohercible to it using `sf::st_crs()` (e.g., WKT or numeric
+#' EPSG code)
+#' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
+#' @author Luigi Ranghetti, phD (2017) <ranghetti.l@irea.cnr.it>
 #' @importFrom sf st_crs st_read st_bbox
 #' @importFrom raster raster
 #' @note License: GPL 3.0
@@ -16,6 +16,14 @@ bbox_from_file <- function(file_path, crs_out) {
   #nocov start
   if (!file.exists(file_path)) {
     stop("Specified file path does not exist. Aborting!")
+  }
+
+  if(suppressWarnings(is.character(crs_out) && !is.na(as.numeric(crs_out)))) {
+    crs_out <- as.numeric(crs_out)
+  } else {
+    if (crs_out == "MODIS Sinusoidal") {
+      crs_out <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs") #nolint)
+    }
   }
 
   if (!inherits(crs_out, "crs")) {
