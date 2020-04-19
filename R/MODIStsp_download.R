@@ -157,11 +157,12 @@ MODIStsp_download <- function(modislist,
                                    intern = Sys.info()["sysname"] == "Windows"))
           } else {
             # http download - httr
-            download <- try(httr::GET(remote_filename,
-                                      httr::authenticate(user, password),
-                                      # httr::progress(),
-                                      httr::write_disk(local_filename,
-                                                       overwrite = TRUE)))
+            download <- try(httr::RETRY("GET", remote_filename,
+                                        httr::authenticate(user, password),
+                                        # httr::progress(),
+                                        httr::write_disk(local_filename,
+                                                         overwrite = TRUE),
+                                        terminate_on = c(403, 404)))
           }
         }
 
