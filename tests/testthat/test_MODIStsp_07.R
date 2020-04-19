@@ -17,11 +17,10 @@ test_that(
       "/Surf_Temp_8Days_GridSin_v6/LST_Day_6km/MOD11B2_LST_Day_6km_2017_001.tif"
     )
     outrast     <- raster::raster(outpath)
-    ext_mstpout <- sp::bbox(outrast)
+    ext_mstpout <- sf::st_bbox(outrast)
 
-    ext_spin <- sp::bbox(rgdal::readOGR(
-      system.file("testdata/spatial_file.shp", package = "MODIStsp"),
-      verbose = FALSE))
+    ext_spin <-  sf::st_bbox(sf::st_read(
+      system.file("testdata/spatial_file.shp", package = "MODIStsp"), quiet = TRUE))
     # Is input and output extent equal (allow for difference equal to raster
     # resolution to account for the fact that to include boundaries of the
     # polygon a padding of one pixel is always made)
@@ -38,7 +37,8 @@ test_that(
         "MODIStsp/Surf_Temp_8Days_GridSin_v6/LST_Day_6km/"),
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
 
-    r <- suppressWarnings(rgdal::GDALinfo(out_files_tif[1]))
-    expect_equal(attr(r, "df")$NoDataValue, 65535)
+    r <- sf::gdal_utils("info", out_files_tif[1], quiet = TRUE)
+    expect_equal(substring(strsplit(r, "NoData Value=")[[1]][2], 1, 5),
+                 "65535")
   }
 )
