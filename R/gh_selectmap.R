@@ -8,6 +8,7 @@
 #' @importFrom gWidgets svalue
 #' @importFrom mapview mapview
 #' @importFrom sf st_bbox
+#' @importFrom stringr str_split_fixed
 gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
   #nocov start
   if (requireNamespace("mapedit")) {
@@ -27,8 +28,8 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
       if (inherits(sel, "data.frame") & length(sel$h > 0)) {
 
         seltiles <- lapply(sel[["Name"]], FUN = function(x){
-          h <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[2])
-          v <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[3])
+          h <- as.numeric(stringr::str_split_fixed(x, "[a-z]:", 3)[2])
+          v <- as.numeric(stringr::str_split_fixed(x, "[a-z]:", 3)[3])
           data.frame(h = h, v = v)})
         seltiles <- data.table::rbindlist(seltiles)
         error_sel <- FALSE

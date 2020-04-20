@@ -10,7 +10,7 @@ bbox_from_file(file_path, crs_out)
 \item{file_path}{\code{character} path of a spatial file.}
 
 \item{crs_out}{(\code{crs} | \code{character}) crs of the desired output projection,
-or string cohercible to it using \code{sf::st_crs()} (e.g., WKT or numeric
+or string coercible to it using \code{sf::st_crs()} (e.g., WKT or numeric
 EPSG code)}
 }
 \description{

@@ -5,7 +5,7 @@
 #   as GeoTiff (scaling output values) and vrt time series are created.
 
 context("MODIStsp Test 6: http download on \"combined\" datasets and mosaicing of MODIS tiles") #nolint
-testthat::test_that(
+test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     # skip_on_travis()

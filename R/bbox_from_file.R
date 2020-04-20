@@ -3,7 +3,7 @@
 #'   recognized by  `sf` or `raster`: the function reads the extent using `sf::st_bbox()`
 #' @param file_path `character` path of a spatial file.
 #' @param crs_out  (`crs` | `character`) crs of the desired output projection,
-#' or string cohercible to it using `sf::st_crs()` (e.g., WKT or numeric
+#' or string coercible to it using `sf::st_crs()` (e.g., WKT or numeric
 #' EPSG code)
 #' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
 #' @author Luigi Ranghetti, phD (2017) <ranghetti.l@irea.cnr.it>

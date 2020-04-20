@@ -11,10 +11,10 @@ reproj_bbox(bbox, in_proj, out_proj, enlarge = TRUE)
 or a numeric vector in the format (xmin, ymin, xmax, ymax)).}
 
 \item{in_proj}{(\code{crs} | \code{character}) crs of the input projection,
-or string cohercible to it using \code{sf::st_crs()} (e.g., WKT or numeric
+or string coercible to it using \code{sf::st_crs()} (e.g., WKT or numeric
 EPSG code)}
 
-\item{out_proj}{\code{crs} \code{crs} of the output projection, or string cohercible to
+\item{out_proj}{\code{crs} \code{crs} of the output projection, or string coercible to
 it using \code{sf::st_crs()} (e.g., WKT or numeric EPSG code)}
 
 \item{enlarge}{`logical`` if TRUE, the reprojected bounding box is the

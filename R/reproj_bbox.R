@@ -7,9 +7,9 @@
 #' @param bbox The input bounding box (it can be a matrix obtained from `sp::bbox()`,
 #'  or a numeric vector in the format (xmin, ymin, xmax, ymax)).
 #' @param in_proj (`crs` | `character`) crs of the input projection,
-#'  or string cohercible to it using `sf::st_crs()` (e.g., WKT or numeric
+#'  or string coercible to it using `sf::st_crs()` (e.g., WKT or numeric
 #'  EPSG code)
-#' @param out_proj `crs` `crs` of the output projection, or string cohercible to
+#' @param out_proj `crs` `crs` of the output projection, or string coercible to
 #'  it using `sf::st_crs()` (e.g., WKT or numeric EPSG code)
 #' @param enlarge `logical`` if TRUE, the reprojected bounding box is the
 #'  one which completely include the original one; if FALSE, it is simply the
