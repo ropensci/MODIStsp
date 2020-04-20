@@ -45,6 +45,7 @@
 #' @importFrom gWidgets dispose
 #' @importFrom jsonlite fromJSON write_json
 #' @importFrom tools file_path_sans_ext
+#' @importFrom utils unzip
 #' @examples
 #'
 #' \dontrun{
@@ -120,7 +121,7 @@
 #'
 #' plot(raster(outfiles_iseo[1]))
 #'
-#' # See also http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html
+#' # See also https://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html
 #' }
 
 MODIStsp <- function(gui               = TRUE,
@@ -264,9 +265,6 @@ MODIStsp <- function(gui               = TRUE,
   if (gui) {
     #nocov start
 
-    if (exists("welcome_lab")) {
-      gWidgets::dispose(welcome_lab)
-    }
     start <- MODIStsp_GUI(general_opts,
                           prod_opt_list,
                           MODIStsp_dir = system.file(package = "MODIStsp"),
@@ -434,8 +432,10 @@ MODIStsp <- function(gui               = TRUE,
                                           general_opts$output_proj,
                                           mod_proj_str,
                                           enlarge = TRUE)
-      d_bbox_mod_tiled     <- raster::crop(modis_grid,
-                                           raster::extent(external_bbox_mod))
+
+      d_bbox_mod_tiled     <- suppressWarnings(sf::st_crop(modis_grid,
+                                                           sf::st_bbox(raster::extent(external_bbox_mod))) )
+
       general_opts$start_x <- min(d_bbox_mod_tiled$H)
       general_opts$end_x   <- max(d_bbox_mod_tiled$H)
       general_opts$start_y <- min(d_bbox_mod_tiled$V)

@@ -7,7 +7,6 @@
 #' @description Helper function to update the labels of the gui showing the
 #'  bounding box coordinates when a spatial file is selected or a projection
 #'  change is issued.
-#' @importFrom raster crop extent
 #' @importFrom gWidgets svalue
 #' @noRd
 #'
@@ -49,7 +48,7 @@ gui_update_bboxlabels <- function(bbox_out,
 #' @title gui_update_tiles
 #' @description Helper function to update the selected tiles with the
 #' intersection with the bounding box
-#' @importFrom raster crop extent
+#' @importFrom sf st_crop
 #' @importFrom gWidgets svalue
 #' @noRd
 #'
@@ -65,7 +64,12 @@ gui_update_tiles <- function(bbox_out,
                            mod_proj_str,
                            enlarge = TRUE)
 
-  d_bbox_mod_tiled    <- raster::crop(modis_grid, raster::extent(bbox_mod))
+  d_bbox_mod_tiled     <- suppressWarnings(sf::st_crop(modis_grid,
+                                                       xmin = bbox_mod[1],
+                                                       ymin = bbox_mod[2],
+                                                       xmax = bbox_mod[3],
+                                                       ymax = bbox_mod[4]))
+
   gWidgets::svalue(wids$start_x) <- min(d_bbox_mod_tiled$H)
   gWidgets::svalue(wids$end_x)   <- max(d_bbox_mod_tiled$H)
   gWidgets::svalue(wids$start_y) <- min(d_bbox_mod_tiled$V)
@@ -253,7 +257,7 @@ gui_load_options <- function(opts_jsfile,
 #' @noRd
 #' @importFrom jsonlite fromJSON write_json
 #' @importFrom gWidgets svalue gconfirm gmessage
-#' @importFrom raster crop extent
+#' @importFrom sf st_crop st_bbox
 #' @noRd
 gui_save_options <- function(general_opts,
                              gui_env,
@@ -438,7 +442,11 @@ gui_save_options <- function(general_opts,
       gWidgets::svalue(wids$output_proj4), mod_proj_str,
       enlarge = FALSE
     )
-    d_bbox_mod_tiled <- raster::crop(modis_grid, raster::extent(bbox_mod))
+    d_bbox_mod_tiled <- suppressWarnings(sf::st_crop(modis_grid,
+                                                     xmin = bbox_mod[1],
+                                                     ymin = bbox_mod[2],
+                                                     xmax = bbox_mod[3],
+                                                     ymax = bbox_mod[4]))
     required_tiles   <- paste0(
       "H",
       apply(expand.grid("H" = min(d_bbox_mod_tiled$H):max(d_bbox_mod_tiled$H),
