@@ -3,6 +3,7 @@ context("MODIStsp_resetindexes")
 
 test_that("MODIStsp_resetindexes works as expected", {
   skip_on_cran()
+  skip_on_travis()
   # add a custom index
   expect_message(
     MODIStsp_addindex(

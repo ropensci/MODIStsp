@@ -5,6 +5,7 @@ test_that("MODIStsp_addindex works as expected", {
   # (Note that an authorization to do this is asked to the user).
   #
   skip_on_cran()
+  skip_on_travis()
   # error in formula leads to aborting
   expect_error(
     MODIStsp_addindex(

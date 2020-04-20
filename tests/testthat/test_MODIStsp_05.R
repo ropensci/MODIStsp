@@ -11,7 +11,7 @@ context("MODIStsp Test 5: HTTP download from USGS, resize and reproject")
 test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
-    # skip_on_travis()
+    skip_on_travis()
 
     MODIStsp(test = 5)
     out_files_tif <- list.files(
