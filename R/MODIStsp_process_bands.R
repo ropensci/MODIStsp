@@ -69,8 +69,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   #                                    file.path(out_folder_mod,modislist[1]))
 
   gdalinfo_raw <- suppressWarnings(suppressMessages(try(
-    sf::gdal_utils("info", file.path(out_folder_mod,modislist[1]), quiet = TRUE) %>%
-      strsplit("\n") %>% unlist() %>% trimws(),
+    trimws(unlist(strsplit(sf::gdal_utils("info", file.path(out_folder_mod,modislist[1]), quiet = TRUE), "\n"))),
     silent = TRUE
   )))
 
