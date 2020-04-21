@@ -95,7 +95,7 @@ If you have problems in installing the "devel" version of `devtools`, manually i
   
   ```
   install.packages(c("bitops", "data.table" , "gdalUtilities", "gWidgets", "gWidgetsRGtk2",
-    "methods", "httr" , "jsonlite", "pacman", "parallel", "raster", "sf", "stringr", "xts"))
+    "httr" , "jsonlite", "parallel", "raster", "sf", "stringr", "xts"))
   ```
 
  , then continue with standard `MODIStsp` installation.

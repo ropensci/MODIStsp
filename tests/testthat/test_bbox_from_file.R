@@ -2,7 +2,8 @@ context("Check proper functioning of bbox_from_file")
 
 
 test_that("bbox_from_file works as expected", {
-  # skip_on_cran()
+  skip_on_cran()
+  skip_on_travis()
   # bbox from a raster file
   r        <- raster::raster(xmn = -10, xmx = 10, ymn = -10, ymx = 10)
   r        <- raster::init(r, "cell")
@@ -44,8 +45,8 @@ test_that("bbox_from_file works as expected", {
                tolerance = 0.000001)
 
   # expect error on badly specified crs_out
-  expect_error(expect_warningbbox_from_file(system.file("shape/nc.shp", package="sf")),
-                              crs_out = st_as_text(st_crs(43265)))
+  expect_error(expect_warning(bbox_from_file(system.file("shape/nc.shp", package="sf")),
+                              crs_out = st_as_text(st_crs(43265))))
 
   expect_error(expect_warning(bbox_from_file(system.file("shape/nc.shp", package="sf")),
                               crs_out = "+init=epssg:4326"))
