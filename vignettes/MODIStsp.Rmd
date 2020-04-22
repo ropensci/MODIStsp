@@ -938,10 +938,4 @@ then, check again to see if hdf4 is supported. The list should now include hdf4:
 
 Good luck!
 
-[^1^]: If you encounter problems installing the gWidgetsRGtk2 library, please signal it in the [issues](https://github.com/ropensci/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you!
-
-[^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: i) ensure that GDAL is properly installed in your system; ii) (on Windows) if it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)); iii) if nothing works, signal it in the [issues](https://github.com/ropensci/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help!
-
-[^3^]: The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
-
 # References
