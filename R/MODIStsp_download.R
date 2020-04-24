@@ -166,7 +166,7 @@ MODIStsp_download <- function(modislist,
         }
 
         # Check for errors on download try
-        if (class(download) == "try-error" |
+        if (inherits(download, "try-error") |
             !is.null(attr(download, "status"))) {
           attempt <- attempt + 1
           if (verbose) message("[", date(), "] Download Error - Retrying...")

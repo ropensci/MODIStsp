@@ -62,7 +62,7 @@ get_mod_dirs <- function(http,
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
 
-      if (class(response) == "try-error" || response$status_code != 200) {
+      if (inherits(response, "try-error") || response$status_code != 200) {
         if (gui) {
           #nocov start
           switch <- gWidgets::gconfirm(

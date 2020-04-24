@@ -1108,7 +1108,7 @@ MODIStsp_GUI <- function(general_opts,
       choice <- try(gfile(
         type = "selectdir", text = "Select the Output Folder for MODIS data..."
       ), silent = TRUE)
-      if (class(choice) != "try-error")  {
+      if (inherits(choice, "try-error"))  {
         if (length(choice) != 0) {
           gWidgets::svalue(wids$outfold) <- choice
           # 	On new selection,  Set value of the selected variable
@@ -1171,7 +1171,7 @@ MODIStsp_GUI <- function(general_opts,
         type = "selectdir",
         text = "Select the Output Folder for storage of MODiS original HDF images..." #nolint
       ), silent = TRUE)
-      if (class(choice) != "try-error") {
+      if (inherits(choice, "try-error")) {
         if (length(choice) != 0) {
           ## On selection, set value of the label widget
           gWidgets::svalue(wids$outfoldmod) <- choice
@@ -1260,7 +1260,7 @@ MODIStsp_GUI <- function(general_opts,
                        "All files"  = list(patterns   = c("*")))
       ), silent = TRUE)
 
-      if (class(choice) != "try-error") {
+      if (inherits(choice, "try-error")) {
         if (length(choice) == 0) {
           continue_load <- FALSE
         } else {
@@ -1300,7 +1300,7 @@ MODIStsp_GUI <- function(general_opts,
                        "All files" = list(patterns = c("*")), container = "aa")
       )
 
-      if (class(choice) == "try-error" | length(choice) == 0) {
+      if (inherits(choice, "try-error") | length(choice) == 0) {
         continue_save <- FALSE
       } else {
         if (length(grep("\\.json$", choice)) == 0) {

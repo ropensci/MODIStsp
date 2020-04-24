@@ -286,7 +286,7 @@ MODIStsp <- function(gui               = TRUE,
     if (file.exists(previous_jsfile)) {
       general_opts <- try(jsonlite::fromJSON(previous_jsfile))
       # stop on error
-      if (class(general_opts) == "try-error") {
+      if (inherits(general_opts, "try-error")) {
         stop(
           "Unable to read the provided JSON options file. Please check your ",
           "inputs!"
@@ -334,7 +334,7 @@ MODIStsp <- function(gui               = TRUE,
     custom_idx <- general_opts$custom_indexes[[sel_prod]][[sel_ver]]
 
     # Workaround to avoid error if only one custom index exists
-    if (class(custom_idx) == "character") {
+    if (inherits(custom_idx, "character")) {
       custom_idx <- data.frame(
         indexes_bandnames  = custom_idx["indexes_bandnames"],
         indexes_fullnames  = custom_idx["indexes_fullnames"],
@@ -405,7 +405,7 @@ MODIStsp <- function(gui               = TRUE,
                                           general_opts$output_proj),
                            silent = TRUE)
 
-      if (class(external_bbox) == "try-error") {
+      if (inherits(external_bbox, "try-error")) {
         stop("Failed in retrieving processing extent from ",
              spatial_file_path,
              " . Please check your inputs! Aborting."

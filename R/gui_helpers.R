@@ -159,7 +159,7 @@ gui_load_options <- function(opts_jsfile,
   general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
 
   # stop on error
-  if (class(general_opts) == "try-error") {
+  if (inherits(general_opts, "try-error")) {
     stop("Unable to read the provided JSON options file. Please check your ",
          "inputs!")
   }
@@ -391,11 +391,11 @@ gui_save_options <- function(general_opts,
   }
 
   if (
-    class(try(as.Date(general_opts$start_date),
-              silent = TRUE)) == "try-error" |
-    class(try(as.Date(general_opts$end_date),
-              silent = TRUE)) == "try-error"
-  ) {
+    inherits(try(as.Date(general_opts$start_date),
+              silent = TRUE), "try-error") |
+    inherits(try(as.Date(general_opts$end_date),
+              silent = TRUE) ,"try-error")
+    ){
     gWidgets::gmessage(
       message = "One or both dates are in wrong format - Please correct!",
       title   = "Warning"

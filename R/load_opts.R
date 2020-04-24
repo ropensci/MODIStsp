@@ -22,7 +22,7 @@ load_opts <- function(opts_jsfile) {
     general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
 
     # stop on errors
-    if (class(general_opts) == "try-error" ) {
+    if (inherits(general_opts, "try-error")) {
       stop(strwrap("Unable to read the provided JSON options file. Please check
                    your inputs!"))
     }

@@ -18,7 +18,7 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
                   "Raster layers" = list(patterns = c("*.tif", "*.dat")),
                   "All files"     = list(patterns = "*"))
   ), silent = TRUE)
-  if (class(choice) != "try-error" & length(choice) != 0) {
+  if (!inherits(choice, "try-error") & length(choice) != 0) {
     # Show window until the process finishes
     message("[", date(), "]", " Retrieving the Extent, please wait...")
     wait_window       <- gwindow(title = "Please wait",
@@ -48,7 +48,7 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
     bbox_out <- try(bbox_from_file(file_path = choice,
                                    crs_out   = sf::st_crs(out_proj_crs)),
                     silent = TRUE)
-    if (class(bbox_out) == "try-error") {
+    if (inherits(bbox_out, "try-error")) {
       gmessage(bbox_out, title = "Error Detected!")
     } else {
 

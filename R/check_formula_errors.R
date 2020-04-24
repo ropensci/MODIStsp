@@ -47,7 +47,7 @@ check_formula_errors <- function(new_indexbandname,
 
   if (any(req_bands)) {
     try_parse <- try(eval(parse(text = new_indexformula)), silent = TRUE)
-    if (class(try_parse) == "try-error") {
+    if (inherits(try_parse, "try-error")) {
       # error 1: error in the formula: expression not computable
       catch_err <- 1
     }
