@@ -96,6 +96,10 @@ MODIStsp_addindex <- function(
   # Initialization and retrieval of parameters ----
   if (gui) {
     #nocov start
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    }
     options("guiToolkit" = "RGtk2")
     #nocov end
   }
@@ -157,6 +161,10 @@ MODIStsp_addindex <- function(
   # GUI Initialization -----
   if (gui) {
     #nocov start
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    }
     main_win <- gWidgets::gbasicdialog(
       title = "Insert the new Spectral Index information and formula",
       parent = NULL,

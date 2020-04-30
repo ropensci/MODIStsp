@@ -40,7 +40,10 @@ load_prodopts <- function(gui) {
     mess_text <- "Reading the MODIS products' characteristics from XML. Please wait!" #nolint
     message(mess_text)
     if (gui) {
-
+      if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+        stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+      }
       mess     <- gWidgets::gwindow(title  = "Please wait...",
                                     width  = 400,
                                     height = 40)
@@ -57,6 +60,10 @@ load_prodopts <- function(gui) {
     prod_opt_list <- get(load(prodopts_file))
 
     if (gui) {
+      if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+        stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+      }
       #nocov start
       # dispose message window
       gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {

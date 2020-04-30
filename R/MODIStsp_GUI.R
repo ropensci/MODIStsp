@@ -521,6 +521,17 @@ MODIStsp_GUI <- function(general_opts,
   sel_group <- ggroup(container = spatial_frame, horizontal = TRUE)
   addSpace(sel_group, 100)
   output_ext_group <- ggroup(container = spatial_frame, horizontal = TRUE)
+  # browser()
+
+  # to allow compatibility with previous versions of options files
+  if (general_opts$full_ext == "Select MODIS Tiles") {
+    general_opts$full_ext <- TRUE
+  }
+
+  if (general_opts$full_ext == "Define Custom Area") {
+    general_opts$full_ext <- FALSE
+  }
+
   wids$output_ext <- gradio(
     items      = c("Select MODIS Tiles", "Define Custom Area"),
     expand     = TRUE, fill = "x",
@@ -667,10 +678,14 @@ MODIStsp_GUI <- function(general_opts,
   lat_w_group <- ggroup(horizontal = TRUE,  container = min_group)
   addSpring(lat_w_group)
 
-  if (general_opts$bbox[1] == "[]" | general_opts$bbox[1] == "") {
+  if (length(general_opts$bbox) == 1) {
     bbox <- c(NA, NA, NA, NA)
   } else {
-    bbox <- general_opts$bbox
+    if (any(is.na(general_opts$bbox)) | any(general_opts$bbox == "NULL") | any(general_opts$bbox == "NA")) {
+      bbox <- c(NA, NA, NA, NA)
+    } else {
+      bbox <- general_opts$bbox
+    }
   }
   output_xmin_lab  <- glabel("x-min", container = lat_w_group, expand = TRUE)
   wids$output_xmin <- gedit(text = bbox[1],

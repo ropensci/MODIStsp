@@ -65,6 +65,10 @@ get_mod_filenames <- function(http,
       # retry
       if (response$status_code != 200) {
         if (gui) {
+          if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+            stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+          }
           #nocov start
           confirm <- gWidgets::gconfirm(
             "http server seems to be down! Do you want to retry?",

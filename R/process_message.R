@@ -2,8 +2,8 @@
 #' @description helper function to provide processing messages
 #' @param mess_text `character` text to be shown in the processing windows
 #'   and/or the console
-#' @param gui `logical` indicating if the message should be passed to the 
-#'   status window or only to the console. 
+#' @param gui `logical` indicating if the message should be passed to the
+#'   status window or only to the console.
 #' @param mess_lab pointer to the gwindow used to shoe messages when gui == TRUE
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @return The function is called for its side effects
@@ -13,6 +13,10 @@
 process_message <- function(mess_text, gui, mess_lab, verbose = TRUE) {
   if (gui) {
     #nocov start
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    }
     if (verbose) gWidgets::svalue(mess_lab) <- paste("---", mess_text, "---")
     Sys.sleep(0.05)
     if (verbose) message("[", date(), "] ", mess_text)

@@ -217,6 +217,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
   if (gui) {
     #nocov start
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    }
     mess     <- gWidgets::gwindow(title = "Processing Status",
                                   width = 400,
                                   height = 40)
@@ -619,6 +623,10 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
   if (gui) {
     #nocov start
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    }
     gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
       return(FALSE)
     })		# Allow message lab to be closed since processing ended .

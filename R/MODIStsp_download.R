@@ -101,6 +101,10 @@ MODIStsp_download <- function(modislist,
           # retry or abort
           if (gui) {
             #nocov start
+            if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+              stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+            }
             confirm <- gWidgets::gconfirm(
               paste0(download_server,
                      "http server seems to be down! Do you want to retry?"),
@@ -202,6 +206,10 @@ MODIStsp_download <- function(modislist,
       if (attempt == n_retries & success == FALSE) {
         if (gui) {
           #nocov start
+          if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+            stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+          }
           confirm <- gWidgets::gconfirm(
             paste0(download_server,
                    " server seems to be down! Do you want to retry?"),

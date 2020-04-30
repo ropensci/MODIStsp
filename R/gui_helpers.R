@@ -330,6 +330,13 @@ gui_save_options <- function(general_opts,
   general_opts$full_ext    <- ifelse(gWidgets::svalue(wids$output_ext) == "Select MODIS Tiles",
                                      TRUE,
                                      FALSE)
+  out_bbox <-  c(gWidgets::svalue(wids$output_xmin),
+                 gWidgets::svalue(wids$output_ymin),
+                 gWidgets::svalue(wids$output_xmax),
+                 gWidgets::svalue(wids$output_ymax))
+  if (any(out_bbox == "NULL")) out_bbox[] <- NA
+  if (any(is.na(out_bbox)))    out_bbox[] <- NA
+
   general_opts$bbox        <- c(gWidgets::svalue(wids$output_xmin),
                                 gWidgets::svalue(wids$output_ymin),
                                 gWidgets::svalue(wids$output_xmax),
@@ -392,10 +399,10 @@ gui_save_options <- function(general_opts,
 
   if (
     inherits(try(as.Date(general_opts$start_date),
-              silent = TRUE), "try-error") |
+                 silent = TRUE), "try-error") |
     inherits(try(as.Date(general_opts$end_date),
-              silent = TRUE) ,"try-error")
-    ){
+                 silent = TRUE) ,"try-error")
+  ){
     gWidgets::gmessage(
       message = "One or both dates are in wrong format - Please correct!",
       title   = "Warning"

@@ -34,8 +34,6 @@ Imports:
     bitops (>= 1.0-6),
     data.table (>= 1.9.6),
     gdalUtilities,
-    gWidgets (>= 0.0-54),
-    gWidgetsRGtk2,
     httr (>= 1.1.0),
     jsonlite,
     parallel,
@@ -56,7 +54,9 @@ Suggests:
     png,
     grid,
     httptest,
-    rgdal
+    rgdal,
+    gWidgets (>= 0.0-54),
+    gWidgetsRGtk2
 SystemRequirements: Cairo >= 1.0.0, ATK (>= 1.10.0), Pango (>= 1.10.0), GTK+ (>=
     2.8.0), GLib (>= 2.8.0), Curl, GDAL (>= 2.2.3), PROJ.4 (>= 4.4.9)
 URL: https://github.com/ropensci/MODIStsp

@@ -222,6 +222,10 @@ MODIStsp <- function(gui               = TRUE,
 
   if (gui) {
     #nocov start
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    }
     options("guiToolkit" = "RGtk2")
     #nocov end
   }
@@ -264,7 +268,10 @@ MODIStsp <- function(gui               = TRUE,
 
   if (gui) {
     #nocov start
-
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    }
     start <- MODIStsp_GUI(general_opts,
                           prod_opt_list,
                           MODIStsp_dir = system.file(package = "MODIStsp"),

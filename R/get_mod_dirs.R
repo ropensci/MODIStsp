@@ -64,6 +64,10 @@ get_mod_dirs <- function(http,
 
       if (inherits(response, "try-error") || response$status_code != 200) {
         if (gui) {
+          if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+            stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+          }
           #nocov start
           switch <- gWidgets::gconfirm(
             "http server seems to be down! Do you want to retry?",
