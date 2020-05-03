@@ -11,7 +11,6 @@
 #' @rdname load_prodopts
 #' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
 #' @importFrom utils packageVersion
-#' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose
 
 load_prodopts <- function(gui) {
 
@@ -43,6 +42,9 @@ load_prodopts <- function(gui) {
       if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
         stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+      } else {
+        requireNamespace("gWidgets")
+        requireNamespace("gWidgetsRGtk2")
       }
       mess     <- gWidgets::gwindow(title  = "Please wait...",
                                     width  = 400,

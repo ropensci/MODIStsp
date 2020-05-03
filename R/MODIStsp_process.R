@@ -134,7 +134,6 @@
 #'   [Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
 #' @rdname MODIStsp_process
-#' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose
 
 MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              out_folder_mod, reprocess = "Yes",
@@ -220,6 +219,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
       stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
     }
     mess     <- gWidgets::gwindow(title = "Processing Status",
                                   width = 400,
@@ -626,6 +628,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
       stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
     }
     gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
       return(FALSE)

@@ -31,7 +31,6 @@
 #' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @importFrom httr RETRY authenticate content
-#' @importFrom gWidgets gconfirm
 #' @importFrom stringr str_split str_pad
 get_mod_filenames <- function(http,
                               used_server,
@@ -44,6 +43,14 @@ get_mod_filenames <- function(http,
                               tiled,
                               out_folder_mod,
                               gui) {
+
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
 
   success <- FALSE
   if (used_server == "http") {
@@ -68,6 +75,9 @@ get_mod_filenames <- function(http,
           if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
             stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+          } else {
+            requireNamespace("gWidgets")
+            requireNamespace("gWidgetsRGtk2")
           }
           #nocov start
           confirm <- gWidgets::gconfirm(

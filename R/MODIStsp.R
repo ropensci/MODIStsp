@@ -42,7 +42,6 @@
 #' @rdname MODIStsp
 #' @importFrom raster rasterOptions crop extent
 #' @importFrom sf sf_extSoftVersion st_as_text st_crs
-#' @importFrom gWidgets dispose
 #' @importFrom jsonlite fromJSON write_json
 #' @importFrom tools file_path_sans_ext
 #' @importFrom utils unzip
@@ -131,7 +130,7 @@ MODIStsp <- function(gui               = TRUE,
                      test              = NULL,
                      n_retries         = 20,
                      verbose           = TRUE) {
-  options("guiToolkit" = "RGtk2")
+
   # Make so that "raster" functions does not automatically add extensions on
   # output files. This is automatically reset to TRUE at the end of the session
   raster::rasterOptions(setfileext = FALSE)
@@ -225,6 +224,9 @@ MODIStsp <- function(gui               = TRUE,
     if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
       stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
     }
     options("guiToolkit" = "RGtk2")
     #nocov end
@@ -271,6 +273,9 @@ MODIStsp <- function(gui               = TRUE,
     if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
       stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
     }
     start <- MODIStsp_GUI(general_opts,
                           prod_opt_list,

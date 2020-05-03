@@ -1,12 +1,17 @@
 #' @title gh_selprod
 #' @description Handler for the actions to be taken when the product
 #'  is changed
-#' @importFrom gWidgets svalue enabled
 #' @noRd
 #'
 gh_selprod <- function(h, wids, prod_opt_list, general_opts) {
   #nocov start
-
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   sel_prod   <- ifelse(!is.null(gWidgets::svalue(wids$prod)),
                        gWidgets::svalue(wids$prod),
                        sel_prod)

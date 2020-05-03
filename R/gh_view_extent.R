@@ -2,13 +2,19 @@
 #' @description Handler used to perform actions required when the "View current
 #'  extent" button is clicked.
 #' @noRd
-#' @importFrom gWidgets svalue
 #' @importFrom leaflet leaflet addPolygons addTiles addProviderTiles addLayersControl layersControlOptions
 #' @importFrom mapedit selectMap
 #' @importFrom shiny browserViewer
 #' @importFrom sf st_bbox st_as_sfc st_transform
 gh_view_extent <- function(ext_type, wids) {
   #nocov start
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   v <- h <- NULL
   if (requireNamespace("mapedit")) {
     if (ext_type == "Select MODIS Tiles") {
@@ -69,13 +75,13 @@ gh_view_extent <- function(ext_type, wids) {
         )
 
       } else {
-        gmessage(strwrap(
+        gWidgets::gmessage(strwrap(
           "Current Output extent is not valid!\n\n
            Please specify a bounding box or load it from a file!"))
       }
     }
   } else {
-    gmessage(strwrap(
+    gWidgets::gmessage(strwrap(
       "You need to install package `mapedit` to be able to
         use this functionality!\n\n
         You can install it using `install.packages(mapedit)`"),

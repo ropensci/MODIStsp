@@ -50,7 +50,6 @@
 #'   containing the new index
 #' @param MODIStsp_dir `character` main folder containing MODIStsp R files,
 #'   Default: retrieved from package installation folder
-#' @importFrom gWidgets gbasicdialog ggroup glabel size font gedit gbutton svalue addSpace gframe addSpring gmessage visible
 #' @return The function is called for its side effects. On success, the
 #'  MODIStsp_Previous.json or the json options file specified by the user
 #'  is modified so to allow computation of the additional indexes.
@@ -99,6 +98,9 @@ MODIStsp_addindex <- function(
     if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
       stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
     }
     options("guiToolkit" = "RGtk2")
     #nocov end
@@ -164,6 +166,9 @@ MODIStsp_addindex <- function(
     if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
       stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
     }
     main_win <- gWidgets::gbasicdialog(
       title = "Insert the new Spectral Index information and formula",
@@ -343,7 +348,7 @@ MODIStsp_addindex <- function(
       text      = "Done !",
       container = but_group,
       handler   = function(h, ...) {
-        dispose(main_win)
+        gWidgets::dispose(main_win)
         gWidgets::gmessage(
           message = "ReOpen the 'Select Layers' window to use the new indexes",
           title = "Done!"

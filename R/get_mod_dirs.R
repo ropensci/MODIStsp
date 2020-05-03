@@ -28,7 +28,6 @@
 #' @note License: GPL 3.0
 #' @importFrom stringr str_sub str_split
 #' @importFrom httr RETRY authenticate content
-#' @importFrom gWidgets gconfirm
 
 get_mod_dirs <- function(http,
                          download_server,
@@ -67,6 +66,9 @@ get_mod_dirs <- function(http,
           if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
             stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+          } else {
+            requireNamespace("gWidgets")
+            requireNamespace("gWidgetsRGtk2")
           }
           #nocov start
           switch <- gWidgets::gconfirm(

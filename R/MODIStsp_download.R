@@ -30,7 +30,6 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @importFrom httr RETRY authenticate content GET write_disk
 #' @importFrom xml2 as_list
-#' @importFrom gWidgets gconfirm
 
 MODIStsp_download <- function(modislist,
                               out_folder_mod,
@@ -104,6 +103,9 @@ MODIStsp_download <- function(modislist,
             if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
               stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+            } else {
+              requireNamespace("gWidgets")
+              requireNamespace("gWidgetsRGtk2")
             }
             confirm <- gWidgets::gconfirm(
               paste0(download_server,
@@ -209,6 +211,9 @@ MODIStsp_download <- function(modislist,
           if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
             stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+          } else {
+            requireNamespace("gWidgets")
+            requireNamespace("gWidgetsRGtk2")
           }
           confirm <- gWidgets::gconfirm(
             paste0(download_server,

@@ -5,12 +5,18 @@
 #' @importFrom mapedit selectFeatures editMap
 #' @importFrom shiny browserViewer
 #' @importFrom data.table rbindlist
-#' @importFrom gWidgets svalue
 #' @importFrom mapview mapview
 #' @importFrom sf st_bbox
 #' @importFrom stringr str_split_fixed
 gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
   #nocov start
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   if (requireNamespace("mapedit")) {
     if (ext_type == "Select MODIS Tiles") {
 
@@ -56,7 +62,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
         }
 
         if (error_sel) {
-          gmessage(strwrap(
+          gWidgets::gmessage(strwrap(
             "Your selection contains non-contiguous tiles!\n
             MODIStsp only allows processing for contigous tiles selections!\n\n
             Please select again!"), icon = "warning")
@@ -81,7 +87,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
 
       if (!is.null(sel[["finished"]])) {
         sel_bbox  <- sf::st_bbox(sel[["finished"]])
-        curr_proj <- svalue(wids$output_proj4)
+        curr_proj <- gWidgets::svalue(wids$output_proj4)
 
         #reproject the bbox to get coordinates in output projection. Use
         #enlarge = TRUE to be sure that all the area in the selected bbox
@@ -109,7 +115,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
       }
     }
   } else {
-    gmessage(strwrap(
+    gWidgets::gmessage(strwrap(
       "You need to install package `mapedit` to be able to
       use this functionality!\n\n
       You can install it using `install.packages(mapedit)`"),

@@ -1,13 +1,19 @@
 #' @title gh_selcat
 #' @description Handler for the actions to be taken when the category of product
 #'  is changed
-#' @importFrom gWidgets svalue enabled
 #' @noRd
 #'
 gh_selcat <- function(h, wids,
                       mod_prod_list, mod_prod_cat,
                       prod_opt_list, general_opts) {
   #nocov start
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   # Identify only products of this category
 
   sel_prod    <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)][1] #nolint

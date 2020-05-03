@@ -1,12 +1,18 @@
 #' @title gh_changeproj
 #' @description Handler for the actions to be taken when the projection is
 #'  changed
-#' @importFrom gWidgets svalue enabled ginput gmessage
 #' @noRd
 #'
 gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
 
   #nocov start
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   # check if the change was triggered by a load_opts call
   is_loadopts <- deparse(sys.calls()[[sys.nframe() - 10]])[1] ==
     "gui_load_options(choice, wids, prod_opt_list, compress_dict)"
@@ -60,7 +66,7 @@ gh_changeproj <- function(h, wids, out_proj_list, bbox_out) {
         horizontal = TRUE
       )
       } else {
-        selproj <- svalue(wids$output_proj4)
+        selproj <- gWidgets::svalue(wids$output_proj4)
       }
 
       # verify the inputted string. Revert to previous on error, or modify

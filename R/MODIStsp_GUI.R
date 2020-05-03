@@ -22,11 +22,6 @@
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
 #' @importFrom utils packageVersion browseURL
-#' @importFrom gWidgets svalue gconfirm gmessage gbasicdialog ggroup
-#'  getToolkitWidget gframe gdroplist enabled size addSpring glabel
-#'  gcombobox addSpace gbutton gcheckboxgroup dispose visible gradio
-#'  gedit gcheckbox gfile gspinbutton ginput gtext
-#' @import gWidgetsRGtk2
 
 MODIStsp_GUI <- function(general_opts,
                          prod_opt_list,
@@ -34,6 +29,14 @@ MODIStsp_GUI <- function(general_opts,
                          opts_jsfile,
                          prodopts_file,
                          scroll_window){
+
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   #nocov start
   #   __________________________________________________________________________
   #   NOTE: The function is excluded from coverage reports since it must be ####
@@ -67,7 +70,7 @@ MODIStsp_GUI <- function(general_opts,
   # workaround to avoid NOTE
 
 
-  main_win <- gbasicdialog(
+  main_win <- gWidgets::gbasicdialog(
     title      = paste0("MODIStsp - v. ", utils::packageVersion("MODIStsp")),
     parent     = NULL,
     do.buttons = FALSE)
@@ -75,12 +78,12 @@ MODIStsp_GUI <- function(general_opts,
   # frame1 and 2 with expand=FALSE grant that widgets are not "too much
   # expanded", neither horizontally nor vertically
 
-  main_frame1 <- ggroup(container  = main_win,
+  main_frame1 <- gWidgets::ggroup(container  = main_win,
                         horizontal = TRUE,
                         expand     = TRUE,
                         use.scrollwindow = scroll_window)
 
-  main_frame2 <- ggroup(container  = main_frame1,
+  main_frame2 <- gWidgets::ggroup(container  = main_frame1,
                         horizontal = FALSE,
                         expand     = TRUE,
                         use.scrollwindow = scroll_window)
@@ -88,12 +91,12 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Main container: holds all widgets                          ####
 
-  main_group  <- ggroup(container  = main_frame2,
+  main_group  <- gWidgets::ggroup(container  = main_frame2,
                         horizontal = FALSE,
                         expand     = TRUE)
 
   if (scroll_window) {
-    getToolkitWidget(main_win)$maximize()
+    gWidgets::getToolkitWidget(main_win)$maximize()
   }
 
   mod_prod_cat <- as.data.frame(
@@ -128,7 +131,7 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for product selection and bands selection          ####
 
-  satprod_frame <- gframe(
+  satprod_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          MODIS Product and Platform </span>"),
     markup     = TRUE,
@@ -145,12 +148,12 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for category selection                             ####
 
-  satprod0_group <- ggroup(horizontal = TRUE, container = satprod_frame)
-  cat_label      <- glabel(text      = "Category:",
+  satprod0_group <- gWidgets::ggroup(horizontal = TRUE, container = satprod_frame)
+  cat_label      <- gWidgets::glabel(text      = "Category:",
                            container = satprod0_group,
                            editable  = FALSE)
 
-  wids$cat <- gdroplist(
+  wids$cat <- gWidgets::gdroplist(
     items      = unique(mod_prod_cat$cat),
     container  = satprod0_group,
     horizontal = TRUE,
@@ -163,7 +166,7 @@ MODIStsp_GUI <- function(general_opts,
   )
   gWidgets::size(wids$cat) <- list(width = 442)
 
-  www_but <- gbutton(
+  www_but <- gWidgets::gbutton(
     text = paste0("Product Info (www)"),
     container = satprod0_group,
     handler   = function(h, ...) {
@@ -179,10 +182,10 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Product selection                              ####
 
-  satprod1_group <- ggroup(horizontal = TRUE, container = satprod_frame)
-  prod_label <- glabel(text = "Product:", container = satprod1_group)
-  addSpace(satprod1_group, 3)
-  wids$prod <- gdroplist(
+  satprod1_group <- gWidgets::ggroup(horizontal = TRUE, container = satprod_frame)
+  prod_label <- gWidgets::glabel(text = "Product:", container = satprod1_group)
+  gWidgets::addSpace(satprod1_group, 3)
+  wids$prod <- gWidgets::gdroplist(
     items     = mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)],
     container = satprod1_group, horizontal = TRUE,
     selected  = match(
@@ -200,8 +203,8 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize widgets for Version selection                              ####
 
-  vers_label <- glabel(text = " Version:", container = satprod1_group)
-  wids$vers   <- gcombobox(
+  vers_label <- gWidgets::glabel(text = " Version:", container = satprod1_group)
+  wids$vers   <- gWidgets::gcombobox(
     items     = vapply(sel_prodopts, function(x){
       x[["v_number"]]
     }
@@ -219,11 +222,11 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Sensor selection                               ####
 
-  satprod2_group <- ggroup(horizontal = TRUE, container = satprod_frame)
+  satprod2_group <- gWidgets::ggroup(horizontal = TRUE, container = satprod_frame)
 
-  sens_label     <- glabel(text = " Platform:", container = satprod1_group)
+  sens_label     <- gWidgets::glabel(text = " Platform:", container = satprod1_group)
 
-  wids$sens      <- gcombobox(items     = c("Terra", "Aqua", "Both"),
+  wids$sens      <- gWidgets::gcombobox(items     = c("Terra", "Aqua", "Both"),
                               container = satprod1_group,
                               text      = "Select Platform", selected = 1)
 
@@ -239,7 +242,7 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Processing Layers selection                    ####
 
-  layers_frame <- gframe(
+  layers_frame <- gWidgets::gframe(
     text       = "<span foreground='red' size='x-large'>Layers to be processed</span>", #nolint
     markup     = TRUE,
     container  = main_group,
@@ -247,17 +250,17 @@ MODIStsp_GUI <- function(general_opts,
     expand     = TRUE
   )
 
-  sel_labs_group <- ggroup(horizontal = FALSE, container = layers_frame)
-  layer_group    <- ggroup(horizontal = TRUE, container = sel_labs_group)
-  band_label     <- glabel(text = "Original MODIS layer:",
+  sel_labs_group <- gWidgets::ggroup(horizontal = FALSE, container = layers_frame)
+  layer_group    <- gWidgets::ggroup(horizontal = TRUE, container = sel_labs_group)
+  band_label     <- gWidgets::glabel(text = "Original MODIS layer:",
                            container = layer_group)
-  cur_prodopts <- sel_prodopts[[svalue(wids$vers)]]
+  cur_prodopts <- sel_prodopts[[gWidgets::svalue(wids$vers)]]
 
   # Original Bands ----
   curr_sel_layers <- paste(
     cur_prodopts[["band_fullnames"]][which(general_opts[["bandsel"]] == 1)],
     collapse = "; ")
-  wids$sel_layers <- gtext(text = ifelse(curr_sel_layers == "",
+  wids$sel_layers <- gWidgets::gtext(text = ifelse(curr_sel_layers == "",
                                          "- None Selected - ", curr_sel_layers),
                            container = layer_group,
                            width     = 600,
@@ -266,7 +269,7 @@ MODIStsp_GUI <- function(general_opts,
                            expand    = TRUE)
   gWidgets::enabled(wids$sel_layers) <- FALSE
 
-  layers_help <- gbutton(text    = " ? ", handler = function(h, ...) {
+  layers_help <- gWidgets::gbutton(text    = " ? ", handler = function(h, ...) {
     gh_help(h, "layers_help", help_messages, NULL)
   },
   container = layer_group,
@@ -282,11 +285,11 @@ MODIStsp_GUI <- function(general_opts,
       collapse = "; ")
   }
 
-  qual_group      <- ggroup(horizontal = TRUE, container = sel_labs_group)
-  qa_label        <- glabel(text = "Quality Indicators:",
+  qual_group      <- gWidgets::ggroup(horizontal = TRUE, container = sel_labs_group)
+  qa_label        <- gWidgets::glabel(text = "Quality Indicators:",
                             container = qual_group)
-  addSpace(qual_group, 11)
-  wids$sel_qi   <- gtext(text = ifelse(curr_sel_qual == "",
+  gWidgets::addSpace(qual_group, 11)
+  wids$sel_qi   <- gWidgets::gtext(text = ifelse(curr_sel_qual == "",
                                        "- None Selected - ", curr_sel_qual),
                          container = qual_group,
                          width     = 600,
@@ -294,7 +297,7 @@ MODIStsp_GUI <- function(general_opts,
                          editable  = FALSE,
                          expand    = TRUE)
   gWidgets::enabled(wids$sel_qi) <- FALSE
-  qi_help <- gbutton(text = " ? ", handler = function(h, ...) {
+  qi_help <- gWidgets::gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "qi_help", help_messages,
             info_addr = "https://goo.gl/MrVyfF")
   },
@@ -309,19 +312,19 @@ MODIStsp_GUI <- function(general_opts,
     check_names_indexes <- c(
       cur_prodopts[["indexes_fullnames"]],
       as.list(general_opts$custom_indexes[[sel_prod]]
-              [[svalue(wids$vers)]])$indexes_fullnames
+              [[gWidgets::svalue(wids$vers)]])$indexes_fullnames
     )
     curr_sel_si <- paste(
       check_names_indexes[which(general_opts[["indexes_bandsel"]] == 1)],
       collapse = "; ")
   }
 
-  si_group    <- ggroup(horizontal = TRUE, container = sel_labs_group)
+  si_group    <- gWidgets::ggroup(horizontal = TRUE, container = sel_labs_group)
 
-  si_label    <- glabel(text = "Spectral Indexes:",
+  si_label    <- gWidgets::glabel(text = "Spectral Indexes:",
                         container = si_group)
-  addSpace(si_group, 16)
-  wids$sel_si  <- gtext(text = ifelse(curr_sel_si == "",
+  gWidgets::addSpace(si_group, 16)
+  wids$sel_si  <- gWidgets::gtext(text = ifelse(curr_sel_si == "",
                                       "- None Selected - ", curr_sel_si),
                         container = si_group,
                         width     = 600,
@@ -329,7 +332,7 @@ MODIStsp_GUI <- function(general_opts,
                         editable  = FALSE,
                         expand    = TRUE)
   gWidgets::enabled(wids$sel_si) <- FALSE
-  si_help <- gbutton(text = " ? ", handler = function(h, ...) {
+  si_help <- gWidgets::gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "si_help", help_messages, NULL)
   },
   container = si_group,
@@ -342,7 +345,7 @@ MODIStsp_GUI <- function(general_opts,
   #  processing layers (could try to separate a function for this, but it would
   #  be a hassle) and deal with all events
 
-  wids$band   <- gbutton(
+  wids$band   <- gWidgets::gbutton(
     text    = " Change\nSelection ",
     handler = function(h, ...) {
       gh_sellayers(prodopts_file,
@@ -367,7 +370,7 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for download mode selection and authentication     ####
 
-  download_frame <- gframe(
+  download_frame <- gWidgets::gframe(
     text       = "<span foreground='red' size='x-large'>Download Method</span>",
     markup     = TRUE,
     container  = main_group,
@@ -375,13 +378,13 @@ MODIStsp_GUI <- function(general_opts,
     expand     = TRUE
   )
 
-  methods_group  <- ggroup(container  = download_frame,
+  methods_group  <- gWidgets::ggroup(container  = download_frame,
                            horizontal = TRUE,
                            expand     = TRUE)
 
-  method_lab <- glabel(text = " Download Server:", container = methods_group)
+  method_lab <- gWidgets::glabel(text = " Download Server:", container = methods_group)
 
-  wids$server <- gcombobox(
+  wids$server <- gWidgets::gcombobox(
     items     = c("http", "offline"),
     text      = "Select",
     container = methods_group,
@@ -397,28 +400,28 @@ MODIStsp_GUI <- function(general_opts,
       )
     }
   )
-  server_help <- gbutton(text = " ? ",
+  server_help <- gWidgets::gbutton(text = " ? ",
                          handler = function(h, ...) {
                            gh_help(h, "server_help", help_messages)
                          },
                          container = methods_group, expand = FALSE
   )
 
-  addSpace(methods_group, 10)
-  authenticate_group <- ggroup(container = methods_group)
+  gWidgets::addSpace(methods_group, 10)
+  authenticate_group <- gWidgets::ggroup(container = methods_group)
 
-  user_lab <- glabel(text      = " User Name:",
+  user_lab <- gWidgets::glabel(text      = " User Name:",
                      container = authenticate_group)
 
-  wids$user <- gedit(text      = general_opts$user,
+  wids$user <- gWidgets::gedit(text      = general_opts$user,
                      container = authenticate_group,
                      width     = 15)
 
-  addSpace(authenticate_group, 10)
-  password_lab <- glabel(text      = " Password:",
+  gWidgets::addSpace(authenticate_group, 10)
+  password_lab <- gWidgets::glabel(text      = " Password:",
                          container = authenticate_group)
 
-  wids$password <- gedit(text      = general_opts$password,
+  wids$password <-  gWidgets::gedit(text      = general_opts$password,
                          container = authenticate_group,
                          width     = 15)
   gWidgets::visible(wids$password) <- FALSE
@@ -428,13 +431,13 @@ MODIStsp_GUI <- function(general_opts,
     current_sel != "http", FALSE, TRUE
   )
 
-  addSpring(methods_group)
-  wids$aria <- gcheckbox("Use 'aria2c'",
+  gWidgets::addSpring(methods_group)
+  wids$aria <- gWidgets::gcheckbox("Use 'aria2c'",
                          checked   = general_opts$use_aria,
                          container = methods_group)
-  addSpace(methods_group, 2)
+  gWidgets::addSpace(methods_group, 2)
 
-  aria_help <- gbutton(text = " ? ",
+  aria_help <- gWidgets::gbutton(text = " ? ",
                        handler = function(h, ...) {
                          gh_help(h, "aria_help", help_messages,
                                  info_addr = "https://aria2.github.io/")
@@ -459,7 +462,7 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Dates selection                                ####
 
-  dates_frame <- gframe(
+  dates_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          Processing Period </span>"),
     markup     = TRUE,
@@ -468,40 +471,40 @@ MODIStsp_GUI <- function(general_opts,
     expand     = TRUE
   )
 
-  dates_group <- ggroup(container  = dates_frame,
+  dates_group <- gWidgets::ggroup(container  = dates_frame,
                         horizontal = TRUE,
                         expand     = TRUE)
 
-  start_date_lab <- glabel(text      = " Starting Date (yyyy-mm-dd):  ",
+  start_date_lab <- gWidgets::glabel(text      = " Starting Date (yyyy-mm-dd):  ",
                            container = dates_group)
 
-  wids$start_date <- gedit(text      = general_opts$start_date,
+  wids$start_date <-  gWidgets::gedit(text      = general_opts$start_date,
                            container = dates_group,
                            width     = 15)
-  addSpace(dates_group, 9)
+  gWidgets::addSpace(dates_group, 9)
 
-  end_date_lab <- glabel(text      = " Ending Date (yyyy-mm-dd):  ",
+  end_date_lab <- gWidgets::glabel(text      = " Ending Date (yyyy-mm-dd):  ",
                          container = dates_group)
 
-  wids$end_date <- gedit(text      = general_opts$end_date,
+  wids$end_date <-  gWidgets::gedit(text      = general_opts$end_date,
                          container = dates_group,
                          width     = 15)
 
   gWidgets::font(start_date_lab) <- gWidgets::font(end_date_lab) <-
     list(family = "sans", weight = "bold")
-  addSpring(dates_group)
+   gWidgets::addSpring(dates_group)
 
-  seas_lab       <- glabel(text = "Period: ", container = dates_group)
+  seas_lab       <- gWidgets::glabel(text = "Period: ", container = dates_group)
   gWidgets::font(seas_lab) <- list(family = "sans", weight = "bold")
 
   seas_array  <- c("full", "seasonal")
-  wids$seas    <-  gcombobox(
+  wids$seas    <-  gWidgets::gcombobox(
     items     = seas_array,
     container = dates_group,
     selected  = match(general_opts$download_range, seas_array)
   )
 
-  season_help <- gbutton(text = " ? ",
+  season_help <- gWidgets::gbutton(text = " ? ",
                          handler = function(h, ...) {
                            gh_help(h, "season_help", help_messages, NULL)
                          },
@@ -510,7 +513,7 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Tiles selection                                ####
 
-  spatial_frame <- gframe(
+  spatial_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          Output Spatial Extent </span>"),
     markup     = TRUE,
@@ -518,9 +521,9 @@ MODIStsp_GUI <- function(general_opts,
     horizontal = FALSE,
     expand     = TRUE
   )
-  sel_group <- ggroup(container = spatial_frame, horizontal = TRUE)
-  addSpace(sel_group, 100)
-  output_ext_group <- ggroup(container = spatial_frame, horizontal = TRUE)
+  sel_group <- gWidgets::ggroup(container = spatial_frame, horizontal = TRUE)
+  gWidgets::addSpace(sel_group, 100)
+  output_ext_group <- gWidgets::ggroup(container = spatial_frame, horizontal = TRUE)
   # browser()
 
   # to allow compatibility with previous versions of options files
@@ -532,7 +535,7 @@ MODIStsp_GUI <- function(general_opts,
     general_opts$full_ext <- FALSE
   }
 
-  wids$output_ext <- gradio(
+  wids$output_ext <- gWidgets::gradio(
     items      = c("Select MODIS Tiles", "Define Custom Area"),
     expand     = TRUE, fill = "x",
     horizontal = TRUE,
@@ -571,14 +574,14 @@ MODIStsp_GUI <- function(general_opts,
     }
   )
 
-  view_button <- gbutton(text = " View current extent ",
+  view_button <- gWidgets::gbutton(text = " View current extent ",
                          handler = function(h, ...) {
-                           gh_view_extent(ext_type = svalue(wids$output_ext),
+                           gh_view_extent(ext_type = gWidgets::svalue(wids$output_ext),
                                           wids)
                          },
                          container = sel_group, expand = FALSE)
 
-  extent_help <- gbutton(text = " ? ",
+  extent_help <- gWidgets::gbutton(text = " ? ",
                          handler = function(h, ...) {
                            gh_help(h, "extent_help", help_messages, NULL)
                          },
@@ -587,9 +590,9 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for tiles selection                                ####
 
-  spatial_group  <- ggroup(container = spatial_frame, horizontal = TRUE)
+  spatial_group  <- gWidgets::ggroup(container = spatial_frame, horizontal = TRUE)
 
-  tiles_group   <- gframe(text       = "<b><i> Required MODIS Tiles </i></b>",
+  tiles_group   <- gWidgets::gframe(text       = "<b><i> Required MODIS Tiles </i></b>",
                           markup     = TRUE,
                           container  = spatial_group,
                           horizontal = FALSE,
@@ -597,38 +600,38 @@ MODIStsp_GUI <- function(general_opts,
                           pos        = 0.5)
 
   # horizontal ----
-  x_group       <- ggroup(container = tiles_group, horizontal = TRUE,
+  x_group       <- gWidgets::ggroup(container = tiles_group, horizontal = TRUE,
                           spacing = 2, expand = TRUE)
 
-  start_x_lab   <- glabel(text = " Horizontal:", container = x_group)
+  start_x_lab   <- gWidgets::glabel(text = " Horizontal:", container = x_group)
   gWidgets::addSpace(x_group, 1)
-  start_x_start <- glabel(text = "Start", container = x_group)
-  wids$start_x  <- gspinbutton(0, 35, text = "Select",
+  start_x_start <- gWidgets::glabel(text = "Start", container = x_group)
+  wids$start_x  <-  gWidgets::gspinbutton(0, 35, text = "Select",
                                container   = x_group,
                                value       = general_opts$start_x,
                                expand     = TRUE)
 
-  end_x_lab     <- glabel(text = "End", container = x_group)
-  wids$end_x    <- gspinbutton(0, 35, text = "Select",
+  end_x_lab     <- gWidgets::glabel(text = "End", container = x_group)
+  wids$end_x    <-  gWidgets::gspinbutton(0, 35, text = "Select",
                                container   = x_group,
                                value       = general_opts$end_x,
                                expand     = TRUE)
 
   # vertical ----
-  y_group       <- ggroup(container  = tiles_group,
+  y_group       <- gWidgets::ggroup(container  = tiles_group,
                           horizontal = TRUE,
                           spacing    = 2,
                           expand     = TRUE)
 
-  start_y_lab   <- glabel(text = " Vertical:     ", container = y_group)
-  start_y_start <- glabel(text = "Start", container = y_group)
-  wids$start_y  <- gspinbutton(0, 17, text = "Select",
+  start_y_lab   <- gWidgets::glabel(text = " Vertical:     ", container = y_group)
+  start_y_start <- gWidgets::glabel(text = "Start", container = y_group)
+  wids$start_y  <-  gWidgets::gspinbutton(0, 17, text = "Select",
                                container   = y_group,
                                value       = general_opts$start_y,
                                expand     = TRUE)
 
-  end_y_lab     <- glabel(text = "End", container = y_group)
-  wids$end_y    <- gspinbutton(0, 17, text = "Select",
+  end_y_lab     <- gWidgets::glabel(text = "End", container = y_group)
+  wids$end_y    <-  gWidgets::gspinbutton(0, 17, text = "Select",
                                container   = y_group,
                                value       = general_opts$end_y,
                                expand     = TRUE)
@@ -646,21 +649,21 @@ MODIStsp_GUI <- function(general_opts,
   # draw on map map button ----
 
   # Extent buttons -----
-  spatialbut_group  <- ggroup(container = spatial_group, horizontal = FALSE,
+  spatialbut_group  <- gWidgets::ggroup(container = spatial_group, horizontal = FALSE,
                               expand = FALSE)
   # draw on map map button ----
-  select_map_tiles <- gbutton(
+  select_map_tiles <- gWidgets::gbutton(
     text    = "Select On Map",
     handler = function(h, ...) {
-      gh_selectmap(h, svalue(wids$output_ext), wids,
+      gh_selectmap(h, gWidgets::svalue(wids$output_ext), wids,
                    mod_proj_str, modis_grid)
 
     }, container = spatialbut_group, expand = TRUE)
 
   # Text labels showing Extent ----
-  addSpace(tiles_group, 1)
+  gWidgets::addSpace(tiles_group, 1)
 
-  bounding_group <- gframe(
+  bounding_group <- gWidgets::gframe(
     text       = "<b><i> Output Bounding Box (in output projection!) </i></b>",
     markup     = TRUE,
     container  = spatial_group,
@@ -669,14 +672,14 @@ MODIStsp_GUI <- function(general_opts,
     pos        = 0.5
   )
   gWidgets::font(bounding_group) <- list(family = "sans", weight = "bold")
-  addSpace(bounding_group, 1)
+  gWidgets::addSpace(bounding_group, 1)
 
   # bounding box ----
-  bbox_group  <- ggroup(horizontal = TRUE, container = bounding_group)
+  bbox_group  <- gWidgets::ggroup(horizontal = TRUE, container = bounding_group)
 
-  min_group   <- ggroup(horizontal = FALSE, container = bbox_group)
-  lat_w_group <- ggroup(horizontal = TRUE,  container = min_group)
-  addSpring(lat_w_group)
+  min_group   <- gWidgets::ggroup(horizontal = FALSE, container = bbox_group)
+  lat_w_group <- gWidgets::ggroup(horizontal = TRUE,  container = min_group)
+   gWidgets::addSpring(lat_w_group)
 
   if (length(general_opts$bbox) == 1) {
     bbox <- c(NA, NA, NA, NA)
@@ -687,32 +690,32 @@ MODIStsp_GUI <- function(general_opts,
       bbox <- general_opts$bbox
     }
   }
-  output_xmin_lab  <- glabel("x-min", container = lat_w_group, expand = TRUE)
-  wids$output_xmin <- gedit(text = bbox[1],
+  output_xmin_lab  <- gWidgets::glabel("x-min", container = lat_w_group, expand = TRUE)
+  wids$output_xmin <-  gWidgets::gedit(text = bbox[1],
                             container = lat_w_group,
                             width     = 9)
-  long_s_group <- ggroup(horizontal = TRUE, container = min_group)
-  addSpring(long_s_group)
+  long_s_group <- gWidgets::ggroup(horizontal = TRUE, container = min_group)
+   gWidgets::addSpring(long_s_group)
 
-  output_ymin_lab  <- glabel("y-min", container = long_s_group)
-  wids$output_ymin <- gedit(text      = bbox[2],
+  output_ymin_lab  <- gWidgets::glabel("y-min", container = long_s_group)
+  wids$output_ymin <-  gWidgets::gedit(text      = bbox[2],
                             container = long_s_group,
                             width     = 9)
-  addSpace(bbox_group, 2)
+  gWidgets::addSpace(bbox_group, 2)
 
-  max_group   <- ggroup(horizontal = FALSE, container = bbox_group)
-  lat_e_group <- ggroup(horizontal = TRUE,  container = max_group)
-  addSpring(lat_e_group)
+  max_group   <- gWidgets::ggroup(horizontal = FALSE, container = bbox_group)
+  lat_e_group <- gWidgets::ggroup(horizontal = TRUE,  container = max_group)
+   gWidgets::addSpring(lat_e_group)
 
-  output_xmax_lab  <- glabel("x-max", container = lat_e_group)
-  wids$output_xmax <- gedit(text = bbox[3],
+  output_xmax_lab  <- gWidgets::glabel("x-max", container = lat_e_group)
+  wids$output_xmax <-  gWidgets::gedit(text = bbox[3],
                             container = lat_e_group,
                             width     = 9)
-  long_n_group <- ggroup(horizontal = TRUE, container = max_group)
-  addSpring(long_n_group)
+  long_n_group <- gWidgets::ggroup(horizontal = TRUE, container = max_group)
+   gWidgets::addSpring(long_n_group)
 
-  output_ymax_lab  <- glabel("y-max", container = long_n_group)
-  wids$output_ymax <- gedit(text = bbox[4],
+  output_ymax_lab  <- gWidgets::glabel("y-max", container = long_n_group)
+  wids$output_ymax <-  gWidgets::gedit(text = bbox[4],
                             container = long_n_group,
                             width     = 9)
 
@@ -723,7 +726,7 @@ MODIStsp_GUI <- function(general_opts,
 
   # Button to load extent from SHP or KML file ----
 
-  bbox_from_file <- gbutton(
+  bbox_from_file <- gWidgets::gbutton(
     text = "Load Extent from a spatial file",
     handler = function(h, ...) {
       # File selection widget
@@ -739,7 +742,7 @@ MODIStsp_GUI <- function(general_opts,
                                      "ExtData/MODIS_Tiles.RData")))
   }  # Laod MODIS grid ancillary file
 
-  tiles_from_bbox <- gbutton(
+  tiles_from_bbox <- gWidgets::gbutton(
     text    = "Update Tiles from bounding box",
     handler = function(h, ...) {
       gh_tiles_from_bbox(h, wids, mod_proj_str, modis_grid)
@@ -775,7 +778,7 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Projection, resolution and bbox selection      ####
 
-  output_proj_frame <- gframe(
+  output_proj_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          Reprojection and Resize Options </span>"),
     markup     = TRUE,
@@ -784,14 +787,14 @@ MODIStsp_GUI <- function(general_opts,
     expand     = TRUE
   )
 
-  output_proj_group <- ggroup(container = output_proj_frame, horizontal = TRUE)
+  output_proj_group <- gWidgets::ggroup(container = output_proj_frame, horizontal = TRUE)
 
   # Projection ----
-  output_proj_lab   <- glabel(text      = "Output Projection: ",
+  output_proj_lab   <- gWidgets::glabel(text      = "Output Projection: ",
                               container = output_proj_group)
   gWidgets::font(output_proj_lab) <- list(family = "sans", weight = "bold")
 
-  wids$proj_choice <- gcombobox(
+  wids$proj_choice <- gWidgets::gcombobox(
 
     items     = out_proj_names,
     container = output_proj_group,
@@ -802,11 +805,11 @@ MODIStsp_GUI <- function(general_opts,
   )
 
   # Text widget showing the current output proj4string ----
-  outproj_user_lab       <- glabel(text      = "  PROJECTION:",
+  outproj_user_lab       <- gWidgets::glabel(text      = "  PROJECTION:",
                                    container = output_proj_group)
   gWidgets::font(outproj_user_lab) <- list(family = "sans", weight = "bold")
 
-  wids$output_proj4       <- gtext(text      = general_opts$output_proj4,
+  wids$output_proj4       <- gWidgets::gtext(text      = general_opts$output_proj4,
                                    container = output_proj_group,
                                    width     = 300,
                                    height    = 20,
@@ -819,7 +822,7 @@ MODIStsp_GUI <- function(general_opts,
     out_proj_list[[gWidgets::svalue(wids$proj_choice)]]) #nolint
 
   # Button to change the user defined projection ----
-  wids$change_proj_but <- gbutton(
+  wids$change_proj_but <- gWidgets::gbutton(
     text      = "Change",
     container = output_proj_group,
     handler   = function(h, ...) {
@@ -827,7 +830,7 @@ MODIStsp_GUI <- function(general_opts,
       choice <- warn_projmess1()
       if (choice) {
         old_proj <- gWidgets::svalue(wids$output_proj4)
-        selproj <- ginput(
+        selproj <- gWidgets::ginput(
           paste("Please insert a valid proj4string,",
                 "an EPSG code or an UTM grid zone (e.g. 32N):"),
           parent     = NULL,
@@ -843,7 +846,7 @@ MODIStsp_GUI <- function(general_opts,
 
         # Check if proj4string is valid
         if (is.na(sel_output_proj)) {
-          gmessage(
+           gWidgets::gmessage(
             message = strwrap(paste(
               "The projection is not recognized,",
               "so the previously selected projection will be kept."
@@ -899,14 +902,14 @@ MODIStsp_GUI <- function(general_opts,
     gWidgets::enabled(wids$change_proj_but)  <- FALSE
   }
 
-  output_res_group <- ggroup(container = output_proj_frame, horizontal = TRUE)
-  output_res_lab   <- glabel(text      = "Output Resolution:",
+  output_res_group <- gWidgets::ggroup(container = output_proj_frame, horizontal = TRUE)
+  output_res_lab   <- gWidgets::glabel(text      = "Output Resolution:",
                              container = output_res_group)
   gWidgets::font(output_res_lab) <- list(family = "sans", weight = "bold")
 
   # Dropdown Native vs. Resampled resolution ----
 
-  wids$output_res_sel  <- gcombobox(
+  wids$output_res_sel  <- gWidgets::gcombobox(
     items     = c("Native", "Resampled"),
     container = output_res_group,
     selected  = match(general_opts$out_res_sel, c("Native", "Resampled")),
@@ -925,11 +928,11 @@ MODIStsp_GUI <- function(general_opts,
   gWidgets::size(wids$output_res_sel) <- list(width = 106)
 
   # input field to define/see output resolution ----
-  pixsize_lab  <- glabel(text      = "  Pixel Size:",
+  pixsize_lab  <- gWidgets::glabel(text      = "  Pixel Size:",
                          container = output_res_group)
   gWidgets::font(pixsize_lab) <- list(family = "sans", weight = "bold")
 
-  wids$output_res <- gedit(text      = general_opts$out_res,
+  wids$output_res <-  gWidgets::gedit(text      = general_opts$out_res,
                            container = output_res_group,
                            width     = 10)
 
@@ -957,17 +960,17 @@ MODIStsp_GUI <- function(general_opts,
 
   units <- gui_get_units(sel_output_proj)
 
-  wids$pixsize2_lab <- glabel(text = units, container = output_res_group)
+  wids$pixsize2_lab <- gWidgets::glabel(text = units, container = output_res_group)
 
   # Dropdown menu to select Resampling Method ----
 
-  addSpring(output_res_group)
-  resmeth_lab <- glabel(text      = "    Resampling Method:  ",
+   gWidgets::addSpring(output_res_group)
+  resmeth_lab <- gWidgets::glabel(text      = "    Resampling Method:  ",
                         container = output_res_group)
   gWidgets::font(resmeth_lab) <- list(family = "sans", weight = "bold")
 
   resamp_array       <- c("near", "mode")
-  wids$output_resmeth <- gcombobox(items     = resamp_array,
+  wids$output_resmeth <- gWidgets::gcombobox(items     = resamp_array,
                                    container = output_res_group,
                                    selected  = match(general_opts$resampling,
                                                      resamp_array))
@@ -975,7 +978,7 @@ MODIStsp_GUI <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Format and reprocess options                   ####
 
-  options_frame <- gframe(
+  options_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          Output Options </span>"),
     markup     = TRUE,
@@ -984,17 +987,17 @@ MODIStsp_GUI <- function(general_opts,
     horizontal = FALSE
   )
 
-  opt_group     <- ggroup(container  = options_frame,
+  opt_group     <- gWidgets::ggroup(container  = options_frame,
                           horizontal = TRUE,
                           expand     = TRUE)
 
   # Out format ----
-  format_lab       <- glabel(text      = "Output Format:",
+  format_lab       <- gWidgets::glabel(text      = "Output Format:",
                              container = opt_group)
   gWidgets::font(format_lab) <- list(family = "sans", weight = "bold")
 
 
-  wids$format <- gcombobox(
+  wids$format <- gWidgets::gcombobox(
     items    = c("ENVI", "GTiff"), text = "Select", container = opt_group,
     selected = match(general_opts$out_format, c("ENVI", "GTiff")),
     handler  = function(h, ...) {
@@ -1006,17 +1009,17 @@ MODIStsp_GUI <- function(general_opts,
   )
 
   gWidgets::size(wids$format) <- c(70, 30)
-  addSpace(opt_group, 10)
+  gWidgets::addSpace(opt_group, 10)
   # Compression ----
-  compress_group       <- ggroup(container = opt_group, horizontal = TRUE)
+  compress_group       <- gWidgets::ggroup(container = opt_group, horizontal = TRUE)
   compress_dict        <- c("None", "PACKBITS", "LZW", "DEFLATE")
   names(compress_dict) <- c("None", "Low (PACKBITS)", "Medium (LZW)",
                             "High (DEFLATE)")
-  compress_lab         <- glabel(text      = "Compression: ",
+  compress_lab         <- gWidgets::glabel(text      = "Compression: ",
                                  container = compress_group)
   gWidgets::font(compress_lab)  <- list(family = "sans", weight = "bold")
 
-  wids$compress <- gcombobox(items     = names(compress_dict),
+  wids$compress <- gWidgets::gcombobox(items     = names(compress_dict),
                              container = compress_group,
                              selected  = match(general_opts$compress[[1]],
                                                compress_dict))
@@ -1027,12 +1030,12 @@ MODIStsp_GUI <- function(general_opts,
   )
 
   gWidgets::size(wids$compress) <- c(110, 30)
-  addSpring(opt_group)
+   gWidgets::addSpring(opt_group)
 
   # RasterStacks and NoData Yes/No ----
-  other_group <- ggroup(container = options_frame, horizontal = TRUE)
-  nodata_lab  <- glabel(text = "Modify NoData: ", container = opt_group)
-  wids$nodata <- gradio(items      = c("Yes", "No"),
+  other_group <- gWidgets::ggroup(container = options_frame, horizontal = TRUE)
+  nodata_lab  <- gWidgets::glabel(text = "Modify NoData: ", container = opt_group)
+  wids$nodata <- gWidgets::gradio(items      = c("Yes", "No"),
                         text       = "Select",
                         container  = opt_group,
                         selected   = match(general_opts$nodata_change,
@@ -1040,14 +1043,14 @@ MODIStsp_GUI <- function(general_opts,
                         horizontal = TRUE)
   gWidgets::font(nodata_lab) <- list(family = "sans", weight = "bold")
 
-  nodata_help <- gbutton(
+  nodata_help <- gWidgets::gbutton(
     text = " ? ",
     handler = function(h, ...) {
       gh_help(h, "nodata_help", help_messages,NULL)
     }, container = opt_group, expand = FALSE)
 
   # Virtual raster creation menu ----
-  timeseries_lab <- glabel(text = "Save Time Series as:",
+  timeseries_lab <- gWidgets::glabel(text = "Save Time Series as:",
                            container = other_group)
   gWidgets::font(timeseries_lab) <- list(family = "sans", weight = "bold")
 
@@ -1056,13 +1059,13 @@ MODIStsp_GUI <- function(general_opts,
   curr_checked <- c(FALSE, FALSE, FALSE)
   curr_checked[match(general_opts$ts_format, list_virt)] <- TRUE
 
-  wids$timeseries <- gcheckboxgroup(
+  wids$timeseries <- gWidgets::gcheckboxgroup(
     items     = c("R rasterStack", "ENVI Meta", "GDAL vrt"),
     container = other_group,
     checked   = curr_checked,
     horizontal = TRUE)
 
-  timeseries_help <- gbutton(
+  timeseries_help <- gWidgets::gbutton(
     text = " ? ",
     handler = function(h, ...) {
       gh_help(h, "timeseries_help", help_messages,
@@ -1072,16 +1075,16 @@ MODIStsp_GUI <- function(general_opts,
 
 
   # Apply scale/offset ----
-  addSpace(other_group, 15)
-  addSpring(other_group)
-  scale_lab <- glabel(text = "Apply Scale/Offset: ", container = other_group)
+  gWidgets::addSpace(other_group, 15)
+   gWidgets::addSpring(other_group)
+  scale_lab <- gWidgets::glabel(text = "Apply Scale/Offset: ", container = other_group)
 
   # default value in case of use of old json settings files - consider removing!
   if (!exists(general_opts$scale_val)) {
     general_opts$scale_val <- "No"
   }
 
-  wids$scale <- gradio(items      = c("Yes", "No"),
+  wids$scale <- gWidgets::gradio(items      = c("Yes", "No"),
                        text       = "Select",
                        container  = other_group,
                        selected   = match(general_opts$scale_val,
@@ -1089,7 +1092,7 @@ MODIStsp_GUI <- function(general_opts,
                        horizontal = TRUE)
   gWidgets::font(scale_lab) <- list(family = "sans", weight = "bold")
 
-  scale_help <- gbutton(text = " ? ", handler = function(h, ...) {
+  scale_help <- gWidgets::gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "scale_help", help_messages, NULL)
   }, container = other_group, expand = FALSE)
 
@@ -1097,7 +1100,7 @@ MODIStsp_GUI <- function(general_opts,
   #   Initialize Widgets for output folders selection                       ####
 
   # Main output folder ----
-  outfold_frame <- gframe(
+  outfold_frame <- gWidgets::gframe(
     text = strwrap("<span foreground='red' size='x-large'>
                    Main MODIStsp output folder </span>"),
     markup    = TRUE,
@@ -1106,21 +1109,21 @@ MODIStsp_GUI <- function(general_opts,
     fill      = TRUE
   )
 
-  outfold_group <- ggroup(horizontal = TRUE,
+  outfold_group <- gWidgets::ggroup(horizontal = TRUE,
                           container  = outfold_frame,
                           expand     = TRUE,
                           fill       = TRUE)
 
-  wids$outfold   <- gedit(text      = format(general_opts$out_folder,
+  wids$outfold   <-  gWidgets::gedit(text      = format(general_opts$out_folder,
                                              justify = "right"),
                           container = outfold_group,
                           width     = 46,
                           expand    = TRUE)
 
-  fold_choose   <- gbutton(
+  fold_choose   <- gWidgets::gbutton(
     text    = "Browse",
     handler = function(h, ...) {
-      choice <- try(gfile(
+      choice <- try(gWidgets::gfile(
         type = "selectdir", text = "Select the Output Folder for MODIS data..."
       ), silent = TRUE)
       if (inherits(choice, "try-error"))  {
@@ -1133,7 +1136,7 @@ MODIStsp_GUI <- function(general_opts,
     container = outfold_group
   )
 
-  outfold_help <- gbutton(text = " ? ", handler = function(h, ...) {
+  outfold_help <- gWidgets::gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "outfold_help", help_messages,
             info_addr = "https://ropensci.github.io/MODIStsp/articles/output.html", #nolint
             ...)
@@ -1141,24 +1144,24 @@ MODIStsp_GUI <- function(general_opts,
 
   # Reprocessing options checkbox ----
 
-  addSpace(outfold_group, 5)
-  reprocess_lab       <- glabel(text = "ReProcess Existing Data: ",
+  gWidgets::addSpace(outfold_group, 5)
+  reprocess_lab       <- gWidgets::glabel(text = "ReProcess Existing Data: ",
                                 container = outfold_group)
   gWidgets::font(reprocess_lab) <- list(family = "sans", weight = "bold")
-  wids$reprocess       <- gradio(items      = c("Yes", "No"),
+  wids$reprocess       <- gWidgets::gradio(items      = c("Yes", "No"),
                                  text       = "Select",
                                  container  = outfold_group,
                                  selected   = match(general_opts$reprocess,
                                                     c("Yes", "No")),
                                  horizontal = TRUE)
 
-  reproc_help <- gbutton(text = " ? ", handler = function(h, ...) {
+  reproc_help <- gWidgets::gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "reproc_help", help_messages, NULL)
   }, container = outfold_group, expand = FALSE)
 
   # HDF output folder ----
 
-  outfoldmod_frame <- gframe(
+  outfoldmod_frame <- gWidgets::gframe(
     text = strwrap("<span foreground='red' size='large'>
                   Folder for permanent storage of MODIS HDF images </span>"),
     markup    = TRUE,
@@ -1167,22 +1170,22 @@ MODIStsp_GUI <- function(general_opts,
     fill      = TRUE
   )
 
-  outfoldmod_group <- ggroup(horizontal = TRUE,
+  outfoldmod_group <- gWidgets::ggroup(horizontal = TRUE,
                              container  = outfoldmod_frame,
                              expand     = TRUE,
                              fill       = TRUE)
 
   # Label for selected folder
-  wids$outfoldmod   <- gedit(
+  wids$outfoldmod   <-  gWidgets::gedit(
     text      = format(general_opts$out_folder_mod, justify = "right"),
     container = outfoldmod_group,
     width     = 30,
     expand    = TRUE
   )
-  fold_choose <- gbutton(
+  fold_choose <- gWidgets::gbutton(
     text    = "Browse",
     handler = function(h, ...) {
-      choice <- try(gfile(
+      choice <- try(gWidgets::gfile(
         type = "selectdir",
         text = "Select the Output Folder for storage of MODiS original HDF images..." #nolint
       ), silent = TRUE)
@@ -1198,33 +1201,33 @@ MODIStsp_GUI <- function(general_opts,
     container = outfoldmod_group
   )
 
-  outhdffold_help <- gbutton(text = " ? ", handler = function(h, ...) {
+  outhdffold_help <- gWidgets::gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "outhdffold_help", help_messages, NULL)
   }, container = outfoldmod_group, expand = FALSE)
 
   # HDF delete option checkbox ----
-  addSpace(outfoldmod_group, 5)
-  delete_lab       <- glabel(text      = "Delete original HDF files: ",
+  gWidgets::addSpace(outfoldmod_group, 5)
+  delete_lab       <- gWidgets::glabel(text      = "Delete original HDF files: ",
                              container = outfoldmod_group)
   gWidgets::font(delete_lab) <- list(family = "sans", weight = "bold")
 
-  wids$delete       <- gradio(items      = c("Yes", "No"),
+  wids$delete       <- gWidgets::gradio(items      = c("Yes", "No"),
                               text       = "Select",
                               container  = outfoldmod_group,
                               selected   = 2,
                               horizontal = TRUE)
 
-  delete_help <- gbutton(text = " ? ", handler = function(h, ...) {
+  delete_help <- gWidgets::gbutton(text = " ? ", handler = function(h, ...) {
     gh_help(h, "delete_help", help_messages, NULL)
   }, container = outfoldmod_group, expand = FALSE)
 
   #   __________________________________________________________________________
   #   Initialize Start/quit/Save/Load buttons                               ####
 
-  but_group <- ggroup(container = main_group, horizontal = TRUE)
+  but_group <- gWidgets::ggroup(container = main_group, horizontal = TRUE)
 
   # If "Start" pressed, retrieve selected values and save in previous file
-  start_but <- gbutton(
+  start_but <- gWidgets::gbutton(
     text      = "Start Processing",
     container = but_group,
     handler   = function(h, ...) {
@@ -1243,30 +1246,30 @@ MODIStsp_GUI <- function(general_opts,
       if (gui_env$check_save_opts) {
 
         gui_env$start <- TRUE
-        dispose(main_win)
+        gWidgets::dispose(main_win)
         return(gui_env$start)
       }
     }
   )
 
   # If "quit", set "start" to FALSE and exit
-  quit_but <- gbutton(
+  quit_but <- gWidgets::gbutton(
     text       = "Quit Program",
     container  = but_group,
     handler    = function(h, ...) {
       gui_env$start <- FALSE
-      dispose(main_win)
+      gWidgets::dispose(main_win)
       return(gui_env$start)
     }
   )
-  addSpring(but_group)
+   gWidgets::addSpring(but_group)
 
   # On "Load", ask for a old options file and load it --------
-  load_but <- gbutton(
+  load_but <- gWidgets::gbutton(
     text      = "Load Options",
     container = but_group,
     handler   = function(h, ...){
-      choice <- try(gfile(
+      choice <- try(gWidgets::gfile(
         type    = "open",
         text    = "Select file for loading processing options...",
         initial.filename = getwd(),
@@ -1280,7 +1283,7 @@ MODIStsp_GUI <- function(general_opts,
           continue_load <- FALSE
         } else {
           if (length(grep("\\.json$", choice)) == 0) {
-            continue_load <- gconfirm(
+            continue_load <- gWidgets::gconfirm(
               message = strwrap("The selected file does not seem to be a
                                 JSON file. \n\n
                                 Do you want to continue?"),
@@ -1297,19 +1300,19 @@ MODIStsp_GUI <- function(general_opts,
       if (continue_load) {
         gui_load_options(choice, wids, prod_opt_list, compress_dict)
       } else {
-        gmessage(message = "Loading failed - Please select a different file!",
+         gWidgets::gmessage(message = "Loading failed - Please select a different file!",
                  title   = "Warning")
       }
     }
   )
 
   # On "Save", ask for a file name and save options (must be a JSON file!) ----
-  save_but <- gbutton(
+  save_but <- gWidgets::gbutton(
     text      = "Save Options",
     container = but_group,
     handler   = function(h, ...) {
 
-      choice <- (gfile(type = "save",
+      choice <- (gWidgets::gfile(type = "save",
                        text = "Select file for saving processing options...",
                        "text files" = list(mime.types = c("text/plain")),
                        "All files" = list(patterns = c("*")), container = "aa")
@@ -1319,7 +1322,7 @@ MODIStsp_GUI <- function(general_opts,
         continue_save <- FALSE
       } else {
         if (length(grep("\\.json$", choice)) == 0) {
-          continue_save <- gconfirm(
+          continue_save <- gWidgets::gconfirm(
             message = strwrap("The selected file does not seem to be a
                               JSON file. \n\n
                               Do you want to continue?"),

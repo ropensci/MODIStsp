@@ -7,7 +7,6 @@
 #' @description Helper function to update the labels of the gui showing the
 #'  bounding box coordinates when a spatial file is selected or a projection
 #'  change is issued.
-#' @importFrom gWidgets svalue
 #' @noRd
 #'
 gui_update_bboxlabels <- function(bbox_out,
@@ -15,6 +14,14 @@ gui_update_bboxlabels <- function(bbox_out,
                                   wids,
                                   reset = FALSE) {
   #nocov start
+
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
 
   if (!reset) {
     digits <- ifelse(units == "dec.degrees", 5, 1)
@@ -49,7 +56,6 @@ gui_update_bboxlabels <- function(bbox_out,
 #' @description Helper function to update the selected tiles with the
 #' intersection with the bounding box
 #' @importFrom sf st_crop
-#' @importFrom gWidgets svalue
 #' @noRd
 #'
 gui_update_tiles <- function(bbox_out,
@@ -58,7 +64,13 @@ gui_update_tiles <- function(bbox_out,
                              modis_grid,
                              wids) {
   #nocov start
-
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   bbox_mod  <- reproj_bbox(bbox_out,
                            curr_proj,
                            mod_proj_str,
@@ -146,7 +158,6 @@ gui_get_units <- function(newproj) {
 #' @description GUI Helper function used to load options from JSON and set
 #'  values of the GUI accordingly
 #' @importFrom jsonlite fromJSON
-#' @importFrom gWidgets svalue
 #' @noRd
 #'
 gui_load_options <- function(opts_jsfile,
@@ -154,7 +165,13 @@ gui_load_options <- function(opts_jsfile,
                              prod_opt_list,
                              compress_dict) {
   #nocov start
-
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   # load file and reset all widgets to values found in the loaded file
   general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
 
@@ -256,7 +273,6 @@ gui_load_options <- function(opts_jsfile,
 #'  options before saving to a json file or starting MODIStsp processing
 #' @noRd
 #' @importFrom jsonlite fromJSON write_json
-#' @importFrom gWidgets svalue gconfirm gmessage
 #' @importFrom sf st_crop st_bbox
 #' @noRd
 gui_save_options <- function(general_opts,
@@ -269,7 +285,13 @@ gui_save_options <- function(general_opts,
                              compress_dict,
                              wids) {
   #nocov start
-
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   # workaround to retrieve custom index, since it was already saved to the
   # JSON but it is not available in current variables
 
@@ -442,7 +464,7 @@ gui_save_options <- function(general_opts,
   # Check if selected tiles are consistent with the bounding box
   # (only if product is not tiled)
   if (general_opts$full_ext == FALSE &
-      prod_opt_list[[svalue(wids$prod)]][[svalue(wids$vers)]][["tiled"]] == 1 &
+      prod_opt_list[[gWidgets::svalue(wids$prod)]][[gWidgets::svalue(wids$vers)]][["tiled"]] == 1 &
       gui_env$check_save_opts) {
     bbox_mod         <- reproj_bbox(
       general_opts$bbox,
@@ -620,9 +642,17 @@ gui_save_options <- function(general_opts,
 #' @description Helper function used to send out messages when the user tries
 #'  to change projection
 #' @noRd
-#' @importFrom gWidgets gconfirm
 
 warn_projmess1 <- function() {
+
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
+
   #nocov start
   gWidgets::gconfirm(strwrap(
     "WARNING! Changing projection may introduce positional errors in the output

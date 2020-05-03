@@ -26,10 +26,6 @@
 #' @importFrom sp CRS
 #' @importFrom grDevices dev.new
 #' @importFrom utils packageVersion browseURL head tail
-#' @importFrom gWidgets svalue gconfirm gmessage gbasicdialog ggroup
-#'  getToolkitWidget gframe gdroplist enabled size addSpring glabel
-#'  gcombobox addSpace gbutton gcheckboxgroup dispose visible gradio
-#'  gedit gcheckbox gfile gspinbutton ginput gtext
 
 MODIStsp_GUI_tcl <- function(general_opts,
                          prod_opt_list,
@@ -37,6 +33,13 @@ MODIStsp_GUI_tcl <- function(general_opts,
                          opt_jsfile,
                          prodopts_file,
                          scroll_window){
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
 
   #   __________________________________________________________________________
   #   NOTE: The function is excluded from coverage reports since it must be ####
@@ -119,7 +122,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for product selection and bands selection          ####
 
-  satprod_frame <- gframe(
+  satprod_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          MODIS Product, Platform and Layers selection
                          </span>"),
@@ -143,7 +146,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
                            editable  = FALSE)
   # gWidgets::size(cat_label) <- list(width = 100)
 
-  wids$cat <- gdroplist(
+  wids$cat <- gWidgets::gdroplist(
     items      = unique(mod_prod_cat$cat),
     container  = satprod1_group,
     horizontal = TRUE,
@@ -193,7 +196,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
   addSpring(satprod1_group)
   prod_label <- glabel(text = "Product:", container = satprod1_group)
 
-  wids$prod <- gdroplist(
+  wids$prod <- gWidgets::gdroplist(
     items     = mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)],
     container = satprod1_group, horizontal = TRUE,
     selected  = match(
@@ -346,7 +349,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
       # child widgets for original layers selection ----
       cbox_main  <- ggroup(container = selgroup, horizontal = FALSE)
       cbox_total <- ggroup(container = cbox_main, horizontal = TRUE)
-      cbox       <- gframe(
+      cbox       <- gWidgets::gframe(
         text       = strwrap("<span foreground='red' size='large'>
                              Original MODIS Layers </span>"),
         markup     = FALSE,
@@ -363,7 +366,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
       check_names_quality <- curr_opts[[curr_vers]]$quality_fullnames
       if (!is.null(check_names_quality)) {
         check_wid_quality <- gui_env$temp_wid_bands_quality
-        cbox_quality <- gframe(
+        cbox_quality <- gWidgets::gframe(
           text       = strwrap("<span foreground='red' size='large'>
                                Quality Indicators </span>"),
           markup     = FALSE,
@@ -389,7 +392,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
       if (!is.null(check_names_indexes)) {
         # retrieve currently selected indexes layers
         check_wid_indexes <- gui_env$temp_wid_bands_indexes
-        cbox_indexes      <- gframe(
+        cbox_indexes      <- gWidgets::gframe(
           text       = strwrap("<span foreground='red' size='large'>
                                Additional Spectral Indexes</span>"),
           markup     = FALSE,
@@ -444,7 +447,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
               tmp_arr_qual[wids$pos] <- 1
               gui_env$temp_wid_bands_quality <- tmp_arr_qual
             }
-            dispose(selgroup)
+            gWidgets::dispose(selgroup)
           },
           container = cbox_indexes,
           expand = FALSE
@@ -481,7 +484,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for download mode selection and authentication     ####
 
-  download_frame <- gframe(
+  download_frame <- gWidgets::gframe(
     text       = "<span foreground='red' size='x-large'>Download Method</span>",
     markup     = FALSE,
     container  = main_group,
@@ -583,7 +586,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Dates selection                                ####
 
-  dates_frame <- gframe(
+  dates_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          Processing Period </span>"),
     markup     = FALSE,
@@ -657,7 +660,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Tiles selection                                ####
 
-  spatial_frame <- gframe(
+  spatial_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          Spatial Extent </span>"),
     markup     = FALSE,
@@ -672,7 +675,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
                              container = output_ext_group)
 
   gWidgets::font(output_ext_lab) <- list(family = "sans", weight = "bold", size = "small")
-  wids$output_ext <- gdroplist(
+  wids$output_ext <- gWidgets::gdroplist(
     items     = c("Full Tiles Extent", "Resized"),
     container = output_ext_group,
     selected = match(general_opts$full_ext, c("Full Tiles Extent", "Resized")),
@@ -756,10 +759,10 @@ MODIStsp_GUI_tcl <- function(general_opts,
       if (class(choice) != "try-error" & length(choice) != 0) {
         # Show window until the process finishes
         message("[", date(), "]", " Retrieving the Extent, please wait...")
-        wait_window       <- gwindow(title = "Please wait",
+        wait_window       <- gWidgets::gwindow(title = "Please wait",
                                      width = 400, height = 40)
         gWidgets::size(wait_window) <- c(100, 8)
-        addHandlerUnrealize(wait_window,
+        gWidgets::addHandlerUnrealize(wait_window,
                             handler = function(h, ...) return(TRUE))
         wait_window_lab <- glabel(
           text      = paste("Retrieving Extent, please wait..."),
@@ -791,7 +794,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
                            wids)
         }
         message("[", date(), "]", " Retrieving Extent, please wait... DONE!")
-        dispose(wait_window)
+        gWidgets::dispose(wait_window)
       }
     }
     , container = output_ext_group
@@ -813,7 +816,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
 
   spatial_group  <- ggroup(container = spatial_frame, horizontal = TRUE)
 
-  tiles_group   <- gframe(text       = "<b><i> Required MODIS Tiles </i></b>",
+  tiles_group   <- gWidgets::gframe(text       = "<b><i> Required MODIS Tiles </i></b>",
                           markup     = FALSE,
                           container  = spatial_group,
                           horizontal = FALSE,
@@ -874,7 +877,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
   # Text labels showing Extent ----
   addSpace(tiles_group, 1)
   addSpring(spatial_group)
-  bounding_group <- gframe(
+  bounding_group <- gWidgets::gframe(
     text       = "<b><i> Output Bounding Box (in output projection!) </i></b>",
     markup     = FALSE,
     container  = spatial_group,
@@ -934,7 +937,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Projection, resolution and bbox selection      ####
 
-  output_proj_frame <- gframe(
+  output_proj_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          Reprojection and Resize Options </span>"),
     markup     = FALSE,
@@ -1046,7 +1049,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
                                    container = output_proj_group)
   gWidgets::font(outproj_user_lab) <- list(family = "sans", weight = "bold", size = "small")
 
-  wids$output_proj4       <- gtext(text      = general_opts$proj,
+  wids$output_proj4       <- gWidgets::gtext(text      = general_opts$proj,
                                    container = output_proj_group,
                                    width     = 300,
                                    height    = 15,
@@ -1187,7 +1190,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
   #   __________________________________________________________________________
   #   Initialize Widgets for Format and reprocess options                   ####
 
-  options_frame <- gframe(
+  options_frame <- gWidgets::gframe(
     text       = strwrap("<span foreground='red' size='x-large'>
                          Processing Options </span>"),
     markup     = FALSE,
@@ -1357,7 +1360,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
 
   # HDF output folder ----
 
-  outfoldmod_frame <- gframe(
+  outfoldmod_frame <- gWidgets::gframe(
     text      = strwrap("<span foreground='red' size='x-large'>
                         Folder for storing original MODIS HDF files </span>"),
     markup    = TRUE,
@@ -1410,7 +1413,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
                               horizontal = TRUE)
 
   # Main output folder ----
-  outfold_frame <- gframe(
+  outfold_frame <- gWidgets::gframe(
     text = strwrap("<span foreground='red' size='x-large'>
                    Folder for storing MODIStsp processed Time Series </span>"),
     markup    = TRUE,
@@ -1483,7 +1486,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
       if (gui_env$check_save_opts) {
 
         gui_env$start <- TRUE
-        dispose(main_win)
+        gWidgets::dispose(main_win)
         return(gui_env$start)
       }
     }
@@ -1495,7 +1498,7 @@ MODIStsp_GUI_tcl <- function(general_opts,
     container  = but_group,
     handler    = function(h, ...) {
       gui_env$start <- FALSE
-      dispose(main_win)
+      gWidgets::dispose(main_win)
       return(gui_env$start)
     }
   )

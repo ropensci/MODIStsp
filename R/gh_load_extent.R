@@ -2,13 +2,20 @@
 #' @description Handler used to perform requirted actions if "load extent
 #'  from spatial file" is clicked.
 #' @noRd
-#' @importFrom gWidgets size svalue
 #' @importFrom sf st_as_text st_crs
 #' @noRd
 gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
                            modis_grid) {
+
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   #nocov start
-  choice <- try(gfile(
+  choice <- try(gWidgets::gfile(
     type = "open",
     text = "Select a vector or raster file",
     # TODO add formats to the lists!
@@ -21,12 +28,12 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
   if (!inherits(choice, "try-error") & length(choice) != 0) {
     # Show window until the process finishes
     message("[", date(), "]", " Retrieving the Extent, please wait...")
-    wait_window       <- gwindow(title = "Please wait",
+    wait_window       <- gWidgets::gwindow(title = "Please wait",
                                  width = 400, height = 40)
     gWidgets::size(wait_window) <- c(100, 8)
-    addHandlerUnrealize(wait_window,
+    gWidgets::addHandlerUnrealize(wait_window,
                         handler = function(h, ...) return(TRUE))
-    glabel(
+    gWidgets::glabel(
       text      = paste("Retrieving Extent, please wait..."),
       editable  = FALSE,
       container = wait_window
@@ -49,7 +56,7 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
                                    crs_out   = sf::st_crs(out_proj_crs)),
                     silent = TRUE)
     if (inherits(bbox_out, "try-error")) {
-      gmessage(bbox_out, title = "Error Detected!")
+      gWidgets::gmessage(bbox_out, title = "Error Detected!")
     } else {
 
       # proj  <- gui_get_proj(sf::st_crs(curr_proj)$proj4string)
@@ -67,7 +74,7 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
                        wids)
     }
     message("[", date(), "]", " Retrieving Extent, please wait... DONE!")
-    dispose(wait_window)
+    gWidgets::dispose(wait_window)
 
   }
   #nocov end

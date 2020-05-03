@@ -7,7 +7,6 @@
 #'  download
 #' @rdname check_usearia
 #' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
-#' @importFrom gWidgets gmessage dispose
 #'
 check_usearia <- function(use_aria, gui, mess) {
   # Check if "aria2c" requested. If so, verify that the executable is found
@@ -21,8 +20,11 @@ check_usearia <- function(use_aria, gui, mess) {
         if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
           stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
                 install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+        } else {
+          requireNamespace("gWidgets")
+          requireNamespace("gWidgetsRGtk2")
         }
-        noaria <- gconfirm(
+        noaria <- gWidgets::gconfirm(
           strwrap("aria2c was not found! It is either not installed or not
                     found on your path! \n Do you want to proceed with standard
                     download?", width = 77)
