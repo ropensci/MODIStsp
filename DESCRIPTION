@@ -2,7 +2,7 @@ Package: MODIStsp
 Title: A Tool for Automating Download and Preprocessing of MODIS Land Products
     Data
 Type: Package
-Version: 1.3.9.9000
+Version: 1.4.0
 Authors@R: c(person("Lorenzo", "Busetto", email = "lbusett@gmail.com", role = c("aut", "cre"),
     comment = c(ORCID = '0000-0001-9634-6038')), 
     person("Luigi", "Ranghetti", email = "ranghetti.l@irea.cnr.it", role = c("aut"), 
@@ -38,7 +38,7 @@ Imports:
     jsonlite,
     parallel,
     raster (>= 2.5-2),
-    sf,
+    sf (>= 0.9.3),
     stringr (>= 1.0.0),
     xts (>= 0.9-7),
     xml2 (>= 1.2.0),

@@ -19,7 +19,7 @@ test_that("bbox_from_file works as expected", {
   # try wityh 3035 projection
   rep_bbox <- bbox_from_file(system.file("shape/nc.shp", package="sf"),
                              crs_out = 3035)
-  expect_equal(as.numeric(rep_bbox), c(-1997525, 5368122,  -1565576,  6332620),
+  expect_equal(as.numeric(rep_bbox), c(-1997537 , 5368147,  -1565600,  6332622),
                tolerance = 0.000001)
 
   # try with a different projection
@@ -31,17 +31,17 @@ test_that("bbox_from_file works as expected", {
   # try passing crs_out as WKT
   rep_bbox <- bbox_from_file(system.file("shape/nc.shp", package="sf"),
                              crs_out = st_as_text(st_crs(3035)))
-  expect_equal(as.numeric(rep_bbox), c(-1997525, 5368122,  -1565576,  6332620),
+  expect_equal(as.numeric(rep_bbox), c(-1997537 , 5368147,  -1565600 ,  6332622),
                tolerance = 0.000001)
 
   rep_bbox <- bbox_from_file(system.file("shape/nc.shp", package="sf"),
                              crs_out = st_crs(3035)$wkt)
-  expect_equal(as.numeric(rep_bbox), c(-1997525, 5368122,  -1565576,  6332620),
+  expect_equal(as.numeric(rep_bbox), c(-1997537 , 5368147,  -1565600 ,  6332622),
                tolerance = 0.000001)
 
   rep_bbox <- bbox_from_file(system.file("shape/nc.shp", package="sf"),
                              crs_out = st_crs(3035)$epsg)
-  expect_equal(as.numeric(rep_bbox), c(-1997525, 5368122,  -1565576,  6332620),
+  expect_equal(as.numeric(rep_bbox), c(-1997537 , 5368147,  -1565600 ,  6332622),
                tolerance = 0.000001)
 
   # expect error on badly specified crs_out

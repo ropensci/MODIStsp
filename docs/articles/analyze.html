@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -156,16 +156,16 @@
 <p>Single-date processed rasters can be accessed by simply opening them with a <code>raster</code> command:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">modistsp_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_500m_v6/NDVI"</span>, <span class="st">"MOD13A1_NDVI_2016_177.tif"</span>)
 <span class="no">modistsp_file</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\RtmpALjv9D/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "D:/RTemp\\Rtmpmu8ArW/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">my_raster</span> <span class="kw">&lt;-</span> <span class="fu">raster</span>(<span class="no">modistsp_file</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">my_raster</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">my_raster</span>)</pre></body></html></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p><code>RasterStack</code> (or GDAL vrt) time series containing all the processed data for a given parameter are saved in the “Time Series/RData” subfolder, and can be accessed by:</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Load the NDVI time series</span>
 <span class="no">ts_folder</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_500m_v6/Time_Series"</span>)
 <span class="no">in_virtual_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">ts_folder</span>, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>)
 <span class="no">in_virtual_file</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\RtmpALjv9D/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
+<pre><code>## [1] "D:/RTemp\\Rtmpmu8ArW/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">ts_data</span>   <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="no">in_virtual_file</span>))
 <span class="no">ts_data</span></pre></body></html></div>
 <pre><code>## class      : RasterStack 
@@ -178,7 +178,7 @@
 <p>, which gives us a 23-band <code>RasterStack</code> in the <code>ts_data</code> variable.</p>
 <p>This <code>RasterStack</code> can be analyzed using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <code>raster</code> or <code>rasterVis</code> packages:</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># plot some dates</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">ts_data</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>)]], <span class="kw">axes</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">horizontal</span> <span class="kw">=</span> <span class="no">T</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">ts_data</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span>)]], <span class="kw">axes</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">horizontal</span> <span class="kw">=</span> <span class="no">T</span>)</pre></body></html></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># Extract one date from the stack</span>
 
@@ -190,7 +190,7 @@
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
 ## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
-## source     : D:/RTemp/RtmpALjv9D/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
+## source     : D:/RTemp/Rtmpmu8ArW/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
 ## names      : MOD13A1_NDVI_2016_001 
 ## time       : 2016-01-01</code></pre>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># Extract multiple dates from the stack</span>
@@ -220,7 +220,7 @@
 ## names      : index_January, index_February, index_March, index_April,  index_May, index_June, index_July, index_August, index_September, index_October, index_November, index_December 
 ## min values :       -1891.0,        -1770.0,     -2000.0,     -1780.0,     -510.0,     -202.5,    -1347.0,       -275.0,         -1158.0,       -1944.0,        -2000.0,           -0.2 
 ## max values :    9130.00000,     8888.00000,  8577.00000,  8699.50000, 9231.50000, 9284.50000, 9229.50000,   9110.50000,      9187.00000,    9173.00000,     9824.00000,        0.93525</code></pre>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">month_avg</span>, <span class="kw">axes</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">horizontal</span> <span class="kw">=</span> <span class="no">T</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">month_avg</span>, <span class="kw">axes</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">horizontal</span> <span class="kw">=</span> <span class="no">T</span>)</pre></body></html></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-4-2.png" width="700"></p>
 <hr>
 </div>
@@ -284,7 +284,7 @@
                                <span class="kw">FUN</span> <span class="kw">=</span> <span class="st">"sd"</span>, <span class="kw">small</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p>The output is a <code>xts</code> object, with one column for each polygon of the input shapefile, and one row for each date. We can easily plot the computed averages using:</p>
 <div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">xts</span>)
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(<span class="no">out_dataavg</span>, <span class="kw">legend.loc</span> <span class="kw">=</span> <span class="st">"topleft"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">out_dataavg</span>, <span class="kw">legend.loc</span> <span class="kw">=</span> <span class="st">"topleft"</span>)</pre></body></html></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>We can also transform the output dataset to a long format and use <code>ggplot2</code> for plotting and other tidyverse-friendly functions for analysis:</p>
 <div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)

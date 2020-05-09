@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
       <h1 data-toc-skip>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v1.3.9</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2020-04-19</h4>
+            <h4 class="date">2020-05-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/MODIStsp/blob/master/vignettes/MODIStsp.Rmd"><code>vignettes/MODIStsp.Rmd</code></a></small>
       <div class="hidden name"><code>MODIStsp.Rmd</code></div>
@@ -450,7 +450,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <p>Several processing options can be set using check-boxes:</p>
 <ul>
 <li><p><strong>Output Files Format</strong>: Two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among “None”, “PACKBITS”, “LZW” and “DEFLATE”.</p></li>
-<li><p><strong>Save Time Series as</strong>: Specify if virtual multitemporal files should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are “R” rasterStacks, ENVI meta-files and GDAL “vrt” files. In particular, “R” rasterStacks may be useful in order to easily access the preprocessed MODIS data within “R” scripts (see also <a href="http://ropensci.github.io/MODIStsp/articles/output.html" class="uri">http://ropensci.github.io/MODIStsp/articles/output.html</a>).</p></li>
+<li><p><strong>Save Time Series as</strong>: Specify if virtual multitemporal files should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are “R” rasterStacks, ENVI meta-files and GDAL “vrt” files. In particular, “R” rasterStacks may be useful in order to easily access the preprocessed MODIS data within “R” scripts (see also <a href="https://ropensci.github.io/MODIStsp/articles/output.html" class="uri">https://ropensci.github.io/MODIStsp/articles/output.html</a>).</p></li>
 <li><p><strong>Modify No Data</strong>: Specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the “MODIStsp_Products_Opts” XML file. By selecting “Yes” in the “Change Original NoData values” check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. <strong>NOTE:</strong> Some MODIS layers have multiple NoData (a.k.a. <em>fill</em>) values. if <em>Modify No Data</em> is set to “Yes”, <code>MODIStsp</code> will convert all <em>fill</em> values to a common output NoData value!</p></li>
 <li><p><strong>Apply Scale/Offset</strong>: Specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true “measure units” of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in degrees Kelvin, etc.).</p></li>
 </ul>
@@ -459,7 +459,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <h3 class="hasAnchor">
 <a href="#main-modistsp-output-folder" class="anchor"></a><strong>Main MODIStsp Output Folder</strong>
 </h3>
-<p>Select the main folder where the pre-processed time series data will be stored. All <code>MODIStsp</code> outputs <strong>will be placed in specific sub-folders of this main folder</strong> (see <a href="http://ropensci.github.io/MODIStsp/articles/output.html" class="uri">http://ropensci.github.io/MODIStsp/articles/output.html</a> for details on <code>MODIStsp</code> naming conventions)-.</p>
+<p>Select the main folder where the pre-processed time series data will be stored. All <code>MODIStsp</code> outputs <strong>will be placed in specific sub-folders of this main folder</strong> (see <a href="https://ropensci.github.io/MODIStsp/articles/output.html" class="uri">https://ropensci.github.io/MODIStsp/articles/output.html</a> for details on <code>MODIStsp</code> naming conventions)-.</p>
 <p>The <strong>“Reprocess Existing Data”</strong> check-box allows to decide if images already available should be reprocessed if a new run of MODIStsp is launched with the same output folder. If set to “No”, MODIStsp skips dates for which output files following the MODIStsp naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates.</p>
 </div>
 <div id="folder-for-permanent-storage-of-original-modis-hdf-images" class="section level3">
@@ -721,7 +721,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <h1 class="hasAnchor">
 <a href="#problems-and-issues" class="anchor"></a>Problems and Issues</h1>
 <p>Solutions to some common <strong>installation and processing problems</strong> can be found in MODIStsp FAQ:</p>
-<p><a href="http://ropensci.github.io/MODIStsp/articles/faq.html" class="uri">http://ropensci.github.io/MODIStsp/articles/faq.html</a></p>
+<p><a href="https://ropensci.github.io/MODIStsp/articles/faq.html" class="uri">https://ropensci.github.io/MODIStsp/articles/faq.html</a></p>
 <ul>
 <li>Please <strong>report any issues</strong> you may encounter in our issues page on GitHub:</li>
 </ul>
@@ -752,37 +752,13 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.
 <div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">sudo</span> apt-get install r-base</span></code></pre></div>
 </div>
 </div>
-<div id="installing-gdal-1-11-1" class="section level2">
+<div id="installing-gdal-2-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installing-gdal-1-11-1" class="anchor"></a>Installing GDAL &gt;= 1.11.1</h2>
+<a href="#installing-gdal-2-3" class="anchor"></a>Installing GDAL &gt;= 2.3</h2>
 <div id="windows-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#windows-1" class="anchor"></a>Windows</h3>
-<p>The easiest way to install GDAL on Windows is from the <a href="https://trac.osgeo.org/osgeo4w/">OSGeo4W Website</a></p>
-<ol style="list-style-type: decimal">
-<li>Open the <a href="https://trac.osgeo.org/osgeo4w/">OSGeo4W Website</a>
-</li>
-<li>In the <strong>Quick Start for OSGeo4W Users</strong> section, select the download of 32bit or 64bit of OSGeo4W network installer</li>
-<li>Run the installer</li>
-</ol>
-<ul>
-<li>
-<em>Easiest Option</em>:
-<ul>
-<li>Select <strong>Express Desktop Install</strong>, then proceed with the installation. This will install GDAL and also other useful Spatial Processing software like <a href="http://www.qgis.org/">QGIS</a> and <a href="https://grass.osgeo.org/">GRASS GIS</a>
-</li>
-</ul>
-</li>
-<li>
-<em>Advanced Option</em>:
-<ul>
-<li>Select <strong>Advanced Install</strong>, then click on “Next” a few times until you reach the “Select Packages” screen.</li>
-<li>Click on “Commandline_Utilities_”, and on the list look for "_gdal: The GDAL/OGR library…" entry</li>
-<li>Click on “Skip”: the word “skip” will be replaced by the current GDAL version number</li>
-<li>Click on “Next” a few times to install GDAL</li>
-</ul>
-</li>
-</ul>
+<p>Starting from MODIStsp 1.4.0, no external GDAL installation is needed - MODIStsp exploits the gdalUtilities package to access GDAL functionality through the sf::gdal_utils() function.</p>
 </div>
 <div id="debian-and-ubuntu-based-systems" class="section level3">
 <h3 class="hasAnchor">

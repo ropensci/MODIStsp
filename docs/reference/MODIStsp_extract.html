@@ -94,7 +94,7 @@ SpatialPolygons, etc.)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.9.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -345,7 +345,7 @@ belonging to the polygon, and one line for each date.</p>
 <span class='co'># 2016-01-01 and 2016-12-18</span>
 <span class='co'># __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series\/RData"</span>
 <span class='co'># subfolder of your main output folder - see</span>
-<span class='co'># "http://ropensci.github.io/MODIStsp/articles/output.html")</span>
+<span class='co'># "https://ropensci.github.io/MODIStsp/articles/output.html")</span>
 
 <span class='co'># Specify the filename of the RData RasterStack of interest</span>
 <span class='no'>stack_file</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
@@ -369,7 +369,7 @@ belonging to the polygon, and one line for each date.</p>
                              <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>out_dataavg</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)
 
 <span class='co'># use a different summarization function</span>
 
@@ -377,7 +377,7 @@ belonging to the polygon, and one line for each date.</p>
                               <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>"sd"</span>, <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>out_datasd</span>)
 
-<span class='co'># (See also http://ropensci.github.io/MODIStsp/articles/Analyze.html for a</span>
+<span class='co'># (See also https://ropensci.github.io/MODIStsp/articles/Analyze.html for a</span>
 <span class='co'># worked-out example)</span>
 }</div></pre>
   </div>

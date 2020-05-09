@@ -131,6 +131,31 @@ DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
               escape = -5, options = list(pageLength = 10, searching = TRUE))
 ```
 
+## _Radiation_
+
+```{r tabrad, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE, results="asis"}
+library(xtable)
+tab <- cat_products %>% 
+  dplyr::filter(cat02 == "Radiation") %>% 
+  dplyr::mutate(Code = as.factor(stringr::str_split_fixed(Name, ":", 2)[,1])) %>% 
+  dplyr::mutate(Name = as.factor(stringr::str_split_fixed(Name, ":", 3)[,2])) %>% 
+  dplyr::select(Code, Name, Version, Resolution, Info) %>% 
+  dplyr::mutate(Resolution =  as.numeric(as.character(Resolution))) %>%  
+  dplyr::mutate(Resolution = as.factor(format(Resolution, digits = 2, 
+                                              nsmall = 1))) %>%
+  dplyr::mutate(Info = paste0("<a href='", Info,"'>", "Link","</a>")) 
+
+# dplyr::select(Name, Version, Resolution, Info)
+# knitr::kable(cat2_products)
+# tab <- knitr::kable(tab, digits = 1, align = c("l","l","c","c","l"),
+#                     col.names = c("Product Code", "Product Name", "Version",
+#                                   "Native Resolution", "Info"))
+# print(tab, type = "html")
+library(DT)
+DT::datatable(tab, rownames = FALSE, filter = "top", style = "bootstrap",
+              escape = -5, options = list(pageLength = 10, searching = TRUE))
+```
+
 ________________________________________________________________________________
 
 

@@ -9826,7 +9826,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MOD13C2: MODIS/Terra Vegetation Indices Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
+                    <prod_fullname>M*D13C2: MODIS/Terra/Aqua Vegetation Indices Monthly L3 Global 0.05Deg CMG V006</prod_fullname>
                     <main_out_folder>VI_Monthly_005dg_v6</main_out_folder>
                     <native_res>5600</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD13C2.006/</http_terra>
@@ -10047,7 +10047,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MOD13Q1: MODIS/Terra Vegetation Indices 16-Day L3 Global 250m Grid SIN V006</prod_fullname>
+                    <prod_fullname>M*D13Q1: MODIS/Terra/Aqua Vegetation Indices 16-Day L3 Global 250m Grid SIN V006</prod_fullname>
                     <main_out_folder>VI_16Days_250m_v6</main_out_folder>
                     <native_res>231.656358</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.006/</http_terra>
@@ -10709,7 +10709,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MOD16A2: MODIS/Terra Net Evapotranspiration 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
+                    <prod_fullname>M*D16A2: MODIS/Terra/Aqua Net Evapotranspiration 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>Net_ET_8Day_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD16A2.006/</http_terra>
@@ -10808,7 +10808,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MOD16A3: MODIS/Terra Net Evapotranspiration Yearly L4 Global 500 m SIN Grid V006</prod_fullname>
+                    <prod_fullname>M*D16A3: MODIS/Terra/Aqua Net Evapotranspiration Yearly L4 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>Net_ET_Yearly_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD16A3.006/</http_terra>
@@ -11212,7 +11212,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MODIS/Terra Land Water Mask Global 250 m SIN Grid V006</prod_fullname>
+                    <prod_fullname>M*D44W: MODIS/Terra Land Water Mask Global 250 m SIN Grid V006</prod_fullname>
                     <main_out_folder>Land_Wat_Mask_Yearly_250m_v6</main_out_folder>
                     <native_res>231.6564</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD44W.006/</http_terra>
@@ -12166,7 +12166,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MODIS/Terra+Aqua MAIAC Land Surface BRF Daily L2G Global 500 m and 1 km SIN Grid</prod_fullname>
+                    <prod_fullname>MCD19A1: MODIS/Terra+Aqua MAIAC Land Surface BRF Daily L2G Global 500 m and 1 km SIN Grid</prod_fullname>
                     <main_out_folder>MAIA_Land_Surf_BRF_500</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD19A1.006/</http_terra>
@@ -12494,7 +12494,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>MODIS/Terra and Aqua MAIAC Land Aerosol Optical Depth Daily L2G 1 km SIN Grid.</prod_fullname>
+                    <prod_fullname>MCD19A2: MODIS/Terra and Aqua MAIAC Land Aerosol Optical Depth Daily L2G 1 km SIN Grid.</prod_fullname>
                     <main_out_folder>MAIA_Land_Surf_BRF_500</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOTA/MCD19A2.006/</http_terra>

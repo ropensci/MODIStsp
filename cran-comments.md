@@ -1,3 +1,34 @@
+MODIStsp 1.4.0
+================
+
+## Test environments
+
+* Windows 10 on local install, R 3.6.3
+* Windows 10 on local install, R 4.0
+* Ubuntu 16.04 on travis-ci (devel and release)
+* win-builder (R-devel, R-release)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs
+
+There is a NOTE related to suggeting a orphaned package (gWidgets)
+I received a mail from Prof. Ripley about that recently. As suggested, I temporarily moved gWidgets to suggests and use it conditionally for the time being, with the intention of removing the dependency in the next MODIstsp release by switching to a Shiny-based GUI. 
+
+## Note on installation on macos 
+
+Build on macos currently fails (also for MODIStsp 1.3.8) with error
+
+"ERROR Package required but not available: ‘gWidgetsRGtk2’"
+
+due to erroring in build of package "RGtk2". 
+
+MODIStsp can be however installed by installing RGtk2 beforehand, following
+instructions reported here: 
+
+http://lbusett.github.io/MODIStsp/articles/installation.html#installing-on-mac
+
+
 MODIStsp 1.3.9
 ================
 

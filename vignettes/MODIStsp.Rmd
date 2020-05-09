@@ -872,23 +872,14 @@ With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommen
 sudo apt-get install r-base
 ```
 
-## Installing GDAL >= 1.11.1
+## Installing GDAL >= 2.3
 
 ### Windows
 
-The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
+Starting from MODIStsp 1.4.0, no external GDAL installation is needed - MODIStsp
+exploits the gdalUtilities package to access GDAL functionality through the 
+sf::gdal_utils() function. 
 
-1. Open the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
-2. In the **Quick Start for OSGeo4W Users** section, select the download of 32bit or 64bit of OSGeo4W network installer
-3. Run the installer
-  + _Easiest Option_: 
-    +  Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing software like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
-  + _Advanced Option_: 
-    +  Select **Advanced Install**, then click on "Next" a few times until you reach the "Select Packages" screen. 
-    +  Click on "Commandline_Utilities_", and on the list look for "_gdal: The GDAL/OGR library..." entry
-    +  Click on "Skip": the word "skip" will be replaced by the current GDAL version number
-    +  Click on "Next" a few times to install GDAL
-    
 ### Debian and Ubuntu-based systems
 
 1. Ensure that your repositories contain a version of ```gdal-bin``` >= 1.11.1. 
