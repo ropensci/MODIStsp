@@ -11,8 +11,8 @@
 
 
 context("MODIStsp Test 4: HTTP download from NSIDC (seasonal)")
-testthat::test_that("Tests on MODIStsp", {
-
+test_that("Tests on MODIStsp", {
+  #
   # skip("Skip tests - since they rely on download they are only run locally")
   skip_on_cran()
   # skip_on_travis()
@@ -21,9 +21,12 @@ testthat::test_that("Tests on MODIStsp", {
   out_files_dat <- list.files(
     file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
     pattern = "[0-9]\\.dat$", recursive = TRUE, full.names = TRUE)
+  out_files_hdr <- list.files(
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    pattern = "[0-9]\\.hdr$", recursive = TRUE, full.names = TRUE)
   file_sizes_dat <- file.info(out_files_dat)$size
-  # checking only the .dat because depending on file system the
-  # ENVI hdr files may have slightly different file sizes !
+  # # checking only the .dat because depending on file system the
+  # # ENVI hdr files may have slightly different file sizes !
   expect_equal(file_sizes_dat, c(91872, 91872, 91872, 91872),
                tolerance = 0.001, scale = 1)
   means <- unlist(
@@ -59,17 +62,13 @@ testthat::test_that("Tests on MODIStsp", {
   # check correct resampling and reprojection
   expect_equal(raster::res(r), c(1553.030, 1551.724),
                tolerance = 0.01, scale = 1)
-  expect_equal(
-    sp::proj4string(r),
-    "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"#nolint
-  )
+  expect_equal(sf::st_crs(r)$input,
+               "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0")
   unlink(out_files_dat)
+  unlink(out_files_hdr)
   unlink(out_files_rts)
-
-  # MODIStsp(test = "04b")
-
-
-  # test proper behaviour if only Aqua selected
+  #
+  #   # test proper behaviour if only Aqua selected
   MODIStsp(test = "04a")
   context("MODIStsp Test 4: Proper functioning when only AQUA is selected")
   out_files_rts <- list.files(
@@ -80,6 +79,16 @@ testthat::test_that("Tests on MODIStsp", {
 
   #check that rts files are properly created
   expect_equal(length(out_files_rts), 1)
+  unlink(out_files_rts)
+
+  out_files_dat <- list.files(
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    pattern = "[0-9]\\.dat$", recursive = TRUE, full.names = TRUE)
+  out_files_hdr <- list.files(
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    pattern = "[0-9]\\.hdr$", recursive = TRUE, full.names = TRUE)
+  unlink(out_files_hdr)
+  unlink(out_files_dat)
 
   MODIStsp(test = "04c")
   context("MODIStsp Test 4: Reassign multiple nodata on notiled processing")
@@ -88,7 +97,13 @@ testthat::test_that("Tests on MODIStsp", {
       tempdir(),
       "MODIStsp/Snow_cov_mnt_005dg_v6/SN_COV_MNT/"),
     pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
-  r <- suppressWarnings(rgdal::GDALinfo(out_files_tif[1]))
-  expect_equal(attr(r, "df")$NoDataValue, 255)
+  r <- sf::gdal_utils("info", out_files_tif[1], quiet = TRUE)
+  expect_equal(substring(strsplit(r, "NoData Value=")[[1]][2], 1, 3),
+               "255")
+  unlink(out_files_tif)
 
+  out_files_rts <- list.files(
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    pattern = "\\.RData$", recursive = TRUE, full.names = TRUE)
+  unlink(out_files_rts)
 })

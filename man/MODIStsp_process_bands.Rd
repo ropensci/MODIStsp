@@ -4,16 +4,38 @@
 \alias{MODIStsp_process_bands}
 \title{MODIStsp helper for processing original HDF layers}
 \usage{
-MODIStsp_process_bands(out_folder_mod, modislist, outproj_str,
-  mod_proj_str, sens_sel, band, bandname, date_name, datatype, nodata_in,
-  nodata_out, full_ext, bbox, scale_val, scale_factor, offset, out_format,
-  outrep_file, compress, out_res_sel, out_res, resampling, gui, mess_lab,
-  verbose)
+MODIStsp_process_bands(
+  out_folder_mod,
+  modislist,
+  outproj_str,
+  mod_proj_str,
+  sens_sel,
+  band,
+  bandname,
+  date_name,
+  datatype,
+  nodata_in,
+  nodata_out,
+  full_ext,
+  bbox,
+  scale_val,
+  scale_factor,
+  offset,
+  out_format,
+  outrep_file,
+  compress,
+  out_res_sel,
+  out_res,
+  resampling,
+  gui,
+  mess_lab,
+  verbose
+)
 }
 \arguments{
 \item{out_folder_mod}{\code{character} Output folder for original HDF storage.}
 
-\item{modislist}{\code{character array} List of MODIS images to be downloaded for
+\item{modislist}{\verb{character array} List of MODIS images to be downloaded for
 the selected date (as returned from \code{get_mod_filenames}). Can be a single
 image, or a list of images in case different tiles are needed!}
 
@@ -39,7 +61,7 @@ processed.}
 \item{nodata_out}{\code{numeric} Output nodata value to the HDF layer to be
 processed.}
 
-\item{full_ext}{\code{characrter ["FullTiles" | "Resized"]} If "Full_Ext", process
+\item{full_ext}{\code{logic} If TRUE, process``
 the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.}
 

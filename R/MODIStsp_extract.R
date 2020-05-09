@@ -18,16 +18,16 @@
 #'
 #' @param in_rts A `RasterStack` bject created by MODIStsp
 #'  (it MUST contain acquisition dates in the "Z" attribute)
-#' @param sp_object "sp" object OR name of an ESRI shapefile specifying the
-#'  "positions" from which data has to be extracted.
-#'  - If `sp_object` represents lines, the output object contains one column for
+#' @param sf_object "sf" object OR name of an GDAL-readable vector file specifying the
+#'  "area" from which data has to be extracted.
+#'  - If `sf_object` represents lines, the output object contains one column for
 #'    each line, containing values obtained applying the function specified
 #'    as the FUN argument over all pixels touched by the line, and one line for
 #'     each date.
-#'  - If `sp_object` represents points, the output object contains one column
+#'  - If `sf_object` represents points, the output object contains one column
 #'    for each point, containing values of the cells corresponding to the point,
 #'    and one line for each date.
-#'  - If `sp_object` represents polygons, the output object contains one column
+#'  - If `sf_object` represents polygons, the output object contains one column
 #'    for each polygon, containing values obtained applying the function
 #'    specified as the FUN argument over all pixels belonging to the polygon,
 #'    and one line for each date
@@ -44,7 +44,7 @@
 #'   MUST be unique. The names of the columns of the output are taken from this
 #'   column. If not provided, or an invalid value is provided, then the names
 #'   of the columns of the output reflect the number of the feature in
-#'   `sp_object`.
+#'   `sf_object`.
 #' @param FUN function to summarize the values (e.g. mean) on polygon data frames.
 #'  The function should take a single numeric vector as argument and return a
 #'  single value (e.g. mean, min or max), and accept a na.rm argument. Thus,
@@ -62,7 +62,7 @@
 #'  centroid are considered (faster, may have problems on strangely shaped
 #'  polygons). If set to "full", then all cells intersected by the small polygon
 #'  are extracted and used in calculations, Default: "centroids"
-#' @param na.rm	`logical` If TRUE, and sp_object is a polygon, then na.rm = TRUE
+#' @param na.rm	`logical` If TRUE, and sf_object is a polygon, then na.rm = TRUE
 #'  is used when applying FUN to the different pixels of the polygon, Default = TRUE.
 #' @param verbose `logical` If TRUE, messages on processing status are sent
 #'  to the console. Default = TRUE.
@@ -75,14 +75,11 @@
 #' @note License: GPL 3.0
 #' @export
 #' @rdname MODIStsp_extract
-#' @importFrom rgdal readOGR writeOGR
-#' @importFrom xts as.xts
+#' @importFrom raster getZ extent extract res raster getValues
+#' @importFrom sf st_as_sf st_read st_crs st_transform st_as_text st_crop st_geometry st_write st_coordinates
+#' @importFrom gdalUtilities gdal_rasterize
 #' @importFrom data.table data.table setkey
-#' @importFrom raster getValues crop extent getZ extract rasterize res
-#' @importFrom sp coordinates CRS proj4string spTransform
-#' @importFrom tools file_path_sans_ext
-#' @importFrom gdalUtils gdal_rasterize
-#' @importFrom rgeos gCentroid
+#' @importFrom xts as.xts
 #' @examples
 #' \dontrun{
 #' # Extract average and standard deviation values from a rts object created by
@@ -112,7 +109,7 @@
 #' # 2016-01-01 and 2016-12-18
 #' # __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series\/RData"
 #' # subfolder of your main output folder - see
-#' # "http://docs.ropensci.org/MODIStsp/articles/output.html")
+#' # "https://ropensci.github.io/MODIStsp/articles/output.html")
 #'
 #' # Specify the filename of the RData RasterStack of interest
 #' stack_file  <- file.path(tempdir(),
@@ -144,12 +141,12 @@
 #'                               FUN = "sd", small = FALSE)
 #' head(out_datasd)
 #'
-#' # (See also http://docs.ropensci.org/MODIStsp/articles/Analyze.html for a
+#' # (See also https://ropensci.github.io/MODIStsp/articles/Analyze.html for a
 #' # worked-out example)
 #' }
 
 
-MODIStsp_extract <- function(in_rts, sp_object,
+MODIStsp_extract <- function(in_rts, sf_object,
                              start_date = NULL,  end_date = NULL,
                              id_field   = NULL,  FUN      = "mean",
                              out_format = "xts", small    = TRUE,
@@ -197,21 +194,23 @@ MODIStsp_extract <- function(in_rts, sp_object,
     message("Unknown 'out_format' value - resetting to 'xts'")
     out_format <- "xts"
   }
-  if (!class(sp_object) %in% c("SpatialPolygonsDataFrame",
-                               "SpatialPolygons", "SpatialPointsDataFrame",
-                               "SpatialPoints",
-                               "SpatialLines", "SpatialLinesDataFrame")) {
-    if (class(sp_object) == "character") {
-      sp_object <- try(
-        rgdal::readOGR(dirname(sp_object),
-                       basename(tools::file_path_sans_ext(sp_object))))
-      if (class(sp_object) == "try-error") {
-        stop("sp_object is not a valid Spatial object or Shapefile")
+
+  if (length(attributes(attributes(sf_object)[["class"]])[["package"]]) != 0 &&
+      attributes(attributes(sf_object)[["class"]])[["package"]] == "sp") {
+    sf_object <- sf::st_as_sf(sf_object)
+  }
+
+  if (!inherits(sf_object, "sf")) {
+    if (inherits(sf_object, "character")) {
+      sf_object <- try(
+        sf::st_read(sf_object))
+      if (inherits(sf_object, "try-error")) {
+        stop("sf_object is not a valid Spatial object or Shapefile")
       }
     }
   }
   if (length(id_field) != 0) {
-    if (!id_field %in% names(sp_object)) {
+    if (!id_field %in% names(sf_object)) {
       warning("Invalid 'id_field' value - names of output columns will be the ",
               "record number of the shapefile feature")
       id_field <- NULL
@@ -221,28 +220,31 @@ MODIStsp_extract <- function(in_rts, sp_object,
   sel_dates <- which(dates >= start_date & dates <= end_date)
 
   if (length(sel_dates) > 0) {
-    if (sp::proj4string(sp_object) != sp::proj4string(in_rts)) {
-      sp_object <- sp::spTransform(sp_object,
-                                   sp::CRS(sp::proj4string(in_rts[[1]])))
+    if (sf::st_crs(sf_object) != sf::st_crs(in_rts[[1]])) {
+      sf_object <- sf::st_transform(sf_object,
+                                    sf::st_crs(in_rts[[1]]))
     }
-    sp_object@data$mdxtnq <- seq_along(sp_object@data[, 1])
-    shape <- raster::crop(sp_object, raster::extent(in_rts[[1]]))
+
+    sf_object$mdxtnq <- seq_along(1:dim(sf_object)[1])
+    # shape <- raster::crop(as(sf_object, "Spatial"),  raster::extent(in_rts[[1]]))
+    # shape <- sf::st_as_sf(shape)
+    shape <- sf::st_crop(sf_object, in_rts[[1]])
     if (!isTRUE(all.equal(raster::extent(shape),
-                          (raster::extent(sp_object)), scale = 100))) {
+                          (raster::extent(sf_object)), scale = 100))) {
       warning("Some features of the spatial object are outside or partially ",
               "outside\n the extent of the input RasterStack ! Output for ",
               "features outside RasterStack extent\n will be set to NA. ",
               "Outputs for features only partially inside will be retrieved\n ",
               "using only the available pixels !")
-      if (!setequal(sp_object$mdxtnq, shape$mdxtnq)) {
+      if (!setequal(sf_object$mdxtnq, shape$mdxtnq)) {
 
-        outside_feat <- setdiff(sp_object$mdxtnq, shape$mdxtnq)
+        outside_feat <- setdiff(sf_object$mdxtnq, shape$mdxtnq)
       }
     }
-    if (class(shape) %in% c("SpatialPointsDataFrame", "SpatialPoints",
-                            "SpatialLines", "SpatialLinesDataFrame")) {
+    if (inherits(sf::st_geometry(shape), c("sfc_POINT", "sfc_MULTIPOINT",
+                            "sfc_LINESTRING", "sfc_MULTILINESTRING"))) {
 
-      ts <- matrix(nrow = length(sel_dates), ncol = length(shape[, 1]))
+      ts <- matrix(nrow = length(sel_dates), ncol = dim(shape)[1])
       for (f in seq_along(sel_dates)) {
         if (verbose == TRUE) {
           message("Extracting data from date: ", dates[sel_dates[f]]) #nocov
@@ -250,12 +252,13 @@ MODIStsp_extract <- function(in_rts, sp_object,
         ts[f, ] <- raster::extract(in_rts[[sel_dates[f]]], shape,
                                    fun = FUN)
       }
+
       ts <- as.data.frame(ts)
       if (length(id_field) == 1) {
-        feat_names <- as.character(shape@data[, eval(id_field)])
+        feat_names <- as.character(shape[[eval(id_field)]])
         names(ts) <- c(feat_names)
       } else {
-        names(ts) <- seq_along(shape[, 1])
+        names(ts) <- seq_along(shape[[1]])
       }
 
       if (out_format == "dframe") {
@@ -266,23 +269,20 @@ MODIStsp_extract <- function(in_rts, sp_object,
       if (verbose) message("Rasterizing shape") #nocov
 
       tempshape <- tempfile(tmpdir = tempdir(), fileext = ".shp")
-      rgdal::writeOGR(shape, dsn = dirname(tempshape),
-                      layer = basename(tools::file_path_sans_ext(tempshape)),
-                      driver = "ESRI Shapefile", overwrite_layer = TRUE,
-                      verbose = FALSE)
       if (verbose) {
         message("Writing temporary rasterized shapefile") #nocov
       }
+      sf::st_write(shape, tempshape, delete_dsn = TRUE, quiet = TRUE)
       tempraster <- tempfile(tmpdir = tempdir(), fileext = ".tiff")
       ext_conv <- function(x) {
         ext <- raster::extent(x)
         c(ext[1], ext[3], ext[2], ext[4])
       }
-      if (max(shape@data$mdxtnq) <= 255) {
+      if (max(shape$mdxtnq) <= 255) {
         ot <- "Byte"
       } else {
         #nocov start
-        if (max(shape@data$mdxtnq) <= 65536) {
+        if (max(shape$mdxtnq) <= 65536) {
 
           ot <- "Int16"
         }
@@ -291,9 +291,12 @@ MODIStsp_extract <- function(in_rts, sp_object,
         }
         #nocov end
       }
-      gdalUtils::gdal_rasterize(tempshape, tempraster, tr = raster::res(in_rts),
-                                te = ext_conv(in_rts[[1]]), a = "mdxtnq",
-                                ot = ot)
+      gdalUtilities::gdal_rasterize(tempshape,
+                                    tempraster,
+                                    tr = raster::res(in_rts),
+                                    te = ext_conv(in_rts[[1]]),
+                                    a = "mdxtnq",
+                                    ot = ot)
       zone_raster <- raster::raster(tempraster)
       zones       <- raster::getValues(zone_raster)
       ok_zones    <- which(is.finite(zones) & zones != 0)
@@ -316,30 +319,30 @@ MODIStsp_extract <- function(in_rts, sp_object,
       ts <- as.data.frame(ts)
       if (length(id_field) == 1) {
         feat_names <- as.character(
-          sp_object@data[, eval(id_field)])[sort(unique(zones))]
-
+          sf_object[[eval(id_field)]][sort(unique(zones))]
+        )
         names(ts) <- feat_names
       }
       else {
-        feat_names <- as.character(shape@data[, "mdxtnq"])[sort(unique(zones))]
+        feat_names <- as.character(sf_object[["mdxtnq"]])[sort(unique(zones))]
         names(ts) <- feat_names
       }
       if (out_format == "dframe") {
         ts <- cbind(date = dates[sel_dates], ts)
       }
 
-      if (small & ncols != length(shape@data[, 1])) {
+      if (small & ncols != dim(shape)[1]) {
 
         if (length(id_field) == 1) {
-          miss_feat   <- setdiff(as.character(shape@data[, eval(id_field)]),
+          miss_feat   <- setdiff(as.character(shape[[eval(id_field)]]),
                                  names(ts))
           pos_missing <- which(
-            as.character(shape@data[, eval(id_field)]) %in% miss_feat
+            as.character(shape[[eval(id_field)]]) %in% miss_feat
           )
         } else {
-          miss_feat <- setdiff(as.character(shape@data[, "mdxtnq"]), names(ts))
+          miss_feat <- setdiff(as.character(shape[["mdxtnq"]]), names(ts))
           pos_missing <- which(
-            as.character(shape@data[, "mdxtnq"]) %in% miss_feat
+            as.character(shape[["mdxtnq"]]) %in% miss_feat
           )
         }
 
@@ -352,7 +355,7 @@ MODIStsp_extract <- function(in_rts, sp_object,
           }
           if (small_method == "centroids") {
             ts_mis[f, ] <- raster::extract(in_rts[[sel_dates[f]]],
-                                           sp::coordinates(shpsub),
+                                           sf::st_coordinates(shpsub),
                                            fun = mean)
 
           } else {
@@ -373,12 +376,11 @@ MODIStsp_extract <- function(in_rts, sp_object,
     if (exists("outside_feat")) {
       if (length(id_field) == 1) {
         feat_names_outside <- as.character(
-          sp_object@data[, eval(id_field)])[outside_feat]
+          sf_object[[eval(id_field)]])[outside_feat]
 
       } else {
         feat_names_outside <- as.character(
-          sp_object@data[, "mdxtnq"])[outside_feat]
-
+          sf_object[["mdxtnq"]])[outside_feat]
       }
 
       ts_outside <- matrix(nrow = length(sel_dates),
@@ -387,14 +389,12 @@ MODIStsp_extract <- function(in_rts, sp_object,
       names(ts_outside) <- feat_names_outside
       ts <- cbind(ts, ts_outside)
       if (length(id_field) == 1) {
-
-        sortindex <- which(!is.na(match(sp_object@data[, eval(id_field)],
+        sortindex <- which(!is.na(match(sf_object[[eval(id_field)]],
                                         names(ts))))
       } else {
-        sortindex <- which(!is.na(match(sp_object@data[,  "mdxtnq"],
+        sortindex <- which(!is.na(match(sf_object[["mdxtnq"]],
                                         names(ts))))
       }
-
       ts <- ts[, sortindex]
     }
     if (out_format == "xts") {

@@ -4,9 +4,19 @@
 \alias{check_files_existence}
 \title{Check if all files required for a given date already exist}
 \usage{
-check_files_existence(out_prod_folder, file_prefix, yy, DOY, bandnames,
-  bandsel_orig_choice, indexes_bandnames, indexes_bandsel,
-  quality_bandnames, quality_bandsel, out_format)
+check_files_existence(
+  out_prod_folder,
+  file_prefix,
+  yy,
+  DOY,
+  bandnames,
+  bandsel_orig_choice,
+  indexes_bandnames,
+  indexes_bandsel,
+  quality_bandnames,
+  quality_bandsel,
+  out_format
+)
 }
 \arguments{
 \item{out_prod_folder}{\code{character} MODIStsp output folder}
@@ -18,22 +28,22 @@ check_files_existence(out_prod_folder, file_prefix, yy, DOY, bandnames,
 
 \item{DOY}{\code{character} doy}
 
-\item{bandnames}{\code{character array} Bandnames of the MODIS product}
+\item{bandnames}{\verb{character array} Bandnames of the MODIS product}
 
-\item{bandsel_orig_choice}{\code{numeric 0/1 array} Indicates which original MODIS
+\item{bandsel_orig_choice}{\verb{numeric 0/1 array} Indicates which original MODIS
 layers were selected for processing (does not contain names of bands needed
 to compute SIs but not selected by the user!)}
 
-\item{indexes_bandnames}{\code{character array} Names of available spectral
+\item{indexes_bandnames}{\verb{character array} Names of available spectral
 indexes (standard + custom) available for the currently processed product}
 
-\item{indexes_bandsel}{\code{numeric 0/1 array} Indicates which spectral indexes
+\item{indexes_bandsel}{\verb{numeric 0/1 array} Indicates which spectral indexes
 were selected for processing}
 
-\item{quality_bandnames}{\code{character array} Name of available Quality
+\item{quality_bandnames}{\verb{character array} Name of available Quality
 Indicators for the currently processed product}
 
-\item{quality_bandsel}{\code{numeric 0/1 array} Indicates which Quality Indicators
+\item{quality_bandsel}{\verb{numeric 0/1 array} Indicates which Quality Indicators
 were selected}
 
 \item{out_format}{\code{character} GTiff or ENVI}

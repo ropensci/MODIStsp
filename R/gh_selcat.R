@@ -1,13 +1,19 @@
 #' @title gh_selcat
 #' @description Handler for the actions to be taken when the category of product
 #'  is changed
-#' @importFrom gWidgets svalue enabled
 #' @noRd
 #'
 gh_selcat <- function(h, wids,
                       mod_prod_list, mod_prod_cat,
                       prod_opt_list, general_opts) {
   #nocov start
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   # Identify only products of this category
 
   sel_prod    <- mod_prod_list[mod_prod_cat$cat == gWidgets::svalue(wids$cat)][1] #nolint
@@ -36,8 +42,7 @@ gh_selcat <- function(h, wids,
     gWidgets::enabled(bbox_group)  <- TRUE
     gWidgets::svalue(wids$output_ext)   <- "Define Custom Area"
     gWidgets::svalue(wids$proj_choice)  <- "Native"
-    gWidgets::svalue(wids$output_proj4) <-
-      "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
+    gWidgets::svalue(wids$output_proj4) <- 4008
     gWidgets::svalue(wids$output_xmin) <- -180
     gWidgets::svalue(wids$output_xmax) <-  180
     gWidgets::svalue(wids$output_ymin) <- -90
@@ -54,9 +59,8 @@ gh_selcat <- function(h, wids,
       gWidgets::enabled(bbox_group)   <- FALSE
       gWidgets::enabled(tiles_group)  <- TRUE
     }
-    gWidgets::svalue(wids$proj_choice)    <- "Native"
-    gWidgets::svalue(wids$output_proj4) <-
-      "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+    gWidgets::svalue(wids$proj_choice)  <- "Native"
+    gWidgets::svalue(wids$output_proj4) <- "MODIS Sinusoidal" #nolint
   }
 
   # reset dummy variables for band selection to 0 on product change

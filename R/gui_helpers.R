@@ -7,8 +7,6 @@
 #' @description Helper function to update the labels of the gui showing the
 #'  bounding box coordinates when a spatial file is selected or a projection
 #'  change is issued.
-#' @importFrom raster crop extent
-#' @importFrom gWidgets svalue
 #' @noRd
 #'
 gui_update_bboxlabels <- function(bbox_out,
@@ -16,6 +14,14 @@ gui_update_bboxlabels <- function(bbox_out,
                                   wids,
                                   reset = FALSE) {
   #nocov start
+
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
 
   if (!reset) {
     digits <- ifelse(units == "dec.degrees", 5, 1)
@@ -49,8 +55,7 @@ gui_update_bboxlabels <- function(bbox_out,
 #' @title gui_update_tiles
 #' @description Helper function to update the selected tiles with the
 #' intersection with the bounding box
-#' @importFrom raster crop extent
-#' @importFrom gWidgets svalue
+#' @importFrom sf st_crop
 #' @noRd
 #'
 gui_update_tiles <- function(bbox_out,
@@ -59,13 +64,24 @@ gui_update_tiles <- function(bbox_out,
                              modis_grid,
                              wids) {
   #nocov start
-
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   bbox_mod  <- reproj_bbox(bbox_out,
                            curr_proj,
                            mod_proj_str,
                            enlarge = TRUE)
 
-  d_bbox_mod_tiled    <- raster::crop(modis_grid, raster::extent(bbox_mod))
+  d_bbox_mod_tiled     <- suppressWarnings(sf::st_crop(modis_grid,
+                                                       xmin = bbox_mod[1],
+                                                       ymin = bbox_mod[2],
+                                                       xmax = bbox_mod[3],
+                                                       ymax = bbox_mod[4]))
+
   gWidgets::svalue(wids$start_x) <- min(d_bbox_mod_tiled$H)
   gWidgets::svalue(wids$end_x)   <- max(d_bbox_mod_tiled$H)
   gWidgets::svalue(wids$start_y) <- min(d_bbox_mod_tiled$V)
@@ -77,36 +93,62 @@ gui_update_tiles <- function(bbox_out,
 # gui_get_proj ----
 #' @title gui_get_proj
 #' @description GUI Helper functions to get currently selected projection
+#' @importFrom sf st_crs st_point st_sfc
 #' @importFrom utils head tail
 #' @noRd
 #'
-gui_get_proj <- function(curr_proj) {
-  #nocov start
-  utils::head(strsplit(utils::tail(
-    strsplit(curr_proj@projargs, "+proj=")[[1]], 1), " +")[[1]], 1)
-  #nocov end
-}
+# gui_get_proj <- function(newproj) {
+#   #nocov start
+#
+#   if (!is.na(as.numeric(newproj))) {
+#     newproj = as.numeric(newproj)
+#   } else {
+#     if (general_opts$output_proj == "MODIS Sinusoidal") {
+#       outproj <- sf::st_as_text(sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs")) #nolint)
+#     }
+#   }
+#   spcrs <- sf::st_crs(newproj)
+#   browser()
+#   # utils::head(strsplit(utils::tail(
+#   #   strsplit(spcrs, "+proj=")[[1]], 1), " +")[[1]], 1)
+#   #nocov end
+# }
 
 # gui_get_units ----
 #' @title gui_get_units
 #' @description GUI Helper functions to get measure units of currently selected
 #'  projection
-#' @importFrom utils head tail
+#' @importFrom sf st_crs st_point st_sfc
 #' @noRd
 #'
-gui_get_units <- function(curr_proj,
-                          proj) {
-  #nocov start
-  if (proj == "longlat") {
-    units <- "dec.degrees"
+gui_get_units <- function(newproj) {
+
+  # nocov start
+  if(suppressWarnings(is.character(newproj) && !is.na(as.numeric(newproj)))) {
+    newproj <- as.numeric(newproj)
   } else {
-    units <- ifelse(
-      length(strsplit(curr_proj@projargs, "+units=")[[1]]) > 1,
-      utils::head(strsplit(utils::tail(strsplit(
-        curr_proj@projargs, "+units=")[[1]], 1), " +")[[1]], 1),
-      "Unknown"
-    )
+    if (newproj == "MODIS Sinusoidal") {
+      newproj <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs") #nolint)
+    }
   }
+  # sfcrs <- sf::st_crs(newproj)$proj4string
+
+  # workaround to allow getting units from crs - create a dmmy sf
+  # object
+  pt = sf::st_sfc(sf::st_point(c(0,1)), crs =  sf::st_crs(newproj))
+  pt_crs = sf::st_crs(pt, parameters = TRUE)
+  units <- pt_crs[["units_gdal"]]
+
+  # if (proj == "longlat") {
+  #   units <- "dec.degrees"
+  # } else {
+  #   units <- ifelse(
+  #     length(strsplit(spcrs, "+units=")[[1]]) > 1,
+  #     utils::head(strsplit(utils::tail(strsplit(
+  #       spcrs, "+units=")[[1]], 1), " +")[[1]], 1),
+  #     "Unknown"
+  #   )
+  # }
   units
   #nocov end
 }
@@ -115,9 +157,7 @@ gui_get_units <- function(curr_proj,
 #' @title gui_load_options
 #' @description GUI Helper function used to load options from JSON and set
 #'  values of the GUI accordingly
-#' @importFrom gWidgets svalue gmessage
 #' @importFrom jsonlite fromJSON
-#' @importFrom raster crop extent
 #' @noRd
 #'
 gui_load_options <- function(opts_jsfile,
@@ -125,12 +165,18 @@ gui_load_options <- function(opts_jsfile,
                              prod_opt_list,
                              compress_dict) {
   #nocov start
-
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   # load file and reset all widgets to values found in the loaded file
   general_opts <- try(jsonlite::fromJSON(opts_jsfile), silent = TRUE)
 
   # stop on error
-  if (class(general_opts) == "try-error") {
+  if (inherits(general_opts, "try-error")) {
     stop("Unable to read the provided JSON options file. Please check your ",
          "inputs!")
   }
@@ -197,7 +243,9 @@ gui_load_options <- function(opts_jsfile,
   gWidgets::svalue(wids$output_res_sel)  <- general_opts$out_res_sel
   gWidgets::svalue(wids$output_res)      <- general_opts$out_res
   gWidgets::svalue(wids$output_resmeth)  <- general_opts$resampling
-  gWidgets::svalue(wids$output_ext)      <- general_opts$full_ext
+  gWidgets::svalue(wids$output_ext)      <- ifelse(general_opts$full_ext == TRUE,
+                                                   "Select MODIS Tiles",
+                                                   "Define Custom Area")
   gWidgets::svalue(wids$output_xmin)     <- general_opts$bbox[1]
   gWidgets::svalue(wids$output_xmax)     <- general_opts$bbox[3]
   gWidgets::svalue(wids$output_ymin)     <- general_opts$bbox[2]
@@ -224,9 +272,8 @@ gui_load_options <- function(opts_jsfile,
 #' @description Helper function to check consistency of the selected processing
 #'  options before saving to a json file or starting MODIStsp processing
 #' @noRd
-#' @importFrom gWidgets gconfirm gmessage svalue
-#' @importFrom jsonlite fromJSON
-#' @importFrom raster crop extent
+#' @importFrom jsonlite fromJSON write_json
+#' @importFrom sf st_crop st_bbox
 #' @noRd
 gui_save_options <- function(general_opts,
                              gui_env,
@@ -238,7 +285,13 @@ gui_save_options <- function(general_opts,
                              compress_dict,
                              wids) {
   #nocov start
-
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   # workaround to retrieve custom index, since it was already saved to the
   # JSON but it is not available in current variables
 
@@ -249,7 +302,7 @@ gui_save_options <- function(general_opts,
   # retrieve product options
   general_opts$sel_prod <- mod_prod_list[
     which(mod_prod_list == gWidgets::svalue(wids$prod))
-    ]
+  ]
   general_opts$prod_version <-
     prod_opt_list[[general_opts$sel_prod]][[which(vapply(
       prod_opt_list[[general_opts$sel_prod]],
@@ -296,7 +349,16 @@ gui_save_options <- function(general_opts,
   general_opts$out_res_sel <- gWidgets::svalue(wids$output_res_sel)
   general_opts$out_res     <- gWidgets::svalue(wids$output_res)
   general_opts$resampling  <- gWidgets::svalue(wids$output_resmeth)
-  general_opts$full_ext    <- gWidgets::svalue(wids$output_ext)
+  general_opts$full_ext    <- ifelse(gWidgets::svalue(wids$output_ext) == "Select MODIS Tiles",
+                                     TRUE,
+                                     FALSE)
+  out_bbox <-  c(gWidgets::svalue(wids$output_xmin),
+                 gWidgets::svalue(wids$output_ymin),
+                 gWidgets::svalue(wids$output_xmax),
+                 gWidgets::svalue(wids$output_ymax))
+  if (any(out_bbox == "NULL")) out_bbox[] <- NA
+  if (any(is.na(out_bbox)))    out_bbox[] <- NA
+
   general_opts$bbox        <- c(gWidgets::svalue(wids$output_xmin),
                                 gWidgets::svalue(wids$output_ymin),
                                 gWidgets::svalue(wids$output_xmax),
@@ -358,11 +420,11 @@ gui_save_options <- function(general_opts,
   }
 
   if (
-    class(try(as.Date(general_opts$start_date),
-              silent = TRUE)) == "try-error" |
-    class(try(as.Date(general_opts$end_date),
-              silent = TRUE)) == "try-error"
-  ) {
+    inherits(try(as.Date(general_opts$start_date),
+                 silent = TRUE), "try-error") |
+    inherits(try(as.Date(general_opts$end_date),
+                 silent = TRUE) ,"try-error")
+  ){
     gWidgets::gmessage(
       message = "One or both dates are in wrong format - Please correct!",
       title   = "Warning"
@@ -381,7 +443,7 @@ gui_save_options <- function(general_opts,
   suppressWarnings(general_opts$bbox <- as.numeric(general_opts$bbox))
   general_opts$bbox <- as.numeric(general_opts$bbox)
   n_bbox_compiled   <- length(which(is.finite(general_opts$bbox)))
-  if (general_opts$full_ext == "Define Custom Area") {
+  if (general_opts$full_ext == FALSE) {
     if (n_bbox_compiled == 4) {
       if (general_opts$bbox[1] > general_opts$bbox[3] |
           general_opts$bbox[2] > general_opts$bbox[4]) {
@@ -401,15 +463,19 @@ gui_save_options <- function(general_opts,
 
   # Check if selected tiles are consistent with the bounding box
   # (only if product is not tiled)
-  if (general_opts$full_ext == "Define Custom Area" &
-      prod_opt_list[[svalue(wids$prod)]][[svalue(wids$vers)]][["tiled"]] == 1 &
+  if (general_opts$full_ext == FALSE &
+      prod_opt_list[[gWidgets::svalue(wids$prod)]][[gWidgets::svalue(wids$vers)]][["tiled"]] == 1 &
       gui_env$check_save_opts) {
     bbox_mod         <- reproj_bbox(
       general_opts$bbox,
       gWidgets::svalue(wids$output_proj4), mod_proj_str,
       enlarge = FALSE
     )
-    d_bbox_mod_tiled <- raster::crop(modis_grid, raster::extent(bbox_mod))
+    d_bbox_mod_tiled <- suppressWarnings(sf::st_crop(modis_grid,
+                                                     xmin = bbox_mod[1],
+                                                     ymin = bbox_mod[2],
+                                                     xmax = bbox_mod[3],
+                                                     ymax = bbox_mod[4]))
     required_tiles   <- paste0(
       "H",
       apply(expand.grid("H" = min(d_bbox_mod_tiled$H):max(d_bbox_mod_tiled$H),
@@ -576,9 +642,17 @@ gui_save_options <- function(general_opts,
 #' @description Helper function used to send out messages when the user tries
 #'  to change projection
 #' @noRd
-#' @importFrom gWidgets gconfirm
 
 warn_projmess1 <- function() {
+
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
+
   #nocov start
   gWidgets::gconfirm(strwrap(
     "WARNING! Changing projection may introduce positional errors in the output

@@ -1,3 +1,15 @@
+## MODIStsp 1.3.9.9000
+
+### Main changes
+
+- switch to use of GDAL3/PROJ6 WKTs for projection representation, using sf::gdal_utils to perform gdalwarp/gdaltranslate instead of gdalUtils on external GDAL.
+
+- switch to sf for all internal work on vector data.
+
+- Remove sp, rgdal, rgeos, pacman, gdalUtils dependencies
+
+- Adds support for products MCD19A1 and MCD19A2 products
+
 ## MODIStsp 1.3.9
 
 ### Main changes

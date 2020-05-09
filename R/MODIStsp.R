@@ -40,15 +40,10 @@
 #' @export
 #' @seealso [MODIStsp_GUI()], [MODIStsp_process()]
 #' @rdname MODIStsp
-#' @importFrom gdalUtils gdal_setInstallation gdalinfo
-#' @importFrom gWidgets gwindow glabel addHandlerUnrealize dispose font
-#' @importFrom pacman p_exists p_load
 #' @importFrom raster rasterOptions crop extent
-#' @importFrom rgdal getGDALVersionInfo
-#' @importFrom stringr str_pad
+#' @importFrom sf sf_extSoftVersion st_as_text st_crs
 #' @importFrom jsonlite fromJSON write_json
 #' @importFrom tools file_path_sans_ext
-#' @importFrom utils packageVersion
 #' @importFrom utils unzip
 #' @examples
 #'
@@ -125,7 +120,7 @@
 #'
 #' plot(raster(outfiles_iseo[1]))
 #'
-#' # See also http://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html
+#' # See also https://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html
 #' }
 
 MODIStsp <- function(gui               = TRUE,
@@ -135,7 +130,7 @@ MODIStsp <- function(gui               = TRUE,
                      test              = NULL,
                      n_retries         = 20,
                      verbose           = TRUE) {
-  options("guiToolkit" = "RGtk2")
+
   # Make so that "raster" functions does not automatically add extensions on
   # output files. This is automatically reset to TRUE at the end of the session
   raster::rasterOptions(setfileext = FALSE)
@@ -202,8 +197,9 @@ MODIStsp <- function(gui               = TRUE,
       pattern    = "\\.hdf\\.zip$",
       full.names = TRUE
     )
+
     for (test_hdf in gsub("\\.zip$", "", tests_hdf_zipped)) {
-      if (!file.exists(test_hdf)) {
+      if (!file.exists(file.path(tempdir(), "MODIStsp/HDFs", basename(test_hdf)))) {
         unzip(zipfile = paste0(test_hdf, ".zip"),
               files   = basename(test_hdf),
               exdir   = file.path(tempdir(), "MODIStsp/HDFs"),
@@ -225,78 +221,20 @@ MODIStsp <- function(gui               = TRUE,
 
   if (gui) {
     #nocov start
-    if (!pacman::p_exists("gWidgetsRGtk2", local = TRUE)) {
-
-      message(strwrap("Library 'gWidgetsRGtk2' is not installed. It is required
-                      to run MODIStsp in interactive mode!\n\n",
-                      "Do you want to install it now?"),
-              type = " y / n")
-      inst_gw <- readline()
-      if (inst_gw == "y") {
-        pacman::p_load("gWidgetsRGtk2")
-      } else {
-        stop(strwrap("MODIStsp can not work in Interactive mode without
-                     gWidgetsRGtk2! Aborting!"))
-      }
-
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
     }
     options("guiToolkit" = "RGtk2")
     #nocov end
   }
 
-  # Check GDAL version ----
-  if (is.null(getOption("gdalUtils_gdalPath"))) {
-
-    welcome_text <- strwrap("Welcome to MODIStsp!\n\nWe will now search for a
-                            valid GDAL installation - please wait! (this will
-                            happen only once)", width = 60)
-    if (gui) {
-      #nocov start
-      welcome_win       <- gWidgets::gwindow(title  = "Welcome", width = 400,
-                                             height = 100)
-
-      welcome_lab       <- gWidgets::glabel(text      = welcome_text,
-                                            container = welcome_win,
-                                            editable  = FALSE)
-      gWidgets::font(welcome_lab) <- list(family = "sans",
-                                          style = "italic", size = 10)
-      Sys.sleep(0.05)
-      message("[", date(), "] ", welcome_text)
-      #nocov end
-    } else {
-      message("[", date(), "] ", welcome_text)
-    }
-
-    gdalUtils::gdal_setInstallation(ignore.full_scan = TRUE)
-  }
-  # gdal_version <- package_version(
-  #   gsub("^GDAL ([0-9.]*)[0-9A-Za-z/., ]*", "\\1",
-  #        rgdal::getGDALVersionInfo(str = "--version"))
-  # )
-
-  gdal_version <- getOption("gdalUtils_gdalPath")[[1]]$version[[1]]
+  gdal_version <- sf::sf_extSoftVersion()[["GDAL"]]
 
   if (verbose) message("GDAL version in use: ", as.character(gdal_version))
-
-  gdal_version <- as.numeric(substring(gdal_version, 1,3))
-
-  # GDAL version used as minimum required version
-  gdal_minversion  <- package_version("2.2.3")
-  gdal_hdf_support <- length(grep("HDF4",
-                                  gdalUtils::gdalinfo(formats = TRUE))) > 0
-
-  if (gdal_version < gdal_minversion) {
-    stop(paste0("GDAL version must be at least ",
-                gdal_minversion,
-                ". Please update it."))
-  }
-
-  if (!gdal_hdf_support) {
-    stop("Your local GDAL installation does not support HDF4 format.\n",
-         "Please install HDF4 support and recompile GDAL. See:\n",
-         strwrap("http://docs.ropensci.org/MODIStsp/articles/installation.html#
-      installing-r-and-gdal", width = 200))
-  }
 
   # ____________________________________________________________________________
   # Files/Folder Initialization and set-up of default parameters            ####
@@ -322,7 +260,6 @@ MODIStsp <- function(gui               = TRUE,
 
   # Load the processing options from the user provided "options_file", or from
   # `previous_jsfile`
-  #
 
   general_opts <- load_opts(previous_jsfile)
 
@@ -333,9 +270,12 @@ MODIStsp <- function(gui               = TRUE,
 
   if (gui) {
     #nocov start
-
-    if (exists("welcome_lab")) {
-      gWidgets::dispose(welcome_lab)
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
     }
     start <- MODIStsp_GUI(general_opts,
                           prod_opt_list,
@@ -358,7 +298,7 @@ MODIStsp <- function(gui               = TRUE,
     if (file.exists(previous_jsfile)) {
       general_opts <- try(jsonlite::fromJSON(previous_jsfile))
       # stop on error
-      if (class(general_opts) == "try-error") {
+      if (inherits(general_opts, "try-error")) {
         stop(
           "Unable to read the provided JSON options file. Please check your ",
           "inputs!"
@@ -406,7 +346,7 @@ MODIStsp <- function(gui               = TRUE,
     custom_idx <- general_opts$custom_indexes[[sel_prod]][[sel_ver]]
 
     # Workaround to avoid error if only one custom index exists
-    if (class(custom_idx) == "character") {
+    if (inherits(custom_idx, "character")) {
       custom_idx <- data.frame(
         indexes_bandnames  = custom_idx["indexes_bandnames"],
         indexes_fullnames  = custom_idx["indexes_fullnames"],
@@ -425,17 +365,40 @@ MODIStsp <- function(gui               = TRUE,
       format(as.Date(general_opts$end_date), "%Y.%m.%d")
     )
 
-    # If the product is NOT tiled, set or_proj to WGS84 and or_res from
+    # If the product is NOT tiled, set or_proj to EPSG:4008 and or_res from
     # metres to degrees
+    # Input projection: If the comment on the CRS does not exist (PROJ <6)
+    # use proj4string. Otherwise, use WKT comment.
+    #
     if (prod_opts$tiled == 0) {
-      mod_proj_str <- "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs"
+      # mod_proj_str <- CRS("+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs") #nolint
+
+      # EPSG for proj definition on latlon data (4008)
+      mod_proj_str <- sf::st_crs(4008) #nolint
+
       prod_opts$native_res <- format(
         as.numeric(prod_opts$native_res) * (0.05 / 5600)
       )
     } else {
-      # default projection string for MODIS gridded data
-      mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+      # default WKT for MODIS gridded data
+      # mod_proj_str <- "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs" #nolint
+      mod_proj_str <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs") #nolint)
     }
+
+    # if (is.null(attr(mod_proj_str, "comment"))) {
+    #   mod_proj_str <- as.character(mod_proj_str)
+    # } else {
+    #   mod_proj_str <- attr(mod_proj_str, "comment")
+    # }
+    # work on output projection - for the time being, convert to WKT if GDAL >3.
+    # needs to be revised!!!!
+
+    if (general_opts$output_proj == "MODIS Sinusoidal") {
+      outproj <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs") #nolint)
+    } else {
+      outproj <- sf::st_crs(check_projection(general_opts$output_proj))
+    }
+
     # get native resolution if out_res empty
     if (general_opts$out_res == "" | general_opts$out_res_sel == "Native") {
       general_opts$out_res <- prod_opts$native_res
@@ -451,9 +414,10 @@ MODIStsp <- function(gui               = TRUE,
       # bounding box
 
       external_bbox <- try(bbox_from_file(spatial_file_path,
-                                          general_opts$output_proj4),
+                                          general_opts$output_proj),
                            silent = TRUE)
-      if (class(external_bbox) == "try-error") {
+
+      if (inherits(external_bbox, "try-error")) {
         stop("Failed in retrieving processing extent from ",
              spatial_file_path,
              " . Please check your inputs! Aborting."
@@ -471,17 +435,19 @@ MODIStsp <- function(gui               = TRUE,
 
       # Overwrite the full_ext option (avoids that, if the options_file
       # specifies a full processing, the incorrect parameter is passed)
-      general_opts$full_ext <- "Define Custom Area"
+      general_opts$full_ext <- FALSE
 
       # Automatically retrieve the tiles required to cover the extent
       modis_grid  <- get(load(system.file("ExtData", "MODIS_Tiles.RData",
                                           package = "MODIStsp")))
       external_bbox_mod    <- reproj_bbox(external_bbox,
-                                          general_opts$output_proj4,
+                                          general_opts$output_proj,
                                           mod_proj_str,
                                           enlarge = TRUE)
-      d_bbox_mod_tiled     <- raster::crop(modis_grid,
-                                           raster::extent(external_bbox_mod))
+
+      d_bbox_mod_tiled     <- suppressWarnings(sf::st_crop(modis_grid,
+                                                           sf::st_bbox(raster::extent(external_bbox_mod))) )
+
       general_opts$start_x <- min(d_bbox_mod_tiled$H)
       general_opts$end_x   <- max(d_bbox_mod_tiled$H)
       general_opts$start_y <- min(d_bbox_mod_tiled$V)
@@ -511,9 +477,7 @@ MODIStsp <- function(gui               = TRUE,
                      start_y            = general_opts$start_y,
                      end_x              = general_opts$end_x,
                      end_y              = general_opts$end_y,
-                     full_ext           = ifelse(
-                       general_opts$full_ext == "Select MODIS Tiles",
-                       "FullTiles", "Resized"),
+                     full_ext           = general_opts$full_ext,
                      bbox               = general_opts$bbox,
                      out_format         = general_opts$out_format,
                      out_res_sel        = general_opts$out_res_sel,
@@ -524,7 +488,7 @@ MODIStsp <- function(gui               = TRUE,
                      ts_format          = general_opts$ts_format,
                      compress           = general_opts$compress,
                      mod_proj_str       = mod_proj_str,
-                     outproj_str        = general_opts$output_proj4,
+                     outproj_str        = outproj,
                      nodata_in          = prod_opts$nodata_in,
                      nodata_out         = prod_opts$nodata_out,
                      nodata_change      = general_opts$nodata_change,

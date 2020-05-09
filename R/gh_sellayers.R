@@ -2,8 +2,6 @@
 #' @description GUI Handler for events that occurr when the "Change selection"
 #'  button is clicked
 #' @importFrom jsonlite fromJSON
-#' @importFrom gWidgets svalue gbasicdialog ggroup gframe gcheckboxgroup
-#'  addSpring gbutton font visible
 #' @importFrom utils browseURL
 #' @noRd
 #' @inheritParams MODIStsp_GUI
@@ -14,6 +12,14 @@ gh_sellayers <- function(prodopts_file,
                          out_proj_list,
                          help_messages) {
   #nocov start
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
+
   prod_opt_list <- get(load(prodopts_file))
   general_opts  <- jsonlite::fromJSON(opts_jsfile)
   curr_prod     <- gWidgets::svalue(wids$prod)
@@ -165,7 +171,7 @@ gh_sellayers <- function(prodopts_file,
       container = cbox_indexes,
       use.table = FALSE
     )
-    glabel(text = "", container = cbox_indexes)
+    gWidgets::glabel(text = "", container = cbox_indexes)
 
     ##  .................................................................. #
     ##  Here we create the sub child widget for creation of custom      ####
@@ -207,7 +213,7 @@ gh_sellayers <- function(prodopts_file,
           tmp_arr_qual[wids$pos] <- 1
           gui_env$temp_wid_bands_quality <- tmp_arr_qual
         }
-        dispose(selgroup)
+        gWidgets::dispose(selgroup)
       },
       container = cbox_indexes,
       expand = FALSE
@@ -221,7 +227,7 @@ gh_sellayers <- function(prodopts_file,
   }
 
   # Start/Cancel buttons for layers selection child widget ----
-  bands_group <- ggroup(container = cbox_main, horizontal = FALSE)
+  bands_group <- gWidgets::ggroup(container = cbox_main, horizontal = FALSE)
 
   # Widget for "www" button for layers selection child widget ----
   gWidgets::addSpring(bands_group)

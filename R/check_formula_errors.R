@@ -3,7 +3,6 @@
 #'  It is called from the GUI when "Add" button is chosen, or when the function starts
 #'  in non-interactive mode.
 #' @inheritParams MODIStsp_addindex
-#' @importFrom pacman p_exists p_load
 #' @importFrom stringr str_detect
 #' @noRd
 #' @return `numeric` error code between 0 and 3. 0 means all checks passed
@@ -17,14 +16,14 @@ check_formula_errors <- function(new_indexbandname,
                                  refbands_names,
                                  avail_refbands,
                                  general_opts) {
-  
+
   catch_err <- 0 # error 0: no errors
-  
+
   # Check that the name, the fullname and the formula fields are not null
   if (any(c(new_indexbandname, new_indexfullname, new_indexformula) == "")) {
     catch_err <- 3 # error 3: blank parameters
   }
-  
+
   # Look for valid band names in index formula
   req_bands <- c(stringr::str_detect(new_indexformula, "b1_Red"),
                  stringr::str_detect(new_indexformula, "b2_NIR"),
@@ -33,11 +32,11 @@ check_formula_errors <- function(new_indexbandname,
                  stringr::str_detect(new_indexformula, "b5_SWIR"),
                  stringr::str_detect(new_indexformula, "b6_SWIR"),
                  stringr::str_detect(new_indexformula, "b7_SWIR"))
-  
+
   # Create dummy variables named as the required bands, assign random values
   # to them, and then verify if formula is computable by evaluate/parse and
   # check for errors
-  
+
   if (req_bands[1]) b1_Red   <- 5
   if (req_bands[2]) b2_NIR   <- 6
   if (req_bands[3]) b3_Blue  <- 7
@@ -45,18 +44,18 @@ check_formula_errors <- function(new_indexbandname,
   if (req_bands[5]) b5_SWIR  <- 9
   if (req_bands[6]) b6_SWIR  <- 15
   if (req_bands[7]) b7_SWIR  <- 25
-  
+
   if (any(req_bands)) {
     try_parse <- try(eval(parse(text = new_indexformula)), silent = TRUE)
-    if (class(try_parse) == "try-error") {
+    if (inherits(try_parse, "try-error")) {
       # error 1: error in the formula: expression not computable
       catch_err <- 1
     }
   } else {
     # error 1: error in the formula: no valid bands provided
     catch_err <- 1
-  } 
-  
+  }
+
   ## generate the list of all the index names
   all_indexes_bandnames <- all_indexes_fullnames <- NA
   # cycle on available products
@@ -79,7 +78,7 @@ check_formula_errors <- function(new_indexbandname,
   }
   all_indexes_bandnames <- unique(all_indexes_bandnames)
   all_indexes_fullnames <- unique(all_indexes_fullnames)
-  
+
   # verify that the index name and fullname is not already present
   if (catch_err == 0 & (new_indexbandname %in% all_indexes_bandnames |
                         new_indexfullname %in% all_indexes_fullnames)) {
@@ -95,8 +94,8 @@ check_formula_errors <- function(new_indexbandname,
       catch_err <- 1 #nocov (only possible on interactive exec.)
     }
   }
-  
+
   attr(catch_err, "req_bands") <- req_bands
   return(catch_err)
-  
+
 } # end of check_formula_errors()

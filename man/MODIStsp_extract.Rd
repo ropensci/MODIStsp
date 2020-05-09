@@ -4,25 +4,35 @@
 \alias{MODIStsp_extract}
 \title{Extract data from MODIStsp time series}
 \usage{
-MODIStsp_extract(in_rts, sp_object, start_date = NULL, end_date = NULL,
-  id_field = NULL, FUN = "mean", out_format = "xts", small = TRUE,
-  small_method = "centroids", na.rm = TRUE, verbose = FALSE)
+MODIStsp_extract(
+  in_rts,
+  sf_object,
+  start_date = NULL,
+  end_date = NULL,
+  id_field = NULL,
+  FUN = "mean",
+  out_format = "xts",
+  small = TRUE,
+  small_method = "centroids",
+  na.rm = TRUE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{in_rts}{A \code{RasterStack} bject created by MODIStsp
 (it MUST contain acquisition dates in the "Z" attribute)}
 
-\item{sp_object}{"sp" object OR name of an ESRI shapefile specifying the
-"positions" from which data has to be extracted.
+\item{sf_object}{"sf" object OR name of an GDAL-readable vector file specifying the
+"area" from which data has to be extracted.
 \itemize{
-\item If \code{sp_object} represents lines, the output object contains one column for
+\item If \code{sf_object} represents lines, the output object contains one column for
 each line, containing values obtained applying the function specified
 as the FUN argument over all pixels touched by the line, and one line for
 each date.
-\item If \code{sp_object} represents points, the output object contains one column
+\item If \code{sf_object} represents points, the output object contains one column
 for each point, containing values of the cells corresponding to the point,
 and one line for each date.
-\item If \code{sp_object} represents polygons, the output object contains one column
+\item If \code{sf_object} represents polygons, the output object contains one column
 for each polygon, containing values obtained applying the function
 specified as the FUN argument over all pixels belonging to the polygon,
 and one line for each date
@@ -43,7 +53,7 @@ shapefile to be used in the data extraction. Values contained in the column
 MUST be unique. The names of the columns of the output are taken from this
 column. If not provided, or an invalid value is provided, then the names
 of the columns of the output reflect the number of the feature in
-\code{sp_object}.}
+\code{sf_object}.}
 
 \item{FUN}{function to summarize the values (e.g. mean) on polygon data frames.
 The function should take a single numeric vector as argument and return a
@@ -66,7 +76,7 @@ centroid are considered (faster, may have problems on strangely shaped
 polygons). If set to "full", then all cells intersected by the small polygon
 are extracted and used in calculations, Default: "centroids"}
 
-\item{na.rm}{\code{logical} If TRUE, and sp_object is a polygon, then na.rm = TRUE
+\item{na.rm}{\code{logical} If TRUE, and sf_object is a polygon, then na.rm = TRUE
 is used when applying FUN to the different pixels of the polygon, Default = TRUE.}
 
 \item{verbose}{\code{logical} If TRUE, messages on processing status are sent
@@ -124,9 +134,9 @@ MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
 
 # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 # 2016-01-01 and 2016-12-18
-# __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series\\/RData"
+# __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series\/RData"
 # subfolder of your main output folder - see
-# "http://docs.ropensci.org/MODIStsp/articles/output.html")
+# "https://ropensci.github.io/MODIStsp/articles/output.html")
 
 # Specify the filename of the RData RasterStack of interest
 stack_file  <- file.path(tempdir(),
@@ -158,7 +168,7 @@ out_datasd <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type",
                               FUN = "sd", small = FALSE)
 head(out_datasd)
 
-# (See also http://docs.ropensci.org/MODIStsp/articles/Analyze.html for a
+# (See also https://ropensci.github.io/MODIStsp/articles/Analyze.html for a
 # worked-out example)
 }
 }

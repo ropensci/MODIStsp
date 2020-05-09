@@ -30,7 +30,7 @@ computable
 Critchlow
 cron
 crontab
-CRS
+crs
 DAAC
 dat
 datatypes
@@ -67,7 +67,9 @@ fullscreen
 gdal
 GDAL
 gdalinfo
+gdaltranslate
 gdalUtils
+gdalwarp
 Geosciences
 Geospatial
 GeoTiff
@@ -145,9 +147,7 @@ nodata
 Nodata
 NoData
 NODATA
-OGG
 OGR
-ogrinfo
 OSGeo
 OSX
 packages’
@@ -194,6 +194,7 @@ rescaled
 rescaling
 resetindexes
 rgdal
+rgeos
 RGRI
 RGtk
 ropensci
@@ -235,6 +236,8 @@ UInt
 urs
 usr
 vrt
+WKT
+WKTs
 writeRaster
 xmax
 xmin

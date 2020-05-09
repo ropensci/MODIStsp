@@ -6,46 +6,90 @@
 #'  one obtained by reprojecting the upper-left and the lower-right corners.
 #' @param bbox The input bounding box (it can be a matrix obtained from `sp::bbox()`,
 #'  or a numeric vector in the format (xmin, ymin, xmax, ymax)).
-#' @param in_proj `character` The input projection (proj4 format).
-#' @param out_proj `character` The output projection (proj4 format).
+#' @param in_proj (`crs` | `character`) crs of the input projection,
+#'  or string coercible to it using `sf::st_crs()` (e.g., WKT or numeric
+#'  EPSG code)
+#' @param out_proj `crs` `crs` of the output projection, or string coercible to
+#'  it using `sf::st_crs()` (e.g., WKT or numeric EPSG code)
 #' @param enlarge `logical`` if TRUE, the reprojected bounding box is the
 #'  one which completely include the original one; if FALSE, it is simply the
 #'  one obtained by reprojecting the upper-left and the lower-right corners.
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom sp bbox CRS Polygon Polygons proj4string SpatialPoints
-#'  SpatialPolygons spTransform
+#' @importFrom sf st_crs st_as_sf st_set_crs st_write st_as_text st_bbox st_read
+#' @importFrom gdalUtilities ogr2ogr
 
 reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE) {
 
+  if (!inherits(in_proj, "crs")) {
+    if (suppressWarnings(!is.na(as.numeric(in_proj)))) {
+      in_proj <- as.numeric(in_proj)
+    } else {
+      if (in_proj == "MODIS Sinusoidal") {
+        in_proj <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs") #nolint)
+      }
+    }
+    in_proj <- try(sf::st_crs(in_proj))
+    if (!inherits(in_proj, "crs")) {
+      stop("`in_proj` is not of (or can be convereted to) class `crs`.",
+           " Aborting!")
+    }
+  }
 
-  if (!any(is.na(bbox))) {
-  # densify the original bounding box
-  N_dens <- ifelse(enlarge, 1000, 1)
+  if (!inherits(out_proj, "crs")) {
+    if (suppressWarnings(!is.na(as.numeric(out_proj)))){
+      out_proj <- as.numeric(out_proj)
+    } else {
+      if (out_proj == "MODIS Sinusoidal") {
+        out_proj <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs") #nolint)
+      }}
+    out_proj <- try(sf::st_crs(out_proj))
+    if (!inherits(out_proj, "crs")) {
+      stop("`out_proj` is not of (or can be convereted to) class `crs`.",
+           " Aborting!")
+    }
+  }
 
-  d_bbox_in <- data.frame(
-    lon = as.numeric(c(bbox[1] + diff(bbox[c(1, 3)]) * (0:N_dens) / N_dens,
-            rep(bbox[3], N_dens - 1),
-            bbox[1] + diff(bbox[c(1, 3)]) * (N_dens:0) / N_dens,
-            rep(bbox[1], N_dens - 1))),
-    lat = as.numeric(c(rep(bbox[2], N_dens),
-            bbox[2] + diff(bbox[c(2, 4)]) * (0:N_dens) / N_dens,
-            rep(bbox[4], N_dens - 1),
-            bbox[2] + diff(bbox[c(2, 4)]) * (N_dens:1) / N_dens)),
-    stringsAsFactors = FALSE
-  )
+  if (suppressWarnings(!any(is.na(bbox)))) {
+    # densify the original bounding box
+    N_dens <- ifelse(enlarge, 1000, 1)
 
-  d_bbox_in <- as.matrix(d_bbox_in)
+    d_bbox_in <- data.frame(
+      X = as.numeric(c(bbox[1] + diff(bbox[c(1, 3)]) * (0:N_dens) / N_dens,
+                       rep(bbox[3], N_dens - 1),
+                       bbox[1] + diff(bbox[c(1, 3)]) * (N_dens:0) / N_dens,
+                       rep(bbox[1], N_dens - 1))),
+      Y = as.numeric(c(rep(bbox[2], N_dens),
+                       bbox[2] + diff(bbox[c(2, 4)]) * (0:N_dens) / N_dens,
+                       rep(bbox[4], N_dens - 1),
+                       bbox[2] + diff(bbox[c(2, 4)]) * (N_dens:1) / N_dens)),
+      stringsAsFactors = FALSE
+    )
 
-  # convert in a SpatialPolygons
-  d_bbox_in <- sp::SpatialPolygons(
-    list(sp::Polygons(list(sp::Polygon(d_bbox_in)), 1))
-  )
-  sp::proj4string(d_bbox_in) <- in_proj # assign the projection
-  # reproject the bbox in a polygon
-  d_bbox_out <- sp::spTransform(d_bbox_in, sp::CRS(out_proj))
+    # convert to sf POLYGON
 
-  return(sp::bbox(d_bbox_out))
+    pts      <- sf::st_as_sf(d_bbox_in, coords = c("X", "Y"), agr = "constant")
+    pts      <- sf::st_set_crs(pts, in_proj)
+
+    pts_convert <- sf::st_transform(pts, out_proj)
+    bbox_out    <- sf::st_bbox(pts_convert)
+    bbox_out <- matrix(bbox_out,
+                       ncol = 2,
+                       dimnames = list(c("x", "y"), c("min", "max")))
+
+    # Legacy Ugly workaround to avoid gdal3 problems: save temporary files and use
+    # gdalwarp for the conversion. This allows using WKT representation ----
+    # d_bbox_in_file <- tempfile(fileext = ".geojson")
+    # sf::st_write(pts, d_bbox_in_file, quiet = TRUE, delete_layer = TRUE)
+    #
+    # d_bbox_out_file <- tempfile(fileext = ".geojson")
+
+    # gdalUtilities::ogr2ogr(d_bbox_in_file, d_bbox_out_file,
+    #                        s_srs = sf::st_crs(in_proj),
+    #                        t_srs = sf::st_crs(out_proj))
+    #
+    # bbox_out <- as.numeric(sf::st_bbox(sf::st_read(d_bbox_out_file, quiet = TRUE)))
+    return(bbox_out)
   } else {
     return(bbox)
   }

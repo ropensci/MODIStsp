@@ -4,17 +4,62 @@
 \alias{MODIStsp_process}
 \title{MODIStsp main processing function}
 \usage{
-MODIStsp_process(sel_prod, start_date, end_date, out_folder,
-  out_folder_mod, reprocess = "Yes", delete_hdf = "No", sensor,
-  download_server, user, password, https, start_x, start_y, end_x, end_y,
-  full_ext, bbox, out_format, compress, out_res_sel, out_res, native_res,
-  tiled, mod_proj_str, outproj_str, nodata_in, nodata_out, nodata_change,
-  scale_val, scale_factor, offset, datatype, bandsel, bandnames,
-  indexes_bandsel, indexes_bandnames, indexes_formula, indexes_nodata_out,
-  quality_bandnames, quality_bandsel, quality_bitN, quality_source,
-  quality_nodata_in, quality_nodata_out, file_prefixes, main_out_folder,
-  resampling, ts_format, use_aria = TRUE, download_range = "full",
-  gui = TRUE, n_retries, verbose)
+MODIStsp_process(
+  sel_prod,
+  start_date,
+  end_date,
+  out_folder,
+  out_folder_mod,
+  reprocess = "Yes",
+  delete_hdf = "No",
+  sensor,
+  download_server,
+  user,
+  password,
+  https,
+  start_x,
+  start_y,
+  end_x,
+  end_y,
+  full_ext,
+  bbox,
+  out_format,
+  compress,
+  out_res_sel,
+  out_res,
+  native_res,
+  tiled,
+  mod_proj_str,
+  outproj_str,
+  nodata_in,
+  nodata_out,
+  nodata_change,
+  scale_val,
+  scale_factor,
+  offset,
+  datatype,
+  bandsel,
+  bandnames,
+  indexes_bandsel,
+  indexes_bandnames,
+  indexes_formula,
+  indexes_nodata_out,
+  quality_bandnames,
+  quality_bandsel,
+  quality_bitN,
+  quality_source,
+  quality_nodata_in,
+  quality_nodata_out,
+  file_prefixes,
+  main_out_folder,
+  resampling,
+  ts_format,
+  use_aria = TRUE,
+  download_range = "full",
+  gui = TRUE,
+  n_retries,
+  verbose
+)
 }
 \arguments{
 \item{sel_prod}{\code{character} Name of selected MODIS product.}
@@ -57,7 +102,7 @@ download.}
 
 \item{end_y}{\code{integer [0-17]} End vertical tile.}
 
-\item{full_ext}{\code{characrter ["FullTiles" | "Resized"]} If "Full_Ext", process
+\item{full_ext}{\code{logic} If TRUE, process``
 the entire extent of the selected tiles. Otherwise, crop the output to
 output bbox.}
 
@@ -84,10 +129,10 @@ unit). Ignored if out_res_sel == "Native".}
 
 \item{outproj_str}{\code{character} proj4 string of selected output projection.}
 
-\item{nodata_in}{\code{numeric array} Original NoData values of original layers of
+\item{nodata_in}{\verb{numeric array} Original NoData values of original layers of
 the selected MODIS product.}
 
-\item{nodata_out}{\code{numeric array} Target NoData values of MODIS original layers
+\item{nodata_out}{\verb{numeric array} Target NoData values of MODIS original layers
 (Ignored if nodata_change == FALSE).}
 
 \item{nodata_change}{\code{character ["Yes" | "No"]} if Yes, NoData are set to nodata_out
@@ -98,47 +143,47 @@ original MODIS layers, and Spectral Indexes are saved as floating point. If
 == "No", no rescaling is done and Spectral Indexes are saved as integer, with a
 10000 scaling factor.}
 
-\item{scale_factor}{\code{numeric array} of length equal to the number of original
+\item{scale_factor}{\verb{numeric array} of length equal to the number of original
 layers of the selected product, containing scale factors to be applied to each
 original layer to convert it to "correct" measure units.}
 
-\item{offset}{\code{numeric array} of length equal to the number of original
+\item{offset}{\verb{numeric array} of length equal to the number of original
 layers of the selected product, containing offsets to be applied to each
 original layer to convert it to "correct" measure units.}
 
-\item{datatype}{\code{character array} datatypes of original MODIS bands
+\item{datatype}{\verb{character array} datatypes of original MODIS bands
 (e.g., "INT2S").}
 
-\item{bandsel}{\code{integer 0/1 array} of length equal to number of original
+\item{bandsel}{\verb{integer 0/1 array} of length equal to number of original
 layers of the selected product set to 1 for bands to be processed.}
 
-\item{bandnames}{\code{character array} Abbreviated Names of original layers of the
+\item{bandnames}{\verb{character array} Abbreviated Names of original layers of the
 selected product (used to build output file names).}
 
-\item{indexes_bandsel}{\code{integer 0/1 array} array of length equal to the number
+\item{indexes_bandsel}{\verb{integer 0/1 array} array of length equal to the number
 of Spectral Indexes available for the product (standard + user-provided),
 set to  1 for indexes to be processed.}
 
-\item{indexes_bandnames}{\code{character array} Abbreviated Names of SIs available
+\item{indexes_bandnames}{\verb{character array} Abbreviated Names of SIs available
 for the selected product (used to build output file names of SIs).}
 
-\item{indexes_formula}{\code{character array} formulas of SIs available for the
+\item{indexes_formula}{\verb{character array} formulas of SIs available for the
 selected product (standard and custom).}
 
-\item{indexes_nodata_out}{\code{numeric array} NoData values to be used for SIs}
+\item{indexes_nodata_out}{\verb{numeric array} NoData values to be used for SIs}
 
-\item{quality_bandnames}{\code{character array} Abbreviated Names of Quality
+\item{quality_bandnames}{\verb{character array} Abbreviated Names of Quality
 Indicators available for the selected product (used to build output file
 names of QIs).}
 
-\item{quality_bandsel}{\code{integer 0|1 array} array of length equal to number
+\item{quality_bandsel}{\verb{integer 0|1 array} array of length equal to number
 of available QIs, set to  1 for indexes to be processed.}
 
-\item{quality_bitN}{\code{character array} with length equal to the number QIs
+\item{quality_bitN}{\verb{character array} with length equal to the number QIs
 available for the selected product. Each entry contains the position of the
 bits corresponding to a QI (e.g., 0-1) in its "source" MODIS layer.}
 
-\item{quality_source}{\code{character array} which connects each QI to its "source"
+\item{quality_source}{\verb{character array} which connects each QI to its "source"
 original MODIS layer (multiple QIs share the same "source", since they are
 derived from different bits of the bit-encoded layer).}
 
@@ -199,7 +244,7 @@ computation);
 }
 
 Reprojection and resize is dealt with by accessing gdal routines through the
-\href{https://CRAN.R-project.org/package=gdalUtils}{gdalUtils}
+\href{https://CRAN.R-project.org/package=gdalUtilities}{\code{gdalUtilities}}
 package.
 Extraction of bitfields from Quality layers is done though bitwise computation
 Checks are done in order to not re-download already existing HDF images, and not

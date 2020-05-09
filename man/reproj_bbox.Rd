@@ -10,9 +10,12 @@ reproj_bbox(bbox, in_proj, out_proj, enlarge = TRUE)
 \item{bbox}{The input bounding box (it can be a matrix obtained from \code{sp::bbox()},
 or a numeric vector in the format (xmin, ymin, xmax, ymax)).}
 
-\item{in_proj}{\code{character} The input projection (proj4 format).}
+\item{in_proj}{(\code{crs} | \code{character}) crs of the input projection,
+or string coercible to it using \code{sf::st_crs()} (e.g., WKT or numeric
+EPSG code)}
 
-\item{out_proj}{\code{character} The output projection (proj4 format).}
+\item{out_proj}{\code{crs} \code{crs} of the output projection, or string coercible to
+it using \code{sf::st_crs()} (e.g., WKT or numeric EPSG code)}
 
 \item{enlarge}{`logical`` if TRUE, the reprojected bounding box is the
 one which completely include the original one; if FALSE, it is simply the

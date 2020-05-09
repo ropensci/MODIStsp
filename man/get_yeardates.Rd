@@ -4,8 +4,7 @@
 \alias{get_yeardates}
 \title{identify dates to be processed for a year}
 \usage{
-get_yeardates(download_range, yy, start_year, end_year, start_date,
-  end_date)
+get_yeardates(download_range, yy, start_year, end_year, start_date, end_date)
 }
 \arguments{
 \item{download_range}{\code{character ["full" | "seasonal"]} If "full", all the
@@ -21,7 +20,7 @@ the images of December, January and February from 2005 to 2010 - excluding
 
 \item{end_year}{\code{numeric} end year of current \code{MODIStsp_process} run.}
 
-\item{start_date}{\code{character`` Start date for images download and preprocessing (yyyy.mm.dd) of current }MODIStsp_process` run.}
+\item{start_date}{\verb{character`` Start date for images download and preprocessing (yyyy.mm.dd) of current }MODIStsp_process` run.}
 
 \item{end_date}{\code{character} Start date for images download and preprocessing
 (yyyy.mm.dd) of current \code{MODIStsp_process} run.}

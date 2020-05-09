@@ -487,7 +487,7 @@ a single file without the need of creating large multitemporal raster images.
 Available virtual files formats are "R" rasterStacks, ENVI meta-files and GDAL 
 "vrt" files. In particular, "R" rasterStacks may be useful in order to easily 
 access the preprocessed MODIS data within "R" scripts 
-(see also http://ropensci.github.io/MODIStsp/articles/output.html).
+(see also https://ropensci.github.io/MODIStsp/articles/output.html).
 
 
 - **Modify No Data**: Specify if NoData values of MODIS layers should be kept
@@ -511,7 +511,7 @@ saved in degrees Kelvin, etc.).
 ### __Main MODIStsp Output Folder__
 
 Select the main folder where the pre-processed time series data will be stored. 
-All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see http://ropensci.github.io/MODIStsp/articles/output.html for details on `MODIStsp` 
+All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see https://ropensci.github.io/MODIStsp/articles/output.html for details on `MODIStsp` 
 naming conventions)-.
 
 The **"Reprocess Existing Data"** check-box allows to decide if images already 
@@ -838,7 +838,7 @@ As an example the following code:
 
 Solutions to some common **installation and processing problems** can be found in MODIStsp FAQ: 
 
-http://ropensci.github.io/MODIStsp/articles/faq.html
+https://ropensci.github.io/MODIStsp/articles/faq.html
 
 - Please **report any issues** you may encounter in our issues page on GitHub:
 
@@ -872,23 +872,14 @@ With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommen
 sudo apt-get install r-base
 ```
 
-## Installing GDAL >= 1.11.1
+## Installing GDAL >= 2.3
 
 ### Windows
 
-The easiest way to install GDAL on Windows is from the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
+Starting from MODIStsp 1.4.0, no external GDAL installation is needed - MODIStsp
+exploits the gdalUtilities package to access GDAL functionality through the 
+sf::gdal_utils() function. 
 
-1. Open the [OSGeo4W Website](https://trac.osgeo.org/osgeo4w/)
-2. In the **Quick Start for OSGeo4W Users** section, select the download of 32bit or 64bit of OSGeo4W network installer
-3. Run the installer
-  + _Easiest Option_: 
-    +  Select **Express Desktop Install**, then proceed with the installation. This will install GDAL and also other useful Spatial Processing software like [QGIS](http://www.qgis.org/) and [GRASS GIS](https://grass.osgeo.org/)
-  + _Advanced Option_: 
-    +  Select **Advanced Install**, then click on "Next" a few times until you reach the "Select Packages" screen. 
-    +  Click on "Commandline_Utilities_", and on the list look for "_gdal: The GDAL/OGR library..." entry
-    +  Click on "Skip": the word "skip" will be replaced by the current GDAL version number
-    +  Click on "Next" a few times to install GDAL
-    
 ### Debian and Ubuntu-based systems
 
 1. Ensure that your repositories contain a version of ```gdal-bin``` >= 1.11.1. 
@@ -937,11 +928,5 @@ then, check again to see if hdf4 is supported. The list should now include hdf4:
 ```
 
 Good luck!
-
-[^1^]: If you encounter problems installing the gWidgetsRGtk2 library, please signal it in the [issues](https://github.com/ropensci/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help you!
-
-[^2^]: At the first execution of _MODIStsp_, a Welcome screen will appear, signaling that MODIStsp is searching for a valid GDAL installation. Press "OK" and wait for GDAL to be found. If nothing happens for a long time (e.g., several minutes), MODIStsp (and in particular the gdalUtils package on which it relies) is not finding a valid GDAL installation in the more common locations. To solve the problem: i) ensure that GDAL is properly installed in your system; ii) (on Windows) if it is installed, verify that GDAL is in your system PATH. and that the _GDAL\_DATA_ environment variable is correctly set (You can find simple instructions [HERE](http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/)); iii) if nothing works, signal it in the [issues](https://github.com/ropensci/MODIStsp/issues) GitHub page of MODIStsp and we'll try to help!
-
-[^3^]: The lists of original MODIS layers, QIs and Sis available for the selected product are automatically retrieved from the "MODIStsp_Products_Opts" XML file distributed with the package in /ExtData subfolder.
 
 # References

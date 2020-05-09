@@ -30,8 +30,7 @@
 #' @author Lorenzo Busetto, phD (2014-2016) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom gWidgets gconfirm
-#' @importFrom httr GET timeout authenticate content
+#' @importFrom httr RETRY authenticate content
 #' @importFrom stringr str_split str_pad
 get_mod_filenames <- function(http,
                               used_server,
@@ -44,6 +43,14 @@ get_mod_filenames <- function(http,
                               tiled,
                               out_folder_mod,
                               gui) {
+
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
 
   success <- FALSE
   if (used_server == "http") {
@@ -65,6 +72,13 @@ get_mod_filenames <- function(http,
       # retry
       if (response$status_code != 200) {
         if (gui) {
+          if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+            stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+          } else {
+            requireNamespace("gWidgets")
+            requireNamespace("gWidgetsRGtk2")
+          }
           #nocov start
           confirm <- gWidgets::gconfirm(
             "http server seems to be down! Do you want to retry?",

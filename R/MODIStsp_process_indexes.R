@@ -28,7 +28,7 @@
 #' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}
 #' @note License: GPL 3.0
-#' @importFrom raster stack NAvalue overlay
+#' @importFrom raster NAvalue overlay
 #' @importFrom tools file_path_sans_ext
 MODIStsp_process_indexes <- function(out_filename,
                                      out_prod_folder,

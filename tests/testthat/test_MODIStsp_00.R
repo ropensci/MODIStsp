@@ -1,7 +1,8 @@
 context("MODIStsp Test 0: Gracefully fail on input problems")
-testthat::test_that(
+test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
+    skip_on_travis()
     # no options file
     expect_error(MODIStsp(gui = FALSE),
                  "Please provide a valid \"options_file\"")

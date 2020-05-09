@@ -1,38 +1,63 @@
 #' @title Retrieve bbox from a spatial file
 #' @description Helper function used to retrieve the bounding box of a specified spatial file
-#'   recognized by GDAL or OGG: the function reads the extent using gdalinfo or ogrinfo,
-#'   converting it to a specified CRS.
-#' @param file_path `string` path of a spatial file.
-#' @param crs_out `string` proj4string of the desired output projection.
-#' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
-#' @importFrom gdalUtils gdalsrsinfo gdalinfo
-#' @importFrom rgdal GDALinfo ogrInfo
-#' @importFrom methods is
+#'   recognized by  `sf` or `raster`: the function reads the extent using `sf::st_bbox()`
+#' @param file_path `character` path of a spatial file.
+#' @param crs_out  (`crs` | `character`) crs of the desired output projection,
+#' or string coercible to it using `sf::st_crs()` (e.g., WKT or numeric
+#' EPSG code)
+#' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
+#' @author Luigi Ranghetti, phD (2017) <ranghetti.l@irea.cnr.it>
+#' @importFrom sf st_crs st_read st_bbox
+#' @importFrom raster raster
 #' @note License: GPL 3.0
 
 bbox_from_file <- function(file_path, crs_out) {
 
-  # Retrieve CRS using gdal: if fails, then the file is not a valid spatial file
-  in_gdalinfo <- suppressWarnings(try(rgdal::GDALinfo(file_path),
-                                      silent = TRUE))
-  in_ogrinfo  <- suppressWarnings(try(rgdal::ogrInfo(file_path),
-                                      silent = TRUE))
-
-  if (methods::is(in_ogrinfo, "try-error") &
-      methods::is(in_gdalinfo, "try-error")) {
-    stop(file_path, "is not recognised by GDAL or OGR as a valid spatial",
-         "file. Please check your inputs. Aborting!")
+  #nocov start
+  if (!file.exists(file_path)) {
+    stop("Specified file path does not exist. Aborting!")
   }
 
-  # If it does not fail, then retrieve the bounding box
-  if (methods::is(in_gdalinfo, "try-error")) {
-    bbox_in <- matrix(in_ogrinfo$extent,
+  if(suppressWarnings(is.character(crs_out) && !is.na(as.numeric(crs_out)))) {
+    crs_out <- as.numeric(crs_out)
+  } else {
+    if (crs_out == "MODIS Sinusoidal") {
+      crs_out <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs") #nolint)
+    }
+  }
+
+  if (!inherits(crs_out, "crs")) {
+    crs_out <- try(sf::st_crs(crs_out))
+    if (!inherits(crs_out, "crs")) {
+      stop("`crs_out` is not an object of (or cohercible to) class `crs`.",
+           " Aborting!")
+    }
+  }
+  #nocov end
+
+  # try opening as vector. If it does not fail, then retrieve the bounding box
+  # of the vector and the wkt of the projection.
+  if (!inherits(try(vectin <- sf::st_read(file_path, quiet = TRUE),
+                    silent = TRUE), "try-error")) {
+
+    crs_in <- st_crs(vectin)
+    bbox_in <- matrix(as.numeric(sf::st_bbox(vectin)),
                       ncol = 2,
                       dimnames = list(c("x", "y"), c("min", "max")))
-    crs_in <- gdalUtils::gdalsrsinfo(file_path, as.CRS = TRUE)@projargs
-  } else if (methods::is(in_ogrinfo, "try-error")) {
-    bbox_in <- gdalUtils::gdalinfo(file_path, raw_output = FALSE)$bbox
-    crs_in  <- attr(in_gdalinfo, "projection")
+
+    # try opening as raster If it does not fail, then retrieve the bounding box
+    # of the raster and the wkt of the projection.
+  } else if (!inherits(try(rastin <- raster::raster(file_path),
+                           silent = TRUE), "try-error")) {
+
+    # Else retrieve the bounding box of the raster and the wkt of the projection
+    crs_in <- sf::st_crs(rastin)
+    bbox_in <- matrix(as.numeric(sf::st_bbox(rastin)),
+                      ncol = 2,
+                      dimnames = list(c("x", "y"), c("min", "max")))
+  } else {
+    stop(file_path, "does not appear to be a valid spatial",
+         "file. Please check your inputs. Aborting!")
   }
 
   # Convert the bounding box in the chosen projection (ensuring to include the

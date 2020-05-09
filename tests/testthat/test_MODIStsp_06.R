@@ -5,7 +5,7 @@
 #   as GeoTiff (scaling output values) and vrt time series are created.
 
 context("MODIStsp Test 6: http download on \"combined\" datasets and mosaicing of MODIS tiles") #nolint
-testthat::test_that(
+test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     # skip_on_travis()
@@ -25,7 +25,7 @@ testthat::test_that(
     expect_equal(means, c(14.9886548, 14.9802337), tolerance = 0.001, scale = 1)
     r <- raster::raster(out_files_dat[1])
     expect_equal(
-      sp::proj4string(r),
+      st_crs(r)$input,
       "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
     )
     expect_equal(raster::res(r), c(0.01, 0.01), tolerance = 0.001, scale = 1)

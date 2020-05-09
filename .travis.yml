@@ -37,14 +37,10 @@ apt_packages:
     - libglib2.0-dev
     - libcurl4-openssl-dev
     - libudunits2-dev
-r_binary_packages:
-    - cairoDevice
-    - RGtk2
 r_packages:
     - udunits2
     - units
     - covr
-    - rgdal
     - sf
     - shiny
     - leaflet

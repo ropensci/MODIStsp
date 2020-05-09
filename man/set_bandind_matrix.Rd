@@ -4,34 +4,42 @@
 \alias{set_bandind_matrix}
 \title{Helper function to determine the bands needed to compute SIs and QIs}
 \usage{
-set_bandind_matrix(bandnames, bandsel, indexes_bandnames, indexes_bandsel,
-  indexes_formula, quality_bandnames, quality_bandsel, quality_source)
+set_bandind_matrix(
+  bandnames,
+  bandsel,
+  indexes_bandnames,
+  indexes_bandsel,
+  indexes_formula,
+  quality_bandnames,
+  quality_bandsel,
+  quality_source
+)
 }
 \arguments{
-\item{bandnames}{\code{character array} Abbreviated Names of original layers of the
+\item{bandnames}{\verb{character array} Abbreviated Names of original layers of the
 selected product (used to build output file names).}
 
-\item{bandsel}{\code{integer 0/1 array} of length equal to number of original
+\item{bandsel}{\verb{integer 0/1 array} of length equal to number of original
 layers of the selected product set to 1 for bands to be processed.}
 
-\item{indexes_bandnames}{\code{character array} Abbreviated Names of SIs available
+\item{indexes_bandnames}{\verb{character array} Abbreviated Names of SIs available
 for the selected product (used to build output file names of SIs).}
 
-\item{indexes_bandsel}{\code{integer 0/1 array} array of length equal to the number
+\item{indexes_bandsel}{\verb{integer 0/1 array} array of length equal to the number
 of Spectral Indexes available for the product (standard + user-provided),
 set to  1 for indexes to be processed.}
 
-\item{indexes_formula}{\code{character array} formulas of SIs available for the
+\item{indexes_formula}{\verb{character array} formulas of SIs available for the
 selected product (standard and custom).}
 
-\item{quality_bandnames}{\code{character array} Abbreviated Names of Quality
+\item{quality_bandnames}{\verb{character array} Abbreviated Names of Quality
 Indicators available for the selected product (used to build output file
 names of QIs).}
 
-\item{quality_bandsel}{\code{integer 0|1 array} array of length equal to number
+\item{quality_bandsel}{\verb{integer 0|1 array} array of length equal to number
 of available QIs, set to  1 for indexes to be processed.}
 
-\item{quality_source}{\code{character array} which connects each QI to its "source"
+\item{quality_source}{\verb{character array} which connects each QI to its "source"
 original MODIS layer (multiple QIs share the same "source", since they are
 derived from different bits of the bit-encoded layer).}
 }

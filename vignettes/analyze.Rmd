@@ -204,9 +204,3 @@ ggplot2::ggplot(month_avg, aes(x = date, y = Value, color = Polygon)) +
 **IMPORTANT NOTES - 1** `MODIStsp_extract` is usually much faster than the 
 standard `raster::extract` function, but does not deal with overlapping polygons.
 If your polygons are overlapping, please use `raster::extract` instead. 
-
-**IMPORTANT NOTES - 2** A more powerful extraction function can be also found 
-in the `sprawl` package, currently under development on github
-(https://lbusett.github.io/sprawl/). In particular, `sprawl::extract_rast` deals
-much better with large rasters and long time series. 
-

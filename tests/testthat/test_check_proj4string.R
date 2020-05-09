@@ -1,37 +1,38 @@
-context("check_proj4string tests")
+context("check_projection tests")
 
-testthat::test_that("check_proj4string works as expected", {
-  # skip_on_travis()
+test_that("check_projection works as expected", {
+  skip_on_travis()
+  skip_on_cran()
 
   # valid character
-  expect_equal(
-    check_proj4string("32N"),
-    "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0") #nolint
+  expect_equal(check_projection("32N"), 32632)
 
+  # WKT can be retrieved from CRS
   expect_equal(
-    check_proj4string(sp::CRS("+init=epsg:32632")),
-    "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0") #nolint
+    check_projection(sf::st_crs(32632))$input,
+    "EPSG:32632") #nolint
 
-  # valid numeric
+  # valid numeric or epsg string
 
   expect_true(
-    check_proj4string(3857) %in% c(
-      "+init=epsg:3857 +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs", #nolint
-      "+init=epsg:3857 +proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +no_defs") #nolint
-    )
+    check_projection(3857) %in% c(
+      3857))
 
+  expect_true(
+    check_projection("3857") %in% c(
+      3857))
 
-  # same using CRS
   expect_equal(
-    check_proj4string("+init=epsg:32632"),
-    "+init=epsg:32632 +proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0") #nolint
-
+    check_projection(sf::st_as_text(sf::st_crs(32632))),
+    sf::st_as_text(sf::st_crs(32632))) #nolint
 
   # invalid inputs
-  expect_error(check_proj4string("+init=epsg:montemario", abort = TRUE))
-  expect_error(check_proj4string("123554644", abort = TRUE))
-  expect_error(check_proj4string(123554644, abort = TRUE))
-  expect_warning(check_proj4string("+init=epsg:montemario"))
+  expect_error(expect_warning(check_projection("+init=epsg:montemario",
+                                               abort = TRUE)))
+  expect_error(expect_warning(check_projection("123554644", abort = TRUE)))
+  expect_error(expect_warning(check_projection(123554644, abort = TRUE)))
+  expect_error(expect_warning(check_projection("+init=epsg:montemario",
+                                               abort = TRUE)))
 
 
 })

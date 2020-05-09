@@ -2,10 +2,21 @@
 #' @description Handler used to perform actions required when the "Select from map"
 #'  button is clicked.
 #' @noRd
+#' @importFrom mapedit selectFeatures editMap
+#' @importFrom shiny browserViewer
 #' @importFrom data.table rbindlist
-#' @importFrom gWidgets svalue
+#' @importFrom mapview mapview
+#' @importFrom sf st_bbox
+#' @importFrom stringr str_split_fixed
 gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
   #nocov start
+  if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+    stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+  } else {
+    requireNamespace("gWidgets")
+    requireNamespace("gWidgetsRGtk2")
+  }
   if (requireNamespace("mapedit")) {
     if (ext_type == "Select MODIS Tiles") {
 
@@ -23,8 +34,8 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
       if (inherits(sel, "data.frame") & length(sel$h > 0)) {
 
         seltiles <- lapply(sel[["Name"]], FUN = function(x){
-          h <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[2])
-          v <- as.numeric(str_split_fixed(x, "[a-z]:", 3)[3])
+          h <- as.numeric(stringr::str_split_fixed(x, "[a-z]:", 3)[2])
+          v <- as.numeric(stringr::str_split_fixed(x, "[a-z]:", 3)[3])
           data.frame(h = h, v = v)})
         seltiles <- data.table::rbindlist(seltiles)
         error_sel <- FALSE
@@ -51,7 +62,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
         }
 
         if (error_sel) {
-          gmessage(strwrap(
+          gWidgets::gmessage(strwrap(
             "Your selection contains non-contiguous tiles!\n
             MODIStsp only allows processing for contigous tiles selections!\n\n
             Please select again!"), icon = "warning")
@@ -76,19 +87,18 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
 
       if (!is.null(sel[["finished"]])) {
         sel_bbox  <- sf::st_bbox(sel[["finished"]])
-        curr_proj <- svalue(wids$output_proj4)
+        curr_proj <- gWidgets::svalue(wids$output_proj4)
 
         #reproject the bbox to get coordinates in output projection. Use
         #enlarge = TRUE to be sure that all the area in the selected bbox
         #will be included in the extent in the target projection
 
         bbox_out <- reproj_bbox(sel_bbox,
-                                "+init=epsg:4326",
+                                4326,
                                 curr_proj,
                                 enlarge = TRUE)
 
-        proj  <- gui_get_proj(CRS(curr_proj))
-        units <- gui_get_units(CRS(curr_proj), proj)
+        units <- gui_get_units(curr_proj)
         gWidgets::svalue(wids$pixsize2_lab) <- units
 
         # re-set bbox in the GUI according coordinates retrieved from file
@@ -105,7 +115,7 @@ gh_selectmap <- function(h, ext_type, wids, mod_proj_str, modis_grid) {
       }
     }
   } else {
-    gmessage(strwrap(
+    gWidgets::gmessage(strwrap(
       "You need to install package `mapedit` to be able to
       use this functionality!\n\n
       You can install it using `install.packages(mapedit)`"),

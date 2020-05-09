@@ -7,18 +7,21 @@
 bbox_from_file(file_path, crs_out)
 }
 \arguments{
-\item{file_path}{\code{string} path of a spatial file.}
+\item{file_path}{\code{character} path of a spatial file.}
 
-\item{crs_out}{\code{string} proj4string of the desired output projection.}
+\item{crs_out}{(\code{crs} | \code{character}) crs of the desired output projection,
+or string coercible to it using \code{sf::st_crs()} (e.g., WKT or numeric
+EPSG code)}
 }
 \description{
 Helper function used to retrieve the bounding box of a specified spatial file
-recognized by GDAL or OGG: the function reads the extent using gdalinfo or ogrinfo,
-converting it to a specified CRS.
+recognized by  \code{sf} or \code{raster}: the function reads the extent using \code{sf::st_bbox()}
 }
 \note{
 License: GPL 3.0
 }
 \author{
-Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@irea.cnr.it}
+Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}
+
+Luigi Ranghetti, phD (2017) \href{mailto:ranghetti.l@irea.cnr.it}{ranghetti.l@irea.cnr.it}
 }

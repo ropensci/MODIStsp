@@ -4,48 +4,6 @@
     <loc>http://ropensci.github.io/MODIStsp/index.html</loc>
   </url>
   <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp-package.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_GUI.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_addindex.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_download.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_extract.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_process.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_process_QA_bits.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_process_bands.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_process_indexes.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_read_xml.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_reset_options.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_resetindexes.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_vrt_create.html</loc>
-  </url>
-  <url>
     <loc>http://ropensci.github.io/MODIStsp/reference/ask_permission.html</loc>
   </url>
   <url>
@@ -55,7 +13,7 @@
     <loc>http://ropensci.github.io/MODIStsp/reference/check_files_existence.html</loc>
   </url>
   <url>
-    <loc>http://ropensci.github.io/MODIStsp/reference/check_proj4string.html</loc>
+    <loc>http://ropensci.github.io/MODIStsp/reference/check_projection.html</loc>
   </url>
   <url>
     <loc>http://ropensci.github.io/MODIStsp/reference/get_mod_dates.html</loc>
@@ -82,6 +40,48 @@
     <loc>http://ropensci.github.io/MODIStsp/reference/load_prodopts.html</loc>
   </url>
   <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp-package.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_addindex.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_download.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_extract.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_GUI.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_process.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_process_bands.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_process_indexes.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_process_QA_bits.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_read_xml.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_resetindexes.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_reset_options.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/reference/MODIStsp_vrt_create.html</loc>
+  </url>
+  <url>
     <loc>http://ropensci.github.io/MODIStsp/reference/process_message.html</loc>
   </url>
   <url>
@@ -92,12 +92,6 @@
   </url>
   <url>
     <loc>http://ropensci.github.io/MODIStsp/reference/split_nodata_values.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/articles/MODIStsp.html</loc>
-  </url>
-  <url>
-    <loc>http://ropensci.github.io/MODIStsp/articles/Products_list.html</loc>
   </url>
   <url>
     <loc>http://ropensci.github.io/MODIStsp/articles/analyze.html</loc>
@@ -115,10 +109,16 @@
     <loc>http://ropensci.github.io/MODIStsp/articles/interactive_execution.html</loc>
   </url>
   <url>
+    <loc>http://ropensci.github.io/MODIStsp/articles/MODIStsp.html</loc>
+  </url>
+  <url>
     <loc>http://ropensci.github.io/MODIStsp/articles/noninteractive_execution.html</loc>
   </url>
   <url>
     <loc>http://ropensci.github.io/MODIStsp/articles/output.html</loc>
+  </url>
+  <url>
+    <loc>http://ropensci.github.io/MODIStsp/articles/Products_list.html</loc>
   </url>
   <url>
     <loc>http://ropensci.github.io/MODIStsp/articles/standalone_execution.html</loc>

@@ -11,12 +11,12 @@
 #'  otherwise the links would continue to point to the old package version!
 #' @param bin_dir
 #'  - on Linux, directory in which the link to the bash script should be
-#'    placed, Default: /usr/bin - use of a path included in the PATH environment variable is
+#'    placed, Default: "/usr/bin" - use of a path included in the PATH environment variable is
 #'    suggested;
 #'  - on Windows, directory where to place the menu entry in the Start Menu,
 #'    Default: Start Menu -> Programs -> MODIStsp.
-#' @param rscript_dir 'character' in Windows only, the path of the directory in which
-#'  Rscript is installed (default is "C:/Progra~1/R/R-<version>/bin/<arch>").
+#' @param rscript_dir `character` in Windows only, the path of the directory in which
+#'  Rscript is installed (usually is \"C:/Progra~1/R/R-`version`/bin/`x64`").
 #'  Edit this parameter if R is installed in a custom directory.
 #' @param desktop_shortcut `logical` indicates if the desktop entry or the
 #'  desktop shortcut should be created, Default: TRUE.

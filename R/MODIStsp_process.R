@@ -13,7 +13,7 @@
 #'   3. Creates virtual files of the processed time series.
 #'
 #' Reprojection and resize is dealt with by accessing gdal routines through the
-#' [`gdalUtils`](https://CRAN.R-project.org/package=gdalUtils)
+#' [`gdalUtilities`](https://CRAN.R-project.org/package=gdalUtilities)
 #' package.
 #' Extraction of bitfields from Quality layers is done though bitwise computation
 #' Checks are done in order to not re-download already existing HDF images, and not
@@ -43,7 +43,7 @@
 #' @param start_y `integer [0-17]` Start vertical tile.
 #' @param end_x `integer [0-35]` End horizontal tile.
 #' @param end_y `integer [0-17]` End vertical tile.
-#' @param full_ext `characrter ["FullTiles" | "Resized"]` If \"Full_Ext\", process
+#' @param full_ext `logic` If TRUE, process``
 #'   the entire extent of the selected tiles. Otherwise, crop the output to
 #'   output bbox.
 #' @param bbox `numeric(4)` Output bounding box (xmin, ymin, xmax, ymax) in
@@ -134,13 +134,6 @@
 #'   [Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
 #' @rdname MODIStsp_process
-#' @importFrom gdalUtils gdalinfo gdal_translate gdalwarp gdalbuildvrt
-#' @importFrom gWidgets gwindow glabel dispose gconfirm svalue addHandlerUnrealize
-#' @importFrom httr content GET authenticate progress timeout
-#' @importFrom raster raster writeRaster
-#' @importFrom tools file_path_sans_ext
-#' @importFrom parallel detectCores
-#' @importFrom stringr str_sub
 
 MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              out_folder_mod, reprocess = "Yes",
@@ -167,6 +160,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                              n_retries,
                              verbose) {
 
+
+  # outproj_str <- sf::st_as_text(sf::st_crs(check_projection(outproj_str)))
   #   __________________________________________________________________________
   #   Intialize processing variables                                        ####
 
@@ -221,6 +216,13 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
   if (gui) {
     #nocov start
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
+    }
     mess     <- gWidgets::gwindow(title = "Processing Status",
                                   width = 400,
                                   height = 40)
@@ -283,7 +285,6 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
     sensor   <- c("Terra")
     combined <- TRUE
   }
-
   #  If both platforms selected, do a cycle. Process first Terra then Aqua.
 
   for (sens_sel in sensor) {
@@ -624,6 +625,13 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
   if (gui) {
     #nocov start
+    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
+      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
+                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
+    } else {
+      requireNamespace("gWidgets")
+      requireNamespace("gWidgetsRGtk2")
+    }
     gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
       return(FALSE)
     })		# Allow message lab to be closed since processing ended .

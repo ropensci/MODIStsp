@@ -3,7 +3,7 @@
 #   operations (clipping on the extent of Avalon peninsula and resampling
 #   resolution to 1000m). Output files are in ENVI format.
 
-testthat::test_that(
+test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     # skip_on_travis()
@@ -32,7 +32,7 @@ testthat::test_that(
             set")
     r <- raster::raster(out_files_dat[1])
     expect_equal(
-      sp::proj4string(r),
+      sf::st_crs(r)$input,
       "+proj=utm +zone=22 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0" #nolint
     )
     expect_equal(raster::res(r), c(1000, 1000))

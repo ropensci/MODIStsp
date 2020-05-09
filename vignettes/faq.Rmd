@@ -94,8 +94,8 @@ There are currently some problems in installing `MODIStsp` **via `install_github
 If you have problems in installing the "devel" version of `devtools`, manually installing all the dependencies should also solve the issue. To do so, please try doing: 
   
   ```
-  install.packages(c("bitops", "data.table", "gdalUtils", "gWidgets", "hash", "plyr", "raster", "RCurl",
-  "rgdal", "rgeos", "xts", "XML", "xml2", "sp", "stringr", "httr", "RJSONIO","chron","iterators", "digest","pacman"))
+  install.packages(c("bitops", "data.table" , "gdalUtilities", "gWidgets", "gWidgetsRGtk2",
+    "httr" , "jsonlite", "parallel", "raster", "sf", "stringr", "xts"))
   ```
 
  , then continue with standard `MODIStsp` installation.
