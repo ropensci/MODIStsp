@@ -21,7 +21,12 @@
 #' @name MODIStsp-package
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
-#' @seealso [https://ropensci.github.io/MODIStsp/](https://ropensci.github.io/MODIStsp/)
+#' @seealso [https://docs.ropensci.org/MODIStsp/](https://docs.ropensci.org/MODIStsp/)
 #' @seealso [https://github.com/ropensci/MODIStsp](https://github.com/ropensci/MODIStsp)
 #'
 NULL
+
+values <- c(3.4, 2.9, 1.7, 8.8, -12.7, 100.4, 8.4, 11.3)
+weights <- c(1.0, 0.1, 1.0, 0.2,  0.44,   0.3, 0.3, 0.83)
+
+wvar <- (sum(weights)/(sum(weights)^2 - sum(weights^2))) * sum(weights*(values - mean(values))^2)
