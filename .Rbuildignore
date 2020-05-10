@@ -6,6 +6,7 @@
 .travis.yml
 .config.yml
 appveyor.yml
+_pkgdown.yml
 index.md
 index.Rmd
 LICENSE.md
@@ -23,6 +24,7 @@ CONDUCT.md
 ^docs$
 ^pkgdown$
 ^codecov\.yml$
+codecov.yml
 vignettes/analyze.Rmd
 vignettes/examples.Rmd
 vignettes/faq.Rmd

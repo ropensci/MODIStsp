@@ -66,19 +66,21 @@ License: GPL 3.0
 # desktop entry in /usr/share/applications)
 # (requires administrator permissions)
 \dontrun{
+# the administrator password is asked interactively
 install_MODIStsp_launcher(sudo = TRUE)
-  # the administrator password is asked interactively}
+}
 
 # Linux: installation in a directory which does not require administrator
 # permissions
 \dontrun{
-install_MODIStsp_launcher(bin_dir = "~/bin"), desktop_dir = "~/Desktop")
+install_MODIStsp_launcher(bin_dir = "~/bin", desktop_dir = "~/Desktop")
 }
 
 # Windows: common installation
 # (script in the Start Menu and shortcut on the desktop)
 \dontrun{
-install_MODIStsp_launcher()}
+install_MODIStsp_launcher()
+}
 }
 \author{
 Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}

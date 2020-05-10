@@ -223,7 +223,7 @@ a single file without the need of creating large multitemporal raster images.
 Available virtual files formats are "R" rasterStacks, ENVI meta-files and GDAL 
 "vrt" files. In particular, "R" rasterStacks may be useful in order to easily 
 access the preprocessed MODIS data within "R" scripts 
-(see also https://ropensci.github.io/MODIStsp/articles/output.html).
+(see also https://docs.ropensci.org/MODIStsp/articles/output.html).
 
 
 - **Modify No Data**: Specify if NoData values of MODIS layers should be kept
@@ -247,7 +247,7 @@ saved in degrees Kelvin, etc.).
 ## _Main MODIStsp Output Folder_
 
 Select the main folder where the pre-processed time series data will be stored. 
-All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see https://ropensci.github.io/MODIStsp/articles/output.html for details on `MODIStsp` 
+All `MODIStsp` outputs **will be placed in specific sub-folders of this main folder** (see https://docs.ropensci.org/MODIStsp/articles/output.html for details on `MODIStsp` 
 naming conventions)-.
 
 The **"Reprocess Existing Data"** check-box allows to decide if images already 

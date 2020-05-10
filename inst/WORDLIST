@@ -25,7 +25,6 @@ cnr
 CNR
 codecov
 coercible
-Commandline
 computable
 Critchlow
 cron
@@ -68,6 +67,7 @@ gdal
 GDAL
 gdalinfo
 gdaltranslate
+gdalUtilities
 gdalUtils
 gdalwarp
 Geosciences
@@ -147,11 +147,10 @@ nodata
 Nodata
 NoData
 NODATA
-OGR
-OSGeo
 OSX
 packages’
 PACKBITS
+pacman
 Pango
 phD
 pkgdown
@@ -168,7 +167,6 @@ proj
 Proj
 PROJ
 qc
-QGIS
 QI
 QIs
 ranghetti

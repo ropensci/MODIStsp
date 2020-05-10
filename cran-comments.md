@@ -12,7 +12,7 @@ MODIStsp 1.4.0
 
 There were no ERRORs, WARNINGs
 
-There is a NOTE related to suggeting a orphaned package (gWidgets)
+There is a NOTE/Warning (depending on platform) related to suggeting a orphaned package (gWidgets)
 I received a mail from Prof. Ripley about that recently. As suggested, I temporarily moved gWidgets to suggests and use it conditionally for the time being, with the intention of removing the dependency in the next MODIstsp release by switching to a Shiny-based GUI. 
 
 ## Note on installation on macos 

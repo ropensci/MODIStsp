@@ -1069,7 +1069,7 @@ MODIStsp_GUI <- function(general_opts,
     text = " ? ",
     handler = function(h, ...) {
       gh_help(h, "timeseries_help", help_messages,
-              info_addr = "https://ropensci.github.io/MODIStsp/articles/output.html", #nolint
+              info_addr = "https://docs.ropensci.org/MODIStsp/articles/output.html", #nolint
               ...)
     }, container = other_group, expand = FALSE)
 
