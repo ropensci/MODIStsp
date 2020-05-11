@@ -1,23 +1,41 @@
 
+  - [MODIStsp
+    <img src='man/figures/logo.png' align="right" height="139" />](#modistsp)
+      - [Citation](#citation)
+      - [Website](#website)
+      - [Important News \!](#important-news)
+      - [Problems and Issues](#problems-and-issues)
+      - [<i class="fa fa-desktop" aria-hidden="true"></i> System
+        Requirements](#system-requirements)
+  - [Installation Instructions](#installation-instructions)
+      - [<i class="fa fa-windows" aria-hidden="true"></i> Installing on
+        Windows](#installing-on-windows)
+      - [<i class="fa fa-linux" aria-hidden="true"></i> Installing on
+        Linux Systems](#installing-on-linux-systems)
+      - [<i class="fa fa-apple" aria-hidden="true"></i> Installing on
+        Mac](#installing-on-mac)
+  - [Usage](#usage)
+  - [Code of Conduct](#code-of-conduct)
+
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
-[![](http://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
+[![](https://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build
 Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://travis-ci.org/ropensci/MODIStsp)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
 [![Coverage
-Status](http://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](http://codecov.io/github/ropensci/MODIStsp?branch=master)
-[![](http://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/onboarding/issues/184)
+Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://codecov.io/github/ropensci/MODIStsp?branch=master)
+[![](https://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/onboarding/issues/184)
 
 # MODIStsp <img src='man/figures/logo.png' align="right" height="139" />
 
-[MODIStsp](http://docs.ropensci.org/MODIStsp/) is a “R” package devoted
-to automatizing the creation of time series of rasters derived from
-MODIS Land Products data. MODIStsp allows to perform several
-preprocessing steps (e.g., download, mosaicing, reprojection and resize)
-on MODIS data available within a given time period. Users have the
-ability to select which specific layers of the original MODIS HDF files
-they want to process. They also can select which additional Quality
-Indicators should be extracted from the aggregated MODIS Quality
+\========= [MODIStsp](https://docs.ropensci.org/MODIStsp/) is a “R”
+package devoted to automatizing the creation of time series of rasters
+derived from MODIS Land Products data. MODIStsp allows to perform
+several preprocessing steps (e.g., download, mosaicing, reprojection and
+resize) on MODIS data available within a given time period. Users have
+the ability to select which specific layers of the original MODIS HDF
+files they want to process. They also can select which additional
+Quality Indicators should be extracted from the aggregated MODIS Quality
 Assurance layers and, in the case of Surface Reflectance products, which
 Spectral Indexes should be computed from the original reflectance bands.
 For each output layer, outputs are saved as single-band raster files
@@ -52,9 +70,14 @@ Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 
 For more information, documentation and examples of use, **see also the
 MODIStsp website at
-[docs.ropensci.org/MODIStsp](http://docs.ropensci.org/MODIStsp/)**
+[docs.ropensci.org/MODIStsp](https://docs.ropensci.org/MODIStsp/)**
 
 ## Important News \!
+
+  - 09/05/2020 - MODIStsp 1.4.0 is out. Switches to use of GDAL3/PROJ6
+    WKTs for projection representation and usage of `sf` for all
+    internal work on vector data. Adds support for products MCD19A1 and
+    MCD19A2 products.
 
   - 07/06/2019 - MODIStsp 1.3.9 is out. Fixes a bug causing crashes on
     MOD14A1 product, adds support for product MCD12Q2 and removes
@@ -105,7 +128,7 @@ MODIStsp website at
 
   - 25/07/2017 - As of today, **most of the content related to MODIStsp
     has been moved to our new website at
-    [docs.ropensci.org/MODIStsp](http://docs.ropensci.org/MODIStsp/)
+    [docs.ropensci.org/MODIStsp](https://docs.ropensci.org/MODIStsp/)
     **, which provides a much better user interface and ease of access
     to MODIStsp-related information. From now on, please **consult the
     new website for detailed and updated information on the package**.
@@ -113,7 +136,7 @@ MODIStsp website at
   - Also our previous FAQ page on github containing info for solving
     common installation, downloading and processing problems and issues
     was discontinued and **migrated at
-    [docs.ropensci.org/MODIStsp/articles/faq.html](http://docs.ropensci.org/MODIStsp/articles/faq.html)**.
+    [docs.ropensci.org/MODIStsp/articles/faq.html](https://docs.ropensci.org/MODIStsp/articles/faq.html)**.
 
 ## Problems and Issues
 
@@ -125,9 +148,9 @@ MODIStsp website at
 
 `MODIStsp` requires [R](https://cran.r-project.org) v \>= 3.2.1 and
 [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v \>=
-1.11.1 **with support for HDF4 raster format** to be installed in your
+2.3 **with support for HDF4 raster format** to be installed in your
 system. Brief instructions for installing R and GDAL can be found
-[HERE](http://docs.ropensci.org/MODIStsp/articles/installation.html#installing-r-and-gdal).
+[HERE](https://docs.ropensci.org/MODIStsp/articles/installation.html#installing-r-and-gdal).
 
 -----
 
@@ -170,8 +193,7 @@ session from RStudio “Session” menu), reload RStudio and the try to
 reload `gWidgetsRGtk2`. If it loads correctly, you should be ready to
 go.
 
-If it still fails, try downloading the GTK+ bundle
-from:
+If it still fails, try downloading the GTK+ bundle from:
 
 <http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip>
 (OR
@@ -184,8 +206,7 @@ Files\\GTK+`), then add the path to its “bin” subfolder (e.g.,
 variable.
 
 Restart your system and try loading again `gWidgetsRGtk2`: if it loads
-ok, you should be ready to install
-`MODIStsp`
+ok, you should be ready to install `MODIStsp`
 
 ## <i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems
 
@@ -198,16 +219,14 @@ required dependencies:
   - `GDAL` \>= 1.6.3, `PROJ.4` \>= 4.4.9 (required by package `rgdal`)
 
 On *Debian and Ubuntu-based* systems, to install those packages open a
-terminal and
-type:
+terminal and type:
 
 ``` bash
 sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
 libgtk2.0-dev libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev
 ```
 
-On *rpm-base systems*, to install packages open a terminal and
-type:
+On *rpm-base systems*, to install packages open a terminal and type:
 
 ``` bash
 sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
@@ -258,8 +277,7 @@ Sierra.
 
 Install homebrew if you do not have it already installed. homebrew is a
 very convenient package manager for macOS. To do so, open a terminal,
-copy the following command in it and hit
-Enter:
+copy the following command in it and hit Enter:
 
 ``` bash
 ~$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -329,8 +347,7 @@ emacs. Now install the library using:
 
 <br>
 
-**4. Update your path** so that `gtk+` is recognized,
-using:
+**4. Update your path** so that `gtk+` is recognized, using:
 
 ``` bash
 ~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
@@ -343,9 +360,9 @@ using:
   - **Download the newest source file for RGtk2** from
     <https://CRAN.R-project.org/package=gWidgetsRGtk2>.
 
-  - Assuming that the path to this file is ~/Downloads. Run the
+  - Assuming that the path to this file is \~/Downloads. Run the
     following in terminal (change the path if you did not download in
-    ~/Downloads):
+    \~/Downloads):
 
 <!-- end list -->
 
@@ -400,7 +417,7 @@ MODIStsp()
 This **opens a GUI** from which processing options can be specified (and
 eventually saved or loaded). After specifying all required parameters,
 clicking on “Start” will start the processing (see
-[HERE](http://docs.ropensci.org/MODIStsp/articles/interactive_execution.html)
+[HERE](https://docs.ropensci.org/MODIStsp/articles/interactive_execution.html)
 for more detailed instructions).
 
 `MODIStsp` can also be launched in non-interactive mode within an `R`
@@ -419,14 +436,13 @@ MODIStsp(gui = FALSE, options_file = options_file)
 ```
 
 (see
-[HERE](http://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html)
+[HERE](https://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html)
 for more detailed instructions and examples).
 
 # Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
 Conduct](https://github.com/ropensci/MODIStsp/blob/master/CONDUCT.md).
-By participating in this project you agree to abide by its
-terms.
+By participating in this project you agree to abide by its terms.
 
-[![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+[![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
