@@ -1080,7 +1080,8 @@ MODIStsp_GUI <- function(general_opts,
   scale_lab <- gWidgets::glabel(text = "Apply Scale/Offset: ", container = other_group)
 
   # default value in case of use of old json settings files - consider removing!
-  if (!exists(general_opts$scale_val)) {
+  scale <- general_opts$scale_val
+  if (is.null(general_opts$scale_val)) {
     general_opts$scale_val <- "No"
   }
 
