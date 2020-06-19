@@ -53,7 +53,7 @@ gh_load_extent <- function(h, wids, out_proj_list, mod_proj_str,
     # the specified file
 
     bbox_out <- try(bbox_from_file(file_path = choice,
-                                   crs_out   = sf::st_crs(out_proj_crs)),
+                                   crs_out   = out_proj_crs),
                     silent = TRUE)
     if (inherits(bbox_out, "try-error")) {
       gWidgets::gmessage(bbox_out, title = "Error Detected!")
