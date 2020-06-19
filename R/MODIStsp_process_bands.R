@@ -65,11 +65,9 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # original layers (e.g. albedo) is needed
 
   # Retrieve information from hdf4 with gdalinfo
-  # gdalinfo_hdf_raw <- sf::gdal_utils("info",
-  #                                    file.path(out_folder_mod,modislist[1]))
 
   gdalinfo_raw <- suppressWarnings(suppressMessages(try(
-    trimws(unlist(strsplit(sf::gdal_utils("info", file.path(out_folder_mod,modislist[1]), quiet = TRUE), "\n"))),
+    trimws(unlist(strsplit(sf::gdal_utils("info", sf::gdal_subdatasets(files_in[1])[band][[1]], quiet = TRUE), "\n"))),
     silent = TRUE
   )))
 
@@ -164,24 +162,22 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
     if (length(split_nodata_values(nodata_in)[[1]]) == 1) {
 
-      # if (length(files_in) != 1) {
-      #   browser()
-      # } else {
-      #   in_sd <- sf::gdal_subdatasets(files_in)[[band]]
-      # }
-
       gdalUtilities::gdalbuildvrt(files_in,
                                   sd = band,
                                   output.vrt = outfile_vrt,
                                   srcnodata = nodata_in,
-                                  vrtnodata = nodata_out)
+                                  vrtnodata = nodata_out,
+                                  a_srs = mod_proj_str)
     } else {
       # If multiple NODATA, do not change the nodata value in the VRT, because
       # it is dealt with later
+
       gdalUtilities::gdalbuildvrt(files_in,
                                   outfile_vrt,
-                                  sd = band
-      )
+                                  sd = band,
+                                  a_srs = mod_proj_str,
+                                  dryrun = F)
+
     }
 
   }
@@ -191,6 +187,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # TODO check if input file with geographic coordinates and type "UInt32"
   # are correctly generated.
   if (correct_hdf & gsub("^.+\\.(.+)$", "\\1", outfile_vrt) == "vrt") {
+
     outfile_vrt_or        <- outfile_vrt
     # filename of new temporary vrt file
     outfile_vrt           <- tempfile(fileext = ".vrt", tmpdir = tmpdir)
@@ -270,6 +267,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # vrt file subsetting the previous vrt file
 
   if (full_ext == FALSE) {
+
     outfile_vrt_or <- outfile_vrt
     # filename of new temporary vrt file
     outfile_vrt    <- tempfile(fileext = ".vrt", tmpdir = tmpdir)
@@ -544,6 +542,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
   # If scale_factor="Yes", create final files by rescaling
   # values
+
   if (scale_val == "Yes"   &
       !(scale_factor == 1 & offset == 0)) {
 
