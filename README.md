@@ -74,6 +74,8 @@ MODIStsp website at
 
 ## Important News \!
 
+  - 07/15/2020 -
+
   - 09/05/2020 - MODIStsp 1.4.0 is out. Switches to use of GDAL3/PROJ6
     WKTs for projection representation and usage of `sf` for all
     internal work on vector data. Adds support for products MCD19A1 and
@@ -166,9 +168,26 @@ You can install the stable version of `MODIStsp` from CRAN:
 fixes) from github:
 
 ``` r
-library(devtools)
+install.packages("remotes")
+library(remotes)
 install_github("ropensci/MODIStsp")
 ```
+
+**IMPORTANT NOTE** As of June 2020, the `gWidgets` and `gWidgetsRGtk2`
+packages were orphaned on CRAN. To install them, you can try:
+
+``` r
+install.packages("remotes")
+library(remotes)
+remotes::install_version("gWidgets", version = "0.0-54.2")
+remotes::install_version("gWidgetsRGtk2", version = "0.0-86.1")
+```
+
+(see also <https://github.com/ropensci/MODIStsp/issues/207> and
+<https://github.com/ropensci/MODIStsp/issues/208>)
+
+As soon as I find the time, I’ll remove those dependencies by developing
+a new "Shiny-based GUI, but this is not straightforward, unfortunately,
 
 Note that **if the `GTK+` library is not already installed on your
 system, installation may fail**. In that case, please install and load
