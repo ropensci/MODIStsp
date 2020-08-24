@@ -1,0 +1,299 @@
+# observers used to send help messages - approach recycled from sen2r
+#
+#### products panel ----
+# product ----
+shiny::observeEvent(input$help_product, {
+  shiny::showModal(shiny::modalDialog(
+    title = "MODIS Platforms",
+    shiny::p(shiny::HTML(
+      "This selector allows to choose which <strong> MODIS product</strong>
+      is to be processed.")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# platform ----
+shiny::observeEvent(input$help_platform, {
+  shiny::showModal(shiny::modalDialog(
+    title = "MODIS Platforms",
+    shiny::p(shiny::HTML(
+      "This selector allows to choose if data from only one or both the <strong> MODIS platforms</strong>
+      (i.e., Terra and Aqua) is to be processed.")),
+    shiny::p(shiny::HTML("The selector is disabled/ineffective for <strong> Combined </strong>
+                         MODIS products (i.e., MCDXXXX)")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+
+# layers ----
+shiny::observeEvent(input$help_layers, {
+  shiny::showModal(shiny::modalDialog(
+    title = "MODIS Layers",
+    shiny::p(shiny::HTML(
+      "This selector allows to choose which of the <strong>original MODIS bands</strong> (SDS layers)",
+      "are to be processed.")),
+    shiny::p(shiny::HTML("A separate image will be saved for each selected layer
+      and available date.")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# quality ----
+shiny::observeEvent(input$help_quality, {
+  shiny::showModal(shiny::modalDialog(
+    title = "Quality Indicators",
+    shiny::p(shiny::HTML(
+      "MODIS images often use one or more <strong>Quality Layers</strong>
+      to store various information concerning pixel data quality. Different
+      <strong>Quality Indicators</strong> are stored within each Quality Layer
+      using a <strong>bit-field representation</strong>.")),
+    shiny::p(shiny::HTML(
+      "MODIStsp can automaticvally compute <strong>Quality Indicators</strong> from the different
+      MODIS Quality Layers by extracting the required information from the bit-field values")),
+    shiny::p(shiny::HTML("A separate image will be saved for each selected Quality Indicator
+      and available date.")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# indexes ----
+shiny::observeEvent(input$help_indexes, {
+  shiny::showModal(shiny::modalDialog(
+    title = "Spectral Indexes",
+    shiny::p(shiny::HTML(
+      "<strong>Spectral Indexes </strong>(e.g., NDVI) can be computed
+      from MODIS Surface Reflectance bands using simple mathematical operations.
+      They are related to several bio-physical characteristics of the Earth
+      surface (e.g., LAI, soil water content, etc.).")),
+    shiny::p(shiny::HTML(
+      "A separate image will be saved for each selected SI
+      and available date.")),
+    shiny::p(shiny::HTML(
+      "It is possible to specify new indexes to be computed by
+      clicking the <strong>\"Add New Spectral Index\"</strong>
+      button at the bottom of the panel and following instructions
+      provided in the modal dialog that will open.")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# Options panel ----
+
+# online ----
+
+observeEvent(input$help_downmeth, {
+  showModal(modalDialog(
+    title = "Download Server",
+    p(HTML(
+      "This selector allows specifying the server used to download MODIS HDF images.",
+    )),
+    p(HTML(
+      "<strong>http</strong>: download data from NASA lpdaac server."
+    )),
+    p(HTML(
+      "<strong>offline</strong>: process only MODIS HDF files already
+      available on disk (specify the folder where they are stored in the
+      'Folder for Storage of MODIS HDF files' input field.)"
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# user ----
+observeEvent(input$help_user, {
+  showModal(modalDialog(
+    title = "User",
+    p(HTML(
+      "Provide your <strong>earthdata</strong> user name." ,
+    )),
+    p(HTML(
+      "You can create an earthdata account at: https://urs.earthdata.nasa.gov/home"
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# password ----
+observeEvent(input$help_password, {
+  showModal(modalDialog(
+    title = "User",
+    p(HTML(
+      "Provide your <strong>earthdata</strong> password." ,
+    )),
+    p(HTML(
+      "You can create an earthdata account at: https://urs.earthdata.nasa.gov/home"
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# downloader ----
+observeEvent(input$help_downloader, {
+  showModal(modalDialog(
+    title = "Downloader",
+    p(HTML(
+      "This selector allows to choose which downloader will be used",
+      "to download MODIS HDF files."
+    )),
+    p(HTML(
+      "<strong>http</strong> is the downloader which is used by default",
+      "through the package 'httr'."
+    )),
+    p(HTML(
+      "<strong><a href=\"https://aria2.github.io\" target=\"_blank\">aria2</a></strong>",
+      "is an alternative downloader which can be installed in Linux systems",
+      "from the default install manager (in Ubuntu, install the package \"aria2\"),",
+      "or in Windows from https://github.com/aria2/aria2/releases/tag/release-1.35.0"
+    )),
+    p(HTML(
+      "This selector is active only if aria2 can be found using sys.which(\"aria2c\"")
+    ),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# format ----
+observeEvent(input$help_format, {
+  showModal(modalDialog(
+    title = "Output Format",
+    p(HTML(
+      "This selector allows specifying the server format used to save
+      MODIStsp processed data.",
+    )),
+    p(HTML(
+      "<strong>TIF</strong>: store processed data in GeoTiff format."
+    )),
+    p(HTML(
+      "<strong>ENVI</strong>: store processed data in ENVI format."
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# format ----
+observeEvent(input$help_compression, {
+  showModal(modalDialog(
+    title = "Compression",
+    p(HTML(
+      "This selector allows specifying compression algorithm when
+      output format is TIF."
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# time series ----
+observeEvent(input$help_time_series, {
+  showModal(modalDialog(
+    title = "Time series",
+    p(HTML(
+      "MODIStsp can create <strong>virtual files</strong> allowing access to
+     the time series of the single-date rasters created for the different
+     processed layers as if they were a single multitemporal file."
+    )),
+    p(HTML("Possible choices are: ")),
+    p(HTML("<strong>R rasterStack</strong>: extension `.RData`. Can be opened in R.")),
+    p(HTML("<strong>ENVI Meta</strong>: extension `.dat`. Can be opened in R.")),
+    p(HTML("<strong>GDAL vrt</strong>: extension `.vrt`. Can be opened in QGIS and R.")),
+
+    p(HTML("Time series files are saved in the <em>\"time_series\"</em> subfolder of the main
+    output folder")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# scale ----
+observeEvent(input$help_scaleoff, {
+  showModal(modalDialog(
+    title = "Apply Scale and Offset",
+    p(HTML(
+      "MODIS data is always stored as <strong>Integer</strong> or <strong>Byte</strong>.
+      A <strong>scale factor</strong> and/or an <strong>offset</strong> can be applied
+      in some cases to convert values to floating point values in the indicated measure units (e.g., to obtain data in
+      Kelvin degrees for LST, or in reflectance for Surface Reflectance)."
+    )),
+    p(HTML("Possible choices are: ")),
+    p(HTML("<strong>No</strong>: scale and offset are NOT applied
+           Output values are kept as Integer and Spectral Indices stored as
+           integer values with a 10000 scale factor;")),
+    p(HTML("<strong>Yes</strong>:  scale factors and offsets are applied .
+           Outputs are converted to their true values in the specified measure units
+           (e.g., degrees Kelvin). Spectral Indices are also computed as floating
+           point values.")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# nodata ----
+observeEvent(input$help_nodata, {
+  showModal(modalDialog(
+    title = "Modify NoData values",
+    p(HTML(
+      "<strong>NoData values</strong> of MODIS products are variable across layers.
+      This option allows you to modify them and use a common standard"
+    )),
+    p(HTML("Possible choices are: ")),
+    p(HTML("<strong>No</strong>: Original MODIS NoData values are maintained;")),
+    p(HTML("<strong>Yes</strong>: NoData values are replaced with default values equal
+           to the maximum possible value of the data type of the output (e.g. 255
+           for unsigned 8-bit integer, 32767 for signed 16-bit integer).")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# mainoutpfold ----
+observeEvent(input$help_outfolder, {
+  showModal(modalDialog(
+    title = "Main Output Folder",
+    p(HTML(
+      "<strong>MODIStsp outputs</strong> will be saved in the selected folder.
+     A separate subfolder will be created for each processed original MODIS
+     layer, Quality Indicator or Spectral Index. Each subfolder will contain one
+     image for each processed date."
+    )),
+    p(HTML("Virtual multitemporal files allowing access to the full time series
+           as if they were stored in a single file will be saved instead in the
+           <em>`time_series` </em> subfolder of the main output folder.")),
+    p(HTML("<strong>NOTE</strong>: If you specify <strong>$tempdir</strong> as
+           the output folder outputs will be saved in the `R` temporary folder and
+           automatically removed when you exit `R`")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# hdfoutpfold ----
+observeEvent(input$help_outfolderhdf, {
+  showModal(modalDialog(
+    title = "HDF Output Folder",
+    p(HTML(
+      "The <strong>original MODIS HDF images</strong> downloaded from NASA servers
+     will be stored in the selected folder. Archiving images can be useful to avoid
+     having to download them again if you need to do process different subsets of
+     a given MODIS tile."
+    )),
+    p(HTML("Select 'Yes' on the 'Delete MODIS HDFs' on the right if you want the
+           HDFs to be automatically deleted from disk at the end of MODIStsp
+           processing")),
+    p(HTML("<strong>NOTE</strong>: If you specify <strong>$tempdir</strong> as the output
+           folder outputs will be saved in the `R` temporary folder and
+           automatically removed when you exit `R`")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})

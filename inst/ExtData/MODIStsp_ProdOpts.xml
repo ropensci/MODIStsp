@@ -1959,7 +1959,7 @@
             </versions>
         </MODTBGA>
         <MOD10A1>
-            <name>Snow_Cov_Daily_500m (M*D10_A1)</name>
+            <name>Snow_Cov_Daily_500m (M*D10A1)</name>
             <cat_01>Radiation Budget Variables</cat_01>
             <cat_02>Snow Cover</cat_02>
             <file_prefix_terra>MOD10_A1</file_prefix_terra>
@@ -1967,7 +1967,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>M*D10_A1: MODIS/Terra/Aqua Snow Cover Daily L3 Global 500m Grid</prod_fullname>
+                    <prod_fullname>M*D10A1: MODIS/Terra/Aqua Snow Cover Daily L3 Global 500m Grid</prod_fullname>
                     <main_out_folder>Snow_Cov_Daily_500m_v6</main_out_folder>
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.006/</http_terra>
