@@ -12,6 +12,7 @@
 #' @param date_dir `character array` Sub-folder where the different images
 #'  can be found (element of the list returned from `get_mod_dirs`, used in case
 #'  of http download to generate the download addresses).
+#' @param use_aria `logical` if TRUE, download using aria2c
 #' @param year `character` Acquisition year of the images to be downloaded
 #' @param DOY `character array` Acquisition doys of the images to be downloaded
 #' @param user `character` Username for http download
@@ -20,10 +21,7 @@
 #' @param date_name `character` Date of acquisition of the images to be downloaded.
 #' @param gui `logical` Indicates if on an interactive or non-interactive execution
 #'  (only influences where the log messages are sent).
-#' @param mess_lab pointer to the gWidget used to issue processing messages in
-#'  when gui = TRUE.
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
-#' @inheritParams MODIStsp_process
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_download
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
@@ -45,7 +43,6 @@ MODIStsp_download <- function(modislist,
                               sens_sel,
                               date_name,
                               gui,
-                              mess_lab,
                               verbose) {
 
   # Cycle on the different files to download for the current date
@@ -98,27 +95,8 @@ MODIStsp_download <- function(modislist,
         } else {
           # If the remote xml file was not accessible, n_retries times,
           # retry or abort
-          if (gui) {
-            #nocov start
-            if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
-              stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
-                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
-            } else {
-              requireNamespace("gWidgets")
-              requireNamespace("gWidgetsRGtk2")
-            }
-            confirm <- gWidgets::gconfirm(
-              paste0(download_server,
-                     "http server seems to be down! Do you want to retry?"),
-              icon = "question")
-            if (!confirm) {
-              stop("You selected to quit! Goodbye!", .call = FALSE)
-            }
-            #nocov end
-          } else {
-            stop("[", date(), "] Error: http server seems to be down! Please retry ", #nolint
-                 "Later!", .call = FALSE)
-          }
+          stop("[", date(), "] Error: http server seems to be down! Please retry ", #nolint
+               "Later!", .call = FALSE)
         }
       }
     } else {
@@ -139,7 +117,7 @@ MODIStsp_download <- function(modislist,
                          date_name, ":", which(modislist == modisname),
                          "of: ", length(modislist))
       # Update progress window
-      if (verbose) process_message(mess_text, gui, mess_lab, verbose)
+      process_message(mess_text, verbose)
       success <- FALSE
       attempt <- 0
       #  _______________________________________________________________________
@@ -206,36 +184,15 @@ MODIStsp_download <- function(modislist,
         }
       }
       if (attempt == n_retries & success == FALSE) {
-        if (gui) {
-          #nocov start
-          if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
-            stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
-                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
-          } else {
-            requireNamespace("gWidgets")
-            requireNamespace("gWidgetsRGtk2")
-          }
-          confirm <- gWidgets::gconfirm(
-            paste0(download_server,
-                   " server seems to be down! Do you want to retry?"),
-            icon = "question")
-          if (confirm) {
-            attempt <- 0
-          } else {
-            unlink(local_filename)
-            stop("You selected to quit! Goodbye!")
-          }
-          #nocov end
-        } else {
           unlink(local_filename)
           stop("[", date(), "] Error: server seems to be down! Please retry ",
                "Later!")
-        }
+
       }
     } else {
       mess_text <- paste("HDF File:", modisname,
                          "already exists on your system. Skipping download!")
-      if (verbose) process_message(mess_text, gui, mess_lab, verbose)
+      process_message(mess_text, verbose)
     }
   }
 }

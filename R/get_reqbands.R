@@ -1,19 +1,21 @@
 #' @title Identify the MODIS original bands needed for a given processing run
-#' @description Helper function used in MODIStsp_process to identify which 
+#' @description Helper function used in MODIStsp_process to identify which
 #'  MODIS hdf layers are required for the current process. The required layers
-#'  include all MODIS original layers selected by the user, plus all those 
+#'  include all MODIS original layers selected by the user, plus all those
 #'  required to compute the Spectral Indexes and Quality Indicators selected
 #'  by the user
 #' @param bands_indexes_matrix `matrix` built by `set_bandind_matrix`
-#' @param out_prod_folder `character` Main folder where the MODIStsp processed 
+#' @param indexes_bandnames names of all indexes available for the product being processed
+#' @param quality_bandnames names of all quality indicators available for the product being processed
+#' @param out_prod_folder `character` Main folder where the MODIStsp processed
 #'  raster will be stored. Used to check if a given processed image already exists.
-#' @param file_prefix File prefix corresponding to the MODIS product being 
+#' @param file_prefix File prefix corresponding to the MODIS product being
 #'  processed. Used to check if a given processed image already exists.
 #' @param yy Year corresponding to the image being processed. Used to check if
 #'  a given processed image already exists.
 #' @param DOY DOY corresponding to the image being processed. Used to check if
 #'  a given processed image already exists.. Used to check if a given processed image already exists.
-#' @inheritParams MODIStsp_process
+#' @inheritParams MODIStsp
 #' @return req_bands_indexes
 #' @rdname get_reqbands
 #' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
@@ -48,7 +50,7 @@ get_reqbands <- function(bands_indexes_matrix,
       )
       # if the index does not exists then find out the original
       # bands required to compute it
-      if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
+      if (file.exists(out_filename) == FALSE | reprocess) {
         req_bands_indexes[, band] <- bands_indexes_matrix[, band]
       }
     }
@@ -63,7 +65,7 @@ get_reqbands <- function(bands_indexes_matrix,
 
       # if the QI does not exists then find out the original
       # bands required for it
-      if (file.exists(out_filename) == FALSE | reprocess == "Yes") {
+      if (file.exists(out_filename) == FALSE | reprocess) {
         req_bands_indexes[, band + length(indexes_bandsel)] <-
           bands_indexes_matrix[, band + length(indexes_bandsel)]
       }

@@ -11,11 +11,21 @@
 check_formula_errors <- function(new_indexbandname,
                                  new_indexfullname,
                                  new_indexformula,
-                                 n_products,
                                  prod_opt_list,
                                  refbands_names,
-                                 avail_refbands,
-                                 general_opts) {
+                                 avail_refbands) {
+
+  indexes_file <- system.file("ExtData/Previous",
+                              "MODIStsp_indexes.json",
+                              package = "MODIStsp")
+
+  if (file.exists(indexes_file)) {
+    custom_indexes <- jsonlite::read_json(indexes_file)
+  }
+
+  if (length(custom_indexes) == 1) {
+    custom_indexes <- NULL
+  }
 
   catch_err <- 0 # error 0: no errors
 
@@ -63,7 +73,7 @@ check_formula_errors <- function(new_indexbandname,
     # cycle on available product versions
     for (vers in names(prod_opt_list[[prod]])) {
       current_prodopts    <- as.list(prod_opt_list[[prod]][[vers]])
-      current_custindexes <- as.list(general_opts$custom_indexes[[prod]][[vers]]) #nolint
+      current_custindexes <- as.list(custom_indexes[[prod]][[vers]]) #nolint
       all_indexes_bandnames <- c(all_indexes_bandnames,
                                  current_prodopts$indexes_bandnames)
       all_indexes_fullnames <- c(all_indexes_fullnames,

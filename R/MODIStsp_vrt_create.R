@@ -6,6 +6,12 @@
 #'  it was a single physical file.
 #'  Created virtual files are stored in the "Time Series" subfolder of `out_prod_folder``
 #' @param out_prod_folder `character` Main output folder.
+#' @param bandnames names of all layers available for the product being processed
+#' @param indexes_bandnames names of all indexes available for the product being processed
+#' @param indexes_nodata_out nodata value for indexes vrts
+#' @param quality_bandnames names of all quality indicators available for the product being processed
+#' @param quality_nodata_out nodata value for quality vrts
+#' @param nodata_out `numeric` Output nodata value to be used in vrt files
 #' @param file_prefixes `character array (2)` file_prefixes for TERRA and AQUA -
 #'  used to identify the files corresponding to each sensor
 #' @param ts_format `character ["ENVI" | "GDAL" | "Both"]` Required output format
@@ -13,8 +19,8 @@
 #' @param out_format `character ["ENVI" | "GTiff"]` Format of images used as
 #'  "input" for the vrt and contained in out_prod_folder/band folders.
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
-#' @inheritParams MODIStsp_process
-#' @return NULL -
+#' @inheritParams MODIStsp
+#' @return NULL - the function is called for its side effects
 #'
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
@@ -85,7 +91,6 @@ MODIStsp_vrt_create <- function(
           message("[", date(), "] Creating Virtual Files and R time series for ", #nolint
                   "layer ", meta_band)
         }
-
         #- --------------------------------------------------------#
         # retrieve files list of the time series (ENVI format) ####
         # (both .dat and .hdr)
@@ -109,7 +114,7 @@ MODIStsp_vrt_create <- function(
 
         #- --------------------------------------------------------#
         # retrieve files list of the time series (GTiff format) ####
-        #
+
         if (out_format == "GTiff") {
           # get list of TIFF files
           out_meta_files <- list.files(file.path(out_prod_folder, meta_band),
@@ -175,8 +180,8 @@ MODIStsp_vrt_create <- function(
 
               if (out_format == "GTiff") {
                 # retrieve nsamp and nrow from first tif file
-                nsamp <- raster::raster(out_meta_files[1])@ncols
-                nrow  <- raster::raster(out_meta_files[1])@nrows
+                nsamp <- suppressWarnings(raster::raster(out_meta_files[1])@ncols)
+                nrow  <- suppressWarnings(raster::raster(out_meta_files[1])@nrows)
               }
 
               meta_dir <- file.path(out_prod_folder, "Time_Series", "ENVI_META",
@@ -235,7 +240,7 @@ MODIStsp_vrt_create <- function(
                            paste(as.numeric(elapsed), collapse = ","), "}"),
                          fileConn_meta_hdr)
               # Data Ignore Value
-              writeLines(c("data ignore value = ", nodata_value),
+              writeLines(c("data ignore value = ", nodata_value[[1]]),
                          fileConn_meta_hdr, sep = " ")
               writeLines("", fileConn_meta_hdr)		# Dummy
               close(fileConn_meta_hdr)
@@ -257,10 +262,16 @@ MODIStsp_vrt_create <- function(
                                                          "GDAL.vrt",
                                                          sep = "_"))
 
+              if (length(split_nodata_values(nodata_value)[[1]]) == 1) {
+
               gdalUtilities::gdalbuildvrt(out_meta_files, meta_filename,
                                       separate = TRUE,
                                       srcnodata = nodata_value,
                                       vrtnodata = nodata_value)
+              } else {
+                gdalUtilities::gdalbuildvrt(out_meta_files, meta_filename,
+                                      separate = TRUE)
+              }
 
             } # end If on necessity to build GDAL vrt files
 
@@ -280,7 +291,7 @@ MODIStsp_vrt_create <- function(
               #
               #                                     rst}),
               #                            quick = TRUE)
-              raster_ts <- raster::stack(out_meta_files, quick = TRUE)
+              raster_ts <- suppressWarnings(raster::stack(out_meta_files, quick = TRUE))
 
               # Add the "time" dimension to the rasterstack
               if (raster::nlayers(raster_ts) != length(temp_dates)) {

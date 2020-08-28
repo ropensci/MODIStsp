@@ -1,6 +1,12 @@
 #' @title Helper function to determine the bands needed to compute SIs and QIs
 #' @description FUNCTION_DESCRIPTION
-#' @inheritParams MODIStsp_process
+#' @param bandnames names of all layers available for the product being processed
+#' @param indexes_bandnames names of all indexes available for the product being processed
+#' @param indexes_formula formulas of all indexes available for the product being processed
+#' @param quality_bandnames names of all quality indicators available for the product being processed
+#' @param quality_source sources of data (original layers) of all quality indicators
+#' available for the product being processed
+#' @inheritParams MODIStsp
 #' @return `matrix` containing info on which bands are needed for computing
 #'  each available QI or SI
 #' @rdname set_bandind_matrix

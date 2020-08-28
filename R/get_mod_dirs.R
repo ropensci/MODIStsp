@@ -62,26 +62,8 @@ get_mod_dirs <- function(http,
       # retry
 
       if (inherits(response, "try-error") || response$status_code != 200) {
-        if (gui) {
-          if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
-            stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
-                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
-          } else {
-            requireNamespace("gWidgets")
-            requireNamespace("gWidgetsRGtk2")
-          }
-          #nocov start
-          switch <- gWidgets::gconfirm(
-            "http server seems to be down! Do you want to retry?",
-            icon = "question")
-          if (!switch) {
-            stop("You selected to abort processing. Goodbye!", call. = FALSE)
-          }
-          #nocov end
-        } else {
           stop("[", date(), "] Error: http server seems to be down! ",
                "Please try again later. Aborting!", call. = FALSE)
-        }
       }
     }
     # On httr success get the directory names (available dates) ----

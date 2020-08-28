@@ -38,8 +38,9 @@ MODIStsp_process_QA_bits <- function(out_filename,
                                      compress) {
 
   dir.create(dirname(out_filename), showWarnings = FALSE, recursive = TRUE)
+
   # Open input file
-  in_raster <- raster::raster(in_source_file, format = out_format)
+  in_raster <- suppressWarnings(raster::raster(in_source_file, format = out_format))
   # reassign NoData to be sure
   raster::NAvalue(in_raster) <- as.numeric(nodata_source)
   # what bits do we need ?
@@ -52,7 +53,7 @@ MODIStsp_process_QA_bits <- function(out_filename,
                  2 ^ (bits[2] - bits[1] + 1) - 1,
                  2 ^ (1) - 1)
 
-  out <- raster::calc(x   = in_raster,
+  out <- suppressWarnings(raster::calc(x   = in_raster,
                fun  =  function(x, ...) {
                  shifted <- bitops::bitShiftR(x, bit1)
                  out     <-  bitops::bitAnd(shifted, bit2)
@@ -65,7 +66,7 @@ MODIStsp_process_QA_bits <- function(out_filename,
                                   paste0("COMPRESS=", compress),
                                   ""),
                NAflag    = as.numeric(nodata_qa_out),
-               overwrite = TRUE)
+               overwrite = TRUE))
 
   if (out_format == "ENVI") {
     # If output format is ENVI, add data ignore value to the header file
