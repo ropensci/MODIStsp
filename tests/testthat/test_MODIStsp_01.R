@@ -30,7 +30,7 @@ test_that(
     means <- unlist(
       lapply(out_files,
              FUN = function(x) {
-               mean(raster::getValues(raster::raster(x)), na.rm = T)
+               mean(raster::getValues(suppressWarnings(raster::raster(x))), na.rm = T)
              })
     )
     expect_equal(means, c(13341.450786, 13266.374624, 2.843336, 2.824311),

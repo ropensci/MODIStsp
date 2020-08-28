@@ -33,7 +33,7 @@ test_that(
     r <- raster::raster(out_files_dat[1])
     expect_equal(
       sf::st_crs(r)$input,
-      "+proj=utm +zone=22 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0" #nolint
+      "+proj=utm +zone=22 +datum=WGS84 +units=m +no_defs" #nolint
     )
     expect_equal(raster::res(r), c(1000, 1000))
     unlink(out_files_dat)

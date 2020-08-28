@@ -4,7 +4,7 @@ test_that("get_yeardates works as expected", {
 
   # year within start and end year: all year processed
   expect_equal(
-    get_yeardates("full",
+    get_yeardates("Full",
                   yy = 2010,
                   start_year = 2005, end_year = 2012,
                   start_date = "2005.02.12", end_date = "2012.02.12"),
@@ -12,7 +12,7 @@ test_that("get_yeardates works as expected", {
   )
   # year equal to  end year: only up to end_date
   expect_equal(
-    get_yeardates("full",
+    get_yeardates("Full",
                   yy = 2012,
                   start_year = 2005, end_year = 2012,
                   start_date = "2005.02.12", end_date = "2012.02.12"),
@@ -21,7 +21,7 @@ test_that("get_yeardates works as expected", {
 
   # year equal to  start year: only from start_date
   expect_equal(
-    get_yeardates("full",
+    get_yeardates("Full",
                   yy = 2005,
                   start_year = 2005, end_year = 2012,
                   start_date = "2005.02.12", end_date = "2012.02.12"),
@@ -30,7 +30,7 @@ test_that("get_yeardates works as expected", {
 
   # year within start and end year: all year processed
   expect_equal(
-    get_yeardates("full",
+    get_yeardates("Full",
                   yy = 2012,
                   start_year = 2012, end_year = 2012,
                   start_date = "2012.01.12", end_date = "2012.02.12"),

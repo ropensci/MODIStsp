@@ -63,7 +63,7 @@ test_that("Tests on MODIStsp", {
   expect_equal(raster::res(r), c(1553.030, 1551.724),
                tolerance = 0.01, scale = 1)
   expect_equal(sf::st_crs(r)$input,
-               "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0")
+               "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
   unlink(out_files_dat)
   unlink(out_files_hdr)
   unlink(out_files_rts)
@@ -91,6 +91,7 @@ test_that("Tests on MODIStsp", {
   unlink(out_files_dat)
 
   MODIStsp(test = "04c")
+
   context("MODIStsp Test 4: Reassign multiple nodata on notiled processing")
   out_files_tif <- list.files(
     file.path(

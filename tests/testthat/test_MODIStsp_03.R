@@ -12,6 +12,10 @@ test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     # skip_on_travis()
+    try(MODIStsp_addindex("GVMI",
+                      "Global Vegetation Moisture Index  (((NIR+0.1)−(SWIR+0.02))/((NIR+0.1)+(SWIR+0.02)))",
+                      "((b2_NIR+0.1)-(b7_SWIR+0.02))/((b2_NIR+0.1)+(b7_SWIR+0.02))",
+                      "32767"))
 
     expect_warning(MODIStsp(test = 3))
     out_files_tif <- list.files(
@@ -19,15 +23,15 @@ test_that(
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
 
     file_sizes_tif <- file.info(out_files_tif)$size
-    expect_equal(file_sizes_tif, c(10583, 10642, 752, 10706, 1397),
+    expect_equal(file_sizes_tif, c(10965, 10559 , 10618 , 728 , 10682 , 1397 ),
                  tolerance = 0.001, scale = 1)
     means <- unlist(lapply(out_files_tif,
                            FUN = function(x) {
-                             mean(raster::getValues(raster::raster(x)),
+                             mean(raster::values(raster::raster(x)),
                                   na.rm = T)
                            }))
-    expect_equal(means, c(0.5400184, 0.6436071, 0.0000000, 0.3753549,
-                          197.0045406), tolerance = 0.001, scale = 1)
+    expect_equal(means, c(-0.08252304, 0.54001838 , 0.64360713, 0, 0.37535489 ,
+                          197.00454060), tolerance = 0.001, scale = 1)
 
     # nodatavalue properly changed
     r <- sf::gdal_utils("info", out_files_tif[1], quiet = TRUE)
@@ -38,12 +42,12 @@ test_that(
       file.path(tempdir(), "MODIStsp/Surf_Ref_8Days_500m_v6"),
       pattern = "\\.vrt$", recursive = TRUE, full.names = TRUE)
     file_sizes_vrt <- file.info(out_files_vrt)$size
-    expect_equal(length(out_files_vrt), 5)
+    expect_equal(length(out_files_vrt), 6)
 
     vrt_1 <- raster::raster(out_files_vrt[1])
     expect_is(vrt_1, "RasterLayer")
     mean_scaled <- mean(raster::getValues(vrt_1), na.rm = T)
-    expect_equal(mean_scaled,  0.5400184, tolerance = .00001, scale = 1)
+    expect_equal(mean_scaled,  -0.08252304, tolerance = .00001, scale = 1)
 
     unlink(out_files_tif)
 
@@ -54,8 +58,8 @@ test_that(
       file.path(tempdir(), "MODIStsp/Surf_Ref_8Days_500m_v6"),
       pattern = "\\.dat$", recursive = TRUE, full.names = TRUE)
     file_sizes_dat <- file.info(out_files_dat)$size
-    expect_equal(length(out_files_dat), 5)
-    expect_equal(file_sizes_dat[1:5], c(7488, 7488, 3744, 7488, 7488),
+    expect_equal(length(out_files_dat), 6)
+    expect_equal(file_sizes_dat[1:6], c(7488, 7488, 7488, 3744, 7488, 7488),
                  tolerance = 0.001, scale = 1)
     dat_1 <- raster::raster(out_files_dat[1])
     mean_noscaled <- mean(raster::getValues(dat_1), na.rm = T)
