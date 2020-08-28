@@ -64,7 +64,7 @@ MODIS products, since NoData values are always integer values).
 
 This function interprets these strings and convert them in vectors with
 single values.
-Notice that the last NoData value is the only one which is considered if
+Notice that the first NoData value is the only one which is considered if
 'Change NoData values' was set to 'No'.
 }
 \examples{

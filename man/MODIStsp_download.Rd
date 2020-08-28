@@ -19,7 +19,6 @@ MODIStsp_download(
   sens_sel,
   date_name,
   gui,
-  mess_lab,
   verbose
 )
 }
@@ -37,8 +36,7 @@ image, or a list of images in case different tiles are needed!}
 \item{n_retries}{\code{numeric} Max number of retry attempts on download. If
 download fails more that n_retries times consecutively, abort}
 
-\item{use_aria}{\code{logical} If TRUE, aria2c is used to accelerate download
-(if available !).}
+\item{use_aria}{\code{logical} if TRUE, download using aria2c}
 
 \item{date_dir}{\verb{character array} Sub-folder where the different images
 can be found (element of the list returned from \code{get_mod_dirs}, used in case
@@ -58,9 +56,6 @@ of http download to generate the download addresses).}
 
 \item{gui}{\code{logical} Indicates if on an interactive or non-interactive execution
 (only influences where the log messages are sent).}
-
-\item{mess_lab}{pointer to the gWidget used to issue processing messages in
-when gui = TRUE.}
 
 \item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
 }

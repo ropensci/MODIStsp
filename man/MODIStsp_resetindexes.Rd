@@ -4,21 +4,16 @@
 \alias{MODIStsp_resetindexes}
 \title{Remove custom spectral indexes}
 \usage{
-MODIStsp_resetindexes(opts_jsfile = NULL)
-}
-\arguments{
-\item{opts_jsfile}{\code{character} full path of a JSON file
-containing the processing options in which the new indexes has to be saved
-(default: MODIStsp_Previous.JSON in subfolder Previous).}
+MODIStsp_resetindexes()
 }
 \value{
 The function is called for its side effects. On success, the
-MODIStsp_Previous.json file or the specified options file is modified so to
+MODIStsp_indexes.json file is modified so to
 remove all previously custom-specified Spectral Indexes.
 }
 \description{
 Function used to remove all user-defined Spectral Indexes from
-a MODIStsp json options file, thus resetting the list of available indexes
+MODIStsp, thus resetting the list of available indexes
 to the default ones.
 }
 \note{
@@ -40,11 +35,11 @@ opts_jsfile = system.file("testdata/test_addindex.json",
    new_indexfullname = paste0("Index_", as.character(sample(10000, 1)))
    )
 
- opts <- jsonlite::fromJSON(opts_jsfile)
+ opts <- jsonlite::fromJSON(indexes_file)
  opts$custom_indexes[1]
 
  # Now remove all custom indexes
- MODIStsp_resetindexes(opts_jsfile)
+ MODIStsp_resetindexes()
  opts <- jsonlite::fromJSON(opts_jsfile)
  opts$custom_indexes[1]
  }

@@ -7,7 +7,7 @@
 get_yeardates(download_range, yy, start_year, end_year, start_date, end_date)
 }
 \arguments{
-\item{download_range}{\code{character ["full" | "seasonal"]} If "full", all the
+\item{download_range}{\code{character ["Full" | "Seasonal"]} If "full", all the
 available images between the starting and the ending dates are downloaded;
 If "seasonal", only the images included in the season are downloaded
 (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, only

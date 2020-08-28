@@ -4,16 +4,11 @@
 \alias{process_message}
 \title{Spawn processing update messages}
 \usage{
-process_message(mess_text, gui, mess_lab, verbose = TRUE)
+process_message(mess_text, verbose = TRUE)
 }
 \arguments{
 \item{mess_text}{\code{character} text to be shown in the processing windows
 and/or the console}
-
-\item{gui}{\code{logical} indicating if the message should be passed to the
-status window or only to the console.}
-
-\item{mess_lab}{pointer to the gwindow used to shoe messages when gui == TRUE}
 
 \item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
 }
