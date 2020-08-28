@@ -1,4 +1,4 @@
-prod_opt_list <- load_prodopts(FALSE)
+prod_opt_list <- load_prodopts()
 prodopts_file <- system.file("ExtData/Previous", "MODIStsp_ProdOpts.RData",
                              package = "MODIStsp")
 mod_prod_cat <- as.data.frame(
@@ -11,7 +11,7 @@ names(mod_prod_cat) <- c("cat01", "cat02")
 mod_prod_cat$cat    <- apply(mod_prod_cat, 1, paste, collapse = " - ")
 mod_prod_list <- names(prod_opt_list)
 
-modis_grid <- get(load(file.path(MODIStsp_dir,
-                                     "ExtData/MODIS_Tiles.RData")))
+modis_grid <- get(load(system.file("ExtData/MODIS_Tiles.RData",
+                       package = "MODIStsp")))
 
 

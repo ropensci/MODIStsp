@@ -9,12 +9,10 @@ observe({
     natproj <- "MODIS Sinusoidal"
 
   } else {
-    natproj <- "4326"
+    natproj <- "4008"
   }
-  output$outprojtxt <- shiny::renderUI({
-    shinyjs::disabled(shiny::textInput("outprojtxt", "Projection Name/EPSG/Wkt", natproj))})
-  output$outres <- shiny::renderUI({
-    shiny::numericInput("outres", "Ouput Resolution", natres)})
+  shiny::updateTextInput(session, "outprojtxt",natproj)
+  shiny::updateNumericInput(session, "outres", "Output Resolution", value = natres)
 
 })
 
@@ -27,9 +25,11 @@ observe({
     natproj <- "MODIS Sinusoidal"
 
   } else {
-    natproj <- "4326"
+    natproj <- "4008"
   }
-  shiny::updateTextInput(session, "outprojtxt", "Projection Name/EPSG/Wkt", natproj)
+  if (input$outprojsel == "Native") {
+    shiny::updateTextInput(session, "outprojtxt", "Projection Name/EPSG/Wkt", natproj)
+  }
 })
 
 shiny::observeEvent(input$seloutproj, {
@@ -40,8 +40,8 @@ shiny::observeEvent(input$seloutproj, {
     shiny::textInput("projtextmodal", "Output projection"),
     easyClose = FALSE,
     footer = tagList(
-      shiny::actionButton("save_textproj", strong("\u2000Ok"), icon=icon("check")),
-      shiny::modalButton("\u2000Cancel", icon = icon("ban"))
+      shiny::actionButton("save_textproj", strong("\u2000Ok"), icon=shiny::icon("check")),
+      shiny::modalButton("\u2000Cancel", icon = shiny::icon("ban"))
     )
   ))
 })
@@ -53,9 +53,9 @@ shiny::observeEvent(input$save_textproj, {
     shiny::updateTextInput(session, "outprojtxt", "Projection Name/EPSG/Wkt", chk_proj)
   } else {
     shinyalert::shinyalert(
-    "Error", type = "error", text = "Invalid EPSG code or WKT string. Try again!"
+      "Error", type = "error", text = "Invalid EPSG code or WKT string. Try again!"
 
-  )
+    )
   }
 })
 

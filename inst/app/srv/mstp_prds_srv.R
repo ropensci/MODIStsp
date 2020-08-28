@@ -1,5 +1,8 @@
 #initialize product and category selectors ----
 
+general_opts <- reactiveValues()
+rv           <- reactiveValues()
+
 output$selcats <-renderUI({
   curprod <- which(names(prod_opt_list) == general_opts$sel_prod)
   curcat  <- mod_prod_cat$cat[curprod]
@@ -10,20 +13,11 @@ output$selcats <-renderUI({
 
 output$selprods <-renderUI({
   shiny::selectInput("selprod",
-                     label = span("Product Name\u2000",
-                                  actionLink("help_product",
-                                             icon("question-circle"))),
-                     choices = mod_prod_list[mod_prod_cat$cat == input$selcat],
+                     label = shiny::span("Product Name\u2000",
+                                         shiny::actionLink("help_product",
+                                                           shiny::icon("question-circle"))),
+                     choices = mod_prod_list[mod_prod_cat$cat == (input$selcat)],
                      selected = general_opts$selprod)
-})
-
-
-#Update products selector based on category ----
-shiny::observe({
-  req(input$selcats)
-  shiny::updateSelectInput(session, "selprod", "Product Name",
-                           choices = names(prod_opt_list)[mod_prod_cat$cat == input$selcat],
-                           selected = 1)
 })
 
 #Update products selector based on category ----
@@ -36,17 +30,25 @@ observe({
   curlabels <- prod_opt_list[[curprod]][[1]]$band_fullnames
   shiny::updateCheckboxGroupInput(session, "sel_layers",
                                   choiceNames = curlabels,
-                                  choiceValues = curlayers)
+                                  choiceValues = curlayers,
+                                  selected = general_opts$curlayers)
+
+  # shiny::isolate(general_opts$curlayers) <- ""
 
   qalayers <- prod_opt_list[[curprod]][[1]]$quality_bandnames
   qalabels <- prod_opt_list[[curprod]][[1]]$quality_fullnames
-  shiny::updateCheckboxGroupInput(session, "sel_qual",
-                                  choiceNames  = qalabels,
-                                  choiceValues = qalayers)
+
   if (is.null(qalayers)) {
     qalayers <- NA
     qalabels <- "No Quality layers available"
   }
+
+  shiny::updateCheckboxGroupInput(session, "sel_qual",
+                                  choiceNames  = qalabels,
+                                  choiceValues = qalayers,
+                                  selected = general_opts$curqual)
+
+  # shiny::isolate(general_opts$curqual) <- ""
 
   indlayers <- prod_opt_list[[curprod]][[1]]$indexes_bandnames
   indlabels <- prod_opt_list[[curprod]][[1]]$indexes_fullnames
@@ -59,7 +61,7 @@ observe({
   } else {
     custom_indexes <- NULL
   }
-  if (length(custom_indexes) == 0) {
+  if (length(custom_indexes) == 1) {
     custom_indexes <- NULL
   }
 
@@ -73,7 +75,10 @@ observe({
   }
   shiny::updateCheckboxGroupInput(session, "sel_ind",
                                   choiceNames  = indlabels,
-                                  choiceValues = indlayers)
+                                  choiceValues = indlayers,
+                                  selected = general_opts$curindexes)
+
+  # shiny::isolate(general_opts$curindexes) <- ""
 })
 
 # Observers to create / deal with the modal used to add spectral indexes ----
@@ -92,7 +97,7 @@ shiny::observeEvent(input$addindex, {
   avail_refbands <- match_refbands[!is.na(match_refbands)]
 
   shiny::showModal(shiny::modalDialog(
-    title = "Add a new Spectral Index output projection",
+    title = "Add a new Spectral Index",
     size = "l",
     shiny::helpText(shiny::em("Insert a names and formula for the new index")),
     shiny::helpText(paste(c("Valid bandnames for this product are: \n", avail_refbands), collapse = " ")),
@@ -101,8 +106,8 @@ shiny::observeEvent(input$addindex, {
     shiny::textInput("indexformula", "Spectral Index Formula (e.g., (b2_NIR/b1_Red))"),
     easyClose = FALSE,
     footer = tagList(
-      shiny::actionButton("save_index", strong("\u2000Ok"), icon=icon("check")),
-      shiny::modalButton("\u2000Cancel", icon = icon("ban"))
+      shiny::actionButton("save_index", strong("\u2000Ok"), icon=shiny::icon("check")),
+      shiny::modalButton("\u2000Cancel", icon = shiny::icon("ban"))
     )
   ))
 })
@@ -198,7 +203,20 @@ observeEvent(input$close_app, {
   shinyalert::shinyalert(title = "GoodBye!",
                          text = "Thanks for using MODIStsp",
                          type = "info")
-  shinyjs::delay(3000, {shinyjs::js$closeWindow()
+  shinyjs::delay(1000, {shinyjs::js$closeWindow()
     stopApp()})
+
+})
+
+observeEvent(input$run_app, {
+  shinyalert::shinyalert(title = "Starting Processing!",
+                         text = "You can follow progress in the console!",
+                         type = "info")
+  proc_opts <- shinygui_saveopts(input, prod_opt_list, rv)
+  shinyjs::delay(1000, {shinyjs::js$closeWindow()
+  stopApp()
+  MODIStsp_process(proc_opts, n_retries = 20)
+  #retrieve the options from the widgets
+  })
 
 })

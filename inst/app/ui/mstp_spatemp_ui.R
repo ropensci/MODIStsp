@@ -16,17 +16,22 @@ shinydashboard::tabItem(
         style = "display:inline-block;vertical-align:top;padding:1px",
         shiny::div(style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
                    shiny::dateRangeInput("proc_dates", "Temporal Range",
-                                         start = as.Date("2002-01-01"),
-                                         end   = as.Date(Sys.Date())
-                   )
-        ),
-        shiny::div(style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
-                   shiny::selectInput("date_seas", "Date Range Type",
-                                      c("Full" , "Seasonal")
-                   )
+                                         start = as.Date("2020-01-01"),
+                                         end   = as.Date(Sys.Date()),
+                                         format = "yyyy.mm.dd")
         )
-
+      ),
+      shiny::div(style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
+                 shiny::selectInput(
+                   "download_range",
+                   label = shiny::span(
+                     "Date Range Type\u2000",
+                     shiny::actionLink("help_daterange",
+                                       shiny::icon("question-circle"))),
+                   c("Full" , "Seasonal")
+                 )
       )
+
     )
   ),
   # Projection selectors -----
@@ -42,10 +47,14 @@ shinydashboard::tabItem(
         style = "display:inline-block;padding:1px;vertical-align:top",
         shiny::div(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:10px",
-          shiny::selectInput("outprojsel", "Output Projection",
+          shiny::selectInput("outprojsel",
+                             label = shiny::span(
+                               "Ouput Projection\u2000",
+                               shiny::actionLink(
+                                 "help_outproj",
+                                 shiny::icon("question-circle"))),
                              c("Native",
-                               "User Defined"),
-                             width = "120px")
+                               "User Defined"))
 
         )
       ),
@@ -57,7 +66,8 @@ shinydashboard::tabItem(
         #   condition = "input.outprojsel == 'Manual'",
         shiny::div(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:5px",
-          shiny::uiOutput("outprojtxt")
+          shinyjs::disabled(shiny::textInput("outprojtxt",
+                                             "Projection Name/EPSG/Wkt", ""))
         ),
         shiny::div(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:5px; margin-top:25px",
@@ -70,10 +80,14 @@ shinydashboard::tabItem(
         style = "display:inline-block;padding:1px;vertical-align:top",
         shiny::div(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:10px",
-          shiny::selectInput("outressel", "Output Resolution",
+          shiny::selectInput("outressel",
+                             label = shiny::span(
+                               "Ouput Resolution\u2000",
+                               shiny::actionLink(
+                                 "help_outres",
+                                 shiny::icon("question-circle"))),
                              c("Native",
-                               "Resampled"),
-                             width = "120px")
+                               "Resampled"))
 
         )
       ),
@@ -85,7 +99,7 @@ shinydashboard::tabItem(
           condition = "input.outressel == 'Resampled'",
           shiny::div(
             style = "display:inline-block;vertical-align:top;padding:1px;margin-right:5px",
-            shiny::uiOutput("outres")
+            shiny::numericInput("outres", "Ouput Resolution", 1)
           )
         )
       ),
@@ -95,11 +109,17 @@ shinydashboard::tabItem(
           condition = "input.outressel == 'Resampled' | input.outprojsel == 'User Defined'",
           shiny::div(
             style = "display:inline-block;vertical-align:top;padding:1px;margin-right:5px",
-            shiny::selectInput("resampmeth", "Resampling Method",
+            shiny::selectInput("resampmeth",
+                               label = shiny::span(
+                                 "Resampling Method\u2000",
+                                 shiny::actionLink(
+                                   "help_resmeth",
+                                   shiny::icon("question-circle"))),
                                c("near",
                                  "bilinear",
                                  "cubic",
                                  "cubicspline",
+                                 "lanczos",
                                  "average",
                                  "mode",
                                  "max",
@@ -126,11 +146,16 @@ shinydashboard::tabItem(
       # style = "display:inline-block;vertical-align:top;padding:1px",
       shiny::div(
         style = "display:inline-block;vertical-align:top;padding:1px;margin-right:5px",
-        shiny::selectInput("spatmeth", "Selection Method",
-                           c("Select Tiles",
-                             "Select Bounding Box",
-                             "Load From Spatial File",
-                             "Draw On Map"),
+        shiny::selectInput("spatmeth",
+                           label = shiny::span(
+                             "Selection Method\u2000",
+                             shiny::actionLink(
+                               "help_spameth",
+                               shiny::icon("question-circle"))),
+                           choices = list("Select Tiles" = "tiles",
+                                          "Select Bounding Box" = "bbox",
+                                          "Load From Spatial File" = "file",
+                                          "Draw On Map" = "map"),
                            width = "200px")
       )
 
@@ -140,7 +165,7 @@ shinydashboard::tabItem(
     # From Tiles ----
     shiny::div(
       shiny::conditionalPanel(
-        condition = "input.spatmeth == 'Select Tiles'",
+        condition = "input.spatmeth == 'tiles'",
         style = "display:inline-block;padding:1px;width:98%",
         shiny::selectInput("selecttile", "Select Method",
                            c("Manual", "From Map"),
@@ -192,7 +217,7 @@ shinydashboard::tabItem(
 
     # From Bounding Box ----
     shiny::conditionalPanel(
-      condition = "input.spatmeth == 'Select Bounding Box'",
+      condition = "input.spatmeth == 'bbox'",
       style = "display:inline-block;padding:1px; width:100%",
       shiny::div(
         style = "display:inline-block;vertical-align:top;padding:1px",
@@ -224,7 +249,7 @@ shinydashboard::tabItem(
 
     # From Spatial File ----
     shiny::conditionalPanel(
-      condition = "input.spatmeth == 'Load From Spatial File'",
+      condition = "input.spatmeth == 'file'",
       style = "display:inline-block;padding:1px;width:100%",
       shiny::div(
         style = "display:inline-block;vertical-align:centre;padding:1px;width:100%",
@@ -245,7 +270,7 @@ shinydashboard::tabItem(
     ),
     # From Map ----
     shiny::conditionalPanel(
-      condition = "input.spatmeth == 'Draw On Map'",
+      condition = "input.spatmeth == 'map'",
       # style = "display:inline-block;padding:1px",
       shiny::div(
         style = "display:inline-block;vertical-align:top;padding:1px;width:200px",

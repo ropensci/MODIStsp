@@ -14,58 +14,59 @@ shinydashboard::tabItem(
         shiny::uiOutput("selprods")
       ),
       shiny::div(
-        style = "display:inline-block;vertical-align:top;padding:1px;width:5%;margin-top:25px",
+        style = "display:inline-block;vertical-align:top;padding:1px;width:5%;margin-top:25px;margin-right:10px",
         shiny::actionButton("prodinfo", "", icon = shiny::icon("atlas"),
                             title = "Open Documentation webpage")
       ),
       shiny::div(
-        style = "display:inline-block;vertical-align:top;padding:1px;width:23%",
+        style = "display:inline-block;vertical-align:top;padding:1px;width:20%",
         shiny::selectInput(
           "selplat",
-          label = span("MODIS Platform\u2000",
-                       actionLink("help_platform",
-                                  icon("question-circle"))),
+          label = shiny::span("Platform\u2000",
+                              shiny::actionLink("help_platform",
+                                                shiny::icon("question-circle"))),
           choices = c("Terra", "Aqua", "Both"))
       )
     )
   ),
-  shinydashboard::box(title = "Select Layers to be processed",
-                      width = 12,
-                      solidHeader = TRUE,
-                      collapsible = TRUE,
-                      status = "primary",
-                      shiny::div(
-                        style = "display:inline-block;padding:1px",
-                        shiny::div(
-                          style = "display:inline-block;vertical-align:top;padding:1px",
-                          shiny::div(
-                            style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
-                            shiny::checkboxGroupInput(
-                              "sel_layers",
-                              label = span("MODIS Layers\u2000",
-                                           actionLink("help_layers",
-                                                      icon("question-circle"))),
-                              c(""))
-                          ),
-                          shiny::div(
-                            style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
-                            shiny::checkboxGroupInput(
-                              "sel_qual",
-                              label = span("Quality Indicators\u2000",
-                                           actionLink("help_quality",
-                                                      icon("question-circle"))),
-                              c(""))
-                          )
-                        ),
-                        shiny::div(style = "display:inline-block;vertical-align:top;padding:1px",
-                                   shiny::checkboxGroupInput(
-                                     "sel_ind",
-                                     label = span("Spectral Indexes\u2000",
-                                                  actionLink("help_indexes",
-                                                             icon("question-circle"))),
-                                     c(""))
-                        )
-                      )
+  shinydashboard::box(
+    title = "Select Layers to be processed",
+    width = 12,
+    solidHeader = TRUE,
+    collapsible = TRUE,
+    status = "primary",
+    shiny::div(
+      style = "display:inline-block;padding:1px",
+      shiny::div(
+        style = "display:inline-block;vertical-align:top;padding:1px",
+        shiny::div(
+          style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
+          shiny::checkboxGroupInput(
+            "sel_layers",
+            label = shiny::span("MODIS Layers\u2000",
+                                shiny::actionLink("help_layers",
+                                                  shiny::icon("question-circle"))),
+            c(""))
+        ),
+        shiny::div(
+          style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
+          shiny::checkboxGroupInput(
+            "sel_qual",
+            label = shiny::span("Quality Indicators\u2000",
+                                shiny::actionLink("help_quality",
+                                                  shiny::icon("question-circle"))),
+            c(""))
+        )
+      ),
+      shiny::div(style = "display:inline-block;vertical-align:top;padding:1px",
+                 shiny::checkboxGroupInput(
+                   "sel_ind",
+                   label = shiny::span("Spectral Indexes\u2000",
+                                       shiny::actionLink("help_indexes",
+                                                         shiny::icon("question-circle"))),
+                   c(""))
+      )
+    )
   ),
   shiny::actionButton("addindex", "Add New Spectral Index", width = "100%")
 )

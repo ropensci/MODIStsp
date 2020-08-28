@@ -83,20 +83,135 @@ shiny::observeEvent(input$help_indexes, {
   ))
 })
 
+# spatemp Panel ----
+
+# date range ----
+shiny::observeEvent(input$help_daterange, {
+  shiny::showModal(shiny::modalDialog(
+    title = "Date Range Type",
+   shiny::p(shiny::HTML(
+      "This selector allows specifying how the date range is interpreted.",
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>Full</strong>: all the available images between the starting and
+      the ending dates will be downloaded;"
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>Seasonal</strong>:  only the images included \"in the season\"
+      will be downloaded (e.g: if the starting date is 2005-12-01 and the ending
+      date is 2010-02-31, the images of December, January and February from
+      2005 to 2010 will be processed."
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# dprojection ----
+shiny::observeEvent(input$help_outproj, {
+  shiny::showModal(shiny::modalDialog(
+    title = "Output Projection",
+   shiny::p(shiny::HTML(
+      "These selectors allows specifying the output projection.",
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>Native</strong>: Native MODIS projection of the product
+      (either MODIS Sinusoidal or EPSG 4008) will be kept;"
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>User Defined</strong>: The user can define the output projection
+      by clicking the \"Change\" button and then specifying the desired projection
+      as a EPSG code or WKT string"
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# resolution ----
+shiny::observeEvent(input$help_outres, {
+  shiny::showModal(shiny::modalDialog(
+    title = "Output Resolution",
+   shiny::p(shiny::HTML(
+      "These selectors allows specifying the output resolution",
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>Native</strong>: Native MODIS resolution of the product
+      will be kept;"
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>Resampled</strong>: The user can define the output resolution
+      by setting the desired value in the selector on the right"
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>NOTE</strong>: resolution MUST be set in the measure units
+      of the output projection (e.g., decimal degrees for lat/lon projections"
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# spatial selection methof ----
+shiny::observeEvent(input$help_spameth, {
+  shiny::showModal(shiny::modalDialog(
+    title = "Spatial Selection Method",
+   shiny::p(shiny::HTML(
+      "These selectors allows specifying the spatial extent to be considered",
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>Select Tiles</strong>: User can specify the output extent by
+      selecting the desired MODIS tiles, either manually or by selecting them
+      an interactive map;"
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>Select Bounding Box</strong>: The user can define the output resolution
+      by setting the desired output bounding box. Coordinates MUST be provided
+      in the <strong>output projection</strong>;"
+    )),
+   shiny::p(shiny::HTML(
+      "<strong>Load From Spatial File</strong>: The user can select a raster or
+      vector file from which the extent has to be retrieved;"
+    )),
+    shiny::p(shiny::HTML(
+      "<strong>Draw on Map</strong>: The user can select the extent by drawing
+      it on an interactive map;"
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# resampling ----
+shiny::observeEvent(input$help_resmeth, {
+  shiny::showModal(shiny::modalDialog(
+    title = "Resampling Method",
+   shiny::p(shiny::HTML(
+      "These selectors allows specifying the <strong>resampling method</strong> in case
+      either the output projection or resolution is not set to \"Native\"",
+    )),
+   shiny::p(shiny::HTML(
+      "All resampling methods available in <strong>gdalwarp</strong> can be used."
+    )),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
 # Options panel ----
 
 # online ----
 
-observeEvent(input$help_downmeth, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_downmeth, {
+  shiny::showModal(shiny::modalDialog(
     title = "Download Server",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "This selector allows specifying the server used to download MODIS HDF images.",
     )),
-    p(HTML(
+   shiny::p(shiny::HTML(
       "<strong>http</strong>: download data from NASA lpdaac server."
     )),
-    p(HTML(
+   shiny::p(shiny::HTML(
       "<strong>offline</strong>: process only MODIS HDF files already
       available on disk (specify the folder where they are stored in the
       'Folder for Storage of MODIS HDF files' input field.)"
@@ -107,13 +222,13 @@ observeEvent(input$help_downmeth, {
 })
 
 # user ----
-observeEvent(input$help_user, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_user, {
+  shiny::showModal(shiny::modalDialog(
     title = "User",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "Provide your <strong>earthdata</strong> user name." ,
     )),
-    p(HTML(
+   shiny::p(shiny::HTML(
       "You can create an earthdata account at: https://urs.earthdata.nasa.gov/home"
     )),
     easyClose = TRUE,
@@ -122,13 +237,13 @@ observeEvent(input$help_user, {
 })
 
 # password ----
-observeEvent(input$help_password, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_password, {
+  shiny::showModal(shiny::modalDialog(
     title = "User",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "Provide your <strong>earthdata</strong> password." ,
     )),
-    p(HTML(
+   shiny::p(shiny::HTML(
       "You can create an earthdata account at: https://urs.earthdata.nasa.gov/home"
     )),
     easyClose = TRUE,
@@ -137,24 +252,24 @@ observeEvent(input$help_password, {
 })
 
 # downloader ----
-observeEvent(input$help_downloader, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_downloader, {
+  shiny::showModal(shiny::modalDialog(
     title = "Downloader",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "This selector allows to choose which downloader will be used",
       "to download MODIS HDF files."
     )),
-    p(HTML(
+   shiny::p(shiny::HTML(
       "<strong>http</strong> is the downloader which is used by default",
       "through the package 'httr'."
     )),
-    p(HTML(
+   shiny::p(shiny::HTML(
       "<strong><a href=\"https://aria2.github.io\" target=\"_blank\">aria2</a></strong>",
       "is an alternative downloader which can be installed in Linux systems",
       "from the default install manager (in Ubuntu, install the package \"aria2\"),",
       "or in Windows from https://github.com/aria2/aria2/releases/tag/release-1.35.0"
     )),
-    p(HTML(
+   shiny::p(shiny::HTML(
       "This selector is active only if aria2 can be found using sys.which(\"aria2c\"")
     ),
     easyClose = TRUE,
@@ -163,17 +278,17 @@ observeEvent(input$help_downloader, {
 })
 
 # format ----
-observeEvent(input$help_format, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_format, {
+  shiny::showModal(shiny::modalDialog(
     title = "Output Format",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "This selector allows specifying the server format used to save
       MODIStsp processed data.",
     )),
-    p(HTML(
+   shiny::p(shiny::HTML(
       "<strong>TIF</strong>: store processed data in GeoTiff format."
     )),
-    p(HTML(
+   shiny::p(shiny::HTML(
       "<strong>ENVI</strong>: store processed data in ENVI format."
     )),
     easyClose = TRUE,
@@ -182,10 +297,10 @@ observeEvent(input$help_format, {
 })
 
 # format ----
-observeEvent(input$help_compression, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_compression, {
+  shiny::showModal(shiny::modalDialog(
     title = "Compression",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "This selector allows specifying compression algorithm when
       output format is TIF."
     )),
@@ -195,20 +310,20 @@ observeEvent(input$help_compression, {
 })
 
 # time series ----
-observeEvent(input$help_time_series, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_time_series, {
+  shiny::showModal(shiny::modalDialog(
     title = "Time series",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "MODIStsp can create <strong>virtual files</strong> allowing access to
      the time series of the single-date rasters created for the different
      processed layers as if they were a single multitemporal file."
     )),
-    p(HTML("Possible choices are: ")),
-    p(HTML("<strong>R rasterStack</strong>: extension `.RData`. Can be opened in R.")),
-    p(HTML("<strong>ENVI Meta</strong>: extension `.dat`. Can be opened in R.")),
-    p(HTML("<strong>GDAL vrt</strong>: extension `.vrt`. Can be opened in QGIS and R.")),
+   shiny::p(shiny::HTML("Possible choices are: ")),
+   shiny::p(shiny::HTML("<strong>R rasterStack</strong>: extension `.RData`. Can be opened in R.")),
+   shiny::p(shiny::HTML("<strong>ENVI Meta</strong>: extension `.dat`. Can be opened in R.")),
+   shiny::p(shiny::HTML("<strong>GDAL vrt</strong>: extension `.vrt`. Can be opened in QGIS and R.")),
 
-    p(HTML("Time series files are saved in the <em>\"time_series\"</em> subfolder of the main
+   shiny::p(shiny::HTML("Time series files are saved in the <em>\"time_series\"</em> subfolder of the main
     output folder")),
     easyClose = TRUE,
     footer = NULL
@@ -216,20 +331,20 @@ observeEvent(input$help_time_series, {
 })
 
 # scale ----
-observeEvent(input$help_scaleoff, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_scaleoff, {
+  shiny::showModal(shiny::modalDialog(
     title = "Apply Scale and Offset",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "MODIS data is always stored as <strong>Integer</strong> or <strong>Byte</strong>.
       A <strong>scale factor</strong> and/or an <strong>offset</strong> can be applied
       in some cases to convert values to floating point values in the indicated measure units (e.g., to obtain data in
       Kelvin degrees for LST, or in reflectance for Surface Reflectance)."
     )),
-    p(HTML("Possible choices are: ")),
-    p(HTML("<strong>No</strong>: scale and offset are NOT applied
+   shiny::p(shiny::HTML("Possible choices are: ")),
+   shiny::p(shiny::HTML("<strong>No</strong>: scale and offset are NOT applied
            Output values are kept as Integer and Spectral Indices stored as
            integer values with a 10000 scale factor;")),
-    p(HTML("<strong>Yes</strong>:  scale factors and offsets are applied .
+   shiny::p(shiny::HTML("<strong>Yes</strong>:  scale factors and offsets are applied .
            Outputs are converted to their true values in the specified measure units
            (e.g., degrees Kelvin). Spectral Indices are also computed as floating
            point values.")),
@@ -239,16 +354,16 @@ observeEvent(input$help_scaleoff, {
 })
 
 # nodata ----
-observeEvent(input$help_nodata, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_nodata, {
+  shiny::showModal(shiny::modalDialog(
     title = "Modify NoData values",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "<strong>NoData values</strong> of MODIS products are variable across layers.
       This option allows you to modify them and use a common standard"
     )),
-    p(HTML("Possible choices are: ")),
-    p(HTML("<strong>No</strong>: Original MODIS NoData values are maintained;")),
-    p(HTML("<strong>Yes</strong>: NoData values are replaced with default values equal
+   shiny::p(shiny::HTML("Possible choices are: ")),
+   shiny::p(shiny::HTML("<strong>No</strong>: Original MODIS NoData values are maintained;")),
+   shiny::p(shiny::HTML("<strong>Yes</strong>: NoData values are replaced with default values equal
            to the maximum possible value of the data type of the output (e.g. 255
            for unsigned 8-bit integer, 32767 for signed 16-bit integer).")),
     easyClose = TRUE,
@@ -257,19 +372,19 @@ observeEvent(input$help_nodata, {
 })
 
 # mainoutpfold ----
-observeEvent(input$help_outfolder, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_outfolder, {
+  shiny::showModal(shiny::modalDialog(
     title = "Main Output Folder",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "<strong>MODIStsp outputs</strong> will be saved in the selected folder.
      A separate subfolder will be created for each processed original MODIS
      layer, Quality Indicator or Spectral Index. Each subfolder will contain one
      image for each processed date."
     )),
-    p(HTML("Virtual multitemporal files allowing access to the full time series
+   shiny::p(shiny::HTML("Virtual multitemporal files allowing access to the full time series
            as if they were stored in a single file will be saved instead in the
            <em>`time_series` </em> subfolder of the main output folder.")),
-    p(HTML("<strong>NOTE</strong>: If you specify <strong>$tempdir</strong> as
+   shiny::p(shiny::HTML("<strong>NOTE</strong>: If you specify <strong>$tempdir</strong> as
            the output folder outputs will be saved in the `R` temporary folder and
            automatically removed when you exit `R`")),
     easyClose = TRUE,
@@ -278,19 +393,19 @@ observeEvent(input$help_outfolder, {
 })
 
 # hdfoutpfold ----
-observeEvent(input$help_outfolderhdf, {
-  showModal(modalDialog(
+shiny::observeEvent(input$help_outfolderhdf, {
+  shiny::showModal(shiny::modalDialog(
     title = "HDF Output Folder",
-    p(HTML(
+   shiny::p(shiny::HTML(
       "The <strong>original MODIS HDF images</strong> downloaded from NASA servers
      will be stored in the selected folder. Archiving images can be useful to avoid
      having to download them again if you need to do process different subsets of
      a given MODIS tile."
     )),
-    p(HTML("Select 'Yes' on the 'Delete MODIS HDFs' on the right if you want the
+   shiny::p(shiny::HTML("Select 'Yes' on the 'Delete MODIS HDFs' on the right if you want the
            HDFs to be automatically deleted from disk at the end of MODIStsp
            processing")),
-    p(HTML("<strong>NOTE</strong>: If you specify <strong>$tempdir</strong> as the output
+   shiny::p(shiny::HTML("<strong>NOTE</strong>: If you specify <strong>$tempdir</strong> as the output
            folder outputs will be saved in the `R` temporary folder and
            automatically removed when you exit `R`")),
     easyClose = TRUE,

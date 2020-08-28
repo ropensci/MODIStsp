@@ -14,18 +14,25 @@ MSTP_ui <- shinydashboard::dashboardPage(
       font-style:italic",
       paste0("MODIStsp v.", packageVersion("MODIStsp"))
     )),
-    shiny::tags$li(class ="dropdown", tags$a(
+    shiny::tags$li(class ="dropdown", shiny::tags$a(
       href="https://docs.ropensci.org/MODIStsp/",
       shiny::icon("book"),
       style="margin:0;padding-top:11px;padding-bottom:11px;padding-left:10px;padding-right:10px;font-size:30px;",
       target="_blank"
     )),
-    shiny::tags$li(class ="dropdown", tags$a(
+    shiny::tags$li(class ="dropdown", shiny::tags$a(
       href="https://github.com/ropensci/MODIStsp/",
       shiny::icon("github"),
       style="margin:0;padding-top:11px;padding-bottom:11px;padding-left:10px;padding-right:10px;font-size:30px;",
       target="_blank"
+    )),
+    shiny::tags$li(class ="dropdown", shiny::tags$a(
+      href="http://www.irea.cnr.it",
+      shiny::tags$img(src="www/images/irea_logo.png"),
+      style="margin:0;padding-top:2px;padding-bottom:2px;padding-left:10px;padding-right:10px;",
+      target="_blank"
     ))
+
   ),
 
   #   ____________________________________________________________________________
@@ -52,7 +59,7 @@ MSTP_ui <- shinydashboard::dashboardPage(
       shiny::div(
         shinyFiles::shinySaveButton('save_opts', '  Save Options',
                                     'Save as json ...', filetype = "json",
-                                    icon = icon("save"),
+                                    icon = shiny::icon("save"),
                                     style = "width:90%")
       ),
       shiny::div(style = "width:100%",
@@ -117,6 +124,8 @@ MSTP_server <- shiny::shinyServer(function(input, output, session) {
   source(system.file("app/srv/mstp_spatemp_srv_proj.R", package = "MODIStsp"),
          local = TRUE)$value
   source(system.file("app/srv/mstp_save_srv.R", package = "MODIStsp"),
+         local = TRUE)$value
+  source(system.file("app/srv/mstp_load_srv.R", package = "MODIStsp"),
          local = TRUE)$value
   source(system.file("app/srv/mstp_helpmess_srv.R", package = "MODIStsp"),
          local = TRUE)$value

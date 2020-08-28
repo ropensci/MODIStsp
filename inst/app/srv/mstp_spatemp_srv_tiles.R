@@ -1,7 +1,7 @@
 # observers used to deal with tiles selection ----
 # (Manual or from map)
 
-rv <- reactiveValues()
+
 rv$tilemap <- get(load(system.file("ExtData" ,"MODIS_Tiles_latlon.RData",
                                    package = "MODIStsp")))
 
@@ -44,8 +44,8 @@ observeEvent(input$tilemap, ignoreNULL = FALSE, ignoreInit = TRUE,{
       mapedit::selectModUI(extent_ns_name, height=500, width="100%"),
       easyClose = FALSE,
       footer = tagList(
-        shiny::actionButton("save_extent_tiles", strong("\u2000Ok"), icon=icon("check")),
-        shiny::modalButton("\u2000Cancel", icon = icon("ban"))
+        shiny::actionButton("save_extent_tiles", strong("\u2000Ok"), icon=shiny::icon("check")),
+        shiny::modalButton("\u2000Cancel", icon = shiny::icon("ban"))
       )
     )
     )}
@@ -61,8 +61,8 @@ observeEvent(input$tilemap, ignoreNULL = FALSE, ignoreInit = TRUE,{
                  whichtiles <- which((rv$tilemap$h %in% selh) & (rv$tilemap$v %in% selv))
                  rv$curtiles <- rv$tilemap[whichtiles,]
                  bbox <- as.numeric(sf::st_bbox(rv$curtiles))
-                 rv$outbbox <- bbox
-                 seltilesmap <- leaflet() %>%
+
+                 seltilesmap <- leaflet::leaflet() %>%
                    leaflet::addTiles("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
                                      group = "Satellite") %>%
                    leaflet::addTiles(group = "OpenStreetMap") %>%
@@ -105,8 +105,8 @@ observe({
     whichtiles <- which((rv$tilemap$h %in% selh) & (rv$tilemap$v %in% selv))
     rv$curtiles <- rv$tilemap[whichtiles,]
     bbox <- as.numeric(sf::st_bbox(rv$curtiles))
-    rv$outbbox <- bbox
-    seltilesmap <- leaflet()  %>%
+
+    seltilesmap <- leaflet::leaflet() %>%
       leaflet::addTiles("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
                         group = "Satellite") %>%
       leaflet::addTiles(group = "OpenStreetMap") %>%

@@ -3520,7 +3520,7 @@
                         <quality_bitN>2 </quality_bitN>
                     </quality>
                     <quality>
-                        <quality_bandname>SN_5</quality_bandname>
+                        <quality_bandname>SN_4</quality_bandname>
                         <quality_fullname>Snow Presence in Day 4</quality_fullname>
                         <quality_source>SC_8DAY_bitfield</quality_source>
                         <quality_bitN>3 </quality_bitN>

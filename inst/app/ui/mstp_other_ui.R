@@ -19,9 +19,9 @@ shinydashboard::tabItem(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
           shiny::selectInput(
             "down_meth",
-            label = span(
+            label = shiny::span(
               "Download Method\u2000",
-              actionLink("help_downmeth", icon("question-circle"))
+              shiny::actionLink("help_downmeth", shiny::icon("question-circle"))
             ),
             c("http", "offline"))
         ),
@@ -29,9 +29,9 @@ shinydashboard::tabItem(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
           shiny::textInput(
             "user",
-            label = span(
+            label = shiny::span(
               "User Name\u2000",
-              actionLink("help_user", icon("question-circle"))
+              shiny::actionLink("help_user", shiny::icon("question-circle"))
             ), "")
         )
       ),
@@ -39,18 +39,18 @@ shinydashboard::tabItem(
         style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
         shiny::textInput(
           "password",
-          label = span(
+          label = shiny::span(
             "Password\u2000",
-            actionLink("help_password", icon("question-circle"))
+            shiny::actionLink("help_password", shiny::icon("question-circle"))
           ), "")
       ),
       shiny::div(
         style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
         shiny::selectInput(
           "downloader",
-          label = span(
+          label = shiny::span(
             "Downloader\u2000",
-            actionLink("help_downloader", icon("question-circle"))
+            shiny::actionLink("help_downloader", shiny::icon("question-circle"))
           ), c("https", "aria2")
         )
       )
@@ -71,19 +71,19 @@ shinydashboard::tabItem(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
           shiny::selectInput(
             "out_format",
-            label = span(
+            label = shiny::span(
               "Output Format\u2000",
-              actionLink("help_format", icon("question-circle"))
+              shiny::actionLink("help_format", shiny::icon("question-circle"))
             ),
-            c("TIFF", "ENVI"))
+            c("GTiff", "ENVI"))
         ),
         shiny::div(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
           shiny::selectInput(
             "compress",
-            label = span(
+            label = shiny::span(
               "Compression\u2000",
-              actionLink("help_compression", icon("question-circle"))
+              shiny::actionLink("help_compression", shiny::icon("question-circle"))
             ),
             c("None", "PACKBITS", "LZW", "DEFLATE" )
             , selected = "LZW")
@@ -93,9 +93,9 @@ shinydashboard::tabItem(
         style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
         shiny::checkboxGroupInput(
           "time_series",
-          label = span(
+          label = shiny::span(
             "Save Time Series As\u2000",
-            actionLink("help_time_series", icon("question-circle"))
+            shiny::actionLink("help_time_series", shiny::icon("question-circle"))
           ),
           c("R RasterStack", "GDAL VRT", "ENVI Meta Files"))
       ),
@@ -103,9 +103,9 @@ shinydashboard::tabItem(
         style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
         shiny::selectInput(
           "scaleoff",
-          label = span(
+          label = shiny::span(
             "Apply Scale/Offset\u2000",
-            actionLink("help_scaleoff", icon("question-circle"))
+            shiny::actionLink("help_scaleoff", shiny::icon("question-circle"))
           ),
           c("Yes", "No"), selected = "No")
       ),
@@ -113,9 +113,9 @@ shinydashboard::tabItem(
         style = "display:inline-block;vertical-align:top;padding:1px;margin-right:15px",
         shiny::selectInput(
           "nodata",
-          label = span(
+          label = shiny::span(
             "Modify NoData Values\u2000",
-            actionLink("help_nodata", icon("question-circle"))
+            shiny::actionLink("help_nodata", shiny::icon("question-circle"))
           ),
           c("Yes", "No"), selected = "No")
       )
@@ -136,9 +136,9 @@ shinydashboard::tabItem(
           style = "display:inline-block;padding:1px;margin-right:5px;width:70%;vertical-align:top",
           shiny::textInput(
             "out_folder_txt",
-            label = span(
+            label = shiny::span(
               "Main Output Folder\u2000",
-              actionLink("help_outfolder", icon("question-circle"))
+              shiny::actionLink("help_outfolder", shiny::icon("question-circle"))
             ),
             "")
         ),
@@ -153,8 +153,8 @@ shinydashboard::tabItem(
           style = "display:inline-block;margin-right:5px;width:15%;vertical-align:top",
           shiny::selectInput(
             "reprocess",
-            label = span("Reprocess\u2000",
-                         actionLink("help_reprocess", icon("question-circle"))
+            label = shiny::span("Reprocess\u2000",
+                         shiny::actionLink("help_reprocess", shiny::icon("question-circle"))
             ),
             c("Yes", "No"), selected = "No"
           )
@@ -169,9 +169,9 @@ shinydashboard::tabItem(
           style = "display:inline-block;padding:1px;margin-right:5px;width:70%;vertical-align:top",
           shiny::textInput(
             "out_hdffolder_txt",
-            label = span(
+            label = shiny::span(
               "Ouput Folder for storage of original MODIS HDF\u2000",
-              actionLink("help_outfolderhdf", icon("question-circle"))
+              shiny::actionLink("help_outfolderhdf", shiny::icon("question-circle"))
             ),
             "")
         ),
@@ -185,8 +185,8 @@ shinydashboard::tabItem(
           style = "display:inline-block;margin-right:5px;width:15%;vertical-align:top",
           shiny::selectInput(
             "delete_hdf",
-            label = span("Delete HDF\u2000",
-                         actionLink("help_delete", icon("question-circle"))
+            label = shiny::span("Delete HDF\u2000",
+                         shiny::actionLink("help_delete", shiny::icon("question-circle"))
             ),
             c("Yes", "No"), selected = "Yes"
           )

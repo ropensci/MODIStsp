@@ -14,7 +14,7 @@ observe({
 
 observe({
   req(input$out_format)
-  if(input$out_format == "TIFF") {
+  if(input$out_format == "GTiff") {
     shinyjs::enable("compress")
   } else {
     shinyjs::disable("compress")
