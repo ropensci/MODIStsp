@@ -16,15 +16,15 @@ shiny::observeEvent(input$load_opts, {
       # update category and product
 
       shiny::updateSelectInput(session, "selcat",
-                               selected = opts$sel_cat)
+                               selected = opts$selcat)
 
-      general_opts$selprod <- opts$sel_prod
+      general_opts$selprod <- opts$selprod
 
       # shiny::updateSelectInput(session, "selprod",
       #                          selected = opts$sel_prod)
 
-      curlayers <- prod_opt_list[[opts$sel_prod]][[1]]$bandnames
-      curlabels <- prod_opt_list[[opts$sel_prod]][[1]]$band_fullnames
+      curlayers <- prod_opt_list[[opts$selprod]][[1]]$bandnames
+      curlabels <- prod_opt_list[[opts$selprod]][[1]]$band_fullnames
       # curlabels[which(curlayers %in% opts$bandsel)]
       general_opts$curlayers  <- unlist(opts$bandsel)
       general_opts$curqual    <- unlist(opts$quality_bandsel)
@@ -65,7 +65,7 @@ shiny::observeEvent(input$load_opts, {
         rv$drawn_extent <- sf::st_read(opts$drawnext)
       }
 
-      shiny::updateSelectInput(session, "outprojsel", selected  = opts$projsel)
+      shiny::updateSelectInput(session, "out_projsel", selected  = opts$out_projsel)
 
       shiny::updateTextInput(session, "outprojtxt",   value  = opts$output_proj)
 

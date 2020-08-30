@@ -1,5 +1,5 @@
 {
-  "sel_prod": "Vegetation_Indexes_16Days_500m (M*D13A1)",
+  "selprod": "Vegetation_Indexes_16Days_500m (M*D13A1)",
   "sensor": "Terra",
   "prod_version": "6",
   "start_date": "2016-01-01",
@@ -16,7 +16,7 @@
   "use_aria": true,
   "download_server": "http",
   "download_range": "full",
-  "proj": "Sinusoidal",
+  "out_projsel": "Sinusoidal",
   "user_proj4": "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs",
   "out_res_sel": "Native",
   "out_res": "native",

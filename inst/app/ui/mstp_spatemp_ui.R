@@ -47,7 +47,7 @@ shinydashboard::tabItem(
         style = "display:inline-block;padding:1px;vertical-align:top",
         shiny::div(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:10px",
-          shiny::selectInput("outprojsel",
+          shiny::selectInput("out_projsel",
                              label = shiny::span(
                                "Ouput Projection\u2000",
                                shiny::actionLink(
@@ -63,7 +63,7 @@ shinydashboard::tabItem(
       shiny::div(
         style = "display:inline-block;padding:1px;vertical-align:top",
         # shiny::conditionalPanel(
-        #   condition = "input.outprojsel == 'Manual'",
+        #   condition = "input.out_projsel == 'Manual'",
         shiny::div(
           style = "display:inline-block;vertical-align:top;padding:1px;margin-right:5px",
           shinyjs::disabled(shiny::textInput("outprojtxt",
@@ -106,7 +106,7 @@ shinydashboard::tabItem(
       shiny::div(
         style = "display:inline-block;padding:1px;vertical-align:top",
         shiny::conditionalPanel(
-          condition = "input.outressel == 'Resampled' | input.outprojsel == 'User Defined'",
+          condition = "input.outressel == 'Resampled' | input.out_projsel == 'User Defined'",
           shiny::div(
             style = "display:inline-block;vertical-align:top;padding:1px;margin-right:5px",
             shiny::selectInput("resampmeth",

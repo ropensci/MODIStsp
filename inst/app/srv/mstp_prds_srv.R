@@ -4,7 +4,7 @@ general_opts <- reactiveValues()
 rv           <- reactiveValues()
 
 output$selcats <-renderUI({
-  curprod <- which(names(prod_opt_list) == general_opts$sel_prod)
+  curprod <- which(names(prod_opt_list) == general_opts$selprod)
   curcat  <- mod_prod_cat$cat[curprod]
   shiny::selectInput("selcat", "Product Category",
                      choices  = unique(mod_prod_cat$cat),

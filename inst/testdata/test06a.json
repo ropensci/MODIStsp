@@ -1,5 +1,5 @@
 {
- "sel_prod": "LAI_8Days_500m (MCD15A2H)",
+ "selprod": "LAI_8Days_500m (MCD15A2H)",
 "sensor": "Combined",
 "prod_version": "6",
 "start_date": "2016.07.16",
@@ -16,7 +16,7 @@
 "downloader": "http",
 "download_server": "http",
 "download_range": "Seasonal",
-"proj": "Native",
+"out_projsel": "Native",
 "output_proj4": "4326",
 "out_res_sel": "Resampled",
 "out_res": "0.01",
@@ -35,5 +35,5 @@
 "bbox": [   3.77,   39.8,   4.34,   40.1 ],
 "out_folder": "$tempdir",
 "out_folder_mod": "$tempdir",
-"MODIStspVersion": "1.3.9"
+"MODIStspVersion": "2.0.0"
 }

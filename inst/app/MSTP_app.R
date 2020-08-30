@@ -25,13 +25,14 @@ MSTP_ui <- shinydashboard::dashboardPage(
       shiny::icon("github"),
       style="margin:0;padding-top:11px;padding-bottom:11px;padding-left:10px;padding-right:10px;font-size:30px;",
       target="_blank"
-    )),
-    shiny::tags$li(class ="dropdown", shiny::tags$a(
-      href="http://www.irea.cnr.it",
-      shiny::tags$img(src="www/images/irea_logo.png"),
-      style="margin:0;padding-top:2px;padding-bottom:2px;padding-left:10px;padding-right:10px;",
-      target="_blank"
     ))
+    # ,
+    # shiny::tags$li(class ="dropdown", shiny::tags$a(
+    #   href="http://www.irea.cnr.it",
+    #   shiny::tags$img(src="irea_logo.png"),
+    #   style="margin:0;padding-top:2px;padding-bottom:2px;padding-left:10px;padding-right:10px;",
+    #   target="_blank"
+    # ))
 
   ),
 

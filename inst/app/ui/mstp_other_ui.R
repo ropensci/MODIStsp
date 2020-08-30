@@ -51,7 +51,7 @@ shinydashboard::tabItem(
           label = shiny::span(
             "Downloader\u2000",
             shiny::actionLink("help_downloader", shiny::icon("question-circle"))
-          ), c("https", "aria2")
+          ), c("http", "aria2")
         )
       )
     )

@@ -1,5 +1,5 @@
 {
- "sel_prod": "LAI_8Days_500m (MCD15A2H)",
+ "selprod": "LAI_8Days_500m (MCD15A2H)",
 "sensor": "Combined",
 "prod_version": "6",
 "start_date": "2016.07.16",
@@ -34,5 +34,5 @@
 "bbox": [   3.77,   39.8,   4.34,   40.1 ],
 "out_folder": "$tempdir",
 "out_folder_mod": "$tempdir",
-"MODIStspVersion": "1.3.9"
+"MODIStspVersion": "2.0.0"
 }

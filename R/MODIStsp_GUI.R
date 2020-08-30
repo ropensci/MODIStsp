@@ -15,6 +15,7 @@
 #'
 MODIStsp_GUI <- function() {
 
+  #nocov start
   file_path <- system.file("app/MSTP_app.R", package = "MODIStsp")
   if (!nzchar(file_path)) stop("Shiny app not found")
   MSTP_ui <- MSTP_server <- NULL # avoid NOTE about undefined globals
@@ -43,4 +44,5 @@ MODIStsp_GUI <- function() {
                "Home" = dirname(dirname(rappdirs::user_data_dir())))
   app <- shiny::shinyApp(MSTP_ui, MSTP_server)
   shiny::runApp(app, launch.browser = TRUE)
+  #nocov end
 }

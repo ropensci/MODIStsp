@@ -12,12 +12,12 @@ observe({
     natproj <- "4008"
   }
   shiny::updateTextInput(session, "outprojtxt",natproj)
-  shiny::updateNumericInput(session, "outres", "Output Resolution", value = natres)
+  shiny::updateNumericInput(session, "outres", "Pixel Size", value = natres)
 
 })
 
 observe({
-  projchoice <- req(input$outprojsel)
+  projchoice <- req(input$out_projsel)
   curprod <- req(input$selprod)
   natres  <- prod_opt_list[[curprod]][[1]]$native_res
   # browser()
@@ -27,7 +27,7 @@ observe({
   } else {
     natproj <- "4008"
   }
-  if (input$outprojsel == "Native") {
+  if (input$out_projsel == "Native") {
     shiny::updateTextInput(session, "outprojtxt", "Projection Name/EPSG/Wkt", natproj)
   }
 })
@@ -63,7 +63,7 @@ shiny::observeEvent(input$save_textproj, {
 #
 shiny::observe({
 
-  if (input$outprojsel == "User Defined"){
+  if (input$out_projsel == "User Defined"){
     shinyjs::enable("seloutproj")
   } else {
     shinyjs::disable("seloutproj")
