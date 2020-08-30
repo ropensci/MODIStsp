@@ -76,7 +76,7 @@ MODIStsp_process_indexes <- function(out_filename,
         paste0(file_prefix, "_", temp_bandname, "_", yy, "_", DOY,
                ifelse(out_format == "GTiff", ".tif", ".dat"))
       )
-      temp_raster <- suppressWarnings(raster::raster(raster(temp_file)))
+      temp_raster <- suppressWarnings(raster::raster(temp_file))
       # assign NA value
       raster::NAvalue(temp_raster) <- as.numeric(nodata_out[band])
       # assign the data to a object with name = bandname
