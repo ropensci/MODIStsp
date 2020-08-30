@@ -12,7 +12,7 @@ available images between the starting and the ending dates are downloaded;
 If "seasonal", only the images included in the season are downloaded
 (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, only
 the images of December, January and February from 2005 to 2010 - excluding
-2005-01, 2005-02 and 2010-12 - are downloaded).}
+2005-01, 2005-02 and 2010-12 - are downloaded), Default: Full}
 
 \item{yy}{\code{numeric} year for which the processing dates need to be identified}
 

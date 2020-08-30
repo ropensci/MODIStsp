@@ -45,7 +45,7 @@ information (e.g., correct bandnames, computable formula, etc...).
 If the index is legit, it modifies the MODIStsp_addindex.json file
 so to allow computation of the additional index within MODIStsp for all
 products containing the required reflectance bands.
-\item To remove all custom-added spectral indexes, run MODistsp_resetindexes()
+\item To remove all custom-added spectral indexes, run MODIStsp_resetindexes()
 }
 }
 \note{

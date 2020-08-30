@@ -33,7 +33,7 @@ MODIStsp_process_bands(
 )
 }
 \arguments{
-\item{out_folder_mod}{\code{character} Output folder for original HDF storage.}
+\item{out_folder_mod}{\code{character} Output folder for original HDF storage, default: $tempdir}
 
 \item{modislist}{\verb{character array} List of MODIS images to be downloaded for
 the selected date (as returned from \code{get_mod_filenames}). Can be a single
@@ -65,7 +65,7 @@ processed.}
 bbox}
 
 \item{bbox}{\code{numeric(4)} Output bounding box (xmin, ymin, xmax, ymax) in
-out_proj coordinate system. Ignored if spatmeth == "tiles".}
+out_proj coordinate system. Ignored if spatmeth == "tiles", Default: NULL}
 
 \item{scale_val}{\code{logical} If TRUE,  scale and offset are applied to
 original MODIS layers, and Spectral Indexes are saved as floating point. If
@@ -93,7 +93,7 @@ set in "out_res" is used.}
 \item{out_res}{\code{float} Output resolution (in output projection measurement
 unit). Ignored if out_res_sel == "Native".}
 
-\item{resampling}{\verb{character ["near" | "bilinear" | "cubic" | "cubicspline", |lanczos"|, "average"|, |"mode"|, "mode", |"max"|, |"min"|, |"q1"|, |"q3"|, |"sum"|]}
+\item{resampling}{\verb{character ["near" | "bilinear" | "cubic" | "cubicspline", |lanczos"|, "average"|, "mode", |"max"|, |"min"|, |"q1"|, |"q3"|, |"sum"|]}
 Resampling method to be used by \code{gdalwarp}.}
 
 \item{nodata_change}{\code{logical} if TRUE, NoData values are set to the max value

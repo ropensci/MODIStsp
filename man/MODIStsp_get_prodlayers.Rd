@@ -12,8 +12,8 @@ NOTE: for products available separately for Terra and Aqua (e.g., MOD13Q1/MYD13Q
 use the code M\emph{D_code_ (e.g., M}D13Q1)}
 }
 \value{
-list, containing the slots: \code{bandnames}, \code{quality_bandnames} and
-\code{indexes_bandnames}
+list, containing the slots: \code{prodname}, \code{bandnames}, \code{quality_bandnames} and
+\code{indexes_bandnames}, \code{band_fullnames}, \code{quality_fullnames}, \code{indexes_fullnames}
 }
 \description{
 Function used to retrieve the names of original MODIS layers, quality layers
@@ -26,9 +26,14 @@ License: GPL 3.0
 }
 \examples{
 
+# Get layers of product M*13Q1 based on code
 MODIStsp_get_prodlayers("M*13Q1")
 
-MODIStsp_get_prodlayers("MCD43C4")
+# Get layers of product M*13Q1 based on full name
+MODIStsp_get_prodlayers("Vegetation Indexes_16Days_250m (M*D13Q1)")
+
+# Get indexes names of product M*13Q1 based on full name
+MODIStsp_get_prodlayers("MCD43C4")$indexes_bandnames
 
 
 }

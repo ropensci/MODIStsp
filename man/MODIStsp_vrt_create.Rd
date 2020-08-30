@@ -24,7 +24,7 @@ MODIStsp_vrt_create(
 }
 \arguments{
 \item{sensor}{\code{character ["Terra"| "Aqua" | "Both"]} MODIS platform to be considered.
-(Ignored for MCD* products). Default: NULL}
+(Ignored for MCD* products). Default: "Both"}
 
 \item{out_prod_folder}{\code{character} Main output folder.}
 
