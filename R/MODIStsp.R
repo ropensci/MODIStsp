@@ -13,17 +13,12 @@
 #' @param gui `logical` if TRUE: the GUI is opened before processing. If FALSE:
 #'  processing parameters are retrieved from the provided `options_file`
 #'  argument), Default: TRUE
-#' @param out_folder `character` Main output folder.
-#' @param out_folder_mod `character` Output folder for original HDF storage.
+#' @param out_folder `character` Main output folder, default: NULL.
+#' @param out_folder_mod `character` Output folder for original HDF storage, default: $tempdir
 #' @param opts_file `character` full path to a JSON file
 #'  containing MODIStsp processing options saved from the GUI. If NULL,
 #'  parameters of the last successful run are retrieved from file
 #'  "MODIStsp_Previous.json" in subfolder "Previous"), Default: NULL
-#' @param spafile `character` (optional) full path of a spatial file
-#'  to use to derive the processing extent. If not NULL, the processing options
-#'  which define the extent, the selected tiles and the "Full Tile / Custom"
-#'  in the JSON options file are overwritten and new files are created on the
-#'  extent of the provided spatial file, Default: NULL
 #' @param selprod `character` Name of selected MODIS product (e.g.,
 #'   Vegetation Indexes_16Days_250m (M*D13Q1)). You can get
 #'   a list of available product names using function `MODIStsp_get_prodnames`,
@@ -41,11 +36,11 @@
 #'   using function `MODIStsp_get_prodlayers` (e.g., MODIStsp_get_prodlayers("M*D13Q1")$indexes_bandnames),
 #'   Default: NULL
 #' @param sensor `character ["Terra"| "Aqua" | "Both"]` MODIS platform to be considered.
-#'   (Ignored for MCD* products). Default: NULL
+#'   (Ignored for MCD* products). Default: "Both"
 #' @param download_server `character ["http" | "offline"]` service to be used for
-#'  download. Default: NULL
+#'  download. Default: "http"
 #' @param downloader download_server `character ["http" | "aria2"]` downloader to be used,
-#'  NULL, Default: NULL
+#'  Default: "http"
 #' @param user `character` Username for NASA http server.
 #'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home)).
 #' @param password `character` Password for NASA http server
@@ -55,34 +50,43 @@
 #'   If "seasonal", only the images included in the season are downloaded
 #'   (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, only
 #'   the images of December, January and February from 2005 to 2010 - excluding
-#'   2005-01, 2005-02 and 2010-12 - are downloaded).
+#'   2005-01, 2005-02 and 2010-12 - are downloaded), Default: Full
 #' @param start_date `character` Start date for images download and preprocessing
-#'  (yyyy.mm.dd).
+#'  (yyyy.mm.dd), Default: NULL
 #' @param end_date `character` End date for images download and preprocessing
-#'  (yyyy.mm.dd).
+#'  (yyyy.mm.dd), Default: NULL
 #' @param spatmeth `character ["tiles" | "bbox" | "file"]`, indicates how the processing
 #'  extent is retrieves. if "tiles", use the specified tiles (start_x....).
 #'  If "file", retrieve extent from spatial file specifies in `spafile`. If
-#'  "bbox", use the specified bounding box, Default: NULL
+#'  "bbox", use the specified bounding box, Default: "tiles"
 #' @param start_x `integer [0-35]` Start MODIS horizontal tile defining spatial extent.
-#'  Ignored if spatmeth != "tiles".
+#'  Ignored if spatmeth != "tiles", Default: 18
 #' @param start_y `integer [0-17]` Start MODIS vertical tile defining spatial extent.
-#'  Ignored if spatmeth != "tiles".
+#'  Ignored if spatmeth != "tiles", Default: 4
 #' @param end_x `integer [0-35]` End MODIS horizontal tile defining spatial extent.
-#'  Ignored if spatmeth != "tiles".
+#'  Ignored if spatmeth != "tiles", Default: 18
 #' @param end_y `integer [0-17]` End MODIS vertical tile defining spatial extent.
-#'  Ignored if spatmeth != "tiles".
+#'  Ignored if spatmeth != "tiles", Default: 4
 #' @param bbox `numeric(4)` Output bounding box (xmin, ymin, xmax, ymax) in
-#'   out_proj coordinate system. Ignored if spatmeth == "tiles".
+#'   out_proj coordinate system. Ignored if spatmeth == "tiles", Default: NULL
+#' @param spafile `character` (optional) full path of a spatial file
+#'  to use to derive the processing extent. If not NULL, the processing options
+#'  which define the extent, the selected tiles and the "Full Tile / Custom"
+#'  in the JSON options file are overwritten and new files are created on the
+#'  extent of the provided spatial file. Ignored if spatmet != "file", Default: NULL
+#' @param out_projsel `character ["Native", "User Defined`] If "Native", the
+#'   outputs keep the original resolution of MODIS HDF images. Otherwise, the value
+#'    set in "out_res" is used, Default:Native
 #' @param output_proj `character` either equal to "MODIS Sinusoidal",
-#'  or to the code of a valid EPSG or to a WKT projection string
+#'  or to the code of a valid EPSG or to a WKT projection string.
+#'  Ignored if outproj_sel == "Native", Default: NULL
 #' @param out_res_sel `character ["Native", "User Defined`]. If "Native", the
 #'   outputs keep the original resolution of MODIS HDF images. Otherwise, the value
 #'    set in "out_res" is used.
 #' @param out_res `float` Output resolution (in output projection measurement
 #'  unit). Ignored if out_res_sel == "Native".
 #' @param resampling `character ["near" | "bilinear" | "cubic" | "cubicspline",
-#' |lanczos"|, "average"|, |"mode"|, "mode", |"max"|, |"min"|, |"q1"|, |"q3"|, |"sum"|]`
+#' |lanczos"|, "average"|, "mode", |"max"|, |"min"|, |"q1"|, |"q3"|, |"sum"|]`
 #'   Resampling method to be used by `gdalwarp`.
 #' @param reprocess `logical` If TRUE, reprocess data for already existing dates.
 #' @param delete_hdf `logical` If TRUE, delete downloaded HDF files after completion.
@@ -93,7 +97,7 @@
 #'  original MODIS layers, and Spectral Indexes are saved as floating point. If
 #'  FALSE, no rescaling is done and Spectral Indexes are saved as integer, with a
 #'  10000 scaling factor.
-#' @param ts_format `character ["None" | "ENVI Meta Files" | "GDAL vrt files" |
+#' @param ts_format `character array including ["R asterStack" | "ENVI Meta Files" | "GDAL vrt files" |
 #'  "ENVI and GDAL"]` Selected virtual time series format.
 #' @param out_format `character ["ENVI" | "GTiff"]` Desired output format.
 #' @param compress `character ["None" | "PACKBITS" | "LZW" | "DEFLATE"]`
@@ -107,6 +111,7 @@
 #'   MODIStsp_process will abort, Default: 20
 #' @param verbose `logical` If FALSE, suppress processing messages,
 #'  Default: TRUE
+#' @param ... not used for values, forces later arguments to bind by name
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
@@ -128,7 +133,33 @@
 #' # Running the tool without any option will start the GUI with the default or
 #' # last used settings, in interactive mode (i.e., with gui = TRUE).
 #'
-#' MODIStsp()
+#' # MODIStsp()
+#' }
+#' \dontrun{
+#'
+#' #' # - Running the tool specifying processing arguments in the call
+#'
+#' # **NOTE** Output files of examples are saved to file.path(tempdir(), "MODIStsp").
+#'
+#' # Here we process layers __NDVI__ and __EVI__ and quality indicator __usefulness__
+#' # of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates
+#' # comprised between 2020-06-01 and 2020-06-15 and saves output to R tempdir
+#' # --> See name and available layers for product M*D13Q1
+#'
+#' MODIStsp_get_prodlayers("M*D13A2")
+#'
+#' # --> Launch the processing
+#' MODIStsp(gui             = FALSE,
+#'          out_folder      = "$tempdir",
+#'          selprod         = "Vegetation_Indexes_16Days_1Km (M*D13A2)",
+#'          bandsel         = c("EVI", "NDVI"),
+#'          quality_bandsel = "QA_usef",
+#'          indexes_bandsel = "SR",
+#'          user            = "mstp_test" ,
+#'          password        = "MSTP_test_01",
+#'          start_date      = "2020.06.01",
+#'          end_date        = "2020.06.15",
+#'          verbose         = FALSE)
 #' }
 #'
 #' \dontrun{
@@ -142,8 +173,8 @@
 #' # downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
 #' # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
 #'
-#' options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
-#' MODIStsp(gui = FALSE, options_file = options_file, verbose = TRUE)
+#' opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+#' MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE)
 #' }
 #'
 #' \dontrun{
@@ -152,10 +183,11 @@
 #' # and specifying the extent from a spatial file allows to re-use the same
 #' # processing settings to perform download and reprocessing on a different area
 #'
-#' options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+#' opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 #' spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
-#' MODIStsp(gui = FALSE, options_file = options_file,
-#'   spatial_file_path = spatial_file, verbose = TRUE)
+#' MODIStsp(gui = FALSE, opts_file = opts_file,
+#'   spatmeth = "file",
+#'   spafile = spatial_file, verbose = TRUE)
 #' }
 #'
 #' \dontrun{
@@ -175,21 +207,22 @@
 #' # extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"),
 #' #                          full.names = TRUE, "\\.shp$")
 #'
-#' options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+#' opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 #' for (single_shape in extent_list) {
-#'   MODIStsp(gui = FALSE, options_file = options_file,
-#'            spatial_file_path = single_shape, verbose = TRUE)
+#'   MODIStsp(gui = FALSE, opts_file = opts_file,
+#'            spatmeth = "file",
+#'            spafile = single_shape, verbose = TRUE)
 #' }
 #'
 #' # output files are placed in separate folders:
-#' outfiles_garda <- list.files(file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"),
+#' outfiles_garda <- list.files(file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/NDVI"),
 #'            full.names = TRUE)
 #' outfiles_garda
 #'
 #' library(raster)
 #' plot(raster(outfiles_garda[1] ))
 #'
-#' outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"),
+#' outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/NDVI"),
 #'            full.names = TRUE)
 #' outfiles_iseo
 #'
@@ -198,11 +231,11 @@
 #' # See also https://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html
 #' }
 
-MODIStsp <- function(gui             = TRUE,
+MODIStsp <- function(...,
+                     gui             = TRUE,
                      out_folder      = NULL,
                      out_folder_mod  = NULL,
                      opts_file       = NULL,
-                     spafile         = NULL,
                      selprod         = NULL,
                      bandsel         = NULL,
                      quality_bandsel = NULL,
@@ -221,6 +254,8 @@ MODIStsp <- function(gui             = TRUE,
                      start_y         = NULL,
                      end_y           = NULL,
                      bbox            = NULL,
+                     spafile         = NULL,
+                     out_projsel     = NULL,
                      output_proj     = NULL,
                      out_res_sel     = NULL,
                      out_res         = NULL,
@@ -316,12 +351,13 @@ MODIStsp <- function(gui             = TRUE,
     #nocov start
     if (!all(requireNamespace(c("leaflet", "shiny",
                                 "shinydashboard","shinyFiles",
-                                "shinyalert","rappdirs")))) {
-      stop("You need to install package suggested packages to use MODIStsp GUI.
+                                "shinyalert","rappdirs", "shinyjs",
+                                "leafem", "mapedit")))) {
+      stop("You need to install the following Suggested packages to use the MODIStsp GUI.
            Please install them with:
-           install.packages(c(\"leaflet\", \"shiny\",
-                                \"shinydashboard\",\"shinyFiles\",
-                                \"shinyalert\", \"rappdirs\")")
+           install.packages(c(\"leaflet\", \"shiny\",\"shinydashboard\",\"shinyFiles\",
+                              \"shinyalert\", \"rappdirs\",\"shinyjs\",
+                              \"leafem\", \"mapedit\")")
     } else {
       requireNamespace("leaflet")
       requireNamespace("shiny")
@@ -329,6 +365,7 @@ MODIStsp <- function(gui             = TRUE,
       requireNamespace("shinyFiles")
       requireNamespace("shinyalert")
     }
+    #nocov end
   }
 
   gdal_version <- sf::sf_extSoftVersion()[["GDAL"]]
@@ -346,52 +383,61 @@ MODIStsp <- function(gui             = TRUE,
     #nocov end
   } else {
 
-    if (is.null(opts_file)) {
-      proc_opts <- jsonlite::read_json(system.file("ExtData/previous/mstp_default.json",
-                                                   package = "MODIStsp"))
-    } else {
+    if (!is.null(opts_file)) {
       proc_opts <- try(jsonlite::read_json(opts_file))
       if(inherits(proc_opts, "try-error")) {
         stop("Unable to read the provided options file. Please check your ",
              "inputs!")
       }
+
+      if(proc_opts$MODIStspVersion < 2.0) {
+        stop("Options files saved with MODIStsp versions lower than 2.0
+             are no longer supported. Please save a new file using MODIStsp
+             GUI.")
+      }
       #TODO: function to check if file is OK
+    } else {
+      # Load default values - to avoid overwriting always the loaded
+      # parameters with default, we set the defaults here rather than
+      # in the initialization of the function!
+      proc_opts <- jsonlite::read_json(system.file("ExtData/Previous/mstp_defaults.json",
+                                                   package = "MODIStsp"))
     }
 
     # update proc_opts based on arguments passed to the function ----
 
-    if(!missing(selprod)) {proc_opts$selprod <- selprod}
+    if(!is.null(selprod)) {proc_opts$selprod <- selprod}
 
-    if(!missing(bandsel)) {proc_opts$bandsel <- bandsel}
+    if(!is.null(bandsel)) {proc_opts$bandsel <- bandsel}
 
-    if(!missing(quality_bandsel)) {proc_opts$quality_bandsel <- quality_bandsel}
+    if(!is.null(quality_bandsel)) {proc_opts$quality_bandsel <- quality_bandsel}
 
-    if(!missing(indexes_bandsel)) {proc_opts$indexes_bandsel <- indexes_bandsel}
+    if(!is.null(indexes_bandsel)) {proc_opts$indexes_bandsel <- indexes_bandsel}
 
-    if(!missing(sensor)) {proc_opts$sensor <- sensor}
+    if(!is.null(sensor)) {proc_opts$sensor <- sensor}
     #TODO check correctness of platform wrt product
 
-    if(!missing(download_server)) {proc_opts$sensor     <- download_server}
-    if(!missing(downloader)) {proc_opts$downloader <- downloader}
+    if(!is.null(download_server)) {proc_opts$download_server <- download_server}
+    if(!is.null(downloader)) {proc_opts$downloader <- downloader}
     # TODO replace use_aria use
 
-    if(!missing(user)) {proc_opts$user     <- user}
-    if(!missing(password)) {proc_opts$password <- password}
+    if(!is.null(user)) {proc_opts$user     <- user}
+    if(!is.null(password)) {proc_opts$password <- password}
 
-    if(!missing(download_range)) {proc_opts$download_range <- download_range}
-    if(!missing(start_date)) {proc_opts$start_date <- start_date}
-    if(!missing(end_date)) {proc_opts$end_date <- end_date}
+    if(!is.null(download_range)) {proc_opts$download_range <- download_range}
+    if(!is.null(start_date)) {proc_opts$start_date <- start_date}
+    if(!is.null(end_date)) {proc_opts$end_date <- end_date}
 
-    if(!missing(spatmeth)) {proc_opts$spatmeth  <- spatmeth}
+    if(!is.null(spatmeth)) {proc_opts$spatmeth  <- spatmeth}
 
-    if (proc_opts$spatmeth == "tile") {
-      if(!missing(start_x)) {proc_opts$start_x  <- start_x}
-      if(!missing(end_x))   {proc_opts$end_x    <- end_x}
-      if(!missing(start_y)) {proc_opts$start_y  <- start_y}
-      if(!missing(end_y))   {proc_opts$end_date <- end_y}
+    if (proc_opts$spatmeth == "tiles") {
+      if(!is.null(start_x)) {proc_opts$start_x  <- start_x}
+      if(!is.null(end_x))   {proc_opts$end_x    <- end_x}
+      if(!is.null(start_y)) {proc_opts$start_y  <- start_y}
+      if(!is.null(end_y))   {proc_opts$end_y <- end_y}
     } else {
       if (proc_opts$spatmeth == "file") {
-        if (!missing(spafile)) {
+        if (!is.null(spafile)) {
           bbox <- bbox_from_file(spafile, crs_out = proc_opts$output_proj)
           proc_opts$bbox <- as.numeric(bbox)
           tiles <- tiles_from_bbox(bbox, proc_opts$output_proj)
@@ -421,24 +467,24 @@ MODIStsp <- function(gui             = TRUE,
       }
     }
     # proc_opts$bbox <- as.numeric(proc_opts$bbox)
-    # if(!missing(projsel))     {proc_opts$projsel  <- projsel}
-    if(!missing(output_proj)) {proc_opts$output_proj  <- output_proj}
+    if(!is.null(out_projsel)) {proc_opts$out_projsel  <- out_projsel}
+    if(!is.null(output_proj)) {proc_opts$output_proj  <- output_proj}
 
-    if(!missing(out_res_sel))  {proc_opts$out_res_sel  <- out_res_sel}
-    if(!missing(out_res))      {proc_opts$out_res  <- out_res}
-    if(!missing(resampling))  {proc_opts$resampling  <- resampling}
+    if(!is.null(out_res_sel))  {proc_opts$out_res_sel  <- out_res_sel}
+    if(!is.null(out_res))      {proc_opts$out_res  <- out_res}
+    if(!is.null(resampling))  {proc_opts$resampling  <- resampling}
 
-    if(!missing(reprocess))  {proc_opts$reprocess  <- reprocess}
-    if(!missing(delete_hdf))  {proc_opts$delete_hdf  <- delete_hdf}
-    if(!missing(nodata_change)) {proc_opts$nodata_change  <- nodata_change}
-    if(!missing(scale_val))  {proc_opts$scale_val  <- scale_val}
+    if(!is.null(reprocess))  {proc_opts$reprocess  <- reprocess}
+    if(!is.null(delete_hdf))  {proc_opts$delete_hdf  <- delete_hdf}
+    if(!is.null(nodata_change)) {proc_opts$nodata_change  <- nodata_change}
+    if(!is.null(scale_val))  {proc_opts$scale_val  <- scale_val}
 
-    if(!missing(scale_val))  {proc_opts$out_format  <- out_format}
-    if(!missing(ts_format))  {proc_opts$ts_format  <- ts_format}
-    if(!missing(compress))   {proc_opts$compress  <- compress}
+    if(!is.null(out_format)) {proc_opts$out_format  <- out_format}
+    if(!is.null(ts_format))  {proc_opts$ts_format  <- ts_format}
+    if(!is.null(compress))   {proc_opts$compress  <- compress}
 
-    if(!missing(out_folder))     {proc_opts$out_folder  <- out_folder}
-    if(!missing(out_folder_mod)) {proc_opts$out_folder_mod  <- out_folder_mod}
+    if(!is.null(out_folder))     {proc_opts$out_folder  <- out_folder}
+    if(!is.null(out_folder_mod)) {proc_opts$out_folder_mod  <- out_folder_mod}
 
     if (proc_opts$out_folder == "$tempdir") {
       proc_opts$out_folder <- file.path(tempdir(), "MODIStsp")
@@ -465,7 +511,18 @@ MODIStsp <- function(gui             = TRUE,
       )
     }
 
-    # check_opts <- check_opts(proc_opts)
+    # Create output folders if needed. No recursive to avoid creating big
+    # folder trees by mistake
+
+    dir.create(proc_opts$out_folder,
+               recursive = FALSE,
+               showWarnings = FALSE)
+
+    dir.create(proc_opts$out_folder_mod,
+               recursive = FALSE,
+               showWarnings = FALSE)
+
+    check_opts <- check_proc_opts(proc_opts)
 
     MODIStsp_process(proc_opts,
                      n_retries = n_retries,

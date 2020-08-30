@@ -41,9 +41,7 @@ MODIStsp_process <- function(proc_opts,
   # Based on sel_prod, retrieve needed variables from prod_opts file
 
   prod_opt_list <- load_prodopts()
-  prod_opts <- prod_opt_list[[proc_opts$sel_prod]][["6"]]
-
-
+  prod_opts <- prod_opt_list[[proc_opts$selprod]][["6"]]
 
   cust_ind      <- jsonlite::read_json(system.file("ExtData/Previous/MODIStsp_indexes.json",
                                                    package = "MODIStsp"))
@@ -51,9 +49,8 @@ MODIStsp_process <- function(proc_opts,
   if (length(cust_ind) == 1) {
     cust_ind <- NULL
   } else {
-    cust_ind  <- cust_ind[[proc_opts$sel_prod]][["6"]]
+    cust_ind  <- cust_ind[[proc_opts$selprod]][["6"]]
   }
-
 
   prod_opts$indexes_bandnames <- c(prod_opts$indexes_bandnames,
                                    cust_ind$indexes_bandnames)
@@ -149,7 +146,7 @@ MODIStsp_process <- function(proc_opts,
   # set-up processing folders ----
 
   # Folder for HDF storage
-  dir.create(proc_opts$out_folder_mod, recursive = TRUE, showWarnings = FALSE)
+  dir.create(proc_opts$out_folder_mod, recursive = FALSE, showWarnings = FALSE)
 
   # main output folder --> subfolder of "out_folder" named after the selected
   # MODIS product
@@ -166,13 +163,12 @@ MODIStsp_process <- function(proc_opts,
   }
 
 
-  dir.create(out_prod_folder, showWarnings = FALSE, recursive = TRUE)
+  dir.create(out_prod_folder, showWarnings = FALSE, recursive = FALSE)
 
   mess_text <- "MODIStsp --> Starting processing"
   # initialize processing messages in case of interactive execution ----
   gui <- FALSE
   process_message(mess_text, verbose)
-
 
   # get start/end years from start_date/end_date
   start_year <- unlist(strsplit(proc_opts$start_date, "[.]"))[1]
