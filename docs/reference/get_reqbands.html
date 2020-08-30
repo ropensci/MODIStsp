@@ -54,7 +54,7 @@ MODIS hdf layers are required for the current process. The required layers
 include all MODIS original layers selected by the user, plus all those
 required to compute the Spectral Indexes and Quality Indicators selected
 by the user" />
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png" />
 
 
 
@@ -96,7 +96,7 @@ by the user" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -219,25 +219,25 @@ by the user</p>
     </tr>
     <tr>
       <th>indexes_bandsel</th>
-      <td><p><code>integer 0/1 array</code> array of length equal to the number
-of Spectral Indexes available for the product (standard + user-provided),
-set to  1 for indexes to be processed.</p></td>
+      <td><p><code>character array</code>Spectral Indexes to be computed starting from reflectance bands.
+You can get a list of available quality layers for a given product
+using function <code>MODIStsp_get_prodlayers</code> (e.g., MODIStsp_get_prodlayers("M*D13Q1")$indexes_bandnames),
+Default: NULL</p></td>
     </tr>
     <tr>
       <th>indexes_bandnames</th>
-      <td><p><code>character array</code> Abbreviated Names of SIs available
-for the selected product (used to build output file names of SIs).</p></td>
+      <td><p>names of all indexes available for the product being processed</p></td>
     </tr>
     <tr>
       <th>quality_bandsel</th>
-      <td><p><code>integer 0|1 array</code> array of length equal to number
-of available QIs, set to  1 for indexes to be processed.</p></td>
+      <td><p><code>character array</code> Quality Indicators to be computed starting from
+bit fields of original MODIS layers. You can get a list of available quality layers for a given product
+using function <code>MODIStsp_get_prodlayers</code> (e.g., MODIStsp_get_prodlayers("M*D13Q1")$quality_bandnames),
+Default: NULL</p></td>
     </tr>
     <tr>
       <th>quality_bandnames</th>
-      <td><p><code>character array</code> Abbreviated Names of Quality
-Indicators available for the selected product (used to build output file
-names of QIs).</p></td>
+      <td><p>names of all quality indicators available for the product being processed</p></td>
     </tr>
     <tr>
       <th>out_prod_folder</th>
@@ -265,8 +265,7 @@ a given processed image already exists.. Used to check if a given processed imag
     </tr>
     <tr>
       <th>reprocess</th>
-      <td><p><code>character ["Yes" | "No"]</code> If Yes, reprocess data for already
-existing dates.</p></td>
+      <td><p><code>logical</code> If TRUE, reprocess data for already existing dates.</p></td>
     </tr>
     </table>
 

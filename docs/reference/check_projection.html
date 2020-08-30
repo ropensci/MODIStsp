@@ -51,7 +51,7 @@
 <meta property="og:title" content="Check the validity of the input projection — check_projection" />
 <meta property="og:description" content="helper function used to check that the input projection
 (passed as UTM zone, EPSG code, WKT string) is a valid projection for MODIStsp." />
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png" />
 
 
 
@@ -93,7 +93,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -232,20 +232,18 @@ projection is passed. Otherwise, the function returns "NA", Default: TRUE</p></t
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>check_projection</span>(<span class='st'>"32632"</span>)
-
-<span class='fu'>check_projection</span>(<span class='st'>"32631"</span>)
-
-<span class='fu'>check_projection</span>(<span class='fl'>32633</span>)
-
-<span class='fu'>check_projection</span>(<span class='fl'>30</span>, <span class='kw'>abort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>check_projection</span>(<span class='st'>"example of invalid string"</span>, <span class='kw'>abort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
+<span class='co'># \dontrun{</span>
+<span class='fu'>check_projection</span>(<span class='st'>"32632"</span>)</div><div class='output co'>#&gt; [1] 32632</div><div class='input'>
+<span class='fu'>check_projection</span>(<span class='st'>"32631"</span>)</div><div class='output co'>#&gt; [1] 32631</div><div class='input'>
+<span class='fu'>check_projection</span>(<span class='fl'>32633</span>)</div><div class='output co'>#&gt; [1] 32633</div><div class='input'>
+<span class='fu'>check_projection</span>(<span class='fl'>30</span>, <span class='kw'>abort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: GDAL Error 1: PROJ: proj_create_from_database: crs not found</span></div><div class='output co'>#&gt; <span class='warning'>Warning: check_projection --&gt; Invalid EPSG code detected,</span>
+#&gt; <span class='warning'>                          returning `NA`!</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'>
+<span class='fu'>check_projection</span>(<span class='st'>"example of invalid string"</span>, <span class='kw'>abort</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; Error in st_crs.character(projection) : 
+#&gt;   invalid crs: example of invalid string</div><div class='output co'>#&gt; <span class='warning'>Warning: check_projection --&gt; Invalid projection detected,</span>
+#&gt; <span class='warning'>                           returning `NA`!</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'>
 <span class='no'>proj_wkt</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sf</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_as_text.html'>st_as_text</a></span>(<span class='kw pkg'>sf</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_crs.html'>st_crs</a></span>(<span class='fl'>32632</span>))
-<span class='fu'>check_projection</span>(<span class='no'>proj_wkt</span>)
-}</div></pre>
+<span class='fu'>check_projection</span>(<span class='no'>proj_wkt</span>)</div><div class='output co'>#&gt; [1] "PROJCS[\"WGS 84 / UTM zone 32N\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",9],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32632\"]]"</div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

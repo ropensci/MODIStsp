@@ -30,10 +30,7 @@ env:
 apt_packages:
     - libgdal-dev
     - libproj-dev
-    - libcairo2-dev
     - libatk1.0-dev
-    - libpango1.0-dev
-    - libgtk2.0-dev
     - libglib2.0-dev
     - libcurl4-openssl-dev
     - libudunits2-dev

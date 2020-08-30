@@ -51,7 +51,7 @@
 <meta property="og:title" content="MODIStsp download function — MODIStsp_download" />
 <meta property="og:description" content="Internal function dealing with download of MODIS hdfs from
 http remote server for a given date." />
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png" />
 
 
 
@@ -93,7 +93,7 @@ http remote server for a given date." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -205,7 +205,6 @@ http remote server for a given date.</p>
   <span class='no'>sens_sel</span>,
   <span class='no'>date_name</span>,
   <span class='no'>gui</span>,
-  <span class='no'>mess_lab</span>,
   <span class='no'>verbose</span>
 )</pre>
 
@@ -237,8 +236,7 @@ download fails more that n_retries times consecutively, abort</p></td>
     </tr>
     <tr>
       <th>use_aria</th>
-      <td><p><code>logical</code> If TRUE, aria2c is used to accelerate download
-(if available !).</p></td>
+      <td><p><code>logical</code> if TRUE, download using aria2c</p></td>
     </tr>
     <tr>
       <th>date_dir</th>
@@ -274,11 +272,6 @@ of http download to generate the download addresses).</p></td>
       <th>gui</th>
       <td><p><code>logical</code> Indicates if on an interactive or non-interactive execution
 (only influences where the log messages are sent).</p></td>
-    </tr>
-    <tr>
-      <th>mess_lab</th>
-      <td><p>pointer to the gWidget used to issue processing messages in
-when gui = TRUE.</p></td>
     </tr>
     <tr>
       <th>verbose</th>

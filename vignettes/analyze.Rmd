@@ -33,7 +33,7 @@ To test this functionality, you can run the following example:
 ```{r eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(MODIStsp)
 opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
-MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
+MODIStsp(opts_file = opts_file, gui = FALSE, verbose = FALSE)
 ```
 
 This will download a yearly time series of MODIS NDVI data and subset it over the

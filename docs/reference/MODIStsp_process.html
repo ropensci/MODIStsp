@@ -50,10 +50,8 @@
 
 <meta property="og:title" content="MODIStsp main processing function — MODIStsp_process" />
 <meta property="og:description" content="Main processing function of MODIStsp. Takes as input processing
-parameters specified by the user using MODIStsp_GUI and saved in
-MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
-(non-interactive mode) and performs all required processing." />
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
+parameters specified by the user and performs all required processing." />
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png" />
 
 
 
@@ -95,7 +93,7 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -189,328 +187,19 @@ MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
 
     <div class="ref-description">
     <p>Main processing function of MODIStsp. Takes as input processing
-parameters specified by the user using MODIStsp_GUI and saved in
-MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
-(non-interactive mode) and performs all required processing.</p>
+parameters specified by the user and performs all required processing.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>MODIStsp_process</span>(
-  <span class='no'>sel_prod</span>,
-  <span class='no'>start_date</span>,
-  <span class='no'>end_date</span>,
-  <span class='no'>out_folder</span>,
-  <span class='no'>out_folder_mod</span>,
-  <span class='kw'>reprocess</span> <span class='kw'>=</span> <span class='st'>"Yes"</span>,
-  <span class='kw'>delete_hdf</span> <span class='kw'>=</span> <span class='st'>"No"</span>,
-  <span class='no'>sensor</span>,
-  <span class='no'>download_server</span>,
-  <span class='no'>user</span>,
-  <span class='no'>password</span>,
-  <span class='no'>https</span>,
-  <span class='no'>start_x</span>,
-  <span class='no'>start_y</span>,
-  <span class='no'>end_x</span>,
-  <span class='no'>end_y</span>,
-  <span class='no'>full_ext</span>,
-  <span class='no'>bbox</span>,
-  <span class='no'>out_format</span>,
-  <span class='no'>compress</span>,
-  <span class='no'>out_res_sel</span>,
-  <span class='no'>out_res</span>,
-  <span class='no'>native_res</span>,
-  <span class='no'>tiled</span>,
-  <span class='no'>mod_proj_str</span>,
-  <span class='no'>outproj_str</span>,
-  <span class='no'>nodata_in</span>,
-  <span class='no'>nodata_out</span>,
-  <span class='no'>nodata_change</span>,
-  <span class='no'>scale_val</span>,
-  <span class='no'>scale_factor</span>,
-  <span class='no'>offset</span>,
-  <span class='no'>datatype</span>,
-  <span class='no'>bandsel</span>,
-  <span class='no'>bandnames</span>,
-  <span class='no'>indexes_bandsel</span>,
-  <span class='no'>indexes_bandnames</span>,
-  <span class='no'>indexes_formula</span>,
-  <span class='no'>indexes_nodata_out</span>,
-  <span class='no'>quality_bandnames</span>,
-  <span class='no'>quality_bandsel</span>,
-  <span class='no'>quality_bitN</span>,
-  <span class='no'>quality_source</span>,
-  <span class='no'>quality_nodata_in</span>,
-  <span class='no'>quality_nodata_out</span>,
-  <span class='no'>file_prefixes</span>,
-  <span class='no'>main_out_folder</span>,
-  <span class='no'>resampling</span>,
-  <span class='no'>ts_format</span>,
-  <span class='kw'>use_aria</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>download_range</span> <span class='kw'>=</span> <span class='st'>"full"</span>,
-  <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>n_retries</span>,
-  <span class='no'>verbose</span>
-)</pre>
+    <pre class="usage"><span class='fu'>MODIStsp_process</span>(<span class='no'>proc_opts</span>, <span class='no'>n_retries</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sel_prod</th>
-      <td><p><code>character</code> Name of selected MODIS product.</p></td>
-    </tr>
-    <tr>
-      <th>start_date</th>
-      <td><p><code>character</code> Start date for images download and preprocessing
-(yyyy.mm.dd).</p></td>
-    </tr>
-    <tr>
-      <th>end_date</th>
-      <td><p><code>character</code> End date for images download and preprocessing
-(yyyy.mm.dd).</p></td>
-    </tr>
-    <tr>
-      <th>out_folder</th>
-      <td><p><code>character</code> Main output folder.</p></td>
-    </tr>
-    <tr>
-      <th>out_folder_mod</th>
-      <td><p><code>character</code> Output folder for original HDF storage.</p></td>
-    </tr>
-    <tr>
-      <th>reprocess</th>
-      <td><p><code>character ["Yes" | "No"]</code> If Yes, reprocess data for already
-existing dates.</p></td>
-    </tr>
-    <tr>
-      <th>delete_hdf</th>
-      <td><p><code>character ["Yes" | "No"]</code> If Yes, delete original HDF after
-completion.</p></td>
-    </tr>
-    <tr>
-      <th>sensor</th>
-      <td><p><code>character ["Terra"| "Aqua" | "Both"]</code> MODIS platform to be considered.
-(Ignored for MCD* products).</p></td>
-    </tr>
-    <tr>
-      <th>download_server</th>
-      <td><p><code>character ["http" | "offline"]</code> service to be used for
-download.</p></td>
-    </tr>
-    <tr>
-      <th>user</th>
-      <td><p><code>character</code> Username for NASA http server.
-(<a href='https://urs.earthdata.nasa.gov/home'>urs.earthdata.nasa.gov/home</a>).</p></td>
-    </tr>
-    <tr>
-      <th>password</th>
-      <td><p><code>character</code> Password for NASA http server
-(<a href='https://urs.earthdata.nasa.gov/home'>urs.earthdata.nasa.gov/home</a>).</p></td>
-    </tr>
-    <tr>
-      <th>https</th>
-      <td><p><code>list</code> http addresses for download of HDF of selected product.</p></td>
-    </tr>
-    <tr>
-      <th>start_x</th>
-      <td><p><code>integer [0-35]</code> Start horizontal tile.</p></td>
-    </tr>
-    <tr>
-      <th>start_y</th>
-      <td><p><code>integer [0-17]</code> Start vertical tile.</p></td>
-    </tr>
-    <tr>
-      <th>end_x</th>
-      <td><p><code>integer [0-35]</code> End horizontal tile.</p></td>
-    </tr>
-    <tr>
-      <th>end_y</th>
-      <td><p><code>integer [0-17]</code> End vertical tile.</p></td>
-    </tr>
-    <tr>
-      <th>full_ext</th>
-      <td><p><code>logic</code> If TRUE, process``
-the entire extent of the selected tiles. Otherwise, crop the output to
-output bbox.</p></td>
-    </tr>
-    <tr>
-      <th>bbox</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(4)</a></code> Output bounding box (xmin, ymin, xmax, ymax) in
-out_proj coordinate system.</p></td>
-    </tr>
-    <tr>
-      <th>out_format</th>
-      <td><p><code>character ["ENVI" | "GTiff"]</code> Desired output format.</p></td>
-    </tr>
-    <tr>
-      <th>compress</th>
-      <td><p><code>character ["None" | "PACKBITS" | "LZW" | "DEFLATE"]</code>
-Compression method for GTiff outputs (Ignored if <code>out_format == ENVI</code>)</p></td>
-    </tr>
-    <tr>
-      <th>out_res_sel</th>
-      <td><p><code>character ["Native" | "Resampled"]</code> Indicates if the native
-resolution of the product or a user supplied one is to be used.</p></td>
-    </tr>
-    <tr>
-      <th>out_res</th>
-      <td><p><code>float</code> Output resolution (in output projection measurement
-unit). Ignored if out_res_sel == "Native".</p></td>
-    </tr>
-    <tr>
-      <th>native_res</th>
-      <td><p><code>float</code> Native resolution of MODIS product to be processed.</p></td>
-    </tr>
-    <tr>
-      <th>tiled</th>
-      <td><p><code>integer [0 | 1]</code> 1 = tiled product; 0 = non-tiled product
-(resolution 0.05 deg - latlong projection).</p></td>
-    </tr>
-    <tr>
-      <th>mod_proj_str</th>
-      <td><p><code>character</code> proj4 string of MODIS product native projection.</p></td>
-    </tr>
-    <tr>
-      <th>outproj_str</th>
-      <td><p><code>character</code> proj4 string of selected output projection.</p></td>
-    </tr>
-    <tr>
-      <th>nodata_in</th>
-      <td><p><code>numeric array</code> Original NoData values of original layers of
-the selected MODIS product.</p></td>
-    </tr>
-    <tr>
-      <th>nodata_out</th>
-      <td><p><code>numeric array</code> Target NoData values of MODIS original layers
-(Ignored if nodata_change == FALSE).</p></td>
-    </tr>
-    <tr>
-      <th>nodata_change</th>
-      <td><p><code>character ["Yes" | "No"]</code> if Yes, NoData are set to nodata_out
-in output rasters.</p></td>
-    </tr>
-    <tr>
-      <th>scale_val</th>
-      <td><p><code>character ["Yes" | "No"]</code> If == "Yes", scale and offset are applied to
-original MODIS layers, and Spectral Indexes are saved as floating point. If
-== "No", no rescaling is done and Spectral Indexes are saved as integer, with a
-10000 scaling factor.</p></td>
-    </tr>
-    <tr>
-      <th>scale_factor</th>
-      <td><p><code>numeric array</code> of length equal to the number of original
-layers of the selected product, containing scale factors to be applied to each
-original layer to convert it to "correct" measure units.</p></td>
-    </tr>
-    <tr>
-      <th>offset</th>
-      <td><p><code>numeric array</code> of length equal to the number of original
-layers of the selected product, containing offsets to be applied to each
-original layer to convert it to "correct" measure units.</p></td>
-    </tr>
-    <tr>
-      <th>datatype</th>
-      <td><p><code>character array</code> datatypes of original MODIS bands
-(e.g., "INT2S").</p></td>
-    </tr>
-    <tr>
-      <th>bandsel</th>
-      <td><p><code>integer 0/1 array</code> of length equal to number of original
-layers of the selected product set to 1 for bands to be processed.</p></td>
-    </tr>
-    <tr>
-      <th>bandnames</th>
-      <td><p><code>character array</code> Abbreviated Names of original layers of the
-selected product (used to build output file names).</p></td>
-    </tr>
-    <tr>
-      <th>indexes_bandsel</th>
-      <td><p><code>integer 0/1 array</code> array of length equal to the number
-of Spectral Indexes available for the product (standard + user-provided),
-set to  1 for indexes to be processed.</p></td>
-    </tr>
-    <tr>
-      <th>indexes_bandnames</th>
-      <td><p><code>character array</code> Abbreviated Names of SIs available
-for the selected product (used to build output file names of SIs).</p></td>
-    </tr>
-    <tr>
-      <th>indexes_formula</th>
-      <td><p><code>character array</code> formulas of SIs available for the
-selected product (standard and custom).</p></td>
-    </tr>
-    <tr>
-      <th>indexes_nodata_out</th>
-      <td><p><code>numeric array</code> NoData values to be used for SIs</p></td>
-    </tr>
-    <tr>
-      <th>quality_bandnames</th>
-      <td><p><code>character array</code> Abbreviated Names of Quality
-Indicators available for the selected product (used to build output file
-names of QIs).</p></td>
-    </tr>
-    <tr>
-      <th>quality_bandsel</th>
-      <td><p><code>integer 0|1 array</code> array of length equal to number
-of available QIs, set to  1 for indexes to be processed.</p></td>
-    </tr>
-    <tr>
-      <th>quality_bitN</th>
-      <td><p><code>character array</code> with length equal to the number QIs
-available for the selected product. Each entry contains the position of the
-bits corresponding to a QI (e.g., 0-1) in its "source" MODIS layer.</p></td>
-    </tr>
-    <tr>
-      <th>quality_source</th>
-      <td><p><code>character array</code> which connects each QI to its "source"
-original MODIS layer (multiple QIs share the same "source", since they are
-derived from different bits of the bit-encoded layer).</p></td>
-    </tr>
-    <tr>
-      <th>quality_nodata_in</th>
-      <td><p><code>integer</code> Always set to 255.</p></td>
-    </tr>
-    <tr>
-      <th>quality_nodata_out</th>
-      <td><p><code>integer</code> Always set to 255.</p></td>
-    </tr>
-    <tr>
-      <th>file_prefixes</th>
-      <td><p><code>character</code> output file prefix of selected product
-(e.g., MOD13Q1). Used to build output filenames.</p></td>
-    </tr>
-    <tr>
-      <th>main_out_folder</th>
-      <td><p><code>character</code> Main folder for storage of MODIStsp
-time series.</p></td>
-    </tr>
-    <tr>
-      <th>resampling</th>
-      <td><p><code>character ["near" | "bilinear" | "cubic" | "lanczos" | "mode"]</code>
-Resampling method to be used by <code>gdalwarp</code>.</p></td>
-    </tr>
-    <tr>
-      <th>ts_format</th>
-      <td><p><code>character ["None" | "ENVI Meta Files" | "GDAL vrt files" | "ENVI and GDAL"]</code> Selected virtual time series format.</p></td>
-    </tr>
-    <tr>
-      <th>use_aria</th>
-      <td><p><code>logical</code> If TRUE, aria2c is used to accelerate download
-(if available !).</p></td>
-    </tr>
-    <tr>
-      <th>download_range</th>
-      <td><p><code>character ["full" | "seasonal"]</code> If "full", all the
-available images between the starting and the ending dates are downloaded;
-If "seasonal", only the images included in the season are downloaded
-(e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, only
-the images of December, January and February from 2005 to 2010 - excluding
-2005-01, 2005-02 and 2010-12 - are downloaded).</p></td>
-    </tr>
-    <tr>
-      <th>gui</th>
-      <td><p><code>logical</code> Indicates if processing was called starting from an
-interactive environment or not. If FALSE, processing messages are sent to a
-log file instead than to the console, and gWidgets messages are suppressed</p></td>
+      <th>proc_opts</th>
+      <td><p><code>data.frame</code> containing all processing parameters, as
+passed from the MODIStsp GUI, or created in <code>MODIStsp</code> by joining
+explicitly passed arguments with a (not mandatory) options file.</p></td>
     </tr>
     <tr>
       <th>n_retries</th>

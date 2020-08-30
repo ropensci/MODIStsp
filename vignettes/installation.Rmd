@@ -6,346 +6,55 @@ title: Installation
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## <i class="fa fa-desktop" aria-hidden="true"></i> System Requirements 
-
-`MODIStsp` requires [R](https://cran.r-project.org) v >= 3.2.1 and [GDAL](http://www.gdal.org) (Geospatial Data Abstraction Library) v >= 1.11.1 __with support for HDF4 raster format__ to be installed in
-your system. Brief instructions for installing R and GDAL can be found [HERE](#installing-r-and-gdal).
-
-____________________________________________________________________________________
-
 ## <i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows
 
-You can install the stable version of `MODIStsp`, from CRAN: 
+You can install the stable version of `MODIStsp` from CRAN: 
 
 `install.packages("MODIStsp")`
 
-, or the development version (containing the latest improvements and bug fixes) from github:
+, or the development version (containing the latest improvements and bug fixes) 
+from github:
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+install.packages("remotes")
+library(remotes)
+install_github("ropensci/MODIStsp")
+```
+
+## <i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems
+
+To install `MODIStsp` on Linux, you need to be able to install the `sf` package, 
+which requires several dependencies. See [HERE](https://github.com/r-spatial/sf#installing)
+if you have trouble installing `sf`. 
+
+Then, you can install the stable version of MODIStsp from CRAN:
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+install.packages("MODIStsp")
+```
+, or the development version (containing the latest improvements and bug fixes) 
+from github;
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
 install_github("ropensci/MODIStsp")
 ```
 
-__IMPORTANT NOTE__
-As of June 2020, the `gWidgets` and `gWidgetsRGtk2` packages were orphaned on CRAN. 
-To install them, you can try: 
+## <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
 
-```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-install.packages("remotes")
-library(remotes)
-remotes::install_version("gWidgets", version = "0.0-54.2")
-remotes::install_version("gWidgetsRGtk2", version = "0.0-86.1")
-```
+To install `MODIStsp` on MacOS, you need to be able to install the `sf` package, 
+which requires several dependencies. See [HERE](https://github.com/r-spatial/sf#installing)
+if you have trouble installing `sf`. 
 
-(see also https://github.com/ropensci/MODIStsp/issues/207 and https://github.com/ropensci/MODIStsp/issues/208)
-
-As soon as I find the time, I'll remove those dependencies by developing a new 
-"Shiny-based GUI, but this is not straightforward, unfortunately.
-
-Note that **if the `GTK+` library is not already installed on your system, installation 
-may fail**. In that case, please install and load the `RGtk2` library beforehand:
-
-```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-install.packages("RGtk2")
-library(gWidgetsRGtk2)
-```
-    
- __Upon loading `gWidgetsRGtk2`, an error window will probably appear__. This
- signals that library "GTK+" is not yet installed on your system or is not on your 
- PATH. To install it press "OK". A new window dialog window will appear, asking
- if you want to install "GTK+". Select "Install GTK" and then "OK" . Windows will 
- download and install the GTK+ library. When it finishes, the RSession should be
- restarted and you should be ready to go !<sup name="a1">
- 
- __In case RStudio does not automatically restart__ or continuously asks to install
- GTK+ again, kill it form "Task Manager" (or restart the R session from RStudio
- "Session" menu), reload RStudio and the try to reload `gWidgetsRGtk2`. If it loads
- correctly, you should be ready to go. 
-
-__If it still fails__, try downloading the GTK+ bundle from:
-
-<http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip> 
-(OR <http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip> if on Win32)
-
-, unzip the archive on a folder of your choice (e.g., `C:\\Program Files\\GTK+`), 
-then add the path of its "bin" subfolder (e.g., `C:\\Program Files\\GTK+\\bin\\`
-to your system PATH environment variable.
-
-Restart your system and try loading again `RGtk2`: if it loads ok, you should be 
-ready to install `MODIStsp`
-
-____________________________________________________________________________________
-
-## <i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems
-
-To install `MODIStsp` on Linux, you have to first install the following required 
-dependencies: 
-
-  * `Cairo` >= 1.0.0, `ATK` >= 1.10.0, `Pango` >= 1.10.0, `GTK+` >= 2.8.0, `GLib` >= 2.8.0 (required by package ```RGtk2```)
-  * `Curl` (required by package ```curl```)
-  * `GDAL` >= 1.6.3, `PROJ.4` >= 4.4.9 (required by package ```rgdal```)
-    
-On *Debian and Ubuntu-based* systems, to install those packages open a terminal and type: 
-    
-```bash
-sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
-libgtk2.0-dev libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev
-```
-    
-On *rpm-base systems*, to install packages open a terminal and type:  
-
-```bash
-sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
-glib2-devel libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad
-```
-    
 Then, you can install the stable version of MODIStsp from CRAN:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("MODIStsp")
 ```
-, or the development version (containing the latest improvements and bug fixes) from github;
+, or the development version (containing the latest improvements and bug fixes) 
+from github;
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-install.packages("remotes")
-library(remotes)
+library(devtools)
 install_github("ropensci/MODIStsp")
 ```
-
-__IMPORTANT NOTE__
-As of June 2020, the `gWidgets` and `gWidgetsRGtk2` packages were orphaned on CRAN. 
-To install them, you can try: 
-
-```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-install.packages("remotes")
-library(remotes)
-remotes::install_version("gWidgets", version = "0.0-54.2")
-remotes::install_version("gWidgetsRGtk2", version = "0.0-86.1")
-```
-
-(see also https://github.com/ropensci/MODIStsp/issues/207 and https://github.com/ropensci/MODIStsp/issues/208)
-
-As soon as I find the time, I'll remove those dependencies by developing a new 
-"Shiny-based GUI, but this is not straightforward, unfortunately.
-
-____________________________________________________________________________________
-
-## <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
-
-**NOTE**: The following  installation notes should be valid for MODIStsp installation 
-on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied...) from: https://zhiyzuo.github.io/installation-rattle/. Thanks to Zhiya Zuo for providing this!
-
-To properly install `MODIStsp` you will need to first install package `RGTk2`. This
-is a somehow difficult operation. The following instructions should help:
-<br>
-
-__1. Check your Mac OS X version and update if necessary: __
-
-Enter the following command in terminal to check your macOS version. Expected
-output is as below the dashed line ---.
-    
-```
-~$ sw_vers  
-------------------------  
-ProductName:	Mac OS X  
-ProductVersion:	10.12.6  
-BuildVersion:	16G29  
-```
-
-If your system is above 10.11, continue. Otherwise, upgrade it to Sierra.
-
-Install homebrew if you do not have it already installed. homebrew  is a very
-convenient package manager for macOS. To do so, open a terminal, copy the following
-command in it and hit Enter:
-
-```
-~$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-Follow the instructions to get brew ready. When inserting your password, nothing 
-will show up for security reasons. Just hit Enter when you are finished.
-
-When brew is finished, copy the following command in terminal and hit Enter:
-
-```
-~$ touch ~/.bash_profile
-~$ echo "export PATH=/usr/local/bin:$PATH
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" >> ~/.bash_profile
-~$ source ~/.bash_profile
-```
-<br>
-
-__2. Install the `cairo` library with x11 support__. Enter the following into your terminal:
- 
-```
-~$ brew uninstall --force cairo --ignore-dependencies
-~$ brew cask install xquartz
-~$ brew install --with-x11 cairo
-```
-<br>
- 
-__3. Install the `gtk+` library__:
- 
-To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write: 
- 
-```
-~$ brew edit gtk+
-```
- 
-A text editor will open. Look in the file, and find a section that begins with
-"def install". Substitute the current `args` section with the following text: 
- 
-```
-def install
- args = [
-         "--disable-dependency-tracking",
-         "--disable-silent-rules",
-         "--prefix=#{prefix}",
-         "--disable-glibtest",
-         "--enable-introspection=yes",
-         # "--disable-visibility",
-         # "--with-gdktarget=quartz",
-         "--with-gdktarget=x11",
-         "--enable-x11-backend"
-        ]
-```     
- 
-Save the modified file using `ctrl+x ctrl+c`, followed by `y` to quit emacs.
-Now install the library using: 
- 
-```
-~$ brew install --build-from-source --verbose gtk+
-```
-<br>
-
-__4. Update your path__ so that `gtk+` is recognized, using:
-
-```
-~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig
-```
-<br>
-
-__5. Install `RGtk2` from source__:
-
-- __Download the newest source file for RGtk2__ from https://CRAN.R-project.org/package=gWidgetsRGtk2.
-
-- Assuming that the path to this file is ~/Downloads. Run the following in terminal 
-(change the path if you did not download in ~/Downloads):
-
-```
-~$ cd ~/Downloads
-~/Downloads$ R CMD INSTALL RGtk2_2.20.33.tar.gz
-```
-(Note that the name of the tar.gz file may vary depending on when you downloaded the file). 
-<br>
-
-__6. Open R and run__: 
-
-```{r eval = FALSE}
-library(RGtk2)
-```
-hopefully, `RGtk2` will load without errors! If so, you should be ready to go, 
-and you can:
-
-__7. Install MODIStsp__ from CRAN:
-
-```{r eval = FALSE}
-install.packages("MODIStsp")
-MODIStsp()
-```
-or the development version from GitHub:
-```{r eval = FALSE}
-install.packages("remotes")
-library(remotes) 
-install_github("ropensci/MODIStsp", ref = "master")
-MODIStsp()
-```
-
-__IMPORTANT NOTE__
-As of June 2020, the `gWidgets` and `gWidgetsRGtk2` packages were orphaned on CRAN. 
-To install them, you can try: 
-
-```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-install.packages("remotes")
-library(remotes)
-remotes::install_version("gWidgets", version = "0.0-54.2")
-remotes::install_version("gWidgetsRGtk2", version = "0.0-86.1")
-```
-
-Good luck!
-
-________________________________________________________________________________
-
-
-# Installing R and GDAL
-
-### Installing R
-
-#### Windows
-
-Download and install the latest version of R which can be found [here](https://cran.r-project.org/bin/windows/base).
-
-#### Linux
-
-Please refer to the documentation which can be found [here](https://cran.r-project.org/bin/linux), opening the directory relative to your Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version.
-With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommended), since packaged version of R is >= 3.2.1 (although not the latest); in this case, user can install R by simply typing in a terminal
-```bash
-sudo apt-get install r-base
-```
-
-### Installing GDAL 2.3
-
-#### Windows
-
-Starting from MODIStsp 1.4.0, no external GDAL installation is needed - MODIStsp
-exploits the gdalUtilities package to access GDAL functionality through the 
-sf::gdal_utils() function. 
-    
-#### Debian and Ubuntu-based systems
-
-1. Ensure that your repositories contain a version of ```gdal-bin``` >= 1.11.1. 
-    In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions [here](https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable)). 
-    With Ubuntu 15.10 Wily (and newer) this step is not mandatory, although recommended in order to have updated version of GDAL installed.
-    
-2. To install GDAL, open a terminal and type  
-    ```bash
-    sudo apt-get install gdal-bin
-    ```
-    
-#### ArchLinux
-
-GDAL is maintained updated to the latest version as binary package within the community repository; although that, the support for HDF4 format is not included. 
-To bypass this problem, ArchLinux users can install ```gdal-hdf4``` package from AUR (see [here](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages) or [here](https://archlinux.fr/yaourt-en) for the package installation from AUR). 
-This package is updated manually after each release of ```gdal``` on the community repository, so a temporal shift between a new ```gdal``` release and the update of ```gdal-hdf4``` could happen.
-If you want to manually add the support for HDF4 in case ```gdal-hdf4``` is out-of-date, you can do it following [these instructions](https://notehub.org/fctdn).
-
-#### Other Linux systems
-
-Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter ```--with-hdf4``` to the ```configure``` instruction).
-
-#### MacOs
-
-1. Check if gdal is already installed and has hdf4 support. In a terminal, type: 
-
-```
-~$ gdal-config --formats 
-```
-- if gdal is installed, the command will list which drivers are installed. If the 
-list includes "hdf4" you should be good to go. 
-
-- if gdal is not yet installed or hdf4 is not already supported, you can install/reinstall 
-it following these [notes](http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html). In short: open a terminal and run:
-
-```
-~$ brew install hdf4 
-~$ brew link --overwrite hdf4 
-~$ brew install gdal --complete --enable-unsupported --with-hdf4 
-```
-
-then, check again to see if hdf4 is supported. The list should now include hdf4: 
-
-```
-~$ gdal-config --formats 
-```
-
-Good luck!

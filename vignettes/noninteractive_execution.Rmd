@@ -6,29 +6,75 @@ title: "Non-Interactive Execution from within R"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+`MODIStsp` can be launched in non-interactive mode within an `R` session by setting the optional `GUI` parameter to FALSE, and either providing the desired processing argument in the call to the function, or providing a previously saved `opts_file` specifying the path to a JSON Options file previously saved through the GUI. 
+This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts.
+
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Specifying the processing parameters in the function call__
+
+All processing parameters can be set in the call to `MODIStsp`. Mandatory 
+parameters are `selprod` (specifying the MODIS product), (one of) `bandsel`, `quality_bandsel` or `indexes_bandsel`, (that specify the desired output layers), `out_folder` and `start_date` and `end_date`. 
+`user` and `password` are also needed if `download_server` is not equal to `offline`.
+
+The new function `MODIStsp_get_prodlayers` allows to easily retrieve the 
+names of products and available layers based on product code, such as in: 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(MODIStsp) 
+MODIStsp_get_prodlayers("M*D13Q1")
+```
+
+The other parameters are set automatically to default values (see XXX for details on the different available function arguments). 
+
+For example, the following code processes layers __NDVI__ and __EVI__ and quality indicator __usefulness__ of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to R tempdir: 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(MODIStsp) 
+
+# **NOTE** Output files of examples are saved to file.path by setting out_folder to $tempdir.
+
+# --> See name and available layers for product M*D13Q1
+MODIStsp_get_prodlayers("M*D13A2")
+
+# --> Launch the processing
+MODIStsp(gui             = FALSE, 
+         out_folder      = "$tempdir", 
+         selprod         = "Vegetation_Indexes_16Days_1Km (M*D13A2)",
+         bandsel         = c("EVI", "NDVI"), 
+         quality_bandsel = "QA_usef", 
+         indexes_bandsel = "SR", 
+         user            = "mstp_test" ,
+         password        = "MSTP_test_01",
+         start_date      = "2020.06.01", 
+         end_date        = "2020.06.15", 
+         verbose         = FALSE)
+
+# Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of 
+# `base::tempdir()`: 
+
+out_fold <- file.path(tempdir(), "MODIStsp/VI_16Days_1Km_v6/") 
+list.files(out_fold)
+list.files(file.path(out_fold ,"EVI"))
+list.files(file.path(out_fold ,"QA_usef"))
+```
+
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Launching MODIStsp using a saved "Options file"__
 
-`MODIStsp` can be launched in non-interactive mode within an `R` session by setting 
-the optional `GUI` parameter to FALSE, and the `Options_File` parameter to the path 
-of a previously saved JSON Options file. 
-This allows to exploit `MODIStsp` functionalities within generic "R" processing 
-scripts: 
+Alternatively, you can run MODIStsp without opening the GUI by specifying a previously saved options file: 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(MODIStsp) 
 
 # **NOTE** Output files of examples are saved to file.path(tempdir(), "MODIStsp").
-# You can run the examples with `gui = TRUE` to set a different output folder!
 
 # --> Specify the path to a valid options file saved in advance from MODIStsp GUI 
 # Here we use a test json file saved in MODIStsp installation folder which
 # downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
 # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
 
-options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 
 # --> Launch the processing
-MODIStsp(gui = FALSE, options_file = options_file, verbose = FALSE)
+MODIStsp(gui = FALSE, opts_file = opts_file, verbose = FALSE)
 
 # Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of 
 # `base::tempdir()`: 
@@ -37,11 +83,8 @@ out_fold <- file.path(tempdir(), "MODIStsp/VI_16Days_1Km_v6")
 list.files(out_fold)
 list.files(file.path(out_fold ,"EVI"))
 ```
-________________________________________________________________________________
 
-<br>
-
-# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Looping over different Options files__
+## _Looping over different Options files_
 
 If you need to process different MODIS products, you can prepare beforehand different
 MODIStsp options files by using the GUI, and then loop over them like this:
@@ -52,42 +95,50 @@ opts_files <- c(system.file("testdata/test_MOD13A2.json", package = "MODIStsp"),
                 system.file("testdata/test_MOD10A2.json", package = "MODIStsp"))
 
 for (opts_file in opts_files) {
-  MODIStsp(gui = FALSE, options_file = opts_file)
+  MODIStsp(gui       = FALSE, 
+           opts_file = opts_file, 
+           verbose   = FALSE)
 }
 
 # MOD13A2 ouputs
 out_fold <- file.path(tempdir(), "MODIStsp/VI_16Days_1Km_v6") 
 list.files(out_fold)
-list.files(file.path(out_fold ,"EVI"))
+list.files(file.path(out_fold ,"NDVI"))
 
 # MOD10A2 ouputs
 out_fold <- file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_1Km_v6") 
 list.files(out_fold)
 list.files(file.path(out_fold ,"LST_Night_1km"))
 ```
+
 ________________________________________________________________________________
 
 <br>
 
-# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Looping over different spatial extents__
+# <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Specifying the processing parameters using a previously saved options file and overwriting some parameters__
 
-Specifying also the `spatial_file_path_` parameter overrides for example the output 
-extent of the selected Options File. This allows to perform the same preprocessing 
-on different extents using a single Options File. For example:
+Finally, it is possible to both specify a previously saved options file AND setting some parameters in the call to the function. This allows to __easily perform similar processings, by only updating the required arguments__, as in the examples below. 
+
+## __Looping over different spatial extents__
+
+Specifying the `spafile` parameter while setting the `spatmeth` parameter to "file" overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File. For example:
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 # Run the tool using the settings previously saved in a specific option file
 # and specifying the extent from a spatial file allows to re-use the same
 # processing settings to perform download and reprocessing on a different area
 library(MODIStsp) 
-options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+opts_file    <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
-MODIStsp(gui = FALSE, options_file = options_file,
-         spatial_file_path = spatial_file, verbose = FALSE)
+MODIStsp(gui       = FALSE, 
+         opts_file = opts_file,
+         spatmeth  = "file", 
+         spafile   = spatial_file, 
+         verbose   = FALSE)
 
 # --> Create a character array containing a list of shapefiles (or other spatial files)
-extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"), 
-                         full.names = TRUE, "\\.shp$")  
+extent_list <- list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"), full.names = TRUE, "\\.shp$")  
+
 extent_list
 
 # --> Loop on the list of spatial files and run MODIStsp using each of them to 
@@ -95,8 +146,11 @@ extent_list
 # each input spatial file).
 
 for (single_shape in extent_list) {
-  MODIStsp(gui = FALSE, options_file = options_file, 
-           spatial_file_path = single_shape )
+  MODIStsp(gui       = FALSE, 
+           opts_file = opts_file, 
+           spatmeth  = "file", 
+           spafile   = single_shape, 
+           verbose   = FALSE)
 }
 
 # output files are placed in separate folders: 

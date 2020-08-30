@@ -52,7 +52,7 @@
 <meta property="og:description" content="function used to extract time series data from rts files created by MODIStsp
 on spatial locations provided in the form of &quot;R&quot; spatial objects (SpatialPoints,
 SpatialPolygons, etc.)" />
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png" />
 
 
 
@@ -94,7 +94,7 @@ SpatialPolygons, etc.)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -317,7 +317,7 @@ belonging to the polygon, and one line for each date.</p>
     <p>License: GPL 3.0</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \dontrun{</span>
 <span class='co'># Extract average and standard deviation values from a rts object created by</span>
 <span class='co'># MODIStsp for each polygon of a shapefile, for each date in the period</span>
 <span class='co'># between 2001-01-01 and 2014-12-31</span>
@@ -336,50 +336,48 @@ belonging to the polygon, and one line for each date.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/files2.html'>dir.create</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>),
            <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='no'>test_folder</span>, <span class='kw'>full.names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>),
-          <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>))
-
+          <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>))</div><div class='output co'>#&gt;  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+#&gt; [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</div><div class='input'>
 <span class='no'>opts_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/test_extract.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
+<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error: assert_that: length of assertion is not 1</span></div><div class='input'>
 <span class='co'># Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between</span>
 <span class='co'># 2016-01-01 and 2016-12-18</span>
 <span class='co'># __NOTE__: MODIStsp rasterStack files are always saved in the "Time_Series\/RData"</span>
 <span class='co'># subfolder of your main output folder - see</span>
-<span class='co'># "https://ropensci.github.io/MODIStsp/articles/output.html")</span>
+<span class='co'># "https://docs.ropensci.org/MODIStsp/articles/output.html")</span>
 
 <span class='co'># Specify the filename of the RData RasterStack of interest</span>
 <span class='no'>stack_file</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
  <span class='st'>"MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI"</span>,
   <span class='st'>"MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='no'>stack_file</span>)
-
-<span class='no'>ts_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/load.html'>load</a></span>(<span class='no'>stack_file</span>))
-<span class='no'>ts_data</span>
-
+<span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='no'>stack_file</span>)</div><div class='output co'>#&gt; [1] "MOD13A1_NDVI_1_2016_353_2016_RData.RData"</div><div class='input'>
+<span class='no'>ts_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/get.html'>get</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/load.html'>load</a></span>(<span class='no'>stack_file</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open compressed file 'D:/RTemp\RtmpE5P16o/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData', probable reason 'No such file or directory'</span></div><div class='output co'>#&gt; <span class='error'>Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection</span></div><div class='input'><span class='no'>ts_data</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'ts_data' not found</span></div><div class='input'>
 <span class='co'># Now load a shapefile containing polygons from which we want to extract data</span>
 
 <span class='no'>polygons</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rgdal</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rgdal/man/readOGR.html'>readOGR</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/extract_polys.shp"</span>,
                            <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>polygons</span>
-
+<span class='no'>polygons</span></div><div class='output co'>#&gt; class       : SpatialPolygonsDataFrame 
+#&gt; features    : 10 
+#&gt; extent      : 9.248174, 9.526815, 45.91182, 46.18547  (xmin, xmax, ymin, ymax)
+#&gt; crs         : +proj=longlat +datum=WGS84 +no_defs 
+#&gt; variables   : 2
+#&gt; names       : id,  lc_type 
+#&gt; min values  :  1, Cropland 
+#&gt; max values  :  9,  water_2 </div><div class='input'>
 <span class='co'># Finally, extract the average values for each polygon and date and plot the</span>
 <span class='co'># results</span>
 
 <span class='no'>out_dataavg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/message.html'>suppressMessages</a></span>(<span class='fu'>MODIStsp_extract</span>(<span class='no'>ts_data</span>, <span class='no'>polygons</span>, <span class='kw'>id_field</span> <span class='kw'>=</span> <span class='st'>"lc_type"</span>,
-                             <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>out_dataavg</span>)
-
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)
-
+                             <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; <span class='error'>Error in class(in_rts) %in% c("RasterStack", "RasterBrick"): object 'ts_data' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>out_dataavg</span>)</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'out_dataavg' not found</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out_dataavg</span>, <span class='kw'>legend.loc</span> <span class='kw'>=</span> <span class='st'>"topleft"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'out_dataavg' not found</span></div><div class='input'>
 <span class='co'># use a different summarization function</span>
 
 <span class='no'>out_datasd</span> <span class='kw'>&lt;-</span> <span class='fu'>MODIStsp_extract</span>(<span class='no'>ts_data</span>, <span class='no'>polygons</span>, <span class='kw'>id_field</span> <span class='kw'>=</span> <span class='st'>"lc_type"</span>,
-                              <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>"sd"</span>, <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>out_datasd</span>)
-
-<span class='co'># (See also https://ropensci.github.io/MODIStsp/articles/Analyze.html for a</span>
-<span class='co'># worked-out example)</span>
-}</div></pre>
+                              <span class='kw'>FUN</span> <span class='kw'>=</span> <span class='st'>"sd"</span>, <span class='kw'>small</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in class(in_rts) %in% c("RasterStack", "RasterBrick"): object 'ts_data' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>out_datasd</span>)</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'head': object 'out_datasd' not found</span></div><div class='input'>
+# (See also https://docs.ropensci.org/MODIStsp/articles/Analyze.html for a
+# worked-out example)
+# }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

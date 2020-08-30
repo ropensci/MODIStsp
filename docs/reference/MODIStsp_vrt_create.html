@@ -55,7 +55,7 @@ the folder in which the single-band files are stored, and creates a ENVI Meta
 file and/or a GDAL vrt file that allows access to the full time series as if
 it was a single physical file.
 Created virtual files are stored in the &quot;Time Series&quot; subfolder of `out_prod_folder``" />
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png" />
 
 
 
@@ -97,7 +97,7 @@ Created virtual files are stored in the &quot;Time Series&quot; subfolder of `ou
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -222,7 +222,7 @@ Created virtual files are stored in the "Time Series" subfolder of `out_prod_fol
     <tr>
       <th>sensor</th>
       <td><p><code>character ["Terra"| "Aqua" | "Both"]</code> MODIS platform to be considered.
-(Ignored for MCD* products).</p></td>
+(Ignored for MCD* products). Default: "Both"</p></td>
     </tr>
     <tr>
       <th>out_prod_folder</th>
@@ -230,48 +230,48 @@ Created virtual files are stored in the "Time Series" subfolder of `out_prod_fol
     </tr>
     <tr>
       <th>bandnames</th>
-      <td><p><code>character array</code> Abbreviated Names of original layers of the
-selected product (used to build output file names).</p></td>
+      <td><p>names of all layers available for the product being processed</p></td>
     </tr>
     <tr>
       <th>bandsel</th>
-      <td><p><code>integer 0/1 array</code> of length equal to number of original
-layers of the selected product set to 1 for bands to be processed.</p></td>
+      <td><p><code>character array</code> Original MODIS layers to be processed.
+You can get a list of available layers for a given product
+using function <code>MODIStsp_get_prodlayers</code> (e.g., MODIStsp_get_prodlayers("M*D13Q1")$bandnames),
+Default: NULL</p></td>
     </tr>
     <tr>
       <th>nodata_out</th>
-      <td><p><code>numeric array</code> Target NoData values of MODIS original layers
-(Ignored if nodata_change == FALSE).</p></td>
+      <td><p><code>numeric</code> Output nodata value to be used in vrt files</p></td>
     </tr>
     <tr>
       <th>indexes_bandnames</th>
-      <td><p><code>character array</code> Abbreviated Names of SIs available
-for the selected product (used to build output file names of SIs).</p></td>
+      <td><p>names of all indexes available for the product being processed</p></td>
     </tr>
     <tr>
       <th>indexes_bandsel</th>
-      <td><p><code>integer 0/1 array</code> array of length equal to the number
-of Spectral Indexes available for the product (standard + user-provided),
-set to  1 for indexes to be processed.</p></td>
+      <td><p><code>character array</code>Spectral Indexes to be computed starting from reflectance bands.
+You can get a list of available quality layers for a given product
+using function <code>MODIStsp_get_prodlayers</code> (e.g., MODIStsp_get_prodlayers("M*D13Q1")$indexes_bandnames),
+Default: NULL</p></td>
     </tr>
     <tr>
       <th>indexes_nodata_out</th>
-      <td><p><code>numeric array</code> NoData values to be used for SIs</p></td>
+      <td><p>nodata value for indexes vrts</p></td>
     </tr>
     <tr>
       <th>quality_bandnames</th>
-      <td><p><code>character array</code> Abbreviated Names of Quality
-Indicators available for the selected product (used to build output file
-names of QIs).</p></td>
+      <td><p>names of all quality indicators available for the product being processed</p></td>
     </tr>
     <tr>
       <th>quality_bandsel</th>
-      <td><p><code>integer 0|1 array</code> array of length equal to number
-of available QIs, set to  1 for indexes to be processed.</p></td>
+      <td><p><code>character array</code> Quality Indicators to be computed starting from
+bit fields of original MODIS layers. You can get a list of available quality layers for a given product
+using function <code>MODIStsp_get_prodlayers</code> (e.g., MODIStsp_get_prodlayers("M*D13Q1")$quality_bandnames),
+Default: NULL</p></td>
     </tr>
     <tr>
       <th>quality_nodata_out</th>
-      <td><p><code>integer</code> Always set to 255.</p></td>
+      <td><p>nodata value for quality vrts</p></td>
     </tr>
     <tr>
       <th>file_prefixes</th>
@@ -296,7 +296,7 @@ for virtual file.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>NULL -</p>
+    <p>NULL - the function is called for its side effects</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>License: GPL 3.0</p>

@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="installation_files/header-attrs-2.3/header-attrs.js"></script><script src="installation_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Installation</h1>
@@ -142,210 +142,35 @@
 
     
     
-<div id="system-requirements" class="section level2">
-<h2 class="hasAnchor">
-<a href="#system-requirements" class="anchor"></a><i class="fa fa-desktop" aria-hidden="true"></i> System Requirements</h2>
-<p><code>MODIStsp</code> requires <a href="https://cran.r-project.org">R</a> v &gt;= 3.2.1 and <a href="http://www.gdal.org">GDAL</a> (Geospatial Data Abstraction Library) v &gt;= 1.11.1 <strong>with support for HDF4 raster format</strong> to be installed in your system. Brief instructions for installing R and GDAL can be found <a href="#installing-r-and-gdal">HERE</a>.</p>
-<hr>
-</div>
 <div id="installing-on-windows" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-on-windows" class="anchor"></a><i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows</h2>
-<p>You can install the stable version of <code>MODIStsp</code>, from CRAN:</p>
+<p>You can install the stable version of <code>MODIStsp</code> from CRAN:</p>
 <p><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("MODIStsp")</a></code></p>
 <p>, or the development version (containing the latest improvements and bug fixes) from github:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">devtools</span>)
-<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ropensci/MODIStsp"</span>)</pre></body></html></div>
-<p><strong>IMPORTANT NOTE</strong> As of June 2020, the <code>gWidgets</code> and <code>gWidgetsRGtk2</code> packages were orphaned on CRAN. To install them, you can try:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">remotes</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span>(<span class="st">"gWidgets"</span>, <span class="kw">version</span> <span class="kw">=</span> <span class="st">"0.0-54.2"</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span>(<span class="st">"gWidgetsRGtk2"</span>, <span class="kw">version</span> <span class="kw">=</span> <span class="st">"0.0-86.1"</span>)</pre></body></html></div>
-<p>(see also <a href="https://github.com/ropensci/MODIStsp/issues/207" class="uri">https://github.com/ropensci/MODIStsp/issues/207</a> and <a href="https://github.com/ropensci/MODIStsp/issues/208" class="uri">https://github.com/ropensci/MODIStsp/issues/208</a>)</p>
-<p>As soon as I find the time, I’ll remove those dependencies by developing a new "Shiny-based GUI, but this is not straightforward, unfortunately.</p>
-<p>Note that <strong>if the <code>GTK+</code> library is not already installed on your system, installation may fail</strong>. In that case, please install and load the <code>RGtk2</code> library beforehand:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"RGtk2"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gWidgetsRGtk2</span>)</pre></body></html></div>
-<p><strong>Upon loading <code>gWidgetsRGtk2</code>, an error window will probably appear</strong>. This signals that library “GTK+” is not yet installed on your system or is not on your PATH. To install it press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select “Install GTK” and then “OK” . Windows will download and install the GTK+ library. When it finishes, the RSession should be restarted and you should be ready to go !<sup name="a1"></sup></p>
-<p><strong>In case RStudio does not automatically restart</strong> or continuously asks to install GTK+ again, kill it form “Task Manager” (or restart the R session from RStudio “Session” menu), reload RStudio and the try to reload <code>gWidgetsRGtk2</code>. If it loads correctly, you should be ready to go.</p>
-<p><strong>If it still fails</strong>, try downloading the GTK+ bundle from:</p>
-<p><a href="http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip" class="uri">http://ftp.gnome.org/pub/gnome/binaries/win64/gtk+/2.22/gtk+-bundle_2.22.1-20101229_win64.zip</a> (OR <a href="http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip" class="uri">http://ftp.gnome.org/pub/gnome/binaries/win32/gtk+/2.22/gtk+-bundle_2.22.1-20101227_win32.zip</a> if on Win32)</p>
-<p>, unzip the archive on a folder of your choice (e.g., <code>C:\\Program Files\\GTK+</code>), then add the path of its “bin” subfolder (e.g., <code>C:\\Program Files\\GTK+\\bin\\</code> to your system PATH environment variable.</p>
-<p>Restart your system and try loading again <code>RGtk2</code>: if it loads ok, you should be ready to install <code>MODIStsp</code></p>
-<hr>
+<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"ropensci/MODIStsp"</span>)</pre></body></html></div>
 </div>
 <div id="installing-on-linux-systems" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-on-linux-systems" class="anchor"></a><i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems</h2>
-<p>To install <code>MODIStsp</code> on Linux, you have to first install the following required dependencies:</p>
-<ul>
-<li>
-<code>Cairo</code> &gt;= 1.0.0, <code>ATK</code> &gt;= 1.10.0, <code>Pango</code> &gt;= 1.10.0, <code>GTK+</code> &gt;= 2.8.0, <code>GLib</code> &gt;= 2.8.0 (required by package <code>RGtk2</code>)</li>
-<li>
-<code>Curl</code> (required by package <code>curl</code>)</li>
-<li>
-<code>GDAL</code> &gt;= 1.6.3, <code>PROJ.4</code> &gt;= 4.4.9 (required by package <code>rgdal</code>)</li>
-</ul>
-<p>On <em>Debian and Ubuntu-based</em> systems, to install those packages open a terminal and type:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">sudo</span> apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev </span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">libgtk2.0-dev</span> libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev</span></code></pre></div>
-<p>On <em>rpm-base systems</em>, to install packages open a terminal and type:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">sudo</span> yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel </span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">glib2-devel</span> libcurl-devel gdal-devel proj proj-devel proj-epsg proj-nad</span></code></pre></div>
+<p>To install <code>MODIStsp</code> on Linux, you need to be able to install the <code>sf</code> package, which requires several dependencies. See <a href="https://github.com/r-spatial/sf#installing">HERE</a> if you have trouble installing <code>sf</code>.</p>
 <p>Then, you can install the stable version of MODIStsp from CRAN:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"MODIStsp"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"MODIStsp"</span>)</pre></body></html></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">remotes</span>)
-<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"ropensci/MODIStsp"</span>)</pre></body></html></div>
-<p><strong>IMPORTANT NOTE</strong> As of June 2020, the <code>gWidgets</code> and <code>gWidgetsRGtk2</code> packages were orphaned on CRAN. To install them, you can try:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">remotes</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span>(<span class="st">"gWidgets"</span>, <span class="kw">version</span> <span class="kw">=</span> <span class="st">"0.0-54.2"</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span>(<span class="st">"gWidgetsRGtk2"</span>, <span class="kw">version</span> <span class="kw">=</span> <span class="st">"0.0-86.1"</span>)</pre></body></html></div>
-<p>(see also <a href="https://github.com/ropensci/MODIStsp/issues/207" class="uri">https://github.com/ropensci/MODIStsp/issues/207</a> and <a href="https://github.com/ropensci/MODIStsp/issues/208" class="uri">https://github.com/ropensci/MODIStsp/issues/208</a>)</p>
-<p>As soon as I find the time, I’ll remove those dependencies by developing a new "Shiny-based GUI, but this is not straightforward, unfortunately.</p>
-<hr>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">devtools</span>)
+<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ropensci/MODIStsp"</span>)</pre></body></html></div>
 </div>
 <div id="installing-on-mac" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-on-mac" class="anchor"></a><i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac</h2>
-<p><strong>NOTE</strong>: The following installation notes should be valid for MODIStsp installation on R 3.4.0 and above with Mac OSX Sierra. They were mainly taken (i.e., blatantly copied…) from: <a href="https://zhiyzuo.github.io/installation-rattle/" class="uri">https://zhiyzuo.github.io/installation-rattle/</a>. Thanks to Zhiya Zuo for providing this!</p>
-<p>To properly install <code>MODIStsp</code> you will need to first install package <code>RGTk2</code>. This is a somehow difficult operation. The following instructions should help: <br></p>
-<p><strong>1. Check your Mac OS X version and update if necessary: </strong></p>
-<p>Enter the following command in terminal to check your macOS version. Expected output is as below the dashed line —.</p>
-<pre><code>~$ sw_vers  
-------------------------  
-ProductName:    Mac OS X  
-ProductVersion: 10.12.6  
-BuildVersion:   16G29  </code></pre>
-<p>If your system is above 10.11, continue. Otherwise, upgrade it to Sierra.</p>
-<p>Install homebrew if you do not have it already installed. homebrew is a very convenient package manager for macOS. To do so, open a terminal, copy the following command in it and hit Enter:</p>
-<pre><code>~$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
-<p>Follow the instructions to get brew ready. When inserting your password, nothing will show up for security reasons. Just hit Enter when you are finished.</p>
-<p>When brew is finished, copy the following command in terminal and hit Enter:</p>
-<pre><code>~$ touch ~/.bash_profile
-~$ echo "export PATH=/usr/local/bin:$PATH
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig" &gt;&gt; ~/.bash_profile
-~$ source ~/.bash_profile</code></pre>
-<p><br></p>
-<p><strong>2. Install the <code>cairo</code> library with x11 support</strong>. Enter the following into your terminal:</p>
-<pre><code>~$ brew uninstall --force cairo --ignore-dependencies
-~$ brew cask install xquartz
-~$ brew install --with-x11 cairo</code></pre>
-<p><br></p>
-<p><strong>3. Install the <code>gtk+</code> library</strong>:</p>
-<p>To do so, you first have to change the way homebrew wants to install gtk+. In an editor, write:</p>
-<pre><code>~$ brew edit gtk+</code></pre>
-<p>A text editor will open. Look in the file, and find a section that begins with “def install”. Substitute the current <code>args</code> section with the following text:</p>
-<pre><code>def install
- args = [
-         "--disable-dependency-tracking",
-         "--disable-silent-rules",
-         "--prefix=#{prefix}",
-         "--disable-glibtest",
-         "--enable-introspection=yes",
-         # "--disable-visibility",
-         # "--with-gdktarget=quartz",
-         "--with-gdktarget=x11",
-         "--enable-x11-backend"
-        ]</code></pre>
-<p>Save the modified file using <code>ctrl+x ctrl+c</code>, followed by <code>y</code> to quit emacs. Now install the library using:</p>
-<pre><code>~$ brew install --build-from-source --verbose gtk+</code></pre>
-<p><br></p>
-<p><strong>4. Update your path</strong> so that <code>gtk+</code> is recognized, using:</p>
-<pre><code>~$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib/pkgconfig/gtk+-2.0.pc:/opt/X11/lib/pkgconfig</code></pre>
-<p><br></p>
-<p><strong>5. Install <code>RGtk2</code> from source</strong>:</p>
-<ul>
-<li><p><strong>Download the newest source file for RGtk2</strong> from <a href="https://CRAN.R-project.org/package=gWidgetsRGtk2" class="uri">https://CRAN.R-project.org/package=gWidgetsRGtk2</a>.</p></li>
-<li><p>Assuming that the path to this file is ~/Downloads. Run the following in terminal (change the path if you did not download in ~/Downloads):</p></li>
-</ul>
-<pre><code>~$ cd ~/Downloads
-~/Downloads$ R CMD INSTALL RGtk2_2.20.33.tar.gz</code></pre>
-<p>(Note that the name of the tar.gz file may vary depending on when you downloaded the file). <br></p>
-<p><strong>6. Open R and run</strong>:</p>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">RGtk2</span>)</pre></body></html></div>
-<p>hopefully, <code>RGtk2</code> will load without errors! If so, you should be ready to go, and you can:</p>
-<p><strong>7. Install MODIStsp</strong> from CRAN:</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"MODIStsp"</span>)
-<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</pre></body></html></div>
-<p>or the development version from GitHub:</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">remotes</span>)
-<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"ropensci/MODIStsp"</span>, <span class="kw">ref</span> <span class="kw">=</span> <span class="st">"master"</span>)
-<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span>()</pre></body></html></div>
-<p><strong>IMPORTANT NOTE</strong> As of June 2020, the <code>gWidgets</code> and <code>gWidgetsRGtk2</code> packages were orphaned on CRAN. To install them, you can try:</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">remotes</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span>(<span class="st">"gWidgets"</span>, <span class="kw">version</span> <span class="kw">=</span> <span class="st">"0.0-54.2"</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span>(<span class="st">"gWidgetsRGtk2"</span>, <span class="kw">version</span> <span class="kw">=</span> <span class="st">"0.0-86.1"</span>)</pre></body></html></div>
-<p>Good luck!</p>
-<hr>
-</div>
-<div id="installing-r-and-gdal" class="section level1">
-<h1 class="hasAnchor">
-<a href="#installing-r-and-gdal" class="anchor"></a>Installing R and GDAL</h1>
-<div id="installing-r" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installing-r" class="anchor"></a>Installing R</h3>
-<div id="windows" class="section level4">
-<h4 class="hasAnchor">
-<a href="#windows" class="anchor"></a>Windows</h4>
-<p>Download and install the latest version of R which can be found <a href="https://cran.r-project.org/bin/windows/base">here</a>.</p>
-</div>
-<div id="linux" class="section level4">
-<h4 class="hasAnchor">
-<a href="#linux" class="anchor"></a>Linux</h4>
-<p>Please refer to the documentation which can be found <a href="https://cran.r-project.org/bin/linux">here</a>, opening the directory relative to your Linux distribution. The documentation provides instruction to add CRAN repositories and to install the latest R version. With Ubuntu 15.10 Wily (and newer) this step is not mandatory (although recommended), since packaged version of R is &gt;= 3.2.1 (although not the latest); in this case, user can install R by simply typing in a terminal</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">sudo</span> apt-get install r-base</span></code></pre></div>
-</div>
-</div>
-<div id="installing-gdal-2-3" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installing-gdal-2-3" class="anchor"></a>Installing GDAL 2.3</h3>
-<div id="windows-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#windows-1" class="anchor"></a>Windows</h4>
-<p>Starting from MODIStsp 1.4.0, no external GDAL installation is needed - MODIStsp exploits the gdalUtilities package to access GDAL functionality through the sf::gdal_utils() function.</p>
-</div>
-<div id="debian-and-ubuntu-based-systems" class="section level4">
-<h4 class="hasAnchor">
-<a href="#debian-and-ubuntu-based-systems" class="anchor"></a>Debian and Ubuntu-based systems</h4>
-<ol style="list-style-type: decimal">
-<li><p>Ensure that your repositories contain a version of <code>gdal-bin</code> &gt;= 1.11.1. In particular, official repositories of Ubuntu 15.04 Vivid (or older) and Debian Jessie (or older) provide older versions of GDAL, so it is necessary to add UbuntuGIS-unstable repository before installing. To do this, follow instructions <a href="https://launchpad.net/~ubuntugis/+archive/ubuntu/ubuntugis-unstable">here</a>). With Ubuntu 15.10 Wily (and newer) this step is not mandatory, although recommended in order to have updated version of GDAL installed.</p></li>
-<li><p>To install GDAL, open a terminal and type<br><code>bash  sudo apt-get install gdal-bin</code></p></li>
-</ol>
-</div>
-<div id="archlinux" class="section level4">
-<h4 class="hasAnchor">
-<a href="#archlinux" class="anchor"></a>ArchLinux</h4>
-<p>GDAL is maintained updated to the latest version as binary package within the community repository; although that, the support for HDF4 format is not included. To bypass this problem, ArchLinux users can install <code>gdal-hdf4</code> package from AUR (see <a href="https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages">here</a> or <a href="https://archlinux.fr/yaourt-en">here</a> for the package installation from AUR). This package is updated manually after each release of <code>gdal</code> on the community repository, so a temporal shift between a new <code>gdal</code> release and the update of <code>gdal-hdf4</code> could happen. If you want to manually add the support for HDF4 in case <code>gdal-hdf4</code> is out-of-date, you can do it following <a href="https://notehub.org/fctdn">these instructions</a>.</p>
-</div>
-<div id="other-linux-systems" class="section level4">
-<h4 class="hasAnchor">
-<a href="#other-linux-systems" class="anchor"></a>Other Linux systems</h4>
-<p>Install the packaged binary of GDAL included in your specific distribution; if the version is older than 1.11.1, or if the support for HDF4 format is not included, you can manually install the HDF4 library and compile the source code by adding the parameter <code>--with-hdf4</code> to the <code>configure</code> instruction).</p>
-</div>
-<div id="macos" class="section level4">
-<h4 class="hasAnchor">
-<a href="#macos" class="anchor"></a>MacOs</h4>
-<ol style="list-style-type: decimal">
-<li>Check if gdal is already installed and has hdf4 support. In a terminal, type:</li>
-</ol>
-<pre><code>~$ gdal-config --formats </code></pre>
-<ul>
-<li><p>if gdal is installed, the command will list which drivers are installed. If the list includes “hdf4” you should be good to go.</p></li>
-<li><p>if gdal is not yet installed or hdf4 is not already supported, you can install/reinstall it following these <a href="http://r-sig-geo.2731867.n2.nabble.com/OSX-rgdal-GDAL-drivers-and-HDF4-td7588400.html">notes</a>. In short: open a terminal and run:</p></li>
-</ul>
-<pre><code>~$ brew install hdf4 
-~$ brew link --overwrite hdf4 
-~$ brew install gdal --complete --enable-unsupported --with-hdf4 </code></pre>
-<p>then, check again to see if hdf4 is supported. The list should now include hdf4:</p>
-<pre><code>~$ gdal-config --formats </code></pre>
-<p>Good luck!</p>
-</div>
-</div>
+<p>To install <code>MODIStsp</code> on MacOS, you need to be able to install the <code>sf</code> package, which requires several dependencies. See <a href="https://github.com/r-spatial/sf#installing">HERE</a> if you have trouble installing <code>sf</code>.</p>
+<p>Then, you can install the stable version of MODIStsp from CRAN:</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"MODIStsp"</span>)</pre></body></html></div>
+<p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">devtools</span>)
+<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ropensci/MODIStsp"</span>)</pre></body></html></div>
 </div>
   </div>
 

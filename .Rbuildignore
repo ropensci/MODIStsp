@@ -44,7 +44,9 @@ inst/testdata/MOD11B2.A2017001.h14v04.006.2017013155631.hdf$
 inst/testdata/test04_LB.json
 inst/testdata/test05_LB.json
 inst/testdata/test5_LB.json
+inst/testdata/VI_16Days_500m_v6
 inst/testdata/VI_16Days_500m_v6/Time_Series
+inst/testdata/VI_16Days_500m_v6/NDVI
 WIP
 img
 ^appveyor\.yml$

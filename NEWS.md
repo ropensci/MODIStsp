@@ -1,4 +1,21 @@
-## MODIStsp 1.3.9.9000
+## MODIStsp 2.0.0
+
+### Main changes
+
+- Replace the old gWidgets-based GUI with a new one based on Shiny;
+
+- Enhances support for CLI usage. Now all parameters can be passed to 
+the `MODIStsp` function. If also a opts_file is passed, values specified
+explicitly in the call override those in the options file;
+
+- Fixes problems in retrieval of corners for MODIS products in 4008 projection (fixes #204);
+
+- Fixes problems/improves support for datasets with multiple NoData values.
+Now, all NoData values are kept to original values if NoData change is set
+to FALSE. Also, Scale/Offset are no longer wrongly applied also to NoData values when scaleval = TRUE;
+
+
+## MODIStsp 1.4.0
 
 ### Main changes
 
