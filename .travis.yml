@@ -31,6 +31,7 @@ apt_packages:
     - libglib2.0-dev
     - libcurl4-openssl-dev
     - libudunits2-dev
+    - libv8-dev
 r_packages:
     - udunits2
     - units
