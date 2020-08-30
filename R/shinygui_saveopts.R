@@ -4,10 +4,10 @@
 
 # retrieve inputs from shiny widgets ----
 shinygui_saveopts <- function(input, prod_opt_list, rv) {
-
+  #nocov start
   opts <- list()
-  opts$sel_cat  <- input$selcat
-  opts$sel_prod <- input$selprod
+  opts$selcat  <- input$selcat
+  opts$selprod <- input$selprod
   # retrieve product options
   opts$prod_version <- "6"
 
@@ -82,7 +82,7 @@ shinygui_saveopts <- function(input, prod_opt_list, rv) {
   }
 
   # # Retrieve projection options ----
-  opts$projsel     <- input$outprojsel
+  opts$out_projsel     <- input$out_projsel
   opts$output_proj <- input$outprojtxt
   opts$out_res_sel <- input$outressel
   opts$out_res     <- input$outres
@@ -125,7 +125,7 @@ shinygui_saveopts <- function(input, prod_opt_list, rv) {
   # # check that the selected product is available on the selected server
   # #
 
-  http <- prod_opt_list[[opts$sel_prod]][["6"]]$http
+  http <- prod_opt_list[[opts$selprod]][["6"]]$http
   #
   if (opts$sensor == "Both") {
     http <- c(http["Terra"][[1]], http["Aqua"][[1]])
@@ -143,4 +143,5 @@ shinygui_saveopts <- function(input, prod_opt_list, rv) {
   }
   opts$MODIStspVersion <- as.character(packageVersion("MODIStsp"))
   return(opts)
+  #nocov end
 }
