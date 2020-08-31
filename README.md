@@ -1,24 +1,6 @@
 
-  - [MODIStsp
-    <img src='man/figures/logo.png' align="right" height="139" />](#modistsp)
-      - [Citation](#citation)
-      - [Website](#website)
-      - [Important News \!](#important-news)
-      - [Problems and Issues](#problems-and-issues)
-      - [<i class="fa fa-desktop" aria-hidden="true"></i> System
-        Requirements](#system-requirements)
-  - [Installation Instructions](#installation-instructions)
-      - [<i class="fa fa-windows" aria-hidden="true"></i> Installing on
-        Windows](#installing-on-windows)
-      - [<i class="fa fa-linux" aria-hidden="true"></i> Installing on
-        Linux Systems](#installing-on-linux-systems)
-      - [<i class="fa fa-apple" aria-hidden="true"></i> Installing on
-        Mac](#installing-on-mac)
-  - [Usage](#usage)
-  - [Code of Conduct](#code-of-conduct)
-
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
-[![](https://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
+[![](https://cranlogs.r-pkg.org/badges/MODIStsp?color=orange)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build
 Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://travis-ci.org/ropensci/MODIStsp)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
@@ -239,9 +221,9 @@ for more detailed instructions).
 
 `MODIStsp` can also be launched in non-interactive mode within an `R`
 session or script by setting the optional `GUI` parameter to FALSE, and
-the `options_file` parameter to the path of a previously saved JSON
-Options file. This allows to exploit `MODIStsp` functionalities within
-generic “R” processing scripts.
+the `opts_file` parameter to the path of a previously saved JSON Options
+file. This allows to exploit `MODIStsp` functionalities within generic
+“R” processing scripts.
 
 ``` r
 library(MODIStsp) 
@@ -262,12 +244,12 @@ library(MODIStsp)
 opts_file <- "X:/yourpath/youroptions.json" 
   
 # --> Launch the processing
-MODIStsp(gui = FALSE, 
-         opts_file = opts_file, 
+MODIStsp(gui        = FALSE, 
+         opts_file  = opts_file, 
          start_date = "2020.05.01", 
-         end_date  = "2020.08.01", 
-         spatmeth = "file", 
-         spafile = "X:/path_to/spatial_extent_file.gpkg")
+         end_date   = "2020.08.01", 
+         spatmeth   = "file", 
+         spafile    = "X:/path_to/spatial_extent_file.gpkg")
 ```
 
 , where we are overwriting the options related to spatial and temporal

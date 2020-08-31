@@ -3,7 +3,7 @@
 
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.rstudio.com/web/packages/MODIStsp/index.html)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](https://cran.rstudio.com/web/packages/MODIStsp/index.html)
+[![Downloads](https://cranlogs.r-pkg.org/badges/MODIStsp?color=orange)](https://cran.rstudio.com/web/packages/MODIStsp/index.html)
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Travis-CI Build

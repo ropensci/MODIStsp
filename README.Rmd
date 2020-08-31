@@ -1,7 +1,7 @@
 ---
 output:
   github_document:
-    toc: yes
+    toc: no
     toc_depth: 2
 ---
 
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
-[![](https://cranlogs.r-pkg.org/badges/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
+[![](https://cranlogs.r-pkg.org/badges/MODIStsp?color=orange)](https://cran.r-project.org/package=MODIStsp)
 [![Travis-CI Build Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://travis-ci.org/ropensci/MODIStsp)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://codecov.io/github/ropensci/MODIStsp?branch=master)
@@ -191,7 +191,7 @@ the processing (see [HERE](https://docs.ropensci.org/MODIStsp/articles/interacti
 for more detailed instructions).
 
 `MODIStsp` can also be launched in non-interactive mode within an `R` session or
-script by setting the optional `GUI` parameter to FALSE, and the `options_file`
+script by setting the optional `GUI` parameter to FALSE, and the `opts_file`
 parameter to the path of a previously saved JSON Options file. This allows to 
 exploit `MODIStsp` functionalities within generic "R" processing scripts.
 
@@ -214,12 +214,12 @@ library(MODIStsp)
 opts_file <- "X:/yourpath/youroptions.json" 
   
 # --> Launch the processing
-MODIStsp(gui = FALSE, 
-         opts_file = opts_file, 
+MODIStsp(gui        = FALSE, 
+         opts_file  = opts_file, 
          start_date = "2020.05.01", 
-         end_date  = "2020.08.01", 
-         spatmeth = "file", 
-         spafile = "X:/path_to/spatial_extent_file.gpkg")
+         end_date   = "2020.08.01", 
+         spatmeth   = "file", 
+         spafile    = "X:/path_to/spatial_extent_file.gpkg")
 ```
 , where we are overwriting the options related to spatial and temporal extent
 contained in the options file with new values. This allows to easily run 
