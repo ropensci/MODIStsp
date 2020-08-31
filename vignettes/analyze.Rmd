@@ -9,7 +9,7 @@ library(rmarkdown)
 library(knitr)
 library(raster)
 library(base)
-library(rgdal)
+library(sf)
 library(MODIStsp)
 library(dplyr)
 test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI",
@@ -42,7 +42,7 @@ region of the Como Lake in Italy.
 After the download and processing finishes (it will take a while, depending on your
 network speed), the MODIS time series will be placed in subfolder `MODIStsp/VI_16Days_500m_v6` 
 of `R` tempdir(). (In this case, I have them in "`file.path(tempdir(), "VI_16Days_500m_v6"`". 
-If you want to save them elsewhere, run `MODIStsp(options_file = opts_file, gui = TRUE)`
+If you want to save them elsewhere, run `MODIStsp(opts_file = opts_file, gui = TRUE)`
 and select a different output folder).
 
 Single-date processed rasters can be accessed by simply opening them  with a
@@ -143,15 +143,16 @@ function as follows:
 # load a shapefile containing polygons --> Here we use a test shapefile in 
 # the testdata folder of MODIStsp.
 
-polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp",
+polygons <- sf::st_read(system.file("testdata/extract_polys.shp",
                                        package = "MODIStsp"),
-                           verbose = FALSE)
+                           quiet = TRUE)
 polygons
 
 # Now extract the average values for each polygon and date and plot the results
 
 out_dataavg <- MODIStsp_extract(ts_data, polygons, id_field = "lc_type", 
                                 small = FALSE)
+
 head(out_dataavg)
 
 # Other summarization functions can be used, by specifying the "FUN" argument. 

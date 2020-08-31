@@ -25,7 +25,11 @@ install_github("ropensci/MODIStsp")
 
 To install `MODIStsp` on Linux, you need to be able to install the `sf` package, 
 which requires several dependencies. See [HERE](https://github.com/r-spatial/sf#installing)
-if you have trouble installing `sf`. 
+if you have trouble installing `sf`.
+
+In addition, you need to install dependencies
+required by the `protolite` package, required by `geojson`. See [HERE](https://github.com/jeroen/protolite/) for instructions
+on installing them. 
 
 Then, you can install the stable version of MODIStsp from CRAN:
 
@@ -43,7 +47,7 @@ install_github("ropensci/MODIStsp")
 ## <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
 
 To install `MODIStsp` on MacOS, you need to be able to install the `sf` package, 
-which requires several dependencies. See [HERE](https://github.com/r-spatial/sf#installing)
+which requires gdal to be installed. See [HERE](https://github.com/r-spatial/sf#installing)
 if you have trouble installing `sf`. 
 
 Then, you can install the stable version of MODIStsp from CRAN:
