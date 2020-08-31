@@ -4,7 +4,7 @@ test_that(
     skip_on_cran()
     skip_on_travis()
 
-    # wrong path or non-existing options_file
+    # wrong path or non-existing opts_file
     expect_error(expect_warning(MODIStsp(opts_file = "", gui = FALSE),
                                 "Processing Options file not found"))
 

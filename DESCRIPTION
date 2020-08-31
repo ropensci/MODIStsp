@@ -61,7 +61,8 @@ Suggests:
     shinyjs, 
     rappdirs,
     leafem (>= 0.1.3), 
-    mapedit (>= 0.6.0)
+    mapedit (>= 0.6.0),
+    rgdal
 SystemRequirements: 
 URL: https://github.com/ropensci/MODIStsp, https://docs.ropensci.org/MODIStsp
 BugReports: https://github.com/ropensci/MODIStsp/issues

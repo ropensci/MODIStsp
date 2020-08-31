@@ -37,8 +37,12 @@ test_that(
                  tolerance = 0.001, scale = 1)
 
     # NodataValue not changed
-    r <- suppressWarnings(rgdal::GDALinfo(out_files[1]))
-    expect_equal(attr(r, "df")$NoDataValue, 0)
+    r <- sf::gdal_utils("info",out_files[1], quiet = TRUE)
+    r <- unlist(strsplit(r, "\n"))
+    r <- r[grep("NoData", r)]
+    r <- as.numeric(strsplit(r, "NoData Value=")[[1]][2])
+
+    expect_equal(r, 0)
 
     unlink(out_files)
 

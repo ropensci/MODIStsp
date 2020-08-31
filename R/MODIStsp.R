@@ -11,7 +11,7 @@
 #'  - launching the function with GUI = FALSE and without specifying a opts_file
 #'    initializes arguments with default values. This allows making a test run.
 #' @param gui `logical` if TRUE: the GUI is opened before processing. If FALSE:
-#'  processing parameters are retrieved from the provided `options_file`
+#'  processing parameters are retrieved from the provided `opts_file`
 #'  argument), Default: TRUE
 #' @param out_folder `character` Main output folder, default: NULL.
 #' @param out_folder_mod `character` Output folder for original HDF storage, default: $tempdir
@@ -104,7 +104,7 @@
 #'   Compression method for GTiff outputs (Ignored if `out_format == ENVI`)
 #' @param test `integer | character  (e.g., "01a")` if set, MODIStsp is executed in
 #'  "test mode", using a preset Options File instead than opening the GUI or accepting the
-#'  `options_file` parameter. This allows both to check correct installation on
+#'  `opts_file` parameter. This allows both to check correct installation on
 #'  user's machines, and to implement unit testing.
 #' @param n_retries `numeric` maximum number of retries on download functions.
 #'   In case any download function fails more than `n_retries` times consecutively,
@@ -278,17 +278,17 @@ MODIStsp <- function(...,
   #   _________________________________________________________________________
   #   check arguments                                                       ####
 
-  # if (is.null(options_file) & gui == FALSE) {
+  # if (is.null(opts_file) & gui == FALSE) {
   #   stop("You need to provide a valid `.json` options file to run MODIStsp",
   #        " in non-interactive mode. \n",
-  #        "Please provide a valid \"options_file\" path or run ",
+  #        "Please provide a valid \"opts_file\" path or run ",
   #        "with gui=TRUE to create and save one.")
   # }
 
   if (!is.null(opts_file)) {
     if (!file.exists(opts_file))
       stop("The specified `.json` options file was not found. \n",
-           "Please provide a valid \"options_file\" path or run ",
+           "Please provide a valid \"opts_file\" path or run ",
            "without specifying one to create and save one.")
   }
 
@@ -375,7 +375,7 @@ MODIStsp <- function(...,
   #   __________________________________________________________________________
   #   On interactive execution, launch the GUI and wait for user selection. ####
   #   On non-interactive immediately start processing using the processing
-  #   options contained in the provided `options_file`
+  #   options contained in the provided `opts_file`
 
   if (gui) {
     #nocov start

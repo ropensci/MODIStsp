@@ -24,7 +24,7 @@ urlcolor: blue
 linkcolor: blue
 vignette: >
   \usepackage[utf8]{inputenc}
-  %\VignetteIndexEntry{"MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v2.0.0"}
+  %\VignetteIndexEntry{MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v2.0.0}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
