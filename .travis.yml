@@ -34,6 +34,7 @@ apt_packages:
     - libv8-dev
     - libjq-dev
     - libprotobuf-dev
+    - libprotoc-dev
     - protobuf-compiler
 r_packages:
     - udunits2
