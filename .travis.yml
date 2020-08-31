@@ -33,6 +33,7 @@ apt_packages:
     - libudunits2-dev
     - libv8-dev
     - libjq-dev
+    - libprotobuf-dev
 r_packages:
     - udunits2
     - units
