@@ -170,7 +170,7 @@ shinydashboard::tabItem(
           shiny::textInput(
             "out_hdffolder_txt",
             label = shiny::span(
-              "Ouput Folder for storage of original MODIS HDF\u2000",
+              "Output Folder for storage of original MODIS HDF\u2000",
               shiny::actionLink("help_outfolderhdf", shiny::icon("question-circle"))
             ),
             "")
@@ -179,7 +179,7 @@ shinydashboard::tabItem(
           style = "display:inline-block;margin-right:25px;width:8%;vertical-align:centre;margin-top:25px",
           shinyFiles::shinyDirButton(
             "out_hdffolder",
-            "Browse", "Ouput Folder for storage of original MODIS HDF")
+            "Browse", "Output Folder for storage of original MODIS HDF")
         ),
         shiny::div(
           style = "display:inline-block;margin-right:5px;width:15%;vertical-align:top",

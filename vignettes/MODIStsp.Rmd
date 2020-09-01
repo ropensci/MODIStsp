@@ -249,12 +249,12 @@ for (opts_file in opts_files) {
            verbose   = FALSE)
 }
 
-# MOD13A2 ouputs
+# MOD13A2 ouptuts
 out_fold <- file.path(tempdir(), "MODIStsp/VI_16Days_1Km_v6") 
 list.files(out_fold)
 list.files(file.path(out_fold ,"NDVI"))
 
-# MOD10A2 ouputs
+# MOD10A2 ouptuts
 out_fold <- file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_1Km_v6") 
 list.files(out_fold)
 list.files(file.path(out_fold ,"LST_Night_1km"))

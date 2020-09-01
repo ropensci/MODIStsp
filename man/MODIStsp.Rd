@@ -50,7 +50,7 @@ MODIStsp(
 \item{...}{not used for values, forces later arguments to bind by name}
 
 \item{gui}{\code{logical} if TRUE: the GUI is opened before processing. If FALSE:
-processing parameters are retrieved from the provided \code{options_file}
+processing parameters are retrieved from the provided \code{opts_file}
 argument), Default: TRUE}
 
 \item{out_folder}{\code{character} Main output folder, default: NULL.}
@@ -176,7 +176,7 @@ Compression method for GTiff outputs (Ignored if \code{out_format == ENVI})}
 
 \item{test}{\code{integer | character  (e.g., "01a")} if set, MODIStsp is executed in
 "test mode", using a preset Options File instead than opening the GUI or accepting the
-\code{options_file} parameter. This allows both to check correct installation on
+\code{opts_file} parameter. This allows both to check correct installation on
 user's machines, and to implement unit testing.}
 
 \item{n_retries}{\code{numeric} maximum number of retries on download functions.

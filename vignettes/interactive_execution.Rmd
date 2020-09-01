@@ -260,7 +260,7 @@ the MODIStsp naming conventions are already present in the output folder. This
 allows to incrementally extend MODIS time series without reprocessing already available
 dates. 
 
-#### _Ouput Folder for storage of original MODIS HDF_
+#### _Output Folder for storage of original MODIS HDF_
 
 Select the folder where downloaded **original MODIS HDF files** downloaded from 
 NASA servers will be stored. 

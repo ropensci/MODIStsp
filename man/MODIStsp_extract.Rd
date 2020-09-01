@@ -130,7 +130,7 @@ file.copy(list.files(test_folder, full.names = TRUE),
           file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"))
 
 opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
-MODIStsp(options_file = opts_file, gui = FALSE, verbose = FALSE)
+MODIStsp(opts_file = opts_file, gui = FALSE, verbose = FALSE)
 
 # Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between
 # 2016-01-01 and 2016-12-18
@@ -149,8 +149,8 @@ ts_data
 
 # Now load a shapefile containing polygons from which we want to extract data
 
-polygons <- rgdal::readOGR(system.file("testdata/extract_polys.shp",
-                           package = "MODIStsp"), verbose = FALSE)
+polygons <- sf::st_read(system.file("testdata/extract_polys.shp",
+                           package = "MODIStsp"), quiet = TRUE)
 polygons
 
 # Finally, extract the average values for each polygon and date and plot the

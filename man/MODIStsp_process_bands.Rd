@@ -101,7 +101,7 @@ of the datatype of the layer on the MODIStsp output rasters. NOTE: If multiple
 nodata values are reported for a layer, all are reset to the new value.}
 
 \item{gui}{\code{logical} if TRUE: the GUI is opened before processing. If FALSE:
-processing parameters are retrieved from the provided \code{options_file}
+processing parameters are retrieved from the provided \code{opts_file}
 argument), Default: TRUE}
 
 \item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}

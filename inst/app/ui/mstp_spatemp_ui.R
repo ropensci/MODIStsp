@@ -99,7 +99,7 @@ shinydashboard::tabItem(
           condition = "input.outressel == 'Resampled'",
           shiny::div(
             style = "display:inline-block;vertical-align:top;padding:1px;margin-right:5px",
-            shiny::numericInput("outres", "Ouput Resolution", 1)
+            shiny::numericInput("outres", "Output Resolution", 1)
           )
         )
       ),
