@@ -260,20 +260,22 @@ otherwise the links would continue to point to the old package version!</p>
     <pre class="examples"><div class='input'><span class='co'># Linux: common installation (script in /usr/bin,</span>
 <span class='co'># desktop entry in /usr/share/applications)</span>
 <span class='co'># (requires administrator permissions)</span>
-<span class='co'># \dontrun{</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># the administrator password is asked interactively</span>
-<span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open file 'D:/Documents/R/win-library/4.0/MODIStsp\ExtData\Launcher\Batch\MODIStsp.bat': No such file or directory</span></div><div class='output co'>#&gt; <span class='error'>Error in readLines(bat_launcher_path): cannot open the connection</span></div><div class='input'><span class='co'># }</span>
+<span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>sudo</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}
 
 <span class='co'># Linux: installation in a directory which does not require administrator</span>
 <span class='co'># permissions</span>
-<span class='co'># \dontrun{</span>
-<span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>bin_dir</span> <span class='kw'>=</span> <span class='st'>"~/bin"</span>, <span class='kw'>desktop_dir</span> <span class='kw'>=</span> <span class='st'>"~/Desktop"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open file 'D:/Documents/R/win-library/4.0/MODIStsp\ExtData\Launcher\Batch\MODIStsp.bat': No such file or directory</span></div><div class='output co'>#&gt; <span class='error'>Error in readLines(bat_launcher_path): cannot open the connection</span></div><div class='input'><span class='co'># }</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>install_MODIStsp_launcher</span>(<span class='kw'>bin_dir</span> <span class='kw'>=</span> <span class='st'>"~/bin"</span>, <span class='kw'>desktop_dir</span> <span class='kw'>=</span> <span class='st'>"~/Desktop"</span>)
+}
 
 <span class='co'># Windows: common installation</span>
 <span class='co'># (script in the Start Menu and shortcut on the desktop)</span>
-<span class='co'># \dontrun{</span>
-<span class='fu'>install_MODIStsp_launcher</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open file 'D:/Documents/R/win-library/4.0/MODIStsp\ExtData\Launcher\Batch\MODIStsp.bat': No such file or directory</span></div><div class='output co'>#&gt; <span class='error'>Error in readLines(bat_launcher_path): cannot open the connection</span></div><div class='input'># }
-</div></pre>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>install_MODIStsp_launcher</span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

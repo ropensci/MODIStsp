@@ -249,14 +249,13 @@ use the code M<em>D_code_ (e.g., M</em>D13Q1)</p></td>
 #&gt; [9] "Possible shadow"                     
 #&gt; 
 #&gt; $indexes_bandnames
-#&gt; [1] "SR"    "NDFI"  "NDII7" "SAVI"  "SSI"  
+#&gt; [1] "SR"    "NDFI"  "NDII7" "SAVI" 
 #&gt; 
 #&gt; $indexes_fullnames
 #&gt; [1] "Simple Ratio (NIR/Red)"              
 #&gt; [2] "Flood Index (Red-SWIR2)/(Red+SWIR2)" 
 #&gt; [3] "NDII7 (NIR-SWIR2)/(NIR+SWIR2)"       
 #&gt; [4] "SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)"
-#&gt; [5] "Simple Useless Index"                
 #&gt; </div><div class='input'>
 <span class='co'># Get layers of product M*13Q1 based on full name</span>
 <span class='fu'>MODIStsp_get_prodlayers</span>(<span class='st'>"Vegetation Indexes_16Days_250m (M*D13Q1)"</span>)</div><div class='output co'>#&gt; $prodname
@@ -290,49 +289,17 @@ use the code M<em>D_code_ (e.g., M</em>D13Q1)</p></td>
 #&gt; [9] "Possible shadow"                     
 #&gt; 
 #&gt; $indexes_bandnames
-#&gt; [1] "SR"    "NDFI"  "NDII7" "SAVI"  "SSI"  
+#&gt; [1] "SR"    "NDFI"  "NDII7" "SAVI" 
 #&gt; 
 #&gt; $indexes_fullnames
 #&gt; [1] "Simple Ratio (NIR/Red)"              
 #&gt; [2] "Flood Index (Red-SWIR2)/(Red+SWIR2)" 
 #&gt; [3] "NDII7 (NIR-SWIR2)/(NIR+SWIR2)"       
 #&gt; [4] "SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)"
-#&gt; [5] "Simple Useless Index"                
 #&gt; </div><div class='input'>
 <span class='co'># Get indexes names of product M*13Q1 based on full name</span>
-<span class='fu'>MODIStsp_get_prodlayers</span>(<span class='st'>"MCD43C4"</span>)$<span class='no'>indexes_bandnames</span></div><div class='output co'>#&gt; [[1]]
-#&gt; [1] "NDVI"
-#&gt; 
-#&gt; [[2]]
-#&gt; [1] "EVI"
-#&gt; 
-#&gt; [[3]]
-#&gt; [1] "SR"
-#&gt; 
-#&gt; [[4]]
-#&gt; [1] "NDFI"
-#&gt; 
-#&gt; [[5]]
-#&gt; [1] "NDII6"
-#&gt; 
-#&gt; [[6]]
-#&gt; [1] "NDII7"
-#&gt; 
-#&gt; [[7]]
-#&gt; [1] "SAVI"
-#&gt; 
-#&gt; [[8]]
-#&gt; [1] "NDSI"
-#&gt; 
-#&gt; [[9]]
-#&gt; [1] "GNDVI"
-#&gt; 
-#&gt; [[10]]
-#&gt; [1] "RGRI"
-#&gt; 
-#&gt; [[11]]
-#&gt; [1] "GRVI"
-#&gt; </div><div class='input'>
+<span class='fu'>MODIStsp_get_prodlayers</span>(<span class='st'>"MCD43C4"</span>)$<span class='no'>indexes_bandnames</span></div><div class='output co'>#&gt;  [1] "NDVI"  "EVI"   "SR"    "NDFI"  "NDII6" "NDII7" "SAVI"  "NDSI"  "GNDVI"
+#&gt; [10] "RGRI"  "GRVI" </div><div class='input'>
 
 </div></pre>
   </div>

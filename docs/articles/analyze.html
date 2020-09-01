@@ -156,7 +156,7 @@
 <p>Single-date processed rasters can be accessed by simply opening them with a <code>raster</code> command:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">modistsp_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_500m_v6/NDVI"</span>, <span class="st">"MOD13A1_NDVI_2016_177.tif"</span>)
 <span class="no">modistsp_file</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\RtmpMTtEhG/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "D:/RTemp\\Rtmp8uGyz0/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">my_raster</span> <span class="kw">&lt;-</span> <span class="fu">raster</span>(<span class="no">modistsp_file</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">my_raster</span>)</pre></body></html></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
@@ -165,7 +165,7 @@
 <span class="no">ts_folder</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_500m_v6/Time_Series"</span>)
 <span class="no">in_virtual_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">ts_folder</span>, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>)
 <span class="no">in_virtual_file</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\RtmpMTtEhG/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
+<pre><code>## [1] "D:/RTemp\\Rtmp8uGyz0/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">ts_data</span>   <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="no">in_virtual_file</span>))
 <span class="no">ts_data</span></pre></body></html></div>
 <pre><code>## class      : RasterStack 
@@ -190,7 +190,7 @@
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
 ## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs 
-## source     : D:/RTemp/RtmpMTtEhG/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
+## source     : D:/RTemp/Rtmp8uGyz0/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
 ## names      : MOD13A1_NDVI_2016_001 
 ## time       : 2016-01-01</code></pre>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># Extract multiple dates from the stack</span>

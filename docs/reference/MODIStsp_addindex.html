@@ -254,17 +254,16 @@ products containing the required reflectance bands.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Run the GUI to interactively define a new index</span>
- <span class='co'># \dontrun{</span>
- <span class='fu'>MODIStsp_addindex</span>()<span class='co'># }</span></div><div class='output co'>#&gt; <span class='error'>Error in MODIStsp_addindex(): The formula of the new index is wrong or not computable. Please check it.</span>
-#&gt; <span class='error'>(Valid band names are: b1_Red, b2_NIR, b3_Blue, b4_Green, b5_SWIR, b6_SWIR, b7_SWIR.</span></div><div class='input'>
+ <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+ <span class='fu'>MODIStsp_addindex</span>()}
+
 <span class='co'># Define the new index in non-interactive execution</span>
 
-<span class='co'># \dontrun{</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>MODIStsp_addindex</span>(<span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
   <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='st'>"Simple Useless Index"</span>,
-  <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)</div><div class='output co'>#&gt; <span class='message'>The new Index was correctly added!</span>
-#&gt; <span class='message'> It will be available at the next execution of MODIStsp().</span></div><div class='input'># }
-</div></pre>
+  <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
