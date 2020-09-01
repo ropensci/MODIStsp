@@ -23,7 +23,7 @@ library(MODIStsp)
 MODIStsp_get_prodlayers("M*D13Q1")
 ```
 
-The other parameters are set automatically to default values (see XXX for details on the different available function arguments). 
+The other parameters are set automatically to default values (see [HERE](reference/index.html) for details on the different available function arguments). 
 
 For example, the following code processes layers __NDVI__ and __EVI__ and quality indicator __usefulness__ of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to R tempdir: 
 
@@ -33,7 +33,7 @@ library(MODIStsp)
 # **NOTE** Output files of examples are saved to file.path by setting out_folder to $tempdir.
 
 # --> See name and available layers for product M*D13Q1
-MODIStsp_get_prodlayers("M*D13A2")
+# MODIStsp_get_prodlayers("M*D13A2")
 
 # --> Launch the processing
 MODIStsp(gui             = FALSE, 

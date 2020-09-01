@@ -145,7 +145,9 @@ shiny::observeEvent(input$save_index, {
                  indexformula,
                  32767,
                  prod_opt_list)
-    shinyalert::shinyalert(title = "You did it!", type = "success")
+    shinyalert::shinyalert(title = "Success!",
+                           text  = "The new index had been added to the list." ,
+                           type = "success")
     shiny::removeModal()
     rv$newindex <- data.frame(indexshortname   = indexshortname,
                               indexfullname    = indexfullname,
@@ -155,18 +157,17 @@ shiny::observeEvent(input$save_index, {
     # Issue error warnings in the GUI if something went wrong!
     switch(
       as.character(catch_err),
-      "1" = shinyalert::shinyalert(title =
-                                     paste(
-                                       "ERROR ! The Formula of the new Index is not computable.
+      "1" = shinyalert::shinyalert(title = "Error!",
+                                   text = paste("The Formula of the new Index is not computable.
                                        Please check it !\n Valid Band Names are: \n\n",
                                        paste(avail_refbands, collapse = ", "),
                                        "."), type = "error")
       ,
-      "2" = shinyalert::shinyalert(
-        title = "Index full or short name is already present.\n\n
+      "2" = shinyalert::shinyalert(title = "Error",
+                                   text = "Index full or short name is already present.\n\n
         Please specify different ones.", type = "error"),
-      "3" = shinyalert::shinyalert(
-        title = "ERROR ! Please provide valid values for the Index Acronym,
+      "3" = shinyalert::shinyalert(title = "Error!",
+                                   text = "Please provide valid values for the Index Acronym,
              its fullname and the Formula.", type = "error")
     )
   }
@@ -214,9 +215,9 @@ observeEvent(input$run_app, {
                          type = "info")
   proc_opts <- shinygui_saveopts(input, prod_opt_list, rv)
   shinyjs::delay(1000, {shinyjs::js$closeWindow()
-  stopApp()
-  MODIStsp_process(proc_opts, n_retries = 20)
-  #retrieve the options from the widgets
+    stopApp()
+    MODIStsp_process(proc_opts, n_retries = 20)
+    #retrieve the options from the widgets
   })
 
 })
