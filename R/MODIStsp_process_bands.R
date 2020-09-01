@@ -3,14 +3,16 @@
 #'  processing on MODIS original hdf layers (reprojection, resizing, resampling,
 #'  mosaicing, computation of scaling factors). The function is based on the
 #'  use of `gdal` routines.
-#' @inheritParams MODIStsp_process
+#' @inheritParams MODIStsp
 #' @param modislist `character array` List of MODIS images to be downloaded for
 #'  the selected date (as returned from `get_mod_filenames`). Can be a single
 #'  image, or a list of images in case different tiles are needed!
+#' @param outproj_str `character` EPSG or WKT of output projection.
+#' @param mod_proj_str `character` EPSG or WKT of MODIS projection.
 #' @param sens_sel `character ["terra" | "aqua"]` Selected sensor.
 #' @param band `numeric` band number corresponding to the HDF layer to be
 #'  processed
-#' @param bandname `character` Name to the HDF layer to be processed.
+#' @param bandname `character` Name of the HDF layer to be processed.
 #' @param date_name `character` Date of acquisition of the images to be
 #'  downloaded.
 #' @param datatype `character` Datatype to the HDF layer to be processed.
@@ -18,14 +20,14 @@
 #'  processed.
 #' @param nodata_out `numeric` Output nodata value to the HDF layer to be
 #'  processed.
+#' @param full_ext `logical` If TRUE, process full tiles, if FALSE, process
+#'  bbox
 #' @param scale_factor `numeric` Scale factor to be applied to the HDF layer
 #'  to be processed (Ignored if `scale_val` == FALSE).
 #' @param offset `numeric` Offset to be applied to the HDF layer
 #'  to be processed (Ignored if `scale_val` == FALSE).
 #' @param outrep_file `character` Full path of the file where results of the
 #'  processing are to be stored (created in `MODIStsp_process`)
-#' @param mess_lab Pointer to the gWidget used to visualize processing messages
-#'  in interactive execution.
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_process_bands
@@ -47,7 +49,8 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                                    scale_val, scale_factor, offset,
                                    out_format, outrep_file, compress,
                                    out_res_sel, out_res, resampling,
-                                   gui, mess_lab, verbose) {
+                                   nodata_change,
+                                   gui, verbose) {
 
   tmpdir <- file.path(tempdir(), "mstp_temp")
   dir.create(tmpdir, showWarnings = FALSE)
@@ -111,7 +114,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                        "files for date:", date_name)
   }
 
-  process_message(mess_text, gui, mess_lab, verbose)
+  process_message(mess_text, verbose)
 
   # filename of temporary vrt file
 
@@ -133,6 +136,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
     outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),
                           ".tif")
+
     if (length(split_nodata_values(nodata_in)[[1]] == 1)) {
 
       gdalUtilities::gdalwarp(files_in,
@@ -182,6 +186,13 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
   }
 
+  # if !nodata_change and multiple nodata, set nodata values to dummy,
+  # to allow later also to correct in case scale is applied
+  if (length(split_nodata_values(nodata_in)[[1]]) > 1 & !nodata_change) {
+    nodata_in_tmp <- nodata_in
+    nodata_in <- nodata_out <- 99999
+  }
+
   # apply the patch if an error in the original hdf4 file at
   # step 0 was detected (and only if outfile_vrt is still a vrt)
   # TODO check if input file with geographic coordinates and type "UInt32"
@@ -210,56 +221,85 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     write(outfile_vrt_cont, outfile_vrt)
   }
 
-  # if there are more than one nodata_in values,
-  # reclassify the input raster to use only one value
+  # Fix needed to avoid that scale and offset are automatically "applied"
+  # when working with GDAL > 2.3.x
+  # workaround on gdal >= 2.3
+
+  gdal_ver <- sf::sf_extSoftVersion()[["GDAL"]]
+  gdal_ver <- as.numeric(substring(gdal_ver, 1,3))
+
+  if (gdal_ver >= 2.3 & tools::file_ext(outfile_vrt) == "vrt") {
+    vrt_in      <- readLines(outfile_vrt)
+
+    scale_line <- grep("Scale", vrt_in)
+    if (length(scale_line) != 0) {
+      vrt_in[scale_line] <- "<Scale>1</Scale>"
+    }
+
+    offset_line <- grep("Offset", vrt_in)
+    if (length(offset_line) != 0) {
+      vrt_in[offset_line] <- "<Offset>0</Offset>"
+    }
+
+    writeLines(vrt_in, outfile_vrt)
+  }
+
+
+
   if (length(split_nodata_values(nodata_in)[[1]]) > 1) {
 
-    outfile_vrt_prev <- outfile_vrt
-    outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),"_recl.tif")
+    if (nodata_change) {
+      # if there are more than one nodata_in values, and nodata_change is on
+      # reclassify the input raster to use only one value
 
-    # if full_ext == "Resized", clip before reclassifying (to speed up)
-    if (full_ext == FALSE) {
-      outfile_vrt_prev2 <- outfile_vrt_prev
-      outfile_vrt_prev <- paste0(stringr::str_sub(outfile_vrt, 1, -5),".vrt")
+      outfile_vrt_prev <- outfile_vrt
+      outfile_vrt <- paste0(stringr::str_sub(outfile_vrt, 1, -5),"_recl.tif")
 
-      outfile_prev_bbox <- do.call(
-        function(x,y) {
-          c(max(x[1],y[1]), max(x[2],y[2]), min(x[3],y[3]), min(x[4],y[4]))
-        },
-        list(
-          reproj_bbox(bbox, outproj_str, mod_proj_str, enlarge = TRUE),
-          raster::bbox(raster::raster(outfile_vrt_prev2))
+      # if full_ext == "Resized", clip before reclassifying (to speed up)
+      if (full_ext == FALSE) {
+        outfile_vrt_prev2 <- outfile_vrt_prev
+        outfile_vrt_prev <- paste0(stringr::str_sub(outfile_vrt, 1, -5),".vrt")
+
+        outfile_prev_bbox <- do.call(
+          function(x,y) {
+            c(max(x[1],y[1]), max(x[2],y[2]), min(x[3],y[3]), min(x[4],y[4]))
+          },
+          list(
+            reproj_bbox(bbox, outproj_str, mod_proj_str, enlarge = TRUE),
+            raster::bbox(suppressWarnings(raster::raster(outfile_vrt_prev2)))
+          )
         )
-      )
-      gdalUtilities::gdalbuildvrt(
-        outfile_vrt_prev2,
-        outfile_vrt_prev,
-        te = outfile_prev_bbox,
-        tap = TRUE,
-        tr = raster::res(raster::raster(outfile_vrt_prev2)), #nolint
-        overwrite = TRUE
-      )
-    }
+        gdalUtilities::gdalbuildvrt(
+          outfile_vrt_prev2,
+          outfile_vrt_prev,
+          te = outfile_prev_bbox,
+          tap = TRUE,
+          tr = raster::res(suppressWarnings(raster::raster(outfile_vrt_prev2))), #nolint
+          overwrite = TRUE
+        )
+      }
 
-    # Ugly workaround to avoid crash on Windows - I do not understand why, but
-    # using vrts fails in this case so we have to save a temporary tif
-    if (Sys.info()['sysname'] == "Windows") {
-      temptif <- tempfile(fileext = ".tif", tmpdir = tmpdir)
-      gdalUtilities::gdal_translate(outfile_vrt_prev, temptif)
-      outfile_vrt_prev <- temptif
+      # Ugly workaround to avoid crash on Windows - I do not understand why, but
+      # using vrts fails in this case so we have to save a temporary tif
+      if (Sys.info()['sysname'] == "Windows") {
+        temptif <- tempfile(fileext = ".tif", tmpdir = tmpdir)
+        gdalUtilities::gdal_translate(outfile_vrt_prev, temptif)
+        outfile_vrt_prev <- temptif
+      }
+
+      recl_in  <- suppressWarnings(raster::stack(outfile_vrt_prev))
+      recl_out <- suppressWarnings(raster::reclassify(
+        recl_in,
+        rcl = create_nodata_rcl(nodata_in, nodata_out)[[1]],
+        filename = outfile_vrt,
+        right = NA,
+        NAflag = as.numeric(nodata_out)
+      ))
+      # this because nodata value has already been changed;
+      # in this way, next gdal commands with srcnodata and dstnodata do not
+      # change it again (providing error, since nodata_in is a string)
+      nodata_in <- nodata_out
     }
-    recl_in  <- stack(outfile_vrt_prev)
-    recl_out <- raster::reclassify(
-      recl_in,
-      rcl = create_nodata_rcl(nodata_in, nodata_out)[[1]],
-      filename = outfile_vrt,
-      right = NA,
-      NAflag = as.numeric(nodata_out)
-    )
-    # this because nodata value has already been changed;
-    # in this way, next gdal commands with srcnodata and dstnodata do not
-    # change it again (providing error, since nodata_in is a string)
-    nodata_in <- nodata_out
   }
 
   # If resize required,  convert bbox coordinates from t_srs
@@ -286,7 +326,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                               outfile_vrt,
                               te        = c(bbox_mod),
                               tap       = TRUE,
-                              tr        = raster::res(raster::raster(outfile_vrt_or)), #nolint
+                              tr        = raster::res(suppressWarnings(raster::raster(outfile_vrt_or))), #nolint
                               # sd        = band,
                               srcnodata = nodata_in,
                               dstnodata = nodata_out,
@@ -302,7 +342,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                                   outfile_vrt,
                                   te        = c(bbox_mod),
                                   tap       = TRUE,
-                                  tr        = raster::res(raster::raster(outfile_vrt_or)), #nolint
+                                  tr        = raster::res(suppressWarnings(raster::raster(outfile_vrt_or))), #nolint
                                   srcnodata = nodata_in,
                                   vrtnodata = nodata_out,
                                   sd        = band,
@@ -314,7 +354,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # files (a temporary file is created in tempdir, then
   # later the scale and offset are applied to it and result
   # is saved in out_repfile)
-  outrep_file_0 <- if (scale_val      == "Yes" &
+  outrep_file_0 <- if (scale_val &
                        !(scale_factor == 1     &
                          offset       == 0)) {
     tempfile(fileext = ifelse(out_format == "GTiff",
@@ -323,28 +363,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     outrep_file
   }
 
-  # workaround on gdal >= 2.3
 
-  gdal_ver <- sf::sf_extSoftVersion()[["GDAL"]]
-  gdal_ver <- as.numeric(substring(gdal_ver, 1,3))
-
-  # Fix needed to avoid that scale and offset are automatically "applied"
-  # when working with GDAL > 2.3.x
-  if (gdal_ver >= 2.3 & tools::file_ext(outfile_vrt) == "vrt") {
-    vrt_in      <- readLines(outfile_vrt)
-
-    scale_line <- grep("Scale", vrt_in)
-    if (length(scale_line) != 0) {
-      vrt_in[scale_line] <- "<Scale>1</Scale>"
-    }
-
-    offset_line <- grep("Offset", vrt_in)
-    if (length(offset_line) != 0) {
-      vrt_in[offset_line] <- "<Offset>0</Offset>"
-    }
-
-    writeLines(vrt_in, outfile_vrt)
-  }
   # Launch the spatial processing -
   # operations to be done depend on whether resize and/or
   # reprojection and/or resampling are necessary. Operations
@@ -464,7 +483,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
     # on ENVI format, processing is identical, save for
     # not providing the "COMPRESSION" option to avoid
     # warnings
-    # browser()
+
     switch(reproj_type,
            GdalTranslate = gdalUtilities::gdal_translate(
              outfile_vrt,
@@ -472,9 +491,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              a_srs     = mod_proj_str,
              of        = out_format,
              ot        = as.character(datatype),
-             a_nodata  = nodata_out,
-             wo        = c("INIT_DEST = NO_DATA",
-                           paste0("NUM_THREADS=", ncores)),
+             a_nodata  = nodata_out
            ),
            Resample0_Resize0 = gdalUtilities::gdalwarp(
              outfile_vrt,
@@ -485,8 +502,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              r         = resampling,
              ot        = as.character(datatype),
              multi     = TRUE,
-             wo        = c("INIT_DEST = NO_DATA",
-                           paste0("NUM_THREADS=", ncores)),
              nomd      = TRUE,
              overwrite = TRUE
            ),
@@ -500,8 +515,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              te        = bbox,
              ot        = as.character(datatype),
              multi     = TRUE,
-             wo        = c("INIT_DEST = NO_DATA",
-                           paste0("NUM_THREADS=", ncores)),
              nomd      = TRUE,
              overwrite = TRUE
            ),
@@ -515,8 +528,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              tr        = rep(out_res, 2),
              ot        = as.character(datatype),
              multi     = TRUE,
-             wo        = c("INIT_DEST = NO_DATA",
-                           paste0("NUM_THREADS=", ncores)),
              nomd      = TRUE,
              overwrite = TRUE
            ),
@@ -531,8 +542,6 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
              tr        = rep(out_res, 2),
              ot        = as.character(datatype),
              multi     = TRUE,
-             wo        = c("INIT_DEST = NO_DATA",
-                           paste0("NUM_THREADS=", ncores)),
              nomd      = TRUE,
              overwrite = TRUE
            ),
@@ -543,14 +552,15 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   # If scale_factor="Yes", create final files by rescaling
   # values
 
-  if (scale_val == "Yes"   &
+  if (scale_val &
       !(scale_factor == 1 & offset == 0)) {
 
-    outrep_0 <- raster::raster(outrep_file_0)
+    outrep_0 <- suppressWarnings(raster::raster(outrep_file_0))
     scl      <- as.numeric(scale_factor)
     off      <- as.numeric(offset)
     na       <- as.numeric(nodata_out)
-    outrep   <- raster::calc(x   = outrep_0,
+
+    outrep   <- suppressWarnings(raster::calc(x   = outrep_0,
                              fun = function(x) {
                                x * scl + off
                              }
@@ -562,7 +572,38 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                                paste0("COMPRESS=", compress),
                                ""),
                              NAflag    = na,
-                             overwrite = TRUE)
+                             overwrite = TRUE))
+
+    # workasround to avoid applying scale offset to nodata values if nodata_change is
+    # FALSE and multiple nodata are present
+    if (nodata_in <- 99999) {
+
+      if (!nodata_change) {
+        nodata_in_min <- split_nodata_values(nodata_in_tmp)[[1]][1]
+        correct_nodata <- function(x) {
+          which_nodata <- which(x >=  (nodata_in_min * scl) + off)
+          if (length(which_nodata) != 0) {
+            x[which_nodata] <- (x[which_nodata] / scl) - off
+          }
+          x
+        }
+
+        outrep   <- suppressWarnings(raster::calc(x   = outrep,
+                                 fun = function(x) {
+                                   correct_nodata(x)
+                                 }
+                                 , filename  = outrep_file,
+                                 format    = out_format,
+                                 datatype  = "FLT4S",
+                                 options   = ifelse(
+                                   out_format == "GTiff",
+                                   paste0("COMPRESS=", compress),
+                                   ""),
+                                 NAflag    = na,
+                                 overwrite = TRUE))
+      }
+    }
+
     rm(outrep, outrep_0)
   }
 
@@ -571,6 +612,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   if (out_format == "ENVI") {
     fileConn_meta_hdr <- file(paste0(
       tools::file_path_sans_ext(outrep_file), ".hdr"), "a")
+
     writeLines(c("data ignore value = ",
                  nodata_out ),
                fileConn_meta_hdr, sep = " ")

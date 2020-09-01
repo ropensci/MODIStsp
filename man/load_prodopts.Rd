@@ -4,11 +4,7 @@
 \alias{load_prodopts}
 \title{Load characteristics of the different MODIS products}
 \usage{
-load_prodopts(gui)
-}
-\arguments{
-\item{gui}{\code{logical} if TRUE, the function was called from an interactive
-MODIStsp session.}
+load_prodopts()
 }
 \value{
 OUTPUT_DESCRIPTION

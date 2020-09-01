@@ -20,7 +20,7 @@
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Accessing and Analyzing Processed Data from R">
 <meta property="og:description" content="MODIStsp">
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png">
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="analyze_files/header-attrs-2.3/header-attrs.js"></script><script src="analyze_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Accessing and Analyzing Processed Data from R</h1>
@@ -150,13 +150,13 @@
 <p>To test this functionality, you can run the following example:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">MODIStsp</span>)
 <span class="no">opts_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/test_extract.json"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"MODIStsp"</span>)
-<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="kw">options_file</span> <span class="kw">=</span> <span class="no">opts_file</span>, <span class="kw">gui</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="kw">opts_file</span> <span class="kw">=</span> <span class="no">opts_file</span>, <span class="kw">gui</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p>This will download a yearly time series of MODIS NDVI data and subset it over the region of the Como Lake in Italy.</p>
 <p>After the download and processing finishes (it will take a while, depending on your network speed), the MODIS time series will be placed in subfolder <code>MODIStsp/VI_16Days_500m_v6</code> of <code>R</code> tempdir(). (In this case, I have them in “<code>file.path(tempdir(), "VI_16Days_500m_v6"</code>”. If you want to save them elsewhere, run <code><a href="../reference/MODIStsp.html">MODIStsp(options_file = opts_file, gui = TRUE)</a></code> and select a different output folder).</p>
 <p>Single-date processed rasters can be accessed by simply opening them with a <code>raster</code> command:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">modistsp_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_500m_v6/NDVI"</span>, <span class="st">"MOD13A1_NDVI_2016_177.tif"</span>)
 <span class="no">modistsp_file</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\Rtmpmu8ArW/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "D:/RTemp\\Rtmp8uGyz0/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">my_raster</span> <span class="kw">&lt;-</span> <span class="fu">raster</span>(<span class="no">modistsp_file</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">my_raster</span>)</pre></body></html></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
@@ -165,14 +165,14 @@
 <span class="no">ts_folder</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_500m_v6/Time_Series"</span>)
 <span class="no">in_virtual_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">ts_folder</span>, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>)
 <span class="no">in_virtual_file</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\Rtmpmu8ArW/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
+<pre><code>## [1] "D:/RTemp\\Rtmp8uGyz0/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">ts_data</span>   <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="no">in_virtual_file</span>))
 <span class="no">ts_data</span></pre></body></html></div>
 <pre><code>## class      : RasterStack 
 ## dimensions : 122, 65, 7930, 23  (nrow, ncol, ncell, nlayers)
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
-## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
+## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs 
 ## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, ... 
 ## time        : 2016-01-01 - 2016-12-18 (range)</code></pre>
 <p>, which gives us a 23-band <code>RasterStack</code> in the <code>ts_data</code> variable.</p>
@@ -189,8 +189,8 @@
 ## dimensions : 122, 65, 7930  (nrow, ncol, ncell)
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
-## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
-## source     : D:/RTemp/Rtmpmu8ArW/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
+## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs 
+## source     : D:/RTemp/Rtmp8uGyz0/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
 ## names      : MOD13A1_NDVI_2016_001 
 ## time       : 2016-01-01</code></pre>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># Extract multiple dates from the stack</span>
@@ -204,7 +204,7 @@
 ## dimensions : 122, 65, 7930, 6  (nrow, ncol, ncell, nlayers)
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
-## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
+## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs 
 ## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081 
 ## time        : 2016-01-01, 2016-01-17, 2016-02-02, 2016-02-18, 2016-03-05, 2016-03-21</code></pre>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co"># Compute monthly averages</span>
@@ -215,7 +215,7 @@
 ## dimensions : 122, 65, 7930, 12  (nrow, ncol, ncell, nlayers)
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
-## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
+## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs 
 ## source     : memory
 ## names      : index_January, index_February, index_March, index_April,  index_May, index_June, index_July, index_August, index_September, index_October, index_November, index_December 
 ## min values :       -1891.0,        -1770.0,     -2000.0,     -1780.0,     -510.0,     -202.5,    -1347.0,       -275.0,         -1158.0,       -1944.0,        -2000.0,           -0.2 
@@ -239,7 +239,7 @@
 ## dimensions : 122, 65, 7930, 23  (nrow, ncol, ncell, nlayers)
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
-## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs 
+## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs 
 ## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, ... 
 ## time        : 2016-01-01 - 2016-12-18 (range)</code></pre>
 <p>, which again gives us the 23-band <code>RasterStack</code> in the <code>ts_data</code> variable.</p>
@@ -254,7 +254,7 @@
 <pre><code>## class       : SpatialPolygonsDataFrame 
 ## features    : 10 
 ## extent      : 9.248174, 9.526815, 45.91182, 46.18547  (xmin, xmax, ymin, ymax)
-## crs         : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## crs         : +proj=longlat +datum=WGS84 +no_defs 
 ## variables   : 2
 ## names       : id,  lc_type 
 ## min values  :  1, Cropland 

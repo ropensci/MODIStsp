@@ -13,7 +13,7 @@ test_that(
     skip_on_cran()
     skip_on_travis()
 
-    MODIStsp(test = 5)
+    MODIStsp(test = "05")
     out_files_tif <- list.files(
       file.path(tempdir(), "MODIStsp/Albedo_Daily_500m_v6"),
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
@@ -22,7 +22,7 @@ test_that(
     means <- unlist(
       lapply(out_files_tif,
              FUN = function(x) {
-               mean(raster::getValues(raster::raster(x)), na.rm = T)
+               mean(raster::values(raster::raster(x)), na.rm = T)
              })
     )
     expect_equal(means, c(0.8962911), tolerance = 0.001, scale = 1)

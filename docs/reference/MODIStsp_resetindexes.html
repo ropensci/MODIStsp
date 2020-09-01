@@ -50,9 +50,9 @@
 
 <meta property="og:title" content="Remove custom spectral indexes — MODIStsp_resetindexes" />
 <meta property="og:description" content="Function used to remove all user-defined Spectral Indexes from
-a MODIStsp json options file, thus resetting the list of available indexes
+MODIStsp, thus resetting the list of available indexes
 to the default ones." />
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png" />
 
 
 
@@ -94,7 +94,7 @@ to the default ones." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -188,27 +188,17 @@ to the default ones." />
 
     <div class="ref-description">
     <p>Function used to remove all user-defined Spectral Indexes from
-a MODIStsp json options file, thus resetting the list of available indexes
+MODIStsp, thus resetting the list of available indexes
 to the default ones.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>MODIStsp_resetindexes</span>(<span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>MODIStsp_resetindexes</span>()</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>opts_jsfile</th>
-      <td><p><code>character</code> full path of a JSON file
-containing the processing options in which the new indexes has to be saved
-(default: MODIStsp_Previous.JSON in subfolder Previous).</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The function is called for its side effects. On success, the
-MODIStsp_Previous.json file or the specified options file is modified so to
+MODIStsp_indexes.json file is modified so to
 remove all previously custom-specified Spectral Indexes.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
@@ -233,11 +223,11 @@ remove all previously custom-specified Spectral Indexes.</p>
    <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"Index_"</span>, <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>10000</span>, <span class='fl'>1</span>)))
    )
 
- <span class='no'>opts</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>fromJSON</a></span>(<span class='no'>opts_jsfile</span>)
+ <span class='no'>opts</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>fromJSON</a></span>(<span class='no'>indexes_file</span>)
  <span class='no'>opts</span>$<span class='no'>custom_indexes</span>[<span class='fl'>1</span>]
 
  <span class='co'># Now remove all custom indexes</span>
- <span class='fu'>MODIStsp_resetindexes</span>(<span class='no'>opts_jsfile</span>)
+ <span class='fu'>MODIStsp_resetindexes</span>()
  <span class='no'>opts</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>jsonlite</span><span class='kw ns'>::</span><span class='fu'><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>fromJSON</a></span>(<span class='no'>opts_jsfile</span>)
  <span class='no'>opts</span>$<span class='no'>custom_indexes</span>[<span class='fl'>1</span>]
  }</div></pre>

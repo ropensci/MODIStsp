@@ -117,7 +117,7 @@ check_projection.character  <- function(projection,
   # Finally, see if it is a WKT - return verbatim
   projection_crs <- try(sf::st_crs(projection))
 
-  if (inherits(projection_crs, "try-error") | is.na(projection_crs$proj4string)) {
+  if (inherits(projection_crs, "try-error") || is.na(projection_crs$proj4string)) {
     if (abort == TRUE) {
       stop("check_projection --> Invalid projection detected! Aborting!")
     } else {

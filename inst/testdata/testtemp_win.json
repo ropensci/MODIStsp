@@ -1,5 +1,5 @@
 {
-"sel_prod": "Surf_Temp_Daily_005dg (M*D11C1)",
+"selprod": "Surf_Temp_Daily_005dg (M*D11C1)",
 "sensor": "Terra",
 "prod_version": "6",
 "start_date": "2004-01-01",
@@ -16,7 +16,7 @@
 "use_aria": false,
 "download_server": "offline",
 "download_range": "full",
-"proj": "Native",
+"out_projsel": "Native",
 "output_proj4": "+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs",
 "out_res_sel": "Native",
 "out_res": "Native",
@@ -32,6 +32,6 @@
 "bbox": [14.4934, 66.494, 21.7382, 67.8348],
 "out_folder": "Z:/tmp/tmpmod",
 "out_folder_mod": "Z:/tmp/tmpmod/hdf",
-"MODIStspVersion": "1.3.9",
+"MODIStspVersion": "2.0.0",
 "custom_indexes": []
 }

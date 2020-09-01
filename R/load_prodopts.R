@@ -1,7 +1,5 @@
 #' @title Load characteristics of the different MODIS products
 #' @description FUNCTION_DESCRIPTION
-#' @param gui `logical` if TRUE, the function was called from an interactive
-#'  MODIStsp session.
 #' @return OUTPUT_DESCRIPTION
 #' @details Load characteristics of the different MODIS products from `prodopts_file`
 #   or load them from the XML options file and create the `prodopts_file` RData
@@ -12,7 +10,7 @@
 #' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
 #' @importFrom utils packageVersion
 
-load_prodopts <- function(gui) {
+load_prodopts <- function() {
 
   # RData file containing products' characteristics
   prodopts_dir <- system.file("ExtData/Previous", package = "MODIStsp")
@@ -38,42 +36,11 @@ load_prodopts <- function(gui) {
     #nocov start
     mess_text <- "Reading the MODIS products' characteristics from XML. Please wait!" #nolint
     message(mess_text)
-    if (gui) {
-      if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
-        stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
-                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
-      } else {
-        requireNamespace("gWidgets")
-        requireNamespace("gWidgetsRGtk2")
-      }
-      mess     <- gWidgets::gwindow(title  = "Please wait...",
-                                    width  = 400,
-                                    height = 40)
-
-      mess_lab <- gWidgets::glabel(text      = mess_text,
-                                   editable  = FALSE,
-                                   container = mess)
-      Sys.sleep(0.05)
-
-    }
 
     MODIStsp_read_xml(prodopts_file = prodopts_file,
                       xml_file      = xml_file)
     prod_opt_list <- get(load(prodopts_file))
 
-    if (gui) {
-      if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
-        stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
-                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
-      }
-      #nocov start
-      # dispose message window
-      gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
-        return(FALSE)
-      })
-      gWidgets::dispose(mess_lab)
-      #nocov end
-    }
   } # End IF on load prodopts
   prod_opt_list
   #nocov end

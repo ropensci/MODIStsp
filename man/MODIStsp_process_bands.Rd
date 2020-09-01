@@ -27,28 +27,28 @@ MODIStsp_process_bands(
   out_res_sel,
   out_res,
   resampling,
+  nodata_change,
   gui,
-  mess_lab,
   verbose
 )
 }
 \arguments{
-\item{out_folder_mod}{\code{character} Output folder for original HDF storage.}
+\item{out_folder_mod}{\code{character} Output folder for original HDF storage, default: $tempdir}
 
 \item{modislist}{\verb{character array} List of MODIS images to be downloaded for
 the selected date (as returned from \code{get_mod_filenames}). Can be a single
 image, or a list of images in case different tiles are needed!}
 
-\item{outproj_str}{\code{character} proj4 string of selected output projection.}
+\item{outproj_str}{\code{character} EPSG or WKT of output projection.}
 
-\item{mod_proj_str}{\code{character} proj4 string of MODIS product native projection.}
+\item{mod_proj_str}{\code{character} EPSG or WKT of MODIS projection.}
 
 \item{sens_sel}{\code{character ["terra" | "aqua"]} Selected sensor.}
 
 \item{band}{\code{numeric} band number corresponding to the HDF layer to be
 processed}
 
-\item{bandname}{\code{character} Name to the HDF layer to be processed.}
+\item{bandname}{\code{character} Name of the HDF layer to be processed.}
 
 \item{date_name}{\code{character} Date of acquisition of the images to be
 downloaded.}
@@ -61,16 +61,15 @@ processed.}
 \item{nodata_out}{\code{numeric} Output nodata value to the HDF layer to be
 processed.}
 
-\item{full_ext}{\code{logic} If TRUE, process``
-the entire extent of the selected tiles. Otherwise, crop the output to
-output bbox.}
+\item{full_ext}{\code{logical} If TRUE, process full tiles, if FALSE, process
+bbox}
 
 \item{bbox}{\code{numeric(4)} Output bounding box (xmin, ymin, xmax, ymax) in
-out_proj coordinate system.}
+out_proj coordinate system. Ignored if spatmeth == "tiles", Default: NULL}
 
-\item{scale_val}{\code{character ["Yes" | "No"]} If == "Yes", scale and offset are applied to
+\item{scale_val}{\code{logical} If TRUE,  scale and offset are applied to
 original MODIS layers, and Spectral Indexes are saved as floating point. If
-== "No", no rescaling is done and Spectral Indexes are saved as integer, with a
+FALSE, no rescaling is done and Spectral Indexes are saved as integer, with a
 10000 scaling factor.}
 
 \item{scale_factor}{\code{numeric} Scale factor to be applied to the HDF layer
@@ -87,21 +86,23 @@ processing are to be stored (created in \code{MODIStsp_process})}
 \item{compress}{\code{character ["None" | "PACKBITS" | "LZW" | "DEFLATE"]}
 Compression method for GTiff outputs (Ignored if \code{out_format == ENVI})}
 
-\item{out_res_sel}{\code{character ["Native" | "Resampled"]} Indicates if the native
-resolution of the product or a user supplied one is to be used.}
+\item{out_res_sel}{\verb{character ["Native", "User Defined}]. If "Native", the
+outputs keep the original resolution of MODIS HDF images. Otherwise, the value
+set in "out_res" is used.}
 
 \item{out_res}{\code{float} Output resolution (in output projection measurement
 unit). Ignored if out_res_sel == "Native".}
 
-\item{resampling}{\code{character ["near" | "bilinear" | "cubic" | "lanczos" | "mode"]}
+\item{resampling}{\verb{character ["near" | "bilinear" | "cubic" | "cubicspline", |lanczos"|, "average"|, "mode", |"max"|, |"min"|, |"q1"|, |"q3"|, |"sum"|]}
 Resampling method to be used by \code{gdalwarp}.}
 
-\item{gui}{\code{logical} Indicates if processing was called starting from an
-interactive environment or not. If FALSE, processing messages are sent to a
-log file instead than to the console, and gWidgets messages are suppressed}
+\item{nodata_change}{\code{logical} if TRUE, NoData values are set to the max value
+of the datatype of the layer on the MODIStsp output rasters. NOTE: If multiple
+nodata values are reported for a layer, all are reset to the new value.}
 
-\item{mess_lab}{Pointer to the gWidget used to visualize processing messages
-in interactive execution.}
+\item{gui}{\code{logical} if TRUE: the GUI is opened before processing. If FALSE:
+processing parameters are retrieved from the provided \code{options_file}
+argument), Default: TRUE}
 
 \item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
 }

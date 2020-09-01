@@ -9,14 +9,15 @@ test_that(
 
     MODIStsp(
       test = 7,
-      spatial_file_path = system.file("testdata/spatial_file.shp",
+      spatmeth = "file",
+      spafile = system.file("testdata/spatial_file.shp",
                                       package = "MODIStsp")
     )
     outpath <- file.path(
       tempdir(), "MODIStsp/spatial_file/",
       "/Surf_Temp_8Days_GridSin_v6/LST_Day_6km/MOD11B2_LST_Day_6km_2017_001.tif"
     )
-    outrast     <- raster::raster(outpath)
+    outrast     <- suppressWarnings(raster::raster(outpath))
     ext_mstpout <- sf::st_bbox(outrast)
 
     ext_spin <-  sf::st_bbox(sf::st_read(

@@ -16,32 +16,31 @@ set_bandind_matrix(
 )
 }
 \arguments{
-\item{bandnames}{\verb{character array} Abbreviated Names of original layers of the
-selected product (used to build output file names).}
+\item{bandnames}{names of all layers available for the product being processed}
 
-\item{bandsel}{\verb{integer 0/1 array} of length equal to number of original
-layers of the selected product set to 1 for bands to be processed.}
+\item{bandsel}{\verb{character array} Original MODIS layers to be processed.
+You can get a list of available layers for a given product
+using function \code{MODIStsp_get_prodlayers} (e.g., MODIStsp_get_prodlayers("M*D13Q1")$bandnames),
+Default: NULL}
 
-\item{indexes_bandnames}{\verb{character array} Abbreviated Names of SIs available
-for the selected product (used to build output file names of SIs).}
+\item{indexes_bandnames}{names of all indexes available for the product being processed}
 
-\item{indexes_bandsel}{\verb{integer 0/1 array} array of length equal to the number
-of Spectral Indexes available for the product (standard + user-provided),
-set to  1 for indexes to be processed.}
+\item{indexes_bandsel}{\verb{character array}Spectral Indexes to be computed starting from reflectance bands.
+You can get a list of available quality layers for a given product
+using function \code{MODIStsp_get_prodlayers} (e.g., MODIStsp_get_prodlayers("M*D13Q1")$indexes_bandnames),
+Default: NULL}
 
-\item{indexes_formula}{\verb{character array} formulas of SIs available for the
-selected product (standard and custom).}
+\item{indexes_formula}{formulas of all indexes available for the product being processed}
 
-\item{quality_bandnames}{\verb{character array} Abbreviated Names of Quality
-Indicators available for the selected product (used to build output file
-names of QIs).}
+\item{quality_bandnames}{names of all quality indicators available for the product being processed}
 
-\item{quality_bandsel}{\verb{integer 0|1 array} array of length equal to number
-of available QIs, set to  1 for indexes to be processed.}
+\item{quality_bandsel}{\verb{character array} Quality Indicators to be computed starting from
+bit fields of original MODIS layers. You can get a list of available quality layers for a given product
+using function \code{MODIStsp_get_prodlayers} (e.g., MODIStsp_get_prodlayers("M*D13Q1")$quality_bandnames),
+Default: NULL}
 
-\item{quality_source}{\verb{character array} which connects each QI to its "source"
-original MODIS layer (multiple QIs share the same "source", since they are
-derived from different bits of the bit-encoded layer).}
+\item{quality_source}{sources of data (original layers) of all quality indicators
+available for the product being processed}
 }
 \value{
 \code{matrix} containing info on which bands are needed for computing

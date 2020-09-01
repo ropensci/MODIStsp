@@ -53,7 +53,7 @@
 processing on MODIS original hdf layers (reprojection, resizing, resampling,
 mosaicing, computation of scaling factors). The function is based on the
 use of gdal routines." />
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png" />
 
 
 
@@ -95,7 +95,7 @@ use of gdal routines." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -217,8 +217,8 @@ use of <code>gdal</code> routines.</p>
   <span class='no'>out_res_sel</span>,
   <span class='no'>out_res</span>,
   <span class='no'>resampling</span>,
+  <span class='no'>nodata_change</span>,
   <span class='no'>gui</span>,
-  <span class='no'>mess_lab</span>,
   <span class='no'>verbose</span>
 )</pre>
 
@@ -227,7 +227,7 @@ use of <code>gdal</code> routines.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>out_folder_mod</th>
-      <td><p><code>character</code> Output folder for original HDF storage.</p></td>
+      <td><p><code>character</code> Output folder for original HDF storage, default: $tempdir</p></td>
     </tr>
     <tr>
       <th>modislist</th>
@@ -237,11 +237,11 @@ image, or a list of images in case different tiles are needed!</p></td>
     </tr>
     <tr>
       <th>outproj_str</th>
-      <td><p><code>character</code> proj4 string of selected output projection.</p></td>
+      <td><p><code>character</code> EPSG or WKT of output projection.</p></td>
     </tr>
     <tr>
       <th>mod_proj_str</th>
-      <td><p><code>character</code> proj4 string of MODIS product native projection.</p></td>
+      <td><p><code>character</code> EPSG or WKT of MODIS projection.</p></td>
     </tr>
     <tr>
       <th>sens_sel</th>
@@ -254,7 +254,7 @@ processed</p></td>
     </tr>
     <tr>
       <th>bandname</th>
-      <td><p><code>character</code> Name to the HDF layer to be processed.</p></td>
+      <td><p><code>character</code> Name of the HDF layer to be processed.</p></td>
     </tr>
     <tr>
       <th>date_name</th>
@@ -277,20 +277,19 @@ processed.</p></td>
     </tr>
     <tr>
       <th>full_ext</th>
-      <td><p><code>logic</code> If TRUE, process``
-the entire extent of the selected tiles. Otherwise, crop the output to
-output bbox.</p></td>
+      <td><p><code>logical</code> If TRUE, process full tiles, if FALSE, process
+bbox</p></td>
     </tr>
     <tr>
       <th>bbox</th>
       <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(4)</a></code> Output bounding box (xmin, ymin, xmax, ymax) in
-out_proj coordinate system.</p></td>
+out_proj coordinate system. Ignored if spatmeth == "tiles", Default: NULL</p></td>
     </tr>
     <tr>
       <th>scale_val</th>
-      <td><p><code>character ["Yes" | "No"]</code> If == "Yes", scale and offset are applied to
+      <td><p><code>logical</code> If TRUE,  scale and offset are applied to
 original MODIS layers, and Spectral Indexes are saved as floating point. If
-== "No", no rescaling is done and Spectral Indexes are saved as integer, with a
+FALSE, no rescaling is done and Spectral Indexes are saved as integer, with a
 10000 scaling factor.</p></td>
     </tr>
     <tr>
@@ -319,8 +318,9 @@ Compression method for GTiff outputs (Ignored if <code>out_format == ENVI</code>
     </tr>
     <tr>
       <th>out_res_sel</th>
-      <td><p><code>character ["Native" | "Resampled"]</code> Indicates if the native
-resolution of the product or a user supplied one is to be used.</p></td>
+      <td><p><code>character ["Native", "User Defined</code>]. If "Native", the
+outputs keep the original resolution of MODIS HDF images. Otherwise, the value
+set in "out_res" is used.</p></td>
     </tr>
     <tr>
       <th>out_res</th>
@@ -329,19 +329,20 @@ unit). Ignored if out_res_sel == "Native".</p></td>
     </tr>
     <tr>
       <th>resampling</th>
-      <td><p><code>character ["near" | "bilinear" | "cubic" | "lanczos" | "mode"]</code>
+      <td><p><code>character ["near" | "bilinear" | "cubic" | "cubicspline", |lanczos"|, "average"|, "mode", |"max"|, |"min"|, |"q1"|, |"q3"|, |"sum"|]</code>
 Resampling method to be used by <code>gdalwarp</code>.</p></td>
     </tr>
     <tr>
-      <th>gui</th>
-      <td><p><code>logical</code> Indicates if processing was called starting from an
-interactive environment or not. If FALSE, processing messages are sent to a
-log file instead than to the console, and gWidgets messages are suppressed</p></td>
+      <th>nodata_change</th>
+      <td><p><code>logical</code> if TRUE, NoData values are set to the max value
+of the datatype of the layer on the MODIStsp output rasters. NOTE: If multiple
+nodata values are reported for a layer, all are reset to the new value.</p></td>
     </tr>
     <tr>
-      <th>mess_lab</th>
-      <td><p>Pointer to the gWidget used to visualize processing messages
-in interactive execution.</p></td>
+      <th>gui</th>
+      <td><p><code>logical</code> if TRUE: the GUI is opened before processing. If FALSE:
+processing parameters are retrieved from the provided <code>options_file</code>
+argument), Default: TRUE</p></td>
     </tr>
     <tr>
       <th>verbose</th>

@@ -1,3 +1,17 @@
+MODIStsp 2.0.0
+================
+* Windows 10 on local install, R 3.6.3
+* Windows 10 on local install, R 4.0
+* Ubuntu 18.04 on local install, R 4.0
+* win-builder (R-devel, R-release)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs
+
+There is a NOTE related to inability to retreive future timestamps.
+There is a NOTE related to possible invalid urls on some builds, but the url is valid.
+
 MODIStsp 1.4.0
 ================
 

@@ -40,7 +40,7 @@
 #'
 #'  This function interprets these strings and convert them in vectors with
 #'  single values.
-#'  Notice that the last NoData value is the only one which is considered if
+#'  Notice that the first NoData value is the only one which is considered if
 #'  'Change NoData values' was set to 'No'.
 #' @author Luigi Ranghetti, phD (2018) \email{ranghetti.l@@irea.cnr.it}
 #' @examples
@@ -62,7 +62,8 @@ split_nodata_values <- function(nodata_in, take_all = TRUE) {
   if (take_all) {
     nodata_split3
   } else {
-    lapply(nodata_split3, function(x){x[length(x)]})
+    # lapply(nodata_split3, function(x){x[length(x)]})
+    lapply(nodata_split3, function(x){x[1]})
   }
 
 }
@@ -93,8 +94,8 @@ create_nodata_rcl <- function(nodata_in, nodata_out) {
   nodata_rcl <- lapply(seq_along(nodata_split2), function(i) {
     do.call(rbind, lapply(seq_along(nodata_split2[[i]]), function(j) {
       as.numeric(c(nodata_split2[[i]][[j]][1],
-        nodata_split2[[i]][[j]][length(nodata_split2[[i]][[j]])],
-        nodata_out[i]))
+                   nodata_split2[[i]][[j]][length(nodata_split2[[i]][[j]])],
+                   nodata_out[i]))
     }))
   })
   nodata_rcl <- lapply(nodata_rcl, function(x) {

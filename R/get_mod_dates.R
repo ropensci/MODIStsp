@@ -12,7 +12,7 @@
 #' @note License: GPL 3.0
 #'
 get_mod_dates <- function(dates, date_dirs) {
-  
+
   tmp_dates     <- as.Date(dates, format = "%Y.%m.%d")
   tmp_date_dirs <- as.Date(date_dirs, format = "%Y.%m.%d")
   if (length(dates) == 1) {
@@ -30,6 +30,6 @@ get_mod_dates <- function(dates, date_dirs) {
       date_dirs[tmp_date_dirs >= tmp_dates[3] & tmp_date_dirs <= tmp_dates[4]]
     )
   }
-  
+
   return(date_dirs)
 }

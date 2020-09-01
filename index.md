@@ -1,11 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](http://cran.rstudio.com/web/packages/MODIStsp/index.html)
+[![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.rstudio.com/web/packages/MODIStsp/index.html)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683)
-[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/MODIStsp?color=red)](http://cran.rstudio.com/web/packages/MODIStsp/index.html)
+[![Downloads](https://cranlogs.r-pkg.org/badges/MODIStsp?color=orange)](https://cran.rstudio.com/web/packages/MODIStsp/index.html)
 [![License: GPL
-v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Travis-CI Build
 Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://travis-ci.org/ropensci/MODIStsp)
 [![Coverage
@@ -50,6 +50,16 @@ Italy (CNR-IREA)***
 -----
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What’s New
+
+  - 01/09/2020 - MODIStsp 2.0.0 is out. Replaces the old gWidgets GUI
+    with a new one based on Shiny, enhances support for CLI usage and
+    enhances support/provides bug fixing for datasets with multiple
+    NoData values when applying scale/offset.
+
+  - 09/05/2020 - MODIStsp 1.4.0 is out. Switches to use of GDAL3/PROJ6
+    WKTs for projection representation and usage of `sf` for all
+    internal work on vector data. Adds support for products MCD19A1 and
+    MCD19A2 products.
 
   - 07/06/2019 - MODIStsp 1.3.9 is out. Fixes a bug causing crashes on
     MOD14A1 product, adds support for product MCD12Q2 and removes

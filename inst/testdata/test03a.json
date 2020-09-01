@@ -1,23 +1,26 @@
 {
- "sel_prod": "Surf_Ref_8Days_500m (M*D09A1)",
+ "selprod": "Surf_Ref_8Days_500m (M*D09A1)",
 "sensor": "Terra",
 "prod_version": "6",
-"start_date": "2017-07-10",
-"end_date": "2017-07-15",
-"bandsel": [      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      1 ],
-"indexes_bandsel": [      1,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,      1 ],
-"quality_bandsel": [      0,      0,      0,      0,      0,      0,      0,      0,      0,      1,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0 ],
+"start_date": "2017.07.10",
+"end_date": "2017.07.15",
+"bandsel": ["sur_refl_doy"],
+"indexes_bandsel": ["NDVI", "SAVI", "GRVI", "GVMI"],
+"quality_bandsel": ["QA_bits"],
 "start_x":     18,
 "end_x":     18,
 "start_y":      4,
 "end_y":      4,
 "user": "",
 "password": "",
-"use_aria": false,
+"downloader": "http",
 "download_server": "offline",
-"download_range": "full",
-"proj": "User Defined",
+"download_range": "Full",
+"out_projsel": "User Defined",
 "output_proj4": "32632",
+"spatmeth":"bbox",
+"drawnmeth": null,
+"spafile": null,
 "out_res_sel": "Resampled",
 "out_res": "250",
 "full_ext": false,
@@ -25,22 +28,12 @@
 "out_format": "ENVI",
 "ts_format": ["GDAL vrt"],
 "compress": "LZW",
-"nodata_change": "No",
-"scale_val": "No",
-"delete_hdf": "Yes",
-"reprocess": "Yes",
+"nodata_change": true,
+"scale_val": false,
+"delete_hdf": true,
+"reprocess": true,
 "bbox": [ 5.7e+05, 5.095e+06, 5.88e+05, 5.108e+06 ],
 "out_folder": "$tempdir",
 "out_folder_mod": "$tempdir",
-"MODIStspVersion": "1.3.9",
-"custom_indexes": {
- "Surf_Ref_8Days_500m (M*D09A1)": {
-"6": {
- "indexes_bandnames": "GVMI",
-"indexes_fullnames": "Global Vegetation Moisture Index  (((NIR+0.1)−(SWIR+0.02))/((NIR+0.1)+(SWIR+0.02)))",
-"indexes_formulas": " ((b2_NIR+0.1)-(b7_SWIR+0.02))/((b2_NIR+0.1)+(b7_SWIR+0.02))",
-"indexes_nodata_out": "32767"
-}
-}
-}
+"MODIStspVersion": "2.0.0"
 }

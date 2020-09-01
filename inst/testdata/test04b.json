@@ -1,5 +1,5 @@
 {
-  "sel_prod": "Snow_Cov_Month_0.05Deg CMG (M*D10CM)",
+  "selprod": "Snow_Cov_Month_0.05Deg CMG (M*D10CM)",
   "sensor": "Both",
   "prod_version": "6",
   "start_date": "2015-07-31",
@@ -16,7 +16,7 @@
   "use_aria": false,
   "download_server": "http",
   "download_range": "seasonal",
-  "proj": "User Defined",
+  "out_projsel": "User Defined",
   "output_proj4": "3857",
   "out_res_sel": "Native",
   "out_res": "Native",
@@ -32,6 +32,6 @@
   "bbox": [-2785560, 9131579, -1452963, 10084420],
   "out_folder": "$tempdir",
   "out_folder_mod": "$tempdir",
-  "MODIStspVersion": "1.3.9",
+  "MODIStspVersion": "2.0.0",
   "custom_indexes": []
 }

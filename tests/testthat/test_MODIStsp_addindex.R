@@ -9,9 +9,7 @@ test_that("MODIStsp_addindex works as expected", {
   # error in formula leads to aborting
   expect_error(
     MODIStsp_addindex(
-      opts_jsfile = system.file("testdata/test_addindex.json",
-                                  package = "MODIStsp"),
-      gui = FALSE, new_indexbandname = "myindex",
+      new_indexbandname = "myindex",
       new_indexformula = "b2_dsadsa",
       new_indexfullname = "Test Index"
     )
@@ -19,9 +17,7 @@ test_that("MODIStsp_addindex works as expected", {
 
   expect_error(
     MODIStsp_addindex(
-      opts_jsfile = system.file("testdata/test_addindex.json",
-                                  package = "MODIStsp"),
-      gui = FALSE, new_indexbandname = "myindex",
+      new_indexbandname = "myindex",
       new_indexformula = "b1_Red - bg",
       new_indexfullname = "Test Index")
   )
@@ -29,18 +25,13 @@ test_that("MODIStsp_addindex works as expected", {
   # Duplicated index name leads to aborting
   expect_error(
     MODIStsp_addindex(
-      opts_jsfile = system.file("testdata/test_addindex.json",
-                                  package = "MODIStsp"),
-      gui = FALSE, new_indexbandname = "SR",
+      new_indexbandname = "SR",
       new_indexformula = "b1_Red - b2_NIR",
       new_indexfullname = "Test Index")
   )
   # Duplicated index full name leads to aborting
   expect_error(
-    MODIStsp_addindex(gui = FALSE,
-                      opts_jsfile = system.file("testdata/test_addindex.json",
-                                                package = "MODIStsp"),
-                      new_indexbandname = "SR2",
+    MODIStsp_addindex(new_indexbandname = "SR2",
                       new_indexformula = "b1_Red - b2_NIR",
                       new_indexfullname = "Simple Ratio (NIR/Red)")
   )
@@ -48,9 +39,6 @@ test_that("MODIStsp_addindex works as expected", {
   # error in formula leads to aborting
   expect_error(
     MODIStsp_addindex(
-      opts_jsfile = system.file("testdata/test_addindex.json",
-                                  package = "MODIStsp"),
-      gui = FALSE,
       new_indexformula = "b1_Red",
       new_indexfullname = "Test Index")
   )
@@ -59,18 +47,11 @@ test_that("MODIStsp_addindex works as expected", {
   # All parameters ok: just a message is given
   expect_message(
     MODIStsp_addindex(
-      opts_jsfile = system.file("testdata/test_addindex.json",
-                                  package = "MODIStsp"),
-      gui = FALSE,
       new_indexbandname = paste0("Index_", as.character(sample(10000, 1))),
       new_indexformula = "b1_Red - b2_NIR",
       new_indexfullname = paste0("Index_", as.character(sample(10000, 1))))
   )
   # check that the index was added
-  opts <- load_opts(system.file("testdata/test_addindex.json",
-                                package = "MODIStsp"))
-  expect_equal(length(opts$custom_indexes), 11)
   # remove the index not to clutter the test file
-  MODIStsp_resetindexes(system.file("testdata/test_addindex.json",
-                                    package = "MODIStsp"))
+  MODIStsp_resetindexes()
 })

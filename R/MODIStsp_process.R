@@ -1,8 +1,6 @@
 #' @title MODIStsp main processing function
 #' @description Main processing function of MODIStsp. Takes as input processing
-#'   parameters specified by the user using MODIStsp_GUI and saved in
-#'   MODIStsp_Previous.json (Interactive mode), or a user specified JSON file
-#'   (non-interactive mode) and performs all required processing.
+#'   parameters specified by the user and performs all required processing.
 #' @details After retrieving the input processing options, the function
 #'   1. Accesses NASA http archive to determine the list of files to be
 #'      downloaded/processed (or, in case of offline processing, get the list
@@ -18,110 +16,9 @@
 #' Extraction of bitfields from Quality layers is done though bitwise computation
 #' Checks are done in order to not re-download already existing HDF images, and not
 #' reprocess already processed dates (if the user did not specify that)
-#'
-#' @param sel_prod `character` Name of selected MODIS product.
-#' @param start_date `character` Start date for images download and preprocessing
-#'  (yyyy.mm.dd).
-#' @param end_date `character` End date for images download and preprocessing
-#'  (yyyy.mm.dd).
-#' @param out_folder `character` Main output folder.
-#' @param out_folder_mod `character` Output folder for original HDF storage.
-#' @param reprocess `character ["Yes" | "No"]` If Yes, reprocess data for already
-#'  existing dates.
-#' @param delete_hdf `character ["Yes" | "No"]` If Yes, delete original HDF after
-#'  completion.
-#' @param sensor `character ["Terra"| "Aqua" | "Both"]` MODIS platform to be considered.
-#'   (Ignored for MCD* products).
-#' @param https `list` http addresses for download of HDF of selected product.
-#' @param download_server `character ["http" | "offline"]` service to be used for
-#'  download.
-#' @param user `character` Username for NASA http server.
-#'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home)).
-#' @param password `character` Password for NASA http server
-#'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home)).
-#' @param start_x `integer [0-35]` Start horizontal tile.
-#' @param start_y `integer [0-17]` Start vertical tile.
-#' @param end_x `integer [0-35]` End horizontal tile.
-#' @param end_y `integer [0-17]` End vertical tile.
-#' @param full_ext `logic` If TRUE, process``
-#'   the entire extent of the selected tiles. Otherwise, crop the output to
-#'   output bbox.
-#' @param bbox `numeric(4)` Output bounding box (xmin, ymin, xmax, ymax) in
-#'   out_proj coordinate system.
-#' @param out_format `character ["ENVI" | "GTiff"]` Desired output format.
-#' @param compress `character ["None" | "PACKBITS" | "LZW" | "DEFLATE"]`
-#'   Compression method for GTiff outputs (Ignored if `out_format == ENVI`)
-#' @param out_res_sel `character ["Native" | "Resampled"]` Indicates if the native
-#'  resolution of the product or a user supplied one is to be used.
-#' @param out_res `float` Output resolution (in output projection measurement
-#'  unit). Ignored if out_res_sel == "Native".
-#' @param native_res `float` Native resolution of MODIS product to be processed.
-#' @param tiled `integer [0 | 1]` 1 = tiled product; 0 = non-tiled product
-#'   (resolution 0.05 deg - latlong projection).
-#' @param mod_proj_str `character` proj4 string of MODIS product native projection.
-#' @param outproj_str `character` proj4 string of selected output projection.
-#' @param nodata_in `numeric array` Original NoData values of original layers of
-#'  the selected MODIS product.
-#' @param nodata_out `numeric array` Target NoData values of MODIS original layers
-#'  (Ignored if nodata_change == FALSE).
-#' @param nodata_change `character ["Yes" | "No"]` if Yes, NoData are set to nodata_out
-#'   in output rasters.
-#' @param scale_val `character ["Yes" | "No"]` If == "Yes", scale and offset are applied to
-#'  original MODIS layers, and Spectral Indexes are saved as floating point. If
-#'  == "No", no rescaling is done and Spectral Indexes are saved as integer, with a
-#'  10000 scaling factor.
-#' @param datatype `character array` datatypes of original MODIS bands
-#'  (e.g., "INT2S").
-#' @param bandsel `integer 0/1 array` of length equal to number of original
-#'  layers of the selected product set to 1 for bands to be processed.
-#'@param bandnames `character array` Abbreviated Names of original layers of the
-#'  selected product (used to build output file names).
-#' @param indexes_bandsel `integer 0/1 array` array of length equal to the number
-#'   of Spectral Indexes available for the product (standard + user-provided),
-#'   set to  1 for indexes to be processed.
-#' @param indexes_bandnames `character array` Abbreviated Names of SIs available
-#'   for the selected product (used to build output file names of SIs).
-#' @param indexes_formula `character array` formulas of SIs available for the
-#'   selected product (standard and custom).
-#' @param indexes_nodata_out `numeric array` NoData values to be used for SIs
-#' @param quality_bandnames `character array` Abbreviated Names of Quality
-#'  Indicators available for the selected product (used to build output file
-#'  names of QIs).
-#' @param quality_bandsel `integer 0|1 array` array of length equal to number
-#'   of available QIs, set to  1 for indexes to be processed.
-#' @param quality_bitN `character array` with length equal to the number QIs
-#'   available for the selected product. Each entry contains the position of the
-#'   bits corresponding to a QI (e.g., 0-1) in its "source" MODIS layer.
-#' @param quality_source `character array` which connects each QI to its "source"
-#'   original MODIS layer (multiple QIs share the same "source", since they are
-#'   derived from different bits of the bit-encoded layer).
-#' @param quality_nodata_in `integer` Always set to 255.
-#' @param quality_nodata_out `integer` Always set to 255.
-#' @param file_prefixes `character` output file prefix of selected product
-#'   (e.g., MOD13Q1). Used to build output filenames.
-#' @param main_out_folder `character` Main folder for storage of MODIStsp
-#'   time series.
-#' @param resampling `character ["near" | "bilinear" | "cubic" | "lanczos" | "mode"]`
-#'   Resampling method to be used by `gdalwarp`.
-#' @param ts_format `character ["None" | "ENVI Meta Files" | "GDAL vrt files" |
-#'  "ENVI and GDAL"]` Selected virtual time series format.
-#' @param gui `logical` Indicates if processing was called starting from an
-#'  interactive environment or not. If FALSE, processing messages are sent to a
-#'  log file instead than to the console, and gWidgets messages are suppressed
-#' @param use_aria `logical` If TRUE, aria2c is used to accelerate download
-#'   (if available !).
-#' @param download_range `character ["full" | "seasonal"]` If "full", all the
-#'   available images between the starting and the ending dates are downloaded;
-#'   If "seasonal", only the images included in the season are downloaded
-#'   (e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, only
-#'   the images of December, January and February from 2005 to 2010 - excluding
-#'   2005-01, 2005-02 and 2010-12 - are downloaded).
-#' @param scale_factor `numeric array` of length equal to the number of original
-#'   layers of the selected product, containing scale factors to be applied to each
-#'   original layer to convert it to "correct" measure units.
-#' @param offset `numeric array` of length equal to the number of original
-#'   layers of the selected product, containing offsets to be applied to each
-#'   original layer to convert it to "correct" measure units.
+#' @param proc_opts `data.frame` containing all processing parameters, as
+#'  passed from the MODIStsp GUI, or created in `MODIStsp` by joining
+#'  explicitly passed arguments with a (not mandatory) options file.
 #' @param n_retries `numeric` maximum number of retries on download functions.
 #'   In case any download function fails more than `n_retries` times consecutively,
 #'   MODIStsp_process will abort, Default: 20
@@ -133,33 +30,92 @@
 #'   development of this function ([ModisDownload](http://r-gis.net/?q=ModisDownload);
 #'   [Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
-#' @rdname MODIStsp_process
+#' @export
+#' @importFrom jsonlite read_json
+#' @importFrom sf st_crs
 
-MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
-                             out_folder_mod, reprocess = "Yes",
-                             delete_hdf = "No",
-                             sensor, download_server, user, password,
-                             https, start_x, start_y, end_x, end_y,
-                             full_ext, bbox, out_format, compress,
-                             out_res_sel, out_res, native_res, tiled,
-                             mod_proj_str, outproj_str,
-                             nodata_in, nodata_out, nodata_change,
-                             scale_val, scale_factor, offset,
-                             datatype,
-                             bandsel, bandnames,
-                             indexes_bandsel, indexes_bandnames,
-                             indexes_formula, indexes_nodata_out,
-                             quality_bandnames, quality_bandsel,
-                             quality_bitN, quality_source,
-                             quality_nodata_in, quality_nodata_out,
-                             file_prefixes, main_out_folder,
-                             resampling, ts_format,
-                             use_aria       = TRUE,
-                             download_range = "full",
-                             gui            = TRUE,
+MODIStsp_process <- function(proc_opts,
                              n_retries,
-                             verbose) {
+                             verbose = TRUE) {
 
+  # Based on sel_prod, retrieve needed variables from prod_opts file
+
+  prod_opt_list <- load_prodopts()
+  prod_opts <- prod_opt_list[[proc_opts$selprod]][["6"]]
+
+  cust_ind      <- jsonlite::read_json(system.file("ExtData/Previous/MODIStsp_indexes.json",
+                                                   package = "MODIStsp"))
+
+  if (length(cust_ind) == 1) {
+    cust_ind <- NULL
+  } else {
+    cust_ind  <- cust_ind[[proc_opts$selprod]][["6"]]
+  }
+
+  prod_opts$indexes_bandnames <- c(prod_opts$indexes_bandnames,
+                                   cust_ind$indexes_bandnames)
+  prod_opts$indexes_fullnames <- c(prod_opts$indexes_fullnames,
+                                   cust_ind$indexes_fullnames)
+  prod_opts$indexes_formulas <- c(prod_opts$indexes_formulas,
+                                  cust_ind$indexes_formulas)
+  prod_opts$indexes_nodata_out <- c(prod_opts$indexes_nodata_out,
+                                    cust_ind$indexes_nodata_out)
+
+  if (prod_opts$tiled == 0) {
+    tiled = FALSE
+    # mod_proj_str <- CRS("+init=epsg:4008 +proj=longlat +ellps=clrk66 +no_defs") #nolint
+
+    # EPSG for proj definition on latlon data (4008)
+    mod_proj_str <- sf::st_crs(4008) #nolint
+
+    prod_opts$native_res <- format(
+      as.numeric(prod_opts$native_res) * (0.05 / 5600)
+    )
+  } else {
+    tiled = TRUE
+    # default WKT for MODIS gridded data
+    mod_proj_str <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs")
+  }
+
+  if (proc_opts$output_proj == "MODIS Sinusoidal") {
+    outproj_str <- sf::st_crs("+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +a=6371007.181 +b=6371007.181 +units=m +no_defs")
+  } else {
+    outproj_str <- sf::st_crs(check_projection(proc_opts$output_proj))
+  }
+
+  if (proc_opts$out_res_sel == "Native") {
+    proc_opts$out_res <- prod_opts$native_res
+  }
+
+  nodata_in  <- prod_opts$nodata_in
+  nodata_out <- prod_opts$nodata_out
+
+  offset       <- prod_opts$offset
+  scale_factor <- prod_opts$scale_factor
+  datatype     <- prod_opts$datatype
+  bandnames    <- prod_opts$bandnames
+
+  indexes_bandnames  <- prod_opts$indexes_bandnames
+  indexes_formula    <- prod_opts$indexes_formula
+  indexes_nodata_out <- prod_opts$indexes_nodata_out
+
+  quality_bandnames  <- prod_opts$quality_bandnames
+  quality_bitN       <- prod_opts$quality_bitN
+  quality_source     <- prod_opts$quality_source
+  quality_nodata_in  <- prod_opts$quality_nodata_in
+  quality_nodata_out <- prod_opts$quality_nodata_out
+
+  file_prefixes      <- prod_opts$file_prefix
+  https              <- prod_opts$http
+  main_out_folder    <- prod_opts$main_out_folder
+
+  start_time <- Sys.time()
+
+  if (proc_opts$spatmeth == "tiles") {
+    full_ext = TRUE
+  } else {
+    full_ext = FALSE
+  }
 
   # outproj_str <- sf::st_as_text(sf::st_crs(check_projection(outproj_str)))
   #   __________________________________________________________________________
@@ -182,65 +138,41 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
   # if NoData change set to no, set out_nodata to nodata_in
   # and take only the last values listed for each band
-  if (nodata_change == "No") {
-    nodata_in <- unlist(split_nodata_values(nodata_in, take_all = FALSE))
+
+  if (!proc_opts$nodata_change) {
     nodata_out <- nodata_in
-    # quality_nodata_in and quality_nodata_out are not changed,
-    # since they are always 255
   }
 
   # set-up processing folders ----
 
   # Folder for HDF storage
-  dir.create(out_folder_mod, recursive = TRUE, showWarnings = FALSE)
+  dir.create(proc_opts$out_folder_mod, recursive = FALSE, showWarnings = FALSE)
 
   # main output folder --> subfolder of "out_folder" named after the selected
   # MODIS product
-  out_prod_folder <- file.path(out_folder, main_out_folder)
+  out_prod_folder <- file.path(proc_opts$out_folder, main_out_folder)
 
   # Preliminary check for MOD19 products: allow processing ONLY if a single tile
   # is involved.
 
   if (basename(out_prod_folder) == "MAIA_Land_Surf_BRF_500") {
-    if ((start_x != end_x) | (start_y != end_y)) {
+    if ((proc_opts$start_x != proc_opts$end_x) | (proc_opts$start_y != proc_opts$end_y)) {
       warning("Processing for MCD19* products is possible only for one tile at a time! Processing aborted!") #nolint
       return()
     }
   }
 
 
-  dir.create(out_prod_folder, showWarnings = FALSE, recursive = TRUE)
+  dir.create(out_prod_folder, showWarnings = FALSE, recursive = FALSE)
 
   mess_text <- "MODIStsp --> Starting processing"
   # initialize processing messages in case of interactive execution ----
-
-  if (gui) {
-    #nocov start
-    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
-      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
-                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
-    } else {
-      requireNamespace("gWidgets")
-      requireNamespace("gWidgetsRGtk2")
-    }
-    mess     <- gWidgets::gwindow(title = "Processing Status",
-                                  width = 400,
-                                  height = 40)
-    mess_lab <- gWidgets::glabel(text = paste("---", mess_text, "---"),
-                                 editable = FALSE,
-                                 container = mess)
-    Sys.sleep(0.05)
-    #nocov end
-  } else {
-    mess_lab <- NULL
-  }
-
-  process_message(mess_text, gui, mess_lab, verbose)
-
+  gui <- FALSE
+  process_message(mess_text, verbose)
 
   # get start/end years from start_date/end_date
-  start_year <- unlist(strsplit(start_date, "[.]"))[1]
-  end_year   <- unlist(strsplit(end_date, "[.]"))[1]
+  start_year <- unlist(strsplit(proc_opts$start_date, "[.]"))[1]
+  end_year   <- unlist(strsplit(proc_opts$end_date, "[.]"))[1]
 
   # workaround to avoid generating error if no indexes and/or quality bands are
   # present/computable for the selected product
@@ -250,7 +182,19 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
   # Save original choice of bands in bandsel_orig_choice (bandsel is later
   # modified to set to 1 all bands needed for indexes and quality
-  bandsel_orig_choice <- bandsel
+
+  bandsel_ind <- which(bandnames %in% proc_opts$bandsel)
+  bandsel <- rep(0, length(bandnames))
+  bandsel[bandsel_ind] <- 1
+  bandsel_orig_choice  <- bandsel
+
+  indsel_ind <- which(indexes_bandnames %in% proc_opts$indexes_bandsel)
+  indexes_bandsel <- rep(0, length(indexes_bandnames))
+  indexes_bandsel[indsel_ind] <- 1
+
+  qsel_ind <- which(quality_bandnames %in% proc_opts$quality_bandsel)
+  quality_bandsel <- rep(0, length(quality_bandnames))
+  quality_bandsel[qsel_ind] <- 1
 
   #  ___________________________________________________________________________
   #  Build a matrix which associates each SI or QI available for the selected
@@ -265,23 +209,33 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                              quality_bandnames,
                                              quality_bandsel,
                                              quality_source)
+
   # ___________________________________________________________________________
   # Double check to see if aria2c executable is present and on the PATH. On non
   # interactive execution, if aria2c is not found, use_aria is forced to FALSE
 
+  if (proc_opts$downloader == "aria2c") {
+    use_aria <- TRUE
+  } else {
+    use_aria <- FALSE
+  }
   check_aria <- Sys.which("aria2c")
   if (check_aria == "") use_aria <- FALSE
+
 
   #   __________________________________________________________________________
   #   Start Working.                                                        ####
 
   combined   <- FALSE
+
   # check which platforms were selected,
-  if (sensor[1] == "Both") {
+  if (proc_opts$sensor[1] == "Both") {
     sensor   <- c("Terra", "Aqua")
+  } else {
+    sensor <- proc_opts$sensor
   }
 
-  if (sensor[1] == "Combined") {
+  if (proc_opts$sensor[1] == "Combined") {
     sensor   <- c("Terra")
     combined <- TRUE
   }
@@ -299,7 +253,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
     # Processing status message
     mess_text <- paste("Accessing http server at: ", http)
-    process_message(mess_text, gui, mess_lab, verbose)
+    process_message(mess_text, verbose)
 
     for (yy in start_year:end_year) {
 
@@ -309,29 +263,30 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
 
       # First, retrieve acquisition dates of all available MODIS hdfs for the
       # selected product in yy
-      date_dirs_all   <- get_mod_dirs(http, download_server,
-                                      user, password,
+      date_dirs_all   <- get_mod_dirs(http, proc_opts$download_server,
+                                      proc_opts$user, proc_opts$password,
                                       yy,
                                       n_retries,
                                       gui,
-                                      out_folder_mod)
+                                      proc_opts$out_folder_mod)
 
       # overwrite download_server with the setting used in the end to retrieve
       # folders.
 
       download_server <- attr(date_dirs_all, "server")
 
-      dates <- get_yeardates(download_range,
+      dates <- get_yeardates(proc_opts$download_range,
                              yy,
                              start_year, end_year,
-                             start_date, end_date)
+                             proc_opts$start_date,
+                             proc_opts$end_date)
 
       # Processing status message
       mess_text <- paste("Retrieving list of available `",
                          ifelse(combined, "Combined", sens_sel),
                          "` Files for Year",
                          as.character(yy))
-      process_message(mess_text, gui, mess_lab, verbose)
+      process_message(mess_text, verbose)
 
       # Get a list of the folders containing HDF images required (Corresponding
       # to the subfolders in lpdaac corresponding to selected product, dates and
@@ -370,21 +325,22 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                indexes_bandsel,
                                                quality_bandnames,
                                                quality_bandsel,
-                                               out_format)
+                                               proc_opts$out_format)
 
           # If not all output files are already present or reprocess = "Yes",
           # start downloading hdfs
-          if (check_files == FALSE | reprocess == "Yes") {
+          if (check_files == FALSE | proc_opts$reprocess) {
 
             # Create vector of image names required (corresponding to the
             # required tiles for the current date)
             modislist <- get_mod_filenames(http,
                                            used_server = download_server,
-                                           user, password, n_retries,
+                                           proc_opts$user, proc_opts$password,
+                                           n_retries,
                                            date_dir = date_dirs[date],
-                                           v = seq(from = start_y, to = end_y),
-                                           h = seq(from = start_x, to = end_x),
-                                           tiled, out_folder_mod,
+                                           v = seq(from = proc_opts$start_y, to = proc_opts$end_y),
+                                           h = seq(from = proc_opts$start_x, to = proc_opts$end_x),
+                                           tiled, proc_opts$out_folder_mod,
                                            gui)
 
             # -----------------------------------------------------------------#
@@ -396,16 +352,16 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               #  STEP 1: Download images (If HDF file already in            ####
               #  out_folder_mod, it is not redownloaded !!!!
 
-              MODIStsp_download(modislist, out_folder_mod,
+              MODIStsp_download(modislist, proc_opts$out_folder_mod,
                                 download_server, http, n_retries, use_aria,
                                 date_dirs[date], year,
-                                DOY, user, password, sens_sel,
-                                date_name, gui, mess_lab, verbose)
+                                DOY, proc_opts$user, proc_opts$password, sens_sel,
+                                date_name, gui, verbose)
 
               mess_text <- paste0("[", date(), "] ", length(modislist),
                                   " files for date: ", date_dirs[date],
                                   " were successfully downloaded!")
-              process_message(mess_text, gui, mess_lab, verbose)
+              process_message(mess_text, verbose)
 
               # ______________________________________________________________
               # After all required tiles for the date are downloaded, start
@@ -426,8 +382,8 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                                 out_prod_folder,
                                                 file_prefix,
                                                 yy, DOY,
-                                                out_format,
-                                                reprocess)
+                                                proc_opts$out_format,
+                                                proc_opts$reprocess)
 
               # Create the final vector of bands required for processing (
               # bands chosen by the user + bands required for indexes and
@@ -453,22 +409,23 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                   out_prod_folder, bandnames[band],
                   paste0(file_prefix, "_",
                          paste0(bandnames[band], "_", yy, "_", DOY),
-                         ifelse(out_format == "GTiff", ".tif", ".dat"))
+                         ifelse(proc_opts$out_format == "GTiff", ".tif", ".dat"))
                 )
 
-                if (!file.exists(outrep_file) | reprocess == "Yes") {
+                if (!file.exists(outrep_file) | proc_opts$reprocess) {
 
                   MODIStsp_process_bands(
-                    out_folder_mod, modislist,
+                    proc_opts$out_folder_mod, modislist,
                     outproj_str, mod_proj_str, sens_sel,
                     band, bandnames[band], date_name,
                     datatype[band],
                     nodata_in[band], nodata_out[band],
-                    full_ext, bbox,
-                    scale_val, scale_factor[band], offset[band],
-                    out_format, outrep_file, compress,
-                    out_res_sel, out_res, resampling,
-                    gui, mess_lab, verbose
+                    full_ext, proc_opts$bbox,
+                    proc_opts$scale_val, scale_factor[band], offset[band],
+                    proc_opts$out_format, outrep_file, proc_opts$compress,
+                    proc_opts$out_res_sel, proc_opts$out_res, proc_opts$resampling,
+                    proc_opts$nodata_change,
+                    gui, verbose
                   )
                 }
               }	# END Cycle on available MODIS Bands
@@ -482,18 +439,18 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                 formula      <- indexes_formula[band]
                 mess_text    <- paste("Computing", sens_sel, indexes_band,
                                       "for date:", date_name)
-                process_message(mess_text, gui, mess_lab, verbose)
+                process_message(mess_text, verbose)
 
                 out_filename <- file.path(
                   out_prod_folder,
                   indexes_band,
                   paste0(file_prefix, "_", indexes_band, "_", yy, "_", DOY,
-                         ifelse(out_format == "GTiff", ".tif", ".dat"))
+                         ifelse(proc_opts$out_format == "GTiff", ".tif", ".dat"))
                 )
 
                 # If file not existing and reprocess = No, compute the index and
                 # save it
-                if (!file.exists(out_filename) | reprocess == "Yes") {
+                if (!file.exists(out_filename) | proc_opts$reprocess) {
                   MODIStsp_process_indexes(out_filename,
                                            out_prod_folder,
                                            formula,
@@ -501,11 +458,11 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                                            nodata_out,
                                            indexes_nodata_out[band],
                                            file_prefix,
-                                           compress,
+                                           proc_opts$compress,
                                            yy,
-                                           out_format,
+                                           proc_opts$out_format,
                                            DOY,
-                                           scale_val)
+                                           proc_opts$scale_val)
                 }
               }
 
@@ -519,7 +476,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                 quality_band  <- quality_bandnames[band]
                 mess_text     <- paste("Computing", quality_band, "for date:",
                                        date_name)
-                process_message(mess_text, gui, mess_lab, verbose)
+                process_message(mess_text, verbose)
                 #  Original MODIS layer containing data of the indicator
                 source        <- quality_source[band]
                 #  bitfields corresponding to indicator within source
@@ -531,30 +488,30 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                 out_filename <- file.path(
                   out_prod_folder, quality_band,
                   paste0(file_prefix, "_", quality_band, "_", yy, "_", DOY,
-                         ifelse(out_format == "GTiff", ".tif", ".dat")
+                         ifelse(proc_opts$out_format == "GTiff", ".tif", ".dat")
                   )
                 )
 
                 # If file not existing or reprocess = Yes, compute the indicator
                 # and save it
-                if (!file.exists(out_filename) | reprocess == "Yes") {
+                if (!file.exists(out_filename) | proc_opts$reprocess) {
 
                   # get filename of the (processed) original MODIS layer which
                   # contains the required bit fields input data
                   in_source_file <- file.path(
                     out_prod_folder, source,
                     paste0(file_prefix, "_", source, "_", yy, "_", DOY,
-                           ifelse(out_format == "GTiff", ".tif", ".dat"))
+                           ifelse(proc_opts$out_format == "GTiff", ".tif", ".dat"))
                   )
 
                   MODIStsp_process_QA_bits(out_filename,
                                            in_source_file,
                                            bitN,
-                                           out_format,
+                                           proc_opts$out_format,
                                            nodata_source,
                                            nodata_qa_in,
                                            nodata_qa_out,
-                                           compress)
+                                           proc_opts$compress)
                 }
               }
 
@@ -571,15 +528,15 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               # If deletion selected, delete the HDF files in out_folder_mod####
               # directory
 
-              if (delete_hdf == "Yes") {
-                unlink(file.path(out_folder_mod, modislist))
+              if (proc_opts$delete_hdf) {
+                unlink(file.path(proc_opts$out_folder_mod, modislist))
               }
 
             } else {
               mess_text <- paste0("[", date(),
                                   "] No images available for selected area ",
                                   "in date ", date_dirs[date])
-              process_message(mess_text, gui, mess_lab, verbose)
+             process_message(mess_text, verbose)
             }
 
           } else {
@@ -587,9 +544,9 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
               "[", date(),
               "] All Required output files for date ",
               date_name, " are already existing - Doing Nothing!\n",
-              "Set Reprocess to \"Yes\" to reprocess existing data!"
+              "Set Reprocess to TRUE to reprocess existing data!"
             )
-            process_message(mess_text, gui, mess_lab, verbose)
+            process_message(mess_text, verbose)
 
           }
 
@@ -598,7 +555,7 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
       } else {
         mess_text <- paste0("[", date(), "] No available data for year: ", yy,
                             " for Sensor ", sens_sel, " in selected dates.")
-        process_message(mess_text, gui, mess_lab, verbose)
+        process_message(mess_text, verbose)
       }
 
     }	# End Cycling on selected years
@@ -616,28 +573,22 @@ MODIStsp_process <- function(sel_prod, start_date, end_date, out_folder,
                       indexes_bandnames, indexes_bandsel, indexes_nodata_out,
                       quality_bandnames, quality_bandsel, quality_nodata_out,
                       file_prefixes,
-                      ts_format, out_format,
+                      proc_opts$ts_format, proc_opts$out_format,
                       verbose = verbose)
 
-  # ____________________________________________________________________________
-  #  Close GUI and clean-up                                                 ####
 
-
-  if (gui) {
-    #nocov start
-    if (!all(requireNamespace(c("gWidgets", "gWidgetsRGtk2")))) {
-      stop("You need to install package gWidgets to use MODIStsp GUI. Please install it with:
-                install.packages(c('gWidgets', 'gWidgetsRGtk2')")
-    } else {
-      requireNamespace("gWidgets")
-      requireNamespace("gWidgetsRGtk2")
-    }
-    gWidgets::addHandlerUnrealize(mess_lab, handler = function(h, ...) {
-      return(FALSE)
-    })		# Allow message lab to be closed since processing ended .
-    gWidgets::dispose(mess_lab)
-    #nocov end
-  }
   unlink(file.path(out_prod_folder, "Temp"), recursive = TRUE)
+
+  # End-of-processing messages and clean-up ----
+  end_time   <- Sys.time()
+  time_taken <- end_time - start_time
+  if (verbose) message("[", date(), "] ", "Total Processing Time: ",
+                       time_taken)
+  if (verbose) message("[", date(), "] ","MODIStsp processed files are in: `",
+                       proc_opts$out_folder, "`")
+  # if (!proc_opts$del)
+  if (verbose) message("[", date(), "] ",
+                       "Original downloaded MODIS HDF files are in: `",
+                       proc_opts$out_folder_mod, "`")
   return("DONE")
 }

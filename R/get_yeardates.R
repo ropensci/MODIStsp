@@ -9,7 +9,7 @@
 #'   (yyyy.mm.dd) of current `MODIStsp_process` run.
 #' @param end_date `character` Start date for images download and preprocessing
 #'   (yyyy.mm.dd) of current `MODIStsp_process` run.
-#' @inheritParams MODIStsp_process
+#' @inheritParams MODIStsp
 #' @return OUTPUT_DESCRIPTION
 #' @rdname get_yeardates
 #' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
@@ -18,7 +18,7 @@ get_yeardates <- function(download_range,
                           start_year, end_year,
                           start_date, end_date) {
 
-  if (download_range == "full") {
+  if (download_range == "Full") {
     # Create string representing the dates to be processed in the case
     # of "full" time processing
 
@@ -45,6 +45,7 @@ get_yeardates <- function(download_range,
     # of splitted processing
 
     # the starting month-day
+
     start_seas <- as.Date(strftime(as.Date(start_date, format = "%Y.%m.%d"),
                                    "0-%m-%d"))
     # the ending month-day

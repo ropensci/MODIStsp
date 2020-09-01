@@ -60,7 +60,7 @@ MODIStsp_process_indexes <- function(out_filename,
   # initialize the "stack_string" for the overlay function --> at the end, it
   # contains a parsable string for creating a RasterStack containing
   # the bands required to compute the index
-  stack_string <- "tmp_stack <- raster::stack("
+  stack_string <- "tmp_stack <- suppressWarnings(raster::stack("
 
   for (band in seq(along = bandnames)) {
     bandsel <- bandnames[band]
@@ -76,7 +76,7 @@ MODIStsp_process_indexes <- function(out_filename,
         paste0(file_prefix, "_", temp_bandname, "_", yy, "_", DOY,
                ifelse(out_format == "GTiff", ".tif", ".dat"))
       )
-      temp_raster <- raster(temp_file)
+      temp_raster <- suppressWarnings(raster::raster(temp_file))
       # assign NA value
       raster::NAvalue(temp_raster) <- as.numeric(nodata_out[band])
       # assign the data to a object with name = bandname
@@ -90,7 +90,7 @@ MODIStsp_process_indexes <- function(out_filename,
   # Finalize the fun_string: all the bands are in: now add the formula and
   # close parenthesis.
 
-  if (scale_val == "Yes") {
+  if (scale_val) {
 
     # if scale_val, indices are written as float -1 - 1
     fun_string <- paste0(fun_string, "...)", "{", formula, "}")
@@ -103,7 +103,7 @@ MODIStsp_process_indexes <- function(out_filename,
     dt  <- "INT2S"
   }
   # Finalize the stack_string: all the bands are in: now close parenthesis.
-  stack_string <- paste0(substr(stack_string, 1, nchar(stack_string) - 2), ")")
+  stack_string <- paste0(substr(stack_string, 1, nchar(stack_string) - 2), "))")
 
   #   __________________________________________________________________________
   #   compute the index, by calling raster::overlay over fun_string, using  ####
@@ -111,7 +111,7 @@ MODIStsp_process_indexes <- function(out_filename,
   #   correct "order" is guaranteed by the fact that they are added in the
   #   same order in "fun_string" and in "stack_string" in the cycle above !
 
-  raster::overlay(eval(parse(text = stack_string)),
+  suppressWarnings(raster::overlay(eval(parse(text = stack_string)),
                   fun       = eval(parse(text = fun_string)),
                   filename  = out_filename,
                   format    = out_format,
@@ -120,7 +120,7 @@ MODIStsp_process_indexes <- function(out_filename,
                                      paste0("COMPRESS=", compress),
                                      ""),
                   NAflag    = as.numeric(indexes_nodata_out),
-                  overwrite = TRUE)
+                  overwrite = TRUE))
 
   # IF "ENVI", write the NoData value in the header
   if (out_format == "ENVI") {

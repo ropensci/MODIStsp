@@ -4,36 +4,12 @@
 \alias{MODIStsp_GUI}
 \title{Build and manage the MODIStsp GUI}
 \usage{
-MODIStsp_GUI(
-  general_opts,
-  prod_opt_list,
-  MODIStsp_dir,
-  opts_jsfile,
-  prodopts_file,
-  scroll_window
-)
-}
-\arguments{
-\item{general_opts}{data.frame containing general processing options passed
-by MODIStsp}
-
-\item{prod_opt_list}{List of MODIS products specifications (read from
-MODIStsp_ProdOpts.xml file)}
-
-\item{MODIStsp_dir}{main folder of the package}
-
-\item{opts_jsfile}{json parameters file containing data of the last
-execution, or the ones contained in the \code{options_file} eventually passed to
-\code{MODIStsp}}
-
-\item{prodopts_file}{rdata file containing info about MODIS products}
-
-\item{scroll_window}{logical parameter passed by MODIStsp main function.}
+MODIStsp_GUI()
 }
 \value{
-start - Logical - tells the main if running processing or exiting
-(also, Processing options are saved in "previous" file and (if
-"Save options" is pressed) in user's selected file)
+the function is called for its side effects - opening
+the GUI and allowing to set, save, load options and eventually
+launch the processing.
 }
 \description{
 Function used to generate and handle the GUI used to allow selection of

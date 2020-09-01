@@ -52,7 +52,7 @@
 <meta property="og:description" content="Function used to add a user-defined Spectral Index to the
 default list of computable spectral indexes. Execution without the GUI
 (i.e., to add a new index from a script) is also possible (see examples)." />
-<meta property="og:image" content="http://ropensci.github.io/MODIStsp/logo.png" />
+<meta property="og:image" content="http://docs.ropensci.org/MODIStsp/logo.png" />
 
 
 
@@ -94,7 +94,7 @@ default list of computable spectral indexes. Execution without the GUI
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -193,55 +193,15 @@ default list of computable spectral indexes. Execution without the GUI
     </div>
 
     <pre class="usage"><span class='fu'>MODIStsp_addindex</span>(
-  <span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>prodopts_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>selprod</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>selvers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>new_indexnodata_out</span> <span class='kw'>=</span> <span class='st'>"32767"</span>,
-  <span class='kw'>MODIStsp_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
+  <span class='kw'>new_indexnodata_out</span> <span class='kw'>=</span> <span class='st'>"32767"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>opts_jsfile</th>
-      <td><p><code>character</code> full path of a JSON file
-containing the processing options in which the new indexes has to be saved
-(default: MODIStsp_Previous.JSON in subfolder Previous).</p></td>
-    </tr>
-    <tr>
-      <th>prodopts_file</th>
-      <td><p><code>character</code>: full path of the RData file containing.
-if NULL, use MODIStsp_ProdOpts.RData in subfolder Previous, Default: NULL</p></td>
-    </tr>
-    <tr>
-      <th>selprod</th>
-      <td><p><code>character</code> Name of the product to which the new index should
-be added (Note: the index will be added to all other products allowing its
-computation !). If NULL, as in non-interactive execution, no
-check on available band names is skipped and the index (if valid) is
-added to all products supporting it, Default: NULL</p></td>
-    </tr>
-    <tr>
-      <th>selvers</th>
-      <td><p><code>character</code> Version of the product to which the new index
-should be added (Note: the index will be added to all other products
-allowing its computation !). If NULL, as in non-interactive execution, the
-check on available band names is skipped and the index (if valid) is
-added to all products supporting it, Default: NULL</p></td>
-    </tr>
-    <tr>
-      <th>gui</th>
-      <td><p><code>logical</code> if TRUE, a GUI is opened to define the new
-index; otherwise use the "new_indexbandname", "new_indexfullname" and
-"new_indexformula" parameters to define it non-interactively,
-Default: TRUE</p></td>
-    </tr>
     <tr>
       <th>new_indexbandname</th>
       <td><p><code>character</code> short name (acronym) of the new
@@ -265,11 +225,6 @@ Default: NULL</p></td>
       <td><p><code>character</code> nodata value to use for rasters
 containing the new index</p></td>
     </tr>
-    <tr>
-      <th>MODIStsp_dir</th>
-      <td><p><code>character</code> main folder containing MODIStsp R files,
-Default: retrieved from package installation folder</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -282,20 +237,12 @@ is modified so to allow computation of the additional indexes.</p>
     
 <ul>
 <li><p>The function asks the user to provide the info related to the new desired
-Spectral Index using a GUI interface, checks for correctness of provided
+Spectral Index, checks for correctness of provided
 information (e.g., correct bandnames, computable formula, etc...).
-If the index is legit, it modifies the MODIStsp_Previous.json (or of the
-json file provided by the user) so to allow computation of the additional
-index within MODIStsp.</p></li>
-<li><p>To remove all custom-added spectral indexes, simply delete the
-MODIStsp_Previous.json file within the /Previous subfolder of the folder
-in which the package was installed, or the alternative JSON specified by
-the parameter "opts_jsfile".</p></li>
-<li><p>The function can be run either from within the main MODIStsp GUI,
-or within a stand-alone script (using GUI = FALSE). In the latter case, it
-modifies either the MODIStsp_Previous.RData options file, or the
-options_file specified by the user to add the new index, without user
-interaction.</p></li>
+If the index is legit, it modifies the MODIStsp_addindex.json file
+so to allow computation of the additional index within MODIStsp for all
+products containing the required reflectance bands.</p></li>
+<li><p>To remove all custom-added spectral indexes, run MODIStsp_resetindexes()</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -310,18 +257,10 @@ interaction.</p></li>
  <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
  <span class='fu'>MODIStsp_addindex</span>()}
 
-<span class='co'># Open the GUI to define a new index and save it in a custom json</span>
-<span class='co'># options file.</span>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>opts_jsfile</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/test_addindex.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>opts_jsfile</span> <span class='kw'>=</span> <span class='no'>opts_jsfile</span>)
-}
-
-<span class='co'># Define the new index in non-interactive execution, without specifying an</span>
-<span class='co'># options file (thus modifying MODIStsp_previous.json)</span>
+<span class='co'># Define the new index in non-interactive execution</span>
 
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
+<span class='fu'>MODIStsp_addindex</span>(<span class='kw'>new_indexbandname</span> <span class='kw'>=</span> <span class='st'>"SSI"</span>,
   <span class='kw'>new_indexfullname</span> <span class='kw'>=</span> <span class='st'>"Simple Useless Index"</span>,
   <span class='kw'>new_indexformula</span> <span class='kw'>=</span> <span class='st'>"b2_NIR+b1_Red"</span>)
 }</div></pre>

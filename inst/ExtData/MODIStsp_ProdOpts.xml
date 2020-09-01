@@ -1959,7 +1959,7 @@
             </versions>
         </MODTBGA>
         <MOD10A1>
-            <name>Snow_Cov_Daily_500m (M*D10_A1)</name>
+            <name>Snow_Cov_Daily_500m (M*D10A1)</name>
             <cat_01>Radiation Budget Variables</cat_01>
             <cat_02>Snow Cover</cat_02>
             <file_prefix_terra>MOD10_A1</file_prefix_terra>
@@ -1967,7 +1967,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>M*D10_A1: MODIS/Terra/Aqua Snow Cover Daily L3 Global 500m Grid</prod_fullname>
+                    <prod_fullname>M*D10A1: MODIS/Terra/Aqua Snow Cover Daily L3 Global 500m Grid</prod_fullname>
                     <main_out_folder>Snow_Cov_Daily_500m_v6</main_out_folder>
                     <native_res>463.3128</native_res>
                     <http_terra>https://n5eil01u.ecs.nsidc.org/MOST/MOD10A1.006/</http_terra>
@@ -2138,7 +2138,7 @@
                             <quality_bitN>2 </quality_bitN>
                         </quality>
                         <quality>
-                            <quality_bandname>SN_5</quality_bandname>
+                            <quality_bandname>SN_4</quality_bandname>
                             <quality_fullname>Snow Presence in Day 4</quality_fullname>
                             <quality_source>SC_8DAY_bitfield</quality_source>
                             <quality_bitN>3 </quality_bitN>
@@ -10272,7 +10272,7 @@
                             <bandname>Fpar</bandname>
                             <fullname>Fraction of photosynthetically active radiation</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>249:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
@@ -10281,7 +10281,7 @@
                             <bandname>Lai</bandname>
                             <fullname>Leaf area index</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>249:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>
@@ -10308,7 +10308,7 @@
                             <bandname>FparStdDev</bandname>
                             <fullname>Standard deviation of Fpar</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>248:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.01</scale_factor>
                             <offset>0</offset>
@@ -10317,7 +10317,7 @@
                             <bandname>LaiStdDev</bandname>
                             <fullname>Standard deviation for Lai</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>248:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>0.1</scale_factor>
                             <offset>0</offset>

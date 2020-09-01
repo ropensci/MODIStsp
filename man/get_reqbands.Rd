@@ -21,19 +21,19 @@ get_reqbands(
 \arguments{
 \item{bands_indexes_matrix}{\code{matrix} built by \code{set_bandind_matrix}}
 
-\item{indexes_bandsel}{\verb{integer 0/1 array} array of length equal to the number
-of Spectral Indexes available for the product (standard + user-provided),
-set to  1 for indexes to be processed.}
+\item{indexes_bandsel}{\verb{character array}Spectral Indexes to be computed starting from reflectance bands.
+You can get a list of available quality layers for a given product
+using function \code{MODIStsp_get_prodlayers} (e.g., MODIStsp_get_prodlayers("M*D13Q1")$indexes_bandnames),
+Default: NULL}
 
-\item{indexes_bandnames}{\verb{character array} Abbreviated Names of SIs available
-for the selected product (used to build output file names of SIs).}
+\item{indexes_bandnames}{names of all indexes available for the product being processed}
 
-\item{quality_bandsel}{\verb{integer 0|1 array} array of length equal to number
-of available QIs, set to  1 for indexes to be processed.}
+\item{quality_bandsel}{\verb{character array} Quality Indicators to be computed starting from
+bit fields of original MODIS layers. You can get a list of available quality layers for a given product
+using function \code{MODIStsp_get_prodlayers} (e.g., MODIStsp_get_prodlayers("M*D13Q1")$quality_bandnames),
+Default: NULL}
 
-\item{quality_bandnames}{\verb{character array} Abbreviated Names of Quality
-Indicators available for the selected product (used to build output file
-names of QIs).}
+\item{quality_bandnames}{names of all quality indicators available for the product being processed}
 
 \item{out_prod_folder}{\code{character} Main folder where the MODIStsp processed
 raster will be stored. Used to check if a given processed image already exists.}
@@ -49,8 +49,7 @@ a given processed image already exists.. Used to check if a given processed imag
 
 \item{out_format}{\code{character ["ENVI" | "GTiff"]} Desired output format.}
 
-\item{reprocess}{\code{character ["Yes" | "No"]} If Yes, reprocess data for already
-existing dates.}
+\item{reprocess}{\code{logical} If TRUE, reprocess data for already existing dates.}
 }
 \value{
 req_bands_indexes

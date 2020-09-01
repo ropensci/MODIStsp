@@ -5,43 +5,13 @@
 \title{Add custom spectral indexes}
 \usage{
 MODIStsp_addindex(
-  opts_jsfile = NULL,
-  prodopts_file = NULL,
-  selprod = NULL,
-  selvers = NULL,
-  gui = TRUE,
   new_indexbandname = "",
   new_indexfullname = "",
   new_indexformula = "",
-  new_indexnodata_out = "32767",
-  MODIStsp_dir = system.file(package = "MODIStsp")
+  new_indexnodata_out = "32767"
 )
 }
 \arguments{
-\item{opts_jsfile}{\code{character} full path of a JSON file
-containing the processing options in which the new indexes has to be saved
-(default: MODIStsp_Previous.JSON in subfolder Previous).}
-
-\item{prodopts_file}{\code{character}: full path of the RData file containing.
-if NULL, use MODIStsp_ProdOpts.RData in subfolder Previous, Default: NULL}
-
-\item{selprod}{\code{character} Name of the product to which the new index should
-be added (Note: the index will be added to all other products allowing its
-computation !). If NULL, as in non-interactive execution, no
-check on available band names is skipped and the index (if valid) is
-added to all products supporting it, Default: NULL}
-
-\item{selvers}{\code{character} Version of the product to which the new index
-should be added (Note: the index will be added to all other products
-allowing its computation !). If NULL, as in non-interactive execution, the
-check on available band names is skipped and the index (if valid) is
-added to all products supporting it, Default: NULL}
-
-\item{gui}{\code{logical} if TRUE, a GUI is opened to define the new
-index; otherwise use the "new_indexbandname", "new_indexfullname" and
-"new_indexformula" parameters to define it non-interactively,
-Default: TRUE}
-
 \item{new_indexbandname}{\code{character} short name (acronym) of the new
 spectral index (Ignored if gui == TRUE), Default: NULL}
 
@@ -56,9 +26,6 @@ Default: NULL}
 
 \item{new_indexnodata_out}{\code{character} nodata value to use for rasters
 containing the new index}
-
-\item{MODIStsp_dir}{\code{character} main folder containing MODIStsp R files,
-Default: retrieved from package installation folder}
 }
 \value{
 The function is called for its side effects. On success, the
@@ -73,20 +40,12 @@ default list of computable spectral indexes. Execution without the GUI
 \details{
 \itemize{
 \item The function asks the user to provide the info related to the new desired
-Spectral Index using a GUI interface, checks for correctness of provided
+Spectral Index, checks for correctness of provided
 information (e.g., correct bandnames, computable formula, etc...).
-If the index is legit, it modifies the MODIStsp_Previous.json (or of the
-json file provided by the user) so to allow computation of the additional
-index within MODIStsp.
-\item To remove all custom-added spectral indexes, simply delete the
-MODIStsp_Previous.json file within the /Previous subfolder of the folder
-in which the package was installed, or the alternative JSON specified by
-the parameter "opts_jsfile".
-\item The function can be run either from within the main MODIStsp GUI,
-or within a stand-alone script (using GUI = FALSE). In the latter case, it
-modifies either the MODIStsp_Previous.RData options file, or the
-options_file specified by the user to add the new index, without user
-interaction.
+If the index is legit, it modifies the MODIStsp_addindex.json file
+so to allow computation of the additional index within MODIStsp for all
+products containing the required reflectance bands.
+\item To remove all custom-added spectral indexes, run MODIStsp_resetindexes()
 }
 }
 \note{
@@ -97,18 +56,10 @@ License: GPL 3.0
  \dontrun{
  MODIStsp_addindex()}
 
-# Open the GUI to define a new index and save it in a custom json
-# options file.
-\dontrun{
-opts_jsfile = system.file("testdata/test_addindex.json", package = "MODIStsp")
-MODIStsp_addindex(opts_jsfile = opts_jsfile)
-}
-
-# Define the new index in non-interactive execution, without specifying an
-# options file (thus modifying MODIStsp_previous.json)
+# Define the new index in non-interactive execution
 
 \dontrun{
-MODIStsp_addindex(gui = FALSE, new_indexbandname = "SSI",
+MODIStsp_addindex(new_indexbandname = "SSI",
   new_indexfullname = "Simple Useless Index",
   new_indexformula = "b2_NIR+b1_Red")
 }

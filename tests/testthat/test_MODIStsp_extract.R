@@ -27,7 +27,7 @@ test_that("MODIStsp_extract works as expected", {
 
       opts_file <- system.file("testdata/test_extract.json",
                                package = "MODIStsp")
-      MODIStsp(options_file = opts_file, gui = FALSE)
+      MODIStsp(opts_file = opts_file, gui = FALSE)
       stack_file  <- list.files(
         file.path(tempdir(),
                   "MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/"

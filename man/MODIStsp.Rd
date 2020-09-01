@@ -5,35 +5,174 @@
 \title{MODIStsp main function}
 \usage{
 MODIStsp(
+  ...,
   gui = TRUE,
-  options_file = NULL,
-  spatial_file_path = NULL,
-  scroll_window = FALSE,
+  out_folder = NULL,
+  out_folder_mod = NULL,
+  opts_file = NULL,
+  selprod = NULL,
+  bandsel = NULL,
+  quality_bandsel = NULL,
+  indexes_bandsel = NULL,
+  sensor = NULL,
+  download_server = NULL,
+  downloader = NULL,
+  user = NULL,
+  password = NULL,
+  download_range = NULL,
+  start_date = NULL,
+  end_date = NULL,
+  spatmeth = NULL,
+  start_x = NULL,
+  end_x = NULL,
+  start_y = NULL,
+  end_y = NULL,
+  bbox = NULL,
+  spafile = NULL,
+  out_projsel = NULL,
+  output_proj = NULL,
+  out_res_sel = NULL,
+  out_res = NULL,
+  resampling = NULL,
+  reprocess = NULL,
+  delete_hdf = NULL,
+  nodata_change = NULL,
+  scale_val = NULL,
+  ts_format = NULL,
+  out_format = NULL,
+  compress = NULL,
   test = NULL,
   n_retries = 20,
   verbose = TRUE
 )
 }
 \arguments{
+\item{...}{not used for values, forces later arguments to bind by name}
+
 \item{gui}{\code{logical} if TRUE: the GUI is opened before processing. If FALSE:
 processing parameters are retrieved from the provided \code{options_file}
 argument), Default: TRUE}
 
-\item{options_file}{\code{character} full path to a JSON file
+\item{out_folder}{\code{character} Main output folder, default: NULL.}
+
+\item{out_folder_mod}{\code{character} Output folder for original HDF storage, default: $tempdir}
+
+\item{opts_file}{\code{character} full path to a JSON file
 containing MODIStsp processing options saved from the GUI. If NULL,
 parameters of the last successful run are retrieved from file
 "MODIStsp_Previous.json" in subfolder "Previous"), Default: NULL}
 
-\item{spatial_file_path}{\code{character} (optional) full path of a spatial file
+\item{selprod}{\code{character} Name of selected MODIS product (e.g.,
+Vegetation Indexes_16Days_250m (M*D13Q1)). You can get
+a list of available product names using function \code{MODIStsp_get_prodnames},
+Default: NULL}
+
+\item{bandsel}{\verb{character array} Original MODIS layers to be processed.
+You can get a list of available layers for a given product
+using function \code{MODIStsp_get_prodlayers} (e.g., MODIStsp_get_prodlayers("M*D13Q1")$bandnames),
+Default: NULL}
+
+\item{quality_bandsel}{\verb{character array} Quality Indicators to be computed starting from
+bit fields of original MODIS layers. You can get a list of available quality layers for a given product
+using function \code{MODIStsp_get_prodlayers} (e.g., MODIStsp_get_prodlayers("M*D13Q1")$quality_bandnames),
+Default: NULL}
+
+\item{indexes_bandsel}{\verb{character array}Spectral Indexes to be computed starting from reflectance bands.
+You can get a list of available quality layers for a given product
+using function \code{MODIStsp_get_prodlayers} (e.g., MODIStsp_get_prodlayers("M*D13Q1")$indexes_bandnames),
+Default: NULL}
+
+\item{sensor}{\code{character ["Terra"| "Aqua" | "Both"]} MODIS platform to be considered.
+(Ignored for MCD* products). Default: "Both"}
+
+\item{download_server}{\code{character ["http" | "offline"]} service to be used for
+download. Default: "http"}
+
+\item{downloader}{download_server \code{character ["http" | "aria2"]} downloader to be used,
+Default: "http"}
+
+\item{user}{\code{character} Username for NASA http server.
+(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home}).}
+
+\item{password}{\code{character} Password for NASA http server
+(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home}).}
+
+\item{download_range}{\code{character ["Full" | "Seasonal"]} If "full", all the
+available images between the starting and the ending dates are downloaded;
+If "seasonal", only the images included in the season are downloaded
+(e.g: if the starting date is 2005-12-01 and the ending is 2010-02-31, only
+the images of December, January and February from 2005 to 2010 - excluding
+2005-01, 2005-02 and 2010-12 - are downloaded), Default: Full}
+
+\item{start_date}{\code{character} Start date for images download and preprocessing
+(yyyy.mm.dd), Default: NULL}
+
+\item{end_date}{\code{character} End date for images download and preprocessing
+(yyyy.mm.dd), Default: NULL}
+
+\item{spatmeth}{\code{character ["tiles" | "bbox" | "file"]}, indicates how the processing
+extent is retrieves. if "tiles", use the specified tiles (start_x....).
+If "file", retrieve extent from spatial file specifies in \code{spafile}. If
+"bbox", use the specified bounding box, Default: "tiles"}
+
+\item{start_x}{\code{integer [0-35]} Start MODIS horizontal tile defining spatial extent.
+Ignored if spatmeth != "tiles", Default: 18}
+
+\item{end_x}{\code{integer [0-35]} End MODIS horizontal tile defining spatial extent.
+Ignored if spatmeth != "tiles", Default: 18}
+
+\item{start_y}{\code{integer [0-17]} Start MODIS vertical tile defining spatial extent.
+Ignored if spatmeth != "tiles", Default: 4}
+
+\item{end_y}{\code{integer [0-17]} End MODIS vertical tile defining spatial extent.
+Ignored if spatmeth != "tiles", Default: 4}
+
+\item{bbox}{\code{numeric(4)} Output bounding box (xmin, ymin, xmax, ymax) in
+out_proj coordinate system. Ignored if spatmeth == "tiles", Default: NULL}
+
+\item{spafile}{\code{character} (optional) full path of a spatial file
 to use to derive the processing extent. If not NULL, the processing options
 which define the extent, the selected tiles and the "Full Tile / Custom"
 in the JSON options file are overwritten and new files are created on the
-extent of the provided spatial file, Default: NULL}
+extent of the provided spatial file. Ignored if spatmet != "file", Default: NULL}
 
-\item{scroll_window}{\code{logical} if TRUE, the GUI window is opened
-fullscreen with scrollbars (this is useful on devices with small displays).
-If using a device with a display resolution >= 1024x768, leaving this
-parameter to FALSE is suggested, Default: FALSE}
+\item{out_projsel}{\verb{character ["Native", "User Defined}] If "Native", the
+outputs keep the original resolution of MODIS HDF images. Otherwise, the value
+set in "out_res" is used, Default:Native}
+
+\item{output_proj}{\code{character} either equal to "MODIS Sinusoidal",
+or to the code of a valid EPSG or to a WKT projection string.
+Ignored if outproj_sel == "Native", Default: NULL}
+
+\item{out_res_sel}{\verb{character ["Native", "User Defined}]. If "Native", the
+outputs keep the original resolution of MODIS HDF images. Otherwise, the value
+set in "out_res" is used.}
+
+\item{out_res}{\code{float} Output resolution (in output projection measurement
+unit). Ignored if out_res_sel == "Native".}
+
+\item{resampling}{\verb{character ["near" | "bilinear" | "cubic" | "cubicspline", |lanczos"|, "average"|, "mode", |"max"|, |"min"|, |"q1"|, |"q3"|, |"sum"|]}
+Resampling method to be used by \code{gdalwarp}.}
+
+\item{reprocess}{\code{logical} If TRUE, reprocess data for already existing dates.}
+
+\item{delete_hdf}{\code{logical} If TRUE, delete downloaded HDF files after completion.}
+
+\item{nodata_change}{\code{logical} if TRUE, NoData values are set to the max value
+of the datatype of the layer on the MODIStsp output rasters. NOTE: If multiple
+nodata values are reported for a layer, all are reset to the new value.}
+
+\item{scale_val}{\code{logical} If TRUE,  scale and offset are applied to
+original MODIS layers, and Spectral Indexes are saved as floating point. If
+FALSE, no rescaling is done and Spectral Indexes are saved as integer, with a
+10000 scaling factor.}
+
+\item{ts_format}{\verb{character array including ["R asterStack" | "ENVI Meta Files" | "GDAL vrt files" | "ENVI and GDAL"]} Selected virtual time series format.}
+
+\item{out_format}{\code{character ["ENVI" | "GTiff"]} Desired output format.}
+
+\item{compress}{\code{character ["None" | "PACKBITS" | "LZW" | "DEFLATE"]}
+Compression method for GTiff outputs (Ignored if \code{out_format == ENVI})}
 
 \item{test}{\code{integer | character  (e.g., "01a")} if set, MODIStsp is executed in
 "test mode", using a preset Options File instead than opening the GUI or accepting the
@@ -55,10 +194,13 @@ Main function for the MODIS Time Series Processing Tool
 The function is used to:
 \itemize{
 \item initialize the processing (folder names, packages, etc.);
-\item launch the GUI (\code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}) and receive its outputs on interactive
-execution, or load an options file on non-interactive execution;
+\item launch the GUI (\code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}) on interactive
+execution, or load an options file to set processing arguments and/or
+retrieve CLI inputs and run processing on non-interactive execution;
 \item launch the routines for downloading and processing the requested datasets.
 (\code{\link[=MODIStsp_process]{MODIStsp_process()}})
+\item launching the function with GUI = FALSE and without specifying a opts_file
+initializes arguments with default values. This allows making a test run.
 }
 }
 \note{
@@ -72,7 +214,33 @@ License: GPL 3.0
 # Running the tool without any option will start the GUI with the default or
 # last used settings, in interactive mode (i.e., with gui = TRUE).
 
-MODIStsp()
+# MODIStsp()
+}
+\dontrun{
+
+#' # - Running the tool specifying processing arguments in the call
+
+# **NOTE** Output files of examples are saved to file.path(tempdir(), "MODIStsp").
+
+# Here we process layers __NDVI__ and __EVI__ and quality indicator __usefulness__
+# of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates
+# comprised between 2020-06-01 and 2020-06-15 and saves output to R tempdir
+# --> See name and available layers for product M*D13Q1
+
+MODIStsp_get_prodlayers("M*D13A2")
+
+# --> Launch the processing
+MODIStsp(gui             = FALSE,
+         out_folder      = "$tempdir",
+         selprod         = "Vegetation_Indexes_16Days_1Km (M*D13A2)",
+         bandsel         = c("EVI", "NDVI"),
+         quality_bandsel = "QA_usef",
+         indexes_bandsel = "SR",
+         user            = "mstp_test" ,
+         password        = "MSTP_test_01",
+         start_date      = "2020.06.01",
+         end_date        = "2020.06.15",
+         verbose         = FALSE)
 }
 
 \dontrun{
@@ -86,8 +254,8 @@ MODIStsp()
 # downloads and processed 3 MOD13A2 images over the Como Lake (Lombardy, Italy)
 # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
 
-options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
-MODIStsp(gui = FALSE, options_file = options_file, verbose = TRUE)
+opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE)
 }
 
 \dontrun{
@@ -96,10 +264,11 @@ MODIStsp(gui = FALSE, options_file = options_file, verbose = TRUE)
 # and specifying the extent from a spatial file allows to re-use the same
 # processing settings to perform download and reprocessing on a different area
 
-options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
-MODIStsp(gui = FALSE, options_file = options_file,
-  spatial_file_path = spatial_file, verbose = TRUE)
+MODIStsp(gui = FALSE, opts_file = opts_file,
+  spatmeth = "file",
+  spafile = spatial_file, verbose = TRUE)
 }
 
 \dontrun{
@@ -119,21 +288,22 @@ extent_list
 # extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"),
 #                          full.names = TRUE, "\\.shp$")
 
-options_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 for (single_shape in extent_list) {
-  MODIStsp(gui = FALSE, options_file = options_file,
-           spatial_file_path = single_shape, verbose = TRUE)
+  MODIStsp(gui = FALSE, opts_file = opts_file,
+           spatmeth = "file",
+           spafile = single_shape, verbose = TRUE)
 }
 
 # output files are placed in separate folders:
-outfiles_garda <- list.files(file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"),
+outfiles_garda <- list.files(file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/NDVI"),
            full.names = TRUE)
 outfiles_garda
 
 library(raster)
 plot(raster(outfiles_garda[1] ))
 
-outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"),
+outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/NDVI"),
            full.names = TRUE)
 outfiles_iseo
 
