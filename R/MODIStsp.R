@@ -349,21 +349,26 @@ MODIStsp <- function(...,
 
   if (gui) {
     #nocov start
-    if (!all(requireNamespace(c("leaflet", "shiny",
-                                "shinydashboard","shinyFiles",
-                                "shinyalert","rappdirs", "shinyjs",
-                                "leafem", "mapedit")))) {
+    gui_deps <- c("leaflet", "shiny",
+                  "shinydashboard","shinyFiles",
+                  "shinyalert","rappdirs", "shinyjs",
+                  "leafem", "mapedit",
+                  "magrittr")
+    gui_deps_missing <- !sapply(gui_deps, requireNamespace, quietly = TRUE)
+    
+    if (sum(gui_deps_missing) > 0) {
       stop("You need to install the following Suggested packages to use the MODIStsp GUI.
            Please install them with:
            install.packages(c(\"leaflet\", \"shiny\",\"shinydashboard\",\"shinyFiles\",
                               \"shinyalert\", \"rappdirs\",\"shinyjs\",
-                              \"leafem\", \"mapedit\")")
+                              \"leafem\", \"mapedit\", \"magrittr\"))")
     } else {
       requireNamespace("leaflet")
       requireNamespace("shiny")
       requireNamespace("shinydashboard")
       requireNamespace("shinyFiles")
       requireNamespace("shinyalert")
+      requireNamespace("magrittr")
     }
     #nocov end
   }
