@@ -417,7 +417,7 @@ modistsp_file <- "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"
 my_raster     <- raster(modistsp_file)
 ```
 
-`rasterStack` time series containing all the processed data for a given parameter (saved in the "Time Series/RData" subfolder - see [here](output.html) for details) can be opened by: 
+`rasterStack` time series containing all the processed data for a given parameter (saved in the "Time Series/RData" subfolder - see [here](https://docs.ropensci.org/MODIStsp/articles/output.html) for details) can be opened by: 
 
 ```{r eval=FALSE}
 in_virtual_file <- "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData" 

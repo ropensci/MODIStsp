@@ -1,3 +1,16 @@
+MODIStsp 2.0.1
+================
+* Windows 10 on local install, R 3.6.3
+* Windows 10 on local install, R 4.0
+* Ubuntu 18.04 on local install, R 4.0
+* win-builder (R-devel, R-release)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs and NOTES
+
+This is a resubmission, fixing notes related to redirected URLS. Sorry for that.
+
 MODIStsp 2.0.0
 ================
 * Windows 10 on local install, R 3.6.3
