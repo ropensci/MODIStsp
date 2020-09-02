@@ -355,7 +355,7 @@ MODIStsp <- function(...,
                   "leafem", "mapedit",
                   "magrittr")
     gui_deps_missing <- !sapply(gui_deps, requireNamespace, quietly = TRUE)
-    
+
     if (sum(gui_deps_missing) > 0) {
       stop("You need to install the following Suggested packages to use the MODIStsp GUI.
            Please install them with:
@@ -368,6 +368,10 @@ MODIStsp <- function(...,
       requireNamespace("shinydashboard")
       requireNamespace("shinyFiles")
       requireNamespace("shinyalert")
+      requireNamespace("shinyjs")
+      requireNamespace("leafem")
+      requireNamespace("rappdirs")
+      requireNamespace("mapedit")
       requireNamespace("magrittr")
     }
     #nocov end

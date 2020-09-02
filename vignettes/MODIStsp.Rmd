@@ -350,7 +350,7 @@ argument:
       
 #### On Windows
 
-- create a Task following [these instructions](https://technet.microsoft.com/en-us/library/cc748993.aspx); add the path of the MODIStsp.bat launcher as Action (point 6), and specifying  `-g -s "X:/yourpath/youroptions.json"` as argument.
+- create a Task following [these instructions](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN); add the path of the MODIStsp.bat launcher as Action (point 6), and specifying  `-g -s "X:/yourpath/youroptions.json"` as argument.
 
 # Outputs Format and Naming Conventions
 
