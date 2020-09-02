@@ -175,7 +175,7 @@ shiny::observeEvent(input$help_spameth, {
     )),
     shiny::p(shiny::HTML(
       "<strong>Draw on Map</strong>: The user can select the extent by drawing
-      it on an interactive map;"
+      it on an interactive map."
     )),
     easyClose = TRUE,
     footer = NULL
@@ -229,8 +229,10 @@ shiny::observeEvent(input$help_user, {
       "Provide your <strong>earthdata</strong> user name." ,
     )),
    shiny::p(shiny::HTML(
-      "You can create an earthdata account at: https://urs.earthdata.nasa.gov/home"
-    )),
+     "You can create an earthdata account at:",
+     "<a href='https://urs.earthdata.nasa.gov/home'",
+     "target='_blank'>https://urs.earthdata.nasa.gov/home</a>."
+   )),
     easyClose = TRUE,
     footer = NULL
   ))
@@ -244,8 +246,10 @@ shiny::observeEvent(input$help_password, {
       "Provide your <strong>earthdata</strong> password." ,
     )),
    shiny::p(shiny::HTML(
-      "You can create an earthdata account at: https://urs.earthdata.nasa.gov/home"
-    )),
+     "You can create an earthdata account at:",
+     "<a href='https://urs.earthdata.nasa.gov/home'",
+     "target='_blank'>https://urs.earthdata.nasa.gov/home</a>."
+   )),
     easyClose = TRUE,
     footer = NULL
   ))
@@ -267,13 +271,15 @@ shiny::observeEvent(input$help_downloader, {
       "<strong><a href=\"https://aria2.github.io\" target=\"_blank\">aria2</a></strong>",
       "is an alternative downloader which can be installed in Linux systems",
       "from the default install manager (in Ubuntu, install the package \"aria2\"),",
-      "or in Windows from https://github.com/aria2/aria2/releases/tag/release-1.35.0"
+      "or in Windows from <a href='https://github.com/aria2/aria2/releases/tag/release-1.35.0'",
+      "target='_blank'>here</a>."
     )),
    shiny::p(shiny::HTML(
-      "This selector is active only if aria2 can be found using sys.which(\"aria2c\"")
-    ),
-    easyClose = TRUE,
-    footer = NULL
+     "This selector is active only if aria2 can be found using",
+     "<span style='font-family: monospace;'>Sys.which(\"aria2c\")</span>."
+   )),
+   easyClose = TRUE,
+   footer = NULL
   ))
 })
 
@@ -319,9 +325,15 @@ shiny::observeEvent(input$help_time_series, {
      processed layers as if they were a single multitemporal file."
     )),
    shiny::p(shiny::HTML("Possible choices are: ")),
-   shiny::p(shiny::HTML("<strong>R rasterStack</strong>: extension `.RData`. Can be opened in R.")),
-   shiny::p(shiny::HTML("<strong>ENVI Meta</strong>: extension `.dat`. Can be opened in R.")),
-   shiny::p(shiny::HTML("<strong>GDAL vrt</strong>: extension `.vrt`. Can be opened in QGIS and R.")),
+   shiny::p(shiny::HTML("<strong>R rasterStack</strong>:",
+                        "extension <span style='font-family: monospace;'>.RData</span>.",
+                        "Can be opened in R.")),
+   shiny::p(shiny::HTML("<strong>ENVI Meta</strong>:",
+                        "extension <span style='font-family: monospace;'>.dat</span>.",
+                        "Can be opened in R.")),
+   shiny::p(shiny::HTML("<strong>GDAL vrt</strong>:",
+                        "extension <span style='font-family: monospace;'>.vrt</span>.",
+                        "Can be opened in QGIS and R.")),
 
    shiny::p(shiny::HTML("Time series files are saved in the <em>\"time_series\"</em> subfolder of the main
     output folder")),
