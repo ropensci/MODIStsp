@@ -23,6 +23,11 @@ MODIStsp_GUI <- function() {
 
   server_env <- environment(MSTP_server)
 
+  # Initialise pipe
+  if (requireNamespace("magrittr", quietly = TRUE)) {
+    `%>%` <- magrittr::`%>%`
+  }
+  
   # ____________________________________________________________________________
   # Files/Folder Initialization and set-up of default parameters            ####
 

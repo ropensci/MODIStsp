@@ -63,6 +63,7 @@ Suggests:
     leafem (>= 0.1.3), 
     mapedit (>= 0.6.0),
     rgdal, 
+    magrittr,
     formatR
 SystemRequirements: 
 URL: https://github.com/ropensci/MODIStsp, https://docs.ropensci.org/MODIStsp
