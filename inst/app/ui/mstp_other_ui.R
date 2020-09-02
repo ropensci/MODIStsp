@@ -153,8 +153,8 @@ shinydashboard::tabItem(
           style = "display:inline-block;margin-right:5px;width:15%;vertical-align:top",
           shiny::selectInput(
             "reprocess",
-            label = shiny::span("Reprocess\u2000",
-                         shiny::actionLink("help_reprocess", shiny::icon("question-circle"))
+            label = shiny::span("Reprocess\u2000"#,
+                         # shiny::actionLink("help_reprocess", shiny::icon("question-circle"))
             ),
             c("Yes", "No"), selected = "No"
           )
@@ -185,8 +185,8 @@ shinydashboard::tabItem(
           style = "display:inline-block;margin-right:5px;width:15%;vertical-align:top",
           shiny::selectInput(
             "delete_hdf",
-            label = shiny::span("Delete HDF\u2000",
-                         shiny::actionLink("help_delete", shiny::icon("question-circle"))
+            label = shiny::span("Delete HDF\u2000"#,
+                         # shiny::actionLink("help_delete", shiny::icon("question-circle"))
             ),
             c("Yes", "No"), selected = "Yes"
           )
