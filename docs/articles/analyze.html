@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -152,11 +152,11 @@
 <span class="no">opts_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/test_extract.json"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"MODIStsp"</span>)
 <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span>(<span class="kw">opts_file</span> <span class="kw">=</span> <span class="no">opts_file</span>, <span class="kw">gui</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p>This will download a yearly time series of MODIS NDVI data and subset it over the region of the Como Lake in Italy.</p>
-<p>After the download and processing finishes (it will take a while, depending on your network speed), the MODIS time series will be placed in subfolder <code>MODIStsp/VI_16Days_500m_v6</code> of <code>R</code> tempdir(). (In this case, I have them in “<code>file.path(tempdir(), "VI_16Days_500m_v6"</code>”. If you want to save them elsewhere, run <code><a href="../reference/MODIStsp.html">MODIStsp(options_file = opts_file, gui = TRUE)</a></code> and select a different output folder).</p>
+<p>After the download and processing finishes (it will take a while, depending on your network speed), the MODIS time series will be placed in subfolder <code>MODIStsp/VI_16Days_500m_v6</code> of <code>R</code> tempdir(). (In this case, I have them in “<code>file.path(tempdir(), "VI_16Days_500m_v6"</code>”. If you want to save them elsewhere, run <code><a href="../reference/MODIStsp.html">MODIStsp(opts_file = opts_file, gui = TRUE)</a></code> and select a different output folder).</p>
 <p>Single-date processed rasters can be accessed by simply opening them with a <code>raster</code> command:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">modistsp_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_500m_v6/NDVI"</span>, <span class="st">"MOD13A1_NDVI_2016_177.tif"</span>)
 <span class="no">modistsp_file</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\Rtmp8uGyz0/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "D:/RTemp\\RtmpCYL7jk/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">my_raster</span> <span class="kw">&lt;-</span> <span class="fu">raster</span>(<span class="no">modistsp_file</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">my_raster</span>)</pre></body></html></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
@@ -165,7 +165,7 @@
 <span class="no">ts_folder</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_500m_v6/Time_Series"</span>)
 <span class="no">in_virtual_file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">ts_folder</span>, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span>)
 <span class="no">in_virtual_file</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\Rtmp8uGyz0/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
+<pre><code>## [1] "D:/RTemp\\RtmpCYL7jk/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">ts_data</span>   <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="no">in_virtual_file</span>))
 <span class="no">ts_data</span></pre></body></html></div>
 <pre><code>## class      : RasterStack 
@@ -190,7 +190,7 @@
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
 ## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs 
-## source     : D:/RTemp/Rtmp8uGyz0/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
+## source     : D:/RTemp/RtmpCYL7jk/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
 ## names      : MOD13A1_NDVI_2016_001 
 ## time       : 2016-01-01</code></pre>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># Extract multiple dates from the stack</span>
@@ -247,22 +247,31 @@
 <div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="co"># load a shapefile containing polygons --&gt; Here we use a test shapefile in </span>
 <span class="co"># the testdata folder of MODIStsp.</span>
 
-<span class="no">polygons</span> <span class="kw">&lt;-</span> <span class="kw pkg">rgdal</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rgdal/man/readOGR.html">readOGR</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/extract_polys.shp"</span>,
+<span class="no">polygons</span> <span class="kw">&lt;-</span> <span class="kw pkg">sf</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">st_read</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"testdata/extract_polys.shp"</span>,
                                        <span class="kw">package</span> <span class="kw">=</span> <span class="st">"MODIStsp"</span>),
-                           <span class="kw">verbose</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+                           <span class="kw">quiet</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="no">polygons</span></pre></body></html></div>
-<pre><code>## class       : SpatialPolygonsDataFrame 
-## features    : 10 
-## extent      : 9.248174, 9.526815, 45.91182, 46.18547  (xmin, xmax, ymin, ymax)
-## crs         : +proj=longlat +datum=WGS84 +no_defs 
-## variables   : 2
-## names       : id,  lc_type 
-## min values  :  1, Cropland 
-## max values  :  9,  water_2</code></pre>
+<pre><code>## Simple feature collection with 10 features and 2 fields
+## geometry type:  POLYGON
+## dimension:      XY
+## bbox:           xmin: 9.248174 ymin: 45.91182 xmax: 9.526815 ymax: 46.18547
+## geographic CRS: WGS 84
+##    id      lc_type                       geometry
+## 1   1        Water POLYGON ((9.27148 46.05185,...
+## 2   2       Forest POLYGON ((9.3097 46.0122, 9...
+## 3   3      Urban_1 POLYGON ((9.334496 45.99779...
+## 4   4      Urban_2 POLYGON ((9.312293 45.9296,...
+## 5   5    Grassland POLYGON ((9.496195 46.02487...
+## 6   6     Cropland POLYGON ((9.441399 46.15214...
+## 7   7     Forest_2 POLYGON ((9.450375 46.10248...
+## 8   8      water_2 POLYGON ((9.35279 46.16475,...
+## 9   9 outside_poly POLYGON ((9.498727 46.18223...
+## 10 10   small_poly POLYGON ((9.364545 46.12664...</code></pre>
 <div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="co"># Now extract the average values for each polygon and date and plot the results</span>
 
 <span class="no">out_dataavg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/MODIStsp_extract.html">MODIStsp_extract</a></span>(<span class="no">ts_data</span>, <span class="no">polygons</span>, <span class="kw">id_field</span> <span class="kw">=</span> <span class="st">"lc_type"</span>,
                                 <span class="kw">small</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">out_dataavg</span>)</pre></body></html></div>
 <pre><code>##                Water   Forest Urban_1  Urban_2 Grassland Cropland Forest_2
 ## 2016-01-01  1286.000 5205.000    4249 3645.444 4118.6667 5810.769 3617.222

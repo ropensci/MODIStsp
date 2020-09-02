@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
       <h1 data-toc-skip>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v2.0.0</h1>
                         <h4 class="author">Lorenzo Busetto (<a href="mailto:lbusett@gmail.com">busetto.l@irea.cnr.it</a>), Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2020-08-30</h4>
+            <h4 class="date">2020-09-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/MODIStsp/blob/master/vignettes/MODIStsp.Rmd"><code>vignettes/MODIStsp.Rmd</code></a></small>
       <div class="hidden name"><code>MODIStsp.Rmd</code></div>
@@ -175,6 +175,7 @@
 <h2 class="hasAnchor">
 <a href="#on-linux-systems" class="anchor"></a>On Linux systems</h2>
 <p>To install <code>MODIStsp</code> on Linux, you need to be able to install the <code>sf</code> package, which requires several dependencies. See <a href="https://github.com/r-spatial/sf#installing">HERE</a> if you have trouble installing <code>sf</code>.</p>
+<p>In addition, you need to install dependencies required by the <code>protolite</code> package, required by <code>geojson</code>. See <a href="https://github.com/jeroen/protolite/">HERE</a> for instructions on installing them.</p>
 <p>Then, you can install the stable version of MODIStsp from CRAN:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"MODIStsp"</span>)</pre></body></html></div>
 <p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
@@ -330,14 +331,14 @@
            <span class="kw">verbose</span>   <span class="kw">=</span> <span class="fl">FALSE</span>)
 }
 
-<span class="co"># MOD13A2 ouputs</span>
+<span class="co"># MOD13A2 ouptuts</span>
 <span class="no">out_fold</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/VI_16Days_1Km_v6"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">out_fold</span>)</pre></body></html></div>
 <pre><code>## [1] "EVI"         "NDVI"        "QA_usef"     "SR"          "Time_Series"</code></pre>
 <div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="no">out_fold</span> ,<span class="st">"NDVI"</span>))</pre></body></html></div>
 <pre><code>## [1] "MOD13A2_NDVI_2016_161.tif" "MOD13A2_NDVI_2016_177.tif"
 ## [3] "MOD13A2_NDVI_2020_161.tif" "MYD13A2_NDVI_2020_153.tif"</code></pre>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="co"># MOD10A2 ouputs</span>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="co"># MOD10A2 ouptuts</span>
 <span class="no">out_fold</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/Surf_Temp_8Days_1Km_v6"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="no">out_fold</span>)</pre></body></html></div>
 <pre><code>## [1] "Days_Clear"    "LST_Day_1km"   "LST_Night_1km" "Time_Series"</code></pre>
@@ -393,8 +394,8 @@
   <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span>),
   <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="no">outfiles_garda</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\RtmpInLQqC/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
-## [2] "D:/RTemp\\RtmpInLQqC/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "D:/RTemp\\RtmpU1HbeY/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
+## [2] "D:/RTemp\\RtmpU1HbeY/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span>(<span class="no">outfiles_garda</span>[<span class="fl">1</span>]))</pre></body></html></div>
 <p><img src="MODIStsp_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
@@ -402,8 +403,8 @@
   <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(), <span class="st">"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span>),
   <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="no">outfiles_iseo</span></pre></body></html></div>
-<pre><code>## [1] "D:/RTemp\\RtmpInLQqC/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
-## [2] "D:/RTemp\\RtmpInLQqC/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "D:/RTemp\\RtmpU1HbeY/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
+## [2] "D:/RTemp\\RtmpU1HbeY/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span>(<span class="no">outfiles_iseo</span>[<span class="fl">1</span>]))</pre></body></html></div>
 <p><img src="MODIStsp_files/figure-html/unnamed-chunk-11-2.png" width="700"></p>
 </div>
@@ -432,7 +433,7 @@
 <h4 class="hasAnchor">
 <a href="#on-windows-1" class="anchor"></a>On Windows</h4>
 <ul>
-<li>create a Task following <a href="https://technet.microsoft.com/en-us/library/cc748993.aspx">these instructions</a>; add the path of the MODIStsp.bat launcher as Action (point 6), and specifying <code>-g -s "X:/yourpath/youroptions.json"</code> as argument.</li>
+<li>create a Task following <a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN">these instructions</a>; add the path of the MODIStsp.bat launcher as Action (point 6), and specifying <code>-g -s "X:/yourpath/youroptions.json"</code> as argument.</li>
 </ul>
 </div>
 </div>
@@ -492,7 +493,7 @@
 <div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>)
 <span class="no">modistsp_file</span> <span class="kw">&lt;-</span> <span class="st">"/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"</span>
 <span class="no">my_raster</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span>(<span class="no">modistsp_file</span>)</pre></body></html></div>
-<p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series/RData” subfolder - see <a href="output.html">here</a> for details) can be opened by:</p>
+<p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series/RData” subfolder - see <a href="https://docs.ropensci.org/MODIStsp/articles/output.html">here</a> for details) can be opened by:</p>
 <div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">in_virtual_file</span> <span class="kw">&lt;-</span> <span class="st">"/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span>
 <span class="no">indata</span>          <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="no">in_virtual_file</span>))</pre></body></html></div>
 <p>This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <code>raster</code> or <code>rasterVis</code> packages.</p>

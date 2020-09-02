@@ -2,16 +2,16 @@ Package: MODIStsp
 Title: A Tool for Automating Download and Preprocessing of MODIS Land Products
     Data
 Type: Package
-Version: 2.0.1
+Version: 2.0.2
 Authors@R: c(person("Lorenzo", "Busetto", email = "lbusett@gmail.com", role = c("aut", "cre"),
     comment = c(ORCID = '0000-0001-9634-6038')), 
     person("Luigi", "Ranghetti", email = "ranghetti.l@irea.cnr.it", role = c("aut"), 
     comment = c(ORCID = '0000-0001-6207-5188')),
     person("Leah", "Wasser", role = "rev", comment = "Leah Wasser reviewed the package for rOpenSci, see 
-                  https://github.com/ropensci/onboarding/issues/184"),
+                  https://github.com/ropensci/software-review/issues/184"),
     person("Jeff", "Hanson", role = "rev",
        comment = "Jeff Hanson reviewed the package for rOpenSci, see 
-                  https://github.com/ropensci/onboarding/issues/184"))
+                  https://github.com/ropensci/software-review/issues/184"))
 Description: Allows automating the creation of time series of rasters derived
     from MODIS Satellite Land Products data. It performs several typical
     preprocessing steps such as download, mosaicking, reprojection and resize
@@ -66,7 +66,7 @@ Suggests:
     magrittr,
     formatR
 SystemRequirements: 
-URL: https://github.com/ropensci/MODIStsp/, https://docs.ropensci.org/MODIStsp
+URL: https://github.com/ropensci/MODIStsp/, https://docs.ropensci.org/MODIStsp/
 BugReports: https://github.com/ropensci/MODIStsp/issues
 LazyData: true
 VignetteBuilder: knitr

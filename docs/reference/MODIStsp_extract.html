@@ -94,7 +94,7 @@ SpatialPolygons, etc.)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MODIStsp</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -339,7 +339,7 @@ belonging to the polygon, and one line for each date.</p>
           <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>"MODIStsp/VI_16Days_500m_v6/NDVI/"</span>))
 
 <span class='no'>opts_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/test_extract.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>)
-<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>options_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'><a href='MODIStsp.html'>MODIStsp</a></span>(<span class='kw'>opts_file</span> <span class='kw'>=</span> <span class='no'>opts_file</span>, <span class='kw'>gui</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># Now load the MODIStsp stack: This is a MODIS NDVI time series ranging between</span>
 <span class='co'># 2016-01-01 and 2016-12-18</span>
@@ -358,8 +358,8 @@ belonging to the polygon, and one line for each date.</p>
 
 <span class='co'># Now load a shapefile containing polygons from which we want to extract data</span>
 
-<span class='no'>polygons</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rgdal</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rgdal/man/readOGR.html'>readOGR</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/extract_polys.shp"</span>,
-                           <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>polygons</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sf</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_read.html'>st_read</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/extract_polys.shp"</span>,
+                           <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"MODIStsp"</span>), <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>polygons</span>
 
 <span class='co'># Finally, extract the average values for each polygon and date and plot the</span>
