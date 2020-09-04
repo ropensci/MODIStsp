@@ -536,7 +536,7 @@ MODIStsp_process <- function(proc_opts,
               mess_text <- paste0("[", date(),
                                   "] No images available for selected area ",
                                   "in date ", date_dirs[date])
-             process_message(mess_text, verbose)
+              process_message(mess_text, verbose)
             }
 
           } else {
@@ -590,5 +590,27 @@ MODIStsp_process <- function(proc_opts,
   if (verbose) message("[", date(), "] ",
                        "Original downloaded MODIS HDF files are in: `",
                        proc_opts$out_folder_mod, "`")
+
+  # Save previous options ----
+
+  # At the end of a successful execution, save the options used in the main
+  # output folder as a JSON file with name containing the date of processing.
+  # Also update "MODIStsp_previous.json.
+
+  if (!is.null(proc_opts)) {
+    if (is.null(proc_opts$spafile))  proc_opts$spafile <- NA
+    if (is.null(proc_opts$drawnext)) proc_opts$drawnext <- NA
+    if (all(unlist(proc_opts$bbox) == NULL)) proc_opts$bbox <- c(NA, NA, NA, NA)
+    opts_jsfile <- file.path(proc_opts$out_folder,
+                             paste0("MODIStsp_", Sys.Date(), ".json"))
+    jsonlite::write_json(proc_opts, opts_jsfile, pretty = TRUE,
+                         auto_unbox = TRUE)
+
+    if (verbose) message("[", date(), "] ",
+                         "Processing options saved to: `",
+                         opts_jsfile, "`")
+
+  }
+
   return("DONE")
 }
