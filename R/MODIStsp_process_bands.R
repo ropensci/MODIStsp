@@ -576,7 +576,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
     # workasround to avoid applying scale offset to nodata values if nodata_change is
     # FALSE and multiple nodata are present
-    if (nodata_in <- 99999) {
+    if (nodata_in == 99999) {
 
       if (!nodata_change) {
         nodata_in_min <- split_nodata_values(nodata_in_tmp)[[1]][1]
