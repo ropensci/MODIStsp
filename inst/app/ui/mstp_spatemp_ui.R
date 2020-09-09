@@ -146,17 +146,18 @@ shinydashboard::tabItem(
       # style = "display:inline-block;vertical-align:top;padding:1px",
       shiny::div(
         style = "display:inline-block;vertical-align:top;padding:1px;margin-right:5px",
-        shiny::selectInput("spatmeth",
-                           label = shiny::span(
-                             "Selection Method\u2000",
-                             shiny::actionLink(
-                               "help_spameth",
-                               shiny::icon("question-circle"))),
-                           choices = list("Select Tiles" = "tiles",
-                                          "Select Bounding Box" = "bbox",
-                                          "Load From Spatial File" = "file",
-                                          "Draw On Map" = "map"),
-                           width = "200px")
+        shiny::radioButtons("spatmeth",
+                            label = shiny::span(
+                              "Selection Method\u2000",
+                              shiny::actionLink(
+                                "help_spameth",
+                                shiny::icon("question-circle"))),
+                            choices = list("Select Tiles" = "tiles",
+                                           "Select Bounding Box" = "bbox",
+                                           "Load From Spatial File" = "file",
+                                           "Draw On Map" = "map"),
+                            selected = "tiles",
+                            inline = TRUE)
       )
 
     ),

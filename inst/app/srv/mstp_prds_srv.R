@@ -20,6 +20,12 @@ output$selprods <-renderUI({
                      selected = general_opts$selprod)
 })
 
+shiny::observeEvent(input$prodinfo, {
+  curprod   <- which(names(prod_opt_list) == isolate(input$selprod))
+  utils::browseURL(prod_opt_list[[curprod]][[1]]$www)
+})
+
+
 #Update products selector based on category ----
 observe({
   req(input$selprod)
