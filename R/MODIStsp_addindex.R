@@ -22,7 +22,7 @@
 #' @param new_indexnodata_out `character` nodata value to use for rasters
 #'   containing the new index
 #' @return The function is called for its side effects. On success, the
-#'  MODIStsp_Previous.json or the json options file specified by the user
+#'  MODIStsp_indexes.json
 #'  is modified so to allow computation of the additional indexes.
 #' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
 #' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
@@ -49,10 +49,8 @@ MODIStsp_addindex <- function(
   new_indexformula    = "",
   new_indexnodata_out = "32767") { #nolint
 
-  # On first execution (or if the file is not found), ask the user permission
-  # for saving a options file in "your-R-library/MODIStsp/ExtData/Previous"
 
-  indexes_file <- (system.file("ExtData/Previous",
+  indexes_file <- (system.file("ExtData",
                                "MODIStsp_indexes.json",
                                package = "MODIStsp"))
 
@@ -112,7 +110,7 @@ MODIStsp_addindex <- function(
 #'  index to the json options file if no errors are detected in `check_formula_errors.
 #' @inheritParams MODIStsp_addindex
 #' @return The function is used for its side effects. It updates the
-#'  previous_jsfile with the info on the new indexes
+#'  MODIStsp_indexes.json file with the info on the new indexes
 #' @noRd
 #' @importFrom jsonlite write_json
 save_formula <- function(refbands_names,
@@ -123,7 +121,7 @@ save_formula <- function(refbands_names,
                          new_indexnodata_out,
                          prod_opt_list) {
 
-  indexes_file <- system.file("ExtData/Previous",
+  indexes_file <- system.file("ExtData",
                               "MODIStsp_indexes.json",
                               package = "MODIStsp")
 

@@ -52,7 +52,7 @@ observe({
 
   indlayers <- prod_opt_list[[curprod]][[1]]$indexes_bandnames
   indlabels <- prod_opt_list[[curprod]][[1]]$indexes_fullnames
-  indexes_file <- system.file("ExtData/Previous",
+  indexes_file <- system.file("ExtData",
                               "MODIStsp_indexes.json",
                               package = "MODIStsp")
 

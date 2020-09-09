@@ -16,9 +16,7 @@
 #' @param out_folder `character` Main output folder, default: NULL.
 #' @param out_folder_mod `character` Output folder for original HDF storage, default: $tempdir
 #' @param opts_file `character` full path to a JSON file
-#'  containing MODIStsp processing options saved from the GUI. If NULL,
-#'  parameters of the last successful run are retrieved from file
-#'  "MODIStsp_Previous.json" in subfolder "Previous"), Default: NULL
+#'  containing MODIStsp processing options saved from the GUI, Default: NULL
 #' @param selprod `character` Name of selected MODIS product (e.g.,
 #'   Vegetation Indexes_16Days_250m (M*D13Q1)). You can get
 #'   a list of available product names using function `MODIStsp_get_prodnames`,
@@ -409,7 +407,8 @@ MODIStsp <- function(...,
       # Load default values - to avoid overwriting always the loaded
       # parameters with default, we set the defaults here rather than
       # in the initialization of the function!
-      proc_opts <- jsonlite::read_json(system.file("ExtData/Previous/mstp_defaults.json",
+      proc_opts <- jsonlite::read_json(system.file("ExtData",
+                                                   "mstp_defaults.json",
                                                    package = "MODIStsp"))
     }
 

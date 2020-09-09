@@ -1,5 +1,5 @@
 prod_opt_list <- load_prodopts()
-prodopts_file <- system.file("ExtData/Previous", "MODIStsp_ProdOpts.RData",
+prodopts_file <- system.file("ExtData", "MODIStsp_ProdOpts.RData",
                              package = "MODIStsp")
 mod_prod_cat <- as.data.frame(
   t(vapply(prod_opt_list, function(x){

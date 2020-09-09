@@ -43,7 +43,7 @@ MODIStsp_process <- function(proc_opts,
   prod_opt_list <- load_prodopts()
   prod_opts <- prod_opt_list[[proc_opts$selprod]][["6"]]
 
-  cust_ind      <- jsonlite::read_json(system.file("ExtData/Previous/MODIStsp_indexes.json",
+  cust_ind      <- jsonlite::read_json(system.file("ExtData","MODIStsp_indexes.json",
                                                    package = "MODIStsp"))
 
   if (length(cust_ind) == 1) {

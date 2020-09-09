@@ -15,7 +15,7 @@ check_formula_errors <- function(new_indexbandname,
                                  refbands_names,
                                  avail_refbands) {
 
-  indexes_file <- system.file("ExtData/Previous",
+  indexes_file <- system.file("ExtData",
                               "MODIStsp_indexes.json",
                               package = "MODIStsp")
 
