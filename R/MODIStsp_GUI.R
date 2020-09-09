@@ -1,10 +1,7 @@
 #' @title Build and manage the MODIStsp GUI
 #' @description
 #'	Function used to generate and handle the GUI used to allow selection of
-#'	MODIStsp processing parameters. If the "previous options" file
-#'	(MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
-#'	the GUI to its last state. Otherwise, the previous options file is created
-#'	by launching the MODIStsp_read_xml function
+#'	MODIStsp processing parameters.
 #' @return the function is called for its side effects - opening
 #'  the GUI and allowing to set, save, load options and eventually
 #'  launch the processing.
@@ -27,11 +24,11 @@ MODIStsp_GUI <- function() {
   if (requireNamespace("magrittr", quietly = TRUE)) {
     `%>%` <- magrittr::`%>%`
   }
-  
+
   # ____________________________________________________________________________
   # Files/Folder Initialization and set-up of default parameters            ####
 
-  # Load the products options from "/ExtData/Previous/MODIStsp_ProdOpts.RData"
+  # Load the products options from "/ExtData/MODIStsp_ProdOpts.RData"
   prod_opt_list <- load_prodopts()
   # Here you add any variables that your server can find
   #

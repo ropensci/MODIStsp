@@ -20,6 +20,12 @@ output$selprods <-renderUI({
                      selected = general_opts$selprod)
 })
 
+shiny::observeEvent(input$prodinfo, {
+  curprod   <- which(names(prod_opt_list) == isolate(input$selprod))
+  utils::browseURL(prod_opt_list[[curprod]][[1]]$www)
+})
+
+
 #Update products selector based on category ----
 observe({
   req(input$selprod)
@@ -52,7 +58,7 @@ observe({
 
   indlayers <- prod_opt_list[[curprod]][[1]]$indexes_bandnames
   indlabels <- prod_opt_list[[curprod]][[1]]$indexes_fullnames
-  indexes_file <- system.file("ExtData/Previous",
+  indexes_file <- system.file("ExtData",
                               "MODIStsp_indexes.json",
                               package = "MODIStsp")
 

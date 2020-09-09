@@ -39,7 +39,7 @@
 #'
 MODIStsp_resetindexes <- function() {
 
-  indexes_file <- system.file("ExtData/Previous",
+  indexes_file <- system.file("ExtData",
                               "MODIStsp_indexes.json",
                               package = "MODIStsp")
 

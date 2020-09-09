@@ -13,10 +13,11 @@
 load_prodopts <- function() {
 
   # RData file containing products' characteristics
-  prodopts_dir <- system.file("ExtData/Previous", package = "MODIStsp")
-  dir.create(prodopts_dir, showWarnings = FALSE, recursive = TRUE)
-  prodopts_file <- file.path(prodopts_dir, "MODIStsp_ProdOpts.RData")
-  # XML file describing MODIS products
+  prodopts_file <- system.file("ExtData", "MODIStsp_ProdOpts.RData",
+                               package = "MODIStsp")
+  # dir.create(prodopts_dir, showWarnings = FALSE, recursive = TRUE)
+  # prodopts_file <- file.path(prodopts_dir, "MODIStsp_ProdOpts.RData")
+  # # XML file describing MODIS products
   xml_file <- system.file("ExtData", "MODIStsp_ProdOpts.xml",
                           package = "MODIStsp")
 

@@ -13,7 +13,7 @@ test_that("MODIStsp_resetindexes works as expected", {
   )
   # remove it and check if custom indexes were removed
   MODIStsp_resetindexes()
-  opts <- jsonlite::read_json(system.file("ExtData/Previous/MODiStsp_indexes.json",
+  opts <- jsonlite::read_json(system.file("ExtData" , "MODIStsp_indexes.json",
                                 package = "MODIStsp"))
   expect_equal(opts, "")
 

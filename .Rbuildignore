@@ -15,7 +15,6 @@ _pkgdown.yaml
 ^old_and_various/
 inst/ExtData/Previous/MODIStsp_Previous.json
 ^sketched_routines/
-^ExtData/
 ^README\.Rmd$
 configure.win
 cran-comments.md
