@@ -166,8 +166,8 @@ shiny::observeEvent(input$save_index, {
       "1" = shinyalert::shinyalert(title = "Error!",
                                    text = paste("The Formula of the new Index is not computable.
                                        Please check it !\n Valid Band Names are: \n\n",
-                                       paste(avail_refbands, collapse = ", "),
-                                       "."), type = "error")
+                                                paste(avail_refbands, collapse = ", "),
+                                                "."), type = "error")
       ,
       "2" = shinyalert::shinyalert(title = "Error",
                                    text = "Index full or short name is already present.\n\n
@@ -216,14 +216,21 @@ observeEvent(input$close_app, {
 })
 
 observeEvent(input$run_app, {
-  shinyalert::shinyalert(title = "Starting Processing!",
-                         text = "You can follow progress in the console!",
-                         type = "info")
   proc_opts <- shinygui_saveopts(input, prod_opt_list, rv)
-  shinyjs::delay(1000, {shinyjs::js$closeWindow()
-    stopApp()
-    MODIStsp_process(proc_opts, n_retries = 20)
-    #retrieve the options from the widgets
-  })
+  #retrieve the options from the widgets
+  if (inherits(proc_opts, "character")) {
+    # send error if neeeded ----
+    shinyalert::shinyalert(title = "Error in input parameters!",
+                           text = proc_opts,
+                           type = "error")
+  } else {
+    shinyalert::shinyalert(title = "Starting Processing!",
+                           text = "You can follow progress in the console!",
+                           type = "info")
+    shinyjs::delay(1000, {shinyjs::js$closeWindow()
+      stopApp()
+      MODIStsp_process(proc_opts, n_retries = 20)
+    })
+  }
 
 })
