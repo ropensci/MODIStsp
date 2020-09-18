@@ -13,10 +13,7 @@ launch the processing.
 }
 \description{
 Function used to generate and handle the GUI used to allow selection of
-MODIStsp processing parameters. If the "previous options" file
-(MODIStsp_Previous.json) already exists, it is loaded and used to reinstate
-the GUI to its last state. Otherwise, the previous options file is created
-by launching the MODIStsp_read_xml function
+MODIStsp processing parameters.
 }
 \note{
 License: GPL 3.0

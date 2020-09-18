@@ -58,9 +58,7 @@ argument), Default: TRUE}
 \item{out_folder_mod}{\code{character} Output folder for original HDF storage, default: $tempdir}
 
 \item{opts_file}{\code{character} full path to a JSON file
-containing MODIStsp processing options saved from the GUI. If NULL,
-parameters of the last successful run are retrieved from file
-"MODIStsp_Previous.json" in subfolder "Previous"), Default: NULL}
+containing MODIStsp processing options saved from the GUI, Default: NULL}
 
 \item{selprod}{\code{character} Name of selected MODIS product (e.g.,
 Vegetation Indexes_16Days_250m (M*D13Q1)). You can get
