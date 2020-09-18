@@ -10,7 +10,7 @@ MODIStsp 2.0.3
 There were no ERRORs, WARNINGs and NOTES
 
 This submission should fix errors on Debian builds, due to improper 
-trigger of an internal function leading to writing in the user's 
+trigger of an helper function leading to writing in the user's 
 lib folder. 
 
 Also fixes a couple of bugs.
