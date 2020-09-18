@@ -50,7 +50,7 @@ test_that("MODIStsp_extract works as expected", {
       #all data for polys outside extent of raster are NaN
       expect_equal(mean(out_data[, 9], na.rm = TRUE), NaN)
 
-      #chack that results are equal to raster::extract
+      #check that results are equal to raster::extract
       expect_warning(out_rastextract <- raster::extract(ts_data,
                                                         polygons,
                                                         fun = mean,

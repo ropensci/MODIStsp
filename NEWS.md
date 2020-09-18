@@ -1,3 +1,22 @@
+## MODIStsp 2.0.2
+
+### Main changes
+
+- This submission should fix errors on Debian CRAN builds, due to improper 
+trigger of an internal function leading to writing in the user's 
+lib folder. 
+
+- Fixes a bug leading to crash when using scale_val = TRUE and change_no_data = FALSE
+
+- Fixes a bug leading to the GUI crashing rather than giving info messages in 
+  case not all input parameters are specified
+
+- Implements redirection to MODIS products web pages when pressing 
+ the corresponding button
+ 
+- Modifies slightly the Shiny GUI
+
+
 ## MODIStsp 2.0.0
 
 ### Main changes

@@ -73,6 +73,7 @@ reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE) {
 
     pts  <- sf::st_as_sf(d_bbox_in, coords = c("X", "Y"), agr = "constant",
                          crs = in_proj)
+
     pts_convert <- sf::st_transform(pts, out_proj)
 
     bbox_out    <- sf::st_bbox(pts_convert)
