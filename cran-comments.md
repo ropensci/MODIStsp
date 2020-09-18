@@ -1,8 +1,8 @@
 MODIStsp 2.0.3
 ================
-* Windows 10 on local install, R 3.6.3
+
 * Windows 10 on local install, R 4.0
-* Ubuntu 18.04 on local install, R 4.0
+* Ubuntu 18.04 on local install, R 3.6.3
 * win-builder (R-devel, R-release)
 
 ## R CMD check results
