@@ -166,7 +166,7 @@ parameters are `selprod` (specifying the MODIS product), (one of) `bandsel`, `qu
 The new function `MODIStsp_get_prodlayers` allows to easily retrieve the 
 names of products and available layers based on product code, such as in: 
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 library(MODIStsp) 
 MODIStsp_get_prodlayers("M*D13Q1")
 ```
@@ -175,7 +175,7 @@ The other parameters are set automatically to default values (see XXX for detail
 
 For example, the following code processes layers __NDVI__ and __EVI__ and quality indicator __usefulness__ of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to R tempdir: 
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 library(MODIStsp) 
 
 # **NOTE** Output files of examples are saved to file.path by setting out_folder to $tempdir.
@@ -210,7 +210,7 @@ list.files(file.path(out_fold ,"QA_usef"))
 
 Alternatively, you can run MODIStsp without opening the GUI by specifying a previously saved options file: 
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 library(MODIStsp) 
 
 # **NOTE** Output files of examples are saved to file.path(tempdir(), "MODIStsp").
@@ -238,7 +238,7 @@ list.files(file.path(out_fold ,"EVI"))
 If you need to process different MODIS products, you can prepare beforehand different
 MODIStsp options files by using the GUI, and then loop over them like this:
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 
 opts_files <- c(system.file("testdata/test_MOD13A2.json", package = "MODIStsp"), 
                 system.file("testdata/test_MOD10A2.json", package = "MODIStsp"))
@@ -268,7 +268,7 @@ Finally, it is possible to both specify a previously saved options file AND sett
 
 Specifying the `spafile` parameter while setting the `spatmeth` parameter to "file" overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File. For example:
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 # Run the tool using the settings previously saved in a specific option file
 # and specifying the extent from a spatial file allows to re-use the same
 # processing settings to perform download and reprocessing on a different area
