@@ -229,7 +229,7 @@ observeEvent(input$run_app, {
                            type = "info")
     shinyjs::delay(1000, {shinyjs::js$closeWindow()
       stopApp()
-      MODIStsp_process(proc_opts, n_retries = 20)
+      MODIStsp_process(proc_opts, n_retries = 5)
     })
   }
 
