@@ -42,7 +42,7 @@ MODIStsp(
   out_format = NULL,
   compress = NULL,
   test = NULL,
-  n_retries = 20,
+  n_retries = 5,
   verbose = TRUE
 )
 }

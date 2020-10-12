@@ -266,7 +266,7 @@ MODIStsp <- function(...,
                      out_format      = NULL,
                      compress        = NULL,
                      test            = NULL,
-                     n_retries       = 20,
+                     n_retries       = 5,
                      verbose         = TRUE) {
 
   # Make so that "raster" functions does not automatically add extensions on

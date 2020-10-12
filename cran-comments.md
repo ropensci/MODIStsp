@@ -1,3 +1,22 @@
+MODIStsp 2.0.4
+================
+
+* Windows 10 on local install, R 4.0
+* Ubuntu 18.04 on local install, R 3.6.3
+* win-builder (R-devel, R-release)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs
+
+There is one note related to nuw submission (package was archived before I had time to fix it)
+
+This submission should fix errors due to trying accessing temporarily non available
+urls when building vignettes, which led to CRAN archival. Sorry for that. 
+
+Also limits number of retries on HTTR GET to 5 (previously 20) as suggested by
+DR Riply in his mail
+
 MODIStsp 2.0.3
 ================
 
