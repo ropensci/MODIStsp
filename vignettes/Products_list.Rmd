@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE )
 library(data.table)
 library(dplyr)
 library(knitr)
-prodopts_file <- system.file("ExtData/Previous", "MODIStsp_ProdOpts.RData", 
+prodopts_file <- system.file("ExtData/", "MODIStsp_ProdOpts.RData", 
                              package = "MODIStsp")
 load(prodopts_file)
 out_list = list()
