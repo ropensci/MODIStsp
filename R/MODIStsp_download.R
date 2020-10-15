@@ -144,6 +144,7 @@ MODIStsp_download <- function(modislist,
             # http download - httr
             download <- try(httr::GET(remote_filename,
                                       httr::authenticate(user, password),
+                                      httr::timeout(20),
                                       # httr::progress(),
                                       httr::write_disk(local_filename,
                                                        overwrite = TRUE)))
