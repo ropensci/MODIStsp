@@ -1,3 +1,20 @@
+MODIStsp 2.0.5
+================
+
+* Windows 10 on local install, R 4.0
+* Ubuntu 18.04 on local install, R 3.6.3
+* win-builder (R-devel, R-release)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs and NOTES
+
+This submission should fix errors on Debian builds, due to improper 
+trigger of an helper function leading to writing in the user's 
+lib folder. 
+
+Also fixes a couple of bugs.
+
 MODIStsp 2.0.4
 ================
 
