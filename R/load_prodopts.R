@@ -18,18 +18,19 @@ load_prodopts <- function() {
   # dir.create(prodopts_dir, showWarnings = FALSE, recursive = TRUE)
   # prodopts_file <- file.path(prodopts_dir, "MODIStsp_ProdOpts.RData")
   # # XML file describing MODIS products
+
   xml_file <- system.file("ExtData", "MODIStsp_ProdOpts.xml",
                           package = "MODIStsp")
 
   if (file.exists(prodopts_file)) {
     prod_opt_list <- get(load(prodopts_file))
-    if (is.null(attr(prod_opt_list, "MODIStspVersion"))) {
-      reload_prodlist <- TRUE
-    } else {
-      # load if prod_opt_list is old
-      reload_prodlist <- attr(prod_opt_list, "MODIStspVersion") <
-        utils::packageVersion("MODIStsp")
-    }
+    # if (is.null(attr(prod_opt_list, "MODIStspVersion"))) {
+    #   reload_prodlist <- TRUE
+    # } else {
+    #   # load if prod_opt_list is old
+    #   reload_prodlist <- attr(prod_opt_list, "MODIStspVersion") <
+    #     utils::packageVersion("MODIStsp")
+    # }
   } else {
     reload_prodlist <- TRUE
   }
