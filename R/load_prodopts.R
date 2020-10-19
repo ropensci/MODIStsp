@@ -31,6 +31,7 @@ load_prodopts <- function() {
     #   reload_prodlist <- attr(prod_opt_list, "MODIStspVersion") <
     #     utils::packageVersion("MODIStsp")
     # }
+    reload_prodlist <- FALSE
   } else {
     reload_prodlist <- TRUE
   }
