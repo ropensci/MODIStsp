@@ -6,7 +6,6 @@ Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://trav
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://codecov.io/github/ropensci/MODIStsp?branch=master)
-[![Lifecycle](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://www.tidyverse.org/lifecycle/#superseded)
 [![](https://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/software-review/issues/184)
 
 # MODIStsp <img src='man/figures/logo.png' align="right" height="139" />
