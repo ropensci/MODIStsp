@@ -1,18 +1,19 @@
-pandoc: 2.9.2.1
-pkgdown: 1.5.1
+pandoc: 2.3.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  MODIStsp: MODIStsp.html
+  Products_list: Products_list.html
   analyze: analyze.html
   discovered_bug: discovered_bug.html
   faq: faq.html
   installation: installation.html
   interactive_execution: interactive_execution.html
-  MODIStsp: MODIStsp.html
+  lorenzo: lorenzo.html
   noninteractive_execution: noninteractive_execution.html
   output: output.html
-  Products_list: Products_list.html
   standalone_execution: standalone_execution.html
-last_built: 2020-09-02T13:53Z
+last_built: 2020-11-02T17:00Z
 urls:
   reference: http://docs.ropensci.org/MODIStsp/reference
   article: http://docs.ropensci.org/MODIStsp/articles
