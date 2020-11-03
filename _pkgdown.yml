@@ -75,6 +75,9 @@ navbar:
     - icon: fa-github fa-lg
       text: "github"
       href: https://github.com/ropensci/MODIStsp/
+    - icon: fa-cross
+      text: "dedication"
+      href: articles/lorenzo.html
 
 extra_packages:
   - tidyr

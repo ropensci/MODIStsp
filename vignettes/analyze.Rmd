@@ -19,6 +19,7 @@ dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"),
 file.copy(list.files(test_folder, full.names = TRUE),
           file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"), 
           recursive = T)
+Sys.setlocale("LC_TIME", "en_US.UTF-8")
 ```
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Accessing the raster time series__

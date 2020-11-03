@@ -1,0 +1,26 @@
+---
+title: In memoriam
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<div style='display: block; margin: auto;'>
+<img src='https://s.gravatar.com/avatar/6f1e3990eec2eb3b4f8a1233b8098c4c?s=500'>
+</div>
+
+This package is dedicated to the memory of
+<a href="https://lbusett.netlify.app/" target="_blank">Lorenzo Busetto</a>.
+
+Lorenzo firmly believed in the open source model: he designed and built
+this package in the framework of the activities conducted at the 
+Italian National Research Council (CNR-IREA), but releasing it as a free software 
+so that anyone can use it for free.
+As an expert in using R for spatial analysis and remote sensing applications, 
+he actively contributed to the geospatial community.
+
+Lorenzo maintained {MODIStsp} until 21st October 2020, when he suddenly
+passed away.
+He left an enormous void among his collaborators and friends.
+

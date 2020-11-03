@@ -6,6 +6,7 @@ Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://trav
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://codecov.io/github/ropensci/MODIStsp?branch=master)
+[![Lifecycle](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://www.tidyverse.org/lifecycle/#superseded)
 [![](https://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/software-review/issues/184)
 
 # MODIStsp <img src='man/figures/logo.png' align="right" height="139" />
@@ -33,10 +34,11 @@ and extent whenever a new image is available.
 <a href="http://www.irea.cnr.it/en/">
 <img src="man/figures/logo_irea.png" height="40" align="left" /></a>
 
-***`MODIStsp` is developed and maintained by Lorenzo Busetto and Luigi
-Ranghetti, [Institute of Remote Sensing of
-Environment](http://www.irea.cnr.it/en/) - National Research Council -
-Italy (CNR-IREA)***
+<span style="font-style:italic;font-weight:bold;">`MODIStsp` was
+developed by Lorenzo Busetto and Luigi Ranghetti, [Institute of Remote
+Sensing of Environment](http://www.irea.cnr.it/en/) - National Research
+Council - Italy (CNR-IREA). [It is dedicated to the memory of
+Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
 
 ## Citation
 
@@ -136,7 +138,8 @@ MODIStsp website at
 
 ## <i class="fa fa-desktop" aria-hidden="true"></i> System Requirements
 
-`MODIStsp` requires [R](https://cran.r-project.org) v \>= 3.6.3
+`MODIStsp` requires [R](https://cran.r-project.org) v \>=
+3.6.3
 
 -----
 
@@ -265,6 +268,7 @@ for more detailed instructions and examples).
 
 Please note that this project is released with a [Contributor Code of
 Conduct](https://github.com/ropensci/MODIStsp/blob/master/CONDUCT.md).
-By participating in this project you agree to abide by its terms.
+By participating in this project you agree to abide by its
+terms.
 
 [![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
