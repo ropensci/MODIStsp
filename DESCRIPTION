@@ -56,7 +56,7 @@ Suggests:
     leaflet,
     shiny,
     shinydashboard,
-    shinyFiles, 
+    shinyFiles (>= 0.9.0), 
     shinyalert, 
     shinyjs, 
     rappdirs,
