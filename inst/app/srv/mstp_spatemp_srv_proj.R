@@ -4,7 +4,6 @@
 observe({
   curprod <- req(input$selprod)
   natres  <- prod_opt_list[[curprod]][[1]]$native_res
-  # browser()
   if (natres != 5600) {
     natproj <- "MODIS Sinusoidal"
 
@@ -20,7 +19,6 @@ observe({
   projchoice <- req(input$out_projsel)
   curprod <- req(input$selprod)
   natres  <- prod_opt_list[[curprod]][[1]]$native_res
-  # browser()
   if (natres != 5600) {
     natproj <- "MODIS Sinusoidal"
 

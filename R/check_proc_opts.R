@@ -106,8 +106,8 @@ check_proc_opts <- function(proc_opts) {
   assertthat::see_if(is.logical(o$nodata_change))
   assertthat::see_if(is.logical(o$scale_val))
 
-  assertthat::see_if(all(o$ts_format %in% c("R RasterStack", "ENVI Meta Files", "GDAL vrt files")),
-                     msg = "`ts_format` must be (one or more of) 'R RasterStack', 'ENVI Meta Files' or 'GDAL vrt files'")
+  assertthat::see_if(all(o$ts_format %in% c("R RasterStack", "ENVI Meta Files", "GDAL VRT")),
+                     msg = "`ts_format` must be (one or more of) 'R RasterStack', 'ENVI Meta Files' or 'GDAL VRT'")
 
   assertthat::see_if(o$compress %in% c("None", "PACKBITS", "LZW", "DEFLATE"),
                      msg = "`spatmeth` must be 'None', 'PACKBITS', 'LZW' or 'DEFLATE'")

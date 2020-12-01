@@ -325,13 +325,13 @@ shiny::observeEvent(input$help_time_series, {
      processed layers as if they were a single multitemporal file."
     )),
    shiny::p(shiny::HTML("Possible choices are: ")),
-   shiny::p(shiny::HTML("<strong>R rasterStack</strong>:",
+   shiny::p(shiny::HTML("<strong>R RasterStack</strong>:",
                         "extension <span style='font-family: monospace;'>.RData</span>.",
                         "Can be opened in R.")),
-   shiny::p(shiny::HTML("<strong>ENVI Meta</strong>:",
+   shiny::p(shiny::HTML("<strong>ENVI Meta Files</strong>:",
                         "extension <span style='font-family: monospace;'>.dat</span>.",
                         "Can be opened in R.")),
-   shiny::p(shiny::HTML("<strong>GDAL vrt</strong>:",
+   shiny::p(shiny::HTML("<strong>GDAL VRT</strong>:",
                         "extension <span style='font-family: monospace;'>.vrt</span>.",
                         "Can be opened in QGIS and R.")),
 

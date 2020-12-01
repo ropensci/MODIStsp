@@ -165,7 +165,7 @@ original MODIS layers, and Spectral Indexes are saved as floating point. If
 FALSE, no rescaling is done and Spectral Indexes are saved as integer, with a
 10000 scaling factor.}
 
-\item{ts_format}{\verb{character array including ["R asterStack" | "ENVI Meta Files" | "GDAL vrt files" | "ENVI and GDAL"]} Selected virtual time series format.}
+\item{ts_format}{\verb{character array including ["R RasterStack" | "ENVI Meta Files" | "GDAL VRT" | "ENVI and GDAL"]} Selected virtual time series format.}
 
 \item{out_format}{\code{character ["ENVI" | "GTiff"]} Desired output format.}
 
