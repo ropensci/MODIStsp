@@ -10799,23 +10799,124 @@
                 </version>
             </versions>
         </MOD16A2>
-        <MOD16A3>
-            <name>Net_ET_Yearly_500m (M*D16A3)</name>
+
+
+        <MOD16A2GF>
+            <name>Net_ETgf_8Day_500m (M*D16A2GF)</name>
             <cat_01>Ecosystem Variables</cat_01>
             <cat_02>Evapotranspiration</cat_02>
-            <file_prefix_terra>MOD16A3</file_prefix_terra>
-            <file_prefix_aqua>MYD16A3</file_prefix_aqua>
+            <file_prefix_terra>MOD16A2GF</file_prefix_terra>
+            <file_prefix_aqua>MYD16A2GF</file_prefix_aqua>
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>M*D16A3: MODIS/Terra/Aqua Net Evapotranspiration Yearly L4 Global 500 m SIN Grid V006</prod_fullname>
-                    <main_out_folder>Net_ET_Yearly_500m_v6</main_out_folder>
+                    <prod_fullname>M*D16A2GF: MODIS/Terra/Aqua Net Evapotranspiration Gap-Filled 8-Day L4 Global 500 m V006</prod_fullname>
+                    <main_out_folder>Net_ETgf_8Day_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD16A3.006/</http_terra>
-                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD16A3.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD16A2GF.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD16A2GF.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/products/mod16a3v006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod16a2gfv006</www>
+                    <bands>
+                        <band>
+                            <bandname>ET_500m</bandname>
+                            <fullname>Total Evapotranspiration</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761:32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>LE_500m</bandname>
+                            <fullname>Average Latent Heat Flux</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761:32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>10000</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>PET_500m</bandname>
+                            <fullname>Total Potential Evapotranspiration</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761:32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>PLE_500m</bandname>
+                            <fullname>Average Potential Latent Heat Flux</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32761:32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>10000</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>ET_QC_500m</bandname>
+                            <fullname>Evapotranspiration Quality Control flags</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                    <quality_indicators>
+                        <quality>
+                            <quality_bandname>QC_bits</quality_bandname>
+                            <quality_fullname>MODLAND_QC bits</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>0</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_sensor</quality_bandname>
+                            <quality_fullname>Sensor</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_DeadDet</quality_bandname>
+                            <quality_fullname>DeadDetector</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>2</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_cld</quality_bandname>
+                            <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>3-4</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_SCF</quality_bandname>
+                            <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
+                            <quality_source>ET_QC_500m</quality_source>
+                            <quality_bitN>5-7</quality_bitN>
+                        </quality>
+                    </quality_indicators>
+                </version>
+            </versions>
+        </MOD16A2GF>
+        <MOD16A3GF>
+            <name>Net_ETgf_Yearly_500m (M*D16A3GF)</name>
+            <cat_01>Ecosystem Variables</cat_01>
+            <cat_02>Evapotranspiration</cat_02>
+            <file_prefix_terra>MOD16A3GF</file_prefix_terra>
+            <file_prefix_aqua>MYD16A3GF</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>M*D16A3GF: MODIS/Terra/Aqua Net Evapotranspiration Gap-Filled Yearly L4 Global 500 m SIN Grid V006</prod_fullname>
+                    <main_out_folder>Net_ETgf_Yearly_500m_v6</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD16A3GF.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD16A3GF.006/</http_aqua>
+                    <combined>0</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/products/myd16a3gfv006</www>
                     <bands>
                         <band>
                             <bandname>ET_500m</bandname>
@@ -10865,7 +10966,7 @@
                     </bands>
                 </version>
             </versions>
-        </MOD16A3>
+        </MOD16A3GF>
         <MOD17A2H>
             <name>Gross_PP_8Days_500m (M*D17A2H)</name>
             <cat_01>Ecosystem Variables</cat_01>
