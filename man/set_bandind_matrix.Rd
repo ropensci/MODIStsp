@@ -50,5 +50,5 @@ each available QI or SI
 FUNCTION_DESCRIPTION
 }
 \author{
-Lorenzo Busetto, phD (2017) \email{lbusett@gmail.com}
+Lorenzo Busetto, phD (2017)
 }

@@ -19,5 +19,5 @@ The function is called for its side effects
 helper function to provide processing messages
 }
 \author{
-Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}
+Lorenzo Busetto, phD (2017)
 }

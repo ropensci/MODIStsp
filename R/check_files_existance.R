@@ -22,8 +22,8 @@
 #'   were selected
 #' @param out_format `character` GTiff or ENVI
 #' @return check - logical = 1 if all expected output files are already existing
-#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
-#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017)
+#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
 #' @note License: GPL 3.0
 
 check_files_existence <- function(out_prod_folder,

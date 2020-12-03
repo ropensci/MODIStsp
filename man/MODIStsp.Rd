@@ -314,7 +314,7 @@ plot(raster(outfiles_iseo[1]))
 \code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}, \code{\link[=MODIStsp_process]{MODIStsp_process()}}
 }
 \author{
-Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
+Lorenzo Busetto, phD (2014-2017)
 
-Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2015-2017) \email{luigi@ranghetti.info}
 }

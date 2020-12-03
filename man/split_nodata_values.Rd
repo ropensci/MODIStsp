@@ -73,5 +73,5 @@ MODIStsp:::split_nodata_values(c("255","250,254:255"), take_all = FALSE)
 MODIStsp:::create_nodata_rcl(c("255","250,254:255"), c("255","255"))
 }
 \author{
-Luigi Ranghetti, phD (2018) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2018) \email{luigi@ranghetti.info}
 }

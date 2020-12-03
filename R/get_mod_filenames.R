@@ -27,8 +27,8 @@
 #' \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
 #' modified to adapt it to MODIStsp scheme and to http archive (instead than old
 #'  FTP) by:
-#' @author Lorenzo Busetto, phD (2014-2016) \email{lbusett@@gmail.com}
-#' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2016)
+#' @author Luigi Ranghetti, phD (2016) \email{luigi@@ranghetti.info}
 #' @note License: GPL 3.0
 #' @importFrom httr RETRY authenticate content
 #' @importFrom stringr str_split str_pad

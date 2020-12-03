@@ -53,7 +53,7 @@ Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
 license GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2017) \email{lbusett@gmail.com}
+Lorenzo Busetto, phD (2017)
 
-Luigi Ranghetti, phD (2017) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2017) \email{luigi@ranghetti.info}
 }

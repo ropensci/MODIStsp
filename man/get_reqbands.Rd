@@ -62,5 +62,5 @@ required to compute the Spectral Indexes and Quality Indicators selected
 by the user
 }
 \author{
-Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}
+Lorenzo Busetto, phD (2017)
 }

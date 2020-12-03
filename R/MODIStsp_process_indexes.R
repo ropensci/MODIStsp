@@ -25,8 +25,8 @@
 #' otherwise integer -10000 - 10000
 #' @return NULL - new raster file saved in out_filename
 #'
-#' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
-#' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2017)
+#' @author Luigi Ranghetti, phD (2017) \email{luigi@@ranghetti.info}
 #' @note License: GPL 3.0
 #' @importFrom raster NAvalue overlay
 #' @importFrom tools file_path_sans_ext

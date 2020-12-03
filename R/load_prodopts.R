@@ -7,7 +7,7 @@
 #   from RData is much faster, but the XML allows for easier maintenance and
 #   update of the MODIS products descriptions)
 #' @rdname load_prodopts
-#' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
+#' @author Lorenzo Busetto, phD (2017)
 #' @importFrom utils packageVersion
 
 load_prodopts <- function() {

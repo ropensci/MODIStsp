@@ -20,5 +20,5 @@ License: GPL 3.0
 MODIStsp_get_prodnames()
 }
 \author{
-Lorenzo Busetto, phD (2014-2020) \email{lbusett@gmail.com}
+Lorenzo Busetto, phD (2014-2020)
 }

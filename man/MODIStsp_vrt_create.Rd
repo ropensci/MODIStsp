@@ -81,7 +81,7 @@ Created virtual files are stored in the "Time Series" subfolder of `out_prod_fol
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
+Lorenzo Busetto, phD (2014-2017)
 
-Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2015) \email{luigi@ranghetti.info}
 }

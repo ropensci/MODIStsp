@@ -125,7 +125,8 @@
 
       
 
-      </header><div class="row">
+      </header><link href="faq_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="faq_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Frequently Asked Questions</h1>
@@ -196,11 +197,10 @@
 <h4 class="hasAnchor">
 <a href="#installing-from-github-fails-due-to-missing-dependencies" class="anchor"></a>- Installing from github fails due to missing dependencies</h4>
 <p>There are currently some problems in installing <code>MODIStsp</code> <strong>via <code>install_github</code></strong> on R &gt;= 3.3.1 due to not correct installation of dependencies (related to a bug in CRAN version of <code>install_github</code>). Installing the development version of <code>devtools</code> should solve the issue. To do so, on a <strong>clean</strong> R/RStudio session do:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-  <span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"hadley/devtools"</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://devtools.r-lib.org">devtools</a></span>)
-</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+  <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"hadley/devtools"</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span></code></pre></div>
 <p>, then continue with standard <code>MODIStsp</code> installation.</p>
 <p>If you have problems in installing the “devel” version of <code>devtools</code>, manually installing all the dependencies should also solve the issue. To do so, please try doing:</p>
 <pre><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages(c("bitops", "data.table" , "gdalUtilities", "gWidgets", "gWidgetsRGtk2",
@@ -236,7 +236,7 @@
 <ol style="list-style-type: decimal">
 <li>If you’re connecting to the internet <strong>via a proxy</strong>, download will fail. To solve the problem, identify the IP address and port of you proxy, and before running MODIStsp, run the following instructions:</li>
 </ol>
-<pre><code><a href="https://httr.r-lib.org">    library(httr)
+<pre><code><a href="https://httr.r-lib.org/">    library(httr)
     set_config(use_proxy(url="XXX.XXX.XXX.XXX", port=YYYY))</a></code></pre>
 <p>(substitute XXX.XXX.XXX.XXX and YYYY with the IP address and port number of the proxy, respectively)</p>
 <ol start="2" style="list-style-type: decimal">

@@ -42,7 +42,7 @@
 #'  single values.
 #'  Notice that the first NoData value is the only one which is considered if
 #'  'Change NoData values' was set to 'No'.
-#' @author Luigi Ranghetti, phD (2018) \email{ranghetti.l@@irea.cnr.it}
+#' @author Luigi Ranghetti, phD (2018) \email{luigi@@ranghetti.info}
 #' @examples
 #' MODIStsp:::split_nodata_values(c("255","250,254:255"))
 #' MODIStsp:::split_nodata_values(c("255","250,254:255"), take_all = FALSE)

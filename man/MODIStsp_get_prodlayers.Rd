@@ -38,5 +38,5 @@ MODIStsp_get_prodlayers("MCD43C4")$indexes_bandnames
 
 }
 \author{
-Lorenzo Busetto, phD (2014-2020) \email{lbusett@gmail.com}
+Lorenzo Busetto, phD (2014-2020)
 }

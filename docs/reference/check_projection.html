@@ -181,19 +181,19 @@
 (passed as UTM zone, EPSG code, WKT string) is a valid projection for MODIStsp.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_projection</span>(<span class='kw'>projection</span>, abort = <span class='fl'>FALSE</span>, verbose = <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>check_projection</span><span class='op'>(</span><span class='va'>projection</span>, abort <span class='op'>=</span> <span class='cn'>FALSE</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>check_projection</span>(<span class='kw'>projection</span>, abort = <span class='fl'>FALSE</span>, verbose = <span class='fl'>TRUE</span>)
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='va'>projection</span>, abort <span class='op'>=</span> <span class='cn'>FALSE</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for numeric</span>
-<span class='fu'>check_projection</span>(<span class='kw'>projection</span>, abort = <span class='fl'>FALSE</span>, verbose = <span class='fl'>TRUE</span>)
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='va'>projection</span>, abort <span class='op'>=</span> <span class='cn'>FALSE</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>check_projection</span>(<span class='kw'>projection</span>, abort = <span class='fl'>FALSE</span>, verbose = <span class='fl'>TRUE</span>)
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='va'>projection</span>, abort <span class='op'>=</span> <span class='cn'>FALSE</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
 <span class='co'># S3 method for crs</span>
-<span class='fu'>check_projection</span>(<span class='kw'>projection</span>, abort = <span class='fl'>FALSE</span>, verbose = <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='va'>projection</span>, abort <span class='op'>=</span> <span class='cn'>FALSE</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -222,25 +222,25 @@ projection is passed. Otherwise, the function returns "NA", Default: TRUE</p></t
     <p>This function was forked from package <code>sprawl</code>, version 0.3.0.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Lorenzo Busetto, phD (2017) <a href='mailto:lbusett@gmail.com'>lbusett@gmail.com</a></p>
-<p>Luigi Ranghetti, phD (2017) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a></p>
+    <p>Lorenzo Busetto, phD (2017)</p>
+<p>Luigi Ranghetti, phD (2017) <a href='mailto:luigi@ranghetti.info'>luigi@ranghetti.info</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>check_projection</span>(<span class='st'>"32632"</span>)
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='st'>"32632"</span><span class='op'>)</span>
 
-<span class='fu'>check_projection</span>(<span class='st'>"32631"</span>)
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='st'>"32631"</span><span class='op'>)</span>
 
-<span class='fu'>check_projection</span>(<span class='fl'>32633</span>)
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='fl'>32633</span><span class='op'>)</span>
 
-<span class='fu'>check_projection</span>(<span class='fl'>30</span>, abort = <span class='fl'>FALSE</span>)
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='fl'>30</span>, abort <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>check_projection</span>(<span class='st'>"example of invalid string"</span>, abort = <span class='fl'>FALSE</span>)
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='st'>"example of invalid string"</span>, abort <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='kw'>proj_wkt</span> <span class='op'>&lt;-</span> <span class='kw'>sf</span>::<span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_as_text.html'>st_as_text</a></span>(<span class='kw'>sf</span>::<span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_crs.html'>st_crs</a></span>(<span class='fl'>32632</span>))
-<span class='fu'>check_projection</span>(<span class='kw'>proj_wkt</span>)
-}
+<span class='va'>proj_wkt</span> <span class='op'>&lt;-</span> <span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_as_text.html'>st_as_text</a></span><span class='op'>(</span><span class='fu'>sf</span><span class='fu'>::</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_crs.html'>st_crs</a></span><span class='op'>(</span><span class='fl'>32632</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>check_projection</span><span class='op'>(</span><span class='va'>proj_wkt</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

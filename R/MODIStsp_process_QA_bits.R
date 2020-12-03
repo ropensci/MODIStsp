@@ -20,8 +20,8 @@
 #' @param nodata_qa_out `character` out NoData for quality bands ("255")
 #' @param compress `character` compression option for GTiff files
 #' @return NULL
-#' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
-#' @author Luigi Ranghetti, phD (2017) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2017)
+#' @author Luigi Ranghetti, phD (2017) \email{luigi@@ranghetti.info}
 #' @note License: GPL 3.0
 #'  Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
 #'  license GPL 3.0

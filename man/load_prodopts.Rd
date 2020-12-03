@@ -16,5 +16,5 @@ FUNCTION_DESCRIPTION
 Load characteristics of the different MODIS products from \code{prodopts_file}
 }
 \author{
-Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}
+Lorenzo Busetto, phD (2017)
 }

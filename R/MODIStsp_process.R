@@ -24,8 +24,8 @@
 #'   MODIStsp_process will abort, Default: 20
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @return The function is called for its side effects.
-#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
-#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017)
+#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
 #' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
 #'   development of this function ([ModisDownload](http://r-gis.net/?q=ModisDownload);
 #'   [Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))

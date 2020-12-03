@@ -5,8 +5,8 @@
 #' @param crs_out  (`crs` | `character`) crs of the desired output projection,
 #' or string coercible to it using `sf::st_crs()` (e.g., WKT or numeric
 #' EPSG code)
-#' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
-#' @author Luigi Ranghetti, phD (2017) <ranghetti.l@irea.cnr.it>
+#' @author Lorenzo Busetto, phD (2017)
+#' @author Luigi Ranghetti, phD (2017) \email{luigi@@ranghetti.info}
 #' @importFrom sf st_crs st_read st_bbox
 #' @importFrom raster raster
 #' @note License: GPL 3.0

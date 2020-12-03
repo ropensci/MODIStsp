@@ -18,7 +18,7 @@
 #' @inheritParams MODIStsp
 #' @return req_bands_indexes
 #' @rdname get_reqbands
-#' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
+#' @author Lorenzo Busetto, phD (2017)
 get_reqbands <- function(bands_indexes_matrix,
                          indexes_bandsel,
                          indexes_bandnames,

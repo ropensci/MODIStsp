@@ -55,7 +55,7 @@ check_projection(proj_wkt)
 }
 }
 \author{
-Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}
+Lorenzo Busetto, phD (2017)
 
-Luigi Ranghetti, phD (2017) \href{mailto:ranghetti.l@irea.cnr.it}{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2017) \email{luigi@ranghetti.info}
 }

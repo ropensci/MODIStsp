@@ -10,7 +10,7 @@
 #' @return list, containing the slots: `prodname`, `bandnames`, `quality_bandnames` and
 #'  `indexes_bandnames`, `band_fullnames`, `quality_fullnames`, `indexes_fullnames`
 #'
-#' @author Lorenzo Busetto, phD (2014-2020) \email{lbusett@@gmail.com}
+#' @author Lorenzo Busetto, phD (2014-2020)
 #' @note License: GPL 3.0
 #' @export
 #' @examples
@@ -82,7 +82,7 @@ MODIStsp_get_prodlayers <- function(prodname) {
 #'	Function used to retrieve the names of available MODIS products
 #' @return character array of product names
 #'
-#' @author Lorenzo Busetto, phD (2014-2020) \email{lbusett@@gmail.com}
+#' @author Lorenzo Busetto, phD (2014-2020)
 #' @note License: GPL 3.0
 #' @export
 #' @examples

@@ -10,7 +10,7 @@
 #' @return `matrix` containing info on which bands are needed for computing
 #'  each available QI or SI
 #' @rdname set_bandind_matrix
-#' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
+#' @author Lorenzo Busetto, phD (2017)
 set_bandind_matrix <- function(bandnames,
                                bandsel,
                                indexes_bandnames,

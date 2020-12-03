@@ -66,7 +66,7 @@ Original code by Babak Naimi (\code{.getModisList}, in
 modified to adapt it to MODIStsp scheme and to http archive (instead than old
 FTP) by:
 
-Lorenzo Busetto, phD (2014-2016) \email{lbusett@gmail.com}
+Lorenzo Busetto, phD (2014-2016)
 
-Luigi Ranghetti, phD (2016) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2016) \email{luigi@ranghetti.info}
 }

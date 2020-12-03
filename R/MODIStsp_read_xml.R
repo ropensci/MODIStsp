@@ -9,8 +9,8 @@
 #' characteristics
 #' @return NULL - retrieved data are stored in the specified RData file
 #'
-#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
-#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017)
+#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
 #' @note License: GPL 3.0
 #' @importFrom xml2 as_list read_xml
 #'

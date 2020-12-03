@@ -7,8 +7,8 @@
 #' @param date_dirs data frame full list of folders in lpdaac archive for product of interest
 #' @return array of folder names containing data for the MODIS product acquired in
 #' the period specified by "dates"
-#' @author Luigi Ranghetti, phD (2016) \email{ranghetti.l@@irea.cnr.it}
-#' @author Lorenzo Busetto, phD (2017) \email{lbusett@@gmail.com}
+#' @author Luigi Ranghetti, phD (2016) \email{luigi@@ranghetti.info}
+#' @author Lorenzo Busetto, phD (2017)
 #' @note License: GPL 3.0
 #'
 get_mod_dates <- function(dates, date_dirs) {

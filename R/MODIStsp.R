@@ -112,8 +112,8 @@
 #' @param ... not used for values, forces later arguments to bind by name
 #' @return NULL
 #'
-#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
-#' @author Luigi Ranghetti, phD (2015-2017) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017)
+#' @author Luigi Ranghetti, phD (2015-2017) \email{luigi@@ranghetti.info}
 #' @note License: GPL 3.0
 #' @export
 #' @seealso [MODIStsp_GUI()], [MODIStsp_process()]

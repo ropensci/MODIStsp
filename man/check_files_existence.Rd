@@ -61,7 +61,7 @@ skipped in MODIStsp_process.
 License: GPL 3.0
 }
 \author{
-Lorenzo Busetto, phD (2014-2017) \email{lbusett@gmail.com}
+Lorenzo Busetto, phD (2014-2017)
 
-Luigi Ranghetti, phD (2015) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2015) \email{luigi@ranghetti.info}
 }

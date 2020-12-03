@@ -34,5 +34,5 @@ be processed for a given year as a function of \code{download_range} selection
 and starting/ending dates and years
 }
 \author{
-Lorenzo Busetto, phD (2017) \href{mailto:lbusett@gmail.com}{lbusett@gmail.com}
+Lorenzo Busetto, phD (2017)
 }

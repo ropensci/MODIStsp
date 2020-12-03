@@ -185,7 +185,7 @@ includes the original extent in the output projection, or if is simply the
 one obtained by reprojecting the upper-left and the lower-right corners.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reproj_bbox</span>(<span class='kw'>bbox</span>, <span class='kw'>in_proj</span>, <span class='kw'>out_proj</span>, enlarge = <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>reproj_bbox</span><span class='op'>(</span><span class='va'>bbox</span>, <span class='va'>in_proj</span>, <span class='va'>out_proj</span>, enlarge <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,13 +198,13 @@ or a numeric vector in the format (xmin, ymin, xmax, ymax)).</p></td>
     <tr>
       <th>in_proj</th>
       <td><p>(<code>crs</code> | <code>character</code>) crs of the input projection,
-or string coercible to it using <code><a href='https://rdrr.io/pkg/sf/man/st_crs.html'>sf::st_crs()</a></code> (e.g., WKT or numeric
+or string coercible to it using <code><a href='https://r-spatial.github.io/sf/reference/st_crs.html'>sf::st_crs()</a></code> (e.g., WKT or numeric
 EPSG code)</p></td>
     </tr>
     <tr>
       <th>out_proj</th>
       <td><p><code>crs</code> <code>crs</code> of the output projection, or string coercible to
-it using <code><a href='https://rdrr.io/pkg/sf/man/st_crs.html'>sf::st_crs()</a></code> (e.g., WKT or numeric EPSG code)</p></td>
+it using <code><a href='https://r-spatial.github.io/sf/reference/st_crs.html'>sf::st_crs()</a></code> (e.g., WKT or numeric EPSG code)</p></td>
     </tr>
     <tr>
       <th>enlarge</th>
@@ -219,7 +219,7 @@ one obtained by reprojecting the upper-left and the lower-right corners.</p></td
     <p>License: GPL 3.0</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Luigi Ranghetti, phD (2015) <a href='mailto:ranghetti.l@irea.cnr.it'>ranghetti.l@irea.cnr.it</a></p>
+    <p>Luigi Ranghetti, phD (2015) <a href='mailto:luigi@ranghetti.info'>luigi@ranghetti.info</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

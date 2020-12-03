@@ -12,7 +12,7 @@
 #' @inheritParams MODIStsp
 #' @return OUTPUT_DESCRIPTION
 #' @rdname get_yeardates
-#' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
+#' @author Lorenzo Busetto, phD (2017)
 get_yeardates <- function(download_range,
                           yy,
                           start_year, end_year,

@@ -183,7 +183,7 @@ MODIStsp, thus resetting the list of available indexes
 to the default ones.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>MODIStsp_resetindexes</span>()</pre>
+    <pre class="usage"><span class='fu'>MODIStsp_resetindexes</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -202,29 +202,29 @@ remove all previously custom-specified Spectral Indexes.</p>
     <p>Lorenzo Busetto, phD (2014-2017) <a href='mailto:busetto.l@irea.cnr.it'>busetto.l@irea.cnr.it</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Remove all custom-defined spectral indexes from an options file</span>
 
 <span class='co'># Add a custom index for testing purposes</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://arxiv.org/abs/1403.2805'>jsonlite</a></span>)
-<span class='kw'>opts_jsfile</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"testdata/test_addindex.json"</span>,
-                             package = <span class='st'>"MODIStsp"</span>)
- <span class='fu'><a href='MODIStsp_addindex.html'>MODIStsp_addindex</a></span>(
-   opts_jsfile = <span class='kw'>opts_jsfile</span>,
-   gui = <span class='fl'>FALSE</span>,
-   new_indexbandname = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"Index_"</span>, <span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>10000</span>, <span class='fl'>1</span>))),
-   new_indexformula = <span class='st'>"b1_Red - b2_NIR"</span>,
-   new_indexfullname = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"Index_"</span>, <span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>10000</span>, <span class='fl'>1</span>)))
-   )
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://arxiv.org/abs/1403.2805'>jsonlite</a></span><span class='op'>)</span>
+<span class='va'>opts_jsfile</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"testdata/test_addindex.json"</span>,
+                             package <span class='op'>=</span> <span class='st'>"MODIStsp"</span><span class='op'>)</span>
+ <span class='fu'><a href='MODIStsp_addindex.html'>MODIStsp_addindex</a></span><span class='op'>(</span>
+   opts_jsfile <span class='op'>=</span> <span class='va'>opts_jsfile</span>,
+   gui <span class='op'>=</span> <span class='cn'>FALSE</span>,
+   new_indexbandname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Index_"</span>, <span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>10000</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>,
+   new_indexformula <span class='op'>=</span> <span class='st'>"b1_Red - b2_NIR"</span>,
+   new_indexfullname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"Index_"</span>, <span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>10000</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+   <span class='op'>)</span>
 
- <span class='kw'>opts</span> <span class='op'>&lt;-</span> <span class='kw'>jsonlite</span>::<span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span>(<span class='kw'>indexes_file</span>)
- <span class='kw'>opts</span><span class='op'>$</span><span class='kw'>custom_indexes</span>[<span class='fl'>1</span>]
+ <span class='va'>opts</span> <span class='op'>&lt;-</span> <span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span><span class='op'>(</span><span class='va'>indexes_file</span><span class='op'>)</span>
+ <span class='va'>opts</span><span class='op'>$</span><span class='va'>custom_indexes</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
 
  <span class='co'># Now remove all custom indexes</span>
- <span class='fu'>MODIStsp_resetindexes</span>()
- <span class='kw'>opts</span> <span class='op'>&lt;-</span> <span class='kw'>jsonlite</span>::<span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span>(<span class='kw'>opts_jsfile</span>)
- <span class='kw'>opts</span><span class='op'>$</span><span class='kw'>custom_indexes</span>[<span class='fl'>1</span>]
- }
+ <span class='fu'>MODIStsp_resetindexes</span><span class='op'>(</span><span class='op'>)</span>
+ <span class='va'>opts</span> <span class='op'>&lt;-</span> <span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span><span class='op'>(</span><span class='va'>opts_jsfile</span><span class='op'>)</span>
+ <span class='va'>opts</span><span class='op'>$</span><span class='va'>custom_indexes</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+ <span class='op'>}</span>
 
 </div></pre>
   </div>

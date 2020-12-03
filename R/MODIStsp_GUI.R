@@ -5,8 +5,8 @@
 #' @return the function is called for its side effects - opening
 #'  the GUI and allowing to set, save, load options and eventually
 #'  launch the processing.
-#' @author Lorenzo Busetto, phD (2014-2017) \email{lbusett@@gmail.com}
-#' @author Luigi Ranghetti, phD (2015) \email{ranghetti.l@@irea.cnr.it}
+#' @author Lorenzo Busetto, phD (2014-2017)
+#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
 #' @note License: GPL 3.0
 #' @importFrom utils packageVersion browseURL
 #'

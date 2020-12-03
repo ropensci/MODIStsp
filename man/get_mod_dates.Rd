@@ -25,7 +25,7 @@ dates period within the full list retrieved by get_moddirs
 License: GPL 3.0
 }
 \author{
-Luigi Ranghetti, phD (2016) \email{ranghetti.l@irea.cnr.it}
+Luigi Ranghetti, phD (2016) \email{luigi@ranghetti.info}
 
-Lorenzo Busetto, phD (2017) \email{lbusett@gmail.com}
+Lorenzo Busetto, phD (2017)
 }
