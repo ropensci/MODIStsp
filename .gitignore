@@ -12,7 +12,6 @@ tests/testthat/test_modistspGUI\.R
 vignettes/Thumbs\.db
 tests/testthat/test-modistsp_LB\.R
 inst/testdata/VI_16Days_500m_v6/Time_Series/
-WIP/
 inst/testdata/MODIStsp_2018-01-04\.json
 libs/
 _main\.Rmd

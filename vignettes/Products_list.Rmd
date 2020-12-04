@@ -1,5 +1,12 @@
 ---
 title: "List of supported MODIS products"
+output: 
+  rmarkdown::html_vignette: default
+  github_document: default
+vignette: >
+  %\VignetteIndexEntry{List of supported MODIS products}
+  %\VignetteEngine{knitr::knitr}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 

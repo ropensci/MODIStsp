@@ -1,5 +1,12 @@
 ---
 title: "Outputs Format and Naming Conventions"
+output: 
+  rmarkdown::html_vignette: default
+  github_document: default
+vignette: >
+  %\VignetteIndexEntry{Outputs Format and Naming Conventions}
+  %\VignetteEngine{knitr::knitr}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Single-band outputs__

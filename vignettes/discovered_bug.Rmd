@@ -1,6 +1,7 @@
 ---
 title: "Bug discovered in spectral indices computation"
-output: github_document
+output: 
+  github_document: default
 ---
 
 We are sorry to report that we recently discovered a nasty bug (or rather, a stupid mistake...) in the [MODIStsp](https://github.com/ropensci/MODIStsp) package.

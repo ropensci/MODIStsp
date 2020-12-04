@@ -1,5 +1,12 @@
 ---
 title: "Non-Interactive Execution from within R"
+output: 
+  rmarkdown::html_vignette: default
+  github_document: default
+vignette: >
+  %\VignetteIndexEntry{Non-Interactive Execution from within R}
+  %\VignetteEngine{knitr::knitr}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}

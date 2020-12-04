@@ -44,7 +44,7 @@ each available acquisition date. **Virtual files** allowing access to the entire
 as a single file can be also created. 
 
 
-<a href="http://www.irea.cnr.it/en/"> <img src="man/figures/logo_irea.png" height="40" align="left" /></a>
+<a href="http://www.irea.cnr.it/en/"> <img src="man/figures/irea_logo.png" height="40" align="left" /></a>
 
 
 <span style='font-style:italic;font-weight:bold;'>`MODIStsp` was developed by Lorenzo Busetto and Luigi Ranghetti, 

@@ -242,7 +242,8 @@ argument), Default: TRUE</p></td>
     </tr>
     <tr>
       <th>out_folder_mod</th>
-      <td><p><code>character</code> Output folder for original HDF storage, default: $tempdir</p></td>
+      <td><p><code>character</code> Output folder for original HDF storage.
+If <code>"$tempdir"</code> (default), a temporary directory is used.</p></td>
     </tr>
     <tr>
       <th>opts_file</th>
@@ -412,7 +413,7 @@ FALSE, no rescaling is done and Spectral Indexes are saved as integer, with a
     </tr>
     <tr>
       <th>ts_format</th>
-      <td><p><code>character array including ["R asterStack" | "ENVI Meta Files" | "GDAL vrt files" | "ENVI and GDAL"]</code> Selected virtual time series format.</p></td>
+      <td><p><code>character array including ["R RasterStack" | "ENVI Meta Files" | "GDAL VRT" | "ENVI and GDAL"]</code> Selected virtual time series format.</p></td>
     </tr>
     <tr>
       <th>out_format</th>

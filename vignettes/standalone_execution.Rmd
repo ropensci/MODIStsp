@@ -1,5 +1,12 @@
 ---
-title: "Stand-alone execution and scheduled processing "
+title: "Stand-alone execution and scheduled processing"
+output: 
+  rmarkdown::html_vignette: default
+  github_document: default
+vignette: >
+  %\VignetteIndexEntry{Stand-alone execution and scheduled processing}
+  %\VignetteEngine{knitr::knitr}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Stand-alone execution__ 

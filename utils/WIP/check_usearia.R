@@ -6,7 +6,7 @@
 #' @return use_aria `logical` Indicating if aria2c should be used to accelerate
 #'  download
 #' @rdname check_usearia
-#' @author Lorenzo Busetto, phD (2017) <lbusett@gmail.com>
+#' @author Lorenzo Busetto, phD (2017)
 #'
 check_usearia <- function(use_aria, gui, mess) {
   # Check if "aria2c" requested. If so, verify that the executable is found

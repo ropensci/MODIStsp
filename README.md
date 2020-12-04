@@ -31,7 +31,7 @@ MODIStsp to automatically update time series related to a MODIS product
 and extent whenever a new image is available.
 
 <a href="http://www.irea.cnr.it/en/">
-<img src="man/figures/logo_irea.png" height="40" align="left" /></a>
+<img src="man/figures/irea_logo.png" height="40" align="left" /></a>
 
 <span style="font-style:italic;font-weight:bold;">`MODIStsp` was
 developed by Lorenzo Busetto and Luigi Ranghetti, [Institute of Remote

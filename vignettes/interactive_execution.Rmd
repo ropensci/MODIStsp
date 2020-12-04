@@ -1,6 +1,13 @@
 ---
 title: "Running the tool in Interactive Mode: the MODIStsp GUI"
 bibliography: MODIStsp.bib
+output: 
+  rmarkdown::html_vignette: default
+  github_document: default
+vignette: >
+  %\VignetteIndexEntry{Running the tool in Interactive Mode: the MODIStsp GUI}
+  %\VignetteEngine{knitr::knitr}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}

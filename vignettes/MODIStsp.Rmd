@@ -1,7 +1,7 @@
 ---
-title: 'MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v2.0.0'
-author: "Lorenzo Busetto ([busetto.l@irea.cnr.it](mailto:lbusett@gmail.com)), Luigi
-  Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
+title: 'MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v2.0.5'
+author: "Lorenzo Busetto, 
+  Luigi Ranghetti ([ranghetti.l@irea.cnr.it](mailto:ranghetti.l@irea.cnr.it))"
 bibliography: MODIStsp.bib
 date: '`r Sys.Date()`'
 output:
@@ -24,7 +24,7 @@ urlcolor: blue
 linkcolor: blue
 vignette: >
   \usepackage[utf8]{inputenc}
-  %\VignetteIndexEntry{MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v2.0.0}
+  %\VignetteIndexEntry{MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v2.0.5}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
