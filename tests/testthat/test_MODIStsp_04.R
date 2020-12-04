@@ -42,10 +42,10 @@ test_that("Tests on MODIStsp", {
     out_files_dat,
     FUN = function(x) {
       tab <- table(raster::getValues(raster::raster(x)), useNA = "ifany")
-      tab[as.numeric(names(tab)) > 100]
+      tab[which(as.numeric(names(tab)) > 100)]
     }
   )
-  expect_equal(unlist(lapply(na_values,names)), rep(as.character(NA), 4))
+  expect_equal(unlist(lapply(na_values,names)), character(0))
 
   out_files_rts <- list.files(
     file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
@@ -62,8 +62,11 @@ test_that("Tests on MODIStsp", {
   # check correct resampling and reprojection
   expect_equal(raster::res(r), c(1553.030, 1551.724),
                tolerance = 0.01, scale = 1)
-  expect_equal(sf::st_crs(r)$input,
-               "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
+  expect_true(grepl(
+    "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0",
+    sf::st_crs(r)$input,
+    fixed = TRUE
+  ))
   unlink(out_files_dat)
   unlink(out_files_hdr)
   unlink(out_files_rts)

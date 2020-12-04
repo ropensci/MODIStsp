@@ -23,8 +23,8 @@ test_that(
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
 
     file_sizes_tif <- file.info(out_files_tif)$size
-    expect_equal(file_sizes_tif, c(10965, 10559 , 10618 , 728 , 10682 , 1397 ),
-                 tolerance = 0.001, scale = 1)
+    expect_equal(file_sizes_tif, c(10989, 10583, 10642, 752, 10706, 1397),
+                 tolerance = 0.01)
     means <- unlist(lapply(out_files_tif,
                            FUN = function(x) {
                              mean(raster::values(raster::raster(x)),

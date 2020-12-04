@@ -8,7 +8,7 @@ context("MODIStsp Test 6: http download on \"combined\" datasets and mosaicing o
 test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
-    # skip_on_travis()
+    skip_on_travis()
 
     MODIStsp(test = 6)
     out_files_dat <- list.files(
