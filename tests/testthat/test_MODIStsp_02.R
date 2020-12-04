@@ -31,10 +31,11 @@ test_that(
     context("MODIStsp Test 2: Output projection and resolution are properly
             set")
     r <- raster::raster(out_files_dat[1])
-    expect_equal(
+    expect_true(grepl(
+      "+proj=utm +zone=22 +datum=WGS84 +units=m +no_defs", #nolint,
       sf::st_crs(r)$input,
-      "+proj=utm +zone=22 +datum=WGS84 +units=m +no_defs" #nolint
-    )
+      fixed=TRUE
+    ))
     expect_equal(raster::res(r), c(1000, 1000))
     unlink(out_files_dat)
   })

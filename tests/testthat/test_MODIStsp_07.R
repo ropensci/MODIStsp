@@ -5,7 +5,7 @@ context("MODIStsp Test 7: Passing the extent with a spatial file")
 test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
-    # skip_on_travis()
+    skip_on_travis()
 
     MODIStsp(
       test = 7,
