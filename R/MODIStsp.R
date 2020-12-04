@@ -14,7 +14,8 @@
 #'  processing parameters are retrieved from the provided `opts_file`
 #'  argument), Default: TRUE
 #' @param out_folder `character` Main output folder, default: NULL.
-#' @param out_folder_mod `character` Output folder for original HDF storage, default: $tempdir
+#' @param out_folder_mod `character` Output folder for original HDF storage.
+#'  If `"$tempdir"` (default), a temporary directory is used.
 #' @param opts_file `character` full path to a JSON file
 #'  containing MODIStsp processing options saved from the GUI, Default: NULL
 #' @param selprod `character` Name of selected MODIS product (e.g.,
@@ -494,22 +495,27 @@ MODIStsp <- function(...,
     if(!is.null(out_folder))     {proc_opts$out_folder  <- out_folder}
     if(!is.null(out_folder_mod)) {proc_opts$out_folder_mod  <- out_folder_mod}
 
+    if (proc_opts$out_folder == "$modistest") {
+      warning(paste0(
+        "Argument out_folder = '$modistest' can no longer be used ",
+        "due to CRAN policy; using '$tempdir'."
+      ))
+      proc_opts$out_folder <- "$tempdir"
+    }
     if (proc_opts$out_folder == "$tempdir") {
       proc_opts$out_folder <- file.path(tempdir(), "MODIStsp")
     }
 
-    if (proc_opts$out_folder == "$modistest") {
-      proc_opts$out_folder <- system.file("testdata/",
-                                          package = "MODIStsp")
+    if (proc_opts$out_folder_mod == "$modistest") {
+      warning(paste0(
+        "Argument out_folder_mod = '$modistest' can no longer be used ",
+        "due to CRAN policy; using '$tempdir'."
+      ))
+      proc_opts$out_folder_mod <- "$tempdir"
     }
 
     if (proc_opts$out_folder_mod == "$tempdir") {
       proc_opts$out_folder_mod <- file.path(tempdir(), "MODIStsp/HDFs")
-    }
-
-    if (proc_opts$out_folder_mod == "$modistest") {
-      proc_opts$out_folder_mod <- system.file("testdata/",
-                                              package = "MODIStsp")
     }
 
     if (proc_opts$spatmeth == "file" & !missing(spafile)) {

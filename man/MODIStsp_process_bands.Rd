@@ -33,7 +33,8 @@ MODIStsp_process_bands(
 )
 }
 \arguments{
-\item{out_folder_mod}{\code{character} Output folder for original HDF storage, default: $tempdir}
+\item{out_folder_mod}{\code{character} Output folder for original HDF storage.
+If \code{"$tempdir"} (default), a temporary directory is used.}
 
 \item{modislist}{\verb{character array} List of MODIS images to be downloaded for
 the selected date (as returned from \code{get_mod_filenames}). Can be a single

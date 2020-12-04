@@ -55,7 +55,8 @@ argument), Default: TRUE}
 
 \item{out_folder}{\code{character} Main output folder, default: NULL.}
 
-\item{out_folder_mod}{\code{character} Output folder for original HDF storage, default: $tempdir}
+\item{out_folder_mod}{\code{character} Output folder for original HDF storage.
+If \code{"$tempdir"} (default), a temporary directory is used.}
 
 \item{opts_file}{\code{character} full path to a JSON file
 containing MODIStsp processing options saved from the GUI, Default: NULL}
