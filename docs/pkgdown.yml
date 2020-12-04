@@ -9,10 +9,11 @@ articles:
   faq: faq.html
   installation: installation.html
   interactive_execution: interactive_execution.html
+  lorenzo: lorenzo.html
   noninteractive_execution: noninteractive_execution.html
   output: output.html
   standalone_execution: standalone_execution.html
-last_built: 2020-12-04T09:00Z
+last_built: 2020-12-04T14:34Z
 urls:
   reference: http://docs.ropensci.org/MODIStsp/reference
   article: http://docs.ropensci.org/MODIStsp/articles

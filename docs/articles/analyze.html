@@ -156,7 +156,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">modistsp_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/VI_16Days_500m_v6/NDVI"</span>, <span class="st">"MOD13A1_NDVI_2016_177.tif"</span><span class="op">)</span>
 <span class="va">modistsp_file</span></code></pre></div>
-<pre><code>## [1] "/tmp/RtmpobKAtQ/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "/tmp/Rtmph13Bd6/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">modistsp_file</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">my_raster</span><span class="op">)</span></code></pre></div>
@@ -167,7 +167,7 @@
 <span class="va">ts_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/VI_16Days_500m_v6/Time_Series"</span><span class="op">)</span>
 <span class="va">in_virtual_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">ts_folder</span>, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span><span class="op">)</span>
 <span class="va">in_virtual_file</span></code></pre></div>
-<pre><code>## [1] "/tmp/RtmpobKAtQ/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
+<pre><code>## [1] "/tmp/Rtmph13Bd6/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ts_data</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">in_virtual_file</span><span class="op">)</span><span class="op">)</span>
 <span class="va">ts_data</span></code></pre></div>
@@ -195,7 +195,7 @@
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
 ## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs 
-## source     : /tmp/RtmpobKAtQ/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
+## source     : /tmp/Rtmph13Bd6/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
 ## names      : MOD13A1_NDVI_2016_001 
 ## time       : 2016-01-01</code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
