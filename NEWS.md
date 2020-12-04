@@ -1,3 +1,17 @@
+## MODIStsp 2.0.5
+
+### Main changes
+
+- Edit documentation related to the maintainer's change
+    (see https://docs.ropensci.org/MODIStsp/articles/lorenzo).
+    
+### Minor changes
+
+- Fix Travis tests
+
+- Bug fix (#222)
+
+
 ## MODIStsp 2.0.3
 
 ### Main changes
