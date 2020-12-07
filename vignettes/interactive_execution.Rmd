@@ -215,7 +215,7 @@ directly downloaded from NASA servers_; see [here](https://docs.ropensci.org/MOD
 for additional details). 
 
 A second dropdown menu allows selecting if using standard http download to access
-NASA servers, or using the **aria2c** downloader, which may speed-up the download. This requires however that that the "aria2c" software is installed in your system. To download and install it, see: [https://aria2.github.io/](aria2.github.io/)
+NASA servers, or using the **aria2c** downloader, which may speed-up the download. This requires however that that the "aria2c" software is installed in your system. To download and install it, see [aria2.github.io](https://aria2.github.io/).
 
 ### _Output Options_
 
