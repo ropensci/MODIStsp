@@ -10,21 +10,21 @@ vignette: >
 ---
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Stand-alone execution__ 
-MODIStsp can be also executed as a "stand-alone" application (i.e., without having 
+`{MODIStsp}` can be also executed as a "stand-alone" application (i.e., without having 
 to open R/RStudio). 
 
 To be able to do that, from R launch the function `install_MODIStsp_launcher()`.
 
 - In a Linux operating system this function creates a desktop entry (accessible from 
 the menu in the sections "Science" and "Geography") and a symbolic link in a known path
-(default: /usr/bin/MODIStsp).
+(default: `/usr/bin/MODIStsp`).
 - In Windows, a link in the Start Menu and optionally a desktop shortcut are created.
 See `?install_MODIStsp_launcher` for details and path customization.
 
 Double-clicking these files or launching them from a shell without parameters will
-launch `MODIStsp` in interactive mode, by opening the GUI. Non-interactive mode 
+launch `MODIStsp()` in interactive mode, by opening the GUI. Non-interactive mode 
 can be triggered by adding the "-g"  argument to the call, and specifying the path
-to a valid Options File as "-s" argument:
+to a valid Options File as `-s` argument:
 
   - Linux: `MODIStsp -g -s "/yourpath/youroptions.json"`
   (see `MODIStsp -h` for details).
@@ -33,7 +33,7 @@ to a valid Options File as "-s" argument:
   (see `C:\Users\you\Desktop\MODIStsp -h` for details).
 
 If you do not want to install any link, launchers can be found in the subdirectory
-"MODIStsp/ExtData/Launcher" of your library path.
+`MODIStsp/ExtData/Launcher` of your library path.
 
 ____________________________________________________________________________________
 
@@ -43,36 +43,37 @@ ________________________________________________________________________________
 
 Stand-alone non-interactive execution can be exploited to periodically and automatically
 update the time series of a selected product over a given study area. To do that, you
-should simply:
+should simply follow these steps.
 
-1.	Open the `MODIStsp` GUI, define the parameters of the processing specifying a 
-date in the future as the "Ending Date" and save the processing options. Then quit
+1.	Open the `MODIStsp()` GUI, define the parameters of the processing specifying a 
+date in the future as the "Ending Date" and save the processing options; then quit
 the program.
  
-2. Schedule non-interactive execution of the MODIStsp launcher script installed 
-as seen before (or located in the subdirectory "MODIStsp/ExtData/Launcher" of your
-R library path) as a windows scheduled task or linux "cron" job according to a 
+2. schedule non-interactive execution of the `{MODIStsp}` launcher script installed 
+as seen before (or located in the subdirectory `MODIStsp/ExtData/Launcher` of your
+`R` library path) as a windows scheduled task or linux "cron" job according to a 
 specified time schedule, specifying the path of a previously saved Options file
-as additional argument:
+as additional argument.
 
 ## _On Linux_
 
-- edit your crontab by opening a terminal and typing:
+3. Edit your crontab by opening a terminal and typing:
 
-```bash
-  crontab -e
-```
+    ```bash
+    crontab -e
+    ```
  
-- add an entry for execution of MODIStsp launcher. For example, if you have 
+4. Add an entry for execution of MODIStsp launcher. For example, if you have 
 installed it in /usr/bin and you want to run the tool every day at 23.00, add the
 following row:
         
-```bash
-  0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.json"
-```
+    ```bash
+      0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.json"
+    ```
       
 ## _On Windows_
 
-- create a Task following [this instructions](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN)
-- add the path of the MODIStsp.bat launcher as Action (point 6), 
+3. Create a Task following <a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN" target="_blank">this instructions</a>.
+
+4. Add the path of the MODIStsp.bat launcher as Action (point 6), 
 specifying  `-g -s "X:/yourpath/youroptions.json"` as argument.

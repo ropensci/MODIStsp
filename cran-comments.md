@@ -2,18 +2,65 @@ MODIStsp 2.0.5
 ================
 
 * Windows 10 on local install, R 4.0
-* Ubuntu 18.04 on local install, R 3.6.3
+* Ubuntu 18.04 on local install, R 4.0.3
 * win-builder (R-devel, R-release)
-
-## R CMD check results
-
-There were no ERRORs, WARNINGs and NOTES
 
 This submission should fix errors on Debian builds, due to improper 
 trigger of an helper function leading to writing in the user's 
 lib folder. 
 
 Also fixes a couple of bugs.
+
+## R CMD check results
+
+There were no ERRORs nor WARNINGs.
+
+NOTE:
+```
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Luigi Ranghetti <luigi@ranghetti.info>'
+
+New submission
+
+Package was archived on CRAN
+```
+Unfortunately Lorenzo Busetto, who maintained the package, suddently passed away
+(https://docs.ropensci.org/MODIStsp/articles/lorenzo).
+After that, package was automatically archived for policy violation, since 
+communications sent to him were not read.
+I now started maintaining MODIStsp (I already authored parts of code).
+
+```
+CRAN repository db overrides:
+  X-CRAN-Comment: Archived on 2020-10-31 for policy violation.
+
+  Attempts writing to the user library.
+```
+In this submission I fixed a possible tentative of writing in the user library
+(commit ebdfa2a6ebbadf1ab42bc4679b48d2224ddf333f).
+
+```
+Possibly mis-spelled words in DESCRIPTION:
+  HDF (26:24)
+  MODIS (2:60, 22:10, 26:18, 27:60, 35:18)
+  Reflectance (28:50)
+  mosaicking (23:43)
+  rasters (21:63)
+  reflectance (29:67)
+  reprojection (23:55)
+```
+This words are correctly spelled.
+
+MODIStsp 2.0.5
+================
+
+* Windows 10 on local install, R 4.0
+* Ubuntu 18.04 on local install, R 3.6.3
+* win-builder (R-devel, R-release)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs and NOTES
 
 MODIStsp 2.0.4
 ================

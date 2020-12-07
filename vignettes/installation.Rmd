@@ -15,12 +15,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## <i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows
 
-You can install the stable version of `MODIStsp` from CRAN: 
+You can install the stable version of `{MODIStsp}` from CRAN: 
 
 `install.packages("MODIStsp")`
 
 , or the development version (containing the latest improvements and bug fixes) 
-from github:
+from GitHub:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("remotes")
@@ -30,21 +30,21 @@ install_github("ropensci/MODIStsp")
 
 ## <i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems
 
-To install `MODIStsp` on Linux, you need to be able to install the `sf` package, 
+To install `{MODIStsp}` on Linux, you need to be able to install the `{sf}` package, 
 which requires several dependencies. See [HERE](https://github.com/r-spatial/sf#installing)
-if you have trouble installing `sf`.
+if you have trouble installing `{sf}`.
 
 In addition, you need to install dependencies
-required by the `protolite` package, required by `geojson`. See [HERE](https://github.com/jeroen/protolite/) for instructions
+required by the `{protolite}` package, required by `{geojson}`. See [HERE](https://github.com/jeroen/protolite/) for instructions
 on installing them. 
 
-Then, you can install the stable version of MODIStsp from CRAN:
+Then, you can install the stable version of `{MODIStsp}` from CRAN:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("MODIStsp")
 ```
 , or the development version (containing the latest improvements and bug fixes) 
-from github;
+from GitHub:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
@@ -53,17 +53,17 @@ install_github("ropensci/MODIStsp")
 
 ## <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
 
-To install `MODIStsp` on MacOS, you need to be able to install the `sf` package, 
+To install `{MODIStsp}` on MacOS, you need to be able to install the `{sf}` package, 
 which requires gdal to be installed. See [HERE](https://github.com/r-spatial/sf#installing)
-if you have trouble installing `sf`. 
+if you have trouble installing `{sf}`. 
 
-Then, you can install the stable version of MODIStsp from CRAN:
+Then, you can install the stable version of `{MODIStsp}` from CRAN:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("MODIStsp")
 ```
 , or the development version (containing the latest improvements and bug fixes) 
-from github;
+from GitHub:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)

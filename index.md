@@ -15,11 +15,11 @@ Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](h
 
 <!-- # MODIStsp <img src='man/figures/logo.png' align="right" height="139" /> -->
 
-**MODIStsp** is a “R” package devoted to **automatizing the creation of
-time series of raster images derived from MODIS Land Products data**.
+**`{MODIStsp}`** is a `R` package devoted to automatizing the creation
+of time series of raster images derived from MODIS Land Products data.
 
-**MODIStsp** allows to perform several preprocessing steps *(e.g.,
-download, mosaicing, reprojection, resize, data extraction)* on MODIS
+**`{MODIStsp}`** allows performing several preprocessing steps (e.g.,
+download, mosaicing, reprojection, resize, data extraction) on MODIS
 data available within a given time period. Users have the ability to
 select which specific layers of the original MODIS HDF files they want
 to process. They also can select which additional **Quality Indicators**
@@ -30,81 +30,82 @@ Indexes** should be computed from the original reflectance bands.
 All processing parameters can be easily selected with a **powerful and
 user-friendly GUI**, although non-interactive execution exploiting a
 previously created Options File is possible. Stand-alone execution
-outside an “R” environment is also possible, allowing to use scheduled
+outside an `R` environment is also possible, allowing using scheduled
 execution of MODIStsp to automatically update time series related to a
 MODIS product and extent whenever a new image is available.
 
 For each output layer, outputs are saved as **single-band raster** files
-corresponding to each available acquisition date. **Virtual files**
-allowing access to the entire time series as a single file can be also
-created.
+corresponding to each available acquisition date. **Virtual files**,
+allowing accessing to the entire time series as a single file, can be
+also created.
 
 <a href="http://www.irea.cnr.it/en/">
 <img src="man/figures/irea_logo.png" height="40" align="left" /></a>
 
-<span style="font-style:italic;font-weight:bold;">`MODIStsp` was
+<span style="font-style:italic;font-weight:bold;">`{MODIStsp}` was
 developed by Lorenzo Busetto and Luigi Ranghetti, [Institute of Remote
 Sensing of Environment](http://www.irea.cnr.it/en/) - National Research
 Council - Italy (CNR-IREA). [It is dedicated to the memory of
-Lorenzo](articles/lorenzo.html).</span>
+Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
 
 -----
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What’s New
 
-  - 01/09/2020 - MODIStsp 2.0.0 is out. Replaces the old gWidgets GUI
-    with a new one based on Shiny, enhances support for CLI usage and
-    enhances support/provides bug fixing for datasets with multiple
+  - 01/09/2020 - `{MODIStsp}` 2.0.0 is out. Replaces the old gWidgets
+    GUI with a new one based on Shiny, enhances support for CLI usage
+    and enhances support/provides bug fixing for datasets with multiple
     NoData values when applying scale/offset.
 
-  - 09/05/2020 - MODIStsp 1.4.0 is out. Switches to use of GDAL3/PROJ6
-    WKTs for projection representation and usage of `sf` for all
-    internal work on vector data. Adds support for products MCD19A1 and
-    MCD19A2 products.
+  - 09/05/2020 - `{MODIStsp}` 1.4.0 is out. Switches to use of
+    GDAL3/PROJ6 WKTs for projection representation and usage of `{sf}`
+    for all internal work on vector data. Adds support for products
+    MCD19A1 and MCD19A2 products.
 
-  - 07/06/2019 - MODIStsp 1.3.9 is out. Fixes a bug causing crashes on
-    MOD14A1 product, adds support for product MCD12Q2 and removes
+  - 07/06/2019 - `{MODIStsp}` 1.3.9 is out. Fixes a bug causing crashes
+    on MOD14A1 product, adds support for product MCD12Q2 and removes
     support for no longer available version 5 of some products.
 
-  - 05/03/2019 - MODIStsp 1.3.8 is out. Fixes an issue causing incorrect
-    application of scale/offset values on GDAL versions \> 2.3
+  - 05/03/2019 - `{MODIStsp}` 1.3.8 is out. Fixes an issue causing
+    incorrect application of scale/offset values on GDAL versions \> 2.3
     (<https://github.com/ropensci/MODIStsp/issues/163>) and adds support
-    for products MOD21A1D.006 MOD21A1N.006 MOD21A2.006
+    for products `MOD21A1D.006 MOD21A1N.006 MOD21A2.006`.
 
   - 29/11/2018 - We recently discovered a nasty bug in the computation
     of some custom spectral indices (those including additions /
     subtractions on reflectance values, such as in
     \(\frac{(b1_{NIR}+0.1)}{b2_{Red}}\) (with \(\rho\) being a
-    reflectance). See [here](articles/discovered_bug.html) for further
-    details\! The bug is now fixed on the GitHub version. A patched
-    release will be made available on CRAN as soon as possible.
+    reflectance). See
+    [here](https://docs.ropensci.org/MODIStsp/articles/discovered_bug.html)
+    for further details. The bug is now fixed on the GitHub version. A
+    patched release will be made available on CRAN as soon as possible.
 
-  - 07/08/2018 - We are glad to report that MODIStsp is now included in
-    the [rOpenSci](https://ropensci.org/about/) packages’ ecosystem. We
-    thank reviewers Leah Wasser and Jeffrey Hanson for their valuable
+  - 07/08/2018 - We are glad to report that `{MODIStsp}` is now included
+    in the [rOpenSci](https://ropensci.org/about/) packages’ ecosystem.
+    We thank reviewers Leah Wasser and Jeffrey Hanson for their valuable
     reviews, which helped us  
-    further improving the package\!
+    further improving the package.
 
-  - 10/07/2018 - MODIStsp v. 1.3.6 is out. Check out the [Release
+  - 10/07/2018 - `{MODIStsp}` v. 1.3.6 is out (check out the [Release
     Notes](https://github.com/ropensci/MODIStsp/releases/tag/1.3.6) for
-    further details \!
+    further details).
 
-  - 20/06/2018 - MODIStsp v. 1.3.5 is out. Check out the [Release
+  - 20/06/2018 - `{MODIStsp}` v. 1.3.5 is out (check out the [Release
     Notes](https://github.com/ropensci/MODIStsp/releases/tag/v1.3.5) for
-    further details \!
+    further details).
 
   - 11/04/2018 - Due to new NASA Policies the MODIS FTP servers were
     shut down starting, April 2, 2018. **FTP download is therefore no
-    longer working** and will be removed in the next MODIStsp version\!
+    longer working** and will be removed in the next MODIStsp version.
 
   - 11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data
     Products**](https://lpdaac.usgs.gov/news/decommissioning-modis-version-51-land-cover-type-data-products-january-7-2019/).
     As per NASA notice above, MODIS v005 products are going to be
     decommissioned, and will soon be no longer available for download.
     Support for those products will be removed in the next MODIStsp
-    version\!.
+    version.
 
-  - 11/08/2017 - MODIStp 1.3.3 was released today. It provides
+  - 11/08/2017 - `{MODIStsp}` 1.3.3 was released today. It provides
     improvements in processing speed, as well as the usual bug fixes.
     See our [\<i class=“fa fa-newspaper-o aria-hidden=”true"\></i>
     news](news/index.html) page for a detailed changelog.
@@ -113,22 +114,22 @@ Lorenzo](articles/lorenzo.html).</span>
 
 ## <i class="fa fa-cog" aria-hidden="true"></i> Getting Started
 
-  - **To install `MODIStsp`**, please follow instructions reported
+  - **To install `{MODIStsp}`**, please follow instructions reported
     [here](articles/installation.html), both for
     [<i class="fa fa-windows" aria-hidden="true"></i>](articles/installation.html#installing-on-windows)
     ,
     [<i class="fa fa-linux" aria-hidden="true"></i>](articles/installation.html#installing-on-linux-systems)
     and
-    [<i class="fa fa-apple" aria-hidden="true"></i>](articles/installation.html#installing-on-mac)
+    [<i class="fa fa-apple" aria-hidden="true"></i>](articles/installation.html#installing-on-mac).
 
-  - `MODIStsp` can be used either in [interactive
+  - **`{MODIStsp}`** can be used either in [interactive
     mode](articles/interactive_execution.html) exploiting its
     user-friendly GUI, or in [non-interactive
     mode](articles/noninteractive_execution.html) from within `R`
-    scripts
+    scripts.
 
   - The list of **currently supported MODIS products and versions** can
-    be found [here](articles/Products_list.html)
+    be found [here](articles/Products_list.html).
 
   - [Scheduled
     Processing](articles/noninteractive_execution.html#scheduled-processing)
@@ -136,17 +137,16 @@ Lorenzo](articles/lorenzo.html).</span>
     jobs, both on
     [<i class="fa fa-windows" aria-hidden="true"></i>](articles/standalone_execution.html#on-windows)
     and
-    [<i class="fa fa-linux" aria-hidden="true"></i>](articles/standalone_execution.html#on-linux)
+    [<i class="fa fa-linux" aria-hidden="true"></i>](articles/standalone_execution.html#on-linux).
 
   - Solutions to common **installation, data download and processing
     problems** can be found in our
     [<i class="fa fa-question-circle-o" aria-hidden="true"></i>
-    faq](articles/faq.html)
+    faq](https://docs.ropensci.org/MODIStsp/articles/faq.html).
 
   - Please **report any issues** you may encounter in our [issues page
     on github
-    <i class="fa fa-github-square" aria-hidden="true"></i>](https://github.com/ropensci/MODIStsp/issues)
-    .
+    <i class="fa fa-github-square" aria-hidden="true"></i>](https://github.com/ropensci/MODIStsp/issues).
 
 -----
 

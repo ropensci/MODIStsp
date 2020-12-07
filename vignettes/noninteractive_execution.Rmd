@@ -13,16 +13,16 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-`MODIStsp` can be launched in non-interactive mode within an `R` session by setting the optional `GUI` parameter to FALSE, and either providing the desired processing argument in the call to the function, or providing a previously saved `opts_file` specifying the path to a JSON Options file previously saved through the GUI. 
-This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts.
+`MODIStsp()` can be launched in non-interactive mode within an `R` session by setting the optional `GUI` parameter to FALSE, and either providing the desired processing argument in the call to the function, or providing a previously saved `opts_file` specifying the path to a JSON Options file previously saved through the GUI. 
+This allows to exploit `{MODIStsp}` functionalities within generic `R` processing scripts.
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Specifying the processing parameters in the function call__
 
-All processing parameters can be set in the call to `MODIStsp`. Mandatory 
-parameters are `selprod` (specifying the MODIS product), (one of) `bandsel`, `quality_bandsel` or `indexes_bandsel`, (that specify the desired output layers), `out_folder` and `start_date` and `end_date`. 
-`user` and `password` are also needed if `download_server` is not equal to `offline`.
+All processing parameters can be set in the call to `MODIStsp()`. Mandatory 
+parameters are `selprod` (specifying the MODIS product), (one of) `bandsel`, `quality_bandsel` or `indexes_bandsel` (that specify the desired output layers), `out_folder`, `start_date` and `end_date`. 
+`user` and `password` are also needed if `download_server` is not equal to `"offline"`.
 
-The new function `MODIStsp_get_prodlayers` allows to easily retrieve the 
+The new function `MODIStsp_get_prodlayers()` allows easily retrieving the 
 names of products and available layers based on product code, such as in: 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
@@ -30,14 +30,14 @@ library(MODIStsp)
 MODIStsp_get_prodlayers("M*D13Q1")
 ```
 
-The other parameters are set automatically to default values (see [HERE](reference/index.html) for details on the different available function arguments). 
+The other parameters are set automatically to default values (see [`MODIStsp()` documentation](../reference/MODIStsp.html) for details on the different available function arguments). 
 
-For example, the following code processes layers __NDVI__ and __EVI__ and quality indicator __usefulness__ of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to R tempdir: 
+For example, the following code processes layers __NDVI__ and __EVI__ and quality indicator __usefulness__ of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to `R` `tempdir()`: 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(MODIStsp) 
 
-# **NOTE** Output files of examples are saved to file.path by setting out_folder to $tempdir.
+# **NOTE** Output files of examples are saved to file.path by setting out_folder to "$tempdir".
 
 # --> See name and available layers for product M*D13Q1
 # MODIStsp_get_prodlayers("M*D13A2")
@@ -66,7 +66,7 @@ list.files(file.path(out_fold ,"QA_usef"))
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Launching MODIStsp using a saved "Options file"__
 
-Alternatively, you can run MODIStsp without opening the GUI by specifying a previously saved options file: 
+Alternatively, you can run `MODIStsp()` without opening the GUI by specifying a previously saved options file: 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(MODIStsp) 
@@ -94,7 +94,7 @@ list.files(file.path(out_fold ,"EVI"))
 ## _Looping over different Options files_
 
 If you need to process different MODIS products, you can prepare beforehand different
-MODIStsp options files by using the GUI, and then loop over them like this:
+`MODIStsp()` options files by using the GUI, and then loop over them like this:
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 
@@ -124,11 +124,11 @@ ________________________________________________________________________________
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Specifying the processing parameters using a previously saved options file and overwriting some parameters__
 
-Finally, it is possible to both specify a previously saved options file AND setting some parameters in the call to the function. This allows to __easily perform similar processings, by only updating the required arguments__, as in the examples below. 
+Finally, it is possible to both specify a previously saved options file AND setting some parameters in the call to the function. This allows __easily performing similar processings, by only updating the required arguments__, as in the examples below. 
 
 ## __Looping over different spatial extents__
 
-Specifying the `spafile` parameter while setting the `spatmeth` parameter to "file" overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File. For example:
+Specifying the `spafile` parameter while setting the `spatmeth` parameter to "file" overrides for example the output extent of the selected Options File. This allows performing the same preprocessing on different extents using a single Options File. For example:
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 # Run the tool using the settings previously saved in a specific option file

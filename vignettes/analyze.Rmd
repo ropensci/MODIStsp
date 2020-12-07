@@ -30,9 +30,9 @@ Sys.setlocale("LC_TIME", "en_US.UTF-8")
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Accessing the raster time series__
 
-Preprocessed MODIS data can be retrieved within `R`  either by accessing the 
+Preprocessed MODIS data can be retrieved within `R` either by accessing the 
 single-date raster files, or by loading the saved `RasterStack` objects (see 
-[HERE](articles/output.html) for a description of `MODIStsp` output folder
+[here](output.html) for a description of `{MODIStsp}` output folder
 structure and naming conventions).
 
 To test this functionality, you can run the following example: 
@@ -48,11 +48,11 @@ region of the Como Lake in Italy.
 
 After the download and processing finishes (it will take a while, depending on your
 network speed), the MODIS time series will be placed in subfolder `MODIStsp/VI_16Days_500m_v6` 
-of `R` tempdir(). (In this case, I have them in "`file.path(tempdir(), "VI_16Days_500m_v6"`". 
+of `R` `tempdir()`. In this case, I have them in "`file.path(tempdir(), "VI_16Days_500m_v6")`". 
 If you want to save them elsewhere, run `MODIStsp(opts_file = opts_file, gui = TRUE)`
-and select a different output folder).
+and select a different output folder.
 
-Single-date processed rasters can be accessed by simply opening them  with a
+Single-date processed rasters can be accessed by simply opening them with a
 `raster` command: 
 
 ```{R echo=TRUE, message=FALSE, warning=FALSE, highlight=TRUE, tidy=TRUE}
@@ -65,7 +65,7 @@ plot(my_raster)
 ```
 
 `RasterStack` (or GDAL vrt) time series containing all the processed data for a
-given parameter are saved in the "Time Series/RData" subfolder, and can be accessed
+given parameter are saved in the `Time Series/RData` subfolder, and can be accessed
 by: 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
@@ -82,7 +82,7 @@ ts_data
 
 This `RasterStack` can be analyzed using the functionalities for raster/raster 
 time series analysis, extraction and plotting provided for example by the 
-```raster``` or   ```rasterVis``` packages: 
+``{raster}`` or   ``{rasterVis}`` packages: 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 # plot some dates
@@ -114,22 +114,22 @@ ________________________________________________________________________________
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Extracting Time Series Data on Areas of Interest__
 
-`MODIStsp` provides an efficient function (`MODIStsp_extract`) for extracting 
+`{MODIStsp}` provides an efficient function (`MODIStsp_extract()`) for extracting 
 time series data at specific locations. The function takes as input a `RasterStack` 
-virtual object created by `MODIStsp` (see above), the starting and ending dates 
-for the extraction and a standard `sp` object (or an ESRI shapefile name) 
+virtual object created by `MODIStsp()` (see above), the starting and ending dates 
+for the extraction and a standard `{sp}` object (or an ESRI shapefile name) 
 specifying the locations (points, lines or polygons) of interest, and provides 
 as output a `xts` object or `data.frame` containing time series data for those
 locations. 
 
-If the input is of class _SpatialPoints_, the output object contains one column 
+If the input is of class `SpatialPoints`, the output object contains one column 
 for each point specified, and one row for each date. If it is of class
-_SpatialPolygons_ (or _SpatialLines_), it contains one column for each polygon 
+`SpatialPolygons` (or `SpatialLines`), it contains one column for each polygon 
 (or each line), with values obtained applying the function specified as the "FUN" 
 argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon
 (or touched by the line), and one row for each date. 
 
-To test `MODIStsp_extract` we can start by loading the NDVI `RasterStack`
+To test `MODIStsp_extract()` we can start by loading the NDVI `RasterStack`
 time series created in the previous example:
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
@@ -142,7 +142,7 @@ ts_data
 
 , which again gives us the 23-band `RasterStack` in the `ts_data` variable. 
 
-To extract the NDVI data over selected areas, we can then use the `MODIStsp_extract`
+To extract the NDVI data over selected areas, we can then use the `MODIStsp_extract()`
 function as follows: 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
@@ -178,7 +178,7 @@ library(xts)
 plot(out_dataavg, legend.loc = "topleft")
 ```
 
-We can also transform the output dataset to a long format and use `ggplot2` for
+We can also transform the output dataset to a long format and use `{ggplot2}` for
 plotting and other tidyverse-friendly functions for analysis:
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
@@ -209,6 +209,6 @@ ggplot2::ggplot(month_avg, aes(x = date, y = Value, color = Polygon)) +
 
 ```
 
-**IMPORTANT NOTES - 1** `MODIStsp_extract` is usually much faster than the 
-standard `raster::extract` function, but does not deal with overlapping polygons.
-If your polygons are overlapping, please use `raster::extract` instead. 
+**Important note:** `MODIStsp_extract()` is usually much faster than the 
+standard `raster::extract()` function, but does not deal with overlapping polygons.
+If your polygons are overlapping, please use `raster::extract()` instead. 

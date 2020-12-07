@@ -34,7 +34,7 @@ myoutfolder/"ProdName"/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
   acquisition of the original MODIS image;
   - **_ext_** is the file extension (.tif for GTiff outputs, or .dat for ENVI outputs). 
   
-so, for example, if you process layers "NDVI" and "EVI" for MODIS product MOD13A2 
+So, for example, if you process layers "NDVI" and "EVI" for MODIS product MOD13A2 
 you will find the resulting GTiff of ENVI output single-date rasters in:
 
 ```
@@ -77,8 +77,9 @@ myoutfolder/"ProdName"/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer
   - **_ext_** is the file extension (".vrt" for gdal virtual files, "META" for 
   ENVI meta files or "RData" for `R` raster stacks). 
 
-so, for example, if you process layer "NDVI" for MODIS product MOD13A2 and platform 
-"Terra", and ask to create "R rasterStacks" and "GDAL vrt" time series you will find the resulting GTiff virtual files in:
+So, for example, if you process layer "NDVI" for MODIS product MOD13A2 and platform 
+"Terra", and ask to create "R rasterStacks" and "GDAL vrt" time series you will 
+find the resulting GTiff virtual files in:
 
 ```
 /your_out_folder/VI_16Days_1Km_v6/Time_Series/RData/Terra/NDVI

@@ -143,7 +143,7 @@
 <h1 class="hasAnchor">
 <a href="#accessing-the-raster-time-series" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Accessing the raster time series</strong>
 </h1>
-<p>Preprocessed MODIS data can be retrieved within <code>R</code> either by accessing the single-date raster files, or by loading the saved <code>RasterStack</code> objects (see <a href="articles/output.html">HERE</a> for a description of <code>MODIStsp</code> output folder structure and naming conventions).</p>
+<p>Preprocessed MODIS data can be retrieved within <code>R</code> either by accessing the single-date raster files, or by loading the saved <code>RasterStack</code> objects (see <a href="output.html">here</a> for a description of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> output folder structure and naming conventions).</p>
 <p>To test this functionality, you can run the following example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span>
@@ -151,23 +151,23 @@
 <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>opts_file <span class="op">=</span> <span class="va">opts_file</span>, gui <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] "DONE"</code></pre>
 <p>This will download a yearly time series of MODIS NDVI data and subset it over the region of the Como Lake in Italy.</p>
-<p>After the download and processing finishes (it will take a while, depending on your network speed), the MODIS time series will be placed in subfolder <code>MODIStsp/VI_16Days_500m_v6</code> of <code>R</code> tempdir(). (In this case, I have them in “<code>file.path(tempdir(), "VI_16Days_500m_v6"</code>”. If you want to save them elsewhere, run <code><a href="../reference/MODIStsp.html">MODIStsp(opts_file = opts_file, gui = TRUE)</a></code> and select a different output folder).</p>
+<p>After the download and processing finishes (it will take a while, depending on your network speed), the MODIS time series will be placed in subfolder <code>MODIStsp/VI_16Days_500m_v6</code> of <code>R</code> <code><a href="https://rdrr.io/r/base/tempfile.html">tempdir()</a></code>. In this case, I have them in “<code><a href="https://rdrr.io/r/base/file.path.html">file.path(tempdir(), "VI_16Days_500m_v6")</a></code>”. If you want to save them elsewhere, run <code><a href="../reference/MODIStsp.html">MODIStsp(opts_file = opts_file, gui = TRUE)</a></code> and select a different output folder.</p>
 <p>Single-date processed rasters can be accessed by simply opening them with a <code>raster</code> command:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">modistsp_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/VI_16Days_500m_v6/NDVI"</span>, <span class="st">"MOD13A1_NDVI_2016_177.tif"</span><span class="op">)</span>
 <span class="va">modistsp_file</span></code></pre></div>
-<pre><code>## [1] "/tmp/Rtmph13Bd6/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "/tmp/Rtmp27E2ZR/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">modistsp_file</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">my_raster</span><span class="op">)</span></code></pre></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<p><code>RasterStack</code> (or GDAL vrt) time series containing all the processed data for a given parameter are saved in the “Time Series/RData” subfolder, and can be accessed by:</p>
+<p><code>RasterStack</code> (or GDAL vrt) time series containing all the processed data for a given parameter are saved in the <code>Time Series/RData</code> subfolder, and can be accessed by:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load the NDVI time series</span>
 <span class="va">ts_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/VI_16Days_500m_v6/Time_Series"</span><span class="op">)</span>
 <span class="va">in_virtual_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">ts_folder</span>, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span><span class="op">)</span>
 <span class="va">in_virtual_file</span></code></pre></div>
-<pre><code>## [1] "/tmp/Rtmph13Bd6/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
+<pre><code>## [1] "/tmp/Rtmp27E2ZR/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ts_data</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">in_virtual_file</span><span class="op">)</span><span class="op">)</span>
 <span class="va">ts_data</span></code></pre></div>
@@ -179,7 +179,7 @@
 ## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, ... 
 ## time        : 2016-01-01 - 2016-12-18 (range)</code></pre>
 <p>, which gives us a 23-band <code>RasterStack</code> in the <code>ts_data</code> variable.</p>
-<p>This <code>RasterStack</code> can be analyzed using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <code>raster</code> or <code>rasterVis</code> packages:</p>
+<p>This <code>RasterStack</code> can be analyzed using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <a href="https://rspatial.org/raster">raster</a> or <a href="https://oscarperpinan.github.io/rastervis/">rasterVis</a> packages:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot some dates</span>
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">ts_data</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">15</span>,<span class="fl">20</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>, horizontal <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
@@ -195,7 +195,7 @@
 ## resolution : 463.3127, 463.3127  (x, y)
 ## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)
 ## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs 
-## source     : /tmp/Rtmph13Bd6/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
+## source     : /tmp/Rtmp27E2ZR/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_001.tif 
 ## names      : MOD13A1_NDVI_2016_001 
 ## time       : 2016-01-01</code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -236,9 +236,9 @@
 <h1 class="hasAnchor">
 <a href="#extracting-time-series-data-on-areas-of-interest" class="anchor"></a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Extracting Time Series Data on Areas of Interest</strong>
 </h1>
-<p><code>MODIStsp</code> provides an efficient function (<code>MODIStsp_extract</code>) for extracting time series data at specific locations. The function takes as input a <code>RasterStack</code> virtual object created by <code>MODIStsp</code> (see above), the starting and ending dates for the extraction and a standard <code>sp</code> object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a <code>xts</code> object or <code>data.frame</code> containing time series data for those locations.</p>
-<p>If the input is of class <em>SpatialPoints</em>, the output object contains one column for each point specified, and one row for each date. If it is of class <em>SpatialPolygons</em> (or <em>SpatialLines</em>), it contains one column for each polygon (or each line), with values obtained applying the function specified as the “FUN” argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.</p>
-<p>To test <code>MODIStsp_extract</code> we can start by loading the NDVI <code>RasterStack</code> time series created in the previous example:</p>
+<p><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> provides an efficient function (<code><a href="../reference/MODIStsp_extract.html">MODIStsp_extract()</a></code>) for extracting time series data at specific locations. The function takes as input a <code>RasterStack</code> virtual object created by <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> (see above), the starting and ending dates for the extraction and a standard <a href="https://github.com/edzer/sp/">sp</a> object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a <code>xts</code> object or <code>data.frame</code> containing time series data for those locations.</p>
+<p>If the input is of class <code>SpatialPoints</code>, the output object contains one column for each point specified, and one row for each date. If it is of class <code>SpatialPolygons</code> (or <code>SpatialLines</code>), it contains one column for each polygon (or each line), with values obtained applying the function specified as the “FUN” argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.</p>
+<p>To test <code><a href="../reference/MODIStsp_extract.html">MODIStsp_extract()</a></code> we can start by loading the NDVI <code>RasterStack</code> time series created in the previous example:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ts_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/VI_16Days_500m_v6/Time_Series"</span><span class="op">)</span>
 <span class="va">in_virtual_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">ts_folder</span>, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span><span class="op">)</span>
@@ -252,7 +252,7 @@
 ## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, ... 
 ## time        : 2016-01-01 - 2016-12-18 (range)</code></pre>
 <p>, which again gives us the 23-band <code>RasterStack</code> in the <code>ts_data</code> variable.</p>
-<p>To extract the NDVI data over selected areas, we can then use the <code>MODIStsp_extract</code> function as follows:</p>
+<p>To extract the NDVI data over selected areas, we can then use the <code><a href="../reference/MODIStsp_extract.html">MODIStsp_extract()</a></code> function as follows:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load a shapefile containing polygons --&gt; Here we use a test shapefile in </span>
 <span class="co"># the testdata folder of MODIStsp.</span>
@@ -308,7 +308,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/xts">xts</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="va">out_dataavg</span>, legend.loc <span class="op">=</span> <span class="st">"topleft"</span><span class="op">)</span></code></pre></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<p>We can also transform the output dataset to a long format and use <code>ggplot2</code> for plotting and other tidyverse-friendly functions for analysis:</p>
+<p>We can also transform the output dataset to a long format and use <a href="http://ggplot2.tidyverse.org">ggplot2</a> for plotting and other tidyverse-friendly functions for analysis:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="va">out_dataavg_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>date <span class="op">=</span> <span class="fu">index</span><span class="op">(</span><span class="va">out_dataavg</span><span class="op">)</span>, <span class="fu">coredata</span><span class="op">(</span><span class="va">out_dataavg</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
@@ -332,7 +332,7 @@
 <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">month_avg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">Value</span>, color <span class="op">=</span> <span class="va">Polygon</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_light</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
-<p><strong>IMPORTANT NOTES - 1</strong> <code>MODIStsp_extract</code> is usually much faster than the standard <code><a href="https://rdrr.io/pkg/raster/man/extract.html">raster::extract</a></code> function, but does not deal with overlapping polygons. If your polygons are overlapping, please use <code><a href="https://rdrr.io/pkg/raster/man/extract.html">raster::extract</a></code> instead.</p>
+<p><strong>Important note:</strong> <code><a href="../reference/MODIStsp_extract.html">MODIStsp_extract()</a></code> is usually much faster than the standard <code><a href="https://rdrr.io/pkg/raster/man/extract.html">raster::extract()</a></code> function, but does not deal with overlapping polygons. If your polygons are overlapping, please use <code><a href="https://rdrr.io/pkg/raster/man/extract.html">raster::extract()</a></code> instead.</p>
 </div>
   </div>
 

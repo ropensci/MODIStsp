@@ -63,6 +63,7 @@ Suggests:
     leaflet,
     magrittr,
     mapedit (>= 0.6.0),
+    markdown,
     png,
     rappdirs,
     rgdal, 
