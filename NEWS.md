@@ -2,7 +2,7 @@
 
 ### Main changes
 
-- Edit documentation related to the maintainer's change
+- Edit documentation related to the change of maintainer
     (see https://docs.ropensci.org/MODIStsp/articles/lorenzo).
     
 ### Minor changes

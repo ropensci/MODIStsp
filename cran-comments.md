@@ -1,9 +1,10 @@
 MODIStsp 2.0.5
 ================
 
-* Windows 10 on local install, R 4.0
+* Windows 10 on local install, R 4.0.3
 * Ubuntu 18.04 on local install, R 4.0.3
-* win-builder (R-devel, R-release)
+* ArchLinux on local install, R 4.0.3
+* win-builder (R-devel, R-release, R-oldrelease)
 
 This submission should fix errors on Debian builds, due to improper 
 trigger of an helper function leading to writing in the user's 
@@ -49,7 +50,7 @@ Possibly mis-spelled words in DESCRIPTION:
   reflectance (29:67)
   reprojection (23:55)
 ```
-This words are correctly spelled.
+All these words are correctly spelled.
 
 MODIStsp 2.0.5
 ================

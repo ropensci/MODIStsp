@@ -65,6 +65,7 @@ Suggests:
     mapedit (>= 0.6.0),
     markdown,
     png,
+    qpdf,
     rappdirs,
     rgdal, 
     rmarkdown,
