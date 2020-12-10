@@ -29,6 +29,12 @@
 #' @param outrep_file `character` Full path of the file where results of the
 #'  processing are to be stored (created in `MODIStsp_process`)
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
+#' @param parallel `logical` If TRUE, the function is run using parallel
+#'  processing, to speed-up the computation for large rasters (with a maximum
+#'  of 8 cores).
+#'  The number of cores is automatically determined; specifying it is also 
+#'  possible (e.g. `parallel = 4`). In this case, more than 8 cores can be
+#'  specified. If FALSE (default), single core processing is used.
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_process_bands
 #' @author Lorenzo Busetto, phD (2014-2017)
@@ -50,7 +56,7 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
                                    out_format, outrep_file, compress,
                                    out_res_sel, out_res, resampling,
                                    nodata_change,
-                                   gui, verbose) {
+                                   gui, verbose, parallel) {
 
   tmpdir <- file.path(tempdir(), "mstp_temp")
   dir.create(tmpdir, showWarnings = FALSE)
@@ -62,7 +68,13 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
   #   number of available cpus > 8 (this to avoid overloading servers with high
   #   number of cpus)
 
-  ncores <- min(c(8, parallel::detectCores() - 2))
+  ncores <- if (is.numeric(parallel)) {
+    as.integer(parallel)
+  } else if (parallel == FALSE) {
+    1
+  } else {
+    min(c(8, parallel::detectCores() - 2))
+  }
 
   # check to see if the patch to correct wrong resolution/bbox in some HDF4 ----
   # original layers (e.g. albedo) is needed

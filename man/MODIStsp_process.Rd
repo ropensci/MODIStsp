@@ -4,7 +4,7 @@
 \alias{MODIStsp_process}
 \title{MODIStsp main processing function}
 \usage{
-MODIStsp_process(proc_opts, n_retries, verbose = TRUE)
+MODIStsp_process(proc_opts, n_retries, verbose = TRUE, parallel = TRUE)
 }
 \arguments{
 \item{proc_opts}{\code{data.frame} containing all processing parameters, as
@@ -16,6 +16,13 @@ In case any download function fails more than \code{n_retries} times consecutive
 MODIStsp_process will abort, Default: 20}
 
 \item{verbose}{\code{logical} If FALSE, suppress processing messages, Default: TRUE}
+
+\item{parallel}{\code{logical} If TRUE (default), the function is run using parallel
+processing, to speed-up the computation for large rasters (with a maximum
+of 8 cores).
+The number of cores is automatically determined; specifying it is also
+possible (e.g. \code{parallel = 4}). In this case, more than 8 cores can be
+specified. If FALSE (default), single core processing is used.}
 }
 \value{
 The function is called for its side effects.
