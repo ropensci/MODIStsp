@@ -56,6 +56,9 @@ ________________________________________________________________________________
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What's New 
 
+- 10/12/2020 - `{MODIStsp}` was resubmitted to CRAN after the maintainer's death.
+Now `{MODIStsp}` is dedicated to Lorenzo Busetto (https://docs.ropensci.org/MODIStsp/articles/lorenzo).
+
 - 01/09/2020 - `{MODIStsp}` 2.0.0 is out. Replaces the old gWidgets GUI with a new one 
 based on Shiny, enhances support for CLI usage and enhances support/provides bug fixing for datasets with 
 multiple NoData values when applying scale/offset.

@@ -39,7 +39,7 @@ instead than to the console/GTK progress windows.}
 \item{out_folder_mod}{\code{character} output folder for MODIS HDF storage}
 }
 \value{
-\verb{character arraay} listing all available folders (a.k.a. dates) for
+\verb{character array} listing all available folders (a.k.a. dates) for
 the requested MODIS product on lpdaac http archive, for the years
 included in the time range selected for processing.
 }

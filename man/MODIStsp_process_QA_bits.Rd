@@ -49,7 +49,7 @@ bitwise operators, and save the result in a new raster image
 }
 \note{
 License: GPL 3.0
-Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
+Based on the \code{modis.qc.R} script by Yann Chemin (2008) (\url{https://goo.gl/7Fhreo})
 license GPL 3.0
 }
 \author{

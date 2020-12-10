@@ -5,6 +5,9 @@
 - Edit documentation related to the change of maintainer
     (see https://docs.ropensci.org/MODIStsp/articles/lorenzo).
     
+- Add the argument `parallel` to function `MODIStsp()` and `MODSIStsp_process()`
+    to allow running the processing in single core modality.
+    
 ### Minor changes
 
 - Fix Travis tests

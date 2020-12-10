@@ -183,17 +183,20 @@ library(MODIStsp)
 # MODIStsp_get_prodlayers("M*D13A2")
 
 # --> Launch the processing
-MODIStsp(gui             = FALSE, 
-         out_folder      = "$tempdir", 
-         selprod         = "Vegetation_Indexes_16Days_1Km (M*D13A2)",
-         bandsel         = c("EVI", "NDVI"), 
-         quality_bandsel = "QA_usef", 
-         indexes_bandsel = "SR", 
-         user            = "mstp_test" ,
-         password        = "MSTP_test_01",
-         start_date      = "2020.06.01", 
-         end_date        = "2020.06.15", 
-         verbose         = FALSE)
+MODIStsp(
+  gui             = FALSE, 
+  out_folder      = "$tempdir", 
+  selprod         = "Vegetation_Indexes_16Days_1Km (M*D13A2)",
+  bandsel         = c("EVI", "NDVI"), 
+  quality_bandsel = "QA_usef", 
+  indexes_bandsel = "SR", 
+  user            = "mstp_test" ,
+  password        = "MSTP_test_01",
+  start_date      = "2020.06.01", 
+  end_date        = "2020.06.15", 
+  verbose         = FALSE,
+  parallel        = FALSE
+)
 
 # Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of 
 # `base::tempdir()`: 
@@ -204,6 +207,9 @@ list.files(file.path(out_fold ,"EVI"))
 list.files(file.path(out_fold ,"QA_usef"))
 ```
 
+_Note that this example, as well as the following ones, is run in single
+core to follow CRAN policies, by setting `parallel = FALSE`;
+users can exploit multicore functionalities skipping to set this argument._
 
 ## __Launching MODIStsp using a saved "Options file"__
 
@@ -222,7 +228,7 @@ library(MODIStsp)
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 
 # --> Launch the processing
-MODIStsp(gui = FALSE, opts_file = opts_file, verbose = FALSE)
+MODIStsp(gui = FALSE, opts_file = opts_file, verbose = FALSE, parallel = FALSE)
 
 # Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of 
 # tempdir(): 
@@ -243,9 +249,7 @@ opts_files <- c(system.file("testdata/test_MOD13A2.json", package = "MODIStsp"),
                 system.file("testdata/test_MOD10A2.json", package = "MODIStsp"))
 
 for (opts_file in opts_files) {
-  MODIStsp(gui       = FALSE, 
-           opts_file = opts_file, 
-           verbose   = FALSE)
+  MODIStsp(gui = FALSE, opts_file = opts_file, verbose = FALSE, parallel = FALSE)
 }
 
 # MOD13A2 ouptuts
@@ -274,11 +278,14 @@ Specifying the `spafile` parameter while setting the `spatmeth` parameter to `"f
 library(MODIStsp) 
 opts_file    <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
-MODIStsp(gui       = FALSE, 
-         opts_file = opts_file,
-         spatmeth  = "file", 
-         spafile   = spatial_file, 
-         verbose   = FALSE)
+MODIStsp(
+  gui = FALSE, 
+  opts_file = opts_file,
+  spatmeth = "file", 
+  spafile = spatial_file, 
+  verbose = FALSE, 
+  parallel = FALSE
+)
 
 # --> Create a character array containing a list of shapefiles (or other spatial files)
 extent_list <- list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"), full.names = TRUE, "\\.shp$")  
@@ -290,11 +297,14 @@ extent_list
 # each input spatial file).
 
 for (single_shape in extent_list) {
-  MODIStsp(gui       = FALSE, 
-           opts_file = opts_file, 
-           spatmeth  = "file", 
-           spafile   = single_shape, 
-           verbose   = FALSE)
+  MODIStsp(
+    gui = FALSE, 
+    opts_file = opts_file, 
+    spatmeth = "file", 
+    spafile = single_shape, 
+    verbose = FALSE, 
+    parallel = FALSE
+  )
 }
 
 # output files are placed in separate folders: 

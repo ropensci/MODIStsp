@@ -132,7 +132,7 @@
       <h1 data-toc-skip>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v2.0.5</h1>
                         <h4 class="author">Lorenzo Busetto, Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2020-12-08</h4>
+            <h4 class="date">2020-12-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/MODIStsp/blob/master/vignettes/MODIStsp.Rmd"><code>vignettes/MODIStsp.Rmd</code></a></small>
       <div class="hidden name"><code>MODIStsp.Rmd</code></div>
@@ -232,17 +232,20 @@
 <span class="co"># MODIStsp_get_prodlayers("M*D13A2")</span>
 
 <span class="co"># --&gt; Launch the processing</span>
-<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui             <span class="op">=</span> <span class="cn">FALSE</span>, 
-         out_folder      <span class="op">=</span> <span class="st">"$tempdir"</span>, 
-         selprod         <span class="op">=</span> <span class="st">"Vegetation_Indexes_16Days_1Km (M*D13A2)"</span>,
-         bandsel         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"EVI"</span>, <span class="st">"NDVI"</span><span class="op">)</span>, 
-         quality_bandsel <span class="op">=</span> <span class="st">"QA_usef"</span>, 
-         indexes_bandsel <span class="op">=</span> <span class="st">"SR"</span>, 
-         user            <span class="op">=</span> <span class="st">"mstp_test"</span> ,
-         password        <span class="op">=</span> <span class="st">"MSTP_test_01"</span>,
-         start_date      <span class="op">=</span> <span class="st">"2020.06.01"</span>, 
-         end_date        <span class="op">=</span> <span class="st">"2020.06.15"</span>, 
-         verbose         <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>
+  gui             <span class="op">=</span> <span class="cn">FALSE</span>, 
+  out_folder      <span class="op">=</span> <span class="st">"$tempdir"</span>, 
+  selprod         <span class="op">=</span> <span class="st">"Vegetation_Indexes_16Days_1Km (M*D13A2)"</span>,
+  bandsel         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"EVI"</span>, <span class="st">"NDVI"</span><span class="op">)</span>, 
+  quality_bandsel <span class="op">=</span> <span class="st">"QA_usef"</span>, 
+  indexes_bandsel <span class="op">=</span> <span class="st">"SR"</span>, 
+  user            <span class="op">=</span> <span class="st">"mstp_test"</span> ,
+  password        <span class="op">=</span> <span class="st">"MSTP_test_01"</span>,
+  start_date      <span class="op">=</span> <span class="st">"2020.06.01"</span>, 
+  end_date        <span class="op">=</span> <span class="st">"2020.06.15"</span>, 
+  verbose         <span class="op">=</span> <span class="cn">FALSE</span>,
+  parallel        <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 
 <span class="co"># Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of </span>
 <span class="co"># `base::tempdir()`: </span>
@@ -251,6 +254,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">out_fold</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">out_fold</span> ,<span class="st">"EVI"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">out_fold</span> ,<span class="st">"QA_usef"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><em>Note that this example, as well as the following ones, is run in single core to follow CRAN policies, by setting <code>parallel = FALSE</code>; users can exploit multicore functionalities skipping to set this argument.</em></p>
 </div>
 <div id="launching-modistsp-using-a-saved-options-file" class="section level2">
 <h2 class="hasAnchor">
@@ -270,7 +274,7 @@
 <span class="va">opts_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/test_MOD13A2.json"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>
 
 <span class="co"># --&gt; Launch the processing</span>
-<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui <span class="op">=</span> <span class="cn">FALSE</span>, opts_file <span class="op">=</span> <span class="va">opts_file</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui <span class="op">=</span> <span class="cn">FALSE</span>, opts_file <span class="op">=</span> <span class="va">opts_file</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co"># Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of </span>
 <span class="co"># tempdir(): </span>
@@ -288,9 +292,7 @@
                 <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/test_MOD10A2.json"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="kw">for</span> <span class="op">(</span><span class="va">opts_file</span> <span class="kw">in</span> <span class="va">opts_files</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui       <span class="op">=</span> <span class="cn">FALSE</span>, 
-           opts_file <span class="op">=</span> <span class="va">opts_file</span>, 
-           verbose   <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui <span class="op">=</span> <span class="cn">FALSE</span>, opts_file <span class="op">=</span> <span class="va">opts_file</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># MOD13A2 ouptuts</span>
@@ -322,11 +324,14 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span> 
 <span class="va">opts_file</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/test_MOD13A2.json"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>
 <span class="va">spatial_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/lakeshapes/garda_lake.shp"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui       <span class="op">=</span> <span class="cn">FALSE</span>, 
-         opts_file <span class="op">=</span> <span class="va">opts_file</span>,
-         spatmeth  <span class="op">=</span> <span class="st">"file"</span>, 
-         spafile   <span class="op">=</span> <span class="va">spatial_file</span>, 
-         verbose   <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>
+  gui <span class="op">=</span> <span class="cn">FALSE</span>, 
+  opts_file <span class="op">=</span> <span class="va">opts_file</span>,
+  spatmeth <span class="op">=</span> <span class="st">"file"</span>, 
+  spafile <span class="op">=</span> <span class="va">spatial_file</span>, 
+  verbose <span class="op">=</span> <span class="cn">FALSE</span>, 
+  parallel <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 
 <span class="co"># --&gt; Create a character array containing a list of shapefiles (or other spatial files)</span>
 <span class="va">extent_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/lakeshapes/"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span>, <span class="st">"\\.shp$"</span><span class="op">)</span>  
@@ -338,11 +343,14 @@
 <span class="co"># each input spatial file).</span>
 
 <span class="kw">for</span> <span class="op">(</span><span class="va">single_shape</span> <span class="kw">in</span> <span class="va">extent_list</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui       <span class="op">=</span> <span class="cn">FALSE</span>, 
-           opts_file <span class="op">=</span> <span class="va">opts_file</span>, 
-           spatmeth  <span class="op">=</span> <span class="st">"file"</span>, 
-           spafile   <span class="op">=</span> <span class="va">single_shape</span>, 
-           verbose   <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>
+    gui <span class="op">=</span> <span class="cn">FALSE</span>, 
+    opts_file <span class="op">=</span> <span class="va">opts_file</span>, 
+    spatmeth <span class="op">=</span> <span class="st">"file"</span>, 
+    spafile <span class="op">=</span> <span class="va">single_shape</span>, 
+    verbose <span class="op">=</span> <span class="cn">FALSE</span>, 
+    parallel <span class="op">=</span> <span class="cn">FALSE</span>
+  <span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># output files are placed in separate folders: </span>

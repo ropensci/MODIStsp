@@ -13,7 +13,7 @@ articles:
   output: output.html
   products_list: products_list.html
   standalone_execution: standalone_execution.html
-last_built: 2020-12-08T07:43Z
+last_built: 2020-12-10T16:36Z
 urls:
   reference: http://docs.ropensci.org/MODIStsp/reference
   article: http://docs.ropensci.org/MODIStsp/articles

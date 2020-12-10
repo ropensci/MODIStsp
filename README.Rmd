@@ -63,7 +63,10 @@ For more information, documentation and examples of use, __see also the `{MODISt
 
 ## Important News
 
-- 09/02/2020 - `{MODIStsp}` 2.0.0 is out. Provides a new GUI interface based on Shiny, getting rid
+- 10/12/2020 - `{MODIStsp}` was resubmitted to CRAN after the maintainer's death.
+Now `{MODIStsp}` is dedicated to Lorenzo Busetto (https://docs.ropensci.org/MODIStsp/articles/lorenzo).
+
+- 01/09/2020 - `{MODIStsp}` 2.0.0 is out. Provides a new GUI interface based on Shiny, getting rid
 of the archived dependencies on gWidgets/gWidgetsRGtk2. Also provides much easier usage from 
 the CLI, by allowing to set all processing arguments also from the CLI. __Note:__ due to the 
 introduced changes, options files created with previous versions of `{MODIStsp}` will no 

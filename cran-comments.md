@@ -42,15 +42,96 @@ In this submission I fixed a possible tentative of writing in the user library
 
 ```
 Possibly mis-spelled words in DESCRIPTION:
-  HDF (26:24)
-  MODIS (2:60, 22:10, 26:18, 27:60, 35:18)
-  Reflectance (28:50)
-  mosaicking (23:43)
-  rasters (21:63)
-  reflectance (29:67)
-  reprojection (23:55)
+  Busetto (40:5)
+  HDF (29:24)
+  MODIS (2:35, 25:10, 29:18, 30:60, 38:18)
+  Ranghetti (40:17)
+  mosaicking (26:43)
+  rasters (24:63)
+  reflectance (31:50, 32:65)
+  reprojecting (26:55)
+  resizing (26:72)
 ```
 All these words are correctly spelled.
+
+## CRAN resubmission review
+
+Please find below the answers to the CRAN reviewer.
+
+> Please reduce the length of the title to less than 65 characters.
+
+The title was changed from "A Tool for Automating Download and Preprocessing of 
+MODIS Land Products Data" to "Find, Download and Process MODIS Land Products".
+
+
+> Please only capitalize sentence beginnings and names in the description text.
+> e.g.  Quality Indicators --> quality indicators
+>          Spectral Indexes --> spectral indexes
+>          Surface Reflectance --> surface reflectance
+
+All capitalized letters were changed (unless sentence beginnings).
+
+
+> Please change:
+> products ,
+> -->
+> products,
+
+Done.
+
+
+> Please provide a link to the used webservices to the description field
+> of your DESCRIPTION file in the form
+> <http:...> or <https:...>
+> with angle brackets for auto-linking and no space after 'http:' and
+> 'https:'.
+
+No webservices were used (the MODIStsp Shiny GUI is launched from local PC).
+I added a reference to the paper which describes MODIStsp:
+Busetto and Ranghetti (2016) <doi:10.1016/j.cageo.2016.08.020>
+
+
+> You have examples for unexported functions.
+> Please either omit these examples or export these functions.
+> Used ::: in documentation:
+>       man/split_nodata_values.Rd:
+>          MODIStsp:::split_nodata_values(c("255", "250,254:255"))
+>       man/split_nodata_values.Rd:
+>          MODIStsp:::split_nodata_values(c("255", "250,254:255"),
+> take_all = FALSE)
+>       man/split_nodata_values.Rd:
+>          MODIStsp:::create_nodata_rcl(c("255", "250,254:255"), c("255",
+> "255"))
+
+Examples of unexported functions were removed.
+
+
+> Some code lines in examples are commented out in MODIStsp.Rd.
+> 
+> Please never do that. Ideally find toy examples that can be regularly
+> executed and checked. Lengthy examples (> 5 sec), can be wrapped in
+> \donttest.
+
+Examples were changed following these indications.
+All lenghy examples were wrapped in \donttest{}.
+\dontrun{} is no more used.
+
+
+> Please ensure that you do not use more than 2 cores in your examples,
+> vignettes, etc.
+
+Argument `parallel` was added to functions `MODIStsp()`, MODIStsp_process()`
+and `MODIStsp_process_bands()` (the only functions exploiting multicore 
+computation): if `parallel = FALSE`, single core is used.
+All examples and vignettes were edited setting `parallel = FALSE` everywhere.
+
+
+> Please always add all authors, contributors and copyright holders in the
+> Authors@R field with the appropriate roles.
+> e.g.: Babak Naimi
+
+Babak Naimi's contribution was added to the DESCRIPTION.
+
 
 MODIStsp 2.0.5
 ================
