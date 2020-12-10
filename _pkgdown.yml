@@ -62,7 +62,7 @@ navbar:
       -  text: Accessing and Analyzing Processed Data from R
          href: articles/analyze.html
       -  text: Supported MODIS Products
-         href: articles/Products_list.html
+         href: articles/products_list.html
     - text: "faq"
       icon: fa-question-circle-o
       href: articles/faq.html

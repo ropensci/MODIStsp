@@ -30,11 +30,11 @@ vignette: >
 
 # Introduction
 
-MODIStsp is a novel "R" package allowing to automatize the creation of time series
-of rasters derived from MODIS Land Products data. It allows to perform several 
+`{MODIStsp}` is an `R` package allowing to automatize the creation of time series
+of rasters derived from MODIS Land Products data. It allows performing several 
 preprocessing steps on MODIS data available within a given time period. 
 
-Development of MODIStsp started from modifications of the ModisDownload "R" script
+Development of `{MODIStsp}` started from modifications of the `ModisDownload` `R` script
 by Thomas Hengl [-@Hengl2010], and successive adaptations by Babak Naimi [-@Naimi2014]. 
 The basic functionalities for download and preprocessing of MODIS datasets provided 
 by these scripts were gradually incremented with the aim of: 
@@ -50,7 +50,7 @@ Spectral Indexes starting form MODIS surface reflectance products.
 
 All processing parameters can be easily set with a user-friendly GUI, although
 non-interactive execution exploiting a previously created Options File is possible. 
-Stand-alone execution outside an "R" environment is also possible, allowing to use
+Stand-alone execution outside an `R` environment is also possible, allowing to use
 scheduled execution of MODIStsp to automatically update time series related to a 
 MODIS product and extent whenever a new image is available. 
 
@@ -64,16 +64,16 @@ be also created.
 
 # Installation
 
-`MODIStsp` requires [R](https://cran.r-project.org) v >= 3.6.3 
+`{MODIStsp}` requires [R](https://cran.r-project.org) v >= 3.6.3.
 
 ## On Windows
 
-You can install the stable version of `MODIStsp` from CRAN: 
+You can install the stable version of `{MODIStsp}` from CRAN: 
 
 `install.packages("MODIStsp")`
 
 , or the development version (containing the latest improvements and bug fixes) 
-from github:
+from GitHub:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("remotes")
@@ -84,21 +84,21 @@ install_github("ropensci/MODIStsp")
     
 ## On Linux systems
 
-To install `MODIStsp` on Linux, you need to be able to install the `sf` package, 
-which requires several dependencies. See [HERE](https://github.com/r-spatial/sf#installing)
-if you have trouble installing `sf`.
+To install `{MODIStsp}` on Linux, you need to be able to install the `{sf}` package, 
+which requires several dependencies. See [here](https://github.com/r-spatial/sf#installing)
+if you have trouble installing `{sf}`.
 
 In addition, you need to install dependencies
-required by the `protolite` package, required by `geojson`. See [HERE](https://github.com/jeroen/protolite/) for instructions
+required by the `{protolite}` package, required by `{geojson}`. See [here](https://github.com/jeroen/protolite/) for instructions
 on installing them. 
 
-Then, you can install the stable version of MODIStsp from CRAN:
+Then, you can install the stable version of `{MODIStsp}` from CRAN:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("MODIStsp")
 ```
 , or the development version (containing the latest improvements and bug fixes) 
-from github;
+from GitHub:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
@@ -107,26 +107,25 @@ install_github("ropensci/MODIStsp")
 
 ## On Mac OS
 
-To install `MODIStsp` on MacOS, you need to be able to install the `sf` package, which requires several dependencies. See [HERE](https://github.com/r-spatial/sf#installing)
-if you have trouble installing `sf`. 
+To install `{MODIStsp}` on MacOS, you need to be able to install the `{sf}` package, which requires several dependencies. See [HERE](https://github.com/r-spatial/sf#installing)
+if you have trouble installing `{sf}`. 
 
-Then, you can install the stable version of MODIStsp from CRAN:
+Then, you can install the stable version of `{MODIStsp}` from CRAN:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 install.packages("MODIStsp")
 ```
 , or the development version (containing the latest improvements and bug fixes) 
-from github;
+from GitHub:
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 library(devtools)
 install_github("ropensci/MODIStsp")
 ```
-Good luck!
 
 # Running the tool in Interactive Mode: the MODIStsp GUI
 
-The easiest way to use `MODIStsp` is to use its powerful GUI (Graphical User 
+The easiest way to use `{MODIStsp}` is to use its powerful GUI (Graphical User 
 Interface) for selection of processing options, and then run the processing. 
 
 To open the GUI, load the package and launch the MODIStsp function, with no parameters:
@@ -135,7 +134,7 @@ library(MODIStsp)
 MODIStsp()
 ```
 This **opens a GUI** from which processing options can be specified and eventually
-saved (or loaded) 
+saved (or loaded).
 
 The  GUI allows selecting all processing options required for the creation of the
 desired MODIS time series. The main available processing options are described in
@@ -154,16 +153,16 @@ info and instructions regarding the usage of the GUI.
 
 # Non-Interactive Execution from within R
 
-`MODIStsp` can be launched in non-interactive mode within an `R` session by setting the optional `GUI` parameter to FALSE, and either providing the desired processing argument in the call to the function, or providing a previously saved `opts_file` specifying the path to a JSON Options file previously saved through the GUI. 
-This allows to exploit `MODIStsp` functionalities within generic "R" processing scripts.
+`MODIStsp()` can be launched in non-interactive mode within an `R` session by setting the optional `GUI` parameter to FALSE, and either providing the desired processing argument in the call to the function, or providing a previously saved `opts_file` specifying the path to a JSON Options file previously saved through the GUI. 
+This allows exploiting `{MODIStsp}` functionalities within generic `R` processing scripts.
 
 ## __Specifying the processing parameters in the function call__
 
-All processing parameters can be set in the call to `MODIStsp`. Mandatory 
+All processing parameters can be set in the call to `MODIStsp()`. Mandatory 
 parameters are `selprod` (specifying the MODIS product), (one of) `bandsel`, `quality_bandsel` or `indexes_bandsel`, (that specify the desired output layers), `out_folder` and `start_date` and `end_date`. 
-`user` and `password` are also needed if `download_server` is not equal to `offline`.
+`user` and `password` are also needed if `download_server` is not equal to `"offline"`.
 
-The new function `MODIStsp_get_prodlayers` allows to easily retrieve the 
+The function `MODIStsp_get_prodlayers()` allows to easily retrieve the 
 names of products and available layers based on product code, such as in: 
 
 ```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
@@ -171,9 +170,9 @@ library(MODIStsp)
 MODIStsp_get_prodlayers("M*D13Q1")
 ```
 
-The other parameters are set automatically to default values (see XXX for details on the different available function arguments). 
+The other parameters are set automatically to default values (see [the function reference](https://docs.ropensci.org/MODIStsp/reference/MODIStsp_get_prodlayers.html) for details on the different available function arguments). 
 
-For example, the following code processes layers __NDVI__ and __EVI__ and quality indicator __usefulness__ of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to R tempdir: 
+For example, the following code processes layers __NDVI__ and __EVI__ and quality indicator __usefulness__ of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to `R` `tempdir()`: 
 
 ```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 library(MODIStsp) 
@@ -208,7 +207,7 @@ list.files(file.path(out_fold ,"QA_usef"))
 
 ## __Launching MODIStsp using a saved "Options file"__
 
-Alternatively, you can run MODIStsp without opening the GUI by specifying a previously saved options file: 
+Alternatively, you can run `MODIStsp()` without opening the GUI by specifying a previously saved options file: 
 
 ```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 library(MODIStsp) 
@@ -226,7 +225,7 @@ opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 MODIStsp(gui = FALSE, opts_file = opts_file, verbose = FALSE)
 
 # Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of 
-# `base::tempdir()`: 
+# tempdir(): 
 
 out_fold <- file.path(tempdir(), "MODIStsp/VI_16Days_1Km_v6") 
 list.files(out_fold)
@@ -262,11 +261,11 @@ list.files(file.path(out_fold ,"LST_Night_1km"))
 
 ## __Specifying the processing parameters using a previously saved options file and overwriting some parameters__
 
-Finally, it is possible to both specify a previously saved options file AND setting some parameters in the call to the function. This allows to __easily perform similar processings, by only updating the required arguments__, as in the examples below. 
+Finally, it is possible to both specify a previously saved options file AND setting some parameters in the call to the function. This allows __easily performing similar processings, by only updating the required arguments__, as in the examples below. 
 
 ## __Looping over different spatial extents__
 
-Specifying the `spafile` parameter while setting the `spatmeth` parameter to "file" overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File. For example:
+Specifying the `spafile` parameter while setting the `spatmeth` parameter to `"file"` overrides for example the output extent of the selected Options File. This allows performing the same preprocessing on different extents using a single Options File. For example:
 
 ```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE}
 # Run the tool using the settings previously saved in a specific option file
@@ -323,26 +322,26 @@ Stand-alone non-interactive execution can be used to periodically and automatica
 update the time series of a selected product over a given study area. To do that, 
 you should simply:
 
-1.	Open the `MODIStsp` GUI, define the parameters of the processing specifying 
+1.	Open the `{MODIStsp}` GUI, define the parameters of the processing specifying 
 a date in the future as the "Ending Date" and save the processing options. Then
 quit the program.
  
 2. Schedule non-interactive execution of the launcher installed as seen before
-(or located in the subdirectory "MODIStsp/ExtData/Launcher" of your library path)
+(or located in the subdirectory `"MODIStsp/ExtData/Launcher"` of your library path)
 as windows scheduled task (or linux "cron" job) according to a specified time 
 schedule, specifying the path of a previously saved Options file as additional
-argument:
+argument.
 
 #### On Linux
 
-- edit your crontab by opening a terminal and type:
+3. Edit your crontab by opening a terminal and type:
 
 ```bash
   crontab -e
 ```
  
-- add an entry for the launcher. For example, if you have installed it in 
-/usr/bin and you want to run the tool every day at 23.00, add the following row:
+4. Add an entry for the launcher. For example, if you have installed it in 
+`/usr/bin` and you want to run the tool every day at 23.00, add the following row:
         
 ```bash
   0 23 * * * /bin/bash /usr/bin/MODIStsp -g -s "/yourpath/youroptions.json"
@@ -350,7 +349,7 @@ argument:
       
 #### On Windows
 
-- create a Task following [these instructions](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN); add the path of the MODIStsp.bat launcher as Action (point 6), and specifying  `-g -s "X:/yourpath/youroptions.json"` as argument.
+3. Create a Task following <a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN" target="_blank">these instructions</a>; add the path of the `MODIStsp.bat` launcher as Action (point 6), and specifying  `-g -s "X:/yourpath/youroptions.json"` as argument.
 
 # Outputs Format and Naming Conventions
 
@@ -386,28 +385,28 @@ instead stored **in the "Time\_Series" subfolder** if required.
 Naming convention for these files is as follow:
 
 ```
-myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" 
+<path_of_out_folder>/Time_Series/<vrt_type>/<Sensor>/<Layer>/<ProdCode>_<Layer>_<StartDOY>_<StartYear>_<EndDOY>_<EndYear>_<suffix>.<ext> 
 ```
-<font size="2"> _(e.g., myoutfolder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData)_ </font size="2"> 
+<font size="2"> _(e.g., `/my/out/folder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData`)_ </font size="2"> 
              
 , where: 
 
-  - **_vrt_type_** indicates the type of virtual file ("RData", "GDAL" or "ENVI_META");
-  - **_Sensor_** indicates to which MODIS sensor the time series belongs ("Terra",
-  "Aqua", "Mixed" or "Combined" (for MCD* products));
-  - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
-  - **_ProdCode_** is the code name of the MODIS product from which the image was 
-  derived (e.g., MOD13Q1);
-  - **_StartDOY_**, **_StartYear_**, **_EndDOY_** and **_EndYear_** indicate the 
+  - `<vrt_type>` indicates the type of virtual file (`"RData"`, `"GDAL"` or `"ENVI_META"`);
+  - `<Sensor>` indicates to which MODIS sensor the time series belongs (`"Terra"`,
+  `"Aqua"`, `"Mixed"` or `"Combined"` (for MCD* products));
+  - `<Layer>` is a short name describing the dataset (e.g., `"b1_Red"`, `"NDII"`, `"UI"`);
+  - `<ProdCode>` is the code name of the MODIS product from which the image was 
+  derived (e.g., `"MOD13Q1"`);
+  - `<StartDOY>`, `<StartYear>`, `<EndDOY>` and `<EndYear>` indicate the 
   temporal extent of the time serie created; 
-  - **_suffix_** indicates the type of virtual file (ENVI, GDAL or RData);
-  - **_ext_** is the file extension (".vrt" for gdal virtual files, "META" for 
-  ENVI meta files or "RData" for `R` raster stacks). 
+  - `<suffix>` indicates the type of virtual file (`"ENVI"`, `"GDAL"` or `"RData"`);
+  - `<ext>` is the file extension (`".vrt"` for GDAL virtual files, `"META"` for 
+  ENVI meta files or `"RData"` for `R` raster stacks). 
 
 
 # Accessing the processed time series from R
 
-Preprocessed MODIS data can be retrieved within `R`  either by accessing the single-date raster files, or by loading the saved _RasterStack_ objects. 
+Preprocessed MODIS data can be retrieved within `R` either by accessing the single-date raster files, or by loading the saved _RasterStack_ objects. 
 
 Any single-date image can be accessed by simply opening it with a `raster` command: 
 
@@ -417,21 +416,21 @@ modistsp_file <- "/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"
 my_raster     <- raster(modistsp_file)
 ```
 
-`rasterStack` time series containing all the processed data for a given parameter (saved in the "Time Series/RData" subfolder - see [here](https://docs.ropensci.org/MODIStsp/articles/output.html) for details) can be opened by: 
+`rasterStack` time series containing all the processed data for a given parameter (saved in the `"Time Series/RData"` subfolder - see [here](https://docs.ropensci.org/MODIStsp/articles/output.html) for details) can be opened by: 
 
 ```{r eval=FALSE}
 in_virtual_file <- "/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData" 
 indata          <- get(load(in_virtual_file))
 ```
 
-This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the ```raster``` or   ```rasterVis``` packages.
+This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the `{raster}` or   `{rasterVis}` packages.
 
 
 ## Extracting Time Series Data on Areas of Interest
 
-`MODIStsp` provides an efficient function (`MODIStsp\_extract`) for extracting time series data at specific locations. The function takes as input a _RasterStack_ virtual object created by `MODIStsp` (see above), the starting and ending dates for the extraction and a standard _Sp*_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a `xts` object or `data.frame` containing time series data for those locations. 
+`{MODIStsp}` provides an efficient function (`MODIStsp_extract()`) for extracting time series data at specific locations. The function takes as input a _RasterStack_ virtual object created by `MODIStsp()` (see above), the starting and ending dates for the extraction and a standard _Sp*_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a `xts` object or `data.frame` containing time series data for those locations. 
 
-If the input is of class _SpatialPoints_, the output object contains one column for each point specified, and one row for each date. If it is of class _SpatialPolygons_ (or _SpatialLines_), it contains one column for each polygon (or each line), with values obtained applying the function specified as the "FUN" argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date. 
+If the input is of class _SpatialPoints_, the output object contains one column for each point specified, and one row for each date. If it is of class _SpatialPolygons_ (or _SpatialLines_), it contains one column for each polygon (or each line), with values obtained applying the function specified as the `FUN` argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date. 
 
 As an example the following code:
 
@@ -455,12 +454,10 @@ As an example the following code:
   
 # Problems and Issues
 
-Solutions to some common **installation and processing problems** can be found in MODIStsp FAQ: 
-
+Solutions to some common **installation and processing problems** can be found in `{MODIStsp}` FAQ: 
 https://docs.ropensci.org/MODIStsp/articles/faq.html
 
-- Please **report any issues** you may encounter in our issues page on GitHub:
-
+Please **report any issues** you may encounter in our issues page on GitHub:
 https://github.com/ropensci/MODIStsp/issues
 
   

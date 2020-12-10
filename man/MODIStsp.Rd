@@ -133,7 +133,7 @@ out_proj coordinate system. Ignored if spatmeth == "tiles", Default: NULL}
 to use to derive the processing extent. If not NULL, the processing options
 which define the extent, the selected tiles and the "Full Tile / Custom"
 in the JSON options file are overwritten and new files are created on the
-extent of the provided spatial file. Ignored if spatmet != "file", Default: NULL}
+extent of the provided spatial file. Ignored if spatmeth != "file", Default: NULL}
 
 \item{out_projsel}{\verb{character ["Native", "User Defined}] If "Native", the
 outputs keep the original resolution of MODIS HDF images. Otherwise, the value

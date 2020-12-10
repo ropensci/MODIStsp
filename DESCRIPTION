@@ -63,9 +63,7 @@ Suggests:
     leaflet,
     magrittr,
     mapedit (>= 0.6.0),
-    markdown,
     png,
-    qpdf,
     rappdirs,
     rgdal, 
     rmarkdown,
@@ -77,7 +75,6 @@ Suggests:
     spelling,
     testthat, 
     tibble,
-    tibbletime,
     tidyr,
     xtable
 SystemRequirements: 

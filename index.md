@@ -81,7 +81,7 @@ Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
     patched release will be made available on CRAN as soon as possible.
 
   - 07/08/2018 - We are glad to report that `{MODIStsp}` is now included
-    in the [rOpenSci](https://ropensci.org/about/) packages’ ecosystem.
+    in the [rOpenSci](https://ropensci.org/about/) packages ecosystem.
     We thank reviewers Leah Wasser and Jeffrey Hanson for their valuable
     reviews, which helped us  
     further improving the package.
@@ -129,7 +129,7 @@ Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
     scripts.
 
   - The list of **currently supported MODIS products and versions** can
-    be found [here](articles/Products_list.html).
+    be found [here](articles/products_list.html).
 
   - [Scheduled
     Processing](articles/noninteractive_execution.html#scheduled-processing)
