@@ -43,7 +43,8 @@ MODIStsp(
   compress = NULL,
   test = NULL,
   n_retries = 5,
-  verbose = TRUE
+  verbose = TRUE,
+  parallel = TRUE
 )
 }
 \arguments{
@@ -133,7 +134,7 @@ out_proj coordinate system. Ignored if spatmeth == "tiles", Default: NULL}
 to use to derive the processing extent. If not NULL, the processing options
 which define the extent, the selected tiles and the "Full Tile / Custom"
 in the JSON options file are overwritten and new files are created on the
-extent of the provided spatial file. Ignored if spatmet != "file", Default: NULL}
+extent of the provided spatial file. Ignored if spatmeth != "file", Default: NULL}
 
 \item{out_projsel}{\verb{character ["Native", "User Defined}] If "Native", the
 outputs keep the original resolution of MODIS HDF images. Otherwise, the value
@@ -184,6 +185,13 @@ MODIStsp_process will abort, Default: 20}
 
 \item{verbose}{\code{logical} If FALSE, suppress processing messages,
 Default: TRUE}
+
+\item{parallel}{\code{logical} If TRUE (default), the function is run using parallel
+processing, to speed-up the computation for large rasters (with a maximum
+of 8 cores).
+The number of cores is automatically determined; specifying it is also
+possible (e.g. \code{parallel = 4}). In this case, more than 8 cores can be
+specified. If FALSE (default), single core processing is used.}
 }
 \description{
 Main function for the MODIS Time Series Processing Tool
@@ -207,15 +215,15 @@ License: GPL 3.0
 }
 \examples{
 
-\dontrun{
 #' # - Running the tool using the GUI
-
 # Running the tool without any option will start the GUI with the default or
 # last used settings, in interactive mode (i.e., with gui = TRUE).
-
-# MODIStsp()
+\donttest{
+if (interactive()) {
+  MODIStsp()
 }
-\dontrun{
+}
+
 
 #' # - Running the tool specifying processing arguments in the call
 
@@ -224,25 +232,29 @@ License: GPL 3.0
 # Here we process layers __NDVI__ and __EVI__ and quality indicator __usefulness__
 # of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates
 # comprised between 2020-06-01 and 2020-06-15 and saves output to R tempdir
-# --> See name and available layers for product M*D13Q1
+# --> See name and available layers for product M*D13Q1.
+# Note that this example (as well as the following ones) is run in single
+# core to follow CRAN policies, by setting parallel = FALSE.
+# Users can exploit multicore functionalities skipping to set this argument.
 
 MODIStsp_get_prodlayers("M*D13A2")
-
-# --> Launch the processing
-MODIStsp(gui             = FALSE,
-         out_folder      = "$tempdir",
-         selprod         = "Vegetation_Indexes_16Days_1Km (M*D13A2)",
-         bandsel         = c("EVI", "NDVI"),
-         quality_bandsel = "QA_usef",
-         indexes_bandsel = "SR",
-         user            = "mstp_test" ,
-         password        = "MSTP_test_01",
-         start_date      = "2020.06.01",
-         end_date        = "2020.06.15",
-         verbose         = FALSE)
+\donttest{
+MODIStsp(
+  gui = FALSE,
+  out_folder = "$tempdir",
+  selprod = "Vegetation_Indexes_16Days_1Km (M*D13A2)",
+  bandsel = c("EVI", "NDVI"),
+  quality_bandsel = "QA_usef",
+  indexes_bandsel = "SR",
+  user = "mstp_test" ,
+  password = "MSTP_test_01",
+  start_date = "2020.06.01",
+  end_date = "2020.06.15",
+  verbose = FALSE,
+  parallel = FALSE
+)
 }
 
-\dontrun{
 
 #' # - Running the tool using the settings previously saved in a specific options file
 
@@ -254,10 +266,10 @@ MODIStsp(gui             = FALSE,
 # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
 
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
-MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE)
+\donttest{
+MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE, parallel = FALSE)
 }
 
-\dontrun{
 
 # Running the tool using the settings previously saved in a specific option file
 # and specifying the extent from a spatial file allows to re-use the same
@@ -265,51 +277,62 @@ MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE)
 
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
-MODIStsp(gui = FALSE, opts_file = opts_file,
+\donttest{
+MODIStsp(
+  gui = FALSE, 
+  opts_file = opts_file,
   spatmeth = "file",
-  spafile = spatial_file, verbose = TRUE)
+  spafile = spatial_file, 
+  verbose = TRUE,
+  parallel = FALSE
+)
 }
 
-\dontrun{
 
 # Running the tool using the settings previously saved in a
 # specific options file and specifying each time the extent from a different
 # spatial file (e.g., to perform the same processing on several extents)
-
-extent_list  <- c(system.file("testdata/lakeshapes/garda_lake.shp",
-                              package = "MODIStsp"),
-                  system.file("testdata/lakeshapes/iseo_lake.shp",
-                              package = "MODIStsp"))
-extent_list
-
 # Note that you can also put all your extent files in a specific folder and
 # create the extent list using for example.
-# extent_list = list.files(system.file("testdata/lakeshapes/", package = "MODIStsp"),
-#                          full.names = TRUE, "\\.shp$")
 
+extent_list = list.files(
+  system.file("testdata/lakeshapes/", package = "MODIStsp"),
+  "\\\\.shp$", 
+  full.names = TRUE
+)
+extent_list
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
+
+\donttest{
 for (single_shape in extent_list) {
-  MODIStsp(gui = FALSE, opts_file = opts_file,
-           spatmeth = "file",
-           spafile = single_shape, verbose = TRUE)
+  MODIStsp(
+    gui = FALSE, 
+    opts_file = opts_file,
+    spatmeth = "file",
+    spafile = single_shape, 
+    verbose = TRUE,
+    parallel = FALSE
+ )
 }
 
 # output files are placed in separate folders:
-outfiles_garda <- list.files(file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/NDVI"),
-           full.names = TRUE)
+outfiles_garda <- list.files(
+  file.path(tempdir(), "MODIStsp/garda_lake/VI_16Days_1Km_v6/NDVI"),
+  full.names = TRUE
+)
 outfiles_garda
-
 library(raster)
 plot(raster(outfiles_garda[1] ))
 
-outfiles_iseo <- list.files(file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/NDVI"),
-           full.names = TRUE)
+outfiles_iseo <- list.files(
+  file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/NDVI"),
+  full.names = TRUE
+)
 outfiles_iseo
-
 plot(raster(outfiles_iseo[1]))
+}
 
 # See also https://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html
-}
 }
 \seealso{
 \code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}, \code{\link[=MODIStsp_process]{MODIStsp_process()}}

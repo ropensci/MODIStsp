@@ -3,7 +3,6 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   MODIStsp: MODIStsp.html
-  Products_list: Products_list.html
   analyze: analyze.html
   discovered_bug: discovered_bug.html
   faq: faq.html
@@ -12,8 +11,9 @@ articles:
   lorenzo: lorenzo.html
   noninteractive_execution: noninteractive_execution.html
   output: output.html
+  products_list: products_list.html
   standalone_execution: standalone_execution.html
-last_built: 2020-12-07T09:09Z
+last_built: 2020-12-10T16:36Z
 urls:
   reference: http://docs.ropensci.org/MODIStsp/reference
   article: http://docs.ropensci.org/MODIStsp/articles

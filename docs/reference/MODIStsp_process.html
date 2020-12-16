@@ -119,7 +119,7 @@ parameters specified by the user and performs all required processing." />
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
     <li>
-      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+      <a href="../articles/products_list.html">Supported MODIS Products</a>
     </li>
   </ul>
 </li>
@@ -181,7 +181,7 @@ parameters specified by the user and performs all required processing." />
 parameters specified by the user and performs all required processing.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>MODIStsp_process</span><span class='op'>(</span><span class='va'>proc_opts</span>, <span class='va'>n_retries</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>MODIStsp_process</span><span class='op'>(</span><span class='va'>proc_opts</span>, <span class='va'>n_retries</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span>, parallel <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,6 +201,15 @@ MODIStsp_process will abort, Default: 20</p></td>
     <tr>
       <th>verbose</th>
       <td><p><code>logical</code> If FALSE, suppress processing messages, Default: TRUE</p></td>
+    </tr>
+    <tr>
+      <th>parallel</th>
+      <td><p><code>logical</code> If TRUE (default), the function is run using parallel
+processing, to speed-up the computation for large rasters (with a maximum
+of 8 cores).
+The number of cores is automatically determined; specifying it is also
+possible (e.g. <code>parallel = 4</code>). In this case, more than 8 cores can be
+specified. If FALSE (default), single core processing is used.</p></td>
     </tr>
     </table>
 

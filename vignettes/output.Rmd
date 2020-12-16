@@ -1,12 +1,7 @@
 ---
 title: "Outputs Format and Naming Conventions"
 output: 
-  rmarkdown::html_vignette: default
   github_document: default
-vignette: >
-  %\VignetteIndexEntry{Outputs Format and Naming Conventions}
-  %\VignetteEngine{knitr::knitr}
-  %\usepackage[UTF-8]{inputenc}
 ---
 
 # <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> __Single-band outputs__
@@ -57,25 +52,22 @@ instead stored **in the "Time\_Series" subfolder** if required.
 Naming conventions for these files is as follow:
 
 ```
-myoutfolder/"ProdName"/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" 
+<path_of_out_folder>/Time_Series/<vrt_type>/<Sensor>/<Layer>/<ProdCode>_<Layer>_<StartDOY>_<StartYear>_<EndDOY>_<EndYear>_<suffix>.<ext> 
 ```
 
 , where: 
 
-  - **_ProdName_** is a short name describing the MODIS product from which the 
-    datasets were derived (e.g., VI_16Days_1Km_v6);
-  - **_vrt_type_** indicates the type of virtual file ("RData", "GDAL" or "ENVI_META");
-  - **_Sensor_** indicates to which MODIS sensor the time series belongs ("Terra",
-  "Aqua", "Mixed" or "Combined" (for MCD* products));
-  - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
-  - **_ProdCode_** is the code name of the MODIS product from which the image was 
-  derived (e.g., MOD13Q1 - Note that in the case of "mixed" Terra and Aqua time
-  series ProdCode would be for example "MOD13Q1_MYD13Q1");
-  - **_StartDOY_**, **_StartYear_**, **_EndDOY_** and **_EndYear_** indicate the 
+  - `<vrt_type>` indicates the type of virtual file (`"RData"`, `"GDAL"` or `"ENVI_META"`);
+  - `<Sensor>` indicates to which MODIS sensor the time series belongs (`"Terra"`,
+  `"Aqua"`, `"Mixed"` or `"Combined"` (for MCD* products));
+  - `<Layer>` is a short name describing the dataset (e.g., `"b1_Red"`, `"NDII"`, `"UI"`);
+  - `<ProdCode>` is the code name of the MODIS product from which the image was 
+  derived (e.g., `"MOD13Q1"`);
+  - `<StartDOY>`, `<StartYear>`, `<EndDOY>` and `<EndYear>` indicate the 
   temporal extent of the time serie created; 
-  - **_suffix_** indicates the type of virtual file (ENVI, GDAL or RData);
-  - **_ext_** is the file extension (".vrt" for gdal virtual files, "META" for 
-  ENVI meta files or "RData" for `R` raster stacks). 
+  - `<suffix>` indicates the type of virtual file (`"ENVI"`, `"GDAL"` or `"RData"`);
+  - `<ext>` is the file extension (`".vrt"` for GDAL virtual files, `"META"` for 
+  ENVI meta files or `"RData"` for `R` raster stacks). 
 
 So, for example, if you process layer "NDVI" for MODIS product MOD13A2 and platform 
 "Terra", and ask to create "R rasterStacks" and "GDAL vrt" time series you will 

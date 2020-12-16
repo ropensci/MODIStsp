@@ -97,9 +97,6 @@
     <loc>http://docs.ropensci.org/MODIStsp/articles/MODIStsp.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/Products_list.html</loc>
-  </url>
-  <url>
     <loc>http://docs.ropensci.org/MODIStsp/articles/analyze.html</loc>
   </url>
   <url>
@@ -122,6 +119,9 @@
   </url>
   <url>
     <loc>http://docs.ropensci.org/MODIStsp/articles/output.html</loc>
+  </url>
+  <url>
+    <loc>http://docs.ropensci.org/MODIStsp/articles/products_list.html</loc>
   </url>
   <url>
     <loc>http://docs.ropensci.org/MODIStsp/articles/standalone_execution.html</loc>

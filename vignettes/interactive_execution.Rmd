@@ -2,12 +2,7 @@
 title: "Running the tool in Interactive Mode: the MODIStsp GUI"
 bibliography: MODIStsp.bib
 output: 
-  rmarkdown::html_vignette: default
   github_document: default
-vignette: >
-  %\VignetteIndexEntry{Running the tool in Interactive Mode: the MODIStsp GUI}
-  %\VignetteEngine{knitr::knitr}
-  %\usepackage[UTF-8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}
@@ -171,7 +166,7 @@ by:
     b. Selecting the __"From Map"__ option in the dropdown and clicking on "change selection". 
     A map will open, allowing interactive selection of the required tiles
     
-Note that during processing, data from the different tiles is mosaiced, and a single file 
+Note that during processing, data from the different tiles is mosaicked, and a single file 
 covering the total area is produced for each acquisition date. For this reason, 
 selected tiles must cover a rectangular area. 
 

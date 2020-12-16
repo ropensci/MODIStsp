@@ -23,6 +23,12 @@
 #'   In case any download function fails more than `n_retries` times consecutively,
 #'   MODIStsp_process will abort, Default: 20
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
+#' @param parallel `logical` If TRUE (default), the function is run using parallel
+#'  processing, to speed-up the computation for large rasters (with a maximum
+#'  of 8 cores).
+#'  The number of cores is automatically determined; specifying it is also 
+#'  possible (e.g. `parallel = 4`). In this case, more than 8 cores can be
+#'  specified. If FALSE (default), single core processing is used.
 #' @return The function is called for its side effects.
 #' @author Lorenzo Busetto, phD (2014-2017)
 #' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
@@ -36,7 +42,8 @@
 
 MODIStsp_process <- function(proc_opts,
                              n_retries,
-                             verbose = TRUE) {
+                             verbose = TRUE,
+                             parallel = TRUE) {
 
   # Based on sel_prod, retrieve needed variables from prod_opts file
 
@@ -425,7 +432,7 @@ MODIStsp_process <- function(proc_opts,
                     proc_opts$out_format, outrep_file, proc_opts$compress,
                     proc_opts$out_res_sel, proc_opts$out_res, proc_opts$resampling,
                     proc_opts$nodata_change,
-                    gui, verbose
+                    gui, verbose, parallel
                   )
                 }
               }	# END Cycle on available MODIS Bands

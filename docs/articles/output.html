@@ -76,7 +76,7 @@
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
     <li>
-      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+      <a href="../articles/products_list.html">Supported MODIS Products</a>
     </li>
   </ul>
 </li>
@@ -170,25 +170,23 @@
 </h1>
 <p>ENVI and/or GDAL virtual time series files and <em>RasterStack</em> RData objects are instead stored <strong>in the “Time_Series” subfolder</strong> if required.</p>
 <p>Naming conventions for these files is as follow:</p>
-<pre><code>myoutfolder/"ProdName"/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" </code></pre>
+<pre><code>&lt;path_of_out_folder&gt;/Time_Series/&lt;vrt_type&gt;/&lt;Sensor&gt;/&lt;Layer&gt;/&lt;ProdCode&gt;_&lt;Layer&gt;_&lt;StartDOY&gt;_&lt;StartYear&gt;_&lt;EndDOY&gt;_&lt;EndYear&gt;_&lt;suffix&gt;.&lt;ext&gt; </code></pre>
 <p>, where:</p>
 <ul>
 <li>
-<strong><em>ProdName</em></strong> is a short name describing the MODIS product from which the datasets were derived (e.g., VI_16Days_1Km_v6);</li>
+<code>&lt;vrt_type&gt;</code> indicates the type of virtual file (<code>"RData"</code>, <code>"GDAL"</code> or <code>"ENVI_META"</code>);</li>
 <li>
-<strong><em>vrt_type</em></strong> indicates the type of virtual file (“RData”, “GDAL” or “ENVI_META”);</li>
+<code>&lt;Sensor&gt;</code> indicates to which MODIS sensor the time series belongs (<code>"Terra"</code>, <code>"Aqua"</code>, <code>"Mixed"</code> or <code>"Combined"</code> (for MCD* products));</li>
 <li>
-<strong><em>Sensor</em></strong> indicates to which MODIS sensor the time series belongs (“Terra”, “Aqua”, “Mixed” or “Combined” (for MCD* products));</li>
+<code>&lt;Layer&gt;</code> is a short name describing the dataset (e.g., <code>"b1_Red"</code>, <code>"NDII"</code>, <code>"UI"</code>);</li>
 <li>
-<strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
+<code>&lt;ProdCode&gt;</code> is the code name of the MODIS product from which the image was derived (e.g., <code>"MOD13Q1"</code>);</li>
 <li>
-<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1 - Note that in the case of “mixed” Terra and Aqua time series ProdCode would be for example “MOD13Q1_MYD13Q1”);</li>
+<code>&lt;StartDOY&gt;</code>, <code>&lt;StartYear&gt;</code>, <code>&lt;EndDOY&gt;</code> and <code>&lt;EndYear&gt;</code> indicate the temporal extent of the time serie created;</li>
 <li>
-<strong><em>StartDOY</em></strong>, <strong><em>StartYear</em></strong>, <strong><em>EndDOY</em></strong> and <strong><em>EndYear</em></strong> indicate the temporal extent of the time serie created;</li>
+<code>&lt;suffix&gt;</code> indicates the type of virtual file (<code>"ENVI"</code>, <code>"GDAL"</code> or <code>"RData"</code>);</li>
 <li>
-<strong><em>suffix</em></strong> indicates the type of virtual file (ENVI, GDAL or RData);</li>
-<li>
-<strong><em>ext</em></strong> is the file extension (“.vrt” for gdal virtual files, “META” for ENVI meta files or “RData” for <code>R</code> raster stacks).</li>
+<code>&lt;ext&gt;</code> is the file extension (<code>".vrt"</code> for GDAL virtual files, <code>"META"</code> for ENVI meta files or <code>"RData"</code> for <code>R</code> raster stacks).</li>
 </ul>
 <p>So, for example, if you process layer “NDVI” for MODIS product MOD13A2 and platform “Terra”, and ask to create “R rasterStacks” and “GDAL vrt” time series you will find the resulting GTiff virtual files in:</p>
 <pre><code>/your_out_folder/VI_16Days_1Km_v6/Time_Series/RData/Terra/NDVI</code></pre>

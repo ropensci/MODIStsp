@@ -76,7 +76,7 @@
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
     <li>
-      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+      <a href="../articles/products_list.html">Supported MODIS Products</a>
     </li>
   </ul>
 </li>
@@ -132,7 +132,7 @@
       <h1 data-toc-skip>MODIStsp: A Tool for Automatic Preprocessing of MODIS Time Series - v2.0.5</h1>
                         <h4 class="author">Lorenzo Busetto, Luigi Ranghetti (<a href="mailto:ranghetti.l@irea.cnr.it">ranghetti.l@irea.cnr.it</a>)</h4>
             
-            <h4 class="date">2020-12-07</h4>
+            <h4 class="date">2020-12-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ropensci/MODIStsp/blob/master/vignettes/MODIStsp.Rmd"><code>vignettes/MODIStsp.Rmd</code></a></small>
       <div class="hidden name"><code>MODIStsp.Rmd</code></div>
@@ -144,26 +144,26 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>MODIStsp is a novel “R” package allowing to automatize the creation of time series of rasters derived from MODIS Land Products data. It allows to perform several preprocessing steps on MODIS data available within a given time period.</p>
-<p>Development of MODIStsp started from modifications of the ModisDownload “R” script by Thomas Hengl <span class="citation">(2010)</span>, and successive adaptations by Babak Naimi <span class="citation">(2014)</span>. The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of:</p>
+<p><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> is an <code>R</code> package allowing to automatize the creation of time series of rasters derived from MODIS Land Products data. It allows performing several preprocessing steps on MODIS data available within a given time period.</p>
+<p>Development of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> started from modifications of the <code>ModisDownload</code> <code>R</code> script by Thomas Hengl <span class="citation">(2010)</span>, and successive adaptations by Babak Naimi <span class="citation">(2014)</span>. The basic functionalities for download and preprocessing of MODIS datasets provided by these scripts were gradually incremented with the aim of:</p>
 <ul>
 <li>developing a stand-alone application allowing to perform several preprocessing steps (e.g., download, mosaicing, reprojection and resize) on all available MODIS land products by exploiting a powerful and user-friendly GUI front-end;</li>
 <li>allowing the creation of time series of both MODIS original layers and additional Quality Indicators (e.g., data acquisition quality, cloud/snow presence, algorithm used for data production, etc. ) extracted from the aggregated bit-field QA layers;</li>
 <li>allowing the automatic calculation and creation of time series of several additional Spectral Indexes starting form MODIS surface reflectance products.</li>
 </ul>
-<p>All processing parameters can be easily set with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an “R” environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.</p>
+<p>All processing parameters can be easily set with a user-friendly GUI, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an <code>R</code> environment is also possible, allowing to use scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.</p>
 <p>Required MODIS HDF files are automatically downloaded from NASA servers and resized, reprojected, resampled and processed according to user’s choices. For each desired output layer, outputs are saved as single-band rasters corresponding to each acquisition date available for the selected MODIS product within the specified time period. “R” <em>RasterStack</em> objects with temporal information as well as Virtual raster files (GDAL vrt and ENVI META files) facilitating access to the entire time series can be also created.</p>
 </div>
 <div id="installation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
-<p><code>MODIStsp</code> requires <a href="https://cran.r-project.org">R</a> v &gt;= 3.6.3</p>
+<p><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> requires <a href="https://cran.r-project.org">R</a> v &gt;= 3.6.3.</p>
 <div id="on-windows" class="section level2">
 <h2 class="hasAnchor">
 <a href="#on-windows" class="anchor"></a>On Windows</h2>
-<p>You can install the stable version of <code>MODIStsp</code> from CRAN:</p>
+<p>You can install the stable version of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> from CRAN:</p>
 <p><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("MODIStsp")</a></code></p>
-<p>, or the development version (containing the latest improvements and bug fixes) from github:</p>
+<p>, or the development version (containing the latest improvements and bug fixes) from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span>
@@ -172,12 +172,12 @@
 <div id="on-linux-systems" class="section level2">
 <h2 class="hasAnchor">
 <a href="#on-linux-systems" class="anchor"></a>On Linux systems</h2>
-<p>To install <code>MODIStsp</code> on Linux, you need to be able to install the <code>sf</code> package, which requires several dependencies. See <a href="https://github.com/r-spatial/sf#installing">HERE</a> if you have trouble installing <code>sf</code>.</p>
-<p>In addition, you need to install dependencies required by the <code>protolite</code> package, required by <code>geojson</code>. See <a href="https://github.com/jeroen/protolite/">HERE</a> for instructions on installing them.</p>
-<p>Then, you can install the stable version of MODIStsp from CRAN:</p>
+<p>To install <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> on Linux, you need to be able to install the <a href="https://r-spatial.github.io/sf/">sf</a> package, which requires several dependencies. See <a href="https://github.com/r-spatial/sf#installing">here</a> if you have trouble installing <a href="https://r-spatial.github.io/sf/">sf</a>.</p>
+<p>In addition, you need to install dependencies required by the <a href="https://jeroen.cran.dev/protolite">protolite</a> package, required by <a href="https://docs.ropensci.org/geojson">geojson</a>. See <a href="https://github.com/jeroen/protolite/">here</a> for instructions on installing them.</p>
+<p>Then, you can install the stable version of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> from CRAN:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"MODIStsp"</span><span class="op">)</span></code></pre></div>
-<p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
+<p>, or the development version (containing the latest improvements and bug fixes) from GitHub:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
 <span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"ropensci/MODIStsp"</span><span class="op">)</span></code></pre></div>
@@ -185,26 +185,25 @@
 <div id="on-mac-os" class="section level2">
 <h2 class="hasAnchor">
 <a href="#on-mac-os" class="anchor"></a>On Mac OS</h2>
-<p>To install <code>MODIStsp</code> on MacOS, you need to be able to install the <code>sf</code> package, which requires several dependencies. See <a href="https://github.com/r-spatial/sf#installing">HERE</a> if you have trouble installing <code>sf</code>.</p>
-<p>Then, you can install the stable version of MODIStsp from CRAN:</p>
+<p>To install <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> on MacOS, you need to be able to install the <a href="https://r-spatial.github.io/sf/">sf</a> package, which requires several dependencies. See <a href="https://github.com/r-spatial/sf#installing">HERE</a> if you have trouble installing <a href="https://r-spatial.github.io/sf/">sf</a>.</p>
+<p>Then, you can install the stable version of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> from CRAN:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"MODIStsp"</span><span class="op">)</span></code></pre></div>
-<p>, or the development version (containing the latest improvements and bug fixes) from github;</p>
+<p>, or the development version (containing the latest improvements and bug fixes) from GitHub:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/">devtools</a></span><span class="op">)</span>
 <span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"ropensci/MODIStsp"</span><span class="op">)</span></code></pre></div>
-<p>Good luck!</p>
 </div>
 </div>
 <div id="running-the-tool-in-interactive-mode-the-modistsp-gui" class="section level1">
 <h1 class="hasAnchor">
 <a href="#running-the-tool-in-interactive-mode-the-modistsp-gui" class="anchor"></a>Running the tool in Interactive Mode: the MODIStsp GUI</h1>
-<p>The easiest way to use <code>MODIStsp</code> is to use its powerful GUI (Graphical User Interface) for selection of processing options, and then run the processing.</p>
+<p>The easiest way to use <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> is to use its powerful GUI (Graphical User Interface) for selection of processing options, and then run the processing.</p>
 <p>To open the GUI, load the package and launch the MODIStsp function, with no parameters:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>This <strong>opens a GUI</strong> from which processing options can be specified and eventually saved (or loaded)</p>
+<p>This <strong>opens a GUI</strong> from which processing options can be specified and eventually saved (or loaded).</p>
 <p>The GUI allows selecting all processing options required for the creation of the desired MODIS time series. The main available processing options are described in detail in the following.</p>
 <p><img src="MODIStsp_files/figure-html/GUIfig-1.png" width="960" style="display: block; margin: auto;"></p>
 <p>See (<a href="https://docs.ropensci.org/MODIStsp/articles/interactive_execution.html" class="uri">https://docs.ropensci.org/MODIStsp/articles/interactive_execution.html</a>) for further info and instructions regarding the usage of the GUI.</p>
@@ -212,18 +211,18 @@
 <div id="non-interactive-execution-from-within-r" class="section level1">
 <h1 class="hasAnchor">
 <a href="#non-interactive-execution-from-within-r" class="anchor"></a>Non-Interactive Execution from within R</h1>
-<p><code>MODIStsp</code> can be launched in non-interactive mode within an <code>R</code> session by setting the optional <code>GUI</code> parameter to FALSE, and either providing the desired processing argument in the call to the function, or providing a previously saved <code>opts_file</code> specifying the path to a JSON Options file previously saved through the GUI. This allows to exploit <code>MODIStsp</code> functionalities within generic “R” processing scripts.</p>
+<p><code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> can be launched in non-interactive mode within an <code>R</code> session by setting the optional <code>GUI</code> parameter to FALSE, and either providing the desired processing argument in the call to the function, or providing a previously saved <code>opts_file</code> specifying the path to a JSON Options file previously saved through the GUI. This allows exploiting <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> functionalities within generic <code>R</code> processing scripts.</p>
 <div id="specifying-the-processing-parameters-in-the-function-call" class="section level2">
 <h2 class="hasAnchor">
 <a href="#specifying-the-processing-parameters-in-the-function-call" class="anchor"></a><strong>Specifying the processing parameters in the function call</strong>
 </h2>
-<p>All processing parameters can be set in the call to <code>MODIStsp</code>. Mandatory parameters are <code>selprod</code> (specifying the MODIS product), (one of) <code>bandsel</code>, <code>quality_bandsel</code> or <code>indexes_bandsel</code>, (that specify the desired output layers), <code>out_folder</code> and <code>start_date</code> and <code>end_date</code>. <code>user</code> and <code>password</code> are also needed if <code>download_server</code> is not equal to <code>offline</code>.</p>
-<p>The new function <code>MODIStsp_get_prodlayers</code> allows to easily retrieve the names of products and available layers based on product code, such as in:</p>
+<p>All processing parameters can be set in the call to <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code>. Mandatory parameters are <code>selprod</code> (specifying the MODIS product), (one of) <code>bandsel</code>, <code>quality_bandsel</code> or <code>indexes_bandsel</code>, (that specify the desired output layers), <code>out_folder</code> and <code>start_date</code> and <code>end_date</code>. <code>user</code> and <code>password</code> are also needed if <code>download_server</code> is not equal to <code>"offline"</code>.</p>
+<p>The function <code><a href="../reference/MODIStsp_get_prodlayers.html">MODIStsp_get_prodlayers()</a></code> allows to easily retrieve the names of products and available layers based on product code, such as in:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span> 
 <span class="fu"><a href="../reference/MODIStsp_get_prodlayers.html">MODIStsp_get_prodlayers</a></span><span class="op">(</span><span class="st">"M*D13Q1"</span><span class="op">)</span></code></pre></div>
-<p>The other parameters are set automatically to default values (see XXX for details on the different available function arguments).</p>
-<p>For example, the following code processes layers <strong>NDVI</strong> and <strong>EVI</strong> and quality indicator <strong>usefulness</strong> of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to R tempdir:</p>
+<p>The other parameters are set automatically to default values (see <a href="https://docs.ropensci.org/MODIStsp/reference/MODIStsp_get_prodlayers.html">the function reference</a> for details on the different available function arguments).</p>
+<p>For example, the following code processes layers <strong>NDVI</strong> and <strong>EVI</strong> and quality indicator <strong>usefulness</strong> of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to <code>R</code> <code><a href="https://rdrr.io/r/base/tempfile.html">tempdir()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span> 
 
@@ -233,17 +232,20 @@
 <span class="co"># MODIStsp_get_prodlayers("M*D13A2")</span>
 
 <span class="co"># --&gt; Launch the processing</span>
-<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui             <span class="op">=</span> <span class="cn">FALSE</span>, 
-         out_folder      <span class="op">=</span> <span class="st">"$tempdir"</span>, 
-         selprod         <span class="op">=</span> <span class="st">"Vegetation_Indexes_16Days_1Km (M*D13A2)"</span>,
-         bandsel         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"EVI"</span>, <span class="st">"NDVI"</span><span class="op">)</span>, 
-         quality_bandsel <span class="op">=</span> <span class="st">"QA_usef"</span>, 
-         indexes_bandsel <span class="op">=</span> <span class="st">"SR"</span>, 
-         user            <span class="op">=</span> <span class="st">"mstp_test"</span> ,
-         password        <span class="op">=</span> <span class="st">"MSTP_test_01"</span>,
-         start_date      <span class="op">=</span> <span class="st">"2020.06.01"</span>, 
-         end_date        <span class="op">=</span> <span class="st">"2020.06.15"</span>, 
-         verbose         <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>
+  gui             <span class="op">=</span> <span class="cn">FALSE</span>, 
+  out_folder      <span class="op">=</span> <span class="st">"$tempdir"</span>, 
+  selprod         <span class="op">=</span> <span class="st">"Vegetation_Indexes_16Days_1Km (M*D13A2)"</span>,
+  bandsel         <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"EVI"</span>, <span class="st">"NDVI"</span><span class="op">)</span>, 
+  quality_bandsel <span class="op">=</span> <span class="st">"QA_usef"</span>, 
+  indexes_bandsel <span class="op">=</span> <span class="st">"SR"</span>, 
+  user            <span class="op">=</span> <span class="st">"mstp_test"</span> ,
+  password        <span class="op">=</span> <span class="st">"MSTP_test_01"</span>,
+  start_date      <span class="op">=</span> <span class="st">"2020.06.01"</span>, 
+  end_date        <span class="op">=</span> <span class="st">"2020.06.15"</span>, 
+  verbose         <span class="op">=</span> <span class="cn">FALSE</span>,
+  parallel        <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 
 <span class="co"># Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of </span>
 <span class="co"># `base::tempdir()`: </span>
@@ -252,12 +254,13 @@
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">out_fold</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">out_fold</span> ,<span class="st">"EVI"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">out_fold</span> ,<span class="st">"QA_usef"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><em>Note that this example, as well as the following ones, is run in single core to follow CRAN policies, by setting <code>parallel = FALSE</code>; users can exploit multicore functionalities skipping to set this argument.</em></p>
 </div>
 <div id="launching-modistsp-using-a-saved-options-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#launching-modistsp-using-a-saved-options-file" class="anchor"></a><strong>Launching MODIStsp using a saved “Options file”</strong>
 </h2>
-<p>Alternatively, you can run MODIStsp without opening the GUI by specifying a previously saved options file:</p>
+<p>Alternatively, you can run <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> without opening the GUI by specifying a previously saved options file:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span> 
 
@@ -271,10 +274,10 @@
 <span class="va">opts_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/test_MOD13A2.json"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>
 
 <span class="co"># --&gt; Launch the processing</span>
-<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui <span class="op">=</span> <span class="cn">FALSE</span>, opts_file <span class="op">=</span> <span class="va">opts_file</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui <span class="op">=</span> <span class="cn">FALSE</span>, opts_file <span class="op">=</span> <span class="va">opts_file</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co"># Outputs are in this case in subfolder "MODIStsp/VI_16Days_1Km_v6" of </span>
-<span class="co"># `base::tempdir()`: </span>
+<span class="co"># tempdir(): </span>
 
 <span class="va">out_fold</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/VI_16Days_1Km_v6"</span><span class="op">)</span> 
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="va">out_fold</span><span class="op">)</span>
@@ -289,9 +292,7 @@
                 <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/test_MOD10A2.json"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="kw">for</span> <span class="op">(</span><span class="va">opts_file</span> <span class="kw">in</span> <span class="va">opts_files</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui       <span class="op">=</span> <span class="cn">FALSE</span>, 
-           opts_file <span class="op">=</span> <span class="va">opts_file</span>, 
-           verbose   <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui <span class="op">=</span> <span class="cn">FALSE</span>, opts_file <span class="op">=</span> <span class="va">opts_file</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># MOD13A2 ouptuts</span>
@@ -309,13 +310,13 @@
 <h2 class="hasAnchor">
 <a href="#specifying-the-processing-parameters-using-a-previously-saved-options-file-and-overwriting-some-parameters" class="anchor"></a><strong>Specifying the processing parameters using a previously saved options file and overwriting some parameters</strong>
 </h2>
-<p>Finally, it is possible to both specify a previously saved options file AND setting some parameters in the call to the function. This allows to <strong>easily perform similar processings, by only updating the required arguments</strong>, as in the examples below.</p>
+<p>Finally, it is possible to both specify a previously saved options file AND setting some parameters in the call to the function. This allows <strong>easily performing similar processings, by only updating the required arguments</strong>, as in the examples below.</p>
 </div>
 <div id="looping-over-different-spatial-extents" class="section level2">
 <h2 class="hasAnchor">
 <a href="#looping-over-different-spatial-extents" class="anchor"></a><strong>Looping over different spatial extents</strong>
 </h2>
-<p>Specifying the <code>spafile</code> parameter while setting the <code>spatmeth</code> parameter to “file” overrides for example the output extent of the selected Options File. This allows to perform the same preprocessing on different extents using a single Options File. For example:</p>
+<p>Specifying the <code>spafile</code> parameter while setting the <code>spatmeth</code> parameter to <code>"file"</code> overrides for example the output extent of the selected Options File. This allows performing the same preprocessing on different extents using a single Options File. For example:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Run the tool using the settings previously saved in a specific option file</span>
 <span class="co"># and specifying the extent from a spatial file allows to re-use the same</span>
@@ -323,11 +324,14 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span> 
 <span class="va">opts_file</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/test_MOD13A2.json"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>
 <span class="va">spatial_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/lakeshapes/garda_lake.shp"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui       <span class="op">=</span> <span class="cn">FALSE</span>, 
-         opts_file <span class="op">=</span> <span class="va">opts_file</span>,
-         spatmeth  <span class="op">=</span> <span class="st">"file"</span>, 
-         spafile   <span class="op">=</span> <span class="va">spatial_file</span>, 
-         verbose   <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>
+  gui <span class="op">=</span> <span class="cn">FALSE</span>, 
+  opts_file <span class="op">=</span> <span class="va">opts_file</span>,
+  spatmeth <span class="op">=</span> <span class="st">"file"</span>, 
+  spafile <span class="op">=</span> <span class="va">spatial_file</span>, 
+  verbose <span class="op">=</span> <span class="cn">FALSE</span>, 
+  parallel <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 
 <span class="co"># --&gt; Create a character array containing a list of shapefiles (or other spatial files)</span>
 <span class="va">extent_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/lakeshapes/"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span>, <span class="st">"\\.shp$"</span><span class="op">)</span>  
@@ -339,11 +343,14 @@
 <span class="co"># each input spatial file).</span>
 
 <span class="kw">for</span> <span class="op">(</span><span class="va">single_shape</span> <span class="kw">in</span> <span class="va">extent_list</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>gui       <span class="op">=</span> <span class="cn">FALSE</span>, 
-           opts_file <span class="op">=</span> <span class="va">opts_file</span>, 
-           spatmeth  <span class="op">=</span> <span class="st">"file"</span>, 
-           spafile   <span class="op">=</span> <span class="va">single_shape</span>, 
-           verbose   <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+  <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span>
+    gui <span class="op">=</span> <span class="cn">FALSE</span>, 
+    opts_file <span class="op">=</span> <span class="va">opts_file</span>, 
+    spatmeth <span class="op">=</span> <span class="st">"file"</span>, 
+    spafile <span class="op">=</span> <span class="va">single_shape</span>, 
+    verbose <span class="op">=</span> <span class="cn">FALSE</span>, 
+    parallel <span class="op">=</span> <span class="cn">FALSE</span>
+  <span class="op">)</span>
 <span class="op">}</span>
 
 <span class="co"># output files are placed in separate folders: </span>
@@ -369,27 +376,27 @@
 <a href="#scheduled-processing" class="anchor"></a>Scheduled Processing</h1>
 <p>Stand-alone non-interactive execution can be used to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply:</p>
 <ol style="list-style-type: decimal">
-<li><p>Open the <code>MODIStsp</code> GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options. Then quit the program.</p></li>
-<li><p>Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory “MODIStsp/ExtData/Launcher” of your library path) as windows scheduled task (or linux “cron” job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument:</p></li>
+<li><p>Open the <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options. Then quit the program.</p></li>
+<li><p>Schedule non-interactive execution of the launcher installed as seen before (or located in the subdirectory <code>"MODIStsp/ExtData/Launcher"</code> of your library path) as windows scheduled task (or linux “cron” job) according to a specified time schedule, specifying the path of a previously saved Options file as additional argument.</p></li>
 </ol>
 <div id="on-linux" class="section level4">
 <h4 class="hasAnchor">
 <a href="#on-linux" class="anchor"></a>On Linux</h4>
-<ul>
-<li>edit your crontab by opening a terminal and type:</li>
-</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Edit your crontab by opening a terminal and type:</li>
+</ol>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1">  <span class="ex">crontab</span> -e</a></code></pre></div>
-<ul>
-<li>add an entry for the launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:</li>
-</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Add an entry for the launcher. For example, if you have installed it in <code>/usr/bin</code> and you want to run the tool every day at 23.00, add the following row:</li>
+</ol>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1">  <span class="ex">0</span> 23 * * * /bin/bash /usr/bin/MODIStsp -g -s <span class="st">"/yourpath/youroptions.json"</span></a></code></pre></div>
 </div>
 <div id="on-windows-1" class="section level4">
 <h4 class="hasAnchor">
 <a href="#on-windows-1" class="anchor"></a>On Windows</h4>
-<ul>
-<li>create a Task following <a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN">these instructions</a>; add the path of the MODIStsp.bat launcher as Action (point 6), and specifying <code>-g -s "X:/yourpath/youroptions.json"</code> as argument.</li>
-</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Create a Task following <a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN" target="_blank">these instructions</a>; add the path of the <code>MODIStsp.bat</code> launcher as Action (point 6), and specifying <code>-g -s "X:/yourpath/youroptions.json"</code> as argument.</li>
+</ol>
 </div>
 </div>
 <div id="outputs-format-and-naming-conventions" class="section level1">
@@ -419,24 +426,24 @@
 <a href="#virtual-multi-band-outputs" class="anchor"></a>Virtual multi-band outputs</h2>
 <p>ENVI and/or GDAL virtual time series files and <em>RasterStack</em> RData objects are instead stored <strong>in the “Time_Series” subfolder</strong> if required.</p>
 <p>Naming convention for these files is as follow:</p>
-<pre><code>myoutfolder/Time_Series/"vrt_type"/"Sensor"/"Layer"/"ProdCode"_"Layer"_"StartDOY"_"StartYear_"EndDOY"_"EndYear_"suffix".ext" </code></pre>
-<p><font size="2"> <em>(e.g., myoutfolder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData)</em> </font></p>
+<pre><code>&lt;path_of_out_folder&gt;/Time_Series/&lt;vrt_type&gt;/&lt;Sensor&gt;/&lt;Layer&gt;/&lt;ProdCode&gt;_&lt;Layer&gt;_&lt;StartDOY&gt;_&lt;StartYear&gt;_&lt;EndDOY&gt;_&lt;EndYear&gt;_&lt;suffix&gt;.&lt;ext&gt; </code></pre>
+<p><font size="2"> <em>(e.g., <code>/my/out/folder/Time_Series/RData/Terra/NDVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData</code>)</em> </font></p>
 <p>, where:</p>
 <ul>
 <li>
-<strong><em>vrt_type</em></strong> indicates the type of virtual file (“RData”, “GDAL” or “ENVI_META”);</li>
+<code>&lt;vrt_type&gt;</code> indicates the type of virtual file (<code>"RData"</code>, <code>"GDAL"</code> or <code>"ENVI_META"</code>);</li>
 <li>
-<strong><em>Sensor</em></strong> indicates to which MODIS sensor the time series belongs (“Terra”, “Aqua”, “Mixed” or “Combined” (for MCD* products));</li>
+<code>&lt;Sensor&gt;</code> indicates to which MODIS sensor the time series belongs (<code>"Terra"</code>, <code>"Aqua"</code>, <code>"Mixed"</code> or <code>"Combined"</code> (for MCD* products));</li>
 <li>
-<strong><em>Layer</em></strong> is a short name describing the dataset (e.g., b1_Red, NDII, UI);</li>
+<code>&lt;Layer&gt;</code> is a short name describing the dataset (e.g., <code>"b1_Red"</code>, <code>"NDII"</code>, <code>"UI"</code>);</li>
 <li>
-<strong><em>ProdCode</em></strong> is the code name of the MODIS product from which the image was derived (e.g., MOD13Q1);</li>
+<code>&lt;ProdCode&gt;</code> is the code name of the MODIS product from which the image was derived (e.g., <code>"MOD13Q1"</code>);</li>
 <li>
-<strong><em>StartDOY</em></strong>, <strong><em>StartYear</em></strong>, <strong><em>EndDOY</em></strong> and <strong><em>EndYear</em></strong> indicate the temporal extent of the time serie created;</li>
+<code>&lt;StartDOY&gt;</code>, <code>&lt;StartYear&gt;</code>, <code>&lt;EndDOY&gt;</code> and <code>&lt;EndYear&gt;</code> indicate the temporal extent of the time serie created;</li>
 <li>
-<strong><em>suffix</em></strong> indicates the type of virtual file (ENVI, GDAL or RData);</li>
+<code>&lt;suffix&gt;</code> indicates the type of virtual file (<code>"ENVI"</code>, <code>"GDAL"</code> or <code>"RData"</code>);</li>
 <li>
-<strong><em>ext</em></strong> is the file extension (“.vrt” for gdal virtual files, “META” for ENVI meta files or “RData” for <code>R</code> raster stacks).</li>
+<code>&lt;ext&gt;</code> is the file extension (<code>".vrt"</code> for GDAL virtual files, <code>"META"</code> for ENVI meta files or <code>"RData"</code> for <code>R</code> raster stacks).</li>
 </ul>
 </div>
 </div>
@@ -449,16 +456,16 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span>
 <span class="va">modistsp_file</span> <span class="op">&lt;-</span> <span class="st">"/my_outfolder/EVI/MOD13Q1_2005_137_EVI.tif"</span>
 <span class="va">my_raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">modistsp_file</span><span class="op">)</span></code></pre></div>
-<p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the “Time Series/RData” subfolder - see <a href="https://docs.ropensci.org/MODIStsp/articles/output.html">here</a> for details) can be opened by:</p>
+<p><code>rasterStack</code> time series containing all the processed data for a given parameter (saved in the <code>"Time Series/RData"</code> subfolder - see <a href="https://docs.ropensci.org/MODIStsp/articles/output.html">here</a> for details) can be opened by:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">in_virtual_file</span> <span class="op">&lt;-</span> <span class="st">"/my_outfolder/Time_Series/RData/Terra/EVI/MOD13Q1_MYD13Q1_NDVI_49_2000_353_2015_RData.RData"</span> 
 <span class="va">indata</span>          <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html">get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="va">in_virtual_file</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <code>raster</code> or <code>rasterVis</code> packages.</p>
+<p>This second option allows accessing the complete data stack and analyzing it using the functionalities for raster/raster time series analysis, extraction and plotting provided for example by the <a href="https://rspatial.org/raster">raster</a> or <a href="https://oscarperpinan.github.io/rastervis/">rasterVis</a> packages.</p>
 <div id="extracting-time-series-data-on-areas-of-interest" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extracting-time-series-data-on-areas-of-interest" class="anchor"></a>Extracting Time Series Data on Areas of Interest</h2>
-<p><code>MODIStsp</code> provides an efficient function (<code>MODIStsp\_extract</code>) for extracting time series data at specific locations. The function takes as input a <em>RasterStack</em> virtual object created by <code>MODIStsp</code> (see above), the starting and ending dates for the extraction and a standard _Sp*_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a <code>xts</code> object or <code>data.frame</code> containing time series data for those locations.</p>
-<p>If the input is of class <em>SpatialPoints</em>, the output object contains one column for each point specified, and one row for each date. If it is of class <em>SpatialPolygons</em> (or <em>SpatialLines</em>), it contains one column for each polygon (or each line), with values obtained applying the function specified as the “FUN” argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.</p>
+<p><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> provides an efficient function (<code><a href="../reference/MODIStsp_extract.html">MODIStsp_extract()</a></code>) for extracting time series data at specific locations. The function takes as input a <em>RasterStack</em> virtual object created by <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> (see above), the starting and ending dates for the extraction and a standard _Sp*_ object (or an ESRI shapefile name) specifying the locations (points, lines or polygons) of interest, and provides as output a <code>xts</code> object or <code>data.frame</code> containing time series data for those locations.</p>
+<p>If the input is of class <em>SpatialPoints</em>, the output object contains one column for each point specified, and one row for each date. If it is of class <em>SpatialPolygons</em> (or <em>SpatialLines</em>), it contains one column for each polygon (or each line), with values obtained applying the function specified as the <code>FUN</code> argument (e.g., mean, standard deviation, etc.) on pixels belonging to the polygon (or touched by the line), and one row for each date.</p>
 <p>As an example the following code:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="co">#Set the input paths to raster and shape file</span>
@@ -480,12 +487,8 @@
 <div id="problems-and-issues" class="section level1">
 <h1 class="hasAnchor">
 <a href="#problems-and-issues" class="anchor"></a>Problems and Issues</h1>
-<p>Solutions to some common <strong>installation and processing problems</strong> can be found in MODIStsp FAQ:</p>
-<p><a href="https://docs.ropensci.org/MODIStsp/articles/faq.html" class="uri">https://docs.ropensci.org/MODIStsp/articles/faq.html</a></p>
-<ul>
-<li>Please <strong>report any issues</strong> you may encounter in our issues page on GitHub:</li>
-</ul>
-<p><a href="https://github.com/ropensci/MODIStsp/issues" class="uri">https://github.com/ropensci/MODIStsp/issues</a></p>
+<p>Solutions to some common <strong>installation and processing problems</strong> can be found in <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> FAQ: <a href="https://docs.ropensci.org/MODIStsp/articles/faq.html" class="uri">https://docs.ropensci.org/MODIStsp/articles/faq.html</a></p>
+<p>Please <strong>report any issues</strong> you may encounter in our issues page on GitHub: <a href="https://github.com/ropensci/MODIStsp/issues" class="uri">https://github.com/ropensci/MODIStsp/issues</a></p>
 </div>
 <div id="citation" class="section level1">
 <h1 class="hasAnchor">

@@ -52,6 +52,10 @@ Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What’s New
 
+  - 10/12/2020 - `{MODIStsp}` was resubmitted to CRAN after the
+    maintainer’s death. Now `{MODIStsp}` is dedicated to Lorenzo Busetto
+    (<https://docs.ropensci.org/MODIStsp/articles/lorenzo>).
+
   - 01/09/2020 - `{MODIStsp}` 2.0.0 is out. Replaces the old gWidgets
     GUI with a new one based on Shiny, enhances support for CLI usage
     and enhances support/provides bug fixing for datasets with multiple
@@ -81,7 +85,7 @@ Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
     patched release will be made available on CRAN as soon as possible.
 
   - 07/08/2018 - We are glad to report that `{MODIStsp}` is now included
-    in the [rOpenSci](https://ropensci.org/about/) packages’ ecosystem.
+    in the [rOpenSci](https://ropensci.org/about/) packages ecosystem.
     We thank reviewers Leah Wasser and Jeffrey Hanson for their valuable
     reviews, which helped us  
     further improving the package.
@@ -129,7 +133,7 @@ Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
     scripts.
 
   - The list of **currently supported MODIS products and versions** can
-    be found [here](articles/Products_list.html).
+    be found [here](articles/products_list.html).
 
   - [Scheduled
     Processing](articles/noninteractive_execution.html#scheduled-processing)

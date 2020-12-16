@@ -57,7 +57,11 @@ For more information, documentation and examples of use, **see also the
 
 ## Important News
 
-  - 09/02/2020 - `{MODIStsp}` 2.0.0 is out. Provides a new GUI interface
+  - 10/12/2020 - `{MODIStsp}` was resubmitted to CRAN after the
+    maintainer’s death. Now `{MODIStsp}` is dedicated to Lorenzo Busetto
+    (<https://docs.ropensci.org/MODIStsp/articles/lorenzo>).
+
+  - 01/09/2020 - `{MODIStsp}` 2.0.0 is out. Provides a new GUI interface
     based on Shiny, getting rid of the archived dependencies on
     gWidgets/gWidgetsRGtk2. Also provides much easier usage from the
     CLI, by allowing to set all processing arguments also from the CLI.
@@ -88,7 +92,7 @@ For more information, documentation and examples of use, **see also the
     for further details. The bug is fixed as of version 1.3.7.
 
   - 07/08/2018 - We are glad to report that `{MODIStsp}` is now included
-    in the [rOpenSci](https://ropensci.org/about/) packages’ ecosystem.
+    in the [rOpenSci](https://ropensci.org/about/) packages ecosystem.
     We thank reviewers Leah Wasser and Jeffrey Hanson for their valuable
     reviews, which helped us to further improve the package.
 

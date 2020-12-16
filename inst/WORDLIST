@@ -16,8 +16,6 @@ ENVI
 EPSG
 EVI
 Emissivity
-EndDOY
-EndYear
 Evapotranspiration
 ExtData
 FPAR
@@ -39,7 +37,6 @@ LPDAAC
 LSTs
 LZW
 MODIS
-MODIStp
 MYD
 MacOS
 ModisDownload
@@ -66,6 +63,7 @@ RData
 README
 RStudio
 RasterStack
+RasterStacks
 Reflectance
 Reproject
 Reprojection
@@ -77,8 +75,6 @@ SWIR
 SpatialLines
 SpatialPoints
 SpatialPolygons
-StartDOY
-StartYear
 Tomislav
 UI
 UInt
@@ -152,8 +148,8 @@ lpdaac
 memoriam
 moddirs
 modis
-mosaiced
 mosaicing
+mosaicked
 mosaicking
 multitemporal
 mydir
@@ -163,7 +159,6 @@ na
 nasa
 nodata
 outproj
-packages’
 pacman
 phD
 pkgdown
@@ -203,7 +198,6 @@ serie
 setZ
 shp
 sp
-spatmet
 spatmeth
 splitted
 subfolder

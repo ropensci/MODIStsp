@@ -1,12 +1,7 @@
 ---
 title: "Accessing and Analyzing Processed Data from R"
 output: 
-  rmarkdown::html_vignette: default
   github_document: default
-vignette: >
-  %\VignetteIndexEntry{Accessing and Analyzing Processed Data from R}
-  %\VignetteEngine{knitr::knitr}
-  %\usepackage[UTF-8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}

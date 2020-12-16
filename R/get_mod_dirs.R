@@ -16,7 +16,7 @@
 #'   environment or not. If not, processing messages are sent to a log file
 #'   instead than to the console/GTK progress windows.
 #' @param out_folder_mod  `character` output folder for MODIS HDF storage
-#' @return `character arraay` listing all available folders (a.k.a. dates) for
+#' @return `character array` listing all available folders (a.k.a. dates) for
 #'   the requested MODIS product on lpdaac http archive, for the years
 #'   included in the time range selected for processing.
 #' @author Original code by Babak Naimi (\code{.getModisList}, in

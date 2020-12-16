@@ -76,7 +76,7 @@
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
     <li>
-      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+      <a href="../articles/products_list.html">Supported MODIS Products</a>
     </li>
   </ul>
 </li>
@@ -319,8 +319,8 @@
 <span class="va">extent_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"testdata/lakeshapes/"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span>, <span class="st">"\\.shp$"</span><span class="op">)</span>  
 
 <span class="va">extent_list</span></code></pre></div>
-<pre><code>## [1] "/tmp/RtmpxGLOPO/temp_libpath9ba7282a5e26/MODIStsp/testdata/lakeshapes//garda_lake.shp"
-## [2] "/tmp/RtmpxGLOPO/temp_libpath9ba7282a5e26/MODIStsp/testdata/lakeshapes//iseo_lake.shp"</code></pre>
+<pre><code>## [1] "/tmp/RtmpFcCck9/temp_libpath81c33d851cef/MODIStsp/testdata/lakeshapes//garda_lake.shp"
+## [2] "/tmp/RtmpFcCck9/temp_libpath81c33d851cef/MODIStsp/testdata/lakeshapes//iseo_lake.shp"</code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># --&gt; Loop on the list of spatial files and run MODIStsp using each of them to </span>
 <span class="co"># automatically define the output extent (A separate output folder is created for</span>
@@ -340,8 +340,8 @@
   <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span><span class="op">)</span>,
   full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">outfiles_garda</span></code></pre></div>
-<pre><code>## [1] "/tmp/RtmpFzjJ7q/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
-## [2] "/tmp/RtmpFzjJ7q/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "/tmp/RtmppxiAvo/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
+## [2] "/tmp/RtmppxiAvo/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster">raster</a></span><span class="op">)</span>       
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">outfiles_garda</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -351,8 +351,8 @@
   <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span><span class="op">)</span>,
   full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">outfiles_iseo</span></code></pre></div>
-<pre><code>## [1] "/tmp/RtmpFzjJ7q/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
-## [2] "/tmp/RtmpFzjJ7q/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
+<pre><code>## [1] "/tmp/RtmppxiAvo/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"
+## [2] "/tmp/RtmppxiAvo/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html">raster</a></span><span class="op">(</span><span class="va">outfiles_iseo</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="noninteractive_execution_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>

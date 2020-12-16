@@ -23,7 +23,7 @@
 #' @author Lorenzo Busetto, phD (2017)
 #' @author Luigi Ranghetti, phD (2017) \email{luigi@@ranghetti.info}
 #' @note License: GPL 3.0
-#'  Based on the "modis.qc.R" script by Yann Chemin (2008) (https://goo.gl/7Fhreo)
+#'  Based on the `modis.qc.R` script by Yann Chemin (2008) (\url{https://goo.gl/7Fhreo})
 #'  license GPL 3.0
 #' @importFrom raster raster NAvalue calc
 #' @importFrom bitops bitShiftR bitAnd

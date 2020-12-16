@@ -121,7 +121,7 @@ use of gdal routines." />
       <a href="../articles/analyze.html">Accessing and Analyzing Processed Data from R</a>
     </li>
     <li>
-      <a href="../articles/Products_list.html">Supported MODIS Products</a>
+      <a href="../articles/products_list.html">Supported MODIS Products</a>
     </li>
   </ul>
 </li>
@@ -210,7 +210,8 @@ use of <code>gdal</code> routines.</p>
   <span class='va'>resampling</span>,
   <span class='va'>nodata_change</span>,
   <span class='va'>gui</span>,
-  <span class='va'>verbose</span>
+  <span class='va'>verbose</span>,
+  <span class='va'>parallel</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -339,6 +340,15 @@ argument), Default: TRUE</p></td>
     <tr>
       <th>verbose</th>
       <td><p><code>logical</code> If FALSE, suppress processing messages, Default: TRUE</p></td>
+    </tr>
+    <tr>
+      <th>parallel</th>
+      <td><p><code>logical</code> If TRUE, the function is run using parallel
+processing, to speed-up the computation for large rasters (with a maximum
+of 8 cores).
+The number of cores is automatically determined; specifying it is also
+possible (e.g. <code>parallel = 4</code>). In this case, more than 8 cores can be
+specified. If FALSE (default), single core processing is used.</p></td>
     </tr>
     </table>
 
