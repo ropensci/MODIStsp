@@ -20,7 +20,7 @@ Please take particular care with code reproducibility (follow indications provid
 Due to the limited time available to address all the issues, the developer will preferentially address requests finalised to publish scientific works; in this case, please provide the required information in the template below.
 
 IMPORTANT NOTES ABOUT NETIQUETTE
-1. Please remember that {MODIStsp} is not a commercial tool, so the developer is not obliged to provide assistance: please be polite, be patient if developers will not answer you instantly and respect the Code of Conduct (https://sen2r.ranghetti.info/CODE-OF-CONDUCT.html).
+1. Please remember that {MODIStsp} is not a commercial tool, so the developer is not obliged to provide assistance: please be polite, be patient if developers will not answer you instantly and respect the Code of Conduct (https://ropensci.org/code-of-conduct/).
 2. Your are required to answer when details (generally outputs of R commands) are required, and to provide a feedback after opening an issue, even after solving your problem or if you are not yet interested in solving it. In the case of missing feedback, the developer reserve the right to ignore your future requests.
 3. Tasks can be closed after 10 days of inactivity (you can reopen it if you need further help).
 -->
@@ -63,4 +63,4 @@ packageVersion("MODIStsp")
 <!-- If your work is finalised to publish a scientific paper, please provide here the following details:
 1. which is the aim of your work;
 2. available details - even if subjected to be modified - about publication (title, authors, candidate journal).
-Please remember to cite {MODIStsp} in your work (see https://docs.ropensci.org/MODIStsp/#citation ). -->
+Please remember to cite {MODIStsp} in your work (see https://docs.ropensci.org/MODIStsp/authors.html ). -->
