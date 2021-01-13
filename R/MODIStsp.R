@@ -461,6 +461,25 @@ MODIStsp <- function(...,
 
     if(!is.null(spatmeth)) {proc_opts$spatmeth  <- spatmeth}
 
+    if(!is.null(out_projsel)) {proc_opts$out_projsel  <- out_projsel}
+    if(!is.null(output_proj)) {proc_opts$output_proj  <- output_proj}
+    
+    if(!is.null(out_res_sel))  {proc_opts$out_res_sel  <- out_res_sel}
+    if(!is.null(out_res))      {proc_opts$out_res  <- out_res}
+    if(!is.null(resampling))  {proc_opts$resampling  <- resampling}
+    
+    if(!is.null(reprocess))  {proc_opts$reprocess  <- reprocess}
+    if(!is.null(delete_hdf))  {proc_opts$delete_hdf  <- delete_hdf}
+    if(!is.null(nodata_change)) {proc_opts$nodata_change  <- nodata_change}
+    if(!is.null(scale_val))  {proc_opts$scale_val  <- scale_val}
+    
+    if(!is.null(out_format)) {proc_opts$out_format  <- out_format}
+    if(!is.null(ts_format))  {proc_opts$ts_format  <- ts_format}
+    if(!is.null(compress))   {proc_opts$compress  <- compress}
+    
+    if(!is.null(out_folder))     {proc_opts$out_folder  <- out_folder}
+    if(!is.null(out_folder_mod)) {proc_opts$out_folder_mod  <- out_folder_mod}
+
     if (proc_opts$spatmeth == "tiles") {
       if(!is.null(start_x)) {proc_opts$start_x  <- start_x}
       if(!is.null(end_x))   {proc_opts$end_x    <- end_x}
@@ -476,9 +495,7 @@ MODIStsp <- function(...,
           proc_opts$start_y <- tiles[3]
           proc_opts$end_x  <- tiles[2]
           proc_opts$end_y  <- tiles[4]
-
         }
-
         #TODO update examples and website
       } else {
         if (proc_opts$spatmeth == "map") {
@@ -498,24 +515,6 @@ MODIStsp <- function(...,
       }
     }
     # proc_opts$bbox <- as.numeric(proc_opts$bbox)
-    if(!is.null(out_projsel)) {proc_opts$out_projsel  <- out_projsel}
-    if(!is.null(output_proj)) {proc_opts$output_proj  <- output_proj}
-
-    if(!is.null(out_res_sel))  {proc_opts$out_res_sel  <- out_res_sel}
-    if(!is.null(out_res))      {proc_opts$out_res  <- out_res}
-    if(!is.null(resampling))  {proc_opts$resampling  <- resampling}
-
-    if(!is.null(reprocess))  {proc_opts$reprocess  <- reprocess}
-    if(!is.null(delete_hdf))  {proc_opts$delete_hdf  <- delete_hdf}
-    if(!is.null(nodata_change)) {proc_opts$nodata_change  <- nodata_change}
-    if(!is.null(scale_val))  {proc_opts$scale_val  <- scale_val}
-
-    if(!is.null(out_format)) {proc_opts$out_format  <- out_format}
-    if(!is.null(ts_format))  {proc_opts$ts_format  <- ts_format}
-    if(!is.null(compress))   {proc_opts$compress  <- compress}
-
-    if(!is.null(out_folder))     {proc_opts$out_folder  <- out_folder}
-    if(!is.null(out_folder_mod)) {proc_opts$out_folder_mod  <- out_folder_mod}
 
     if (proc_opts$out_folder == "$modistest") {
       warning(paste0(
