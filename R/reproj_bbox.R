@@ -21,6 +21,9 @@
 
 reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE) {
 
+  # fix bbox if it is a list (#228)
+  if (inherits(bbox, "list")) {bbox <- unlist(bbox)}
+  
   if (!inherits(in_proj, "crs")) {
     if (suppressWarnings(!is.na(as.numeric(in_proj)))) {
       in_proj <- as.numeric(in_proj)
