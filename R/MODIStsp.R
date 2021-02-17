@@ -537,6 +537,8 @@ MODIStsp <- function(...,
 
     if (proc_opts$out_folder_mod == "$tempdir") {
       proc_opts$out_folder_mod <- file.path(tempdir(), "MODIStsp/HDFs")
+      dir.create(dirname(proc_opts$out_folder_mod), showWarnings = FALSE)
+      dir.create(proc_opts$out_folder_mod, showWarnings = FALSE)
     }
 
     if (proc_opts$spatmeth == "file" & !missing(spafile)) {
