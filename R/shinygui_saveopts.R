@@ -108,15 +108,10 @@ shinygui_saveopts <- function(input, prod_opt_list, rv) {
     return("Please provide output folder names")
   }
 
-  if (opts$out_folder == "$tempdir"){
-    opts$out_folder <- file.path(tempdir(), "MODIStsp/HDF")
-    dir.create(opts$out_folder)
-  }
-
-  if (opts$out_folder == "$tempdir"){
+  if (opts$out_folder_mod == "$tempdir"){
     opts$out_folder_mod <- file.path(tempdir(), "MODIStsp/HDF")
-    dir.create(dirname(opts$out_folder_mod))
-    dir.create(opts$out_folder_mod)
+    dir.create(dirname(opts$out_folder_mod), showWarnings = FALSE)
+    dir.create(opts$out_folder_mod, showWarnings = FALSE)
   }
 
   # #- Perform checks on options consistency ---------------
