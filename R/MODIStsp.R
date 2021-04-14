@@ -503,9 +503,8 @@ MODIStsp <- function(...,
         } else {
           if (proc_opts$spatmeth == "bbox") {
             #TODO retrieve tiles from selection
-            bbox  <- as.numeric(proc_opts$bbox)
-            proc_opts$bbox <- bbox
-            tiles <- tiles_from_bbox(bbox, proc_opts$output_proj)
+            if(!is.null(bbox)) {proc_opts$bbox  <- as.numeric(bbox)}
+            tiles <- tiles_from_bbox(proc_opts$bbox, proc_opts$output_proj)
             proc_opts$start_x <- tiles[1]
             proc_opts$start_y <- tiles[3]
             proc_opts$end_x  <- tiles[2]
