@@ -10974,7 +10974,7 @@
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>M*D17A2H: MODIS/Terra/Aqua Gross Primary Productivity 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
+                    <prod_fullname>M*D17A2HGF: MODIS/Terra/Aqua Gross Primary Productivity 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
                     <main_out_folder>Gross_PP_8Days_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
                     <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD17A2H.006/</http_terra>
@@ -10985,7 +10985,7 @@
                     <bands>
                         <band>
                             <bandname>GPP</bandname>
-                            <fullname>Gross Primary Production</fullname>
+                            <fullname>Gross Primary Productivity</fullname>
                             <datatype>16-bit signed integer</datatype>
                             <nodata_in>32767</nodata_in>
                             <nodata_out>32767</nodata_out>
@@ -11046,29 +11046,110 @@
                 </version>
             </versions>
         </MOD17A2H>
-        <MOD17A3H>
-            <name>Net_PP_Yearly_500m (M*D17A3H)</name>
+        <MOD17A2HGF>
+            <name>Gross_PP_GapFil_8Days_500m (M*D17A2HGF)</name>
             <cat_01>Ecosystem Variables</cat_01>
-            <cat_02>Net Primary Productivity</cat_02>
-            <file_prefix_terra>MOD17A3H</file_prefix_terra>
-            <file_prefix_aqua>MYD17A3H</file_prefix_aqua>
+            <cat_02>Gross Primary Productivity</cat_02>
+            <file_prefix_terra>MOD17A2HGF</file_prefix_terra>
+            <file_prefix_aqua>MYD17A2HGF</file_prefix_aqua>
             <versions>
                 <version>
                     <v_number>6</v_number>
-                    <prod_fullname>M*D17A3H: MODIS/Terra/Aqua Net Primary Production Yearly L4 Global 500 m SIN Grid V006</prod_fullname>
-                    <main_out_folder>Net_PP_Yearly_500m_v6</main_out_folder>
+                    <prod_fullname>M*D17A2H: MODIS/Terra/Aqua Gross Primary Productivity Gap-Filled 8-Day L4 Global 500 m SIN Grid V006</prod_fullname>
+                    <main_out_folder>Gross_PP_GapFil_8Days_500m_v6</main_out_folder>
                     <native_res>463.3127</native_res>
-                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD17A3H.006/</http_terra>
-                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD17A3H.006/</http_aqua>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD17A2HGF.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD17A2HGF.006/</http_aqua>
                     <combined>0</combined>
                     <tiled>1</tiled>
-                    <www>https://lpdaac.usgs.gov/products/mod17a3hv006</www>
+                    <www>https://lpdaac.usgs.gov/products/mod17a2hgfv006</www>
+                    <bands>
+                        <band>
+                            <bandname>GPP</bandname>
+                            <fullname>Gross Primary Productivity</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>PsnNet</bandname>
+                            <fullname>Net Photosynthesis</fullname>
+                            <datatype>16-bit signed integer</datatype>
+                            <nodata_in>32767</nodata_in>
+                            <nodata_out>32767</nodata_out>
+                            <scale_factor>0.0001</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                        <band>
+                            <bandname>Psn_QC</bandname>
+                            <fullname>Quality Control bits</fullname>
+                            <datatype>8-bit unsigned integer</datatype>
+                            <nodata_in>255</nodata_in>
+                            <nodata_out>255</nodata_out>
+                            <scale_factor>1</scale_factor>
+                            <offset>0</offset>
+                        </band>
+                    </bands>
+                    <quality_indicators>
+                        <quality>
+                            <quality_bandname>QC_bits</quality_bandname>
+                            <quality_fullname>MODLAND_QC bits</quality_fullname>
+                            <quality_source>Psn_QC</quality_source>
+                            <quality_bitN>0</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_sensor</quality_bandname>
+                            <quality_fullname>Sensor</quality_fullname>
+                            <quality_source>Psn_QC</quality_source>
+                            <quality_bitN>1</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_DeadDet</quality_bandname>
+                            <quality_fullname>DeadDetector</quality_fullname>
+                            <quality_source>Psn_QC</quality_source>
+                            <quality_bitN>2</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_cld</quality_bandname>
+                            <quality_fullname>CloudState (inherited from Aggregate_QC bits {0,1} cloud state)</quality_fullname>
+                            <quality_source>Psn_QC</quality_source>
+                            <quality_bitN>3-4</quality_bitN>
+                        </quality>
+                        <quality>
+                            <quality_bandname>QC_SCF</quality_bandname>
+                            <quality_fullname>SCF_QC (five level confidence score)</quality_fullname>
+                            <quality_source>Psn_QC</quality_source>
+                            <quality_bitN>5-7</quality_bitN>
+                        </quality>
+                    </quality_indicators>
+                </version>
+            </versions>
+        </MOD17A2HGF>
+        <MOD17A3HGF>
+            <name>Net_PP_GapFil_Yearly_500m (M*D17A3HGF)</name>
+            <cat_01>Ecosystem Variables</cat_01>
+            <cat_02>Net Primary Productivity</cat_02>
+            <file_prefix_terra>MOD17A3HGF</file_prefix_terra>
+            <file_prefix_aqua>MYD17A3HGF</file_prefix_aqua>
+            <versions>
+                <version>
+                    <v_number>6</v_number>
+                    <prod_fullname>M*D17A3HGF: MODIS/Terra/Aqua Net Primary Production Gap-Filled Yearly L4 Global 500 m SIN Grid V006</prod_fullname>
+                    <main_out_folder>Net_PP_Yearly_500m_v6</main_out_folder>
+                    <native_res>463.3127</native_res>
+                    <http_terra>https://e4ftl01.cr.usgs.gov/MOLT/MOD17A3HGF.006/</http_terra>
+                    <http_aqua>https://e4ftl01.cr.usgs.gov/MOLA/MYD17A3HGF.006/</http_aqua>
+                    <combined>0</combined>
+                    <tiled>1</tiled>
+                    <www>https://lpdaac.usgs.gov/products/mod17a3hgfv006</www>
                     <bands>
                         <band>
                             <bandname>Npp</bandname>
                             <fullname>Net Primary Productivity</fullname>
                             <datatype>16-bit unsigned integer</datatype>
-                            <nodata_in>32767</nodata_in>
+                            <nodata_in>32761:32767</nodata_in>
                             <nodata_out>65535</nodata_out>
                             <scale_factor>0.0001</scale_factor>
                             <offset>0</offset>
@@ -11077,7 +11158,7 @@
                             <bandname>Npp_QC</bandname>
                             <fullname>Quality Control bits</fullname>
                             <datatype>8-bit unsigned integer</datatype>
-                            <nodata_in>255</nodata_in>
+                            <nodata_in>249:255</nodata_in>
                             <nodata_out>255</nodata_out>
                             <scale_factor>1</scale_factor>
                             <offset>0</offset>
@@ -11117,7 +11198,7 @@
                     </quality_indicators>
                 </version>
             </versions>
-        </MOD17A3H>
+        </MOD17A3HGF>
         <MOD44B>
             <name>Veg_Cont_Fields_Yearly_250m (MOD44B)</name>
             <cat_01>Ecosystem Variables</cat_01>
