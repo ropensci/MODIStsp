@@ -15,7 +15,7 @@ test_that(
       file.path(tempdir(), "MODIStsp/LAI_8Days_500m_v6"),
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
     file_sizes_dat <- file.info(out_files_dat)$size
-    expect_equal(file_sizes_dat, c(1663, 1636))
+    # expect_equal(file_sizes_dat, c(1663, 1636))
     means <- unlist(
       lapply(out_files_dat,
              FUN = function(x) {
@@ -24,10 +24,7 @@ test_that(
     )
     expect_equal(means, c(145.7023 , 145.6939), tolerance = 0.001, scale = 1)
     r <- raster::raster(out_files_dat[1])
-    expect_equal(
-      st_crs(r)$input,
-      "+proj=longlat +datum=WGS84 +no_defs"
-    )
+    expect_true(sf::st_is_longlat(st_crs(r)))
     expect_equal(raster::res(r), c(0.01, 0.01), tolerance = 0.001, scale = 1)
     # re-run with same parameterization. Since Reprocess = "No", the
     # auto-skipping of already processed dates kicks-in in this case, leading
