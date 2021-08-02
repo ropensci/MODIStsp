@@ -282,6 +282,8 @@ MODIStsp_process <- function(proc_opts,
 
       download_server <- attr(date_dirs_all, "server")
 
+      if (download_server == "unreachable") {return(invisible(NULL))}
+        
       dates <- get_yeardates(proc_opts$download_range,
                              yy,
                              start_year, end_year,
@@ -619,5 +621,5 @@ MODIStsp_process <- function(proc_opts,
 
   }
 
-  return("DONE")
+  return(invisible(NULL))
 }

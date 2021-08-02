@@ -214,14 +214,13 @@ initializes arguments with default values. This allows making a test run.
 License: GPL 3.0
 }
 \examples{
+\donttest{
 
 #' # - Running the tool using the GUI
 # Running the tool without any option will start the GUI with the default or
 # last used settings, in interactive mode (i.e., with gui = TRUE).
-\donttest{
 if (interactive()) {
   MODIStsp()
-}
 }
 
 
@@ -238,7 +237,6 @@ if (interactive()) {
 # Users can exploit multicore functionalities skipping to set this argument.
 
 MODIStsp_get_prodlayers("M*D13A2")
-\donttest{
 MODIStsp(
   gui = FALSE,
   out_folder = "$tempdir",
@@ -253,7 +251,6 @@ MODIStsp(
   verbose = FALSE,
   parallel = FALSE
 )
-}
 
 
 #' # - Running the tool using the settings previously saved in a specific options file
@@ -266,9 +263,8 @@ MODIStsp(
 # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
 
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
-\donttest{
+
 MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE, parallel = FALSE)
-}
 
 
 # Running the tool using the settings previously saved in a specific option file
@@ -277,7 +273,6 @@ MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE, parallel = FALSE)
 
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
-\donttest{
 MODIStsp(
   gui = FALSE, 
   opts_file = opts_file,
@@ -286,7 +281,6 @@ MODIStsp(
   verbose = TRUE,
   parallel = FALSE
 )
-}
 
 
 # Running the tool using the settings previously saved in a
@@ -303,7 +297,6 @@ extent_list = list.files(
 extent_list
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 
-\donttest{
 for (single_shape in extent_list) {
   MODIStsp(
     gui = FALSE, 
@@ -312,7 +305,7 @@ for (single_shape in extent_list) {
     spafile = single_shape, 
     verbose = TRUE,
     parallel = FALSE
- )
+  )
 }
 
 # output files are placed in separate folders:
@@ -321,18 +314,22 @@ outfiles_garda <- list.files(
   full.names = TRUE
 )
 outfiles_garda
-library(raster)
-plot(raster(outfiles_garda[1] ))
+require(raster)
+if (length(outfiles_garda) > 0) {
+  plot(raster(outfiles_garda[1] ))
+}
 
 outfiles_iseo <- list.files(
   file.path(tempdir(), "MODIStsp/iseo_lake/VI_16Days_1Km_v6/NDVI"),
   full.names = TRUE
 )
 outfiles_iseo
-plot(raster(outfiles_iseo[1]))
+if (length(outfiles_garda) > 0) {
+  plot(raster(outfiles_iseo[1]))
 }
 
 # See also https://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html
+}
 }
 \seealso{
 \code{\link[=MODIStsp_GUI]{MODIStsp_GUI()}}, \code{\link[=MODIStsp_process]{MODIStsp_process()}}
