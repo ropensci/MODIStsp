@@ -34,7 +34,7 @@
 #' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
 #' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
 #'   development of this function ([ModisDownload](http://r-gis.net/?q=ModisDownload);
-#'   [Download_and_resampling_of_MODIS_images](http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images))
+#'   [Download_and_resampling_of_MODIS_images](https://en.wikipedia.org/wiki/Regression-kriging?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
 #' @export
 #' @importFrom jsonlite read_json

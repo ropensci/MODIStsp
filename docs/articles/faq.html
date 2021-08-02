@@ -37,7 +37,7 @@
 
       <div class="navbar-brand-container">
         <a href="https://ropensci.org"><img src="https://ropensci.org/img/icon_short_white.svg" id="hexlogo" alt="rOpenSci"></a>
-        <a class="navbar-brand" href="../index.html"><i>MODIStsp <small>v2.0.5</small></i></a>
+        <a class="navbar-brand" href="../index.html"><i>MODIStsp <small>v2.0.6</small></i></a>
       </div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
@@ -50,7 +50,7 @@
 </li>
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa fas fa-book"></span>
+    <span class="fas fa-book"></span>
      
     Articles
      
@@ -125,8 +125,7 @@
 
       
 
-      </header><link href="faq_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="faq_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="faq_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Frequently Asked Questions</h1>
@@ -163,7 +162,7 @@
 <h4 class="hasAnchor">
 <a href="#on-windows-modistsp-hangs-at-first-interactive-execution-while-attempting-to-install-gwisgetsrgtk2" class="anchor"></a>- On Windows, <code>MODIStsp</code> hangs at first interactive execution, while attempting to install <code>gWisgetsRGtk2</code>
 </h4>
-<p>At first interactive execution (i.e., with “gui = TRUE) of <code>MODIStsp</code>, an error window may appear, signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library”GTK+"" is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select <em>“Install GTK+”</em> and then <em>“OK”</em>. Windows will download and install the GTK+ library. When it finishes, the R Session should be restarted and next <code>MODIStsp</code> should go well ! In case RStudio does not automatically restart after installing GTK+, simply kill it form “Task Manager” and reload RStudio.</p>
+<p>At first interactive execution (i.e., with “gui = TRUE) of <code>MODIStsp</code>, an error window may appear, signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library”GTK+“” is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select <em>“Install GTK+”</em> and then <em>“OK”</em>. Windows will download and install the GTK+ library. When it finishes, the R Session should be restarted and next <code>MODIStsp</code> should go well ! In case RStudio does not automatically restart after installing GTK+, simply kill it form “Task Manager” and reload RStudio.</p>
 <p>If you still have problems, try to install the GTK+ library independently, following instructions reported here:</p>
 <p><a href="https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2" class="uri">https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2</a></p>
 <p>, starting from “Download the GTK+ all-in-one bundle. I downloaded version 2.22 for Windows 64-bit.”. Then try to install <code>gWisgetsRGtk2</code> before <code>MODIStsp</code> as explained in the point above.</p>
@@ -295,7 +294,7 @@
 <li><p><em><strong>offline</strong></em>: if you just want to process the images that you have. In that case, <code>MODIStsp</code> will not even connect to NASA servers, and just process all images that it finds in your “hdf folder” <strong><em>and which satisfy the processing parameters you specified</em></strong> (to be clear: if you have a folder with MOD13Q1 images, but the GUI is set as to process MOD09A1 data, nothing will happen. Analogously, if you have imagery from 2003 to 2009, but you set the processing period from 2010 to 2015 nothing will happen)</p></li>
 </ul>
 </li>
-<li>Set the “Output Folder for Original HDF files download” to the folder containing the hdf images, and the "Main Output Folder for Time Series storage to the folder where you want to store the results of the processing.</li>
+<li><p>Set the “Output Folder for Original HDF files download” to the folder containing the hdf images, and the “Main Output Folder for Time Series storage to the folder where you want to store the results of the processing.</p></li>
 <li><p>Start the processing.</p></li>
 </ol>
 <hr>
