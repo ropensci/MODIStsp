@@ -50,20 +50,28 @@ get_mod_dirs <- function(http,
     response <- data.frame(status_code = "")
     while (response$status_code != 200) {
       # send request to server
-      response <- try(httr::RETRY("GET",
-                              http,
-                              httr::authenticate(user, password),
-                              times = n_retries,
-                              pause_base = 0.1,
-                              pause_cap = 3,
-                              quiet = FALSE))
+      response <- try(
+        httr::RETRY("GET",
+                    http,
+                    httr::authenticate(user, password),
+                    times = n_retries,
+                    pause_base = 0.1,
+                    pause_cap = 3,
+                    quiet = FALSE),
+        silent = TRUE
+      )
 
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
 
       if (inherits(response, "try-error") || response$status_code != 200) {
-          stop("[", date(), "] Error: http server seems to be down! ",
-               "Please try again later. Aborting!", call. = FALSE)
+        message(
+          "[", date(), "] Error: http server seems to be down! ",
+          "Please try again later. Aborting!"
+        )
+        date_dirs <- character()
+        attr(date_dirs, "server") <- "unreachable"
+        return(date_dirs)
       }
     }
     # On httr success get the directory names (available dates) ----

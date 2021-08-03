@@ -53,7 +53,7 @@ reprocess already processed dates (if the user did not specify that)
 \note{
 Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
 development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
-\href{http://spatial-analyst.net/wiki/index.php?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
+\href{https://en.wikipedia.org/wiki/Regression-kriging?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
 
 License: GPL 3.0
 }

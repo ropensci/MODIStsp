@@ -27,3 +27,4 @@
 ^vignettes/products_list\.Rmd
 ^vignettes/standalone_execution\.Rmd
 ^CONDUCT\.md$
+^\.github$

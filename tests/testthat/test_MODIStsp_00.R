@@ -20,6 +20,6 @@ test_that(
     # Credentials for earthdata login for http download are wrong
     expect_error(MODIStsp(
       opts_file = system.file("testdata/test05a.json",
-                                 package = "MODIStsp"),
+                                 package = "MODIStsp"), over,
       gui = FALSE, n_retries = 2), "Username and/or password are not valid")
   })

@@ -1,3 +1,17 @@
+## MODIStsp 2.0.6
+
+## Minor changes
+- Replace `M*D17A3H` with `M*D17A3HGF` and add `M*D17A2HGF` (#237)
+- Avoid errors in case of missing internet connection
+
+## Bug fixes 
+- Patch for bbox loaded from json in case of drawn extent (#228)
+- Fix #226
+- Fix #232 
+- Fix #234
+- Fix CRAN notes
+
+
 ## MODIStsp 2.0.5
 
 ### Main changes
