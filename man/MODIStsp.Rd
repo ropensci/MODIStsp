@@ -11,6 +11,7 @@ MODIStsp(
   out_folder_mod = NULL,
   opts_file = NULL,
   selprod = NULL,
+  prod_version = NULL,
   bandsel = NULL,
   quality_bandsel = NULL,
   indexes_bandsel = NULL,
@@ -66,6 +67,15 @@ containing MODIStsp processing options saved from the GUI, Default: NULL}
 Vegetation Indexes_16Days_250m (M*D13Q1)). You can get
 a list of available product names using function \code{MODIStsp_get_prodnames},
 Default: NULL}
+
+\item{prod_version}{Version of the selected MODIS product.
+Currently versions \code{"006"} and/or \code{"061"} can be chosen.
+Default value is \code{"006"} until decommission of this version will be
+announced by USGS.
+Products with version \verb{"061} are experimental: in case users would encounter
+an error in the encoding of bands or quality flags they are encouraged
+to report it by opening a new issue on GitHub at
+\url{https://github.com/ropensci/MODIStsp/issues}.}
 
 \item{bandsel}{\verb{character array} Original MODIS layers to be processed.
 You can get a list of available layers for a given product

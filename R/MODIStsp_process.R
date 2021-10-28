@@ -48,7 +48,7 @@ MODIStsp_process <- function(proc_opts,
   # Based on sel_prod, retrieve needed variables from prod_opts file
 
   prod_opt_list <- load_prodopts()
-  prod_opts <- prod_opt_list[[proc_opts$selprod]][["6"]]
+  prod_opts <- prod_opt_list[[proc_opts$selprod]][[proc_opts$prod_version]]
 
   cust_ind      <- jsonlite::read_json(system.file("ExtData","MODIStsp_indexes.json",
                                                    package = "MODIStsp"))
@@ -56,7 +56,7 @@ MODIStsp_process <- function(proc_opts,
   if (length(cust_ind) == 1) {
     cust_ind <- NULL
   } else {
-    cust_ind  <- cust_ind[[proc_opts$selprod]][["6"]]
+    cust_ind  <- cust_ind[[proc_opts$selprod]][[proc_opts$selprod]]
   }
 
   prod_opts$indexes_bandnames <- c(prod_opts$indexes_bandnames,

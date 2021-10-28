@@ -6,8 +6,31 @@ shiny::observeEvent(input$help_product, {
   shiny::showModal(shiny::modalDialog(
     title = "MODIS Platforms",
     shiny::p(shiny::HTML(
-      "This selector allows to choose which <strong> MODIS product</strong>
+      "This selector allows choosing which <strong> MODIS product</strong>
       is to be processed.")),
+    easyClose = TRUE,
+    footer = NULL
+  ))
+})
+
+# version ----
+shiny::observeEvent(input$help_version, {
+  shiny::showModal(shiny::modalDialog(
+    title = "MODIS Product Version",
+    shiny::p(shiny::HTML(
+      "This selector allows choosing which <strong> MODIS product version</strong>
+      is to be processed.")),
+    shiny::p(shiny::HTML(
+      'Currently, default version is "006", while it will decommissioned soon by
+      USGS. Version "061" is being populated for almost all the products,
+      although archives could not be fully replaced yet.
+      As soon as verion 006 will be decommissioned, versio 061 will be taken
+      as default one.')),
+    shiny::p(shiny::HTML(
+      'Pleas notice that version 061 could not be available for all the products,
+      as well as some products could be available only with version 061.
+      For further detail, refer to the Documentation Webpace
+      (accessible with the button in the GUI).')),
     easyClose = TRUE,
     footer = NULL
   ))
@@ -18,7 +41,7 @@ shiny::observeEvent(input$help_platform, {
   shiny::showModal(shiny::modalDialog(
     title = "MODIS Platforms",
     shiny::p(shiny::HTML(
-      "This selector allows to choose if data from only one or both the <strong> MODIS platforms</strong>
+      "This selector allows choosing if data from only one or both the <strong> MODIS platforms</strong>
       (i.e., Terra and Aqua) is to be processed.")),
     shiny::p(shiny::HTML("The selector is disabled/ineffective for <strong> Combined </strong>
                          MODIS products (i.e., MCDXXXX)")),
@@ -33,7 +56,7 @@ shiny::observeEvent(input$help_layers, {
   shiny::showModal(shiny::modalDialog(
     title = "MODIS Layers",
     shiny::p(shiny::HTML(
-      "This selector allows to choose which of the <strong>original MODIS bands</strong> (SDS layers)",
+      "This selector allows choosing which of the <strong>original MODIS bands</strong> (SDS layers)",
       "are to be processed.")),
     shiny::p(shiny::HTML("A separate image will be saved for each selected layer
       and available date.")),
@@ -52,7 +75,7 @@ shiny::observeEvent(input$help_quality, {
       <strong>Quality Indicators</strong> are stored within each Quality Layer
       using a <strong>bit-field representation</strong>.")),
     shiny::p(shiny::HTML(
-      "MODIStsp can automaticvally compute <strong>Quality Indicators</strong> from the different
+      "MODIStsp can automatically compute <strong>Quality Indicators</strong> from the different
       MODIS Quality Layers by extracting the required information from the bit-field values")),
     shiny::p(shiny::HTML("A separate image will be saved for each selected Quality Indicator
       and available date.")),
@@ -260,7 +283,7 @@ shiny::observeEvent(input$help_downloader, {
   shiny::showModal(shiny::modalDialog(
     title = "Downloader",
    shiny::p(shiny::HTML(
-      "This selector allows to choose which downloader will be used",
+      "This selector allows choosing which downloader will be used",
       "to download MODIS HDF files."
     )),
    shiny::p(shiny::HTML(
