@@ -7,10 +7,13 @@
 #' @param prodname character containing the code of the desired MODIS product.
 #'  NOTE: for products available separately for Terra and Aqua (e.g., MOD13Q1/MYD13Q1),
 #'  use the code M*D_code_ (e.g., M*D13Q1)
+#' @param prodver character containing the version of the desired MODIS product.
+#'  Currently versions `"006"` (default) and `"061"` can be chosen.
 #' @return list, containing the slots: `prodname`, `bandnames`, `quality_bandnames` and
 #'  `indexes_bandnames`, `band_fullnames`, `quality_fullnames`, `indexes_fullnames`
 #'
 #' @author Lorenzo Busetto, phD (2014-2020)
+#' @author Luigi Ranghetti, phD (2021)
 #' @note License: GPL 3.0
 #' @export
 #' @examples
@@ -25,7 +28,7 @@
 #' MODIStsp_get_prodlayers("MCD43C4")$indexes_bandnames
 #'
 #'
-MODIStsp_get_prodlayers <- function(prodname) {
+MODIStsp_get_prodlayers <- function(prodname, prodver = "006") {
 
   stopifnot(inherits(prodname, "character"))
   prod_opt_list <- load_prodopts()
@@ -45,7 +48,19 @@ MODIStsp_get_prodlayers <- function(prodname) {
   }
 
   prodname <- names(selprod)
-  selprod <- selprod[[1]][["6"]]
+  selprod <- selprod[[1]][[prodver]]
+  if (length(selprod) == 0){
+    if (!prodver %in% c("006","061")) {
+      stop('Invalid product version (currently, values "006" and "061" are supported).')
+    } else {
+      stop(paste0(
+        "Version ",prodver," is not available for product ",prodname,".\n",
+        "If you think this is an error, please open a new GitHub issue at ",
+        "'https://github.com/ropensci/MODIStsp/issues' and report it."
+      ))
+    }
+  }
+  
   bandnames         <- selprod[["bandnames"]]
   band_fullnames    <- selprod[["band_fullnames"]]
   quality_bandnames <- selprod[["quality_bandnames"]]
@@ -59,7 +74,7 @@ MODIStsp_get_prodlayers <- function(prodname) {
   if (length(cust_ind) == 1) {
     cust_ind <- NULL
   } else {
-    cust_ind  <- cust_ind[[prodname]][["6"]]
+    cust_ind  <- cust_ind[[prodname]][[prodver]]
   }
 
   indexes_bandnames <- c(indexes_bandnames,

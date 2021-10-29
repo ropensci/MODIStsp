@@ -22,6 +22,14 @@
 #'   Vegetation Indexes_16Days_250m (M*D13Q1)). You can get
 #'   a list of available product names using function `MODIStsp_get_prodnames`,
 #'   Default: NULL
+#' @param prod_version Version of the selected MODIS product.
+#'   Currently versions `"006"` and/or `"061"` can be chosen.
+#'   Default value is `"006"` until decommission of this version will be 
+#'   announced by USGS.
+#'   Products with version `"061` are experimental: in case users would encounter
+#'   an error in the encoding of bands or quality flags they are encouraged
+#'   to report it by opening a new issue on GitHub at
+#'   \url{https://github.com/ropensci/MODIStsp/issues}.
 #' @param bandsel `character array` Original MODIS layers to be processed.
 #'   You can get a list of available layers for a given product
 #'   using function `MODIStsp_get_prodlayers` (e.g., MODIStsp_get_prodlayers("M*D13Q1")$bandnames),
@@ -254,6 +262,7 @@ MODIStsp <- function(...,
                      out_folder_mod  = NULL,
                      opts_file       = NULL,
                      selprod         = NULL,
+                     prod_version    = NULL,
                      bandsel         = NULL,
                      quality_bandsel = NULL,
                      indexes_bandsel = NULL,
@@ -435,7 +444,10 @@ MODIStsp <- function(...,
     # update proc_opts based on arguments passed to the function ----
 
     if(!is.null(selprod)) {proc_opts$selprod <- selprod}
-
+    
+    if(!is.null(prod_version)) {proc_opts$prod_version <- prod_version}
+    if(proc_opts$prod_version=="6") {proc_opts$prod_version <- "006"} # for retrocompatibility
+    
     if(!is.null(bandsel)) {proc_opts$bandsel <- bandsel}
 
     if(!is.null(quality_bandsel)) {proc_opts$quality_bandsel <- quality_bandsel}

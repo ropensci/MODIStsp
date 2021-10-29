@@ -1,7 +1,7 @@
 {
   "selprod": "Vegetation_Indexes_16Days_500m (M*D13A1)",
   "sensor": "Terra",
-  "prod_version": "6",
+  "prod_version": "006",
   "start_date": "2016-01-01",
   "end_date": "2016-12-31",
   "bandsel": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],

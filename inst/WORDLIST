@@ -1,7 +1,6 @@
 ATK
 Albedo
 BRDF
-Babak
 Bandnames
 CLI
 CMG
@@ -19,7 +18,6 @@ Emissivity
 Evapotranspiration
 ExtData
 FPAR
-Fhreo
 GDAL
 GLib
 GTK
@@ -45,7 +43,6 @@ NDII
 NDVI
 NIR
 NODATA
-Naimi
 Neighbour
 NoData
 Nodata
@@ -78,6 +75,7 @@ SpatialPolygons
 Tomislav
 UI
 UInt
+USGS
 WKT
 WKTs
 YYYY
@@ -131,7 +129,6 @@ gdaltranslate
 gdalwarp
 geospatial
 github
-gl
 gui
 hdf
 hdfs
@@ -144,7 +141,10 @@ json
 jsonlite
 libatk
 linux
+lorenzo
 lpdaac
+maintainer's
+maintainer’s
 memoriam
 moddirs
 modis
@@ -170,7 +170,6 @@ proc
 processings
 prodlayers
 proj
-qc
 rOpenSci
 rasterStacks
 rasterize
@@ -218,3 +217,4 @@ xts
 ymax
 ymin
 yyyy
+ρ

@@ -20,20 +20,31 @@ output$selprods <-renderUI({
                      selected = general_opts$selprod)
 })
 
+output$selvers <-renderUI({
+  req(input$selprod)
+  shiny::selectInput("selver",
+                     label = shiny::span("Version\u2000",
+                                         shiny::actionLink("help_version",
+                                                           shiny::icon("question-circle"))),
+                     choices = names(prod_opt_list[[input$selprod]]),
+                     selected = general_opts$selver)
+})
+
 shiny::observeEvent(input$prodinfo, {
   curprod   <- which(names(prod_opt_list) == isolate(input$selprod))
-  utils::browseURL(prod_opt_list[[curprod]][[1]]$www)
+  utils::browseURL(prod_opt_list[[curprod]][[input$selver]]$www)
 })
 
 
 #Update products selector based on category ----
 observe({
   req(input$selprod)
+  req(input$selver)
   rv$newindex
   curprod   <- which(names(prod_opt_list) == input$selprod)
 
-  curlayers <- prod_opt_list[[curprod]][[1]]$bandnames
-  curlabels <- prod_opt_list[[curprod]][[1]]$band_fullnames
+  curlayers <- prod_opt_list[[curprod]][[input$selver]]$bandnames
+  curlabels <- prod_opt_list[[curprod]][[input$selver]]$band_fullnames
   shiny::updateCheckboxGroupInput(session, "sel_layers",
                                   choiceNames = curlabels,
                                   choiceValues = curlayers,
@@ -41,8 +52,8 @@ observe({
 
   # shiny::isolate(general_opts$curlayers) <- ""
 
-  qalayers <- prod_opt_list[[curprod]][[1]]$quality_bandnames
-  qalabels <- prod_opt_list[[curprod]][[1]]$quality_fullnames
+  qalayers <- prod_opt_list[[curprod]][[input$selver]]$quality_bandnames
+  qalabels <- prod_opt_list[[curprod]][[input$selver]]$quality_fullnames
 
   if (is.null(qalayers)) {
     qalayers <- NA
@@ -56,8 +67,8 @@ observe({
 
   # shiny::isolate(general_opts$curqual) <- ""
 
-  indlayers <- prod_opt_list[[curprod]][[1]]$indexes_bandnames
-  indlabels <- prod_opt_list[[curprod]][[1]]$indexes_fullnames
+  indlayers <- prod_opt_list[[curprod]][[input$selver]]$indexes_bandnames
+  indlabels <- prod_opt_list[[curprod]][[input$selver]]$indexes_fullnames
   indexes_file <- system.file("ExtData",
                               "MODIStsp_indexes.json",
                               package = "MODIStsp")
@@ -71,7 +82,7 @@ observe({
     custom_indexes <- NULL
   }
 
-  custom_indexes <- custom_indexes[[curprod]][[1]]
+  custom_indexes <- custom_indexes[[curprod]][[input$selver]]
   indlayers <- c(indlayers, custom_indexes$indexes_bandnames)
   indlabels <- c(indlabels, custom_indexes$indexes_fullnames)
 
@@ -94,7 +105,7 @@ shiny::observeEvent(input$addindex, {
   # Valid names for reflectance bands
   refbands_names <- c("b1_Red", "b2_NIR", "b3_Blue", "b4_Green", "b5_SWIR",
                       "b6_SWIR", "b7_SWIR")
-  selprod <- MODIStsp_get_prodlayers(input$selprod)
+  selprod <- MODIStsp_get_prodlayers(input$selprod, input$selver)
 
   # check on bands available for a specific product
   avail_prodbands <- selprod$bandnames
@@ -128,7 +139,7 @@ shiny::observeEvent(input$save_index, {
   indexformula <- req(input$indexformula)
   refbands_names <- c("b1_Red", "b2_NIR", "b3_Blue", "b4_Green", "b5_SWIR",
                       "b6_SWIR", "b7_SWIR")
-  selprod <- MODIStsp_get_prodlayers(input$selprod)
+  selprod <- MODIStsp_get_prodlayers(input$selprod, input$selver)
 
   # check on bands available for a specific product
   avail_prodbands <- selprod$bandnames
@@ -197,7 +208,8 @@ shiny::observe({
 
 shiny::observe({
   shiny::req(input$selprod)
-  indexes <- MODIStsp_get_prodlayers(input$selprod)$indexes_bandnames
+  shiny::req(input$selver)
+  indexes <- MODIStsp_get_prodlayers(input$selprod, input$selver)$indexes_bandnames
   if (is.null(indexes)) {
     shinyjs::disable("addindex")
   } else {

@@ -56,6 +56,12 @@ ________________________________________________________________________________
 
 ## <i class="fa fa-newspaper-o" aria-hidden="true"></i> What's New 
 
+- 29/10/2021 - `{MODIStsp}` (GitHub version 2.0.6.9000) supports products with version 061.
+Version 006 will remain the default product version until its decommission
+will be announced.
+Version 061 can be specified through the argument `prod_version` of function
+`MODIStsp()` or by selecting it in the GUI.
+
 - 10/12/2020 - `{MODIStsp}` was resubmitted to CRAN after the maintainer's death.
 Now `{MODIStsp}` is dedicated to Lorenzo Busetto (https://docs.ropensci.org/MODIStsp/articles/lorenzo).
 

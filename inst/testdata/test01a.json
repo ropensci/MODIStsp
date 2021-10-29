@@ -1,7 +1,7 @@
 {
  "selprod": "Surf_Temp_8Days_GridSin (M*D11B2)",
 "sensor": "Terra",
-"prod_version": "6",
+"prod_version": "006",
 "start_date": "2017.01.01",
 "end_date": "2017.01.01",
 "bandsel": ["LST_Day_6km", "LST_Night_6km"],

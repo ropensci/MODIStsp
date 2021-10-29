@@ -9,7 +9,7 @@ shinygui_saveopts <- function(input, prod_opt_list, rv) {
   opts$selcat  <- input$selcat
   opts$selprod <- input$selprod
   # retrieve product options
-  opts$prod_version <- "6"
+  opts$prod_version <- input$prod_version
 
   opts$sensor  <- input$selplat
   opts$bandsel <- if(is.null(input$sel_layers)) {
@@ -120,7 +120,7 @@ shinygui_saveopts <- function(input, prod_opt_list, rv) {
   # # check that the selected product is available on the selected server
   # #
 
-  http <- prod_opt_list[[opts$selprod]][["6"]]$http
+  http <- prod_opt_list[[opts$selprod]][[opts$prod_version]]$http
   #
   if (opts$sensor == "Both") {
     http <- c(http["Terra"][[1]], http["Aqua"][[1]])

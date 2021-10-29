@@ -18,7 +18,7 @@ test_that(
       file.path(tempdir(), "MODIStsp/Albedo_Daily_500m_v6"),
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
     file_sizes_tif <- file.info(out_files_tif)$size
-    expect_equal(file_sizes_tif, c(8196))
+    expect_equal(file_sizes_tif, c(9062))
     means <- unlist(
       lapply(out_files_tif,
              FUN = function(x) {

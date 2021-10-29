@@ -6,7 +6,22 @@ shinydashboard::tabItem(
   shinydashboard::box(
     title = "Select MODIS Product",
     width = 12,
-    shiny::uiOutput("selcats"),
+    shiny::div(
+      style = "display:inline-block;width:100%",
+      shiny::div(
+        style = "display:inline-block;vertical-align:top;padding:1px;width:78%",
+        shiny::uiOutput("selcats")
+      ),
+      shiny::div(
+        style = "display:inline-block;vertical-align:top;padding:1px;width:18%",
+        shiny::selectInput(
+          "selplat",
+          label = shiny::span("Platform\u2000",
+                              shiny::actionLink("help_platform",
+                                                shiny::icon("question-circle"))),
+          choices = c("Terra", "Aqua", "Both"))
+      )
+    ),
     shiny::div(
       style = "display:inline-block;width:100%",
       shiny::div(
@@ -20,12 +35,7 @@ shinydashboard::tabItem(
       ),
       shiny::div(
         style = "display:inline-block;vertical-align:top;padding:1px;width:20%",
-        shiny::selectInput(
-          "selplat",
-          label = shiny::span("Platform\u2000",
-                              shiny::actionLink("help_platform",
-                                                shiny::icon("question-circle"))),
-          choices = c("Terra", "Aqua", "Both"))
+        shiny::uiOutput("selvers")
       )
     )
   ),

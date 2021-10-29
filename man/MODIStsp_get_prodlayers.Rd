@@ -4,12 +4,15 @@
 \alias{MODIStsp_get_prodlayers}
 \title{Retrieve the names of MODIS layers for a product}
 \usage{
-MODIStsp_get_prodlayers(prodname)
+MODIStsp_get_prodlayers(prodname, prodver = "006")
 }
 \arguments{
 \item{prodname}{character containing the code of the desired MODIS product.
 NOTE: for products available separately for Terra and Aqua (e.g., MOD13Q1/MYD13Q1),
 use the code M\emph{D_code_ (e.g., M}D13Q1)}
+
+\item{prodver}{character containing the version of the desired MODIS product.
+Currently versions \code{"006"} (default) and \code{"061"} can be chosen.}
 }
 \value{
 list, containing the slots: \code{prodname}, \code{bandnames}, \code{quality_bandnames} and
@@ -39,4 +42,6 @@ MODIStsp_get_prodlayers("MCD43C4")$indexes_bandnames
 }
 \author{
 Lorenzo Busetto, phD (2014-2020)
+
+Luigi Ranghetti, phD (2021)
 }

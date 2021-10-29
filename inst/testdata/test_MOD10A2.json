@@ -1,7 +1,7 @@
 {
   "selprod": "Surf_Temp_8Days_1Km (M*D11A2)",
   "sensor": "Terra",
-  "prod_version": "6",
+  "prod_version": "006",
   "start_date": "2016.06.01",
   "end_date": "2016.07.01",
   "bandsel": ["LST_Day_1km", "LST_Night_1km", "Days_Clear"],
