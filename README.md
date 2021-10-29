@@ -57,11 +57,17 @@ For more information, documentation and examples of use, **see also the
 
 ## Important News
 
-  - 10/12/2020 - `{MODIStsp}` was resubmitted to CRAN after the
+-   29/10/2021 - `{MODIStsp}` (GitHub version 2.0.6.9000) supports
+    products with version 061. Version 006 will remain the default
+    product version until its decommission will be announced. Version
+    061 can be specified through the argument `prod_version` of function
+    `MODIStsp()` or by selecting it in the GUI.
+
+-   10/12/2020 - `{MODIStsp}` was resubmitted to CRAN after the
     maintainer’s death. Now `{MODIStsp}` is dedicated to Lorenzo Busetto
     (<https://docs.ropensci.org/MODIStsp/articles/lorenzo>).
 
-  - 01/09/2020 - `{MODIStsp}` 2.0.0 is out. Provides a new GUI interface
+-   01/09/2020 - `{MODIStsp}` 2.0.0 is out. Provides a new GUI interface
     based on Shiny, getting rid of the archived dependencies on
     gWidgets/gWidgetsRGtk2. Also provides much easier usage from the
     CLI, by allowing to set all processing arguments also from the CLI.
@@ -70,81 +76,80 @@ For more information, documentation and examples of use, **see also the
     processing scripts using `{MODIStsp}` may need to be slightly
     adapted.
 
-  - 09/05/2020 - `{MODIStsp}` 1.4.0 is out. Switches to use of
+-   09/05/2020 - `{MODIStsp}` 1.4.0 is out. Switches to use of
     GDAL3/PROJ6 WKTs for projection representation and usage of `{sf}`
     for all internal work on vector data. Adds support for products
     MCD19A1 and MCD19A2 products.
 
-  - 07/06/2019 - `{MODIStsp}` 1.3.9 is out. Fixes a bug causing crashes
+-   07/06/2019 - `{MODIStsp}` 1.3.9 is out. Fixes a bug causing crashes
     on MOD14A1 product, adds support for product MCD12Q2 and removes
     support for no longer available version 5 of some products.
 
-  - 05/03/2019 - `{MODIStsp}` 1.3.8 is out. Fixes an issue causing
-    incorrect application of scale/offset values on GDAL versions \> 2.3
+-   05/03/2019 - `{MODIStsp}` 1.3.8 is out. Fixes an issue causing
+    incorrect application of scale/offset values on GDAL versions > 2.3
     (<https://github.com/ropensci/MODIStsp/issues/163>) and adds support
     for products MOD21A1D.006, MOD21A1N.006 and MOD21A2.006.
 
-  - 29/11/2018 - We recently discovered a nasty bug in the computation
+-   29/11/2018 - We recently discovered a nasty bug in the computation
     of some custom spectral indices (those including additions /
-    subtractions on reflectance values, such as in (b1\_NIR+0.1) /
-    b2\_Red. See
+    subtractions on reflectance values, such as in (b1_NIR+0.1) /
+    b2_Red. See
     [here](https://docs.ropensci.org/MODIStsp/articles/discovered_bug.html)
     for further details. The bug is fixed as of version 1.3.7.
 
-  - 07/08/2018 - We are glad to report that `{MODIStsp}` is now included
+-   07/08/2018 - We are glad to report that `{MODIStsp}` is now included
     in the [rOpenSci](https://ropensci.org/about/) packages ecosystem.
     We thank reviewers Leah Wasser and Jeffrey Hanson for their valuable
     reviews, which helped us to further improve the package.
 
-  - 10/07/2018 - `{MODIStsp}` v. 1.3.6 is out (check out the [Release
+-   10/07/2018 - `{MODIStsp}` v. 1.3.6 is out (check out the [Release
     Notes](https://github.com/ropensci/MODIStsp/releases/tag/1.3.6) for
     further details).
 
-  - 20/06/2018 - `{MODIStsp}` v. 1.3.5 is out (check out the [Release
+-   20/06/2018 - `{MODIStsp}` v. 1.3.5 is out (check out the [Release
     Notes](https://github.com/ropensci/MODIStsp/releases/tag/v1.3.5) for
     further details).
 
-  - 11/04/2018 - Due to new NASA Policies the MODIS FTP servers were
+-   11/04/2018 - Due to new NASA Policies the MODIS FTP servers were
     shut down starting, April 2, 2018. **FTP download is therefore no
     longer working** and will be removed in the next MODIStsp version.
 
-  - 11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data
+-   11/04/2018 - [**Decommissioning of MODIS Version 5 Land Data
     Products**](https://lpdaac.usgs.gov/news/decommissioning-modis-version-51-land-cover-type-data-products-january-7-2019/).
     As per NASA notice above, MODIS v005 products are going to be
     decommissioned, and will soon be no longer available for download.
     Support for those products will be removed in the next MODIStsp
     version.
 
-  - 11/08/2017 - `{MODIStsp}` 1.3.3 was released today. It provides
+-   11/08/2017 - `{MODIStsp}` 1.3.3 was released today. It provides
     improvements in processing speed, as well as the usual bug fixes
     (thanks to all the users that signaled problems). Check the [Release
     Notes](https://github.com/ropensci/MODIStsp/releases/tag/v1.3.3) for
     further details.
 
-  - 25/07/2017 - As of today, **most of the content related to
+-   25/07/2017 - As of today, **most of the content related to
     `{MODIStsp}` has been moved to our new website at
     [docs.ropensci.org/MODIStsp](https://docs.ropensci.org/MODIStsp/)
     **, which provides a much better user interface and ease of access
     to MODIStsp-related information. From now on, please **consult the
     new website for detailed and updated information on the package**.
 
-  - Also our previous FAQ page on GitHub containing info for solving
+-   Also our previous FAQ page on GitHub containing info for solving
     common installation, downloading and processing problems and issues
     was discontinued and **migrated at
     [docs.ropensci.org/MODIStsp/articles/faq.html](https://docs.ropensci.org/MODIStsp/articles/faq.html)**.
 
 ## Problems and Issues
 
-  - Please **report any issues** you may encounter in our [issues page
+-   Please **report any issues** you may encounter in our [issues page
     on github
     <i class="fa fa-github-square" aria-hidden="true"></i>](https://github.com/ropensci/MODIStsp/issues).
 
 ## <i class="fa fa-desktop" aria-hidden="true"></i> System Requirements
 
-`{MODIStsp}` requires [`R`](https://cran.r-project.org) v \>=
-3.6.3.
+`{MODIStsp}` requires [`R`](https://cran.r-project.org) v \>= 3.6.3.
 
------
+------------------------------------------------------------------------
 
 # Installation Instructions
 
@@ -271,7 +276,6 @@ for more detailed instructions and examples.
 
 Please note that this project is released with a [Contributor Code of
 Conduct](https://github.com/ropensci/MODIStsp/blob/master/CONDUCT.md).
-By participating in this project you agree to abide by its
-terms.
+By participating in this project you agree to abide by its terms.
 
-[![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+[![ropensci_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
