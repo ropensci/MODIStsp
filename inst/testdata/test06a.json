@@ -1,9 +1,9 @@
 {
  "selprod": "LAI_8Days_500m (MCD15A2H)",
 "sensor": "Combined",
-"prod_version": "6",
-"start_date": "2016.07.16",
-"end_date": "2016.07.31",
+"prod_version": "061",
+"start_date": "2020.07.16",
+"end_date": "2020.07.31",
 "bandsel": "Lai",
 "indexes_bandsel": null,
 "quality_bandsel": null,

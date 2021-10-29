@@ -17,9 +17,11 @@ test_that(
                                  package = "MODIStsp"),
       gui = FALSE), "Unable to read the provided options")
 
-    # Credentials for earthdata login for http download are wrong
-    expect_error(MODIStsp(
-      opts_file = system.file("testdata/test05a.json",
-                                 package = "MODIStsp"), over,
-      gui = FALSE, n_retries = 2), "Username and/or password are not valid")
+    # # Credentials for earthdata login for http download are wrong
+    # # TEST DEACTIVATED because, in some cases, downloading HDFs is possible
+    # # even without autentication
+    # expect_error(MODIStsp(
+    #   opts_file = system.file("testdata/test05a.json",
+    #                              package = "MODIStsp"), over,
+    #   gui = FALSE, n_retries = 2), "Username and/or password are not valid")
   })

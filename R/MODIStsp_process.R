@@ -303,7 +303,6 @@ MODIStsp_process <- function(proc_opts,
 
       # First, find the folders in lpdaac corresponding to the required dates
       date_dirs <- get_mod_dates(dates = dates, date_dirs =  date_dirs_all)
-
       if (length(date_dirs) > 0 | download_server == "offline") {
         modislist <- NULL
         # Start Cycling on directories containing images to be downloaded and

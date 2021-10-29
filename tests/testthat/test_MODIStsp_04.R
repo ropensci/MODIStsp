@@ -19,15 +19,15 @@ test_that("Tests on MODIStsp", {
 
   MODIStsp(test = 4)
   out_files_dat <- list.files(
-    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v61"),
     pattern = "[0-9]\\.dat$", recursive = TRUE, full.names = TRUE)
   out_files_hdr <- list.files(
-    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v61"),
     pattern = "[0-9]\\.hdr$", recursive = TRUE, full.names = TRUE)
   file_sizes_dat <- file.info(out_files_dat)$size
   # # checking only the .dat because depending on file system the
   # # ENVI hdr files may have slightly different file sizes !
-  expect_equal(file_sizes_dat, c(91872, 91872, 91872, 91872),
+  expect_equal(file_sizes_dat, c(120196, 120196, 120196, 120196),
                tolerance = 0.001, scale = 1)
   means <- unlist(
     lapply(out_files_dat,
@@ -35,7 +35,7 @@ test_that("Tests on MODIStsp", {
              mean(raster::getValues(raster::raster(x)), na.rm = T)
            })
   )
-  expect_equal(means, c(68.31894, 65.17218, 70.06092, 67.14750),
+  expect_equal(means, c(72.16937, 60.61675, 73.50130, 62.84780),
                tolerance = 0.1, scale = 1)
   # check that all nodata_in values were coerced to nodata_out
   na_values <- lapply(
@@ -48,7 +48,7 @@ test_that("Tests on MODIStsp", {
   expect_equal(unlist(lapply(na_values,names)), character(0))
 
   out_files_rts <- list.files(
-    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v61"),
     pattern = "\\.RData$", recursive = TRUE, full.names = TRUE)
 
   #check that rts files are properly created
@@ -57,10 +57,10 @@ test_that("Tests on MODIStsp", {
   # loading an rdata utput yields a RasterStack
   r <- get(load(out_files_rts[1]))
   expect_is(r, "RasterStack")
-  expect_equal(names(r)[1], "MYD10CM_SN_COV_MNT_2015_213")
+  expect_equal(names(r)[1], "MYD10CM_SN_COV_MNT_2019_213")
 
   # check correct resampling and reprojection
-  expect_equal(raster::res(r), c(1553.030, 1551.724),
+  expect_equal(raster::res(r), c(1357.616, 1356.784),
                tolerance = 0.01, scale = 1)
   # expect_true(grepl(
   #   "+proj=stere +lat_0=90 +lat_ts=71 +lon_0=0",
@@ -77,7 +77,7 @@ test_that("Tests on MODIStsp", {
   out_files_rts <- list.files(
     file.path(
       tempdir(),
-      "MODIStsp/Snow_cov_mnt_005dg_v6/Time_Series/RData/Aqua/SN_COV_MNT"),
+      "MODIStsp/Snow_cov_mnt_005dg_v61/Time_Series/RData/Aqua/SN_COV_MNT"),
     pattern = "\\.RData$", recursive = TRUE, full.names = TRUE)
 
   #check that rts files are properly created
@@ -85,10 +85,10 @@ test_that("Tests on MODIStsp", {
   unlink(out_files_rts)
 
   out_files_dat <- list.files(
-    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v61"),
     pattern = "[0-9]\\.dat$", recursive = TRUE, full.names = TRUE)
   out_files_hdr <- list.files(
-    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v61"),
     pattern = "[0-9]\\.hdr$", recursive = TRUE, full.names = TRUE)
   unlink(out_files_hdr)
   unlink(out_files_dat)
@@ -99,7 +99,7 @@ test_that("Tests on MODIStsp", {
   out_files_tif <- list.files(
     file.path(
       tempdir(),
-      "MODIStsp/Snow_cov_mnt_005dg_v6/SN_COV_MNT/"),
+      "MODIStsp/Snow_cov_mnt_005dg_v61/SN_COV_MNT/"),
     pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
   r <- sf::gdal_utils("info", out_files_tif[1], quiet = TRUE)
   expect_equal(substring(strsplit(r, "NoData Value=")[[1]][2], 1, 3),
@@ -107,7 +107,7 @@ test_that("Tests on MODIStsp", {
   unlink(out_files_tif)
 
   out_files_rts <- list.files(
-    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v6"),
+    file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v61"),
     pattern = "\\.RData$", recursive = TRUE, full.names = TRUE)
   unlink(out_files_rts)
 })

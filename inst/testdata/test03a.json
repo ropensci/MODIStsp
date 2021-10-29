@@ -1,9 +1,9 @@
 {
  "selprod": "Surf_Ref_8Days_500m (M*D09A1)",
 "sensor": "Terra",
-"prod_version": "6",
-"start_date": "2017.07.10",
-"end_date": "2017.07.15",
+"prod_version": "061",
+"start_date": "2020.07.10",
+"end_date": "2020.07.15",
 "bandsel": ["sur_refl_doy"],
 "indexes_bandsel": ["NDVI", "SAVI", "GRVI", "GVMI"],
 "quality_bandsel": ["QA_bits"],
