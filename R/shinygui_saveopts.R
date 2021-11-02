@@ -9,7 +9,7 @@ shinygui_saveopts <- function(input, prod_opt_list, rv) {
   opts$selcat  <- input$selcat
   opts$selprod <- input$selprod
   # retrieve product options
-  opts$prod_version <- input$prod_version
+  opts$prod_version <- input$selver
 
   opts$sensor  <- input$selplat
   opts$bandsel <- if(is.null(input$sel_layers)) {
