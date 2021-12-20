@@ -1,5 +1,5 @@
-pandoc: 2.14.0.2
-pkgdown: 1.6.1
+pandoc: 2.11.4
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
   MODIStsp: MODIStsp.html
@@ -13,8 +13,8 @@ articles:
   output: output.html
   products_list: products_list.html
   standalone_execution: standalone_execution.html
-last_built: 2021-08-02T19:17Z
+last_built: 2021-12-20T06:33Z
 urls:
-  reference: http://docs.ropensci.org/MODIStsp/reference
-  article: http://docs.ropensci.org/MODIStsp/articles
+  reference: https://docs.ropensci.org/MODIStsp/reference
+  article: https://docs.ropensci.org/MODIStsp/articles
 
