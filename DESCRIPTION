@@ -81,6 +81,7 @@ Suggests:
     spelling,
     testthat, 
     tibble,
+    tibbletime,
     tidyr,
     xtable
 SystemRequirements: 

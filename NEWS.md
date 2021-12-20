@@ -1,4 +1,4 @@
-## MODIStsp 2.0.6
+# MODIStsp 2.0.6
 
 ## Minor changes
 - Replace `M*D17A3H` with `M*D17A3HGF` and add `M*D17A2HGF` (#237)
@@ -12,9 +12,9 @@
 - Fix CRAN notes
 
 
-## MODIStsp 2.0.5
+# MODIStsp 2.0.5
 
-### Main changes
+## Main changes
 
 - Edit documentation related to the change of maintainer
     (see https://docs.ropensci.org/MODIStsp/articles/lorenzo).
@@ -22,16 +22,16 @@
 - Add the argument `parallel` to function `MODIStsp()` and `MODSIStsp_process()`
     to allow running the processing in single core modality.
     
-### Minor changes
+## Minor changes
 
 - Fix Travis tests
 
 - Bug fix (#222)
 
 
-## MODIStsp 2.0.3
+# MODIStsp 2.0.3
 
-### Main changes
+## Main changes
 
 - This submission should fix errors on Debian CRAN builds, due to improper 
 trigger of an internal function leading to writing in the user's 
@@ -48,9 +48,9 @@ lib folder.
 - Modifies slightly the Shiny GUI
 
 
-## MODIStsp 2.0.0
+# MODIStsp 2.0.0
 
-### Main changes
+## Main changes
 
 - Replace the old gWidgets-based GUI with a new one based on Shiny;
 
@@ -65,9 +65,9 @@ Now, all NoData values are kept to original values if NoData change is set
 to FALSE. Also, Scale/Offset are no longer wrongly applied also to NoData values when scaleval = TRUE;
 
 
-## MODIStsp 1.4.0
+# MODIStsp 1.4.0
 
-### Main changes
+## Main changes
 
 - switch to use of GDAL3/PROJ6 WKTs for projection representation, using sf::gdal_utils to perform gdalwarp/gdaltranslate instead of gdalUtils on external GDAL.
 
@@ -77,9 +77,9 @@ to FALSE. Also, Scale/Offset are no longer wrongly applied also to NoData values
 
 - Adds support for products MCD19A1 and MCD19A2 products
 
-## MODIStsp 1.3.9
+# MODIStsp 1.3.9
 
-### Main changes
+## Main changes
 
 - Fixes a bug causing crashes on MOD14A1 product
 
@@ -87,29 +87,29 @@ to FALSE. Also, Scale/Offset are no longer wrongly applied also to NoData values
 
 - Updates web links to MODIS products description pages
 
-## MODIStsp 1.3.8
+# MODIStsp 1.3.8
 
-### Main changes
+## Main changes
 
 - Fixed an issue causing incorrect application of scale/offset values on GDAL 
 versions > 2.3 (introduced by change of behaviour of gdal_buildvrt - https://trac.osgeo.org/gdal/ticket/3221#comment:5) - see https://github.com/ropensci/MODIStsp/issues/163
 
 - Added support for the following products: MOD21A1D.006 MOD21A1N.006 MOD21A2.006/
 
-#### Bug fixing
+## Bug fixing
 
 - Fixed an issue preventing correct processing of some products in offline mode (
 https://github.com/ropensci/MODIStsp/issues/142)
 
 
-## MODIStsp 1.3.7
+# MODIStsp 1.3.7
 
-### Main changes
+## Main changes
 
 - Fixed a bug leading to incorrect computation of custom spectral indices containing "additive"
 parameters (e.g., (NIR+0.1)/(Red-0.2)) when scale_val == FALSE
 
-#### Bug fixing
+## Bug fixing
 
 - Fixed a bug leading to not properly reassigning NoData values when processing 
   full tiles and using change_nodata = TRUE
@@ -122,39 +122,39 @@ to not render
 
 - Updated MOD44B specifications to allow download of v006 version
 
-## MODIStsp 1.3.6
+# MODIStsp 1.3.6
 
-### Main changes
+## Main changes
 
 Maintenance release to solve CRAN build errors on debian, due to the test_resetindexes
 test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
 function was modified to require explicit permission by the user to write on 
 the MODIStsp_previous.json file
 
-#### Bug fixing
+## Bug fixing
 
 - Fixed a bug leading to errors if only "Aqua" platform was selected for download [#133](https://github.com/ropensci/MODIStsp/issues/133)
 
-## MODIStsp 1.3.5
+# MODIStsp 1.3.5
 
-### Main changes
+## Main changes
 
 Maintenance release to solve CRAN build errors on debian, due to the test_addindex
 test. The test is now skipped on CRAN. Additionally, the MODIStsp_addindex 
 function was modified to require explicit permission by the user to write on 
 the MODIStsp_previous.json file
 
-#### Bug fixing
+## Bug fixing
 
 - Fixed bug leading to errors in processing extent when switching products with different Native projection (4008 vs sinusoidal), the projection string was not properly updated. [77f5693e9](https://github.com/ropensci/MODIStsp/commit/77f5693e9e1e180f05efaa04fa031567e782ba89)
 
 - Fixed warnings on check for uniqueness in http addresses
 
-## MODIStsp 1.3.4
+# MODIStsp 1.3.4
 
-### Main changes
+## Main changes
 
-#### Breaking changes
+### Breaking changes
 
 - Due to improvements and changes in the GUI (see below), `MODIStsp` .json options 
   files saved with older versions are no longer supported. Users will be informed of 
@@ -162,7 +162,7 @@ the MODIStsp_previous.json file
   
 - **Removed support for FTP download** due to switch-off of NASA servers.
 
-#### Updates in supported products
+### Updates in supported products
 
 - **Removed all v005 and earlier products**, due to discontinuation of their 
 distribution by NASA servers
@@ -172,7 +172,7 @@ distribution by NASA servers
   MCD64A1; MCD12C1; MCD18A1; MCD18A2; MCD12Q1; MOD44B; MOD44W; MCD12C1; MCD12Q1;
   MOD12A2; MOD12A3
 
-#### Improvements in download functions
+### Improvements in download functions
 
 - **Improvements in GUI**. It is now possible to set the processing extent interactively
   using the "Select on Map" button. This opens a browser window allowing to select
@@ -182,14 +182,14 @@ distribution by NASA servers
   retrieve available files and while downloading hdf file (when use_aria == FALSE), 
   thus removing dependency to RCurl. 
   
-#### Improvements in processing functions
+### Improvements in processing functions
 
  - **Improved functionality for dealing with NoData** for products with multiple 
    fill-values. If "Change NoData" is set to "Yes", then in case a layer 
    has multiple Nodata values all those values are set to NA in the output 
    (see github.com/ropensci/MODIStsp#113)
 
-#### Extensive code refactoring for submission to ropensci. 
+### Extensive code refactoring for submission to ropensci. 
 
 - Long functions were simplified/split into smaller functions to allow for 
   easier maintenance
@@ -198,24 +198,24 @@ distribution by NASA servers
 - Switch to jsonlite/xml2 to abide to ropensci standards
 - Removal of some less-used dependencies (e.g., hash)
 
-#### Improvements in documentation and website
+### Improvements in documentation and website
 
 - More detailed documentation for the main functions
 - Improvements in pkgdown articles to include some "worked examples" (e.g., 
   MODIStsp_Extract)
 - New article in pkgdown showing a list of supported products
 
-#### Improvements in test coverage
+### Improvements in test coverage
 
 - Several new tests added, bringing coverage above 90%
 
-#### New functions
+### New functions
 
 - Added `MODIStsp_resetindexes` to remove all custom indexes from a MODIStsp 
   json options file and `MODIStsp_reset_options` to reset MODIStsp options to 
   default.
   
-#### Bug fixing
+### Bug fixing
 
 - Fixed bug affecting extent selection when working with non-tiled (MCD) products
 https://github.com/ropensci/MODIStsp/issues/122
@@ -225,12 +225,12 @@ https://github.com/ropensci/MODIStsp/issues/122
 ________________________________________________________________________________
 
   
-## MODIStsp 1.3.3.1 Release Notes
+# MODIStsp 1.3.3.1 Release Notes
 
 This was mostly a maintenance release - fixing a bug in 1.3.3 submission related
 to a missing import in NAMESPACE
 
-### Minor Changes
+## Minor Changes
 
 Improved organization of Virtual Raster files and RData files in the "Time_Series"
 output subfolder. Now virtual files and RData files are organized by sensor and 
@@ -238,11 +238,11 @@ layer to facilitate access.
 
 ____________________________________________________________________________________
 
-## MODIStsp 1.3.3 Release Notes
+# MODIStsp 1.3.3 Release Notes
 
 v1.3.3 was released on 10/08/2017
 
-### Major Changes
+## Major Changes
 
 -  Improved speed in computation of spectral indexes, quality indicators and in 
    computation of scaled variables by using `raster::calc()` and `raster::overlay`
@@ -256,12 +256,12 @@ v1.3.3 was released on 10/08/2017
    `MODIStsp(test = X)` (with X in (0,6)) runs the processing using default processing
    parameters  (commit [0c00fc6](https://github.com/ropensci/MODIStsp/commit/0c00fc6bf07aed046b2b198e0278ab3264e5298a) and others)
 
-### Minor Changes
+## Minor Changes
 
 -  Suppression of verbose messages and (useless) warning messages while parsing the NASA
 servers and downloading data using "ftp" ( [3775d60](https://github.com/ropensci/MODIStsp/commit/3775d6099bc359925d3dcbd96c2ffe8455502648));
 
-### Bug fixing
+## Bug fixing
 
 -   Fixed a bug preventing the "last" choice (or that present in the json file) from 
     correctly showing in the GUI upon launch/restore of a saved json file (commit
@@ -292,7 +292,7 @@ servers and downloading data using "ftp" ( [3775d60](https://github.com/ropensci
 
 ____________________________________________________________________________________
 
-### 17/04/2017 - MODIStsp is now on CRAN !
+## 17/04/2017 - MODIStsp is now on CRAN !
 
 MODIStsp was recently accepted on CRAN. From now on, you can install it simply using
 
@@ -305,16 +305,16 @@ containing the last improvements and bug fixing using:
 
 ____________________________________________________________________________________
 
-## MODIStsp 1.3.2 Release Notes
+# MODIStsp 1.3.2 Release Notes
 
 v1.3.2 was released on 22/03/2017
 
-### Major Changes:
+## Major Changes:
 
 - Added functionality to apply scale and offset coefficients on MODIS original values
   according with the specifications of single MODIS products.
 
-#### Details:
+### Details:
 
 - MODIS hdf datasets are always stored as integer values, with scales factor and/or
   offsets to apply in order to convert to the indicated measure units reported in
@@ -330,7 +330,7 @@ v1.3.2 was released on 22/03/2017
       values in the output raster will be in °K), and  spectral indices are floating
       point values (for example, NDVI is between -1 and 1, etc.).
 
-### Minor Changes:
+## Minor Changes:
 
 - Some product names and output layer names were modified to reduce the length of
   output file names, homogenize the names of the outputs and correct some errors.
@@ -350,7 +350,7 @@ __For compatibility with already created output files__ (versions up to 1.3.1),
 - Timeouts of httr/ftp requests were increased to prevent problems on download on
   slow connections
 
-### Bug fixing:
+## Bug fixing:
 
 - Fixed bug on FTP download speed (Issue [#65](https://github.com/ropensci/MODIStsp/issues/65)) 
 - Fixed bug on download of tile 0, preventing download of images with DOY 001 and
@@ -359,11 +359,11 @@ __For compatibility with already created output files__ (versions up to 1.3.1),
 
 ____________________________________________________________________________________
 
-## MODIStsp 1.3.1 Release Notes
+# MODIStsp 1.3.1 Release Notes
 
 v1.3.1 was released on 13/02/2017
 
-### Major Changes
+## Major Changes
 
 - Added functionality for processing of Snow Cover datasets: MOD10A1, MOD10A2, 
   MOD10C1, MOD10C2, MOD10CM (Issue
@@ -379,7 +379,7 @@ v1.3.1 was released on 13/02/2017
 - Added functionality for accelerating download using aria2c (Issue 
   [#55](https://github.com/ropensci/MODIStsp/issues/55)) on devel
 
-### Bug fixing
+## Bug fixing
 
 - Fixed bug on download with aria, throwing an error on partial download on http
   download with aria ([6fbc875](https://github.com/ropensci/MODIStsp/commit/6fbc87547b6214b500afc0291c02166c0b855c78))
@@ -401,11 +401,11 @@ v1.3.1 was released on 13/02/2017
 
 ____________________________________________________________________________________
 
-## MODIStsp 1.3.0  Release Notes
+# MODIStsp 1.3.0  Release Notes
 
 v1.3.0 was released on 11/05/2016
 
-### Major Changes
+## Major Changes
 
 - Added functionality for downloading and preprocessing MODIS collection 006 datasets.
   For products with both 005 and 006 collections, the user can select the version
@@ -425,7 +425,7 @@ v1.3.0 was released on 11/05/2016
 - Improved the GUI interface for specifying additional Spectral Indexes. Hints are 
   now showed to the user, and multiple indexes can be added in the same session.
 
-### Minor Changes
+## Minor Changes
 
 - General improvements in the GUI interface. Products are now grouped by categories,
   to allow easier identification and selection.
@@ -446,11 +446,11 @@ v1.3.0 was released on 11/05/2016
 
 ____________________________________________________________________________________
 
-## MODIStsp 1.2.1 Release Notes
+# MODIStsp 1.2.1 Release Notes
 
 v1.2.1 was released on 11/05/2016
  
-### Major Changes
+## Major Changes
 
 1. Modified format of "R" output time series from _rts_ objects to _RasterStack_ 
    objects with temporal information added in the "z" attribute via setZ()
@@ -474,7 +474,7 @@ v1.2.1 was released on 11/05/2016
    bilinear, cubic, etc.) to avoid incorrect resampling on categorical variables
    and "contamination" of good pixels data. 
 
-### Minor Changes
+## Minor Changes
 
 * Changed the input method for starting and ending dates selection in the GUI.
   Now a text field is used 
@@ -495,18 +495,18 @@ v1.2.1 was released on 11/05/2016
   "warning" to allow easy disabling MODIStsp verbose messages
 * Using "R" tempfile/tempdir to save vrt files
 
-### Bug Fixes
+## Bug Fixes
 
 * Corrected a bug that threw an error in case incorrect bounding box specified
 
 ________________________________________________________________________________
 
 
-## MODIStsp 1.2.0 Release Notes
+# MODIStsp 1.2.0 Release Notes
 
 v1.2.0 was released on 29/07/2015
 
-### Major changes
+## Major changes
 
 First stable release of advanced implementation of MODIStsp !
 We know it should be 1.0.0, but that's it !
