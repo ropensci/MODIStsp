@@ -184,4 +184,4 @@ A BibTeX entry for LaTeX users is:
         url     = {https://github.com/ropensci/MODIStsp},
       }
 
-[![ropensci_footer](http://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+
