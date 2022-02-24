@@ -7,6 +7,18 @@ assignees: ''
 
 ---
 
+--- NEWS ---
+Unfortunately the owner can no longer provide assistance for this package.
+If you need to ask for help or make a question about {MODIStsp} functionalities,
+refer to the package documentation first, 
+and check if the topic was already addressed within closed issues.
+Then, address remaining doubts to public forums like StackOverflow,
+where other users could eventually provide useful ticks.
+Any opened issues will be automatically closed, as well as reopened old issues 
+will be ignored.
+The following template instructions are kept for backwards compatibility.
+---
+
 <!--
 
 IMPORTANT NOTE: the following template must not be deleted, but read and filled with the required information. Issues written without following the template will be marked as "malformed" and ignored.
