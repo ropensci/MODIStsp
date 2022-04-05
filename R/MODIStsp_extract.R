@@ -156,10 +156,10 @@ MODIStsp_extract <- function(in_rts, sf_object,
   .SD <- NULL # Workaround to avoid note on package check
 
 
-  if (!class(in_rts) %in% c("RasterStack", "RasterBrick")) {
+  if (!inherits(in_rts, c("RasterStack", "RasterBrick"))) {
     stop("Input is not a RasterStack or RasterBrick object")
   }
-  if (!class(raster::getZ(in_rts)) == "Date") {
+  if (!inherits(raster::getZ(in_rts), "Date")) {
     stop("Input does not contain valid dates in its 'Z' attribute !")
   }
   if (length(start_date) == 0) {
@@ -172,15 +172,15 @@ MODIStsp_extract <- function(in_rts, sf_object,
     if (verbose)
       message("Ending date not provided - Using the last date in the stack") #nocov #nolint
   }
-  if (!class(start_date) %in% c("Date", "POSIXct", "POSIXlt")) {
+  if (!inherits(start_date, c("Date", "POSIXct", "POSIXlt"))) {
     start_date <- try(as.Date(start_date), silent = TRUE)
-    if (class(start_date) == "try-error") {
+    if (inherits(start_date, "try-error")) {
       stop("start_date is not a Date object or string coercible to date")
     }
   }
-  if (!class(end_date) %in% c("Date", "POSIXct", "POSIXlt")) {
+  if (!inherits(end_date, c("Date", "POSIXct", "POSIXlt"))) {
     end_date <- try(as.Date(end_date), silent = TRUE)
-    if (class(end_date) == "try-error") {
+    if (inherits(end_date, "try-error")) {
       stop("end_date is not a Date object or string coercible to date")
     }
   }
