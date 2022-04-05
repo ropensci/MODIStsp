@@ -1,4 +1,4 @@
-context("Check proper functioning of MODIStsp_addindex")
+message("Check proper functioning of MODIStsp_addindex")
 
 test_that("MODIStsp_addindex works as expected", {
   # skip on cran, because the test needs to write on file system.

@@ -1,4 +1,4 @@
-context("MODIStsp_resetindexes")
+message("MODIStsp_resetindexes")
 
 
 test_that("MODIStsp_resetindexes works as expected", {

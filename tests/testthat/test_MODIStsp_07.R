@@ -1,7 +1,7 @@
 ### Test 7: Test proper working when passing a spatial file to set the      ####
 ### extent
 
-context("MODIStsp Test 7: Passing the extent with a spatial file")
+message("MODIStsp Test 7: Passing the extent with a spatial file")
 test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
@@ -30,7 +30,7 @@ test_that(
     unlink(outpath)
 
     MODIStsp(test = "07b")
-    context("MODIStsp Test 7: Reassign multiple nodata on tiled processing and
+    message("MODIStsp Test 7: Reassign multiple nodata on tiled processing and
             Full Tiles")
     out_files_tif <- list.files(
       file.path(

@@ -1,5 +1,5 @@
 test_that("get_yeardates works as expected", {
-  context("get_yeardates works as expected when download_range == \"Full\"")
+  message("get_yeardates works as expected when download_range == \"Full\"")
   # download range == "full"
 
   # year within start and end year: all year processed
@@ -40,7 +40,7 @@ test_that("get_yeardates works as expected", {
 })
 
 test_that("get_yeardates works as expected", {
-  context("get_yeardates works as expected when download_range == \"Seasonal\"")
+  message("get_yeardates works as expected when download_range == \"Seasonal\"")
 
   # If the period spans nye:
 

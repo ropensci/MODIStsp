@@ -1,4 +1,4 @@
-context("MODIStsp_extract works as expected")
+message("MODIStsp_extract works as expected")
 
 test_that("MODIStsp_extract works as expected", {
 

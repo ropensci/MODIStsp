@@ -7,7 +7,7 @@
 #   `R CMD check` and must be run manually or using `devtools::test()`
 
 
-context("MODIStsp Test 5: HTTP download from USGS, resize and reproject")
+message("MODIStsp Test 5: HTTP download from USGS, resize and reproject")
 test_that(
   "Tests on MODIStsp", {
     skip_on_cran()

@@ -1,4 +1,4 @@
-context("Check proper functioning of MODIStsp_readxml")
+message("Check proper functioning of MODIStsp_readxml")
 
 
 test_that("MODIStsp_readxml works as expected", {

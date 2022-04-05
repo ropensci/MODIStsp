@@ -6,7 +6,7 @@
 #   mode), and processing options for time series creation are applied.
 #   Output files are in GeoTiff compressed format, with vrt and ENVI
 #   virtual time series.
-context("MODIStsp Test 3: Computation of spectral indices and
+message("MODIStsp Test 3: Computation of spectral indices and
             creation of time series")
 test_that(
   "Tests on MODIStsp", {
@@ -52,7 +52,7 @@ test_that(
     unlink(out_files_tif)
 
     # same execution with ENVI output and no scaling on indexes
-    context("MODIStsp Test 3: Save in ENVI format")
+    message("MODIStsp Test 3: Save in ENVI format")
     MODIStsp(test = "03a")
     out_files_dat <- list.files(
       file.path(tempdir(), "MODIStsp/Surf_Ref_8Days_500m_v61"),
@@ -66,7 +66,7 @@ test_that(
 
     # Average index value is the same whether it is comnputed from scaled ####
     # or noscaled  reflectances also when additive factors are present
-    context("MODIStsp Test 3: Indexes with additive components are properly
+    message("MODIStsp Test 3: Indexes with additive components are properly
             computed")
     expect_equal((mean_noscaled / 10000), mean_scaled, tolerance = 1e-5)
 

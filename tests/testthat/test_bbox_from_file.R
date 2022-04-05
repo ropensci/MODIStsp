@@ -1,4 +1,4 @@
-context("Check proper functioning of bbox_from_file")
+message("Check proper functioning of bbox_from_file")
 
 
 test_that("bbox_from_file works as expected", {
