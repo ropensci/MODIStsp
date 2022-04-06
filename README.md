@@ -86,7 +86,7 @@ For more information, documentation and examples of use, **see also the
     support for no longer available version 5 of some products.
 
 -   05/03/2019 - `{MODIStsp}` 1.3.8 is out. Fixes an issue causing
-    incorrect application of scale/offset values on GDAL versions > 2.3
+    incorrect application of scale/offset values on GDAL versions \> 2.3
     (<https://github.com/ropensci/MODIStsp/issues/163>) and adds support
     for products MOD21A1D.006, MOD21A1N.006 and MOD21A2.006.
 
@@ -274,8 +274,6 @@ for more detailed instructions and examples.
 
 # Code of Conduct
 
-Please note that this project is released with a [Contributor Code of
-Conduct](https://github.com/ropensci/MODIStsp/blob/master/CONDUCT.md).
-By participating in this project you agree to abide by its terms.
-
-
+Please note that this package is released with a [Contributor Code of
+Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
+project, you agree to abide by its terms.

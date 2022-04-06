@@ -32,14 +32,14 @@
     <a href="https://ropensci.org" class="external-link"><img src="https://ropensci.org/img/icon_short_white.svg" id="hexlogo" alt="rOpenSci"></a>
     <a class="navbar-brand me-2" href="../index.html">rOpenSci: MODIStsp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../index.html">
@@ -110,8 +110,11 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="interactive_execution_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="interactive_execution_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="interactive_execution_files/datatables-binding-0.20/datatables.js"></script><script src="interactive_execution_files/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="interactive_execution_files/dt-core-bootstrap-1.11.3/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<script src="interactive_execution_files/datatables-binding-0.21/datatables.js"></script><link href="interactive_execution_files/dt-core-bootstrap-1.11.3/css/dataTables.bootstrap.min.css" rel="stylesheet">
 <link href="interactive_execution_files/dt-core-bootstrap-1.11.3/css/dataTables.bootstrap.extra.css" rel="stylesheet">
 <script src="interactive_execution_files/dt-core-bootstrap-1.11.3/js/jquery.dataTables.min.js"></script><script src="interactive_execution_files/dt-core-bootstrap-1.11.3/js/dataTables.bootstrap.min.js"></script><link href="interactive_execution_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="interactive_execution_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><div class="row">
@@ -125,167 +128,314 @@
 
     
     
-<p>The easiest way to use <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> is to use its powerful GUI (Graphical User Interface) for selection of processing options, and then run the processing.</p>
-<p>To open the GUI, load the package and launch the <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> function, with no parameters:</p>
+<p>The easiest way to use <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> is to use its powerful
+GUI (Graphical User Interface) for selection of processing options, and
+then run the processing.</p>
+<p>To open the GUI, load the package and launch the
+<a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> function, with no parameters:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/MODIStsp.html">MODIStsp</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>This <strong>opens a GUI</strong> from which processing options can be specified and eventually saved (or loaded from a previously saved file).</p>
-<p>The GUI allows selecting all processing options required for the creation of the desired MODIS time series. The GUI uses a dashboard structure, divided in the following tabs. The available processing options configurable in each tab are described in the following.</p>
+<p>This <strong>opens a GUI</strong> from which processing options can
+be specified and eventually saved (or loaded from a previously saved
+file).</p>
+<p>The GUI allows selecting all processing options required for the
+creation of the desired MODIS time series. The GUI uses a dashboard
+structure, divided in the following tabs. The available processing
+options configurable in each tab are described in the following.</p>
 <hr>
-<div class="section level1">
-<h1 id="selecting-processing-parameters">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Selecting Processing Parameters</strong><a class="anchor" aria-label="anchor" href="#selecting-processing-parameters"></a>
-</h1>
-<p><br></p>
 <div class="section level2">
-<h2 id="product-and-layers-tab">
+<h2 id="selecting-processing-parameters">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Selecting Processing Parameters</strong><a class="anchor" aria-label="anchor" href="#selecting-processing-parameters"></a>
+</h2>
+<p><br></p>
+<div class="section level3">
+<h3 id="product-and-layers-tab">
 <em>Product and Layers Tab</em><a class="anchor" aria-label="anchor" href="#product-and-layers-tab"></a>
-</h2>
+</h3>
 <p><img src="interactive_execution_files/figure-html/GUIfig-1.png" width="960" style="display: block; margin: auto;"></p>
-<p>The top-most tab allow to specify details of the desired MODIS Product and Layers to be processed:</p>
+<p>The top-most tab allow to specify details of the desired MODIS
+Product and Layers to be processed:</p>
 <ol style="list-style-type: decimal">
 <li>
-<strong>“Category”</strong> and <strong>“Product”</strong>: selects the MODIS product of interest;</li>
+<strong>“Category”</strong> and <strong>“Product”</strong>: selects
+the MODIS product of interest;</li>
 <li>
-<strong>MODIS platform(s)</strong>: selects if only TERRA, only AQUA or Both MODIS platforms should be considered for download and creation of the time series;</li>
+<strong>MODIS platform(s)</strong>: selects if only TERRA, only AQUA
+or Both MODIS platforms should be considered for download and creation
+of the time series;</li>
 <li>
-<strong>MODIS layers to be processed</strong>: the user <strong>must</strong> select which MODIS original layers and/or derived Quality Indexes (QI) and Spectral Indexes (SI) layers should be processed:
+<strong>MODIS layers to be processed</strong>: the user
+<strong>must</strong> select which MODIS original layers and/or derived
+Quality Indexes (QI) and Spectral Indexes (SI) layers should be
+processed:
 <ul>
-<li>the left-hand selector allows to select which <em>original MODIS layers</em> should be processed;</li>
-<li>the central selector allows to select which <em>Quality Indicators should be extracted</em> from the original MODIS Quality Assurance layers;</li>
-<li>for MODIS products containing surface reflectance data, the right-hand selector allows selecting which additional <em>Spectral Indexes should be computed</em>.</li>
+<li>the left-hand selector allows to select which <em>original MODIS
+layers</em> should be processed;</li>
+<li>the central selector allows to select which <em>Quality Indicators
+should be extracted</em> from the original MODIS Quality Assurance
+layers;</li>
+<li>for MODIS products containing surface reflectance data, the
+right-hand selector allows selecting which additional <em>Spectral
+Indexes should be computed</em>.</li>
 </ul>
 </li>
 </ol>
-<p>The following commonly used Spectral Indexes are available for computation by default:</p>
+<p>The following commonly used Spectral Indexes are available for
+computation by default:</p>
 <p><br></p>
-<div id="htmlwidget-1f4972ff7eb7fe5dcf59" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1f4972ff7eb7fe5dcf59">{"x":{"style":"bootstrap","filter":"none","vertical":false,"data":[["NDVI","EVI","SR","NDFI","NDII6 (NDWI6)","NDII7 (NDWI7)","SAVI","NDSI","GNDVI","RGRI","GRVI"],["Normalized Difference Vegetation Index (Rouse, 1973)","Enhanced Vegetation Index (Huete, 2002)","Simple Ratio[@Tucker1979]","Normalized Difference Flood Index (Boschetti, 2014)","Normalized Difference Infrared Index - Band 6 (Hunt, 1989)","Normalized Difference Infrared Index - Band 7 (Hunt, 1989)","Soil Adjusted Vegetation Index  (Huete, 1988)","Normalized Difference Snow Index (Hall, 2002)","Green Normalized Difference Vegetation Index (Gitelson, 1998)","Red Green Ratio Index (Gamon, 1999)","Green-Red ratio Vegetation Index  (Tucker, 1979)"],["(NIR - RED)/(NIR + RED)","2.5 * (NIR - RED)/(NIR + 6 * RED - 7.5 * BLUE + 1","NIR / RED","(NIR - SWIR1) / (NIR + SWIR1)","(NIR - SWIR1) / (NIR + SWIR1)","(NIR - SWIR2) / (NIR + SWIR2)","((NIR - RED) / (NIR + RED + 0.5)) * (1 + 0.5)","(GREEN - SWIR1) / GREEN + SWIR1)","(NIR - GREEN)/(NIR + GREEN)","RED / GREEN","(RED - GREEN) / (RED + GREEN)"]],"container":"<table class=\"table table-striped table-hover row-border order-column display\">\n  <thead>\n    <tr>\n      <th>Acronym<\/th>\n      <th>Index Name and reference<\/th>\n      <th>Index Formula<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","pageLength":11,"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,11,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>You can however <strong>specify other SIs to be computed without modifying MODIStsp source code</strong> by clicking on the <em><strong>“Add New Spectral Index”</strong></em> button, which allow providing info related to the new desired SI using a simple GUI interface.</p>
+<div id="htmlwidget-bef62391790a28d72148" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bef62391790a28d72148">{"x":{"style":"bootstrap","filter":"none","vertical":false,"data":[["NDVI","EVI","SR","NDFI","NDII6 (NDWI6)","NDII7 (NDWI7)","SAVI","NDSI","GNDVI","RGRI","GRVI"],["Normalized Difference Vegetation Index (Rouse, 1973)","Enhanced Vegetation Index (Huete, 2002)","Simple Ratio[@Tucker1979]","Normalized Difference Flood Index (Boschetti, 2014)","Normalized Difference Infrared Index - Band 6 (Hunt, 1989)","Normalized Difference Infrared Index - Band 7 (Hunt, 1989)","Soil Adjusted Vegetation Index  (Huete, 1988)","Normalized Difference Snow Index (Hall, 2002)","Green Normalized Difference Vegetation Index (Gitelson, 1998)","Red Green Ratio Index (Gamon, 1999)","Green-Red ratio Vegetation Index  (Tucker, 1979)"],["(NIR - RED)/(NIR + RED)","2.5 * (NIR - RED)/(NIR + 6 * RED - 7.5 * BLUE + 1","NIR / RED","(NIR - SWIR1) / (NIR + SWIR1)","(NIR - SWIR1) / (NIR + SWIR1)","(NIR - SWIR2) / (NIR + SWIR2)","((NIR - RED) / (NIR + RED + 0.5)) * (1 + 0.5)","(GREEN - SWIR1) / GREEN + SWIR1)","(NIR - GREEN)/(NIR + GREEN)","RED / GREEN","(RED - GREEN) / (RED + GREEN)"]],"container":"<table class=\"table table-striped table-hover row-border order-column display\">\n  <thead>\n    <tr>\n      <th>Acronym<\/th>\n      <th>Index Name and reference<\/th>\n      <th>Index Formula<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tip","pageLength":11,"columnDefs":[],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,11,25,50,100]}},"evals":[],"jsHooks":[]}</script><p>You can however <strong>specify other SIs to be computed without
+modifying MODIStsp source code</strong> by clicking on the
+<em><strong>“Add New Spectral Index”</strong></em> button, which allow
+providing info related to the new desired SI using a simple GUI
+interface.</p>
 <p><img src="interactive_execution_files/figure-html/indexfig-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>Provided information (e.g., correct band-names, computable formula, etc…) is automatically checked upon clicking “Set New Index.” On success, the new index is added in the list of available ones for all products allowing its computation. Clicking “Done!” returns to the main.</p>
-<p><strong>Note:</strong> all custom defined indexes can be removed by using the <code><a href="../reference/MODIStsp_resetindexes.html">MODIStsp_resetindexes()</a></code> function.</p>
+<p>Provided information (e.g., correct band-names, computable formula,
+etc…) is automatically checked upon clicking “Set New Index”. On
+success, the new index is added in the list of available ones for all
+products allowing its computation. Clicking “Done!” returns to the
+main.</p>
+<p><strong>Note:</strong> all custom defined indexes can be removed by
+using the <code><a href="../reference/MODIStsp_resetindexes.html">MODIStsp_resetindexes()</a></code> function.</p>
 </div>
-<div class="section level2">
-<h2 id="spatialtemporal-options-tab">
-<em>Spatial/Temporal Options Tab</em><a class="anchor" aria-label="anchor" href="#spatialtemporal-options-tab"></a>
-</h2>
-<p>The middle tab allow specifying details about the temporal and spatial extent of the analysis.</p>
-<p><img src="interactive_execution_files/figure-html/unnamed-chunk-2-1.png" width="960" style="display: block; margin: auto;"></p>
 <div class="section level3">
-<h3 id="temporal-extent">
-<em>Temporal Extent</em><a class="anchor" aria-label="anchor" href="#temporal-extent"></a>
+<h3 id="spatialtemporal-options-tab">
+<em>Spatial/Temporal Options Tab</em><a class="anchor" aria-label="anchor" href="#spatialtemporal-options-tab"></a>
 </h3>
-<p>Specify the starting and ending dates to be considered for the creation of the time in the series corresponding fields.</p>
-<p>The <strong>Date Range Type</strong> drop-down menu allows to choose between two options:</p>
+<p>The middle tab allow specifying details about the temporal and
+spatial extent of the analysis.</p>
+<p><img src="interactive_execution_files/figure-html/unnamed-chunk-2-1.png" width="960" style="display: block; margin: auto;"></p>
+<div class="section level4">
+<h4 id="temporal-extent">
+<em>Temporal Extent</em><a class="anchor" aria-label="anchor" href="#temporal-extent"></a>
+</h4>
+<p>Specify the starting and ending dates to be considered for the
+creation of the time in the series corresponding fields.</p>
+<p>The <strong>Date Range Type</strong> drop-down menu allows to choose
+between two options:</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>full</strong>: all available images between the starting and ending dates are downloaded and processed;</p></li>
-<li><p><strong>seasonal</strong>: data is downloaded only for one part of the year, but for multiple years. For example, if the starting date is 2005-03-01 and the ending is 2010-06-01, only the images of March, April and May for the years between 2005 and 2010 will be downloaded. This allows to easily process data concerning a particular season of interest.</p></li>
+<li><p><strong>full</strong>: all available images between the starting
+and ending dates are downloaded and processed;</p></li>
+<li><p><strong>seasonal</strong>: data is downloaded only for one part
+of the year, but for multiple years. For example, if the starting date
+is 2005-03-01 and the ending is 2010-06-01, only the images of March,
+April and May for the years between 2005 and 2010 will be downloaded.
+This allows to easily process data concerning a particular season of
+interest.</p></li>
 </ol>
 </div>
-<div class="section level3">
-<h3 id="output-projection">
+<div class="section level4">
+<h4 id="output-projection">
 <em>Output Projection</em><a class="anchor" aria-label="anchor" href="#output-projection"></a>
-</h3>
-<p>Specify the options to be used for reprojecting and resizing the MODIS images.</p>
+</h4>
+<p>Specify the options to be used for reprojecting and resizing the
+MODIS images.</p>
 <ul>
-<li><p><strong>“Output Projection”</strong>: select either the Native MODIS projection (Default) or specify a user-defined one. To specify a user selected projection, select “Change” and then insert a valid “EPSG” code or WKT string in the pop-up window. Validity of the new projection string is automatically checked, and error messages issued if the check fails.</p></li>
-<li><p><strong>“Output Resolution”</strong>, <strong>“Pixel Size”</strong> and <strong>“Resampling Method”</strong>: specify whether output images should inherit their spatial resolution from the original MODIS files, or be resampled to a user-defined resolution. In the latter case, output spatial resolution must be specified in the measure units of the selected output projection. Resampling method can be chosen among the ones available for the “gdalwarp” routine. <strong>Note:</strong> resampling methods different than Nearest Neighbour" and “Mode” (Useful for down-sampling purposes) should used carefully. Other resampling methods (e.g., bilinear, cubic) i) cannot be used for resampling of categorical variables such as the QA and QI layers, and ii) using them on continuous variable (e.g., reflectance, VI values) without performing an a-priori data cleaning would risk to contaminate the values of high-quality observations with those of low-quality ones.</p></li>
+<li><p><strong>“Output Projection”</strong>: select either the Native
+MODIS projection (Default) or specify a user-defined one. To specify a
+user selected projection, select “Change” and then insert a valid “EPSG”
+code or WKT string in the pop-up window. Validity of the new projection
+string is automatically checked, and error messages issued if the check
+fails.</p></li>
+<li><p><strong>“Output Resolution”</strong>, <strong>“Pixel
+Size”</strong> and <strong>“Resampling Method”</strong>: specify whether
+output images should inherit their spatial resolution from the original
+MODIS files, or be resampled to a user-defined resolution. In the latter
+case, output spatial resolution must be specified in the measure units
+of the selected output projection. Resampling method can be chosen among
+the ones available for the “gdalwarp” routine. <strong>Note:</strong>
+resampling methods different than Nearest Neighbour” and “Mode” (Useful
+for down-sampling purposes) should used carefully. Other resampling
+methods (e.g., bilinear, cubic) i) cannot be used for resampling of
+categorical variables such as the QA and QI layers, and ii) using them
+on continuous variable (e.g., reflectance, VI values) without performing
+an a-priori data cleaning would risk to contaminate the values of
+high-quality observations with those of low-quality ones.</p></li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="spatial-extent">
+<div class="section level4">
+<h4 id="spatial-extent">
 <em>Spatial Extent</em><a class="anchor" aria-label="anchor" href="#spatial-extent"></a>
-</h3>
-<p>Allows defining the area of interest for the processing. Four main options are possible, and can be selected using a dropdown menu.</p>
+</h4>
+<p>Allows defining the area of interest for the processing. Four main
+options are possible, and can be selected using a dropdown menu.</p>
 <ol style="list-style-type: decimal">
 <li>
-<p><strong>Select Tiles</strong>: specify which MODIS tiles need to be processed either by:</p>
+<p><strong>Select Tiles</strong>: specify which MODIS tiles need to
+be processed either by:</p>
 <ol style="list-style-type: lower-alpha">
-<li>Using the “Start” and “End” horizontal and vertical sliders in the <em>Required MODIS Tiles</em> frame.<br>
+<li>Using the “Start” and “End” horizontal and vertical sliders in the
+<em>Required MODIS Tiles</em> frame.<br>
 </li>
-<li>Selecting the <strong>“From Map”</strong> option in the dropdown and clicking on “change selection.” A map will open, allowing interactive selection of the required tiles</li>
+<li>Selecting the <strong>“From Map”</strong> option in the dropdown and
+clicking on “change selection”. A map will open, allowing interactive
+selection of the required tiles</li>
 </ol>
 </li>
 </ol>
-<p>Note that during processing, data from the different tiles is mosaicked, and a single file covering the total area is produced for each acquisition date. For this reason, selected tiles must cover a rectangular area.</p>
+<p>Note that during processing, data from the different tiles is
+mosaicked, and a single file covering the total area is produced for
+each acquisition date. For this reason, selected tiles must cover a
+rectangular area.</p>
 <ol start="2" style="list-style-type: decimal">
-<li><p><strong>Select Bounding Box</strong>: manually insert the coordinates of the Upper Left and Lower Right corners of the area of interest in the <strong>Bounding Box</strong> frame. <em>Coordinates of the corners must be provided in the coordinate system of the selected output projection</em>.</p></li>
-<li><p><strong>Load From File</strong>: click the <strong>“Browse”</strong> button and select a raster or vector spatial file that will be used to compute the required bounding box in output projection coordinates.</p></li>
-<li><p><strong>Draw on Map</strong>: click the <strong>“Draw Extent”</strong> button a map will open in a<br>
-window, allowing interactive selection of the spatial extent using the tools on the left.</p></li>
+<li><p><strong>Select Bounding Box</strong>: manually insert the
+coordinates of the Upper Left and Lower Right corners of the area of
+interest in the <strong>Bounding Box</strong> frame. <em>Coordinates of
+the corners must be provided in the coordinate system of the selected
+output projection</em>.</p></li>
+<li><p><strong>Load From File</strong>: click the
+<strong>“Browse”</strong> button and select a raster or vector spatial
+file that will be used to compute the required bounding box in output
+projection coordinates.</p></li>
+<li><p><strong>Draw on Map</strong>: click the <strong>“Draw
+Extent”</strong> button a map will open in a<br>
+window, allowing interactive selection of the spatial extent using the
+tools on the left.</p></li>
 </ol>
 </div>
 </div>
-<div class="section level2">
-<h2 id="output-format-options-and-folders-tab">
-<em>Output Format, Options and Folders Tab</em><a class="anchor" aria-label="anchor" href="#output-format-options-and-folders-tab"></a>
-</h2>
-<p>The last tab allows specifying some options concerning processing, and the output folders.</p>
-<p><img src="interactive_execution_files/figure-html/unnamed-chunk-3-1.png" width="960" style="display: block; margin: auto;"></p>
 <div class="section level3">
-<h3 id="download-method">
-<em>Download Method</em><a class="anchor" aria-label="anchor" href="#download-method"></a>
+<h3 id="output-format-options-and-folders-tab">
+<em>Output Format, Options and Folders Tab</em><a class="anchor" aria-label="anchor" href="#output-format-options-and-folders-tab"></a>
 </h3>
+<p>The last tab allows specifying some options concerning processing,
+and the output folders.</p>
+<p><img src="interactive_execution_files/figure-html/unnamed-chunk-3-1.png" width="960" style="display: block; margin: auto;"></p>
+<div class="section level4">
+<h4 id="download-method">
+<em>Download Method</em><a class="anchor" aria-label="anchor" href="#download-method"></a>
+</h4>
 <p>Select the method to be used for download. Available choices are:</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>http</strong>: download through http from NASA lpdaac http archive (<a href="http://e4ftl01.cr.usgs.gov" class="external-link uri">http://e4ftl01.cr.usgs.gov</a>). This requires providing a user name and password, which can be obtained by registering an account at the address <a href="https://urs.earthdata.nasa.gov/profile" class="external-link">https://urs.earthdata.nasa.gov/profile</a>;</p></li>
-<li><p><strong>offline</strong>: this option allows to process/reprocess HDF files already available on the user’s PC without downloading from NASA – useful if the user already has an archive of HDF images, or to reprocess data already downloaded via <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> to create time series for an additional layer (<em>it is fundamental that the HDFs are those directly downloaded from NASA servers</em>; see <a href="https://docs.ropensci.org/MODIStsp/articles/faq.html#working-with-already-downloaded-hdf-files">here</a> for additional details).</p></li>
+<li><p><strong>http</strong>: download through http from NASA lpdaac
+http archive (<a href="http://e4ftl01.cr.usgs.gov" class="external-link uri">http://e4ftl01.cr.usgs.gov</a>). This requires providing a
+user name and password, which can be obtained by registering an account
+at the address <a href="https://urs.earthdata.nasa.gov/profile" class="external-link">https://urs.earthdata.nasa.gov/profile</a>;</p></li>
+<li><p><strong>offline</strong>: this option allows to process/reprocess
+HDF files already available on the user’s PC without downloading from
+NASA – useful if the user already has an archive of HDF images, or to
+reprocess data already downloaded via <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> to create
+time series for an additional layer (<em>it is fundamental that the HDFs
+are those directly downloaded from NASA servers</em>; see <a href="https://docs.ropensci.org/MODIStsp/articles/faq.html#working-with-already-downloaded-hdf-files">here</a>
+for additional details).</p></li>
 </ol>
-<p>A second dropdown menu allows selecting if using standard http download to access NASA servers, or using the <strong>aria2c</strong> downloader, which may speed-up the download. This requires however that that the “aria2c” software is installed in your system. To download and install it, see <a href="https://aria2.github.io/" class="external-link">aria2.github.io</a>.</p>
+<p>A second dropdown menu allows selecting if using standard http
+download to access NASA servers, or using the <strong>aria2c</strong>
+downloader, which may speed-up the download. This requires however that
+that the “aria2c” software is installed in your system. To download and
+install it, see <a href="https://aria2.github.io/" class="external-link">aria2.github.io</a>.</p>
 </div>
-<div class="section level3">
-<h3 id="output-options">
+<div class="section level4">
+<h4 id="output-options">
 <em>Output Options</em><a class="anchor" aria-label="anchor" href="#output-options"></a>
-</h3>
-<p>Several processing options can be set using check-boxes/dropdowns:</p>
+</h4>
+<p>Several processing options can be set using
+check-boxes/dropdowns:</p>
 <ul>
-<li><p><strong>Output Files Format</strong>: two of the most commonly formats used in remote sensing applications are available at the moment: ENVI binary and GeoTiff. If GeoTiff is selected, the type of file compression can be also specified among “None,” “PACKBITS,” “LZW” and “DEFLATE.”</p></li>
-<li><p><strong>Save Time Series as</strong>: specify if virtual multitemporal files should be created. These virtual files allow access to the entire time series of images as a single file without the need of creating large multitemporal raster images. Available virtual files formats are “R” rasterStacks, ENVI meta-files and GDAL “vrt” files. In particular, <code>R</code> RasterStacks may be useful in order to easily access the preprocessed MODIS data within <code>R</code> scripts (see also <a href="output.html">here</a>).</p></li>
-<li><p><strong>Apply Scale/Offset</strong>: specify if scale and offset values of the different MODIS layers should be applied. If selected, outputs are appropriately rescaled on the fly, and saved in the true “measure units” of the selected parameter (e.g., spectral indexes are saved as floating point values; Land Surface Temperature is saved in degrees Kelvin, etc.).</p></li>
-<li><p><strong>Modify No Data Values</strong>: specify if NoData values of MODIS layers should be kept at their original values, or changed to those specified within the <code>MODIStsp_Products_Opts</code> XML file. By selecting “Yes” in the “Change Original NoData values” check-box, NoData of outputs are set to the largest integer value possible for the data type of the processed layer (e.g., for 8-bit unsigned integer layers, NoData is set always to 255, for 16-bit signed integer layers to 32767, and for 16-bit unsigned integer layers to 65535). Information about the new NoData values is stored both in the output rasters, and in the XML files associated with them. <strong>Note:</strong> some MODIS layers have multiple NoData (a.k.a. <em>fill</em>) values. if <em>Modify No Data</em> is set to “Yes,” <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> will convert all <em>fill</em> values to a common output NoData value.</p></li>
+<li><p><strong>Output Files Format</strong>: two of the most commonly
+formats used in remote sensing applications are available at the moment:
+ENVI binary and GeoTiff. If GeoTiff is selected, the type of file
+compression can be also specified among “None”, “PACKBITS”, “LZW” and
+“DEFLATE”.</p></li>
+<li><p><strong>Save Time Series as</strong>: specify if virtual
+multitemporal files should be created. These virtual files allow access
+to the entire time series of images as a single file without the need of
+creating large multitemporal raster images. Available virtual files
+formats are “R” rasterStacks, ENVI meta-files and GDAL “vrt” files. In
+particular, <code>R</code> RasterStacks may be useful in order to easily
+access the preprocessed MODIS data within <code>R</code> scripts (see
+also <a href="output.html">here</a>).</p></li>
+<li><p><strong>Apply Scale/Offset</strong>: specify if scale and offset
+values of the different MODIS layers should be applied. If selected,
+outputs are appropriately rescaled on the fly, and saved in the true
+“measure units” of the selected parameter (e.g., spectral indexes are
+saved as floating point values; Land Surface Temperature is saved in
+degrees Kelvin, etc.).</p></li>
+<li><p><strong>Modify No Data Values</strong>: specify if NoData values
+of MODIS layers should be kept at their original values, or changed to
+those specified within the <code>MODIStsp_Products_Opts</code> XML file.
+By selecting “Yes” in the “Change Original NoData values” check-box,
+NoData of outputs are set to the largest integer value possible for the
+data type of the processed layer (e.g., for 8-bit unsigned integer
+layers, NoData is set always to 255, for 16-bit signed integer layers to
+32767, and for 16-bit unsigned integer layers to 65535). Information
+about the new NoData values is stored both in the output rasters, and in
+the XML files associated with them. <strong>Note:</strong> some MODIS
+layers have multiple NoData (a.k.a. <em>fill</em>) values. if <em>Modify
+No Data</em> is set to “Yes”, <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> will convert all
+<em>fill</em> values to a common output NoData value.</p></li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="output-folders">
+<div class="section level4">
+<h4 id="output-folders">
 <em>Output Folders</em><a class="anchor" aria-label="anchor" href="#output-folders"></a>
-</h3>
-<div class="section level4">
-<h4 id="main-modistsp-output-folder">
+</h4>
+<div class="section level5">
+<h5 id="main-modistsp-output-folder">
 <em>Main MODIStsp Output Folder</em><a class="anchor" aria-label="anchor" href="#main-modistsp-output-folder"></a>
-</h4>
-<p>Select the main folder where the pre-processed time series data will be stored. All <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> outputs <strong>will be placed in specific sub-folders of this main folder</strong> (see <a href="output.html">here</a> for details on <code>MODIStsp</code> naming conventions).</p>
-<p>The <strong>“Reprocess”</strong> selector allows to decide if images already available should be reprocessed if a new run of <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> is launched with the same output folder. If set to “No,” <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> skips dates for which output files following the <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> naming conventions are already present in the output folder. This allows to incrementally extend MODIS time series without reprocessing already available dates.</p>
+</h5>
+<p>Select the main folder where the pre-processed time series data will
+be stored. All <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> outputs <strong>will be placed in
+specific sub-folders of this main folder</strong> (see <a href="output.html">here</a> for details on <code>MODIStsp</code> naming
+conventions).</p>
+<p>The <strong>“Reprocess”</strong> selector allows to decide if images
+already available should be reprocessed if a new run of
+<code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> is launched with the same output folder. If set
+to “No”, <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> skips dates for which output files
+following the <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> naming conventions are already
+present in the output folder. This allows to incrementally extend MODIS
+time series without reprocessing already available dates.</p>
 </div>
-<div class="section level4">
-<h4 id="output-folder-for-storage-of-original-modis-hdf">
+<div class="section level5">
+<h5 id="output-folder-for-storage-of-original-modis-hdf">
 <em>Output Folder for storage of original MODIS HDF</em><a class="anchor" aria-label="anchor" href="#output-folder-for-storage-of-original-modis-hdf"></a>
-</h4>
-<p>Select the folder where downloaded <strong>original MODIS HDF files</strong> downloaded from NASA servers will be stored.</p>
-<p>The <strong>“delete HDF”</strong> selector allows also to decide if the downloaded images should be deleted from the file system at the end of the processing. To avoid accidental file deletion, this is always set to “No” by default, and a warning is issued before execution whenever the selection is changed to “Yes.”</p>
+</h5>
+<p>Select the folder where downloaded <strong>original MODIS HDF
+files</strong> downloaded from NASA servers will be stored.</p>
+<p>The <strong>“delete HDF”</strong> selector allows also to decide if
+the downloaded images should be deleted from the file system at the end
+of the processing. To avoid accidental file deletion, this is always set
+to “No” by default, and a warning is issued before execution whenever
+the selection is changed to “Yes”.</p>
 <hr>
 <p><br></p>
 </div>
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="saving-and-loading-processing-options">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Saving and Loading Processing Options</strong><a class="anchor" aria-label="anchor" href="#saving-and-loading-processing-options"></a>
-</h1>
+<div class="section level2">
+<h2 id="saving-and-loading-processing-options">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Saving and Loading Processing Options</strong><a class="anchor" aria-label="anchor" href="#saving-and-loading-processing-options"></a>
+</h2>
 <p><img src="interactive_execution_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;"></p>
-<p>Specified processing parameters can be saved to a JSON file for later use by clicking on the <em><strong>Save Options</strong></em> button in the sidebar.</p>
-<p>Previously saved options can be restored clicking on the <em><strong>Load Options</strong></em> button and navigating to the previously saved JSON file.</p>
+<p>Specified processing parameters can be saved to a JSON file for later
+use by clicking on the <em><strong>Save Options</strong></em> button in
+the sidebar.</p>
+<p>Previously saved options can be restored clicking on the
+<em><strong>Load Options</strong></em> button and navigating to the
+previously saved JSON file.</p>
 <hr>
 <p><br></p>
 </div>
-<div class="section level1">
-<h1 id="starting-the-processing">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Starting the processing</strong><a class="anchor" aria-label="anchor" href="#starting-the-processing"></a>
-</h1>
-<p>Once you are happy with your choices, click on <strong>Run MODIStsp</strong>. <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> will start accessing NASA servers to download and process the MODIS data corresponding to your choices.</p>
-<p>For each date of the specified time period, <code>MODIStp()</code> downloads and preprocesses all HDF images required to cover the desired spatial extent. Informative messages concerning the status of the processing are provided on the console, as well as on a self-updating progress window.</p>
-<p>The processed time series are saved in specific subfolders of the main selected output folder, as explained in detail <a href="output.html">here</a>.</p>
+<div class="section level2">
+<h2 id="starting-the-processing">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Starting the processing</strong><a class="anchor" aria-label="anchor" href="#starting-the-processing"></a>
+</h2>
+<p>Once you are happy with your choices, click on <strong>Run
+MODIStsp</strong>. <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> will start accessing NASA
+servers to download and process the MODIS data corresponding to your
+choices.</p>
+<p>For each date of the specified time period, <code>MODIStp()</code>
+downloads and preprocesses all HDF images required to cover the desired
+spatial extent. Informative messages concerning the status of the
+processing are provided on the console, as well as on a self-updating
+progress window.</p>
+<p>The processed time series are saved in specific subfolders of the
+main selected output folder, as explained in detail <a href="output.html">here</a>.</p>
 <hr>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

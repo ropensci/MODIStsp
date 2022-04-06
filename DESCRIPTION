@@ -2,7 +2,7 @@ Package: MODIStsp
 Title: Find, Download and Process MODIS Land Products
     Data
 Type: Package
-Version: 2.0.6.9003
+Version: 2.0.7
 Authors@R: c(person("Lorenzo", "Busetto", 
                  role = c("aut"),
                  comment = c(ORCID = '0000-0001-9634-6038')),
@@ -83,13 +83,14 @@ Suggests:
     tibble,
     tibbletime,
     tidyr,
+    qpdf,
     xtable
 SystemRequirements: 
 URL: https://github.com/ropensci/MODIStsp/, https://docs.ropensci.org/MODIStsp/
 BugReports: https://github.com/ropensci/MODIStsp/issues
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 Language: en-US

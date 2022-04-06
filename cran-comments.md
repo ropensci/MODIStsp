@@ -1,3 +1,15 @@
+MODIStsp 2.0.7
+================
+
+* Windows 10 on local install, R 4.1.3
+* ArchLinux on local install, R 4.1.3
+* win-builder (R-devel, R-release, R-oldrelease)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs nor NOTEs.
+
+
 MODIStsp 2.0.6
 ================
 

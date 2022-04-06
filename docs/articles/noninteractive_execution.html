@@ -32,14 +32,14 @@
     <a href="https://ropensci.org" class="external-link"><img src="https://ropensci.org/img/icon_short_white.svg" id="hexlogo" alt="rOpenSci"></a>
     <a class="navbar-brand me-2" href="../index.html">rOpenSci: MODIStsp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../index.html">
@@ -111,6 +111,9 @@
   </div>
 </nav><div class="container template-article">
 
+
+
+
 <div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Non-Interactive Execution from within R</h1>
@@ -122,13 +125,31 @@
 
     
     
-<p><code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> can be launched in non-interactive mode within an <code>R</code> session by setting the optional <code>GUI</code> parameter to FALSE, and either providing the desired processing argument in the call to the function, or providing a previously saved <code>opts_file</code> specifying the path to a JSON Options file previously saved through the GUI. This allows to exploit <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> functionalities within generic <code>R</code> processing scripts.</p>
-<div class="section level1">
-<h1 id="specifying-the-processing-parameters-in-the-function-call">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Specifying the processing parameters in the function call</strong><a class="anchor" aria-label="anchor" href="#specifying-the-processing-parameters-in-the-function-call"></a>
-</h1>
-<p>All processing parameters can be set in the call to <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code>. Mandatory parameters are <code>selprod</code> (specifying the MODIS product), (one of) <code>bandsel</code>, <code>quality_bandsel</code> or <code>indexes_bandsel</code> (that specify the desired output layers), <code>out_folder</code>, <code>start_date</code> and <code>end_date</code>. <code>user</code> and <code>password</code> are also needed if <code>download_server</code> is not equal to <code>"offline"</code>.</p>
-<p>The new function <code><a href="../reference/MODIStsp_get_prodlayers.html">MODIStsp_get_prodlayers()</a></code> allows easily retrieving the names of products and available layers based on product code, such as in:</p>
+<p><code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> can be launched in non-interactive mode
+within an <code>R</code> session by setting the optional
+<code>GUI</code> parameter to FALSE, and either providing the desired
+processing argument in the call to the function, or providing a
+previously saved <code>opts_file</code> specifying the path to a JSON
+Options file previously saved through the GUI. This allows to exploit
+<a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> functionalities within generic <code>R</code>
+processing scripts.</p>
+<div class="section level2">
+<h2 id="specifying-the-processing-parameters-in-the-function-call">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Specifying the processing parameters in the function
+call</strong><a class="anchor" aria-label="anchor" href="#specifying-the-processing-parameters-in-the-function-call"></a>
+</h2>
+<p>All processing parameters can be set in the call to
+<code><a href="../reference/MODIStsp.html">MODIStsp()</a></code>. Mandatory parameters are <code>selprod</code>
+(specifying the MODIS product), (one of) <code>bandsel</code>,
+<code>quality_bandsel</code> or <code>indexes_bandsel</code> (that
+specify the desired output layers), <code>out_folder</code>,
+<code>start_date</code> and <code>end_date</code>. <code>user</code> and
+<code>password</code> are also needed if <code>download_server</code> is
+not equal to <code>"offline"</code>.</p>
+<p>The new function <code><a href="../reference/MODIStsp_get_prodlayers.html">MODIStsp_get_prodlayers()</a></code> allows easily
+retrieving the names of products and available layers based on product
+code, such as in:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span> 
 <span class="fu"><a href="../reference/MODIStsp_get_prodlayers.html">MODIStsp_get_prodlayers</a></span><span class="op">(</span><span class="st">"M*D13Q1"</span><span class="op">)</span></code></pre></div>
@@ -170,8 +191,15 @@
 <span class="co">## [2] "Flood Index (Red-SWIR2)/(Red+SWIR2)" </span>
 <span class="co">## [3] "NDII7 (NIR-SWIR2)/(NIR+SWIR2)"       </span>
 <span class="co">## [4] "SAVI (NIR-Red)/(NIR+Red+0.5)*(1+0.5)"</span></code></pre>
-<p>The other parameters are set automatically to default values (see <a href="../reference/MODIStsp.html"><code>MODIStsp()</code> documentation</a> for details on the different available function arguments).</p>
-<p>For example, the following code processes layers <strong>NDVI</strong> and <strong>EVI</strong> and quality indicator <strong>usefulness</strong> of product __M*D13Q1__, considering both Terra and Aqua platforms, for dates comprised between 2020-06-01 and 2020-06-15 and saves output to <code>R</code> <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>:</p>
+<p>The other parameters are set automatically to default values (see <a href="../reference/MODIStsp.html"><code>MODIStsp()</code>
+documentation</a> for details on the different available function
+arguments).</p>
+<p>For example, the following code processes layers
+<strong>NDVI</strong> and <strong>EVI</strong> and quality indicator
+<strong>usefulness</strong> of product __M*D13Q1__, considering both
+Terra and Aqua platforms, for dates comprised between 2020-06-01 and
+2020-06-15 and saves output to <code>R</code>
+<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span> 
 
@@ -206,11 +234,13 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">out_fold</span> ,<span class="st">"QA_usef"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] "MOD13A2_QA_usef_2020_161.tif" "MYD13A2_QA_usef_2020_153.tif"</span></code></pre>
 </div>
-<div class="section level1">
-<h1 id="launching-modistsp-using-a-saved-options-file">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Launching MODIStsp using a saved “Options file”</strong><a class="anchor" aria-label="anchor" href="#launching-modistsp-using-a-saved-options-file"></a>
-</h1>
-<p>Alternatively, you can run <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> without opening the GUI by specifying a previously saved options file:</p>
+<div class="section level2">
+<h2 id="launching-modistsp-using-a-saved-options-file">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Launching MODIStsp using a saved “Options file”</strong><a class="anchor" aria-label="anchor" href="#launching-modistsp-using-a-saved-options-file"></a>
+</h2>
+<p>Alternatively, you can run <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> without opening
+the GUI by specifying a previously saved options file:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></span><span class="op">)</span> 
 
@@ -236,11 +266,13 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">out_fold</span> ,<span class="st">"EVI"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] "MOD13A2_EVI_2016_161.tif" "MOD13A2_EVI_2016_177.tif"</span>
 <span class="co">## [3] "MOD13A2_EVI_2020_161.tif" "MYD13A2_EVI_2020_153.tif"</span></code></pre>
-<div class="section level2">
-<h2 id="looping-over-different-options-files">
+<div class="section level3">
+<h3 id="looping-over-different-options-files">
 <em>Looping over different Options files</em><a class="anchor" aria-label="anchor" href="#looping-over-different-options-files"></a>
-</h2>
-<p>If you need to process different MODIS products, you can prepare beforehand different <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> options files by using the GUI, and then loop over them like this:</p>
+</h3>
+<p>If you need to process different MODIS products, you can prepare
+beforehand different <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> options files by using the
+GUI, and then loop over them like this:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">opts_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata/test_MOD13A2.json"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span>, 
                 <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata/test_MOD10A2.json"</span>, package <span class="op">=</span> <span class="st">"MODIStsp"</span><span class="op">)</span><span class="op">)</span>
@@ -272,16 +304,25 @@
 <p><br></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="specifying-the-processing-parameters-using-a-previously-saved-options-file-and-overwriting-some-parameters">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Specifying the processing parameters using a previously saved options file and overwriting some parameters</strong><a class="anchor" aria-label="anchor" href="#specifying-the-processing-parameters-using-a-previously-saved-options-file-and-overwriting-some-parameters"></a>
-</h1>
-<p>Finally, it is possible to both specify a previously saved options file AND setting some parameters in the call to the function. This allows <strong>easily performing similar processings, by only updating the required arguments</strong>, as in the examples below.</p>
 <div class="section level2">
-<h2 id="looping-over-different-spatial-extents">
-<strong>Looping over different spatial extents</strong><a class="anchor" aria-label="anchor" href="#looping-over-different-spatial-extents"></a>
+<h2 id="specifying-the-processing-parameters-using-a-previously-saved-options-file-and-overwriting-some-parameters">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Specifying the processing parameters using a previously saved
+options file and overwriting some parameters</strong><a class="anchor" aria-label="anchor" href="#specifying-the-processing-parameters-using-a-previously-saved-options-file-and-overwriting-some-parameters"></a>
 </h2>
-<p>Specifying the <code>spafile</code> parameter while setting the <code>spatmeth</code> parameter to “file” overrides for example the output extent of the selected Options File. This allows performing the same preprocessing on different extents using a single Options File. For example:</p>
+<p>Finally, it is possible to both specify a previously saved options
+file AND setting some parameters in the call to the function. This
+allows <strong>easily performing similar processings, by only updating
+the required arguments</strong>, as in the examples below.</p>
+<div class="section level3">
+<h3 id="looping-over-different-spatial-extents">
+<strong>Looping over different spatial extents</strong><a class="anchor" aria-label="anchor" href="#looping-over-different-spatial-extents"></a>
+</h3>
+<p>Specifying the <code>spafile</code> parameter while setting the
+<code>spatmeth</code> parameter to “file” overrides for example the
+output extent of the selected Options File. This allows performing the
+same preprocessing on different extents using a single Options File. For
+example:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Run the tool using the settings previously saved in a specific option file</span>
 <span class="co"># and specifying the extent from a spatial file allows to re-use the same</span>
@@ -320,8 +361,8 @@
   <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI"</span><span class="op">)</span>,
   full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">outfiles_garda</span></code></pre></div>
-<pre><code><span class="co">## [1] "/tmp/Rtmpqkl0dq/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"</span>
-<span class="co">## [2] "/tmp/Rtmpqkl0dq/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</span></code></pre>
+<pre><code><span class="co">## [1] "/tmp/RtmpWKpNet/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"</span>
+<span class="co">## [2] "/tmp/RtmpWKpNet/MODIStsp/garda_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span>       
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span><span class="va">outfiles_garda</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -331,8 +372,8 @@
   <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI"</span><span class="op">)</span>,
   full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="va">outfiles_iseo</span></code></pre></div>
-<pre><code><span class="co">## [1] "/tmp/Rtmpqkl0dq/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"</span>
-<span class="co">## [2] "/tmp/Rtmpqkl0dq/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</span></code></pre>
+<pre><code><span class="co">## [1] "/tmp/RtmpWKpNet/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_161.tif"</span>
+<span class="co">## [2] "/tmp/RtmpWKpNet/MODIStsp/iseo_lake/VI_16Days_1Km_v6/EVI/MOD13A2_EVI_2016_177.tif"</span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/raster/man/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span><span class="va">outfiles_iseo</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="noninteractive_execution_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>

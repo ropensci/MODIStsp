@@ -77,15 +77,17 @@ Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
     support for no longer available version 5 of some products.
 
 -   05/03/2019 - `{MODIStsp}` 1.3.8 is out. Fixes an issue causing
-    incorrect application of scale/offset values on GDAL versions > 2.3
+    incorrect application of scale/offset values on GDAL versions \> 2.3
     (<https://github.com/ropensci/MODIStsp/issues/163>) and adds support
     for products `MOD21A1D.006 MOD21A1N.006 MOD21A2.006`.
 
 -   29/11/2018 - We recently discovered a nasty bug in the computation
     of some custom spectral indices (those including additions /
     subtractions on reflectance values, such as in
-    $\\frac{(b1\_{NIR}+0.1)}{b2\_{Red}}$ (with *ρ* being a reflectance).
-    See
+    ![\\frac{(b1\_{NIR}+0.1)}{b2\_{Red}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cfrac%7B%28b1_%7BNIR%7D%2B0.1%29%7D%7Bb2_%7BRed%7D%7D "\frac{(b1_{NIR}+0.1)}{b2_{Red}}")
+    (with
+    ![\\rho](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Crho "\rho")
+    being a reflectance). See
     [here](https://docs.ropensci.org/MODIStsp/articles/discovered_bug.html)
     for further details. The bug is now fixed on the GitHub version. A
     patched release will be made available on CRAN as soon as possible.
@@ -117,7 +119,7 @@ Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
 
 -   11/08/2017 - `{MODIStsp}` 1.3.3 was released today. It provides
     improvements in processing speed, as well as the usual bug fixes.
-    See our [\<i class=“fa fa-newspaper-o aria-hidden=”true”></i>
+    See our [\<i class=“fa fa-newspaper-o aria-hidden=”true”\></i>
     news](news/index.html) page for a detailed changelog.
 
 ------------------------------------------------------------------------
@@ -183,5 +185,3 @@ A BibTeX entry for LaTeX users is:
         doi     = {10.1016/j.cageo.2016.08.020},
         url     = {https://github.com/ropensci/MODIStsp},
       }
-
-

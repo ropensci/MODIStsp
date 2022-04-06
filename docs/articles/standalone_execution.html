@@ -32,14 +32,14 @@
     <a href="https://ropensci.org" class="external-link"><img src="https://ropensci.org/img/icon_short_white.svg" id="hexlogo" alt="rOpenSci"></a>
     <a class="navbar-brand me-2" href="../index.html">rOpenSci: MODIStsp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../index.html">
@@ -111,6 +111,9 @@
   </div>
 </nav><div class="container template-article">
 
+
+
+
 <div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Stand-alone execution and scheduled processing</h1>
@@ -122,56 +125,90 @@
 
     
     
-<div class="section level1">
-<h1 id="stand-alone-execution">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Stand-alone execution</strong><a class="anchor" aria-label="anchor" href="#stand-alone-execution"></a>
-</h1>
-<p><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> can be also executed as a “stand-alone” application (i.e., without having to open R/RStudio).</p>
-<p>To be able to do that, from R launch the function <code><a href="../reference/install_MODIStsp_launcher.html">install_MODIStsp_launcher()</a></code>.</p>
+<div class="section level2">
+<h2 id="stand-alone-execution">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Stand-alone execution</strong><a class="anchor" aria-label="anchor" href="#stand-alone-execution"></a>
+</h2>
+<p><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> can be also executed as a “stand-alone”
+application (i.e., without having to open R/RStudio).</p>
+<p>To be able to do that, from R launch the function
+<code><a href="../reference/install_MODIStsp_launcher.html">install_MODIStsp_launcher()</a></code>.</p>
 <ul>
-<li>In a Linux operating system this function creates a desktop entry (accessible from the menu in the sections “Science” and “Geography”) and a symbolic link in a known path (default: <code>/usr/bin/MODIStsp</code>).</li>
-<li>In Windows, a link in the Start Menu and optionally a desktop shortcut are created. See <code><a href="../reference/install_MODIStsp_launcher.html">?install_MODIStsp_launcher</a></code> for details and path customization.</li>
+<li>In a Linux operating system this function creates a desktop entry
+(accessible from the menu in the sections “Science” and “Geography”) and
+a symbolic link in a known path (default:
+<code>/usr/bin/MODIStsp</code>).</li>
+<li>In Windows, a link in the Start Menu and optionally a desktop
+shortcut are created. See <code><a href="../reference/install_MODIStsp_launcher.html">?install_MODIStsp_launcher</a></code> for
+details and path customization.</li>
 </ul>
-<p>Double-clicking these files or launching them from a shell without parameters will launch <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> in interactive mode, by opening the GUI. Non-interactive mode can be triggered by adding the “-g” argument to the call, and specifying the path to a valid Options File as <code>-s</code> argument:</p>
+<p>Double-clicking these files or launching them from a shell without
+parameters will launch <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> in interactive mode, by
+opening the GUI. Non-interactive mode can be triggered by adding the
+“-g” argument to the call, and specifying the path to a valid Options
+File as <code>-s</code> argument:</p>
 <ul>
-<li><p>Linux: <code>MODIStsp -g -s "/yourpath/youroptions.json"</code> (see <code>MODIStsp -h</code> for details).</p></li>
-<li><p>Windows:<code>your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.json"</code> (see <code>C:\Users\you\Desktop\MODIStsp -h</code> for details).</p></li>
+<li><p>Linux: <code>MODIStsp -g -s "/yourpath/youroptions.json"</code>
+(see <code>MODIStsp -h</code> for details).</p></li>
+<li><p>Windows:<code>your_r_library\MODIStsp\ExtData\Launcher\MODIStsp.bat -g -s "yourpath/youroptions.json"</code>
+(see <code>C:\Users\you\Desktop\MODIStsp -h</code> for
+details).</p></li>
 </ul>
-<p>If you do not want to install any link, launchers can be found in the subdirectory <code>MODIStsp/ExtData/Launcher</code> of your library path.</p>
+<p>If you do not want to install any link, launchers can be found in the
+subdirectory <code>MODIStsp/ExtData/Launcher</code> of your library
+path.</p>
 <hr>
 <p><br></p>
 </div>
-<div class="section level1">
-<h1 id="scheduled-processing">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Scheduled Processing</strong><a class="anchor" aria-label="anchor" href="#scheduled-processing"></a>
-</h1>
-<p>Stand-alone non-interactive execution can be exploited to periodically and automatically update the time series of a selected product over a given study area. To do that, you should simply follow these steps.</p>
-<ol style="list-style-type: decimal">
-<li><p>Open the <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> GUI, define the parameters of the processing specifying a date in the future as the “Ending Date” and save the processing options; then quit the program.</p></li>
-<li><p>schedule non-interactive execution of the <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> launcher script installed as seen before (or located in the subdirectory <code>MODIStsp/ExtData/Launcher</code> of your <code>R</code> library path) as a windows scheduled task or linux “cron” job according to a specified time schedule, specifying the path of a previously saved Options file as additional argument.</p></li>
-</ol>
 <div class="section level2">
-<h2 id="on-linux">
-<em>On Linux</em><a class="anchor" aria-label="anchor" href="#on-linux"></a>
+<h2 id="scheduled-processing">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Scheduled Processing</strong><a class="anchor" aria-label="anchor" href="#scheduled-processing"></a>
 </h2>
+<p>Stand-alone non-interactive execution can be exploited to
+periodically and automatically update the time series of a selected
+product over a given study area. To do that, you should simply follow
+these steps.</p>
+<ol style="list-style-type: decimal">
+<li><p>Open the <code><a href="../reference/MODIStsp.html">MODIStsp()</a></code> GUI, define the parameters of
+the processing specifying a date in the future as the “Ending Date” and
+save the processing options; then quit the program.</p></li>
+<li><p>schedule non-interactive execution of the <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a>
+launcher script installed as seen before (or located in the subdirectory
+<code>MODIStsp/ExtData/Launcher</code> of your <code>R</code> library
+path) as a windows scheduled task or linux “cron” job according to a
+specified time schedule, specifying the path of a previously saved
+Options file as additional argument.</p></li>
+</ol>
+<div class="section level3">
+<h3 id="on-linux">
+<em>On Linux</em><a class="anchor" aria-label="anchor" href="#on-linux"></a>
+</h3>
 <ol start="3" style="list-style-type: decimal">
 <li>
 <p>Edit your crontab by opening a terminal and typing:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">crontab</span> <span class="at">-e</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crontab</span> <span class="at">-e</span></span></code></pre></div>
 </li>
 <li>
-<p>Add an entry for execution of MODIStsp launcher. For example, if you have installed it in /usr/bin and you want to run the tool every day at 23.00, add the following row:</p>
+<p>Add an entry for execution of MODIStsp launcher. For example, if
+you have installed it in /usr/bin and you want to run the tool every day
+at 23.00, add the following row:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">0</span> 23 <span class="pp">*</span> <span class="pp">*</span> <span class="pp">*</span> /bin/bash /usr/bin/MODIStsp <span class="at">-g</span> <span class="at">-s</span> <span class="st">"/yourpath/youroptions.json"</span></span></code></pre></div>
 </li>
 </ol>
 </div>
-<div class="section level2">
-<h2 id="on-windows">
+<div class="section level3">
+<h3 id="on-windows">
 <em>On Windows</em><a class="anchor" aria-label="anchor" href="#on-windows"></a>
-</h2>
+</h3>
 <ol start="3" style="list-style-type: decimal">
-<li><p>Create a Task following <a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN" target="_blank" class="external-link">this instructions</a>.</p></li>
-<li><p>Add the path of the MODIStsp.bat launcher as Action (point 6), specifying <code>-g -s "X:/yourpath/youroptions.json"</code> as argument.</p></li>
+<li><p>Create a Task following
+<a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN" target="_blank" class="external-link">this
+instructions</a>.</p></li>
+<li><p>Add the path of the MODIStsp.bat launcher as Action (point 6),
+specifying <code>-g -s "X:/yourpath/youroptions.json"</code> as
+argument.</p></li>
 </ol>
 </div>
 </div>
