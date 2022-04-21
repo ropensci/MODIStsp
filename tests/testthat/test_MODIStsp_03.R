@@ -8,10 +8,12 @@
 #   virtual time series.
 message("MODIStsp Test 3: Computation of spectral indices and
             creation of time series")
+
 test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     # skip_on_travis()
+    skip_if(!"HDF4" %in% sf::st_drivers("raster")$name)
     try(MODIStsp_addindex("GVMI",
                       "Global Vegetation Moisture Index  (((NIR+0.1)−(SWIR+0.02))/((NIR+0.1)+(SWIR+0.02)))",
                       "((b2_NIR+0.1)-(b7_SWIR+0.02))/((b2_NIR+0.1)+(b7_SWIR+0.02))",

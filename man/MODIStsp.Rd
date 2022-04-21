@@ -246,21 +246,27 @@ if (interactive()) {
 # core to follow CRAN policies, by setting parallel = FALSE.
 # Users can exploit multicore functionalities skipping to set this argument.
 
+# The following check is performed in order not to provide errors
+# running the examples if HDF4 is not supported.
+is_hdf4_supported <- "HDF4" \%in\% sf::st_drivers("raster")$name
+
 MODIStsp_get_prodlayers("M*D13A2")
-MODIStsp(
-  gui = FALSE,
-  out_folder = "$tempdir",
-  selprod = "Vegetation_Indexes_16Days_1Km (M*D13A2)",
-  bandsel = c("EVI", "NDVI"),
-  quality_bandsel = "QA_usef",
-  indexes_bandsel = "SR",
-  user = "mstp_test" ,
-  password = "MSTP_test_01",
-  start_date = "2020.06.01",
-  end_date = "2020.06.15",
-  verbose = FALSE,
-  parallel = FALSE
-)
+if (is_hdf4_supported) {
+  MODIStsp(
+    gui = FALSE,
+    out_folder = "$tempdir",
+    selprod = "Vegetation_Indexes_16Days_1Km (M*D13A2)",
+    bandsel = c("EVI", "NDVI"),
+    quality_bandsel = "QA_usef",
+    indexes_bandsel = "SR",
+    user = "mstp_test" ,
+    password = "MSTP_test_01",
+    start_date = "2020.06.01",
+    end_date = "2020.06.15",
+    verbose = FALSE,
+    parallel = FALSE
+  )
+}
 
 
 #' # - Running the tool using the settings previously saved in a specific options file
@@ -274,7 +280,9 @@ MODIStsp(
 
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 
-MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE, parallel = FALSE)
+if (is_hdf4_supported) {
+  MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE, parallel = FALSE)
+}
 
 
 # Running the tool using the settings previously saved in a specific option file
@@ -283,14 +291,16 @@ MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE, parallel = FALSE)
 
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
-MODIStsp(
-  gui = FALSE, 
-  opts_file = opts_file,
-  spatmeth = "file",
-  spafile = spatial_file, 
-  verbose = TRUE,
-  parallel = FALSE
-)
+if (is_hdf4_supported) {
+  MODIStsp(
+    gui = FALSE, 
+    opts_file = opts_file,
+    spatmeth = "file",
+    spafile = spatial_file, 
+    verbose = TRUE,
+    parallel = FALSE
+  )
+}
 
 
 # Running the tool using the settings previously saved in a
@@ -307,15 +317,17 @@ extent_list = list.files(
 extent_list
 opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 
-for (single_shape in extent_list) {
-  MODIStsp(
-    gui = FALSE, 
-    opts_file = opts_file,
-    spatmeth = "file",
-    spafile = single_shape, 
-    verbose = TRUE,
-    parallel = FALSE
-  )
+if (is_hdf4_supported) {
+  for (single_shape in extent_list) {
+    MODIStsp(
+      gui = FALSE, 
+      opts_file = opts_file,
+      spatmeth = "file",
+      spafile = single_shape, 
+      verbose = TRUE,
+      parallel = FALSE
+    )
+  }
 }
 
 # output files are placed in separate folders:

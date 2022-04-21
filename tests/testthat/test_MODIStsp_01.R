@@ -6,7 +6,8 @@ test_that(
     # skip("Skip tests - since they rely on download they are only run locally")
     skip_on_cran()
     # skip_on_travis()
-
+    skip_if(!"HDF4" %in% sf::st_drivers("raster")$name)
+    
     ### Test 1: test of the basic operations of MODIStsp.                   ####
     #   The test process two bands and extracts one quality indicator from a
     #   single local hdf file for MOD11A2 product  without any

@@ -9,7 +9,8 @@ test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     skip_on_travis()
-
+    skip_if(!"HDF4" %in% sf::st_drivers("raster")$name)
+    
     MODIStsp(test = 6)
     out_files_dat <- list.files(
       file.path(tempdir(), "MODIStsp/LAI_8Days_500m_v61"),

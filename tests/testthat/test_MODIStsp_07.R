@@ -6,7 +6,8 @@ test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     skip_on_travis()
-
+    skip_if(!"HDF4" %in% sf::st_drivers("raster")$name)
+    
     MODIStsp(
       test = 7,
       spatmeth = "file",
