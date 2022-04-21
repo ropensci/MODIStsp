@@ -13,7 +13,7 @@ test_that(
                                 found"))
     # provided options file is not a MODIStsp json options file
     expect_error(MODIStsp(
-      opts_file = system.file("ExtData", "MODIStsp_ProdOpts.xml",
+      opts_file = system.file("ExtData", "MODIStsp_ProdOpts.xml.zip",
                                  package = "MODIStsp"),
       gui = FALSE), "Unable to read the provided options")
 

@@ -122,12 +122,12 @@ License: GPL 3.0
 # __NOTE__ To avoid redownloading, here we copy some test data from MODIStsp
 # installation folder to tempdir and use it to create a test time series.
 
-test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI",
-                            package = "MODIStsp")
-dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"),
+test_zip <-  system.file("testdata/VI_16Days_500m_v6/NDVI.zip",
+                         package = "MODIStsp")
+dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"),
            showWarnings = FALSE, recursive = TRUE)
-file.copy(list.files(test_folder, full.names = TRUE),
-          file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI/"))
+utils::unzip(test_zip, 
+             exdir = file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"))
 
 opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
 MODIStsp(opts_file = opts_file, gui = FALSE, verbose = FALSE)
