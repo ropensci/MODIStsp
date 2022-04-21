@@ -1,4 +1,4 @@
-context("MODIStsp Test 1: Basic processing on bands and quality
+message("MODIStsp Test 1: Basic processing on bands and quality
         indicators")
 test_that(
   "Tests on MODIStsp", {
@@ -47,7 +47,7 @@ test_that(
     unlink(out_files)
 
     ### Test 1: Nodata values are properly changed on full tiles           ####
-    context("Nodata values are properly changed on full tiles ")
+    message("Nodata values are properly changed on full tiles ")
     MODIStsp(test = "01a")
     r <- sf::gdal_utils("info", out_files[1], quiet = TRUE)
     expect_equal(substring(strsplit(r, "NoData Value=")[[1]][2], 1, 5),

@@ -4,7 +4,7 @@
 #   After reprojection in geographic coordinates, output files are exported
 #   as GeoTiff (scaling output values) and vrt time series are created.
 
-context("MODIStsp Test 6: http download on \"combined\" datasets and mosaicing of MODIS tiles") #nolint
+message("MODIStsp Test 6: http download on \"combined\" datasets and mosaicing of MODIS tiles") #nolint
 test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
@@ -29,7 +29,7 @@ test_that(
     # re-run with same parameterization. Since Reprocess = "No", the
     # auto-skipping of already processed dates kicks-in in this case, leading
     # the process to be very quick (Only MODIStso_vrt_create needs to run. )
-    context("MODIStsp Test 6: No Reprocessing works as expected")
+    message("MODIStsp Test 6: No Reprocessing works as expected")
     t1 <- Sys.time()
     MODIStsp(test = 6)
     tt <- Sys.time() - t1
@@ -38,7 +38,7 @@ test_that(
 
     # re-run with same parameterization but nodata_chage to true to see
     # that nodata_change is ok when scale_val is true and multiple nodata
-    context("MODIStsp Test 6: multiple nodata and nodata_change")
+    message("MODIStsp Test 6: multiple nodata and nodata_change")
     MODIStsp(test = "06a")
     means <- unlist(
       lapply(out_files_dat,

@@ -32,14 +32,14 @@
     <a href="https://ropensci.org" class="external-link"><img src="https://ropensci.org/img/icon_short_white.svg" id="hexlogo" alt="rOpenSci"></a>
     <a class="navbar-brand me-2" href="../index.html">rOpenSci: MODIStsp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../index.html">
@@ -111,6 +111,9 @@
   </div>
 </nav><div class="container template-article">
 
+
+
+
 <div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Frequently Asked Questions</h1>
@@ -122,69 +125,124 @@
 
     
     
-<p>Here you can find possible <strong>solutions for common <code>MODIStsp</code> problems</strong>. We will add to this page as soon as additional problems are reported. If these solutions does not work for you, or you have a different problem, signal it at: <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link uri">https://github.com/ropensci/MODIStsp/issues</a></p>
+<p>Here you can find possible <strong>solutions for common
+<code>MODIStsp</code> problems</strong>. We will add to this page as
+soon as additional problems are reported. If these solutions does not
+work for you, or you have a different problem, signal it at: <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link uri">https://github.com/ropensci/MODIStsp/issues</a></p>
 <p><a name="Installation%20Problems"> </a></p>
-<div class="section level1">
-<h1 id="installation-problems">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Installation Problems<a class="anchor" aria-label="anchor" href="#installation-problems"></a>
-</h1>
+<div class="section level2">
+<h2 id="installation-problems">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+Installation Problems<a class="anchor" aria-label="anchor" href="#installation-problems"></a>
+</h2>
 <ul>
-<li><a href="#Missing-packages">On Linux, installation fails due to some packages missing</a></li>
-<li><a href="#gWidgets-error">On Windows, the program hangs at first interactive execution, while attempting to install <code>gWisgets2RGtk2</code></a></li>
-<li><a href="#gdal-error"><code>MODIStsp</code> hangs at first execution, while looking for <code>gdal</code> installation</a></li>
-<li><a href="#github-error">Installing from github fails due to missing dependencies</a></li>
+<li><a href="#Missing-packages">On Linux, installation fails due to some
+packages missing</a></li>
+<li><a href="#gWidgets-error">On Windows, the program hangs at first
+interactive execution, while attempting to install
+<code>gWisgets2RGtk2</code></a></li>
+<li><a href="#gdal-error"><code>MODIStsp</code> hangs at first
+execution, while looking for <code>gdal</code> installation</a></li>
+<li><a href="#github-error">Installing from github fails due to missing
+dependencies</a></li>
 </ul>
 <p><a name="gWidgets-error"></a></p>
-<div class="section level4">
-<h4 id="on-windows-modistsp-fails-to-install-signaling-problems-in-installation-of-either-gwidgetsrgtk2-or-rgtk2">- On Windows, <code>MODIStsp</code> fails to install, signaling problems in installation of either <code>gwidgetsRGtk2</code> or <code>RGtk2</code><a class="anchor" aria-label="anchor" href="#on-windows-modistsp-fails-to-install-signaling-problems-in-installation-of-either-gwidgetsrgtk2-or-rgtk2"></a>
-</h4>
-<p>Please try to install package <code>gwidgetsRGtk2</code> beforehand using:</p>
+<div class="section level5">
+<h5 id="on-windows-modistsp-fails-to-install-signaling-problems-in-installation-of-either-gwidgetsrgtk2-or-rgtk2">- On Windows, <code>MODIStsp</code> fails to install, signaling
+problems in installation of either <code>gwidgetsRGtk2</code> or
+<code>RGtk2</code><a class="anchor" aria-label="anchor" href="#on-windows-modistsp-fails-to-install-signaling-problems-in-installation-of-either-gwidgetsrgtk2-or-rgtk2"></a>
+</h5>
+<p>Please try to install package <code>gwidgetsRGtk2</code> beforehand
+using:</p>
 <pre><code><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"gwidgetsRGtk2"</span><span class="op">)</span></code></pre>
-<p>You will probably get some errors/problems during installation: please see instructions on the next point !</p>
+<p>You will probably get some errors/problems during installation:
+please see instructions on the next point !</p>
 </div>
-<div class="section level4">
-<h4 id="on-windows-modistsp-hangs-at-first-interactive-execution-while-attempting-to-install-gwisgetsrgtk2">- On Windows, <code>MODIStsp</code> hangs at first interactive execution, while attempting to install <code>gWisgetsRGtk2</code><a class="anchor" aria-label="anchor" href="#on-windows-modistsp-hangs-at-first-interactive-execution-while-attempting-to-install-gwisgetsrgtk2"></a>
-</h4>
-<p>At first interactive execution (i.e., with “gui = TRUE) of <code>MODIStsp</code>, an error window may appear, signaling that <em>libatk-1.0-0.dll</em> is missing from your system. This is due to the fact that library”GTK+"" is not yet installed on your system and needs to be installed. To do so, press “OK”. A new window dialog window will appear, asking if you want to install “GTK+”. Select <em>“Install GTK+”</em> and then <em>“OK”</em>. Windows will download and install the GTK+ library. When it finishes, the R Session should be restarted and next <code>MODIStsp</code> should go well ! In case RStudio does not automatically restart after installing GTK+, simply kill it form “Task Manager” and reload RStudio.</p>
-<p>If you still have problems, try to install the GTK+ library independently, following instructions reported here:</p>
+<div class="section level5">
+<h5 id="on-windows-modistsp-hangs-at-first-interactive-execution-while-attempting-to-install-gwisgetsrgtk2">- On Windows, <code>MODIStsp</code> hangs at first interactive
+execution, while attempting to install <code>gWisgetsRGtk2</code><a class="anchor" aria-label="anchor" href="#on-windows-modistsp-hangs-at-first-interactive-execution-while-attempting-to-install-gwisgetsrgtk2"></a>
+</h5>
+<p>At first interactive execution (i.e., with “gui = TRUE) of
+<code>MODIStsp</code>, an error window may appear, signaling that
+<em>libatk-1.0-0.dll</em> is missing from your system. This is due to
+the fact that library”GTK+“” is not yet installed on your system and
+needs to be installed. To do so, press “OK”. A new window dialog window
+will appear, asking if you want to install “GTK+”. Select <em>“Install
+GTK+”</em> and then <em>“OK”</em>. Windows will download and install the
+GTK+ library. When it finishes, the R Session should be restarted and
+next <code>MODIStsp</code> should go well ! In case RStudio does not
+automatically restart after installing GTK+, simply kill it form “Task
+Manager” and reload RStudio.</p>
+<p>If you still have problems, try to install the GTK+ library
+independently, following instructions reported here:</p>
 <p><a href="https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2" class="external-link uri">https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2</a></p>
-<p>, starting from “Download the GTK+ all-in-one bundle. I downloaded version 2.22 for Windows 64-bit.”. Then try to install <code>gWisgetsRGtk2</code> before <code>MODIStsp</code> as explained in the point above.</p>
+<p>, starting from “Download the GTK+ all-in-one bundle. I downloaded
+version 2.22 for Windows 64-bit.”. Then try to install
+<code>gWisgetsRGtk2</code> before <code>MODIStsp</code> as explained in
+the point above.</p>
 <p><a name="Missing-packages"></a></p>
 </div>
-<div class="section level4">
-<h4 id="on-linux-installation-fails-due-to-some-packages-missing">- On Linux, installation fails due to some packages missing<a class="anchor" aria-label="anchor" href="#on-linux-installation-fails-due-to-some-packages-missing"></a>
-</h4>
-<p>Please Install the following required dependencies: * Cairo &gt;= 1.0.0, ATK &gt;= 1.10.0, Pango &gt;= 1.10.0, GTK+ &gt;= 2.8.0, GLib &gt;= 2.8.0 (required by package <code>RGtk2</code>) * Curl (required by package <code>curl</code>) * GDAL &gt;= 1.6.3, PROJ.4 &gt;= 4.4.9 (required by package <code>rgdal</code>)</p>
-<p>On <strong>Debian and Ubuntu-based systems</strong>, to install packages open a terminal and type:</p>
+<div class="section level5">
+<h5 id="on-linux-installation-fails-due-to-some-packages-missing">- On Linux, installation fails due to some packages missing<a class="anchor" aria-label="anchor" href="#on-linux-installation-fails-due-to-some-packages-missing"></a>
+</h5>
+<p>Please Install the following required dependencies: * Cairo &gt;=
+1.0.0, ATK &gt;= 1.10.0, Pango &gt;= 1.10.0, GTK+ &gt;= 2.8.0, GLib
+&gt;= 2.8.0 (required by package <code>RGtk2</code>) * Curl (required by
+package <code>curl</code>) * GDAL &gt;= 1.6.3, PROJ.4 &gt;= 4.4.9
+(required by package <code>rgdal</code>)</p>
+<p>On <strong>Debian and Ubuntu-based systems</strong>, to install
+packages open a terminal and type:</p>
 <pre><code>  sudo apt-get install r-cran-cairodevice r-cran-rgtk2 libcairo2-dev libatk1.0-dev libpango1.0-dev 
   libgtk2.0-dev libglib2.0-dev libcurl4-openssl-dev libgdal-dev libproj-dev</code></pre>
-<p>On <strong>rpm-based systems</strong>, to install packages open a terminal and type;</p>
+<p>On <strong>rpm-based systems</strong>, to install packages open a
+terminal and type;</p>
 <pre><code>   sudo yum install libcairo2-devel libatk1.0-devel libpango1.0-devel gtk2 gtk2-devel 
    glib2-devel libcurl4-devel gdal-devel proj-devel</code></pre>
-<p>On <strong>others distros</strong>: we did not test installation on other distros yet - if you experience problems please contact us.</p>
+<p>On <strong>others distros</strong>: we did not test installation on
+other distros yet - if you experience problems please contact us.</p>
 <p><a name="gdal-error"></a></p>
 </div>
-<div class="section level4">
-<h4 id="modistsp-hangs-at-first-execution-while-looking-for-gdal-installation">- MODIStsp hangs at first execution, while looking for <code>gdal</code> installation<a class="anchor" aria-label="anchor" href="#modistsp-hangs-at-first-execution-while-looking-for-gdal-installation"></a>
-</h4>
-<p>At the first execution <code>MODIStsp</code> searches for a valid <code>GDAL</code> installation. If nothing happens for a long time (e.g., several minutes), <code>MODIStsp</code> (and in particular the <code>gdalUtils</code> package on which it relies) is not finding a valid <code>GDAL</code> installation in the more common locations. To solve the problem:</p>
+<div class="section level5">
+<h5 id="modistsp-hangs-at-first-execution-while-looking-for-gdal-installation">- MODIStsp hangs at first execution, while looking for
+<code>gdal</code> installation<a class="anchor" aria-label="anchor" href="#modistsp-hangs-at-first-execution-while-looking-for-gdal-installation"></a>
+</h5>
+<p>At the first execution <code>MODIStsp</code> searches for a valid
+<code>GDAL</code> installation. If nothing happens for a long time
+(e.g., several minutes), <code>MODIStsp</code> (and in particular the
+<code>gdalUtils</code> package on which it relies) is not finding a
+valid <code>GDAL</code> installation in the more common locations. To
+solve the problem:</p>
 <ol style="list-style-type: decimal">
-<li>Ensure that <code>GDAL</code> is properly installed in your system. See the main <code>MODIStsp</code> github page for simple instructions</li>
-<li>(On Windows) If it is installed, verify that <code>GDAL</code> is in your system PATH, and that the <em>GDAL_DATA</em> environment variable is correctly set (You can find simple instructions <a href="http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/" class="external-link">HERE</a>) (If gdal is not correctly installed or the path not set, then opening a windows shell (“cmd”) and issuing the “gdalinfo” command will result in an error !)</li>
+<li>Ensure that <code>GDAL</code> is properly installed in your system.
+See the main <code>MODIStsp</code> github page for simple
+instructions</li>
+<li>(On Windows) If it is installed, verify that <code>GDAL</code> is in
+your system PATH, and that the <em>GDAL_DATA</em> environment variable
+is correctly set (You can find simple instructions <a href="http://gisforthought.com/setting-up-your-gdal-and-ogr-environmental-variables/" class="external-link">HERE</a>)
+(If gdal is not correctly installed or the path not set, then opening a
+windows shell (“cmd”) and issuing the “gdalinfo” command will result in
+an error !)</li>
 </ol>
 <p>If nothing works, please report the issue here: <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link uri">https://github.com/ropensci/MODIStsp/issues</a></p>
 <p><a name="github-error"></a></p>
 </div>
-<div class="section level4">
-<h4 id="installing-from-github-fails-due-to-missing-dependencies">- Installing from github fails due to missing dependencies<a class="anchor" aria-label="anchor" href="#installing-from-github-fails-due-to-missing-dependencies"></a>
-</h4>
-<p>There are currently some problems in installing <code>MODIStsp</code> <strong>via <code>install_github</code></strong> on R &gt;= 3.3.1 due to not correct installation of dependencies (related to a bug in CRAN version of <code>install_github</code>). Installing the development version of <code>devtools</code> should solve the issue. To do so, on a <strong>clean</strong> R/RStudio session do:</p>
+<div class="section level5">
+<h5 id="installing-from-github-fails-due-to-missing-dependencies">- Installing from github fails due to missing dependencies<a class="anchor" aria-label="anchor" href="#installing-from-github-fails-due-to-missing-dependencies"></a>
+</h5>
+<p>There are currently some problems in installing <code>MODIStsp</code>
+<strong>via <code>install_github</code></strong> on R &gt;= 3.3.1 due to
+not correct installation of dependencies (related to a bug in CRAN
+version of <code>install_github</code>). Installing the development
+version of <code>devtools</code> should solve the issue. To do so, on a
+<strong>clean</strong> R/RStudio session do:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
   <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"hadley/devtools"</span><span class="op">)</span>
   <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></code></pre></div>
 <p>, then continue with standard <code>MODIStsp</code> installation.</p>
-<p>If you have problems in installing the “devel” version of <code>devtools</code>, manually installing all the dependencies should also solve the issue. To do so, please try doing:</p>
+<p>If you have problems in installing the “devel” version of
+<code>devtools</code>, manually installing all the dependencies should
+also solve the issue. To do so, please try doing:</p>
 <pre><code><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bitops"</span>, <span class="st">"data.table"</span> , <span class="st">"gdalUtilities"</span>, <span class="st">"gWidgets"</span>, <span class="st">"gWidgetsRGtk2"</span>,
   <span class="st">"httr"</span> , <span class="st">"jsonlite"</span>, <span class="st">"parallel"</span>, <span class="st">"raster"</span>, <span class="st">"sf"</span>, <span class="st">"stringr"</span>, <span class="st">"xts"</span><span class="op">)</span><span class="op">)</span></code></pre>
 <p>, then continue with standard <code>MODIStsp</code> installation.</p>
@@ -193,100 +251,158 @@
 <p><a name="download-errors"></a></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="data-download-problems">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Data download Problems</strong><a class="anchor" aria-label="anchor" href="#data-download-problems"></a>
-</h1>
+<div class="section level2">
+<h2 id="data-download-problems">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Data download Problems</strong><a class="anchor" aria-label="anchor" href="#data-download-problems"></a>
+</h2>
 <ul>
-<li><a href="#timeout-error">On ‘http’ download, files are not getting downloaded, OR you get ‘timeout’ problems</a></li>
+<li><a href="#timeout-error">On ‘http’ download, files are not getting
+downloaded, OR you get ‘timeout’ problems</a></li>
 </ul>
 <p><a name="timeout-error"></a></p>
-<div class="section level4">
-<h4 id="on-http-download-files-are-not-getting-downloaded-or-you-get-timeout-problems">- On ‘http’ download, files are not getting downloaded, OR you get ‘timeout’ problems<a class="anchor" aria-label="anchor" href="#on-http-download-files-are-not-getting-downloaded-or-you-get-timeout-problems"></a>
-</h4>
+<div class="section level5">
+<h5 id="on-http-download-files-are-not-getting-downloaded-or-you-get-timeout-problems">- On ‘http’ download, files are not getting downloaded, OR you get
+‘timeout’ problems<a class="anchor" aria-label="anchor" href="#on-http-download-files-are-not-getting-downloaded-or-you-get-timeout-problems"></a>
+</h5>
 <ol style="list-style-type: decimal">
-<li>Visit your <a href="https://urs.earthdata.nasa.gov/profile" class="external-link">earthdata “profile” page</a>, click on “My Applications” and <em>ensure that “LP DAAC Data Pool” is authorized</em>. If not, click on “Approve More Applications”, search for it in the list and approve it.</li>
-<li>Verify that the <strong>username and password</strong> you provided are correct (Those can be obtained by <strong>registering an account</strong> at: <a href="https://urs.earthdata.nasa.gov/profile" class="external-link uri">https://urs.earthdata.nasa.gov/profile</a>.);</li>
+<li>Visit your <a href="https://urs.earthdata.nasa.gov/profile" class="external-link">earthdata “profile”
+page</a>, click on “My Applications” and <em>ensure that “LP DAAC Data
+Pool” is authorized</em>. If not, click on “Approve More Applications”,
+search for it in the list and approve it.</li>
+<li>Verify that the <strong>username and password</strong> you provided
+are correct (Those can be obtained by <strong>registering an
+account</strong> at: <a href="https://urs.earthdata.nasa.gov/profile" class="external-link uri">https://urs.earthdata.nasa.gov/profile</a>.);</li>
 <li>
-<em>Is it Wednesday ???</em> If so, NASA http server may be down for maintenance. <strong>Try switching to “ftp” download</strong>;</li>
-<li>In some cases, access to the http server seems to be not allowed (we don’t know why - maybe firewalling). <strong>Try switching to ftp download</strong>.</li>
+<em>Is it Wednesday ???</em> If so, NASA http server may be down for
+maintenance. <strong>Try switching to “ftp” download</strong>;</li>
+<li>In some cases, access to the http server seems to be not allowed (we
+don’t know why - maybe firewalling). <strong>Try switching to ftp
+download</strong>.</li>
 </ol>
 </div>
-<div class="section level4">
-<h4 id="files-are-not-getting-downloaded-on-either-http-or-ftp-and-you-get-continuous-timeout-problems">- Files are not getting downloaded on either “http” or “ftp”, and you get continuous ‘timeout’ problems<a class="anchor" aria-label="anchor" href="#files-are-not-getting-downloaded-on-either-http-or-ftp-and-you-get-continuous-timeout-problems"></a>
-</h4>
+<div class="section level5">
+<h5 id="files-are-not-getting-downloaded-on-either-http-or-ftp-and-you-get-continuous-timeout-problems">- Files are not getting downloaded on either “http” or “ftp”, and
+you get continuous ‘timeout’ problems<a class="anchor" aria-label="anchor" href="#files-are-not-getting-downloaded-on-either-http-or-ftp-and-you-get-continuous-timeout-problems"></a>
+</h5>
 <ol style="list-style-type: decimal">
-<li>If you’re connecting to the internet <strong>via a proxy</strong>, download will fail. To solve the problem, identify the IP address and port of you proxy, and before running MODIStsp, run the following instructions:</li>
+<li>If you’re connecting to the internet <strong>via a proxy</strong>,
+download will fail. To solve the problem, identify the IP address and
+port of you proxy, and before running MODIStsp, run the following
+instructions:</li>
 </ol>
 <pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/" class="external-link">httr</a></span><span class="op">)</span>
     <span class="fu"><a href="https://httr.r-lib.org/reference/set_config.html" class="external-link">set_config</a></span><span class="op">(</span><span class="fu"><a href="https://httr.r-lib.org/reference/use_proxy.html" class="external-link">use_proxy</a></span><span class="op">(</span>url<span class="op">=</span><span class="st">"XXX.XXX.XXX.XXX"</span>, port<span class="op">=</span><span class="va">YYYY</span><span class="op">)</span><span class="op">)</span></code></pre>
-<p>(substitute XXX.XXX.XXX.XXX and YYYY with the IP address and port number of the proxy, respectively)</p>
+<p>(substitute XXX.XXX.XXX.XXX and YYYY with the IP address and port
+number of the proxy, respectively)</p>
 <ol start="2" style="list-style-type: decimal">
-<li>If your connection is very slow, you could get frequent timeout problems while <code>MODIStsp</code> fetches the list of files available on NASA archives. This problem is more pronounced for ftp download, so switching to http may be a good idea !</li>
+<li>If your connection is very slow, you could get frequent timeout
+problems while <code>MODIStsp</code> fetches the list of files available
+on NASA archives. This problem is more pronounced for ftp download, so
+switching to http may be a good idea !</li>
 </ol>
 </div>
-<div class="section level4">
-<h4 id="no-luck-nothing-worked">- No luck ! Nothing worked<a class="anchor" aria-label="anchor" href="#no-luck-nothing-worked"></a>
-</h4>
-<p>If nothing of the above solves your problem, please report the issue here: <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link uri">https://github.com/ropensci/MODIStsp/issues</a></p>
+<div class="section level5">
+<h5 id="no-luck-nothing-worked">- No luck ! Nothing worked<a class="anchor" aria-label="anchor" href="#no-luck-nothing-worked"></a>
+</h5>
+<p>If nothing of the above solves your problem, please report the issue
+here: <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link uri">https://github.com/ropensci/MODIStsp/issues</a></p>
 <hr>
 <p><a name="processing-errors"></a></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="processing-problems">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Processing Problems</strong><a class="anchor" aria-label="anchor" href="#processing-problems"></a>
-</h1>
+<div class="section level2">
+<h2 id="processing-problems">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Processing Problems</strong><a class="anchor" aria-label="anchor" href="#processing-problems"></a>
+</h2>
 <ul>
-<li><a href="#product-error"><code>MODIStsp</code> fails while processing product <strong>MxDyyy</strong></a></li>
+<li><a href="#product-error"><code>MODIStsp</code> fails while
+processing product <strong>MxDyyy</strong></a></li>
 <li><a href="#whereare-error">I can’t find the processed files</a></li>
-<li><a href="#old-hdfs">Working with already downloaded hdf files</a></li>
+<li><a href="#old-hdfs">Working with already downloaded hdf
+files</a></li>
 </ul>
 <p><a name="product-error"></a></p>
-<div class="section level4">
-<h4 id="modistsp-fails-while-processing-product-mxdyyy">- MODIStsp fails while processing product <strong>MxDyyy</strong><a class="anchor" aria-label="anchor" href="#modistsp-fails-while-processing-product-mxdyyy"></a>
-</h4>
-<p>Although we tried to test functionality for all products, some bugs may be still present for specific products, due to the complexity and variability of MODIS hdfs structure. In that case, please report the issue here: <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link uri">https://github.com/ropensci/MODIStsp/issues</a></p>
+<div class="section level5">
+<h5 id="modistsp-fails-while-processing-product-mxdyyy">- MODIStsp fails while processing product
+<strong>MxDyyy</strong><a class="anchor" aria-label="anchor" href="#modistsp-fails-while-processing-product-mxdyyy"></a>
+</h5>
+<p>Although we tried to test functionality for all products, some bugs
+may be still present for specific products, due to the complexity and
+variability of MODIS hdfs structure. In that case, please report the
+issue here: <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link uri">https://github.com/ropensci/MODIStsp/issues</a></p>
 <p><a name="whereare-error"></a></p>
 </div>
-<div class="section level4">
-<h4 id="wherehow-can-i-access-the-processed-data">- Where/How can I access the processed data ?<a class="anchor" aria-label="anchor" href="#wherehow-can-i-access-the-processed-data"></a>
-</h4>
+<div class="section level5">
+<h5 id="wherehow-can-i-access-the-processed-data">- Where/How can I access the processed data ?<a class="anchor" aria-label="anchor" href="#wherehow-can-i-access-the-processed-data"></a>
+</h5>
 <p>Please see <a href="output.html">here</a></p>
 <p><a name="old-hdfs"></a></p>
 </div>
-<div class="section level4">
-<h4 id="working-with-already-downloaded-hdf-files">- Working with already downloaded hdf files<a class="anchor" aria-label="anchor" href="#working-with-already-downloaded-hdf-files"></a>
-</h4>
-<p>If you wish to use <code>MODIStsp</code> to process MODIS hdf images that you already downloaded from NASA servers, you should proceed like this:</p>
+<div class="section level5">
+<h5 id="working-with-already-downloaded-hdf-files">- Working with already downloaded hdf files<a class="anchor" aria-label="anchor" href="#working-with-already-downloaded-hdf-files"></a>
+</h5>
+<p>If you wish to use <code>MODIStsp</code> to process MODIS hdf images
+that you already downloaded from NASA servers, you should proceed like
+this:</p>
 <ol style="list-style-type: decimal">
-<li><p>Place all the hdf files in a folder of your choice (e.g., “D:\myfolder\mydir\hdf_modis”). All the images must reside in the root of that folder (i.e., no subfolders)</p></li>
+<li><p>Place all the hdf files in a folder of your choice (e.g.,
+“D:\myfolder\mydir\hdf_modis”). All the images must reside in the root
+of that folder (i.e., no subfolders)</p></li>
 <li>
-<p>Open MODIStsp GUI and set the processing parameters for your analysis as you would do if you had still to download the data. In particular, be sure to:</p>
+<p>Open MODIStsp GUI and set the processing parameters for your
+analysis as you would do if you had still to download the data. In
+particular, be sure to:</p>
 <ul>
-<li>select the product <em><strong>corresponding to your hdf images</strong></em> on the top of the GUI (e.g., MOD13Q1 v006), and set the processing layers you wish to analyze;</li>
-<li>set the <em><strong>processing period</strong></em> to that of your available images;</li>
-<li>Set the <em><strong>spatial extent</strong></em> to that of your available images. A minimum requirement is to set the Horizontal and Vertical “Required MODIS tiles” so to correspond to your imagery. If you also specify a bounding box for the output, that will be considered while creating the outputs.</li>
+<li>select the product <em><strong>corresponding to your hdf
+images</strong></em> on the top of the GUI (e.g., MOD13Q1 v006), and set
+the processing layers you wish to analyze;</li>
+<li>set the <em><strong>processing period</strong></em> to that of your
+available images;</li>
+<li>Set the <em><strong>spatial extent</strong></em> to that of your
+available images. A minimum requirement is to set the Horizontal and
+Vertical “Required MODIS tiles” so to correspond to your imagery. If you
+also specify a bounding box for the output, that will be considered
+while creating the outputs.</li>
 </ul>
 </li>
 <li>
 <p>Set the “download method” to either:</p>
 <ul>
-<li><p><em><strong>http/ftp</strong></em>: if you want <code>MODIStsp</code> to check if all the images for the selected product and time period are already available on your PC. <code>MODIStsp</code> will take care of downloading any missing image (i.e., if you forgot to download something, or the processing period you provided is larger than that “covered” by the images you already have).</p></li>
-<li><p><em><strong>offline</strong></em>: if you just want to process the images that you have. In that case, <code>MODIStsp</code> will not even connect to NASA servers, and just process all images that it finds in your “hdf folder” <strong><em>and which satisfy the processing parameters you specified</em></strong> (to be clear: if you have a folder with MOD13Q1 images, but the GUI is set as to process MOD09A1 data, nothing will happen. Analogously, if you have imagery from 2003 to 2009, but you set the processing period from 2010 to 2015 nothing will happen)</p></li>
+<li><p><em><strong>http/ftp</strong></em>: if you want
+<code>MODIStsp</code> to check if all the images for the selected
+product and time period are already available on your PC.
+<code>MODIStsp</code> will take care of downloading any missing image
+(i.e., if you forgot to download something, or the processing period you
+provided is larger than that “covered” by the images you already
+have).</p></li>
+<li><p><em><strong>offline</strong></em>: if you just want to process
+the images that you have. In that case, <code>MODIStsp</code> will not
+even connect to NASA servers, and just process all images that it finds
+in your “hdf folder” <strong><em>and which satisfy the processing
+parameters you specified</em></strong> (to be clear: if you have a
+folder with MOD13Q1 images, but the GUI is set as to process MOD09A1
+data, nothing will happen. Analogously, if you have imagery from 2003 to
+2009, but you set the processing period from 2010 to 2015 nothing will
+happen)</p></li>
 </ul>
 </li>
-<li><p>Set the “Output Folder for Original HDF files download” to the folder containing the hdf images, and the "Main Output Folder for Time Series storage to the folder where you want to store the results of the processing.</p></li>
+<li><p>Set the “Output Folder for Original HDF files download” to the
+folder containing the hdf images, and the “Main Output Folder for Time
+Series storage to the folder where you want to store the results of the
+processing.</p></li>
 <li><p>Start the processing.</p></li>
 </ol>
 <hr>
 <p><a name="other-errors"></a></p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="other-problems">
-<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong>Other Problems</strong><a class="anchor" aria-label="anchor" href="#other-problems"></a>
-</h1>
+<div class="section level2">
+<h2 id="other-problems">
+<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+<strong>Other Problems</strong><a class="anchor" aria-label="anchor" href="#other-problems"></a>
+</h2>
 <p>Please report any other issues at <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link uri">https://github.com/ropensci/MODIStsp/issues</a></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

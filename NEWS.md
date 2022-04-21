@@ -1,3 +1,13 @@
+# MODIStsp 2.0.7
+
+## Minor changes
+- Add product version 061 for existing products (#238)
+- Closing the support on GitHub issues, due to career change of the maintainer.
+
+## Bug fixes 
+- Fix #245
+
+
 # MODIStsp 2.0.6
 
 ## Minor changes

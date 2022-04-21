@@ -32,14 +32,14 @@
     <a href="https://ropensci.org" class="external-link"><img src="https://ropensci.org/img/icon_short_white.svg" id="hexlogo" alt="rOpenSci"></a>
     <a class="navbar-brand me-2" href="../index.html">rOpenSci: MODIStsp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../index.html">
@@ -111,6 +111,9 @@
   </div>
 </nav><div class="container template-article">
 
+
+
+
 <div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Bug discovered in spectral indices computation</h1>
@@ -122,23 +125,31 @@
 
     
     
-<p>We are sorry to report that we recently discovered a nasty bug (or rather, a stupid mistake…) in the <a href="https://github.com/ropensci/MODIStsp" class="external-link">MODIStsp</a> package.</p>
-<p>The bug led to improper computation of custom spectral indices in the case that their formula included addition or subtraction operations on reflectance values (e.g., something like <span class="math inline">\(\frac{(\rho_{NIR}+0.1)}{\rho_{Red}}\)</span>, with <span class="math inline">\(\rho\)</span> indicating a reflectance).</p>
+<p>We are sorry to report that we recently discovered a nasty bug (or
+rather, a stupid mistake…) in the <a href="https://github.com/ropensci/MODIStsp" class="external-link">MODIStsp</a> package.</p>
+<p>The bug led to improper computation of custom spectral indices in the
+case that their formula included addition or subtraction operations on
+reflectance values (e.g., something like <span class="math inline">\(\frac{(\rho_{NIR}+0.1)}{\rho_{Red}}\)</span>, with
+<span class="math inline">\(\rho\)</span> indicating a reflectance).</p>
 <div class="section level2">
 <h2 id="what-is-affected">What is affected<a class="anchor" aria-label="anchor" href="#what-is-affected"></a>
 </h2>
 <ul>
 <li>
-<p>Values of the following <em>Additional Spectral Indices</em> selectable using the MODIStsp GUI:</p>
+<p>Values of the following <em>Additional Spectral Indices</em>
+selectable using the MODIStsp GUI:</p>
 <ul>
 <li>EVI</li>
 <li>SAVI</li>
 </ul>
-<p>, <em>in the case that the <strong>Apply Scale/Offset</strong> option was set to “No”</em></p>
+<p>, <em>in the case that the <strong>Apply Scale/Offset</strong> option
+was set to “No”</em></p>
 </li>
 <li>
-<p>Values of any <em>custom spectral indexes</em> added by the user, in case they included additive or subtractive coefficients.</p>
-<p>, <em>in the case that the <strong>Apply Scale/Offset</strong> option was set to “No”</em></p>
+<p>Values of any <em>custom spectral indexes</em> added by the user,
+in case they included additive or subtractive coefficients.</p>
+<p>, <em>in the case that the <strong>Apply Scale/Offset</strong> option
+was set to “No”</em></p>
 </li>
 </ul>
 </div>
@@ -146,25 +157,42 @@
 <h2 id="what-is-not-affected">What is NOT affected<a class="anchor" aria-label="anchor" href="#what-is-not-affected"></a>
 </h2>
 <ul>
-<li><p>Values of spectral indexes available in MODIS HDF images as original sds layers (e.g., EVI in MOD13Q1)</p></li>
-<li><p>Values of any additional / custom spectral indexes in case they did not include additive or subtractive coefficients, or the <strong>Apply Scale/Offset</strong> option was set to “Yes”</p></li>
+<li><p>Values of spectral indexes available in MODIS HDF images as
+original sds layers (e.g., EVI in MOD13Q1)</p></li>
+<li><p>Values of any additional / custom spectral indexes in case they
+did not include additive or subtractive coefficients, or the
+<strong>Apply Scale/Offset</strong> option was set to “Yes”</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="what-to-do-if-you-are-affected">What to do if you are affected<a class="anchor" aria-label="anchor" href="#what-to-do-if-you-are-affected"></a>
 </h2>
-<p>The bug is now fixed on the GitHub version. A patched release will be made available on CRAN as soon as possible. Unfortunately, if you have time series processed with the old version falling in the “What is affected” category, there’s nothing you can do, save for reprocessing them.</p>
-<p><strong>We are truly sorry for the problem</strong>, which somehow managed to slip under the radar until now. We hope it will not bring you too much trouble!</p>
+<p>The bug is now fixed on the GitHub version. A patched release will be
+made available on CRAN as soon as possible. Unfortunately, if you have
+time series processed with the old version falling in the “What is
+affected” category, there’s nothing you can do, save for reprocessing
+them.</p>
+<p><strong>We are truly sorry for the problem</strong>, which somehow
+managed to slip under the radar until now. We hope it will not bring you
+too much trouble!</p>
 </div>
 <div class="section level2">
 <h2 id="what-exactly-was-the-problem">What exactly was the problem?<a class="anchor" aria-label="anchor" href="#what-exactly-was-the-problem"></a>
 </h2>
-<p>This is <strong>so basic that can easily go unnoticed.</strong> So it’s better to document it…</p>
-<p>MODIS reflectances are stored in HDF layers as integers with a 10000 scale factor (e.g., a 0.1 reflectance is stored as 1000). If you need to “manually” compute and index such as SAVI:</p>
-<p><span class="math inline">\(SAVI = \frac{(\rho_{NIR} - \rho_{Red})}{(\rho_{NIR} + \rho_{Red} + 0.5)} * (1 + 0.5)\)</span>).</p>
-<p>starting from MODIS reflectances, you must take care of multiplying the MODIS data by 10E-4 beforehand. Your formula then becomes:</p>
-<p><span class="math inline">\(SAVI = \frac{(0.0001 * b2_{NIR} - 0.0001 * b1_{Red})}{0.0001 * b2_{NIR} + 0.0001 * b1_{Red} + 0.5} * (1 + 0.5)\)</span>).</p>
-<p>, otherwise the additive constants (in this case, the <span class="math inline">\(+ 0.5\)</span> in the denominator) would be made practically irrelevant.</p>
+<p>This is <strong>so basic that can easily go unnoticed.</strong> So
+it’s better to document it…</p>
+<p>MODIS reflectances are stored in HDF layers as integers with a 10000
+scale factor (e.g., a 0.1 reflectance is stored as 1000). If you need to
+“manually” compute and index such as SAVI:</p>
+<p><span class="math inline">\(SAVI = \frac{(\rho_{NIR} -
+\rho_{Red})}{(\rho_{NIR} + \rho_{Red} + 0.5)} * (1 + 0.5)\)</span>).</p>
+<p>starting from MODIS reflectances, you must take care of multiplying
+the MODIS data by 10E-4 beforehand. Your formula then becomes:</p>
+<p><span class="math inline">\(SAVI = \frac{(0.0001 * b2_{NIR} - 0.0001
+* b1_{Red})}{0.0001 * b2_{NIR} + 0.0001 * b1_{Red} + 0.5} * (1 +
+0.5)\)</span>).</p>
+<p>, otherwise the additive constants (in this case, the <span class="math inline">\(+ 0.5\)</span> in the denominator) would be made
+practically irrelevant.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

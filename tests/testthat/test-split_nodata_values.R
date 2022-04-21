@@ -1,4 +1,4 @@
-context("test-split_nodata_values.R")
+message("test-split_nodata_values.R")
 
 test_that("split_nodata_values works as expected", {
   expect_equal(split_nodata_values(c("250:255"))[[1]], 250:255)

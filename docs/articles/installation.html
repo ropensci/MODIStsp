@@ -32,14 +32,14 @@
     <a href="https://ropensci.org" class="external-link"><img src="https://ropensci.org/img/icon_short_white.svg" id="hexlogo" alt="rOpenSci"></a>
     <a class="navbar-brand me-2" href="../index.html">rOpenSci: MODIStsp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../index.html">
@@ -111,6 +111,9 @@
   </div>
 </nav><div class="container template-article">
 
+
+
+
 <div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Installation</h1>
@@ -124,11 +127,14 @@
     
 <div class="section level2">
 <h2 id="installing-on-windows">
-<i class="fa fa-windows" aria-hidden="true"></i> Installing on Windows<a class="anchor" aria-label="anchor" href="#installing-on-windows"></a>
+<i class="fa fa-windows" aria-hidden="true"></i> Installing on
+Windows<a class="anchor" aria-label="anchor" href="#installing-on-windows"></a>
 </h2>
-<p>You can install the stable version of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> from CRAN:</p>
+<p>You can install the stable version of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> from
+CRAN:</p>
 <p><code>install.packages("MODIStsp")</code></p>
-<p>, or the development version (containing the latest improvements and bug fixes) from GitHub:</p>
+<p>, or the development version (containing the latest improvements and
+bug fixes) from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span>
@@ -136,27 +142,42 @@
 </div>
 <div class="section level2">
 <h2 id="installing-on-linux-systems">
-<i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux Systems<a class="anchor" aria-label="anchor" href="#installing-on-linux-systems"></a>
+<i class="fa fa-linux" aria-hidden="true"></i> Installing on Linux
+Systems<a class="anchor" aria-label="anchor" href="#installing-on-linux-systems"></a>
 </h2>
-<p>To install <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> on Linux, you need to be able to install the <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> package, which requires several dependencies. See <a href="https://github.com/r-spatial/sf#installing" class="external-link">HERE</a> if you have trouble installing <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a>.</p>
-<p>In addition, you need to install dependencies required by the <a href="https://github.com/jeroen/protolite" class="external-link">protolite</a> package, required by <a href="https://docs.ropensci.org/geojson" class="external-link">geojson</a>. See <a href="https://github.com/jeroen/protolite/" class="external-link">HERE</a> for instructions on installing them.</p>
-<p>Then, you can install the stable version of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> from CRAN:</p>
+<p>To install <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> on Linux, you need to be able to
+install the <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> package, which requires several
+dependencies. See <a href="https://github.com/r-spatial/sf#installing" class="external-link">HERE</a> if you have
+trouble installing <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a>.</p>
+<p>In addition, you need to install dependencies required by the
+<a href="https://github.com/jeroen/protolite" class="external-link">protolite</a> package, required by <a href="https://docs.ropensci.org/geojson" class="external-link">geojson</a>.
+See <a href="https://github.com/jeroen/protolite/" class="external-link">HERE</a> for
+instructions on installing them.</p>
+<p>Then, you can install the stable version of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a>
+from CRAN:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"MODIStsp"</span><span class="op">)</span></code></pre></div>
-<p>, or the development version (containing the latest improvements and bug fixes) from GitHub:</p>
+<p>, or the development version (containing the latest improvements and
+bug fixes) from GitHub:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ropensci/MODIStsp"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="installing-on-mac">
-<i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac<a class="anchor" aria-label="anchor" href="#installing-on-mac"></a>
+<i class="fa fa-apple" aria-hidden="true"></i> Installing on
+Mac<a class="anchor" aria-label="anchor" href="#installing-on-mac"></a>
 </h2>
-<p>To install <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> on MacOS, you need to be able to install the <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> package, which requires gdal to be installed. See <a href="https://github.com/r-spatial/sf#installing" class="external-link">HERE</a> if you have trouble installing <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a>.</p>
-<p>Then, you can install the stable version of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> from CRAN:</p>
+<p>To install <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> on MacOS, you need to be able to
+install the <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> package, which requires gdal to be
+installed. See <a href="https://github.com/r-spatial/sf#installing" class="external-link">HERE</a> if you have
+trouble installing <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a>.</p>
+<p>Then, you can install the stable version of <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a>
+from CRAN:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"MODIStsp"</span><span class="op">)</span></code></pre></div>
-<p>, or the development version (containing the latest improvements and bug fixes) from GitHub:</p>
+<p>, or the development version (containing the latest improvements and
+bug fixes) from GitHub:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ropensci/MODIStsp"</span><span class="op">)</span></code></pre></div>

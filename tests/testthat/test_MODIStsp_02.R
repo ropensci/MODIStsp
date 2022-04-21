@@ -10,11 +10,11 @@ test_that(
 
     suppressWarnings(MODIStsp(test = 2)) # FIXME manage the returned warning:
     # "GDAL Message 1: All options related to creation ignored in update mode"
-    context("MODIStsp Test 2: Processing works when changing projection and
+    message("MODIStsp Test 2: Processing works when changing projection and
             resolution")
     out_files_dat  <- list.files(
       file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_GridSin_v6"),
-      pattern = "\\.dat$", recursive = TRUE, full.names = TRUE)
+      pattern = "[0-9]{3}\\.dat$", recursive = TRUE, full.names = TRUE)
 
     # same checks as before on file size and raster stats
     file_sizes_dat <- file.info(out_files_dat)$size
@@ -29,7 +29,7 @@ test_that(
                  tolerance = 0.001, scale = 1)
 
     # additional checks on output projection and resolution
-    context("MODIStsp Test 2: Output projection and resolution are properly
+    message("MODIStsp Test 2: Output projection and resolution are properly
             set")
     r <- raster::raster(out_files_dat[1])
     # expect_true(grepl(

@@ -28,3 +28,5 @@
 ^vignettes/standalone_execution\.Rmd
 ^CONDUCT\.md$
 ^\.github$
+^doc$
+^Meta$

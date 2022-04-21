@@ -1,4 +1,4 @@
-context("MODIStsp Test 0: Gracefully fail on input problems")
+message("MODIStsp Test 0: Gracefully fail on input problems")
 test_that(
   "Tests on MODIStsp", {
     skip_on_cran()

@@ -10,7 +10,7 @@
 #   `R CMD check` and must be run manually or using `devtools::test()`
 
 
-context("MODIStsp Test 4: HTTP download from NSIDC (seasonal)")
+message("MODIStsp Test 4: HTTP download from NSIDC (seasonal)")
 test_that("Tests on MODIStsp", {
   #
   # skip("Skip tests - since they rely on download they are only run locally")
@@ -73,7 +73,7 @@ test_that("Tests on MODIStsp", {
   #
   #   # test proper behaviour if only Aqua selected
   MODIStsp(test = "04a")
-  context("MODIStsp Test 4: Proper functioning when only AQUA is selected")
+  message("MODIStsp Test 4: Proper functioning when only AQUA is selected")
   out_files_rts <- list.files(
     file.path(
       tempdir(),
@@ -95,7 +95,7 @@ test_that("Tests on MODIStsp", {
 
   MODIStsp(test = "04c")
 
-  context("MODIStsp Test 4: Reassign multiple nodata on notiled processing")
+  message("MODIStsp Test 4: Reassign multiple nodata on notiled processing")
   out_files_tif <- list.files(
     file.path(
       tempdir(),

@@ -1,4 +1,4 @@
-context("check_projection tests")
+message("check_projection tests")
 
 test_that("check_projection works as expected", {
   skip_on_travis()
