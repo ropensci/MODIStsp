@@ -50,13 +50,9 @@ Notice that, in order to be able to read input HDF4 MODIS archives, your GDAL
 installation must support the HDF4 format.
 You can check that with the command:
 ```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
-system("gdalinfo --formats | grep HDF4")
+"HDF4" %in% sf::st_drivers("raster")$name
 ```
-, that should return the following output:
-```
-  HDF4 -raster,multidimensional raster- (ros): Hierarchical Data Format Release 4
-  HDF4Image -raster- (rw+): HDF4 Dataset
-```
+, that should return TRUE.
 Most of the OS includes a GDAL distribution which supports this format, 
 while some do not
 (e.g. ArchLinux, see [here](https://github.com/ropensci/MODIStsp/issues/161)).

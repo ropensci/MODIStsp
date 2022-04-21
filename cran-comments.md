@@ -34,6 +34,9 @@ This occurs when the local GDAL environment does not support HDF4 format,
 which is required by the package.
 This requirement was now explicitly assessed both in the package description
 than in the vignette documentation.
+If the user tries to run functions while HDF4 is not supported, the code
+exits gracefully informing that "Your current GDAL environment does not support 
+HDF4 file format. Please recompile GDAL including HDF4 drivers.".
 
 
 MODIStsp 2.0.7

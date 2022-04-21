@@ -3,7 +3,7 @@
 ## Minor changes
 - Reducing package size
 - State that GDAL with support for HDF4 format is needed (in vignette and 
-    package description)
+    package description), and exit gracefully if HDF4 is not supported.
 
 
 # MODIStsp 2.0.7
