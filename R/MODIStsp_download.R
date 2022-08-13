@@ -73,7 +73,7 @@ MODIStsp_download <- function(modislist,
 
         size_string <- httr::RETRY("GET",
                                    paste0(remote_filename, ".xml"),
-                                   httr::authenticate(user, password),
+                                   httr::authenticate(user, password, type = "any"),
                                    times = n_retries,
                                    pause_base = 0.1,
                                    pause_cap = 10,
@@ -142,7 +142,7 @@ MODIStsp_download <- function(modislist,
           } else {
             # http download - httr
             download <- try(httr::GET(remote_filename,
-                                      httr::authenticate(user, password),
+                                      httr::authenticate(user, password, type = "any"),
                                       # httr::progress(),
                                       httr::write_disk(local_filename,
                                                        overwrite = TRUE)))
