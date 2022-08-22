@@ -1,4 +1,3 @@
-shinyalert::useShinyalert()
 shinydashboard::tabItem(
   shinyjs::useShinyjs(),
   # shinyjs::extendShinyjs(text = jscode, functions = c("closeWindow")),
