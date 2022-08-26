@@ -1,3 +1,12 @@
+# MODIStsp 2.0.9
+
+## Minor changes
+- Revise the authenticate type to `"any"` (default is `"basic"`) to reflect
+    changes on USGS authentication after the maintenance of the U.S. GOVERNMENT COMPUTER.
+## Bug fixes
+- Remove `useshinyalert()` to avoid warnings.
+
+
 # MODIStsp 2.0.8
 
 ## Minor changes
