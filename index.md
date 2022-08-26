@@ -6,8 +6,6 @@
 [![Downloads](https://cranlogs.r-pkg.org/badges/MODIStsp?color=orange)](https://cran.rstudio.com/web/packages/MODIStsp/index.html)
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Travis-CI Build
-Status](https://travis-ci.org/ropensci/MODIStsp.svg?branch=master)](https://travis-ci.org/ropensci/MODIStsp)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://codecov.io/github/ropensci/MODIStsp?branch=master)
 
