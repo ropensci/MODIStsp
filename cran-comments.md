@@ -7,7 +7,23 @@ MODIStsp 2.0.9
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs nor NOTEs.
+There were no ERRORs nor WARNINGs.
+
+`check_win_oldrelease()` returns the following NOTE:
+```
+Possibly mis-spelled words in DESCRIPTION:
+  Busetto (40:5)
+  HDF (29:24)
+  MODIS (2:35, 25:10, 29:18, 30:60, 38:18)
+  Ranghetti (40:17)
+  mosaicking (26:43)
+  rasters (24:63)
+  reflectance (31:50, 32:65)
+  reprojecting (26:55)
+  resizing (26:72)
+```
+All these words are correctly spelled, and they do not contain package names
+nor book titles, so they should not be quoted.
 
 
 MODIStsp 2.0.8
