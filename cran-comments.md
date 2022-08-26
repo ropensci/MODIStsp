@@ -1,3 +1,15 @@
+MODIStsp 2.0.9
+================
+
+* Windows 11 on local install, R 4.2.1
+* ArchLinux on local install, R 4.2.1
+* win-builder (R-devel, R-release, R-oldrelease)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs nor NOTEs.
+
+
 MODIStsp 2.0.8
 ================
 
