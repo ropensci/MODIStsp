@@ -16,7 +16,8 @@ test_that("Tests on MODIStsp", {
   # skip("Skip tests - since they rely on download they are only run locally")
   skip_on_cran()
   # skip_on_travis()
-
+  skip_if(!"HDF4" %in% sf::st_drivers("raster")$name)
+  
   MODIStsp(test = 4)
   out_files_dat <- list.files(
     file.path(tempdir(), "MODIStsp/Snow_cov_mnt_005dg_v61"),

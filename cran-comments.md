@@ -1,3 +1,72 @@
+MODIStsp 2.0.9
+================
+
+* Windows 11 on local install, R 4.2.1
+* ArchLinux on local install, R 4.2.1
+* win-builder (R-devel, R-release, R-oldrelease)
+
+## R CMD check results
+
+There were no ERRORs nor WARNINGs.
+
+`check_win_oldrelease()` returns the following NOTE:
+```
+Possibly mis-spelled words in DESCRIPTION:
+  Busetto (40:5)
+  HDF (29:24)
+  MODIS (2:35, 25:10, 29:18, 30:60, 38:18)
+  Ranghetti (40:17)
+  mosaicking (26:43)
+  rasters (24:63)
+  reflectance (31:50, 32:65)
+  reprojecting (26:55)
+  resizing (26:72)
+```
+All these words are correctly spelled, and they do not contain package names
+nor book titles, so they should not be quoted.
+
+
+MODIStsp 2.0.8
+================
+
+* Windows 10 on local install, R 4.1.3
+* ArchLinux on local install, R 4.1.3
+* win-builder (R-devel, R-release, R-oldrelease)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs nor NOTEs.
+
+This submission fixes the following CRAN NOTEs:
+```
+Version: 2.0.7
+Check: installed package size
+Result: NOTE
+     installed size is 5.1Mb
+     sub-directories of 1Mb or more:
+     ExtData 1.9Mb
+     app 1.3Mb
+     testdata 1.0Mb
+Flavors: r-devel-linux-x86_64-fedora-clang, r-devel-macos-arm64, r-devel-macos-x86_64, r-release-macos-arm64, r-release-macos-x86_64, r-oldrel-macos-x86_64
+```
+Package size was reduced using zip archives and resizing the logo.
+
+Moreover, the following error appeared as additional donttest issue:
+```
+Error in gdal_utils("buildvrt", gdalfile, output.vrt, opts) : 
+  gdal_utils buildvrt: an error occured
+Calls: MODIStsp ... MODIStsp_process_bands -> <Anonymous> -> gdal_utils
+Execution halted
+```
+This occurs when the local GDAL environment does not support HDF4 format,
+which is required by the package.
+This requirement was now explicitly assessed both in the package description
+than in the vignette documentation.
+If the user tries to run functions while HDF4 is not supported, the code
+exits gracefully informing that "Your current GDAL environment does not support 
+HDF4 file format. Please recompile GDAL including HDF4 drivers.".
+
+
 MODIStsp 2.0.7
 ================
 

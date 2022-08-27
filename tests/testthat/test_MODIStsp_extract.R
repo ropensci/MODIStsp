@@ -15,13 +15,12 @@ test_that("MODIStsp_extract works as expected", {
       # copy files in "inst/testdata/VI_16Days_500m_v6" to tempdir to avoid
       # creating files outside tempdir while running the test
       #
-      test_folder <-  system.file("testdata/VI_16Days_500m_v6/NDVI",
+      test_zip <-  system.file("testdata/VI_16Days_500m_v6/NDVI.zip",
                                   package = "MODIStsp")
-      dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"),
+      dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"),
                  showWarnings = FALSE, recursive = TRUE)
-      file.copy(list.files(test_folder, full.names = TRUE),
-                file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/NDVI"),
-                recursive = T)
+      utils::unzip(test_zip, 
+                   exdir = file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"))
 
       # build and load the MODIStsp stack
 

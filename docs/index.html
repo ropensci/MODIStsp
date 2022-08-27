@@ -23,13 +23,13 @@
     For additional documentation refer to the following article: 
     Busetto and Ranghetti (2016) &lt;doi:10.1016/j.cageo.2016.08.020&gt;.">
 <title>Find, Download and Process MODIS Land Products
-    Data • rOpenSci: MODIStsp</title>
+    Data • MODIStsp</title>
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/apple-touch-icon.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Find, Download and Process MODIS Land Products
     Data">
@@ -64,9 +64,9 @@
 
     <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
     <a href="https://ropensci.org" class="external-link"><img src="https://ropensci.org/img/icon_short_white.svg" id="hexlogo" alt="rOpenSci"></a>
-    <a class="navbar-brand me-2" href="index.html">rOpenSci: MODIStsp</a>
+    <a class="navbar-brand me-2" href="index.html">MODIStsp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,134 +145,54 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><p><a href="https://cran.rstudio.com/web/packages/MODIStsp/index.html" class="external-link"><img src="https://www.r-pkg.org/badges/version-ago/MODIStsp"></a> <a href="https://doi.org/10.5281/zenodo.290683" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg" alt="DOI"></a> <a href="https://cran.rstudio.com/web/packages/MODIStsp/index.html" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/MODIStsp?color=orange" alt="Downloads"></a> <a href="https://www.gnu.org/licenses/gpl-3.0" class="external-link"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a> <a href="https://travis-ci.org/ropensci/MODIStsp" class="external-link"><img src="https://travis-ci.org/ropensci/MODIStsp.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/ropensci/MODIStsp?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg" alt="Coverage Status"></a></p>
+  <main id="main" class="col-md-9"><p><a href="https://cran.rstudio.com/web/packages/MODIStsp/index.html" class="external-link"><img src="https://www.r-pkg.org/badges/version-ago/MODIStsp"></a> <a href="https://doi.org/10.5281/zenodo.290683" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg" alt="DOI"></a> <a href="https://cran.rstudio.com/web/packages/MODIStsp/index.html" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/MODIStsp?color=orange" alt="Downloads"></a> <a href="https://www.gnu.org/licenses/gpl-3.0" class="external-link"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a> <a href="https://codecov.io/github/ropensci/MODIStsp?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg" alt="Coverage Status"></a></p>
 <div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="-modistsp-">
-<i class="fa fa-globe" aria-hidden="true"></i> MODIStsp
-<a class="anchor" aria-label="anchor" href="#-modistsp-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="id_-modistsp-">
+<i class="fa fa-globe" aria-hidden="true"></i> MODIStsp <a class="anchor" aria-label="anchor" href="#id_-modistsp-"></a>
 </h1>
 </div>
 <!-- # MODIStsp <img src='man/figures/logo.png' align="right" height="139" /> -->
-<p><strong><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></strong> is a <code>R</code> package
-devoted to automatizing the creation of time series of raster images
-derived from MODIS Land Products data.</p>
-<p><strong><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></strong> allows performing several
-preprocessing steps (e.g., download, mosaicing, reprojection, resize,
-data extraction) on MODIS data available within a given time period.
-Users have the ability to select which specific layers of the original
-MODIS HDF files they want to process. They also can select which
-additional <strong>Quality Indicators</strong> should be extracted from
-the aggregated MODIS Quality Assurance layers and, in the case of
-Surface Reflectance products, which <strong>Spectral Indexes</strong>
-should be computed from the original reflectance bands.</p>
-<p>All processing parameters can be easily selected with a
-<strong>powerful and user-friendly GUI</strong>, although
-non-interactive execution exploiting a previously created Options File
-is possible. Stand-alone execution outside an <code>R</code> environment
-is also possible, allowing using scheduled execution of MODIStsp to
-automatically update time series related to a MODIS product and extent
-whenever a new image is available.</p>
-<p>For each output layer, outputs are saved as <strong>single-band
-raster</strong> files corresponding to each available acquisition date.
-<strong>Virtual files</strong>, allowing accessing to the entire time
-series as a single file, can be also created.</p>
-<p><a href="http://www.irea.cnr.it/en/" class="external-link">
-<img src="reference/figures/irea_logo.png" height="40" align="left"></a></p>
-<p><span style="font-style:italic;font-weight:bold;"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> was
-developed by Lorenzo Busetto and Luigi Ranghetti, <a href="http://www.irea.cnr.it/en/" class="external-link">Institute of Remote Sensing of
-Environment</a> - National Research Council - Italy (CNR-IREA). <a href="https://docs.ropensci.org/MODIStsp/articles/lorenzo.html">It is
-dedicated to the memory of Lorenzo</a>.</span></p>
+<p><strong><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></strong> is a <code>R</code> package devoted to automatizing the creation of time series of raster images derived from MODIS Land Products data.</p>
+<p><strong><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></strong> allows performing several preprocessing steps (e.g., download, mosaicing, reprojection, resize, data extraction) on MODIS data available within a given time period. Users have the ability to select which specific layers of the original MODIS HDF files they want to process. They also can select which additional <strong>Quality Indicators</strong> should be extracted from the aggregated MODIS Quality Assurance layers and, in the case of Surface Reflectance products, which <strong>Spectral Indexes</strong> should be computed from the original reflectance bands.</p>
+<p>All processing parameters can be easily selected with a <strong>powerful and user-friendly GUI</strong>, although non-interactive execution exploiting a previously created Options File is possible. Stand-alone execution outside an <code>R</code> environment is also possible, allowing using scheduled execution of MODIStsp to automatically update time series related to a MODIS product and extent whenever a new image is available.</p>
+<p>For each output layer, outputs are saved as <strong>single-band raster</strong> files corresponding to each available acquisition date. <strong>Virtual files</strong>, allowing accessing to the entire time series as a single file, can be also created.</p>
+<p><a href="http://www.irea.cnr.it/en/" class="external-link"> <img src="reference/figures/irea_logo.png" height="40" align="left"></a></p>
+<p><span style="font-style:italic;font-weight:bold;"><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> was developed by Lorenzo Busetto and Luigi Ranghetti, <a href="http://www.irea.cnr.it/en/" class="external-link">Institute of Remote Sensing of Environment</a> - National Research Council - Italy (CNR-IREA). <a href="https://docs.ropensci.org/MODIStsp/articles/lorenzo.html">It is dedicated to the memory of Lorenzo</a>.</span></p>
 <hr>
 <div class="section level2">
-<h2 id="-whats-new">
-<i class="fa fa-newspaper-o" aria-hidden="true"></i> What’s New<a class="anchor" aria-label="anchor" href="#-whats-new"></a>
+<h2 id="id_-whats-new">
+<i class="fa fa-newspaper-o" aria-hidden="true"></i> What’s New<a class="anchor" aria-label="anchor" href="#id_-whats-new"></a>
 </h2>
 <ul>
-<li><p>29/10/2021 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> (GitHub version 2.0.6.9000)
-supports products with version 061. Version 006 will remain the default
-product version until its decommission will be announced. Version 061
-can be specified through the argument <code>prod_version</code> of
-function <code><a href="reference/MODIStsp.html">MODIStsp()</a></code> or by selecting it in the GUI.</p></li>
-<li><p>10/12/2020 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> was resubmitted to CRAN
-after the maintainer’s death. Now <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> is dedicated
-to Lorenzo Busetto (<a href="https://docs.ropensci.org/MODIStsp/articles/lorenzo" class="uri">https://docs.ropensci.org/MODIStsp/articles/lorenzo</a>).</p></li>
-<li><p>01/09/2020 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 2.0.0 is out. Replaces the
-old gWidgets GUI with a new one based on Shiny, enhances support for CLI
-usage and enhances support/provides bug fixing for datasets with
-multiple NoData values when applying scale/offset.</p></li>
-<li><p>09/05/2020 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 1.4.0 is out. Switches to
-use of GDAL3/PROJ6 WKTs for projection representation and usage of
-<a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> for all internal work on vector data. Adds support for
-products MCD19A1 and MCD19A2 products.</p></li>
-<li><p>07/06/2019 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 1.3.9 is out. Fixes a bug
-causing crashes on MOD14A1 product, adds support for product MCD12Q2 and
-removes support for no longer available version 5 of some
-products.</p></li>
-<li><p>05/03/2019 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 1.3.8 is out. Fixes an issue
-causing incorrect application of scale/offset values on GDAL versions
-&gt; 2.3 (<a href="https://github.com/ropensci/MODIStsp/issues/163" class="external-link uri">https://github.com/ropensci/MODIStsp/issues/163</a>) and
-adds support for products
-<code>MOD21A1D.006 MOD21A1N.006 MOD21A2.006</code>.</p></li>
-<li><p>29/11/2018 - We recently discovered a nasty bug in the
-computation of some custom spectral indices (those including additions /
-subtractions on reflectance values, such as in <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Cfrac%7B%28b1_%7BNIR%7D%2B0.1%29%7D%7Bb2_%7BRed%7D%7D" title="\frac{(b1_{NIR}+0.1)}{b2_{Red}}" alt="\frac{(b1_{NIR}+0.1)}{b2_{Red}}"> (with <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Crho" title="\rho" alt="\rho"> being a reflectance). See <a href="https://docs.ropensci.org/MODIStsp/articles/discovered_bug.html">here</a>
-for further details. The bug is now fixed on the GitHub version. A
-patched release will be made available on CRAN as soon as
-possible.</p></li>
-<li><p>07/08/2018 - We are glad to report that <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a>
-is now included in the <a href="https://ropensci.org/about/" class="external-link">rOpenSci</a> packages ecosystem. We
-thank reviewers Leah Wasser and Jeffrey Hanson for their valuable
-reviews, which helped us<br>
+<li><p>29/10/2021 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> (GitHub version 2.0.6.9000) supports products with version 061. Version 006 will remain the default product version until its decommission will be announced. Version 061 can be specified through the argument <code>prod_version</code> of function <code><a href="reference/MODIStsp.html">MODIStsp()</a></code> or by selecting it in the GUI.</p></li>
+<li><p>10/12/2020 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> was resubmitted to CRAN after the maintainer’s death. Now <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> is dedicated to Lorenzo Busetto (<a href="https://docs.ropensci.org/MODIStsp/articles/lorenzo" class="uri">https://docs.ropensci.org/MODIStsp/articles/lorenzo</a>).</p></li>
+<li><p>01/09/2020 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 2.0.0 is out. Replaces the old gWidgets GUI with a new one based on Shiny, enhances support for CLI usage and enhances support/provides bug fixing for datasets with multiple NoData values when applying scale/offset.</p></li>
+<li><p>09/05/2020 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 1.4.0 is out. Switches to use of GDAL3/PROJ6 WKTs for projection representation and usage of <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> for all internal work on vector data. Adds support for products MCD19A1 and MCD19A2 products.</p></li>
+<li><p>07/06/2019 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 1.3.9 is out. Fixes a bug causing crashes on MOD14A1 product, adds support for product MCD12Q2 and removes support for no longer available version 5 of some products.</p></li>
+<li><p>05/03/2019 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 1.3.8 is out. Fixes an issue causing incorrect application of scale/offset values on GDAL versions &gt; 2.3 (<a href="https://github.com/ropensci/MODIStsp/issues/163" class="external-link uri">https://github.com/ropensci/MODIStsp/issues/163</a>) and adds support for products <code>MOD21A1D.006 MOD21A1N.006 MOD21A2.006</code>.</p></li>
+<li><p>29/11/2018 - We recently discovered a nasty bug in the computation of some custom spectral indices (those including additions / subtractions on reflectance values, such as in <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Cfrac%7B%28b1_%7BNIR%7D%2B0.1%29%7D%7Bb2_%7BRed%7D%7D" title="\frac{(b1_{NIR}+0.1)}{b2_{Red}}" alt="\frac{(b1_{NIR}+0.1)}{b2_{Red}}"> (with <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Crho" title="\rho" alt="\rho"> being a reflectance). See <a href="https://docs.ropensci.org/MODIStsp/articles/discovered_bug.html">here</a> for further details. The bug is now fixed on the GitHub version. A patched release will be made available on CRAN as soon as possible.</p></li>
+<li><p>07/08/2018 - We are glad to report that <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> is now included in the <a href="https://ropensci.org/about/" class="external-link">rOpenSci</a> packages ecosystem. We thank reviewers Leah Wasser and Jeffrey Hanson for their valuable reviews, which helped us<br>
 further improving the package.</p></li>
-<li><p>10/07/2018 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> v. 1.3.6 is out (check out
-the <a href="https://github.com/ropensci/MODIStsp/releases/tag/1.3.6" class="external-link">Release
-Notes</a> for further details).</p></li>
-<li><p>20/06/2018 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> v. 1.3.5 is out (check out
-the <a href="https://github.com/ropensci/MODIStsp/releases/tag/v1.3.5" class="external-link">Release
-Notes</a> for further details).</p></li>
-<li><p>11/04/2018 - Due to new NASA Policies the MODIS FTP servers were
-shut down starting, April 2, 2018. <strong>FTP download is therefore no
-longer working</strong> and will be removed in the next MODIStsp
-version.</p></li>
-<li><p>11/04/2018 - <a href="https://lpdaac.usgs.gov/news/decommissioning-modis-version-51-land-cover-type-data-products-january-7-2019/" class="external-link"><strong>Decommissioning
-of MODIS Version 5 Land Data Products</strong></a>. As per NASA notice
-above, MODIS v005 products are going to be decommissioned, and will soon
-be no longer available for download. Support for those products will be
-removed in the next MODIStsp version.</p></li>
-<li><p>11/08/2017 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 1.3.3 was released today. It
-provides improvements in processing speed, as well as the usual bug
-fixes. See our <a href="news/index.html">&lt;i class=“fa fa-newspaper-o
-aria-hidden=”true”&gt; news</a> page for a detailed
-changelog.</p></li>
+<li><p>10/07/2018 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> v. 1.3.6 is out (check out the <a href="https://github.com/ropensci/MODIStsp/releases/tag/1.3.6" class="external-link">Release Notes</a> for further details).</p></li>
+<li><p>20/06/2018 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> v. 1.3.5 is out (check out the <a href="https://github.com/ropensci/MODIStsp/releases/tag/v1.3.5" class="external-link">Release Notes</a> for further details).</p></li>
+<li><p>11/04/2018 - Due to new NASA Policies the MODIS FTP servers were shut down starting, April 2, 2018. <strong>FTP download is therefore no longer working</strong> and will be removed in the next MODIStsp version.</p></li>
+<li><p>11/04/2018 - <a href="https://lpdaac.usgs.gov/news/decommissioning-modis-version-51-land-cover-type-data-products-january-7-2019/" class="external-link"><strong>Decommissioning of MODIS Version 5 Land Data Products</strong></a>. As per NASA notice above, MODIS v005 products are going to be decommissioned, and will soon be no longer available for download. Support for those products will be removed in the next MODIStsp version.</p></li>
+<li><p>11/08/2017 - <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a> 1.3.3 was released today. It provides improvements in processing speed, as well as the usual bug fixes. See our <a href="news/index.html">&lt;i class=“fa fa-newspaper-o aria-hidden=”true”&gt; news</a> page for a detailed changelog.</p></li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="-getting-started">
-<i class="fa fa-cog" aria-hidden="true"></i> Getting Started<a class="anchor" aria-label="anchor" href="#-getting-started"></a>
+<h2 id="id_-getting-started">
+<i class="fa fa-cog" aria-hidden="true"></i> Getting Started<a class="anchor" aria-label="anchor" href="#id_-getting-started"></a>
 </h2>
 <ul>
-<li><p><strong>To install <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></strong>, please
-follow instructions reported <a href="articles/installation.html">here</a>, both for <a href="articles/installation.html#installing-on-windows"><i class="fa fa-windows" aria-hidden="true"></i></a>
-, <a href="articles/installation.html#installing-on-linux-systems"><i class="fa fa-linux" aria-hidden="true"></i></a>
-and <a href="articles/installation.html#installing-on-mac"><i class="fa fa-apple" aria-hidden="true"></i></a>.</p></li>
-<li><p><strong><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></strong> can be used either in <a href="articles/interactive_execution.html">interactive mode</a>
-exploiting its user-friendly GUI, or in <a href="articles/noninteractive_execution.html">non-interactive mode</a>
-from within <code>R</code> scripts.</p></li>
-<li><p>The list of <strong>currently supported MODIS products and
-versions</strong> can be found <a href="articles/products_list.html">here</a>.</p></li>
-<li><p><a href="articles/noninteractive_execution.html#scheduled-processing">Scheduled
-Processing</a> allows automatic updating of MODIS time series through
-scheduled jobs, both on <a href="articles/standalone_execution.html#on-windows"><i class="fa fa-windows" aria-hidden="true"></i></a>
-and <a href="articles/standalone_execution.html#on-linux"><i class="fa fa-linux" aria-hidden="true"></i></a>.</p></li>
-<li><p>Solutions to common <strong>installation, data download and
-processing problems</strong> can be found in our <a href="https://docs.ropensci.org/MODIStsp/articles/faq.html"><i class="fa fa-question-circle-o" aria-hidden="true"></i>
-faq</a>.</p></li>
-<li><p>Please <strong>report any issues</strong> you may encounter in
-our <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link">issues page on
-github
-<i class="fa fa-github-square" aria-hidden="true"></i></a>.</p></li>
+<li><p><strong>To install <a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></strong>, please follow instructions reported <a href="articles/installation.html">here</a>, both for <a href="articles/installation.html#installing-on-windows"><i class="fa fa-windows" aria-hidden="true"></i></a> , <a href="articles/installation.html#installing-on-linux-systems"><i class="fa fa-linux" aria-hidden="true"></i></a> and <a href="articles/installation.html#installing-on-mac"><i class="fa fa-apple" aria-hidden="true"></i></a>.</p></li>
+<li><p><strong><a href="https://docs.ropensci.org/MODIStsp">MODIStsp</a></strong> can be used either in <a href="articles/interactive_execution.html">interactive mode</a> exploiting its user-friendly GUI, or in <a href="articles/noninteractive_execution.html">non-interactive mode</a> from within <code>R</code> scripts.</p></li>
+<li><p>The list of <strong>currently supported MODIS products and versions</strong> can be found <a href="articles/products_list.html">here</a>.</p></li>
+<li><p><a href="articles/noninteractive_execution.html#scheduled-processing">Scheduled Processing</a> allows automatic updating of MODIS time series through scheduled jobs, both on <a href="articles/standalone_execution.html#on-windows"><i class="fa fa-windows" aria-hidden="true"></i></a> and <a href="articles/standalone_execution.html#on-linux"><i class="fa fa-linux" aria-hidden="true"></i></a>.</p></li>
+<li><p>Solutions to common <strong>installation, data download and processing problems</strong> can be found in our <a href="https://docs.ropensci.org/MODIStsp/articles/faq.html"><i class="fa fa-question-circle-o" aria-hidden="true"></i> faq</a>.</p></li>
+<li><p>Please <strong>report any issues</strong> you may encounter in our <a href="https://github.com/ropensci/MODIStsp/issues" class="external-link">issues page on github <i class="fa fa-github-square" aria-hidden="true"></i></a>.</p></li>
 </ul>
 <hr>
 </div>
@@ -281,9 +201,7 @@ github
 <i class="fa fa-pencil" aria-hidden="true"></i>Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>To cite MODIStsp in publications, please use:</p>
-<p>L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic
-preprocessing of MODIS Land Products time series, Computers &amp;
-Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004, <a href="https://doi.org/10.1016/j.cageo.2016.08.020" class="external-link uri">https://doi.org/10.1016/j.cageo.2016.08.020</a>, URL: <a href="https://github.com/ropensci/MODIStsp" class="external-link uri">https://github.com/ropensci/MODIStsp</a>.</p>
+<p>L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic preprocessing of MODIS Land Products time series, Computers &amp; Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004, <a href="https://doi.org/10.1016/j.cageo.2016.08.020" class="external-link uri">https://doi.org/10.1016/j.cageo.2016.08.020</a>, URL: <a href="https://github.com/ropensci/MODIStsp" class="external-link uri">https://github.com/ropensci/MODIStsp</a>.</p>
 <p>A BibTeX entry for LaTeX users is:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="sc">@</span>Article{,</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    author  <span class="ot">=</span> {Lorenzo Busetto and Luigi Ranghetti},</span>

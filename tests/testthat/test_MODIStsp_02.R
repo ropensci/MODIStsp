@@ -7,7 +7,8 @@ test_that(
   "Tests on MODIStsp", {
     skip_on_cran()
     # skip_on_travis()
-
+    skip_if(!"HDF4" %in% sf::st_drivers("raster")$name)
+    
     suppressWarnings(MODIStsp(test = 2)) # FIXME manage the returned warning:
     # "GDAL Message 1: All options related to creation ignored in update mode"
     message("MODIStsp Test 2: Processing works when changing projection and

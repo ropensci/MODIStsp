@@ -52,7 +52,7 @@ test_that("bbox_from_file works as expected", {
                               crs_out = "+init=epssg:4326"))
 
   # expect error on a non-spatial file name
-  in_file  <- system.file("ExtData", "MODIStsp_ProdOpts.xml",
+  in_file  <- system.file("ExtData", "MODIStsp_ProdOpts.xml.zip",
                           package = "MODIStsp")
   expect_error(bbox_from_file(in_file))
 

@@ -21,7 +21,7 @@ load_prodopts <- function() {
   # prodopts_file <- file.path(prodopts_dir, "MODIStsp_ProdOpts.RData")
   # # XML file describing MODIS products
 
-  xml_file <- system.file("ExtData", "MODIStsp_ProdOpts.xml",
+  xml_file <- system.file("ExtData", "MODIStsp_ProdOpts.xml.zip",
                           package = "MODIStsp")
 
   if (file.exists(prodopts_file)) {

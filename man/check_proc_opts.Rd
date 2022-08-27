@@ -16,3 +16,4 @@ NULL - processing interrupted if any condition is not met
 helper function used to check consistency of processing
 parameters
 }
+\keyword{internal}

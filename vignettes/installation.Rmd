@@ -46,6 +46,17 @@ library(devtools)
 install_github("ropensci/MODIStsp")
 ```
 
+Notice that, in order to be able to read input HDF4 MODIS archives, your GDAL
+installation must support the HDF4 format.
+You can check that with the command:
+```{r, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+"HDF4" %in% sf::st_drivers("raster")$name
+```
+, that should return TRUE.
+Most of the OS includes a GDAL distribution which supports this format, 
+while some do not
+(e.g. ArchLinux, see [here](https://github.com/ropensci/MODIStsp/issues/161)).
+
 ## <i class="fa fa-apple" aria-hidden="true"></i> Installing on Mac
 
 To install `{MODIStsp}` on MacOS, you need to be able to install the `{sf}` package, 

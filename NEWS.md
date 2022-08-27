@@ -1,3 +1,20 @@
+# MODIStsp 2.0.9
+
+## Minor changes
+- Revise the authenticate type to `"any"` (default is `"basic"`) to reflect
+    changes on USGS authentication after the maintenance of the U.S. GOVERNMENT COMPUTER.
+## Bug fixes
+- Remove `useshinyalert()` to avoid warnings.
+
+
+# MODIStsp 2.0.8
+
+## Minor changes
+- Reducing package size
+- State that GDAL with support for HDF4 format is needed (in vignette and 
+    package description), and exit gracefully if HDF4 is not supported.
+
+
 # MODIStsp 2.0.7
 
 ## Minor changes

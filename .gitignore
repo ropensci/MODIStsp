@@ -16,6 +16,7 @@ inst/testdata/MODIStsp_2018-01-04\.json
 libs/
 _main\.Rmd
 inst/ExtData/Previous/MODIStsp_Previous\.json
+inst/ExtData/MODIStsp_ProdOpts\.RData$
 inst/testdata/MODIStsp_2018-02-18\.json
 inst/testdata/MODIStsp_Previous\.json
 inst/ExtData/modis_sinusoidal_grid_world\.dbf

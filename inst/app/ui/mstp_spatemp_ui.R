@@ -1,6 +1,4 @@
 shinydashboard::tabItem(
-  shinyjs::useShinyjs(),
-  shinyalert::useShinyalert(),
   # shinyjs::extendShinyjs(text = jscode, functions = c("closeWindow")),
   tabName = "mstp_spatemp",
   # Temporal selectors -----

@@ -40,7 +40,7 @@
 #' @author Lorenzo Busetto, phD (2014-2017)
 #' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
 #' @importFrom parallel detectCores
-#' @importFrom sf gdal_utils gdal_subdatasets sf_extSoftVersion
+#' @importFrom sf gdal_utils gdal_subdatasets sf_extSoftVersion st_drivers
 #' @importFrom stats na.omit
 #' @importFrom gdalUtilities gdal_translate gdalwarp gdalbuildvrt
 #' @importFrom stringr str_sub
@@ -132,6 +132,12 @@ MODIStsp_process_bands <- function(out_folder_mod, modislist,
 
   outfile_vrt <- tempfile(fileext = ".vrt", tmpdir = tmpdir)
 
+  # Exist if HDF4 is not supported
+  if (!"HDF4" %in% sf::st_drivers("raster")$name) {
+    stop("Your current GDAL environment does not support HDF4 file format. 
+         Please recompile GDAL including HDF4 drivers.")
+  }
+  
   # workaround to avoid gdalbuildvrt bug in creation of vrt
   # files for UInt32 data type -
   # create tiff files from the original hdfs, and

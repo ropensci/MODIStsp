@@ -4,6 +4,7 @@
 #' @param proc_opts data frame of parameters passed by `MODIStsp`
 #' @return NULL - processing interrupted if any condition is not met
 #' @importFrom assertthat is.dir see_if is.string is.number
+#' @keywords internal
 #'
 check_proc_opts <- function(proc_opts) {
 
