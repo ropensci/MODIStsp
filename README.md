@@ -1,12 +1,15 @@
 
+# MODIStsp <img src='man/figures/logo.png' align="right" height="139" />
+
+<!-- badges: start -->
+
 [![](https://www.r-pkg.org/badges/version-ago/MODIStsp)](https://cran.r-project.org/package=MODIStsp)
 [![](https://cranlogs.r-pkg.org/badges/MODIStsp?color=orange)](https://cran.r-project.org/package=MODIStsp)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://codecov.io/github/ropensci/MODIStsp?branch=master)
 [![](https://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/software-review/issues/184)
-
-# MODIStsp <img src='man/figures/logo.png' align="right" height="139" />
+<!-- badges: end -->
 
 [`{MODIStsp}`](https://docs.ropensci.org/MODIStsp/) is a `R` package
 devoted to automatizing the creation of time series of rasters derived
