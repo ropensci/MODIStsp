@@ -71,7 +71,6 @@ Suggests:
     mapedit (>= 0.6.0),
     png,
     rappdirs,
-    rgdal, 
     rmarkdown,
     shiny,
     shinyalert (>= 3.0.0), 
