@@ -1,13 +1,39 @@
 MODIStsp 2.0.10
 ================
 
-* Windows 11 on local install, R 4.2.2
-* ArchLinux on local install, R 4.2.2
-* win-builder (R-devel, R-release, R-oldrelease)
+## Test environments
+* [local installation] Windows 11, 64 bit, R 4.2.2: 
+  There were no ERRORs, WARNINGs nor NOTEs.
+* [local rocker/geospatial] Ubuntu 22.04.1, 64 bit, R 4.2.2: 
+  There were no ERRORs, WARNINGs nor NOTEs.
+* [macbuilder] macOS 11.5.2 (Mac mini Apple M1), 64 bit, R 4.2.1
+  (`https://mac.r-project.org/macbuilder/results/1677773629-b034285cbc028613/`):
+  There were no ERRORs, WARNINGs nor NOTEs.
+* [devtools] `check_win_devel()`
+  (`https://win-builder.r-project.org/ETZLz8p6S9DH/`): 
+  There were no ERRORs nor WARNINGs (1 NOTE, see below).
+* [devtools] `check_win_release()`
+  (`https://win-builder.r-project.org/69FF7desTYfD/`): 
+  There were no ERRORs nor WARNINGs (1 NOTE, see below).
+* [devtools] `check_win_oldrelease()`
+  (`https://win-builder.r-project.org/R3I6hwC1Ijl3/`): 
+  There were no ERRORs nor WARNINGs (1 NOTE, see below).
+* [rhub] `check_on_macos()`
+  (`https://builder.r-hub.io/status/MODIStsp_2.0.10.tar.gz-defa1bba8ed7423ea37330f29aca5684`): 
+  There were no ERRORs, WARNINGs nor NOTEs.
 
-## R CMD check results
+`check_win_release()` and `check_win_devel()` return the following NOTE:
+```
+* checking CRAN incoming feasibility ... [50s] NOTE
+Maintainer: 'Luigi Ranghetti <rpackages.ranghetti@gmail.com>'
 
-There were no ERRORs nor WARNINGs.
+New maintainer:
+  Luigi Ranghetti <rpackages.ranghetti@gmail.com>
+Old maintainer(s):
+  Luigi Ranghetti <luigi@ranghetti.info>
+```
+The email was changed in order to use an account which does not forward to 
+Google, so to respect CRAN requirements.
 
 `check_win_oldrelease()` returns the following NOTE:
 ```
