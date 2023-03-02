@@ -11,8 +11,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/apple-touch-icon.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Accessing and Analyzing Processed Data from R">
 <meta property="og:description" content="MODIStsp">
@@ -32,7 +32,7 @@
     <a href="https://ropensci.org" class="external-link"><img src="https://ropensci.org/img/icon_short_white.svg" id="hexlogo" alt="rOpenSci"></a>
     <a class="navbar-brand me-2" href="../index.html">MODIStsp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.10</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -155,7 +155,7 @@ with a <code>raster</code> command:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modistsp_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/VI_16Days_500m_v6/NDVI"</span>, <span class="st">"MOD13A1_NDVI_2016_177.tif"</span><span class="op">)</span></span>
 <span><span class="va">modistsp_file</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "/tmp/RtmpGlJs6S/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "C:\\Users\\LUIGI~1.RAN\\AppData\\Local\\Temp\\RtmpsBxKa1/MODIStsp/VI_16Days_500m_v6/NDVI/MOD13A1_NDVI_2016_177.tif"</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_raster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/raster.html" class="external-link">raster</a></span><span class="op">(</span><span class="va">modistsp_file</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">my_raster</span><span class="op">)</span></span></code></pre></div>
@@ -168,16 +168,16 @@ processed data for a given parameter are saved in the
 <span><span class="va">ts_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"MODIStsp/VI_16Days_500m_v6/Time_Series"</span><span class="op">)</span></span>
 <span><span class="va">in_virtual_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">ts_folder</span>, <span class="st">"RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span><span class="op">)</span></span>
 <span><span class="va">in_virtual_file</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "/tmp/RtmpGlJs6S/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "C:\\Users\\LUIGI~1.RAN\\AppData\\Local\\Temp\\RtmpsBxKa1/MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData"</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ts_data</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">in_virtual_file</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ts_data</span></span></code></pre></div>
 <pre><code><span><span class="co">## class      : RasterStack </span></span>
-<span><span class="co">## dimensions : 122, 65, 7930, 22  (nrow, ncol, ncell, nlayers)</span></span>
+<span><span class="co">## dimensions : 122, 65, 7930, 23  (nrow, ncol, ncell, nlayers)</span></span>
 <span><span class="co">## resolution : 463.3127, 463.3127  (x, y)</span></span>
 <span><span class="co">## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)</span></span>
 <span><span class="co">## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs </span></span>
-<span><span class="co">## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, MOD13A1_NDVI_2016_241, ... </span></span>
+<span><span class="co">## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, ... </span></span>
 <span><span class="co">## time        : 2016-01-01 - 2016-12-18 (range)</span></span></code></pre>
 <p>, which gives us a 23-band <code>RasterStack</code> in the
 <code>ts_data</code> variable.</p>
@@ -212,12 +212,12 @@ plotting provided for example by the <a href="https://rspatial.org/raster" class
 <span>                    <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/zvalues.html" class="external-link">getZ</a></span><span class="op">(</span><span class="va">ts_data</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="va">mindate</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/zvalues.html" class="external-link">getZ</a></span><span class="op">(</span><span class="va">ts_data</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="va">maxdate</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">substack</span>  </span></code></pre></div>
 <pre><code><span><span class="co">## class      : RasterStack </span></span>
-<span><span class="co">## dimensions : 122, 65, 7930, 5  (nrow, ncol, ncell, nlayers)</span></span>
+<span><span class="co">## dimensions : 122, 65, 7930, 6  (nrow, ncol, ncell, nlayers)</span></span>
 <span><span class="co">## resolution : 463.3127, 463.3127  (x, y)</span></span>
 <span><span class="co">## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)</span></span>
 <span><span class="co">## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs </span></span>
-<span><span class="co">## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065 </span></span>
-<span><span class="co">## time        : 2016-01-01, 2016-01-17, 2016-02-02, 2016-02-18, 2016-03-05</span></span></code></pre>
+<span><span class="co">## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081 </span></span>
+<span><span class="co">## time        : 2016-01-01, 2016-01-17, 2016-02-02, 2016-02-18, 2016-03-05, 2016-03-21</span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute monthly averages</span></span>
 <span></span>
@@ -229,9 +229,9 @@ plotting provided for example by the <a href="https://rspatial.org/raster" class
 <span><span class="co">## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)</span></span>
 <span><span class="co">## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs </span></span>
 <span><span class="co">## source     : memory</span></span>
-<span><span class="co">## names      : index_January, index_February, index_March, index_April, index_May, index_June, index_July, index_August, index_September, index_October, index_November, index_December </span></span>
-<span><span class="co">## min values :       -1891.0,        -1770.0,     -2000.0,     -1780.0,    -510.0,     -202.5,    -1347.0,       -275.0,         -1158.0,       -1944.0,        -2000.0,        -2000.0 </span></span>
-<span><span class="co">## max values :        9130.0,         8888.0,      9859.0,      8699.5,    9231.5,     9284.5,     9229.5,       9110.5,          9187.0,        9173.0,         9824.0,         9352.5</span></span></code></pre>
+<span><span class="co">## names      : index_January, index_February, index_March, index_April,  index_May, index_June, index_July, index_August, index_September, index_October, index_November, index_December </span></span>
+<span><span class="co">## min values :       -1891.0,        -1770.0,     -2000.0,     -1780.0,     -510.0,     -202.5,    -1347.0,       -275.0,         -1158.0,       -1944.0,        -2000.0,           -0.2 </span></span>
+<span><span class="co">## max values :    9130.00000,     8888.00000,  8577.00000,  8699.50000, 9231.50000, 9284.50000, 9229.50000,   9110.50000,      9187.00000,    9173.00000,     9824.00000,        0.93525</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">month_avg</span>, axes <span class="op">=</span> <span class="cn">FALSE</span>, horizontal <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <p><img src="analyze_files/figure-html/unnamed-chunk-4-2.png" width="700"></p>
@@ -269,11 +269,11 @@ example:</p>
 <span><span class="va">ts_data</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/get.html" class="external-link">get</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">in_virtual_file</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ts_data</span></span></code></pre></div>
 <pre><code><span><span class="co">## class      : RasterStack </span></span>
-<span><span class="co">## dimensions : 122, 65, 7930, 22  (nrow, ncol, ncell, nlayers)</span></span>
+<span><span class="co">## dimensions : 122, 65, 7930, 23  (nrow, ncol, ncell, nlayers)</span></span>
 <span><span class="co">## resolution : 463.3127, 463.3127  (x, y)</span></span>
 <span><span class="co">## extent     : 711648.3, 741763.7, 5076054, 5132578  (xmin, xmax, ymin, ymax)</span></span>
 <span><span class="co">## crs        : +proj=sinu +lon_0=0 +x_0=0 +y_0=0 +R=6371007.181 +units=m +no_defs </span></span>
-<span><span class="co">## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, MOD13A1_NDVI_2016_241, ... </span></span>
+<span><span class="co">## names      : MOD13A1_NDVI_2016_001, MOD13A1_NDVI_2016_017, MOD13A1_NDVI_2016_033, MOD13A1_NDVI_2016_049, MOD13A1_NDVI_2016_065, MOD13A1_NDVI_2016_081, MOD13A1_NDVI_2016_097, MOD13A1_NDVI_2016_113, MOD13A1_NDVI_2016_129, MOD13A1_NDVI_2016_145, MOD13A1_NDVI_2016_161, MOD13A1_NDVI_2016_177, MOD13A1_NDVI_2016_193, MOD13A1_NDVI_2016_209, MOD13A1_NDVI_2016_225, ... </span></span>
 <span><span class="co">## time        : 2016-01-01 - 2016-12-18 (range)</span></span></code></pre>
 <p>, which again gives us the 23-band <code>RasterStack</code> in the
 <code>ts_data</code> variable.</p>
@@ -316,14 +316,14 @@ example:</p>
 <span><span class="co">## 2016-02-02 -1408.000 5773.667    4458 3276.111 2037.5000 4964.385 2849.444</span></span>
 <span><span class="co">## 2016-02-18    69.680 5532.667    3795 3705.333 -409.4000 6325.692 3286.222</span></span>
 <span><span class="co">## 2016-03-05  1176.000 5070.000    3972 3759.333 -374.6667 6402.231 3586.556</span></span>
-<span><span class="co">## 2016-04-06  1084.353 6928.667    5653 4324.444 2293.5000 7970.615 4745.333</span></span>
+<span><span class="co">## 2016-03-21  1191.143 6197.333    4506 4226.889 2841.0000 7483.077 5281.000</span></span>
 <span><span class="co">##              water_2 outside_poly</span></span>
 <span><span class="co">## 2016-01-01 1637.2500           NA</span></span>
 <span><span class="co">## 2016-01-17  624.5714           NA</span></span>
 <span><span class="co">## 2016-02-02  207.5714           NA</span></span>
 <span><span class="co">## 2016-02-18 2113.1000           NA</span></span>
 <span><span class="co">## 2016-03-05 2195.0000           NA</span></span>
-<span><span class="co">## 2016-04-06 1716.0667           NA</span></span></code></pre>
+<span><span class="co">## 2016-03-21  383.2857           NA</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Other summarization functions can be used, by specifying the "FUN" argument. </span></span>
 <span><span class="co"># Compute the Standard Deviation over each polygon: </span></span>
@@ -356,7 +356,7 @@ functions for analysis:</p>
 <span><span class="va">out_dataavg_tt</span> <span class="op">&lt;-</span> <span class="fu">tibbletime</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tibbletime/man/tbl_time.html" class="external-link">as_tbl_time</a></span><span class="op">(</span><span class="va">out_dataavg_df</span>, index <span class="op">=</span> <span class="va">date</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="va">month_avg</span> <span class="op">&lt;-</span> <span class="va">out_dataavg_tt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Polygon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Polygon</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">tibbletime</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tibbletime/man/as_period.html" class="external-link">as_period</a></span><span class="op">(</span>period <span class="op">=</span> <span class="st">"monthly"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">month_avg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">Value</span>, color <span class="op">=</span> <span class="va">Polygon</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
