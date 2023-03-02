@@ -4,7 +4,7 @@
 #' @param test integer number of the performed test
 #' @return NULL
 #'
-#' @author Luigi Ranghetti, phD (2017) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2017)
 #' @note License: GPL 3.0
 #' license GPL 3.0
 #' @importFrom tools md5sum

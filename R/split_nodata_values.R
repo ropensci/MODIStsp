@@ -42,7 +42,7 @@
 #'  single values.
 #'  Notice that the first NoData value is the only one which is considered if
 #'  'Change NoData values' was set to 'No'.
-#' @author Luigi Ranghetti, phD (2018) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2018)
 
 split_nodata_values <- function(nodata_in, take_all = TRUE) {
 

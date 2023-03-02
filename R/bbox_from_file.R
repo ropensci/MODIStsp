@@ -6,7 +6,7 @@
 #' or string coercible to it using `sf::st_crs()` (e.g., WKT or numeric
 #' EPSG code)
 #' @author Lorenzo Busetto, phD (2017)
-#' @author Luigi Ranghetti, phD (2017) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2017)
 #' @importFrom sf st_crs st_read st_bbox
 #' @importFrom raster raster
 #' @note License: GPL 3.0

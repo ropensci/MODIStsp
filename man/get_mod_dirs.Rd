@@ -59,5 +59,5 @@ FTP) by:
 
 Lorenzo Busetto, phD (2014-2017)
 
-Luigi Ranghetti, phD (2016-2017) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2016-2017)
 }

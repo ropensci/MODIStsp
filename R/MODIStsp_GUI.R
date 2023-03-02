@@ -6,7 +6,7 @@
 #'  the GUI and allowing to set, save, load options and eventually
 #'  launch the processing.
 #' @author Lorenzo Busetto, phD (2014-2017)
-#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2015)
 #' @note License: GPL 3.0
 #' @importFrom utils packageVersion browseURL
 #'

@@ -31,5 +31,5 @@ one obtained by reprojecting the upper-left and the lower-right corners.
 License: GPL 3.0
 }
 \author{
-Luigi Ranghetti, phD (2015) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2015)
 }

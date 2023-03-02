@@ -24,7 +24,7 @@
 #' modified to adapt it to MODIStsp scheme and to http archive (instead than old
 #' FTP) by:
 #' @author Lorenzo Busetto, phD (2014-2017)
-#' @author Luigi Ranghetti, phD (2016-2017) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2016-2017)
 #' @note License: GPL 3.0
 #' @importFrom stringr str_sub str_split
 #' @importFrom httr RETRY authenticate content

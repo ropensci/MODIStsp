@@ -30,5 +30,5 @@ related to a MODIS product whenever a new image is available.
 \author{
 Lorenzo Busetto, phD (2014-2017)
 
-Luigi Ranghetti, phD (2015-2017) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2015-2017)
 }

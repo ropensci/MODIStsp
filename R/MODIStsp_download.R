@@ -25,7 +25,7 @@
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_download
 #' @author Lorenzo Busetto, phD (2014-2017)
-#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2015)
 #' @importFrom httr RETRY authenticate content GET write_disk
 #' @importFrom xml2 as_list
 

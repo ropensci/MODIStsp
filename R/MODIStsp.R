@@ -24,7 +24,7 @@
 #'   Default: NULL
 #' @param prod_version Version of the selected MODIS product.
 #'   Currently versions `"006"` and/or `"061"` can be chosen.
-#'   Default value is `"006"` until decommission of this version will be 
+#'   Default value is `"006"` until decommission of this version will be
 #'   announced by USGS.
 #'   Products with version `"061` are experimental: in case users would encounter
 #'   an error in the encoding of bands or quality flags they are encouraged
@@ -121,14 +121,14 @@
 #' @param parallel `logical` If TRUE (default), the function is run using parallel
 #'  processing, to speed-up the computation for large rasters (with a maximum
 #'  of 8 cores).
-#'  The number of cores is automatically determined; specifying it is also 
+#'  The number of cores is automatically determined; specifying it is also
 #'  possible (e.g. `parallel = 4`). In this case, more than 8 cores can be
 #'  specified. If FALSE (default), single core processing is used.
 #' @param ... not used for values, forces later arguments to bind by name
 #' @return NULL
 #'
 #' @author Lorenzo Busetto, phD (2014-2017)
-#' @author Luigi Ranghetti, phD (2015-2017) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2015-2017)
 #' @note License: GPL 3.0
 #' @export
 #' @seealso [MODIStsp_GUI()], [MODIStsp_process()]
@@ -160,7 +160,7 @@
 #' # Note that this example (as well as the following ones) is run in single
 #' # core to follow CRAN policies, by setting parallel = FALSE.
 #' # Users can exploit multicore functionalities skipping to set this argument.
-#' 
+#'
 #' # The following check is performed in order not to provide errors
 #' # running the examples if HDF4 is not supported.
 #' is_hdf4_supported <- "HDF4" %in% sf::st_drivers("raster")$name
@@ -194,7 +194,7 @@
 #' # and retrieves NDVI and EVI data, plus the Usefulness Index Quality Indicator.
 #'
 #' opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
-#' 
+#'
 #' if (is_hdf4_supported) {
 #'   MODIStsp(gui = FALSE, opts_file = opts_file, verbose = TRUE, parallel = FALSE)
 #' }
@@ -208,10 +208,10 @@
 #' spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
 #' if (is_hdf4_supported) {
 #'   MODIStsp(
-#'     gui = FALSE, 
+#'     gui = FALSE,
 #'     opts_file = opts_file,
 #'     spatmeth = "file",
-#'     spafile = spatial_file, 
+#'     spafile = spatial_file,
 #'     verbose = TRUE,
 #'     parallel = FALSE
 #'   )
@@ -223,22 +223,22 @@
 #' # spatial file (e.g., to perform the same processing on several extents)
 #' # Note that you can also put all your extent files in a specific folder and
 #' # create the extent list using for example.
-#' 
+#'
 #' extent_list = list.files(
 #'   system.file("testdata/lakeshapes/", package = "MODIStsp"),
-#'   "\\.shp$", 
+#'   "\\.shp$",
 #'   full.names = TRUE
 #' )
 #' extent_list
 #' opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
-#' 
+#'
 #' if (is_hdf4_supported) {
 #'   for (single_shape in extent_list) {
 #'     MODIStsp(
-#'       gui = FALSE, 
+#'       gui = FALSE,
 #'       opts_file = opts_file,
 #'       spatmeth = "file",
-#'       spafile = single_shape, 
+#'       spafile = single_shape,
 #'       verbose = TRUE,
 #'       parallel = FALSE
 #'     )
@@ -456,10 +456,10 @@ MODIStsp <- function(...,
     # update proc_opts based on arguments passed to the function ----
 
     if(!is.null(selprod)) {proc_opts$selprod <- selprod}
-    
+
     if(!is.null(prod_version)) {proc_opts$prod_version <- prod_version}
     if(proc_opts$prod_version=="6") {proc_opts$prod_version <- "006"} # for retrocompatibility
-    
+
     if(!is.null(bandsel)) {proc_opts$bandsel <- bandsel}
 
     if(!is.null(quality_bandsel)) {proc_opts$quality_bandsel <- quality_bandsel}
@@ -484,20 +484,20 @@ MODIStsp <- function(...,
 
     if(!is.null(out_projsel)) {proc_opts$out_projsel  <- out_projsel}
     if(!is.null(output_proj)) {proc_opts$output_proj  <- output_proj}
-    
+
     if(!is.null(out_res_sel))  {proc_opts$out_res_sel  <- out_res_sel}
     if(!is.null(out_res))      {proc_opts$out_res  <- out_res}
     if(!is.null(resampling))  {proc_opts$resampling  <- resampling}
-    
+
     if(!is.null(reprocess))  {proc_opts$reprocess  <- reprocess}
     if(!is.null(delete_hdf))  {proc_opts$delete_hdf  <- delete_hdf}
     if(!is.null(nodata_change)) {proc_opts$nodata_change  <- nodata_change}
     if(!is.null(scale_val))  {proc_opts$scale_val  <- scale_val}
-    
+
     if(!is.null(out_format)) {proc_opts$out_format  <- out_format}
     if(!is.null(ts_format))  {proc_opts$ts_format  <- ts_format}
     if(!is.null(compress))   {proc_opts$compress  <- compress}
-    
+
     if(!is.null(out_folder))     {proc_opts$out_folder  <- out_folder}
     if(!is.null(out_folder_mod)) {proc_opts$out_folder_mod  <- out_folder_mod}
 
@@ -567,7 +567,7 @@ MODIStsp <- function(...,
         tools::file_path_sans_ext(basename(spafile))
       )
     }
-    
+
     if (inherits(proc_opts$bbox, "list")) {
       proc_opts$bbox <- unlist(proc_opts$bbox)
     }

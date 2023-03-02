@@ -38,7 +38,7 @@
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_process_bands
 #' @author Lorenzo Busetto, phD (2014-2017)
-#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2015)
 #' @importFrom parallel detectCores
 #' @importFrom sf gdal_utils gdal_subdatasets sf_extSoftVersion st_drivers
 #' @importFrom stats na.omit
