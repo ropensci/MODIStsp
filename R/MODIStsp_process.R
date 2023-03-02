@@ -33,7 +33,7 @@
 #' @author Lorenzo Busetto, phD (2014-2017)
 #' @author Luigi Ranghetti, phD (2015)
 #' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
-#'   development of this function ([ModisDownload](http://r-gis.net/?q=ModisDownload);
+#'   development of this function ([ModisDownload](https://r-gis.net/?q=ModisDownload);
 #'   [Download_and_resampling_of_MODIS_images](https://en.wikipedia.org/wiki/Regression-kriging?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
 #' @export

@@ -359,7 +359,7 @@ argument.
       
 #### On Windows
 
-3. Create a Task following <a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN" target="_blank">these instructions</a>; add the path of the `MODIStsp.bat` launcher as Action (point 6), and specifying  `-g -s "X:/yourpath/youroptions.json"` as argument.
+3. Create a Task following <a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc748993(v=ws.11)?redirectedfrom=MSDN" target="_blank">these instructions</a>; add the path of the `MODIStsp.bat` launcher as Action (point 6), and specifying  `-g -s "X:/yourpath/youroptions.json"` as argument.
 
 # Outputs Format and Naming Conventions
 
