@@ -60,7 +60,6 @@ Suggests:
     dplyr,
     DT,
     formatR,
-    geojsonlint,
     ggplot2,
     grid,
     httptest,
@@ -83,6 +82,7 @@ Suggests:
     tibbletime,
     tidyr,
     qpdf,
+    webshot,
     xtable
 SystemRequirements: GDAL (>= 2.1.2) with support for HDF4 format, PROJ (>= 4.9.1).
 URL: https://github.com/ropensci/MODIStsp/, https://docs.ropensci.org/MODIStsp/

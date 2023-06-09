@@ -44,9 +44,6 @@ each available acquisition date. **Virtual files**, allowing accessing to the en
 as a single file, can be also created. 
 
 
-<a href="http://www.irea.cnr.it/en/"> <img src="man/figures/irea_logo.png" height="40" align="left" /></a>
-
-
 <span style='font-style:italic;font-weight:bold;'>`{MODIStsp}` was developed by Lorenzo Busetto and Luigi Ranghetti, 
 [Institute of Remote Sensing of Environment](http://www.irea.cnr.it/en/) - National Research Council - Italy (CNR-IREA).
 [It is dedicated to the memory of Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
