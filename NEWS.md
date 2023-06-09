@@ -2,6 +2,7 @@
 
 ## Minor changes
 - Remove explicit {rgdal} dependency (`https://r-spatial.org/r/2022/12/14/evolution2.html`).
+- Remove suggested dependency {geojsonlint}.
 - Change maintainer's email in order to follow CRAN requirements.
 
 

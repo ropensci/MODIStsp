@@ -128,13 +128,13 @@ gdalUtils
 gdalinfo
 gdaltranslate
 gdalwarp
+geojsonlint
 geospatial
 github
 gui
 hdf
 hdfs
 http
-https
 httr
 io
 irea
@@ -142,7 +142,6 @@ json
 jsonlite
 libatk
 linux
-lorenzo
 lpdaac
 maintainer's
 maintainer’s

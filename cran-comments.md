@@ -2,27 +2,28 @@ MODIStsp 2.0.10
 ================
 
 ## Test environments
-* [local installation] Windows 11, 64 bit, R 4.2.2: 
+* [local installation] Windows 11, 64 bit, R 4.3.0: 
   There were no ERRORs, WARNINGs nor NOTEs.
-* [local rocker/geospatial] Ubuntu 22.04.1, 64 bit, R 4.2.2: 
+* [local installation] Ubuntu 22.04.2, 64 bit, R 4.3.0: 
   There were no ERRORs, WARNINGs nor NOTEs.
-* [macbuilder] macOS 11.5.2 (Mac mini Apple M1), 64 bit, R 4.2.1
-  (`https://mac.r-project.org/macbuilder/results/1677773629-b034285cbc028613/`):
+* [macbuilder] macOS 13.3.1 (Mac mini Apple M1), 64 bit, R 4.3.0
+  (`https://mac.r-project.org/macbuilder/results/1686345371-aea52cb0e0a31706/`):
   There were no ERRORs, WARNINGs nor NOTEs.
 * [devtools] `check_win_devel()`
-  (`https://win-builder.r-project.org/ETZLz8p6S9DH/`): 
+  (`https://win-builder.r-project.org/PDj1HTwZJtPM`): 
   There were no ERRORs nor WARNINGs (1 NOTE, see below).
 * [devtools] `check_win_release()`
-  (`https://win-builder.r-project.org/69FF7desTYfD/`): 
+  (`https://win-builder.r-project.org/PDj1HTwZJtPM`): 
   There were no ERRORs nor WARNINGs (1 NOTE, see below).
 * [devtools] `check_win_oldrelease()`
-  (`https://win-builder.r-project.org/R3I6hwC1Ijl3/`): 
+  (`https://win-builder.r-project.org/ifjTeEB2b2eD`): 
   There were no ERRORs nor WARNINGs (1 NOTE, see below).
 * [rhub] `check_on_macos()`
-  (`https://builder.r-hub.io/status/MODIStsp_2.0.10.tar.gz-defa1bba8ed7423ea37330f29aca5684`): 
+  (``): 
   There were no ERRORs, WARNINGs nor NOTEs.
 
-`check_win_release()` and `check_win_devel()` return the following NOTE:
+`check_win_oldrelease()`, `check_win_release()` and `check_win_devel()` return 
+the following NOTE:
 ```
 * checking CRAN incoming feasibility ... [50s] NOTE
 Maintainer: 'Luigi Ranghetti <rpackages.ranghetti@gmail.com>'
@@ -34,22 +35,6 @@ Old maintainer(s):
 ```
 The email was changed in order to use an account which does not forward to 
 Google, so to respect CRAN requirements.
-
-`check_win_oldrelease()` returns the following NOTE:
-```
-Possibly mis-spelled words in DESCRIPTION:
-  Busetto (40:5)
-  HDF (29:24)
-  MODIS (2:35, 25:10, 29:18, 30:60, 38:18)
-  Ranghetti (40:17)
-  mosaicking (26:43)
-  rasters (24:63)
-  reflectance (31:50, 32:65)
-  reprojecting (26:55)
-  resizing (26:72)
-```
-All these words are correctly spelled, and they do not contain package names
-nor book titles, so they should not be quoted.
 
 
 MODIStsp 2.0.9
