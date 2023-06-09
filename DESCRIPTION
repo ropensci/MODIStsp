@@ -60,7 +60,6 @@ Suggests:
     dplyr,
     DT,
     formatR,
-    geojsonlint,
     ggplot2,
     grid,
     httptest,
