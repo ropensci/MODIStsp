@@ -36,6 +36,13 @@ Old maintainer(s):
 The email was changed in order to use an account which does not forward to 
 Google, so to respect CRAN requirements.
 
+Moreover:
+```
+   Package CITATION file contains call(s) to old-style citEntry().  Please
+   use bibentry() instead.
+```
+This was fixed in file `CITATION`.
+
 
 MODIStsp 2.0.9
 ================
