@@ -7,20 +7,17 @@ MODIStsp 2.0.10
 * [local installation] Ubuntu 22.04.2, 64 bit, R 4.3.0: 
   There were no ERRORs, WARNINGs nor NOTEs.
 * [macbuilder] macOS 13.3.1 (Mac mini Apple M1), 64 bit, R 4.3.0
-  (`https://mac.r-project.org/macbuilder/results/1686345371-aea52cb0e0a31706/`):
+  (`https://mac.r-project.org/macbuilder/results/1686556731-83724b077df2cb09/`):
   There were no ERRORs, WARNINGs nor NOTEs.
 * [devtools] `check_win_devel()`
-  (`https://win-builder.r-project.org/PDj1HTwZJtPM`): 
+  (`https://win-builder.r-project.org/S2szRfR9q3iP/`): 
   There were no ERRORs nor WARNINGs (1 NOTE, see below).
 * [devtools] `check_win_release()`
-  (`https://win-builder.r-project.org/PDj1HTwZJtPM`): 
+  (`https://win-builder.r-project.org/1juWeHpUoGjQ/`): 
   There were no ERRORs nor WARNINGs (1 NOTE, see below).
 * [devtools] `check_win_oldrelease()`
-  (`https://win-builder.r-project.org/ifjTeEB2b2eD`): 
+  (`https://win-builder.r-project.org/X3tJSYIEHYX9/`): 
   There were no ERRORs nor WARNINGs (1 NOTE, see below).
-* [rhub] `check_on_macos()`
-  (``): 
-  There were no ERRORs, WARNINGs nor NOTEs.
 
 `check_win_oldrelease()`, `check_win_release()` and `check_win_devel()` return 
 the following NOTE:
@@ -36,12 +33,12 @@ Old maintainer(s):
 The email was changed in order to use an account which does not forward to 
 Google, so to respect CRAN requirements.
 
-Moreover:
+Moreover, old checks contained the following note:
 ```
    Package CITATION file contains call(s) to old-style citEntry().  Please
    use bibentry() instead.
 ```
-This was fixed in file `CITATION`.
+This was fixed in commit `1180ceeaf2a853bfe95cfb0be65804a279ef5d3f`.
 
 
 MODIStsp 2.0.9
