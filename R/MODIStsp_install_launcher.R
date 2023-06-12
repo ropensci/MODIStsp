@@ -30,7 +30,7 @@
 #'  requires to set this option to TRUE (or to launch the script in a root session of R),
 #'  Default: FALSE
 #' @return The function is called for its side effects.
-#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2015)
 #' @note License: GPL 3.0
 #' @export
 #' @rdname install_MODIStsp_launcher

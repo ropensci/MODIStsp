@@ -71,5 +71,5 @@ Notice that the first NoData value is the only one which is considered if
 MODIStsp:::create_nodata_rcl(c("255","250,254:255"), c("255","255"))
 }
 \author{
-Luigi Ranghetti, phD (2018) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2018)
 }

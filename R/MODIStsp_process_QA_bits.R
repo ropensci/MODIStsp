@@ -21,7 +21,7 @@
 #' @param compress `character` compression option for GTiff files
 #' @return NULL
 #' @author Lorenzo Busetto, phD (2017)
-#' @author Luigi Ranghetti, phD (2017) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2017)
 #' @note License: GPL 3.0
 #'  Based on the `modis.qc.R` script by Yann Chemin (2008) (\url{https://goo.gl/7Fhreo})
 #'  license GPL 3.0

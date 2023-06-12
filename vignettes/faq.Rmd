@@ -49,7 +49,7 @@ https://www.stat.auckland.ac.nz/%7Ekimihia/rgtk2
 Please Install the following required dependencies: 
     * Cairo >= 1.0.0, ATK >= 1.10.0, Pango >= 1.10.0, GTK+ >= 2.8.0, GLib >= 2.8.0 (required by package ```RGtk2```)
     * Curl (required by package ```curl```)
-    * GDAL >= 1.6.3, PROJ.4 >= 4.4.9 (required by package ```rgdal```)
+    * GDAL >= 1.6.3, PROJ.4 >= 4.4.9 (required by package ```sf```)
     
 On **Debian and Ubuntu-based systems**, to install packages open a terminal and type:  
 ```

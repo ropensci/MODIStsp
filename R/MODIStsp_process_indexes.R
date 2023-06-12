@@ -26,7 +26,7 @@
 #' @return NULL - new raster file saved in out_filename
 #'
 #' @author Lorenzo Busetto, phD (2017)
-#' @author Luigi Ranghetti, phD (2017) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2017)
 #' @note License: GPL 3.0
 #' @importFrom raster NAvalue overlay
 #' @importFrom tools file_path_sans_ext

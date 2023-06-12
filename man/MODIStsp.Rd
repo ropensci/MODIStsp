@@ -293,10 +293,10 @@ opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 spatial_file <- system.file("testdata/lakeshapes/garda_lake.shp", package = "MODIStsp")
 if (is_hdf4_supported) {
   MODIStsp(
-    gui = FALSE, 
+    gui = FALSE,
     opts_file = opts_file,
     spatmeth = "file",
-    spafile = spatial_file, 
+    spafile = spatial_file,
     verbose = TRUE,
     parallel = FALSE
   )
@@ -311,7 +311,7 @@ if (is_hdf4_supported) {
 
 extent_list = list.files(
   system.file("testdata/lakeshapes/", package = "MODIStsp"),
-  "\\\\.shp$", 
+  "\\\\.shp$",
   full.names = TRUE
 )
 extent_list
@@ -320,10 +320,10 @@ opts_file <- system.file("testdata/test_MOD13A2.json", package = "MODIStsp")
 if (is_hdf4_supported) {
   for (single_shape in extent_list) {
     MODIStsp(
-      gui = FALSE, 
+      gui = FALSE,
       opts_file = opts_file,
       spatmeth = "file",
-      spafile = single_shape, 
+      spafile = single_shape,
       verbose = TRUE,
       parallel = FALSE
     )
@@ -359,5 +359,5 @@ if (length(outfiles_garda) > 0) {
 \author{
 Lorenzo Busetto, phD (2014-2017)
 
-Luigi Ranghetti, phD (2015-2017) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2015-2017)
 }

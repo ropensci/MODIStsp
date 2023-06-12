@@ -14,7 +14,7 @@
 #' @param enlarge `logical`` if TRUE, the reprojected bounding box is the
 #'  one which completely include the original one; if FALSE, it is simply the
 #'  one obtained by reprojecting the upper-left and the lower-right corners.
-#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2015)
 #' @note License: GPL 3.0
 #' @importFrom sf st_crs st_as_sf st_set_crs st_write st_as_text st_bbox st_read
 #' @importFrom gdalUtilities ogr2ogr
@@ -23,7 +23,7 @@ reproj_bbox <- function(bbox, in_proj, out_proj, enlarge=TRUE) {
 
   # fix bbox if it is a list (#228)
   if (inherits(bbox, "list")) {bbox <- unlist(bbox)}
-  
+
   if (!inherits(in_proj, "crs")) {
     if (suppressWarnings(!is.na(as.numeric(in_proj)))) {
       in_proj <- as.numeric(in_proj)

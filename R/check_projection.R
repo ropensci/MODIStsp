@@ -14,7 +14,7 @@
 #' @name check_projection
 #' @rdname check_projection
 #' @author Lorenzo Busetto, phD (2017)
-#' @author Luigi Ranghetti, phD (2017) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2017)
 #'
 #' @examples
 #'

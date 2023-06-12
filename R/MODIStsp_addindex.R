@@ -25,7 +25,7 @@
 #'  MODIStsp_indexes.json
 #'  is modified so to allow computation of the additional indexes.
 #' @author Lorenzo Busetto, phD (2014-2017)
-#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2015)
 #' @note License: GPL 3.0
 #' @seealso [MODIStsp_resetindexes]
 #' @export

@@ -26,14 +26,14 @@
 #' @param parallel `logical` If TRUE (default), the function is run using parallel
 #'  processing, to speed-up the computation for large rasters (with a maximum
 #'  of 8 cores).
-#'  The number of cores is automatically determined; specifying it is also 
+#'  The number of cores is automatically determined; specifying it is also
 #'  possible (e.g. `parallel = 4`). In this case, more than 8 cores can be
 #'  specified. If FALSE (default), single core processing is used.
 #' @return The function is called for its side effects.
 #' @author Lorenzo Busetto, phD (2014-2017)
-#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2015)
 #' @note Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
-#'   development of this function ([ModisDownload](http://r-gis.net/?q=ModisDownload);
+#'   development of this function ([ModisDownload](https://r-gis.net/?q=ModisDownload);
 #'   [Download_and_resampling_of_MODIS_images](https://en.wikipedia.org/wiki/Regression-kriging?title=Download_and_resampling_of_MODIS_images))
 #' @note License: GPL 3.0
 #' @export
@@ -283,7 +283,7 @@ MODIStsp_process <- function(proc_opts,
       download_server <- attr(date_dirs_all, "server")
 
       if (download_server == "unreachable") {return(invisible(NULL))}
-        
+
       dates <- get_yeardates(proc_opts$download_range,
                              yy,
                              start_year, end_year,

@@ -1,7 +1,7 @@
 citHeader("To cite MODIStsp in publications use:")
 
-citEntry(,
-  entry        = "Article",
+bibentry(,
+  bibtype      = "Article",
   author       = "Lorenzo Busetto and Luigi Ranghetti",
   title        = "MODIStsp: an R package for preprocessing of MODIS Land Products time series",
   journal      = "Computers & Geosciences",

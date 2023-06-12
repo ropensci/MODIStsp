@@ -23,5 +23,5 @@ License: GPL 3.0
 \author{
 Lorenzo Busetto, phD (2017)
 
-Luigi Ranghetti, phD (2017) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2017)
 }

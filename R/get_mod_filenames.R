@@ -24,11 +24,11 @@
 #' @return `character array` containing names of HDF images corresponding to the
 #'  requested tiles available for the product in the selected date
 #' @author Original code by Babak Naimi (\code{.getModisList}, in
-#' \href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
+#' \href{https://r-gis.net/?q=ModisDownload}{ModisDownload.R})
 #' modified to adapt it to MODIStsp scheme and to http archive (instead than old
 #'  FTP) by:
 #' @author Lorenzo Busetto, phD (2014-2016)
-#' @author Luigi Ranghetti, phD (2016) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2016)
 #' @note License: GPL 3.0
 #' @importFrom httr RETRY authenticate content
 #' @importFrom stringr str_split str_pad

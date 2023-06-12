@@ -57,5 +57,5 @@ check_projection(proj_wkt)
 \author{
 Lorenzo Busetto, phD (2017)
 
-Luigi Ranghetti, phD (2017) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2017)
 }

@@ -23,7 +23,7 @@
 #' @return NULL - the function is called for its side effects
 #'
 #' @author Lorenzo Busetto, phD (2014-2017)
-#' @author Luigi Ranghetti, phD (2015) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2015)
 #' @note License: GPL 3.0
 #' @importFrom stringr str_sub str_detect
 #' @importFrom raster raster stack nlayers setZ

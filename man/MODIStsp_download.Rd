@@ -69,5 +69,5 @@ http remote server for a given date.
 \author{
 Lorenzo Busetto, phD (2014-2017)
 
-Luigi Ranghetti, phD (2015) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2015)
 }

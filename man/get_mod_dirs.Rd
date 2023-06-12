@@ -53,11 +53,11 @@ License: GPL 3.0
 }
 \author{
 Original code by Babak Naimi (\code{.getModisList}, in
-\href{http://r-gis.net/?q=ModisDownload}{ModisDownload.R})
+\href{https://r-gis.net/?q=ModisDownload}{ModisDownload.R})
 modified to adapt it to MODIStsp scheme and to http archive (instead than old
 FTP) by:
 
 Lorenzo Busetto, phD (2014-2017)
 
-Luigi Ranghetti, phD (2016-2017) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2016-2017)
 }

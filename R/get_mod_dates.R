@@ -7,7 +7,7 @@
 #' @param date_dirs data frame full list of folders in lpdaac archive for product of interest
 #' @return array of folder names containing data for the MODIS product acquired in
 #' the period specified by "dates"
-#' @author Luigi Ranghetti, phD (2016) \email{luigi@@ranghetti.info}
+#' @author Luigi Ranghetti, phD (2016)
 #' @author Lorenzo Busetto, phD (2017)
 #' @note License: GPL 3.0
 #'

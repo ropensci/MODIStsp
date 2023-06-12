@@ -52,7 +52,7 @@ reprocess already processed dates (if the user did not specify that)
 }
 \note{
 Thanks Tomislav Hengl and Babak Naimi, whose scripts made the starting point for
-development of this function (\href{http://r-gis.net/?q=ModisDownload}{ModisDownload};
+development of this function (\href{https://r-gis.net/?q=ModisDownload}{ModisDownload};
 \href{https://en.wikipedia.org/wiki/Regression-kriging?title=Download_and_resampling_of_MODIS_images}{Download_and_resampling_of_MODIS_images})
 
 License: GPL 3.0
@@ -60,5 +60,5 @@ License: GPL 3.0
 \author{
 Lorenzo Busetto, phD (2014-2017)
 
-Luigi Ranghetti, phD (2015) \email{luigi@ranghetti.info}
+Luigi Ranghetti, phD (2015)
 }
