@@ -1,33 +1,41 @@
 #initialize product and category selectors ----
 
-general_opts <- reactiveValues()
+# general_opts <- reactiveValues()
 rv           <- reactiveValues()
 
 output$selcats <-renderUI({
-  curprod <- which(names(prod_opt_list) == general_opts$selprod)
-  curcat  <- mod_prod_cat$cat[curprod]
-  shiny::selectInput("selcat", "Product Category",
-                     choices  = unique(mod_prod_cat$cat),
-                     selected = curcat)
+  # curprod <- which(names(prod_opt_list) == general_opts$selprod)
+  # curcat  <- mod_prod_cat$cat[curprod]
+  shiny::selectInput(
+    "selcat", "Product Category",
+    choices  = unique(mod_prod_cat$cat),
+    selected = unique(mod_prod_cat$cat)[1]
+  )
 })
 
 output$selprods <-renderUI({
-  shiny::selectInput("selprod",
-                     label = shiny::span("Product Name\u2000",
-                                         shiny::actionLink("help_product",
-                                                           shiny::icon("question-circle"))),
-                     choices = mod_prod_list[mod_prod_cat$cat == (input$selcat)],
-                     selected = general_opts$selprod)
+  shiny::selectInput(
+    "selprod",
+    label = shiny::span(
+      "Product Name\u2000",
+      shiny::actionLink("help_product", shiny::icon("question-circle"))
+    ),
+    choices = mod_prod_list[mod_prod_cat$cat == (input$selcat)],
+    selected = mod_prod_list[mod_prod_cat$cat == (input$selcat)][1]
+  )
 })
 
 output$selvers <-renderUI({
   req(input$selprod)
-  shiny::selectInput("selver",
-                     label = shiny::span("Version\u2000",
-                                         shiny::actionLink("help_version",
-                                                           shiny::icon("question-circle"))),
-                     choices = names(prod_opt_list[[input$selprod]]),
-                     selected = general_opts$selver)
+  shiny::selectInput(
+    "selver",
+    label = shiny::span(
+      "Version\u2000",
+      shiny::actionLink("help_version", shiny::icon("question-circle"))
+    ),
+    choices = names(prod_opt_list[[input$selprod]]),
+    selected = rev(names(prod_opt_list[[input$selprod]]))[1]
+  )
 })
 
 shiny::observeEvent(input$prodinfo, {
@@ -45,10 +53,12 @@ observe({
 
   curlayers <- prod_opt_list[[curprod]][[input$selver]]$bandnames
   curlabels <- prod_opt_list[[curprod]][[input$selver]]$band_fullnames
-  shiny::updateCheckboxGroupInput(session, "sel_layers",
-                                  choiceNames = curlabels,
-                                  choiceValues = curlayers,
-                                  selected = general_opts$curlayers)
+  shiny::updateCheckboxGroupInput(
+    session, "sel_layers",
+    choiceNames = curlabels,
+    choiceValues = curlayers,
+    selected = NULL
+  )
 
   # shiny::isolate(general_opts$curlayers) <- ""
 
@@ -60,10 +70,12 @@ observe({
     qalabels <- "No Quality layers available"
   }
 
-  shiny::updateCheckboxGroupInput(session, "sel_qual",
-                                  choiceNames  = qalabels,
-                                  choiceValues = qalayers,
-                                  selected = general_opts$curqual)
+  shiny::updateCheckboxGroupInput(
+    session, "sel_qual",
+    choiceNames  = qalabels,
+    choiceValues = qalayers,
+    selected = NULL
+  )
 
   # shiny::isolate(general_opts$curqual) <- ""
 
@@ -90,10 +102,12 @@ observe({
     indlayers <- NA
     indlabels <- "No Indexes available"
   }
-  shiny::updateCheckboxGroupInput(session, "sel_ind",
-                                  choiceNames  = indlabels,
-                                  choiceValues = indlayers,
-                                  selected = general_opts$curindexes)
+  shiny::updateCheckboxGroupInput(
+    session, "sel_ind",
+    choiceNames  = indlabels,
+    choiceValues = indlayers,
+    selected = NULL
+  )
 
   # shiny::isolate(general_opts$curindexes) <- ""
 })
@@ -209,6 +223,7 @@ shiny::observe({
 shiny::observe({
   shiny::req(input$selprod)
   shiny::req(input$selver)
+  shiny::req(input$selver %in% names(prod_opt_list[[input$selprod]]))
   indexes <- MODIStsp_get_prodlayers(input$selprod, input$selver)$indexes_bandnames
   if (is.null(indexes)) {
     shinyjs::disable("addindex")
