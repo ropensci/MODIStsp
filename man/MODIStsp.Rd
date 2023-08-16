@@ -69,10 +69,10 @@ a list of available product names using function \code{MODIStsp_get_prodnames},
 Default: NULL}
 
 \item{prod_version}{Version of the selected MODIS product.
-Currently versions \code{"006"} and/or \code{"061"} can be chosen.
-Default value is \code{"006"} until decommission of this version will be
-announced by USGS.
-Products with version \verb{"061} are experimental: in case users would encounter
+Currently versions \code{"061"} and/or \code{"006"} can be chosen.
+Default value is \code{"061"} (version \code{"006"} was decommissioned by USGS on
+July 31, 2023, products of this version will be gradually removed).
+In case users would encounter
 an error in the encoding of bands or quality flags they are encouraged
 to report it by opening a new issue on GitHub at
 \url{https://github.com/ropensci/MODIStsp/issues}.}
