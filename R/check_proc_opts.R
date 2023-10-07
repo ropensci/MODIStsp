@@ -17,7 +17,7 @@ check_proc_opts <- function(proc_opts) {
   assertthat::see_if(o$selprod %in% names(prod_opts),
                      msg = "`selprod` is not a valid MODIS product name!")
 
-  prod_layers <- MODIStsp_get_prodlayers(o$selprod)
+  prod_layers <- MODIStsp_get_prodlayers(o$selprod, prodver = o$prod_version)
   assertthat::see_if(all(o$bandsel %in% prod_layers$bandnames),
                      msg = "Some of `bandsel` are not a valid bandname of the selected MODIS product!")
 
