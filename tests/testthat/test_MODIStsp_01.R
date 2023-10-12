@@ -15,7 +15,7 @@ test_that(
 
     MODIStsp(test = 1)
     out_files  <- list.files(
-      file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_GridSin_v6"),
+      file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_GridSin_v61"),
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
     file_sizes <- file.info(out_files)$size
 

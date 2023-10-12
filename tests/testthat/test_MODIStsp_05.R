@@ -16,7 +16,7 @@ test_that(
     
     MODIStsp(test = "05")
     out_files_tif <- list.files(
-      file.path(tempdir(), "MODIStsp/Albedo_Daily_500m_v6"),
+      file.path(tempdir(), "MODIStsp/Albedo_Daily_500m_v61"),
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
     file_sizes_tif <- file.info(out_files_tif)$size
     expect_equal(file_sizes_tif, c(9062))

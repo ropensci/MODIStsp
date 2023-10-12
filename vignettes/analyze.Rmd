@@ -13,12 +13,12 @@ library(base)
 library(sf)
 library(MODIStsp)
 library(dplyr)
-test_zip <-  system.file("testdata/VI_16Days_500m_v6/NDVI.zip",
+test_zip <-  system.file("testdata/VI_16Days_500m_v61/NDVI.zip",
                          package = "MODIStsp")
-dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"),
+dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61"),
            showWarnings = FALSE, recursive = TRUE)
 utils::unzip(test_zip, 
-             exdir = file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"))
+             exdir = file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61"))
 Sys.setlocale("LC_TIME", "en_US.UTF-8")
 ```
 
@@ -41,8 +41,8 @@ This will download a yearly time series of MODIS NDVI data and subset it over th
 region of the Como Lake in Italy.
 
 After the download and processing finishes (it will take a while, depending on your
-network speed), the MODIS time series will be placed in subfolder `MODIStsp/VI_16Days_500m_v6` 
-of `R` `tempdir()`. In this case, I have them in "`file.path(tempdir(), "VI_16Days_500m_v6")`". 
+network speed), the MODIS time series will be placed in subfolder `MODIStsp/VI_16Days_500m_v61` 
+of `R` `tempdir()`. In this case, I have them in "`file.path(tempdir(), "VI_16Days_500m_v61")`". 
 If you want to save them elsewhere, run `MODIStsp(opts_file = opts_file, gui = TRUE)`
 and select a different output folder.
 
@@ -50,7 +50,7 @@ Single-date processed rasters can be accessed by simply opening them with a
 `raster` command: 
 
 ```{R echo=TRUE, message=FALSE, warning=FALSE, highlight=TRUE, tidy=TRUE}
-modistsp_file <- file.path(tempdir(),"MODIStsp/VI_16Days_500m_v6/NDVI",
+modistsp_file <- file.path(tempdir(),"MODIStsp/VI_16Days_500m_v61/NDVI",
                            "MOD13A1_NDVI_2016_177.tif")
 modistsp_file
 
@@ -64,7 +64,7 @@ by:
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 # Load the NDVI time series
-ts_folder <- file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/Time_Series")
+ts_folder <- file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61/Time_Series")
 in_virtual_file <- file.path(ts_folder, "RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData")
 in_virtual_file
 
@@ -128,7 +128,7 @@ time series created in the previous example:
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 
-ts_folder <- file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6/Time_Series")
+ts_folder <- file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61/Time_Series")
 in_virtual_file <- file.path(ts_folder, "RData/Terra/NDVI/MOD13A1_NDVI_1_2016_353_2016_RData.RData")
 ts_data   <- get(load(in_virtual_file))
 ts_data

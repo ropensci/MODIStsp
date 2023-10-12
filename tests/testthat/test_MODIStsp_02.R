@@ -14,7 +14,7 @@ test_that(
     message("MODIStsp Test 2: Processing works when changing projection and
             resolution")
     out_files_dat  <- list.files(
-      file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_GridSin_v6"),
+      file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_GridSin_v61"),
       pattern = "[0-9]{3}\\.dat$", recursive = TRUE, full.names = TRUE)
 
     # same checks as before on file size and raster stats

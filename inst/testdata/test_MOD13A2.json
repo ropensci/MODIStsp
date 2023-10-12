@@ -1,7 +1,7 @@
 {
   "selprod": "Vegetation_Indexes_16Days_1Km (M*D13A2)",
   "sensor": "Terra",
-  "prod_version": "006",
+  "prod_version": "061",
   "start_date": "2016.06.01",
   "end_date": "2016.07.01",
   "bandsel": ["EVI", "NDVI"],

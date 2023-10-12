@@ -8,7 +8,7 @@
 #'  NOTE: for products available separately for Terra and Aqua (e.g., MOD13Q1/MYD13Q1),
 #'  use the code M*D_code_ (e.g., M*D13Q1)
 #' @param prodver character containing the version of the desired MODIS product.
-#'  Currently versions `"006"` (default) and `"061"` can be chosen.
+#'  Currently versions `"061"` (default) and `"006"` can be chosen.
 #' @return list, containing the slots: `prodname`, `bandnames`, `quality_bandnames` and
 #'  `indexes_bandnames`, `band_fullnames`, `quality_fullnames`, `indexes_fullnames`
 #'
@@ -28,7 +28,7 @@
 #' MODIStsp_get_prodlayers("MCD43C4")$indexes_bandnames
 #'
 #'
-MODIStsp_get_prodlayers <- function(prodname, prodver = "006") {
+MODIStsp_get_prodlayers <- function(prodname, prodver = "061") {
 
   stopifnot(inherits(prodname, "character"))
   prod_opt_list <- load_prodopts()
@@ -60,7 +60,7 @@ MODIStsp_get_prodlayers <- function(prodname, prodver = "006") {
       ))
     }
   }
-  
+
   bandnames         <- selprod[["bandnames"]]
   band_fullnames    <- selprod[["band_fullnames"]]
   quality_bandnames <- selprod[["quality_bandnames"]]
