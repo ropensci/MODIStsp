@@ -17,6 +17,6 @@ test_that("MODIStsp_readxml works as expected", {
   testthat::expect_equal(opts[[1]][["061"]][["file_prefix"]][["Terra"]],
                          "MOD09A1")
   testthat::expect_equal(opts[[101]][["061"]][["file_prefix"]][["Aqua"]],
-                         "MYD13A2")
+                         "MYD13C1")
 
 })

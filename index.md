@@ -7,7 +7,7 @@
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://codecov.io/github/ropensci/MODIStsp?branch=master)
+Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://app.codecov.io/github/ropensci/MODIStsp?branch=master)
 
 # <i class="fa fa-globe" aria-hidden="true"></i> MODIStsp <img src="man/figures/logo.png" width="100" height="100" align="right"/>
 

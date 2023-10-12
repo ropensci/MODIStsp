@@ -7,7 +7,7 @@
 [![](https://cranlogs.r-pkg.org/badges/MODIStsp?color=orange)](https://cran.r-project.org/package=MODIStsp)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1972039.svg)](https://doi.org/10.5281/zenodo.1972039)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://codecov.io/github/ropensci/MODIStsp?branch=master)
+Status](https://img.shields.io/codecov/c/github/ropensci/MODIStsp/master.svg)](https://app.codecov.io/github/ropensci/MODIStsp?branch=master)
 [![](https://badges.ropensci.org/184_status.svg)](https://github.com/ropensci/software-review/issues/184)
 <!-- badges: end -->
 
