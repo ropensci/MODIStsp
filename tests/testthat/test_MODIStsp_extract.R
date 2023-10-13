@@ -8,19 +8,19 @@ test_that("MODIStsp_extract works as expected", {
       # skip_on_travis()
 
       ### Test 1: test of extraction on polygons                ####
-      #   The test uses tif files in testdata/VI_16Days_500m_v6 to build
+      #   The test uses tif files in testdata/VI_16Days_500m_v61 to build
       #   a MODIStsp rasterStack, end extract data on polygons saved in
       #   testdata/extract_polys.shp
 
-      # copy files in "inst/testdata/VI_16Days_500m_v6" to tempdir to avoid
+      # copy files in "inst/testdata/VI_16Days_500m_v61" to tempdir to avoid
       # creating files outside tempdir while running the test
       #
       test_zip <-  system.file("testdata/VI_16Days_500m_v6/NDVI.zip",
                                   package = "MODIStsp")
-      dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"),
+      dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61"),
                  showWarnings = FALSE, recursive = TRUE)
-      utils::unzip(test_zip, 
-                   exdir = file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"))
+      utils::unzip(test_zip,
+                   exdir = file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61"))
 
       # build and load the MODIStsp stack
 
@@ -29,7 +29,7 @@ test_that("MODIStsp_extract works as expected", {
       MODIStsp(opts_file = opts_file, gui = FALSE)
       stack_file  <- list.files(
         file.path(tempdir(),
-                  "MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI/"
+                  "MODIStsp/VI_16Days_500m_v61/Time_Series/RData/Terra/NDVI/"
                   ),
         full.names = TRUE)
       ts_data <- get(load(stack_file))

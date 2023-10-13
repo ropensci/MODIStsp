@@ -86,7 +86,7 @@
 #' # MODIStsp for each polygon of a shapefile, for each date in the period
 #' # between 2001-01-01 and 2014-12-31
 #'
-#' # The example uses tif files in testdata/VI_16Days_500m_v6 to build
+#' # The example uses tif files in testdata/VI_16Days_500m_v61 to build
 #' # a MODIStsp rasterStack corresponding to the 2016 time series of the NDVI index
 #' # over the Como Lake (Italy). It then extracts data on polygons corresponding
 #' # to different land cover classes saved in testdata/extract_polys.shp
@@ -97,10 +97,10 @@
 #'
 #' test_zip <-  system.file("testdata/VI_16Days_500m_v6/NDVI.zip",
 #'                          package = "MODIStsp")
-#' dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"),
+#' dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61"),
 #'            showWarnings = FALSE, recursive = TRUE)
-#' utils::unzip(test_zip, 
-#'              exdir = file.path(tempdir(), "MODIStsp/VI_16Days_500m_v6"))
+#' utils::unzip(test_zip,
+#'              exdir = file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61"))
 #'
 #' opts_file <- system.file("testdata/test_extract.json", package = "MODIStsp")
 #' MODIStsp(opts_file = opts_file, gui = FALSE, verbose = FALSE)
@@ -113,7 +113,7 @@
 #'
 #' # Specify the filename of the RData RasterStack of interest
 #' stack_file  <- file.path(tempdir(),
-#'  "MODIStsp/VI_16Days_500m_v6/Time_Series/RData/Terra/NDVI",
+#'  "MODIStsp/VI_16Days_500m_v61/Time_Series/RData/Terra/NDVI",
 #'   "MOD13A1_NDVI_1_2016_353_2016_RData.RData")
 #' basename(stack_file)
 #'

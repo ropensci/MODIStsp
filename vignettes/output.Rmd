@@ -18,7 +18,7 @@ myoutfolder/"ProdName"/"Layer"/"ProdCode"_"Layer"_"YYYY"_"DOY"."ext"
 , where: 
 
   - **_ProdName_** is a short name describing the MODIS product from which the 
-    datasets were derived (e.g., VI_16Days_1Km_v6);
+    datasets were derived (e.g., VI_16Days_1Km_v61);
   - **_Layer_** is a short name describing the dataset (e.g., b1_Red, NDII, UI);
   - **_ProdCode_** is the code name of the MODIS product from which the image was
   derived (e.g., MOD13Q1 - Note that if you choose to process both "Terra" and 
@@ -33,13 +33,13 @@ So, for example, if you process layers "NDVI" and "EVI" for MODIS product MOD13A
 you will find the resulting GTiff of ENVI output single-date rasters in:
 
 ```
-/your_out_folder/VI_16Days_1Km_v6/NDVI/
+/your_out_folder/VI_16Days_1Km_v61/NDVI/
 ```
 
 and
 
 ```
-/your_out_folder/VI_16Days_1Km_v6/EVI/
+/your_out_folder/VI_16Days_1Km_v61/EVI/
 ```
 
 ____________________________________________________________________________________
@@ -74,11 +74,11 @@ So, for example, if you process layer "NDVI" for MODIS product MOD13A2 and platf
 find the resulting GTiff virtual files in:
 
 ```
-/your_out_folder/VI_16Days_1Km_v6/Time_Series/RData/Terra/NDVI
+/your_out_folder/VI_16Days_1Km_v61/Time_Series/RData/Terra/NDVI
 ```
 
 and 
 
 ```
-/your_out_folder/VI_16Days_1Km_v6/Time_Series/GDAL/Terra/NDVI
+/your_out_folder/VI_16Days_1Km_v61/Time_Series/GDAL/Terra/NDVI
 ```
