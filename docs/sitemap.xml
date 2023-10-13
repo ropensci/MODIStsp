@@ -1,153 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/404.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/404.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/analyze.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/analyze.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/discovered_bug.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/discovered_bug.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/faq.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/faq.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/index.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/index.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/installation.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/installation.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/interactive_execution.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/interactive_execution.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/lorenzo.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/lorenzo.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/MODIStsp.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/MODIStsp.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/noninteractive_execution.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/output.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/output.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/products_list.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/products_list.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/articles/standalone_execution.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/articles/standalone_execution.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/authors.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/authors.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/CONDUCT.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/CONDUCT.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/index.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/index.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/ISSUE_TEMPLATE.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/ISSUE_TEMPLATE.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/LICENSE.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/LICENSE.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/news/index.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/news/index.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/bbox_from_file.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/bbox_from_file.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/check_files_existence.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/check_files_existence.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/check_proc_opts.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/check_proc_opts.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/check_projection.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/check_projection.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/get_mod_dates.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/get_mod_dates.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/get_mod_dirs.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/get_mod_dirs.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/get_mod_filenames.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/get_mod_filenames.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/get_reqbands.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/get_reqbands.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/get_yeardates.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/get_yeardates.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/index.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/index.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/install_MODIStsp_launcher.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/install_MODIStsp_launcher.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/load_prodopts.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/load_prodopts.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp-package.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp-package.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_addindex.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_addindex.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_download.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_download.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_extract.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_extract.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_get_prodlayers.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_get_prodlayers.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_get_prodnames.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_get_prodnames.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_GUI.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_GUI.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_process.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_process.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_process_bands.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_process_bands.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_process_indexes.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_process_indexes.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_process_QA_bits.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_process_QA_bits.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_read_xml.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_read_xml.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_resetindexes.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_resetindexes.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/MODIStsp_vrt_create.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/MODIStsp_vrt_create.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/process_message.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/process_message.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/reproj_bbox.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/reproj_bbox.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/set_bandind_matrix.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/set_bandind_matrix.html</loc>
   </url>
   <url>
-    <loc>http://docs.ropensci.org/MODIStsp/reference/split_nodata_values.html</loc>
+    <loc>https://docs.ropensci.org/MODIStsp/reference/split_nodata_values.html</loc>
   </url>
 </urlset>

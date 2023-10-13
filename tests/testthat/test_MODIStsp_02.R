@@ -14,7 +14,7 @@ test_that(
     message("MODIStsp Test 2: Processing works when changing projection and
             resolution")
     out_files_dat  <- list.files(
-      file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_GridSin_v6"),
+      file.path(tempdir(), "MODIStsp/Surf_Temp_8Days_GridSin_v61"),
       pattern = "[0-9]{3}\\.dat$", recursive = TRUE, full.names = TRUE)
 
     # same checks as before on file size and raster stats
@@ -26,8 +26,8 @@ test_that(
                mean(raster::getValues(raster::raster(x)), na.rm = T)
              })
     )
-    expect_equal(means, c(13447.650685, 1.757238),
-                 tolerance = 0.001, scale = 1)
+    expect_equal(means, c(13420.67, 1.72),
+                 tolerance = 0.01, scale = 1)
 
     # additional checks on output projection and resolution
     message("MODIStsp Test 2: Output projection and resolution are properly

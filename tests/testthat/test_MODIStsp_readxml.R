@@ -14,9 +14,9 @@ test_that("MODIStsp_readxml works as expected", {
   # characteristics
   testthat::expect_is(opts, "list")
   testthat::expect_equal(names(opts)[[1]], "Surf_Ref_8Days_500m (M*D09A1)")
-  testthat::expect_equal(opts[[1]][["006"]][["file_prefix"]][["Terra"]],
+  testthat::expect_equal(opts[[1]][["061"]][["file_prefix"]][["Terra"]],
                          "MOD09A1")
-  testthat::expect_equal(opts[[101]][["006"]][["file_prefix"]][["Aqua"]],
-                         "MYD13A2")
+  testthat::expect_equal(opts[[101]][["061"]][["file_prefix"]][["Aqua"]],
+                         "MYD13C1")
 
 })

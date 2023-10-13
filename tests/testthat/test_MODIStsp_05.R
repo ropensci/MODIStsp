@@ -16,16 +16,16 @@ test_that(
     
     MODIStsp(test = "05")
     out_files_tif <- list.files(
-      file.path(tempdir(), "MODIStsp/Albedo_Daily_500m_v6"),
+      file.path(tempdir(), "MODIStsp/Albedo_Daily_500m_v61"),
       pattern = "\\.tif$", recursive = TRUE, full.names = TRUE)
     file_sizes_tif <- file.info(out_files_tif)$size
-    expect_equal(file_sizes_tif, c(9062))
+    expect_equal(file_sizes_tif, c(8566))
     means <- unlist(
       lapply(out_files_tif,
              FUN = function(x) {
                mean(raster::values(raster::raster(x)), na.rm = T)
              })
     )
-    expect_equal(means, c(0.8962911), tolerance = 0.001, scale = 1)
+    expect_equal(means, c(0.809), tolerance = 0.01, scale = 1)
     unlink(out_files_tif)
   })
