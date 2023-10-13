@@ -13,7 +13,7 @@ library(base)
 library(sf)
 library(MODIStsp)
 library(dplyr)
-test_zip <-  system.file("testdata/VI_16Days_500m_v61/NDVI.zip",
+test_zip <-  system.file("testdata/VI_16Days_500m_v6/NDVI.zip",
                          package = "MODIStsp")
 dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61"),
            showWarnings = FALSE, recursive = TRUE)

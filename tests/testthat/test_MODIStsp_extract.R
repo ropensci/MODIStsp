@@ -15,7 +15,7 @@ test_that("MODIStsp_extract works as expected", {
       # copy files in "inst/testdata/VI_16Days_500m_v61" to tempdir to avoid
       # creating files outside tempdir while running the test
       #
-      test_zip <-  system.file("testdata/VI_16Days_500m_v61/NDVI.zip",
+      test_zip <-  system.file("testdata/VI_16Days_500m_v6/NDVI.zip",
                                   package = "MODIStsp")
       dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61"),
                  showWarnings = FALSE, recursive = TRUE)

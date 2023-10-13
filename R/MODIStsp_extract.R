@@ -95,7 +95,7 @@
 #' # __NOTE__ To avoid redownloading, here we copy some test data from MODIStsp
 #' # installation folder to tempdir and use it to create a test time series.
 #'
-#' test_zip <-  system.file("testdata/VI_16Days_500m_v61/NDVI.zip",
+#' test_zip <-  system.file("testdata/VI_16Days_500m_v6/NDVI.zip",
 #'                          package = "MODIStsp")
 #' dir.create(file.path(tempdir(), "MODIStsp/VI_16Days_500m_v61"),
 #'            showWarnings = FALSE, recursive = TRUE)
