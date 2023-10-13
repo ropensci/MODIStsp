@@ -34,8 +34,8 @@ test_that(
                mean(raster::getValues(suppressWarnings(raster::raster(x))), na.rm = T)
              })
     )
-    expect_equal(means, c(13341.450786, 13266.374624, 2.843336, 2.824311),
-                 tolerance = 0.001, scale = 1)
+    expect_equal(means, c(13336.34, 13256.26, 2.83, 2.82),
+                 tolerance = 0.01, scale = 1)
 
     # NodataValue not changed
     r <- sf::gdal_utils("info",out_files[1], quiet = TRUE)

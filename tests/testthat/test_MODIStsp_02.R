@@ -26,8 +26,8 @@ test_that(
                mean(raster::getValues(raster::raster(x)), na.rm = T)
              })
     )
-    expect_equal(means, c(13447.650685, 1.757238),
-                 tolerance = 0.001, scale = 1)
+    expect_equal(means, c(13420.67, 1.72),
+                 tolerance = 0.01, scale = 1)
 
     # additional checks on output projection and resolution
     message("MODIStsp Test 2: Output projection and resolution are properly

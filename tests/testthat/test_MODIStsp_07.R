@@ -27,7 +27,7 @@ test_that(
     # resolution to account for the fact that to include boundaries of the
     # polygon a padding of one pixel is always made)
     expect_equal(as.numeric(ext_mstpout), as.numeric(ext_spin),
-                 tolerance = raster::res(outrast), scale = 1)
+                 tolerance = mean(raster::res(outrast)), scale = 1)
     unlink(outpath)
 
     MODIStsp(test = "07b")
