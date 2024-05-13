@@ -24,9 +24,7 @@
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_download
-#' @author Lorenzo Busetto, phD (2014-2017)
-#' @author Luigi Ranghetti, phD (2015)
-#' @importFrom httr RETRY authenticate content GET write_disk
+#' @importFrom httr2 request req_perform req_auth_basic req_headers resp_body_xml
 #' @importFrom xml2 as_list
 
 MODIStsp_download <- function(modislist,
@@ -71,25 +69,21 @@ MODIStsp_download <- function(modislist,
     if (download_server == "http") {
       while (success == FALSE) {
 
-        size_string <- httr::RETRY("GET",
-                                   paste0(remote_filename, ".xml"),
-                                   httr::authenticate(user, password, type = "any"),
-                                   times = n_retries,
-                                   pause_base = 0.1,
-                                   pause_cap = 10,
-                                   quiet = verbose)
+        size_req <- httr2::request(paste0(remote_filename, ".xml")) %>%
+                    httr2::req_auth_basic(user, password) %>%
+                    httr2::req_headers(`User-Agent` = "httr2")
+
+        size_resp <- httr2::req_perform(size_req)
 
         # if user/password are not valid, notify
-        if (size_string["status_code"] == 401) {
-          stop("Username and/or password are not valid. Please provide
-             valid ones!")
+        if (httr2::resp_status(size_resp) == 401) {
+          stop("Username and/or password are not valid. Please provide valid ones!")
         }
 
-        if (size_string$status_code == 200) {
+        if (httr2::resp_status(size_resp) == 200) {
           remote_filesize <- as.integer(
             xml2::as_list(
-              httr::content(
-                size_string, encoding = "UTF-8"))[["GranuleMetaDataFile"]][["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]] #nolint
+              httr2::resp_body_xml(size_resp))[["GranuleMetaDataFile"]][["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]] #nolint
           )
           success <- TRUE
         } else {
@@ -140,29 +134,29 @@ MODIStsp_download <- function(modislist,
             download <- try(system(aria_string,
                                    intern = Sys.info()["sysname"] == "Windows"))
           } else {
-            # http download - httr
-            download <- try(httr::GET(remote_filename,
-                                      httr::authenticate(user, password, type = "any"),
-                                      # httr::progress(),
-                                      httr::write_disk(local_filename,
-                                                       overwrite = TRUE)))
+            # http download - httr2
+            download_req <- httr2::request(remote_filename) %>%
+                            httr2::req_auth_basic(user, password) %>%
+                            httr2::req_headers(`User-Agent` = "httr2") %>%
+                            httr2::req_options(followlocation = TRUE)
+
+            download <- try(httr2::req_perform(download_req, path = local_filename))
           }
         }
 
         # Check for errors on download try
         if (inherits(download, "try-error") |
-            !is.null(attr(download, "status"))) {
+            !file.exists(local_filename)) {
           attempt <- attempt + 1
           if (verbose) message("[", date(), "] Download Error - Retrying...")
           unlink(local_filename)  # On download error, delete incomplete files
           Sys.sleep(1)    # sleep for a while....
         } else {
           if (download_server == "http" & use_aria == FALSE) {
+            download_resp <- httr2::resp_status(download)
 
-            if (download$status_code != 200 &
-                length(httr::content(download,
-                                     "text",
-                                     encoding = "UTF-8")) == 1) {
+            if (download_resp != 200 &
+                file.info(local_filename)$size == 0) {
               # on error, delete last HDF file (to be sure no incomplete
               # files are left behind and send message)
               if (verbose) {
