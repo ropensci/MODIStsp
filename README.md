@@ -154,7 +154,7 @@ For more information, documentation and examples of use, **see also the
 
 ## <i class="fa fa-desktop" aria-hidden="true"></i> System Requirements
 
-`{MODIStsp}` requires [`R`](https://cran.r-project.org) v \>= 3.6.3.
+`{MODIStsp}` requires [`R`](https://cran.r-project.org) v \>= 4.2.0.
 
 ------------------------------------------------------------------------
 
