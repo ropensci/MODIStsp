@@ -58,9 +58,6 @@ get_mod_dirs <- function(http,
              httr2::req_auth_bearer_token(token) %>%
              httr2::req_retry(max_tries = n_retries, backoff = ~ 10) 
       response <- httr2::req_perform(req)
-        }
-        silent = TRUE
-      )
 
       # On interactive execution, after n_retries attempt ask if quit or retry
       if (inherits(response, "try-error") || httr2::resp_status(response) != 200) {
