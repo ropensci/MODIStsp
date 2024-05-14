@@ -59,7 +59,7 @@ get_mod_filenames <- function(http,
     # Create a request object using httr2
     req <- httr2::request(paste0(http, date_dir, "/")) %>%
            httr2::req_auth_bearer_token(token) %>%
-                httr2::req_retry(max_tries = n_retries, backoff = ~ 10)
+           httr2::req_retry(max_tries = n_retries, backoff = ~ 10)
       
     response <- httr2::req_perform(req) 
 
