@@ -31,7 +31,7 @@
 #' @author Luigi Ranghetti, phD (2016)
 #' @author Pasi Autio (2024)
 #' @note License: GPL 3.0
-#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_xml req_retry
+#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_xml req_retry req_body_text
 #' @importFrom stringr str_split str_pad
 get_mod_filenames <- function(http,
                               used_server,
@@ -70,7 +70,7 @@ get_mod_filenames <- function(http,
              "Please try again later. Aborting!", call. = FALSE)
 
       } else {
-        content <- httr2::req_content(response, as = "text", encoding = "UTF-8")
+        content <- httr2::req_body_text(response, as = "text", encoding = "UTF-8")
         getlist <- strsplit(content, "\r*\n")[[1]]
         getlist <- getlist[grep(
           ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
