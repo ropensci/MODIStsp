@@ -54,13 +54,11 @@ get_mod_dirs <- function(http,
     response <- list(status_code = "")
     while (response$status_code != 200) {
       # send request to server
-      response <- try(
-        {
-          req <- httr2::request(http) %>%
-                 httr2::req_auth_bearer_token(token) %>%
-                 httr2::req_retry(max_tries = n_retries, backoff = ~ 10) 
-          httr2::req_perform(req)
-        },
+      req <- httr2::request(http) %>%
+             httr2::req_auth_bearer_token(token) %>%
+             httr2::req_retry(max_tries = n_retries, backoff = ~ 10) 
+      response <- httr2::req_perform(req)
+        }
         silent = TRUE
       )
 
