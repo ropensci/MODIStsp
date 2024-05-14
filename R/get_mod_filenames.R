@@ -48,8 +48,6 @@ get_mod_filenames <- function(http,
   # Fetch Bearer token to be used for further authentication
   token <- get_earthdata_token(user, password)
   
-  n_retries = 10
-  
   success <- FALSE
   if (used_server == "http") {
     #   ________________________________________________________________________
