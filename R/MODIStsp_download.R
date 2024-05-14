@@ -43,7 +43,7 @@ MODIStsp_download <- function(modislist,
                               gui,
                               verbose) {
 
-  # Fetch Bearer token
+  # Fetch Bearer token to be used for further authentication
   token <- get_earthdata_token(user, password)
   
   # Cycle on the different files to download for the current date
