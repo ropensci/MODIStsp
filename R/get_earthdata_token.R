@@ -5,8 +5,8 @@
 #'  - Request new token if no token is defined
 #'  - Update token if the token is expired
 #'  - Bearer token is used for authentication by other functions
-#' @param user `character` Username for http download
-#' @param password `character` Password for http download
+#' @param user `character` Username for Earthdata servers
+#' @param password `character` Password for Earthdata servers
 #' @return The function is called for its side effects
 #' @rdname get_earthdata_token
 #' @importFrom httr2 request req_perform req_auth_basic req_headers resp_body_xml
