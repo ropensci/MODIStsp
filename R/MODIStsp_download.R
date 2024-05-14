@@ -24,7 +24,7 @@
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_download
-#' @importFrom httr2 request req_perform req_auth_basic req_headers resp_body_xml
+#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_xml
 #' @importFrom xml2 as_list
 
 MODIStsp_download <- function(modislist,
@@ -43,6 +43,9 @@ MODIStsp_download <- function(modislist,
                               gui,
                               verbose) {
 
+  # Fetch Bearer token
+  token <- get_earthdata_token(user, password)
+  
   # Cycle on the different files to download for the current date
   for (file in seq_along(modislist)) {
     modisname <- modislist[file]
@@ -70,8 +73,7 @@ MODIStsp_download <- function(modislist,
       while (success == FALSE) {
 
         size_req <- httr2::request(paste0(remote_filename, ".xml")) %>%
-                    httr2::req_auth_basic(user, password) %>%
-                    httr2::req_headers(`User-Agent` = "httr2")
+                    httr2::req_auth_bearer_token(token) 
 
         size_resp <- httr2::req_perform(size_req)
 
@@ -136,7 +138,7 @@ MODIStsp_download <- function(modislist,
           } else {
             # http download - httr2
             download_req <- httr2::request(remote_filename) %>%
-                            httr2::req_auth_basic(user, password) %>%
+                            httr2::req_auth_bearer_token %>%
                             httr2::req_headers(`User-Agent` = "httr2") %>%
                             httr2::req_options(followlocation = TRUE)
 
