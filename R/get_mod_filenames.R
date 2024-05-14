@@ -70,7 +70,7 @@ get_mod_filenames <- function(http,
              "Please try again later. Aborting!", call. = FALSE)
 
       } else {
-        content <- httr2::req_body_text(response, as = "text", encoding = "UTF-8")
+        content <- httr2::req_body_raw(response, encoding = "UTF-8")
         getlist <- strsplit(content, "\r*\n")[[1]]
         getlist <- getlist[grep(
           ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
