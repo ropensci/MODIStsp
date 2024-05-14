@@ -24,6 +24,7 @@
     } 
     token_one <- httr2::resp_body_json(resp)[[1]]
     access_token <- token_one$access_token
+    # Return token
     access_token
   }
   
