@@ -58,7 +58,7 @@ get_mod_dirs <- function(http,
         {
           req <- httr2::request(http) %>%
                  httr2::req_auth_bearer_token(token) %>%
-                 httr2::req_retry(max_tries = n_retries, backoff = 10)
+                 httr2::req_retry(max_tries = n_retries, backoff = 10) 
           httr2::req_perform(req)
         },
         silent = TRUE
