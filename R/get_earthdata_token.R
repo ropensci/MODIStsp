@@ -8,7 +8,7 @@
 #' @param user `character` Username for http download
 #' @param password `character` Password for http download
 #' @return The function is called for its side effects
-#' @rdname MODIStsp_download
+#' @rdname get_eartdata_token
 #' @importFrom httr2 request req_perform req_auth_basic req_headers resp_body_xml
 
   get_token <- function(user, password) {
