@@ -25,9 +25,10 @@
 #' FTP) by:
 #' @author Lorenzo Busetto, phD (2014-2017)
 #' @author Luigi Ranghetti, phD (2016-2017)
+#' @author Pasi Autio (2024)
 #' @note License: GPL 3.0
 #' @importFrom stringr str_sub str_split
-#' @importFrom httr2 request req_perform req_auth_basic req_headers resp_body_string
+#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_string
 
 get_mod_dirs <- function(http,
                          download_server,
@@ -37,6 +38,9 @@ get_mod_dirs <- function(http,
                          gui,
                          out_folder_mod) {
 
+  # Fetch Bearer token to be used for further authentication
+  token <- get_earthdata_token(user, password)
+  
   # make sure that the http address terminates with a "/" (i.e., it is a
   # folder, not a file)
   if (stringr::str_sub(http, -1) != "/") {
@@ -53,8 +57,7 @@ get_mod_dirs <- function(http,
       response <- try(
         {
           req <- httr2::request(http) %>%
-                 httr2::req_auth_basic(user, password) %>%
-                 httr2::req_headers(`User-Agent` = "httr2") %>%
+                 httr2::req_auth_bearer_token(token) %>%
                  httr2::req_retry(times = n_retries, pause_base = 0.1, pause_cap = 3)
           httr2::req_perform(req)
         },
