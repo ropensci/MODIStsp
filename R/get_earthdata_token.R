@@ -1,10 +1,11 @@
+#' @title Get Earthdata Bearer access token function
+#' @description Internal function to fetch Earthdata access token
+#' @param user `character` Username for http download
+#' @param password `character` Password for http download
+#' @return The function is called for its side effects
+#' @rdname MODIStsp_download
+#' @importFrom httr2 request req_perform req_auth_basic req_headers resp_body_xml
 
-
-
-
-
-
-# Function to fetch Earthdata access token
   get_token <- function(user, password) {
     endpoint = "https://urs.earthdata.nasa.gov/api/users/tokens"
     resp <- httr2::request(endpoint) |> httr2::req_auth_basic(user, password) |> httr2::req_perform()
