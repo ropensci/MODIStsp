@@ -28,7 +28,7 @@
 #' @author Pasi Autio (2024)
 #' @note License: GPL 3.0
 #' @importFrom stringr str_sub str_split
-#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_string req_retry
+#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_string req_retry resp_status
 
 get_mod_dirs <- function(http,
                          download_server,
