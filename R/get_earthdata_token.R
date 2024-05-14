@@ -11,7 +11,7 @@
 #' @rdname get_earthdata_token
 #' @importFrom httr2 request req_perform req_auth_basic req_headers resp_body_xml
 
-  get_token <- function(user, password) {
+  get_earthdata_token <- function(user, password) {
     endpoint = "https://urs.earthdata.nasa.gov/api/users/tokens"
     resp <- httr2::request(endpoint) |> httr2::req_auth_basic(user, password) |> httr2::req_perform()
     token_one <- httr2::resp_body_json(resp)[[1]]
