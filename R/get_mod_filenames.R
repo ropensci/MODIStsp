@@ -48,6 +48,8 @@ get_mod_filenames <- function(http,
   # Fetch Bearer token to be used for further authentication
   token <- get_earthdata_token(user, password)
   
+  n_retries = 10
+  
   success <- FALSE
   if (used_server == "http") {
     #   ________________________________________________________________________
@@ -61,7 +63,7 @@ get_mod_filenames <- function(http,
            httr2::req_auth_bearer_token(token)
       
     response <- httr2::req_perform(req) %>%
-                httr2::req_retry(times = n_retries, backoff = ~ 10)
+                httr2::req_retry(max_tries = n_retries, backoff = ~ 10)
 
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
