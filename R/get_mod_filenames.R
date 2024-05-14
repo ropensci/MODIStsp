@@ -31,7 +31,7 @@
 #' @author Luigi Ranghetti, phD (2016)
 #' @author Pasi Autio (2024)
 #' @note License: GPL 3.0
-#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_xml req_retry req_body_text
+#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_xml req_retry req_body_raw
 #' @importFrom stringr str_split str_pad
 get_mod_filenames <- function(http,
                               used_server,
