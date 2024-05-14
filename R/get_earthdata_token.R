@@ -1,5 +1,10 @@
 #' @title Get Earthdata Bearer access token function
 #' @description Internal function to fetch Earthdata access token
+#' @details The function is used to:
+#'  - Fetch Bearer token if there is one already defined;
+#'  - Request new token if no token is defined
+#'  - Update token if the token is expired
+#'  - Bearer token is used for authentication by other functions
 #' @param user `character` Username for http download
 #' @param password `character` Password for http download
 #' @return The function is called for its side effects
