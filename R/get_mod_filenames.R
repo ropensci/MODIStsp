@@ -61,7 +61,7 @@ get_mod_filenames <- function(http,
            httr2::req_auth_bearer_token(token)
       
     response <- httr2::req_perform(req) %>%
-                httr2::req_retry(times = n_retries, backoff = 10)
+                httr2::req_retry(times = n_retries, backoff = ~ 10)
 
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
