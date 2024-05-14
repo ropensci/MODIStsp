@@ -9,7 +9,7 @@
 #' @param password `character` Password for Earthdata servers
 #' @return The function is called for its side effects
 #' @rdname get_earthdata_token
-#' @importFrom httr2 request req_perform req_auth_basic req_headers resp_body_xml
+#' @importFrom httr2 request req_perform req_auth_basic req_headers resp_body_xml req_method
 
   get_earthdata_token <- function(user, password) {
     endpoint = "https://urs.earthdata.nasa.gov/api/users/tokens"
