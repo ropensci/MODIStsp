@@ -138,9 +138,8 @@ MODIStsp_download <- function(modislist,
           } else {
             # http download - httr2
             download_req <- httr2::request(remote_filename) %>%
-                            httr2::req_auth_bearer_token %>%
-                            httr2::req_headers(`User-Agent` = "httr2") %>%
-                            httr2::req_options(followlocation = TRUE)
+                            httr2::req_auth_bearer_token(token) %>%
+                            httr2::req_retry(max_tries = 10, backoff = 10)
 
             download <- try(httr2::req_perform(download_req, path = local_filename))
           }
