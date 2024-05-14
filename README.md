@@ -44,7 +44,7 @@ Lorenzo](https://docs.ropensci.org/MODIStsp/articles/lorenzo.html).</span>
 
 To cite `{MODIStsp}` please use:
 
-L. Busetto, L. Ranghetti (2016) MODIStsp: An R package for automatic
+L. Busetto, L. Ranghetti (2016), P. Autio (2024) MODIStsp: An R package for automatic
 preprocessing of MODIS Land Products time series, Computers &
 Geosciences, Volume 97, Pages 40-48, ISSN 0098-3004,
 <https://doi.org/10.1016/j.cageo.2016.08.020>, URL:
@@ -57,6 +57,12 @@ For more information, documentation and examples of use, **see also the
 [docs.ropensci.org/MODIStsp](https://docs.ropensci.org/MODIStsp/)**.
 
 ## Important News
+
+-   14/05/2024 - `{MODIStsp}` 2.2.0 (GitHub version 2.2.0) is out.
+    This version switches to httr2 package and starts using
+    Bearer authentication to Earthdata sites. MODIStsp() uses
+    Earthdata token 1 for the authentication are requests new
+    token automatically if the old one is expired. 
 
 -   29/10/2021 - `{MODIStsp}` (GitHub version 2.0.6.9000) supports
     products with version 061. Version 006 will remain the default
