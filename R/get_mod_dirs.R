@@ -39,10 +39,13 @@ get_mod_dirs <- function(http,
                          out_folder_mod) {
 
   # Fetch Bearer token to be used for further authentication
-  if (is.defined(earthdata_token) {
-    token <- earthdata_token else
-    token <- get_earthdata_token(user, password)
-    }
+ if (is.null(earthdata_token)) 
+     {
+     token <- earthdata_token 
+     } else 
+     {
+         token <- get_earthdata_token(user, password)
+     }
   
   # make sure that the http address terminates with a "/" (i.e., it is a
   # folder, not a file)
