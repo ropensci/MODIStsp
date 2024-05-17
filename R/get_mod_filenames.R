@@ -85,6 +85,7 @@ get_mod_filenames <- function(http,
           ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
           getlist)
         success <- TRUE
+        print(getlist)
 
       }
     }
