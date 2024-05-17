@@ -135,5 +135,6 @@ get_mod_filenames <- function(http,
   } else {
     Modislist <- grep(".hdf$", getlist, value = TRUE)
   }
+  print(Modislist)
   return(Modislist)
 }
