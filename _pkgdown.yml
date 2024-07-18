@@ -41,43 +41,17 @@ reference:
       - '`load_prodopts`'
       - '`split_nodata_values`'
 navbar:
-  type: inverse
-  left:
-    - icon: fa-home
-      href: index.html
-  right:
-    - text: "Articles"
-      icon: fas fa-book
-      menu:
-      -  text: Installation
-         href: articles/installation.html
-      -  text: Interactive Execution - the MODIStsp GUI
-         href: articles/interactive_execution.html
-      -  text: Non-Interactive Execution from within R
-         href: articles/noninteractive_execution.html
-      -  text: Standalone Execution and Scheduled Processing
-         href: articles/standalone_execution.html
-      -  text: Outputs Format and Naming Conventions
-         href: articles/output.html
-      -  text: Accessing and Analyzing Processed Data from R
-         href: articles/analyze.html
-      -  text: Supported MODIS Products
-         href: articles/products_list.html
-    - text: "faq"
-      icon: fa-question-circle-o
+  components:
+    faq:
+      text:  FAQ
       href: articles/faq.html
-    - icon: fa-newspaper-o
-      text: "news"
-      href: news/index.html
-    - icon: fa-file-code-o
-      text: "functions"
-      href: reference/index.html
-    - icon: fa-github fa-lg
-      text: "github"
-      href: https://github.com/ropensci/MODIStsp/
-    - icon: fa-cross
-      text: "dedication"
-      href: articles/lorenzo.html
+    dedication:
+      text: Dedication
+      href: href: articles/lorenzo.html
+  structure:
+    left:  [intro, faq, dedication, reference, articles, tutorials, news]
+    right: [search, github, lightswitch]
+
 
 extra_packages:
   - tidyr
