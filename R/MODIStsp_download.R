@@ -44,7 +44,7 @@ MODIStsp_download <- function(modislist,
                               verbose) {
 
   # Fetch Bearer token to be used for further authentication
-  if (is.defined(earthdata_token) {
+  if (is.defined(earthdata_token)) {
     token <- earthdata_token else
     token <- get_earthdata_token(user, password)
     }
