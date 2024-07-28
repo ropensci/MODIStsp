@@ -12,7 +12,7 @@
 #'  be identified
 #' @param n_retries `numeric` number of times the access to the http server
 #'   should be retried in case of error before quitting, Default: 20
-#' @param gui `logical`` indicates if processing was called from the GUI
+#' @param gui `logical` indicates if processing was called from the GUI
 #'   environment or not. If not, processing messages are sent to a log file
 #'   instead than to the console/GTK progress windows.
 #' @param out_folder_mod  `character` output folder for MODIS HDF storage
@@ -25,18 +25,28 @@
 #' FTP) by:
 #' @author Lorenzo Busetto, phD (2014-2017)
 #' @author Luigi Ranghetti, phD (2016-2017)
+#' @author Pasi Autio (2024)
 #' @note License: GPL 3.0
 #' @importFrom stringr str_sub str_split
-#' @importFrom httr RETRY authenticate content
+#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_string req_retry resp_status
 
 get_mod_dirs <- function(http,
                          download_server,
                          user, password,
                          yy,
-                         n_retries,
+                         n_retries = 20,
                          gui,
                          out_folder_mod) {
 
+  # Fetch Bearer token to be used for further authentication
+ if (is.null(earthdata_token)) 
+     {
+     token <- earthdata_token 
+     } else 
+     {
+         token <- get_earthdata_token(user, password)
+     }
+  
   # make sure that the http address terminates with a "/" (i.e., it is a
   # folder, not a file)
   if (stringr::str_sub(http, -1) != "/") {
@@ -47,24 +57,16 @@ get_mod_dirs <- function(http,
   #   retrieve list of folders in case of http download                    ####
 
   if (download_server == "http") {
-    response <- data.frame(status_code = "")
+    response <- list(status_code = "")
     while (response$status_code != 200) {
       # send request to server
-      response <- try(
-        httr::RETRY("GET",
-                    http,
-                    httr::authenticate(user, password),
-                    times = n_retries,
-                    pause_base = 0.1,
-                    pause_cap = 3,
-                    quiet = FALSE),
-        silent = TRUE
-      )
+      req <- httr2::request(http) %>%
+             httr2::req_auth_bearer_token(token) %>%
+             httr2::req_retry(max_tries = n_retries, backoff = ~ 10) 
+      response <- httr2::req_perform(req)
 
-      # On interactive execution, after n_retries attempt ask if quit or ----
-      # retry
-
-      if (inherits(response, "try-error") || response$status_code != 200) {
+      # On interactive execution, after n_retries attempt ask if quit or retry
+      if (inherits(response, "try-error") || httr2::resp_status(response) != 200) {
         message(
           "[", date(), "] Error: http server seems to be down! ",
           "Please try again later. Aborting!"
@@ -74,9 +76,8 @@ get_mod_dirs <- function(http,
         return(date_dirs)
       }
     }
-    # On httr success get the directory names (available dates) ----
-    items <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
-                      "\r*\n")[[1]]
+    # On httr2 success get the directory names (available dates) ----
+    items <- strsplit(httr2::resp_body_string(response), "\r*\n")[[1]]
     date_dirs <- gsub(
       ".*>(20[0-9]{2}\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
     )
