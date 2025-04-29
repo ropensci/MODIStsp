@@ -52,7 +52,3 @@ navbar:
     left:  [intro, faq, dedication, reference, articles, tutorials, news]
     right: [search, github, lightswitch]
 
-
-extra_packages:
-  - tidyr
-  - tibbletime
