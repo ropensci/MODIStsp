@@ -47,7 +47,7 @@ navbar:
       href: articles/faq.html
     dedication:
       text: Dedication
-      href: href: articles/lorenzo.html
+      href: articles/lorenzo.html
   structure:
     left:  [intro, faq, dedication, reference, articles, tutorials, news]
     right: [search, github, lightswitch]
