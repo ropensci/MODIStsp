@@ -1,4 +1,6 @@
-# MODIStsp 2.1.1
+# MODIStsp dev
+
+- interim mods to record maintainer change (mdsumner), tagged at master branch v2.1.0.9001
 
 ## Major changes
 - Major product update: Fix broken authentication to NASA Earthdata sites.

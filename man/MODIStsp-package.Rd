@@ -31,4 +31,6 @@ related to a MODIS product whenever a new image is available.
 Lorenzo Busetto, phD (2014-2017)
 
 Luigi Ranghetti, phD (2015-2017)
+
+Pasi Autio (2024)
 }
