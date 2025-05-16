@@ -10,7 +10,7 @@ get_mod_dirs(
   user,
   password,
   yy,
-  n_retries,
+  n_retries = 20,
   gui,
   out_folder_mod
 )
@@ -32,7 +32,7 @@ be identified}
 \item{n_retries}{\code{numeric} number of times the access to the http server
 should be retried in case of error before quitting, Default: 20}
 
-\item{gui}{`logical`` indicates if processing was called from the GUI
+\item{gui}{\code{logical} indicates if processing was called from the GUI
 environment or not. If not, processing messages are sent to a log file
 instead than to the console/GTK progress windows.}
 
@@ -60,4 +60,6 @@ FTP) by:
 Lorenzo Busetto, phD (2014-2017)
 
 Luigi Ranghetti, phD (2016-2017)
+
+Pasi Autio (2024)
 }

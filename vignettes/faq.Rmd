@@ -95,7 +95,7 @@ If you have problems in installing the "devel" version of `devtools`, manually i
   
   ```
   install.packages(c("bitops", "data.table" , "gdalUtilities", "gWidgets", "gWidgetsRGtk2",
-    "httr" , "jsonlite", "parallel", "raster", "sf", "stringr", "xts"))
+    "httr2" , "jsonlite", "parallel", "raster", "sf", "stringr", "xts"))
   ```
 
  , then continue with standard `MODIStsp` installation.
@@ -125,7 +125,7 @@ ________________________________________________________________________________
 1. If you're connecting to the internet **via a proxy**, download will fail. To solve the problem, identify the IP address and port of you proxy, and before running MODIStsp, run the following instructions: 
 
 ```
-    library(httr)
+    library(httr2)
     set_config(use_proxy(url="XXX.XXX.XXX.XXX", port=YYYY))
 ```
 

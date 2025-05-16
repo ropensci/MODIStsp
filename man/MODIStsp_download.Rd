@@ -66,8 +66,3 @@ The function is called for its side effects
 Internal function dealing with download of MODIS hdfs from
 http remote server for a given date.
 }
-\author{
-Lorenzo Busetto, phD (2014-2017)
-
-Luigi Ranghetti, phD (2015)
-}

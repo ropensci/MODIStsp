@@ -229,6 +229,14 @@ MODIStsp_process <- function(proc_opts,
   check_aria <- Sys.which("aria2c")
   if (check_aria == "") use_aria <- FALSE
 
+  #   __________________________________________________________________________
+  # Fetch Bearer token to be used for further authentication
+ ## this exist of earthdata_token can't work, WIP mdsumner
+  if (exists("earthdata_token")) {
+    token <- earthdata_token
+  } else {
+    token <- get_earthdata_token(proc_opts$user, proc_opts$password)
+  }
 
   #   __________________________________________________________________________
   #   Start Working.                                                        ####

@@ -288,7 +288,7 @@ shiny::observeEvent(input$help_downloader, {
     )),
    shiny::p(shiny::HTML(
       "<strong>http</strong> is the downloader which is used by default",
-      "through the package 'httr'."
+      "through the package 'httr2'."
     )),
    shiny::p(shiny::HTML(
       "<strong><a href=\"https://aria2.github.io\" target=\"_blank\">aria2</a></strong>",

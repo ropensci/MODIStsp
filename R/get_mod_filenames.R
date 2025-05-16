@@ -29,8 +29,9 @@
 #'  FTP) by:
 #' @author Lorenzo Busetto, phD (2014-2016)
 #' @author Luigi Ranghetti, phD (2016)
+#' @author Pasi Autio (2024)
 #' @note License: GPL 3.0
-#' @importFrom httr RETRY authenticate content
+#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_xml req_retry resp_body_string
 #' @importFrom stringr str_split str_pad
 get_mod_filenames <- function(http,
                               used_server,
@@ -44,7 +45,15 @@ get_mod_filenames <- function(http,
                               out_folder_mod,
                               gui) {
 
-
+  # Fetch Bearer token to be used for further authentication
+ if (is.null(earthdata_token)) 
+     {
+     token <- earthdata_token 
+     } else 
+     {
+         token <- get_earthdata_token(user, password)
+     }
+  
   success <- FALSE
   if (used_server == "http") {
     #   ________________________________________________________________________
@@ -53,13 +62,12 @@ get_mod_filenames <- function(http,
     # http folders are organized by date subfolders containing all tiles
     while (!success) {
 
-      response <- httr::RETRY("GET",
-                              paste0(http, date_dir, "/"),
-                              httr::authenticate(user, password),
-                              times = n_retries,
-                              pause_base = 0.1,
-                              pause_cap = 10,
-                              quiet = FALSE)
+    # Create a request object using httr2
+    req <- httr2::request(paste0(http, date_dir, "/")) %>%
+           httr2::req_auth_bearer_token(token) %>%
+           httr2::req_retry(max_tries = n_retries, backoff = ~ 10)
+      
+    response <- httr2::req_perform(req) 
 
       # On interactive execution, after n_retries attempt ask if quit or ----
       # retry
@@ -68,8 +76,8 @@ get_mod_filenames <- function(http,
              "Please try again later. Aborting!", call. = FALSE)
 
       } else {
-        getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
-                            "\r*\n")[[1]]
+        content <- httr2::resp_body_string(response)
+        getlist <- strsplit(content, "\r*\n")[[1]]
         getlist <- getlist[grep(
           ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
           getlist)]
@@ -77,6 +85,7 @@ get_mod_filenames <- function(http,
           ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
           getlist)
         success <- TRUE
+        print(getlist)
 
       }
     }
@@ -126,5 +135,6 @@ get_mod_filenames <- function(http,
   } else {
     Modislist <- grep(".hdf$", getlist, value = TRUE)
   }
+  print(Modislist)
   return(Modislist)
 }

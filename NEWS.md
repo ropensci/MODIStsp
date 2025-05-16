@@ -2,6 +2,13 @@
 
 - interim mods to record maintainer change (mdsumner), tagged at master branch v2.1.0.9001
 
+## Major changes
+- Major product update: Fix broken authentication to NASA Earthdata sites.
+- Migrate to httr2 package and remove dependencies to obsolete httr package
+
+## Minor changes
+- Change maintainer's email in order to follow CRAN requirements.
+
 # MODIStsp 2.1.0
 
 ## Major changes
