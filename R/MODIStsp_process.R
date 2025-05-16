@@ -231,11 +231,11 @@ MODIStsp_process <- function(proc_opts,
 
   #   __________________________________________________________________________
   # Fetch Bearer token to be used for further authentication
-  
-  if (exists("earthdata_token")) { 
-    token <- earthdata_token 
-  } else { 
-    token <- get_earthdata_token(user, password)
+ ## this exist of earthdata_token can't work, WIP mdsumner
+  if (exists("earthdata_token")) {
+    token <- earthdata_token
+  } else {
+    token <- get_earthdata_token(proc_opts$user, proc_opts$password)
   }
 
   #   __________________________________________________________________________
