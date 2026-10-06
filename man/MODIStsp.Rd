@@ -20,6 +20,7 @@ MODIStsp(
   downloader = NULL,
   user = NULL,
   password = NULL,
+  token = NULL,
   download_range = NULL,
   start_date = NULL,
   end_date = NULL,
@@ -101,11 +102,21 @@ download. Default: "http"}
 \item{downloader}{download_server \code{character ["http" | "aria2"]} downloader to be used,
 Default: "http"}
 
-\item{user}{\code{character} Username for NASA http server.
-(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home}).}
+\item{user}{\code{character} Earthdata Login username. Used to obtain a bearer
+token automatically when \code{token} is not supplied
+(\href{https://urs.earthdata.nasa.gov/}{urs.earthdata.nasa.gov}). Default: NULL.}
 
-\item{password}{\code{character} Password for NASA http server
-(\href{https://urs.earthdata.nasa.gov/home}{urs.earthdata.nasa.gov/home}).}
+\item{password}{\code{character} Earthdata Login password (see \code{user}).
+Default: NULL.}
+
+\item{token}{\code{character} Earthdata Login bearer token used to authenticate
+downloads from the NASA Earthdata Cloud. If NULL (default), the
+\code{EARTHDATA_TOKEN} environment variable is used if set; otherwise a token is
+generated on the fly from \code{user}/\code{password}. Generate one at
+\href{https://urs.earthdata.nasa.gov/}{urs.earthdata.nasa.gov} via
+\emph{Generate Token}. Since NASA retired the LP DAAC Data Pool for MODIS
+(2025-06-30), downloads go through the Earthdata Cloud and are discovered via
+the NASA CMR. Default: NULL.}
 
 \item{download_range}{\code{character ["Full" | "Seasonal"]} If "full", all the
 available images between the starting and the ending dates are downloaded;
@@ -259,8 +270,7 @@ if (is_hdf4_supported) {
     bandsel = c("EVI", "NDVI"),
     quality_bandsel = "QA_usef",
     indexes_bandsel = "SR",
-    user = "mstp_test" ,
-    password = "MSTP_test_01",
+    token = Sys.getenv("EARTHDATA_TOKEN"),
     start_date = "2020.06.01",
     end_date = "2020.06.15",
     verbose = FALSE,

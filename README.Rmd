@@ -64,6 +64,9 @@ For more information, documentation and examples of use, __see also the `{MODISt
 
 ## Important News
 
+- 13/05/2023 - `{MODIStsp}` (GitHub version 2.1.1)
+Update MODIStsp to use httr2 package instead of obsolete httr to access Earthdata site while fixing the authentication issues at the same time.
+
 - 29/10/2021 - `{MODIStsp}` (GitHub version 2.0.6.9000) supports products with version 061.
 Version 006 will remain the default product version until its decommission
 will be announced.

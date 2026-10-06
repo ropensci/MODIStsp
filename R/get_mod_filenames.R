@@ -1,17 +1,16 @@
 #' @title Find the names of MODIS images corresponding to the selected dates
 #   and tiles
 #' @description Accessory function to find the names of HDF images corresponding
-#' to a given date and interval of spatial tiles within the lpdaac archive.
-#' @param http `character` url of http site on lpdaac corresponding to a given MODIS
-#'   product.
-#' @param used_server `character` can assume values "http"; it cannot be NA.
-#' @param user `character` username for earthdata server.
-#' @param password `character` password for earthdata server.
-#' @param n_retries `numeric` number of times the access to the http server
+#' to a given date and interval of spatial tiles. Names (and their Earthdata
+#' Cloud download URLs) are retrieved by querying the NASA Common Metadata
+#' Repository (CMR).
+#' @param http `character` LP DAAC-style product URL carried in the product
+#'   options DB. Only used here to derive the product `short_name`/`version`.
+#' @param used_server `character` can assume values "http" or "offline".
+#' @param n_retries `numeric` number of times the access to the CMR server
 #'   should be retried in case of error before quitting, Default: 20.
-#' @param date_dir `character array` array of folder names corresponding to acquisition
-#'  containing dates where MODIS files to be downloaded are to be identified
-#'  (return array from `get_mod_dates`).
+#' @param date_dir `character` folder name (a.k.a. acquisition date, format
+#'  "YYYY.MM.DD") for which MODIS files are to be identified.
 #' @param v `integer array` containing a sequence of the vertical tiles of interest
 #'   (e.g., c(18,19)).
 #' @param h `integer array` containing a sequence of the horizontal tiles of interest
@@ -22,20 +21,18 @@
 #' @param gui `logical` indicates if processing was called within the GUI environment
 #'   or not. If not, processing messages are redirected direct to the log file.
 #' @return `character array` containing names of HDF images corresponding to the
-#'  requested tiles available for the product in the selected date
+#'  requested tiles available for the product in the selected date. On "http"
+#'  the returned vector carries an attribute `"urls"`, a named character vector
+#'  mapping each HDF file name to its Earthdata Cloud download URL.
 #' @author Original code by Babak Naimi (\code{.getModisList}, in
 #' \href{https://r-gis.net/?q=ModisDownload}{ModisDownload.R})
-#' modified to adapt it to MODIStsp scheme and to http archive (instead than old
-#'  FTP) by:
+#' modified to adapt it to MODIStsp scheme by:
 #' @author Lorenzo Busetto, phD (2014-2016)
 #' @author Luigi Ranghetti, phD (2016)
 #' @note License: GPL 3.0
-#' @importFrom httr RETRY authenticate content
 #' @importFrom stringr str_split str_pad
 get_mod_filenames <- function(http,
                               used_server,
-                              user,
-                              password,
                               n_retries,
                               date_dir,
                               v,
@@ -44,42 +41,26 @@ get_mod_filenames <- function(http,
                               out_folder_mod,
                               gui) {
 
+  urls <- NULL
 
-  success <- FALSE
   if (used_server == "http") {
     #   ________________________________________________________________________
-    #   Retrieve available hdf files in case of http download               ####
+    #   Retrieve available hdf files for the date from NASA CMR             ####
 
-    # http folders are organized by date subfolders containing all tiles
-    while (!success) {
+    prod_vers <- parse_prod_version(http)
 
-      response <- httr::RETRY("GET",
-                              paste0(http, date_dir, "/"),
-                              httr::authenticate(user, password),
-                              times = n_retries,
-                              pause_base = 0.1,
-                              pause_cap = 10,
-                              quiet = FALSE)
+    granules <- get_mod_granules_cmr(
+      short_name = prod_vers[["short_name"]],
+      version    = prod_vers[["version"]],
+      date_from  = date_dir,
+      date_to    = date_dir,
+      v = v, h = h, tiled = tiled,
+      n_retries  = n_retries
+    )
 
-      # On interactive execution, after n_retries attempt ask if quit or ----
-      # retry
-      if (response$status_code != 200) {
-        stop("[", date(), "] Error: http server seems to be down! ",
-             "Please try again later. Aborting!", call. = FALSE)
+    getlist <- granules$hdf_name
+    urls    <- stats::setNames(granules$url, granules$hdf_name)
 
-      } else {
-        getlist <- strsplit(httr::content(response, "text", encoding = "UTF-8"),
-                            "\r*\n")[[1]]
-        getlist <- getlist[grep(
-          ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", #nolint
-          getlist)]
-        getlist <- gsub(
-          ".*>([A-Z0-9]+\\.A[0-9]+(?:\\.h[0-9]{2}v[0-9]{2})?\\.[0-9]+\\.[0-9]+\\.hdf)<.*", "\\1", #nolint
-          getlist)
-        success <- TRUE
-
-      }
-    }
   }
 
   # __________________________________________________________________________
@@ -125,6 +106,12 @@ get_mod_filenames <- function(http,
     }
   } else {
     Modislist <- grep(".hdf$", getlist, value = TRUE)
+  }
+
+  # Attach the download URLs (http mode only) so MODIStsp_download does not
+  # need to query CMR again.
+  if (!is.null(urls) && length(Modislist) > 0) {
+    attr(Modislist, "urls") <- urls[Modislist]
   }
   return(Modislist)
 }
