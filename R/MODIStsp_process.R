@@ -230,15 +230,6 @@ MODIStsp_process <- function(proc_opts,
   if (check_aria == "") use_aria <- FALSE
 
   #   __________________________________________________________________________
-  # Fetch Bearer token to be used for further authentication
- ## this exist of earthdata_token can't work, WIP mdsumner
-  if (exists("earthdata_token")) {
-    token <- earthdata_token
-  } else {
-    token <- get_earthdata_token(proc_opts$user, proc_opts$password)
-  }
-
-  #   __________________________________________________________________________
   #   Start Working.                                                        ####
 
   combined   <- FALSE
@@ -254,6 +245,15 @@ MODIStsp_process <- function(proc_opts,
     sensor   <- c("Terra")
     combined <- TRUE
   }
+
+  # Resolve the Earthdata Login bearer token once (needed only for downloads).
+  # Accepts an explicit token, the EARTHDATA_TOKEN env var, or user/password.
+  token <- NULL
+  if (proc_opts$download_server == "http") {
+    token <- resolve_earthdata_token(proc_opts$token,
+                                     proc_opts$user, proc_opts$password)
+  }
+
   #  If both platforms selected, do a cycle. Process first Terra then Aqua.
 
   for (sens_sel in sensor) {
@@ -279,11 +279,15 @@ MODIStsp_process <- function(proc_opts,
       # First, retrieve acquisition dates of all available MODIS hdfs for the
       # selected product in yy
       date_dirs_all   <- get_mod_dirs(http, proc_opts$download_server,
-                                      proc_opts$user, proc_opts$password,
                                       yy,
                                       n_retries,
                                       gui,
-                                      proc_opts$out_folder_mod)
+                                      proc_opts$out_folder_mod,
+                                      v = seq(from = proc_opts$start_y,
+                                              to = proc_opts$end_y),
+                                      h = seq(from = proc_opts$start_x,
+                                              to = proc_opts$end_x),
+                                      tiled = tiled)
 
       # overwrite download_server with the setting used in the end to retrieve
       # folders.
@@ -318,11 +322,8 @@ MODIStsp_process <- function(proc_opts,
         # dates)
 
         for (date in seq_along(date_dirs)) {
-          #Create the date string
-          date_name <- sub(sub(
-            pattern = "\\.", replacement = "_", date_dirs[date]),
-            pattern = "\\.", replacement = "_", date_dirs[date]
-          )
+          #Create the date string (YYYY.MM.DD -> YYYY_MM_DD)
+          date_name <- gsub(".", "_", date_dirs[date], fixed = TRUE)
           # transform date to year
           year      <- strftime(as.Date(date_name, "%Y_%m_%d" ), format = "%Y")
           # transform date to DOY
@@ -351,7 +352,6 @@ MODIStsp_process <- function(proc_opts,
             # required tiles for the current date)
             modislist <- get_mod_filenames(http,
                                            used_server = download_server,
-                                           proc_opts$user, proc_opts$password,
                                            n_retries,
                                            date_dir = date_dirs[date],
                                            v = seq(from = proc_opts$start_y, to = proc_opts$end_y),
@@ -369,9 +369,11 @@ MODIStsp_process <- function(proc_opts,
               #  out_folder_mod, it is not redownloaded !!!!
 
               MODIStsp_download(modislist, proc_opts$out_folder_mod,
-                                download_server, http, n_retries, use_aria,
+                                download_server,
+                                urls = attr(modislist, "urls"),
+                                n_retries, use_aria,
                                 date_dirs[date], year,
-                                DOY, proc_opts$user, proc_opts$password, sens_sel,
+                                DOY, token, sens_sel,
                                 date_name, gui, verbose)
 
               mess_text <- paste0("[", date(), "] ", length(modislist),

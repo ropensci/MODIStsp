@@ -2,51 +2,58 @@
 % Please edit documentation in R/get_mod_dirs.R
 \name{get_mod_dirs}
 \alias{get_mod_dirs}
-\title{Get list of MODIS data folders from http server}
+\title{Get list of MODIS acquisition dates from NASA CMR}
 \usage{
 get_mod_dirs(
   http,
   download_server,
-  user,
-  password,
   yy,
-  n_retries = 20,
+  n_retries,
   gui,
-  out_folder_mod
+  out_folder_mod,
+  v = NULL,
+  h = NULL,
+  tiled = 1
 )
 }
 \arguments{
-\item{http}{\code{character} http site on lpdaac corresponding to the selected MODIS
-product}
+\item{http}{\code{character} LP DAAC-style product URL carried in the product
+options DB (e.g. "https://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.061/"). Only
+used here to derive the product \code{short_name} and \code{version}.}
 
 \item{download_server}{\code{character ["http" | "offline"]} download service
 to be used; if NA, the script tries to download with http.}
 
-\item{user}{\code{character} username for earthdata http server}
+\item{yy}{\code{character} Year for which the available acquisition dates are to
+be identified.}
 
-\item{password}{\code{character} password for earthdata http server}
+\item{n_retries}{\code{numeric} number of times the access to the CMR server
+should be retried in case of error before quitting, Default: 20.}
 
-\item{yy}{\code{character} Year for which the folder containing HDF images are to
-be identified}
-
-\item{n_retries}{\code{numeric} number of times the access to the http server
-should be retried in case of error before quitting, Default: 20}
-
-\item{gui}{\code{logical} indicates if processing was called from the GUI
+\item{gui}{`logical`` indicates if processing was called from the GUI
 environment or not. If not, processing messages are sent to a log file
 instead than to the console/GTK progress windows.}
 
-\item{out_folder_mod}{\code{character} output folder for MODIS HDF storage}
+\item{out_folder_mod}{\code{character} output folder for MODIS HDF storage.}
+
+\item{v}{\code{integer array} vertical tiles of interest (used to restrict the CMR
+query for tiled products). Default: NULL.}
+
+\item{h}{\code{integer array} horizontal tiles of interest. Default: NULL.}
+
+\item{tiled}{\code{numeric [0/1]} 1 = tiled product; 0 = non-tiled. Default: 1.}
 }
 \value{
 \verb{character array} listing all available folders (a.k.a. dates) for
-the requested MODIS product on lpdaac http archive, for the years
-included in the time range selected for processing.
+the requested MODIS product, for the years included in the time range
+selected for processing.
 }
 \description{
-Accessory function to get the full list of directories on the
-lpdaac http site containing data included in the time range selected for
-processing (modified after Barry Rowlingson function):
+Accessory function to get the full list of acquisition dates
+available for the selected MODIS product within the time range selected for
+processing. Dates are retrieved by querying the NASA Common Metadata
+Repository (CMR) instead of scraping the (now retired) LP DAAC Data Pool
+HTML directory listings.
 }
 \note{
 License: GPL 3.0
@@ -54,12 +61,9 @@ License: GPL 3.0
 \author{
 Original code by Babak Naimi (\code{.getModisList}, in
 \href{https://r-gis.net/?q=ModisDownload}{ModisDownload.R})
-modified to adapt it to MODIStsp scheme and to http archive (instead than old
-FTP) by:
+modified to adapt it to MODIStsp scheme by:
 
 Lorenzo Busetto, phD (2014-2017)
 
 Luigi Ranghetti, phD (2016-2017)
-
-Pasi Autio (2024)
 }

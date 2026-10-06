@@ -1,5 +1,20 @@
 # MODIStsp dev
 
+## Major changes
+- Migrate the download backend to the NASA Earthdata Cloud. NASA retired the LP
+  DAAC Data Pool for MODIS on 2025-06-30 (and legacy OPeNDAP on 2025-09-19),
+  which broke the previous HTML directory-listing discovery and download.
+  Granules are now discovered via the NASA Common Metadata Repository
+  (CMR, provider `LPCLOUD`) through the new `get_mod_granules_cmr()` helper, and
+  downloaded over HTTPS from the Earthdata Cloud with `httr2`.
+- Authentication uses an Earthdata Login bearer token. A new `token` argument
+  (or the `EARTHDATA_TOKEN` environment variable) is accepted; if only
+  `user`/`password` are given, a token is generated automatically via
+  `get_earthdata_token()` (building on @pkautio's work in #275). Existing
+  `user`/`password`-based calls therefore keep working (non-breaking).
+- Fix a latent bug in `MODIStsp_process()` where the date string was built with
+  a malformed nested `sub()` call ("NA in coercion to boolean").
+
 - interim mods to record maintainer change (mdsumner), tagged at master branch v2.1.0.9001
 
 ## Major changes

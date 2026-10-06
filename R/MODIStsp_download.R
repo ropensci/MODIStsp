@@ -1,22 +1,25 @@
 #' @title MODIStsp download function
-#' @description Internal function dealing with download of MODIS hdfs from
-#'  http remote server for a given date.
+#' @description Internal function dealing with download of MODIS hdfs from the
+#'  NASA Earthdata Cloud for a given date. Granules are downloaded from the URLs
+#'  discovered through the CMR (see `get_mod_filenames`), authenticating with an
+#'  Earthdata Login bearer token.
 #' @param modislist `character array` List of MODIS images to be downloaded for
 #'  the selected date (as returned from `get_mod_filenames`). Can be a single
 #'  image, or a list of images in case different tiles are needed!
 #' @param out_folder_mod `character` Folder where the hdfs are to be stored
 #' @param download_server `character ["http"]` Server to be used.
-#' @param http `character` Address of the http server for the selected product.
+#' @param urls `named character` mapping each HDF file name in `modislist` to its
+#'  Earthdata Cloud download URL (the `"urls"` attribute returned by
+#'  `get_mod_filenames`).
 #' @param n_retries `numeric` Max number of retry attempts on download. If
 #'  download fails more that n_retries times consecutively, abort
 #' @param date_dir `character array` Sub-folder where the different images
-#'  can be found (element of the list returned from `get_mod_dirs`, used in case
-#'  of http download to generate the download addresses).
+#'  can be found (element of the list returned from `get_mod_dirs`).
 #' @param use_aria `logical` if TRUE, download using aria2c
 #' @param year `character` Acquisition year of the images to be downloaded
 #' @param DOY `character array` Acquisition doys of the images to be downloaded
-#' @param user `character` Username for http download
-#' @param password `character` Password for http download
+#' @param token `character` Earthdata Login bearer token used to authenticate
+#'  downloads from the NASA Earthdata Cloud.
 #' @param sens_sel `character ["terra" | "aqua"]` Selected sensor.
 #' @param date_name `character` Date of acquisition of the images to be downloaded.
 #' @param gui `logical` Indicates if on an interactive or non-interactive execution
@@ -24,32 +27,26 @@
 #' @param verbose `logical` If FALSE, suppress processing messages, Default: TRUE
 #' @return The function is called for its side effects
 #' @rdname MODIStsp_download
-#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_xml
-#' @importFrom xml2 as_list
+#' @author Lorenzo Busetto, phD (2014-2017)
+#' @author Luigi Ranghetti, phD (2015)
+#' @importFrom httr2 request req_headers req_method req_retry req_perform
+#'  req_error resp_header resp_status
 
 MODIStsp_download <- function(modislist,
                               out_folder_mod,
                               download_server,
-                              http,
+                              urls,
                               n_retries,
                               use_aria,
                               date_dir,
                               year,
                               DOY,
-                              user,
-                              password,
+                              token,
                               sens_sel,
                               date_name,
                               gui,
                               verbose) {
 
-  # Fetch Bearer token to be used for further authentication
-  if (exists("earthdata_token")) { 
-    token <- earthdata_token 
-  } else { 
-    token <- get_earthdata_token(user, password)
-  }
-  
   # Cycle on the different files to download for the current date
   for (file in seq_along(modislist)) {
     modisname <- modislist[file]
@@ -66,41 +63,18 @@ MODIStsp_download <- function(modislist,
     }
 
     if (download_server == "http") {
-      remote_filename <- paste0(http, date_dir, "/", modisname)
-    }
-    if (download_server == "offline") {
-      remote_filename <- NA
-    }
-    success <- FALSE
-    # On http download, try to catch size information from xml file ----
-    if (download_server == "http") {
-      while (success == FALSE) {
-
-        size_req <- httr2::request(paste0(remote_filename, ".xml")) %>%
-                    httr2::req_auth_bearer_token(token) 
-
-        size_resp <- httr2::req_perform(size_req)
-
-        # if user/password are not valid, notify
-        if (httr2::resp_status(size_resp) == 401) {
-          stop("Username and/or password are not valid. Please provide valid ones!")
-        }
-
-        if (httr2::resp_status(size_resp) == 200) {
-          remote_filesize <- as.integer(
-            xml2::as_list(
-              httr2::resp_body_xml(size_resp))[["GranuleMetaDataFile"]][["GranuleURMetaData"]][["DataFiles"]][["DataFileContainer"]][["FileSize"]] #nolint
-          )
-          success <- TRUE
-        } else {
-          # If the remote xml file was not accessible, n_retries times,
-          # retry or abort
-          stop("[", date(), "] Error: http server seems to be down! Please retry ", #nolint
-               "Later!", .call = FALSE)
-        }
+      remote_filename <- unname(urls[modisname])
+      if (is.na(remote_filename) || is.null(remote_filename)) {
+        stop("[", date(), "] Error: no download URL found for ", modisname,
+             ". Aborting!", call. = FALSE)
       }
-    } else {
+    }
 
+    # On http download, retrieve the remote file size (Content-Length) so we ----
+    # can skip already-complete files and detect incomplete downloads.
+    if (download_server == "http") {
+      remote_filesize <- get_remote_filesize(remote_filename, token, n_retries)
+    } else {
       # On offline mode, don't perform file size check ----
       remote_filesize <- local_filesize
     }
@@ -109,8 +83,13 @@ MODIStsp_download <- function(modislist,
     #   Download required HDF images                                        ####
     #   (If HDF not existing locally, or existing with different size)
     #
+    # remote_filesize may be NA if the server did not report Content-Length;
+    # in that case we always (re)download.
 
-    if (!file.exists(local_filename) | local_filesize != remote_filesize) {
+    need_download <- !file.exists(local_filename) ||
+      is.na(remote_filesize) || local_filesize != remote_filesize
+
+    if (need_download) {
 
       # update messages
       mess_text <- paste("Downloading", sens_sel, "Files for date:",
@@ -130,51 +109,55 @@ MODIStsp_download <- function(modislist,
             aria_string <- paste0(
               Sys.which("aria2c"), " -x 6 -d ",
               dirname(local_filename),
-              " -o ", basename(remote_filename),
+              " -o ", basename(local_filename),
               " ", remote_filename,
               " --allow-overwrite --file-allocation=none --retry-wait=2",
-              " --http-user=", user,
-              " --http-passwd=", password)
+              " --header=\"Authorization: Bearer ", token, "\"")
 
             # intern=TRUE for Windows, FALSE for Unix
             download <- try(system(aria_string,
                                    intern = Sys.info()["sysname"] == "Windows"))
           } else {
-            # http download - httr2
-            download_req <- httr2::request(remote_filename) %>%
-                            httr2::req_auth_bearer_token(token) %>%
-                            httr2::req_retry(max_tries = n_retries, backoff = ~ 10)
+            # http download - httr2 with bearer token. libcurl strips the
+            # Authorization header on the cross-host redirect to S3/CloudFront,
+            # so the pre-signed URL is honoured without leaking credentials.
+            req <- httr2::request(remote_filename)
+            req <- httr2::req_headers(
+              req, Authorization = paste("Bearer", token))
+            req <- httr2::req_retry(req, max_tries = n_retries)
+            req <- httr2::req_error(req, is_error = function(resp) FALSE)
+            download <- try(
+              httr2::req_perform(req, path = local_filename), silent = TRUE)
 
-            download <- httr2::req_perform(download_req, path = local_filename)
+            # An auth error is fatal (no point retrying with a bad token)
+            if (!inherits(download, "try-error")) {
+              status <- httr2::resp_status(download)
+              if (status == 401 || status == 403) {
+                unlink(local_filename)
+                stop("Earthdata authentication failed (HTTP ", status,
+                     "). Please check that your Earthdata Login token is ",
+                     "valid and that the 'LP DAAC' application is authorized ",
+                     "in your Earthdata profile.", call. = FALSE)
+              }
+            }
           }
         }
 
-        # Check for errors on download try
-        if (inherits(download, "try-error") |
-            !file.exists(local_filename)) {
+        # Check for errors on download try (network / aria2c failures -> retry)
+        aria_failed <- use_aria && !is.null(attr(download, "status")) &&
+          !is.na(attr(download, "status")) && attr(download, "status") != 0
+        if (inherits(download, "try-error") | aria_failed) {
           attempt <- attempt + 1
           if (verbose) message("[", date(), "] Download Error - Retrying...")
           unlink(local_filename)  # On download error, delete incomplete files
           Sys.sleep(1)    # sleep for a while....
-        } else {
-          if (download_server == "http" & use_aria == FALSE) {
-            download_resp <- httr2::resp_status(download)
-
-            if (download_resp != 200 &
-                file.info(local_filename)$size == 0) {
-              # on error, delete last HDF file (to be sure no incomplete
-              # files are left behind and send message)
-              if (verbose) {
-                message("[", date(), "] Download Error - Retrying...")
-              }
-              unlink(local_filename)
-            }
-          }
         }
+
         # final check on local file size: Only exit if local file size equals
         # remote filesize to  prevent problems on incomplete download!
         local_filesize <- file.info(local_filename)$size
-        if (local_filesize == remote_filesize & !is.na(local_filesize)) {
+        if (!is.na(local_filesize) && local_filesize > 0 &&
+            (is.na(remote_filesize) || local_filesize == remote_filesize)) {
           # on success, bump attempt number so to exit the while cycle
           attempt <- n_retries + 1
           success <- TRUE
@@ -182,10 +165,10 @@ MODIStsp_download <- function(modislist,
           attempt <- attempt + 1
         }
       }
-      if (attempt == n_retries & success == FALSE) {
+      if (success == FALSE) {
           unlink(local_filename)
-          stop("[", date(), "] Error: server seems to be down! Please retry ",
-               "Later!")
+          stop("[", date(), "] Error: server seems to be down or the file ",
+               "could not be downloaded! Please retry later!", call. = FALSE)
 
       }
     } else {
@@ -194,4 +177,36 @@ MODIStsp_download <- function(modislist,
       process_message(mess_text, verbose)
     }
   }
+}
+
+#' @title Retrieve the remote size of an Earthdata Cloud granule
+#' @description Helper issuing a HEAD request (bearer token, following the
+#'  redirect to S3/CloudFront) to obtain the `Content-Length` of a granule.
+#' @param url `character` granule download URL.
+#' @param token `character` Earthdata Login bearer token.
+#' @param n_retries `numeric` max retry attempts.
+#' @return `integer` remote file size in bytes, or `NA` if not reported.
+#' @keywords internal
+#' @importFrom httr2 request req_headers req_method req_retry req_error
+#'  req_perform resp_header resp_status
+get_remote_filesize <- function(url, token, n_retries) {
+  resp <- try({
+    req <- httr2::request(url)
+    req <- httr2::req_headers(req, Authorization = paste("Bearer", token))
+    req <- httr2::req_method(req, "HEAD")
+    req <- httr2::req_retry(req, max_tries = n_retries)
+    req <- httr2::req_error(req, is_error = function(resp) FALSE)
+    httr2::req_perform(req)
+  }, silent = TRUE)
+
+  if (inherits(resp, "try-error")) return(NA_integer_)
+
+  # If the size probe cannot authenticate/authorize, don't abort here: return
+  # NA (forcing a download attempt) and let the GET report the definitive error.
+  status <- httr2::resp_status(resp)
+  if (status == 401 || status == 403) return(NA_integer_)
+
+  cl <- httr2::resp_header(resp, "Content-Length")
+  if (is.null(cl)) return(NA_integer_)
+  suppressWarnings(as.integer(cl))
 }

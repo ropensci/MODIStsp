@@ -8,14 +8,13 @@ MODIStsp_download(
   modislist,
   out_folder_mod,
   download_server,
-  http,
+  urls,
   n_retries,
   use_aria,
   date_dir,
   year,
   DOY,
-  user,
-  password,
+  token,
   sens_sel,
   date_name,
   gui,
@@ -31,7 +30,9 @@ image, or a list of images in case different tiles are needed!}
 
 \item{download_server}{\code{character ["http"]} Server to be used.}
 
-\item{http}{\code{character} Address of the http server for the selected product.}
+\item{urls}{\verb{named character} mapping each HDF file name in \code{modislist} to its
+Earthdata Cloud download URL (the \code{"urls"} attribute returned by
+\code{get_mod_filenames}).}
 
 \item{n_retries}{\code{numeric} Max number of retry attempts on download. If
 download fails more that n_retries times consecutively, abort}
@@ -39,16 +40,14 @@ download fails more that n_retries times consecutively, abort}
 \item{use_aria}{\code{logical} if TRUE, download using aria2c}
 
 \item{date_dir}{\verb{character array} Sub-folder where the different images
-can be found (element of the list returned from \code{get_mod_dirs}, used in case
-of http download to generate the download addresses).}
+can be found (element of the list returned from \code{get_mod_dirs}).}
 
 \item{year}{\code{character} Acquisition year of the images to be downloaded}
 
 \item{DOY}{\verb{character array} Acquisition doys of the images to be downloaded}
 
-\item{user}{\code{character} Username for http download}
-
-\item{password}{\code{character} Password for http download}
+\item{token}{\code{character} Earthdata Login bearer token used to authenticate
+downloads from the NASA Earthdata Cloud.}
 
 \item{sens_sel}{\code{character ["terra" | "aqua"]} Selected sensor.}
 
@@ -64,5 +63,12 @@ The function is called for its side effects
 }
 \description{
 Internal function dealing with download of MODIS hdfs from
-http remote server for a given date.
+the NASA Earthdata Cloud for a given date. Granules are downloaded from the
+URLs discovered through the CMR (see \code{get_mod_filenames}), authenticating
+with an Earthdata Login bearer token.
+}
+\author{
+Lorenzo Busetto, phD (2014-2017)
+
+Luigi Ranghetti, phD (2015)
 }

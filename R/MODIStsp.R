@@ -48,10 +48,19 @@
 #'  download. Default: "http"
 #' @param downloader download_server `character ["http" | "aria2"]` downloader to be used,
 #'  Default: "http"
-#' @param user `character` Username for NASA http server.
-#'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home)).
-#' @param password `character` Password for NASA http server
-#'   ([urs.earthdata.nasa.gov/home](https://urs.earthdata.nasa.gov/home)).
+#' @param user `character` Earthdata Login username. Used to obtain a bearer
+#'   token automatically when `token` is not supplied
+#'   ([urs.earthdata.nasa.gov](https://urs.earthdata.nasa.gov/)). Default: NULL.
+#' @param password `character` Earthdata Login password (see `user`).
+#'   Default: NULL.
+#' @param token `character` Earthdata Login bearer token used to authenticate
+#'   downloads from the NASA Earthdata Cloud. If NULL (default), the
+#'   `EARTHDATA_TOKEN` environment variable is used if set; otherwise a token is
+#'   generated on the fly from `user`/`password`. Generate one at
+#'   [urs.earthdata.nasa.gov](https://urs.earthdata.nasa.gov/) via
+#'   *Generate Token*. Since NASA retired the LP DAAC Data Pool for MODIS
+#'   (2025-06-30), downloads go through the Earthdata Cloud and are
+#'   discovered via the NASA CMR. Default: NULL.
 #' @param download_range `character ["Full" | "Seasonal"]` If "full", all the
 #'   available images between the starting and the ending dates are downloaded;
 #'   If "seasonal", only the images included in the season are downloaded
@@ -174,8 +183,7 @@
 #'     bandsel = c("EVI", "NDVI"),
 #'     quality_bandsel = "QA_usef",
 #'     indexes_bandsel = "SR",
-#'     user = "mstp_test" ,
-#'     password = "MSTP_test_01",
+#'     token = Sys.getenv("EARTHDATA_TOKEN"),
 #'     start_date = "2020.06.01",
 #'     end_date = "2020.06.15",
 #'     verbose = FALSE,
@@ -283,6 +291,7 @@ MODIStsp <- function(...,
                      downloader      = NULL,
                      user            = NULL,
                      password        = NULL,
+                     token           = NULL,
                      download_range  = NULL,
                      start_date      = NULL,
                      end_date        = NULL,
@@ -475,6 +484,12 @@ MODIStsp <- function(...,
 
     if(!is.null(user)) {proc_opts$user     <- user}
     if(!is.null(password)) {proc_opts$password <- password}
+    # Earthdata Login bearer token: explicit argument wins, else env var
+    if (is.null(token)) {
+      env_token <- Sys.getenv("EARTHDATA_TOKEN")
+      if (nzchar(env_token)) token <- env_token
+    }
+    if(!is.null(token)) {proc_opts$token <- token}
 
     if(!is.null(download_range)) {proc_opts$download_range <- download_range}
     if(!is.null(start_date)) {proc_opts$start_date <- start_date}

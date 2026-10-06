@@ -2,27 +2,28 @@
 % Please edit documentation in R/get_earthdata_token.R
 \name{get_earthdata_token}
 \alias{get_earthdata_token}
-\title{Get Earthdata Bearer access token function}
+\title{Get an Earthdata Login bearer token from username/password}
 \usage{
 get_earthdata_token(user, password)
 }
 \arguments{
-\item{user}{\code{character} Username for Earthdata servers}
+\item{user}{\code{character} Earthdata Login username.}
 
-\item{password}{\code{character} Password for Earthdata servers}
+\item{password}{\code{character} Earthdata Login password.}
 }
 \value{
-The function is called for its side effects
+\code{character} a bearer access token.
 }
 \description{
-Internal function to fetch Earthdata access token
+Internal function that fetches (or, if none exists, creates) an
+Earthdata Login user token via the URS API, using HTTP Basic authentication
+with the user's Earthdata credentials. The returned bearer token is then
+used to authenticate downloads from the NASA Earthdata Cloud.
 }
-\details{
-The function is used to:
-\itemize{
-\item Fetch Bearer token if there is one already defined;
-\item Request new token if no token is defined
-\item Update token if the token is expired
-\item Bearer token is used for authentication by other functions
+\author{
+Pasi Autio (2024)
 }
+\note{
+License: GPL 3.0
 }
+\keyword{internal}

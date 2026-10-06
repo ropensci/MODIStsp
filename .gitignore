@@ -25,3 +25,5 @@ inst/ExtData/modis_sinusoidal_grid_world\.shp
 inst/ExtData/modis_sinusoidal_grid_world\.shx
 /doc/
 /Meta/
+.claude/
+scripts_test/

@@ -32,3 +32,5 @@
 ^Meta$
 ^CRAN-SUBMISSION$
 ^MODIStsp\.Rproj$
+^\.claude$
+^scripts_test$

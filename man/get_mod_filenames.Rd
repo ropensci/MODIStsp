@@ -7,8 +7,6 @@
 get_mod_filenames(
   http,
   used_server,
-  user,
-  password,
   n_retries,
   date_dir,
   v,
@@ -19,21 +17,16 @@ get_mod_filenames(
 )
 }
 \arguments{
-\item{http}{\code{character} url of http site on lpdaac corresponding to a given MODIS
-product.}
+\item{http}{\code{character} LP DAAC-style product URL carried in the product
+options DB. Only used here to derive the product \code{short_name}/\code{version}.}
 
-\item{used_server}{\code{character} can assume values "http"; it cannot be NA.}
+\item{used_server}{\code{character} can assume values "http" or "offline".}
 
-\item{user}{\code{character} username for earthdata server.}
-
-\item{password}{\code{character} password for earthdata server.}
-
-\item{n_retries}{\code{numeric} number of times the access to the http server
+\item{n_retries}{\code{numeric} number of times the access to the CMR server
 should be retried in case of error before quitting, Default: 20.}
 
-\item{date_dir}{\verb{character array} array of folder names corresponding to acquisition
-containing dates where MODIS files to be downloaded are to be identified
-(return array from \code{get_mod_dates}).}
+\item{date_dir}{\code{character} folder name (a.k.a. acquisition date, format
+"YYYY.MM.DD") for which MODIS files are to be identified.}
 
 \item{v}{\verb{integer array} containing a sequence of the vertical tiles of interest
 (e.g., c(18,19)).}
@@ -51,11 +44,15 @@ or not. If not, processing messages are redirected direct to the log file.}
 }
 \value{
 \verb{character array} containing names of HDF images corresponding to the
-requested tiles available for the product in the selected date
+requested tiles available for the product in the selected date. On "http"
+the returned vector carries an attribute \code{"urls"}, a named character vector
+mapping each HDF file name to its Earthdata Cloud download URL.
 }
 \description{
 Accessory function to find the names of HDF images corresponding
-to a given date and interval of spatial tiles within the lpdaac archive.
+to a given date and interval of spatial tiles. Names (and their Earthdata
+Cloud download URLs) are retrieved by querying the NASA Common Metadata
+Repository (CMR).
 }
 \note{
 License: GPL 3.0
@@ -69,6 +66,4 @@ FTP) by:
 Lorenzo Busetto, phD (2014-2016)
 
 Luigi Ranghetti, phD (2016)
-
-Pasi Autio (2024)
 }

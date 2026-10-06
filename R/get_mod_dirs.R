@@ -1,88 +1,77 @@
-#' @title Get list of MODIS data folders from http server
-#' @description Accessory function to get the full list of directories on the
-#'  lpdaac http site containing data included in the time range selected for
-#'  processing (modified after Barry Rowlingson function):
-#' @param http `character` http site on lpdaac corresponding to the selected MODIS
-#'   product
+#' @title Get list of MODIS acquisition dates from NASA CMR
+#' @description Accessory function to get the full list of acquisition dates
+#'  available for the selected MODIS product within the time range selected for
+#'  processing. Dates are retrieved by querying the NASA Common Metadata
+#'  Repository (CMR) instead of scraping the (now retired) LP DAAC Data Pool
+#'  HTML directory listings.
+#' @param http `character` LP DAAC-style product URL carried in the product
+#'   options DB (e.g. "https://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.061/"). Only
+#'   used here to derive the product `short_name` and `version`.
 #' @param download_server `character ["http" | "offline"]` download service
 #'   to be used; if NA, the script tries to download with http.
-#' @param user `character` username for earthdata http server
-#' @param password `character` password for earthdata http server
-#' @param yy `character` Year for which the folder containing HDF images are to
-#'  be identified
-#' @param n_retries `numeric` number of times the access to the http server
-#'   should be retried in case of error before quitting, Default: 20
-#' @param gui `logical` indicates if processing was called from the GUI
+#' @param yy `character` Year for which the available acquisition dates are to
+#'  be identified.
+#' @param n_retries `numeric` number of times the access to the CMR server
+#'   should be retried in case of error before quitting, Default: 20.
+#' @param gui `logical`` indicates if processing was called from the GUI
 #'   environment or not. If not, processing messages are sent to a log file
 #'   instead than to the console/GTK progress windows.
-#' @param out_folder_mod  `character` output folder for MODIS HDF storage
+#' @param out_folder_mod  `character` output folder for MODIS HDF storage.
+#' @param v `integer array` vertical tiles of interest (used to restrict the CMR
+#'   query for tiled products). Default: NULL.
+#' @param h `integer array` horizontal tiles of interest. Default: NULL.
+#' @param tiled `numeric [0/1]` 1 = tiled product; 0 = non-tiled. Default: 1.
 #' @return `character array` listing all available folders (a.k.a. dates) for
-#'   the requested MODIS product on lpdaac http archive, for the years
-#'   included in the time range selected for processing.
+#'   the requested MODIS product, for the years included in the time range
+#'   selected for processing.
 #' @author Original code by Babak Naimi (\code{.getModisList}, in
 #' \href{https://r-gis.net/?q=ModisDownload}{ModisDownload.R})
-#' modified to adapt it to MODIStsp scheme and to http archive (instead than old
-#' FTP) by:
+#' modified to adapt it to MODIStsp scheme by:
 #' @author Lorenzo Busetto, phD (2014-2017)
 #' @author Luigi Ranghetti, phD (2016-2017)
-#' @author Pasi Autio (2024)
 #' @note License: GPL 3.0
 #' @importFrom stringr str_sub str_split
-#' @importFrom httr2 request req_perform req_auth_bearer_token req_headers resp_body_string req_retry resp_status
 
 get_mod_dirs <- function(http,
                          download_server,
-                         user, password,
                          yy,
-                         n_retries = 20,
+                         n_retries,
                          gui,
-                         out_folder_mod) {
-
-  # Fetch Bearer token to be used for further authentication
- if (is.null(earthdata_token)) 
-     {
-     token <- earthdata_token 
-     } else 
-     {
-         token <- get_earthdata_token(user, password)
-     }
-  
-  # make sure that the http address terminates with a "/" (i.e., it is a
-  # folder, not a file)
-  if (stringr::str_sub(http, -1) != "/") {
-    http <- paste(http, "/", sep = "")
-  }
+                         out_folder_mod,
+                         v = NULL,
+                         h = NULL,
+                         tiled = 1) {
 
   #   __________________________________________________________________________
-  #   retrieve list of folders in case of http download                    ####
+  #   retrieve available acquisition dates from NASA CMR                    ####
 
   if (download_server == "http") {
-    response <- list(status_code = "")
-    while (response$status_code != 200) {
-      # send request to server
-      req <- httr2::request(http) %>%
-             httr2::req_auth_bearer_token(token) %>%
-             httr2::req_retry(max_tries = n_retries, backoff = ~ 10) 
-      response <- httr2::req_perform(req)
 
-      # On interactive execution, after n_retries attempt ask if quit or retry
-      if (inherits(response, "try-error") || httr2::resp_status(response) != 200) {
-        message(
-          "[", date(), "] Error: http server seems to be down! ",
-          "Please try again later. Aborting!"
-        )
-        date_dirs <- character()
-        attr(date_dirs, "server") <- "unreachable"
-        return(date_dirs)
-      }
-    }
-    # On httr2 success get the directory names (available dates) ----
-    items <- strsplit(httr2::resp_body_string(response), "\r*\n")[[1]]
-    date_dirs <- gsub(
-      ".*>(20[0-9]{2}\\.[01][0-9]\\.[0-3][0-9])\\/<.*", "\\1", items
+    prod_vers <- parse_prod_version(http)
+
+    granules <- try(
+      get_mod_granules_cmr(
+        short_name = prod_vers[["short_name"]],
+        version    = prod_vers[["version"]],
+        date_from  = paste0(yy, ".01.01"),
+        date_to    = paste0(yy, ".12.31"),
+        v = v, h = h, tiled = tiled,
+        n_retries  = n_retries
+      ),
+      silent = TRUE
     )
-    date_dirs <- date_dirs[grep(paste0(yy, "\\.[01][0-9]\\.[0-3][0-9]"),
-                                date_dirs)]
+
+    if (inherits(granules, "try-error")) {
+      message(
+        "[", date(), "] Error: the NASA CMR server seems to be unreachable! ",
+        "Please try again later. Aborting!"
+      )
+      date_dirs <- character()
+      attr(date_dirs, "server") <- "unreachable"
+      return(date_dirs)
+    }
+
+    date_dirs <- sort(unique(granules$date))
     attr(date_dirs, "server") <- "http"
 
   }
@@ -111,4 +100,19 @@ get_mod_dirs <- function(http,
 
   return(date_dirs)
 
+}
+
+#' @title Parse MODIS product short name and version from an LP DAAC URL
+#' @description Helper extracting the product `short_name` and `version` from the
+#'   LP DAAC-style product URL stored in the product options DB, e.g.
+#'   "https://e4ftl01.cr.usgs.gov/MOLT/MOD13Q1.061/" -> c("MOD13Q1", "061").
+#' @param http `character` product URL.
+#' @return named `character` vector with `short_name` and `version`.
+#' @keywords internal
+parse_prod_version <- function(http) {
+  # take the last non-empty path segment, e.g. "MOD13Q1.061"
+  http <- sub("/+$", "", http)
+  last <- basename(http)
+  parts <- strsplit(last, "\\.")[[1]]
+  c(short_name = parts[1], version = parts[2])
 }
